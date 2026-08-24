@@ -58,6 +58,38 @@
         <article class="metric"><span>MCTS nodes / sec</span><strong id="nodes-sec">0</strong><small>search throughput</small></article>
       </section>
 
+      <section class="quality-grid">
+        <article class="card quality-card">
+          <div class="card-title">
+            <div><span>MODEL QUALITY</span><h3>Candidate vs champion</h3></div>
+            <div id="promotion-status" class="pill">COLLECTING</div>
+          </div>
+          <div class="quality-summary">
+            <div><span>Estimated gain</span><strong id="elo-delta">—</strong><small>Elo</small></div>
+            <div><span>95% interval</span><strong id="elo-interval">—</strong><small>confidence</small></div>
+            <div><span>Arena score</span><strong id="arena-score">—</strong><small id="arena-games">0 games</small></div>
+          </div>
+          <canvas id="elo-chart" class="chart" height="190" aria-label="Candidate Elo gain history"></canvas>
+          <div class="arena-breakdown">
+            <span>W <strong id="arena-wins">0</strong></span>
+            <span>D <strong id="arena-draws">0</strong></span>
+            <span>L <strong id="arena-losses">0</strong></span>
+          </div>
+        </article>
+
+        <article class="card trajectory-card">
+          <div class="card-title"><div><span>TRAINING TRAJECTORY</span><h3>Learning and production</h3></div></div>
+          <div class="chart-block">
+            <div class="chart-heading"><span>Total loss</span><strong id="loss-trend-value">—</strong></div>
+            <canvas id="loss-chart" class="chart compact" height="105" aria-label="Total training loss history"></canvas>
+          </div>
+          <div class="chart-block">
+            <div class="chart-heading"><span>Self-play games / hour</span><strong id="throughput-trend-value">—</strong></div>
+            <canvas id="throughput-chart" class="chart compact" height="105" aria-label="Self-play throughput history"></canvas>
+          </div>
+        </article>
+      </section>
+
       <section class="work-grid">
         <article class="card game-card">
           <div class="card-title"><div><span>LIVE SAMPLE</span><h3 id="game-id">No active game</h3></div><div id="ply" class="pill">PLY 0</div></div>
@@ -95,4 +127,3 @@
     <script src="/app.js"></script>
   </body>
 </html>
-
