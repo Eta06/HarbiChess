@@ -65,6 +65,8 @@ class OcakRunConfig:
     learning_rate: float = 0.002
     minimum_train_improvement: float = 0.02
     maximum_validation_ratio: float = 1.25
+    minimum_decisive_games: int = 1
+    maximum_max_ply_draw_ratio: float = 0.9
     telemetry_interval_steps: int = 2
     trunk_channels: int = 16
     residual_blocks: int = 2
@@ -95,6 +97,10 @@ class OcakRunConfig:
             raise ValueError("validation_fraction must be between zero and one")
         if self.run_seed < 0 or self.learning_rate <= 0:
             raise ValueError("run seed must be non-negative and learning rate positive")
+        if self.minimum_decisive_games < 0:
+            raise ValueError("minimum_decisive_games must be non-negative")
+        if not 0.0 <= self.maximum_max_ply_draw_ratio <= 1.0:
+            raise ValueError("maximum_max_ply_draw_ratio must be in [0, 1]")
 
 
 @dataclass(frozen=True, slots=True)
@@ -163,6 +169,10 @@ def _diversity_snapshot(metrics: DiversityMetrics) -> DiversitySnapshot:
         white_wins=metrics.white_wins,
         draws=metrics.draws,
         black_wins=metrics.black_wins,
+        decisive_games=metrics.decisive_games,
+        decisive_game_ratio=metrics.decisive_game_ratio,
+        max_ply_draws=metrics.max_ply_draws,
+        max_ply_draw_ratio=metrics.max_ply_draw_ratio,
         openings=tuple(
             OpeningDiversity(
                 ply=opening.ply,
@@ -454,16 +464,25 @@ def run_ocak_sanity(
             ),
             on_step=training_step,
         )
+        outcome_reasons = []
+        if diversity_metrics.decisive_games < config.minimum_decisive_games:
+            outcome_reasons.append(
+                "self-play did not produce the required decisive terminal games"
+            )
+        if diversity_metrics.max_ply_draw_ratio > config.maximum_max_ply_draw_ratio:
+            outcome_reasons.append("too many self-play games ended at the max-ply limit")
+        reasons = (*report.reasons, *outcome_reasons)
+        passed = report.passed and not outcome_reasons
         training_seconds = time.perf_counter() - training_started
         publish(
             mode=RunMode.CHECKPOINTING,
             mode_detail="Pilot complete · writing atomic candidate checkpoint",
-            pilot_status=PilotStatus.PASSED if report.passed else PilotStatus.FAILED,
+            pilot_status=PilotStatus.PASSED if passed else PilotStatus.FAILED,
             pilot_steps_completed=report.steps,
             pilot_final_train_loss=report.final_train_loss,
             pilot_final_validation_loss=report.final_validation_loss,
             pilot_max_gradient_norm=report.maximum_gradient_norm,
-            pilot_reasons=report.reasons,
+            pilot_reasons=reasons,
             checkpoint_status=CheckpointStatus.WRITING,
         )
 
@@ -512,8 +531,8 @@ def run_ocak_sanity(
             "run_id": config.run_id,
             "source_commit": commit,
             "created_at": _now(),
-            "passed": report.passed,
-            "reasons": report.reasons,
+            "passed": passed,
+            "reasons": reasons,
             "config": {
                 **asdict(config),
                 "artifact_root": str(config.artifact_root),
@@ -552,7 +571,7 @@ def run_ocak_sanity(
             mode=RunMode.IDLE,
             mode_detail=(
                 "OCAK sanity pilot passed · candidate awaits DEVIR evaluation"
-                if report.passed
+                if passed
                 else "OCAK sanity pilot failed · champion remains unchanged"
             ),
             active_checkpoint="random-initial",
@@ -565,8 +584,8 @@ def run_ocak_sanity(
         return OcakRunResult(
             run_id=config.run_id,
             source_commit=commit,
-            passed=report.passed,
-            reasons=report.reasons,
+            passed=passed,
+            reasons=reasons,
             games=config.games,
             replay_samples=len(train_records) + len(validation_records),
             validation_samples=len(validation_records),
@@ -610,6 +629,8 @@ def _parser() -> argparse.ArgumentParser:
     parser.add_argument("--max-plies", type=int, default=64)
     parser.add_argument("--training-steps", type=int, default=40)
     parser.add_argument("--batch-size", type=int, default=16)
+    parser.add_argument("--minimum-decisive-games", type=int, default=1)
+    parser.add_argument("--maximum-max-ply-draw-ratio", type=float, default=0.9)
     return parser
 
 
@@ -627,6 +648,8 @@ def main(argv: list[str] | None = None) -> int:
             max_plies=arguments.max_plies,
             training_steps=arguments.training_steps,
             batch_size=arguments.batch_size,
+            minimum_decisive_games=arguments.minimum_decisive_games,
+            maximum_max_ply_draw_ratio=arguments.maximum_max_ply_draw_ratio,
         )
     )
     print(json.dumps(asdict(result), indent=2))
