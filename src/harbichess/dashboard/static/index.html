@@ -1,129 +1,15 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="harbi-theme" data-theme="light">
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#090b0d" />
-    <title>HarbiChess — Training Command</title>
-    <link rel="stylesheet" href="/styles.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#fafafa" />
+    <meta name="description" content="HarbiChess training and model telemetry dashboard" />
+    <title>HarbiChess Dashboard</title>
+    <script type="module" crossorigin src="/assets/app.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/app.css">
   </head>
   <body>
-    <div class="noise"></div>
-    <main class="shell">
-      <header class="topbar">
-        <div class="brand">
-          <div class="brand-mark">H</div>
-          <div><p>HARBI LABS</p><h1>Training Command</h1></div>
-        </div>
-        <div class="run-state">
-          <span id="demo-badge" class="demo hidden">DEMO DATA</span>
-          <span id="connection" class="connection">CONNECTING</span>
-          <span id="mode" class="mode idle">IDLE</span>
-        </div>
-      </header>
-
-      <section class="hero-grid">
-        <article class="card mission-card">
-          <div class="eyebrow">CURRENT OPERATION</div>
-          <h2 id="mode-detail">Waiting for telemetry</h2>
-          <div class="time-row">
-            <div><span>Run uptime</span><strong id="session-time">00:00:00</strong></div>
-            <div><span>Training time</span><strong id="training-time">00:00:00</strong></div>
-          </div>
-          <div class="checkpoint-strip">
-            <div><span>Active checkpoint</span><strong id="active-checkpoint">—</strong></div>
-            <div><span>Promoted</span><strong id="promoted-checkpoint">—</strong></div>
-            <div><span>Candidate</span><strong id="candidate-checkpoint">—</strong></div>
-            <div><span>Source</span><strong id="source-commit">—</strong></div>
-          </div>
-        </article>
-
-        <article class="card count-card">
-          <div class="eyebrow">LIFETIME SELF-PLAY</div>
-          <div id="lifetime-games" class="mega-number">0</div>
-          <div class="count-caption">TOTAL GAMES</div>
-          <div class="mini-grid">
-            <div><span>This run</span><strong id="run-games">0</strong></div>
-            <div><span>Generation</span><strong id="generation-games">0</strong></div>
-            <div><span>Active</span><strong id="active-games">0</strong></div>
-            <div><span>Games / hour</span><strong id="games-hour">0</strong></div>
-          </div>
-        </article>
-      </section>
-
-      <section class="metrics-row">
-        <article class="metric"><span>Training step</span><strong id="training-step">0</strong><small>optimizer updates</small></article>
-        <article class="metric"><span>Positions / sec</span><strong id="positions-sec">0</strong><small>encoded states</small></article>
-        <article class="metric"><span>Neural evals / sec</span><strong id="evals-sec">0</strong><small>MLX Metal</small></article>
-        <article class="metric"><span>MCTS nodes / sec</span><strong id="nodes-sec">0</strong><small>search throughput</small></article>
-      </section>
-
-      <section class="quality-grid">
-        <article class="card quality-card">
-          <div class="card-title">
-            <div><span>MODEL QUALITY</span><h3>Candidate vs champion</h3></div>
-            <div id="promotion-status" class="pill">COLLECTING</div>
-          </div>
-          <div class="quality-summary">
-            <div><span>Estimated gain</span><strong id="elo-delta">—</strong><small>Elo</small></div>
-            <div><span>95% interval</span><strong id="elo-interval">—</strong><small>confidence</small></div>
-            <div><span>Arena score</span><strong id="arena-score">—</strong><small id="arena-games">0 games</small></div>
-          </div>
-          <canvas id="elo-chart" class="chart" height="190" aria-label="Candidate Elo gain history"></canvas>
-          <div class="arena-breakdown">
-            <span>W <strong id="arena-wins">0</strong></span>
-            <span>D <strong id="arena-draws">0</strong></span>
-            <span>L <strong id="arena-losses">0</strong></span>
-          </div>
-        </article>
-
-        <article class="card trajectory-card">
-          <div class="card-title"><div><span>TRAINING TRAJECTORY</span><h3>Learning and production</h3></div></div>
-          <div class="chart-block">
-            <div class="chart-heading"><span>Total loss</span><strong id="loss-trend-value">—</strong></div>
-            <canvas id="loss-chart" class="chart compact" height="105" aria-label="Total training loss history"></canvas>
-          </div>
-          <div class="chart-block">
-            <div class="chart-heading"><span>Self-play games / hour</span><strong id="throughput-trend-value">—</strong></div>
-            <canvas id="throughput-chart" class="chart compact" height="105" aria-label="Self-play throughput history"></canvas>
-          </div>
-        </article>
-      </section>
-
-      <section class="work-grid">
-        <article class="card game-card">
-          <div class="card-title"><div><span>LIVE SAMPLE</span><h3 id="game-id">No active game</h3></div><div id="ply" class="pill">PLY 0</div></div>
-          <div class="game-layout">
-            <div id="board" class="board" aria-label="Live chess board"></div>
-            <div class="game-analysis">
-              <div class="last-move"><span>Last move</span><strong id="last-move">—</strong></div>
-              <div class="wdl">
-                <div><span>WIN</span><strong id="wdl-win">0%</strong></div>
-                <div><span>DRAW</span><strong id="wdl-draw">100%</strong></div>
-                <div><span>LOSS</span><strong id="wdl-loss">0%</strong></div>
-              </div>
-              <div><span class="section-label">POLICY / MCTS TOP MOVES</span><div id="top-moves" class="top-moves"></div></div>
-            </div>
-          </div>
-        </article>
-
-        <article class="card systems-card">
-          <div class="card-title"><div><span>SYSTEM PULSE</span><h3>Actor–learner pipeline</h3></div></div>
-          <div class="system-list">
-            <div class="system-item"><div><span>Inference batch</span><strong id="batch-size">0</strong></div><div class="bar"><i id="batch-bar"></i></div></div>
-            <div class="system-item"><div><span>Queue depth</span><strong id="queue-depth">0</strong></div><div class="bar"><i id="queue-bar"></i></div></div>
-            <div class="system-item"><div><span>Replay buffer</span><strong id="replay-label">0 / 0</strong></div><div class="bar gold"><i id="replay-bar"></i></div></div>
-          </div>
-          <div class="loss-grid">
-            <div><span>Policy loss</span><strong id="policy-loss">—</strong></div>
-            <div><span>WDL loss</span><strong id="value-loss">—</strong></div>
-            <div><span>Total loss</span><strong id="total-loss">—</strong></div>
-            <div><span>Learning rate</span><strong id="learning-rate">—</strong></div>
-          </div>
-          <div class="footer-line"><span id="run-id">not-started</span><span id="updated-at">No update yet</span></div>
-        </article>
-      </section>
-    </main>
-    <script src="/app.js"></script>
+    <div id="root"></div>
   </body>
 </html>
