@@ -28,11 +28,19 @@ uv run pytest
 uv run ruff check .
 uv run harbichess-mlx-smoke --size 512 --iterations 5
 uv run harbichess-network-benchmark --batches 1,8,16,32,64,128
+uv run harbichess-dashboard --demo
 ```
 
 The network benchmark executes the actual history-aware 104-plane board input
 through the MLX residual policy/WDL model. End-to-end self-play concurrency will
 be calibrated separately once MCTS and the shared inference queue are present.
+
+The standalone dashboard listens on `http://127.0.0.1:8765` by default. It
+reads a low-frequency atomic telemetry snapshot and never imports or blocks the
+trainer. Use `--host 0.0.0.0` to view it from another device on the local
+network. Resume metadata links model, optimizer, replay cursor, RNG state,
+counters, and accumulated training time so a stopped run can continue from its
+latest durable checkpoint.
 
 Generated checkpoints, replay shards, and run artifacts are intentionally kept
 outside Git history. Evaluated checkpoints will be tied to an exact source
