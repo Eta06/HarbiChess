@@ -30,6 +30,7 @@ uv run harbichess-mlx-smoke --size 512 --iterations 5
 uv run harbichess-network-benchmark --batches 1,8,16,32,64,128
 uv run harbichess-search-benchmark --games 16,32,64,128 --simulations 32
 uv run harbichess-dashboard --demo
+uv run harbichess-ocak-sanity --run-id ocak-sanity-001
 ```
 
 The dashboard frontend lives in `dashboard-ui` and is compiled into the Python
@@ -65,6 +66,10 @@ The OCAK learner foundation adds versioned checksummed replay, whole-game
 train/validation isolation, collapse metrics, finite-gradient training, a small
 pilot gate, and exact model/optimizer/sampler checkpoint resume. See
 [the OCAK training guardrails](docs/ocak-training-guardrails.md).
+
+The sanity runner streams self-play, learner, diversity, replay, and checkpoint
+state to the same low-overhead dashboard snapshot. It writes immutable run
+artifacts under `artifacts/runs/<run-id>` and never promotes its candidate.
 
 Generated checkpoints, replay shards, and run artifacts are intentionally kept
 outside Git history. Evaluated checkpoints will be tied to an exact source
