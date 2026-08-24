@@ -64,6 +64,10 @@ export interface DiversitySnapshot {
   white_wins: number;
   draws: number;
   black_wins: number;
+  decisive_games: number;
+  decisive_game_ratio: number;
+  max_ply_draws: number;
+  max_ply_draw_ratio: number;
   openings: OpeningDiversity[];
 }
 
