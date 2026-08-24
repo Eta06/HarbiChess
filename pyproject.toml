@@ -1,0 +1,41 @@
+[build-system]
+requires = ["hatchling>=1.27"]
+build-backend = "hatchling.build"
+
+[project]
+name = "harbichess"
+version = "0.1.0.dev0"
+description = "A neural-guided chess engine trained through reinforcement learning and self-play."
+readme = "README.md"
+requires-python = ">=3.12"
+license = { text = "MIT" }
+authors = [{ name = "Eta06" }]
+dependencies = [
+  "chess>=1.11,<2",
+  "mlx>=0.32,<0.33; platform_system == 'Darwin' and platform_machine == 'arm64'",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8.4,<9",
+  "pytest-cov>=6.2,<7",
+  "ruff>=0.12,<0.13",
+]
+
+[project.scripts]
+harbichess-mlx-smoke = "harbichess.backends.mlx_smoke:main"
+harbichess-release-checkpoint = "harbichess.checkpoints.release:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/harbichess"]
+
+[tool.pytest.ini_options]
+addopts = "--strict-markers --strict-config"
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM", "RUF"]
