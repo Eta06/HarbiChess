@@ -52,11 +52,11 @@ class NeuralPositionEvaluator:
         self.evaluator = evaluator
 
     def evaluate(self, state: ChessState) -> PositionEvaluation:
-        board = self.rules.board(state)
+        board = self.rules.inspect(state)
         legal_moves = tuple(sorted(board.legal_moves, key=lambda move: move.uci()))
         if not legal_moves:
             raise ValueError("terminal positions must be resolved before neural evaluation")
-        output = self.evaluator.evaluate(self.encoder.encode(state))
+        output = self.evaluator.evaluate(self.encoder.encode_board(board))
         if len(output.policy_logits) != POLICY_SIZE:
             raise ValueError(
                 f"policy output must contain {POLICY_SIZE} logits, "
