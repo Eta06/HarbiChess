@@ -26,11 +26,15 @@ class BoardEncoder:
         self._rules = rules or PythonChessRules()
 
     def encode(self, state: ChessState) -> EncodedPosition:
-        board = self._rules.board(state)
+        return self.encode_board(self._rules.inspect(state))
+
+    def encode_board(self, board: chess.Board) -> EncodedPosition:
+        """Encode a read-only board without reconstructing its move history."""
+
         perspective = board.turn
         values = [0.0] * (8 * 8 * ENCODER_CHANNELS)
 
-        historical = board.copy(stack=True)
+        historical = board.copy(stack=HISTORY_STEPS - 1)
         for step in range(HISTORY_STEPS):
             if step > 0:
                 if not historical.move_stack:
@@ -100,4 +104,3 @@ class BoardEncoder:
             return
         for square in chess.SQUARES:
             BoardEncoder._set(values, square, channel, value)
-
