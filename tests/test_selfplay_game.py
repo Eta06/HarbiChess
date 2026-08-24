@@ -34,6 +34,7 @@ def test_self_play_game_records_policy_and_final_values() -> None:
 
     assert game.outcome.result is TerminalResult.BLACK_WIN
     assert game.final_state.ply == 4
+    assert [sample.selected_move for sample in game.samples] == list(ScriptedSearch.moves)
     assert [sample.outcome_value for sample in game.samples] == [-1, 1, -1, 1]
     assert all(sum(value for _, value in sample.visit_policy) == 1 for sample in game.samples)
 
