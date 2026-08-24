@@ -18,6 +18,8 @@ CONTENT_TYPES = {
     ".html": "text/html; charset=utf-8",
     ".css": "text/css; charset=utf-8",
     ".js": "text/javascript; charset=utf-8",
+    ".map": "application/json; charset=utf-8",
+    ".svg": "image/svg+xml",
 }
 
 
@@ -44,8 +46,8 @@ def handler_for(store: SnapshotStore, static_root: Path = STATIC_ROOT):
                 self._send_json(json.dumps({"status": "ok"}))
             elif path in ("/", "/index.html"):
                 self._send_file(static_root / "index.html")
-            elif path in ("/styles.css", "/app.js"):
-                self._send_file(static_root / path.removeprefix("/"))
+            elif path.startswith("/assets/"):
+                self._send_static(path.removeprefix("/"))
             else:
                 self.send_error(HTTPStatus.NOT_FOUND)
 
@@ -64,11 +66,22 @@ def handler_for(store: SnapshotStore, static_root: Path = STATIC_ROOT):
                 return
             encoded = path.read_bytes()
             self.send_response(HTTPStatus.OK)
-            self.send_header("Content-Type", CONTENT_TYPES[path.suffix])
+            self.send_header(
+                "Content-Type",
+                CONTENT_TYPES.get(path.suffix, "application/octet-stream"),
+            )
             self.send_header("Cache-Control", "no-cache")
             self.send_header("Content-Length", str(len(encoded)))
             self.end_headers()
             self.wfile.write(encoded)
+
+        def _send_static(self, relative_path: str) -> None:
+            root = static_root.resolve()
+            candidate = (root / relative_path).resolve()
+            if not candidate.is_relative_to(root):
+                self.send_error(HTTPStatus.NOT_FOUND)
+                return
+            self._send_file(candidate)
 
         def _send_events(self) -> None:
             self.send_response(HTTPStatus.OK)
