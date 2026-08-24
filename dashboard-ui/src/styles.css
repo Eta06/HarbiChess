@@ -516,6 +516,30 @@
     gap: 8px;
   }
 
+  .termination-list {
+    display: grid;
+    gap: 8px;
+  }
+
+  .termination-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 64px 56px;
+    gap: 10px;
+    border-bottom: 1px solid var(--separator);
+    padding: 7px 0;
+    font-size: 12px;
+  }
+
+  .termination-row > span,
+  .termination-row small {
+    color: var(--muted);
+  }
+
+  .termination-row strong,
+  .termination-row small {
+    text-align: right;
+  }
+
   .opening-row {
     display: grid;
     grid-template-columns: 56px 90px minmax(0, 1fr);
@@ -539,6 +563,31 @@
   }
 
   .diversity-wdl strong {
+    font-size: 13px;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .arena-termination-summary {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 8px;
+    margin-top: 12px;
+  }
+
+  .arena-termination-summary div {
+    display: grid;
+    gap: 3px;
+    border: 1px solid var(--separator);
+    border-radius: 7px;
+    padding: 8px 10px;
+  }
+
+  .arena-termination-summary span {
+    color: var(--muted);
+    font-size: 10px;
+  }
+
+  .arena-termination-summary strong {
     font-size: 13px;
     font-variant-numeric: tabular-nums;
   }
@@ -960,6 +1009,10 @@
 
   .opening-row {
     grid-template-columns: 52px 80px minmax(0, 1fr);
+  }
+
+  .arena-termination-summary {
+    grid-template-columns: 1fr 1fr;
   }
 
   .quality-metrics div {
