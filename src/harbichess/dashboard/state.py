@@ -167,6 +167,7 @@ class DashboardSnapshot:
     arena_losses: int = 0
     arena_decisive_games: int = 0
     arena_threefold_repetitions: int = 0
+    arena_avoidable_threefold_repetitions: int = 0
     arena_max_ply_draws: int = 0
     arena_other_draws: int = 0
     arena_score_rate: float = 0.5
@@ -348,6 +349,7 @@ def demo_snapshot() -> DashboardSnapshot:
             "arena_losses": quality.losses,
             "arena_decisive_games": quality.wins + quality.losses,
             "arena_threefold_repetitions": 41,
+            "arena_avoidable_threefold_repetitions": 38,
             "arena_max_ply_draws": 12,
             "arena_other_draws": 8,
             "arena_score_rate": quality.score_rate,
