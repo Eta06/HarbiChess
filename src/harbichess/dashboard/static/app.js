@@ -16,6 +16,40 @@ function duration(seconds) {
 
 function setText(id, value) { $(id).textContent = value; }
 function setBar(id, value) { $(id).style.width = `${Math.max(0, Math.min(100, value))}%`; }
+function signed(value, digits = 0) {
+  if (value == null) return "—";
+  return `${value >= 0 ? "+" : ""}${Number(value).toFixed(digits)}`;
+}
+
+function drawChart(canvasId, history, valueOf, color, bandOf = null) {
+  const canvas = $(canvasId);
+  const width = Math.max(240, canvas.clientWidth);
+  const height = canvas.classList.contains("compact") ? 105 : 190;
+  const scale = window.devicePixelRatio || 1;
+  canvas.width = width * scale; canvas.height = height * scale;
+  const context = canvas.getContext("2d"); context.scale(scale, scale);
+  const points = (history || []).map(point => ({ value: valueOf(point), band: bandOf?.(point) })).filter(point => point.value != null);
+  context.clearRect(0, 0, width, height);
+  if (points.length < 2) {
+    context.fillStyle = "#858d94"; context.font = "11px ui-monospace";
+    context.fillText("Waiting for history", 12, height / 2); return;
+  }
+  const values = points.flatMap(point => point.band ? [point.value, ...point.band.filter(value => value != null)] : [point.value]);
+  let min = Math.min(...values), max = Math.max(...values);
+  const padding = Math.max((max - min) * .14, 1); min -= padding; max += padding;
+  const x = index => 10 + index / (points.length - 1) * (width - 20);
+  const y = value => 8 + (max - value) / (max - min) * (height - 18);
+  context.strokeStyle = "rgba(255,255,255,.07)"; context.lineWidth = 1;
+  for (let line = 1; line < 4; line++) { const lineY = line * height / 4; context.beginPath(); context.moveTo(0,lineY); context.lineTo(width,lineY); context.stroke(); }
+  if (bandOf && points.every(point => point.band?.every(value => value != null))) {
+    context.beginPath(); points.forEach((point, index) => index ? context.lineTo(x(index),y(point.band[1])) : context.moveTo(x(index),y(point.band[1])));
+    [...points].reverse().forEach((point, reverseIndex) => context.lineTo(x(points.length - 1 - reverseIndex),y(point.band[0])));
+    context.closePath(); context.fillStyle = "rgba(231,183,95,.12)"; context.fill();
+  }
+  context.beginPath(); points.forEach((point, index) => index ? context.lineTo(x(index),y(point.value)) : context.moveTo(x(index),y(point.value)));
+  context.strokeStyle = color; context.lineWidth = 2; context.stroke();
+  const last = points.at(-1); context.beginPath(); context.arc(x(points.length - 1),y(last.value),3.5,0,Math.PI*2); context.fillStyle = color; context.fill();
+}
 
 const pieces = { p:"♟", r:"♜", n:"♞", b:"♝", q:"♛", k:"♚", P:"♙", R:"♖", N:"♘", B:"♗", Q:"♕", K:"♔" };
 function fenBoard(fen, lastMove) {
@@ -64,6 +98,16 @@ function render(data) {
   setText("batch-size", number(data.inference_batch_size)); setText("queue-depth", number(data.inference_queue_depth)); setBar("batch-bar", data.inference_batch_size / 128 * 100); setBar("queue-bar", data.inference_queue_depth / 128 * 100);
   setText("replay-label", `${number(data.replay_samples)} / ${number(data.replay_capacity)}`); setBar("replay-bar", data.replay_capacity ? data.replay_samples / data.replay_capacity * 100 : 0);
   setText("policy-loss", loss(data.policy_loss)); setText("value-loss", loss(data.value_loss)); setText("total-loss", loss(data.total_loss)); setText("learning-rate", data.learning_rate == null ? "—" : Number(data.learning_rate).toExponential(2));
+  setText("elo-delta", signed(data.arena_elo_delta));
+  setText("elo-interval", data.arena_elo_low == null ? "—" : `${signed(data.arena_elo_low)} / ${signed(data.arena_elo_high)}`);
+  setText("arena-score", data.arena_games ? `${number(data.arena_score_rate * 100, 1)}%` : "—");
+  setText("arena-games", `${number(data.arena_games)} games`); setText("arena-wins", number(data.arena_wins)); setText("arena-draws", number(data.arena_draws)); setText("arena-losses", number(data.arena_losses));
+  const promotion = $("promotion-status"); setText("promotion-status", data.promotion_ready ? "PROMOTION READY" : "COLLECTING"); promotion.className = data.promotion_ready ? "pill promotion-ready" : "pill";
+  const history = data.history || [];
+  setText("loss-trend-value", loss(history.at(-1)?.total_loss)); setText("throughput-trend-value", number(history.at(-1)?.games_per_hour));
+  drawChart("elo-chart", history, point => point.elo_delta, "#e7b75f", point => [point.elo_low, point.elo_high]);
+  drawChart("loss-chart", history, point => point.total_loss, "#64e9dc");
+  drawChart("throughput-chart", history, point => point.games_per_hour, "#87e38d");
   setText("run-id", data.run_id); setText("updated-at", new Date(data.updated_at).toLocaleTimeString());
   const game = data.live_game || {}; setText("game-id", game.game_id || "No active game"); setText("ply", `PLY ${game.ply || 0}`); setText("last-move", game.last_move || "—");
   const [win=0, draw=1, lose=0] = game.wdl || []; setText("wdl-win", `${Math.round(win*100)}%`); setText("wdl-draw", `${Math.round(draw*100)}%`); setText("wdl-loss", `${Math.round(lose*100)}%`);
@@ -84,4 +128,4 @@ const events = new EventSource("/api/events");
 events.onmessage = (event) => render(JSON.parse(event.data));
 events.onerror = () => { $("connection").className = "connection"; setText("connection", "RECONNECTING"); };
 fetch("/api/snapshot").then(r => r.json()).then(render).catch(() => setText("connection", "OFFLINE"));
-
+window.addEventListener("resize", () => latest && render(latest));
