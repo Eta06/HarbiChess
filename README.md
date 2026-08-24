@@ -42,6 +42,10 @@ network. Resume metadata links model, optimizer, replay cursor, RNG state,
 counters, and accumulated training time so a stopped run can continue from its
 latest durable checkpoint.
 
+Candidate quality is tracked with color-balanced arena W/D/L results, estimated
+Elo gain, and a 95% confidence interval; training loss alone never promotes a
+model. See [the model quality measurement notes](docs/model-quality.md).
+
 Generated checkpoints, replay shards, and run artifacts are intentionally kept
 outside Git history. Evaluated checkpoints will be tied to an exact source
 commit and published as GitHub Release assets.
