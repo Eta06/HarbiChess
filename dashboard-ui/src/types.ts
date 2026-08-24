@@ -112,6 +112,10 @@ export interface DashboardSnapshot {
   pilot_status: PilotStatus;
   pilot_steps_planned: number;
   pilot_steps_completed: number;
+  pilot_steps_attempted: number;
+  pilot_best_validation_step: number;
+  pilot_best_validation_loss: number | null;
+  pilot_stopped_early: boolean;
   pilot_initial_train_loss: number | null;
   pilot_final_train_loss: number | null;
   pilot_initial_validation_loss: number | null;
