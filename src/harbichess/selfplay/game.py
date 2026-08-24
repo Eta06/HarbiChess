@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import hashlib
 import random
+from collections.abc import Callable
 from concurrent.futures import ThreadPoolExecutor
 from dataclasses import dataclass
 
@@ -116,13 +117,14 @@ def play_parallel_games(
     game_count: int,
     max_workers: int,
     config: SelfPlayConfig | None = None,
+    on_game_complete: Callable[[SelfPlayGame], None] | None = None,
 ) -> tuple[SelfPlayGame, ...]:
     if game_count <= 0 or max_workers <= 0:
         raise ValueError("game_count and max_workers must be positive")
     initial_state = rules.initial_state()
 
     def play(game_index: int) -> SelfPlayGame:
-        return play_game(
+        game = play_game(
             mcts,
             rules,
             initial_state,
@@ -130,6 +132,9 @@ def play_parallel_games(
             seed=derive_game_seed(run_seed, game_index),
             config=config,
         )
+        if on_game_complete is not None:
+            on_game_complete(game)
+        return game
 
     indices = range(first_game_index, first_game_index + game_count)
     with ThreadPoolExecutor(max_workers=max_workers, thread_name_prefix="harbichess-game") as pool:
