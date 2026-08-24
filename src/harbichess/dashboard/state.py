@@ -93,6 +93,10 @@ class DiversitySnapshot:
     white_wins: int = 0
     draws: int = 0
     black_wins: int = 0
+    decisive_games: int = 0
+    decisive_game_ratio: float = 0.0
+    max_ply_draws: int = 0
+    max_ply_draw_ratio: float = 0.0
     openings: tuple[OpeningDiversity, ...] = ()
 
 
@@ -298,6 +302,10 @@ def demo_snapshot() -> DashboardSnapshot:
                 white_wins=4_201,
                 draws=4_508,
                 black_wins=4_097,
+                decisive_games=8_298,
+                decisive_game_ratio=0.648,
+                max_ply_draws=312,
+                max_ply_draw_ratio=0.024,
                 openings=(
                     OpeningDiversity(4, 12_806, 1_848, 6.82, 916.0),
                     OpeningDiversity(8, 12_806, 8_431, 8.71, 6_072.0),
