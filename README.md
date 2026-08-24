@@ -61,6 +61,11 @@ Candidate quality is tracked with color-balanced arena W/D/L results, estimated
 Elo gain, and a 95% confidence interval; training loss alone never promotes a
 model. See [the model quality measurement notes](docs/model-quality.md).
 
+The OCAK learner foundation adds versioned checksummed replay, whole-game
+train/validation isolation, collapse metrics, finite-gradient training, a small
+pilot gate, and exact model/optimizer/sampler checkpoint resume. See
+[the OCAK training guardrails](docs/ocak-training-guardrails.md).
+
 Generated checkpoints, replay shards, and run artifacts are intentionally kept
 outside Git history. Evaluated checkpoints will be tied to an exact source
 commit and published as GitHub Release assets.
