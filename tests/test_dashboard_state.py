@@ -3,7 +3,9 @@ from pathlib import Path
 
 from harbichess.dashboard.state import (
     MAX_HISTORY_POINTS,
+    CheckpointStatus,
     HistoryPoint,
+    PilotStatus,
     RunMode,
     SnapshotStore,
     demo_snapshot,
@@ -48,3 +50,6 @@ def test_demo_snapshot_contains_arena_quality() -> None:
     assert snapshot.arena_games == 220
     assert snapshot.arena_elo_low > 0
     assert snapshot.promotion_ready
+    assert snapshot.pilot_status is PilotStatus.TRAINING
+    assert snapshot.checkpoint_status is CheckpointStatus.VERIFIED
+    assert snapshot.diversity.openings[-1].ply == 12
