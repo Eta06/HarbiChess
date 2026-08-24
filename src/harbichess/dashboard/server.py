@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import sys
 import time
 from collections.abc import Sequence
 from http import HTTPStatus
@@ -18,6 +19,17 @@ CONTENT_TYPES = {
     ".css": "text/css; charset=utf-8",
     ".js": "text/javascript; charset=utf-8",
 }
+
+
+class DashboardHTTPServer(ThreadingHTTPServer):
+    """Threaded server that ignores routine browser disconnects."""
+
+    daemon_threads = True
+
+    def handle_error(self, request: object, client_address: object) -> None:
+        if isinstance(sys.exception(), BrokenPipeError | ConnectionResetError):
+            return
+        super().handle_error(request, client_address)
 
 
 def handler_for(store: SnapshotStore, static_root: Path = STATIC_ROOT):
@@ -85,9 +97,7 @@ def create_server(
     store: SnapshotStore,
     static_root: Path = STATIC_ROOT,
 ) -> ThreadingHTTPServer:
-    server = ThreadingHTTPServer((host, port), handler_for(store, static_root))
-    server.daemon_threads = True
-    return server
+    return DashboardHTTPServer((host, port), handler_for(store, static_root))
 
 
 def main(argv: Sequence[str] | None = None) -> int:
