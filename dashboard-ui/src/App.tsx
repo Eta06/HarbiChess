@@ -400,6 +400,8 @@ function App() {
               <div><span>Validation loss</span><strong>{formatLoss(snapshot.pilot_initial_validation_loss)} <small>→</small> {formatLoss(snapshot.pilot_final_validation_loss ?? latestHistory?.validation_loss)}</strong></div>
               <div><span>Max gradient norm</span><strong>{formatLoss(snapshot.pilot_max_gradient_norm)}</strong></div>
               <div><span>Validation samples</span><strong>{formatNumber(snapshot.validation_samples)}</strong></div>
+              <div><span>Best validation</span><strong>{formatLoss(snapshot.pilot_best_validation_loss)} <small>@ step {formatNumber(snapshot.pilot_best_validation_step)}</small></strong></div>
+              <div><span>Early stopping</span><strong>{snapshot.pilot_stopped_early ? "Triggered" : "Not triggered"} <small>· {formatNumber(snapshot.pilot_steps_attempted)} attempted</small></strong></div>
             </div>
             {snapshot.pilot_reasons.length ? (
               <div className="guardrail-message is-danger">{snapshot.pilot_reasons.join(" · ")}</div>
