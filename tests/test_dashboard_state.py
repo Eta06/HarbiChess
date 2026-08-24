@@ -53,3 +53,5 @@ def test_demo_snapshot_contains_arena_quality() -> None:
     assert snapshot.pilot_status is PilotStatus.TRAINING
     assert snapshot.checkpoint_status is CheckpointStatus.VERIFIED
     assert snapshot.diversity.openings[-1].ply == 12
+    assert snapshot.diversity.terminations[0].termination == "checkmate"
+    assert snapshot.arena_threefold_repetitions == 41
