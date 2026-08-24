@@ -7,6 +7,8 @@ htmlcov/
 __pycache__/
 *.py[cod]
 *.egg-info/
+node_modules/
+*.tsbuildinfo
 
 # Generated training state never belongs in Git history.
 /artifacts/
