@@ -5,7 +5,7 @@ import pytest
 
 from harbichess.chess.actions import POLICY_SIZE, move_to_action
 from harbichess.chess.rules import PythonChessRules
-from harbichess.core.backend import EncodedPosition, PolicyValueOutput
+from harbichess.core.backend import EncodedPosition, MaskedPolicyValueOutput, PolicyValueOutput
 from harbichess.core.state import ChessMove
 from harbichess.search.evaluator import NeuralPositionEvaluator
 
@@ -17,6 +17,19 @@ class FixedEvaluator:
     def evaluate(self, position: EncodedPosition) -> PolicyValueOutput:
         assert position.shape == (8, 8, 104)
         return self.output
+
+
+class FixedMaskedEvaluator:
+    def evaluate_masked(
+        self,
+        position: EncodedPosition,
+        action_indices: tuple[int, ...],
+    ) -> MaskedPolicyValueOutput:
+        assert position.shape == (8, 8, 104)
+        return MaskedPolicyValueOutput(
+            tuple(3.0 if index == action_indices[-1] else 0.0 for index in action_indices),
+            (0.0, 1.0, 0.0),
+        )
 
 
 def test_neural_evaluator_masks_policy_and_converts_wdl_value() -> None:
@@ -46,3 +59,13 @@ def test_neural_evaluator_rejects_terminal_and_wrong_policy_shape() -> None:
         evaluator.evaluate(terminal)
     with pytest.raises(ValueError, match="4672"):
         evaluator.evaluate(rules.initial_state())
+
+
+def test_neural_evaluator_uses_masked_backend_without_full_policy_transfer() -> None:
+    rules = PythonChessRules()
+    evaluator = NeuralPositionEvaluator(FixedMaskedEvaluator(), rules=rules)
+
+    result = evaluator.evaluate(rules.initial_state())
+
+    assert len(result.priors) == 20
+    assert result.priors[-1][1] > result.priors[0][1]
