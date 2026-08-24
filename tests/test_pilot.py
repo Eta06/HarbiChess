@@ -24,6 +24,7 @@ def test_sanity_pilot_requires_loss_improvement_without_validation_regression() 
         HarbiChessNetwork(NetworkConfig(trunk_channels=8, residual_blocks=1)),
         config=LearnerConfig(learning_rate=0.005, weight_decay=0.0),
     )
+    observed_steps = []
 
     report = run_sanity_pilot(
         learner,
@@ -36,12 +37,15 @@ def test_sanity_pilot_requires_loss_improvement_without_validation_regression() 
             maximum_validation_ratio=1.5,
             seed=7,
         ),
+        on_step=observed_steps.append,
     )
 
     assert report.passed, report.reasons
     assert report.final_train_loss < report.initial_train_loss
     assert report.final_validation_loss <= report.initial_validation_loss * 1.5
     assert report.maximum_gradient_norm > 0
+    assert len(observed_steps) == 30
+    assert report.sampler_rng_state is not None
 
 
 def test_sanity_pilot_rejects_game_level_leakage() -> None:
