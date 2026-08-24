@@ -432,6 +432,17 @@ function App() {
               <div><span>Decisive games</span><strong>{formatNumber(diversity.decisive_games)} · {formatPercent(diversity.decisive_game_ratio)}</strong></div>
               <div><span>Max-ply draws</span><strong>{formatNumber(diversity.max_ply_draws)} · {formatPercent(diversity.max_ply_draw_ratio)}</strong></div>
             </div>
+            <div className="termination-list">
+              <span className="subsection-label">Termination distribution</span>
+              {(diversity.terminations ?? []).map((termination) => (
+                <div className="termination-row" key={termination.termination}>
+                  <span>{modeLabel(termination.termination)}</span>
+                  <strong>{formatNumber(termination.count)}</strong>
+                  <small>{formatPercent(termination.ratio)}</small>
+                </div>
+              ))}
+              {!diversity.terminations?.length ? <p className="empty-copy">Waiting for terminal outcomes</p> : null}
+            </div>
             <div className="opening-list">
               <span className="subsection-label">Opening prefix coverage</span>
               {(diversity.openings ?? []).map((opening) => (
@@ -472,6 +483,12 @@ function App() {
               <div><span>Wins</span><strong>{formatNumber(snapshot.arena_wins)}</strong></div>
               <div><span>Draws</span><strong>{formatNumber(snapshot.arena_draws)}</strong></div>
               <div><span>Losses</span><strong>{formatNumber(snapshot.arena_losses)}</strong></div>
+            </div>
+            <div className="arena-termination-summary">
+              <div><span>Decisive</span><strong>{formatNumber(snapshot.arena_decisive_games)}</strong></div>
+              <div><span>Threefold</span><strong>{formatNumber(snapshot.arena_threefold_repetitions)}</strong></div>
+              <div><span>Max-ply</span><strong>{formatNumber(snapshot.arena_max_ply_draws)}</strong></div>
+              <div><span>Other draws</span><strong>{formatNumber(snapshot.arena_other_draws)}</strong></div>
             </div>
           </Panel>
 
