@@ -35,3 +35,16 @@ def test_learner_configuration_rejects_unsafe_values() -> None:
         LearnerConfig(learning_rate=float("nan"))
     with pytest.raises(ValueError, match="positive"):
         LearnerConfig(max_gradient_norm=0)
+
+
+def test_gradient_finiteness_is_reduced_in_one_mlx_expression() -> None:
+    finite = MLXLearner._tree_is_finite(
+        {"first": mx.array([1.0, 2.0]), "second": mx.array([3.0])}
+    )
+    non_finite = MLXLearner._tree_is_finite(
+        {"first": mx.array([1.0]), "second": mx.array([float("nan")])}
+    )
+    mx.eval(finite, non_finite)
+
+    assert bool(finite.item())
+    assert not bool(non_finite.item())
