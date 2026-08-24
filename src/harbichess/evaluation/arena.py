@@ -246,10 +246,18 @@ def run_devir_arena(config: ArenaConfig) -> ArenaResult:
     ]
     candidate = HarbiChessNetwork(network_config)
     candidate.load_weights(str(candidate_path))
-    mx.random.seed(int(ocak["config"]["run_seed"]))
     champion = HarbiChessNetwork(network_config)
-    champion_path = arena_root / "baseline-initial.safetensors"
-    champion.save_weights(str(champion_path))
+    baseline = ocak.get("baseline")
+    if baseline is not None:
+        champion_path = Path(baseline["path"])
+        if _sha256(champion_path) != baseline["model_sha256"]:
+            raise ValueError("OCAK baseline model checksum mismatch")
+        champion.load_weights(str(champion_path))
+    else:
+        mx.random.seed(int(ocak["config"]["run_seed"]))
+        champion = HarbiChessNetwork(network_config)
+        champion_path = arena_root / "baseline-initial.safetensors"
+        champion.save_weights(str(champion_path))
 
     rules = PythonChessRules()
     candidate_batcher = SharedBatchEvaluator(
@@ -295,6 +303,10 @@ def run_devir_arena(config: ArenaConfig) -> ArenaResult:
         arena_wins=0,
         arena_draws=0,
         arena_losses=0,
+        arena_decisive_games=0,
+        arena_threefold_repetitions=0,
+        arena_max_ply_draws=0,
+        arena_other_draws=0,
         arena_score_rate=0.5,
         arena_elo_delta=None,
         arena_elo_low=None,
@@ -314,6 +326,11 @@ def run_devir_arena(config: ArenaConfig) -> ArenaResult:
             wins = sum(item.candidate_score == 1.0 for item in games)
             draws = sum(item.candidate_score == 0.5 for item in games)
             losses = sum(item.candidate_score == 0.0 for item in games)
+            threefold = sum(
+                item.outcome.termination == "threefold_repetition" for item in games
+            )
+            max_ply = sum(item.outcome.termination == "max_plies" for item in games)
+            other_draws = draws - threefold - max_ply
             quality = estimate_arena_quality(
                 wins,
                 draws,
@@ -333,6 +350,10 @@ def run_devir_arena(config: ArenaConfig) -> ArenaResult:
                 arena_wins=quality.wins,
                 arena_draws=quality.draws,
                 arena_losses=quality.losses,
+                arena_decisive_games=wins + losses,
+                arena_threefold_repetitions=threefold,
+                arena_max_ply_draws=max_ply,
+                arena_other_draws=other_draws,
                 arena_score_rate=quality.score_rate,
                 arena_elo_delta=quality.elo_delta,
                 arena_elo_low=quality.elo_low,
