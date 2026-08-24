@@ -1,3 +1,4 @@
+import chess
 import pytest
 
 from harbichess.chess.rules import IllegalMoveError, PythonChessRules
@@ -67,6 +68,24 @@ def test_castling_and_en_passant_are_legal(rules: PythonChessRules) -> None:
 def test_illegal_move_is_rejected(rules: PythonChessRules) -> None:
     with pytest.raises(IllegalMoveError, match="illegal move"):
         rules.apply(rules.initial_state(), ChessMove("e2e5"))
+
+
+def test_incremental_board_cache_preserves_external_mutation_isolation(
+    rules: PythonChessRules,
+) -> None:
+    state = play(rules, ["e2e4", "e7e5", "g1f3"])
+    expected_fen = rules.board(state).fen()
+
+    leaked = rules.board(state)
+    leaked.push(chess.Move.from_uci("b8c6"))
+
+    assert rules.board(state).fen() == expected_fen
+    assert rules.view(state).side_to_move is Side.BLACK
+
+
+def test_board_cache_size_must_be_positive() -> None:
+    with pytest.raises(ValueError, match="cache size"):
+        PythonChessRules(board_cache_size=0)
 
 
 def test_state_replay_preserves_repetition_history(rules: PythonChessRules) -> None:
