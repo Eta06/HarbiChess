@@ -28,13 +28,15 @@ def test_dashboard_serves_ui_health_and_snapshot(tmp_path: Path) -> None:
     try:
         with urllib.request.urlopen(f"{base}/", timeout=2) as response:
             assert response.status == 200
-            assert b"Training Command" in response.read()
+            assert b"HarbiChess Dashboard" in response.read()
         with urllib.request.urlopen(f"{base}/healthz", timeout=2) as response:
             assert json.load(response) == {"status": "ok"}
         with urllib.request.urlopen(f"{base}/api/snapshot", timeout=2) as response:
             assert json.load(response)["active_games"] == 64
-        with urllib.request.urlopen(f"{base}/styles.css", timeout=2) as response:
+        with urllib.request.urlopen(f"{base}/assets/app.css", timeout=2) as response:
             assert response.headers["Content-Type"] == "text/css; charset=utf-8"
+        with urllib.request.urlopen(f"{base}/assets/app.js", timeout=2) as response:
+            assert response.headers["Content-Type"] == "text/javascript; charset=utf-8"
         with urllib.request.urlopen(f"{base}/api/events", timeout=2) as response:
             assert json.loads(response.readline().removeprefix(b"data: "))["demo"]
         with pytest.raises(urllib.error.HTTPError) as error:
