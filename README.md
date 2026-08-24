@@ -31,6 +31,15 @@ uv run harbichess-network-benchmark --batches 1,8,16,32,64,128
 uv run harbichess-dashboard --demo
 ```
 
+The dashboard frontend lives in `dashboard-ui` and is compiled into the Python
+package's static directory. Rebuild it after frontend changes:
+
+```bash
+cd dashboard-ui
+npm install
+npm run build
+```
+
 The network benchmark executes the actual history-aware 104-plane board input
 through the MLX residual policy/WDL model. End-to-end self-play concurrency will
 be calibrated separately once MCTS and the shared inference queue are present.
