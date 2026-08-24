@@ -103,11 +103,14 @@ class MLXLearner:
         return inputs, policies, wdl
 
     @staticmethod
-    def _tree_is_finite(tree: object) -> bool:
-        return all(
-            bool(mx.all(mx.isfinite(array)).item())
-            for _, array in tree_flatten(tree)
-        )
+    def _tree_is_finite(tree: object) -> mx.array:
+        checks = [mx.all(mx.isfinite(array)) for _, array in tree_flatten(tree)]
+        if not checks:
+            return mx.array(True)
+        result = checks[0]
+        for check in checks[1:]:
+            result = mx.logical_and(result, check)
+        return result
 
     def train_step(self, batch: TrainingBatch) -> TrainingMetrics:
         inputs, policies, wdl = self._arrays(batch)
@@ -120,8 +123,16 @@ class MLXLearner:
             gradients,
             self.config.max_gradient_norm,
         )
-        mx.eval(total, policy_loss, value_loss, gradient_norm, gradients)
-        if not self._tree_is_finite(gradients) or not all(
+        gradients_finite = self._tree_is_finite(gradients)
+        mx.eval(
+            total,
+            policy_loss,
+            value_loss,
+            gradient_norm,
+            gradients_finite,
+            gradients,
+        )
+        if not bool(gradients_finite.item()) or not all(
             math.isfinite(float(value.item()))
             for value in (total, policy_loss, value_loss, gradient_norm)
         ):
