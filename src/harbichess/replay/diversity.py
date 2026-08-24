@@ -37,6 +37,10 @@ class DiversityMetrics:
     white_wins: int
     draws: int
     black_wins: int
+    decisive_games: int
+    decisive_game_ratio: float
+    max_ply_draws: int
+    max_ply_draw_ratio: float
     openings: tuple[OpeningCoverage, ...]
 
 
@@ -91,6 +95,8 @@ def measure_diversity(
         )
 
     outcomes = Counter(game.outcome.result for game in games)
+    decisive_games = outcomes[TerminalResult.WHITE_WIN] + outcomes[TerminalResult.BLACK_WIN]
+    max_ply_draws = sum(game.outcome.termination == "max_plies" for game in games)
     mean_policy_entropy = sum(policy_entropies) / len(policy_entropies) if policy_entropies else 0.0
     return DiversityMetrics(
         games=len(games),
@@ -106,5 +112,9 @@ def measure_diversity(
         white_wins=outcomes[TerminalResult.WHITE_WIN],
         draws=outcomes[TerminalResult.DRAW],
         black_wins=outcomes[TerminalResult.BLACK_WIN],
+        decisive_games=decisive_games,
+        decisive_game_ratio=decisive_games / len(games),
+        max_ply_draws=max_ply_draws,
+        max_ply_draw_ratio=max_ply_draws / len(games),
         openings=tuple(openings),
     )
