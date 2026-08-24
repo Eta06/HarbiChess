@@ -27,7 +27,12 @@ uv sync --extra dev
 uv run pytest
 uv run ruff check .
 uv run harbichess-mlx-smoke --size 512 --iterations 5
+uv run harbichess-network-benchmark --batches 1,8,16,32,64,128
 ```
+
+The network benchmark executes the actual history-aware 104-plane board input
+through the MLX residual policy/WDL model. End-to-end self-play concurrency will
+be calibrated separately once MCTS and the shared inference queue are present.
 
 Generated checkpoints, replay shards, and run artifacts are intentionally kept
 outside Git history. Evaluated checkpoints will be tied to an exact source
@@ -41,4 +46,3 @@ commit and published as GitHub Release assets.
 4. Parallel self-play and replay storage
 5. Training, checkpointing, and evaluation league
 6. Diversity monitoring and calibrated difficulty control
-
