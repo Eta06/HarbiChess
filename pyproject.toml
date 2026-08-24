@@ -28,6 +28,7 @@ harbichess-network-benchmark = "harbichess.benchmarks.network:main"
 harbichess-search-benchmark = "harbichess.benchmarks.search:main"
 harbichess-release-checkpoint = "harbichess.checkpoints.release:main"
 harbichess-dashboard = "harbichess.dashboard.server:main"
+harbichess-ocak-sanity = "harbichess.training.ocak_run:main"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/harbichess"]
