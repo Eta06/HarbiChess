@@ -17,15 +17,25 @@ class PilotConfig:
     batch_size: int = 32
     minimum_train_improvement: float = 0.05
     maximum_validation_ratio: float = 1.25
+    validation_interval_steps: int = 10
+    early_stopping_patience: int = 5
+    minimum_validation_delta: float = 1e-3
     seed: int = 0
 
     def __post_init__(self) -> None:
-        if self.steps <= 0 or self.batch_size <= 0:
+        if (
+            self.steps <= 0
+            or self.batch_size <= 0
+            or self.validation_interval_steps <= 0
+            or self.early_stopping_patience <= 0
+        ):
             raise ValueError("pilot steps and batch size must be positive")
         if not 0.0 <= self.minimum_train_improvement < 1.0:
             raise ValueError("minimum train improvement must be in [0, 1)")
         if self.maximum_validation_ratio <= 0:
             raise ValueError("maximum validation ratio must be positive")
+        if not math.isfinite(self.minimum_validation_delta) or self.minimum_validation_delta < 0:
+            raise ValueError("minimum validation delta must be finite and non-negative")
 
 
 @dataclass(frozen=True, slots=True)
@@ -40,6 +50,10 @@ class PilotReport:
     maximum_gradient_norm: float
     metrics: tuple[TrainingMetrics, ...]
     sampler_rng_state: object
+    attempted_steps: int
+    best_validation_step: int
+    best_validation_loss: float
+    stopped_early: bool
 
 
 def run_sanity_pilot(
@@ -48,7 +62,7 @@ def run_sanity_pilot(
     validation_records: tuple[ReplayRecord, ...],
     *,
     config: PilotConfig | None = None,
-    on_step: Callable[[TrainingMetrics], None] | None = None,
+    on_step: Callable[[TrainingMetrics, float | None], None] | None = None,
     train_evaluation: TrainingBatch | None = None,
     validation_evaluation: TrainingBatch | None = None,
 ) -> PilotReport:
@@ -71,13 +85,39 @@ def run_sanity_pilot(
     initial_train = learner.evaluate_loss(train_eval)[0]
     initial_validation = learner.evaluate_loss(validation_eval)[0]
     sampler = GameBalancedSampler(train_records, seed=settings.seed)
+    best_snapshot = learner.snapshot()
+    best_sampler_state = sampler.rng_state
+    best_validation = initial_validation
+    best_validation_step = learner.step
+    stale_evaluations = 0
+    stopped_early = False
     metrics = []
     for _ in range(settings.steps):
         sampled_indices = sampler.sample_indices(settings.batch_size)
         metric = learner.train_step(train_eval.select(sampled_indices))
         metrics.append(metric)
+        validation_loss = None
+        if (
+            metric.step % settings.validation_interval_steps == 0
+            or metric.step == settings.steps
+        ):
+            validation_loss = learner.evaluate_loss(validation_eval)[0]
+            if validation_loss < best_validation - settings.minimum_validation_delta:
+                best_validation = validation_loss
+                best_validation_step = metric.step
+                best_snapshot = learner.snapshot()
+                best_sampler_state = sampler.rng_state
+                stale_evaluations = 0
+            else:
+                stale_evaluations += 1
         if on_step is not None:
-            on_step(metric)
+            on_step(metric, validation_loss)
+        if stale_evaluations >= settings.early_stopping_patience:
+            stopped_early = True
+            break
+    attempted_steps = learner.step
+    learner.restore(best_snapshot)
+    sampler.set_rng_state(best_sampler_state)
     final_train = learner.evaluate_loss(train_eval)[0]
     final_validation = learner.evaluate_loss(validation_eval)[0]
 
@@ -94,7 +134,7 @@ def run_sanity_pilot(
     return PilotReport(
         passed=not reasons,
         reasons=tuple(reasons),
-        steps=settings.steps,
+        steps=learner.step,
         initial_train_loss=initial_train,
         final_train_loss=final_train,
         initial_validation_loss=initial_validation,
@@ -102,4 +142,8 @@ def run_sanity_pilot(
         maximum_gradient_norm=max(metric.gradient_norm for metric in metrics),
         metrics=tuple(metrics),
         sampler_rng_state=sampler.rng_state,
+        attempted_steps=attempted_steps,
+        best_validation_step=best_validation_step,
+        best_validation_loss=best_validation,
+        stopped_early=stopped_early,
     )
