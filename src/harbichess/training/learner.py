@@ -8,7 +8,7 @@ from dataclasses import dataclass
 import mlx.core as mx
 import mlx.nn as nn
 import mlx.optimizers as optim
-from mlx.utils import tree_flatten
+from mlx.utils import tree_flatten, tree_unflatten
 
 from harbichess.backends.mlx_network import HarbiChessNetwork
 from harbichess.training.batch import TrainingBatch
@@ -49,6 +49,13 @@ class TrainingMetrics:
     value_loss: float
     total_loss: float
     gradient_norm: float
+
+
+@dataclass(frozen=True, slots=True)
+class LearnerSnapshot:
+    step: int
+    model_weights: tuple[tuple[str, mx.array], ...]
+    optimizer_state: tuple[tuple[str, mx.array], ...]
 
 
 class MLXLearner:
@@ -153,3 +160,22 @@ class MLXLearner:
         total, policy_loss, value_loss = self._loss(inputs, policies, wdl)
         mx.eval(total, policy_loss, value_loss)
         return float(total.item()), float(policy_loss.item()), float(value_loss.item())
+
+    def snapshot(self) -> LearnerSnapshot:
+        model_weights = tuple(
+            (name, mx.array(array)) for name, array in tree_flatten(self.network.parameters())
+        )
+        optimizer_state = tuple(
+            (name, mx.array(array)) for name, array in tree_flatten(self.optimizer.state)
+        )
+        mx.eval(
+            [array for _, array in model_weights],
+            [array for _, array in optimizer_state],
+        )
+        return LearnerSnapshot(self.step, model_weights, optimizer_state)
+
+    def restore(self, snapshot: LearnerSnapshot) -> None:
+        self.network.load_weights(list(snapshot.model_weights))
+        self.optimizer.state = tree_unflatten(list(snapshot.optimizer_state))
+        self.step = snapshot.step
+        mx.eval(self.network.parameters(), self.optimizer.state)
