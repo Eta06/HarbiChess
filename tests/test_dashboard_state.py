@@ -51,6 +51,8 @@ def test_demo_snapshot_contains_arena_quality() -> None:
     assert snapshot.arena_elo_low > 0
     assert snapshot.promotion_ready
     assert snapshot.pilot_status is PilotStatus.TRAINING
+    assert snapshot.pilot_stopped_early
+    assert snapshot.pilot_best_validation_step == 18_400
     assert snapshot.checkpoint_status is CheckpointStatus.VERIFIED
     assert snapshot.diversity.openings[-1].ply == 12
     assert snapshot.diversity.terminations[0].termination == "checkmate"
