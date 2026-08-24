@@ -72,6 +72,7 @@ class OcakRunConfig:
     maximum_validation_ratio: float = 1.25
     minimum_decisive_games: int = 1
     maximum_max_ply_draw_ratio: float = 0.9
+    maximum_repetition_draw_ratio: float = 0.5
     telemetry_interval_steps: int = 2
     early_stopping_patience: int = 12
     minimum_validation_delta: float = 1e-3
@@ -111,6 +112,8 @@ class OcakRunConfig:
             raise ValueError("minimum_validation_delta must be finite and non-negative")
         if not 0.0 <= self.maximum_max_ply_draw_ratio <= 1.0:
             raise ValueError("maximum_max_ply_draw_ratio must be in [0, 1]")
+        if not 0.0 <= self.maximum_repetition_draw_ratio <= 1.0:
+            raise ValueError("maximum_repetition_draw_ratio must be in [0, 1]")
 
 
 @dataclass(frozen=True, slots=True)
@@ -540,6 +543,13 @@ def run_ocak_sanity(
             )
         if diversity_metrics.max_ply_draw_ratio > config.maximum_max_ply_draw_ratio:
             outcome_reasons.append("too many self-play games ended at the max-ply limit")
+        repetition_draws = sum(
+            termination.count
+            for termination in diversity_metrics.terminations
+            if termination.termination == "threefold_repetition"
+        )
+        if repetition_draws / diversity_metrics.games > config.maximum_repetition_draw_ratio:
+            outcome_reasons.append("too many self-play games ended by threefold repetition")
         reasons = (*report.reasons, *outcome_reasons)
         passed = report.passed and not outcome_reasons
         training_seconds = time.perf_counter() - training_started
@@ -713,6 +723,7 @@ def _parser() -> argparse.ArgumentParser:
     parser.add_argument("--batch-size", type=int, default=16)
     parser.add_argument("--minimum-decisive-games", type=int, default=1)
     parser.add_argument("--maximum-max-ply-draw-ratio", type=float, default=0.9)
+    parser.add_argument("--maximum-repetition-draw-ratio", type=float, default=0.5)
     parser.add_argument("--early-stopping-patience", type=int, default=12)
     parser.add_argument("--minimum-validation-delta", type=float, default=1e-3)
     return parser
@@ -734,6 +745,7 @@ def main(argv: list[str] | None = None) -> int:
             batch_size=arguments.batch_size,
             minimum_decisive_games=arguments.minimum_decisive_games,
             maximum_max_ply_draw_ratio=arguments.maximum_max_ply_draw_ratio,
+            maximum_repetition_draw_ratio=arguments.maximum_repetition_draw_ratio,
             early_stopping_patience=arguments.early_stopping_patience,
             minimum_validation_delta=arguments.minimum_validation_delta,
         )
