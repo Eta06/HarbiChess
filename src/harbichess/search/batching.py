@@ -8,13 +8,19 @@ import time
 from concurrent.futures import Future
 from dataclasses import dataclass
 
-from harbichess.core.backend import EncodedPosition, PolicyValueBackend, PolicyValueOutput
+from harbichess.core.backend import (
+    EncodedPosition,
+    MaskedPolicyValueOutput,
+    PolicyValueBackend,
+    PolicyValueOutput,
+)
 
 
 @dataclass(slots=True)
 class _Request:
     position: EncodedPosition
-    future: Future[PolicyValueOutput]
+    action_indices: tuple[int, ...] | None
+    future: Future[PolicyValueOutput | MaskedPolicyValueOutput]
 
 
 @dataclass(frozen=True, slots=True)
@@ -61,8 +67,25 @@ class SharedBatchEvaluator:
         with self._lock:
             if self._closed:
                 raise RuntimeError("shared evaluator is closed")
-            self._queue.put(_Request(position, future))
+            self._queue.put(_Request(position, None, future))
         return future.result()
+
+    def evaluate_masked(
+        self,
+        position: EncodedPosition,
+        action_indices: tuple[int, ...],
+    ) -> MaskedPolicyValueOutput:
+        if not action_indices:
+            raise ValueError("masked evaluation requires legal action indices")
+        future: Future[PolicyValueOutput | MaskedPolicyValueOutput] = Future()
+        with self._lock:
+            if self._closed:
+                raise RuntimeError("shared evaluator is closed")
+            self._queue.put(_Request(position, action_indices, future))
+        output = future.result()
+        if not isinstance(output, MaskedPolicyValueOutput):
+            raise TypeError("masked backend returned a full policy output")
+        return output
 
     def close(self) -> None:
         with self._lock:
@@ -112,7 +135,12 @@ class SharedBatchEvaluator:
                     stop_after_batch = True
                     break
                 requests.append(request)
-            self._evaluate_batch(requests)
+            full = [request for request in requests if request.action_indices is None]
+            masked = [request for request in requests if request.action_indices is not None]
+            if full:
+                self._evaluate_batch(full)
+            if masked:
+                self._evaluate_batch(masked)
             if stop_after_batch:
                 return
 
@@ -122,7 +150,31 @@ class SharedBatchEvaluator:
             self._positions += len(requests)
             self._largest_batch = max(self._largest_batch, len(requests))
         try:
-            outputs = self.backend.evaluate([request.position for request in requests])
+            positions = [request.position for request in requests]
+            if requests[0].action_indices is None:
+                outputs = self.backend.evaluate(positions)
+            else:
+                action_indices = [
+                    request.action_indices
+                    for request in requests
+                    if request.action_indices is not None
+                ]
+                evaluate_masked = getattr(self.backend, "evaluate_masked", None)
+                if evaluate_masked is not None:
+                    outputs = evaluate_masked(positions, action_indices)
+                else:
+                    full_outputs = self.backend.evaluate(positions)
+                    outputs = [
+                        MaskedPolicyValueOutput(
+                            tuple(output.policy_logits[action] for action in indices),
+                            output.wdl_logits,
+                        )
+                        for output, indices in zip(
+                            full_outputs,
+                            action_indices,
+                            strict=True,
+                        )
+                    ]
             if len(outputs) != len(requests):
                 raise RuntimeError(
                     f"backend returned {len(outputs)} outputs for {len(requests)} positions"
