@@ -136,6 +136,7 @@ export interface DashboardSnapshot {
   arena_losses: number;
   arena_decisive_games: number;
   arena_threefold_repetitions: number;
+  arena_avoidable_threefold_repetitions: number;
   arena_max_ply_draws: number;
   arena_other_draws: number;
   arena_score_rate: number;
