@@ -50,6 +50,12 @@ export interface OpeningDiversity {
   effective_prefixes: number;
 }
 
+export interface TerminationSnapshot {
+  termination: string;
+  count: number;
+  ratio: number;
+}
+
 export interface DiversitySnapshot {
   games: number;
   positions: number;
@@ -68,6 +74,7 @@ export interface DiversitySnapshot {
   decisive_game_ratio: number;
   max_ply_draws: number;
   max_ply_draw_ratio: number;
+  terminations: TerminationSnapshot[];
   openings: OpeningDiversity[];
 }
 
@@ -123,6 +130,10 @@ export interface DashboardSnapshot {
   arena_wins: number;
   arena_draws: number;
   arena_losses: number;
+  arena_decisive_games: number;
+  arena_threefold_repetitions: number;
+  arena_max_ply_draws: number;
+  arena_other_draws: number;
   arena_score_rate: number;
   arena_elo_delta: number | null;
   arena_elo_low: number | null;
