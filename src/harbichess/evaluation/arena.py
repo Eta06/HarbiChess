@@ -20,7 +20,7 @@ import mlx.core as mx
 from harbichess.backends.mlx_backend import MLXPolicyValueBackend
 from harbichess.backends.mlx_network import HarbiChessNetwork, NetworkConfig
 from harbichess.chess.rules import PythonChessRules
-from harbichess.core.state import ChessState, GameOutcome, Side, TerminalResult
+from harbichess.core.state import ChessMove, ChessState, GameOutcome, Side, TerminalResult
 from harbichess.dashboard.state import (
     HistoryPoint,
     LiveGame,
@@ -73,6 +73,7 @@ class ArenaGame:
     outcome: GameOutcome
     candidate_score: float
     last_search: SearchResult | None
+    avoidable_threefold: bool
 
 
 @dataclass(frozen=True, slots=True)
@@ -131,6 +132,27 @@ def _candidate_score(outcome: GameOutcome, candidate_side: Side) -> float:
     return 1.0 if value > 0 else 0.0 if value < 0 else 0.5
 
 
+def _avoidable_threefold(
+    rules: PythonChessRules,
+    state: ChessState,
+    selected_move: ChessMove,
+) -> bool:
+    selected_state = rules.apply(state, selected_move)
+    selected_outcome = rules.outcome(selected_state, claim_draw=True)
+    if selected_outcome is None or selected_outcome.termination != "threefold_repetition":
+        return False
+    for move in rules.legal_moves(state):
+        if move == selected_move:
+            continue
+        alternative_outcome = rules.outcome(rules.apply(state, move), claim_draw=True)
+        if (
+            alternative_outcome is None
+            or alternative_outcome.termination != "threefold_repetition"
+        ):
+            return True
+    return False
+
+
 def play_arena_game(
     candidate: MCTS,
     champion: MCTS,
@@ -145,6 +167,7 @@ def play_arena_game(
 ) -> ArenaGame:
     state = initial_state
     last_search: SearchResult | None = None
+    avoidable_threefold = False
     while True:
         outcome = rules.outcome(state, claim_draw=True)
         if outcome is not None:
@@ -155,10 +178,9 @@ def play_arena_game(
         side = rules.view(state).side_to_move
         search = candidate if side is candidate_side else champion
         last_search = search.search(state, rng=random.Random(0), add_root_noise=False)
-        state = rules.apply(
-            state,
-            last_search.select_move(temperature=0.0, rng=random.Random(0)),
-        )
+        selected_move = last_search.select_move(temperature=0.0, rng=random.Random(0))
+        avoidable_threefold = _avoidable_threefold(rules, state, selected_move)
+        state = rules.apply(state, selected_move)
     return ArenaGame(
         game_id=game_id,
         pair_index=pair_index,
@@ -168,6 +190,7 @@ def play_arena_game(
         outcome=outcome,
         candidate_score=_candidate_score(outcome, candidate_side),
         last_search=last_search,
+        avoidable_threefold=avoidable_threefold,
     )
 
 
@@ -305,6 +328,7 @@ def run_devir_arena(config: ArenaConfig) -> ArenaResult:
         arena_losses=0,
         arena_decisive_games=0,
         arena_threefold_repetitions=0,
+        arena_avoidable_threefold_repetitions=0,
         arena_max_ply_draws=0,
         arena_other_draws=0,
         arena_score_rate=0.5,
@@ -329,6 +353,7 @@ def run_devir_arena(config: ArenaConfig) -> ArenaResult:
             threefold = sum(
                 item.outcome.termination == "threefold_repetition" for item in games
             )
+            avoidable_threefold = sum(item.avoidable_threefold for item in games)
             max_ply = sum(item.outcome.termination == "max_plies" for item in games)
             other_draws = draws - threefold - max_ply
             quality = estimate_arena_quality(
@@ -352,6 +377,7 @@ def run_devir_arena(config: ArenaConfig) -> ArenaResult:
                 arena_losses=quality.losses,
                 arena_decisive_games=wins + losses,
                 arena_threefold_repetitions=threefold,
+                arena_avoidable_threefold_repetitions=avoidable_threefold,
                 arena_max_ply_draws=max_ply,
                 arena_other_draws=other_draws,
                 arena_score_rate=quality.score_rate,
@@ -424,6 +450,7 @@ def run_devir_arena(config: ArenaConfig) -> ArenaResult:
                     "opening_moves": game.opening_moves,
                     "result": game.outcome.result,
                     "termination": game.outcome.termination,
+                    "avoidable_threefold": game.avoidable_threefold,
                     "plies": game.final_state.ply,
                     "candidate_score": game.candidate_score,
                 }
