@@ -5,6 +5,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import math
 import os
 import platform
 import subprocess
@@ -72,6 +73,8 @@ class OcakRunConfig:
     minimum_decisive_games: int = 1
     maximum_max_ply_draw_ratio: float = 0.9
     telemetry_interval_steps: int = 2
+    early_stopping_patience: int = 12
+    minimum_validation_delta: float = 1e-3
     trunk_channels: int = 16
     residual_blocks: int = 2
     policy_channels: int = 4
@@ -89,6 +92,7 @@ class OcakRunConfig:
             self.training_steps,
             self.batch_size,
             self.telemetry_interval_steps,
+            self.early_stopping_patience,
             self.trunk_channels,
             self.residual_blocks,
             self.policy_channels,
@@ -103,6 +107,8 @@ class OcakRunConfig:
             raise ValueError("run seed must be non-negative and learning rate positive")
         if self.minimum_decisive_games < 0:
             raise ValueError("minimum_decisive_games must be non-negative")
+        if not math.isfinite(self.minimum_validation_delta) or self.minimum_validation_delta < 0:
+            raise ValueError("minimum_validation_delta must be finite and non-negative")
         if not 0.0 <= self.maximum_max_ply_draw_ratio <= 1.0:
             raise ValueError("maximum_max_ply_draw_ratio must be in [0, 1]")
 
@@ -463,13 +469,20 @@ def run_ocak_sanity(
             pilot_initial_validation_loss=initial_validation,
         )
 
-        def training_step(metric: TrainingMetrics) -> None:
+        def training_step(
+            metric: TrainingMetrics,
+            measured_validation_loss: float | None,
+        ) -> None:
             if (
                 metric.step % config.telemetry_interval_steps != 0
                 and metric.step != config.training_steps
             ):
                 return
-            validation_loss = learner.evaluate_loss(validation_evaluation)[0]
+            validation_loss = (
+                measured_validation_loss
+                if measured_validation_loss is not None
+                else learner.evaluate_loss(validation_evaluation)[0]
+            )
             elapsed = max(time.perf_counter() - training_started, 1e-9)
             point = HistoryPoint(
                 training_step=metric.step,
@@ -511,6 +524,9 @@ def run_ocak_sanity(
                 batch_size=config.batch_size,
                 minimum_train_improvement=config.minimum_train_improvement,
                 maximum_validation_ratio=config.maximum_validation_ratio,
+                validation_interval_steps=config.telemetry_interval_steps,
+                early_stopping_patience=config.early_stopping_patience,
+                minimum_validation_delta=config.minimum_validation_delta,
                 seed=config.run_seed,
             ),
             on_step=training_step,
@@ -607,6 +623,10 @@ def run_ocak_sanity(
                 "initial_validation": report.initial_validation_loss,
                 "final_validation": report.final_validation_loss,
                 "maximum_gradient_norm": report.maximum_gradient_norm,
+                "attempted_steps": report.attempted_steps,
+                "best_validation_step": report.best_validation_step,
+                "best_validation_loss": report.best_validation_loss,
+                "stopped_early": report.stopped_early,
             },
             "diversity": asdict(diversity_metrics),
             "baseline": {
@@ -689,6 +709,8 @@ def _parser() -> argparse.ArgumentParser:
     parser.add_argument("--batch-size", type=int, default=16)
     parser.add_argument("--minimum-decisive-games", type=int, default=1)
     parser.add_argument("--maximum-max-ply-draw-ratio", type=float, default=0.9)
+    parser.add_argument("--early-stopping-patience", type=int, default=12)
+    parser.add_argument("--minimum-validation-delta", type=float, default=1e-3)
     return parser
 
 
@@ -708,6 +730,8 @@ def main(argv: list[str] | None = None) -> int:
             batch_size=arguments.batch_size,
             minimum_decisive_games=arguments.minimum_decisive_games,
             maximum_max_ply_draw_ratio=arguments.maximum_max_ply_draw_ratio,
+            early_stopping_patience=arguments.early_stopping_patience,
+            minimum_validation_delta=arguments.minimum_validation_delta,
         )
     )
     print(json.dumps(asdict(result), indent=2))
