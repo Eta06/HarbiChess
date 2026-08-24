@@ -79,6 +79,13 @@ class OpeningDiversity:
 
 
 @dataclass(frozen=True, slots=True)
+class TerminationSnapshot:
+    termination: str
+    count: int
+    ratio: float
+
+
+@dataclass(frozen=True, slots=True)
 class DiversitySnapshot:
     games: int = 0
     positions: int = 0
@@ -97,6 +104,7 @@ class DiversitySnapshot:
     decisive_game_ratio: float = 0.0
     max_ply_draws: int = 0
     max_ply_draw_ratio: float = 0.0
+    terminations: tuple[TerminationSnapshot, ...] = ()
     openings: tuple[OpeningDiversity, ...] = ()
 
 
@@ -153,6 +161,10 @@ class DashboardSnapshot:
     arena_wins: int = 0
     arena_draws: int = 0
     arena_losses: int = 0
+    arena_decisive_games: int = 0
+    arena_threefold_repetitions: int = 0
+    arena_max_ply_draws: int = 0
+    arena_other_draws: int = 0
     arena_score_rate: float = 0.5
     arena_elo_delta: float | None = None
     arena_elo_low: float | None = None
@@ -179,6 +191,10 @@ class DashboardSnapshot:
         game["wdl"] = tuple(game.get("wdl", (0.0, 1.0, 0.0)))
         data["live_game"] = LiveGame(**game)
         diversity = data.get("diversity", {})
+        diversity["terminations"] = tuple(
+            TerminationSnapshot(**termination)
+            for termination in diversity.get("terminations", ())
+        )
         diversity["openings"] = tuple(
             OpeningDiversity(**opening) for opening in diversity.get("openings", ())
         )
@@ -306,6 +322,11 @@ def demo_snapshot() -> DashboardSnapshot:
                 decisive_game_ratio=0.648,
                 max_ply_draws=312,
                 max_ply_draw_ratio=0.024,
+                terminations=(
+                    TerminationSnapshot("checkmate", 8_298, 0.648),
+                    TerminationSnapshot("max_plies", 312, 0.024),
+                    TerminationSnapshot("threefold_repetition", 4_196, 0.328),
+                ),
                 openings=(
                     OpeningDiversity(4, 12_806, 1_848, 6.82, 916.0),
                     OpeningDiversity(8, 12_806, 8_431, 8.71, 6_072.0),
@@ -317,6 +338,10 @@ def demo_snapshot() -> DashboardSnapshot:
             "arena_wins": quality.wins,
             "arena_draws": quality.draws,
             "arena_losses": quality.losses,
+            "arena_decisive_games": quality.wins + quality.losses,
+            "arena_threefold_repetitions": 41,
+            "arena_max_ply_draws": 12,
+            "arena_other_draws": 8,
             "arena_score_rate": quality.score_rate,
             "arena_elo_delta": quality.elo_delta,
             "arena_elo_low": quality.elo_low,
