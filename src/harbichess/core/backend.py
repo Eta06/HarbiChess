@@ -34,6 +34,14 @@ class PolicyValueOutput:
 
 
 @dataclass(frozen=True, slots=True)
+class MaskedPolicyValueOutput:
+    """Policy logits gathered only for a caller-supplied legal action list."""
+
+    policy_logits: tuple[float, ...]
+    wdl_logits: tuple[float, float, float]
+
+
+@dataclass(frozen=True, slots=True)
 class BackendCapabilities:
     """Execution features exposed for measurement and scheduling."""
 
