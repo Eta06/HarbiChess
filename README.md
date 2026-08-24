@@ -28,6 +28,7 @@ uv run pytest
 uv run ruff check .
 uv run harbichess-mlx-smoke --size 512 --iterations 5
 uv run harbichess-network-benchmark --batches 1,8,16,32,64,128
+uv run harbichess-search-benchmark --games 16,32,64,128 --simulations 32
 uv run harbichess-dashboard --demo
 ```
 
@@ -43,6 +44,11 @@ npm run build
 The network benchmark executes the actual history-aware 104-plane board input
 through the MLX residual policy/WDL model. End-to-end self-play concurrency will
 be calibrated separately once MCTS and the shared inference queue are present.
+
+The search pipeline now uses legal-masked PUCT, independent per-game random
+streams, and a shared inference worker that batches parallel actors onto MLX.
+Self-play records visit-policy targets and final outcomes from each position's
+side-to-move perspective.
 
 The standalone dashboard listens on `http://127.0.0.1:8765` by default. It
 reads a low-frequency atomic telemetry snapshot and never imports or blocks the
