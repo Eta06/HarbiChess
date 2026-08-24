@@ -36,3 +36,37 @@ def test_game_balanced_sampler_is_deterministic_and_restorable() -> None:
     assert len({record.game_id for record in first}) == 2
     with pytest.raises(ValueError, match="batch_size"):
         sampler.sample(0)
+
+
+def test_prevalidated_batch_selection_reuses_encoded_rows() -> None:
+    _, game = scripted_game()
+    records = records_from_game(game, run_id="pilot")
+    batch = build_training_batch(records)
+
+    selected = batch.select((2, 0, 2))
+
+    assert selected.positions == (batch.positions[2], batch.positions[0], batch.positions[2])
+    assert selected.policy_targets == (
+        batch.policy_targets[2],
+        batch.policy_targets[0],
+        batch.policy_targets[2],
+    )
+    assert selected.wdl_targets == (
+        batch.wdl_targets[2],
+        batch.wdl_targets[0],
+        batch.wdl_targets[2],
+    )
+    with pytest.raises(IndexError, match="indices"):
+        batch.select(())
+
+
+def test_sampler_indices_address_the_original_replay_tuple() -> None:
+    _, game = scripted_game()
+    records = records_from_game(game, run_id="pilot")
+    by_record = GameBalancedSampler(records, seed=19)
+    by_index = GameBalancedSampler(records, seed=19)
+
+    sampled = by_record.sample(6)
+    indices = by_index.sample_indices(6)
+
+    assert sampled == tuple(records[index] for index in indices)
