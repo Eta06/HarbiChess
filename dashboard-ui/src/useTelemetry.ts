@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import type { ConnectionState, DashboardSnapshot } from "./types";
 
-const SUPPORTED_SCHEMA = 2;
+const SUPPORTED_SCHEMA = 3;
 
 function parseSnapshot(value: unknown): DashboardSnapshot {
   if (!value || typeof value !== "object") {
