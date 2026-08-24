@@ -2,6 +2,9 @@
 
 from __future__ import annotations
 
+import threading
+from collections import OrderedDict
+
 import chess
 
 from harbichess.chess.rules import PythonChessRules
@@ -22,11 +25,41 @@ def _canonical_square(square: chess.Square, perspective: chess.Color) -> chess.S
 class BoardEncoder:
     """Encode current and recent positions into an NHWC-compatible tensor."""
 
-    def __init__(self, rules: PythonChessRules | None = None) -> None:
+    def __init__(
+        self,
+        rules: PythonChessRules | None = None,
+        *,
+        cache_size: int = 64,
+    ) -> None:
+        if cache_size <= 0:
+            raise ValueError("encoding cache size must be positive")
         self._rules = rules or PythonChessRules()
+        self._cache_size = cache_size
+        self._thread_local = threading.local()
+
+    def _cache(self) -> OrderedDict[ChessState, EncodedPosition]:
+        cache = getattr(self._thread_local, "encoding_cache", None)
+        if cache is None:
+            cache = OrderedDict()
+            self._thread_local.encoding_cache = cache
+        return cache
 
     def encode(self, state: ChessState) -> EncodedPosition:
-        return self.encode_board(self._rules.inspect(state))
+        return self.encode_state(state, self._rules.inspect(state))
+
+    def encode_state(self, state: ChessState, board: chess.Board) -> EncodedPosition:
+        """Encode and retain an immutable state using an already inspected board."""
+
+        cache = self._cache()
+        encoded = cache.get(state)
+        if encoded is not None:
+            cache.move_to_end(state)
+            return encoded
+        encoded = self.encode_board(board)
+        cache[state] = encoded
+        while len(cache) > self._cache_size:
+            cache.popitem(last=False)
+        return encoded
 
     def encode_board(self, board: chess.Board) -> EncodedPosition:
         """Encode a read-only board without reconstructing its move history."""
