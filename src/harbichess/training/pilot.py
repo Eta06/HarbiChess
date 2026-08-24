@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import math
+from collections.abc import Callable
 from dataclasses import dataclass
 
 from harbichess.replay.schema import ReplayRecord
@@ -38,6 +39,7 @@ class PilotReport:
     final_validation_loss: float
     maximum_gradient_norm: float
     metrics: tuple[TrainingMetrics, ...]
+    sampler_rng_state: object
 
 
 def run_sanity_pilot(
@@ -46,6 +48,7 @@ def run_sanity_pilot(
     validation_records: tuple[ReplayRecord, ...],
     *,
     config: PilotConfig | None = None,
+    on_step: Callable[[TrainingMetrics], None] | None = None,
 ) -> PilotReport:
     settings = config or PilotConfig()
     if not train_records or not validation_records:
@@ -63,7 +66,10 @@ def run_sanity_pilot(
     metrics = []
     for _ in range(settings.steps):
         sampled = sampler.sample(settings.batch_size)
-        metrics.append(learner.train_step(build_training_batch(sampled)))
+        metric = learner.train_step(build_training_batch(sampled))
+        metrics.append(metric)
+        if on_step is not None:
+            on_step(metric)
     final_train = learner.evaluate_loss(train_eval)[0]
     final_validation = learner.evaluate_loss(validation_eval)[0]
 
@@ -87,4 +93,5 @@ def run_sanity_pilot(
         final_validation_loss=final_validation,
         maximum_gradient_norm=max(metric.gradient_norm for metric in metrics),
         metrics=tuple(metrics),
+        sampler_rng_state=sampler.rng_state,
     )
