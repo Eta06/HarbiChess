@@ -1,9 +1,16 @@
 import json
 import threading
 import urllib.request
+from contextlib import redirect_stderr
+from io import StringIO
 from pathlib import Path
 
-from harbichess.dashboard.server import STATIC_ROOT, create_server
+from harbichess.dashboard.server import (
+    STATIC_ROOT,
+    DashboardHTTPServer,
+    create_server,
+    handler_for,
+)
 from harbichess.dashboard.state import SnapshotStore, demo_snapshot
 
 
@@ -27,3 +34,18 @@ def test_dashboard_serves_ui_health_and_snapshot(tmp_path: Path) -> None:
         server.server_close()
         thread.join(timeout=2)
 
+
+def test_dashboard_suppresses_routine_client_disconnects(tmp_path: Path) -> None:
+    server = DashboardHTTPServer(
+        ("127.0.0.1", 0),
+        handler_for(SnapshotStore(tmp_path / "unused")),
+    )
+    try:
+        with redirect_stderr(StringIO()) as stderr:
+            try:
+                raise ConnectionResetError
+            except ConnectionResetError:
+                server.handle_error(object(), ("127.0.0.1", 1))
+        assert stderr.getvalue() == ""
+    finally:
+        server.server_close()
