@@ -1,0 +1,18 @@
+.DS_Store
+.venv/
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+__pycache__/
+*.py[cod]
+*.egg-info/
+
+# Generated training state never belongs in Git history.
+artifacts/
+checkpoints/
+replay/
+runs/
+*.safetensors
+*.npz
+*.gguf
