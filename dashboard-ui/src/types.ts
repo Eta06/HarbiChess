@@ -103,6 +103,15 @@ export interface DashboardSnapshot {
   mcts_nodes_per_second: number;
   inference_batch_size: number;
   inference_queue_depth: number;
+  profile_self_play_baseline_seconds: number | null;
+  profile_self_play_optimized_seconds: number | null;
+  profile_self_play_baseline_positions_per_second: number | null;
+  profile_self_play_optimized_positions_per_second: number | null;
+  profile_training_baseline_positions_per_second: number | null;
+  profile_training_optimized_positions_per_second: number | null;
+  profile_inference_baseline_positions_per_second: number | null;
+  profile_inference_optimized_positions_per_second: number | null;
+  profile_optimal_workers: number | null;
   replay_samples: number;
   replay_capacity: number;
   policy_loss: number | null;
