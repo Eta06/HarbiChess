@@ -5,6 +5,7 @@ from test_replay_schema import scripted_game
 
 from harbichess.backends.mlx_network import HarbiChessNetwork, NetworkConfig
 from harbichess.replay.schema import records_from_game
+from harbichess.training.batch import build_training_batch
 from harbichess.training.learner import LearnerConfig, MLXLearner
 from harbichess.training.pilot import PilotConfig, run_sanity_pilot
 
@@ -57,3 +58,27 @@ def test_sanity_pilot_rejects_game_level_leakage() -> None:
 
     with pytest.raises(ValueError, match="leak"):
         run_sanity_pilot(learner, records[:1], records[1:2], config=PilotConfig(steps=1))
+
+
+def test_sanity_pilot_accepts_matching_prebuilt_evaluation_batches() -> None:
+    _, game = scripted_game()
+    records = records_from_game(game, run_id="pilot")
+    train = records[:2]
+    validation = tuple(
+        replace(record, game_id="validation-000000000008", game_index=8)
+        for record in records[2:]
+    )
+    learner = MLXLearner(
+        HarbiChessNetwork(NetworkConfig(trunk_channels=8, residual_blocks=1))
+    )
+
+    report = run_sanity_pilot(
+        learner,
+        train,
+        validation,
+        config=PilotConfig(steps=1, batch_size=2),
+        train_evaluation=build_training_batch(train),
+        validation_evaluation=build_training_batch(validation),
+    )
+
+    assert report.steps == 1
