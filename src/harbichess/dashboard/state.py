@@ -5,11 +5,15 @@ from __future__ import annotations
 import json
 import os
 import tempfile
-from dataclasses import asdict, dataclass, field
+from dataclasses import asdict, dataclass, field, replace
 from datetime import UTC, datetime
 from enum import StrEnum
 from pathlib import Path
 from typing import Any
+
+from harbichess.evaluation.quality import estimate_arena_quality
+
+MAX_HISTORY_POINTS = 240
 
 
 class RunMode(StrEnum):
@@ -31,6 +35,19 @@ class LiveGame:
     ply: int = 0
     top_moves: tuple[tuple[str, float], ...] = ()
     wdl: tuple[float, float, float] = (0.0, 1.0, 0.0)
+
+
+@dataclass(frozen=True, slots=True)
+class HistoryPoint:
+    training_step: int
+    training_elapsed_seconds: float
+    lifetime_games: int
+    total_loss: float | None
+    elo_delta: float | None
+    elo_low: float | None
+    elo_high: float | None
+    games_per_hour: float
+    positions_per_second: float
 
 
 @dataclass(frozen=True, slots=True)
@@ -67,6 +84,16 @@ class DashboardSnapshot:
     learning_rate: float | None
     demo: bool = False
     live_game: LiveGame = field(default_factory=LiveGame)
+    arena_games: int = 0
+    arena_wins: int = 0
+    arena_draws: int = 0
+    arena_losses: int = 0
+    arena_score_rate: float = 0.5
+    arena_elo_delta: float | None = None
+    arena_elo_low: float | None = None
+    arena_elo_high: float | None = None
+    promotion_ready: bool = False
+    history: tuple[HistoryPoint, ...] = ()
 
     def to_json(self) -> str:
         return json.dumps(asdict(self), separators=(",", ":"))
@@ -79,12 +106,18 @@ class DashboardSnapshot:
         game["top_moves"] = tuple(tuple(item) for item in game.get("top_moves", ()))
         game["wdl"] = tuple(game.get("wdl", (0.0, 1.0, 0.0)))
         data["live_game"] = LiveGame(**game)
+        data["history"] = tuple(
+            HistoryPoint(**point) for point in data.get("history", ())[-MAX_HISTORY_POINTS:]
+        )
         return cls(**data)
+
+    def append_history(self, point: HistoryPoint) -> DashboardSnapshot:
+        return replace(self, history=(*self.history, point)[-MAX_HISTORY_POINTS:])
 
 
 def empty_snapshot() -> DashboardSnapshot:
     return DashboardSnapshot(
-        schema_version=1,
+        schema_version=2,
         updated_at=datetime.now(UTC).isoformat(),
         mode=RunMode.IDLE,
         mode_detail="Waiting for the first HarbiChess run",
@@ -119,6 +152,21 @@ def empty_snapshot() -> DashboardSnapshot:
 
 def demo_snapshot() -> DashboardSnapshot:
     snapshot = empty_snapshot()
+    quality = estimate_arena_quality(122, 61, 37, minimum_games=200)
+    history = tuple(
+        HistoryPoint(
+            training_step=4_000 + index * 960,
+            training_elapsed_seconds=4_100 + index * 1_049,
+            lifetime_games=1_061_000 + index * 14_893,
+            total_loss=3.72 - index * 0.0537,
+            elo_delta=-42.0 + index * 12.25,
+            elo_low=-137.0 + index * 15.5,
+            elo_high=53.0 + index * 9.0,
+            games_per_hour=8_940.0 + index * 120.0,
+            positions_per_second=70_100.0 + index * 568.0,
+        )
+        for index in range(16)
+    )
     return DashboardSnapshot(
         **{
             **asdict(snapshot),
@@ -151,6 +199,16 @@ def demo_snapshot() -> DashboardSnapshot:
             "total_loss": 2.915,
             "learning_rate": 0.0002,
             "demo": True,
+            "arena_games": quality.games,
+            "arena_wins": quality.wins,
+            "arena_draws": quality.draws,
+            "arena_losses": quality.losses,
+            "arena_score_rate": quality.score_rate,
+            "arena_elo_delta": quality.elo_delta,
+            "arena_elo_low": quality.elo_low,
+            "arena_elo_high": quality.elo_high,
+            "promotion_ready": quality.promotion_ready,
+            "history": history,
             "live_game": LiveGame(
                 game_id="sp-0007-12806",
                 fen="r1bq1rk1/pp2bppp/2n1pn2/2pp4/3P4/2NBPN2/PPQ2PPP/R1B2RK1 w - - 4 10",
@@ -191,4 +249,3 @@ class SnapshotStore:
         finally:
             if temporary is not None and os.path.exists(temporary):
                 os.unlink(temporary)
-
