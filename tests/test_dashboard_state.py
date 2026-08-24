@@ -57,3 +57,4 @@ def test_demo_snapshot_contains_arena_quality() -> None:
     assert snapshot.diversity.openings[-1].ply == 12
     assert snapshot.diversity.terminations[0].termination == "checkmate"
     assert snapshot.arena_threefold_repetitions == 41
+    assert snapshot.arena_avoidable_threefold_repetitions == 38
