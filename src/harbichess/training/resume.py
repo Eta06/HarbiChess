@@ -5,7 +5,7 @@ from __future__ import annotations
 import json
 import os
 import tempfile
-from dataclasses import asdict, dataclass
+from dataclasses import asdict, dataclass, field
 from pathlib import Path
 from typing import Any
 
@@ -28,6 +28,7 @@ class ResumeState:
     model_file: str
     optimizer_file: str
     rng_file: str
+    artifact_sha256: dict[str, str] = field(default_factory=dict)
 
     def __post_init__(self) -> None:
         if self.schema_version <= 0:
@@ -49,6 +50,12 @@ class ResumeState:
         artifacts = (self.model_file, self.optimizer_file, self.rng_file)
         if not self.run_id or not self.checkpoint_id or not all(artifacts):
             raise ValueError("resume identifiers and artifact files cannot be empty")
+        if any(
+            len(digest) != 64
+            or any(character not in "0123456789abcdef" for character in digest.lower())
+            for digest in self.artifact_sha256.values()
+        ):
+            raise ValueError("artifact checksums must be 64-character SHA-256 digests")
 
     def to_json(self) -> str:
         return json.dumps(asdict(self), indent=2, sort_keys=True) + "\n"
