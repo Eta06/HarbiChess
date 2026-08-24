@@ -5,6 +5,7 @@ import pytest
 from harbichess.core.backend import (
     BackendCapabilities,
     EncodedPosition,
+    MaskedPolicyValueOutput,
     PolicyValueOutput,
 )
 from harbichess.search.batching import SharedBatchEvaluator
@@ -53,3 +54,15 @@ def test_evaluator_rejects_use_after_close_and_invalid_config() -> None:
         evaluator.evaluate(EncodedPosition((0.0,), (1,), 1))
     with pytest.raises(ValueError, match="batch size"):
         SharedBatchEvaluator(RecordingBackend(), max_batch_size=0)
+
+
+def test_masked_requests_fall_back_to_generic_backend_slicing() -> None:
+    backend = RecordingBackend()
+    with SharedBatchEvaluator(backend, max_batch_size=1) as evaluator:
+        output = evaluator.evaluate_masked(
+            EncodedPosition((1.0, 2.0, 3.0), (3,), 1),
+            (2, 0),
+        )
+
+    assert isinstance(output, MaskedPolicyValueOutput)
+    assert output.policy_logits == (3.0, 1.0)
