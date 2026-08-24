@@ -1,7 +1,14 @@
 from dataclasses import replace
 from pathlib import Path
 
-from harbichess.dashboard.state import RunMode, SnapshotStore, demo_snapshot, empty_snapshot
+from harbichess.dashboard.state import (
+    MAX_HISTORY_POINTS,
+    HistoryPoint,
+    RunMode,
+    SnapshotStore,
+    demo_snapshot,
+    empty_snapshot,
+)
 
 
 def test_snapshot_round_trip_preserves_nested_game(tmp_path: Path) -> None:
@@ -24,3 +31,20 @@ def test_training_elapsed_time_is_persisted() -> None:
     snapshot = replace(empty_snapshot(), training_elapsed_seconds=7_200.0)
     assert snapshot.from_json(snapshot.to_json()).training_elapsed_seconds == 7_200.0
 
+
+def test_history_is_bounded_and_round_trips() -> None:
+    point = HistoryPoint(1, 2.0, 3, 4.0, 5.0, 1.0, 9.0, 6.0, 7.0)
+    snapshot = empty_snapshot()
+    for _ in range(MAX_HISTORY_POINTS + 5):
+        snapshot = snapshot.append_history(point)
+
+    restored = snapshot.from_json(snapshot.to_json())
+    assert len(restored.history) == MAX_HISTORY_POINTS
+    assert restored.history[-1] == point
+
+
+def test_demo_snapshot_contains_arena_quality() -> None:
+    snapshot = demo_snapshot()
+    assert snapshot.arena_games == 220
+    assert snapshot.arena_elo_low > 0
+    assert snapshot.promotion_ready
