@@ -51,6 +51,8 @@ def test_ocak_run_connects_self_play_training_checkpoint_and_telemetry(
             learning_rate=0.002,
             minimum_train_improvement=0.0,
             maximum_validation_ratio=100.0,
+            minimum_decisive_games=0,
+            maximum_max_ply_draw_ratio=1.0,
             telemetry_interval_steps=1,
             trunk_channels=8,
             residual_blocks=1,
@@ -77,3 +79,32 @@ def test_ocak_run_connects_self_play_training_checkpoint_and_telemetry(
 def test_ocak_run_configuration_rejects_unsafe_run_id() -> None:
     with pytest.raises(ValueError, match="safe path"):
         OcakRunConfig(run_id="../escape")
+
+
+def test_ocak_run_rejects_draw_only_truncated_self_play(tmp_path: Path) -> None:
+    result = run_ocak_sanity(
+        OcakRunConfig(
+            run_id=_run_id_with_both_splits(4),
+            artifact_root=tmp_path / "runs",
+            telemetry_path=tmp_path / "dashboard.json",
+            games=4,
+            workers=4,
+            simulations=1,
+            max_plies=1,
+            validation_fraction=0.5,
+            training_steps=1,
+            batch_size=1,
+            minimum_train_improvement=0.0,
+            maximum_validation_ratio=100.0,
+            trunk_channels=8,
+            residual_blocks=1,
+            policy_channels=2,
+            value_channels=1,
+            value_hidden=8,
+        ),
+        source_commit="b" * 40,
+    )
+
+    assert not result.passed
+    assert "decisive terminal" in " ".join(result.reasons)
+    assert "max-ply" in " ".join(result.reasons)
