@@ -60,7 +60,7 @@ class NeuralPositionEvaluator:
         legal_moves = tuple(sorted(board.legal_moves, key=lambda move: move.uci()))
         if not legal_moves:
             raise ValueError("terminal positions must be resolved before neural evaluation")
-        encoded = self.encoder.encode_board(board)
+        encoded = self.encoder.encode_state(state, board)
         actions = tuple(move_to_action(board, move) for move in legal_moves)
         masked_evaluate = getattr(self.evaluator, "evaluate_masked", None)
         if masked_evaluate is None:
