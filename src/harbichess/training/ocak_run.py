@@ -450,10 +450,10 @@ def run_ocak_sanity(
             max_gradient_norm=5.0,
         )
         learner = MLXLearner(network, config=learner_config)
-        initial_train = learner.evaluate_loss(build_training_batch(train_records))[0]
-        initial_validation = learner.evaluate_loss(
-            build_training_batch(validation_records)
-        )[0]
+        train_evaluation = build_training_batch(train_records)
+        validation_evaluation = build_training_batch(validation_records)
+        initial_train = learner.evaluate_loss(train_evaluation)[0]
+        initial_validation = learner.evaluate_loss(validation_evaluation)[0]
         training_started = time.perf_counter()
         publish(
             mode=RunMode.TRAINING,
@@ -469,9 +469,7 @@ def run_ocak_sanity(
                 and metric.step != config.training_steps
             ):
                 return
-            validation_loss = learner.evaluate_loss(
-                build_training_batch(validation_records)
-            )[0]
+            validation_loss = learner.evaluate_loss(validation_evaluation)[0]
             elapsed = max(time.perf_counter() - training_started, 1e-9)
             point = HistoryPoint(
                 training_step=metric.step,
@@ -516,6 +514,8 @@ def run_ocak_sanity(
                 seed=config.run_seed,
             ),
             on_step=training_step,
+            train_evaluation=train_evaluation,
+            validation_evaluation=validation_evaluation,
         )
         outcome_reasons = []
         if diversity_metrics.decisive_games < config.minimum_decisive_games:
