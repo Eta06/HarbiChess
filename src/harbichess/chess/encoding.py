@@ -127,9 +127,7 @@ class BoardEncoder:
 
     @staticmethod
     def _set(values: list[float], square: chess.Square, channel: int, value: float) -> None:
-        row = chess.square_rank(square)
-        column = chess.square_file(square)
-        values[(row * 8 + column) * ENCODER_CHANNELS + channel] = value
+        values[square * ENCODER_CHANNELS + channel] = value
 
     @staticmethod
     def _fill_plane(values: list[float], channel: int, value: float) -> None:
