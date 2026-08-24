@@ -48,3 +48,21 @@ def test_gradient_finiteness_is_reduced_in_one_mlx_expression() -> None:
 
     assert bool(finite.item())
     assert not bool(non_finite.item())
+
+
+def test_learner_snapshot_restores_model_optimizer_and_step() -> None:
+    mx.random.seed(29)
+    _, game = scripted_game()
+    batch = build_training_batch((records_from_game(game, run_id="pilot")[0],))
+    learner = MLXLearner(
+        HarbiChessNetwork(NetworkConfig(trunk_channels=8, residual_blocks=1))
+    )
+    learner.train_step(batch)
+    snapshot = learner.snapshot()
+    expected = learner.evaluate_loss(batch)
+
+    learner.train_step(batch)
+    learner.restore(snapshot)
+
+    assert learner.step == 1
+    assert learner.evaluate_loss(batch) == pytest.approx(expected)
