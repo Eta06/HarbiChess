@@ -140,6 +140,15 @@ class DashboardSnapshot:
     value_loss: float | None
     total_loss: float | None
     learning_rate: float | None
+    profile_self_play_baseline_seconds: float | None = None
+    profile_self_play_optimized_seconds: float | None = None
+    profile_self_play_baseline_positions_per_second: float | None = None
+    profile_self_play_optimized_positions_per_second: float | None = None
+    profile_training_baseline_positions_per_second: float | None = None
+    profile_training_optimized_positions_per_second: float | None = None
+    profile_inference_baseline_positions_per_second: float | None = None
+    profile_inference_optimized_positions_per_second: float | None = None
+    profile_optimal_workers: int | None = None
     pilot_status: PilotStatus = PilotStatus.NOT_STARTED
     pilot_steps_planned: int = 0
     pilot_steps_completed: int = 0
@@ -296,6 +305,15 @@ def demo_snapshot() -> DashboardSnapshot:
             "value_loss": 0.731,
             "total_loss": 2.915,
             "learning_rate": 0.0002,
+            "profile_self_play_baseline_seconds": 289.33,
+            "profile_self_play_optimized_seconds": 49.69,
+            "profile_self_play_baseline_positions_per_second": 21.13,
+            "profile_self_play_optimized_positions_per_second": 123.04,
+            "profile_training_baseline_positions_per_second": 4_036.84,
+            "profile_training_optimized_positions_per_second": 5_574.79,
+            "profile_inference_baseline_positions_per_second": 5_814.21,
+            "profile_inference_optimized_positions_per_second": 17_237.66,
+            "profile_optimal_workers": 64,
             "pilot_status": PilotStatus.TRAINING,
             "pilot_steps_planned": 20_000,
             "pilot_steps_completed": 18_400,
