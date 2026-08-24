@@ -7,7 +7,7 @@ from collections.abc import Callable
 from dataclasses import dataclass
 
 from harbichess.replay.schema import ReplayRecord
-from harbichess.training.batch import GameBalancedSampler, build_training_batch
+from harbichess.training.batch import GameBalancedSampler, TrainingBatch, build_training_batch
 from harbichess.training.learner import MLXLearner, TrainingMetrics
 
 
@@ -49,6 +49,8 @@ def run_sanity_pilot(
     *,
     config: PilotConfig | None = None,
     on_step: Callable[[TrainingMetrics], None] | None = None,
+    train_evaluation: TrainingBatch | None = None,
+    validation_evaluation: TrainingBatch | None = None,
 ) -> PilotReport:
     settings = config or PilotConfig()
     if not train_records or not validation_records:
@@ -58,15 +60,21 @@ def run_sanity_pilot(
     if train_games & validation_games:
         raise ValueError("train and validation records leak the same game IDs")
 
-    train_eval = build_training_batch(train_records)
-    validation_eval = build_training_batch(validation_records)
+    if (train_evaluation is None) != (validation_evaluation is None):
+        raise ValueError("train and validation evaluation batches must be supplied together")
+    train_eval = train_evaluation or build_training_batch(train_records)
+    validation_eval = validation_evaluation or build_training_batch(validation_records)
+    if len(train_eval.positions) != len(train_records):
+        raise ValueError("train evaluation batch does not match replay records")
+    if len(validation_eval.positions) != len(validation_records):
+        raise ValueError("validation evaluation batch does not match replay records")
     initial_train = learner.evaluate_loss(train_eval)[0]
     initial_validation = learner.evaluate_loss(validation_eval)[0]
     sampler = GameBalancedSampler(train_records, seed=settings.seed)
     metrics = []
     for _ in range(settings.steps):
-        sampled = sampler.sample(settings.batch_size)
-        metric = learner.train_step(build_training_batch(sampled))
+        sampled_indices = sampler.sample_indices(settings.batch_size)
+        metric = learner.train_step(train_eval.select(sampled_indices))
         metrics.append(metric)
         if on_step is not None:
             on_step(metric)
