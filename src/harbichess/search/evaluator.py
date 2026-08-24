@@ -10,7 +10,11 @@ from typing import Protocol
 from harbichess.chess.actions import POLICY_SIZE, move_to_action
 from harbichess.chess.encoding import BoardEncoder
 from harbichess.chess.rules import PythonChessRules
-from harbichess.core.backend import EncodedPosition, PolicyValueOutput
+from harbichess.core.backend import (
+    EncodedPosition,
+    MaskedPolicyValueOutput,
+    PolicyValueOutput,
+)
 from harbichess.core.state import ChessMove, ChessState
 
 
@@ -56,15 +60,22 @@ class NeuralPositionEvaluator:
         legal_moves = tuple(sorted(board.legal_moves, key=lambda move: move.uci()))
         if not legal_moves:
             raise ValueError("terminal positions must be resolved before neural evaluation")
-        output = self.evaluator.evaluate(self.encoder.encode_board(board))
-        if len(output.policy_logits) != POLICY_SIZE:
-            raise ValueError(
-                f"policy output must contain {POLICY_SIZE} logits, "
-                f"got {len(output.policy_logits)}"
-            )
-        legal_logits = tuple(
-            output.policy_logits[move_to_action(board, move)] for move in legal_moves
-        )
+        encoded = self.encoder.encode_board(board)
+        actions = tuple(move_to_action(board, move) for move in legal_moves)
+        masked_evaluate = getattr(self.evaluator, "evaluate_masked", None)
+        if masked_evaluate is None:
+            output: PolicyValueOutput | MaskedPolicyValueOutput = self.evaluator.evaluate(encoded)
+            if len(output.policy_logits) != POLICY_SIZE:
+                raise ValueError(
+                    f"policy output must contain {POLICY_SIZE} logits, "
+                    f"got {len(output.policy_logits)}"
+                )
+            legal_logits = tuple(output.policy_logits[action] for action in actions)
+        else:
+            output = masked_evaluate(encoded, actions)
+            if len(output.policy_logits) != len(legal_moves):
+                raise ValueError("masked policy output must match the legal action count")
+            legal_logits = output.policy_logits
         priors = _softmax(legal_logits)
         win, draw, loss = _softmax(output.wdl_logits)
         del draw
