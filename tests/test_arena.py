@@ -23,6 +23,20 @@ class ScriptedArenaSearch:
         return SearchResult((MoveStatistics(move, 1, 1.0, 0.0),), 0.0, 1)
 
 
+class RepeatingArenaSearch:
+    moves = (
+        ChessMove("g1f3"),
+        ChessMove("g8f6"),
+        ChessMove("f3g1"),
+        ChessMove("f6g8"),
+    )
+
+    def search(self, state, *, rng: random.Random, add_root_noise: bool):
+        del rng, add_root_noise
+        move = self.moves[state.ply % len(self.moves)]
+        return SearchResult((MoveStatistics(move, 1, 1.0, 0.0),), 0.0, 1)
+
+
 def test_arena_scores_result_from_candidate_color() -> None:
     rules = PythonChessRules()
     game = play_arena_game(
@@ -40,6 +54,24 @@ def test_arena_scores_result_from_candidate_color() -> None:
     assert game.candidate_score == 1.0
     assert game.final_state.ply == 4
     assert game.candidate_side is Side.BLACK
+
+
+def test_arena_marks_threefold_when_non_repeating_alternatives_exist() -> None:
+    rules = PythonChessRules()
+    game = play_arena_game(
+        RepeatingArenaSearch(),
+        RepeatingArenaSearch(),
+        rules,
+        rules.initial_state(),
+        game_id="repetition",
+        pair_index=0,
+        candidate_side=Side.WHITE,
+        opening_moves=(),
+        max_plies=20,
+    )
+
+    assert game.outcome.termination == "threefold_repetition"
+    assert game.avoidable_threefold
 
 
 def test_arena_configuration_rejects_unsafe_values(tmp_path) -> None:
@@ -111,5 +143,6 @@ def test_devir_runner_keeps_champion_when_micro_arena_is_inconclusive(
     assert not snapshot.promotion_ready
     assert snapshot.arena_max_ply_draws == 2
     assert snapshot.arena_threefold_repetitions == 0
+    assert snapshot.arena_avoidable_threefold_repetitions == 0
     assert "champion unchanged" in snapshot.mode_detail
     assert Path(result.result_path).is_file()
