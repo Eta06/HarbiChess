@@ -8,6 +8,8 @@ import {
   Database,
   GitCommitHorizontal,
   Gauge,
+  Network,
+  ShieldCheck,
   Swords,
   Trophy,
   Wifi,
@@ -15,7 +17,7 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import { useEffect, useMemo, useState, type ReactNode } from "react";
-import type { ConnectionState, DashboardSnapshot, HistoryPoint, RunMode } from "./types";
+import type { ConnectionState, DashboardSnapshot, HistoryPoint } from "./types";
 import { useTelemetry } from "./useTelemetry";
 
 const integerFormatter = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
@@ -35,6 +37,10 @@ function formatSigned(value: number | null | undefined) {
   return `${value >= 0 ? "+" : ""}${Math.round(value)}`;
 }
 
+function formatPercent(value: number | null | undefined, digits = 1) {
+  return value == null ? "—" : `${(value * 100).toFixed(digits)}%`;
+}
+
 function formatDuration(seconds: number) {
   const total = Math.max(0, Math.floor(seconds));
   const days = Math.floor(total / 86_400);
@@ -45,7 +51,7 @@ function formatDuration(seconds: number) {
   return days > 0 ? `${days}d ${clock}` : clock;
 }
 
-function modeLabel(mode: RunMode) {
+function modeLabel(mode: string) {
   return mode.replaceAll("_", " ").toLowerCase().replace(/\b\w/g, (letter) => letter.toUpperCase());
 }
 
@@ -293,6 +299,21 @@ function App() {
   const latestHistory = history.at(-1);
   const game = snapshot.live_game;
   const [win = 0, draw = 1, loss = 0] = game.wdl ?? [];
+  const diversity = snapshot.diversity;
+  const pilotColor: StatusColor = snapshot.pilot_status === "PASSED"
+    ? "success"
+    : snapshot.pilot_status === "FAILED"
+      ? "danger"
+      : snapshot.pilot_status === "TRAINING"
+        ? "accent"
+        : "default";
+  const checkpointColor: StatusColor = snapshot.checkpoint_status === "VERIFIED"
+    ? "success"
+    : snapshot.checkpoint_status === "FAILED"
+      ? "danger"
+      : snapshot.checkpoint_status === "WRITING"
+        ? "warning"
+        : "default";
 
   return (
     <div className="app-frame">
@@ -358,6 +379,73 @@ function App() {
           <StatCard icon={Gauge} label="Positions / sec" value={formatNumber(snapshot.positions_per_second)} detail="encoded states" />
           <StatCard icon={Cpu} label="Neural evals / sec" value={formatNumber(snapshot.neural_evals_per_second)} detail="MLX inference" />
           <StatCard icon={Swords} label="MCTS nodes / sec" value={formatNumber(snapshot.mcts_nodes_per_second)} detail="search throughput" />
+        </section>
+
+        <section className="guardrail-grid" aria-label="OCAK sanity guardrails">
+          <Panel
+            className="pilot-panel"
+            description="Low-budget learner gate before recursive training"
+            icon={ShieldCheck}
+            title="OCAK sanity pilot"
+            action={<Chip color={pilotColor} size="sm" variant="soft">{modeLabel(snapshot.pilot_status)}</Chip>}
+          >
+            <ProgressMetric
+              display={`${formatNumber(snapshot.pilot_steps_completed)} / ${formatNumber(snapshot.pilot_steps_planned)}`}
+              label="Pilot steps"
+              maxValue={Math.max(1, snapshot.pilot_steps_planned)}
+              value={snapshot.pilot_steps_completed}
+            />
+            <div className="gate-metrics">
+              <div><span>Train loss</span><strong>{formatLoss(snapshot.pilot_initial_train_loss)} <small>→</small> {formatLoss(snapshot.pilot_final_train_loss ?? snapshot.total_loss)}</strong></div>
+              <div><span>Validation loss</span><strong>{formatLoss(snapshot.pilot_initial_validation_loss)} <small>→</small> {formatLoss(snapshot.pilot_final_validation_loss ?? latestHistory?.validation_loss)}</strong></div>
+              <div><span>Max gradient norm</span><strong>{formatLoss(snapshot.pilot_max_gradient_norm)}</strong></div>
+              <div><span>Validation samples</span><strong>{formatNumber(snapshot.validation_samples)}</strong></div>
+            </div>
+            {snapshot.pilot_reasons.length ? (
+              <div className="guardrail-message is-danger">{snapshot.pilot_reasons.join(" · ")}</div>
+            ) : (
+              <div className="guardrail-message">No guardrail violation recorded</div>
+            )}
+            <div className="checkpoint-state">
+              <div>
+                <span>Checkpoint</span>
+                <strong title={snapshot.checkpoint_path}>{snapshot.candidate_checkpoint || "Not written yet"}</strong>
+              </div>
+              <Chip color={checkpointColor} size="sm" variant="soft">{modeLabel(snapshot.checkpoint_status)}</Chip>
+            </div>
+          </Panel>
+
+          <Panel
+            className="diversity-panel"
+            description={`${formatNumber(diversity.games)} games · ${formatNumber(diversity.positions)} positions`}
+            icon={Network}
+            title="Self-play diversity"
+            action={<Chip size="sm" variant="soft">{formatNumber(snapshot.replay_shards)} shards</Chip>}
+          >
+            <div className="diversity-metrics">
+              <div><span>Unique games</span><strong>{formatPercent(diversity.unique_game_ratio)}</strong></div>
+              <div><span>Duplicate games</span><strong>{formatPercent(diversity.duplicate_game_ratio)}</strong></div>
+              <div><span>Unique positions</span><strong>{formatPercent(diversity.unique_position_ratio)}</strong></div>
+              <div><span>Action coverage</span><strong>{formatPercent(diversity.action_space_coverage, 2)}</strong></div>
+              <div><span>Effective branches</span><strong>{formatNumber(diversity.effective_policy_branches, 1)}</strong></div>
+              <div><span>Mean game plies</span><strong>{formatNumber(diversity.mean_game_plies, 1)}</strong></div>
+            </div>
+            <div className="opening-list">
+              <span className="subsection-label">Opening prefix coverage</span>
+              {(diversity.openings ?? []).map((opening) => (
+                <div className="opening-row" key={opening.ply}>
+                  <span>Ply {opening.ply}</span>
+                  <strong>{formatNumber(opening.unique_prefixes)} unique</strong>
+                  <small>entropy {opening.entropy.toFixed(2)} · effective {formatNumber(opening.effective_prefixes, 1)}</small>
+                </div>
+              ))}
+              {!diversity.openings?.length ? <p className="empty-copy">Waiting for completed games</p> : null}
+            </div>
+            <div className="diversity-wdl">
+              <span>W / D / L</span>
+              <strong>{formatNumber(diversity.white_wins)} / {formatNumber(diversity.draws)} / {formatNumber(diversity.black_wins)}</strong>
+            </div>
+          </Panel>
         </section>
 
         <section className="primary-grid">
