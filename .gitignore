@@ -9,10 +9,10 @@ __pycache__/
 *.egg-info/
 
 # Generated training state never belongs in Git history.
-artifacts/
-checkpoints/
-replay/
-runs/
+/artifacts/
+/checkpoints/
+/replay/
+/runs/
 *.safetensors
 *.npz
 *.gguf
