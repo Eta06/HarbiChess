@@ -557,6 +557,7 @@ def run_ocak_sanity(
             mode=RunMode.CHECKPOINTING,
             mode_detail="Pilot complete · writing atomic candidate checkpoint",
             pilot_status=PilotStatus.PASSED if passed else PilotStatus.FAILED,
+            training_step=report.steps,
             pilot_steps_completed=report.steps,
             pilot_steps_attempted=report.attempted_steps,
             pilot_best_validation_step=report.best_validation_step,
