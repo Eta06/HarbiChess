@@ -41,6 +41,7 @@ def test_self_play_game_records_policy_and_final_values() -> None:
 
 def test_parallel_games_receive_reproducible_unique_seeds() -> None:
     rules = PythonChessRules()
+    completed = []
     games = play_parallel_games(
         ScriptedSearch(),
         rules,
@@ -48,11 +49,13 @@ def test_parallel_games_receive_reproducible_unique_seeds() -> None:
         first_game_index=10,
         game_count=4,
         max_workers=4,
+        on_game_complete=completed.append,
     )
 
     assert [game.game_index for game in games] == [10, 11, 12, 13]
     assert len({game.seed for game in games}) == 4
     assert games[0].seed == derive_game_seed(1234, 10)
+    assert sorted(game.game_index for game in completed) == [10, 11, 12, 13]
 
 
 def test_self_play_configuration_validation_and_ply_adjudication() -> None:
