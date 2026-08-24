@@ -72,6 +72,7 @@ def test_ocak_run_connects_self_play_training_checkpoint_and_telemetry(
     assert snapshot.diversity.games == 4
     assert snapshot.diversity.terminations[0].termination == "max_plies"
     assert snapshot.replay_shards == 2
+    assert snapshot.training_step == result.training_steps
     assert snapshot.history[-1].training_step == 2
     assert payload["checkpoint"]["verified"]
     assert Path(payload["baseline"]["path"]).is_file()
