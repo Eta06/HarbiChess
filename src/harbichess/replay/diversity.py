@@ -23,6 +23,13 @@ class OpeningCoverage:
 
 
 @dataclass(frozen=True, slots=True)
+class TerminationCoverage:
+    termination: str
+    count: int
+    ratio: float
+
+
+@dataclass(frozen=True, slots=True)
 class DiversityMetrics:
     games: int
     positions: int
@@ -41,6 +48,7 @@ class DiversityMetrics:
     decisive_game_ratio: float
     max_ply_draws: int
     max_ply_draw_ratio: float
+    terminations: tuple[TerminationCoverage, ...]
     openings: tuple[OpeningCoverage, ...]
 
 
@@ -95,6 +103,7 @@ def measure_diversity(
         )
 
     outcomes = Counter(game.outcome.result for game in games)
+    terminations = Counter(game.outcome.termination for game in games)
     decisive_games = outcomes[TerminalResult.WHITE_WIN] + outcomes[TerminalResult.BLACK_WIN]
     max_ply_draws = sum(game.outcome.termination == "max_plies" for game in games)
     mean_policy_entropy = sum(policy_entropies) / len(policy_entropies) if policy_entropies else 0.0
@@ -116,5 +125,9 @@ def measure_diversity(
         decisive_game_ratio=decisive_games / len(games),
         max_ply_draws=max_ply_draws,
         max_ply_draw_ratio=max_ply_draws / len(games),
+        terminations=tuple(
+            TerminationCoverage(termination, count, count / len(games))
+            for termination, count in sorted(terminations.items())
+        ),
         openings=tuple(openings),
     )
