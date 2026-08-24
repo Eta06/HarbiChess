@@ -25,6 +25,22 @@ class RunMode(StrEnum):
     IDLE = "IDLE"
 
 
+class PilotStatus(StrEnum):
+    NOT_STARTED = "NOT_STARTED"
+    SELF_PLAY = "SELF_PLAY"
+    REPLAY = "REPLAY"
+    TRAINING = "TRAINING"
+    PASSED = "PASSED"
+    FAILED = "FAILED"
+
+
+class CheckpointStatus(StrEnum):
+    NONE = "NONE"
+    WRITING = "WRITING"
+    VERIFIED = "VERIFIED"
+    FAILED = "FAILED"
+
+
 @dataclass(frozen=True, slots=True)
 class LiveGame:
     game_id: str = ""
@@ -48,6 +64,36 @@ class HistoryPoint:
     elo_high: float | None
     games_per_hour: float
     positions_per_second: float
+    policy_loss: float | None = None
+    value_loss: float | None = None
+    validation_loss: float | None = None
+
+
+@dataclass(frozen=True, slots=True)
+class OpeningDiversity:
+    ply: int
+    eligible_games: int
+    unique_prefixes: int
+    entropy: float
+    effective_prefixes: float
+
+
+@dataclass(frozen=True, slots=True)
+class DiversitySnapshot:
+    games: int = 0
+    positions: int = 0
+    unique_game_ratio: float = 0.0
+    duplicate_game_ratio: float = 0.0
+    unique_position_ratio: float = 0.0
+    selected_actions: int = 0
+    action_space_coverage: float = 0.0
+    mean_policy_entropy: float = 0.0
+    effective_policy_branches: float = 0.0
+    mean_game_plies: float = 0.0
+    white_wins: int = 0
+    draws: int = 0
+    black_wins: int = 0
+    openings: tuple[OpeningDiversity, ...] = ()
 
 
 @dataclass(frozen=True, slots=True)
@@ -82,6 +128,21 @@ class DashboardSnapshot:
     value_loss: float | None
     total_loss: float | None
     learning_rate: float | None
+    pilot_status: PilotStatus = PilotStatus.NOT_STARTED
+    pilot_steps_planned: int = 0
+    pilot_steps_completed: int = 0
+    pilot_initial_train_loss: float | None = None
+    pilot_final_train_loss: float | None = None
+    pilot_initial_validation_loss: float | None = None
+    pilot_final_validation_loss: float | None = None
+    pilot_max_gradient_norm: float | None = None
+    pilot_reasons: tuple[str, ...] = ()
+    checkpoint_status: CheckpointStatus = CheckpointStatus.NONE
+    checkpoint_path: str = ""
+    checkpoint_verified: bool = False
+    replay_shards: int = 0
+    validation_samples: int = 0
+    diversity: DiversitySnapshot = field(default_factory=DiversitySnapshot)
     demo: bool = False
     live_game: LiveGame = field(default_factory=LiveGame)
     arena_games: int = 0
@@ -102,10 +163,22 @@ class DashboardSnapshot:
     def from_json(cls, payload: str) -> DashboardSnapshot:
         data: dict[str, Any] = json.loads(payload)
         data["mode"] = RunMode(data["mode"])
+        data["pilot_status"] = PilotStatus(
+            data.get("pilot_status", PilotStatus.NOT_STARTED)
+        )
+        data["checkpoint_status"] = CheckpointStatus(
+            data.get("checkpoint_status", CheckpointStatus.NONE)
+        )
+        data["pilot_reasons"] = tuple(data.get("pilot_reasons", ()))
         game = data.get("live_game", {})
         game["top_moves"] = tuple(tuple(item) for item in game.get("top_moves", ()))
         game["wdl"] = tuple(game.get("wdl", (0.0, 1.0, 0.0)))
         data["live_game"] = LiveGame(**game)
+        diversity = data.get("diversity", {})
+        diversity["openings"] = tuple(
+            OpeningDiversity(**opening) for opening in diversity.get("openings", ())
+        )
+        data["diversity"] = DiversitySnapshot(**diversity)
         data["history"] = tuple(
             HistoryPoint(**point) for point in data.get("history", ())[-MAX_HISTORY_POINTS:]
         )
@@ -117,7 +190,7 @@ class DashboardSnapshot:
 
 def empty_snapshot() -> DashboardSnapshot:
     return DashboardSnapshot(
-        schema_version=2,
+        schema_version=3,
         updated_at=datetime.now(UTC).isoformat(),
         mode=RunMode.IDLE,
         mode_detail="Waiting for the first HarbiChess run",
@@ -198,6 +271,39 @@ def demo_snapshot() -> DashboardSnapshot:
             "value_loss": 0.731,
             "total_loss": 2.915,
             "learning_rate": 0.0002,
+            "pilot_status": PilotStatus.TRAINING,
+            "pilot_steps_planned": 20_000,
+            "pilot_steps_completed": 18_400,
+            "pilot_initial_train_loss": 4.112,
+            "pilot_final_train_loss": 2.915,
+            "pilot_initial_validation_loss": 4.083,
+            "pilot_final_validation_loss": 3.024,
+            "pilot_max_gradient_norm": 2.71,
+            "checkpoint_status": CheckpointStatus.VERIFIED,
+            "checkpoint_path": "checkpoints/candidate-0007",
+            "checkpoint_verified": True,
+            "replay_shards": 28,
+            "validation_samples": 241_006,
+            "diversity": DiversitySnapshot(
+                games=12_806,
+                positions=4_820_114,
+                unique_game_ratio=0.994,
+                duplicate_game_ratio=0.006,
+                unique_position_ratio=0.721,
+                selected_actions=2_988,
+                action_space_coverage=0.639,
+                mean_policy_entropy=1.84,
+                effective_policy_branches=6.30,
+                mean_game_plies=82.4,
+                white_wins=4_201,
+                draws=4_508,
+                black_wins=4_097,
+                openings=(
+                    OpeningDiversity(4, 12_806, 1_848, 6.82, 916.0),
+                    OpeningDiversity(8, 12_806, 8_431, 8.71, 6_072.0),
+                    OpeningDiversity(12, 12_794, 11_902, 9.31, 11_049.0),
+                ),
+            ),
             "demo": True,
             "arena_games": quality.games,
             "arena_wins": quality.wins,
