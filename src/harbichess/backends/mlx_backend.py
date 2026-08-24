@@ -11,6 +11,7 @@ from harbichess.backends.mlx_network import HarbiChessNetwork
 from harbichess.core.backend import (
     BackendCapabilities,
     EncodedPosition,
+    MaskedPolicyValueOutput,
     PolicyValueOutput,
 )
 
@@ -44,6 +45,56 @@ class MLXPolicyValueBackend:
     def evaluate(self, positions: Sequence[EncodedPosition]) -> list[PolicyValueOutput]:
         if not positions:
             return []
+        policy, wdl = self._forward(positions)
+        return [
+            PolicyValueOutput(tuple(map(float, policy_row)), tuple(map(float, wdl_row)))
+            for policy_row, wdl_row in zip(policy.tolist(), wdl.tolist(), strict=True)
+        ]
+
+    def evaluate_masked(
+        self,
+        positions: Sequence[EncodedPosition],
+        action_indices: Sequence[tuple[int, ...]],
+    ) -> list[MaskedPolicyValueOutput]:
+        if len(positions) != len(action_indices):
+            raise ValueError("every position must have one legal action index tuple")
+        if not positions:
+            return []
+        if any(not indices for indices in action_indices):
+            raise ValueError("masked policy evaluation requires legal actions")
+        policy, wdl = self._forward(positions)
+        policy_size = policy.shape[1]
+        if any(
+            action < 0 or action >= policy_size
+            for indices in action_indices
+            for action in indices
+        ):
+            raise ValueError("masked policy action index is out of range")
+        maximum = max(map(len, action_indices))
+        padded = [
+            (*indices, *(0 for _ in range(maximum - len(indices))))
+            for indices in action_indices
+        ]
+        gathered = mx.take_along_axis(policy, mx.array(padded, dtype=mx.int32), axis=1)
+        mx.eval(gathered, wdl)
+        policy_rows = gathered.tolist()
+        return [
+            MaskedPolicyValueOutput(
+                tuple(map(float, policy_row[: len(indices)])),
+                tuple(map(float, wdl_row)),
+            )
+            for policy_row, wdl_row, indices in zip(
+                policy_rows,
+                wdl.tolist(),
+                action_indices,
+                strict=True,
+            )
+        ]
+
+    def _forward(
+        self,
+        positions: Sequence[EncodedPosition],
+    ) -> tuple[mx.array, mx.array]:
         shape = positions[0].shape
         schema_version = positions[0].schema_version
         if any(
@@ -55,10 +106,7 @@ class MLXPolicyValueBackend:
         inputs = inputs.reshape((len(positions), *shape))
         policy, wdl = self._thread_forward()(inputs)
         mx.eval(policy, wdl)
-        return [
-            PolicyValueOutput(tuple(map(float, policy_row)), tuple(map(float, wdl_row)))
-            for policy_row, wdl_row in zip(policy.tolist(), wdl.tolist(), strict=True)
-        ]
+        return policy, wdl
 
     def _thread_forward(self) -> Callable[[mx.array], tuple[mx.array, mx.array]]:
         if not self._compiled:
