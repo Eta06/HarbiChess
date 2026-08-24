@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import os
 import platform
@@ -10,6 +11,7 @@ import subprocess
 import tempfile
 import threading
 import time
+from collections import Counter
 from dataclasses import asdict, dataclass, replace
 from datetime import UTC, datetime
 from pathlib import Path
@@ -19,6 +21,7 @@ import mlx.core as mx
 from harbichess.backends.mlx_backend import MLXPolicyValueBackend
 from harbichess.backends.mlx_network import HarbiChessNetwork, NetworkConfig
 from harbichess.chess.rules import PythonChessRules
+from harbichess.core.state import TerminalResult
 from harbichess.dashboard.state import (
     CheckpointStatus,
     DiversitySnapshot,
@@ -28,6 +31,7 @@ from harbichess.dashboard.state import (
     PilotStatus,
     RunMode,
     SnapshotStore,
+    TerminationSnapshot,
     empty_snapshot,
 )
 from harbichess.replay.diversity import DiversityMetrics, measure_diversity
@@ -124,6 +128,14 @@ def _now() -> str:
     return datetime.now(UTC).isoformat()
 
 
+def _sha256(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as handle:
+        for chunk in iter(lambda: handle.read(1024 * 1024), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
+
+
 def _source_commit() -> str:
     return subprocess.check_output(
         ["git", "rev-parse", "HEAD"],
@@ -173,6 +185,10 @@ def _diversity_snapshot(metrics: DiversityMetrics) -> DiversitySnapshot:
         decisive_game_ratio=metrics.decisive_game_ratio,
         max_ply_draws=metrics.max_ply_draws,
         max_ply_draw_ratio=metrics.max_ply_draw_ratio,
+        terminations=tuple(
+            TerminationSnapshot(item.termination, item.count, item.ratio)
+            for item in metrics.terminations
+        ),
         openings=tuple(
             OpeningDiversity(
                 ply=opening.ply,
@@ -240,7 +256,7 @@ def run_ocak_sanity(
         mode_detail=f"OCAK sanity self-play · 0/{config.games} games",
         run_id=config.run_id,
         source_commit=commit,
-        active_checkpoint="random-initial",
+        active_checkpoint="baseline-initial",
         pilot_status=PilotStatus.SELF_PLAY,
         pilot_steps_planned=config.training_steps,
         active_games=config.games,
@@ -276,6 +292,15 @@ def run_ocak_sanity(
     )
     mx.random.seed(config.run_seed)
     network = HarbiChessNetwork(network_config)
+    baseline_dir = run_root / "baseline"
+    baseline_dir.mkdir(parents=True)
+    baseline_path = baseline_dir / "model.safetensors"
+    temporary_baseline = baseline_dir / ".model.tmp.safetensors"
+    network.save_weights(str(temporary_baseline))
+    with temporary_baseline.open("rb") as handle:
+        os.fsync(handle.fileno())
+    os.replace(temporary_baseline, baseline_path)
+    baseline_sha256 = _sha256(baseline_path)
     rules = PythonChessRules()
     completed_games: list[SelfPlayGame] = []
     completed_positions = 0
@@ -301,6 +326,33 @@ def run_ocak_sanity(
                 completed_positions += len(game.samples)
                 count = len(completed_games)
                 positions = completed_positions
+                outcomes = Counter(item.outcome.result for item in completed_games)
+                terminations = Counter(
+                    item.outcome.termination for item in completed_games
+                )
+                white_wins = outcomes[TerminalResult.WHITE_WIN]
+                black_wins = outcomes[TerminalResult.BLACK_WIN]
+                draws = outcomes[TerminalResult.DRAW]
+                max_ply_draws = terminations["max_plies"]
+                live_diversity = replace(
+                    snapshot.diversity,
+                    games=count,
+                    positions=positions,
+                    mean_game_plies=(
+                        sum(item.final_state.ply for item in completed_games) / count
+                    ),
+                    white_wins=white_wins,
+                    draws=draws,
+                    black_wins=black_wins,
+                    decisive_games=white_wins + black_wins,
+                    decisive_game_ratio=(white_wins + black_wins) / count,
+                    max_ply_draws=max_ply_draws,
+                    max_ply_draw_ratio=max_ply_draws / count,
+                    terminations=tuple(
+                        TerminationSnapshot(termination, amount, amount / count)
+                        for termination, amount in sorted(terminations.items())
+                    ),
+                )
             elapsed = max(time.perf_counter() - self_play_started, 1e-9)
             statistics = batcher.statistics if batcher is not None else None
             publish(
@@ -319,6 +371,7 @@ def run_ocak_sanity(
                     round(statistics.average_batch_size) if statistics else 0
                 ),
                 live_game=_latest_game(game),
+                diversity=live_diversity,
             )
 
         games = play_parallel_games(
@@ -556,6 +609,11 @@ def run_ocak_sanity(
                 "maximum_gradient_norm": report.maximum_gradient_norm,
             },
             "diversity": asdict(diversity_metrics),
+            "baseline": {
+                "checkpoint_id": "baseline-initial",
+                "path": str(baseline_path),
+                "model_sha256": baseline_sha256,
+            },
             "replay": {
                 "train": asdict(train_header),
                 "validation": asdict(validation_header),
