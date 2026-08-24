@@ -429,6 +429,8 @@ function App() {
               <div><span>Action coverage</span><strong>{formatPercent(diversity.action_space_coverage, 2)}</strong></div>
               <div><span>Effective branches</span><strong>{formatNumber(diversity.effective_policy_branches, 1)}</strong></div>
               <div><span>Mean game plies</span><strong>{formatNumber(diversity.mean_game_plies, 1)}</strong></div>
+              <div><span>Decisive games</span><strong>{formatNumber(diversity.decisive_games)} · {formatPercent(diversity.decisive_game_ratio)}</strong></div>
+              <div><span>Max-ply draws</span><strong>{formatNumber(diversity.max_ply_draws)} · {formatPercent(diversity.max_ply_draw_ratio)}</strong></div>
             </div>
             <div className="opening-list">
               <span className="subsection-label">Opening prefix coverage</span>
