@@ -41,6 +41,15 @@ function formatPercent(value: number | null | undefined, digits = 1) {
   return value == null ? "—" : `${(value * 100).toFixed(digits)}%`;
 }
 
+function formatSpeedup(
+  baseline: number | null,
+  optimized: number | null,
+  lowerIsBetter = false,
+) {
+  if (baseline == null || optimized == null || baseline <= 0 || optimized <= 0) return "—";
+  return `${(lowerIsBetter ? baseline / optimized : optimized / baseline).toFixed(2)}×`;
+}
+
 function formatDuration(seconds: number) {
   const total = Math.max(0, Math.floor(seconds));
   const days = Math.floor(total / 86_400);
@@ -550,6 +559,14 @@ function App() {
               <div><span>WDL loss</span><strong>{formatLoss(snapshot.value_loss)}</strong></div>
               <div><span>Total loss</span><strong>{formatLoss(snapshot.total_loss)}</strong></div>
               <div><span>Learning rate</span><strong>{snapshot.learning_rate == null ? "—" : snapshot.learning_rate.toExponential(2)}</strong></div>
+            </div>
+            <span className="subsection-label">Profiler comparison</span>
+            <div className="gate-metrics">
+              <div><span>Self-play time</span><strong>{formatNumber(snapshot.profile_self_play_baseline_seconds, 1)}s <small>→</small> {formatNumber(snapshot.profile_self_play_optimized_seconds, 1)}s <small>· {formatSpeedup(snapshot.profile_self_play_baseline_seconds, snapshot.profile_self_play_optimized_seconds, true)}</small></strong></div>
+              <div><span>Self-play throughput</span><strong>{formatNumber(snapshot.profile_self_play_baseline_positions_per_second, 1)} <small>→</small> {formatNumber(snapshot.profile_self_play_optimized_positions_per_second, 1)} <small>pos/s</small></strong></div>
+              <div><span>Training throughput</span><strong>{formatNumber(snapshot.profile_training_baseline_positions_per_second, 1)} <small>→</small> {formatNumber(snapshot.profile_training_optimized_positions_per_second, 1)} <small>· {formatSpeedup(snapshot.profile_training_baseline_positions_per_second, snapshot.profile_training_optimized_positions_per_second)}</small></strong></div>
+              <div><span>Masked inference</span><strong>{formatNumber(snapshot.profile_inference_baseline_positions_per_second, 1)} <small>→</small> {formatNumber(snapshot.profile_inference_optimized_positions_per_second, 1)} <small>· {formatSpeedup(snapshot.profile_inference_baseline_positions_per_second, snapshot.profile_inference_optimized_positions_per_second)}</small></strong></div>
+              <div><span>Measured worker optimum</span><strong>{formatNumber(snapshot.profile_optimal_workers)} <small>parallel games</small></strong></div>
             </div>
             <div className="pipeline-footer">
               <span><Clock3 size={13} />Last update</span>
