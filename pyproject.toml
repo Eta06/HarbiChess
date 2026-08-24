@@ -26,6 +26,7 @@ dev = [
 harbichess-mlx-smoke = "harbichess.backends.mlx_smoke:main"
 harbichess-network-benchmark = "harbichess.benchmarks.network:main"
 harbichess-release-checkpoint = "harbichess.checkpoints.release:main"
+harbichess-dashboard = "harbichess.dashboard.server:main"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/harbichess"]
