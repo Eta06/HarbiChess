@@ -109,5 +109,7 @@ def test_devir_runner_keeps_champion_when_micro_arena_is_inconclusive(
     assert not result.promotion_ready
     assert snapshot.mode is RunMode.IDLE
     assert not snapshot.promotion_ready
+    assert snapshot.arena_max_ply_draws == 2
+    assert snapshot.arena_threefold_repetitions == 0
     assert "champion unchanged" in snapshot.mode_detail
     assert Path(result.result_path).is_file()
