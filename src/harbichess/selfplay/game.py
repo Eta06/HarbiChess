@@ -34,6 +34,7 @@ class SelfPlaySample:
     state: ChessState
     side_to_move: Side
     visit_policy: tuple[tuple[ChessMove, float], ...]
+    selected_move: ChessMove
     root_value: float
     outcome_value: int
 
@@ -67,7 +68,7 @@ def play_game(
     rng = random.Random(seed)
     state = initial_state
     pending: list[
-        tuple[ChessState, Side, tuple[tuple[ChessMove, float], ...], float]
+        tuple[ChessState, Side, tuple[tuple[ChessMove, float], ...], ChessMove, float]
     ] = []
 
     while True:
@@ -89,7 +90,7 @@ def play_game(
         side_to_move = rules.view(state).side_to_move
         temperature = settings.temperature if state.ply < settings.exploration_plies else 0.0
         selected = search.select_move(temperature=temperature, rng=rng)
-        pending.append((state, side_to_move, policy, search.root_value))
+        pending.append((state, side_to_move, policy, selected, search.root_value))
         state = rules.apply(state, selected)
 
     samples = tuple(
@@ -97,10 +98,11 @@ def play_game(
             state=sample_state,
             side_to_move=side,
             visit_policy=policy,
+            selected_move=selected_move,
             root_value=root_value,
             outcome_value=outcome.value_for(side),
         )
-        for sample_state, side, policy, root_value in pending
+        for sample_state, side, policy, selected_move, root_value in pending
     )
     return SelfPlayGame(game_index, seed, state, outcome, samples)
 
