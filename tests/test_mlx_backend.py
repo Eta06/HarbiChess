@@ -30,6 +30,27 @@ def test_mlx_backend_implements_batch_contract() -> None:
     assert backend.evaluate([]) == []
 
 
+def test_mlx_backend_gathers_only_requested_policy_logits() -> None:
+    rules = PythonChessRules()
+    position = BoardEncoder(rules).encode(rules.initial_state())
+    backend = MLXPolicyValueBackend(
+        HarbiChessNetwork(NetworkConfig(trunk_channels=8, residual_blocks=1)),
+        compiled=False,
+        dtype=mx.float32,
+    )
+    actions = ((0, 17, 4_671),)
+
+    full = backend.evaluate([position])[0]
+    masked = backend.evaluate_masked([position], actions)[0]
+
+    assert masked.policy_logits == pytest.approx(
+        tuple(full.policy_logits[index] for index in actions[0])
+    )
+    assert masked.wdl_logits == pytest.approx(full.wdl_logits)
+    with pytest.raises(ValueError, match="one legal action"):
+        backend.evaluate_masked([position], ())
+
+
 def test_mlx_backend_rejects_mixed_position_shapes() -> None:
     backend = MLXPolicyValueBackend(
         HarbiChessNetwork(NetworkConfig(trunk_channels=8, residual_blocks=1)),
