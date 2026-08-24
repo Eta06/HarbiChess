@@ -1,3 +1,5 @@
+import pytest
+
 from harbichess.chess.encoding import ENCODER_CHANNELS, BoardEncoder
 from harbichess.chess.rules import PythonChessRules
 from harbichess.core.state import ChessMove
@@ -58,3 +60,13 @@ def test_prebuilt_board_encoding_matches_state_encoding() -> None:
     encoder = BoardEncoder(rules)
 
     assert encoder.encode_board(rules.board(state)) == encoder.encode(state)
+
+
+def test_state_encoding_cache_reuses_immutable_result() -> None:
+    rules = PythonChessRules()
+    state = rules.apply(rules.initial_state(), ChessMove("e2e4"))
+    encoder = BoardEncoder(rules, cache_size=1)
+
+    assert encoder.encode(state) is encoder.encode(state)
+    with pytest.raises(ValueError, match="cache size"):
+        BoardEncoder(cache_size=0)
