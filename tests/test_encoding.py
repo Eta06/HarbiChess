@@ -48,3 +48,13 @@ def test_repetition_metadata_preserves_game_history() -> None:
         state = rules.apply(state, ChessMove(move))
     encoded = BoardEncoder(rules).encode(state)
     assert channel_sum(encoded, 103) == 32.0
+
+
+def test_prebuilt_board_encoding_matches_state_encoding() -> None:
+    rules = PythonChessRules()
+    state = rules.initial_state()
+    for move in ("e2e4", "e7e5", "g1f3", "b8c6", "f1b5"):
+        state = rules.apply(state, ChessMove(move))
+    encoder = BoardEncoder(rules)
+
+    assert encoder.encode_board(rules.board(state)) == encoder.encode(state)
