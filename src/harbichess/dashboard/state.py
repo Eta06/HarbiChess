@@ -143,6 +143,10 @@ class DashboardSnapshot:
     pilot_status: PilotStatus = PilotStatus.NOT_STARTED
     pilot_steps_planned: int = 0
     pilot_steps_completed: int = 0
+    pilot_steps_attempted: int = 0
+    pilot_best_validation_step: int = 0
+    pilot_best_validation_loss: float | None = None
+    pilot_stopped_early: bool = False
     pilot_initial_train_loss: float | None = None
     pilot_final_train_loss: float | None = None
     pilot_initial_validation_loss: float | None = None
@@ -294,6 +298,10 @@ def demo_snapshot() -> DashboardSnapshot:
             "pilot_status": PilotStatus.TRAINING,
             "pilot_steps_planned": 20_000,
             "pilot_steps_completed": 18_400,
+            "pilot_steps_attempted": 18_640,
+            "pilot_best_validation_step": 18_400,
+            "pilot_best_validation_loss": 3.024,
+            "pilot_stopped_early": True,
             "pilot_initial_train_loss": 4.112,
             "pilot_final_train_loss": 2.915,
             "pilot_initial_validation_loss": 4.083,
