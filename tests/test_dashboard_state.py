@@ -58,3 +58,8 @@ def test_demo_snapshot_contains_arena_quality() -> None:
     assert snapshot.diversity.terminations[0].termination == "checkmate"
     assert snapshot.arena_threefold_repetitions == 41
     assert snapshot.arena_avoidable_threefold_repetitions == 38
+    assert (
+        snapshot.profile_self_play_optimized_seconds
+        < snapshot.profile_self_play_baseline_seconds
+    )
+    assert snapshot.profile_optimal_workers == 64
