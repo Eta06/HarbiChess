@@ -488,7 +488,7 @@ function App() {
             </div>
             <div className="arena-termination-summary">
               <div><span>Decisive</span><strong>{formatNumber(snapshot.arena_decisive_games)}</strong></div>
-              <div><span>Threefold</span><strong>{formatNumber(snapshot.arena_threefold_repetitions)}</strong></div>
+              <div><span>Threefold</span><strong>{formatNumber(snapshot.arena_threefold_repetitions)} <small>· {formatNumber(snapshot.arena_avoidable_threefold_repetitions)} avoidable</small></strong></div>
               <div><span>Max-ply</span><strong>{formatNumber(snapshot.arena_max_ply_draws)}</strong></div>
               <div><span>Other draws</span><strong>{formatNumber(snapshot.arena_other_draws)}</strong></div>
             </div>
