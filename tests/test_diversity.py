@@ -46,6 +46,9 @@ def test_diversity_detects_duplicate_games_and_action_coverage() -> None:
     assert metrics.selected_actions == 2
     assert metrics.effective_policy_branches == 1.0
     assert metrics.draws == 4
+    assert metrics.decisive_games == 0
+    assert metrics.max_ply_draws == 4
+    assert metrics.max_ply_draw_ratio == 1.0
     assert metrics.openings[0].unique_prefixes == 2
     assert metrics.openings[0].effective_prefixes == pytest.approx(2.0)
     assert metrics.openings[1].eligible_games == 0
