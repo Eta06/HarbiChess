@@ -6,10 +6,13 @@ import pytest
 
 from harbichess.backends.mlx_network import HarbiChessNetwork, NetworkConfig
 from harbichess.chess.rules import PythonChessRules
-from harbichess.core.state import ChessMove, Side
+from harbichess.core.state import ChessMove, GameOutcome, Side, TerminalResult
 from harbichess.dashboard.state import RunMode, SnapshotStore
 from harbichess.evaluation.arena import (
     ArenaConfig,
+    ArenaGame,
+    ContinuationRoot,
+    _continuation_records,
     _select_checkpoint,
     play_arena_game,
     run_devir_arena,
@@ -50,7 +53,15 @@ class RepeatingArenaSearch:
     def search(self, state, *, rng: random.Random, add_root_noise: bool):
         del rng, add_root_noise
         move = self.moves[state.ply % len(self.moves)]
-        return SearchResult((MoveStatistics(move, 1, 1.0, 0.0),), 0.0, 1)
+        alternative = next(item for item in PythonChessRules().legal_moves(state) if item != move)
+        return SearchResult(
+            (
+                MoveStatistics(move, 3, 0.75, 0.0),
+                MoveStatistics(alternative, 1, 0.25, -0.01),
+            ),
+            0.0,
+            4,
+        )
 
 
 def test_arena_scores_result_from_candidate_color() -> None:
@@ -88,6 +99,46 @@ def test_arena_marks_threefold_when_non_repeating_alternatives_exist() -> None:
 
     assert game.outcome.termination == "threefold_repetition"
     assert game.avoidable_threefold
+    assert len(game.continuation_roots) == 1
+    assert game.continuation_roots[0].repeating_policy_mass == pytest.approx(0.75)
+
+
+def test_arena_continuation_roots_become_legal_replay_targets() -> None:
+    rules = PythonChessRules()
+    state = rules.initial_state()
+    root = ContinuationRoot(
+        state=state,
+        side_to_move=Side.WHITE,
+        policy=((ChessMove("e2e4"), 0.75), (ChessMove("d2d4"), 0.25)),
+        selected_move=ChessMove("e2e4"),
+        root_value=0.1,
+        repeating_policy_mass=0.4,
+        source_model="candidate",
+    )
+    game = ArenaGame(
+        game_id="arena-game",
+        pair_index=0,
+        candidate_side=Side.WHITE,
+        opening_moves=(),
+        final_state=rules.apply(state, ChessMove("e2e4")),
+        outcome=GameOutcome(TerminalResult.DRAW, "threefold_repetition"),
+        candidate_score=0.5,
+        last_search=None,
+        avoidable_threefold=True,
+        continuation_roots=(root,),
+    )
+
+    records = _continuation_records(
+        (game,),
+        arena_id="arena",
+        seed=7,
+        rules=rules,
+    )
+
+    assert len(records) == 1
+    assert records[0].repetition_redirected
+    assert records[0].outcome_value == 0
+    records[0].validate_rules(rules)
 
 
 def test_arena_configuration_rejects_unsafe_values(tmp_path) -> None:
