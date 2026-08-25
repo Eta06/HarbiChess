@@ -22,6 +22,7 @@ class PilotConfig:
     minimum_validation_delta: float = 1e-3
     checkpoint_interval_steps: int = 8
     maximum_validation_checkpoints: int = 4
+    continuation_fraction: float | None = None
     seed: int = 0
 
     def __post_init__(self) -> None:
@@ -40,6 +41,8 @@ class PilotConfig:
             raise ValueError("maximum validation ratio must be positive")
         if not math.isfinite(self.minimum_validation_delta) or self.minimum_validation_delta < 0:
             raise ValueError("minimum validation delta must be finite and non-negative")
+        if self.continuation_fraction is not None and not 0.0 <= self.continuation_fraction <= 1.0:
+            raise ValueError("continuation fraction must be in [0, 1]")
 
 
 @dataclass(frozen=True, slots=True)
@@ -97,7 +100,11 @@ def run_sanity_pilot(
         raise ValueError("validation evaluation batch does not match replay records")
     initial_train = learner.evaluate_loss(train_eval)[0]
     initial_validation = learner.evaluate_loss(validation_eval)[0]
-    sampler = GameBalancedSampler(train_records, seed=settings.seed)
+    sampler = GameBalancedSampler(
+        train_records,
+        seed=settings.seed,
+        continuation_fraction=settings.continuation_fraction,
+    )
     best_snapshot = learner.snapshot()
     best_sampler_state = sampler.rng_state
     best_validation = initial_validation
