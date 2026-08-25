@@ -1,3 +1,4 @@
+import math
 import random
 from dataclasses import replace
 
@@ -9,6 +10,7 @@ from harbichess.core.state import ChessMove
 from harbichess.replay.schema import (
     BranchValueEstimate,
     ContinuationEvidence,
+    PolicyRegretAdjustment,
     RepetitionRiskEstimate,
     ReplayRecord,
     records_from_game,
@@ -166,3 +168,33 @@ def test_replay_record_round_trips_multi_ply_repetition_risk() -> None:
     payload["continuation_evidence"]["maximum_repetition_risk"] = 0.10
     with pytest.raises(ValueError, match="risk gate"):
         ReplayRecord.from_dict(payload)
+
+
+def test_replay_record_round_trips_continuous_policy_regret() -> None:
+    rules, game = scripted_game()
+    record = records_from_game(game, run_id="pilot", rules=rules)[0]
+    board = rules.board(record.state)
+    repeat_action = move_to_action(board, board.parse_uci("e2e4"))
+    regret = 0.04
+    adjustment = PolicyRegretAdjustment(
+        method_version=1,
+        temperature=0.02,
+        root_value=0.04,
+        repeat_value=0.0,
+        best_nonrepeat_value=0.14,
+        regret=regret,
+        redirect_fraction=1.0 - math.exp(-regret / 0.02),
+        repeat_actions=(repeat_action,),
+        redirect_actions=(record.selected_action,),
+        source_model_sha256="b" * 64,
+    )
+    adjusted = replace(
+        record,
+        policy=((repeat_action, 0.25), (record.selected_action, 0.75)),
+        root_value=0.04,
+        repetition_redirected=True,
+        policy_regret_adjustment=adjustment,
+    )
+
+    assert ReplayRecord.from_dict(adjusted.to_dict()) == adjusted
+    adjusted.validate_rules(rules)
