@@ -3,12 +3,18 @@
 from __future__ import annotations
 
 import math
-from collections.abc import Callable
+from collections.abc import Callable, Mapping
 from dataclasses import dataclass
+from enum import StrEnum
 
 from harbichess.replay.schema import ReplayRecord
 from harbichess.training.batch import GameBalancedSampler, TrainingBatch, build_training_batch
 from harbichess.training.learner import LearnerSnapshot, MLXLearner, TrainingMetrics
+
+
+class PilotStopReason(StrEnum):
+    MAX_STEPS = "max_steps"
+    EARLY_STOPPING = "early_stopping_no_validation_improvement"
 
 
 @dataclass(frozen=True, slots=True)
@@ -23,6 +29,7 @@ class PilotConfig:
     checkpoint_interval_steps: int = 8
     maximum_validation_checkpoints: int = 4
     continuation_fraction: float | None = None
+    continuation_game_weights: Mapping[str, float] | None = None
     seed: int = 0
 
     def __post_init__(self) -> None:
@@ -62,6 +69,12 @@ class PilotReport:
     best_validation_loss: float
     stopped_early: bool
     validation_candidates: tuple[ValidationCandidate, ...]
+    stop_reason: PilotStopReason
+    last_validation_step: int
+    last_validation_loss: float
+    last_improvement_step: int
+    stale_validation_evaluations: int
+    validation_evaluations: int
 
 
 @dataclass(frozen=True, slots=True)
@@ -92,18 +105,21 @@ def run_sanity_pilot(
 
     if (train_evaluation is None) != (validation_evaluation is None):
         raise ValueError("train and validation evaluation batches must be supplied together")
-    train_eval = train_evaluation or build_training_batch(train_records)
-    validation_eval = validation_evaluation or build_training_batch(validation_records)
-    if len(train_eval.positions) != len(train_records):
+    raw_train_eval = train_evaluation or build_training_batch(train_records)
+    raw_validation_eval = validation_evaluation or build_training_batch(validation_records)
+    if len(raw_train_eval.positions) != len(train_records):
         raise ValueError("train evaluation batch does not match replay records")
-    if len(validation_eval.positions) != len(validation_records):
+    if len(raw_validation_eval.positions) != len(validation_records):
         raise ValueError("validation evaluation batch does not match replay records")
+    train_eval = learner.prepare_batch(raw_train_eval)
+    validation_eval = learner.prepare_batch(raw_validation_eval)
     initial_train = learner.evaluate_loss(train_eval)[0]
     initial_validation = learner.evaluate_loss(validation_eval)[0]
     sampler = GameBalancedSampler(
         train_records,
         seed=settings.seed,
         continuation_fraction=settings.continuation_fraction,
+        continuation_game_weights=settings.continuation_game_weights,
     )
     best_snapshot = learner.snapshot()
     best_sampler_state = sampler.rng_state
@@ -111,6 +127,11 @@ def run_sanity_pilot(
     best_validation_step = learner.step
     stale_evaluations = 0
     stopped_early = False
+    stop_reason = PilotStopReason.MAX_STEPS
+    last_validation_step = learner.step
+    last_validation_loss = initial_validation
+    last_improvement_step = learner.step
+    validation_evaluations = 0
     validation_candidates: list[ValidationCandidate] = []
     metrics = []
     for _ in range(settings.steps):
@@ -120,11 +141,15 @@ def run_sanity_pilot(
         validation_loss = None
         if metric.step % settings.validation_interval_steps == 0 or metric.step == settings.steps:
             validation_loss = learner.evaluate_loss(validation_eval)[0]
+            validation_evaluations += 1
+            last_validation_step = metric.step
+            last_validation_loss = validation_loss
             if validation_loss < best_validation - settings.minimum_validation_delta:
                 best_validation = validation_loss
                 best_validation_step = metric.step
                 best_snapshot = learner.snapshot()
                 best_sampler_state = sampler.rng_state
+                last_improvement_step = metric.step
                 candidate = ValidationCandidate(
                     step=metric.step,
                     validation_loss=validation_loss,
@@ -149,6 +174,7 @@ def run_sanity_pilot(
             on_step(metric, validation_loss)
         if stale_evaluations >= settings.early_stopping_patience:
             stopped_early = True
+            stop_reason = PilotStopReason.EARLY_STOPPING
             break
     attempted_steps = learner.step
     learner.restore(best_snapshot)
@@ -182,4 +208,10 @@ def run_sanity_pilot(
         best_validation_loss=best_validation,
         stopped_early=stopped_early,
         validation_candidates=tuple(validation_candidates),
+        stop_reason=stop_reason,
+        last_validation_step=last_validation_step,
+        last_validation_loss=last_validation_loss,
+        last_improvement_step=last_improvement_step,
+        stale_validation_evaluations=stale_evaluations,
+        validation_evaluations=validation_evaluations,
     )
