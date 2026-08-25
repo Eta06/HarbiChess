@@ -53,9 +53,17 @@ class TrainingBatch:
 class GameBalancedSampler:
     """Sample games uniformly before selecting positions within each game."""
 
-    def __init__(self, records: tuple[ReplayRecord, ...], *, seed: int) -> None:
+    def __init__(
+        self,
+        records: tuple[ReplayRecord, ...],
+        *,
+        seed: int,
+        continuation_fraction: float | None = None,
+    ) -> None:
         if not records:
             raise ValueError("sampler requires replay records")
+        if continuation_fraction is not None and not 0.0 <= continuation_fraction <= 1.0:
+            raise ValueError("continuation fraction must be in [0, 1]")
         index_by_game: dict[str, list[int]] = {}
         for index, record in enumerate(records):
             index_by_game.setdefault(record.game_id, []).append(index)
@@ -64,6 +72,16 @@ class GameBalancedSampler:
             game_id: tuple(indices) for game_id, indices in index_by_game.items()
         }
         self._game_ids = tuple(sorted(self._indices_by_game))
+        self._continuation_game_ids = tuple(
+            game_id
+            for game_id in self._game_ids
+            if any(records[index].repetition_redirected for index in self._indices_by_game[game_id])
+        )
+        continuation_games = set(self._continuation_game_ids)
+        self._standard_game_ids = tuple(
+            game_id for game_id in self._game_ids if game_id not in continuation_games
+        )
+        self._continuation_fraction = continuation_fraction
         self._rng = random.Random(seed)
 
     def sample(self, batch_size: int) -> tuple[ReplayRecord, ...]:
@@ -72,11 +90,28 @@ class GameBalancedSampler:
     def sample_indices(self, batch_size: int) -> tuple[int, ...]:
         if batch_size <= 0:
             raise ValueError("batch_size must be positive")
-        if batch_size <= len(self._game_ids):
-            game_ids = self._rng.sample(self._game_ids, batch_size)
+        if (
+            self._continuation_fraction is None
+            or not self._continuation_game_ids
+            or not self._standard_game_ids
+        ):
+            game_ids = self._sample_games(self._game_ids, batch_size)
         else:
-            game_ids = self._rng.choices(self._game_ids, k=batch_size)
+            continuation_count = round(batch_size * self._continuation_fraction)
+            standard_count = batch_size - continuation_count
+            game_ids = [
+                *self._sample_games(self._continuation_game_ids, continuation_count),
+                *self._sample_games(self._standard_game_ids, standard_count),
+            ]
+            self._rng.shuffle(game_ids)
         return tuple(self._rng.choice(self._indices_by_game[game_id]) for game_id in game_ids)
+
+    def _sample_games(self, game_ids: tuple[str, ...], count: int) -> list[str]:
+        if count <= 0:
+            return []
+        if count <= len(game_ids):
+            return self._rng.sample(game_ids, count)
+        return self._rng.choices(game_ids, k=count)
 
     @property
     def rng_state(self) -> object:
