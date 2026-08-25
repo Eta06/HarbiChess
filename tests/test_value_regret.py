@@ -67,6 +67,7 @@ def test_losing_root_preserves_original_policy() -> None:
     assert dict(target.policy) == dict(original.policy)
     assert target.policy_regret_adjustment.regret == 0.0
     assert target.policy_regret_adjustment.redirect_fraction == 0.0
+    assert target.policy_regret_adjustment.redirect_actions == (evidenced.selected_action,)
 
 
 def test_advantage_continuously_moves_mass_to_safe_policy() -> None:
