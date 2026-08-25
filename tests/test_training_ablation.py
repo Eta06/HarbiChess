@@ -59,3 +59,11 @@ def test_ablation_treatments_require_matching_shards() -> None:
         **common,
     )
     assert risk_gated.continuation_fraction == 0.25
+
+    value_aware = AblationConfig(
+        ablation_id="value-aware",
+        treatment=ContinuationTreatment.VALUE_AWARE_RISK,
+        continuation_shards=(Path("value-aware-v6.gz"),),
+        **common,
+    )
+    assert value_aware.continuation_fraction == 0.25
