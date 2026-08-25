@@ -21,6 +21,7 @@ class _Request:
     position: EncodedPosition
     action_indices: tuple[int, ...] | None
     future: Future[PolicyValueOutput | MaskedPolicyValueOutput]
+    queued_at: float
 
 
 @dataclass(frozen=True, slots=True)
@@ -28,10 +29,16 @@ class BatchStatistics:
     batches: int
     positions: int
     largest_batch: int
+    backend_seconds: float
+    queue_wait_seconds: float
 
     @property
     def average_batch_size(self) -> float:
         return self.positions / self.batches if self.batches else 0.0
+
+    @property
+    def average_queue_wait_ms(self) -> float:
+        return self.queue_wait_seconds / self.positions * 1_000 if self.positions else 0.0
 
 
 class SharedBatchEvaluator:
@@ -55,6 +62,8 @@ class SharedBatchEvaluator:
         self._batches = 0
         self._positions = 0
         self._largest_batch = 0
+        self._backend_seconds = 0.0
+        self._queue_wait_seconds = 0.0
         self._worker = threading.Thread(
             target=self._run,
             name="harbichess-inference",
@@ -67,7 +76,7 @@ class SharedBatchEvaluator:
         with self._lock:
             if self._closed:
                 raise RuntimeError("shared evaluator is closed")
-            self._queue.put(_Request(position, None, future))
+            self._queue.put(_Request(position, None, future, time.perf_counter()))
         return future.result()
 
     def evaluate_masked(
@@ -81,7 +90,7 @@ class SharedBatchEvaluator:
         with self._lock:
             if self._closed:
                 raise RuntimeError("shared evaluator is closed")
-            self._queue.put(_Request(position, action_indices, future))
+            self._queue.put(_Request(position, action_indices, future, time.perf_counter()))
         output = future.result()
         if not isinstance(output, MaskedPolicyValueOutput):
             raise TypeError("masked backend returned a full policy output")
@@ -98,15 +107,29 @@ class SharedBatchEvaluator:
     @property
     def statistics(self) -> BatchStatistics:
         with self._lock:
-            return BatchStatistics(self._batches, self._positions, self._largest_batch)
+            return BatchStatistics(
+                self._batches,
+                self._positions,
+                self._largest_batch,
+                self._backend_seconds,
+                self._queue_wait_seconds,
+            )
 
     def reset_statistics(self) -> BatchStatistics:
         """Return and clear counters after callers have drained their requests."""
         with self._lock:
-            statistics = BatchStatistics(self._batches, self._positions, self._largest_batch)
+            statistics = BatchStatistics(
+                self._batches,
+                self._positions,
+                self._largest_batch,
+                self._backend_seconds,
+                self._queue_wait_seconds,
+            )
             self._batches = 0
             self._positions = 0
             self._largest_batch = 0
+            self._backend_seconds = 0.0
+            self._queue_wait_seconds = 0.0
             return statistics
 
     def __enter__(self) -> SharedBatchEvaluator:
@@ -145,10 +168,12 @@ class SharedBatchEvaluator:
                 return
 
     def _evaluate_batch(self, requests: list[_Request]) -> None:
+        started = time.perf_counter()
         with self._lock:
             self._batches += 1
             self._positions += len(requests)
             self._largest_batch = max(self._largest_batch, len(requests))
+            self._queue_wait_seconds += sum(started - request.queued_at for request in requests)
         try:
             positions = [request.position for request in requests]
             if requests[0].action_indices is None:
@@ -183,5 +208,8 @@ class SharedBatchEvaluator:
             for request in requests:
                 request.future.set_exception(error)
             return
+        backend_seconds = time.perf_counter() - started
+        with self._lock:
+            self._backend_seconds += backend_seconds
         for request, output in zip(requests, outputs, strict=True):
             request.future.set_result(output)
