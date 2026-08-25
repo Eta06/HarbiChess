@@ -19,15 +19,6 @@ class ContinuationDecision:
     defensive_repetition_preserved: bool
 
 
-def _immediate_threefold(
-    rules: PythonChessRules,
-    state: ChessState,
-    move: ChessMove,
-) -> bool:
-    outcome = rules.outcome(rules.apply(state, move), claim_draw=True)
-    return outcome is not None and outcome.termination == "threefold_repetition"
-
-
 def transform_repetition_target(
     search: SearchResult,
     rules: PythonChessRules,
@@ -47,7 +38,16 @@ def transform_repetition_target(
     total_visits = sum(item.visits for item in visited)
     if total_visits <= 0:
         raise ValueError("continuation targets require visited MCTS moves")
-    repeating = tuple(item for item in visited if _immediate_threefold(rules, state, item.move))
+    moves_to_check = tuple(
+        item.move
+        for item in visited
+        if item.move == selected or item.visits / total_visits >= minimum_repeating_policy_mass
+    )
+    repeating_moves = rules.claimable_threefold_moves(
+        state,
+        moves_to_check,
+    )
+    repeating = tuple(item for item in visited if item.move in repeating_moves)
     if not repeating:
         return ContinuationDecision(visited, selected, False, 0.0, False)
     repeating_mass = sum(item.visits for item in repeating) / total_visits
