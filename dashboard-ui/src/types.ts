@@ -74,6 +74,8 @@ export interface DiversitySnapshot {
   decisive_game_ratio: number;
   max_ply_draws: number;
   max_ply_draw_ratio: number;
+  repetition_redirects: number;
+  repetition_redirect_ratio: number;
   terminations: TerminationSnapshot[];
   openings: OpeningDiversity[];
 }
@@ -136,6 +138,7 @@ export interface DashboardSnapshot {
   checkpoint_verified: boolean;
   replay_shards: number;
   validation_samples: number;
+  validation_checkpoint_count: number;
   diversity: DiversitySnapshot;
   demo: boolean;
   live_game: LiveGame;
