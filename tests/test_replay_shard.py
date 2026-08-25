@@ -100,3 +100,16 @@ def test_replay_shard_reads_legacy_target_schema_three(tmp_path) -> None:
 
     assert restored.header.target_schema == 3
     assert restored.records == records
+
+
+def test_replay_shard_reads_value_risk_schema_five(tmp_path) -> None:
+    _, game = scripted_game()
+    records = records_from_game(game, run_id="legacy-v5")
+    path = tmp_path / "legacy-v5.jsonl.gz"
+    write_shard_atomic(path, records, metadata())
+
+    rewrite_gzip(path, lambda lines: lines[0].__setitem__("target_schema", 5))
+    restored = read_shard(path)
+
+    assert restored.header.target_schema == 5
+    assert restored.records == records
