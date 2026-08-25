@@ -139,6 +139,7 @@ export interface DashboardSnapshot {
   replay_shards: number;
   validation_samples: number;
   validation_checkpoint_count: number;
+  continuation_replay_samples: number;
   diversity: DiversitySnapshot;
   demo: boolean;
   live_game: LiveGame;
@@ -149,6 +150,7 @@ export interface DashboardSnapshot {
   arena_decisive_games: number;
   arena_threefold_repetitions: number;
   arena_avoidable_threefold_repetitions: number;
+  arena_continuation_replay_samples: number;
   arena_max_ply_draws: number;
   arena_other_draws: number;
   arena_score_rate: number;
