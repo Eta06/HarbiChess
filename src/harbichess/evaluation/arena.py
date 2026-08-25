@@ -53,6 +53,7 @@ class ArenaConfig:
     minimum_promotion_games: int = 200
     promotion_elo: float = 0.0
     candidate_checkpoint: str | None = None
+    inference_wait_seconds: float = 0.00025
 
     def __post_init__(self) -> None:
         if not self.arena_id or Path(self.arena_id).name != self.arena_id:
@@ -68,6 +69,8 @@ class ArenaConfig:
             raise ValueError("arena counts must be positive and opening plies non-negative")
         if self.seed < 0:
             raise ValueError("arena seed must be non-negative")
+        if self.inference_wait_seconds < 0:
+            raise ValueError("inference_wait_seconds must be non-negative")
 
 
 def _select_checkpoint(
@@ -402,12 +405,12 @@ def run_devir_arena(config: ArenaConfig) -> ArenaResult:
     candidate_batcher = SharedBatchEvaluator(
         MLXPolicyValueBackend(candidate),
         max_batch_size=min(128, config.workers),
-        max_wait_seconds=0.002,
+        max_wait_seconds=config.inference_wait_seconds,
     )
     champion_batcher = SharedBatchEvaluator(
         MLXPolicyValueBackend(champion),
         max_batch_size=min(128, config.workers),
-        max_wait_seconds=0.002,
+        max_wait_seconds=config.inference_wait_seconds,
     )
     candidate_search = MCTS(
         NeuralPositionEvaluator(candidate_batcher, rules=rules),
@@ -437,6 +440,8 @@ def run_devir_arena(config: ArenaConfig) -> ArenaResult:
         mode=RunMode.EVALUATION,
         mode_detail=f"DEVIR color-balanced arena · 0/{len(tasks)} games",
         candidate_checkpoint=selected_checkpoint["manifest"]["checkpoint_id"],
+        pilot_arena_selected_step=selected_checkpoint["manifest"].get("training_step", 0),
+        pilot_arena_selection_reason="explicit same-generation arena checkpoint",
         active_games=len(tasks),
         completed_games=0,
         arena_games=0,
@@ -532,6 +537,9 @@ def run_devir_arena(config: ArenaConfig) -> ArenaResult:
         candidate_batcher.close()
         champion_batcher.close()
 
+    candidate_inference = candidate_batcher.statistics
+    champion_inference = champion_batcher.statistics
+
     wins = sum(game.candidate_score == 1.0 for game in completed)
     draws = sum(game.candidate_score == 0.5 for game in completed)
     losses = sum(game.candidate_score == 0.0 for game in completed)
@@ -584,6 +592,18 @@ def run_devir_arena(config: ArenaConfig) -> ArenaResult:
             },
             "quality": asdict(quality),
             "elapsed_seconds": elapsed,
+            "inference": {
+                "candidate": {
+                    **asdict(candidate_inference),
+                    "average_batch_size": candidate_inference.average_batch_size,
+                    "average_queue_wait_ms": candidate_inference.average_queue_wait_ms,
+                },
+                "champion": {
+                    **asdict(champion_inference),
+                    "average_batch_size": champion_inference.average_batch_size,
+                    "average_queue_wait_ms": champion_inference.average_queue_wait_ms,
+                },
+            },
             "continuation_replay": (
                 {
                     "path": str(continuation_path),
@@ -683,6 +703,7 @@ def _parser() -> argparse.ArgumentParser:
     parser.add_argument("--workers", type=int, default=16)
     parser.add_argument("--seed", type=int, default=20260825)
     parser.add_argument("--candidate-checkpoint")
+    parser.add_argument("--inference-wait-ms", type=float, default=0.25)
     return parser
 
 
@@ -700,6 +721,7 @@ def main(argv: list[str] | None = None) -> int:
             workers=arguments.workers,
             seed=arguments.seed,
             candidate_checkpoint=arguments.candidate_checkpoint,
+            inference_wait_seconds=arguments.inference_wait_ms / 1_000,
         )
     )
     print(json.dumps(asdict(result), indent=2))
