@@ -45,6 +45,7 @@ class BranchEvidenceConfig:
     branch_simulations: int = 64
     maximum_nonrepeat_branches: int = 3
     confidence_level: float = 0.95
+    minimum_confident_advantage: float = 0.01
     workers: int = 96
     seed: int = 2026082505
 
@@ -60,6 +61,8 @@ class BranchEvidenceConfig:
             raise ValueError("branch evidence search counts must be positive")
         if not 0.0 < self.confidence_level < 1.0:
             raise ValueError("branch evidence confidence level must be in (0, 1)")
+        if not 0.0 <= self.minimum_confident_advantage <= 1.0:
+            raise ValueError("minimum confident advantage must be in [0, 1]")
         if not self.shard_paths or self.seed < 0:
             raise ValueError("branch evidence requires shards and a non-negative seed")
 
@@ -321,7 +324,9 @@ def run_branch_evidence(config: BranchEvidenceConfig) -> Path:
         )
         branches = tuple(sorted(branches_by_game[record.game_id], key=lambda item: item.action))
         qualified = tuple(
-            branch.action for branch in branches if branch.lower_confidence_bound > 0.0
+            branch.action
+            for branch in branches
+            if branch.lower_confidence_bound > config.minimum_confident_advantage
         )
         evidence = ContinuationEvidence(
             method_version=1,
@@ -329,6 +334,7 @@ def run_branch_evidence(config: BranchEvidenceConfig) -> Path:
             branch_searches=config.branch_searches,
             simulations_per_search=config.branch_simulations,
             repeat_value=0.0,
+            minimum_advantage=config.minimum_confident_advantage,
             repeat_actions=repeat_actions,
             branches=branches,
             qualified_actions=qualified,
@@ -413,6 +419,7 @@ def _parser() -> argparse.ArgumentParser:
     parser.add_argument("--branch-simulations", type=int, default=64)
     parser.add_argument("--maximum-nonrepeat-branches", type=int, default=3)
     parser.add_argument("--confidence-level", type=float, default=0.95)
+    parser.add_argument("--minimum-confident-advantage", type=float, default=0.01)
     parser.add_argument("--workers", type=int, default=96)
     parser.add_argument("--seed", type=int, default=2026082505)
     return parser
@@ -430,6 +437,7 @@ def main(argv: list[str] | None = None) -> int:
             branch_simulations=arguments.branch_simulations,
             maximum_nonrepeat_branches=arguments.maximum_nonrepeat_branches,
             confidence_level=arguments.confidence_level,
+            minimum_confident_advantage=arguments.minimum_confident_advantage,
             workers=arguments.workers,
             seed=arguments.seed,
         )
