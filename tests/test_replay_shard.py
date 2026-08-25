@@ -6,7 +6,7 @@ from datetime import UTC, datetime
 import pytest
 from test_replay_schema import scripted_game
 
-from harbichess.replay.schema import TARGET_SCHEMA_VERSION, records_from_game
+from harbichess.replay.schema import records_from_game
 from harbichess.replay.shard import (
     ReplayCompatibilityError,
     ReplayIntegrityError,
@@ -86,7 +86,7 @@ def test_replay_shard_reads_legacy_target_schema_three(tmp_path) -> None:
     write_shard_atomic(path, records, metadata())
 
     def downgrade(lines) -> None:
-        lines[0]["target_schema"] = TARGET_SCHEMA_VERSION - 1
+        lines[0]["target_schema"] = 3
         for record in lines[1:]:
             record.pop("continuation_evidence")
         payload = b"".join(
