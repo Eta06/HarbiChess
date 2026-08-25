@@ -1,11 +1,17 @@
 import random
+from dataclasses import replace
 
 import pytest
 
-from harbichess.chess.actions import POLICY_SIZE
+from harbichess.chess.actions import POLICY_SIZE, move_to_action
 from harbichess.chess.rules import PythonChessRules
 from harbichess.core.state import ChessMove
-from harbichess.replay.schema import ReplayRecord, records_from_game
+from harbichess.replay.schema import (
+    BranchValueEstimate,
+    ContinuationEvidence,
+    ReplayRecord,
+    records_from_game,
+)
 from harbichess.search.mcts import MoveStatistics, SearchResult
 from harbichess.selfplay.game import play_game
 
@@ -62,3 +68,39 @@ def test_replay_record_rejects_invalid_targets() -> None:
     )
     with pytest.raises(ValueError, match="positive"):
         ReplayRecord.from_dict(data)
+
+
+def test_replay_record_round_trips_branch_confidence_evidence() -> None:
+    rules, game = scripted_game()
+    record = records_from_game(game, run_id="pilot", rules=rules)[0]
+    board = rules.board(record.state)
+    repeat_action = move_to_action(board, board.parse_uci("e2e4"))
+    evidence = ContinuationEvidence(
+        method_version=1,
+        confidence_level=0.95,
+        branch_searches=8,
+        simulations_per_search=64,
+        repeat_value=0.0,
+        repeat_actions=(repeat_action,),
+        branches=(
+            BranchValueEstimate(
+                action=record.selected_action,
+                move="f2f3",
+                samples=8,
+                mean_value=0.20,
+                standard_error=0.04,
+                lower_confidence_bound=0.12,
+                upper_confidence_bound=0.28,
+            ),
+        ),
+        qualified_actions=(record.selected_action,),
+        source_model_sha256="a" * 64,
+    )
+    evidenced = replace(record, continuation_evidence=evidence)
+
+    assert ReplayRecord.from_dict(evidenced.to_dict()) == evidenced
+
+    payload = evidenced.to_dict()
+    payload["continuation_evidence"]["qualified_actions"] = [repeat_action]
+    with pytest.raises(ValueError, match="qualified"):
+        ReplayRecord.from_dict(payload)
