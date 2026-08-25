@@ -13,8 +13,8 @@ from harbichess.core.state import ChessMove, ChessState, Side
 from harbichess.selfplay.game import SelfPlayGame, SelfPlaySample
 
 REPLAY_SCHEMA_VERSION = 2
-TARGET_SCHEMA_VERSION = 6
-SUPPORTED_TARGET_SCHEMA_VERSIONS = frozenset({3, 4, 5, TARGET_SCHEMA_VERSION})
+TARGET_SCHEMA_VERSION = 7
+SUPPORTED_TARGET_SCHEMA_VERSIONS = frozenset({3, 4, 5, 6, TARGET_SCHEMA_VERSION})
 
 
 @dataclass(frozen=True, slots=True)
@@ -216,6 +216,75 @@ class ContinuationEvidence:
 
 
 @dataclass(frozen=True, slots=True)
+class PolicyRegretAdjustment:
+    method_version: int
+    temperature: float
+    root_value: float
+    repeat_value: float
+    best_nonrepeat_value: float
+    regret: float
+    redirect_fraction: float
+    repeat_actions: tuple[int, ...]
+    redirect_actions: tuple[int, ...]
+    source_model_sha256: str
+
+    def __post_init__(self) -> None:
+        values = (
+            self.temperature,
+            self.root_value,
+            self.repeat_value,
+            self.best_nonrepeat_value,
+            self.regret,
+            self.redirect_fraction,
+        )
+        if self.method_version <= 0 or any(not math.isfinite(value) for value in values):
+            raise ValueError("policy regret values must be finite and versioned")
+        if self.temperature <= 0.0:
+            raise ValueError("policy regret temperature must be positive")
+        if not (
+            -1.0 <= self.root_value <= 1.0
+            and -1.0 <= self.repeat_value <= 1.0
+            and -1.0 <= self.best_nonrepeat_value <= 1.0
+            and 0.0 <= self.regret <= 2.0
+            and 0.0 <= self.redirect_fraction < 1.0
+        ):
+            raise ValueError("policy regret values must be bounded")
+        expected_regret = max(
+            0.0,
+            min(self.root_value, self.best_nonrepeat_value) - self.repeat_value,
+        )
+        if not math.isclose(self.regret, expected_regret, abs_tol=1e-12):
+            raise ValueError("policy regret must match the conservative value gap")
+        expected_fraction = 1.0 - math.exp(-self.regret / self.temperature)
+        if not math.isclose(self.redirect_fraction, expected_fraction, abs_tol=1e-12):
+            raise ValueError("redirect fraction must follow the frozen regret transform")
+        if (
+            not self.repeat_actions
+            or len(self.repeat_actions) != len(set(self.repeat_actions))
+            or not self.redirect_actions
+            or len(self.redirect_actions) != len(set(self.redirect_actions))
+            or set(self.repeat_actions) & set(self.redirect_actions)
+        ):
+            raise ValueError("policy regret actions must be unique repeat/non-repeat sets")
+        if len(self.source_model_sha256) != 64 or any(
+            character not in "0123456789abcdef" for character in self.source_model_sha256.lower()
+        ):
+            raise ValueError("policy regret model hash must be SHA-256")
+
+    def to_dict(self) -> dict[str, Any]:
+        return asdict(self)
+
+    @classmethod
+    def from_dict(cls, data: dict[str, Any]) -> PolicyRegretAdjustment:
+        parsed = dict(data)
+        parsed["repeat_actions"] = tuple(int(action) for action in parsed["repeat_actions"])
+        parsed["redirect_actions"] = tuple(
+            int(action) for action in parsed["redirect_actions"]
+        )
+        return cls(**parsed)
+
+
+@dataclass(frozen=True, slots=True)
 class ReplayRecord:
     game_id: str
     game_index: int
@@ -230,6 +299,7 @@ class ReplayRecord:
     outcome_value: int
     repetition_redirected: bool
     continuation_evidence: ContinuationEvidence | None = None
+    policy_regret_adjustment: PolicyRegretAdjustment | None = None
 
     def __post_init__(self) -> None:
         if not self.game_id or self.game_index < 0 or self.seed < 0 or self.ply != len(self.moves):
@@ -257,6 +327,12 @@ class ReplayRecord:
             qualified = set(self.continuation_evidence.qualified_actions)
             if not qualified or set(indices) != qualified or self.selected_action not in qualified:
                 raise ValueError("confidence-gated policy must exactly match qualified actions")
+        if self.policy_regret_adjustment is not None:
+            adjustment = self.policy_regret_adjustment
+            if not set(adjustment.redirect_actions) <= set(indices):
+                raise ValueError("regret redirect actions must remain in the blended policy")
+            if adjustment.redirect_fraction > 0.0 and not self.repetition_redirected:
+                raise ValueError("positive regret adjustment must mark the target redirected")
 
     @property
     def state(self) -> ChessState:
@@ -277,6 +353,13 @@ class ReplayRecord:
             }
             if not evidence_actions <= legal_actions:
                 raise ValueError("continuation evidence contains an illegal action")
+        if self.policy_regret_adjustment is not None:
+            adjustment_actions = {
+                *self.policy_regret_adjustment.repeat_actions,
+                *self.policy_regret_adjustment.redirect_actions,
+            }
+            if not adjustment_actions <= legal_actions:
+                raise ValueError("policy regret adjustment contains an illegal action")
 
     def to_dict(self) -> dict[str, Any]:
         return asdict(self)
@@ -292,6 +375,10 @@ class ReplayRecord:
         evidence = parsed.get("continuation_evidence")
         parsed["continuation_evidence"] = (
             ContinuationEvidence.from_dict(evidence) if evidence is not None else None
+        )
+        adjustment = parsed.get("policy_regret_adjustment")
+        parsed["policy_regret_adjustment"] = (
+            PolicyRegretAdjustment.from_dict(adjustment) if adjustment is not None else None
         )
         return cls(**parsed)
 
