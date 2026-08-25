@@ -152,6 +152,7 @@ def test_replay_record_round_trips_multi_ply_repetition_risk() -> None:
     legacy_risk = legacy_v5["continuation_evidence"]["repetition_risks"][0]
     for field in (
         "loop_value_samples",
+        "exact_loop_value_samples",
         "mean_loop_value",
         "lower_loop_value_bound",
         "risk_adjusted_value_lower_bound",
