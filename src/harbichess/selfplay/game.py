@@ -16,7 +16,7 @@ from harbichess.core.state import (
     Side,
     TerminalResult,
 )
-from harbichess.search.mcts import MCTS
+from harbichess.search.mcts import MCTS, MoveStatistics, SearchResult
 
 
 @dataclass(frozen=True, slots=True)
@@ -24,9 +24,15 @@ class SelfPlayConfig:
     exploration_plies: int = 30
     temperature: float = 1.0
     max_plies: int = 512
+    repetition_value_tolerance: float = 0.05
 
     def __post_init__(self) -> None:
-        if self.exploration_plies < 0 or self.temperature < 0 or self.max_plies <= 0:
+        if (
+            self.exploration_plies < 0
+            or self.temperature < 0
+            or self.max_plies <= 0
+            or not 0.0 <= self.repetition_value_tolerance <= 2.0
+        ):
             raise ValueError("self-play temperatures and ply limits must be non-negative")
 
 
@@ -38,6 +44,7 @@ class SelfPlaySample:
     selected_move: ChessMove
     root_value: float
     outcome_value: int
+    repetition_redirected: bool = False
 
 
 @dataclass(frozen=True, slots=True)
@@ -56,6 +63,50 @@ def derive_game_seed(run_seed: int, game_index: int) -> int:
     return int.from_bytes(hashlib.blake2b(payload, digest_size=8).digest())
 
 
+def _immediate_threefold(
+    rules: PythonChessRules,
+    state: ChessState,
+    move: ChessMove,
+) -> bool:
+    outcome = rules.outcome(rules.apply(state, move), claim_draw=True)
+    return outcome is not None and outcome.termination == "threefold_repetition"
+
+
+def _redirect_repetition(
+    search: SearchResult,
+    rules: PythonChessRules,
+    state: ChessState,
+    selected: ChessMove,
+    *,
+    temperature: float,
+    tolerance: float,
+    rng: random.Random,
+) -> tuple[tuple[MoveStatistics, ...], ChessMove, bool]:
+    if not _immediate_threefold(rules, state, selected):
+        return search.moves, selected, False
+    selected_statistics = next(item for item in search.moves if item.move == selected)
+    alternatives = tuple(
+        item
+        for item in search.moves
+        if item.visits > 0
+        and not _immediate_threefold(rules, state, item.move)
+        and item.mean_value >= selected_statistics.mean_value - tolerance
+    )
+    if not alternatives:
+        return search.moves, selected, False
+    redirected_search = SearchResult(
+        alternatives,
+        search.root_value,
+        search.simulations,
+        search.outcome,
+    )
+    return (
+        alternatives,
+        redirected_search.select_move(temperature=temperature, rng=rng),
+        True,
+    )
+
+
 def play_game(
     mcts: MCTS,
     rules: PythonChessRules,
@@ -69,7 +120,14 @@ def play_game(
     rng = random.Random(seed)
     state = initial_state
     pending: list[
-        tuple[ChessState, Side, tuple[tuple[ChessMove, float], ...], ChessMove, float]
+        tuple[
+            ChessState,
+            Side,
+            tuple[tuple[ChessMove, float], ...],
+            ChessMove,
+            float,
+            bool,
+        ]
     ] = []
 
     while True:
@@ -80,18 +138,36 @@ def play_game(
             outcome = GameOutcome(TerminalResult.DRAW, "max_plies")
             break
         search = mcts.search(state, rng=rng, add_root_noise=True)
-        total_visits = sum(statistics.visits for statistics in search.moves)
+        side_to_move = rules.view(state).side_to_move
+        temperature = settings.temperature if state.ply < settings.exploration_plies else 0.0
+        selected = search.select_move(temperature=temperature, rng=rng)
+        policy_moves, selected, repetition_redirected = _redirect_repetition(
+            search,
+            rules,
+            state,
+            selected,
+            temperature=temperature,
+            tolerance=settings.repetition_value_tolerance,
+            rng=rng,
+        )
+        total_visits = sum(statistics.visits for statistics in policy_moves)
         if total_visits <= 0:
             raise RuntimeError("non-terminal search returned no visited moves")
         policy = tuple(
             (statistics.move, statistics.visits / total_visits)
-            for statistics in search.moves
+            for statistics in policy_moves
             if statistics.visits > 0
         )
-        side_to_move = rules.view(state).side_to_move
-        temperature = settings.temperature if state.ply < settings.exploration_plies else 0.0
-        selected = search.select_move(temperature=temperature, rng=rng)
-        pending.append((state, side_to_move, policy, selected, search.root_value))
+        pending.append(
+            (
+                state,
+                side_to_move,
+                policy,
+                selected,
+                search.root_value,
+                repetition_redirected,
+            )
+        )
         state = rules.apply(state, selected)
 
     samples = tuple(
@@ -102,8 +178,16 @@ def play_game(
             selected_move=selected_move,
             root_value=root_value,
             outcome_value=outcome.value_for(side),
+            repetition_redirected=repetition_redirected,
         )
-        for sample_state, side, policy, selected_move, root_value in pending
+        for (
+            sample_state,
+            side,
+            policy,
+            selected_move,
+            root_value,
+            repetition_redirected,
+        ) in pending
     )
     return SelfPlayGame(game_index, seed, state, outcome, samples)
 
