@@ -46,6 +46,7 @@ class ArenaConfig:
     seed: int = 20260825
     minimum_promotion_games: int = 200
     promotion_elo: float = 0.0
+    candidate_checkpoint: str | None = None
 
     def __post_init__(self) -> None:
         if not self.arena_id or Path(self.arena_id).name != self.arena_id:
@@ -61,6 +62,22 @@ class ArenaConfig:
             raise ValueError("arena counts must be positive and opening plies non-negative")
         if self.seed < 0:
             raise ValueError("arena seed must be non-negative")
+
+
+def _select_checkpoint(
+    ocak: dict[str, object],
+    checkpoint_id: str | None,
+) -> dict[str, object]:
+    selected = ocak["checkpoint"]
+    if checkpoint_id is None:
+        return selected
+    candidates = ocak.get("validation_checkpoints", ())
+    for candidate in candidates:
+        if candidate["manifest"]["checkpoint_id"] == checkpoint_id:
+            return candidate
+    if selected["manifest"]["checkpoint_id"] == checkpoint_id:
+        return selected
+    raise ValueError(f"unknown validation checkpoint: {checkpoint_id}")
 
 
 @dataclass(frozen=True, slots=True)
@@ -145,10 +162,7 @@ def _avoidable_threefold(
         if move == selected_move:
             continue
         alternative_outcome = rules.outcome(rules.apply(state, move), claim_draw=True)
-        if (
-            alternative_outcome is None
-            or alternative_outcome.termination != "threefold_repetition"
-        ):
+        if alternative_outcome is None or alternative_outcome.termination != "threefold_repetition":
             return True
     return False
 
@@ -236,9 +250,12 @@ def _network_config(payload: dict[str, object]) -> NetworkConfig:
 
 def _live_game(game: ArenaGame, rules: PythonChessRules) -> LiveGame:
     search = game.last_search
-    moves = () if search is None else tuple(
-        (item.move.uci, item.visits / max(1, search.simulations))
-        for item in search.moves[:3]
+    moves = (
+        ()
+        if search is None
+        else tuple(
+            (item.move.uci, item.visits / max(1, search.simulations)) for item in search.moves[:3]
+        )
     )
     value = 0.0 if search is None else search.root_value
     return LiveGame(
@@ -257,6 +274,7 @@ def run_devir_arena(config: ArenaConfig) -> ArenaResult:
     ocak = json.loads(config.ocak_result.read_text(encoding="utf-8"))
     if not ocak.get("passed"):
         raise ValueError("DEVIR arena requires a passed OCAK result")
+    selected_checkpoint = _select_checkpoint(ocak, config.candidate_checkpoint)
     network_config = _network_config(ocak["config"])
     run_root = config.ocak_result.parent
     arena_root = run_root / "arena" / config.arena_id
@@ -264,9 +282,9 @@ def run_devir_arena(config: ArenaConfig) -> ArenaResult:
         raise FileExistsError(f"arena already exists: {arena_root}")
     arena_root.mkdir(parents=True)
 
-    candidate_path = Path(ocak["checkpoint"]["path"]) / ocak["checkpoint"]["manifest"][
-        "model_file"
-    ]
+    candidate_path = (
+        Path(selected_checkpoint["path"]) / selected_checkpoint["manifest"]["model_file"]
+    )
     candidate = HarbiChessNetwork(network_config)
     candidate.load_weights(str(candidate_path))
     champion = HarbiChessNetwork(network_config)
@@ -350,9 +368,7 @@ def run_devir_arena(config: ArenaConfig) -> ArenaResult:
             wins = sum(item.candidate_score == 1.0 for item in games)
             draws = sum(item.candidate_score == 0.5 for item in games)
             losses = sum(item.candidate_score == 0.0 for item in games)
-            threefold = sum(
-                item.outcome.termination == "threefold_repetition" for item in games
-            )
+            threefold = sum(item.outcome.termination == "threefold_repetition" for item in games)
             avoidable_threefold = sum(item.avoidable_threefold for item in games)
             max_ply = sum(item.outcome.termination == "max_plies" for item in games)
             other_draws = draws - threefold - max_ply
@@ -430,7 +446,7 @@ def run_devir_arena(config: ArenaConfig) -> ArenaResult:
         {
             "arena_id": config.arena_id,
             "created_at": _now(),
-            "candidate_checkpoint": ocak["checkpoint"]["manifest"]["checkpoint_id"],
+            "candidate_checkpoint": selected_checkpoint["manifest"]["checkpoint_id"],
             "candidate_source_commit": ocak["source_commit"],
             "candidate_model_sha256": _sha256(candidate_path),
             "baseline_model": str(champion_path),
@@ -487,7 +503,7 @@ def run_devir_arena(config: ArenaConfig) -> ArenaResult:
     store.write_atomic(snapshot)
     return ArenaResult(
         arena_id=config.arena_id,
-        candidate_checkpoint=ocak["checkpoint"]["manifest"]["checkpoint_id"],
+        candidate_checkpoint=selected_checkpoint["manifest"]["checkpoint_id"],
         games=quality.games,
         wins=quality.wins,
         draws=quality.draws,
@@ -512,6 +528,8 @@ def _parser() -> argparse.ArgumentParser:
     parser.add_argument("--simulations", type=int, default=4)
     parser.add_argument("--max-plies", type=int, default=192)
     parser.add_argument("--workers", type=int, default=16)
+    parser.add_argument("--seed", type=int, default=20260825)
+    parser.add_argument("--candidate-checkpoint")
     return parser
 
 
@@ -527,6 +545,8 @@ def main(argv: list[str] | None = None) -> int:
             simulations=arguments.simulations,
             max_plies=arguments.max_plies,
             workers=arguments.workers,
+            seed=arguments.seed,
+            candidate_checkpoint=arguments.candidate_checkpoint,
         )
     )
     print(json.dumps(asdict(result), indent=2))
