@@ -148,6 +148,19 @@ def test_replay_record_round_trips_multi_ply_repetition_risk() -> None:
 
     assert ReplayRecord.from_dict(evidenced.to_dict()) == evidenced
 
+    legacy_v5 = evidenced.to_dict()
+    legacy_risk = legacy_v5["continuation_evidence"]["repetition_risks"][0]
+    for field in (
+        "loop_value_samples",
+        "mean_loop_value",
+        "lower_loop_value_bound",
+        "risk_adjusted_value_lower_bound",
+    ):
+        legacy_risk.pop(field)
+    legacy_v5["continuation_evidence"].pop("evaluated_root_value")
+    legacy_v5["continuation_evidence"].pop("minimum_advantaged_root_value")
+    assert ReplayRecord.from_dict(legacy_v5) == evidenced
+
     payload = evidenced.to_dict()
     payload["continuation_evidence"]["maximum_repetition_risk"] = 0.10
     with pytest.raises(ValueError, match="risk gate"):
