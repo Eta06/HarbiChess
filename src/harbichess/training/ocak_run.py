@@ -83,6 +83,7 @@ class OcakRunConfig:
     value_hidden: int = 32
     continuation_shards: tuple[Path, ...] = ()
     continuation_batch_fraction: float = 0.25
+    initial_model: Path | None = None
 
     def __post_init__(self) -> None:
         if not self.run_id or Path(self.run_id).name != self.run_id:
@@ -269,7 +270,9 @@ def run_ocak_sanity(
         mode_detail=f"OCAK sanity self-play · 0/{config.games} games",
         run_id=config.run_id,
         source_commit=commit,
-        active_checkpoint="baseline-initial",
+        active_checkpoint=(
+            "provided-champion" if config.initial_model is not None else "random-initial"
+        ),
         pilot_status=PilotStatus.SELF_PLAY,
         pilot_steps_planned=config.training_steps,
         active_games=config.games,
@@ -305,6 +308,13 @@ def run_ocak_sanity(
     )
     mx.random.seed(config.run_seed)
     network = HarbiChessNetwork(network_config)
+    if config.initial_model is not None:
+        if not config.initial_model.is_file():
+            raise FileNotFoundError(f"initial model does not exist: {config.initial_model}")
+        network.load_weights(str(config.initial_model))
+    initial_checkpoint = (
+        "provided-champion" if config.initial_model is not None else "random-initial"
+    )
     baseline_dir = run_root / "baseline"
     baseline_dir.mkdir(parents=True)
     baseline_path = baseline_dir / "model.safetensors"
@@ -437,7 +447,7 @@ def run_ocak_sanity(
             ShardMetadata(
                 run_id=config.run_id,
                 generation=0,
-                source_checkpoint="random-initial",
+                source_checkpoint=initial_checkpoint,
                 source_commit=commit,
                 created_at=created_at,
                 split=ReplaySplit.TRAIN,
@@ -449,7 +459,7 @@ def run_ocak_sanity(
             ShardMetadata(
                 run_id=config.run_id,
                 generation=0,
-                source_checkpoint="random-initial",
+                source_checkpoint=initial_checkpoint,
                 source_commit=commit,
                 created_at=created_at,
                 split=ReplaySplit.VALIDATION,
@@ -681,6 +691,9 @@ def run_ocak_sanity(
                 "artifact_root": str(config.artifact_root),
                 "telemetry_path": str(config.telemetry_path),
                 "continuation_shards": [str(path) for path in config.continuation_shards],
+                "initial_model": (
+                    str(config.initial_model) if config.initial_model is not None else None
+                ),
             },
             "system": {
                 "platform": platform.platform(),
@@ -705,7 +718,7 @@ def run_ocak_sanity(
             },
             "diversity": asdict(diversity_metrics),
             "baseline": {
-                "checkpoint_id": "baseline-initial",
+                "checkpoint_id": initial_checkpoint,
                 "path": str(baseline_path),
                 "model_sha256": baseline_sha256,
             },
@@ -740,7 +753,7 @@ def run_ocak_sanity(
                 if passed
                 else "OCAK sanity pilot failed · champion remains unchanged"
             ),
-            active_checkpoint="random-initial",
+            active_checkpoint=initial_checkpoint,
             candidate_checkpoint=saved_resume.checkpoint_id,
             promoted_checkpoint="None",
             checkpoint_status=CheckpointStatus.VERIFIED,
@@ -801,6 +814,7 @@ def _parser() -> argparse.ArgumentParser:
     parser.add_argument("--minimum-validation-delta", type=float, default=1e-3)
     parser.add_argument("--continuation-shard", action="append", type=Path, default=[])
     parser.add_argument("--continuation-batch-fraction", type=float, default=0.25)
+    parser.add_argument("--initial-model", type=Path)
     return parser
 
 
@@ -825,6 +839,7 @@ def main(argv: list[str] | None = None) -> int:
             minimum_validation_delta=arguments.minimum_validation_delta,
             continuation_shards=tuple(arguments.continuation_shard),
             continuation_batch_fraction=arguments.continuation_batch_fraction,
+            initial_model=arguments.initial_model,
         )
     )
     print(json.dumps(asdict(result), indent=2))
