@@ -329,7 +329,10 @@ class ReplayRecord:
                 raise ValueError("confidence-gated policy must exactly match qualified actions")
         if self.policy_regret_adjustment is not None:
             adjustment = self.policy_regret_adjustment
-            if not set(adjustment.redirect_actions) <= set(indices):
+            if (
+                adjustment.redirect_fraction > 0.0
+                and not set(adjustment.redirect_actions) <= set(indices)
+            ):
                 raise ValueError("regret redirect actions must remain in the blended policy")
             if adjustment.redirect_fraction > 0.0 and not self.repetition_redirected:
                 raise ValueError("positive regret adjustment must mark the target redirected")
