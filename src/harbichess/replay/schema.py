@@ -13,8 +13,8 @@ from harbichess.core.state import ChessMove, ChessState, Side
 from harbichess.selfplay.game import SelfPlayGame, SelfPlaySample
 
 REPLAY_SCHEMA_VERSION = 2
-TARGET_SCHEMA_VERSION = 4
-SUPPORTED_TARGET_SCHEMA_VERSIONS = frozenset({3, TARGET_SCHEMA_VERSION})
+TARGET_SCHEMA_VERSION = 5
+SUPPORTED_TARGET_SCHEMA_VERSIONS = frozenset({3, 4, TARGET_SCHEMA_VERSION})
 
 
 @dataclass(frozen=True, slots=True)
@@ -45,6 +45,33 @@ class BranchValueEstimate:
 
 
 @dataclass(frozen=True, slots=True)
+class RepetitionRiskEstimate:
+    action: int
+    horizon_plies: int
+    rollouts: int
+    repetition_events: int
+    estimated_risk: float
+    upper_confidence_bound: float
+
+    def __post_init__(self) -> None:
+        if (
+            not 0 <= self.action < POLICY_SIZE
+            or self.horizon_plies not in (2, 3)
+            or self.rollouts <= 0
+            or not 0 <= self.repetition_events <= self.rollouts
+        ):
+            raise ValueError("repetition risk identity and counts are invalid")
+        expected = self.repetition_events / self.rollouts
+        if not math.isclose(self.estimated_risk, expected, abs_tol=1e-12):
+            raise ValueError("estimated repetition risk must match its event count")
+        if not (
+            math.isfinite(self.upper_confidence_bound)
+            and 0.0 <= self.estimated_risk <= self.upper_confidence_bound <= 1.0
+        ):
+            raise ValueError("repetition risk confidence bound must contain the estimate")
+
+
+@dataclass(frozen=True, slots=True)
 class ContinuationEvidence:
     method_version: int
     confidence_level: float
@@ -56,6 +83,8 @@ class ContinuationEvidence:
     branches: tuple[BranchValueEstimate, ...]
     qualified_actions: tuple[int, ...]
     source_model_sha256: str
+    repetition_risks: tuple[RepetitionRiskEstimate, ...] = ()
+    maximum_repetition_risk: float | None = None
 
     def __post_init__(self) -> None:
         if (
@@ -94,6 +123,29 @@ class ContinuationEvidence:
             character not in "0123456789abcdef" for character in self.source_model_sha256.lower()
         ):
             raise ValueError("continuation evidence model hash must be SHA-256")
+        if self.repetition_risks:
+            risk_actions = {risk.action for risk in self.repetition_risks}
+            if (
+                len(risk_actions) != len(self.repetition_risks)
+                or not risk_actions <= branch_actions
+            ):
+                raise ValueError("repetition risk actions must be unique evaluated branches")
+            if not (
+                self.maximum_repetition_risk is not None
+                and math.isfinite(self.maximum_repetition_risk)
+                and 0.0 <= self.maximum_repetition_risk <= 1.0
+            ):
+                raise ValueError("repetition risk evidence requires a bounded maximum")
+            risks_by_action = {risk.action: risk for risk in self.repetition_risks}
+            if any(
+                action not in risks_by_action
+                or risks_by_action[action].upper_confidence_bound
+                > self.maximum_repetition_risk
+                for action in self.qualified_actions
+            ):
+                raise ValueError("qualified branch must clear the repetition risk gate")
+        elif self.maximum_repetition_risk is not None:
+            raise ValueError("maximum repetition risk requires branch risk evidence")
 
     def to_dict(self) -> dict[str, Any]:
         return asdict(self)
@@ -104,6 +156,9 @@ class ContinuationEvidence:
         parsed["repeat_actions"] = tuple(int(action) for action in parsed["repeat_actions"])
         parsed["branches"] = tuple(BranchValueEstimate(**branch) for branch in parsed["branches"])
         parsed["qualified_actions"] = tuple(int(action) for action in parsed["qualified_actions"])
+        parsed["repetition_risks"] = tuple(
+            RepetitionRiskEstimate(**risk) for risk in parsed.get("repetition_risks", ())
+        )
         return cls(**parsed)
 
 
