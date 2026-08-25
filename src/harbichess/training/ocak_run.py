@@ -194,6 +194,8 @@ def _diversity_snapshot(metrics: DiversityMetrics) -> DiversitySnapshot:
         decisive_game_ratio=metrics.decisive_game_ratio,
         max_ply_draws=metrics.max_ply_draws,
         max_ply_draw_ratio=metrics.max_ply_draw_ratio,
+        repetition_redirects=metrics.repetition_redirects,
+        repetition_redirect_ratio=metrics.repetition_redirect_ratio,
         terminations=tuple(
             TerminationSnapshot(item.termination, item.count, item.ratio)
             for item in metrics.terminations
@@ -237,9 +239,7 @@ def _records(
     rules: PythonChessRules,
 ) -> tuple[ReplayRecord, ...]:
     return tuple(
-        record
-        for game in games
-        for record in records_from_game(game, run_id=run_id, rules=rules)
+        record for game in games for record in records_from_game(game, run_id=run_id, rules=rules)
     )
 
 
@@ -336,9 +336,7 @@ def run_ocak_sanity(
                 count = len(completed_games)
                 positions = completed_positions
                 outcomes = Counter(item.outcome.result for item in completed_games)
-                terminations = Counter(
-                    item.outcome.termination for item in completed_games
-                )
+                terminations = Counter(item.outcome.termination for item in completed_games)
                 white_wins = outcomes[TerminalResult.WHITE_WIN]
                 black_wins = outcomes[TerminalResult.BLACK_WIN]
                 draws = outcomes[TerminalResult.DRAW]
@@ -347,9 +345,7 @@ def run_ocak_sanity(
                     snapshot.diversity,
                     games=count,
                     positions=positions,
-                    mean_game_plies=(
-                        sum(item.final_state.ply for item in completed_games) / count
-                    ),
+                    mean_game_plies=(sum(item.final_state.ply for item in completed_games) / count),
                     white_wins=white_wins,
                     draws=draws,
                     black_wins=black_wins,
@@ -376,9 +372,7 @@ def run_ocak_sanity(
                 positions_per_second=positions / elapsed,
                 neural_evals_per_second=(statistics.positions / elapsed if statistics else 0.0),
                 mcts_nodes_per_second=positions * config.simulations / elapsed,
-                inference_batch_size=(
-                    round(statistics.average_batch_size) if statistics else 0
-                ),
+                inference_batch_size=(round(statistics.average_batch_size) if statistics else 0),
                 live_game=_latest_game(game),
                 diversity=live_diversity,
             )
@@ -502,9 +496,7 @@ def run_ocak_sanity(
                 validation_loss=validation_loss,
             )
             publish(
-                mode_detail=(
-                    f"OCAK learner pilot · {metric.step}/{config.training_steps} steps"
-                ),
+                mode_detail=(f"OCAK learner pilot · {metric.step}/{config.training_steps} steps"),
                 training_step=metric.step,
                 pilot_steps_completed=metric.step,
                 policy_loss=metric.policy_loss,
@@ -538,9 +530,7 @@ def run_ocak_sanity(
         )
         outcome_reasons = []
         if diversity_metrics.decisive_games < config.minimum_decisive_games:
-            outcome_reasons.append(
-                "self-play did not produce the required decisive terminal games"
-            )
+            outcome_reasons.append("self-play did not produce the required decisive terminal games")
         if diversity_metrics.max_ply_draw_ratio > config.maximum_max_ply_draw_ratio:
             outcome_reasons.append("too many self-play games ended at the max-ply limit")
         repetition_draws = sum(
@@ -568,46 +558,90 @@ def run_ocak_sanity(
             pilot_max_gradient_norm=report.maximum_gradient_norm,
             pilot_reasons=reasons,
             checkpoint_status=CheckpointStatus.WRITING,
+            validation_checkpoint_count=len(report.validation_candidates),
         )
 
-        checkpoint_id = f"candidate-step-{learner.step:06d}"
-        checkpoint_path = run_root / "checkpoints" / checkpoint_id
-        checkpoint_sampler = GameBalancedSampler(train_records, seed=config.run_seed)
-        checkpoint_sampler.set_rng_state(report.sampler_rng_state)
-        resume = ResumeState(
-            schema_version=1,
-            run_id=config.run_id,
-            checkpoint_id=checkpoint_id,
-            source_commit=commit,
-            created_at=_now(),
-            training_step=learner.step,
-            lifetime_games=config.games,
-            generation_games=config.games,
-            training_elapsed_seconds=training_seconds,
-            replay_samples=len(train_records) + len(validation_records),
-            replay_cursor=len(train_records) - 1,
-            model_file="model.safetensors",
-            optimizer_file="optimizer.safetensors",
-            rng_file="sampler-rng.json",
+        validation_checkpoints = []
+
+        def save_candidate(step: int, validation_loss: float, rng_state: object):
+            checkpoint_id = f"candidate-step-{step:06d}"
+            checkpoint_path = run_root / "checkpoints" / checkpoint_id
+            checkpoint_sampler = GameBalancedSampler(train_records, seed=config.run_seed)
+            checkpoint_sampler.set_rng_state(rng_state)
+            resume = ResumeState(
+                schema_version=1,
+                run_id=config.run_id,
+                checkpoint_id=checkpoint_id,
+                source_commit=commit,
+                created_at=_now(),
+                training_step=step,
+                lifetime_games=config.games,
+                generation_games=config.games,
+                training_elapsed_seconds=training_seconds,
+                replay_samples=len(train_records) + len(validation_records),
+                replay_cursor=len(train_records) - 1,
+                model_file="model.safetensors",
+                optimizer_file="optimizer.safetensors",
+                rng_file="sampler-rng.json",
+            )
+            saved = save_training_checkpoint(
+                checkpoint_path,
+                state=resume,
+                learner=learner,
+                sampler=checkpoint_sampler,
+            )
+            verification_learner = MLXLearner(
+                HarbiChessNetwork(network_config),
+                config=learner_config,
+            )
+            verification_sampler = GameBalancedSampler(train_records, seed=0)
+            loaded = load_training_checkpoint(
+                checkpoint_path,
+                learner=verification_learner,
+                sampler=verification_sampler,
+            )
+            if loaded != saved:
+                raise RuntimeError("checkpoint verification did not reproduce its resume manifest")
+            entry = {
+                "step": step,
+                "validation_loss": validation_loss,
+                "path": str(checkpoint_path),
+                "verified": True,
+                "manifest": asdict(saved),
+            }
+            validation_checkpoints.append(entry)
+            return checkpoint_path, saved
+
+        for candidate in report.validation_candidates:
+            learner.restore(candidate.learner_snapshot)
+            save_candidate(
+                candidate.step,
+                candidate.validation_loss,
+                candidate.sampler_rng_state,
+            )
+        if not validation_checkpoints:
+            checkpoint_path, saved_resume = save_candidate(
+                learner.step,
+                report.final_validation_loss,
+                report.sampler_rng_state,
+            )
+        else:
+            selected = next(
+                item
+                for item in validation_checkpoints
+                if item["step"] == report.best_validation_step
+            )
+            checkpoint_path = Path(selected["path"])
+            saved_resume = ResumeState(**selected["manifest"])
+        learner.restore(
+            next(
+                candidate.learner_snapshot
+                for candidate in report.validation_candidates
+                if candidate.step == report.best_validation_step
+            )
+            if report.validation_candidates
+            else learner.snapshot()
         )
-        saved_resume = save_training_checkpoint(
-            checkpoint_path,
-            state=resume,
-            learner=learner,
-            sampler=checkpoint_sampler,
-        )
-        verification_learner = MLXLearner(
-            HarbiChessNetwork(network_config),
-            config=learner_config,
-        )
-        verification_sampler = GameBalancedSampler(train_records, seed=0)
-        loaded_resume = load_training_checkpoint(
-            checkpoint_path,
-            learner=verification_learner,
-            sampler=verification_sampler,
-        )
-        if loaded_resume != saved_resume:
-            raise RuntimeError("checkpoint verification did not reproduce its resume manifest")
 
         result_path = run_root / "result.json"
         total_seconds = time.perf_counter() - started
@@ -658,6 +692,7 @@ def run_ocak_sanity(
                 "verified": True,
                 "manifest": asdict(saved_resume),
             },
+            "validation_checkpoints": validation_checkpoints,
         }
         _atomic_json(result_path, result_payload)
         publish(
@@ -668,11 +703,12 @@ def run_ocak_sanity(
                 else "OCAK sanity pilot failed · champion remains unchanged"
             ),
             active_checkpoint="random-initial",
-            candidate_checkpoint=checkpoint_id,
+            candidate_checkpoint=saved_resume.checkpoint_id,
             promoted_checkpoint="None",
             checkpoint_status=CheckpointStatus.VERIFIED,
             checkpoint_path=str(checkpoint_path),
             checkpoint_verified=True,
+            validation_checkpoint_count=len(validation_checkpoints),
         )
         return OcakRunResult(
             run_id=config.run_id,
@@ -712,9 +748,7 @@ def _parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--run-id", required=True)
     parser.add_argument("--artifact-root", type=Path, default=Path("artifacts/runs"))
-    parser.add_argument(
-        "--telemetry", type=Path, default=Path("artifacts/dashboard/state.json")
-    )
+    parser.add_argument("--telemetry", type=Path, default=Path("artifacts/dashboard/state.json"))
     parser.add_argument("--seed", type=int, default=20260824)
     parser.add_argument("--games", type=int, default=12)
     parser.add_argument("--workers", type=int, default=12)
