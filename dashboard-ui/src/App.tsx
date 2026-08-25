@@ -411,6 +411,10 @@ function App() {
               <div><span>Validation samples</span><strong>{formatNumber(snapshot.validation_samples)}</strong></div>
               <div><span>Best validation</span><strong>{formatLoss(snapshot.pilot_best_validation_loss)} <small>@ step {formatNumber(snapshot.pilot_best_validation_step)}</small></strong></div>
               <div><span>Early stopping</span><strong>{snapshot.pilot_stopped_early ? "Triggered" : "Not triggered"} <small>· {formatNumber(snapshot.pilot_steps_attempted)} attempted</small></strong></div>
+              <div><span>Training stopped by</span><strong>{modeLabel(snapshot.pilot_stop_reason)}</strong></div>
+              <div><span>Last improvement</span><strong>step {formatNumber(snapshot.pilot_last_improvement_step)} <small>· last validation {formatLoss(snapshot.pilot_last_validation_loss)} @ {formatNumber(snapshot.pilot_last_validation_step)}</small></strong></div>
+              <div><span>Validation patience</span><strong>{formatNumber(snapshot.pilot_stale_validation_evaluations)} / {formatNumber(snapshot.pilot_early_stopping_patience)} <small>· every {formatNumber(snapshot.pilot_validation_interval_steps)} steps</small></strong></div>
+              <div><span>Arena selected</span><strong>{snapshot.pilot_arena_selected_step == null ? "Not evaluated" : `step ${formatNumber(snapshot.pilot_arena_selected_step)}`} <small>· {modeLabel(snapshot.pilot_arena_selection_reason)}</small></strong></div>
               <div><span>Arena candidates</span><strong>{formatNumber(snapshot.validation_checkpoint_count)}</strong></div>
               <div><span>Continuation samples</span><strong>{formatNumber(snapshot.continuation_replay_samples)}</strong></div>
             </div>
@@ -419,6 +423,7 @@ function App() {
             ) : (
               <div className="guardrail-message">No guardrail violation recorded</div>
             )}
+            <div className="guardrail-message">{snapshot.pilot_stop_detail}</div>
             <div className="checkpoint-state">
               <div>
                 <span>Checkpoint</span>
