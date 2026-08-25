@@ -34,6 +34,7 @@ class ContinuationTreatment(StrEnum):
     CONFIDENCE_GATED = "confidence_gated"
     REPETITION_RISK_GATED = "repetition_risk_gated"
     VALUE_AWARE_RISK = "value_aware_risk"
+    VALUE_REGRET = "value_regret"
 
 
 @dataclass(frozen=True, slots=True)
