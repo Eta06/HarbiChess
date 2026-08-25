@@ -92,3 +92,36 @@ def test_sampler_holds_requested_continuation_fraction() -> None:
     sampled = sampler.sample(8)
 
     assert sum(record.repetition_redirected for record in sampled) == 2
+
+
+def test_sampler_applies_continuation_recency_weights() -> None:
+    _, game = scripted_game()
+    standard = records_from_game(game, run_id="standard")
+    continuation = tuple(
+        replace(
+            record,
+            game_id=f"continuation-{index}",
+            game_index=100 + index,
+            repetition_redirected=True,
+        )
+        for index, record in enumerate(standard)
+    )
+    weights = {record.game_id: 1.0 for record in continuation}
+    weights["continuation-0"] = 100.0
+    sampler = GameBalancedSampler(
+        (*standard, *continuation),
+        seed=23,
+        continuation_fraction=0.5,
+        continuation_game_weights=weights,
+    )
+
+    sampled = tuple(record for _ in range(100) for record in sampler.sample(4))
+    continuation_counts = {
+        game_id: sum(record.game_id == game_id for record in sampled) for game_id in weights
+    }
+
+    assert continuation_counts["continuation-0"] > sum(
+        continuation_counts[game_id]
+        for game_id in continuation_counts
+        if game_id != "continuation-0"
+    )
