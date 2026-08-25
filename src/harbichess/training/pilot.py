@@ -8,7 +8,7 @@ from dataclasses import dataclass
 
 from harbichess.replay.schema import ReplayRecord
 from harbichess.training.batch import GameBalancedSampler, TrainingBatch, build_training_batch
-from harbichess.training.learner import MLXLearner, TrainingMetrics
+from harbichess.training.learner import LearnerSnapshot, MLXLearner, TrainingMetrics
 
 
 @dataclass(frozen=True, slots=True)
@@ -20,6 +20,8 @@ class PilotConfig:
     validation_interval_steps: int = 10
     early_stopping_patience: int = 5
     minimum_validation_delta: float = 1e-3
+    checkpoint_interval_steps: int = 8
+    maximum_validation_checkpoints: int = 4
     seed: int = 0
 
     def __post_init__(self) -> None:
@@ -28,6 +30,8 @@ class PilotConfig:
             or self.batch_size <= 0
             or self.validation_interval_steps <= 0
             or self.early_stopping_patience <= 0
+            or self.checkpoint_interval_steps <= 0
+            or self.maximum_validation_checkpoints <= 0
         ):
             raise ValueError("pilot steps and batch size must be positive")
         if not 0.0 <= self.minimum_train_improvement < 1.0:
@@ -54,6 +58,15 @@ class PilotReport:
     best_validation_step: int
     best_validation_loss: float
     stopped_early: bool
+    validation_candidates: tuple[ValidationCandidate, ...]
+
+
+@dataclass(frozen=True, slots=True)
+class ValidationCandidate:
+    step: int
+    validation_loss: float
+    learner_snapshot: LearnerSnapshot
+    sampler_rng_state: object
 
 
 def run_sanity_pilot(
@@ -91,22 +104,37 @@ def run_sanity_pilot(
     best_validation_step = learner.step
     stale_evaluations = 0
     stopped_early = False
+    validation_candidates: list[ValidationCandidate] = []
     metrics = []
     for _ in range(settings.steps):
         sampled_indices = sampler.sample_indices(settings.batch_size)
         metric = learner.train_step(train_eval.select(sampled_indices))
         metrics.append(metric)
         validation_loss = None
-        if (
-            metric.step % settings.validation_interval_steps == 0
-            or metric.step == settings.steps
-        ):
+        if metric.step % settings.validation_interval_steps == 0 or metric.step == settings.steps:
             validation_loss = learner.evaluate_loss(validation_eval)[0]
             if validation_loss < best_validation - settings.minimum_validation_delta:
                 best_validation = validation_loss
                 best_validation_step = metric.step
                 best_snapshot = learner.snapshot()
                 best_sampler_state = sampler.rng_state
+                candidate = ValidationCandidate(
+                    step=metric.step,
+                    validation_loss=validation_loss,
+                    learner_snapshot=best_snapshot,
+                    sampler_rng_state=best_sampler_state,
+                )
+                if (
+                    validation_candidates
+                    and metric.step - validation_candidates[-1].step
+                    < settings.checkpoint_interval_steps
+                ):
+                    validation_candidates[-1] = candidate
+                else:
+                    validation_candidates.append(candidate)
+                validation_candidates = validation_candidates[
+                    -settings.maximum_validation_checkpoints :
+                ]
                 stale_evaluations = 0
             else:
                 stale_evaluations += 1
@@ -146,4 +174,5 @@ def run_sanity_pilot(
         best_validation_step=best_validation_step,
         best_validation_loss=best_validation,
         stopped_early=stopped_early,
+        validation_candidates=tuple(validation_candidates),
     )
