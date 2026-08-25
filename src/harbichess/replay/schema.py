@@ -53,6 +53,7 @@ class RepetitionRiskEstimate:
     estimated_risk: float
     upper_confidence_bound: float
     loop_value_samples: int = 0
+    exact_loop_value_samples: int = 0
     mean_loop_value: float | None = None
     lower_loop_value_bound: float | None = None
     risk_adjusted_value_lower_bound: float | None = None
@@ -85,6 +86,8 @@ class RepetitionRiskEstimate:
                 raise ValueError("loop value lower bound must contain the mean")
         elif any(value is not None for value in loop_values):
             raise ValueError("loop values require at least one sampled repetition event")
+        if not 0 <= self.exact_loop_value_samples <= self.loop_value_samples:
+            raise ValueError("exact loop values must be a subset of loop value samples")
         if self.risk_adjusted_value_lower_bound is not None and not (
             math.isfinite(self.risk_adjusted_value_lower_bound)
             and -1.0 <= self.risk_adjusted_value_lower_bound <= 1.0
