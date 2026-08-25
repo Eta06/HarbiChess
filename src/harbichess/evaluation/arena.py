@@ -7,6 +7,7 @@ import hashlib
 import json
 import os
 import random
+import subprocess
 import tempfile
 import threading
 import time
@@ -19,6 +20,7 @@ import mlx.core as mx
 
 from harbichess.backends.mlx_backend import MLXPolicyValueBackend
 from harbichess.backends.mlx_network import HarbiChessNetwork, NetworkConfig
+from harbichess.chess.actions import move_to_action
 from harbichess.chess.rules import PythonChessRules
 from harbichess.core.state import ChessMove, ChessState, GameOutcome, Side, TerminalResult
 from harbichess.dashboard.state import (
@@ -28,7 +30,11 @@ from harbichess.dashboard.state import (
     SnapshotStore,
 )
 from harbichess.evaluation.quality import ArenaQuality, estimate_arena_quality
+from harbichess.replay.schema import ReplayRecord
+from harbichess.replay.shard import ShardMetadata, write_shard_atomic
+from harbichess.replay.split import ReplaySplit
 from harbichess.search.batching import SharedBatchEvaluator
+from harbichess.search.continuation import transform_repetition_target
 from harbichess.search.evaluator import NeuralPositionEvaluator
 from harbichess.search.mcts import MCTS, SearchConfig, SearchResult
 
@@ -91,6 +97,18 @@ class ArenaGame:
     candidate_score: float
     last_search: SearchResult | None
     avoidable_threefold: bool
+    continuation_roots: tuple[ContinuationRoot, ...]
+
+
+@dataclass(frozen=True, slots=True)
+class ContinuationRoot:
+    state: ChessState
+    side_to_move: Side
+    policy: tuple[tuple[ChessMove, float], ...]
+    selected_move: ChessMove
+    root_value: float
+    repeating_policy_mass: float
+    source_model: str
 
 
 @dataclass(frozen=True, slots=True)
@@ -108,6 +126,8 @@ class ArenaResult:
     promotion_ready: bool
     elapsed_seconds: float
     result_path: str
+    continuation_replay_samples: int
+    continuation_replay_path: str | None
 
 
 def _now() -> str:
@@ -120,6 +140,14 @@ def _sha256(path: Path) -> str:
         for chunk in iter(lambda: handle.read(1024 * 1024), b""):
             digest.update(chunk)
     return digest.hexdigest()
+
+
+def _source_commit() -> str:
+    return subprocess.check_output(
+        ["git", "rev-parse", "HEAD"],
+        text=True,
+        stderr=subprocess.DEVNULL,
+    ).strip()
 
 
 def _atomic_json(path: Path, value: object) -> None:
@@ -182,6 +210,7 @@ def play_arena_game(
     state = initial_state
     last_search: SearchResult | None = None
     avoidable_threefold = False
+    continuation_roots = []
     while True:
         outcome = rules.outcome(state, claim_draw=True)
         if outcome is not None:
@@ -194,6 +223,33 @@ def play_arena_game(
         last_search = search.search(state, rng=random.Random(0), add_root_noise=False)
         selected_move = last_search.select_move(temperature=0.0, rng=random.Random(0))
         avoidable_threefold = _avoidable_threefold(rules, state, selected_move)
+        if avoidable_threefold:
+            continuation = transform_repetition_target(
+                last_search,
+                rules,
+                state,
+                selected_move,
+                temperature=0.0,
+                value_tolerance=0.05,
+                minimum_repeating_policy_mass=0.10,
+                rng=random.Random(0),
+            )
+            if continuation.transformed:
+                total_visits = sum(item.visits for item in continuation.policy_moves)
+                continuation_roots.append(
+                    ContinuationRoot(
+                        state=state,
+                        side_to_move=side,
+                        policy=tuple(
+                            (item.move, item.visits / total_visits)
+                            for item in continuation.policy_moves
+                        ),
+                        selected_move=continuation.selected_move,
+                        root_value=last_search.root_value,
+                        repeating_policy_mass=continuation.repeating_policy_mass,
+                        source_model=("candidate" if side is candidate_side else "champion"),
+                    )
+                )
         state = rules.apply(state, selected_move)
     return ArenaGame(
         game_id=game_id,
@@ -205,7 +261,49 @@ def play_arena_game(
         candidate_score=_candidate_score(outcome, candidate_side),
         last_search=last_search,
         avoidable_threefold=avoidable_threefold,
+        continuation_roots=tuple(continuation_roots),
     )
+
+
+def _continuation_records(
+    games: tuple[ArenaGame, ...],
+    *,
+    arena_id: str,
+    seed: int,
+    rules: PythonChessRules,
+) -> tuple[ReplayRecord, ...]:
+    records = []
+    for game_index, game in enumerate(games):
+        for root in game.continuation_roots:
+            board = rules.board(root.state)
+            records.append(
+                ReplayRecord(
+                    game_id=f"continuation-{arena_id}-{game.game_id}",
+                    game_index=game_index,
+                    seed=seed,
+                    ply=root.state.ply,
+                    root_fen=root.state.root_fen,
+                    moves=tuple(move.uci for move in root.state.moves),
+                    side_to_move=root.side_to_move,
+                    policy=tuple(
+                        sorted(
+                            (
+                                move_to_action(board, board.parse_uci(move.uci)),
+                                probability,
+                            )
+                            for move, probability in root.policy
+                        )
+                    ),
+                    selected_action=move_to_action(
+                        board,
+                        board.parse_uci(root.selected_move.uci),
+                    ),
+                    root_value=root.root_value,
+                    outcome_value=game.outcome.value_for(root.side_to_move),
+                    repetition_redirected=True,
+                )
+            )
+    return tuple(records)
 
 
 def _openings(
@@ -348,6 +446,7 @@ def run_devir_arena(config: ArenaConfig) -> ArenaResult:
         arena_decisive_games=0,
         arena_threefold_repetitions=0,
         arena_avoidable_threefold_repetitions=0,
+        arena_continuation_replay_samples=0,
         arena_max_ply_draws=0,
         arena_other_draws=0,
         arena_score_rate=0.5,
@@ -395,6 +494,9 @@ def run_devir_arena(config: ArenaConfig) -> ArenaResult:
                 arena_decisive_games=wins + losses,
                 arena_threefold_repetitions=threefold,
                 arena_avoidable_threefold_repetitions=avoidable_threefold,
+                arena_continuation_replay_samples=sum(
+                    len(item.continuation_roots) for item in games
+                ),
                 arena_max_ply_draws=max_ply,
                 arena_other_draws=other_draws,
                 arena_score_rate=quality.score_rate,
@@ -441,6 +543,29 @@ def run_devir_arena(config: ArenaConfig) -> ArenaResult:
         promotion_elo=config.promotion_elo,
     )
     elapsed = time.perf_counter() - started
+    continuation_records = _continuation_records(
+        completed,
+        arena_id=config.arena_id,
+        seed=config.seed,
+        rules=rules,
+    )
+    continuation_path = arena_root / "continuation-replay.jsonl.gz"
+    continuation_header = (
+        write_shard_atomic(
+            continuation_path,
+            continuation_records,
+            ShardMetadata(
+                run_id=config.arena_id,
+                generation=0,
+                source_checkpoint=selected_checkpoint["manifest"]["checkpoint_id"],
+                source_commit=_source_commit(),
+                created_at=_now(),
+                split=ReplaySplit.TRAIN,
+            ),
+        )
+        if continuation_records
+        else None
+    )
     result_path = arena_root / "result.json"
     _atomic_json(
         result_path,
@@ -459,6 +584,31 @@ def run_devir_arena(config: ArenaConfig) -> ArenaResult:
             },
             "quality": asdict(quality),
             "elapsed_seconds": elapsed,
+            "continuation_replay": (
+                {
+                    "path": str(continuation_path),
+                    "source_commit": continuation_header.source_commit,
+                    "header": asdict(continuation_header),
+                    "candidate_roots": sum(
+                        root.source_model == "candidate"
+                        for game in completed
+                        for root in game.continuation_roots
+                    ),
+                    "champion_roots": sum(
+                        root.source_model == "champion"
+                        for game in completed
+                        for root in game.continuation_roots
+                    ),
+                    "mean_repeating_policy_mass": sum(
+                        root.repeating_policy_mass
+                        for game in completed
+                        for root in game.continuation_roots
+                    )
+                    / len(continuation_records),
+                }
+                if continuation_header is not None
+                else None
+            ),
             "games": [
                 {
                     "game_id": game.game_id,
@@ -516,6 +666,8 @@ def run_devir_arena(config: ArenaConfig) -> ArenaResult:
         promotion_ready=quality.promotion_ready,
         elapsed_seconds=elapsed,
         result_path=str(result_path),
+        continuation_replay_samples=len(continuation_records),
+        continuation_replay_path=(str(continuation_path) if continuation_records else None),
     )
 
 
