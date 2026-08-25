@@ -43,3 +43,11 @@ def test_ablation_treatments_require_matching_shards() -> None:
             continuation_shards=(Path("continuation.gz"),),
             **common,
         )
+
+    gated = AblationConfig(
+        ablation_id="gated",
+        treatment=ContinuationTreatment.CONFIDENCE_GATED,
+        continuation_shards=(Path("confidence-v4.gz"),),
+        **common,
+    )
+    assert gated.continuation_fraction == 0.25
