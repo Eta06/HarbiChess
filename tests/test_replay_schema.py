@@ -81,6 +81,7 @@ def test_replay_record_round_trips_branch_confidence_evidence() -> None:
         branch_searches=8,
         simulations_per_search=64,
         repeat_value=0.0,
+        minimum_advantage=0.01,
         repeat_actions=(repeat_action,),
         branches=(
             BranchValueEstimate(
