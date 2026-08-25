@@ -185,13 +185,20 @@ def build_confidence_target(
         return None
     by_action = {branch.action: branch for branch in evidence.branches}
     risks_by_action = {risk.action: risk for risk in evidence.repetition_risks}
-    weights = {
-        action: (by_action[action].lower_confidence_bound - evidence.repeat_value)
-        * (1.0 - risks_by_action[action].upper_confidence_bound)
-        if action in risks_by_action
-        else by_action[action].lower_confidence_bound - evidence.repeat_value
-        for action in evidence.qualified_actions
-    }
+    if evidence.method_version >= 3:
+        weights = {
+            action: risks_by_action[action].risk_adjusted_value_lower_bound
+            - evidence.repeat_value
+            for action in evidence.qualified_actions
+        }
+    else:
+        weights = {
+            action: (by_action[action].lower_confidence_bound - evidence.repeat_value)
+            * (1.0 - risks_by_action[action].upper_confidence_bound)
+            if action in risks_by_action
+            else by_action[action].lower_confidence_bound - evidence.repeat_value
+            for action in evidence.qualified_actions
+        }
     total = sum(weights.values())
     if total <= 0:
         raise ValueError("qualified confidence target must have positive total surplus")
