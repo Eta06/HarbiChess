@@ -12,8 +12,8 @@ from harbichess.chess.rules import PythonChessRules
 from harbichess.core.state import ChessMove, ChessState, Side
 from harbichess.selfplay.game import SelfPlayGame, SelfPlaySample
 
-REPLAY_SCHEMA_VERSION = 1
-TARGET_SCHEMA_VERSION = 1
+REPLAY_SCHEMA_VERSION = 2
+TARGET_SCHEMA_VERSION = 2
 
 
 @dataclass(frozen=True, slots=True)
@@ -29,14 +29,10 @@ class ReplayRecord:
     selected_action: int
     root_value: float
     outcome_value: int
+    repetition_redirected: bool
 
     def __post_init__(self) -> None:
-        if (
-            not self.game_id
-            or self.game_index < 0
-            or self.seed < 0
-            or self.ply != len(self.moves)
-        ):
+        if not self.game_id or self.game_index < 0 or self.seed < 0 or self.ply != len(self.moves):
             raise ValueError("replay identity and ply history are inconsistent")
         if not math.isfinite(self.root_value) or not -1.0 <= self.root_value <= 1.0:
             raise ValueError("root value must be finite and between -1 and 1")
@@ -115,6 +111,7 @@ def record_from_sample(
         selected_action=selected,
         root_value=sample.root_value,
         outcome_value=sample.outcome_value,
+        repetition_redirected=sample.repetition_redirected,
     )
     record.validate_rules(rules)
     return record
@@ -128,8 +125,7 @@ def records_from_game(
 ) -> tuple[ReplayRecord, ...]:
     engine = rules or PythonChessRules()
     return tuple(
-        record_from_sample(game, sample, run_id=run_id, rules=engine)
-        for sample in game.samples
+        record_from_sample(game, sample, run_id=run_id, rules=engine) for sample in game.samples
     )
 
 
