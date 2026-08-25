@@ -170,6 +170,7 @@ class DashboardSnapshot:
     replay_shards: int = 0
     validation_samples: int = 0
     validation_checkpoint_count: int = 0
+    continuation_replay_samples: int = 0
     diversity: DiversitySnapshot = field(default_factory=DiversitySnapshot)
     demo: bool = False
     live_game: LiveGame = field(default_factory=LiveGame)
@@ -180,6 +181,7 @@ class DashboardSnapshot:
     arena_decisive_games: int = 0
     arena_threefold_repetitions: int = 0
     arena_avoidable_threefold_repetitions: int = 0
+    arena_continuation_replay_samples: int = 0
     arena_max_ply_draws: int = 0
     arena_other_draws: int = 0
     arena_score_rate: float = 0.5
