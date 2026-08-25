@@ -21,8 +21,7 @@ def perft(rules: PythonChessRules, state, depth: int) -> int:
     if depth == 0:
         return 1
     return sum(
-        perft(rules, rules.apply(state, move), depth - 1)
-        for move in rules.legal_moves(state)
+        perft(rules, rules.apply(state, move), depth - 1) for move in rules.legal_moves(state)
     )
 
 
@@ -100,3 +99,20 @@ def test_state_replay_preserves_repetition_history(rules: PythonChessRules) -> N
     assert claimed.result is TerminalResult.DRAW
     assert claimed.termination == "threefold_repetition"
     assert rules.view(state).side_to_move is Side.WHITE
+
+
+def test_claimable_threefold_moves_scan_one_isolated_board(
+    rules: PythonChessRules,
+) -> None:
+    state = play(
+        rules,
+        ["g1f3", "g8f6", "f3g1", "f6g8", "g1f3", "g8f6", "f3g1"],
+    )
+
+    repeating = rules.claimable_threefold_moves(
+        state,
+        (ChessMove("f6g8"), ChessMove("h8g8")),
+    )
+
+    assert repeating == frozenset({ChessMove("f6g8")})
+    assert rules.board(state).move_stack[-1].uci() == "f3g1"
