@@ -58,6 +58,27 @@ class LearnerSnapshot:
     optimizer_state: tuple[tuple[str, mx.array], ...]
 
 
+@dataclass(frozen=True, slots=True)
+class PreparedTrainingBatch:
+    inputs: mx.array
+    policy_targets: mx.array
+    wdl_targets: mx.array
+
+    @property
+    def size(self) -> int:
+        return self.inputs.shape[0]
+
+    def select(self, indices: tuple[int, ...]) -> PreparedTrainingBatch:
+        if not indices or any(index < 0 or index >= self.size for index in indices):
+            raise IndexError("prepared batch indices must be non-empty and in range")
+        rows = mx.array(indices, dtype=mx.int32)
+        return PreparedTrainingBatch(
+            mx.take(self.inputs, rows, axis=0),
+            mx.take(self.policy_targets, rows, axis=0),
+            mx.take(self.wdl_targets, rows, axis=0),
+        )
+
+
 class MLXLearner:
     def __init__(
         self,
@@ -92,10 +113,7 @@ class MLXLearner:
             wdl_targets,
             reduction="mean",
         )
-        total = (
-            self.config.policy_weight * policy_loss
-            + self.config.value_weight * value_loss
-        )
+        total = self.config.policy_weight * policy_loss + self.config.value_weight * value_loss
         return total, policy_loss, value_loss
 
     @staticmethod
@@ -109,6 +127,20 @@ class MLXLearner:
         wdl = mx.array(batch.wdl_targets, dtype=mx.int32)
         return inputs, policies, wdl
 
+    @classmethod
+    def prepare_batch(cls, batch: TrainingBatch) -> PreparedTrainingBatch:
+        prepared = PreparedTrainingBatch(*cls._arrays(batch))
+        mx.eval(prepared.inputs, prepared.policy_targets, prepared.wdl_targets)
+        return prepared
+
+    @staticmethod
+    def _prepared_arrays(
+        batch: TrainingBatch | PreparedTrainingBatch,
+    ) -> tuple[mx.array, mx.array, mx.array]:
+        if isinstance(batch, PreparedTrainingBatch):
+            return batch.inputs, batch.policy_targets, batch.wdl_targets
+        return MLXLearner._arrays(batch)
+
     @staticmethod
     def _tree_is_finite(tree: object) -> mx.array:
         checks = [mx.all(mx.isfinite(array)) for _, array in tree_flatten(tree)]
@@ -119,8 +151,11 @@ class MLXLearner:
             result = mx.logical_and(result, check)
         return result
 
-    def train_step(self, batch: TrainingBatch) -> TrainingMetrics:
-        inputs, policies, wdl = self._arrays(batch)
+    def train_step(
+        self,
+        batch: TrainingBatch | PreparedTrainingBatch,
+    ) -> TrainingMetrics:
+        inputs, policies, wdl = self._prepared_arrays(batch)
         (total, policy_loss, value_loss), gradients = self._loss_and_grad(
             inputs,
             policies,
@@ -155,8 +190,11 @@ class MLXLearner:
             gradient_norm=float(gradient_norm.item()),
         )
 
-    def evaluate_loss(self, batch: TrainingBatch) -> tuple[float, float, float]:
-        inputs, policies, wdl = self._arrays(batch)
+    def evaluate_loss(
+        self,
+        batch: TrainingBatch | PreparedTrainingBatch,
+    ) -> tuple[float, float, float]:
+        inputs, policies, wdl = self._prepared_arrays(batch)
         total, policy_loss, value_loss = self._loss(inputs, policies, wdl)
         mx.eval(total, policy_loss, value_loss)
         return float(total.item()), float(policy_loss.item()), float(value_loss.item())
