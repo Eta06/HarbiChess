@@ -8,10 +8,26 @@ from harbichess.backends.mlx_network import HarbiChessNetwork, NetworkConfig
 from harbichess.chess.rules import PythonChessRules
 from harbichess.core.state import ChessMove, Side
 from harbichess.dashboard.state import RunMode, SnapshotStore
-from harbichess.evaluation.arena import ArenaConfig, play_arena_game, run_devir_arena
+from harbichess.evaluation.arena import (
+    ArenaConfig,
+    _select_checkpoint,
+    play_arena_game,
+    run_devir_arena,
+)
 from harbichess.search.mcts import MoveStatistics, SearchResult
 
 mx = pytest.importorskip("mlx.core")
+
+
+def test_arena_selects_requested_validation_checkpoint() -> None:
+    selected = {"path": "best", "manifest": {"checkpoint_id": "candidate-step-20"}}
+    earlier = {"path": "early", "manifest": {"checkpoint_id": "candidate-step-10"}}
+    payload = {"checkpoint": selected, "validation_checkpoints": [earlier, selected]}
+
+    assert _select_checkpoint(payload, None) is selected
+    assert _select_checkpoint(payload, "candidate-step-10") is earlier
+    with pytest.raises(ValueError, match="unknown validation checkpoint"):
+        _select_checkpoint(payload, "candidate-step-99")
 
 
 class ScriptedArenaSearch:
