@@ -75,9 +75,7 @@ class PythonChessRules:
                     f"invalid move at ply {state.ply - 1}: {encoded_move.uci}"
                 ) from error
             if move not in board.legal_moves:
-                raise IllegalMoveError(
-                    f"illegal move at ply {state.ply - 1}: {encoded_move.uci}"
-                )
+                raise IllegalMoveError(f"illegal move at ply {state.ply - 1}: {encoded_move.uci}")
             board.push(move)
         self._remember(state, board)
         return board
@@ -134,3 +132,24 @@ class PythonChessRules:
             return None
         result = TerminalResult(outcome.result())
         return GameOutcome(result=result, termination=outcome.termination.name.lower())
+
+    def claimable_threefold_moves(
+        self,
+        state: ChessState,
+        moves: tuple[ChessMove, ...],
+    ) -> frozenset[ChessMove]:
+        """Return supplied moves after which a threefold claim is available."""
+
+        if state.ply < 6 or not moves:
+            return frozenset()
+        board = self._cached_board(state).copy(stack=True)
+        repeating = []
+        for move in moves:
+            parsed = chess.Move.from_uci(move.uci)
+            if parsed not in board.legal_moves:
+                raise IllegalMoveError(f"illegal move: {move.uci}")
+            board.push(parsed)
+            if board.is_repetition(3) or board.can_claim_threefold_repetition():
+                repeating.append(move)
+            board.pop()
+        return frozenset(repeating)
