@@ -184,18 +184,19 @@ def build_confidence_target(
     if not evidence.qualified_actions:
         return None
     by_action = {branch.action: branch for branch in evidence.branches}
+    risks_by_action = {risk.action: risk for risk in evidence.repetition_risks}
     weights = {
-        action: by_action[action].lower_confidence_bound - evidence.repeat_value
+        action: (by_action[action].lower_confidence_bound - evidence.repeat_value)
+        * (1.0 - risks_by_action[action].upper_confidence_bound)
+        if action in risks_by_action
+        else by_action[action].lower_confidence_bound - evidence.repeat_value
         for action in evidence.qualified_actions
     }
     total = sum(weights.values())
     if total <= 0:
         raise ValueError("qualified confidence target must have positive total surplus")
     policy = tuple(sorted((action, weight / total) for action, weight in weights.items()))
-    selected = max(
-        evidence.qualified_actions,
-        key=lambda action: (by_action[action].lower_confidence_bound, -action),
-    )
+    selected = max(evidence.qualified_actions, key=lambda action: (weights[action], -action))
     return replace(
         record,
         policy=policy,
