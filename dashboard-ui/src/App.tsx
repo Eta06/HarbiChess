@@ -412,6 +412,7 @@ function App() {
               <div><span>Best validation</span><strong>{formatLoss(snapshot.pilot_best_validation_loss)} <small>@ step {formatNumber(snapshot.pilot_best_validation_step)}</small></strong></div>
               <div><span>Early stopping</span><strong>{snapshot.pilot_stopped_early ? "Triggered" : "Not triggered"} <small>· {formatNumber(snapshot.pilot_steps_attempted)} attempted</small></strong></div>
               <div><span>Arena candidates</span><strong>{formatNumber(snapshot.validation_checkpoint_count)}</strong></div>
+              <div><span>Continuation samples</span><strong>{formatNumber(snapshot.continuation_replay_samples)}</strong></div>
             </div>
             {snapshot.pilot_reasons.length ? (
               <div className="guardrail-message is-danger">{snapshot.pilot_reasons.join(" · ")}</div>
@@ -500,6 +501,7 @@ function App() {
             <div className="arena-termination-summary">
               <div><span>Decisive</span><strong>{formatNumber(snapshot.arena_decisive_games)}</strong></div>
               <div><span>Threefold</span><strong>{formatNumber(snapshot.arena_threefold_repetitions)} <small>· {formatNumber(snapshot.arena_avoidable_threefold_repetitions)} avoidable</small></strong></div>
+              <div><span>Continuation replay</span><strong>{formatNumber(snapshot.arena_continuation_replay_samples)} roots</strong></div>
               <div><span>Max-ply</span><strong>{formatNumber(snapshot.arena_max_ply_draws)}</strong></div>
               <div><span>Other draws</span><strong>{formatNumber(snapshot.arena_other_draws)}</strong></div>
             </div>
