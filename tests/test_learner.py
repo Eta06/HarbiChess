@@ -38,9 +38,7 @@ def test_learner_configuration_rejects_unsafe_values() -> None:
 
 
 def test_gradient_finiteness_is_reduced_in_one_mlx_expression() -> None:
-    finite = MLXLearner._tree_is_finite(
-        {"first": mx.array([1.0, 2.0]), "second": mx.array([3.0])}
-    )
+    finite = MLXLearner._tree_is_finite({"first": mx.array([1.0, 2.0]), "second": mx.array([3.0])})
     non_finite = MLXLearner._tree_is_finite(
         {"first": mx.array([1.0]), "second": mx.array([float("nan")])}
     )
@@ -54,9 +52,7 @@ def test_learner_snapshot_restores_model_optimizer_and_step() -> None:
     mx.random.seed(29)
     _, game = scripted_game()
     batch = build_training_batch((records_from_game(game, run_id="pilot")[0],))
-    learner = MLXLearner(
-        HarbiChessNetwork(NetworkConfig(trunk_channels=8, residual_blocks=1))
-    )
+    learner = MLXLearner(HarbiChessNetwork(NetworkConfig(trunk_channels=8, residual_blocks=1)))
     learner.train_step(batch)
     snapshot = learner.snapshot()
     expected = learner.evaluate_loss(batch)
@@ -66,3 +62,19 @@ def test_learner_snapshot_restores_model_optimizer_and_step() -> None:
 
     assert learner.step == 1
     assert learner.evaluate_loss(batch) == pytest.approx(expected)
+
+
+def test_prepared_training_batch_selects_device_rows() -> None:
+    _, game = scripted_game()
+    batch = build_training_batch(records_from_game(game, run_id="prepared"))
+    learner = MLXLearner(HarbiChessNetwork(NetworkConfig(trunk_channels=8, residual_blocks=1)))
+
+    prepared = learner.prepare_batch(batch)
+    selected = prepared.select((2, 0, 2))
+    metrics = learner.train_step(selected)
+
+    assert prepared.size == 4
+    assert selected.size == 3
+    assert metrics.step == 1
+    with pytest.raises(IndexError, match="indices"):
+        prepared.select(())
