@@ -31,6 +31,8 @@ class ParallelSearchResult:
     backend_batches: int
     average_batch_size: float
     largest_batch: int
+    backend_seconds: float
+    average_queue_wait_ms: float
 
 
 def benchmark_parallel_searches(
@@ -80,6 +82,8 @@ def benchmark_parallel_searches(
                     backend_batches=statistics.batches,
                     average_batch_size=statistics.average_batch_size,
                     largest_batch=statistics.largest_batch,
+                    backend_seconds=statistics.backend_seconds,
+                    average_queue_wait_ms=statistics.average_queue_wait_ms,
                 )
             )
     return results
