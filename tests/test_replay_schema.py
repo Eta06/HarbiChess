@@ -9,6 +9,7 @@ from harbichess.core.state import ChessMove
 from harbichess.replay.schema import (
     BranchValueEstimate,
     ContinuationEvidence,
+    RepetitionRiskEstimate,
     ReplayRecord,
     records_from_game,
 )
@@ -104,4 +105,50 @@ def test_replay_record_round_trips_branch_confidence_evidence() -> None:
     payload = evidenced.to_dict()
     payload["continuation_evidence"]["qualified_actions"] = [repeat_action]
     with pytest.raises(ValueError, match="qualified"):
+        ReplayRecord.from_dict(payload)
+
+
+def test_replay_record_round_trips_multi_ply_repetition_risk() -> None:
+    rules, game = scripted_game()
+    record = records_from_game(game, run_id="pilot", rules=rules)[0]
+    board = rules.board(record.state)
+    repeat_action = move_to_action(board, board.parse_uci("e2e4"))
+    branch = BranchValueEstimate(
+        action=record.selected_action,
+        move="f2f3",
+        samples=8,
+        mean_value=0.20,
+        standard_error=0.04,
+        lower_confidence_bound=0.12,
+        upper_confidence_bound=0.28,
+    )
+    risk = RepetitionRiskEstimate(
+        action=record.selected_action,
+        horizon_plies=3,
+        rollouts=16,
+        repetition_events=0,
+        estimated_risk=0.0,
+        upper_confidence_bound=0.145,
+    )
+    evidence = ContinuationEvidence(
+        method_version=2,
+        confidence_level=0.95,
+        branch_searches=8,
+        simulations_per_search=64,
+        repeat_value=0.0,
+        minimum_advantage=0.01,
+        repeat_actions=(repeat_action,),
+        branches=(branch,),
+        qualified_actions=(record.selected_action,),
+        source_model_sha256="a" * 64,
+        repetition_risks=(risk,),
+        maximum_repetition_risk=0.25,
+    )
+    evidenced = replace(record, continuation_evidence=evidence)
+
+    assert ReplayRecord.from_dict(evidenced.to_dict()) == evidenced
+
+    payload = evidenced.to_dict()
+    payload["continuation_evidence"]["maximum_repetition_risk"] = 0.10
+    with pytest.raises(ValueError, match="risk gate"):
         ReplayRecord.from_dict(payload)
