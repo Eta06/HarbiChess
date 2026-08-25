@@ -23,8 +23,7 @@ def test_game_balanced_sampler_is_deterministic_and_restorable() -> None:
     _, game = scripted_game()
     first_game = records_from_game(game, run_id="pilot")
     second_game = tuple(
-        replace(record, game_id="pilot-000000000008", game_index=8)
-        for record in first_game
+        replace(record, game_id="pilot-000000000008", game_index=8) for record in first_game
     )
     sampler = GameBalancedSampler((*first_game, *second_game), seed=7)
     state = sampler.rng_state
@@ -70,3 +69,26 @@ def test_sampler_indices_address_the_original_replay_tuple() -> None:
     indices = by_index.sample_indices(6)
 
     assert sampled == tuple(records[index] for index in indices)
+
+
+def test_sampler_holds_requested_continuation_fraction() -> None:
+    _, game = scripted_game()
+    standard = records_from_game(game, run_id="standard")
+    continuation = tuple(
+        replace(
+            record,
+            game_id=f"continuation-{index}",
+            game_index=100 + index,
+            repetition_redirected=True,
+        )
+        for index, record in enumerate(standard)
+    )
+    sampler = GameBalancedSampler(
+        (*standard, *continuation),
+        seed=17,
+        continuation_fraction=0.25,
+    )
+
+    sampled = sampler.sample(8)
+
+    assert sum(record.repetition_redirected for record in sampled) == 2
