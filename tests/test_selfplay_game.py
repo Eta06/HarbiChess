@@ -4,10 +4,10 @@ import pytest
 
 from harbichess.chess.rules import PythonChessRules
 from harbichess.core.state import ChessMove, TerminalResult
+from harbichess.search.continuation import transform_repetition_target
 from harbichess.search.mcts import MoveStatistics, SearchResult
 from harbichess.selfplay.game import (
     SelfPlayConfig,
-    _redirect_repetition,
     derive_game_seed,
     play_game,
     play_parallel_games,
@@ -99,19 +99,20 @@ def test_repetition_target_redirects_to_comparable_non_repeating_move() -> None:
         16,
     )
 
-    policy_moves, selected, redirected = _redirect_repetition(
+    decision = transform_repetition_target(
         search,
         rules,
         state,
         repeating,
         temperature=0.0,
-        tolerance=0.05,
+        value_tolerance=0.05,
+        minimum_repeating_policy_mass=0.10,
         rng=random.Random(1),
     )
 
-    assert redirected
-    assert selected == alternative
-    assert tuple(item.move for item in policy_moves) == (alternative,)
+    assert decision.transformed
+    assert decision.selected_move == alternative
+    assert tuple(item.move for item in decision.policy_moves) == (alternative,)
 
 
 def test_repetition_target_keeps_draw_when_continuations_are_worse() -> None:
@@ -128,16 +129,51 @@ def test_repetition_target_keeps_draw_when_continuations_are_worse() -> None:
         16,
     )
 
-    policy_moves, selected, redirected = _redirect_repetition(
+    decision = transform_repetition_target(
         search,
         rules,
         state,
         repeating,
         temperature=0.0,
-        tolerance=0.05,
+        value_tolerance=0.05,
+        minimum_repeating_policy_mass=0.10,
         rng=random.Random(1),
     )
 
-    assert not redirected
-    assert selected == repeating
-    assert policy_moves == search.moves
+    assert not decision.transformed
+    assert decision.defensive_repetition_preserved
+    assert decision.selected_move == repeating
+    assert decision.policy_moves == search.moves
+
+
+def test_repetition_target_redirects_meaningful_mass_when_repeat_not_selected() -> None:
+    rules = PythonChessRules()
+    state = _threefold_choice_state(rules)
+    repeating = ChessMove("f6g8")
+    selected = ChessMove("h8g8")
+    other = ChessMove("f6h5")
+    search = SearchResult(
+        (
+            MoveStatistics(selected, 10, 0.5, 0.02),
+            MoveStatistics(repeating, 5, 0.3, 0.0),
+            MoveStatistics(other, 1, 0.2, -0.4),
+        ),
+        0.0,
+        16,
+    )
+
+    decision = transform_repetition_target(
+        search,
+        rules,
+        state,
+        selected,
+        temperature=0.0,
+        value_tolerance=0.05,
+        minimum_repeating_policy_mass=0.10,
+        rng=random.Random(1),
+    )
+
+    assert decision.transformed
+    assert decision.repeating_policy_mass == pytest.approx(5 / 16)
+    assert decision.selected_move == selected
+    assert tuple(item.move for item in decision.policy_moves) == (selected,)
