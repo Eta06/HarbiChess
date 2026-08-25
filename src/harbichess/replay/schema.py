@@ -13,8 +13,8 @@ from harbichess.core.state import ChessMove, ChessState, Side
 from harbichess.selfplay.game import SelfPlayGame, SelfPlaySample
 
 REPLAY_SCHEMA_VERSION = 2
-TARGET_SCHEMA_VERSION = 5
-SUPPORTED_TARGET_SCHEMA_VERSIONS = frozenset({3, 4, TARGET_SCHEMA_VERSION})
+TARGET_SCHEMA_VERSION = 6
+SUPPORTED_TARGET_SCHEMA_VERSIONS = frozenset({3, 4, 5, TARGET_SCHEMA_VERSION})
 
 
 @dataclass(frozen=True, slots=True)
@@ -52,6 +52,10 @@ class RepetitionRiskEstimate:
     repetition_events: int
     estimated_risk: float
     upper_confidence_bound: float
+    loop_value_samples: int = 0
+    mean_loop_value: float | None = None
+    lower_loop_value_bound: float | None = None
+    risk_adjusted_value_lower_bound: float | None = None
 
     def __post_init__(self) -> None:
         if (
@@ -69,6 +73,23 @@ class RepetitionRiskEstimate:
             and 0.0 <= self.estimated_risk <= self.upper_confidence_bound <= 1.0
         ):
             raise ValueError("repetition risk confidence bound must contain the estimate")
+        loop_values = (self.mean_loop_value, self.lower_loop_value_bound)
+        if self.loop_value_samples:
+            if not 0 < self.loop_value_samples <= self.repetition_events:
+                raise ValueError("loop value samples must correspond to repetition events")
+            if any(value is None or not math.isfinite(value) for value in loop_values):
+                raise ValueError("loop value estimates must be finite when sampled")
+            assert self.mean_loop_value is not None
+            assert self.lower_loop_value_bound is not None
+            if not -1.0 <= self.lower_loop_value_bound <= self.mean_loop_value <= 1.0:
+                raise ValueError("loop value lower bound must contain the mean")
+        elif any(value is not None for value in loop_values):
+            raise ValueError("loop values require at least one sampled repetition event")
+        if self.risk_adjusted_value_lower_bound is not None and not (
+            math.isfinite(self.risk_adjusted_value_lower_bound)
+            and -1.0 <= self.risk_adjusted_value_lower_bound <= 1.0
+        ):
+            raise ValueError("risk-adjusted branch value must be finite and bounded")
 
 
 @dataclass(frozen=True, slots=True)
@@ -85,6 +106,8 @@ class ContinuationEvidence:
     source_model_sha256: str
     repetition_risks: tuple[RepetitionRiskEstimate, ...] = ()
     maximum_repetition_risk: float | None = None
+    evaluated_root_value: float | None = None
+    minimum_advantaged_root_value: float | None = None
 
     def __post_init__(self) -> None:
         if (
@@ -130,22 +153,49 @@ class ContinuationEvidence:
                 or not risk_actions <= branch_actions
             ):
                 raise ValueError("repetition risk actions must be unique evaluated branches")
-            if not (
-                self.maximum_repetition_risk is not None
-                and math.isfinite(self.maximum_repetition_risk)
-                and 0.0 <= self.maximum_repetition_risk <= 1.0
-            ):
-                raise ValueError("repetition risk evidence requires a bounded maximum")
             risks_by_action = {risk.action: risk for risk in self.repetition_risks}
-            if any(
-                action not in risks_by_action
-                or risks_by_action[action].upper_confidence_bound
-                > self.maximum_repetition_risk
-                for action in self.qualified_actions
-            ):
-                raise ValueError("qualified branch must clear the repetition risk gate")
+            if self.method_version == 2:
+                if not (
+                    self.maximum_repetition_risk is not None
+                    and math.isfinite(self.maximum_repetition_risk)
+                    and 0.0 <= self.maximum_repetition_risk <= 1.0
+                ):
+                    raise ValueError("repetition risk evidence requires a bounded maximum")
+                if any(
+                    action not in risks_by_action
+                    or risks_by_action[action].upper_confidence_bound
+                    > self.maximum_repetition_risk
+                    for action in self.qualified_actions
+                ):
+                    raise ValueError("qualified branch must clear the repetition risk gate")
+            elif self.method_version >= 3:
+                if self.maximum_repetition_risk is not None:
+                    raise ValueError("value-aware evidence must not use a probability cutoff")
+                if not (
+                    self.evaluated_root_value is not None
+                    and self.minimum_advantaged_root_value is not None
+                    and math.isfinite(self.evaluated_root_value)
+                    and math.isfinite(self.minimum_advantaged_root_value)
+                    and -1.0 <= self.evaluated_root_value <= 1.0
+                    and 0.0 <= self.minimum_advantaged_root_value <= 1.0
+                    and self.evaluated_root_value > self.minimum_advantaged_root_value
+                ):
+                    raise ValueError("value-aware evidence requires an advantaged root")
+                if any(
+                    action not in risks_by_action
+                    or risks_by_action[action].risk_adjusted_value_lower_bound is None
+                    or risks_by_action[action].risk_adjusted_value_lower_bound
+                    <= self.repeat_value + self.minimum_advantage
+                    for action in self.qualified_actions
+                ):
+                    raise ValueError("qualified branch must clear the value-aware risk gate")
         elif self.maximum_repetition_risk is not None:
             raise ValueError("maximum repetition risk requires branch risk evidence")
+        if self.method_version < 3 and (
+            self.evaluated_root_value is not None
+            or self.minimum_advantaged_root_value is not None
+        ):
+            raise ValueError("legacy continuation evidence cannot contain root advantage fields")
 
     def to_dict(self) -> dict[str, Any]:
         return asdict(self)
