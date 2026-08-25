@@ -104,6 +104,8 @@ class DiversitySnapshot:
     decisive_game_ratio: float = 0.0
     max_ply_draws: int = 0
     max_ply_draw_ratio: float = 0.0
+    repetition_redirects: int = 0
+    repetition_redirect_ratio: float = 0.0
     terminations: tuple[TerminationSnapshot, ...] = ()
     openings: tuple[OpeningDiversity, ...] = ()
 
@@ -167,6 +169,7 @@ class DashboardSnapshot:
     checkpoint_verified: bool = False
     replay_shards: int = 0
     validation_samples: int = 0
+    validation_checkpoint_count: int = 0
     diversity: DiversitySnapshot = field(default_factory=DiversitySnapshot)
     demo: bool = False
     live_game: LiveGame = field(default_factory=LiveGame)
@@ -193,9 +196,7 @@ class DashboardSnapshot:
     def from_json(cls, payload: str) -> DashboardSnapshot:
         data: dict[str, Any] = json.loads(payload)
         data["mode"] = RunMode(data["mode"])
-        data["pilot_status"] = PilotStatus(
-            data.get("pilot_status", PilotStatus.NOT_STARTED)
-        )
+        data["pilot_status"] = PilotStatus(data.get("pilot_status", PilotStatus.NOT_STARTED))
         data["checkpoint_status"] = CheckpointStatus(
             data.get("checkpoint_status", CheckpointStatus.NONE)
         )
@@ -206,8 +207,7 @@ class DashboardSnapshot:
         data["live_game"] = LiveGame(**game)
         diversity = data.get("diversity", {})
         diversity["terminations"] = tuple(
-            TerminationSnapshot(**termination)
-            for termination in diversity.get("terminations", ())
+            TerminationSnapshot(**termination) for termination in diversity.get("terminations", ())
         )
         diversity["openings"] = tuple(
             OpeningDiversity(**opening) for opening in diversity.get("openings", ())
