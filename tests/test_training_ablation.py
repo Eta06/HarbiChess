@@ -67,3 +67,11 @@ def test_ablation_treatments_require_matching_shards() -> None:
         **common,
     )
     assert value_aware.continuation_fraction == 0.25
+
+    value_regret = AblationConfig(
+        ablation_id="value-regret",
+        treatment=ContinuationTreatment.VALUE_REGRET,
+        continuation_shards=(Path("value-regret-v7.gz"),),
+        **common,
+    )
+    assert value_regret.continuation_fraction == 0.25
