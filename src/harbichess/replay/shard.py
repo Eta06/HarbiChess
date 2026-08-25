@@ -14,7 +14,11 @@ from pathlib import Path
 from typing import Any
 
 from harbichess.chess.rules import PythonChessRules
-from harbichess.replay.schema import SCHEMA_VERSIONS, ReplayRecord
+from harbichess.replay.schema import (
+    SCHEMA_VERSIONS,
+    SUPPORTED_TARGET_SCHEMA_VERSIONS,
+    ReplayRecord,
+)
 from harbichess.replay.split import ReplaySplit
 
 
@@ -139,9 +143,18 @@ def read_shard(path: Path, *, rules: PythonChessRules | None = None) -> ReplaySh
                 "action": header.action_schema,
                 "target": header.target_schema,
             }
-            if actual_versions != SCHEMA_VERSIONS:
+            base_versions_match = all(
+                actual_versions[name] == SCHEMA_VERSIONS[name]
+                for name in ("replay", "encoder", "action")
+            )
+            if (
+                not base_versions_match
+                or header.target_schema not in SUPPORTED_TARGET_SCHEMA_VERSIONS
+            ):
                 raise ReplayCompatibilityError(
-                    f"replay schema mismatch: expected {SCHEMA_VERSIONS}, got {actual_versions}"
+                    "replay schema mismatch: expected base schemas "
+                    f"{SCHEMA_VERSIONS} with target in "
+                    f"{sorted(SUPPORTED_TARGET_SCHEMA_VERSIONS)}, got {actual_versions}"
                 )
             digest = hashlib.sha256()
             records = []
