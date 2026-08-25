@@ -31,6 +31,7 @@ class ContinuationTreatment(StrEnum):
     OFF = "off"
     CURRENT = "current"
     FILTERED = "filtered"
+    CONFIDENCE_GATED = "confidence_gated"
 
 
 @dataclass(frozen=True, slots=True)
