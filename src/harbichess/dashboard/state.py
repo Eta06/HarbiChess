@@ -158,6 +158,17 @@ class DashboardSnapshot:
     pilot_best_validation_step: int = 0
     pilot_best_validation_loss: float | None = None
     pilot_stopped_early: bool = False
+    pilot_stop_reason: str = "not_finished"
+    pilot_stop_detail: str = "Training has not finished"
+    pilot_last_validation_step: int = 0
+    pilot_last_validation_loss: float | None = None
+    pilot_last_improvement_step: int = 0
+    pilot_stale_validation_evaluations: int = 0
+    pilot_validation_evaluations: int = 0
+    pilot_validation_interval_steps: int = 0
+    pilot_early_stopping_patience: int = 0
+    pilot_arena_selected_step: int | None = None
+    pilot_arena_selection_reason: str = "not_evaluated"
     pilot_initial_train_loss: float | None = None
     pilot_final_train_loss: float | None = None
     pilot_initial_validation_loss: float | None = None
