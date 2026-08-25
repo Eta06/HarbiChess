@@ -338,6 +338,7 @@ def run_devir_arena(config: ArenaConfig) -> ArenaResult:
         updated_at=_now(),
         mode=RunMode.EVALUATION,
         mode_detail=f"DEVIR color-balanced arena · 0/{len(tasks)} games",
+        candidate_checkpoint=selected_checkpoint["manifest"]["checkpoint_id"],
         active_games=len(tasks),
         completed_games=0,
         arena_games=0,
