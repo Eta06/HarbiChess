@@ -33,6 +33,7 @@ class ContinuationTreatment(StrEnum):
     FILTERED = "filtered"
     CONFIDENCE_GATED = "confidence_gated"
     REPETITION_RISK_GATED = "repetition_risk_gated"
+    VALUE_AWARE_RISK = "value_aware_risk"
 
 
 @dataclass(frozen=True, slots=True)
