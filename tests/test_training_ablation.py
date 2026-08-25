@@ -51,3 +51,11 @@ def test_ablation_treatments_require_matching_shards() -> None:
         **common,
     )
     assert gated.continuation_fraction == 0.25
+
+    risk_gated = AblationConfig(
+        ablation_id="risk-gated",
+        treatment=ContinuationTreatment.REPETITION_RISK_GATED,
+        continuation_shards=(Path("repetition-risk-v5.gz"),),
+        **common,
+    )
+    assert risk_gated.continuation_fraction == 0.25
