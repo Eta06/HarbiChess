@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import math
 import random
+from collections.abc import Mapping
 from dataclasses import InitVar, dataclass
 
 from harbichess.chess.actions import POLICY_SIZE
@@ -59,11 +60,17 @@ class GameBalancedSampler:
         *,
         seed: int,
         continuation_fraction: float | None = None,
+        continuation_game_weights: Mapping[str, float] | None = None,
     ) -> None:
         if not records:
             raise ValueError("sampler requires replay records")
         if continuation_fraction is not None and not 0.0 <= continuation_fraction <= 1.0:
             raise ValueError("continuation fraction must be in [0, 1]")
+        if continuation_game_weights is not None and any(
+            not math.isfinite(weight) or weight <= 0
+            for weight in continuation_game_weights.values()
+        ):
+            raise ValueError("continuation game weights must be finite and positive")
         index_by_game: dict[str, list[int]] = {}
         for index, record in enumerate(records):
             index_by_game.setdefault(record.game_id, []).append(index)
@@ -82,6 +89,7 @@ class GameBalancedSampler:
             game_id for game_id in self._game_ids if game_id not in continuation_games
         )
         self._continuation_fraction = continuation_fraction
+        self._continuation_game_weights = continuation_game_weights
         self._rng = random.Random(seed)
 
     def sample(self, batch_size: int) -> tuple[ReplayRecord, ...]:
@@ -90,17 +98,15 @@ class GameBalancedSampler:
     def sample_indices(self, batch_size: int) -> tuple[int, ...]:
         if batch_size <= 0:
             raise ValueError("batch_size must be positive")
-        if (
-            self._continuation_fraction is None
-            or not self._continuation_game_ids
-            or not self._standard_game_ids
-        ):
+        if self._continuation_fraction is None or not self._continuation_game_ids:
             game_ids = self._sample_games(self._game_ids, batch_size)
+        elif not self._standard_game_ids:
+            game_ids = self._sample_continuation_games(batch_size)
         else:
             continuation_count = round(batch_size * self._continuation_fraction)
             standard_count = batch_size - continuation_count
             game_ids = [
-                *self._sample_games(self._continuation_game_ids, continuation_count),
+                *self._sample_continuation_games(continuation_count),
                 *self._sample_games(self._standard_game_ids, standard_count),
             ]
             self._rng.shuffle(game_ids)
@@ -112,6 +118,15 @@ class GameBalancedSampler:
         if count <= len(game_ids):
             return self._rng.sample(game_ids, count)
         return self._rng.choices(game_ids, k=count)
+
+    def _sample_continuation_games(self, count: int) -> list[str]:
+        if self._continuation_game_weights is None:
+            return self._sample_games(self._continuation_game_ids, count)
+        weights = [
+            self._continuation_game_weights.get(game_id, 1.0)
+            for game_id in self._continuation_game_ids
+        ]
+        return self._rng.choices(self._continuation_game_ids, weights=weights, k=count)
 
     @property
     def rng_state(self) -> object:
