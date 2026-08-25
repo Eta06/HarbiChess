@@ -30,6 +30,7 @@ def evidence() -> ContinuationEvidence:
 def test_sparse_loop_value_keeps_uncertainty_explicit() -> None:
     assert loop_value_lower_bound((), 0.95) == (None, None)
     assert loop_value_lower_bound((0.4,), 0.95) == (0.4, -1.0)
+    assert loop_value_lower_bound((0.0,), 0.95, (True,)) == (0.0, 0.0)
 
 
 def test_value_aware_risk_combines_probability_and_loop_value() -> None:
@@ -38,6 +39,7 @@ def test_value_aware_risk_combines_probability_and_loop_value() -> None:
         horizon_plies=3,
         rollouts=16,
         loop_values=(),
+        exact_loop_values=(),
         confidence_level=0.95,
         repeat_value=0.0,
     )
@@ -46,6 +48,7 @@ def test_value_aware_risk_combines_probability_and_loop_value() -> None:
         horizon_plies=3,
         rollouts=16,
         loop_values=(-0.5,),
+        exact_loop_values=(False,),
         confidence_level=0.95,
         repeat_value=0.0,
     )
@@ -62,6 +65,7 @@ def test_value_aware_gate_requires_advantage_and_expected_value() -> None:
         horizon_plies=3,
         rollouts=16,
         loop_values=(-0.5,),
+        exact_loop_values=(False,),
         confidence_level=0.95,
         repeat_value=0.0,
     )
