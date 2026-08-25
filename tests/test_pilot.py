@@ -18,8 +18,7 @@ def test_sanity_pilot_requires_loss_improvement_without_validation_regression() 
     records = records_from_game(game, run_id="pilot")
     train = records[:2]
     validation = tuple(
-        replace(record, game_id="validation-000000000008", game_index=8)
-        for record in records[:2]
+        replace(record, game_id="validation-000000000008", game_index=8) for record in records[:2]
     )
     learner = MLXLearner(
         HarbiChessNetwork(NetworkConfig(trunk_channels=8, residual_blocks=1)),
@@ -49,14 +48,22 @@ def test_sanity_pilot_requires_loss_improvement_without_validation_regression() 
     assert report.sampler_rng_state is not None
     assert report.best_validation_step == report.steps
     assert report.best_validation_loss == pytest.approx(report.final_validation_loss)
+    assert 1 <= len(report.validation_candidates) <= 4
+    assert report.validation_candidates[-1].step == report.best_validation_step
+    assert all(
+        later.step > earlier.step
+        for earlier, later in zip(
+            report.validation_candidates,
+            report.validation_candidates[1:],
+            strict=False,
+        )
+    )
 
 
 def test_sanity_pilot_rejects_game_level_leakage() -> None:
     _, game = scripted_game()
     records = records_from_game(game, run_id="pilot")
-    learner = MLXLearner(
-        HarbiChessNetwork(NetworkConfig(trunk_channels=8, residual_blocks=1))
-    )
+    learner = MLXLearner(HarbiChessNetwork(NetworkConfig(trunk_channels=8, residual_blocks=1)))
 
     with pytest.raises(ValueError, match="leak"):
         run_sanity_pilot(learner, records[:1], records[1:2], config=PilotConfig(steps=1))
@@ -67,12 +74,9 @@ def test_sanity_pilot_accepts_matching_prebuilt_evaluation_batches() -> None:
     records = records_from_game(game, run_id="pilot")
     train = records[:2]
     validation = tuple(
-        replace(record, game_id="validation-000000000008", game_index=8)
-        for record in records[2:]
+        replace(record, game_id="validation-000000000008", game_index=8) for record in records[2:]
     )
-    learner = MLXLearner(
-        HarbiChessNetwork(NetworkConfig(trunk_channels=8, residual_blocks=1))
-    )
+    learner = MLXLearner(HarbiChessNetwork(NetworkConfig(trunk_channels=8, residual_blocks=1)))
 
     report = run_sanity_pilot(
         learner,
@@ -92,8 +96,7 @@ def test_sanity_pilot_restores_best_validation_step_after_early_stop() -> None:
     records = records_from_game(game, run_id="pilot")
     train = records[:2]
     validation = tuple(
-        replace(record, game_id="validation-000000000009", game_index=9)
-        for record in records[2:]
+        replace(record, game_id="validation-000000000009", game_index=9) for record in records[2:]
     )
     learner = MLXLearner(
         HarbiChessNetwork(NetworkConfig(trunk_channels=8, residual_blocks=1)),
@@ -118,3 +121,4 @@ def test_sanity_pilot_restores_best_validation_step_after_early_stop() -> None:
     assert report.best_validation_step == 0
     assert report.steps == 0
     assert learner.step == 0
+    assert report.validation_candidates == ()
