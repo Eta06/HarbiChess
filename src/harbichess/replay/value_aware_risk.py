@@ -83,7 +83,9 @@ def _stable_seed(seed: int, game_id: str, action: int, rollout: int) -> int:
 
 
 def loop_value_lower_bound(
-    values: tuple[float, ...], confidence_level: float
+    values: tuple[float, ...],
+    confidence_level: float,
+    exact: tuple[bool, ...] = (),
 ) -> tuple[float | None, float | None]:
     """Return mean and conservative lower bound for sparse loop-state values."""
 
@@ -91,9 +93,13 @@ def loop_value_lower_bound(
         raise ValueError("loop value confidence level must be in (0, 1)")
     if not values:
         return None, None
+    if exact and len(exact) != len(values):
+        raise ValueError("loop value exactness must match the sampled values")
     if any(not math.isfinite(value) or not -1.0 <= value <= 1.0 for value in values):
         raise ValueError("loop values must be finite and bounded")
     mean = statistics.fmean(values)
+    if exact and all(exact):
+        return mean, min(values)
     if len(values) == 1:
         return mean, -1.0
     standard_error = statistics.stdev(values) / math.sqrt(len(values))
@@ -107,11 +113,16 @@ def value_aware_risk_estimate(
     horizon_plies: int,
     rollouts: int,
     loop_values: tuple[float, ...],
+    exact_loop_values: tuple[bool, ...] = (),
     confidence_level: float,
     repeat_value: float,
 ) -> RepetitionRiskEstimate:
     events = len(loop_values)
-    mean_loop, lower_loop = loop_value_lower_bound(loop_values, confidence_level)
+    if exact_loop_values and len(exact_loop_values) != len(loop_values):
+        raise ValueError("exact loop flags must match loop values")
+    mean_loop, lower_loop = loop_value_lower_bound(
+        loop_values, confidence_level, exact_loop_values
+    )
     loop_floor = repeat_value if lower_loop is None else lower_loop
     observed_risk = events / rollouts
     adjusted = (
@@ -126,6 +137,7 @@ def value_aware_risk_estimate(
         estimated_risk=observed_risk,
         upper_confidence_bound=wilson_upper_bound(events, rollouts, confidence_level),
         loop_value_samples=events,
+        exact_loop_value_samples=sum(exact_loop_values),
         mean_loop_value=mean_loop,
         lower_loop_value_bound=lower_loop,
         risk_adjusted_value_lower_bound=max(-1.0, min(1.0, adjusted)),
@@ -223,6 +235,7 @@ def run_value_aware_risk(config: ValueAwareRiskConfig) -> Path:
     def evaluate_branch(item: tuple[ReplayRecord, BranchValueEstimate]):
         record, branch = item
         loop_values = []
+        exact_loop_values = []
         for rollout_index in range(config.rollouts):
             rng = random.Random(
                 _stable_seed(config.seed, record.game_id, branch.action, rollout_index)
@@ -242,6 +255,7 @@ def run_value_aware_risk(config: ValueAwareRiskConfig) -> Path:
                 if board.is_repetition(2) or claimable:
                     if claimable:
                         loop_value = 0.0
+                        exact_loop_value = True
                     else:
                         loop_result = value_search.search(
                             state, rng=random.Random(0), add_root_noise=False
@@ -252,7 +266,9 @@ def run_value_aware_risk(config: ValueAwareRiskConfig) -> Path:
                             if current_side is record.side_to_move
                             else -loop_result.root_value
                         )
+                        exact_loop_value = False
                     loop_values.append(loop_value)
+                    exact_loop_values.append(exact_loop_value)
                     break
         evidence = record.continuation_evidence
         assert evidence is not None
@@ -261,6 +277,7 @@ def run_value_aware_risk(config: ValueAwareRiskConfig) -> Path:
             horizon_plies=config.horizon_plies,
             rollouts=config.rollouts,
             loop_values=tuple(loop_values),
+            exact_loop_values=tuple(exact_loop_values),
             confidence_level=config.confidence_level,
             repeat_value=evidence.repeat_value,
         )
