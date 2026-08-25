@@ -1,11 +1,12 @@
 import gzip
+import hashlib
 import json
 from datetime import UTC, datetime
 
 import pytest
 from test_replay_schema import scripted_game
 
-from harbichess.replay.schema import records_from_game
+from harbichess.replay.schema import TARGET_SCHEMA_VERSION, records_from_game
 from harbichess.replay.shard import (
     ReplayCompatibilityError,
     ReplayIntegrityError,
@@ -31,10 +32,12 @@ def rewrite_gzip(path, mutate) -> None:
     lines = gzip.decompress(path.read_bytes()).splitlines()
     parsed = [json.loads(line) for line in lines]
     mutate(parsed)
-    payload = b"\n".join(
-        json.dumps(value, sort_keys=True, separators=(",", ":")).encode()
-        for value in parsed
-    ) + b"\n"
+    payload = (
+        b"\n".join(
+            json.dumps(value, sort_keys=True, separators=(",", ":")).encode() for value in parsed
+        )
+        + b"\n"
+    )
     path.write_bytes(gzip.compress(payload, mtime=0))
 
 
@@ -69,3 +72,31 @@ def test_replay_shard_rejects_future_schema(tmp_path) -> None:
 
     with pytest.raises(ReplayCompatibilityError, match="schema mismatch"):
         read_shard(path)
+
+    write_shard_atomic(path, records_from_game(game, run_id="pilot"), metadata())
+    rewrite_gzip(path, lambda lines: lines[0].__setitem__("target_schema", 999))
+    with pytest.raises(ReplayCompatibilityError, match="schema mismatch"):
+        read_shard(path)
+
+
+def test_replay_shard_reads_legacy_target_schema_three(tmp_path) -> None:
+    _, game = scripted_game()
+    records = records_from_game(game, run_id="legacy")
+    path = tmp_path / "legacy.jsonl.gz"
+    write_shard_atomic(path, records, metadata())
+
+    def downgrade(lines) -> None:
+        lines[0]["target_schema"] = TARGET_SCHEMA_VERSION - 1
+        for record in lines[1:]:
+            record.pop("continuation_evidence")
+        payload = b"".join(
+            json.dumps(record, sort_keys=True, separators=(",", ":")).encode() + b"\n"
+            for record in lines[1:]
+        )
+        lines[0]["payload_sha256"] = hashlib.sha256(payload).hexdigest()
+
+    rewrite_gzip(path, downgrade)
+    restored = read_shard(path)
+
+    assert restored.header.target_schema == 3
+    assert restored.records == records
