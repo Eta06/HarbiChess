@@ -116,13 +116,19 @@ def audit_continuation_record(
     overlap = sum(item.move in repeating_moves for item in target)
     selected = search.select_move(temperature=0.0, rng=random.Random(0))
     target_mass = target_visits / total_visits
-    if overlap or (
-        target_value is not None and target_value < repeat_value - settings.value_margin
+    selected_repeats = selected in repeating_moves
+    selected_in_target = action_by_move[selected] in target_actions
+    if (
+        overlap
+        or (target_value is not None and target_value < repeat_value - settings.value_margin)
+        or (not selected_repeats and not selected_in_target)
     ):
         verdict = AuditVerdict.HARMFUL
     elif (
         target_value is not None
-        and target_value > repeat_value + settings.value_margin
+        and not selected_repeats
+        and selected_in_target
+        and target_value >= repeat_value - min(settings.value_margin, 0.02)
         and target_visits >= settings.minimum_target_visits
         and target_mass >= settings.minimum_target_visit_mass
     ):
@@ -147,8 +153,8 @@ def audit_continuation_record(
         target_mcts_value=target_value,
         target_repeat_overlap=overlap,
         champion_selected_move=selected.uci,
-        champion_selected_repeats=selected in repeating_moves,
-        target_contains_champion_selection=action_by_move[selected] in target_actions,
+        champion_selected_repeats=selected_repeats,
+        target_contains_champion_selection=selected_in_target,
     )
 
 
