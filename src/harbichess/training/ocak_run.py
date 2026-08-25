@@ -37,7 +37,7 @@ from harbichess.dashboard.state import (
 )
 from harbichess.replay.diversity import DiversityMetrics, measure_diversity
 from harbichess.replay.schema import ReplayRecord, records_from_game
-from harbichess.replay.shard import ShardMetadata, write_shard_atomic
+from harbichess.replay.shard import ShardMetadata, read_shard, write_shard_atomic
 from harbichess.replay.split import ReplaySplit, partition_games
 from harbichess.search.batching import SharedBatchEvaluator
 from harbichess.search.evaluator import NeuralPositionEvaluator
@@ -81,6 +81,8 @@ class OcakRunConfig:
     policy_channels: int = 4
     value_channels: int = 2
     value_hidden: int = 32
+    continuation_shards: tuple[Path, ...] = ()
+    continuation_batch_fraction: float = 0.25
 
     def __post_init__(self) -> None:
         if not self.run_id or Path(self.run_id).name != self.run_id:
@@ -114,6 +116,8 @@ class OcakRunConfig:
             raise ValueError("maximum_max_ply_draw_ratio must be in [0, 1]")
         if not 0.0 <= self.maximum_repetition_draw_ratio <= 1.0:
             raise ValueError("maximum_repetition_draw_ratio must be in [0, 1]")
+        if not 0.0 <= self.continuation_batch_fraction <= 1.0:
+            raise ValueError("continuation_batch_fraction must be in [0, 1]")
 
 
 @dataclass(frozen=True, slots=True)
@@ -406,13 +410,30 @@ def run_ocak_sanity(
             raise RuntimeError(
                 "deterministic game split produced an empty train or validation partition"
             )
-        train_records = _records(train_games, run_id=config.run_id, rules=rules)
+        generated_train_records = _records(
+            train_games,
+            run_id=config.run_id,
+            rules=rules,
+        )
         validation_records = _records(validation_games, run_id=config.run_id, rules=rules)
+        continuation_shards = tuple(
+            read_shard(path, rules=rules) for path in config.continuation_shards
+        )
+        if any(shard.header.split is not ReplaySplit.TRAIN for shard in continuation_shards):
+            raise ValueError("continuation replay shards must use the train split")
+        continuation_records = tuple(
+            record for shard in continuation_shards for record in shard.records
+        )
+        train_records = (*generated_train_records, *continuation_records)
+        if {record.game_id for record in train_records} & {
+            record.game_id for record in validation_records
+        }:
+            raise ValueError("continuation replay leaks validation game IDs")
         replay_dir = run_root / "replay"
         created_at = _now()
         train_header = write_shard_atomic(
             replay_dir / "train-00000.jsonl.gz",
-            train_records,
+            generated_train_records,
             ShardMetadata(
                 run_id=config.run_id,
                 generation=0,
@@ -441,7 +462,8 @@ def run_ocak_sanity(
             active_games=0,
             replay_samples=len(train_records) + len(validation_records),
             validation_samples=len(validation_records),
-            replay_shards=2,
+            replay_shards=2 + len(continuation_shards),
+            continuation_replay_samples=len(continuation_records),
             diversity=_diversity_snapshot(diversity_metrics),
         )
 
@@ -523,6 +545,9 @@ def run_ocak_sanity(
                 early_stopping_patience=config.early_stopping_patience,
                 minimum_validation_delta=config.minimum_validation_delta,
                 seed=config.run_seed,
+                continuation_fraction=(
+                    config.continuation_batch_fraction if continuation_records else None
+                ),
             ),
             on_step=training_step,
             train_evaluation=train_evaluation,
@@ -655,6 +680,7 @@ def run_ocak_sanity(
                 **asdict(config),
                 "artifact_root": str(config.artifact_root),
                 "telemetry_path": str(config.telemetry_path),
+                "continuation_shards": [str(path) for path in config.continuation_shards],
             },
             "system": {
                 "platform": platform.platform(),
@@ -686,6 +712,18 @@ def run_ocak_sanity(
             "replay": {
                 "train": asdict(train_header),
                 "validation": asdict(validation_header),
+                "continuation": [
+                    {"path": str(path), "header": asdict(shard.header)}
+                    for path, shard in zip(
+                        config.continuation_shards,
+                        continuation_shards,
+                        strict=True,
+                    )
+                ],
+                "continuation_samples": len(continuation_records),
+                "continuation_batch_fraction": (
+                    config.continuation_batch_fraction if continuation_records else 0.0
+                ),
             },
             "checkpoint": {
                 "path": str(checkpoint_path),
@@ -761,6 +799,8 @@ def _parser() -> argparse.ArgumentParser:
     parser.add_argument("--maximum-repetition-draw-ratio", type=float, default=0.5)
     parser.add_argument("--early-stopping-patience", type=int, default=12)
     parser.add_argument("--minimum-validation-delta", type=float, default=1e-3)
+    parser.add_argument("--continuation-shard", action="append", type=Path, default=[])
+    parser.add_argument("--continuation-batch-fraction", type=float, default=0.25)
     return parser
 
 
@@ -783,6 +823,8 @@ def main(argv: list[str] | None = None) -> int:
             maximum_repetition_draw_ratio=arguments.maximum_repetition_draw_ratio,
             early_stopping_patience=arguments.early_stopping_patience,
             minimum_validation_delta=arguments.minimum_validation_delta,
+            continuation_shards=tuple(arguments.continuation_shard),
+            continuation_batch_fraction=arguments.continuation_batch_fraction,
         )
     )
     print(json.dumps(asdict(result), indent=2))
