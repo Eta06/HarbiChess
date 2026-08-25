@@ -13,7 +13,88 @@ from harbichess.core.state import ChessMove, ChessState, Side
 from harbichess.selfplay.game import SelfPlayGame, SelfPlaySample
 
 REPLAY_SCHEMA_VERSION = 2
-TARGET_SCHEMA_VERSION = 3
+TARGET_SCHEMA_VERSION = 4
+SUPPORTED_TARGET_SCHEMA_VERSIONS = frozenset({3, TARGET_SCHEMA_VERSION})
+
+
+@dataclass(frozen=True, slots=True)
+class BranchValueEstimate:
+    action: int
+    move: str
+    samples: int
+    mean_value: float
+    standard_error: float
+    lower_confidence_bound: float
+    upper_confidence_bound: float
+
+    def __post_init__(self) -> None:
+        values = (
+            self.mean_value,
+            self.standard_error,
+            self.lower_confidence_bound,
+            self.upper_confidence_bound,
+        )
+        if not 0 <= self.action < POLICY_SIZE or not self.move or self.samples <= 1:
+            raise ValueError("branch evidence identity and samples are invalid")
+        if any(not math.isfinite(value) for value in values) or self.standard_error < 0:
+            raise ValueError("branch evidence values must be finite")
+        if not -1.0 <= self.mean_value <= 1.0:
+            raise ValueError("branch mean value must be between -1 and 1")
+        if not -1.0 <= self.lower_confidence_bound <= self.upper_confidence_bound <= 1.0:
+            raise ValueError("branch confidence bounds must be ordered within [-1, 1]")
+
+
+@dataclass(frozen=True, slots=True)
+class ContinuationEvidence:
+    method_version: int
+    confidence_level: float
+    branch_searches: int
+    simulations_per_search: int
+    repeat_value: float
+    repeat_actions: tuple[int, ...]
+    branches: tuple[BranchValueEstimate, ...]
+    qualified_actions: tuple[int, ...]
+    source_model_sha256: str
+
+    def __post_init__(self) -> None:
+        if (
+            self.method_version <= 0
+            or self.branch_searches <= 1
+            or self.simulations_per_search <= 0
+        ):
+            raise ValueError("continuation evidence search configuration is invalid")
+        if not 0.0 < self.confidence_level < 1.0:
+            raise ValueError("continuation evidence confidence level must be in (0, 1)")
+        if not math.isfinite(self.repeat_value) or not -1.0 <= self.repeat_value <= 1.0:
+            raise ValueError("continuation repeat value must be finite and bounded")
+        if not self.repeat_actions or len(self.repeat_actions) != len(set(self.repeat_actions)):
+            raise ValueError("continuation repeat actions must be unique and non-empty")
+        if not self.branches or len({branch.action for branch in self.branches}) != len(
+            self.branches
+        ):
+            raise ValueError("continuation branch actions must be unique and non-empty")
+        branch_actions = {branch.action for branch in self.branches}
+        if (
+            len(self.qualified_actions) != len(set(self.qualified_actions))
+            or not set(self.qualified_actions) <= branch_actions
+            or set(self.qualified_actions) & set(self.repeat_actions)
+        ):
+            raise ValueError("qualified actions must be unique evaluated non-repeat branches")
+        if len(self.source_model_sha256) != 64 or any(
+            character not in "0123456789abcdef" for character in self.source_model_sha256.lower()
+        ):
+            raise ValueError("continuation evidence model hash must be SHA-256")
+
+    def to_dict(self) -> dict[str, Any]:
+        return asdict(self)
+
+    @classmethod
+    def from_dict(cls, data: dict[str, Any]) -> ContinuationEvidence:
+        parsed = dict(data)
+        parsed["repeat_actions"] = tuple(int(action) for action in parsed["repeat_actions"])
+        parsed["branches"] = tuple(BranchValueEstimate(**branch) for branch in parsed["branches"])
+        parsed["qualified_actions"] = tuple(int(action) for action in parsed["qualified_actions"])
+        return cls(**parsed)
 
 
 @dataclass(frozen=True, slots=True)
@@ -30,6 +111,7 @@ class ReplayRecord:
     root_value: float
     outcome_value: int
     repetition_redirected: bool
+    continuation_evidence: ContinuationEvidence | None = None
 
     def __post_init__(self) -> None:
         if not self.game_id or self.game_index < 0 or self.seed < 0 or self.ply != len(self.moves):
@@ -53,6 +135,10 @@ class ReplayRecord:
             for action, probability in self.policy
         ):
             raise ValueError("selected action must have positive replay-policy mass")
+        if self.continuation_evidence is not None:
+            qualified = set(self.continuation_evidence.qualified_actions)
+            if not qualified or set(indices) != qualified or self.selected_action not in qualified:
+                raise ValueError("confidence-gated policy must exactly match qualified actions")
 
     @property
     def state(self) -> ChessState:
@@ -66,6 +152,13 @@ class ReplayRecord:
         legal_actions = {move_to_action(board, move) for move in board.legal_moves}
         if any(action not in legal_actions for action, _ in self.policy):
             raise ValueError("replay policy contains an illegal action")
+        if self.continuation_evidence is not None:
+            evidence_actions = {
+                *self.continuation_evidence.repeat_actions,
+                *(branch.action for branch in self.continuation_evidence.branches),
+            }
+            if not evidence_actions <= legal_actions:
+                raise ValueError("continuation evidence contains an illegal action")
 
     def to_dict(self) -> dict[str, Any]:
         return asdict(self)
@@ -77,6 +170,10 @@ class ReplayRecord:
         parsed["side_to_move"] = Side(parsed["side_to_move"])
         parsed["policy"] = tuple(
             (int(action), float(probability)) for action, probability in parsed["policy"]
+        )
+        evidence = parsed.get("continuation_evidence")
+        parsed["continuation_evidence"] = (
+            ContinuationEvidence.from_dict(evidence) if evidence is not None else None
         )
         return cls(**parsed)
 
