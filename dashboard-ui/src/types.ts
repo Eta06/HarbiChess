@@ -127,6 +127,17 @@ export interface DashboardSnapshot {
   pilot_best_validation_step: number;
   pilot_best_validation_loss: number | null;
   pilot_stopped_early: boolean;
+  pilot_stop_reason: string;
+  pilot_stop_detail: string;
+  pilot_last_validation_step: number;
+  pilot_last_validation_loss: number | null;
+  pilot_last_improvement_step: number;
+  pilot_stale_validation_evaluations: number;
+  pilot_validation_evaluations: number;
+  pilot_validation_interval_steps: number;
+  pilot_early_stopping_patience: number;
+  pilot_arena_selected_step: number | null;
+  pilot_arena_selection_reason: string;
   pilot_initial_train_loss: number | null;
   pilot_final_train_loss: number | null;
   pilot_initial_validation_loss: number | null;
