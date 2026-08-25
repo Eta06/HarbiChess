@@ -411,6 +411,7 @@ function App() {
               <div><span>Validation samples</span><strong>{formatNumber(snapshot.validation_samples)}</strong></div>
               <div><span>Best validation</span><strong>{formatLoss(snapshot.pilot_best_validation_loss)} <small>@ step {formatNumber(snapshot.pilot_best_validation_step)}</small></strong></div>
               <div><span>Early stopping</span><strong>{snapshot.pilot_stopped_early ? "Triggered" : "Not triggered"} <small>· {formatNumber(snapshot.pilot_steps_attempted)} attempted</small></strong></div>
+              <div><span>Arena candidates</span><strong>{formatNumber(snapshot.validation_checkpoint_count)}</strong></div>
             </div>
             {snapshot.pilot_reasons.length ? (
               <div className="guardrail-message is-danger">{snapshot.pilot_reasons.join(" · ")}</div>
@@ -442,6 +443,7 @@ function App() {
               <div><span>Mean game plies</span><strong>{formatNumber(diversity.mean_game_plies, 1)}</strong></div>
               <div><span>Decisive games</span><strong>{formatNumber(diversity.decisive_games)} · {formatPercent(diversity.decisive_game_ratio)}</strong></div>
               <div><span>Max-ply draws</span><strong>{formatNumber(diversity.max_ply_draws)} · {formatPercent(diversity.max_ply_draw_ratio)}</strong></div>
+              <div><span>Repetition redirects</span><strong>{formatNumber(diversity.repetition_redirects)} · {formatPercent(diversity.repetition_redirect_ratio)}</strong></div>
             </div>
             <div className="termination-list">
               <span className="subsection-label">Termination distribution</span>
