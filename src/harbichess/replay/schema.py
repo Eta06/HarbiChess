@@ -51,6 +51,7 @@ class ContinuationEvidence:
     branch_searches: int
     simulations_per_search: int
     repeat_value: float
+    minimum_advantage: float
     repeat_actions: tuple[int, ...]
     branches: tuple[BranchValueEstimate, ...]
     qualified_actions: tuple[int, ...]
@@ -67,6 +68,8 @@ class ContinuationEvidence:
             raise ValueError("continuation evidence confidence level must be in (0, 1)")
         if not math.isfinite(self.repeat_value) or not -1.0 <= self.repeat_value <= 1.0:
             raise ValueError("continuation repeat value must be finite and bounded")
+        if not math.isfinite(self.minimum_advantage) or not 0.0 <= self.minimum_advantage <= 1.0:
+            raise ValueError("continuation minimum advantage must be finite and bounded")
         if not self.repeat_actions or len(self.repeat_actions) != len(set(self.repeat_actions)):
             raise ValueError("continuation repeat actions must be unique and non-empty")
         if not self.branches or len({branch.action for branch in self.branches}) != len(
@@ -80,6 +83,13 @@ class ContinuationEvidence:
             or set(self.qualified_actions) & set(self.repeat_actions)
         ):
             raise ValueError("qualified actions must be unique evaluated non-repeat branches")
+        branches_by_action = {branch.action: branch for branch in self.branches}
+        if any(
+            branches_by_action[action].lower_confidence_bound
+            <= self.repeat_value + self.minimum_advantage
+            for action in self.qualified_actions
+        ):
+            raise ValueError("qualified branch lower bound must clear the repeat gate")
         if len(self.source_model_sha256) != 64 or any(
             character not in "0123456789abcdef" for character in self.source_model_sha256.lower()
         ):
