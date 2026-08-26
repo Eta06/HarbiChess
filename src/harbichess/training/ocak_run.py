@@ -80,6 +80,7 @@ class OcakRunConfig:
     validation_interval_steps: int = 10
     early_stopping_patience: int = 12
     minimum_validation_delta: float = 1e-3
+    maximum_value_validation_ratio: float = 1.05
     trunk_channels: int = 16
     residual_blocks: int = 2
     policy_channels: int = 4
@@ -131,6 +132,11 @@ class OcakRunConfig:
             raise ValueError("minimum_decisive_games must be non-negative")
         if not math.isfinite(self.minimum_validation_delta) or self.minimum_validation_delta < 0:
             raise ValueError("minimum_validation_delta must be finite and non-negative")
+        if (
+            not math.isfinite(self.maximum_value_validation_ratio)
+            or self.maximum_value_validation_ratio < 1.0
+        ):
+            raise ValueError("maximum_value_validation_ratio must be finite and at least one")
         if not 0.0 <= self.maximum_max_ply_draw_ratio <= 1.0:
             raise ValueError("maximum_max_ply_draw_ratio must be in [0, 1]")
         if not 0.0 <= self.maximum_repetition_draw_ratio <= 1.0:
@@ -627,6 +633,7 @@ def run_ocak_sanity(
                 validation_interval_steps=config.validation_interval_steps,
                 early_stopping_patience=config.early_stopping_patience,
                 minimum_validation_delta=config.minimum_validation_delta,
+                maximum_value_validation_ratio=config.maximum_value_validation_ratio,
                 seed=config.run_seed,
                 continuation_fraction=(
                     config.continuation_batch_fraction if continuation_records else None
@@ -689,7 +696,14 @@ def run_ocak_sanity(
 
         validation_checkpoints = []
 
-        def save_candidate(step: int, validation_loss: float, rng_state: object):
+        def save_candidate(
+            step: int,
+            validation_loss: float,
+            rng_state: object,
+            *,
+            validation_policy_loss: float | None = None,
+            validation_value_loss: float | None = None,
+        ):
             checkpoint_id = f"candidate-step-{step:06d}"
             checkpoint_path = run_root / "checkpoints" / checkpoint_id
             checkpoint_sampler = GameBalancedSampler(train_records, seed=config.run_seed)
@@ -731,6 +745,8 @@ def run_ocak_sanity(
             entry = {
                 "step": step,
                 "validation_loss": validation_loss,
+                "validation_policy_loss": validation_policy_loss,
+                "validation_value_loss": validation_value_loss,
                 "path": str(checkpoint_path),
                 "verified": True,
                 "manifest": asdict(saved),
@@ -744,6 +760,8 @@ def run_ocak_sanity(
                 candidate.step,
                 candidate.validation_loss,
                 candidate.sampler_rng_state,
+                validation_policy_loss=candidate.validation_policy_loss,
+                validation_value_loss=candidate.validation_value_loss,
             )
         if not validation_checkpoints:
             checkpoint_path, saved_resume = save_candidate(
@@ -807,15 +825,19 @@ def run_ocak_sanity(
                 "final_train": report.final_train_loss,
                 "initial_validation": report.initial_validation_loss,
                 "final_validation": report.final_validation_loss,
+                "initial_validation_value": report.initial_validation_value_loss,
+                "final_validation_value": report.final_validation_value_loss,
                 "maximum_gradient_norm": report.maximum_gradient_norm,
                 "attempted_steps": report.attempted_steps,
                 "best_validation_step": report.best_validation_step,
                 "best_validation_loss": report.best_validation_loss,
+                "best_validation_value_loss": report.best_validation_value_loss,
                 "stopped_early": report.stopped_early,
                 "stop_reason": report.stop_reason,
                 "stop_detail": stop_detail,
                 "last_validation_step": report.last_validation_step,
                 "last_validation_loss": report.last_validation_loss,
+                "last_validation_value_loss": report.last_validation_value_loss,
                 "last_improvement_step": report.last_improvement_step,
                 "stale_validation_evaluations": report.stale_validation_evaluations,
                 "validation_evaluations": report.validation_evaluations,
@@ -912,6 +934,7 @@ def _parser() -> argparse.ArgumentParser:
     parser.add_argument("--early-stopping-patience", type=int, default=12)
     parser.add_argument("--validation-interval-steps", type=int, default=10)
     parser.add_argument("--minimum-validation-delta", type=float, default=1e-3)
+    parser.add_argument("--maximum-value-validation-ratio", type=float, default=1.05)
     parser.add_argument("--continuation-shard", action="append", type=Path, default=[])
     parser.add_argument("--continuation-batch-fraction", type=float, default=0.25)
     parser.add_argument("--initial-model", type=Path)
@@ -952,6 +975,7 @@ def main(argv: list[str] | None = None) -> int:
             early_stopping_patience=arguments.early_stopping_patience,
             validation_interval_steps=arguments.validation_interval_steps,
             minimum_validation_delta=arguments.minimum_validation_delta,
+            maximum_value_validation_ratio=arguments.maximum_value_validation_ratio,
             continuation_shards=tuple(arguments.continuation_shard),
             continuation_batch_fraction=arguments.continuation_batch_fraction,
             initial_model=arguments.initial_model,
