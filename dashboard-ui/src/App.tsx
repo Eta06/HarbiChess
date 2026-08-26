@@ -9,6 +9,7 @@ import {
   GitCommitHorizontal,
   Gauge,
   Network,
+  Search,
   ShieldCheck,
   Swords,
   Trophy,
@@ -30,6 +31,11 @@ function formatNumber(value: number | null | undefined, digits = 0) {
 
 function formatLoss(value: number | null | undefined) {
   return value == null ? "—" : value.toFixed(3);
+}
+
+function formatPrecise(value: number | null | undefined, digits = 4) {
+  if (value == null) return "—";
+  return `${value >= 0 ? "+" : ""}${value.toFixed(digits)}`;
 }
 
 function formatSigned(value: number | null | undefined) {
@@ -323,6 +329,11 @@ function App() {
       : snapshot.checkpoint_status === "WRITING"
         ? "warning"
         : "default";
+  const teacherColor: StatusColor = snapshot.teacher_qualification_status === "passed"
+    ? "success"
+    : snapshot.teacher_qualification_status === "failed"
+      ? "danger"
+      : "default";
 
   return (
     <div className="app-frame">
@@ -389,6 +400,35 @@ function App() {
           <StatCard icon={Cpu} label="Neural evals / sec" value={formatNumber(snapshot.neural_evals_per_second)} detail="MLX inference" />
           <StatCard icon={Swords} label="MCTS nodes / sec" value={formatNumber(snapshot.mcts_nodes_per_second)} detail="search throughput" />
         </section>
+
+        <Panel
+          className="teacher-panel"
+          description={`${formatNumber(snapshot.teacher_qualification_positions)} stratified positions · ${formatNumber(snapshot.teacher_qualification_variants)} search variants`}
+          icon={Search}
+          title="OMURGA search teacher qualification"
+          action={<Chip color={teacherColor} size="sm" variant="soft">{modeLabel(snapshot.teacher_qualification_status)}</Chip>}
+        >
+          <div className="gate-metrics">
+            <div><span>Best search variant</span><strong>{snapshot.teacher_best_variant || "—"}</strong></div>
+            <div><span>Qualified variants</span><strong>{snapshot.teacher_qualified_variants.length ? snapshot.teacher_qualified_variants.join(", ") : `0 / ${formatNumber(snapshot.teacher_qualification_variants)}`}</strong></div>
+            <div><span>Verified action-value delta</span><strong>{formatPrecise(snapshot.teacher_best_value_delta)}</strong></div>
+            <div><span>95% interval</span><strong>{snapshot.teacher_best_value_delta_low == null ? "—" : `${formatPrecise(snapshot.teacher_best_value_delta_low)} to ${formatPrecise(snapshot.teacher_best_value_delta_high)}`}</strong></div>
+            <div><span>Seed stability TV</span><strong>{formatPrecise(snapshot.teacher_best_stability_tv)}</strong></div>
+            <div><span>Value MSE</span><strong>{formatLoss(snapshot.teacher_raw_value_mse)} <small>raw → teacher</small> {formatLoss(snapshot.teacher_best_value_mse)}</strong></div>
+          </div>
+          <div className={`guardrail-message ${snapshot.teacher_qualification_status === "failed" ? "is-danger" : ""}`}>
+            {snapshot.teacher_qualification_status === "passed"
+              ? "Teacher gate passed; continuous learner still requires its own implementation checkpoint."
+              : snapshot.teacher_qualification_status === "failed"
+                ? "Teacher gate failed; continuous learner and new generation are blocked."
+                : "Teacher qualification has not run yet."}
+          </div>
+          {snapshot.teacher_qualification_result ? (
+            <div className="guardrail-message mono" title={snapshot.teacher_qualification_result}>
+              Result: {snapshot.teacher_qualification_result}
+            </div>
+          ) : null}
+        </Panel>
 
         <section className="guardrail-grid" aria-label="OCAK sanity guardrails">
           <Panel
