@@ -30,6 +30,7 @@ harbichess-release-checkpoint = "harbichess.checkpoints.release:main"
 harbichess-dashboard = "harbichess.dashboard.server:main"
 harbichess-ocak-sanity = "harbichess.training.ocak_run:main"
 harbichess-devir-arena = "harbichess.evaluation.arena:main"
+harbichess-qualify-teacher = "harbichess.evaluation.teacher_qualification:main"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/harbichess"]
