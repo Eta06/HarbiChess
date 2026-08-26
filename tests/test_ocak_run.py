@@ -81,6 +81,11 @@ def test_ocak_run_connects_self_play_training_checkpoint_and_telemetry(
 
 
 def test_ocak_run_configuration_rejects_unsafe_run_id() -> None:
+    assert not OcakRunConfig(run_id="clean-default").repetition_target_transform
+    assert OcakRunConfig(
+        run_id="legacy-reproduction",
+        repetition_target_transform=True,
+    ).repetition_target_transform
     with pytest.raises(ValueError, match="safe path"):
         OcakRunConfig(run_id="../escape")
 
