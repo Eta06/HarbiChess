@@ -302,7 +302,11 @@ def _continuation_records(
                         board.parse_uci(root.selected_move.uci),
                     ),
                     root_value=root.root_value,
-                    outcome_value=game.outcome.value_for(root.side_to_move),
+                    outcome_value=(
+                        None
+                        if game.outcome.termination == "max_plies"
+                        else game.outcome.value_for(root.side_to_move)
+                    ),
                     repetition_redirected=True,
                 )
             )
