@@ -88,6 +88,9 @@ class OcakRunConfig:
     initial_model: Path | None = None
     inference_wait_seconds: float = 0.00025
     continuation_recency_decay: float = 0.60
+    value_policy_temperature: float | None = None
+    value_policy_prior_visits: float = 8.0
+    maximum_value_logit_adjustment: float = 1.25
 
     def __post_init__(self) -> None:
         if not self.run_id or Path(self.run_id).name != self.run_id:
@@ -128,6 +131,10 @@ class OcakRunConfig:
             raise ValueError("inference_wait_seconds must be non-negative")
         if not 0.0 < self.continuation_recency_decay <= 1.0:
             raise ValueError("continuation_recency_decay must be in (0, 1]")
+        if self.value_policy_temperature is not None and self.value_policy_temperature <= 0:
+            raise ValueError("value_policy_temperature must be positive when enabled")
+        if self.value_policy_prior_visits < 0 or self.maximum_value_logit_adjustment < 0:
+            raise ValueError("value-policy shrinkage and logit bounds must be non-negative")
 
 
 @dataclass(frozen=True, slots=True)
@@ -413,6 +420,11 @@ def run_ocak_sanity(
             config=SelfPlayConfig(
                 exploration_plies=config.exploration_plies,
                 max_plies=config.max_plies,
+                value_policy_temperature=config.value_policy_temperature,
+                value_policy_prior_visits=config.value_policy_prior_visits,
+                maximum_value_logit_adjustment=(
+                    config.maximum_value_logit_adjustment
+                ),
             ),
             on_game_complete=game_complete,
         )
@@ -856,6 +868,9 @@ def _parser() -> argparse.ArgumentParser:
     parser.add_argument("--initial-model", type=Path)
     parser.add_argument("--inference-wait-ms", type=float, default=0.25)
     parser.add_argument("--continuation-recency-decay", type=float, default=0.60)
+    parser.add_argument("--value-policy-temperature", type=float)
+    parser.add_argument("--value-policy-prior-visits", type=float, default=8.0)
+    parser.add_argument("--maximum-value-logit-adjustment", type=float, default=1.25)
     return parser
 
 
@@ -884,6 +899,11 @@ def main(argv: list[str] | None = None) -> int:
             initial_model=arguments.initial_model,
             inference_wait_seconds=arguments.inference_wait_ms / 1_000,
             continuation_recency_decay=arguments.continuation_recency_decay,
+            value_policy_temperature=arguments.value_policy_temperature,
+            value_policy_prior_visits=arguments.value_policy_prior_visits,
+            maximum_value_logit_adjustment=(
+                arguments.maximum_value_logit_adjustment
+            ),
         )
     )
     print(json.dumps(asdict(result), indent=2))
