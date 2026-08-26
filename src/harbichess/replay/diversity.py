@@ -50,6 +50,10 @@ class DiversityMetrics:
     max_ply_draw_ratio: float
     repetition_redirects: int
     repetition_redirect_ratio: float
+    root_search_evaluated: int
+    root_search_adjustments: int
+    root_search_adjustment_ratio: float
+    mean_adjusted_root_margin: float
     terminations: tuple[TerminationCoverage, ...]
     openings: tuple[OpeningCoverage, ...]
 
@@ -112,6 +116,13 @@ def measure_diversity(
     repetition_redirects = sum(
         sample.repetition_redirected for game in games for sample in game.samples
     )
+    root_evidence = [
+        sample
+        for game in games
+        for sample in game.samples
+        if sample.root_search_final_margin is not None
+    ]
+    root_adjustments = [sample for sample in root_evidence if sample.root_search_adjusted]
     return DiversityMetrics(
         games=len(games),
         positions=position_count,
@@ -133,6 +144,17 @@ def measure_diversity(
         repetition_redirects=repetition_redirects,
         repetition_redirect_ratio=(
             repetition_redirects / position_count if position_count else 0.0
+        ),
+        root_search_evaluated=len(root_evidence),
+        root_search_adjustments=len(root_adjustments),
+        root_search_adjustment_ratio=(
+            len(root_adjustments) / len(root_evidence) if root_evidence else 0.0
+        ),
+        mean_adjusted_root_margin=(
+            sum(sample.root_search_final_margin or 0.0 for sample in root_adjustments)
+            / len(root_adjustments)
+            if root_adjustments
+            else 0.0
         ),
         terminations=tuple(
             TerminationCoverage(termination, count, count / len(games))
