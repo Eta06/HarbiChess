@@ -18,6 +18,10 @@ from harbichess.core.state import (
 )
 from harbichess.search.continuation import transform_repetition_target
 from harbichess.search.mcts import MCTS
+from harbichess.search.value_policy import (
+    ValueImprovedPolicyConfig,
+    value_improved_policy,
+)
 
 
 @dataclass(frozen=True, slots=True)
@@ -27,6 +31,9 @@ class SelfPlayConfig:
     max_plies: int = 512
     repetition_value_tolerance: float = 0.05
     minimum_repeating_policy_mass: float = 0.10
+    value_policy_temperature: float | None = None
+    value_policy_prior_visits: float = 8.0
+    maximum_value_logit_adjustment: float = 1.25
 
     def __post_init__(self) -> None:
         if (
@@ -35,6 +42,12 @@ class SelfPlayConfig:
             or self.max_plies <= 0
             or not 0.0 <= self.repetition_value_tolerance <= 2.0
             or not 0.0 <= self.minimum_repeating_policy_mass <= 1.0
+            or (
+                self.value_policy_temperature is not None
+                and self.value_policy_temperature <= 0
+            )
+            or self.value_policy_prior_visits < 0
+            or self.maximum_value_logit_adjustment < 0
         ):
             raise ValueError("self-play temperatures and ply limits must be non-negative")
 
@@ -113,14 +126,27 @@ def play_game(
         policy_moves = continuation.policy_moves
         selected = continuation.selected_move
         repetition_redirected = continuation.transformed
-        total_visits = sum(statistics.visits for statistics in policy_moves)
-        if total_visits <= 0:
-            raise RuntimeError("non-terminal search returned no visited moves")
-        policy = tuple(
-            (statistics.move, statistics.visits / total_visits)
-            for statistics in policy_moves
-            if statistics.visits > 0
-        )
+        if settings.value_policy_temperature is None:
+            total_visits = sum(statistics.visits for statistics in policy_moves)
+            if total_visits <= 0:
+                raise RuntimeError("non-terminal search returned no visited moves")
+            policy = tuple(
+                (statistics.move, statistics.visits / total_visits)
+                for statistics in policy_moves
+                if statistics.visits > 0
+            )
+        else:
+            policy = value_improved_policy(
+                policy_moves,
+                search.root_value,
+                config=ValueImprovedPolicyConfig(
+                    advantage_temperature=settings.value_policy_temperature,
+                    prior_visits=settings.value_policy_prior_visits,
+                    maximum_logit_adjustment=(
+                        settings.maximum_value_logit_adjustment
+                    ),
+                ),
+            )
         pending.append(
             (
                 state,
