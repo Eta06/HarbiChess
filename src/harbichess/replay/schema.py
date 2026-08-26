@@ -13,8 +13,8 @@ from harbichess.core.state import ChessMove, ChessState, Side
 from harbichess.selfplay.game import SelfPlayGame, SelfPlaySample
 
 REPLAY_SCHEMA_VERSION = 2
-TARGET_SCHEMA_VERSION = 8
-SUPPORTED_TARGET_SCHEMA_VERSIONS = frozenset({3, 4, 5, 6, 7, TARGET_SCHEMA_VERSION})
+TARGET_SCHEMA_VERSION = 9
+SUPPORTED_TARGET_SCHEMA_VERSIONS = frozenset({3, 4, 5, 6, 7, 8, TARGET_SCHEMA_VERSION})
 
 
 @dataclass(frozen=True, slots=True)
@@ -300,6 +300,9 @@ class ReplayRecord:
     repetition_redirected: bool
     continuation_evidence: ContinuationEvidence | None = None
     policy_regret_adjustment: PolicyRegretAdjustment | None = None
+    root_search_adjusted: bool = False
+    root_search_first_margin: float | None = None
+    root_search_final_margin: float | None = None
 
     def __post_init__(self) -> None:
         if not self.game_id or self.game_index < 0 or self.seed < 0 or self.ply != len(self.moves):
@@ -336,6 +339,14 @@ class ReplayRecord:
                 raise ValueError("regret redirect actions must remain in the blended policy")
             if adjustment.redirect_fraction > 0.0 and not self.repetition_redirected:
                 raise ValueError("positive regret adjustment must mark the target redirected")
+        root_margins = (self.root_search_first_margin, self.root_search_final_margin)
+        if self.root_search_adjusted and any(margin is None for margin in root_margins):
+            raise ValueError("adjusted root search requires both confidence margins")
+        if any(
+            margin is not None and (not math.isfinite(margin) or not -2.0 <= margin <= 2.0)
+            for margin in root_margins
+        ):
+            raise ValueError("root-search confidence margins must be finite and bounded")
 
     @property
     def state(self) -> ChessState:
@@ -417,6 +428,9 @@ def record_from_sample(
         root_value=sample.root_value,
         outcome_value=sample.outcome_value,
         repetition_redirected=sample.repetition_redirected,
+        root_search_adjusted=sample.root_search_adjusted,
+        root_search_first_margin=sample.root_search_first_margin,
+        root_search_final_margin=sample.root_search_final_margin,
     )
     record.validate_rules(rules)
     return record
