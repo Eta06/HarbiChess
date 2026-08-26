@@ -60,6 +60,10 @@ def test_replay_record_rejects_invalid_targets() -> None:
         ReplayRecord.from_dict(data)
 
     data = record.to_dict()
+    data["outcome_value"] = None
+    assert ReplayRecord.from_dict(data).outcome_value is None
+
+    data = record.to_dict()
     data["policy"] = ((record.selected_action, 0.5),)
     with pytest.raises(ValueError, match="normalized"):
         ReplayRecord.from_dict(data)
