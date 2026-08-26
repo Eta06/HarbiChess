@@ -151,6 +151,18 @@ class DashboardSnapshot:
     profile_inference_baseline_positions_per_second: float | None = None
     profile_inference_optimized_positions_per_second: float | None = None
     profile_optimal_workers: int | None = None
+    teacher_qualification_status: str = "not_run"
+    teacher_qualification_positions: int = 0
+    teacher_qualification_variants: int = 0
+    teacher_qualified_variants: tuple[str, ...] = ()
+    teacher_best_variant: str = "none"
+    teacher_best_value_delta: float | None = None
+    teacher_best_value_delta_low: float | None = None
+    teacher_best_value_delta_high: float | None = None
+    teacher_best_stability_tv: float | None = None
+    teacher_raw_value_mse: float | None = None
+    teacher_best_value_mse: float | None = None
+    teacher_qualification_result: str = ""
     pilot_status: PilotStatus = PilotStatus.NOT_STARTED
     pilot_steps_planned: int = 0
     pilot_steps_completed: int = 0
@@ -214,6 +226,9 @@ class DashboardSnapshot:
             data.get("checkpoint_status", CheckpointStatus.NONE)
         )
         data["pilot_reasons"] = tuple(data.get("pilot_reasons", ()))
+        data["teacher_qualified_variants"] = tuple(
+            data.get("teacher_qualified_variants", ())
+        )
         game = data.get("live_game", {})
         game["top_moves"] = tuple(tuple(item) for item in game.get("top_moves", ()))
         game["wdl"] = tuple(game.get("wdl", (0.0, 1.0, 0.0)))
