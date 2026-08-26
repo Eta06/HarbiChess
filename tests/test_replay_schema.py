@@ -73,6 +73,33 @@ def test_replay_record_rejects_invalid_targets() -> None:
         ReplayRecord.from_dict(data)
 
 
+def test_replay_record_round_trips_root_search_confidence() -> None:
+    rules, game = scripted_game()
+    record = records_from_game(game, run_id="pilot", rules=rules)[0]
+    adjusted = replace(
+        record,
+        root_search_adjusted=True,
+        root_search_first_margin=0.12,
+        root_search_final_margin=0.18,
+    )
+
+    assert ReplayRecord.from_dict(adjusted.to_dict()) == adjusted
+
+    legacy = adjusted.to_dict()
+    for field in (
+        "root_search_adjusted",
+        "root_search_first_margin",
+        "root_search_final_margin",
+    ):
+        legacy.pop(field)
+    assert not ReplayRecord.from_dict(legacy).root_search_adjusted
+
+    invalid = adjusted.to_dict()
+    invalid["root_search_final_margin"] = None
+    with pytest.raises(ValueError, match="both confidence margins"):
+        ReplayRecord.from_dict(invalid)
+
+
 def test_replay_record_round_trips_branch_confidence_evidence() -> None:
     rules, game = scripted_game()
     record = records_from_game(game, run_id="pilot", rules=rules)[0]
