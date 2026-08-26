@@ -25,7 +25,7 @@ _PIECE_VALUES = {
 @dataclass(frozen=True, slots=True)
 class TacticalOracleConfig:
     depth: int = 2
-    material_scale: float = 8.0
+    material_scale: float = 39.0
     cache_size: int = 100_000
 
     def __post_init__(self) -> None:
