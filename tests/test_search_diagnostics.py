@@ -1,9 +1,14 @@
+from pathlib import Path
 from typing import ClassVar
 
 import chess
 import pytest
 
 from harbichess.chess.rules import PythonChessRules
+from harbichess.evaluation.search_diagnostics import (
+    SearchDiagnosticConfig,
+    audit_search_conventions,
+)
 from harbichess.search.diagnostics import (
     TACTICAL_CASES,
     TacticalCase,
@@ -53,6 +58,15 @@ def test_tactical_fixtures_are_proven_by_rules() -> None:
     }
 
 
+def test_search_conventions_preserve_sign_and_history() -> None:
+    audit = audit_search_conventions()
+
+    assert audit["passed"] is True
+    assert audit["terminal_value"] == -1
+    assert audit["backed_up_values_root_to_leaf"] == (1.0, -1.0, 1.0, -1.0)
+    assert all(audit["checks"].values())
+
+
 def test_tactical_sweep_reports_budget_regressions_and_oracle_mass() -> None:
     rules = PythonChessRules()
     result = run_tactical_sweep(
@@ -97,4 +111,11 @@ def test_tactical_sweep_rejects_bad_schedule_and_fixture() -> None:
                     ("d1d2",),
                 ),
             )
+        )
+    with pytest.raises(ValueError, match="configuration"):
+        SearchDiagnosticConfig(
+            run_result=Path("run.json"),
+            shard=Path("replay.jsonl.gz"),
+            output_dir=Path("diagnostics"),
+            budgets=(32, 8),
         )
