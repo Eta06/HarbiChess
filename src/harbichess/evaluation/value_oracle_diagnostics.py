@@ -48,6 +48,7 @@ class ValueOracleDiagnosticConfig:
     seed: int = 2026082621
     oracle_depth: int = 2
     verifier_depth: int = 4
+    material_scale: float = 39.0
     bootstrap_samples: int = 2_000
 
     def __post_init__(self) -> None:
@@ -64,6 +65,7 @@ class ValueOracleDiagnosticConfig:
             )
             <= 0
             or self.verifier_depth <= self.oracle_depth
+            or self.material_scale <= 0
         ):
             raise ValueError("value oracle diagnostic configuration is invalid")
 
@@ -152,12 +154,18 @@ def run_value_oracle_diagnostics(config: ValueOracleDiagnosticConfig) -> Path:
     neural = NeuralPositionEvaluator(batcher, rules=rules)
     shallow_oracle = DeterministicTacticalOracle(
         rules=rules,
-        config=TacticalOracleConfig(depth=config.oracle_depth),
+        config=TacticalOracleConfig(
+            depth=config.oracle_depth,
+            material_scale=config.material_scale,
+        ),
     )
     oracle = OracleValueEvaluator(neural, shallow_oracle)
     verifier = DeterministicTacticalOracle(
         rules=rules,
-        config=TacticalOracleConfig(depth=config.verifier_depth),
+        config=TacticalOracleConfig(
+            depth=config.verifier_depth,
+            material_scale=config.material_scale,
+        ),
     )
     started = time.perf_counter()
     try:
@@ -300,6 +308,7 @@ def _parser() -> argparse.ArgumentParser:
     parser.add_argument("--seed", type=int, default=2026082621)
     parser.add_argument("--oracle-depth", type=int, default=2)
     parser.add_argument("--verifier-depth", type=int, default=4)
+    parser.add_argument("--material-scale", type=float, default=39.0)
     parser.add_argument("--bootstrap-samples", type=int, default=2_000)
     return parser
 
@@ -317,6 +326,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             seed=arguments.seed,
             oracle_depth=arguments.oracle_depth,
             verifier_depth=arguments.verifier_depth,
+            material_scale=arguments.material_scale,
             bootstrap_samples=arguments.bootstrap_samples,
         )
     )
