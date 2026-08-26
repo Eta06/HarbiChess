@@ -63,6 +63,7 @@ class PreparedTrainingBatch:
     inputs: mx.array
     policy_targets: mx.array
     wdl_targets: mx.array
+    value_weights: mx.array
 
     @property
     def size(self) -> int:
@@ -76,6 +77,7 @@ class PreparedTrainingBatch:
             mx.take(self.inputs, rows, axis=0),
             mx.take(self.policy_targets, rows, axis=0),
             mx.take(self.wdl_targets, rows, axis=0),
+            mx.take(self.value_weights, rows, axis=0),
         )
 
 
@@ -101,6 +103,7 @@ class MLXLearner:
         inputs: mx.array,
         policy_targets: mx.array,
         wdl_targets: mx.array,
+        value_weights: mx.array,
     ) -> tuple[mx.array, mx.array, mx.array]:
         policy_logits, wdl_logits = self.network(inputs)
         policy_loss = nn.losses.cross_entropy(
@@ -108,16 +111,20 @@ class MLXLearner:
             policy_targets,
             reduction="mean",
         )
-        value_loss = nn.losses.cross_entropy(
+        value_losses = nn.losses.cross_entropy(
             wdl_logits,
             wdl_targets,
-            reduction="mean",
+            reduction="none",
+        )
+        value_loss = mx.sum(value_losses * value_weights) / mx.maximum(
+            mx.sum(value_weights),
+            mx.array(1.0),
         )
         total = self.config.policy_weight * policy_loss + self.config.value_weight * value_loss
         return total, policy_loss, value_loss
 
     @staticmethod
-    def _arrays(batch: TrainingBatch) -> tuple[mx.array, mx.array, mx.array]:
+    def _arrays(batch: TrainingBatch) -> tuple[mx.array, mx.array, mx.array, mx.array]:
         shape = batch.positions[0].shape
         if any(position.shape != shape for position in batch.positions):
             raise ValueError("training positions must share one encoded shape")
@@ -125,20 +132,31 @@ class MLXLearner:
         inputs = inputs.reshape((len(batch.positions), *shape))
         policies = mx.array(batch.policy_targets, dtype=mx.float32)
         wdl = mx.array(batch.wdl_targets, dtype=mx.int32)
-        return inputs, policies, wdl
+        value_weights = mx.array(batch.value_weights, dtype=mx.float32)
+        return inputs, policies, wdl, value_weights
 
     @classmethod
     def prepare_batch(cls, batch: TrainingBatch) -> PreparedTrainingBatch:
         prepared = PreparedTrainingBatch(*cls._arrays(batch))
-        mx.eval(prepared.inputs, prepared.policy_targets, prepared.wdl_targets)
+        mx.eval(
+            prepared.inputs,
+            prepared.policy_targets,
+            prepared.wdl_targets,
+            prepared.value_weights,
+        )
         return prepared
 
     @staticmethod
     def _prepared_arrays(
         batch: TrainingBatch | PreparedTrainingBatch,
-    ) -> tuple[mx.array, mx.array, mx.array]:
+    ) -> tuple[mx.array, mx.array, mx.array, mx.array]:
         if isinstance(batch, PreparedTrainingBatch):
-            return batch.inputs, batch.policy_targets, batch.wdl_targets
+            return (
+                batch.inputs,
+                batch.policy_targets,
+                batch.wdl_targets,
+                batch.value_weights,
+            )
         return MLXLearner._arrays(batch)
 
     @staticmethod
@@ -155,11 +173,12 @@ class MLXLearner:
         self,
         batch: TrainingBatch | PreparedTrainingBatch,
     ) -> TrainingMetrics:
-        inputs, policies, wdl = self._prepared_arrays(batch)
+        inputs, policies, wdl, value_weights = self._prepared_arrays(batch)
         (total, policy_loss, value_loss), gradients = self._loss_and_grad(
             inputs,
             policies,
             wdl,
+            value_weights,
         )
         gradients, gradient_norm = optim.clip_grad_norm(
             gradients,
@@ -194,8 +213,8 @@ class MLXLearner:
         self,
         batch: TrainingBatch | PreparedTrainingBatch,
     ) -> tuple[float, float, float]:
-        inputs, policies, wdl = self._prepared_arrays(batch)
-        total, policy_loss, value_loss = self._loss(inputs, policies, wdl)
+        inputs, policies, wdl, value_weights = self._prepared_arrays(batch)
+        total, policy_loss, value_loss = self._loss(inputs, policies, wdl, value_weights)
         mx.eval(total, policy_loss, value_loss)
         return float(total.item()), float(policy_loss.item()), float(value_loss.item())
 
