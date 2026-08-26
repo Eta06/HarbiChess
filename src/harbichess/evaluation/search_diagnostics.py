@@ -20,7 +20,7 @@ from typing import Any
 from harbichess.backends.mlx_backend import MLXPolicyValueBackend
 from harbichess.backends.mlx_network import HarbiChessNetwork, NetworkConfig
 from harbichess.chess.rules import PythonChessRules
-from harbichess.core.state import ChessMove
+from harbichess.core.state import ChessMove, ChessState
 from harbichess.evaluation.teacher_qualification import select_stratified_records
 from harbichess.replay.schema import ReplayRecord
 from harbichess.replay.shard import read_shard
@@ -156,7 +156,7 @@ def audit_batching(
     rules: PythonChessRules,
     workers: int,
 ) -> dict[str, Any]:
-    """Compare serial and coalesced inference outputs on identical encoded states."""
+    """Compare serial and coalesced inference and search on identical states."""
 
     states = tuple(rules.initial_state(case.fen) for case in TACTICAL_CASES)
     serial = tuple(evaluator.evaluate(state) for state in states)
@@ -168,11 +168,46 @@ def audit_batching(
     )
     maximum_policy = max(distance[0] for distance in distances)
     maximum_value = max(distance[1] for distance in distances)
+    search = MCTS(
+        evaluator,
+        rules=rules,
+        config=SearchConfig(simulations=64, dirichlet_fraction=0.0),
+    )
+
+    def inspect(
+        item: tuple[int, ChessState],
+    ) -> tuple[str, tuple[tuple[str, int, float], ...]]:
+        index, state = item
+        result = search.search(
+            state,
+            rng=random.Random(f"batch-audit:{index}"),
+            add_root_noise=False,
+        )
+        selected = result.select_move(temperature=0.0, rng=random.Random(0)).uci
+        statistics = tuple(
+            (move.move.uci, move.visits, move.mean_value) for move in result.moves
+        )
+        return selected, statistics
+
+    serial_search = tuple(inspect(item) for item in enumerate(states))
+    with ThreadPoolExecutor(max_workers=min(workers, len(states))) as pool:
+        parallel_search = tuple(pool.map(inspect, enumerate(states)))
+    selection_mismatches = tuple(
+        TACTICAL_CASES[index].name
+        for index, (serial_result, parallel_result) in enumerate(
+            zip(serial_search, parallel_search, strict=True)
+        )
+        if serial_result[0] != parallel_result[0]
+    )
     return {
-        "equivalent": maximum_policy <= 1e-7 and maximum_value <= 1e-7,
+        "bitwise_equivalent": maximum_policy == 0.0 and maximum_value == 0.0,
+        "numerically_close": maximum_policy <= 1e-4 and maximum_value <= 1e-4,
         "maximum_policy_probability_delta": maximum_policy,
         "maximum_value_delta": maximum_value,
         "positions": len(states),
+        "search_budget": 64,
+        "search_selection_equivalent": not selection_mismatches,
+        "search_selection_mismatches": selection_mismatches,
     }
 
 
