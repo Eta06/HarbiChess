@@ -1,3 +1,5 @@
+from dataclasses import replace
+
 import pytest
 from test_replay_schema import scripted_game
 
@@ -78,3 +80,19 @@ def test_prepared_training_batch_selects_device_rows() -> None:
     assert metrics.step == 1
     with pytest.raises(IndexError, match="indices"):
         prepared.select(())
+
+
+def test_unknown_outcomes_have_zero_value_loss_and_keep_policy_gradient() -> None:
+    mx.random.seed(37)
+    _, game = scripted_game()
+    record = replace(records_from_game(game, run_id="truncated")[0], outcome_value=None)
+    batch = build_training_batch((record,))
+    learner = MLXLearner(HarbiChessNetwork(NetworkConfig(trunk_channels=8, residual_blocks=1)))
+
+    total, policy, value = learner.evaluate_loss(batch)
+    metric = learner.train_step(batch)
+
+    assert value == pytest.approx(0.0)
+    assert total == pytest.approx(policy)
+    assert metric.policy_loss > 0.0
+    assert metric.value_loss == pytest.approx(0.0)
