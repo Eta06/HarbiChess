@@ -18,6 +18,7 @@ from harbichess.core.state import (
 )
 from harbichess.search.continuation import transform_repetition_target
 from harbichess.search.mcts import MCTS
+from harbichess.search.root_halving import RootHalvingConfig, sequential_halving_root
 from harbichess.search.value_policy import (
     ValueImprovedPolicyConfig,
     value_improved_policy,
@@ -34,6 +35,7 @@ class SelfPlayConfig:
     value_policy_temperature: float | None = None
     value_policy_prior_visits: float = 8.0
     maximum_value_logit_adjustment: float = 1.25
+    root_halving_config: RootHalvingConfig | None = None
 
     def __post_init__(self) -> None:
         if (
@@ -48,6 +50,10 @@ class SelfPlayConfig:
             )
             or self.value_policy_prior_visits < 0
             or self.maximum_value_logit_adjustment < 0
+            or (
+                self.root_halving_config is not None
+                and self.value_policy_temperature is not None
+            )
         ):
             raise ValueError("self-play temperatures and ply limits must be non-negative")
 
@@ -61,6 +67,9 @@ class SelfPlaySample:
     root_value: float
     outcome_value: int
     repetition_redirected: bool = False
+    root_search_adjusted: bool = False
+    root_search_first_margin: float | None = None
+    root_search_final_margin: float | None = None
 
 
 @dataclass(frozen=True, slots=True)
@@ -99,6 +108,9 @@ def play_game(
             ChessMove,
             float,
             bool,
+            bool,
+            float | None,
+            float | None,
         ]
     ] = []
 
@@ -110,6 +122,20 @@ def play_game(
             outcome = GameOutcome(TerminalResult.DRAW, "max_plies")
             break
         search = mcts.search(state, rng=rng, add_root_noise=True)
+        root_halving = (
+            sequential_halving_root(
+                mcts,
+                state,
+                search,
+                rng=rng,
+                config=settings.root_halving_config,
+            )
+            if settings.root_halving_config is not None
+            else None
+        )
+        if root_halving is not None:
+            search = root_halving.search
+        root_evidence = root_halving.evidence if root_halving is not None else None
         side_to_move = rules.view(state).side_to_move
         temperature = settings.temperature if state.ply < settings.exploration_plies else 0.0
         selected = search.select_move(temperature=temperature, rng=rng)
@@ -155,6 +181,9 @@ def play_game(
                 selected,
                 search.root_value,
                 repetition_redirected,
+                bool(root_evidence and root_evidence.adjusted),
+                root_evidence.first_round_margin if root_evidence else None,
+                root_evidence.final_round_margin if root_evidence else None,
             )
         )
         state = rules.apply(state, selected)
@@ -168,6 +197,9 @@ def play_game(
             root_value=root_value,
             outcome_value=outcome.value_for(side),
             repetition_redirected=repetition_redirected,
+            root_search_adjusted=root_search_adjusted,
+            root_search_first_margin=root_search_first_margin,
+            root_search_final_margin=root_search_final_margin,
         )
         for (
             sample_state,
@@ -176,6 +208,9 @@ def play_game(
             selected_move,
             root_value,
             repetition_redirected,
+            root_search_adjusted,
+            root_search_first_margin,
+            root_search_final_margin,
         ) in pending
     )
     return SelfPlayGame(game_index, seed, state, outcome, samples)
