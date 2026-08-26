@@ -19,11 +19,17 @@ class TrainingBatch:
     positions: tuple[EncodedPosition, ...]
     policy_targets: tuple[tuple[float, ...], ...]
     wdl_targets: tuple[int, ...]
+    value_weights: tuple[float, ...]
     _validate: InitVar[bool] = True
 
     def __post_init__(self, _validate: bool) -> None:
         size = len(self.positions)
-        if size == 0 or len(self.policy_targets) != size or len(self.wdl_targets) != size:
+        if (
+            size == 0
+            or len(self.policy_targets) != size
+            or len(self.wdl_targets) != size
+            or len(self.value_weights) != size
+        ):
             raise ValueError("training batch components must have equal non-zero length")
         if not _validate:
             return
@@ -37,6 +43,8 @@ class TrainingBatch:
             raise ValueError("policy targets must be finite, non-negative, and normalized")
         if any(target not in (0, 1, 2) for target in self.wdl_targets):
             raise ValueError("WDL class targets must be win=0, draw=1, or loss=2")
+        if any(weight not in (0.0, 1.0) for weight in self.value_weights):
+            raise ValueError("value weights must mask unknown targets with zero or one")
 
     def select(self, indices: tuple[int, ...]) -> TrainingBatch:
         """Select rows already validated by this immutable parent batch."""
@@ -47,6 +55,7 @@ class TrainingBatch:
             tuple(self.positions[index] for index in indices),
             tuple(self.policy_targets[index] for index in indices),
             tuple(self.wdl_targets[index] for index in indices),
+            tuple(self.value_weights[index] for index in indices),
             _validate=False,
         )
 
@@ -149,6 +158,7 @@ def build_training_batch(
     positions = []
     policies = []
     wdl_targets = []
+    value_weights = []
     for record in records:
         record.validate_rules(engine)
         positions.append(board_encoder.encode(record.state))
@@ -156,5 +166,15 @@ def build_training_batch(
         for action, probability in record.policy:
             dense_policy[action] = probability
         policies.append(tuple(dense_policy))
-        wdl_targets.append({1: 0, 0: 1, -1: 2}[record.outcome_value])
-    return TrainingBatch(tuple(positions), tuple(policies), tuple(wdl_targets))
+        if record.outcome_value is None:
+            wdl_targets.append(1)
+            value_weights.append(0.0)
+        else:
+            wdl_targets.append({1: 0, 0: 1, -1: 2}[record.outcome_value])
+            value_weights.append(1.0)
+    return TrainingBatch(
+        tuple(positions),
+        tuple(policies),
+        tuple(wdl_targets),
+        tuple(value_weights),
+    )
