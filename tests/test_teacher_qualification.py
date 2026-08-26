@@ -1,17 +1,34 @@
 import json
+from types import SimpleNamespace
 
 import pytest
 from test_replay_schema import scripted_game
 
+from harbichess.chess.rules import PythonChessRules
+from harbichess.core.state import ChessMove
 from harbichess.dashboard.state import SnapshotStore
 from harbichess.evaluation.teacher_qualification import (
     QualificationConfig,
     _mean_policy,
     _tv,
+    _verify_action,
     publish_qualification_result,
     select_stratified_records,
 )
 from harbichess.replay.schema import records_from_game
+from harbichess.search.evaluator import PositionEvaluation
+from harbichess.search.mcts import MCTS, SearchConfig
+
+
+class UniformEvaluator:
+    def __init__(self, rules: PythonChessRules) -> None:
+        self.rules = rules
+
+    def evaluate(self, state) -> PositionEvaluation:
+        return PositionEvaluation(
+            tuple((move, 1.0) for move in self.rules.legal_moves(state)),
+            0.0,
+        )
 
 
 def test_stratified_position_selection_is_deterministic_and_bounded(tmp_path) -> None:
@@ -51,6 +68,20 @@ def test_qualification_config_rejects_empty_replay(tmp_path) -> None:
             shards=(),
             output_dir=tmp_path / "qualification",
         )
+
+
+def test_action_verifier_reports_value_from_parent_perspective() -> None:
+    rules = PythonChessRules()
+    state = rules.initial_state("8/8/8/8/8/8/8/k1KQ4 w - - 0 1")
+    verifier = MCTS(
+        UniformEvaluator(rules),
+        rules=rules,
+        config=SearchConfig(simulations=8, dirichlet_fraction=0.0),
+    )
+
+    value = _verify_action(verifier, SimpleNamespace(state=state), ChessMove("d1a4"))
+
+    assert value == 1.0
 
 
 def test_completed_qualification_blocks_dashboard_learner_on_failure(tmp_path) -> None:
