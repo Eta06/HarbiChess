@@ -1,4 +1,5 @@
 import random
+from dataclasses import replace
 
 import pytest
 
@@ -62,3 +63,19 @@ def test_diversity_requires_games_and_positive_depths() -> None:
         measure_diversity(())
     with pytest.raises(ValueError, match="positive"):
         measure_diversity((one_ply_game(0, "e2e4"),), opening_plies=(0,))
+
+
+def test_diversity_counts_only_confidence_gated_root_adjustments() -> None:
+    game = one_ply_game(0, "e2e4")
+    sample = replace(
+        game.samples[0],
+        root_search_adjusted=True,
+        root_search_first_margin=0.10,
+        root_search_final_margin=0.20,
+    )
+    metrics = measure_diversity((replace(game, samples=(sample,)),), opening_plies=(1,))
+
+    assert metrics.root_search_evaluated == 1
+    assert metrics.root_search_adjustments == 1
+    assert metrics.root_search_adjustment_ratio == 1.0
+    assert metrics.mean_adjusted_root_margin == pytest.approx(0.20)
