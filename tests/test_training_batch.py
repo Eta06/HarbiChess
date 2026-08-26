@@ -16,6 +16,7 @@ def test_training_batch_encodes_policy_and_side_to_move_wdl() -> None:
     assert len(batch.positions) == 4
     assert batch.positions[0].shape == (8, 8, 104)
     assert batch.wdl_targets == (2, 0, 2, 0)
+    assert batch.value_weights == (1.0, 1.0, 1.0, 1.0)
     assert all(sum(policy) == pytest.approx(1.0) for policy in batch.policy_targets)
 
 
@@ -55,6 +56,11 @@ def test_prevalidated_batch_selection_reuses_encoded_rows() -> None:
         batch.wdl_targets[0],
         batch.wdl_targets[2],
     )
+    assert selected.value_weights == (
+        batch.value_weights[2],
+        batch.value_weights[0],
+        batch.value_weights[2],
+    )
     with pytest.raises(IndexError, match="indices"):
         batch.select(())
 
@@ -69,6 +75,17 @@ def test_sampler_indices_address_the_original_replay_tuple() -> None:
     indices = by_index.sample_indices(6)
 
     assert sampled == tuple(records[index] for index in indices)
+
+
+def test_training_batch_masks_unknown_value_targets_but_keeps_policy() -> None:
+    _, game = scripted_game()
+    record = replace(records_from_game(game, run_id="truncated")[0], outcome_value=None)
+
+    batch = build_training_batch((record,))
+
+    assert batch.wdl_targets == (1,)
+    assert batch.value_weights == (0.0,)
+    assert sum(batch.policy_targets[0]) == pytest.approx(1.0)
 
 
 def test_sampler_holds_requested_continuation_fraction() -> None:
