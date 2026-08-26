@@ -32,6 +32,7 @@ class SelfPlayConfig:
     max_plies: int = 512
     repetition_value_tolerance: float = 0.05
     minimum_repeating_policy_mass: float = 0.10
+    repetition_target_transform: bool = False
     value_policy_temperature: float | None = None
     value_policy_prior_visits: float = 8.0
     maximum_value_logit_adjustment: float = 1.25
@@ -65,7 +66,7 @@ class SelfPlaySample:
     visit_policy: tuple[tuple[ChessMove, float], ...]
     selected_move: ChessMove
     root_value: float
-    outcome_value: int
+    outcome_value: int | None
     repetition_redirected: bool = False
     root_search_adjusted: bool = False
     root_search_first_margin: float | None = None
@@ -139,19 +140,23 @@ def play_game(
         side_to_move = rules.view(state).side_to_move
         temperature = settings.temperature if state.ply < settings.exploration_plies else 0.0
         selected = search.select_move(temperature=temperature, rng=rng)
-        continuation = transform_repetition_target(
-            search,
-            rules,
-            state,
-            selected,
-            temperature=temperature,
-            value_tolerance=settings.repetition_value_tolerance,
-            minimum_repeating_policy_mass=settings.minimum_repeating_policy_mass,
-            rng=rng,
-        )
-        policy_moves = continuation.policy_moves
-        selected = continuation.selected_move
-        repetition_redirected = continuation.transformed
+        if settings.repetition_target_transform:
+            continuation = transform_repetition_target(
+                search,
+                rules,
+                state,
+                selected,
+                temperature=temperature,
+                value_tolerance=settings.repetition_value_tolerance,
+                minimum_repeating_policy_mass=settings.minimum_repeating_policy_mass,
+                rng=rng,
+            )
+            policy_moves = continuation.policy_moves
+            selected = continuation.selected_move
+            repetition_redirected = continuation.transformed
+        else:
+            policy_moves = search.moves
+            repetition_redirected = False
         if settings.value_policy_temperature is None:
             total_visits = sum(statistics.visits for statistics in policy_moves)
             if total_visits <= 0:
@@ -195,7 +200,9 @@ def play_game(
             visit_policy=policy,
             selected_move=selected_move,
             root_value=root_value,
-            outcome_value=outcome.value_for(side),
+            outcome_value=(
+                None if outcome.termination == "max_plies" else outcome.value_for(side)
+            ),
             repetition_redirected=repetition_redirected,
             root_search_adjusted=root_search_adjusted,
             root_search_first_margin=root_search_first_margin,
