@@ -1,7 +1,10 @@
+from pathlib import Path
+
 import pytest
 
 from harbichess.chess.rules import PythonChessRules
 from harbichess.core.state import ChessMove
+from harbichess.evaluation.value_oracle_diagnostics import ValueOracleDiagnosticConfig
 from harbichess.search.evaluator import PositionEvaluation
 from harbichess.search.value_oracle import (
     DeterministicTacticalOracle,
@@ -54,3 +57,11 @@ def test_oracle_terminal_and_history_values_use_side_to_move() -> None:
 def test_oracle_configuration_rejects_invalid_depth() -> None:
     with pytest.raises(ValueError, match="configuration"):
         TacticalOracleConfig(depth=-1)
+    with pytest.raises(ValueError, match="configuration"):
+        ValueOracleDiagnosticConfig(
+            run_result=Path("run.json"),
+            shard=Path("replay.jsonl.gz"),
+            output_dir=Path("diagnostics"),
+            oracle_depth=4,
+            verifier_depth=2,
+        )
