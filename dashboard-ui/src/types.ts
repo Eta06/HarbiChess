@@ -114,6 +114,18 @@ export interface DashboardSnapshot {
   profile_inference_baseline_positions_per_second: number | null;
   profile_inference_optimized_positions_per_second: number | null;
   profile_optimal_workers: number | null;
+  teacher_qualification_status: "not_run" | "passed" | "failed";
+  teacher_qualification_positions: number;
+  teacher_qualification_variants: number;
+  teacher_qualified_variants: string[];
+  teacher_best_variant: string;
+  teacher_best_value_delta: number | null;
+  teacher_best_value_delta_low: number | null;
+  teacher_best_value_delta_high: number | null;
+  teacher_best_stability_tv: number | null;
+  teacher_raw_value_mse: number | null;
+  teacher_best_value_mse: number | null;
+  teacher_qualification_result: string;
   replay_samples: number;
   replay_capacity: number;
   policy_loss: number | null;
