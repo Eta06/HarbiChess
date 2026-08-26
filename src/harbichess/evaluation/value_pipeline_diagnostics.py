@@ -94,8 +94,16 @@ def _model_metrics(
         inputs = mx.array([position.values for position in positions], dtype=mx.float32)
         inputs = inputs.reshape((len(positions), *shape))
         policy_logits, wdl_logits = network(inputs)
-        policy_log_probs = mx.log_softmax(policy_logits, axis=1)
-        wdl_log_probs = mx.log_softmax(wdl_logits, axis=1)
+        policy_log_probs = policy_logits - mx.logsumexp(
+            policy_logits,
+            axis=1,
+            keepdims=True,
+        )
+        wdl_log_probs = wdl_logits - mx.logsumexp(
+            wdl_logits,
+            axis=1,
+            keepdims=True,
+        )
         wdl_probs = mx.softmax(wdl_logits, axis=1)
         mx.eval(policy_log_probs, wdl_log_probs, wdl_probs)
         policy_rows = policy_log_probs.tolist()
