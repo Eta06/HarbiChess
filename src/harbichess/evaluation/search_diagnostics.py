@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import math
 import os
 import random
 import subprocess
@@ -14,7 +15,7 @@ from concurrent.futures import ThreadPoolExecutor
 from dataclasses import asdict, dataclass
 from datetime import UTC, datetime
 from pathlib import Path
-from statistics import mean
+from statistics import mean, pstdev
 from typing import Any
 
 from harbichess.backends.mlx_backend import MLXPolicyValueBackend
@@ -150,6 +151,21 @@ def _evaluation_distance(
     return policy, abs(first.value - second.value)
 
 
+def _correlation(left: tuple[float, ...], right: tuple[float, ...]) -> float | None:
+    if len(left) != len(right) or len(left) < 2:
+        return None
+    left_mean, right_mean = mean(left), mean(right)
+    numerator = sum(
+        (first - left_mean) * (second - right_mean)
+        for first, second in zip(left, right, strict=True)
+    )
+    left_scale = sum((value - left_mean) ** 2 for value in left)
+    right_scale = sum((value - right_mean) ** 2 for value in right)
+    if left_scale == 0.0 or right_scale == 0.0:
+        return None
+    return numerator / math.sqrt(left_scale * right_scale)
+
+
 def audit_batching(
     evaluator: NeuralPositionEvaluator,
     *,
@@ -226,10 +242,25 @@ def profile_replay_search(
         raw = tuple(pool.map(lambda record: evaluator.evaluate(record.state), records))
     raw_moves = tuple(_argmax_prior(evaluation) for evaluation in raw)
     raw_values = tuple(evaluation.value for evaluation in raw)
+    labeled = tuple(
+        (value, float(record.outcome_value))
+        for value, record in zip(raw_values, records, strict=True)
+        if record.outcome_value is not None
+    )
+    outcomes = tuple(target for _, target in labeled)
+    values_by_outcome = {
+        label: tuple(
+            value for value, target in labeled if target == expected
+        )
+        for label, expected in (("win", 1.0), ("draw", 0.0), ("loss", -1.0))
+    }
     result: dict[str, Any] = {
         "positions": len(records),
         "mean_raw_value": mean(raw_values),
         "mean_absolute_raw_value": mean(abs(value) for value in raw_values),
+        "raw_value_standard_deviation": pstdev(raw_values),
+        "minimum_raw_value": min(raw_values),
+        "maximum_raw_value": max(raw_values),
         "raw_value_signs": {
             "positive": sum(value > 0 for value in raw_values),
             "zero": sum(value == 0 for value in raw_values),
@@ -238,6 +269,17 @@ def profile_replay_search(
         "mean_top_policy_prior": mean(
             max(prior for _, prior in evaluation.priors) for evaluation in raw
         ),
+        "labeled_positions": len(labeled),
+        "raw_value_mse": (
+            mean((value - target) ** 2 for value, target in labeled) if labeled else None
+        ),
+        "raw_value_outcome_correlation": (
+            _correlation(tuple(value for value, _ in labeled), outcomes) if labeled else None
+        ),
+        "mean_raw_value_by_outcome": {
+            label: mean(values) if values else None
+            for label, values in values_by_outcome.items()
+        },
         "budgets": [],
     }
     for budget in budgets:
