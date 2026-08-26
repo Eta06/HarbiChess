@@ -26,6 +26,7 @@ class PilotConfig:
     validation_interval_steps: int = 10
     early_stopping_patience: int = 5
     minimum_validation_delta: float = 1e-3
+    maximum_value_validation_ratio: float = 1.05
     checkpoint_interval_steps: int = 8
     maximum_validation_checkpoints: int = 4
     continuation_fraction: float | None = None
@@ -40,6 +41,8 @@ class PilotConfig:
             or self.early_stopping_patience <= 0
             or self.checkpoint_interval_steps <= 0
             or self.maximum_validation_checkpoints <= 0
+            or not math.isfinite(self.maximum_value_validation_ratio)
+            or self.maximum_value_validation_ratio < 1.0
         ):
             raise ValueError("pilot steps and batch size must be positive")
         if not 0.0 <= self.minimum_train_improvement < 1.0:
@@ -61,17 +64,21 @@ class PilotReport:
     final_train_loss: float
     initial_validation_loss: float
     final_validation_loss: float
+    initial_validation_value_loss: float
+    final_validation_value_loss: float
     maximum_gradient_norm: float
     metrics: tuple[TrainingMetrics, ...]
     sampler_rng_state: object
     attempted_steps: int
     best_validation_step: int
     best_validation_loss: float
+    best_validation_value_loss: float
     stopped_early: bool
     validation_candidates: tuple[ValidationCandidate, ...]
     stop_reason: PilotStopReason
     last_validation_step: int
     last_validation_loss: float
+    last_validation_value_loss: float
     last_improvement_step: int
     stale_validation_evaluations: int
     validation_evaluations: int
@@ -81,6 +88,8 @@ class PilotReport:
 class ValidationCandidate:
     step: int
     validation_loss: float
+    validation_policy_loss: float
+    validation_value_loss: float
     learner_snapshot: LearnerSnapshot
     sampler_rng_state: object
 
@@ -114,7 +123,7 @@ def run_sanity_pilot(
     train_eval = learner.prepare_batch(raw_train_eval)
     validation_eval = learner.prepare_batch(raw_validation_eval)
     initial_train = learner.evaluate_loss(train_eval)[0]
-    initial_validation = learner.evaluate_loss(validation_eval)[0]
+    initial_validation, _, initial_validation_value = learner.evaluate_loss(validation_eval)
     sampler = GameBalancedSampler(
         train_records,
         seed=settings.seed,
@@ -124,12 +133,14 @@ def run_sanity_pilot(
     best_snapshot = learner.snapshot()
     best_sampler_state = sampler.rng_state
     best_validation = initial_validation
+    best_validation_value = initial_validation_value
     best_validation_step = learner.step
     stale_evaluations = 0
     stopped_early = False
     stop_reason = PilotStopReason.MAX_STEPS
     last_validation_step = learner.step
     last_validation_loss = initial_validation
+    last_validation_value_loss = initial_validation_value
     last_improvement_step = learner.step
     validation_evaluations = 0
     validation_candidates: list[ValidationCandidate] = []
@@ -140,12 +151,23 @@ def run_sanity_pilot(
         metrics.append(metric)
         validation_loss = None
         if metric.step % settings.validation_interval_steps == 0 or metric.step == settings.steps:
-            validation_loss = learner.evaluate_loss(validation_eval)[0]
+            validation_loss, validation_policy_loss, validation_value_loss = (
+                learner.evaluate_loss(validation_eval)
+            )
             validation_evaluations += 1
             last_validation_step = metric.step
             last_validation_loss = validation_loss
-            if validation_loss < best_validation - settings.minimum_validation_delta:
+            last_validation_value_loss = validation_value_loss
+            value_safe = (
+                validation_value_loss
+                <= initial_validation_value * settings.maximum_value_validation_ratio
+            )
+            if (
+                validation_loss < best_validation - settings.minimum_validation_delta
+                and value_safe
+            ):
                 best_validation = validation_loss
+                best_validation_value = validation_value_loss
                 best_validation_step = metric.step
                 best_snapshot = learner.snapshot()
                 best_sampler_state = sampler.rng_state
@@ -153,6 +175,8 @@ def run_sanity_pilot(
                 candidate = ValidationCandidate(
                     step=metric.step,
                     validation_loss=validation_loss,
+                    validation_policy_loss=validation_policy_loss,
+                    validation_value_loss=validation_value_loss,
                     learner_snapshot=best_snapshot,
                     sampler_rng_state=best_sampler_state,
                 )
@@ -180,7 +204,7 @@ def run_sanity_pilot(
     learner.restore(best_snapshot)
     sampler.set_rng_state(best_sampler_state)
     final_train = learner.evaluate_loss(train_eval)[0]
-    final_validation = learner.evaluate_loss(validation_eval)[0]
+    final_validation, _, final_validation_value = learner.evaluate_loss(validation_eval)
 
     reasons = []
     if not all(
@@ -200,17 +224,21 @@ def run_sanity_pilot(
         final_train_loss=final_train,
         initial_validation_loss=initial_validation,
         final_validation_loss=final_validation,
+        initial_validation_value_loss=initial_validation_value,
+        final_validation_value_loss=final_validation_value,
         maximum_gradient_norm=max(metric.gradient_norm for metric in metrics),
         metrics=tuple(metrics),
         sampler_rng_state=sampler.rng_state,
         attempted_steps=attempted_steps,
         best_validation_step=best_validation_step,
         best_validation_loss=best_validation,
+        best_validation_value_loss=best_validation_value,
         stopped_early=stopped_early,
         validation_candidates=tuple(validation_candidates),
         stop_reason=stop_reason,
         last_validation_step=last_validation_step,
         last_validation_loss=last_validation_loss,
+        last_validation_value_loss=last_validation_value_loss,
         last_improvement_step=last_improvement_step,
         stale_validation_evaluations=stale_evaluations,
         validation_evaluations=validation_evaluations,
