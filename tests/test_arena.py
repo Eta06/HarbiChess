@@ -1,5 +1,6 @@
 import json
 import random
+from dataclasses import replace
 from pathlib import Path
 
 import pytest
@@ -138,6 +139,18 @@ def test_arena_continuation_roots_become_legal_replay_targets() -> None:
     assert len(records) == 1
     assert records[0].repetition_redirected
     assert records[0].outcome_value == 0
+
+    truncated = replace(
+        game,
+        outcome=GameOutcome(TerminalResult.DRAW, "max_plies"),
+    )
+    truncated_records = _continuation_records(
+        (truncated,),
+        arena_id="truncated-arena",
+        seed=11,
+        rules=rules,
+    )
+    assert truncated_records[0].outcome_value is None
     records[0].validate_rules(rules)
 
 
