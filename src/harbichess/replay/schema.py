@@ -13,8 +13,8 @@ from harbichess.core.state import ChessMove, ChessState, Side
 from harbichess.selfplay.game import SelfPlayGame, SelfPlaySample
 
 REPLAY_SCHEMA_VERSION = 2
-TARGET_SCHEMA_VERSION = 9
-SUPPORTED_TARGET_SCHEMA_VERSIONS = frozenset({3, 4, 5, 6, 7, 8, TARGET_SCHEMA_VERSION})
+TARGET_SCHEMA_VERSION = 10
+SUPPORTED_TARGET_SCHEMA_VERSIONS = frozenset({3, 4, 5, 6, 7, 8, 9, TARGET_SCHEMA_VERSION})
 
 
 @dataclass(frozen=True, slots=True)
@@ -296,7 +296,7 @@ class ReplayRecord:
     policy: tuple[tuple[int, float], ...]
     selected_action: int
     root_value: float
-    outcome_value: int
+    outcome_value: int | None
     repetition_redirected: bool
     continuation_evidence: ContinuationEvidence | None = None
     policy_regret_adjustment: PolicyRegretAdjustment | None = None
@@ -309,8 +309,8 @@ class ReplayRecord:
             raise ValueError("replay identity and ply history are inconsistent")
         if not math.isfinite(self.root_value) or not -1.0 <= self.root_value <= 1.0:
             raise ValueError("root value must be finite and between -1 and 1")
-        if self.outcome_value not in (-1, 0, 1):
-            raise ValueError("outcome value must be -1, 0, or 1")
+        if self.outcome_value is not None and self.outcome_value not in (-1, 0, 1):
+            raise ValueError("outcome value must be -1, 0, 1, or unknown")
         indices = [action for action, _ in self.policy]
         probabilities = [probability for _, probability in self.policy]
         if (
