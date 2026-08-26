@@ -43,6 +43,7 @@ from harbichess.replay.split import ReplaySplit, partition_games
 from harbichess.search.batching import SharedBatchEvaluator
 from harbichess.search.evaluator import NeuralPositionEvaluator
 from harbichess.search.mcts import MCTS, SearchConfig
+from harbichess.search.root_halving import RootHalvingConfig
 from harbichess.selfplay.game import SelfPlayConfig, SelfPlayGame, play_parallel_games
 from harbichess.training.batch import GameBalancedSampler, build_training_batch
 from harbichess.training.checkpoint import (
@@ -91,6 +92,14 @@ class OcakRunConfig:
     value_policy_temperature: float | None = None
     value_policy_prior_visits: float = 8.0
     maximum_value_logit_adjustment: float = 1.25
+    root_halving_enabled: bool = False
+    root_halving_top_actions: int = 4
+    root_halving_finalists: int = 2
+    root_halving_first_round_simulations: int = 3
+    root_halving_final_round_simulations: int = 7
+    root_halving_minimum_margin: float = 0.05
+    root_halving_transfer_fraction: float = 0.35
+    replay_split_namespace: str | None = None
 
     def __post_init__(self) -> None:
         if not self.run_id or Path(self.run_id).name != self.run_id:
@@ -135,6 +144,24 @@ class OcakRunConfig:
             raise ValueError("value_policy_temperature must be positive when enabled")
         if self.value_policy_prior_visits < 0 or self.maximum_value_logit_adjustment < 0:
             raise ValueError("value-policy shrinkage and logit bounds must be non-negative")
+        if self.root_halving_enabled and self.value_policy_temperature is not None:
+            raise ValueError("root halving and value-policy reweighting are mutually exclusive")
+        if self.replay_split_namespace is not None and (
+            not self.replay_split_namespace
+            or Path(self.replay_split_namespace).name != self.replay_split_namespace
+        ):
+            raise ValueError("replay_split_namespace must be one safe path segment")
+        if self.root_halving_enabled:
+            root_halving = RootHalvingConfig(
+                top_actions=self.root_halving_top_actions,
+                finalists=self.root_halving_finalists,
+                first_round_simulations=self.root_halving_first_round_simulations,
+                final_round_simulations=self.root_halving_final_round_simulations,
+                minimum_consensus_margin=self.root_halving_minimum_margin,
+                transfer_fraction=self.root_halving_transfer_fraction,
+            )
+            if self.simulations <= root_halving.forced_evaluations:
+                raise ValueError("total simulations must exceed forced root evaluations")
 
 
 @dataclass(frozen=True, slots=True)
@@ -355,10 +382,27 @@ def run_ocak_sanity(
             max_batch_size=max(1, min(128, config.workers * 2)),
             max_wait_seconds=config.inference_wait_seconds,
         )
+        root_halving_config = (
+            RootHalvingConfig(
+                top_actions=config.root_halving_top_actions,
+                finalists=config.root_halving_finalists,
+                first_round_simulations=config.root_halving_first_round_simulations,
+                final_round_simulations=config.root_halving_final_round_simulations,
+                minimum_consensus_margin=config.root_halving_minimum_margin,
+                transfer_fraction=config.root_halving_transfer_fraction,
+            )
+            if config.root_halving_enabled
+            else None
+        )
+        initial_simulations = (
+            config.simulations - root_halving_config.forced_evaluations
+            if root_halving_config is not None
+            else config.simulations
+        )
         search = MCTS(
             NeuralPositionEvaluator(batcher, rules=rules),
             rules=rules,
-            config=SearchConfig(simulations=config.simulations),
+            config=SearchConfig(simulations=initial_simulations),
         )
 
         def game_complete(game: SelfPlayGame) -> None:
@@ -425,6 +469,7 @@ def run_ocak_sanity(
                 maximum_value_logit_adjustment=(
                     config.maximum_value_logit_adjustment
                 ),
+                root_halving_config=root_halving_config,
             ),
             on_game_complete=game_complete,
         )
@@ -436,7 +481,7 @@ def run_ocak_sanity(
         diversity_metrics = measure_diversity(games)
         partitions = partition_games(
             games,
-            run_id=config.run_id,
+            run_id=config.replay_split_namespace or config.run_id,
             validation_fraction=config.validation_fraction,
         )
         train_games = partitions[ReplaySplit.TRAIN]
@@ -871,6 +916,14 @@ def _parser() -> argparse.ArgumentParser:
     parser.add_argument("--value-policy-temperature", type=float)
     parser.add_argument("--value-policy-prior-visits", type=float, default=8.0)
     parser.add_argument("--maximum-value-logit-adjustment", type=float, default=1.25)
+    parser.add_argument("--root-halving", action="store_true")
+    parser.add_argument("--root-halving-top-actions", type=int, default=4)
+    parser.add_argument("--root-halving-finalists", type=int, default=2)
+    parser.add_argument("--root-halving-first-round-simulations", type=int, default=3)
+    parser.add_argument("--root-halving-final-round-simulations", type=int, default=7)
+    parser.add_argument("--root-halving-minimum-margin", type=float, default=0.05)
+    parser.add_argument("--root-halving-transfer-fraction", type=float, default=0.35)
+    parser.add_argument("--replay-split-namespace")
     return parser
 
 
@@ -904,6 +957,18 @@ def main(argv: list[str] | None = None) -> int:
             maximum_value_logit_adjustment=(
                 arguments.maximum_value_logit_adjustment
             ),
+            root_halving_enabled=arguments.root_halving,
+            root_halving_top_actions=arguments.root_halving_top_actions,
+            root_halving_finalists=arguments.root_halving_finalists,
+            root_halving_first_round_simulations=(
+                arguments.root_halving_first_round_simulations
+            ),
+            root_halving_final_round_simulations=(
+                arguments.root_halving_final_round_simulations
+            ),
+            root_halving_minimum_margin=arguments.root_halving_minimum_margin,
+            root_halving_transfer_fraction=arguments.root_halving_transfer_fraction,
+            replay_split_namespace=arguments.replay_split_namespace,
         )
     )
     print(json.dumps(asdict(result), indent=2))
