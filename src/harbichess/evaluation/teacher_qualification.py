@@ -14,7 +14,7 @@ import time
 from collections import Counter, defaultdict
 from collections.abc import Mapping, Sequence
 from concurrent.futures import ThreadPoolExecutor
-from dataclasses import asdict, dataclass
+from dataclasses import asdict, dataclass, replace
 from datetime import UTC, datetime
 from pathlib import Path
 
@@ -22,6 +22,7 @@ from harbichess.backends.mlx_backend import MLXPolicyValueBackend
 from harbichess.backends.mlx_network import HarbiChessNetwork, NetworkConfig
 from harbichess.chess.rules import PythonChessRules
 from harbichess.core.state import ChessMove
+from harbichess.dashboard.state import RunMode, SnapshotStore
 from harbichess.replay.schema import ReplayRecord
 from harbichess.replay.shard import read_shard
 from harbichess.search.batching import SharedBatchEvaluator
@@ -554,6 +555,48 @@ def run_teacher_qualification(config: QualificationConfig) -> Path:
     return result_path
 
 
+def publish_qualification_result(result_path: Path, telemetry_path: Path) -> None:
+    """Publish one completed qualification without changing training state."""
+
+    result = json.loads(result_path.read_text(encoding="utf-8"))
+    variants = {name: summary for name, summary in result["variants"].items() if name != "raw"}
+    best_name, best = max(
+        variants.items(),
+        key=lambda item: item[1]["mean_verified_action_value_delta"],
+    )
+    low, high = best["verified_action_value_delta_95_interval"]
+    qualified = bool(result["gate"]["qualified"])
+    store = SnapshotStore(telemetry_path)
+    snapshot = store.read()
+    store.write_atomic(
+        replace(
+            snapshot,
+            updated_at=datetime.now(UTC).isoformat(),
+            mode=RunMode.IDLE,
+            mode_detail=(
+                "OMURGA teacher qualified · continuous learner still requires approval"
+                if qualified
+                else "OMURGA teacher rejected · continuous learner blocked"
+            ),
+            run_id=result_path.parent.name,
+            source_commit=result["source_commit"],
+            teacher_qualification_status="passed" if qualified else "failed",
+            teacher_qualification_positions=result["selection"]["selected_records"],
+            teacher_qualification_variants=len(variants),
+            teacher_qualified_variants=tuple(result["gate"]["qualified_variants"]),
+            teacher_best_variant=best_name,
+            teacher_best_value_delta=best["mean_verified_action_value_delta"],
+            teacher_best_value_delta_low=low,
+            teacher_best_value_delta_high=high,
+            teacher_best_stability_tv=best["mean_seed_stability_tv"],
+            teacher_raw_value_mse=result["raw_value_mse"],
+            teacher_best_value_mse=best["value_mse"],
+            teacher_qualification_result=str(result_path),
+            promotion_ready=False,
+        )
+    )
+
+
 def _csv_ints(value: str) -> tuple[int, ...]:
     return tuple(int(item) for item in value.split(",") if item)
 
@@ -573,6 +616,7 @@ def _parser() -> argparse.ArgumentParser:
     parser.add_argument("--bootstrap-samples", type=int, default=2000)
     parser.add_argument("--maximum-stability-tv", type=float, default=0.10)
     parser.add_argument("--maximum-value-mse-regression", type=float, default=0.0)
+    parser.add_argument("--telemetry", type=Path)
     return parser
 
 
@@ -595,6 +639,8 @@ def main(argv: list[str] | None = None) -> int:
             maximum_value_mse_regression=arguments.maximum_value_mse_regression,
         )
     )
+    if arguments.telemetry is not None:
+        publish_qualification_result(path, arguments.telemetry)
     print(path)
     return 0
 
