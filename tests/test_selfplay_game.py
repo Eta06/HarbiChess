@@ -82,7 +82,56 @@ def test_self_play_configuration_validation_and_ply_adjudication() -> None:
         config=SelfPlayConfig(max_plies=1),
     )
     assert game.outcome.termination == "max_plies"
-    assert game.samples[0].outcome_value == 0
+    assert game.samples[0].outcome_value is None
+
+
+def test_repetition_target_transform_is_opt_in_for_self_play() -> None:
+    class NonTerminalTestRules(PythonChessRules):
+        def outcome(self, state, *, claim_draw: bool = False):
+            del state, claim_draw
+            return None
+
+    rules = NonTerminalTestRules()
+    state = _threefold_choice_state(rules)
+    repeating = ChessMove("f6g8")
+    alternative = ChessMove("h8g8")
+
+    class RepetitionSearch:
+        def search(self, state, *, rng: random.Random, add_root_noise: bool):
+            del state, rng, add_root_noise
+            return SearchResult(
+                (
+                    MoveStatistics(repeating, 12, 0.6, 0.0),
+                    MoveStatistics(alternative, 4, 0.4, -0.03),
+                ),
+                0.0,
+                16,
+            )
+
+    default_game = play_game(
+        RepetitionSearch(),
+        rules,
+        state,
+        game_index=0,
+        seed=1,
+        config=SelfPlayConfig(max_plies=state.ply + 1),
+    )
+    legacy_game = play_game(
+        RepetitionSearch(),
+        rules,
+        state,
+        game_index=1,
+        seed=1,
+        config=SelfPlayConfig(
+            max_plies=state.ply + 1,
+            repetition_target_transform=True,
+        ),
+    )
+
+    assert default_game.samples[0].selected_move == repeating
+    assert not default_game.samples[0].repetition_redirected
+    assert legacy_game.samples[0].selected_move == alternative
+    assert legacy_game.samples[0].repetition_redirected
 
 
 def test_repetition_target_redirects_to_comparable_non_repeating_move() -> None:
