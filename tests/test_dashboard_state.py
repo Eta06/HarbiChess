@@ -27,6 +27,8 @@ def test_missing_snapshot_returns_idle_state(tmp_path: Path) -> None:
     snapshot = SnapshotStore(tmp_path / "missing.json").read()
     assert snapshot.mode is RunMode.IDLE
     assert snapshot.lifetime_games == 0
+    assert snapshot.teacher_qualification_status == "not_run"
+    assert snapshot.teacher_qualified_variants == ()
 
 
 def test_training_elapsed_time_is_persisted() -> None:
