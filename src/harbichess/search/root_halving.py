@@ -6,7 +6,7 @@ import random
 from dataclasses import dataclass, replace
 
 from harbichess.core.state import ChessMove, ChessState
-from harbichess.search.mcts import MCTS, MoveStatistics, SearchConfig, SearchResult
+from harbichess.search.mcts import MCTS, MoveStatistics, SearchResult
 
 
 @dataclass(frozen=True, slots=True)
