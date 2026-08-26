@@ -13,8 +13,8 @@ from harbichess.core.state import ChessMove, ChessState, Side
 from harbichess.selfplay.game import SelfPlayGame, SelfPlaySample
 
 REPLAY_SCHEMA_VERSION = 2
-TARGET_SCHEMA_VERSION = 7
-SUPPORTED_TARGET_SCHEMA_VERSIONS = frozenset({3, 4, 5, 6, TARGET_SCHEMA_VERSION})
+TARGET_SCHEMA_VERSION = 8
+SUPPORTED_TARGET_SCHEMA_VERSIONS = frozenset({3, 4, 5, 6, 7, TARGET_SCHEMA_VERSION})
 
 
 @dataclass(frozen=True, slots=True)
