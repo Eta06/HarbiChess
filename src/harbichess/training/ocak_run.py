@@ -75,6 +75,7 @@ class OcakRunConfig:
     minimum_decisive_games: int = 1
     maximum_max_ply_draw_ratio: float = 0.9
     maximum_repetition_draw_ratio: float = 0.5
+    repetition_target_transform: bool = False
     telemetry_interval_steps: int = 2
     validation_interval_steps: int = 10
     early_stopping_patience: int = 12
@@ -464,6 +465,7 @@ def run_ocak_sanity(
             config=SelfPlayConfig(
                 exploration_plies=config.exploration_plies,
                 max_plies=config.max_plies,
+                repetition_target_transform=config.repetition_target_transform,
                 value_policy_temperature=config.value_policy_temperature,
                 value_policy_prior_visits=config.value_policy_prior_visits,
                 maximum_value_logit_adjustment=(
@@ -780,6 +782,7 @@ def run_ocak_sanity(
                 "artifact_root": str(config.artifact_root),
                 "telemetry_path": str(config.telemetry_path),
                 "continuation_shards": [str(path) for path in config.continuation_shards],
+                "repetition_target_transform": config.repetition_target_transform,
                 "initial_model": (
                     str(config.initial_model) if config.initial_model is not None else None
                 ),
@@ -905,6 +908,7 @@ def _parser() -> argparse.ArgumentParser:
     parser.add_argument("--minimum-decisive-games", type=int, default=1)
     parser.add_argument("--maximum-max-ply-draw-ratio", type=float, default=0.9)
     parser.add_argument("--maximum-repetition-draw-ratio", type=float, default=0.5)
+    parser.add_argument("--repetition-target-transform", action="store_true")
     parser.add_argument("--early-stopping-patience", type=int, default=12)
     parser.add_argument("--validation-interval-steps", type=int, default=10)
     parser.add_argument("--minimum-validation-delta", type=float, default=1e-3)
@@ -944,6 +948,7 @@ def main(argv: list[str] | None = None) -> int:
             minimum_decisive_games=arguments.minimum_decisive_games,
             maximum_max_ply_draw_ratio=arguments.maximum_max_ply_draw_ratio,
             maximum_repetition_draw_ratio=arguments.maximum_repetition_draw_ratio,
+            repetition_target_transform=arguments.repetition_target_transform,
             early_stopping_patience=arguments.early_stopping_patience,
             validation_interval_steps=arguments.validation_interval_steps,
             minimum_validation_delta=arguments.minimum_validation_delta,
