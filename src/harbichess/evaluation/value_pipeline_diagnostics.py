@@ -153,7 +153,7 @@ def run_value_pipeline_diagnostics(config: ValuePipelineDiagnosticConfig) -> Pat
     excluded_games = legacy_max_ply_game_ids(
         shard.records,
         max_plies=max_plies,
-        target_schema=shard.metadata.target_schema,
+        target_schema=shard.header.target_schema,
     )
     model_metrics: dict[str, dict[str, Any]] = {}
     for label, path in _model_paths(run):
@@ -184,7 +184,7 @@ def run_value_pipeline_diagnostics(config: ValuePipelineDiagnosticConfig) -> Pat
                 for key, value in asdict(config).items()
             },
             "replay": {
-                "target_schema": shard.metadata.target_schema,
+                "target_schema": shard.header.target_schema,
                 "current_target_schema": TARGET_SCHEMA_VERSION,
                 "samples": len(shard.records),
                 "games": len({record.game_id for record in shard.records}),
