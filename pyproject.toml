@@ -31,6 +31,7 @@ harbichess-dashboard = "harbichess.dashboard.server:main"
 harbichess-ocak-sanity = "harbichess.training.ocak_run:main"
 harbichess-devir-arena = "harbichess.evaluation.arena:main"
 harbichess-qualify-teacher = "harbichess.evaluation.teacher_qualification:main"
+harbichess-diagnose-search = "harbichess.evaluation.search_diagnostics:main"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/harbichess"]
