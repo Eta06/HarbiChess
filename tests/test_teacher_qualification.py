@@ -1,10 +1,14 @@
+import json
+
 import pytest
 from test_replay_schema import scripted_game
 
+from harbichess.dashboard.state import SnapshotStore
 from harbichess.evaluation.teacher_qualification import (
     QualificationConfig,
     _mean_policy,
     _tv,
+    publish_qualification_result,
     select_stratified_records,
 )
 from harbichess.replay.schema import records_from_game
@@ -47,3 +51,37 @@ def test_qualification_config_rejects_empty_replay(tmp_path) -> None:
             shards=(),
             output_dir=tmp_path / "qualification",
         )
+
+
+def test_completed_qualification_blocks_dashboard_learner_on_failure(tmp_path) -> None:
+    result_path = tmp_path / "qualification" / "qualification.json"
+    result_path.parent.mkdir()
+    result_path.write_text(
+        json.dumps(
+            {
+                "source_commit": "a" * 40,
+                "gate": {"qualified": False, "qualified_variants": []},
+                "selection": {"selected_records": 32},
+                "raw_value_mse": 0.5,
+                "variants": {
+                    "raw": {"mean_verified_action_value_delta": 0.0},
+                    "puct-64-clean": {
+                        "mean_verified_action_value_delta": -0.01,
+                        "verified_action_value_delta_95_interval": [-0.02, 0.0],
+                        "mean_seed_stability_tv": 0.0,
+                        "value_mse": 0.49,
+                    },
+                },
+            }
+        ),
+        encoding="utf-8",
+    )
+    telemetry = tmp_path / "state.json"
+
+    publish_qualification_result(result_path, telemetry)
+
+    snapshot = SnapshotStore(telemetry).read()
+    assert snapshot.teacher_qualification_status == "failed"
+    assert snapshot.teacher_best_variant == "puct-64-clean"
+    assert "blocked" in snapshot.mode_detail
+    assert not snapshot.promotion_ready
