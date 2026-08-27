@@ -180,3 +180,32 @@ def test_sanity_pilot_rejects_total_loss_gain_that_regresses_value() -> None:
     assert report.last_validation_loss == 9.0
     assert report.last_validation_value_loss == 3.0
     assert learner.step == 0
+
+
+def test_sanity_pilot_rejects_zero_known_value_targets() -> None:
+    _, game = scripted_game()
+    records = records_from_game(game, run_id="pilot")
+    train = (replace(records[0], outcome_value=None),)
+    validation = (
+        replace(
+            records[1],
+            game_id="validation-000000000011",
+            game_index=11,
+            outcome_value=None,
+        ),
+    )
+    learner = MLXLearner(
+        HarbiChessNetwork(NetworkConfig(trunk_channels=8, residual_blocks=1))
+    )
+
+    report = run_sanity_pilot(
+        learner,
+        train,
+        validation,
+        config=PilotConfig(steps=1, batch_size=1, minimum_train_improvement=0.0),
+    )
+
+    assert not report.passed
+    assert report.train_value_samples == 0
+    assert report.validation_value_samples == 0
+    assert "no known value targets" in " ".join(report.reasons)
