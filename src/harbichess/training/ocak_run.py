@@ -44,6 +44,11 @@ from harbichess.search.batching import SharedBatchEvaluator
 from harbichess.search.evaluator import NeuralPositionEvaluator
 from harbichess.search.mcts import MCTS, SearchConfig
 from harbichess.search.root_halving import RootHalvingConfig
+from harbichess.search.value_oracle import (
+    DeterministicTacticalOracle,
+    OracleValueEvaluator,
+    TacticalOracleConfig,
+)
 from harbichess.selfplay.game import SelfPlayConfig, SelfPlayGame, play_parallel_games
 from harbichess.training.batch import GameBalancedSampler, build_training_batch
 from harbichess.training.checkpoint import (
@@ -102,6 +107,7 @@ class OcakRunConfig:
     root_halving_minimum_margin: float = 0.05
     root_halving_transfer_fraction: float = 0.35
     replay_split_namespace: str | None = None
+    teacher_oracle_depth: int | None = None
 
     def __post_init__(self) -> None:
         if not self.run_id or Path(self.run_id).name != self.run_id:
@@ -158,6 +164,8 @@ class OcakRunConfig:
             or Path(self.replay_split_namespace).name != self.replay_split_namespace
         ):
             raise ValueError("replay_split_namespace must be one safe path segment")
+        if self.teacher_oracle_depth is not None and self.teacher_oracle_depth <= 0:
+            raise ValueError("teacher_oracle_depth must be positive when enabled")
         if self.root_halving_enabled:
             root_halving = RootHalvingConfig(
                 top_actions=self.root_halving_top_actions,
@@ -406,8 +414,20 @@ def run_ocak_sanity(
             if root_halving_config is not None
             else config.simulations
         )
+        neural_evaluator = NeuralPositionEvaluator(batcher, rules=rules)
+        search_evaluator = (
+            OracleValueEvaluator(
+                neural_evaluator,
+                DeterministicTacticalOracle(
+                    rules=rules,
+                    config=TacticalOracleConfig(depth=config.teacher_oracle_depth),
+                ),
+            )
+            if config.teacher_oracle_depth is not None
+            else neural_evaluator
+        )
         search = MCTS(
-            NeuralPositionEvaluator(batcher, rules=rules),
+            search_evaluator,
             rules=rules,
             config=SearchConfig(simulations=initial_simulations),
         )
@@ -951,6 +971,7 @@ def _parser() -> argparse.ArgumentParser:
     parser.add_argument("--root-halving-minimum-margin", type=float, default=0.05)
     parser.add_argument("--root-halving-transfer-fraction", type=float, default=0.35)
     parser.add_argument("--replay-split-namespace")
+    parser.add_argument("--teacher-oracle-depth", type=int)
     return parser
 
 
@@ -998,6 +1019,7 @@ def main(argv: list[str] | None = None) -> int:
             root_halving_minimum_margin=arguments.root_halving_minimum_margin,
             root_halving_transfer_fraction=arguments.root_halving_transfer_fraction,
             replay_split_namespace=arguments.replay_split_namespace,
+            teacher_oracle_depth=arguments.teacher_oracle_depth,
         )
     )
     print(json.dumps(asdict(result), indent=2))
