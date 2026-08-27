@@ -59,6 +59,7 @@ def test_ocak_run_connects_self_play_training_checkpoint_and_telemetry(
             policy_channels=2,
             value_channels=1,
             value_hidden=8,
+            tactical_gate_budgets=(),
         ),
         source_commit="a" * 40,
     )
@@ -124,6 +125,7 @@ def test_ocak_run_rejects_draw_only_truncated_self_play(tmp_path: Path) -> None:
             policy_channels=2,
             value_channels=1,
             value_hidden=8,
+            tactical_gate_budgets=(),
         ),
         source_commit="b" * 40,
     )
