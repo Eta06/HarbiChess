@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import random
 import time
@@ -42,6 +43,7 @@ class ValueOracleDiagnosticConfig:
     run_result: Path
     shard: Path
     output_dir: Path
+    model_path: Path | None = None
     budgets: tuple[int, ...] = (64, 128, 256, 512, 800)
     positions: int = 32
     workers: int = 32
@@ -72,6 +74,14 @@ class ValueOracleDiagnosticConfig:
 
 def _argmax_prior(evaluation) -> ChessMove:
     return min(evaluation.priors, key=lambda item: (-item[1], item[0].uci))[0]
+
+
+def _sha256(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as handle:
+        for chunk in iter(lambda: handle.read(1024 * 1024), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
 
 
 def _search_rows(
@@ -136,6 +146,11 @@ def run_value_oracle_diagnostics(config: ValueOracleDiagnosticConfig) -> Path:
     baseline = run.get("baseline")
     if baseline is None:
         raise ValueError("value oracle diagnostics require a persisted baseline")
+    baseline = dict(baseline)
+    if config.model_path is not None:
+        baseline["checkpoint_id"] = "diagnostic-model"
+        baseline["path"] = str(config.model_path)
+        baseline["model_sha256"] = _sha256(config.model_path)
     rules = PythonChessRules()
     shard = read_shard(config.shard, rules=rules)
     records = select_stratified_records(
@@ -267,6 +282,7 @@ def run_value_oracle_diagnostics(config: ValueOracleDiagnosticConfig) -> Path:
                 "run_result": str(config.run_result),
                 "shard": str(config.shard),
                 "output_dir": str(config.output_dir),
+                "model_path": str(config.model_path) if config.model_path else None,
             },
             "controls": {
                 "same_model": True,
@@ -302,6 +318,7 @@ def _parser() -> argparse.ArgumentParser:
     parser.add_argument("--run-result", required=True, type=Path)
     parser.add_argument("--shard", required=True, type=Path)
     parser.add_argument("--output-dir", required=True, type=Path)
+    parser.add_argument("--model", type=Path)
     parser.add_argument("--budgets", default="64,128,256,512,800")
     parser.add_argument("--positions", type=int, default=32)
     parser.add_argument("--workers", type=int, default=32)
@@ -320,6 +337,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             run_result=arguments.run_result,
             shard=arguments.shard,
             output_dir=arguments.output_dir,
+            model_path=arguments.model,
             budgets=tuple(int(value) for value in arguments.budgets.split(",") if value),
             positions=arguments.positions,
             workers=arguments.workers,
