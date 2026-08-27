@@ -41,6 +41,7 @@ from harbichess.replay.schema import ReplayRecord, records_from_game
 from harbichess.replay.shard import ShardMetadata, read_shard, write_shard_atomic
 from harbichess.replay.split import ReplaySplit, partition_games
 from harbichess.search.batching import SharedBatchEvaluator
+from harbichess.search.diagnostics import run_tactical_sweep
 from harbichess.search.evaluator import NeuralPositionEvaluator
 from harbichess.search.mcts import MCTS, SearchConfig
 from harbichess.search.root_halving import RootHalvingConfig
@@ -110,6 +111,7 @@ class OcakRunConfig:
     replay_split_namespace: str | None = None
     teacher_oracle_depth: int | None = None
     teacher_oracle_workers: int = 0
+    tactical_gate_budgets: tuple[int, ...] = (64, 512)
 
     def __post_init__(self) -> None:
         if not self.run_id or Path(self.run_id).name != self.run_id:
@@ -172,6 +174,8 @@ class OcakRunConfig:
             self.teacher_oracle_workers > 0 and self.teacher_oracle_depth is None
         ):
             raise ValueError("teacher oracle workers require an enabled oracle")
+        if any(budget <= 0 for budget in self.tactical_gate_budgets):
+            raise ValueError("tactical gate budgets must be positive")
         if self.root_halving_enabled:
             root_halving = RootHalvingConfig(
                 top_actions=self.root_halving_top_actions,
@@ -678,6 +682,71 @@ def run_ocak_sanity(
             train_evaluation=train_evaluation,
             validation_evaluation=validation_evaluation,
         )
+        tactical_gate: dict[str, object] = {
+            "enabled": bool(config.tactical_gate_budgets),
+            "passed": True,
+            "budgets": config.tactical_gate_budgets,
+            "baseline_solved": (),
+            "candidate_solved": (),
+            "regressed_budgets": (),
+        }
+        if config.tactical_gate_budgets:
+            candidate_snapshot = learner.snapshot()
+
+            def tactical_counts(model: HarbiChessNetwork) -> tuple[int, ...]:
+                tactical_batcher = SharedBatchEvaluator(
+                    MLXPolicyValueBackend(model),
+                    max_batch_size=min(64, config.workers),
+                    max_wait_seconds=config.inference_wait_seconds,
+                )
+                policy_evaluator = NeuralPositionEvaluator(tactical_batcher, rules=rules)
+                evaluator = (
+                    OracleValueEvaluator(
+                        policy_evaluator,
+                        DeterministicTacticalOracle(
+                            rules=rules,
+                            config=TacticalOracleConfig(depth=config.teacher_oracle_depth),
+                        ),
+                    )
+                    if config.teacher_oracle_depth is not None
+                    else policy_evaluator
+                )
+                try:
+                    sweep = run_tactical_sweep(
+                        evaluator,
+                        rules=rules,
+                        budgets=config.tactical_gate_budgets,
+                        workers=min(8, config.workers),
+                        seed=config.run_seed,
+                    )
+                finally:
+                    tactical_batcher.close()
+                return tuple(row["solved"] for row in sweep["budgets"])
+
+            baseline_gate_network = HarbiChessNetwork(network_config)
+            baseline_gate_network.load_weights(str(baseline_path))
+            candidate_gate_network = HarbiChessNetwork(network_config)
+            candidate_gate_network.load_weights(list(candidate_snapshot.model_weights))
+            baseline_solved = tactical_counts(baseline_gate_network)
+            candidate_solved = tactical_counts(candidate_gate_network)
+            regressed_budgets = tuple(
+                budget
+                for budget, baseline_count, candidate_count in zip(
+                    config.tactical_gate_budgets,
+                    baseline_solved,
+                    candidate_solved,
+                    strict=True,
+                )
+                if candidate_count < baseline_count
+            )
+            tactical_gate = {
+                "enabled": True,
+                "passed": not regressed_budgets,
+                "budgets": config.tactical_gate_budgets,
+                "baseline_solved": baseline_solved,
+                "candidate_solved": candidate_solved,
+                "regressed_budgets": regressed_budgets,
+            }
         outcome_reasons = []
         if diversity_metrics.decisive_games < config.minimum_decisive_games:
             outcome_reasons.append("self-play did not produce the required decisive terminal games")
@@ -690,6 +759,8 @@ def run_ocak_sanity(
         )
         if repetition_draws / diversity_metrics.games > config.maximum_repetition_draw_ratio:
             outcome_reasons.append("too many self-play games ended by threefold repetition")
+        if not tactical_gate["passed"]:
+            outcome_reasons.append("candidate regressed the tactical teacher safety gate")
         reasons = (*report.reasons, *outcome_reasons)
         passed = report.passed and not outcome_reasons
         training_seconds = time.perf_counter() - training_started
@@ -877,6 +948,7 @@ def run_ocak_sanity(
                 "validation_value_samples": report.validation_value_samples,
             },
             "diversity": asdict(diversity_metrics),
+            "tactical_gate": tactical_gate,
             "baseline": {
                 "checkpoint_id": initial_checkpoint,
                 "path": str(baseline_path),
@@ -990,6 +1062,7 @@ def _parser() -> argparse.ArgumentParser:
     parser.add_argument("--replay-split-namespace")
     parser.add_argument("--teacher-oracle-depth", type=int)
     parser.add_argument("--teacher-oracle-workers", type=int, default=0)
+    parser.add_argument("--tactical-gate-budgets", default="64,512")
     return parser
 
 
@@ -1040,6 +1113,9 @@ def main(argv: list[str] | None = None) -> int:
             replay_split_namespace=arguments.replay_split_namespace,
             teacher_oracle_depth=arguments.teacher_oracle_depth,
             teacher_oracle_workers=arguments.teacher_oracle_workers,
+            tactical_gate_budgets=tuple(
+                int(value) for value in arguments.tactical_gate_budgets.split(",") if value
+            ),
         )
     )
     print(json.dumps(asdict(result), indent=2))
