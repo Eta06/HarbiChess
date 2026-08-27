@@ -9,7 +9,7 @@ from dataclasses import dataclass
 import chess
 
 from harbichess.chess.rules import PythonChessRules
-from harbichess.core.state import ChessMove, ChessState
+from harbichess.core.state import ChessState
 from harbichess.search.evaluator import PositionEvaluation, SearchEvaluator
 
 _PIECE_VALUES = {
@@ -65,30 +65,30 @@ class DeterministicTacticalOracle:
         cached = cache.get(key)
         if cached is not None:
             return cached
-        outcome = self.rules.outcome(state, claim_draw=True)
-        if outcome is not None:
-            value = float(outcome.value_for(self.rules.view(state).side_to_move))
-        else:
-            board = self.rules.inspect(state)
-            stand_pat = self._material_value(board)
-            if depth == 0:
-                value = stand_pat
-            else:
-                moves = self._tactical_moves(board)
-                if not moves:
-                    value = stand_pat
-                else:
-                    continuations = tuple(
-                        -self._negamax(self.rules.apply(state, move), depth - 1)
-                        for move in moves
-                    )
-                    value = max(continuations) if board.is_check() else max(
-                        stand_pat, *continuations
-                    )
+        value = self._negamax_board(self.rules.inspect(state), depth)
         if len(cache) >= self.config.cache_size:
             cache.clear()
         cache[key] = value
         return value
+
+    def _negamax_board(self, board: chess.Board, depth: int) -> float:
+        outcome = board.outcome(claim_draw=True)
+        if outcome is not None:
+            if outcome.winner is None:
+                return 0.0
+            return 1.0 if outcome.winner == board.turn else -1.0
+        stand_pat = self._material_value(board)
+        if depth == 0:
+            return stand_pat
+        moves = self._tactical_moves(board)
+        if not moves:
+            return stand_pat
+        continuations = []
+        for move in moves:
+            board.push(move)
+            continuations.append(-self._negamax_board(board, depth - 1))
+            board.pop()
+        return max(continuations) if board.is_check() else max(stand_pat, *continuations)
 
     def _material_value(self, board: chess.Board) -> float:
         own = sum(
@@ -102,12 +102,12 @@ class DeterministicTacticalOracle:
         return math.tanh((own - opponent) / self.config.material_scale)
 
     @staticmethod
-    def _tactical_moves(board: chess.Board) -> tuple[ChessMove, ...]:
+    def _tactical_moves(board: chess.Board) -> tuple[chess.Move, ...]:
         moves = tuple(sorted(board.legal_moves, key=lambda move: move.uci()))
         if board.is_check():
-            return tuple(ChessMove(move.uci()) for move in moves)
+            return moves
         return tuple(
-            ChessMove(move.uci())
+            move
             for move in moves
             if board.is_capture(move) or move.promotion is not None or board.gives_check(move)
         )
