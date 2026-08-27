@@ -82,6 +82,8 @@ class PilotReport:
     last_improvement_step: int
     stale_validation_evaluations: int
     validation_evaluations: int
+    train_value_samples: int
+    validation_value_samples: int
 
 
 @dataclass(frozen=True, slots=True)
@@ -120,6 +122,8 @@ def run_sanity_pilot(
         raise ValueError("train evaluation batch does not match replay records")
     if len(raw_validation_eval.positions) != len(validation_records):
         raise ValueError("validation evaluation batch does not match replay records")
+    train_value_samples = sum(weight > 0 for weight in raw_train_eval.value_weights)
+    validation_value_samples = sum(weight > 0 for weight in raw_validation_eval.value_weights)
     train_eval = learner.prepare_batch(raw_train_eval)
     validation_eval = learner.prepare_batch(raw_validation_eval)
     initial_train = learner.evaluate_loss(train_eval)[0]
@@ -151,21 +155,19 @@ def run_sanity_pilot(
         metrics.append(metric)
         validation_loss = None
         if metric.step % settings.validation_interval_steps == 0 or metric.step == settings.steps:
-            validation_loss, validation_policy_loss, validation_value_loss = (
-                learner.evaluate_loss(validation_eval)
+            validation_loss, validation_policy_loss, validation_value_loss = learner.evaluate_loss(
+                validation_eval
             )
             validation_evaluations += 1
             last_validation_step = metric.step
             last_validation_loss = validation_loss
             last_validation_value_loss = validation_value_loss
             value_safe = (
-                validation_value_loss
+                validation_value_samples > 0
+                and validation_value_loss
                 <= initial_validation_value * settings.maximum_value_validation_ratio
             )
-            if (
-                validation_loss < best_validation - settings.minimum_validation_delta
-                and value_safe
-            ):
+            if validation_loss < best_validation - settings.minimum_validation_delta and value_safe:
                 best_validation = validation_loss
                 best_validation_value = validation_value_loss
                 best_validation_step = metric.step
@@ -216,6 +218,10 @@ def run_sanity_pilot(
         reasons.append("training loss did not improve enough")
     if final_validation > initial_validation * settings.maximum_validation_ratio:
         reasons.append("validation loss degraded beyond the safety ratio")
+    if train_value_samples == 0:
+        reasons.append("training replay has no known value targets")
+    if validation_value_samples == 0:
+        reasons.append("validation replay has no known value targets")
     return PilotReport(
         passed=not reasons,
         reasons=tuple(reasons),
@@ -242,4 +248,6 @@ def run_sanity_pilot(
         last_improvement_step=last_improvement_step,
         stale_validation_evaluations=stale_evaluations,
         validation_evaluations=validation_evaluations,
+        train_value_samples=train_value_samples,
+        validation_value_samples=validation_value_samples,
     )
