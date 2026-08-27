@@ -74,7 +74,7 @@ class OcakRunConfig:
     validation_fraction: float = 0.25
     training_steps: int = 40
     batch_size: int = 16
-    learning_rate: float = 0.002
+    learning_rate: float = 0.0002
     minimum_train_improvement: float = 0.02
     maximum_validation_ratio: float = 1.25
     minimum_decisive_games: int = 1
@@ -947,6 +947,7 @@ def _parser() -> argparse.ArgumentParser:
     parser.add_argument("--max-plies", type=int, default=64)
     parser.add_argument("--training-steps", type=int, default=40)
     parser.add_argument("--batch-size", type=int, default=16)
+    parser.add_argument("--learning-rate", type=float, default=0.0002)
     parser.add_argument("--minimum-decisive-games", type=int, default=1)
     parser.add_argument("--maximum-max-ply-draw-ratio", type=float, default=0.9)
     parser.add_argument("--maximum-repetition-draw-ratio", type=float, default=0.5)
@@ -989,6 +990,7 @@ def main(argv: list[str] | None = None) -> int:
             max_plies=arguments.max_plies,
             training_steps=arguments.training_steps,
             batch_size=arguments.batch_size,
+            learning_rate=arguments.learning_rate,
             minimum_decisive_games=arguments.minimum_decisive_games,
             maximum_max_ply_draw_ratio=arguments.maximum_max_ply_draw_ratio,
             maximum_repetition_draw_ratio=arguments.maximum_repetition_draw_ratio,
