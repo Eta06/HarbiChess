@@ -14,6 +14,7 @@ from harbichess.search.evaluator import PositionEvaluation
 from harbichess.search.value_oracle import (
     DeterministicTacticalOracle,
     OracleValueEvaluator,
+    ProcessTacticalOracle,
     TacticalOracleConfig,
 )
 
@@ -106,3 +107,15 @@ def test_qualified_oracle_publish_keeps_promotion_blocked(tmp_path: Path) -> Non
     assert snapshot.teacher_qualification_status == "passed"
     assert snapshot.teacher_qualified_variants == ("oracle-8",)
     assert not snapshot.promotion_ready
+
+
+def test_process_oracle_matches_local_value() -> None:
+    rules = PythonChessRules()
+    state = rules.initial_state("4k3/8/8/3q4/4P3/8/8/4K3 w - - 0 1")
+    config = TacticalOracleConfig(depth=1)
+    local = DeterministicTacticalOracle(rules=rules, config=config)
+    process = ProcessTacticalOracle(config, workers=1)
+    try:
+        assert process.value(state) == local.value(state)
+    finally:
+        process.close()
