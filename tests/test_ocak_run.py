@@ -1,4 +1,5 @@
 import json
+from dataclasses import replace
 from pathlib import Path
 
 import pytest
@@ -7,6 +8,7 @@ from harbichess.dashboard.state import (
     CheckpointStatus,
     PilotStatus,
     SnapshotStore,
+    empty_snapshot,
 )
 from harbichess.replay.split import ReplaySplit, split_for_game
 from harbichess.training.ocak_run import OcakRunConfig, run_ocak_sanity
@@ -34,6 +36,13 @@ def test_ocak_run_connects_self_play_training_checkpoint_and_telemetry(
 ) -> None:
     run_id = _run_id_with_both_splits(4)
     telemetry_path = tmp_path / "dashboard.json"
+    SnapshotStore(telemetry_path).write_atomic(
+        replace(
+            empty_snapshot(),
+            teacher_qualification_status="passed",
+            teacher_best_variant="oracle-512",
+        )
+    )
     result = run_ocak_sanity(
         OcakRunConfig(
             run_id=run_id,
@@ -70,6 +79,8 @@ def test_ocak_run_connects_self_play_training_checkpoint_and_telemetry(
     assert snapshot.pilot_status is PilotStatus.FAILED
     assert snapshot.checkpoint_status is CheckpointStatus.VERIFIED
     assert snapshot.checkpoint_verified
+    assert snapshot.teacher_qualification_status == "passed"
+    assert snapshot.teacher_best_variant == "oracle-512"
     assert snapshot.diversity.games == 4
     assert snapshot.diversity.terminations[0].termination == "max_plies"
     assert snapshot.replay_shards == 2
