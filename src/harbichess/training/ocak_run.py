@@ -328,6 +328,7 @@ def run_ocak_sanity(
     if run_root.exists():
         raise FileExistsError(f"run already exists: {run_root}")
     store = SnapshotStore(config.telemetry_path)
+    previous_snapshot = store.read()
     started = time.perf_counter()
     training_started: float | None = None
     lock = threading.Lock()
@@ -348,6 +349,18 @@ def run_ocak_sanity(
         active_games=config.games,
         replay_capacity=config.games * config.max_plies,
         learning_rate=config.learning_rate,
+        teacher_qualification_status=previous_snapshot.teacher_qualification_status,
+        teacher_qualification_positions=previous_snapshot.teacher_qualification_positions,
+        teacher_qualification_variants=previous_snapshot.teacher_qualification_variants,
+        teacher_qualified_variants=previous_snapshot.teacher_qualified_variants,
+        teacher_best_variant=previous_snapshot.teacher_best_variant,
+        teacher_best_value_delta=previous_snapshot.teacher_best_value_delta,
+        teacher_best_value_delta_low=previous_snapshot.teacher_best_value_delta_low,
+        teacher_best_value_delta_high=previous_snapshot.teacher_best_value_delta_high,
+        teacher_best_stability_tv=previous_snapshot.teacher_best_stability_tv,
+        teacher_raw_value_mse=previous_snapshot.teacher_raw_value_mse,
+        teacher_best_value_mse=previous_snapshot.teacher_best_value_mse,
+        teacher_qualification_result=previous_snapshot.teacher_qualification_result,
     )
 
     def publish(**changes: object) -> None:
