@@ -9,7 +9,7 @@ import random
 import time
 from collections.abc import Sequence
 from concurrent.futures import ThreadPoolExecutor
-from dataclasses import asdict, dataclass
+from dataclasses import asdict, dataclass, replace
 from datetime import UTC, datetime
 from pathlib import Path
 from statistics import mean
@@ -19,6 +19,7 @@ from harbichess.backends.mlx_backend import MLXPolicyValueBackend
 from harbichess.backends.mlx_network import HarbiChessNetwork
 from harbichess.chess.rules import PythonChessRules
 from harbichess.core.state import ChessMove
+from harbichess.dashboard.state import RunMode, SnapshotStore
 from harbichess.evaluation.teacher_qualification import (
     _atomic_json,
     _interval,
@@ -270,6 +271,12 @@ def run_value_oracle_diagnostics(config: ValueOracleDiagnosticConfig) -> Path:
         for budget, summary in summaries["neural"].items()
         if summary["counterfactual_teacher_qualified"]
     )
+    oracle_tactical = tactical["oracle"]
+    bootstrap_teacher_qualified = (
+        len(qualified_oracle) == len(config.budgets)
+        and oracle_tactical["aggregate_solve_count_monotonic"]
+        and all(not row["regressions"] for row in oracle_tactical["budgets"])
+    )
     path = config.output_dir / "diagnostics.json"
     _atomic_json(
         path,
@@ -298,6 +305,7 @@ def run_value_oracle_diagnostics(config: ValueOracleDiagnosticConfig) -> Path:
                 "oracle_supports_value_bottleneck": bool(qualified_oracle),
                 "qualified_oracle_budgets": qualified_oracle,
                 "qualified_neural_budgets": qualified_neural,
+                "bootstrap_teacher_qualified": bootstrap_teacher_qualified,
                 "continuous_learner_authorized": False,
                 "generation_authorized": False,
                 "note": "counterfactual oracle evidence cannot authorize training",
@@ -311,6 +319,59 @@ def run_value_oracle_diagnostics(config: ValueOracleDiagnosticConfig) -> Path:
         },
     )
     return path
+
+
+def publish_value_oracle_diagnostics(result_path: Path, telemetry_path: Path) -> None:
+    """Publish a qualified bootstrap teacher without authorizing training."""
+
+    result = json.loads(result_path.read_text(encoding="utf-8"))
+    oracle = result["search"]["oracle"]
+    best_budget, best = max(
+        oracle.items(),
+        key=lambda item: item[1]["mean_verified_action_value_delta"],
+    )
+    low, high = best["verified_action_value_delta_95_interval"]
+    qualified = bool(
+        result["gate"].get("bootstrap_teacher_qualified")
+        or (
+            len(result["gate"]["qualified_oracle_budgets"])
+            == len(result["config"]["budgets"])
+            and result["tactical"]["oracle"]["aggregate_solve_count_monotonic"]
+            and all(
+                not row["regressions"]
+                for row in result["tactical"]["oracle"]["budgets"]
+            )
+        )
+    )
+    store = SnapshotStore(telemetry_path)
+    snapshot = store.read()
+    store.write_atomic(
+        replace(
+            snapshot,
+            updated_at=datetime.now(UTC).isoformat(),
+            mode=RunMode.IDLE,
+            mode_detail=(
+                "OMURGA depth-1 bootstrap teacher qualified · learner remains blocked"
+                if qualified
+                else "OMURGA bootstrap teacher rejected · learner remains blocked"
+            ),
+            run_id=result_path.parent.name,
+            source_commit=result["source_commit"],
+            teacher_qualification_status="passed" if qualified else "failed",
+            teacher_qualification_positions=result["config"]["positions"],
+            teacher_qualification_variants=len(oracle),
+            teacher_qualified_variants=tuple(
+                f"oracle-{budget}" for budget in result["gate"]["qualified_oracle_budgets"]
+            ),
+            teacher_best_variant=f"oracle-{best_budget}",
+            teacher_best_value_delta=best["mean_verified_action_value_delta"],
+            teacher_best_value_delta_low=low,
+            teacher_best_value_delta_high=high,
+            teacher_best_stability_tv=0.0,
+            teacher_qualification_result=str(result_path),
+            promotion_ready=False,
+        )
+    )
 
 
 def _parser() -> argparse.ArgumentParser:
@@ -327,6 +388,7 @@ def _parser() -> argparse.ArgumentParser:
     parser.add_argument("--verifier-depth", type=int, default=4)
     parser.add_argument("--material-scale", type=float, default=39.0)
     parser.add_argument("--bootstrap-samples", type=int, default=2_000)
+    parser.add_argument("--telemetry", type=Path)
     return parser
 
 
@@ -348,6 +410,8 @@ def main(argv: Sequence[str] | None = None) -> int:
             bootstrap_samples=arguments.bootstrap_samples,
         )
     )
+    if arguments.telemetry is not None:
+        publish_value_oracle_diagnostics(path, arguments.telemetry)
     print(path)
     return 0
 
