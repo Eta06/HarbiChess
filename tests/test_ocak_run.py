@@ -84,6 +84,7 @@ def test_ocak_run_configuration_rejects_unsafe_run_id() -> None:
     clean = OcakRunConfig(run_id="clean-default")
     assert not clean.repetition_target_transform
     assert clean.teacher_oracle_depth is None
+    assert clean.learning_rate == pytest.approx(0.0002)
     assert OcakRunConfig(
         run_id="legacy-reproduction",
         repetition_target_transform=True,
