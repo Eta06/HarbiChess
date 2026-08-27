@@ -47,6 +47,7 @@ from harbichess.search.root_halving import RootHalvingConfig
 from harbichess.search.value_oracle import (
     DeterministicTacticalOracle,
     OracleValueEvaluator,
+    ProcessTacticalOracle,
     TacticalOracleConfig,
 )
 from harbichess.selfplay.game import SelfPlayConfig, SelfPlayGame, play_parallel_games
@@ -108,6 +109,7 @@ class OcakRunConfig:
     root_halving_transfer_fraction: float = 0.35
     replay_split_namespace: str | None = None
     teacher_oracle_depth: int | None = None
+    teacher_oracle_workers: int = 0
 
     def __post_init__(self) -> None:
         if not self.run_id or Path(self.run_id).name != self.run_id:
@@ -166,6 +168,10 @@ class OcakRunConfig:
             raise ValueError("replay_split_namespace must be one safe path segment")
         if self.teacher_oracle_depth is not None and self.teacher_oracle_depth <= 0:
             raise ValueError("teacher_oracle_depth must be positive when enabled")
+        if self.teacher_oracle_workers < 0 or (
+            self.teacher_oracle_workers > 0 and self.teacher_oracle_depth is None
+        ):
+            raise ValueError("teacher oracle workers require an enabled oracle")
         if self.root_halving_enabled:
             root_halving = RootHalvingConfig(
                 top_actions=self.root_halving_top_actions,
@@ -389,6 +395,7 @@ def run_ocak_sanity(
     completed_positions = 0
     self_play_started = time.perf_counter()
     batcher: SharedBatchEvaluator | None = None
+    process_oracle: ProcessTacticalOracle | None = None
     inference_statistics = None
     try:
         backend = MLXPolicyValueBackend(network)
@@ -415,17 +422,19 @@ def run_ocak_sanity(
             else config.simulations
         )
         neural_evaluator = NeuralPositionEvaluator(batcher, rules=rules)
-        search_evaluator = (
-            OracleValueEvaluator(
-                neural_evaluator,
-                DeterministicTacticalOracle(
-                    rules=rules,
-                    config=TacticalOracleConfig(depth=config.teacher_oracle_depth),
-                ),
-            )
-            if config.teacher_oracle_depth is not None
-            else neural_evaluator
-        )
+        if config.teacher_oracle_depth is None:
+            search_evaluator = neural_evaluator
+        else:
+            oracle_config = TacticalOracleConfig(depth=config.teacher_oracle_depth)
+            if config.teacher_oracle_workers:
+                process_oracle = ProcessTacticalOracle(
+                    oracle_config,
+                    workers=config.teacher_oracle_workers,
+                )
+                oracle = process_oracle
+            else:
+                oracle = DeterministicTacticalOracle(rules=rules, config=oracle_config)
+            search_evaluator = OracleValueEvaluator(neural_evaluator, oracle)
         search = MCTS(
             search_evaluator,
             rules=rules,
@@ -505,6 +514,9 @@ def run_ocak_sanity(
         inference_statistics = batcher.statistics
         batcher.close()
         batcher = None
+        if process_oracle is not None:
+            process_oracle.close()
+            process_oracle = None
 
         diversity_metrics = measure_diversity(games)
         partitions = partition_games(
@@ -921,6 +933,8 @@ def run_ocak_sanity(
     except BaseException as error:
         if batcher is not None:
             batcher.close()
+        if process_oracle is not None:
+            process_oracle.close()
         publish(
             mode=RunMode.IDLE,
             mode_detail=f"OCAK sanity run failed · {type(error).__name__}: {error}",
@@ -975,6 +989,7 @@ def _parser() -> argparse.ArgumentParser:
     parser.add_argument("--root-halving-transfer-fraction", type=float, default=0.35)
     parser.add_argument("--replay-split-namespace")
     parser.add_argument("--teacher-oracle-depth", type=int)
+    parser.add_argument("--teacher-oracle-workers", type=int, default=0)
     return parser
 
 
@@ -1024,6 +1039,7 @@ def main(argv: list[str] | None = None) -> int:
             root_halving_transfer_fraction=arguments.root_halving_transfer_fraction,
             replay_split_namespace=arguments.replay_split_namespace,
             teacher_oracle_depth=arguments.teacher_oracle_depth,
+            teacher_oracle_workers=arguments.teacher_oracle_workers,
         )
     )
     print(json.dumps(asdict(result), indent=2))
