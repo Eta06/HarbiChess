@@ -91,11 +91,17 @@ def test_ocak_run_configuration_rejects_unsafe_run_id() -> None:
         run_id="legacy-reproduction",
         repetition_target_transform=True,
     ).repetition_target_transform
-    assert OcakRunConfig(run_id="qualified-teacher", teacher_oracle_depth=1)
+    assert OcakRunConfig(
+        run_id="qualified-teacher",
+        teacher_oracle_depth=1,
+        teacher_oracle_workers=4,
+    ).teacher_oracle_workers == 4
     with pytest.raises(ValueError, match="safe path"):
         OcakRunConfig(run_id="../escape")
     with pytest.raises(ValueError, match="teacher_oracle_depth"):
         OcakRunConfig(run_id="invalid-teacher", teacher_oracle_depth=0)
+    with pytest.raises(ValueError, match="workers"):
+        OcakRunConfig(run_id="orphan-workers", teacher_oracle_workers=1)
 
 
 def test_ocak_run_rejects_draw_only_truncated_self_play(tmp_path: Path) -> None:
