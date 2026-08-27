@@ -861,6 +861,8 @@ def run_ocak_sanity(
                 "last_improvement_step": report.last_improvement_step,
                 "stale_validation_evaluations": report.stale_validation_evaluations,
                 "validation_evaluations": report.validation_evaluations,
+                "train_value_samples": report.train_value_samples,
+                "validation_value_samples": report.validation_value_samples,
             },
             "diversity": asdict(diversity_metrics),
             "baseline": {
