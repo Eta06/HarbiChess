@@ -65,16 +65,18 @@ def test_ocak_run_connects_self_play_training_checkpoint_and_telemetry(
 
     snapshot = SnapshotStore(telemetry_path).read()
     payload = json.loads(Path(result.result_path).read_text(encoding="utf-8"))
-    assert result.passed
-    assert snapshot.pilot_status is PilotStatus.PASSED
+    assert not result.passed
+    assert snapshot.pilot_status is PilotStatus.FAILED
     assert snapshot.checkpoint_status is CheckpointStatus.VERIFIED
     assert snapshot.checkpoint_verified
     assert snapshot.diversity.games == 4
     assert snapshot.diversity.terminations[0].termination == "max_plies"
     assert snapshot.replay_shards == 2
-    assert snapshot.training_step == result.training_steps
+    assert snapshot.training_step == result.training_steps == 0
     assert snapshot.history[-1].training_step == 2
     assert payload["checkpoint"]["verified"]
+    assert payload["loss"]["validation_value_samples"] == 0
+    assert "no known value targets" in " ".join(result.reasons)
     assert Path(payload["baseline"]["path"]).is_file()
     assert len(payload["baseline"]["model_sha256"]) == 64
     assert Path(result.checkpoint_path, "resume.json").is_file()
