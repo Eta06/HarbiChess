@@ -81,13 +81,18 @@ def test_ocak_run_connects_self_play_training_checkpoint_and_telemetry(
 
 
 def test_ocak_run_configuration_rejects_unsafe_run_id() -> None:
-    assert not OcakRunConfig(run_id="clean-default").repetition_target_transform
+    clean = OcakRunConfig(run_id="clean-default")
+    assert not clean.repetition_target_transform
+    assert clean.teacher_oracle_depth is None
     assert OcakRunConfig(
         run_id="legacy-reproduction",
         repetition_target_transform=True,
     ).repetition_target_transform
+    assert OcakRunConfig(run_id="qualified-teacher", teacher_oracle_depth=1)
     with pytest.raises(ValueError, match="safe path"):
         OcakRunConfig(run_id="../escape")
+    with pytest.raises(ValueError, match="teacher_oracle_depth"):
+        OcakRunConfig(run_id="invalid-teacher", teacher_oracle_depth=0)
 
 
 def test_ocak_run_rejects_draw_only_truncated_self_play(tmp_path: Path) -> None:
