@@ -4,7 +4,9 @@ from __future__ import annotations
 
 import math
 import threading
+from concurrent.futures import ProcessPoolExecutor
 from dataclasses import dataclass
+from multiprocessing import get_context
 
 import chess
 
@@ -113,13 +115,43 @@ class DeterministicTacticalOracle:
         )
 
 
+_PROCESS_ORACLES: dict[TacticalOracleConfig, DeterministicTacticalOracle] = {}
+
+
+def _process_oracle_value(config: TacticalOracleConfig, state: ChessState) -> float:
+    oracle = _PROCESS_ORACLES.get(config)
+    if oracle is None:
+        oracle = DeterministicTacticalOracle(rules=PythonChessRules(), config=config)
+        _PROCESS_ORACLES[config] = oracle
+    return oracle.value(state)
+
+
+class ProcessTacticalOracle:
+    """Evaluate the deterministic oracle outside the caller's Python GIL."""
+
+    def __init__(self, config: TacticalOracleConfig, *, workers: int) -> None:
+        if workers <= 0:
+            raise ValueError("process oracle workers must be positive")
+        self.config = config
+        self._pool = ProcessPoolExecutor(
+            max_workers=workers,
+            mp_context=get_context("spawn"),
+        )
+
+    def value(self, state: ChessState) -> float:
+        return self._pool.submit(_process_oracle_value, self.config, state).result()
+
+    def close(self) -> None:
+        self._pool.shutdown(wait=True, cancel_futures=True)
+
+
 class OracleValueEvaluator:
     """Keep neural policy priors unchanged and replace only the leaf value."""
 
     def __init__(
         self,
         policy_evaluator: SearchEvaluator,
-        oracle: DeterministicTacticalOracle,
+        oracle: DeterministicTacticalOracle | ProcessTacticalOracle,
     ) -> None:
         self.policy_evaluator = policy_evaluator
         self.oracle = oracle
