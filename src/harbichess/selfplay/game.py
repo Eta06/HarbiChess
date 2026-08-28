@@ -38,6 +38,9 @@ class SelfPlayConfig:
     value_policy_prior_visits: float = 8.0
     maximum_value_logit_adjustment: float = 1.25
     root_halving_config: RootHalvingConfig | None = None
+    search_root_noise: bool = True
+    selection_dirichlet_alpha: float = 0.3
+    selection_dirichlet_fraction: float = 0.0
 
     def __post_init__(self) -> None:
         if (
@@ -52,6 +55,9 @@ class SelfPlayConfig:
             )
             or self.value_policy_prior_visits < 0
             or self.maximum_value_logit_adjustment < 0
+            or self.selection_dirichlet_alpha <= 0
+            or not 0.0 <= self.selection_dirichlet_fraction <= 1.0
+            or (self.search_root_noise and self.selection_dirichlet_fraction > 0)
             or (
                 self.root_halving_config is not None
                 and self.value_policy_temperature is not None
@@ -142,6 +148,36 @@ def _teacher_telemetry(
     return raw_policy, tv, kl, teacher_action != raw_action, value_delta
 
 
+def _select_from_policy(
+    policy: tuple[tuple[ChessMove, float], ...],
+    *,
+    temperature: float,
+    dirichlet_alpha: float,
+    dirichlet_fraction: float,
+    rng: random.Random,
+) -> ChessMove:
+    if temperature == 0:
+        return min(policy, key=lambda item: (-item[1], item[0].uci))[0]
+    weights = [probability ** (1.0 / temperature) for _, probability in policy]
+    total = sum(weights)
+    weights = [weight / total for weight in weights]
+    if dirichlet_fraction > 0:
+        noise = [rng.gammavariate(dirichlet_alpha, 1.0) for _ in policy]
+        noise_total = sum(noise)
+        weights = [
+            (1.0 - dirichlet_fraction) * weight
+            + dirichlet_fraction * sample / noise_total
+            for weight, sample in zip(weights, noise, strict=True)
+        ]
+    threshold = rng.random() * sum(weights)
+    cumulative = 0.0
+    for (move, _), weight in zip(policy, weights, strict=True):
+        cumulative += weight
+        if cumulative >= threshold:
+            return move
+    return policy[-1][0]
+
+
 def play_game(
     mcts: MCTS,
     rules: PythonChessRules,
@@ -180,7 +216,11 @@ def play_game(
         if state.ply >= settings.max_plies:
             outcome = GameOutcome(TerminalResult.DRAW, "max_plies")
             break
-        search = mcts.search(state, rng=rng, add_root_noise=True)
+        search = mcts.search(
+            state,
+            rng=rng,
+            add_root_noise=settings.search_root_noise,
+        )
         root_halving = (
             sequential_halving_root(
                 mcts,
@@ -235,6 +275,16 @@ def play_game(
                         settings.maximum_value_logit_adjustment
                     ),
                 ),
+            )
+        if settings.selection_dirichlet_fraction > 0:
+            selected = _select_from_policy(
+                policy,
+                temperature=temperature,
+                dirichlet_alpha=settings.selection_dirichlet_alpha,
+                dirichlet_fraction=(
+                    settings.selection_dirichlet_fraction if temperature > 0 else 0.0
+                ),
+                rng=rng,
             )
         teacher_telemetry = _teacher_telemetry(search, policy)
         pending.append(
