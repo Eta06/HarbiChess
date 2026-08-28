@@ -234,6 +234,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument("--train-shard", required=True, type=Path)
     parser.add_argument("--validation-shard", required=True, type=Path)
     parser.add_argument("--output-dir", required=True, type=Path)
+    parser.add_argument("--seed", type=int, default=2026082828)
     arguments = parser.parse_args(argv)
     path = run_uncertainty_q_labels(
         UncertaintyQLabelConfig(
@@ -241,6 +242,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             train_shard=arguments.train_shard,
             validation_shard=arguments.validation_shard,
             output_dir=arguments.output_dir,
+            seed=arguments.seed,
         )
     )
     print(path)
