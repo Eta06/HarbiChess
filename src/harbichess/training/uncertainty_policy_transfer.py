@@ -420,6 +420,12 @@ def run_uncertainty_policy_transfer(config: UncertaintyPolicyTransferConfig) -> 
                     _snapshot(adapter),
                     _quality(
                         adapter,
+                        train,
+                        bootstrap_samples=config.bootstrap_samples,
+                        seed=config.seed + step + 10_000,
+                    ),
+                    _quality(
+                        adapter,
                         validation,
                         bootstrap_samples=config.bootstrap_samples,
                         seed=config.seed + step,
@@ -451,12 +457,12 @@ def run_uncertainty_policy_transfer(config: UncertaintyPolicyTransferConfig) -> 
         seed=config.seed,
     )
     baseline_tactical = _tactical_solved(baseline_tactical_payload)
-    baseline_ce = float(checkpoints[0][2]["uncertainty_policy_cross_entropy"])
+    baseline_ce = float(checkpoints[0][3]["uncertainty_policy_cross_entropy"])
     evaluated = []
     eligible = []
     base_wdl = base(validation.inputs)[1]
     mx.eval(base_wdl)
-    for step, weights, quality in checkpoints:
+    for step, weights, train_quality, quality in checkpoints:
         candidate_adapter = _clone_adapter(feature_size, config.rank, weights)
         candidate = _merged_network(baseline_path, network_config, candidate_adapter)
         tactical_payload = _tactical_metrics(
@@ -487,6 +493,7 @@ def run_uncertainty_policy_transfer(config: UncertaintyPolicyTransferConfig) -> 
         evaluated.append(
             {
                 "step": step,
+                "train_quality": train_quality,
                 "quality": quality,
                 "maximum_wdl_logit_delta": wdl_delta,
                 "tactical": tactical_payload,
