@@ -25,6 +25,7 @@ from harbichess.evaluation.arena import _openings
 from harbichess.search.batching import BatchStatistics, SharedBatchEvaluator
 from harbichess.search.diagnostics import run_tactical_sweep
 from harbichess.search.evaluator import NeuralPositionEvaluator, SearchEvaluator
+from harbichess.search.full_gumbel import FullGumbelConfig, FullGumbelMCTS
 from harbichess.search.mcts import MCTS, MoveStatistics, SearchConfig, SearchResult
 
 
@@ -49,6 +50,9 @@ class SystemTeacherConfig:
     bootstrap_samples: int = 50_000
     root_fpu_reduction: float = 0.0
     fpu_reduction: float = 0.0
+    search_kind: str = "puct"
+    max_considered_actions: int = 16
+    gumbel_scale: float = 0.0
 
     def __post_init__(self) -> None:
         counts = (
@@ -67,8 +71,12 @@ class SystemTeacherConfig:
             or self.inference_wait_seconds < 0
             or self.root_fpu_reduction < 0
             or self.fpu_reduction < 0
+            or self.max_considered_actions <= 0
+            or self.gumbel_scale < 0
         ):
             raise ValueError("system teacher seed and wait must be non-negative")
+        if self.search_kind not in {"puct", "full-gumbel"}:
+            raise ValueError("unknown system teacher search kind")
 
 
 @dataclass(frozen=True, slots=True)
@@ -147,8 +155,8 @@ def _score(outcome: GameOutcome, side: Side) -> float:
 
 
 def _play_game(
-    white: RawPolicy | MCTS,
-    black: RawPolicy | MCTS,
+    white: RawPolicy | MCTS | FullGumbelMCTS,
+    black: RawPolicy | MCTS | FullGumbelMCTS,
     rules: PythonChessRules,
     initial_state: ChessState,
     *,
@@ -310,19 +318,33 @@ def run_system_teacher_qualification(config: SystemTeacherConfig) -> Path:
     )
     evaluator = NeuralPositionEvaluator(batcher, rules=rules)
     raw = RawPolicy(evaluator)
-    searches = {
-        budget: MCTS(
-            evaluator,
-            rules=rules,
-            config=SearchConfig(
-                simulations=budget,
-                dirichlet_fraction=0.0,
-                root_fpu_reduction=config.root_fpu_reduction,
-                fpu_reduction=config.fpu_reduction,
-            ),
-        )
-        for budget in config.budgets
-    }
+    if config.search_kind == "full-gumbel":
+        searches: dict[int, MCTS | FullGumbelMCTS] = {
+            budget: FullGumbelMCTS(
+                evaluator,
+                rules=rules,
+                config=FullGumbelConfig(
+                    simulations=budget,
+                    max_considered_actions=config.max_considered_actions,
+                    gumbel_scale=config.gumbel_scale,
+                ),
+            )
+            for budget in config.budgets
+        }
+    else:
+        searches = {
+            budget: MCTS(
+                evaluator,
+                rules=rules,
+                config=SearchConfig(
+                    simulations=budget,
+                    dirichlet_fraction=0.0,
+                    root_fpu_reduction=config.root_fpu_reduction,
+                    fpu_reduction=config.fpu_reduction,
+                ),
+            )
+            for budget in config.budgets
+        }
     openings = _openings(
         rules, count=config.opening_pairs, plies=config.opening_plies, seed=config.seed
     )
@@ -331,8 +353,11 @@ def run_system_teacher_qualification(config: SystemTeacherConfig) -> Path:
         store.read(),
         updated_at=datetime.now(UTC).isoformat(),
         mode=RunMode.EVALUATION,
-        mode_detail="ESAS system teacher qualification · tactical diagnostics",
-        run_id="esas-system-teacher-20260828-01",
+        mode_detail=(
+            f"ESAS {config.search_kind} system teacher qualification · "
+            "tactical diagnostics"
+        ),
+        run_id=config.output_dir.name,
         active_games=0,
         completed_games=0,
     )
@@ -346,9 +371,14 @@ def run_system_teacher_qualification(config: SystemTeacherConfig) -> Path:
         seed=config.seed,
         root_fpu_reduction=config.root_fpu_reduction,
         fpu_reduction=config.fpu_reduction,
+        search_kind=config.search_kind,
+        max_considered_actions=config.max_considered_actions,
+        gumbel_scale=config.gumbel_scale,
     )
 
-    def run_arm(candidate: RawPolicy | MCTS | None, label: str) -> tuple[QualificationGame, ...]:
+    def run_arm(
+        candidate: RawPolicy | MCTS | FullGumbelMCTS | None, label: str
+    ) -> tuple[QualificationGame, ...]:
         tasks = [
             (pair_index, side, state, moves)
             for pair_index, (state, moves) in enumerate(openings)
@@ -378,7 +408,10 @@ def run_system_teacher_qualification(config: SystemTeacherConfig) -> Path:
                 snapshot = replace(
                     snapshot,
                     updated_at=datetime.now(UTC).isoformat(),
-                    mode_detail=f"ESAS system teacher · {label} · {completed}/{len(tasks)} games",
+                    mode_detail=(
+                        f"ESAS {config.search_kind} teacher · {label} · "
+                        f"{completed}/{len(tasks)} games"
+                    ),
                     session_elapsed_seconds=elapsed,
                     active_games=len(tasks) - completed,
                     completed_games=completed,
@@ -465,6 +498,9 @@ def _parser() -> argparse.ArgumentParser:
     parser.add_argument("--workers", type=int, default=24)
     parser.add_argument("--root-fpu-reduction", type=float, default=0.0)
     parser.add_argument("--fpu-reduction", type=float, default=0.0)
+    parser.add_argument("--search-kind", choices=("puct", "full-gumbel"), default="puct")
+    parser.add_argument("--max-considered-actions", type=int, default=16)
+    parser.add_argument("--gumbel-scale", type=float, default=0.0)
     return parser
 
 
@@ -479,6 +515,9 @@ def main(argv: list[str] | None = None) -> int:
             workers=arguments.workers,
             root_fpu_reduction=arguments.root_fpu_reduction,
             fpu_reduction=arguments.fpu_reduction,
+            search_kind=arguments.search_kind,
+            max_considered_actions=arguments.max_considered_actions,
+            gumbel_scale=arguments.gumbel_scale,
         )
     )
     print(result)
