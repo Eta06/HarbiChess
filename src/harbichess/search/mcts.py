@@ -56,6 +56,7 @@ class SearchResult:
     root_value: float
     simulations: int
     outcome: GameOutcome | None = None
+    network_priors: tuple[tuple[ChessMove, float], ...] = ()
 
     def select_move(self, *, temperature: float, rng: random.Random) -> ChessMove:
         if not self.moves:
@@ -108,7 +109,9 @@ class MCTS:
             return SearchResult((), root_value, 0, root_outcome)
 
         root = SearchNode()
-        self._expand(root, self.evaluator.evaluate(state))
+        root_evaluation = self.evaluator.evaluate(state)
+        network_priors = tuple(root_evaluation.priors)
+        self._expand(root, root_evaluation)
         if add_root_noise:
             self._add_root_noise(root, rng)
 
@@ -143,7 +146,12 @@ class MCTS:
                 key=lambda item: (-item.visits, item.move.uci),
             )
         )
-        return SearchResult(moves, root.mean_value, self.config.simulations)
+        return SearchResult(
+            moves,
+            root.mean_value,
+            self.config.simulations,
+            network_priors=network_priors,
+        )
 
     def _select_child(self, parent: SearchNode) -> tuple[ChessMove, SearchNode]:
         scale = math.sqrt(max(1, parent.visit_count))
