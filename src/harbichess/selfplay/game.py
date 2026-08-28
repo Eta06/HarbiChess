@@ -41,6 +41,7 @@ class SelfPlayConfig:
     search_root_noise: bool = True
     selection_dirichlet_alpha: float = 0.3
     selection_dirichlet_fraction: float = 0.0
+    separate_clean_target_search: bool = False
 
     def __post_init__(self) -> None:
         if (
@@ -61,6 +62,16 @@ class SelfPlayConfig:
             or (
                 self.root_halving_config is not None
                 and self.value_policy_temperature is not None
+            )
+            or (
+                self.separate_clean_target_search
+                and (
+                    not self.search_root_noise
+                    or self.selection_dirichlet_fraction > 0
+                    or self.repetition_target_transform
+                    or self.value_policy_temperature is not None
+                    or self.root_halving_config is not None
+                )
             )
         ):
             raise ValueError("self-play temperatures and ply limits must be non-negative")
@@ -83,6 +94,7 @@ class SelfPlaySample:
     teacher_policy_kl: float | None = None
     teacher_argmax_changed: bool | None = None
     teacher_search_value_delta: float | None = None
+    behavior_target_decoupled: bool = False
 
 
 @dataclass(frozen=True, slots=True)
@@ -206,6 +218,7 @@ def play_game(
             float | None,
             bool | None,
             float | None,
+            bool,
         ]
     ] = []
 
@@ -235,6 +248,15 @@ def play_game(
         if root_halving is not None:
             search = root_halving.search
         root_evidence = root_halving.evidence if root_halving is not None else None
+        target_search = (
+            mcts.search(
+                state,
+                rng=random.Random(f"{seed}:{state.ply}:clean-target"),
+                add_root_noise=False,
+            )
+            if settings.separate_clean_target_search
+            else search
+        )
         side_to_move = rules.view(state).side_to_move
         temperature = settings.temperature if state.ply < settings.exploration_plies else 0.0
         selected = search.select_move(temperature=temperature, rng=rng)
@@ -253,7 +275,7 @@ def play_game(
             selected = continuation.selected_move
             repetition_redirected = continuation.transformed
         else:
-            policy_moves = search.moves
+            policy_moves = target_search.moves
             repetition_redirected = False
         if settings.value_policy_temperature is None:
             total_visits = sum(statistics.visits for statistics in policy_moves)
@@ -267,7 +289,7 @@ def play_game(
         else:
             policy = value_improved_policy(
                 policy_moves,
-                search.root_value,
+                target_search.root_value,
                 config=ValueImprovedPolicyConfig(
                     advantage_temperature=settings.value_policy_temperature,
                     prior_visits=settings.value_policy_prior_visits,
@@ -286,19 +308,20 @@ def play_game(
                 ),
                 rng=rng,
             )
-        teacher_telemetry = _teacher_telemetry(search, policy)
+        teacher_telemetry = _teacher_telemetry(target_search, policy)
         pending.append(
             (
                 state,
                 side_to_move,
                 policy,
                 selected,
-                search.root_value,
+                target_search.root_value,
                 repetition_redirected,
                 bool(root_evidence and root_evidence.adjusted),
                 root_evidence.first_round_margin if root_evidence else None,
                 root_evidence.final_round_margin if root_evidence else None,
                 *teacher_telemetry,
+                settings.separate_clean_target_search,
             )
         )
         state = rules.apply(state, selected)
@@ -322,6 +345,7 @@ def play_game(
             teacher_policy_kl=teacher_policy_kl,
             teacher_argmax_changed=teacher_argmax_changed,
             teacher_search_value_delta=teacher_search_value_delta,
+            behavior_target_decoupled=behavior_target_decoupled,
         )
         for (
             sample_state,
@@ -338,6 +362,7 @@ def play_game(
             teacher_policy_kl,
             teacher_argmax_changed,
             teacher_search_value_delta,
+            behavior_target_decoupled,
         ) in pending
     )
     return SelfPlayGame(game_index, seed, state, outcome, samples)
