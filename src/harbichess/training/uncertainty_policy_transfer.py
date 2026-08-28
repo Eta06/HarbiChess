@@ -42,6 +42,7 @@ class UncertaintyPolicyTransferConfig:
     train_shard: Path
     validation_shard: Path
     output_dir: Path
+    policy_target_result: Path | None = None
     telemetry_path: Path = Path("artifacts/dashboard/state.json")
     rank: int = 8
     steps: int = 480
@@ -190,11 +191,32 @@ def _dense_target(
     return targets, legal_mask, teacher, legal
 
 
+def _dense_explicit_target(
+    board: chess.Board, target_rows: Sequence[Sequence[object]]
+) -> tuple[list[float], list[bool], dict[int, float], tuple[int, ...]]:
+    targets = [0.0] * POLICY_SIZE
+    legal = tuple(sorted(move_to_action(board, move) for move in board.legal_moves))
+    legal_mask = [False] * POLICY_SIZE
+    for action in legal:
+        legal_mask[action] = True
+    teacher = {}
+    for uci, probability in target_rows:
+        action = move_to_action(board, chess.Move.from_uci(str(uci)))
+        targets[action] = float(probability)
+        if float(probability) > 0:
+            teacher[action] = float(probability)
+    if not math.isclose(sum(targets), 1.0, abs_tol=1e-6):
+        raise ValueError("explicit policy target must sum to one")
+    return targets, legal_mask, teacher, legal
+
+
 def _prepare_data(
     records: tuple[ReplayRecord, ...],
     label_rows: Sequence[Mapping[str, object]],
     verifier_rows: Sequence[Mapping[str, object]],
     network: HarbiChessNetwork,
+    *,
+    explicit_targets: bool = False,
 ) -> PreparedPolicyData:
     rules = PythonChessRules()
     index = _record_index(records)
@@ -217,7 +239,11 @@ def _prepare_data(
         if record is None or verifier_row is None:
             raise ValueError(f"AKIS row is absent from replay or verifier data: {key}")
         board = rules.board(record.state)
-        target, mask, teacher, legal = _dense_target(board, row["labels"])
+        target, mask, teacher, legal = (
+            _dense_explicit_target(board, row["target"])
+            if explicit_targets
+            else _dense_target(board, row["labels"])
+        )
         matched.append(record)
         encoded.append(encoder.encode_state(record.state, board))
         targets.append(target)
@@ -382,6 +408,11 @@ def run_uncertainty_policy_transfer(config: UncertaintyPolicyTransferConfig) -> 
     run = json.loads(config.run_result.read_text(encoding="utf-8"))
     if not labels.get("gate", {}).get("spatial_transfer_authorized"):
         raise ValueError("AKIS requires qualified uncertainty labels")
+    targets = None
+    if config.policy_target_result is not None:
+        targets = json.loads(config.policy_target_result.read_text(encoding="utf-8"))
+        if not targets.get("gate", {}).get("learner_transfer_authorized"):
+            raise ValueError("AKIS requires a qualified explicit policy target")
     network_config = _network_config(run["config"])
     baseline_path = Path(run["baseline"]["path"])
     base = HarbiChessNetwork(network_config)
@@ -389,14 +420,20 @@ def run_uncertainty_policy_transfer(config: UncertaintyPolicyTransferConfig) -> 
     rules = PythonChessRules()
     train_records = read_shard(config.train_shard, rules=rules).records
     validation_records = read_shard(config.validation_shard, rules=rules).records
+    target_rows = targets["rows"] if targets is not None else labels["rows"]
     train = _prepare_data(
-        train_records, labels["rows"]["train"], dataset["rows"]["train"], base
+        train_records,
+        target_rows["train"],
+        dataset["rows"]["train"],
+        base,
+        explicit_targets=targets is not None,
     )
     validation = _prepare_data(
         validation_records,
-        labels["rows"]["validation"],
+        target_rows["validation"],
         dataset["rows"]["validation"],
         base,
+        explicit_targets=targets is not None,
     )
     feature_size = int(train.features.shape[1])
     mx.random.seed(config.seed)
@@ -544,6 +581,11 @@ def run_uncertainty_policy_transfer(config: UncertaintyPolicyTransferConfig) -> 
                         "telemetry_path",
                     )
                 },
+                "policy_target_result": (
+                    str(config.policy_target_result)
+                    if config.policy_target_result is not None
+                    else None
+                ),
             },
             "baseline": {
                 "path": str(baseline_path),
@@ -593,6 +635,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument("--train-shard", required=True, type=Path)
     parser.add_argument("--validation-shard", required=True, type=Path)
     parser.add_argument("--output-dir", required=True, type=Path)
+    parser.add_argument("--policy-target-result", type=Path)
     parser.add_argument("--telemetry", type=Path, default=Path("artifacts/dashboard/state.json"))
     parser.add_argument("--seed", type=int, default=2026082833)
     arguments = parser.parse_args(argv)
@@ -604,6 +647,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             train_shard=arguments.train_shard,
             validation_shard=arguments.validation_shard,
             output_dir=arguments.output_dir,
+            policy_target_result=arguments.policy_target_result,
             telemetry_path=arguments.telemetry,
             seed=arguments.seed,
         )
