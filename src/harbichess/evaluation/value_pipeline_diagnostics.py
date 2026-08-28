@@ -26,6 +26,8 @@ from harbichess.evaluation.teacher_qualification import (
 from harbichess.replay.schema import TARGET_SCHEMA_VERSION, ReplayRecord
 from harbichess.replay.shard import read_shard
 
+MAX_PLY_UNKNOWN_TARGET_SCHEMA_VERSION = 10
+
 
 @dataclass(frozen=True, slots=True)
 class ValuePipelineDiagnosticConfig:
@@ -47,7 +49,7 @@ def legacy_max_ply_game_ids(
 ) -> frozenset[str]:
     """Identify legacy games whose artificial draw label is now masked by schema 10."""
 
-    if target_schema >= TARGET_SCHEMA_VERSION:
+    if target_schema >= MAX_PLY_UNKNOWN_TARGET_SCHEMA_VERSION:
         return frozenset()
     by_game: dict[str, list[ReplayRecord]] = {}
     for record in records:
