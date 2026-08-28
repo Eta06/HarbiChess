@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import math
 from dataclasses import asdict, dataclass
 from statistics import mean
 
@@ -18,6 +19,7 @@ class ModelQualityMetrics:
     samples: int
     known_value_samples: int
     teacher_policy_cross_entropy: float
+    global_teacher_policy_cross_entropy: float
     teacher_top_action_agreement: float
     value_cross_entropy: float
     value_accuracy: float
@@ -66,6 +68,7 @@ def evaluate_model_quality(
     engine = rules or PythonChessRules()
     encoder = BoardEncoder(engine)
     policy_losses = []
+    global_policy_losses = []
     top_action_matches = []
     value_losses = []
     value_matches = []
@@ -82,13 +85,14 @@ def evaluate_model_quality(
         policy_log_probs = policy_logits - mx.logsumexp(policy_logits, axis=1, keepdims=True)
         wdl_log_probs = wdl_logits - mx.logsumexp(wdl_logits, axis=1, keepdims=True)
         wdl_probs = mx.softmax(wdl_logits, axis=1)
-        mx.eval(policy_log_probs, wdl_log_probs, wdl_probs)
+        mx.eval(policy_logits, policy_log_probs, wdl_log_probs, wdl_probs)
+        policy_logits_rows = policy_logits.tolist()
         policy_rows = policy_log_probs.tolist()
         wdl_log_rows = wdl_log_probs.tolist()
         wdl_rows = wdl_probs.tolist()
 
         for index, record in enumerate(chunk):
-            policy_losses.append(
+            global_policy_losses.append(
                 -sum(
                     probability * policy_rows[index][action]
                     for action, probability in record.policy
@@ -97,9 +101,23 @@ def evaluate_model_quality(
             legal_actions = tuple(action for action, _ in record.raw_policy) or tuple(
                 action for action, _ in record.policy
             )
+            legal_maximum = max(policy_logits_rows[index][action] for action in legal_actions)
+            legal_log_normalizer = legal_maximum + math.log(
+                sum(
+                    math.exp(policy_logits_rows[index][action] - legal_maximum)
+                    for action in legal_actions
+                )
+            )
+            policy_losses.append(
+                -sum(
+                    probability
+                    * (policy_logits_rows[index][action] - legal_log_normalizer)
+                    for action, probability in record.policy
+                )
+            )
             predicted_action = min(
                 legal_actions,
-                key=lambda action: (-policy_rows[index][action], action),
+                key=lambda action: (-policy_logits_rows[index][action], action),
             )
             teacher_action = min(record.policy, key=lambda item: (-item[1], item[0]))[0]
             top_action_matches.append(predicted_action == teacher_action)
@@ -116,6 +134,7 @@ def evaluate_model_quality(
         samples=len(records),
         known_value_samples=len(value_losses),
         teacher_policy_cross_entropy=mean(policy_losses),
+        global_teacher_policy_cross_entropy=mean(global_policy_losses),
         teacher_top_action_agreement=mean(top_action_matches),
         value_cross_entropy=mean(value_losses) if value_losses else 0.0,
         value_accuracy=mean(value_matches) if value_matches else 0.0,
