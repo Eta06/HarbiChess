@@ -165,6 +165,7 @@ def sequential_halving_root(
         initial.root_value,
         initial.simulations + settings.forced_evaluations,
         initial.outcome,
+        initial.network_priors,
     )
     return RootHalvingResult(
         search,
