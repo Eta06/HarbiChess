@@ -350,6 +350,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument("--train-shard", required=True, type=Path)
     parser.add_argument("--validation-shard", required=True, type=Path)
     parser.add_argument("--output-dir", required=True, type=Path)
+    parser.add_argument("--seed", type=int, default=2026082824)
     arguments = parser.parse_args(argv)
     path = run_action_value_dataset(
         ActionValueDatasetConfig(
@@ -359,6 +360,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             validation_shard=arguments.validation_shard,
             output_dir=arguments.output_dir,
             additional_excluded_q_results=tuple(arguments.additional_excluded_q_result),
+            seed=arguments.seed,
         )
     )
     print(path)
