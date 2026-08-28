@@ -14,7 +14,7 @@ The design follows the root-allocation principle in Gumbel AlphaZero/MuZero and 
 
 ## Frozen algorithm
 
-For each position and total neural-evaluation budget `B` in `512, 800`:
+For each position and total search-evaluation-slot budget `B` in `512, 800`:
 
 1. Evaluate the root once and take at most the 16 highest-prior legal actions.
 2. Let `R = ceil(log2(K))` for `K` considered actions.
@@ -23,7 +23,7 @@ For each position and total neural-evaluation budget `B` in `512, 800`:
 5. Rank by mean continuation value, then prior, then UCI; retain `ceil(active/2)` actions.
 6. Spend any final remainder on the surviving action and return the highest accumulated-value action.
 
-All evaluation costs, including root and forced child expansions, count against `B`; no run may exceed it. Search uses the unchanged depth-1 oracle, no root noise, 24 position workers, eight oracle workers, batch cap 48, wait 0.25 ms, seed `2026082821`, and the exact MIHENK 96/48 positions. Every legal root action retains the unchanged depth-4 verifier value from a fresh deterministic evaluation.
+All evaluation slots, including root and forced child expansions, count against `B`; no run may exceed it. A terminal node consumes its allocated slot even though it correctly requires no neural backend call. This convention prevents terminal-heavy positions from receiving extra non-terminal search compute while keeping the allocator exactly budget matched. Search uses the unchanged depth-1 oracle, no root noise, 24 position workers, eight oracle workers, batch cap 48, wait 0.25 ms, seed `2026082821`, and the exact MIHENK 96/48 positions. Every legal root action retains the unchanged depth-4 verifier value from a fresh deterministic evaluation.
 
 ## Frozen gate
 
@@ -35,6 +35,6 @@ ODAK is qualified for a later soft-target experiment only if validation satisfie
 - mean selected-action verified regret at most `0.10`;
 - mean selected-action verified delta is no worse than TERAZI standard 800 top-Q by more than `0.01`;
 - the considered top-16 prior set contains the independently best legal action in at least `80%` of rows;
-- actual neural-evaluation count equals the requested budget for every row.
+- allocated search-evaluation slots equal the requested budget for every row; measured backend calls are reported separately and may be lower only for terminal nodes.
 
 Bootstrap uses 2,000 resamples. Thresholds and sample sizes cannot change after results become visible. A pass authorizes only a separately preregistered uncertainty-preserving target qualification; learner remains blocked. A failure rejects this allocator and returns the investigation to value/action representation rather than tuning K, budgets, or gates on this position set.
