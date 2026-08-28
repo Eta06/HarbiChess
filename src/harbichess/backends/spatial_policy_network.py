@@ -7,7 +7,7 @@ import mlx.nn as nn
 from mlx.utils import tree_flatten
 
 from harbichess.backends.mlx_network import HarbiChessNetwork, NetworkConfig
-from harbichess.chess.actions import POLICY_PLANES, POLICY_SIZE
+from harbichess.chess.actions import POLICY_PLANES, POLICY_SIZE, action_destination_square
 
 
 class SpatialPolicyAdapter(nn.Module):
@@ -42,6 +42,10 @@ class HarbiChessSpatialPolicyNetwork(HarbiChessNetwork):
         mx.eval(target.parameters())
         return target
 
+    @property
+    def policy_adapter(self) -> SpatialPolicyAdapter:
+        return self.spatial_policy_adapter
+
     def frozen_spatial_features(
         self, inputs: mx.array
     ) -> tuple[mx.array, mx.array, mx.array]:
@@ -58,3 +62,82 @@ class HarbiChessSpatialPolicyNetwork(HarbiChessNetwork):
         trunk = self._trunk(inputs)
         policy = self.policy_linear(self._policy_features(trunk))
         return policy + self.spatial_policy_adapter(trunk), self._value_logits(trunk)
+
+
+class RelationalPolicyAdapter(nn.Module):
+    """Shared action scorer conditioned on origin, destination, and move plane."""
+
+    def __init__(
+        self,
+        trunk_channels: int,
+        *,
+        plane_embedding: int = 8,
+        hidden: int = 16,
+    ) -> None:
+        super().__init__()
+        if min(trunk_channels, plane_embedding, hidden) <= 0:
+            raise ValueError("relational policy adapter dimensions must be positive")
+        self.plane_embedding = nn.Embedding(POLICY_PLANES, plane_embedding)
+        self.hidden = nn.Linear(2 * trunk_channels + plane_embedding, hidden)
+        self.output = nn.Linear(hidden, 1)
+        self.output.weight = mx.zeros_like(self.output.weight)
+        self.output.bias = mx.zeros_like(self.output.bias)
+        self._origin_indices = tuple(action // POLICY_PLANES for action in range(POLICY_SIZE))
+        self._plane_indices = tuple(action % POLICY_PLANES for action in range(POLICY_SIZE))
+        self._destination_indices = tuple(
+            destination if (destination := action_destination_square(action)) is not None else (
+                action // POLICY_PLANES
+            )
+            for action in range(POLICY_SIZE)
+        )
+
+    def __call__(self, trunk: mx.array) -> mx.array:
+        if trunk.ndim != 4 or tuple(trunk.shape[1:3]) != (8, 8):
+            raise ValueError("relational policy adapter requires (batch, 8, 8, channels)")
+        flat = trunk.reshape(trunk.shape[0], 64, trunk.shape[-1])
+        origins = mx.take(flat, mx.array(self._origin_indices, dtype=mx.int32), axis=1)
+        destinations = mx.take(
+            flat,
+            mx.array(self._destination_indices, dtype=mx.int32),
+            axis=1,
+        )
+        planes = self.plane_embedding(mx.array(self._plane_indices, dtype=mx.int32))
+        planes = mx.broadcast_to(planes[None, :, :], (*origins.shape[:2], planes.shape[-1]))
+        features = mx.concatenate((origins, destinations, planes), axis=2)
+        return self.output(nn.relu(self.hidden(features))).squeeze(-1)
+
+
+class HarbiChessRelationalPolicyNetwork(HarbiChessNetwork):
+    """Release network plus a compact origin/destination policy adapter."""
+
+    def __init__(self, config: NetworkConfig | None = None) -> None:
+        super().__init__(config)
+        self.relational_policy_adapter = RelationalPolicyAdapter(self.config.trunk_channels)
+
+    @classmethod
+    def from_base(cls, base: HarbiChessNetwork) -> HarbiChessRelationalPolicyNetwork:
+        target = cls(base.config)
+        target.load_weights(list(tree_flatten(base.parameters())), strict=False)
+        mx.eval(target.parameters())
+        return target
+
+    @property
+    def policy_adapter(self) -> RelationalPolicyAdapter:
+        return self.relational_policy_adapter
+
+    def frozen_spatial_features(
+        self, inputs: mx.array
+    ) -> tuple[mx.array, mx.array, mx.array]:
+        trunk = self._trunk(inputs)
+        policy = self.policy_linear(self._policy_features(trunk))
+        wdl = self._value_logits(trunk)
+        return (
+            mx.stop_gradient(trunk),
+            mx.stop_gradient(policy),
+            mx.stop_gradient(wdl),
+        )
+
+    def __call__(self, inputs: mx.array) -> tuple[mx.array, mx.array]:
+        trunk = self._trunk(inputs)
+        policy = self.policy_linear(self._policy_features(trunk))
+        return policy + self.relational_policy_adapter(trunk), self._value_logits(trunk)
