@@ -191,6 +191,24 @@ def _candidate_reasons(
     return tuple(reasons)
 
 
+def _select_validation_snapshots(
+    snapshots: list[tuple[int, float, LearnerSnapshot]],
+    *,
+    maximum: int,
+) -> tuple[tuple[int, float, LearnerSnapshot], ...]:
+    """Select evenly spaced validation snapshots without looking at their metrics."""
+
+    if maximum <= 0:
+        raise ValueError("maximum validation snapshots must be positive")
+    if len(snapshots) <= maximum:
+        return tuple(snapshots)
+    indices = tuple(
+        round(index * (len(snapshots) - 1) / (maximum - 1))
+        for index in range(maximum)
+    )
+    return tuple(snapshots[index] for index in indices)
+
+
 def run_learner_transfer(config: LearnerTransferConfig) -> Path:
     if config.output_dir.exists():
         raise FileExistsError(f"learner transfer output already exists: {config.output_dir}")
@@ -236,11 +254,13 @@ def run_learner_transfer(config: LearnerTransferConfig) -> Path:
     store = SnapshotStore(config.telemetry_path)
     snapshot = store.read()
     started = time.perf_counter()
+    validation_snapshots: list[tuple[int, float, LearnerSnapshot]] = []
 
     def on_step(metric, validation_loss) -> None:
         nonlocal snapshot
-        if metric.step % config.validation_interval_steps != 0:
+        if validation_loss is None:
             return
+        validation_snapshots.append((metric.step, validation_loss, learner.snapshot()))
         elapsed = time.perf_counter() - started
         point = HistoryPoint(
             training_step=metric.step,
@@ -296,8 +316,9 @@ def run_learner_transfer(config: LearnerTransferConfig) -> Path:
 
     candidates = []
     eligible: list[tuple[float, int, LearnerSnapshot]] = []
-    for candidate in report.validation_candidates:
-        learner.restore(candidate.learner_snapshot)
+    selected_snapshots = _select_validation_snapshots(validation_snapshots, maximum=8)
+    for candidate_step, validation_loss, candidate_snapshot in selected_snapshots:
+        learner.restore(candidate_snapshot)
         quality = evaluate_model_quality(network, validation)
         tactical = _tactical_metrics(
             network,
@@ -316,8 +337,8 @@ def run_learner_transfer(config: LearnerTransferConfig) -> Path:
         )
         candidates.append(
             {
-                "step": candidate.step,
-                "validation_loss": candidate.validation_loss,
+                "step": candidate_step,
+                "validation_loss": validation_loss,
                 "quality": quality.to_dict(),
                 "tactical": tactical,
                 "passed": not reasons,
@@ -328,8 +349,8 @@ def run_learner_transfer(config: LearnerTransferConfig) -> Path:
             eligible.append(
                 (
                     quality.teacher_policy_cross_entropy,
-                    candidate.step,
-                    candidate.learner_snapshot,
+                    candidate_step,
+                    candidate_snapshot,
                 )
             )
 
@@ -373,6 +394,11 @@ def run_learner_transfer(config: LearnerTransferConfig) -> Path:
         "pilot": {
             "attempted_steps": report.attempted_steps,
             "restored_step": report.steps,
+            "initial_validation_loss": report.initial_validation_loss,
+            "initial_validation_value_loss": report.initial_validation_value_loss,
+            "last_validation_step": report.last_validation_step,
+            "last_validation_loss": report.last_validation_loss,
+            "last_validation_value_loss": report.last_validation_value_loss,
             "maximum_gradient_norm": report.maximum_gradient_norm,
             "maximum_unclipped_gradient_norm": report.maximum_unclipped_gradient_norm,
             "stopped_early": report.stopped_early,
