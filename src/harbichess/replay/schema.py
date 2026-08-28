@@ -13,9 +13,9 @@ from harbichess.core.state import ChessMove, ChessState, Side
 from harbichess.selfplay.game import SelfPlayGame, SelfPlaySample
 
 REPLAY_SCHEMA_VERSION = 2
-TARGET_SCHEMA_VERSION = 11
+TARGET_SCHEMA_VERSION = 12
 SUPPORTED_TARGET_SCHEMA_VERSIONS = frozenset(
-    {3, 4, 5, 6, 7, 8, 9, 10, TARGET_SCHEMA_VERSION}
+    {3, 4, 5, 6, 7, 8, 9, 10, 11, TARGET_SCHEMA_VERSION}
 )
 
 
@@ -310,6 +310,7 @@ class ReplayRecord:
     teacher_policy_kl: float | None = None
     teacher_argmax_changed: bool | None = None
     teacher_search_value_delta: float | None = None
+    behavior_target_decoupled: bool = False
 
     def __post_init__(self) -> None:
         if not self.game_id or self.game_index < 0 or self.seed < 0 or self.ply != len(self.moves):
@@ -328,7 +329,7 @@ class ReplayRecord:
             or not math.isclose(sum(probabilities), 1.0, abs_tol=1e-6)
         ):
             raise ValueError("replay policy must be unique, legal-sized, finite, and normalized")
-        if not any(
+        if not self.behavior_target_decoupled and not any(
             action == self.selected_action and probability > 0
             for action, probability in self.policy
         ):
@@ -391,6 +392,8 @@ class ReplayRecord:
         if self.side_to_move is not expected_side:
             raise ValueError("replay side-to-move does not match reconstructed state")
         legal_actions = {move_to_action(board, move) for move in board.legal_moves}
+        if self.selected_action not in legal_actions:
+            raise ValueError("selected replay action is illegal")
         if any(action not in legal_actions for action, _ in self.policy):
             raise ValueError("replay policy contains an illegal action")
         if any(action not in legal_actions for action, _ in self.raw_policy):
@@ -481,6 +484,7 @@ def record_from_sample(
         teacher_policy_kl=sample.teacher_policy_kl,
         teacher_argmax_changed=sample.teacher_argmax_changed,
         teacher_search_value_delta=sample.teacher_search_value_delta,
+        behavior_target_decoupled=sample.behavior_target_decoupled,
     )
     record.validate_rules(rules)
     return record
