@@ -25,6 +25,7 @@ class UncertaintyQLabelConfig:
     validation_shard: Path
     output_dir: Path
     drift_cutoff: float = 0.03
+    minimum_labelable_ratio: float = 0.95
     minimum_common_support: float = 0.95
     minimum_stable_visit_mass: float = 0.80
     minimum_stable_q_verified_spearman: float = 0.35
@@ -37,6 +38,7 @@ class UncertaintyQLabelConfig:
     def __post_init__(self) -> None:
         if (
             self.drift_cutoff <= 0
+            or not 0 <= self.minimum_labelable_ratio <= 1
             or not 0 <= self.minimum_common_support <= 1
             or not 0 <= self.minimum_stable_visit_mass <= 1
             or not -1 <= self.minimum_stable_q_verified_spearman <= 1
@@ -131,11 +133,17 @@ def _row_metrics(
 
 
 def _summary(
-    rows: tuple[Mapping[str, object], ...], *, config: UncertaintyQLabelConfig, seed: int
+    rows: tuple[Mapping[str, object], ...],
+    *,
+    source_positions: int,
+    config: UncertaintyQLabelConfig,
+    seed: int,
 ) -> dict[str, object]:
     deltas = tuple(float(row["conservative_verified_delta_vs_raw"]) for row in rows)
     return {
         "positions": len(rows),
+        "source_positions": source_positions,
+        "labelable_ratio": len(rows) / source_positions,
         "mean_common_support_fraction": mean(
             float(row["common_support_fraction"]) for row in rows
         ),
@@ -158,6 +166,8 @@ def _summary(
 
 def _gate(summary: Mapping[str, object], config: UncertaintyQLabelConfig) -> dict[str, object]:
     reasons = []
+    if float(summary["labelable_ratio"]) < config.minimum_labelable_ratio:
+        reasons.append("uncertainty-labelable position ratio is below 95%")
     if float(summary["mean_common_support_fraction"]) < config.minimum_common_support:
         reasons.append("common visited support is below 95%")
     if float(summary["mean_stable_visit_mass"]) < config.minimum_stable_visit_mass:
@@ -186,17 +196,37 @@ def run_uncertainty_q_labels(config: UncertaintyQLabelConfig) -> Path:
     }
     started = time.perf_counter()
     output_rows = {}
+    excluded_rows = {}
     for partition in ("train", "validation"):
         rows = []
+        excluded = []
         for row in dataset["rows"][partition]:
             key = (str(row["game_id"]), int(row["game_index"]), int(row["ply"]))
             record = record_indices[partition].get(key)
             if record is None:
                 raise ValueError(f"fresh Q row is absent from replay: {key}")
-            rows.append(_row_metrics(row, _record_policy(record, rules), config=config))
+            try:
+                rows.append(_row_metrics(row, _record_policy(record, rules), config=config))
+            except ValueError as error:
+                if str(error) != "uncertainty Q labels contain no confident support":
+                    raise
+                excluded.append(
+                    {
+                        "game_id": row["game_id"],
+                        "game_index": row["game_index"],
+                        "ply": row["ply"],
+                        "reason": "no cross-budget action below the frozen drift cutoff",
+                    }
+                )
         output_rows[partition] = tuple(rows)
+        excluded_rows[partition] = tuple(excluded)
     summaries = {
-        partition: _summary(rows, config=config, seed=config.seed + index * 10)
+        partition: _summary(
+            rows,
+            source_positions=len(dataset["rows"][partition]),
+            config=config,
+            seed=config.seed + index * 10,
+        )
         for index, (partition, rows) in enumerate(output_rows.items())
     }
     gate = _gate(summaries["validation"], config)
@@ -222,6 +252,7 @@ def run_uncertainty_q_labels(config: UncertaintyQLabelConfig) -> Path:
                 "promotion_authorized": False,
             },
             "rows": output_rows,
+            "excluded_rows": excluded_rows,
             "elapsed_seconds": time.perf_counter() - started,
         },
     )
