@@ -74,22 +74,59 @@ class HarbiChessNetwork(nn.Module):
         self.value_hidden = nn.Linear(8 * 8 * self.config.value_channels, self.config.value_hidden)
         self.value_output = nn.Linear(self.config.value_hidden, 3)
 
-    def __call__(self, inputs: mx.array) -> tuple[mx.array, mx.array]:
+    def _validate_inputs(self, inputs: mx.array) -> None:
         if inputs.ndim != 4 or tuple(inputs.shape[1:]) != (8, 8, self.config.input_channels):
             raise ValueError(
                 "network input must have shape "
                 f"(batch, 8, 8, {self.config.input_channels}), got {tuple(inputs.shape)}"
             )
+
+    def _trunk(self, inputs: mx.array) -> mx.array:
+        self._validate_inputs(inputs)
         trunk = nn.relu(self.stem(inputs))
         for block in self.blocks:
             trunk = block(trunk)
+        return trunk
 
-        policy = nn.relu(self.policy_conv(trunk)).reshape(inputs.shape[0], -1)
-        policy_logits = self.policy_linear(policy)
-        value = nn.relu(self.value_conv(trunk)).reshape(inputs.shape[0], -1)
+    def _policy_features(self, trunk: mx.array) -> mx.array:
+        return nn.relu(self.policy_conv(trunk)).reshape(trunk.shape[0], -1)
+
+    def _value_logits(self, trunk: mx.array) -> mx.array:
+        value = nn.relu(self.value_conv(trunk)).reshape(trunk.shape[0], -1)
         value = nn.relu(self.value_hidden(value))
-        wdl_logits = self.value_output(value)
-        return policy_logits, wdl_logits
+        return self.value_output(value)
+
+    def __call__(self, inputs: mx.array) -> tuple[mx.array, mx.array]:
+        trunk = self._trunk(inputs)
+        policy_logits = self.policy_linear(self._policy_features(trunk))
+        return policy_logits, self._value_logits(trunk)
+
+    def masked_policy_value(
+        self,
+        inputs: mx.array,
+        action_indices: mx.array,
+    ) -> tuple[mx.array, mx.array]:
+        """Evaluate only requested policy logits while retaining the exact WDL head."""
+
+        if (
+            action_indices.ndim != 2
+            or action_indices.shape[0] != inputs.shape[0]
+            or action_indices.shape[1] == 0
+        ):
+            raise ValueError("masked actions must have shape (batch, non-zero actions)")
+        trunk = self._trunk(inputs)
+        policy = self._policy_features(trunk)
+        flat_actions = action_indices.reshape(-1)
+        selected_weights = mx.take(self.policy_linear.weight, flat_actions, axis=0).reshape(
+            action_indices.shape[0],
+            action_indices.shape[1],
+            policy.shape[1],
+        )
+        selected_bias = mx.take(self.policy_linear.bias, flat_actions, axis=0).reshape(
+            action_indices.shape
+        )
+        policy_logits = mx.sum(policy[:, None, :] * selected_weights, axis=2) + selected_bias
+        return policy_logits, self._value_logits(trunk)
 
     @property
     def parameter_count(self) -> int:
