@@ -9,6 +9,7 @@ from collections.abc import Mapping, Sequence
 from dataclasses import asdict, dataclass
 from pathlib import Path
 from statistics import mean
+from typing import Literal
 
 from harbichess.chess.rules import PythonChessRules
 from harbichess.evaluation.consensus_target import _record_index, _record_policy, _top_actions
@@ -33,6 +34,7 @@ class PolicyImprovementTargetConfig:
     minimum_labelable_ratio: float = 0.95
     bootstrap_samples: int = 2_000
     seed: int = 2026082837
+    q_mode: Literal["average", "conservative"] = "average"
 
     def __post_init__(self) -> None:
         if (
@@ -43,6 +45,7 @@ class PolicyImprovementTargetConfig:
             or not 0 <= self.minimum_effective_action_ratio <= 1
             or not 0 <= self.minimum_labelable_ratio <= 1
             or min(self.bootstrap_samples, self.seed) <= 0
+            or self.q_mode not in {"average", "conservative"}
         ):
             raise ValueError("policy improvement target configuration is invalid")
 
@@ -119,11 +122,20 @@ def _row(
     *,
     config: PolicyImprovementTargetConfig,
 ) -> dict[str, object]:
-    stable_q = {
+    average_q = {
         str(action): float(q)
         for action, q, _drift, confidence in label["labels"]
         if float(confidence) > 0
     }
+    if config.q_mode == "average":
+        stable_q = average_q
+    else:
+        low_q = dict(verifier["budgets"]["512"]["q"])
+        high_q = dict(verifier["budgets"]["800"]["q"])
+        stable_q = {
+            action: min(float(low_q[action]), float(high_q[action]))
+            for action in average_q
+        }
     confidence = {
         str(action): float(weight)
         for action, _q, _drift, weight in label["labels"]
@@ -297,6 +309,9 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument("--train-shard", required=True, type=Path)
     parser.add_argument("--validation-shard", required=True, type=Path)
     parser.add_argument("--output-dir", required=True, type=Path)
+    parser.add_argument(
+        "--q-mode", choices=("average", "conservative"), default="average"
+    )
     arguments = parser.parse_args(argv)
     path = run_policy_improvement_target(
         PolicyImprovementTargetConfig(
@@ -305,6 +320,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             train_shard=arguments.train_shard,
             validation_shard=arguments.validation_shard,
             output_dir=arguments.output_dir,
+            q_mode=arguments.q_mode,
         )
     )
     print(path)
