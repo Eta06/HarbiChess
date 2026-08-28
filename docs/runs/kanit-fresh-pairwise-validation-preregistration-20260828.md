@@ -10,6 +10,7 @@
 - Uncertainty bootstrap seed: `2026082848`
 - Decisive-pair bootstrap seed: `2026082849`
 - Policy-target bootstrap seed: `2026082850`
+- Candidate/tactical evaluation seed: `2026082851`
 - Search budgets: clean 512/800; verifier depth 4
 
 The unchanged MARJ pairwise teacher gate runs first. Only if it passes may the
