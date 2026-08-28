@@ -18,6 +18,12 @@ def test_training_batch_encodes_policy_and_side_to_move_wdl() -> None:
     assert batch.wdl_targets == (2, 0, 2, 0)
     assert batch.value_weights == (1.0, 1.0, 1.0, 1.0)
     assert all(sum(policy) == pytest.approx(1.0) for policy in batch.policy_targets)
+    assert all(any(mask) for mask in batch.legal_masks)
+    assert all(
+        not probability or mask
+        for policy, legal in zip(batch.policy_targets, batch.legal_masks, strict=True)
+        for probability, mask in zip(policy, legal, strict=True)
+    )
 
 
 def test_game_balanced_sampler_is_deterministic_and_restorable() -> None:
@@ -50,6 +56,11 @@ def test_prevalidated_batch_selection_reuses_encoded_rows() -> None:
         batch.policy_targets[2],
         batch.policy_targets[0],
         batch.policy_targets[2],
+    )
+    assert selected.legal_masks == (
+        batch.legal_masks[2],
+        batch.legal_masks[0],
+        batch.legal_masks[2],
     )
     assert selected.wdl_targets == (
         batch.wdl_targets[2],
