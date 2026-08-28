@@ -107,12 +107,13 @@ def _search_rows(
             rng=random.Random(f"{seed}:{arm}:{budget}:{index}"),
             add_root_noise=False,
         )
-        leader, runner = result.moves[:2]
+        leader = result.moves[0]
+        runner_visits = result.moves[1].visits if len(result.moves) > 1 else 0
         return {
             "selected_move": leader.move,
             "leader_visits": leader.visits,
             "leader_visit_share": leader.visits / budget,
-            "visit_margin": leader.visits - runner.visits,
+            "visit_margin": leader.visits - runner_visits,
             "visited_children": sum(move.visits > 0 for move in result.moves),
             "legal_children": len(result.moves),
             "root_value": result.root_value,
