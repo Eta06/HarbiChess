@@ -19,6 +19,7 @@ import mlx.core as mx
 
 from harbichess.backends.mlx_backend import MLXPolicyValueBackend
 from harbichess.backends.mlx_network import HarbiChessNetwork, NetworkConfig
+from harbichess.chess.rules import PythonChessRules
 from harbichess.dashboard.state import PilotStatus, RunMode, SnapshotStore
 from harbichess.evaluation.model_quality import (
     PreparedModelQualityDataset,
@@ -148,18 +149,20 @@ def _maximum_logit_delta(
 
 
 def _tactical_metrics(network: HarbiChessNetwork, *, budget: int, workers: int, seed: int):
+    rules = PythonChessRules()
     batcher = SharedBatchEvaluator(
         MLXPolicyValueBackend(network),
         max_batch_size=max(8, workers * 2),
     )
-    neural = NeuralPositionEvaluator(batcher)
+    neural = NeuralPositionEvaluator(batcher, rules=rules)
     teacher = OracleValueEvaluator(
         neural,
-        DeterministicTacticalOracle(config=TacticalOracleConfig(depth=1)),
+        DeterministicTacticalOracle(rules=rules, config=TacticalOracleConfig(depth=1)),
     )
     try:
         return run_tactical_sweep(
             teacher,
+            rules=rules,
             budgets=(budget,),
             workers=workers,
             seed=seed,
