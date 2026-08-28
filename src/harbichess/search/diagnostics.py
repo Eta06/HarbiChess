@@ -131,6 +131,8 @@ def run_tactical_sweep(
     budgets: tuple[int, ...],
     workers: int,
     seed: int,
+    root_fpu_reduction: float = 0.0,
+    fpu_reduction: float = 0.0,
     cases: tuple[TacticalCase, ...] = TACTICAL_CASES,
 ) -> dict[str, Any]:
     """Measure raw and clean-search tactical choices under a fixed budget schedule."""
@@ -163,7 +165,12 @@ def run_tactical_sweep(
         search = MCTS(
             evaluator,
             rules=rules,
-            config=SearchConfig(simulations=budget, dirichlet_fraction=0.0),
+            config=SearchConfig(
+                simulations=budget,
+                dirichlet_fraction=0.0,
+                root_fpu_reduction=root_fpu_reduction,
+                fpu_reduction=fpu_reduction,
+            ),
         )
 
         def inspect(
