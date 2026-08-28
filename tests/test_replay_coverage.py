@@ -7,7 +7,7 @@ from harbichess.replay.coverage import ReplayCoverageThresholds, measure_replay_
 from harbichess.replay.schema import records_from_game
 
 
-def test_replay_coverage_qualifies_teacher_telemetry_with_frozen_thresholds() -> None:
+def test_replay_coverage_reports_teacher_telemetry_without_strength_gating() -> None:
     rules, game = scripted_game()
     record = records_from_game(game, run_id="coverage", rules=rules)[0]
     evidenced = replace(
@@ -32,7 +32,6 @@ def test_replay_coverage_qualifies_teacher_telemetry_with_frozen_thresholds() ->
         minimum_position_signatures=1,
         minimum_teacher_telemetry_ratio=1.0,
         minimum_comparable_teacher_deltas=1,
-        minimum_positive_teacher_delta_ratio=1.0,
     )
 
     report = measure_replay_coverage((evidenced,), thresholds=thresholds, rules=rules)
@@ -60,8 +59,6 @@ def test_replay_coverage_rejects_missing_teacher_evidence() -> None:
         minimum_position_signatures=1,
         minimum_teacher_telemetry_ratio=1.0,
         minimum_comparable_teacher_deltas=1,
-        minimum_positive_teacher_delta_ratio=0.0,
-        minimum_mean_teacher_delta=-1.0,
     )
 
     report = measure_replay_coverage((record,), thresholds=thresholds, rules=rules)
