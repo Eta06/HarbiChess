@@ -59,6 +59,7 @@ class UncertaintyPolicyTransferConfig:
     minimum_best_action_coverage: float = 0.80
     tactical_budgets: tuple[int, ...] = (64, 512)
     tactical_workers: int = 8
+    diagnostic_train_only: bool = False
 
     def __post_init__(self) -> None:
         if (
@@ -380,6 +381,31 @@ def _candidate_reasons(
     return tuple(reasons)
 
 
+def _fit_reasons(
+    quality: Mapping[str, object],
+    *,
+    baseline_cross_entropy: float,
+    config: UncertaintyPolicyTransferConfig,
+    maximum_gradient_norm: float,
+) -> tuple[str, ...]:
+    reasons = []
+    if float(quality["uncertainty_policy_cross_entropy"]) > baseline_cross_entropy * (
+        1 - config.minimum_cross_entropy_improvement
+    ):
+        reasons.append("train cross entropy did not improve by 5%")
+    if float(quality["mean_teacher_policy_spearman"]) < config.minimum_teacher_spearman:
+        reasons.append("train teacher-policy Spearman is below 0.35")
+    if float(quality["verified_delta_95_interval"][0]) <= 0:
+        reasons.append("train verified-improvement interval is not positive")
+    if float(quality["harmful_ratio"]) > config.maximum_harmful_ratio:
+        reasons.append("train harmful-action ratio exceeds 10%")
+    if float(quality["mean_verified_regret"]) > config.maximum_verified_regret:
+        reasons.append("train mean verified regret exceeds 0.10")
+    if not math.isfinite(maximum_gradient_norm) or maximum_gradient_norm > config.max_gradient_norm:
+        reasons.append("gradient safety limit was exceeded")
+    return tuple(reasons)
+
+
 def _merged_network(
     baseline_path: Path,
     network_config: NetworkConfig,
@@ -435,6 +461,7 @@ def run_uncertainty_policy_transfer(config: UncertaintyPolicyTransferConfig) -> 
         base,
         explicit_targets=targets is not None,
     )
+    evaluation = train if config.diagnostic_train_only else validation
     feature_size = int(train.features.shape[1])
     mx.random.seed(config.seed)
     adapter = LowRankPolicyAdapter(feature_size, config.rank)
@@ -463,7 +490,7 @@ def run_uncertainty_policy_transfer(config: UncertaintyPolicyTransferConfig) -> 
                     ),
                     _quality(
                         adapter,
-                        validation,
+                        evaluation,
                         bootstrap_samples=config.bootstrap_samples,
                         seed=config.seed + step,
                     ),
@@ -485,6 +512,77 @@ def run_uncertainty_policy_transfer(config: UncertaintyPolicyTransferConfig) -> 
             train.select(sampler.sample_indices(config.batch_size))
         )
         maximum_gradient_norm = max(maximum_gradient_norm, gradient_norm)
+
+    if config.diagnostic_train_only:
+        baseline_ce = float(checkpoints[0][2]["uncertainty_policy_cross_entropy"])
+        rows = []
+        for step, _weights, quality, _duplicate_quality in checkpoints:
+            reasons = (
+                ("baseline control is not a trainable candidate",)
+                if step == 0
+                else _fit_reasons(
+                    quality,
+                    baseline_cross_entropy=baseline_ce,
+                    config=config,
+                    maximum_gradient_norm=maximum_gradient_norm,
+                )
+            )
+            rows.append(
+                {"step": step, "train_quality": quality, "passed": not reasons, "reasons": reasons}
+            )
+        config.output_dir.mkdir(parents=True, exist_ok=True)
+        result_path = config.output_dir / "result.json"
+        _atomic_json(
+            result_path,
+            {
+                "created_at": datetime.now(UTC).isoformat(),
+                "source_commit": _source_commit(),
+                "config": {
+                    **asdict(config),
+                    **{
+                        name: str(getattr(config, name))
+                        for name in (
+                            "label_result",
+                            "dataset_result",
+                            "run_result",
+                            "train_shard",
+                            "validation_shard",
+                            "output_dir",
+                            "telemetry_path",
+                        )
+                    },
+                    "policy_target_result": (
+                        str(config.policy_target_result)
+                        if config.policy_target_result is not None
+                        else None
+                    ),
+                },
+                "training": {
+                    "elapsed_seconds": time.perf_counter() - started,
+                    "maximum_gradient_norm": maximum_gradient_norm,
+                },
+                "checkpoints": rows,
+                "fit_capable": any(row["passed"] for row in rows),
+                "search_qualification_authorized": False,
+                "arena_authorized": False,
+                "generation_authorized": False,
+                "promotion_authorized": False,
+            },
+        )
+        dashboard = replace(
+            dashboard,
+            updated_at=datetime.now(UTC).isoformat(),
+            mode=RunMode.IDLE,
+            mode_detail="AKTARIM train-only fit diagnostic complete",
+            pilot_status=PilotStatus.PASSED,
+            pilot_steps_attempted=config.steps,
+            pilot_steps_completed=config.steps,
+            pilot_stop_reason="fixed_step_limit",
+            pilot_stop_detail="Diagnostic only; no candidate authorization",
+            promotion_ready=False,
+        )
+        store.write_atomic(dashboard)
+        return result_path
 
     baseline_tactical_payload = _tactical_metrics(
         base,
@@ -638,6 +736,9 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument("--policy-target-result", type=Path)
     parser.add_argument("--telemetry", type=Path, default=Path("artifacts/dashboard/state.json"))
     parser.add_argument("--seed", type=int, default=2026082833)
+    parser.add_argument("--rank", type=int, default=8)
+    parser.add_argument("--learning-rate", type=float, default=2e-4)
+    parser.add_argument("--diagnostic-train-only", action="store_true")
     arguments = parser.parse_args(argv)
     path = run_uncertainty_policy_transfer(
         UncertaintyPolicyTransferConfig(
@@ -650,6 +751,9 @@ def main(argv: Sequence[str] | None = None) -> int:
             policy_target_result=arguments.policy_target_result,
             telemetry_path=arguments.telemetry,
             seed=arguments.seed,
+            rank=arguments.rank,
+            learning_rate=arguments.learning_rate,
+            diagnostic_train_only=arguments.diagnostic_train_only,
         )
     )
     print(path)
