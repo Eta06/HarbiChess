@@ -13,6 +13,7 @@ import chess
 from harbichess.chess.rules import PythonChessRules
 from harbichess.core.state import ChessMove
 from harbichess.search.evaluator import SearchEvaluator
+from harbichess.search.full_gumbel import FullGumbelConfig, FullGumbelMCTS
 from harbichess.search.mcts import MCTS, SearchConfig
 
 
@@ -133,6 +134,9 @@ def run_tactical_sweep(
     seed: int,
     root_fpu_reduction: float = 0.0,
     fpu_reduction: float = 0.0,
+    search_kind: str = "puct",
+    max_considered_actions: int = 16,
+    gumbel_scale: float = 0.0,
     cases: tuple[TacticalCase, ...] = TACTICAL_CASES,
 ) -> dict[str, Any]:
     """Measure raw and clean-search tactical choices under a fixed budget schedule."""
@@ -141,6 +145,8 @@ def run_tactical_sweep(
         raise ValueError("tactical sweep requires positive budgets and workers")
     if tuple(sorted(set(budgets))) != budgets:
         raise ValueError("tactical budgets must be unique and increasing")
+    if search_kind not in {"puct", "full-gumbel"}:
+        raise ValueError("unknown tactical search kind")
     validate_tactical_cases(cases)
     states = tuple(rules.initial_state(case.fen) for case in cases)
     with ThreadPoolExecutor(max_workers=min(workers, len(cases))) as pool:
@@ -162,20 +168,31 @@ def run_tactical_sweep(
     sweeps = []
     previous_solved: set[str] = set()
     for budget in budgets:
-        search = MCTS(
-            evaluator,
-            rules=rules,
-            config=SearchConfig(
-                simulations=budget,
-                dirichlet_fraction=0.0,
-                root_fpu_reduction=root_fpu_reduction,
-                fpu_reduction=fpu_reduction,
-            ),
-        )
+        if search_kind == "full-gumbel":
+            search = FullGumbelMCTS(
+                evaluator,
+                rules=rules,
+                config=FullGumbelConfig(
+                    simulations=budget,
+                    max_considered_actions=max_considered_actions,
+                    gumbel_scale=gumbel_scale,
+                ),
+            )
+        else:
+            search = MCTS(
+                evaluator,
+                rules=rules,
+                config=SearchConfig(
+                    simulations=budget,
+                    dirichlet_fraction=0.0,
+                    root_fpu_reduction=root_fpu_reduction,
+                    fpu_reduction=fpu_reduction,
+                ),
+            )
 
         def inspect(
             index: int,
-            search: MCTS = search,
+            search: MCTS | FullGumbelMCTS = search,
             budget: int = budget,
         ) -> dict[str, Any]:
             case = cases[index]
