@@ -72,6 +72,21 @@ def test_replay_record_round_trips_teacher_policy_evidence() -> None:
         ReplayRecord.from_dict(invalid)
 
 
+def test_replay_allows_explicitly_decoupled_behavior_action() -> None:
+    rules, game = scripted_game()
+    record = records_from_game(game, run_id="pilot", rules=rules)[0]
+    board = rules.board(record.state)
+    alternative = move_to_action(board, board.parse_uci("e2e4"))
+    decoupled = replace(
+        record,
+        policy=((alternative, 1.0),),
+        behavior_target_decoupled=True,
+    )
+
+    decoupled.validate_rules(rules)
+    assert ReplayRecord.from_dict(decoupled.to_dict()) == decoupled
+
+
 def test_replay_record_rejects_invalid_targets() -> None:
     _, game = scripted_game()
     record = records_from_game(game, run_id="pilot")[0]
