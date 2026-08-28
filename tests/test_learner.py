@@ -29,6 +29,8 @@ def test_learner_overfits_one_replay_position_without_non_finite_values() -> Non
     assert final < initial * 0.25
     assert all(metric.total_loss >= 0 for metric in metrics)
     assert all(metric.gradient_norm >= 0 for metric in metrics)
+    assert all(metric.gradient_norm <= 10.0 for metric in metrics)
+    assert all(metric.unclipped_gradient_norm >= metric.gradient_norm for metric in metrics)
     assert learner.step == 30
 
 
