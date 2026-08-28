@@ -4,7 +4,9 @@ import pytest
 from harbichess.backends.action_value_network import (
     ActionValueHead,
     HarbiChessActionValueNetwork,
+    HarbiChessMoveConditionedActionValueNetwork,
     HarbiChessSpatialActionValueNetwork,
+    MoveConditionedActionValueHead,
     SpatialActionValueHead,
 )
 from harbichess.backends.mlx_network import HarbiChessNetwork, NetworkConfig
@@ -61,3 +63,27 @@ def test_spatial_action_value_head_is_compact_aligned_and_function_preserving() 
 def test_spatial_action_value_head_validates_dimensions() -> None:
     with pytest.raises(ValueError, match="dimensions"):
         SpatialActionValueHead(16, 0)
+
+
+def test_move_conditioned_head_is_compact_aligned_and_function_preserving() -> None:
+    mx.random.seed(83)
+    config = NetworkConfig(trunk_channels=16, residual_blocks=2, value_channels=2)
+    base = HarbiChessNetwork(config)
+    network = HarbiChessMoveConditionedActionValueNetwork.from_base(base)
+    inputs = mx.random.uniform(shape=(2, 8, 8, ENCODER_CHANNELS))
+
+    base_policy, base_wdl = base(inputs)
+    policy, wdl, action_values = network.forward_with_action_values(inputs)
+    expected = mx.tanh(HarbiChessActionValueNetwork.expected_wdl_value(base_wdl)[:, None])
+    mx.eval(base_policy, base_wdl, policy, wdl, action_values, expected)
+
+    assert policy.shape == action_values.shape == (2, POLICY_SIZE)
+    assert float(mx.max(mx.abs(policy - base_policy)).item()) == 0.0
+    assert float(mx.max(mx.abs(wdl - base_wdl)).item()) == 0.0
+    assert float(mx.max(mx.abs(action_values - expected)).item()) == 0.0
+    assert network.parameter_count - base.parameter_count < 5_000
+
+
+def test_move_conditioned_head_validates_dimensions() -> None:
+    with pytest.raises(ValueError, match="dimensions"):
+        MoveConditionedActionValueHead(16, hidden=0)
