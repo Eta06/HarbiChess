@@ -44,8 +44,10 @@ def test_spatial_transfer_configuration_freezes_checkpoints() -> None:
         train_shard=Path("train.jsonl.gz"),
         validation_shard=Path("validation.jsonl.gz"),
         output_dir=Path("output"),
+        architecture="move-conditioned",
     )
     assert config.checkpoint_steps == (0, 60, 120, 240, 480)
+    assert config.architecture == "move-conditioned"
 
     with pytest.raises(ValueError, match="configuration"):
         SpatialActionValueTransferConfig(
@@ -56,4 +58,15 @@ def test_spatial_transfer_configuration_freezes_checkpoints() -> None:
             validation_shard=Path("validation.jsonl.gz"),
             output_dir=Path("output"),
             checkpoint_steps=(0, 120, 60, 480),
+        )
+
+    with pytest.raises(ValueError, match="configuration"):
+        SpatialActionValueTransferConfig(
+            label_result=Path("labels.json"),
+            dataset_result=Path("dataset.json"),
+            run_result=Path("run.json"),
+            train_shard=Path("train.jsonl.gz"),
+            validation_shard=Path("validation.jsonl.gz"),
+            output_dir=Path("output"),
+            architecture="unknown",  # type: ignore[arg-type]
         )
