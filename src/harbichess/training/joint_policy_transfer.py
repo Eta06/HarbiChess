@@ -33,6 +33,7 @@ from harbichess.training.batch import GameBalancedSampler, build_training_batch
 from harbichess.training.learner import MLXLearner
 from harbichess.training.policy_projection import _target_entropy
 from harbichess.training.uncertainty_policy_transfer import (
+    PreparedPolicyData,
     _network_config,
     _policy_quality,
     _prepare_data,
@@ -186,6 +187,15 @@ class JointPolicyLearner:
         self.optimizer.update(self.network, gradients)
         mx.eval(self.network.parameters(), self.optimizer.state)
         return loss_value, norm_value
+
+
+def _target_arrays(
+    data: PreparedPolicyData, indices: tuple[int, ...]
+) -> tuple[mx.array, mx.array, mx.array]:
+    rows = mx.array(indices, dtype=mx.int32)
+    return tuple(
+        mx.take(array, rows, axis=0) for array in (data.inputs, data.targets, data.legal_masks)
+    )
 
 
 def _anchor_data(records: tuple[ReplayRecord, ...], baseline: HarbiChessNetwork) -> JointAnchorData:
@@ -351,14 +361,9 @@ def run_joint_policy_transfer(config: JointPolicyTransferConfig) -> Path:
         maximum_gradient_norm = 0.0
         for _step in range(config.steps):
             target_indices = target_sampler.sample_indices(config.target_batch_size)
-            target_arrays = fit.select(target_indices)
+            target_arrays = _target_arrays(fit, target_indices)
             anchor_arrays = anchor.select(anchor_sampler.sample_indices(config.anchor_batch_size))
-            arrays = (
-                target_arrays[0],
-                target_arrays[2],
-                target_arrays[3],
-                *anchor_arrays,
-            )
+            arrays = (*target_arrays, *anchor_arrays)
             _, norm = learner.train_step(arrays)
             maximum_gradient_norm = max(maximum_gradient_norm, norm)
         holdout_policy, _ = network(holdout.inputs)
