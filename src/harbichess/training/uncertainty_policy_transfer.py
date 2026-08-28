@@ -532,6 +532,7 @@ def run_uncertainty_policy_transfer(config: UncertaintyPolicyTransferConfig) -> 
             )
         config.output_dir.mkdir(parents=True, exist_ok=True)
         result_path = config.output_dir / "result.json"
+        fit_capable = any(row["passed"] for row in rows)
         _atomic_json(
             result_path,
             {
@@ -562,7 +563,7 @@ def run_uncertainty_policy_transfer(config: UncertaintyPolicyTransferConfig) -> 
                     "maximum_gradient_norm": maximum_gradient_norm,
                 },
                 "checkpoints": rows,
-                "fit_capable": any(row["passed"] for row in rows),
+                "fit_capable": fit_capable,
                 "search_qualification_authorized": False,
                 "arena_authorized": False,
                 "generation_authorized": False,
@@ -573,12 +574,20 @@ def run_uncertainty_policy_transfer(config: UncertaintyPolicyTransferConfig) -> 
             dashboard,
             updated_at=datetime.now(UTC).isoformat(),
             mode=RunMode.IDLE,
-            mode_detail="AKTARIM train-only fit diagnostic complete",
-            pilot_status=PilotStatus.PASSED,
+            mode_detail=(
+                "AKTARIM train-only fit passed"
+                if fit_capable
+                else "AKTARIM train-only fit failed"
+            ),
+            pilot_status=PilotStatus.PASSED if fit_capable else PilotStatus.FAILED,
             pilot_steps_attempted=config.steps,
             pilot_steps_completed=config.steps,
             pilot_stop_reason="fixed_step_limit",
-            pilot_stop_detail="Diagnostic only; no candidate authorization",
+            pilot_stop_detail=(
+                "Train fit gate passed; diagnostic only"
+                if fit_capable
+                else "No preregistered train-fit arm qualified"
+            ),
             promotion_ready=False,
         )
         store.write_atomic(dashboard)
