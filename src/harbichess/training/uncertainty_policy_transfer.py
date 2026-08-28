@@ -301,10 +301,13 @@ def _quality(
     *,
     bootstrap_samples: int,
     seed: int,
+    scale: float = 1.0,
 ) -> dict[str, object]:
+    adapted_logits = adapter(data.features, data.base_logits)
+    projected_logits = data.base_logits + scale * (adapted_logits - data.base_logits)
     logits = mx.where(
         data.legal_masks,
-        adapter(data.features, data.base_logits),
+        projected_logits,
         mx.array(-1e9),
     )
     log_probs = logits - mx.logsumexp(logits, axis=1, keepdims=True)
@@ -410,10 +413,15 @@ def _merged_network(
     baseline_path: Path,
     network_config: NetworkConfig,
     adapter: LowRankPolicyAdapter,
+    *,
+    scale: float = 1.0,
 ) -> HarbiChessNetwork:
     network = HarbiChessNetwork(network_config)
     network.load_weights(str(baseline_path))
-    network.policy_linear.weight = adapter.merged_weight(network.policy_linear.weight)
+    merged = adapter.merged_weight(network.policy_linear.weight)
+    network.policy_linear.weight = network.policy_linear.weight + scale * (
+        merged - network.policy_linear.weight
+    )
     mx.eval(network.parameters())
     return network
 
