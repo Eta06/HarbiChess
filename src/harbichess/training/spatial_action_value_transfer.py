@@ -12,11 +12,15 @@ from collections.abc import Mapping, Sequence
 from dataclasses import asdict, dataclass, replace
 from datetime import UTC, datetime
 from pathlib import Path
+from typing import Literal
 
 import chess
 import mlx.core as mx
 
-from harbichess.backends.action_value_network import HarbiChessSpatialActionValueNetwork
+from harbichess.backends.action_value_network import (
+    HarbiChessMoveConditionedActionValueNetwork,
+    HarbiChessSpatialActionValueNetwork,
+)
 from harbichess.backends.mlx_network import HarbiChessNetwork, NetworkConfig
 from harbichess.chess.actions import POLICY_SIZE, move_to_action
 from harbichess.chess.encoding import BoardEncoder
@@ -63,6 +67,7 @@ class SpatialActionValueTransferConfig:
     maximum_logit_delta: float = 1e-7
     tactical_budget: int = 64
     tactical_workers: int = 8
+    architecture: Literal["spatial", "move-conditioned"] = "spatial"
 
     def __post_init__(self) -> None:
         if (
@@ -88,6 +93,7 @@ class SpatialActionValueTransferConfig:
             or self.maximum_verified_regret < 0
             or not 0 <= self.minimum_best_action_coverage <= 1
             or self.maximum_logit_delta < 0
+            or self.architecture not in {"spatial", "move-conditioned"}
         ):
             raise ValueError("spatial action-value transfer configuration is invalid")
 
@@ -127,10 +133,23 @@ def _dense_labels(
     return targets, weights, sparse
 
 
+ActionValueNetwork = (
+    HarbiChessSpatialActionValueNetwork | HarbiChessMoveConditionedActionValueNetwork
+)
+
+
+def _from_base(base: HarbiChessNetwork, architecture: str) -> ActionValueNetwork:
+    if architecture == "spatial":
+        return HarbiChessSpatialActionValueNetwork.from_base(base)
+    if architecture == "move-conditioned":
+        return HarbiChessMoveConditionedActionValueNetwork.from_base(base)
+    raise ValueError(f"unsupported action-value architecture: {architecture}")
+
+
 def _prepare_data(
     records: tuple[ReplayRecord, ...],
     rows: Sequence[Mapping[str, object]],
-    network: HarbiChessSpatialActionValueNetwork,
+    network: ActionValueNetwork,
     *,
     rules: PythonChessRules,
 ) -> PreparedActionValueData:
@@ -205,10 +224,11 @@ def _clone_with_head(
     baseline_path: Path,
     network_config: NetworkConfig,
     head_weights: tuple[tuple[str, mx.array], ...],
-) -> HarbiChessSpatialActionValueNetwork:
+    architecture: str,
+) -> ActionValueNetwork:
     base = HarbiChessNetwork(network_config)
     base.load_weights(str(baseline_path))
-    network = HarbiChessSpatialActionValueNetwork.from_base(base)
+    network = _from_base(base, architecture)
     network.action_value_head.load_weights(list(head_weights))
     mx.eval(network.parameters())
     return network
@@ -231,7 +251,7 @@ def run_spatial_action_value_transfer(config: SpatialActionValueTransferConfig) 
     baseline_path = Path(run["baseline"]["path"])
     base = HarbiChessNetwork(network_config)
     base.load_weights(str(baseline_path))
-    network = HarbiChessSpatialActionValueNetwork.from_base(base)
+    network = _from_base(base, config.architecture)
     train = _prepare_data(train_records, labels["rows"]["train"], network, rules=rules)
     validation = _prepare_data(
         validation_records, labels["rows"]["validation"], network, rules=rules
@@ -264,7 +284,9 @@ def run_spatial_action_value_transfer(config: SpatialActionValueTransferConfig) 
                 dashboard,
                 updated_at=datetime.now(UTC).isoformat(),
                 mode=RunMode.TRAINING if step < config.steps else RunMode.IDLE,
-                mode_detail=f"OLCEK spatial-Q transfer · {step}/{config.steps} steps",
+                mode_detail=(
+                    f"{config.architecture} Q transfer · {step}/{config.steps} steps"
+                ),
                 pilot_status=PilotStatus.TRAINING,
                 pilot_steps_planned=config.steps,
                 pilot_steps_completed=step,
@@ -291,7 +313,9 @@ def run_spatial_action_value_transfer(config: SpatialActionValueTransferConfig) 
     rows = []
     eligible = []
     for step, head_weights, quality in checkpoints:
-        candidate = _clone_with_head(baseline_path, network_config, head_weights)
+        candidate = _clone_with_head(
+            baseline_path, network_config, head_weights, config.architecture
+        )
         tactical_payload = _tactical_metrics(
             candidate,
             network_config=network_config,
@@ -329,7 +353,9 @@ def run_spatial_action_value_transfer(config: SpatialActionValueTransferConfig) 
     checkpoint = None
     if eligible:
         _, selected_step, selected_weights, selected_quality = min(eligible)
-        selected = _clone_with_head(baseline_path, network_config, selected_weights)
+        selected = _clone_with_head(
+            baseline_path, network_config, selected_weights, config.architecture
+        )
         checkpoint_dir = config.output_dir / f"candidate-step-{selected_step:06d}"
         checkpoint_dir.mkdir(parents=True)
         checkpoint_path = checkpoint_dir / "model.safetensors"
@@ -390,16 +416,16 @@ def run_spatial_action_value_transfer(config: SpatialActionValueTransferConfig) 
         updated_at=datetime.now(UTC).isoformat(),
         mode=RunMode.IDLE,
         mode_detail=(
-            "OLCEK spatial-Q transfer passed · completed-Q audit authorized"
+            f"{config.architecture} Q transfer passed · completed-Q audit authorized"
             if checkpoint
-            else "OLCEK spatial-Q transfer failed · learner remains blocked"
+            else f"{config.architecture} Q transfer failed · learner remains blocked"
         ),
         pilot_status=PilotStatus.PASSED if checkpoint else PilotStatus.FAILED,
         pilot_steps_attempted=config.steps,
         pilot_steps_completed=config.steps,
         pilot_stop_reason="fixed_step_limit",
         pilot_stop_detail=(
-            "Spatial-Q transfer gate passed" if checkpoint else "; ".join(all_reasons)
+            "Action-Q transfer gate passed" if checkpoint else "; ".join(all_reasons)
         ),
         promotion_ready=False,
     )
@@ -416,6 +442,12 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument("--validation-shard", required=True, type=Path)
     parser.add_argument("--output-dir", required=True, type=Path)
     parser.add_argument("--telemetry", type=Path, default=Path("artifacts/dashboard/state.json"))
+    parser.add_argument(
+        "--architecture",
+        choices=("spatial", "move-conditioned"),
+        default="spatial",
+    )
+    parser.add_argument("--seed", type=int, default=2026082829)
     arguments = parser.parse_args(argv)
     path = run_spatial_action_value_transfer(
         SpatialActionValueTransferConfig(
@@ -426,6 +458,8 @@ def main(argv: Sequence[str] | None = None) -> int:
             validation_shard=arguments.validation_shard,
             output_dir=arguments.output_dir,
             telemetry_path=arguments.telemetry,
+            architecture=arguments.architecture,
+            seed=arguments.seed,
         )
     )
     print(path)
