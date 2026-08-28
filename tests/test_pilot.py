@@ -89,7 +89,7 @@ def test_sanity_pilot_accepts_matching_prebuilt_evaluation_batches() -> None:
         validation_evaluation=build_training_batch(validation),
     )
 
-    assert report.steps == 1
+    assert report.attempted_steps == 1
 
 
 def test_sanity_pilot_restores_best_validation_step_after_early_stop() -> None:
@@ -158,7 +158,7 @@ def test_sanity_pilot_rejects_total_loss_gain_that_regresses_value() -> None:
 
         def train_step(self, _batch):
             self.step += 1
-            return TrainingMetrics(self.step, 6.0, 3.0, 9.0, 1.0)
+            return TrainingMetrics(self.step, 6.0, 3.0, 9.0, 1.0, 1.0)
 
     learner = RegressingValueLearner()
     report = run_sanity_pilot(
