@@ -63,3 +63,17 @@ def test_policy_improvement_config_accepts_only_frozen_q_modes() -> None:
             output_dir=Path("output"),
             q_mode="optimistic",  # type: ignore[arg-type]
         )
+
+
+def test_policy_improvement_config_accepts_pairwise_teacher_evidence() -> None:
+    config = PolicyImprovementTargetConfig(
+        label_result=Path("labels.json"),
+        dataset_result=Path("dataset.json"),
+        train_shard=Path("train.jsonl.gz"),
+        validation_shard=Path("validation.jsonl.gz"),
+        output_dir=Path("output"),
+        pair_teacher_result=Path("pairs.json"),
+        seed=2026082850,
+    )
+    assert config.pair_teacher_result == Path("pairs.json")
+    assert config.seed == 2026082850
