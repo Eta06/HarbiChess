@@ -7,6 +7,7 @@ import mlx.nn as nn
 from mlx.utils import tree_flatten
 
 from harbichess.backends.mlx_network import HarbiChessNetwork, NetworkConfig
+from harbichess.chess.actions import POLICY_PLANES, POLICY_SIZE, action_destination_square
 
 
 class ActionValueHead(nn.Module):
@@ -110,6 +111,85 @@ class HarbiChessSpatialActionValueNetwork(HarbiChessNetwork):
 
     @classmethod
     def from_base(cls, base: HarbiChessNetwork) -> HarbiChessSpatialActionValueNetwork:
+        target = cls(base.config)
+        target.load_weights(list(tree_flatten(base.parameters())), strict=False)
+        mx.eval(target.parameters())
+        return target
+
+    def frozen_action_features(self, inputs: mx.array) -> tuple[mx.array, mx.array]:
+        trunk = self._trunk(inputs)
+        wdl_logits = self._value_logits(trunk)
+        state_value = HarbiChessActionValueNetwork.expected_wdl_value(wdl_logits)
+        return mx.stop_gradient(trunk), mx.stop_gradient(state_value)
+
+    def action_values(self, inputs: mx.array) -> mx.array:
+        trunk = self._trunk(inputs)
+        wdl_logits = self._value_logits(trunk)
+        state_value = HarbiChessActionValueNetwork.expected_wdl_value(wdl_logits)
+        return self.action_value_head(trunk, state_value)
+
+    def forward_with_action_values(
+        self, inputs: mx.array
+    ) -> tuple[mx.array, mx.array, mx.array]:
+        trunk = self._trunk(inputs)
+        policy_logits = self.policy_linear(self._policy_features(trunk))
+        wdl_logits = self._value_logits(trunk)
+        state_value = HarbiChessActionValueNetwork.expected_wdl_value(wdl_logits)
+        return policy_logits, wdl_logits, self.action_value_head(trunk, state_value)
+
+
+class MoveConditionedActionValueHead(nn.Module):
+    """Shared scorer over origin, destination, and move-plane representations."""
+
+    def __init__(
+        self,
+        trunk_channels: int,
+        *,
+        plane_embedding: int = 8,
+        hidden: int = 16,
+    ) -> None:
+        super().__init__()
+        if min(trunk_channels, plane_embedding, hidden) <= 0:
+            raise ValueError("move-conditioned action-value dimensions must be positive")
+        self.plane_embedding = nn.Embedding(POLICY_PLANES, plane_embedding)
+        self.hidden = nn.Linear(2 * trunk_channels + plane_embedding, hidden)
+        self.output = nn.Linear(hidden, 1)
+        self.output.weight = mx.zeros_like(self.output.weight)
+        self.output.bias = mx.zeros_like(self.output.bias)
+        self._origin_indices = tuple(action // POLICY_PLANES for action in range(POLICY_SIZE))
+        self._plane_indices = tuple(action % POLICY_PLANES for action in range(POLICY_SIZE))
+        destinations = []
+        for action in range(POLICY_SIZE):
+            destination = action_destination_square(action)
+            destinations.append(
+                destination if destination is not None else action // POLICY_PLANES
+            )
+        self._destination_indices = tuple(destinations)
+
+    def __call__(self, trunk: mx.array, state_value: mx.array) -> mx.array:
+        if trunk.ndim != 4 or state_value.ndim != 1 or trunk.shape[0] != state_value.shape[0]:
+            raise ValueError("move-conditioned head requires batched features and values")
+        flat = trunk.reshape(trunk.shape[0], 64, trunk.shape[-1])
+        origins = mx.take(flat, mx.array(self._origin_indices, dtype=mx.int32), axis=1)
+        destinations = mx.take(
+            flat, mx.array(self._destination_indices, dtype=mx.int32), axis=1
+        )
+        planes = self.plane_embedding(mx.array(self._plane_indices, dtype=mx.int32))
+        planes = mx.broadcast_to(planes[None, :, :], (*origins.shape[:2], planes.shape[-1]))
+        features = mx.concatenate((origins, destinations, planes), axis=2)
+        advantages = self.output(nn.relu(self.hidden(features))).squeeze(-1)
+        return mx.tanh(state_value[:, None] + advantages)
+
+
+class HarbiChessMoveConditionedActionValueNetwork(HarbiChessNetwork):
+    """HarbiChess network with a relational, parameter-shared action-Q head."""
+
+    def __init__(self, config: NetworkConfig | None = None) -> None:
+        super().__init__(config)
+        self.action_value_head = MoveConditionedActionValueHead(self.config.trunk_channels)
+
+    @classmethod
+    def from_base(cls, base: HarbiChessNetwork) -> HarbiChessMoveConditionedActionValueNetwork:
         target = cls(base.config)
         target.load_weights(list(tree_flatten(base.parameters())), strict=False)
         mx.eval(target.parameters())
