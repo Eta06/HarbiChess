@@ -62,6 +62,15 @@ def test_low_rank_adapter_is_function_preserving_and_mergeable() -> None:
     assert float(mx.max(mx.abs(adapted - base_logits)).item()) == 0.0
     assert float(mx.max(mx.abs(merged - base_logits)).item()) == 0.0
 
+    adapter.up.weight = mx.ones_like(adapter.up.weight) * 0.01
+    full = adapter(features, base_logits)
+    half = base_logits + 0.5 * (full - base_logits)
+    mx.eval(full, half)
+    assert float(mx.max(mx.abs(full - base_logits)).item()) > 0.0
+    error = mx.max(mx.abs((half - base_logits) - 0.5 * (full - base_logits)))
+    mx.eval(error)
+    assert float(error.item()) < 1e-7
+
 
 def test_explicit_policy_target_maps_uci_probabilities() -> None:
     board = chess.Board()
