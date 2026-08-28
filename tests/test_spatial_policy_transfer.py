@@ -1,6 +1,12 @@
 from pathlib import Path
 
+from harbichess.backends.mlx_network import HarbiChessNetwork, NetworkConfig
+from harbichess.backends.spatial_policy_network import (
+    HarbiChessRelationalPolicyNetwork,
+    HarbiChessSpatialPolicyNetwork,
+)
 from harbichess.training.spatial_policy_transfer import (
+    SpatialPolicyLearner,
     SpatialPolicyTransferConfig,
     _gate_reasons,
 )
@@ -60,3 +66,19 @@ def test_relational_policy_fit_uses_same_frozen_compute() -> None:
     )
     assert config.architecture == "relational"
     assert config.steps == 480
+
+
+def test_policy_learner_accepts_both_adapter_contracts() -> None:
+    base = HarbiChessNetwork(
+        NetworkConfig(trunk_channels=16, residual_blocks=1, policy_channels=2)
+    )
+    for network in (
+        HarbiChessSpatialPolicyNetwork.from_base(base),
+        HarbiChessRelationalPolicyNetwork.from_base(base),
+    ):
+        learner = SpatialPolicyLearner(
+            network,
+            learning_rate=1e-3,
+            max_gradient_norm=5.0,
+        )
+        assert learner.head is network.policy_adapter
