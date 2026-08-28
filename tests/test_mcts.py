@@ -91,3 +91,60 @@ def test_search_config_and_temperature_validation() -> None:
     assert result.select_move(temperature=0.001, rng=random.Random(1)) in {
         move.move for move in result.moves
     }
+
+
+def test_explicit_zero_fpu_is_legacy_equivalent() -> None:
+    rules = PythonChessRules()
+    default = MCTS(
+        UniformEvaluator(rules),
+        rules=rules,
+        config=SearchConfig(simulations=40),
+    ).search(rules.initial_state(), rng=random.Random(9))
+    explicit = MCTS(
+        UniformEvaluator(rules),
+        rules=rules,
+        config=SearchConfig(
+            simulations=40,
+            root_fpu_reduction=0.0,
+            fpu_reduction=0.0,
+        ),
+    ).search(rules.initial_state(), rng=random.Random(9))
+
+    assert explicit == default
+
+
+def test_parent_relative_fpu_concentrates_flat_value_search() -> None:
+    rules = PythonChessRules()
+    legacy = MCTS(
+        UniformEvaluator(rules),
+        rules=rules,
+        config=SearchConfig(simulations=16),
+    ).search(rules.initial_state(), rng=random.Random(5))
+    reduced = MCTS(
+        UniformEvaluator(rules),
+        rules=rules,
+        config=SearchConfig(
+            simulations=16,
+            root_fpu_reduction=0.2,
+            fpu_reduction=0.2,
+        ),
+    ).search(rules.initial_state(), rng=random.Random(5))
+
+    assert sum(move.visits > 0 for move in reduced.moves) < sum(
+        move.visits > 0 for move in legacy.moves
+    )
+    repeated = MCTS(
+        UniformEvaluator(rules),
+        rules=rules,
+        config=SearchConfig(
+            simulations=16,
+            root_fpu_reduction=0.2,
+            fpu_reduction=0.2,
+        ),
+    ).search(rules.initial_state(), rng=random.Random(5))
+    assert repeated == reduced
+
+
+def test_fpu_reduction_validation() -> None:
+    with pytest.raises(ValueError, match="FPU"):
+        SearchConfig(root_fpu_reduction=-0.1)
