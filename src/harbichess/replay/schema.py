@@ -6,6 +6,8 @@ import math
 from dataclasses import asdict, dataclass
 from typing import Any
 
+import chess
+
 from harbichess.chess.actions import ACTION_SCHEMA_VERSION, POLICY_SIZE, move_to_action
 from harbichess.chess.encoding import ENCODER_SCHEMA_VERSION
 from harbichess.chess.rules import PythonChessRules
@@ -388,6 +390,11 @@ class ReplayRecord:
 
     def validate_rules(self, rules: PythonChessRules) -> None:
         board = rules.board(self.state)
+        self.validate_board(board)
+
+    def validate_board(self, board: chess.Board) -> None:
+        """Validate rule-derived fields against an already reconstructed board."""
+
         expected_side = Side.WHITE if board.turn else Side.BLACK
         if self.side_to_move is not expected_side:
             raise ValueError("replay side-to-move does not match reconstructed state")
