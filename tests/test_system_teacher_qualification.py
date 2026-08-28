@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import random
+from pathlib import Path
 
 import pytest
 
@@ -9,6 +10,7 @@ from harbichess.core.state import GameOutcome, Side, TerminalResult
 from harbichess.evaluation.system_teacher_qualification import (
     QualificationGame,
     RawPolicy,
+    SystemTeacherConfig,
     evaluate_gate,
     summarize_control,
     summarize_games,
@@ -124,3 +126,20 @@ def test_system_gate_uses_strength_tactics_and_behavior() -> None:
     )
     assert not failed
     assert any("score" in reason for reason in reasons)
+
+
+def test_system_teacher_config_selects_only_registered_search_kinds() -> None:
+    config = SystemTeacherConfig(
+        output_dir=Path("output"),
+        model_path=Path("model.safetensors"),
+        search_kind="full-gumbel",
+    )
+
+    assert config.max_considered_actions == 16
+    assert config.gumbel_scale == 0.0
+    with pytest.raises(ValueError, match="search kind"):
+        SystemTeacherConfig(
+            output_dir=Path("output"),
+            model_path=Path("model.safetensors"),
+            search_kind="root-only-imitation",
+        )
