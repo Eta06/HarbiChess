@@ -18,12 +18,19 @@ class SearchConfig:
     dirichlet_alpha: float = 0.3
     dirichlet_fraction: float = 0.25
     claim_draw: bool = True
+    root_fpu_reduction: float = 0.0
+    fpu_reduction: float = 0.0
 
     def __post_init__(self) -> None:
         if self.simulations <= 0 or self.c_puct <= 0 or self.dirichlet_alpha <= 0:
             raise ValueError("simulations, c_puct, and dirichlet_alpha must be positive")
         if not 0.0 <= self.dirichlet_fraction <= 1.0:
             raise ValueError("dirichlet_fraction must be between zero and one")
+        if any(
+            not math.isfinite(value) or value < 0
+            for value in (self.root_fpu_reduction, self.fpu_reduction)
+        ):
+            raise ValueError("FPU reductions must be finite and non-negative")
 
 
 @dataclass(slots=True)
@@ -120,7 +127,7 @@ class MCTS:
             simulation_state = state
             path = [root]
             while node.expanded:
-                move, node = self._select_child(node)
+                move, node = self._select_child(node, is_root=node is root)
                 simulation_state = self.rules.apply(simulation_state, move)
                 path.append(node)
 
@@ -153,12 +160,24 @@ class MCTS:
             network_priors=network_priors,
         )
 
-    def _select_child(self, parent: SearchNode) -> tuple[ChessMove, SearchNode]:
+    def _select_child(
+        self, parent: SearchNode, *, is_root: bool = False
+    ) -> tuple[ChessMove, SearchNode]:
         scale = math.sqrt(max(1, parent.visit_count))
+        reduction = (
+            self.config.root_fpu_reduction if is_root else self.config.fpu_reduction
+        )
+        visited_policy = sum(
+            child.prior for child in parent.children.values() if child.visit_count > 0
+        )
 
         def score(item: tuple[ChessMove, SearchNode]) -> float:
             _, child = item
-            exploitation = -child.mean_value
+            exploitation = (
+                parent.mean_value - reduction * math.sqrt(visited_policy)
+                if child.visit_count == 0 and reduction > 0
+                else -child.mean_value
+            )
             exploration = self.config.c_puct * child.prior * scale / (1 + child.visit_count)
             return exploitation + exploration
 
