@@ -2,10 +2,12 @@ from pathlib import Path
 
 import pytest
 
+from harbichess.backends.mlx_network import HarbiChessNetwork, NetworkConfig
 from harbichess.training.capacity_matrix import (
     FROZEN_VARIANTS,
     CapacityMatrixConfig,
     _gate_reasons,
+    _tactical_metrics,
 )
 
 
@@ -73,3 +75,14 @@ def test_capacity_gate_requires_quality_and_tactical_non_regression() -> None:
 def test_capacity_matrix_configuration_rejects_invalid_duration() -> None:
     with pytest.raises(ValueError, match="configuration"):
         CapacityMatrixConfig(Path("replay.json"), Path("output"), epochs=0)
+
+
+def test_capacity_matrix_tactical_smoke_uses_one_rules_engine() -> None:
+    network = HarbiChessNetwork(
+        NetworkConfig(trunk_channels=8, residual_blocks=1, policy_channels=2)
+    )
+
+    result = _tactical_metrics(network, budget=1, workers=1, seed=7)
+
+    assert result["raw"]["total"] == 8
+    assert result["budgets"][0]["budget"] == 1
