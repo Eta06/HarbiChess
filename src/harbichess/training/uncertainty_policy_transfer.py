@@ -295,19 +295,16 @@ def _clone_adapter(
     return adapter
 
 
-def _quality(
-    adapter: LowRankPolicyAdapter,
+def _policy_quality(
+    policy_logits: mx.array,
     data: PreparedPolicyData,
     *,
     bootstrap_samples: int,
     seed: int,
-    scale: float = 1.0,
 ) -> dict[str, object]:
-    adapted_logits = adapter(data.features, data.base_logits)
-    projected_logits = data.base_logits + scale * (adapted_logits - data.base_logits)
     logits = mx.where(
         data.legal_masks,
-        projected_logits,
+        policy_logits,
         mx.array(-1e9),
     )
     log_probs = logits - mx.logsumexp(logits, axis=1, keepdims=True)
@@ -345,6 +342,24 @@ def _quality(
         "mean_verified_regret": mean(regrets),
         "best_action_coverage_top_16": mean(coverage),
     }
+
+
+def _quality(
+    adapter: LowRankPolicyAdapter,
+    data: PreparedPolicyData,
+    *,
+    bootstrap_samples: int,
+    seed: int,
+    scale: float = 1.0,
+) -> dict[str, object]:
+    adapted_logits = adapter(data.features, data.base_logits)
+    projected_logits = data.base_logits + scale * (adapted_logits - data.base_logits)
+    return _policy_quality(
+        projected_logits,
+        data,
+        bootstrap_samples=bootstrap_samples,
+        seed=seed,
+    )
 
 
 def _candidate_reasons(
