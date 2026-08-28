@@ -52,24 +52,33 @@ class ReplayTeacherAlignmentConfig:
     oracle_depth: int = 1
     verifier_depth: int = 4
     bootstrap_samples: int = 2_000
+    minimum_stored_clean_agreement: float = 0.95
+    maximum_stored_clean_tv: float = 0.05
 
     def __post_init__(self) -> None:
-        if min(
-            self.positions,
-            self.simulations,
-            self.workers,
-            self.oracle_depth,
-            self.verifier_depth,
-            self.bootstrap_samples,
-        ) <= 0 or self.verifier_depth <= self.oracle_depth:
+        if (
+            min(
+                self.positions,
+                self.simulations,
+                self.workers,
+                self.oracle_depth,
+                self.verifier_depth,
+                self.bootstrap_samples,
+            )
+            <= 0
+            or self.verifier_depth <= self.oracle_depth
+        ):
             raise ValueError("replay teacher alignment configuration is invalid")
+        if not 0.0 <= self.minimum_stored_clean_agreement <= 1.0:
+            raise ValueError("minimum stored-clean agreement must be a probability")
+        if not 0.0 <= self.maximum_stored_clean_tv <= 1.0:
+            raise ValueError("maximum stored-clean TV must be a probability")
 
 
 def _policy(record: ReplayRecord, items: tuple[tuple[int, float], ...]) -> Policy:
     board = PythonChessRules().board(record.state)
     return tuple(
-        (ChessMove(action_to_legal_move(board, action).uci()), value)
-        for action, value in items
+        (ChessMove(action_to_legal_move(board, action).uci()), value) for action, value in items
     )
 
 
@@ -80,8 +89,7 @@ def _argmax(policy: Policy) -> ChessMove:
 def _tv(first: Policy, second: Policy) -> float:
     left, right = dict(first), dict(second)
     return 0.5 * sum(
-        abs(left.get(move, 0.0) - right.get(move, 0.0))
-        for move in left.keys() | right.keys()
+        abs(left.get(move, 0.0) - right.get(move, 0.0)) for move in left.keys() | right.keys()
     )
 
 
@@ -92,6 +100,34 @@ def _kl(target: Policy, reference: Policy) -> float:
         for move, probability in target
         if probability > 0
     )
+
+
+def _alignment_gate(
+    summary: dict[str, object], config: ReplayTeacherAlignmentConfig
+) -> dict[str, object]:
+    reasons = []
+    if float(summary["stored_clean_top_action_agreement"]) < (
+        config.minimum_stored_clean_agreement
+    ):
+        reasons.append("stored-clean top-action agreement is below the frozen minimum")
+    if float(summary["mean_stored_clean_tv"]) > config.maximum_stored_clean_tv:
+        reasons.append("stored-clean policy TV exceeds the frozen maximum")
+    stored_interval = summary["stored_verified_delta_vs_raw_95_interval"]
+    clean_interval = summary["clean_verified_delta_vs_raw_95_interval"]
+    if float(stored_interval[0]) <= 0.0:
+        reasons.append("stored teacher verified-value interval is not strictly positive")
+    if float(clean_interval[0]) <= 0.0:
+        reasons.append("clean teacher verified-value interval is not strictly positive")
+    return {
+        "passed": not reasons,
+        "reasons": reasons,
+        "thresholds": {
+            "minimum_stored_clean_agreement": config.minimum_stored_clean_agreement,
+            "maximum_stored_clean_tv": config.maximum_stored_clean_tv,
+            "require_positive_stored_value_interval": True,
+            "require_positive_clean_value_interval": True,
+        },
+    }
 
 
 def run_replay_teacher_alignment(config: ReplayTeacherAlignmentConfig) -> Path:
@@ -166,8 +202,7 @@ def run_replay_teacher_alignment(config: ReplayTeacherAlignmentConfig) -> Path:
             "clean": _argmax(clean),
         }
         verified = {
-            name: -verifier.value(rules.apply(record.state, move))
-            for name, move in moves.items()
+            name: -verifier.value(rules.apply(record.state, move)) for name, move in moves.items()
         }
         return {
             "game_id": record.game_id,
@@ -210,6 +245,49 @@ def run_replay_teacher_alignment(config: ReplayTeacherAlignmentConfig) -> Path:
     clean_deltas = values("clean_delta_vs_raw")
     stored_vs_clean = values("stored_delta_vs_clean")
     output = config.output_dir / "alignment.json"
+    summary = {
+        "positions": len(rows),
+        "stored_clean_top_action_agreement": mean(bool(row["stored_clean_agree"]) for row in rows),
+        "raw_clean_top_action_agreement": mean(bool(row["raw_clean_agree"]) for row in rows),
+        "stored_raw_top_action_agreement": mean(bool(row["stored_raw_agree"]) for row in rows),
+        "noisy_clean_top_action_agreement": mean(bool(row["noisy_clean_agree"]) for row in rows),
+        "pruned_clean_top_action_agreement": mean(bool(row["pruned_clean_agree"]) for row in rows),
+        "mean_stored_clean_tv": mean(values("stored_clean_tv")),
+        "mean_noisy_clean_tv": mean(values("noisy_clean_tv")),
+        "mean_pruned_clean_tv": mean(values("pruned_clean_tv")),
+        "mean_stored_clean_kl": mean(values("stored_clean_kl")),
+        "mean_clean_stored_kl": mean(values("clean_stored_kl")),
+        "stored_verified_delta_vs_raw": mean(stored_deltas),
+        "stored_verified_delta_vs_raw_95_interval": _interval(
+            stored_deltas,
+            samples=config.bootstrap_samples,
+            seed=config.seed,
+        ),
+        "clean_verified_delta_vs_raw": mean(clean_deltas),
+        "clean_verified_delta_vs_raw_95_interval": _interval(
+            clean_deltas,
+            samples=config.bootstrap_samples,
+            seed=config.seed + 1,
+        ),
+        "stored_verified_delta_vs_clean": mean(stored_vs_clean),
+        "stored_verified_delta_vs_clean_95_interval": _interval(
+            stored_vs_clean,
+            samples=config.bootstrap_samples,
+            seed=config.seed + 2,
+        ),
+        "noisy_verified_delta_vs_raw": mean(noisy_deltas),
+        "noisy_verified_delta_vs_raw_95_interval": _interval(
+            noisy_deltas,
+            samples=config.bootstrap_samples,
+            seed=config.seed + 3,
+        ),
+        "pruned_verified_delta_vs_raw": mean(pruned_deltas),
+        "pruned_verified_delta_vs_raw_95_interval": _interval(
+            pruned_deltas,
+            samples=config.bootstrap_samples,
+            seed=config.seed + 4,
+        ),
+    }
     _atomic_json(
         output,
         {
@@ -221,59 +299,8 @@ def run_replay_teacher_alignment(config: ReplayTeacherAlignmentConfig) -> Path:
                 "shard": str(config.shard),
                 "output_dir": str(config.output_dir),
             },
-            "summary": {
-                "positions": len(rows),
-                "stored_clean_top_action_agreement": mean(
-                    bool(row["stored_clean_agree"]) for row in rows
-                ),
-                "raw_clean_top_action_agreement": mean(
-                    bool(row["raw_clean_agree"]) for row in rows
-                ),
-                "stored_raw_top_action_agreement": mean(
-                    bool(row["stored_raw_agree"]) for row in rows
-                ),
-                "noisy_clean_top_action_agreement": mean(
-                    bool(row["noisy_clean_agree"]) for row in rows
-                ),
-                "pruned_clean_top_action_agreement": mean(
-                    bool(row["pruned_clean_agree"]) for row in rows
-                ),
-                "mean_stored_clean_tv": mean(values("stored_clean_tv")),
-                "mean_noisy_clean_tv": mean(values("noisy_clean_tv")),
-                "mean_pruned_clean_tv": mean(values("pruned_clean_tv")),
-                "mean_stored_clean_kl": mean(values("stored_clean_kl")),
-                "mean_clean_stored_kl": mean(values("clean_stored_kl")),
-                "stored_verified_delta_vs_raw": mean(stored_deltas),
-                "stored_verified_delta_vs_raw_95_interval": _interval(
-                    stored_deltas,
-                    samples=config.bootstrap_samples,
-                    seed=config.seed,
-                ),
-                "clean_verified_delta_vs_raw": mean(clean_deltas),
-                "clean_verified_delta_vs_raw_95_interval": _interval(
-                    clean_deltas,
-                    samples=config.bootstrap_samples,
-                    seed=config.seed + 1,
-                ),
-                "stored_verified_delta_vs_clean": mean(stored_vs_clean),
-                "stored_verified_delta_vs_clean_95_interval": _interval(
-                    stored_vs_clean,
-                    samples=config.bootstrap_samples,
-                    seed=config.seed + 2,
-                ),
-                "noisy_verified_delta_vs_raw": mean(noisy_deltas),
-                "noisy_verified_delta_vs_raw_95_interval": _interval(
-                    noisy_deltas,
-                    samples=config.bootstrap_samples,
-                    seed=config.seed + 3,
-                ),
-                "pruned_verified_delta_vs_raw": mean(pruned_deltas),
-                "pruned_verified_delta_vs_raw_95_interval": _interval(
-                    pruned_deltas,
-                    samples=config.bootstrap_samples,
-                    seed=config.seed + 4,
-                ),
-            },
+            "summary": summary,
+            "gate": _alignment_gate(summary, config),
             "rows": rows,
             "elapsed_seconds": time.perf_counter() - started,
         },
@@ -286,6 +313,10 @@ def _parser() -> argparse.ArgumentParser:
     parser.add_argument("--run-result", required=True, type=Path)
     parser.add_argument("--shard", required=True, type=Path)
     parser.add_argument("--output-dir", required=True, type=Path)
+    parser.add_argument("--positions", type=int, default=48)
+    parser.add_argument("--simulations", type=int, default=64)
+    parser.add_argument("--workers", type=int, default=32)
+    parser.add_argument("--seed", type=int, default=2026082804)
     return parser
 
 
@@ -296,6 +327,10 @@ def main(argv: Sequence[str] | None = None) -> int:
             run_result=arguments.run_result,
             shard=arguments.shard,
             output_dir=arguments.output_dir,
+            positions=arguments.positions,
+            simulations=arguments.simulations,
+            workers=arguments.workers,
+            seed=arguments.seed,
         )
     )
     print(path)
