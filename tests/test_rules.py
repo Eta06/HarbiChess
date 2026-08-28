@@ -82,6 +82,27 @@ def test_incremental_board_cache_preserves_external_mutation_isolation(
     assert rules.view(state).side_to_move is Side.BLACK
 
 
+def test_repeated_transition_reuses_the_validated_cached_child(
+    rules: PythonChessRules,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    state = rules.initial_state()
+    original = rules._cached_board
+    calls = 0
+
+    def tracked(current):
+        nonlocal calls
+        calls += 1
+        return original(current)
+
+    monkeypatch.setattr(rules, "_cached_board", tracked)
+    first = rules.apply(state, ChessMove("e2e4"))
+    second = rules.apply(state, ChessMove("e2e4"))
+
+    assert first == second
+    assert calls == 1
+
+
 def test_board_cache_size_must_be_positive() -> None:
     with pytest.raises(ValueError, match="cache size"):
         PythonChessRules(board_cache_size=0)
