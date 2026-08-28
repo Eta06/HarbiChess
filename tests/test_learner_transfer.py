@@ -1,10 +1,13 @@
 from pathlib import Path
 
+import pytest
+
 from harbichess.evaluation.model_quality import ModelQualityMetrics
 from harbichess.training.learner_transfer import (
     LearnerTransferConfig,
     _candidate_reasons,
     _select_validation_snapshots,
+    _validate_replay_alignment,
 )
 
 
@@ -65,3 +68,18 @@ def test_transfer_checkpoint_selection_is_even_and_metric_blind() -> None:
     selected = _select_validation_snapshots(snapshots, maximum=4)
 
     assert [step for step, _, _ in selected] == [0, 3, 6, 9]
+
+
+def test_transfer_requires_matching_passed_replay_alignment() -> None:
+    replay = Path("artifacts/runs/fresh/result.json")
+
+    _validate_replay_alignment(
+        {"gate": {"passed": True}, "config": {"run_result": str(replay)}},
+        replay_run_result=replay,
+    )
+
+    with pytest.raises(ValueError, match="passed fresh replay alignment"):
+        _validate_replay_alignment(
+            {"gate": {"passed": False}, "config": {"run_result": str(replay)}},
+            replay_run_result=replay,
+        )
