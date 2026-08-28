@@ -68,3 +68,4 @@ def test_action_value_dataset_accepts_multiple_exclusion_artifacts() -> None:
         Path("second.json"),
         Path("third.json"),
     )
+    assert config.telemetry_path == Path("artifacts/dashboard/state.json")
