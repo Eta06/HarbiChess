@@ -228,6 +228,10 @@ def _determinism_delta(first: dict[str, object], second: dict[str, object]) -> f
     )
 
 
+def _normalized_visits(value: object) -> tuple[tuple[str, int], ...]:
+    return tuple((str(move), int(visits)) for move, visits in value)  # type: ignore[misc]
+
+
 def _selection_summary(rows: Sequence[dict[str, object]]) -> dict[str, object]:
     strata: dict[str, int] = defaultdict(int)
     for row in rows:
@@ -376,7 +380,9 @@ def run_full_gumbel_targets(config: FullGumbelTargetConfig) -> Path:
                     visit_mismatches += 1
                     continue
                 action_mismatches += original["selected_action"] != row["selected_action"]
-                visit_mismatches += original["root_visits"] != row["root_visits"]
+                visit_mismatches += _normalized_visits(
+                    original["root_visits"]
+                ) != _normalized_visits(row["root_visits"])
         reference_passed = action_mismatches == 0 and visit_mismatches == 0
         performance_passed = elapsed <= float(reference["elapsed_seconds"])
         reference_equivalence = {
