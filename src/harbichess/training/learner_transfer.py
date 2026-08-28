@@ -25,7 +25,11 @@ from harbichess.dashboard.state import (
     RunMode,
     SnapshotStore,
 )
-from harbichess.evaluation.model_quality import ModelQualityMetrics, evaluate_model_quality
+from harbichess.evaluation.model_quality import (
+    ModelQualityMetrics,
+    evaluate_model_quality,
+    prepare_model_quality_dataset,
+)
 from harbichess.replay.shard import read_shard
 from harbichess.search.batching import SharedBatchEvaluator
 from harbichess.search.diagnostics import run_tactical_sweep
@@ -263,12 +267,13 @@ def run_learner_transfer(config: LearnerTransferConfig) -> Path:
     validation = read_shard(validation_path).records
     if {record.game_id for record in train} & {record.game_id for record in validation}:
         raise ValueError("learner transfer detected train/validation game leakage")
+    quality_dataset = prepare_model_quality_dataset(validation)
 
     network_config = _network_config(replay_result["config"])
     baseline_path = Path(replay_result["baseline"]["path"])
     baseline = HarbiChessNetwork(network_config)
     baseline.load_weights(str(baseline_path))
-    baseline_quality = evaluate_model_quality(baseline, validation)
+    baseline_quality = evaluate_model_quality(baseline, quality_dataset)
     baseline_tactical = _tactical_metrics(
         baseline,
         network_config=network_config,
@@ -355,7 +360,7 @@ def run_learner_transfer(config: LearnerTransferConfig) -> Path:
     selected_snapshots = _select_validation_snapshots(validation_snapshots, maximum=8)
     for candidate_step, validation_loss, candidate_snapshot in selected_snapshots:
         learner.restore(candidate_snapshot)
-        quality = evaluate_model_quality(network, validation)
+        quality = evaluate_model_quality(network, quality_dataset)
         tactical = _tactical_metrics(
             network,
             network_config=network_config,
