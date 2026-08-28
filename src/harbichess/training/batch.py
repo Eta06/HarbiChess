@@ -7,7 +7,7 @@ import random
 from collections.abc import Mapping
 from dataclasses import InitVar, dataclass
 
-from harbichess.chess.actions import POLICY_SIZE
+from harbichess.chess.actions import POLICY_SIZE, legal_action_indices
 from harbichess.chess.encoding import BoardEncoder
 from harbichess.chess.rules import PythonChessRules
 from harbichess.core.backend import EncodedPosition
@@ -18,6 +18,7 @@ from harbichess.replay.schema import ReplayRecord
 class TrainingBatch:
     positions: tuple[EncodedPosition, ...]
     policy_targets: tuple[tuple[float, ...], ...]
+    legal_masks: tuple[tuple[bool, ...], ...]
     wdl_targets: tuple[int, ...]
     value_weights: tuple[float, ...]
     _validate: InitVar[bool] = True
@@ -27,6 +28,7 @@ class TrainingBatch:
         if (
             size == 0
             or len(self.policy_targets) != size
+            or len(self.legal_masks) != size
             or len(self.wdl_targets) != size
             or len(self.value_weights) != size
         ):
@@ -35,6 +37,8 @@ class TrainingBatch:
             return
         if any(len(target) != POLICY_SIZE for target in self.policy_targets):
             raise ValueError(f"policy targets must contain {POLICY_SIZE} actions")
+        if any(len(mask) != POLICY_SIZE or not any(mask) for mask in self.legal_masks):
+            raise ValueError(f"legal masks must contain {POLICY_SIZE} actions and legal moves")
         if any(
             any(not math.isfinite(value) or value < 0 for value in target)
             or not math.isclose(sum(target), 1.0, abs_tol=1e-6)
@@ -54,6 +58,7 @@ class TrainingBatch:
         return TrainingBatch(
             tuple(self.positions[index] for index in indices),
             tuple(self.policy_targets[index] for index in indices),
+            tuple(self.legal_masks[index] for index in indices),
             tuple(self.wdl_targets[index] for index in indices),
             tuple(self.value_weights[index] for index in indices),
             _validate=False,
@@ -157,15 +162,21 @@ def build_training_batch(
     board_encoder = encoder or BoardEncoder(engine)
     positions = []
     policies = []
+    legal_masks = []
     wdl_targets = []
     value_weights = []
     for record in records:
         record.validate_rules(engine)
         positions.append(board_encoder.encode(record.state))
+        board = engine.board(record.state)
         dense_policy = [0.0] * POLICY_SIZE
         for action, probability in record.policy:
             dense_policy[action] = probability
         policies.append(tuple(dense_policy))
+        legal = [False] * POLICY_SIZE
+        for action in legal_action_indices(board):
+            legal[action] = True
+        legal_masks.append(tuple(legal))
         if record.outcome_value is None:
             wdl_targets.append(1)
             value_weights.append(0.0)
@@ -175,6 +186,7 @@ def build_training_batch(
     return TrainingBatch(
         tuple(positions),
         tuple(policies),
+        tuple(legal_masks),
         tuple(wdl_targets),
         tuple(value_weights),
     )
