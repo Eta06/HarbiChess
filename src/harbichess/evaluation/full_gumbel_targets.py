@@ -347,12 +347,18 @@ def run_full_gumbel_targets(config: FullGumbelTargetConfig) -> Path:
             for records in selected.values()
             for record in records
         }
-        audit_repeat = tuple(
-            _target_row(
-                audit_records[str(row["identity"])], search, seed=config.seed, rules=rules
+        def repeat_audit(row: dict[str, object]) -> dict[str, object]:
+            return _target_row(
+                audit_records[str(row["identity"])],
+                search,
+                seed=config.seed,
+                rules=rules,
             )
-            for row in audit_source
-        )
+
+        with ThreadPoolExecutor(
+            max_workers=min(config.workers, len(audit_source))
+        ) as pool:
+            audit_repeat = tuple(pool.map(repeat_audit, audit_source))
     finally:
         batcher.close()
     deltas = tuple(
