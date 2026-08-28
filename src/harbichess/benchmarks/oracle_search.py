@@ -201,6 +201,9 @@ def _parser() -> argparse.ArgumentParser:
     parser.add_argument("--positions", type=int, default=24)
     parser.add_argument("--simulations", type=int, default=64)
     parser.add_argument("--repeats", type=int, default=2)
+    parser.add_argument("--actor-workers", type=int, default=24)
+    parser.add_argument("--max-batch-size", type=int, default=48)
+    parser.add_argument("--max-wait-ms", type=float, default=0.25)
     return parser
 
 
@@ -215,6 +218,9 @@ def main(argv: Sequence[str] | None = None) -> int:
             positions=arguments.positions,
             simulations=arguments.simulations,
             repeats=arguments.repeats,
+            actor_workers=arguments.actor_workers,
+            max_batch_size=arguments.max_batch_size,
+            max_wait_seconds=arguments.max_wait_ms / 1_000,
         )
     )
     print(output)
