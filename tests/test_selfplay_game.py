@@ -109,6 +109,8 @@ def test_self_play_configuration_validation_and_ply_adjudication() -> None:
         SelfPlayConfig(max_plies=0)
     with pytest.raises(ValueError, match="game_index"):
         derive_game_seed(1, -1)
+    with pytest.raises(ValueError, match="temperatures"):
+        SelfPlayConfig(selection_dirichlet_fraction=0.25)
 
     rules = PythonChessRules()
     game = play_game(
@@ -121,6 +123,43 @@ def test_self_play_configuration_validation_and_ply_adjudication() -> None:
     )
     assert game.outcome.termination == "max_plies"
     assert game.samples[0].outcome_value is None
+
+
+def test_selection_noise_keeps_search_teacher_clean() -> None:
+    rules = PythonChessRules()
+    first = ChessMove("e2e4")
+    second = ChessMove("d2d4")
+    observed_noise_flags = []
+
+    class CleanTeacherSearch:
+        def search(self, state, *, rng: random.Random, add_root_noise: bool):
+            del state, rng
+            observed_noise_flags.append(add_root_noise)
+            return SearchResult(
+                (
+                    MoveStatistics(first, 9, 0.7, 0.2),
+                    MoveStatistics(second, 1, 0.3, 0.1),
+                ),
+                0.1,
+                10,
+                network_priors=((first, 0.7), (second, 0.3)),
+            )
+
+    game = play_game(
+        CleanTeacherSearch(),
+        rules,
+        rules.initial_state(),
+        game_index=0,
+        seed=5,
+        config=SelfPlayConfig(
+            max_plies=1,
+            search_root_noise=False,
+            selection_dirichlet_fraction=0.25,
+        ),
+    )
+
+    assert observed_noise_flags == [False]
+    assert game.samples[0].visit_policy == ((first, 0.9), (second, 0.1))
 
 
 def test_repetition_target_transform_is_opt_in_for_self_play() -> None:
