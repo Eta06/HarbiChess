@@ -110,6 +110,20 @@ def _sha256(path: Path) -> str:
     return digest.hexdigest()
 
 
+def _config_payload(config: LearnerTransferConfig) -> dict[str, object]:
+    payload = asdict(config)
+    for name in (
+        "replay_run_result",
+        "teacher_audit_result",
+        "output_dir",
+        "replay_alignment_result",
+        "telemetry_path",
+    ):
+        value = getattr(config, name)
+        payload[name] = str(value) if value is not None else None
+    return payload
+
+
 def _network_config(payload: dict[str, object]) -> NetworkConfig:
     return NetworkConfig(
         trunk_channels=int(payload["trunk_channels"]),
@@ -394,13 +408,7 @@ def run_learner_transfer(config: LearnerTransferConfig) -> Path:
         "created_at": datetime.now(UTC).isoformat(),
         "source_commit": _source_commit(),
         "passed": checkpoint is not None,
-        "config": {
-            **asdict(config),
-            "replay_run_result": str(config.replay_run_result),
-            "teacher_audit_result": str(config.teacher_audit_result),
-            "output_dir": str(config.output_dir),
-            "telemetry_path": str(config.telemetry_path),
-        },
+        "config": _config_payload(config),
         "baseline": {
             "path": str(baseline_path),
             "model_sha256": replay_result["baseline"]["model_sha256"],
