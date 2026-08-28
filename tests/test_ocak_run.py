@@ -106,11 +106,14 @@ def test_ocak_run_configuration_rejects_unsafe_run_id() -> None:
         run_id="legacy-reproduction",
         repetition_target_transform=True,
     ).repetition_target_transform
-    assert OcakRunConfig(
-        run_id="qualified-teacher",
-        teacher_oracle_depth=1,
-        teacher_oracle_workers=4,
-    ).teacher_oracle_workers == 4
+    assert (
+        OcakRunConfig(
+            run_id="qualified-teacher",
+            teacher_oracle_depth=1,
+            teacher_oracle_workers=4,
+        ).teacher_oracle_workers
+        == 4
+    )
     with pytest.raises(ValueError, match="safe path"):
         OcakRunConfig(run_id="../escape")
     with pytest.raises(ValueError, match="teacher_oracle_depth"):
@@ -166,8 +169,6 @@ def test_generation_only_run_writes_replay_without_starting_learner(tmp_path: Pa
         minimum_position_signatures=1,
         minimum_teacher_telemetry_ratio=1.0,
         minimum_comparable_teacher_deltas=0,
-        minimum_positive_teacher_delta_ratio=0.0,
-        minimum_mean_teacher_delta=-1.0,
     )
     result = run_ocak_sanity(
         OcakRunConfig(
