@@ -12,6 +12,7 @@ from collections.abc import Mapping, Sequence
 from dataclasses import asdict, dataclass, replace
 from datetime import UTC, datetime
 from pathlib import Path
+from typing import Literal
 
 import mlx.core as mx
 import mlx.nn as nn
@@ -19,7 +20,10 @@ import mlx.optimizers as optim
 from mlx.utils import tree_flatten
 
 from harbichess.backends.mlx_network import HarbiChessNetwork
-from harbichess.backends.spatial_policy_network import HarbiChessSpatialPolicyNetwork
+from harbichess.backends.spatial_policy_network import (
+    HarbiChessRelationalPolicyNetwork,
+    HarbiChessSpatialPolicyNetwork,
+)
 from harbichess.chess.rules import PythonChessRules
 from harbichess.dashboard.state import PilotStatus, RunMode, SnapshotStore
 from harbichess.evaluation.teacher_qualification import _atomic_json, _source_commit
@@ -53,6 +57,7 @@ class SpatialPolicyTransferConfig:
     maximum_harmful_ratio: float = 0.10
     maximum_verified_regret: float = 0.10
     minimum_best_action_coverage: float = 0.80
+    architecture: Literal["spatial", "relational"] = "spatial"
 
     def __post_init__(self) -> None:
         if (
@@ -64,14 +69,26 @@ class SpatialPolicyTransferConfig:
             or not 0 <= self.maximum_harmful_ratio <= 1
             or self.maximum_verified_regret < 0
             or not 0 <= self.minimum_best_action_coverage <= 1
+            or self.architecture not in {"spatial", "relational"}
         ):
             raise ValueError("spatial policy transfer configuration is invalid")
+
+
+PolicyNetwork = HarbiChessSpatialPolicyNetwork | HarbiChessRelationalPolicyNetwork
+
+
+def _from_base(base: HarbiChessNetwork, architecture: str) -> PolicyNetwork:
+    if architecture == "spatial":
+        return HarbiChessSpatialPolicyNetwork.from_base(base)
+    if architecture == "relational":
+        return HarbiChessRelationalPolicyNetwork.from_base(base)
+    raise ValueError(f"unsupported policy architecture: {architecture}")
 
 
 class SpatialPolicyLearner:
     def __init__(
         self,
-        network: HarbiChessSpatialPolicyNetwork,
+        network: PolicyNetwork,
         *,
         learning_rate: float,
         max_gradient_norm: float,
@@ -169,7 +186,7 @@ def run_spatial_policy_transfer(config: SpatialPolicyTransferConfig) -> Path:
     baseline_path = Path(run["baseline"]["path"])
     base = HarbiChessNetwork(network_config)
     base.load_weights(str(baseline_path))
-    network = HarbiChessSpatialPolicyNetwork.from_base(base)
+    network = _from_base(base, config.architecture)
     rules = PythonChessRules()
     train_records = read_shard(config.train_shard, rules=rules).records
     data = _prepare_data(
@@ -193,7 +210,7 @@ def run_spatial_policy_transfer(config: SpatialPolicyTransferConfig) -> Path:
         store.read(),
         updated_at=datetime.now(UTC).isoformat(),
         mode=RunMode.TRAINING,
-        mode_detail=f"YAPI spatial policy fit · 0/{config.steps}",
+        mode_detail=f"{config.architecture} policy fit · 0/{config.steps}",
         pilot_status=PilotStatus.TRAINING,
         pilot_steps_planned=config.steps,
         pilot_steps_completed=0,
@@ -210,7 +227,9 @@ def run_spatial_policy_transfer(config: SpatialPolicyTransferConfig) -> Path:
             dashboard = replace(
                 dashboard,
                 updated_at=datetime.now(UTC).isoformat(),
-                mode_detail=f"YAPI spatial policy fit · {step}/{config.steps}",
+                mode_detail=(
+                    f"{config.architecture} policy fit · {step}/{config.steps}"
+                ),
                 pilot_steps_completed=step,
             )
             store.write_atomic(dashboard)
@@ -313,9 +332,9 @@ def run_spatial_policy_transfer(config: SpatialPolicyTransferConfig) -> Path:
         updated_at=datetime.now(UTC).isoformat(),
         mode=RunMode.IDLE,
         mode_detail=(
-            "YAPI spatial policy fit passed · fresh validation authorized"
+            f"{config.architecture} policy fit passed · fresh validation authorized"
             if checkpoint
-            else "YAPI spatial policy fit failed · learner blocked"
+            else f"{config.architecture} policy fit failed · learner blocked"
         ),
         pilot_status=PilotStatus.PASSED if checkpoint else PilotStatus.FAILED,
         pilot_steps_attempted=config.steps,
@@ -336,6 +355,10 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument("--train-shard", required=True, type=Path)
     parser.add_argument("--output-dir", required=True, type=Path)
     parser.add_argument("--telemetry", type=Path, default=Path("artifacts/dashboard/state.json"))
+    parser.add_argument(
+        "--architecture", choices=("spatial", "relational"), default="spatial"
+    )
+    parser.add_argument("--seed", type=int, default=2026082841)
     arguments = parser.parse_args(argv)
     path = run_spatial_policy_transfer(
         SpatialPolicyTransferConfig(
@@ -345,6 +368,8 @@ def main(argv: Sequence[str] | None = None) -> int:
             train_shard=arguments.train_shard,
             output_dir=arguments.output_dir,
             telemetry_path=arguments.telemetry,
+            architecture=arguments.architecture,
+            seed=arguments.seed,
         )
     )
     print(path)
