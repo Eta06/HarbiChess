@@ -1,4 +1,5 @@
 from pathlib import Path
+from types import SimpleNamespace
 
 import mlx.core as mx
 
@@ -9,6 +10,7 @@ from harbichess.training.joint_policy_transfer import (
     JointPolicyTransferConfig,
     _joint_reasons,
     _masked_kl,
+    _target_arrays,
 )
 
 
@@ -104,3 +106,18 @@ def test_joint_learner_accepts_soft_targets_and_distillation() -> None:
     candidate_policy, candidate_wdl = network(inputs)
     assert _masked_kl(base_policy, candidate_policy, masks) >= 0
     assert _masked_kl(base_wdl, candidate_wdl) >= 0
+
+
+def test_target_batch_selects_board_inputs_not_frozen_features() -> None:
+    data = SimpleNamespace(
+        inputs=mx.arange(24).reshape(3, 2, 2, 2),
+        targets=mx.arange(12).reshape(3, 4),
+        legal_masks=mx.ones((3, 4), dtype=mx.bool_),
+    )
+
+    inputs, targets, masks = _target_arrays(data, (2, 0))  # type: ignore[arg-type]
+
+    assert tuple(inputs.shape) == (2, 2, 2, 2)
+    assert inputs[:, 0, 0, 0].tolist() == [16, 0]
+    assert targets[:, 0].tolist() == [8, 0]
+    assert masks.shape == targets.shape
