@@ -374,6 +374,7 @@ def run_learner_transfer(config: LearnerTransferConfig) -> Path:
             "attempted_steps": report.attempted_steps,
             "restored_step": report.steps,
             "maximum_gradient_norm": report.maximum_gradient_norm,
+            "maximum_unclipped_gradient_norm": report.maximum_unclipped_gradient_norm,
             "stopped_early": report.stopped_early,
             "stop_reason": report.stop_reason,
         },
