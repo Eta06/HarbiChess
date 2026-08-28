@@ -30,7 +30,7 @@ from harbichess.replay.shard import read_shard
 from harbichess.search.batching import SharedBatchEvaluator
 from harbichess.search.evaluator import NeuralPositionEvaluator
 from harbichess.search.mcts import MCTS, SearchConfig
-from harbichess.search.targets import visit_policy
+from harbichess.search.targets import prune_noise_attributable_visits, visit_policy
 from harbichess.search.value_oracle import (
     DeterministicTacticalOracle,
     OracleValueEvaluator,
@@ -139,13 +139,25 @@ def run_replay_teacher_alignment(config: ReplayTeacherAlignmentConfig) -> Path:
         clean = visit_policy(
             clean_search.search(
                 record.state,
-                rng=random.Random(f"{config.seed}:{index}"),
+                rng=random.Random(f"{config.seed}:clean:{index}"),
                 add_root_noise=False,
             )
+        )
+        noisy_result = clean_search.search(
+            record.state,
+            rng=random.Random(f"{config.seed}:noisy:{index}"),
+            add_root_noise=True,
+        )
+        noisy = visit_policy(noisy_result)
+        pruned = prune_noise_attributable_visits(
+            noisy_result,
+            dict(noisy_result.network_priors),
         )
         moves = {
             "raw": _argmax(raw),
             "stored": _argmax(stored),
+            "noisy": _argmax(noisy),
+            "pruned": _argmax(pruned),
             "clean": _argmax(clean),
         }
         verified = {
@@ -157,15 +169,23 @@ def run_replay_teacher_alignment(config: ReplayTeacherAlignmentConfig) -> Path:
             "ply": record.ply,
             "raw_action": moves["raw"].uci,
             "stored_action": moves["stored"].uci,
+            "noisy_action": moves["noisy"].uci,
+            "pruned_action": moves["pruned"].uci,
             "clean_action": moves["clean"].uci,
             "stored_clean_agree": moves["stored"] == moves["clean"],
             "raw_clean_agree": moves["raw"] == moves["clean"],
             "stored_raw_agree": moves["stored"] == moves["raw"],
+            "noisy_clean_agree": moves["noisy"] == moves["clean"],
+            "pruned_clean_agree": moves["pruned"] == moves["clean"],
             "stored_clean_tv": _tv(stored, clean),
+            "noisy_clean_tv": _tv(noisy, clean),
+            "pruned_clean_tv": _tv(pruned, clean),
             "stored_clean_kl": _kl(stored, clean),
             "clean_stored_kl": _kl(clean, stored),
             "verified": verified,
             "stored_delta_vs_raw": verified["stored"] - verified["raw"],
+            "noisy_delta_vs_raw": verified["noisy"] - verified["raw"],
+            "pruned_delta_vs_raw": verified["pruned"] - verified["raw"],
             "clean_delta_vs_raw": verified["clean"] - verified["raw"],
             "stored_delta_vs_clean": verified["stored"] - verified["clean"],
         }
@@ -180,6 +200,8 @@ def run_replay_teacher_alignment(config: ReplayTeacherAlignmentConfig) -> Path:
         return tuple(float(row[name]) for row in rows)
 
     stored_deltas = values("stored_delta_vs_raw")
+    noisy_deltas = values("noisy_delta_vs_raw")
+    pruned_deltas = values("pruned_delta_vs_raw")
     clean_deltas = values("clean_delta_vs_raw")
     stored_vs_clean = values("stored_delta_vs_clean")
     output = config.output_dir / "alignment.json"
@@ -205,7 +227,15 @@ def run_replay_teacher_alignment(config: ReplayTeacherAlignmentConfig) -> Path:
                 "stored_raw_top_action_agreement": mean(
                     bool(row["stored_raw_agree"]) for row in rows
                 ),
+                "noisy_clean_top_action_agreement": mean(
+                    bool(row["noisy_clean_agree"]) for row in rows
+                ),
+                "pruned_clean_top_action_agreement": mean(
+                    bool(row["pruned_clean_agree"]) for row in rows
+                ),
                 "mean_stored_clean_tv": mean(values("stored_clean_tv")),
+                "mean_noisy_clean_tv": mean(values("noisy_clean_tv")),
+                "mean_pruned_clean_tv": mean(values("pruned_clean_tv")),
                 "mean_stored_clean_kl": mean(values("stored_clean_kl")),
                 "mean_clean_stored_kl": mean(values("clean_stored_kl")),
                 "stored_verified_delta_vs_raw": mean(stored_deltas),
@@ -225,6 +255,18 @@ def run_replay_teacher_alignment(config: ReplayTeacherAlignmentConfig) -> Path:
                     stored_vs_clean,
                     samples=config.bootstrap_samples,
                     seed=config.seed + 2,
+                ),
+                "noisy_verified_delta_vs_raw": mean(noisy_deltas),
+                "noisy_verified_delta_vs_raw_95_interval": _interval(
+                    noisy_deltas,
+                    samples=config.bootstrap_samples,
+                    seed=config.seed + 3,
+                ),
+                "pruned_verified_delta_vs_raw": mean(pruned_deltas),
+                "pruned_verified_delta_vs_raw_95_interval": _interval(
+                    pruned_deltas,
+                    samples=config.bootstrap_samples,
+                    seed=config.seed + 4,
                 ),
             },
             "rows": rows,
