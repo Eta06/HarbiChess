@@ -162,6 +162,37 @@ def test_selection_noise_keeps_search_teacher_clean() -> None:
     assert game.samples[0].visit_policy == ((first, 0.9), (second, 0.1))
 
 
+def test_dual_search_decouples_noisy_behavior_from_clean_target() -> None:
+    rules = PythonChessRules()
+    clean = ChessMove("e2e4")
+    behavior = ChessMove("d2d4")
+
+    class DualSearch:
+        def search(self, state, *, rng: random.Random, add_root_noise: bool):
+            del state, rng
+            selected = behavior if add_root_noise else clean
+            return SearchResult(
+                (MoveStatistics(selected, 8, 1.0, 0.2),),
+                0.2,
+                8,
+                network_priors=((clean, 0.5), (behavior, 0.5)),
+            )
+
+    game = play_game(
+        DualSearch(),
+        rules,
+        rules.initial_state(),
+        game_index=0,
+        seed=7,
+        config=SelfPlayConfig(max_plies=1, separate_clean_target_search=True),
+    )
+    sample = game.samples[0]
+
+    assert sample.selected_move == behavior
+    assert sample.visit_policy == ((clean, 1.0),)
+    assert sample.behavior_target_decoupled
+
+
 def test_repetition_target_transform_is_opt_in_for_self_play() -> None:
     class NonTerminalTestRules(PythonChessRules):
         def outcome(self, state, *, claim_draw: bool = False):
