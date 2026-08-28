@@ -69,6 +69,7 @@ def transform_repetition_target(
         search.root_value,
         search.simulations,
         search.outcome,
+        search.network_priors,
     )
     return ContinuationDecision(
         policy_moves=comparable,
