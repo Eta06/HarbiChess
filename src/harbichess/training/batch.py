@@ -166,9 +166,9 @@ def build_training_batch(
     wdl_targets = []
     value_weights = []
     for record in records:
-        record.validate_rules(engine)
-        positions.append(board_encoder.encode(record.state))
         board = engine.board(record.state)
+        record.validate_board(board)
+        positions.append(board_encoder.encode_state(record.state, board))
         dense_policy = [0.0] * POLICY_SIZE
         for action, probability in record.policy:
             dense_policy[action] = probability
