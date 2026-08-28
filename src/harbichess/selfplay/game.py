@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import hashlib
+import math
 import random
 from collections.abc import Callable
 from concurrent.futures import ThreadPoolExecutor
@@ -71,6 +72,11 @@ class SelfPlaySample:
     root_search_adjusted: bool = False
     root_search_first_margin: float | None = None
     root_search_final_margin: float | None = None
+    raw_policy: tuple[tuple[ChessMove, float], ...] = ()
+    teacher_policy_tv: float | None = None
+    teacher_policy_kl: float | None = None
+    teacher_argmax_changed: bool | None = None
+    teacher_search_value_delta: float | None = None
 
 
 @dataclass(frozen=True, slots=True)
@@ -87,6 +93,53 @@ def derive_game_seed(run_seed: int, game_index: int) -> int:
         raise ValueError("game_index must be non-negative")
     payload = f"{run_seed}:{game_index}".encode()
     return int.from_bytes(hashlib.blake2b(payload, digest_size=8).digest())
+
+
+def _teacher_telemetry(
+    search,
+    policy: tuple[tuple[ChessMove, float], ...],
+) -> tuple[
+    tuple[tuple[ChessMove, float], ...],
+    float | None,
+    float | None,
+    bool | None,
+    float | None,
+]:
+    """Compare the clean network prior with the final search policy target."""
+
+    if not search.network_priors:
+        return (), None, None, None, None
+    total = sum(probability for _, probability in search.network_priors)
+    if total <= 0:
+        return (), None, None, None, None
+    raw_policy = tuple(
+        sorted(
+            (
+                (move, probability / total)
+                for move, probability in search.network_priors
+                if probability > 0
+            ),
+            key=lambda item: item[0].uci,
+        )
+    )
+    raw = dict(raw_policy)
+    target = dict(policy)
+    moves = raw.keys() | target.keys()
+    tv = 0.5 * sum(abs(raw.get(move, 0.0) - target.get(move, 0.0)) for move in moves)
+    kl = sum(
+        probability * math.log(probability / max(raw.get(move, 0.0), 1e-12))
+        for move, probability in policy
+        if probability > 0
+    )
+    raw_action = min(raw_policy, key=lambda item: (-item[1], item[0].uci))[0]
+    teacher_action = min(policy, key=lambda item: (-item[1], item[0].uci))[0]
+    values = {statistics.move: statistics.mean_value for statistics in search.moves}
+    value_delta = (
+        values[teacher_action] - values[raw_action]
+        if teacher_action in values and raw_action in values
+        else None
+    )
+    return raw_policy, tv, kl, teacher_action != raw_action, value_delta
 
 
 def play_game(
@@ -111,6 +164,11 @@ def play_game(
             bool,
             bool,
             float | None,
+            float | None,
+            tuple[tuple[ChessMove, float], ...],
+            float | None,
+            float | None,
+            bool | None,
             float | None,
         ]
     ] = []
@@ -178,6 +236,7 @@ def play_game(
                     ),
                 ),
             )
+        teacher_telemetry = _teacher_telemetry(search, policy)
         pending.append(
             (
                 state,
@@ -189,6 +248,7 @@ def play_game(
                 bool(root_evidence and root_evidence.adjusted),
                 root_evidence.first_round_margin if root_evidence else None,
                 root_evidence.final_round_margin if root_evidence else None,
+                *teacher_telemetry,
             )
         )
         state = rules.apply(state, selected)
@@ -207,6 +267,11 @@ def play_game(
             root_search_adjusted=root_search_adjusted,
             root_search_first_margin=root_search_first_margin,
             root_search_final_margin=root_search_final_margin,
+            raw_policy=raw_policy,
+            teacher_policy_tv=teacher_policy_tv,
+            teacher_policy_kl=teacher_policy_kl,
+            teacher_argmax_changed=teacher_argmax_changed,
+            teacher_search_value_delta=teacher_search_value_delta,
         )
         for (
             sample_state,
@@ -218,6 +283,11 @@ def play_game(
             root_search_adjusted,
             root_search_first_margin,
             root_search_final_margin,
+            raw_policy,
+            teacher_policy_tv,
+            teacher_policy_kl,
+            teacher_argmax_changed,
+            teacher_search_value_delta,
         ) in pending
     )
     return SelfPlayGame(game_index, seed, state, outcome, samples)
