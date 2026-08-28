@@ -36,6 +36,7 @@ class FullGumbelTargetConfig:
     train_shard: Path
     validation_shard: Path
     teacher_qualification_result: Path
+    reference_target_result: Path | None = None
     telemetry_path: Path = Path("artifacts/dashboard/state.json")
     model_sha256: str = "5a094285413d52e663441926afe09aa6efda3aa5e5ec195919b54c159d830eca"
     train_positions: int = 384
@@ -45,6 +46,7 @@ class FullGumbelTargetConfig:
     max_considered_actions: int = 16
     workers: int = 24
     inference_wait_seconds: float = 0.00025
+    fixed_inference_batch_size: int = 24
     seed: int = 2026082879
 
     def __post_init__(self) -> None:
@@ -55,6 +57,7 @@ class FullGumbelTargetConfig:
             self.simulations,
             self.max_considered_actions,
             self.workers,
+            self.fixed_inference_batch_size,
         )
         if any(value <= 0 for value in counts) or self.inference_wait_seconds < 0:
             raise ValueError("Full Gumbel target counts must be positive")
@@ -279,7 +282,9 @@ def run_full_gumbel_targets(config: FullGumbelTargetConfig) -> Path:
     )
     network.load_weights(str(config.model_path))
     batcher = SharedBatchEvaluator(
-        MLXPolicyValueBackend(network),
+        MLXPolicyValueBackend(
+            network, fixed_batch_size=config.fixed_inference_batch_size
+        ),
         max_batch_size=min(128, config.workers),
         max_wait_seconds=config.inference_wait_seconds,
     )
@@ -351,8 +356,36 @@ def run_full_gumbel_targets(config: FullGumbelTargetConfig) -> Path:
         for first, second in zip(audit_source, audit_repeat, strict=True)
     )
     maximum_delta = max(deltas)
-    passed = maximum_delta <= 1e-12
     elapsed = time.perf_counter() - started
+    reference_equivalence: dict[str, object] | None = None
+    reference_passed = True
+    performance_passed = True
+    if config.reference_target_result is not None:
+        reference = json.loads(config.reference_target_result.read_text(encoding="utf-8"))
+        reference_rows = {
+            partition: {str(row["identity"]): row for row in reference["rows"][partition]}
+            for partition in ("train", "validation")
+        }
+        action_mismatches = 0
+        visit_mismatches = 0
+        for partition, partition_rows in rows.items():
+            for row in partition_rows:
+                original = reference_rows[partition].get(str(row["identity"]))
+                if original is None:
+                    action_mismatches += 1
+                    visit_mismatches += 1
+                    continue
+                action_mismatches += original["selected_action"] != row["selected_action"]
+                visit_mismatches += original["root_visits"] != row["root_visits"]
+        reference_passed = action_mismatches == 0 and visit_mismatches == 0
+        performance_passed = elapsed <= float(reference["elapsed_seconds"])
+        reference_equivalence = {
+            "artifact": str(config.reference_target_result),
+            "selected_action_mismatches": action_mismatches,
+            "root_visit_mismatches": visit_mismatches,
+            "passed": reference_passed,
+        }
+    passed = maximum_delta <= 1e-12 and reference_passed and performance_passed
     result_path = config.output_dir / "result.json"
     config.output_dir.mkdir(parents=True)
     _atomic_json(
@@ -373,6 +406,7 @@ def run_full_gumbel_targets(config: FullGumbelTargetConfig) -> Path:
                         "train_shard",
                         "validation_shard",
                         "teacher_qualification_result",
+                        "reference_target_result",
                         "telemetry_path",
                     )
                 },
@@ -393,7 +427,17 @@ def run_full_gumbel_targets(config: FullGumbelTargetConfig) -> Path:
                 "positions": len(deltas),
                 "maximum_target_delta": maximum_delta,
                 "tolerance": 1e-12,
-                "passed": passed,
+                "passed": maximum_delta <= 1e-12,
+            },
+            "reference_equivalence": reference_equivalence,
+            "performance_gate": {
+                "reference_elapsed_seconds": (
+                    None
+                    if config.reference_target_result is None
+                    else float(reference["elapsed_seconds"])
+                ),
+                "elapsed_seconds": elapsed,
+                "passed": performance_passed,
             },
             "rows": rows,
             "elapsed_seconds": elapsed,
@@ -430,6 +474,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument("--train-shard", type=Path, required=True)
     parser.add_argument("--validation-shard", type=Path, required=True)
     parser.add_argument("--teacher-qualification", type=Path, required=True)
+    parser.add_argument("--reference-target-result", type=Path)
     parser.add_argument("--telemetry", type=Path, default=Path("artifacts/dashboard/state.json"))
     arguments = parser.parse_args(argv)
     result = run_full_gumbel_targets(
@@ -439,6 +484,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             train_shard=arguments.train_shard,
             validation_shard=arguments.validation_shard,
             teacher_qualification_result=arguments.teacher_qualification,
+            reference_target_result=arguments.reference_target_result,
             telemetry_path=arguments.telemetry,
         )
     )
