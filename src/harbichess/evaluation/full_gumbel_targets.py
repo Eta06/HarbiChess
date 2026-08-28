@@ -483,6 +483,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument("--reference-target-result", type=Path)
     parser.add_argument("--telemetry", type=Path, default=Path("artifacts/dashboard/state.json"))
     parser.add_argument("--inference-wait-seconds", type=float, default=0.00025)
+    parser.add_argument("--fixed-inference-batch-size", type=int, default=24)
     arguments = parser.parse_args(argv)
     result = run_full_gumbel_targets(
         FullGumbelTargetConfig(
@@ -494,6 +495,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             reference_target_result=arguments.reference_target_result,
             telemetry_path=arguments.telemetry,
             inference_wait_seconds=arguments.inference_wait_seconds,
+            fixed_inference_batch_size=arguments.fixed_inference_batch_size,
         )
     )
     print(result)
