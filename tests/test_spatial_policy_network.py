@@ -3,7 +3,9 @@ import pytest
 
 from harbichess.backends.mlx_network import HarbiChessNetwork, NetworkConfig
 from harbichess.backends.spatial_policy_network import (
+    HarbiChessRelationalPolicyNetwork,
     HarbiChessSpatialPolicyNetwork,
+    RelationalPolicyAdapter,
     SpatialPolicyAdapter,
 )
 from harbichess.chess.actions import POLICY_SIZE
@@ -37,3 +39,27 @@ def test_spatial_policy_adapter_validates_shape_and_channels() -> None:
     adapter = SpatialPolicyAdapter(16)
     with pytest.raises(ValueError, match="requires"):
         adapter(mx.zeros((1, 64, 16)))
+
+
+def test_relational_policy_adapter_is_compact_and_function_preserving() -> None:
+    mx.random.seed(101)
+    config = NetworkConfig(trunk_channels=16, residual_blocks=2, policy_channels=4)
+    base = HarbiChessNetwork(config)
+    network = HarbiChessRelationalPolicyNetwork.from_base(base)
+    inputs = mx.random.uniform(shape=(2, 8, 8, ENCODER_CHANNELS))
+
+    base_policy, base_wdl = base(inputs)
+    policy, wdl = network(inputs)
+    trunk, _, _ = network.frozen_spatial_features(inputs)
+    residual = network.policy_adapter(trunk)
+    mx.eval(base_policy, base_wdl, policy, wdl, residual)
+
+    assert residual.shape == policy.shape == (2, POLICY_SIZE)
+    assert float(mx.max(mx.abs(policy - base_policy)).item()) == 0.0
+    assert float(mx.max(mx.abs(wdl - base_wdl)).item()) == 0.0
+    assert network.parameter_count - base.parameter_count < 2_000
+
+
+def test_relational_policy_adapter_validates_dimensions() -> None:
+    with pytest.raises(ValueError, match="dimensions"):
+        RelationalPolicyAdapter(16, hidden=0)
