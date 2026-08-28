@@ -37,3 +37,11 @@ def test_batch_benchmark_rejects_duplicate_wait_windows() -> None:
             target_result=Path("target"),
             wait_windows=(0.001, 0.001),
         )
+    with pytest.raises(ValueError, match="shape matrix"):
+        FullGumbelBatchBenchmarkConfig(
+            output_dir=Path("output"),
+            model_path=Path("model"),
+            train_shard=Path("train"),
+            target_result=Path("target"),
+            fixed_batch_sizes=(8, 8),
+        )
