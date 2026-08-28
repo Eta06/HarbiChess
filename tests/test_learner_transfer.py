@@ -12,6 +12,7 @@ def _quality(*, policy: float, value: float, ece: float) -> ModelQualityMetrics:
         samples=100,
         known_value_samples=80,
         teacher_policy_cross_entropy=policy,
+        global_teacher_policy_cross_entropy=8.0,
         teacher_top_action_agreement=0.5,
         value_cross_entropy=value,
         value_accuracy=0.4,
