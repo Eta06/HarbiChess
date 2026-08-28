@@ -118,6 +118,8 @@ class OcakRunConfig:
     replay_coverage_thresholds: ReplayCoverageThresholds = field(
         default_factory=ReplayCoverageThresholds
     )
+    search_root_noise: bool = True
+    selection_dirichlet_fraction: float = 0.0
 
     def __post_init__(self) -> None:
         if not self.run_id or Path(self.run_id).name != self.run_id:
@@ -183,6 +185,10 @@ class OcakRunConfig:
             raise ValueError("teacher oracle workers require an enabled oracle")
         if any(budget <= 0 for budget in self.tactical_gate_budgets):
             raise ValueError("tactical gate budgets must be positive")
+        if not 0.0 <= self.selection_dirichlet_fraction <= 1.0 or (
+            self.search_root_noise and self.selection_dirichlet_fraction > 0
+        ):
+            raise ValueError("search and selection noise configuration is invalid")
         if self.generation_only and self.teacher_qualification_result is None:
             raise ValueError("generation-only replay requires a teacher qualification result")
         if self.root_halving_enabled:
@@ -548,6 +554,8 @@ def run_ocak_sanity(
                     config.maximum_value_logit_adjustment
                 ),
                 root_halving_config=root_halving_config,
+                search_root_noise=config.search_root_noise,
+                selection_dirichlet_fraction=config.selection_dirichlet_fraction,
             ),
             on_game_complete=game_complete,
         )
@@ -1210,6 +1218,8 @@ def _parser() -> argparse.ArgumentParser:
     parser.add_argument("--tactical-gate-budgets", default="64,512")
     parser.add_argument("--generation-only", action="store_true")
     parser.add_argument("--teacher-qualification-result", type=Path)
+    parser.add_argument("--disable-search-root-noise", action="store_true")
+    parser.add_argument("--selection-dirichlet-fraction", type=float, default=0.0)
     return parser
 
 
@@ -1265,6 +1275,8 @@ def main(argv: list[str] | None = None) -> int:
             ),
             generation_only=arguments.generation_only,
             teacher_qualification_result=arguments.teacher_qualification_result,
+            search_root_noise=not arguments.disable_search_root_noise,
+            selection_dirichlet_fraction=arguments.selection_dirichlet_fraction,
         )
     )
     print(json.dumps(asdict(result), indent=2))
