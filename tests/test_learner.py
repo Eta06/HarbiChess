@@ -39,6 +39,28 @@ def test_learner_configuration_rejects_unsafe_values() -> None:
         LearnerConfig(learning_rate=float("nan"))
     with pytest.raises(ValueError, match="positive"):
         LearnerConfig(max_gradient_norm=0)
+    with pytest.raises(ValueError, match="must not exceed one"):
+        LearnerConfig(confident_top_action_margin=1.1)
+
+
+def test_confident_top_action_auxiliary_adds_only_to_policy_loss() -> None:
+    _, game = scripted_game()
+    record = records_from_game(game, run_id="confident-top")[0]
+    teacher_action = record.policy[0][0]
+    confident = replace(record, policy=((teacher_action, 1.0),))
+    batch = build_training_batch((confident,))
+    network = HarbiChessNetwork(NetworkConfig(trunk_channels=8, residual_blocks=1))
+    baseline = MLXLearner(
+        network,
+        config=LearnerConfig(confident_top_action_weight=0.0),
+    ).evaluate_loss(batch)
+    auxiliary = MLXLearner(
+        network,
+        config=LearnerConfig(confident_top_action_weight=1.0),
+    ).evaluate_loss(batch)
+
+    assert auxiliary[1] > baseline[1]
+    assert auxiliary[2] == pytest.approx(baseline[2])
 
 
 def test_gradient_finiteness_is_reduced_in_one_mlx_expression() -> None:
