@@ -50,3 +50,16 @@ def test_policy_improvement_gate_requires_verified_gain_without_collapse() -> No
     assert _gate(failed, _config())["reasons"] == [
         "verified expected-value improvement interval is not positive"
     ]
+
+
+def test_policy_improvement_config_accepts_only_frozen_q_modes() -> None:
+    assert _config().q_mode == "average"
+    with pytest.raises(ValueError, match="configuration"):
+        PolicyImprovementTargetConfig(
+            label_result=Path("labels.json"),
+            dataset_result=Path("dataset.json"),
+            train_shard=Path("train.jsonl.gz"),
+            validation_shard=Path("validation.jsonl.gz"),
+            output_dir=Path("output"),
+            q_mode="optimistic",  # type: ignore[arg-type]
+        )
