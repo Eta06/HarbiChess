@@ -120,6 +120,7 @@ class OcakRunConfig:
     )
     search_root_noise: bool = True
     selection_dirichlet_fraction: float = 0.0
+    separate_clean_target_search: bool = False
 
     def __post_init__(self) -> None:
         if not self.run_id or Path(self.run_id).name != self.run_id:
@@ -189,6 +190,10 @@ class OcakRunConfig:
             self.search_root_noise and self.selection_dirichlet_fraction > 0
         ):
             raise ValueError("search and selection noise configuration is invalid")
+        if self.separate_clean_target_search and (
+            not self.search_root_noise or self.selection_dirichlet_fraction > 0
+        ):
+            raise ValueError("dual search requires noisy behavior and clean target searches")
         if self.generation_only and self.teacher_qualification_result is None:
             raise ValueError("generation-only replay requires a teacher qualification result")
         if self.root_halving_enabled:
@@ -556,6 +561,7 @@ def run_ocak_sanity(
                 root_halving_config=root_halving_config,
                 search_root_noise=config.search_root_noise,
                 selection_dirichlet_fraction=config.selection_dirichlet_fraction,
+                separate_clean_target_search=config.separate_clean_target_search,
             ),
             on_game_complete=game_complete,
         )
@@ -1220,6 +1226,7 @@ def _parser() -> argparse.ArgumentParser:
     parser.add_argument("--teacher-qualification-result", type=Path)
     parser.add_argument("--disable-search-root-noise", action="store_true")
     parser.add_argument("--selection-dirichlet-fraction", type=float, default=0.0)
+    parser.add_argument("--separate-clean-target-search", action="store_true")
     return parser
 
 
@@ -1277,6 +1284,7 @@ def main(argv: list[str] | None = None) -> int:
             teacher_qualification_result=arguments.teacher_qualification_result,
             search_root_noise=not arguments.disable_search_root_noise,
             selection_dirichlet_fraction=arguments.selection_dirichlet_fraction,
+            separate_clean_target_search=arguments.separate_clean_target_search,
         )
     )
     print(json.dumps(asdict(result), indent=2))
