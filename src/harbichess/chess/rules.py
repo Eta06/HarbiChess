@@ -116,12 +116,16 @@ class PythonChessRules:
         return tuple(ChessMove(move.uci()) for move in sorted(board.legal_moves, key=str))
 
     def apply(self, state: ChessState, move: ChessMove) -> ChessState:
+        result = ChessState(root_fen=state.root_fen, moves=(*state.moves, move))
+        cache = self._cache()
+        if result in cache:
+            cache.move_to_end(result)
+            return result
         board = self._cached_board(state).copy(stack=True)
         parsed = chess.Move.from_uci(move.uci)
         if parsed not in board.legal_moves:
             raise IllegalMoveError(f"illegal move: {move.uci}")
         board.push(parsed)
-        result = ChessState(root_fen=state.root_fen, moves=(*state.moves, move))
         self._remember(result, board)
         return result
 
