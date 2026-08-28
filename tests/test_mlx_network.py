@@ -42,3 +42,26 @@ def test_encoded_chess_state_runs_through_network() -> None:
     mx.eval(policy, wdl)
     assert policy.shape == (1, POLICY_SIZE)
     assert wdl.shape == (1, 3)
+
+
+def test_masked_policy_head_matches_selected_full_logits() -> None:
+    mx.random.seed(53)
+    network = HarbiChessNetwork(NetworkConfig(trunk_channels=16, residual_blocks=2))
+    inputs = mx.random.uniform(shape=(2, 8, 8, ENCODER_CHANNELS))
+    actions = mx.array(((0, 17, 900), (5, 42, POLICY_SIZE - 1)), dtype=mx.int32)
+
+    full_policy, full_wdl = network(inputs)
+    masked_policy, masked_wdl = network.masked_policy_value(inputs, actions)
+    expected = mx.take_along_axis(full_policy, actions, axis=1)
+    mx.eval(expected, masked_policy, full_wdl, masked_wdl)
+
+    assert float(mx.max(mx.abs(masked_policy - expected)).item()) < 1e-5
+    assert float(mx.max(mx.abs(masked_wdl - full_wdl)).item()) == 0.0
+
+
+def test_masked_policy_head_rejects_invalid_action_shape() -> None:
+    network = HarbiChessNetwork(NetworkConfig(trunk_channels=8, residual_blocks=1))
+    inputs = mx.zeros((1, 8, 8, ENCODER_CHANNELS))
+
+    with pytest.raises(ValueError, match="masked actions"):
+        network.masked_policy_value(inputs, mx.zeros((1, 0), dtype=mx.int32))
