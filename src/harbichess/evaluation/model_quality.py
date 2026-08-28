@@ -30,6 +30,18 @@ class ModelQualityMetrics:
         return asdict(self)
 
 
+@dataclass(frozen=True, slots=True)
+class PreparedModelQualityChunk:
+    records: tuple[ReplayRecord, ...]
+    inputs: mx.array
+
+
+@dataclass(frozen=True, slots=True)
+class PreparedModelQualityDataset:
+    records: tuple[ReplayRecord, ...]
+    chunks: tuple[PreparedModelQualityChunk, ...]
+
+
 def _expected_score_ece(
     predictions: list[float],
     targets: list[float],
@@ -55,18 +67,43 @@ def _expected_score_ece(
     return error
 
 
+def prepare_model_quality_dataset(
+    records: tuple[ReplayRecord, ...],
+    *,
+    batch_size: int = 256,
+    rules: PythonChessRules | None = None,
+) -> PreparedModelQualityDataset:
+    if not records or batch_size <= 0:
+        raise ValueError("model quality preparation requires records and a batch")
+    engine = rules or PythonChessRules()
+    encoder = BoardEncoder(engine)
+    chunks = []
+    for start in range(0, len(records), batch_size):
+        chunk = records[start : start + batch_size]
+        positions = tuple(encoder.encode(record.state) for record in chunk)
+        shape = positions[0].shape
+        inputs = mx.array([position.values for position in positions], dtype=mx.float32)
+        inputs = inputs.reshape((len(positions), *shape))
+        mx.eval(inputs)
+        chunks.append(PreparedModelQualityChunk(chunk, inputs))
+    return PreparedModelQualityDataset(records, tuple(chunks))
+
+
 def evaluate_model_quality(
     network: HarbiChessNetwork,
-    records: tuple[ReplayRecord, ...],
+    records: tuple[ReplayRecord, ...] | PreparedModelQualityDataset,
     *,
     batch_size: int = 256,
     calibration_bins: int = 10,
     rules: PythonChessRules | None = None,
 ) -> ModelQualityMetrics:
-    if not records or batch_size <= 0 or calibration_bins <= 1:
-        raise ValueError("model quality requires records, a batch, and calibration bins")
-    engine = rules or PythonChessRules()
-    encoder = BoardEncoder(engine)
+    if calibration_bins <= 1:
+        raise ValueError("model quality requires at least two calibration bins")
+    prepared = (
+        records
+        if isinstance(records, PreparedModelQualityDataset)
+        else prepare_model_quality_dataset(records, batch_size=batch_size, rules=rules)
+    )
     policy_losses = []
     global_policy_losses = []
     top_action_matches = []
@@ -75,13 +112,9 @@ def evaluate_model_quality(
     expected_scores = []
     score_targets = []
 
-    for start in range(0, len(records), batch_size):
-        chunk = records[start : start + batch_size]
-        positions = tuple(encoder.encode(record.state) for record in chunk)
-        shape = positions[0].shape
-        inputs = mx.array([position.values for position in positions], dtype=mx.float32)
-        inputs = inputs.reshape((len(positions), *shape))
-        policy_logits, wdl_logits = network(inputs)
+    for prepared_chunk in prepared.chunks:
+        chunk = prepared_chunk.records
+        policy_logits, wdl_logits = network(prepared_chunk.inputs)
         policy_log_probs = policy_logits - mx.logsumexp(policy_logits, axis=1, keepdims=True)
         wdl_log_probs = wdl_logits - mx.logsumexp(wdl_logits, axis=1, keepdims=True)
         wdl_probs = mx.softmax(wdl_logits, axis=1)
@@ -110,8 +143,7 @@ def evaluate_model_quality(
             )
             policy_losses.append(
                 -sum(
-                    probability
-                    * (policy_logits_rows[index][action] - legal_log_normalizer)
+                    probability * (policy_logits_rows[index][action] - legal_log_normalizer)
                     for action, probability in record.policy
                 )
             )
@@ -131,7 +163,7 @@ def evaluate_model_quality(
             score_targets.append((record.outcome_value + 1.0) / 2.0)
 
     return ModelQualityMetrics(
-        samples=len(records),
+        samples=len(prepared.records),
         known_value_samples=len(value_losses),
         teacher_policy_cross_entropy=mean(policy_losses),
         global_teacher_policy_cross_entropy=mean(global_policy_losses),
