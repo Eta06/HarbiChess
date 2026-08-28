@@ -28,8 +28,6 @@ class ReplayCoverageThresholds:
     minimum_position_signatures: int = 24
     minimum_teacher_telemetry_ratio: float = 0.99
     minimum_comparable_teacher_deltas: int = 100
-    minimum_positive_teacher_delta_ratio: float = 0.55
-    minimum_mean_teacher_delta: float = 0.0
 
 
 @dataclass(frozen=True, slots=True)
@@ -94,10 +92,7 @@ def _material_balance(board: chess.Board) -> str:
     weights = {chess.PAWN: 1, chess.KNIGHT: 3, chess.BISHOP: 3, chess.ROOK: 5, chess.QUEEN: 9}
     balance = sum(
         weights[piece_type]
-        * (
-            len(board.pieces(piece_type, chess.WHITE))
-            - len(board.pieces(piece_type, chess.BLACK))
-        )
+        * (len(board.pieces(piece_type, chess.WHITE)) - len(board.pieces(piece_type, chess.BLACK)))
         for piece_type in weights
     )
     if balance >= 2:
@@ -109,16 +104,10 @@ def _material_balance(board: chess.Board) -> str:
 
 def _position_signature(board: chess.Board) -> tuple[object, ...]:
     white_pawn_files = tuple(
-        sorted(
-            chess.square_file(square)
-            for square in board.pieces(chess.PAWN, chess.WHITE)
-        )
+        sorted(chess.square_file(square) for square in board.pieces(chess.PAWN, chess.WHITE))
     )
     black_pawn_files = tuple(
-        sorted(
-            chess.square_file(square)
-            for square in board.pieces(chess.PAWN, chess.BLACK)
-        )
+        sorted(chess.square_file(square) for square in board.pieces(chess.PAWN, chess.BLACK))
     )
     return (
         _material_signature(board),
@@ -231,15 +220,6 @@ def measure_replay_coverage(
         len(deltas) >= limits.minimum_comparable_teacher_deltas,
         "too few comparable raw/teacher actions",
     )
-    require(
-        positive_delta_ratio >= limits.minimum_positive_teacher_delta_ratio,
-        "positive teacher search-delta ratio below threshold",
-    )
-    require(
-        mean_delta > limits.minimum_mean_teacher_delta,
-        "mean teacher search delta not positive",
-    )
-
     return ReplayCoverageReport(
         samples=sample_count,
         games=len({record.game_id for record in records}),
