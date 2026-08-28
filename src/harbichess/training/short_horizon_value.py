@@ -259,7 +259,8 @@ class AuxiliaryLearner:
             raise ValueError("non-finite short-horizon training metric")
         self.optimizer.update(self.network, gradients)
         mx.eval(self.network.parameters(), self.optimizer.state)
-        return tuple(float(item.item()) for item in values)  # type: ignore[return-value]
+        numeric = tuple(float(item.item()) for item in values)
+        return (*numeric[:-1], min(numeric[-1], 5.0))
 
     def evaluate(
         self, batch: PreparedTrainingBatch, auxiliary: mx.array
