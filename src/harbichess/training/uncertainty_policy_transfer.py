@@ -594,6 +594,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument("--validation-shard", required=True, type=Path)
     parser.add_argument("--output-dir", required=True, type=Path)
     parser.add_argument("--telemetry", type=Path, default=Path("artifacts/dashboard/state.json"))
+    parser.add_argument("--seed", type=int, default=2026082833)
     arguments = parser.parse_args(argv)
     path = run_uncertainty_policy_transfer(
         UncertaintyPolicyTransferConfig(
@@ -604,6 +605,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             validation_shard=arguments.validation_shard,
             output_dir=arguments.output_dir,
             telemetry_path=arguments.telemetry,
+            seed=arguments.seed,
         )
     )
     print(path)
