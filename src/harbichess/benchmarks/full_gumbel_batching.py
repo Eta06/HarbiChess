@@ -35,20 +35,28 @@ class FullGumbelBatchBenchmarkConfig:
     positions: int = 48
     simulations: int = 64
     workers: int = 24
-    fixed_batch_size: int = 24
-    wait_windows: tuple[float, ...] = (0.00025, 0.0005, 0.001, 0.002)
+    fixed_batch_sizes: tuple[int, ...] = (24, 4, 8, 12, 16)
+    wait_windows: tuple[float, ...] = (0.00025,)
     repeats: int = 2
     seed: int = 2026082879
 
     def __post_init__(self) -> None:
-        if min(
-            self.positions,
-            self.simulations,
-            self.workers,
-            self.fixed_batch_size,
-            self.repeats,
-        ) <= 0:
+        if (
+            min(
+                self.positions,
+                self.simulations,
+                self.workers,
+                self.repeats,
+            )
+            <= 0
+        ):
             raise ValueError("Full Gumbel benchmark counts must be positive")
+        if (
+            not self.fixed_batch_sizes
+            or len(set(self.fixed_batch_sizes)) != len(self.fixed_batch_sizes)
+            or any(size <= 0 for size in self.fixed_batch_sizes)
+        ):
+            raise ValueError("fixed batch shape matrix must be unique and positive")
         if (
             not self.wait_windows
             or len(set(self.wait_windows)) != len(self.wait_windows)
@@ -95,20 +103,36 @@ def _compare(
     }
 
 
+def _decision_compare(
+    reference: tuple[dict[str, object], ...],
+    candidate: tuple[dict[str, object], ...],
+) -> dict[str, object]:
+    action_mismatches = sum(
+        first["selected_action"] != second["selected_action"]
+        for first, second in zip(reference, candidate, strict=True)
+    )
+    visit_mismatches = sum(
+        first["root_visits"] != second["root_visits"]
+        for first, second in zip(reference, candidate, strict=True)
+    )
+    return {
+        "selected_action_mismatches": action_mismatches,
+        "root_visit_mismatches": visit_mismatches,
+        "passed": action_mismatches == 0 and visit_mismatches == 0,
+    }
+
+
 def run_full_gumbel_batch_benchmark(config: FullGumbelBatchBenchmarkConfig) -> Path:
     if config.output_dir.exists():
         raise FileExistsError(f"Full Gumbel benchmark output exists: {config.output_dir}")
     target = json.loads(config.target_result.read_text(encoding="utf-8"))
-    identities = tuple(
-        str(row["identity"]) for row in target["rows"]["train"][: config.positions]
-    )
+    identities = tuple(str(row["identity"]) for row in target["rows"]["train"][: config.positions])
     if len(identities) != config.positions:
         raise ValueError("target artifact has insufficient benchmark positions")
     rules = PythonChessRules()
     shard = read_shard(config.train_shard, rules=rules)
     records_by_identity = {
-        f"{record.game_id}:{record.game_index}:{record.ply}": record
-        for record in shard.records
+        f"{record.game_id}:{record.game_index}:{record.ply}": record for record in shard.records
     }
     records = tuple(records_by_identity[identity] for identity in identities)
     store = SnapshotStore(config.telemetry_path)
@@ -123,75 +147,78 @@ def run_full_gumbel_batch_benchmark(config: FullGumbelBatchBenchmarkConfig) -> P
     arms = []
     reference: tuple[dict[str, object], ...] | None = None
     benchmark_started = time.perf_counter()
-    for wait in config.wait_windows:
-        batcher = SharedBatchEvaluator(
-            MLXPolicyValueBackend(
-                _network(config.model_path), fixed_batch_size=config.fixed_batch_size
-            ),
-            max_batch_size=config.fixed_batch_size,
-            max_wait_seconds=wait,
-        )
-        search = FullGumbelMCTS(
-            NeuralPositionEvaluator(batcher, rules=rules),
-            rules=rules,
-            config=FullGumbelConfig(
-                simulations=config.simulations,
-                max_considered_actions=16,
-                gumbel_scale=0.0,
-            ),
-        )
-
-        def evaluate(record, current_search=search):
-            return _target_row(record, current_search, seed=config.seed, rules=rules)
-
-        with ThreadPoolExecutor(max_workers=min(config.workers, len(records))) as pool:
-            tuple(pool.map(evaluate, records[: min(4, len(records))]))
-        batcher.reset_statistics()
-        repeat_rows = []
-        repeat_metrics = []
-        try:
-            for repeat in range(config.repeats):
-                started = time.perf_counter()
-                with ThreadPoolExecutor(
-                    max_workers=min(config.workers, len(records))
-                ) as pool:
-                    rows = tuple(pool.map(evaluate, records))
-                elapsed = time.perf_counter() - started
-                stats = batcher.reset_statistics()
-                repeat_rows.append(rows)
-                repeat_metrics.append(
-                    {
-                        "repeat": repeat,
-                        "elapsed_seconds": elapsed,
-                        "positions_per_second": stats.positions / max(elapsed, 1e-9),
-                        "average_batch_size": stats.average_batch_size,
-                        "largest_batch": stats.largest_batch,
-                        "backend_seconds": stats.backend_seconds,
-                        "queue_wait_seconds": stats.queue_wait_seconds,
-                    }
-                )
-        finally:
-            batcher.close()
-        if reference is None:
-            reference = repeat_rows[0]
-        equivalence = tuple(_compare(reference, rows) for rows in repeat_rows)
-        arms.append(
-            {
-                "wait_seconds": wait,
-                "repeats": repeat_metrics,
-                "median_elapsed_seconds": statistics.median(
-                    row["elapsed_seconds"] for row in repeat_metrics
+    for fixed_batch_size in config.fixed_batch_sizes:
+        for wait in config.wait_windows:
+            batcher = SharedBatchEvaluator(
+                MLXPolicyValueBackend(
+                    _network(config.model_path), fixed_batch_size=fixed_batch_size
                 ),
-                "equivalence": equivalence,
-                "passed": all(row["passed"] for row in equivalence),
-            }
-        )
-        snapshot = replace(
-            snapshot,
-            updated_at=datetime.now(UTC).isoformat(),
-            mode_detail=f"AKTAR fixed-batch benchmark · wait {wait:g} complete",
-        )
-        store.write_atomic(snapshot)
+                max_batch_size=fixed_batch_size,
+                max_wait_seconds=wait,
+            )
+            search = FullGumbelMCTS(
+                NeuralPositionEvaluator(batcher, rules=rules),
+                rules=rules,
+                config=FullGumbelConfig(
+                    simulations=config.simulations,
+                    max_considered_actions=16,
+                    gumbel_scale=0.0,
+                ),
+            )
+
+            def evaluate(record, current_search=search):
+                return _target_row(record, current_search, seed=config.seed, rules=rules)
+
+            with ThreadPoolExecutor(max_workers=min(config.workers, len(records))) as pool:
+                tuple(pool.map(evaluate, records[: min(4, len(records))]))
+            batcher.reset_statistics()
+            repeat_rows = []
+            repeat_metrics = []
+            try:
+                for repeat in range(config.repeats):
+                    started = time.perf_counter()
+                    with ThreadPoolExecutor(max_workers=min(config.workers, len(records))) as pool:
+                        rows = tuple(pool.map(evaluate, records))
+                    elapsed = time.perf_counter() - started
+                    stats = batcher.reset_statistics()
+                    repeat_rows.append(rows)
+                    repeat_metrics.append(
+                        {
+                            "repeat": repeat,
+                            "elapsed_seconds": elapsed,
+                            "positions_per_second": stats.positions / max(elapsed, 1e-9),
+                            "average_batch_size": stats.average_batch_size,
+                            "largest_batch": stats.largest_batch,
+                            "backend_seconds": stats.backend_seconds,
+                            "queue_wait_seconds": stats.queue_wait_seconds,
+                        }
+                    )
+            finally:
+                batcher.close()
+            if reference is None:
+                reference = repeat_rows[0]
+            equivalence = tuple(_compare(repeat_rows[0], rows) for rows in repeat_rows)
+            decision_equivalence = _decision_compare(reference, repeat_rows[0])
+            arms.append(
+                {
+                    "fixed_batch_size": fixed_batch_size,
+                    "wait_seconds": wait,
+                    "repeats": repeat_metrics,
+                    "median_elapsed_seconds": statistics.median(
+                        row["elapsed_seconds"] for row in repeat_metrics
+                    ),
+                    "equivalence": equivalence,
+                    "reference_decision_equivalence": decision_equivalence,
+                    "passed": all(row["passed"] for row in equivalence)
+                    and decision_equivalence["passed"],
+                }
+            )
+            snapshot = replace(
+                snapshot,
+                updated_at=datetime.now(UTC).isoformat(),
+                mode_detail=(f"AKTAR fixed-batch benchmark · shape {fixed_batch_size} complete"),
+            )
+            store.write_atomic(snapshot)
     eligible = [arm for arm in arms if arm["passed"]]
     selected = min(eligible, key=lambda arm: arm["median_elapsed_seconds"]) if eligible else None
     config.output_dir.mkdir(parents=True)
@@ -218,6 +245,9 @@ def run_full_gumbel_batch_benchmark(config: FullGumbelBatchBenchmarkConfig) -> P
             },
             "arms": arms,
             "selected_wait_seconds": None if selected is None else selected["wait_seconds"],
+            "selected_fixed_batch_size": (
+                None if selected is None else selected["fixed_batch_size"]
+            ),
             "passed": selected is not None,
             "elapsed_seconds": time.perf_counter() - benchmark_started,
         },
@@ -227,7 +257,7 @@ def run_full_gumbel_batch_benchmark(config: FullGumbelBatchBenchmarkConfig) -> P
         updated_at=datetime.now(UTC).isoformat(),
         mode=RunMode.IDLE,
         mode_detail=(
-            f"AKTAR batch benchmark passed · wait {selected['wait_seconds']:g}"
+            f"AKTAR batch benchmark passed · shape {selected['fixed_batch_size']}"
             if selected is not None
             else "AKTAR batch benchmark failed equivalence"
         ),
