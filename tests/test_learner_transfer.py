@@ -1,3 +1,4 @@
+import json
 from pathlib import Path
 
 import pytest
@@ -6,6 +7,7 @@ from harbichess.evaluation.model_quality import ModelQualityMetrics
 from harbichess.training.learner_transfer import (
     LearnerTransferConfig,
     _candidate_reasons,
+    _config_payload,
     _select_validation_snapshots,
     _validate_replay_alignment,
 )
@@ -83,3 +85,17 @@ def test_transfer_requires_matching_passed_replay_alignment() -> None:
             {"gate": {"passed": False}, "config": {"run_result": str(replay)}},
             replay_run_result=replay,
         )
+
+
+def test_transfer_config_payload_serializes_alignment_path() -> None:
+    config = LearnerTransferConfig(
+        replay_run_result=Path("replay.json"),
+        teacher_audit_result=Path("teacher.json"),
+        replay_alignment_result=Path("alignment.json"),
+        output_dir=Path("output"),
+    )
+
+    payload = _config_payload(config)
+
+    assert payload["replay_alignment_result"] == "alignment.json"
+    json.dumps(payload)
