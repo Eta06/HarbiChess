@@ -51,6 +51,27 @@ def test_self_play_game_converts_to_legal_versioned_records() -> None:
     assert ReplayRecord.from_dict(records[2].to_dict()) == records[2]
 
 
+def test_replay_record_round_trips_teacher_policy_evidence() -> None:
+    rules, game = scripted_game()
+    record = records_from_game(game, run_id="pilot", rules=rules)[0]
+    evidenced = replace(
+        record,
+        raw_policy=record.policy,
+        teacher_policy_tv=0.0,
+        teacher_policy_kl=0.0,
+        teacher_argmax_changed=False,
+        teacher_search_value_delta=0.0,
+    )
+
+    assert ReplayRecord.from_dict(evidenced.to_dict()) == evidenced
+    evidenced.validate_rules(rules)
+
+    invalid = evidenced.to_dict()
+    invalid["teacher_policy_tv"] = 1.1
+    with pytest.raises(ValueError, match="outside"):
+        ReplayRecord.from_dict(invalid)
+
+
 def test_replay_record_rejects_invalid_targets() -> None:
     _, game = scripted_game()
     record = records_from_game(game, run_id="pilot")[0]
