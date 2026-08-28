@@ -289,7 +289,7 @@ def run_full_gumbel_targets(config: FullGumbelTargetConfig) -> Path:
         MLXPolicyValueBackend(
             network, fixed_batch_size=config.fixed_inference_batch_size
         ),
-        max_batch_size=min(128, config.workers),
+        max_batch_size=min(config.fixed_inference_batch_size, config.workers),
         max_wait_seconds=config.inference_wait_seconds,
     )
     evaluator = NeuralPositionEvaluator(batcher, rules=rules)
