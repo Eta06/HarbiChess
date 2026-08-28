@@ -26,6 +26,7 @@ class PolicyImprovementTargetConfig:
     train_shard: Path
     validation_shard: Path
     output_dir: Path
+    pair_teacher_result: Path | None = None
     maximum_kl: float = 0.10
     harmful_delta: float = -0.025
     maximum_harmful_ratio: float = 0.10
@@ -236,8 +237,18 @@ def run_policy_improvement_target(config: PolicyImprovementTargetConfig) -> Path
         raise FileExistsError(f"policy improvement output exists: {config.output_dir}")
     labels = json.loads(config.label_result.read_text(encoding="utf-8"))
     dataset = json.loads(config.dataset_result.read_text(encoding="utf-8"))
-    if not labels.get("gate", {}).get("passed"):
-        raise ValueError("policy improvement requires qualified uncertainty labels")
+    pair_teacher = None
+    if config.pair_teacher_result is not None:
+        pair_teacher = json.loads(config.pair_teacher_result.read_text(encoding="utf-8"))
+        pair_config = pair_teacher.get("config", {})
+        if (
+            not pair_teacher.get("gate", {}).get("policy_target_authorized")
+            or Path(str(pair_config.get("dataset_result", ""))) != config.dataset_result
+            or Path(str(pair_config.get("label_result", ""))) != config.label_result
+        ):
+            raise ValueError("policy improvement pairwise teacher is absent or mismatched")
+    if not labels.get("gate", {}).get("passed") and pair_teacher is None:
+        raise ValueError("policy improvement requires a qualified uncertainty teacher")
     rules = PythonChessRules()
     records = {
         "train": _record_index(read_shard(config.train_shard, rules=rules).records),
@@ -287,6 +298,11 @@ def run_policy_improvement_target(config: PolicyImprovementTargetConfig) -> Path
                 "train_shard": str(config.train_shard),
                 "validation_shard": str(config.validation_shard),
                 "output_dir": str(config.output_dir),
+                "pair_teacher_result": (
+                    str(config.pair_teacher_result)
+                    if config.pair_teacher_result is not None
+                    else None
+                ),
             },
             "summaries": summaries,
             "gate": {
@@ -309,9 +325,11 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument("--train-shard", required=True, type=Path)
     parser.add_argument("--validation-shard", required=True, type=Path)
     parser.add_argument("--output-dir", required=True, type=Path)
+    parser.add_argument("--pair-teacher-result", type=Path)
     parser.add_argument(
         "--q-mode", choices=("average", "conservative"), default="average"
     )
+    parser.add_argument("--seed", type=int, default=2026082837)
     arguments = parser.parse_args(argv)
     path = run_policy_improvement_target(
         PolicyImprovementTargetConfig(
@@ -320,7 +338,9 @@ def main(argv: Sequence[str] | None = None) -> int:
             train_shard=arguments.train_shard,
             validation_shard=arguments.validation_shard,
             output_dir=arguments.output_dir,
+            pair_teacher_result=arguments.pair_teacher_result,
             q_mode=arguments.q_mode,
+            seed=arguments.seed,
         )
     )
     print(path)
