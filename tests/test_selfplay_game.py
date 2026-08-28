@@ -1,3 +1,4 @@
+import math
 import random
 
 import pytest
@@ -45,6 +46,43 @@ def test_self_play_game_records_policy_and_final_values() -> None:
     assert [sample.selected_move for sample in game.samples] == list(ScriptedSearch.moves)
     assert [sample.outcome_value for sample in game.samples] == [-1, 1, -1, 1]
     assert all(sum(value for _, value in sample.visit_policy) == 1 for sample in game.samples)
+
+
+def test_self_play_records_clean_prior_to_teacher_policy_telemetry() -> None:
+    rules = PythonChessRules()
+    first = ChessMove("e2e4")
+    second = ChessMove("d2d4")
+
+    class TeacherSearch:
+        def search(self, state, *, rng: random.Random, add_root_noise: bool):
+            del state, rng, add_root_noise
+            return SearchResult(
+                (
+                    MoveStatistics(first, 2, 0.7, 0.10),
+                    MoveStatistics(second, 8, 0.3, 0.35),
+                ),
+                0.2,
+                10,
+                network_priors=((first, 0.7), (second, 0.3)),
+            )
+
+    game = play_game(
+        TeacherSearch(),
+        rules,
+        rules.initial_state(),
+        game_index=0,
+        seed=1,
+        config=SelfPlayConfig(max_plies=1, temperature=0.0),
+    )
+    sample = game.samples[0]
+
+    assert sample.raw_policy == ((second, 0.3), (first, 0.7))
+    assert sample.teacher_argmax_changed
+    assert sample.teacher_policy_tv == pytest.approx(0.5)
+    assert sample.teacher_policy_kl == pytest.approx(
+        0.2 * math.log(0.2 / 0.7) + 0.8 * math.log(0.8 / 0.3)
+    )
+    assert sample.teacher_search_value_delta == pytest.approx(0.25)
 
 
 def test_parallel_games_receive_reproducible_unique_seeds() -> None:
