@@ -9,6 +9,7 @@ from harbichess.chess.actions import POLICY_SIZE, move_to_action
 from harbichess.training.uncertainty_policy_transfer import (
     LowRankPolicyAdapter,
     UncertaintyPolicyTransferConfig,
+    _dense_explicit_target,
     _dense_target,
 )
 
@@ -60,6 +61,19 @@ def test_low_rank_adapter_is_function_preserving_and_mergeable() -> None:
 
     assert float(mx.max(mx.abs(adapted - base_logits)).item()) == 0.0
     assert float(mx.max(mx.abs(merged - base_logits)).item()) == 0.0
+
+
+def test_explicit_policy_target_maps_uci_probabilities() -> None:
+    board = chess.Board()
+    target, legal_mask, teacher, _legal = _dense_explicit_target(
+        board, (("e2e4", 0.6), ("d2d4", 0.4))
+    )
+    e4 = move_to_action(board, chess.Move.from_uci("e2e4"))
+    d4 = move_to_action(board, chess.Move.from_uci("d2d4"))
+    assert target[e4] == pytest.approx(0.6)
+    assert target[d4] == pytest.approx(0.4)
+    assert legal_mask[e4] and legal_mask[d4]
+    assert teacher == {e4: 0.6, d4: 0.4}
 
 
 def test_uncertainty_policy_config_rejects_unfrozen_checkpoints() -> None:
