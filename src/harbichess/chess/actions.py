@@ -96,3 +96,28 @@ def action_to_legal_move(board: chess.Board, action: int) -> chess.Move:
     if len(matches) != 1:
         raise ValueError(f"action {action} does not identify exactly one legal move")
     return matches[0]
+
+
+def action_destination_square(action: int) -> chess.Square | None:
+    """Return the canonical destination square encoded by an action index."""
+
+    if not 0 <= action < POLICY_SIZE:
+        raise ValueError(f"policy action is out of range: {action}")
+    origin, plane = divmod(action, POLICY_PLANES)
+    origin_file = chess.square_file(origin)
+    origin_rank = chess.square_rank(origin)
+    if plane < 56:
+        file_step, rank_step = _RAY_DIRECTIONS[plane // 7]
+        distance = plane % 7 + 1
+        target_file = origin_file + file_step * distance
+        target_rank = origin_rank + rank_step * distance
+    elif plane < 64:
+        file_step, rank_step = _KNIGHT_DELTAS[plane - 56]
+        target_file = origin_file + file_step
+        target_rank = origin_rank + rank_step
+    else:
+        target_file = origin_file + (plane - 64) % 3 - 1
+        target_rank = origin_rank + 1
+    if not 0 <= target_file < 8 or not 0 <= target_rank < 8:
+        return None
+    return chess.square(target_file, target_rank)
