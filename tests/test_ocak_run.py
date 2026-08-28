@@ -119,6 +119,8 @@ def test_ocak_run_configuration_rejects_unsafe_run_id() -> None:
         OcakRunConfig(run_id="orphan-workers", teacher_oracle_workers=1)
     with pytest.raises(ValueError, match="qualification"):
         OcakRunConfig(run_id="ungated-generation", generation_only=True)
+    with pytest.raises(ValueError, match="noise configuration"):
+        OcakRunConfig(run_id="double-noise", selection_dirichlet_fraction=0.25)
 
 
 def test_generation_only_run_writes_replay_without_starting_learner(tmp_path: Path) -> None:
