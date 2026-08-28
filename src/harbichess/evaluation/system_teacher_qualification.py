@@ -47,6 +47,8 @@ class SystemTeacherConfig:
     seed: int = 2026082867
     inference_wait_seconds: float = 0.00025
     bootstrap_samples: int = 50_000
+    root_fpu_reduction: float = 0.0
+    fpu_reduction: float = 0.0
 
     def __post_init__(self) -> None:
         counts = (
@@ -60,7 +62,12 @@ class SystemTeacherConfig:
             raise ValueError("system teacher counts must be positive")
         if tuple(sorted(set(self.budgets))) != self.budgets:
             raise ValueError("system teacher budgets must be unique and increasing")
-        if self.seed < 0 or self.inference_wait_seconds < 0:
+        if (
+            self.seed < 0
+            or self.inference_wait_seconds < 0
+            or self.root_fpu_reduction < 0
+            or self.fpu_reduction < 0
+        ):
             raise ValueError("system teacher seed and wait must be non-negative")
 
 
@@ -307,7 +314,12 @@ def run_system_teacher_qualification(config: SystemTeacherConfig) -> Path:
         budget: MCTS(
             evaluator,
             rules=rules,
-            config=SearchConfig(simulations=budget, dirichlet_fraction=0.0),
+            config=SearchConfig(
+                simulations=budget,
+                dirichlet_fraction=0.0,
+                root_fpu_reduction=config.root_fpu_reduction,
+                fpu_reduction=config.fpu_reduction,
+            ),
         )
         for budget in config.budgets
     }
@@ -332,6 +344,8 @@ def run_system_teacher_qualification(config: SystemTeacherConfig) -> Path:
         budgets=config.budgets,
         workers=min(config.workers, 8),
         seed=config.seed,
+        root_fpu_reduction=config.root_fpu_reduction,
+        fpu_reduction=config.fpu_reduction,
     )
 
     def run_arm(candidate: RawPolicy | MCTS | None, label: str) -> tuple[QualificationGame, ...]:
@@ -449,6 +463,8 @@ def _parser() -> argparse.ArgumentParser:
     parser.add_argument("--telemetry", type=Path, default=Path("artifacts/dashboard/state.json"))
     parser.add_argument("--opening-pairs", type=int, default=32)
     parser.add_argument("--workers", type=int, default=24)
+    parser.add_argument("--root-fpu-reduction", type=float, default=0.0)
+    parser.add_argument("--fpu-reduction", type=float, default=0.0)
     return parser
 
 
@@ -461,6 +477,8 @@ def main(argv: list[str] | None = None) -> int:
             telemetry_path=arguments.telemetry,
             opening_pairs=arguments.opening_pairs,
             workers=arguments.workers,
+            root_fpu_reduction=arguments.root_fpu_reduction,
+            fpu_reduction=arguments.fpu_reduction,
         )
     )
     print(result)
