@@ -44,6 +44,7 @@ class LearnerTransferConfig:
     replay_run_result: Path
     teacher_audit_result: Path
     output_dir: Path
+    replay_alignment_result: Path | None = None
     telemetry_path: Path = Path("artifacts/dashboard/state.json")
     steps: int = 200
     batch_size: int = 64
@@ -202,11 +203,19 @@ def _select_validation_snapshots(
         raise ValueError("maximum validation snapshots must be positive")
     if len(snapshots) <= maximum:
         return tuple(snapshots)
-    indices = tuple(
-        round(index * (len(snapshots) - 1) / (maximum - 1))
-        for index in range(maximum)
-    )
+    indices = tuple(round(index * (len(snapshots) - 1) / (maximum - 1)) for index in range(maximum))
     return tuple(snapshots[index] for index in indices)
+
+
+def _validate_replay_alignment(alignment: dict[str, object], *, replay_run_result: Path) -> None:
+    gate = alignment.get("gate", {})
+    if not isinstance(gate, dict) or not gate.get("passed"):
+        raise ValueError("learner transfer requires a passed fresh replay alignment audit")
+    config = alignment.get("config", {})
+    if not isinstance(config, dict) or Path(str(config.get("run_result", ""))) != (
+        replay_run_result
+    ):
+        raise ValueError("replay alignment audit does not match the learner replay")
 
 
 def run_learner_transfer(config: LearnerTransferConfig) -> Path:
@@ -214,12 +223,19 @@ def run_learner_transfer(config: LearnerTransferConfig) -> Path:
         raise FileExistsError(f"learner transfer output already exists: {config.output_dir}")
     replay_result = json.loads(config.replay_run_result.read_text(encoding="utf-8"))
     teacher_audit = json.loads(config.teacher_audit_result.read_text(encoding="utf-8"))
+    if config.replay_alignment_result is None:
+        raise ValueError("learner transfer requires a fresh replay alignment artifact")
+    replay_alignment = json.loads(config.replay_alignment_result.read_text(encoding="utf-8"))
     if replay_result.get("mode") != "generation_only" or not replay_result.get("passed"):
         raise ValueError("learner transfer requires a qualified generation-only replay")
     if 64 not in teacher_audit.get("gate", {}).get("qualified_oracle_budgets", []):
         raise ValueError("learner transfer requires the fresh 64-simulation teacher audit")
     if not teacher_audit.get("gate", {}).get("bootstrap_teacher_qualified"):
         raise ValueError("fresh teacher audit did not pass its tactical/strength gate")
+    _validate_replay_alignment(
+        replay_alignment,
+        replay_run_result=config.replay_run_result,
+    )
 
     train_path = config.replay_run_result.parent / "replay" / "train-00000.jsonl.gz"
     validation_path = config.replay_run_result.parent / "replay" / "validation-00000.jsonl.gz"
@@ -436,9 +452,7 @@ def run_learner_transfer(config: LearnerTransferConfig) -> Path:
             else "No validation checkpoint preserved policy, value, calibration, and tactics"
         ),
         pilot_reasons=() if checkpoint else all_reasons,
-        candidate_checkpoint=(
-            f"candidate-step-{checkpoint['step']:06d}" if checkpoint else "None"
-        ),
+        candidate_checkpoint=(f"candidate-step-{checkpoint['step']:06d}" if checkpoint else "None"),
         checkpoint_status=CheckpointStatus.VERIFIED if checkpoint else CheckpointStatus.NONE,
         checkpoint_path=checkpoint["path"] if checkpoint else "",
         checkpoint_verified=checkpoint is not None,
@@ -452,8 +466,10 @@ def _parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--replay-run-result", required=True, type=Path)
     parser.add_argument("--teacher-audit-result", required=True, type=Path)
+    parser.add_argument("--replay-alignment-result", required=True, type=Path)
     parser.add_argument("--output-dir", required=True, type=Path)
     parser.add_argument("--telemetry", type=Path, default=Path("artifacts/dashboard/state.json"))
+    parser.add_argument("--seed", type=int, default=2026082803)
     return parser
 
 
@@ -463,8 +479,10 @@ def main(argv: Sequence[str] | None = None) -> int:
         LearnerTransferConfig(
             replay_run_result=arguments.replay_run_result,
             teacher_audit_result=arguments.teacher_audit_result,
+            replay_alignment_result=arguments.replay_alignment_result,
             output_dir=arguments.output_dir,
             telemetry_path=arguments.telemetry,
+            seed=arguments.seed,
         )
     )
     print(path)
