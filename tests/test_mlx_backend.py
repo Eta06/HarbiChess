@@ -77,3 +77,26 @@ def test_compiled_mlx_backend_runs_on_inference_worker_thread() -> None:
 
     assert len(first[0].policy_logits) == 4_672
     assert len(second[0].wdl_logits) == 3
+
+
+def test_fixed_mlx_batch_padding_preserves_outputs_across_request_sizes() -> None:
+    rules = PythonChessRules()
+    encoder = BoardEncoder(rules)
+    first = encoder.encode(rules.initial_state())
+    second_state = rules.apply(rules.initial_state(), rules.legal_moves(rules.initial_state())[0])
+    second = encoder.encode(second_state)
+    backend = MLXPolicyValueBackend(
+        HarbiChessNetwork(NetworkConfig(trunk_channels=8, residual_blocks=1)),
+        compiled=False,
+        dtype=mx.float32,
+        fixed_batch_size=4,
+    )
+
+    alone = backend.evaluate([first])[0]
+    together = backend.evaluate([first, second])[0]
+
+    assert alone == together
+    with pytest.raises(ValueError, match="exceeds"):
+        backend.evaluate([first] * 5)
+    with pytest.raises(ValueError, match="positive"):
+        MLXPolicyValueBackend(fixed_batch_size=0)
