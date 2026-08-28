@@ -1,15 +1,18 @@
+import hashlib
 import json
 from dataclasses import replace
 from pathlib import Path
 
 import pytest
 
+from harbichess.backends.mlx_network import HarbiChessNetwork, NetworkConfig
 from harbichess.dashboard.state import (
     CheckpointStatus,
     PilotStatus,
     SnapshotStore,
     empty_snapshot,
 )
+from harbichess.replay.coverage import ReplayCoverageThresholds
 from harbichess.replay.split import ReplaySplit, split_for_game
 from harbichess.training.ocak_run import OcakRunConfig, run_ocak_sanity
 
@@ -114,6 +117,84 @@ def test_ocak_run_configuration_rejects_unsafe_run_id() -> None:
         OcakRunConfig(run_id="invalid-teacher", teacher_oracle_depth=0)
     with pytest.raises(ValueError, match="workers"):
         OcakRunConfig(run_id="orphan-workers", teacher_oracle_workers=1)
+    with pytest.raises(ValueError, match="qualification"):
+        OcakRunConfig(run_id="ungated-generation", generation_only=True)
+
+
+def test_generation_only_run_writes_replay_without_starting_learner(tmp_path: Path) -> None:
+    model = tmp_path / "model.safetensors"
+    HarbiChessNetwork(
+        NetworkConfig(
+            trunk_channels=8,
+            residual_blocks=1,
+            policy_channels=2,
+            value_channels=1,
+            value_hidden=8,
+        )
+    ).save_weights(str(model))
+    model_hash = hashlib.sha256(model.read_bytes()).hexdigest()
+    qualification = tmp_path / "teacher.json"
+    qualification.write_text(
+        json.dumps(
+            {
+                "baseline": {"model_sha256": model_hash},
+                "config": {"oracle_depth": 1},
+                "gate": {"qualified_oracle_budgets": [1]},
+            }
+        ),
+        encoding="utf-8",
+    )
+    permissive = ReplayCoverageThresholds(
+        minimum_samples=1,
+        minimum_unique_position_ratio=0.0,
+        minimum_opening_ratio=0.0,
+        minimum_middlegame_ratio=0.0,
+        minimum_endgame_ratio=0.0,
+        minimum_tactical_ratio=0.0,
+        minimum_quiet_ratio=0.0,
+        minimum_value_bucket_ratio=0.0,
+        minimum_outcome_bucket_ratio=0.0,
+        minimum_material_signatures=1,
+        minimum_position_signatures=1,
+        minimum_teacher_telemetry_ratio=1.0,
+        minimum_comparable_teacher_deltas=0,
+        minimum_positive_teacher_delta_ratio=0.0,
+        minimum_mean_teacher_delta=-1.0,
+    )
+    result = run_ocak_sanity(
+        OcakRunConfig(
+            run_id=_run_id_with_both_splits(4),
+            artifact_root=tmp_path / "runs",
+            telemetry_path=tmp_path / "dashboard.json",
+            games=4,
+            workers=2,
+            simulations=1,
+            max_plies=1,
+            validation_fraction=0.5,
+            initial_model=model,
+            trunk_channels=8,
+            residual_blocks=1,
+            policy_channels=2,
+            value_channels=1,
+            value_hidden=8,
+            teacher_oracle_depth=1,
+            generation_only=True,
+            teacher_qualification_result=qualification,
+            replay_coverage_thresholds=permissive,
+        ),
+        source_commit="c" * 40,
+    )
+
+    payload = json.loads(Path(result.result_path).read_text(encoding="utf-8"))
+    snapshot = SnapshotStore(tmp_path / "dashboard.json").read()
+    assert result.passed
+    assert result.training_steps == 0
+    assert result.checkpoint_path == ""
+    assert payload["mode"] == "generation_only"
+    assert payload["checkpoint"] is None
+    assert payload["coverage"]["passed"]
+    assert snapshot.pilot_status is PilotStatus.REPLAY
+    assert snapshot.candidate_checkpoint == "None"
 
 
 def test_ocak_run_rejects_draw_only_truncated_self_play(tmp_path: Path) -> None:
