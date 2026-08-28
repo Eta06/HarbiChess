@@ -67,6 +67,7 @@ class PilotReport:
     initial_validation_value_loss: float
     final_validation_value_loss: float
     maximum_gradient_norm: float
+    maximum_unclipped_gradient_norm: float
     metrics: tuple[TrainingMetrics, ...]
     sampler_rng_state: object
     attempted_steps: int
@@ -233,6 +234,9 @@ def run_sanity_pilot(
         initial_validation_value_loss=initial_validation_value,
         final_validation_value_loss=final_validation_value,
         maximum_gradient_norm=max(metric.gradient_norm for metric in metrics),
+        maximum_unclipped_gradient_norm=max(
+            metric.unclipped_gradient_norm for metric in metrics
+        ),
         metrics=tuple(metrics),
         sampler_rng_state=sampler.rng_state,
         attempted_steps=attempted_steps,
