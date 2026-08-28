@@ -36,6 +36,7 @@ def test_uncertainty_labels_downweight_cross_budget_drift() -> None:
 
 def test_uncertainty_label_gate_requires_coverage_and_verified_strength() -> None:
     passing = {
+        "labelable_ratio": 0.95,
         "mean_common_support_fraction": 0.95,
         "mean_stable_visit_mass": 0.80,
         "mean_stable_q_verified_spearman": 0.35,
@@ -53,4 +54,19 @@ def test_uncertainty_label_gate_requires_coverage_and_verified_strength() -> Non
     assert _gate(failed, _config())["reasons"] == [
         "drift-qualified visit mass is below 80%",
         "conservative-Q verified-improvement interval is not positive",
+    ]
+
+
+def test_uncertainty_label_gate_rejects_insufficient_labelable_coverage() -> None:
+    summary = {
+        "labelable_ratio": 0.94,
+        "mean_common_support_fraction": 0.95,
+        "mean_stable_visit_mass": 0.80,
+        "mean_stable_q_verified_spearman": 0.35,
+        "conservative_verified_delta_95_interval": (0.001, 0.10),
+        "conservative_harmful_ratio": 0.10,
+        "mean_conservative_verified_regret": 0.10,
+    }
+    assert _gate(summary, _config())["reasons"] == [
+        "uncertainty-labelable position ratio is below 95%"
     ]
