@@ -482,6 +482,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument("--teacher-qualification", type=Path, required=True)
     parser.add_argument("--reference-target-result", type=Path)
     parser.add_argument("--telemetry", type=Path, default=Path("artifacts/dashboard/state.json"))
+    parser.add_argument("--inference-wait-seconds", type=float, default=0.00025)
     arguments = parser.parse_args(argv)
     result = run_full_gumbel_targets(
         FullGumbelTargetConfig(
@@ -492,6 +493,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             teacher_qualification_result=arguments.teacher_qualification,
             reference_target_result=arguments.reference_target_result,
             telemetry_path=arguments.telemetry,
+            inference_wait_seconds=arguments.inference_wait_seconds,
         )
     )
     print(result)
