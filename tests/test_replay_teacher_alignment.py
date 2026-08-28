@@ -46,3 +46,22 @@ def test_alignment_gate_applies_frozen_integrity_and_strength_thresholds() -> No
     gate = _alignment_gate(summary, config)
     assert gate["passed"] is False
     assert gate["reasons"] == ["stored-clean policy TV exceeds the frozen maximum"]
+
+
+def test_alignment_audit_preserves_failed_upstream_replay_gate() -> None:
+    config = ReplayTeacherAlignmentConfig(
+        run_result=Path("run.json"),
+        shard=Path("replay.jsonl.gz"),
+        output_dir=Path("alignment"),
+    )
+    summary = {
+        "stored_clean_top_action_agreement": 1.0,
+        "mean_stored_clean_tv": 0.0,
+        "stored_verified_delta_vs_raw_95_interval": (0.01, 0.10),
+        "clean_verified_delta_vs_raw_95_interval": (0.01, 0.10),
+    }
+
+    gate = _alignment_gate(summary, config, replay_qualified=False)
+
+    assert gate["passed"] is False
+    assert gate["reasons"] == ["upstream replay coverage gate did not pass"]
