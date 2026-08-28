@@ -46,3 +46,17 @@ def test_spatial_policy_fit_is_frozen_to_small_adapter_compute() -> None:
     assert config.batch_size == 16
     assert config.learning_rate == 1e-3
     assert config.seed == 2026082841
+
+
+def test_relational_policy_fit_uses_same_frozen_compute() -> None:
+    config = SpatialPolicyTransferConfig(
+        policy_target_result=Path("targets.json"),
+        dataset_result=Path("dataset.json"),
+        run_result=Path("run.json"),
+        train_shard=Path("train.jsonl.gz"),
+        output_dir=Path("output"),
+        architecture="relational",
+        seed=2026082842,
+    )
+    assert config.architecture == "relational"
+    assert config.steps == 480
