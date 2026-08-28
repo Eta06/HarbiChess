@@ -10,6 +10,7 @@ from harbichess.core.state import Side
 from harbichess.evaluation.full_gumbel_targets import (
     FullGumbelTargetConfig,
     _determinism_delta,
+    _normalized_visits,
     select_stratified_records,
 )
 from harbichess.replay.schema import ReplayRecord
@@ -76,3 +77,10 @@ def test_target_config_rejects_an_oversized_audit() -> None:
             validation_positions=2,
             audit_positions=5,
         )
+
+
+def test_visit_normalization_ignores_json_list_representation() -> None:
+    assert _normalized_visits([["a2a3", 4], ["b2b3", 2]]) == (
+        ("a2a3", 4),
+        ("b2b3", 2),
+    )
