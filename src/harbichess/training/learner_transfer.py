@@ -55,6 +55,7 @@ class LearnerTransferConfig:
     tactical_budgets: tuple[int, ...] = (64, 512)
     tactical_workers: int = 8
     minimum_policy_improvement: float = 0.02
+    minimum_top_action_agreement_ratio: float = 1.0
     maximum_value_loss_ratio: float = 1.02
     maximum_ece_regression: float = 0.02
 
@@ -72,6 +73,7 @@ class LearnerTransferConfig:
             or not self.tactical_budgets
             or any(budget <= 0 for budget in self.tactical_budgets)
             or not 0.0 <= self.minimum_policy_improvement < 1.0
+            or not 0.0 <= self.minimum_top_action_agreement_ratio <= 1.0
             or self.maximum_value_loss_ratio < 1.0
             or self.maximum_ece_regression < 0.0
         ):
@@ -184,6 +186,10 @@ def _candidate_reasons(
         1.0 - config.minimum_policy_improvement
     ):
         reasons.append("teacher-policy imitation did not improve by 2%")
+    if quality.teacher_top_action_agreement < (
+        baseline_quality.teacher_top_action_agreement * config.minimum_top_action_agreement_ratio
+    ):
+        reasons.append("teacher top-action agreement regressed")
     if quality.value_cross_entropy > (
         baseline_quality.value_cross_entropy * config.maximum_value_loss_ratio
     ):
