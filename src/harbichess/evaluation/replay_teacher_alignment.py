@@ -126,6 +126,11 @@ def run_replay_teacher_alignment(config: ReplayTeacherAlignmentConfig) -> Path:
         rules=rules,
         config=SearchConfig(simulations=config.simulations, dirichlet_fraction=0.0),
     )
+    noisy_search = MCTS(
+        teacher,
+        rules=rules,
+        config=SearchConfig(simulations=config.simulations),
+    )
     verifier = DeterministicTacticalOracle(
         rules=rules,
         config=TacticalOracleConfig(depth=config.verifier_depth),
@@ -143,7 +148,7 @@ def run_replay_teacher_alignment(config: ReplayTeacherAlignmentConfig) -> Path:
                 add_root_noise=False,
             )
         )
-        noisy_result = clean_search.search(
+        noisy_result = noisy_search.search(
             record.state,
             rng=random.Random(f"{config.seed}:noisy:{index}"),
             add_root_noise=True,
