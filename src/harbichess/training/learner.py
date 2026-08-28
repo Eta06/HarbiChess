@@ -25,6 +25,8 @@ class LearnerConfig:
     max_gradient_norm: float = 5.0
     policy_weight: float = 1.0
     value_weight: float = 1.0
+    confident_top_action_weight: float = 0.0
+    confident_top_action_margin: float = 0.2
 
     def __post_init__(self) -> None:
         values = (
@@ -33,6 +35,8 @@ class LearnerConfig:
             self.max_gradient_norm,
             self.policy_weight,
             self.value_weight,
+            self.confident_top_action_weight,
+            self.confident_top_action_margin,
         )
         if any(not math.isfinite(value) or value < 0 for value in values):
             raise ValueError("learner configuration must be finite and non-negative")
@@ -40,6 +44,8 @@ class LearnerConfig:
             raise ValueError("learning rate and max gradient norm must be positive")
         if self.policy_weight + self.value_weight == 0:
             raise ValueError("at least one learner loss weight must be positive")
+        if self.confident_top_action_margin > 1.0:
+            raise ValueError("confident top-action margin must not exceed one")
 
 
 @dataclass(frozen=True, slots=True)
@@ -111,10 +117,26 @@ class MLXLearner:
     ) -> tuple[mx.array, mx.array, mx.array]:
         policy_logits, wdl_logits = self.network(inputs)
         policy_logits = mx.where(legal_masks, policy_logits, mx.array(-1e9))
-        policy_loss = nn.losses.cross_entropy(
+        soft_policy_loss = nn.losses.cross_entropy(
             policy_logits,
             policy_targets,
             reduction="mean",
+        )
+        sorted_targets = mx.sort(policy_targets, axis=1)
+        target_margins = sorted_targets[:, -1] - sorted_targets[:, -2]
+        confident_weights = (target_margins >= self.config.confident_top_action_margin).astype(
+            mx.float32
+        )
+        top_action_losses = nn.losses.cross_entropy(
+            policy_logits,
+            mx.argmax(policy_targets, axis=1),
+            reduction="none",
+        )
+        confident_top_action_loss = mx.sum(top_action_losses * confident_weights) / mx.maximum(
+            mx.sum(confident_weights), mx.array(1.0)
+        )
+        policy_loss = (
+            soft_policy_loss + self.config.confident_top_action_weight * confident_top_action_loss
         )
         value_losses = nn.losses.cross_entropy(
             wdl_logits,
