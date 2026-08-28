@@ -103,9 +103,14 @@ def _kl(target: Policy, reference: Policy) -> float:
 
 
 def _alignment_gate(
-    summary: dict[str, object], config: ReplayTeacherAlignmentConfig
+    summary: dict[str, object],
+    config: ReplayTeacherAlignmentConfig,
+    *,
+    replay_qualified: bool = True,
 ) -> dict[str, object]:
     reasons = []
+    if not replay_qualified:
+        reasons.append("upstream replay coverage gate did not pass")
     if float(summary["stored_clean_top_action_agreement"]) < (
         config.minimum_stored_clean_agreement
     ):
@@ -134,8 +139,8 @@ def run_replay_teacher_alignment(config: ReplayTeacherAlignmentConfig) -> Path:
     if config.output_dir.exists():
         raise FileExistsError(f"alignment output already exists: {config.output_dir}")
     run = json.loads(config.run_result.read_text(encoding="utf-8"))
-    if not run.get("passed") or run.get("mode") != "generation_only":
-        raise ValueError("alignment requires a qualified generation-only replay")
+    if run.get("mode") != "generation_only":
+        raise ValueError("alignment requires a generation-only replay")
     rules = PythonChessRules()
     records = select_stratified_records(
         read_shard(config.shard, rules=rules).records,
@@ -300,7 +305,11 @@ def run_replay_teacher_alignment(config: ReplayTeacherAlignmentConfig) -> Path:
                 "output_dir": str(config.output_dir),
             },
             "summary": summary,
-            "gate": _alignment_gate(summary, config),
+            "gate": _alignment_gate(
+                summary,
+                config,
+                replay_qualified=bool(run.get("passed")),
+            ),
             "rows": rows,
             "elapsed_seconds": time.perf_counter() - started,
         },
