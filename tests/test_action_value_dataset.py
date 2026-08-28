@@ -53,3 +53,18 @@ def test_action_value_dataset_gate_requires_stable_verified_q_labels() -> None:
         "cross-budget Q drift exceeds 0.03",
         "top-two Q-set overlap is below 75%",
     ]
+
+
+def test_action_value_dataset_accepts_multiple_exclusion_artifacts() -> None:
+    config = ActionValueDatasetConfig(
+        excluded_q_result=Path("first.json"),
+        additional_excluded_q_results=(Path("second.json"), Path("third.json")),
+        run_result=Path("run.json"),
+        train_shard=Path("train.jsonl.gz"),
+        validation_shard=Path("validation.jsonl.gz"),
+        output_dir=Path("output"),
+    )
+    assert config.additional_excluded_q_results == (
+        Path("second.json"),
+        Path("third.json"),
+    )
