@@ -8,7 +8,8 @@ import random
 import time
 from collections.abc import Mapping, Sequence
 from concurrent.futures import ThreadPoolExecutor
-from dataclasses import asdict, dataclass
+from dataclasses import asdict, dataclass, replace
+from datetime import UTC, datetime
 from pathlib import Path
 from statistics import mean
 
@@ -17,6 +18,7 @@ from harbichess.backends.mlx_network import HarbiChessNetwork
 from harbichess.chess.actions import action_to_legal_move
 from harbichess.chess.rules import PythonChessRules
 from harbichess.core.state import ChessMove
+from harbichess.dashboard.state import PilotStatus, RunMode, SnapshotStore
 from harbichess.evaluation.consensus_target import _record_policy, _top_actions
 from harbichess.evaluation.search_q_reliability import _spearman
 from harbichess.evaluation.teacher_qualification import (
@@ -45,6 +47,7 @@ class ActionValueDatasetConfig:
     train_shard: Path
     validation_shard: Path
     output_dir: Path
+    telemetry_path: Path = Path("artifacts/dashboard/state.json")
     train_positions: int = 96
     validation_positions: int = 48
     budgets: tuple[int, ...] = (512, 800)
@@ -129,23 +132,16 @@ def _summary(
         "mean_high_q_verified_spearman": mean(
             float(row["high_q_verified_spearman"]) for row in rows
         ),
-        "mean_cross_budget_q_spearman": mean(
-            float(row["cross_budget_q_spearman"]) for row in rows
-        ),
-        "mean_cross_budget_q_drift": mean(
-            float(row["cross_budget_q_drift"]) for row in rows
-        ),
+        "mean_cross_budget_q_spearman": mean(float(row["cross_budget_q_spearman"]) for row in rows),
+        "mean_cross_budget_q_drift": mean(float(row["cross_budget_q_drift"]) for row in rows),
         "mean_top_two_q_overlap": mean(float(row["top_two_q_overlap"]) for row in rows),
         "mean_top_q_verified_delta_vs_raw": mean(deltas),
         "top_q_verified_delta_95_interval": _interval(
             deltas, samples=config.bootstrap_samples, seed=seed
         ),
         "top_q_harmful_count": sum(delta <= config.harmful_delta for delta in deltas),
-        "top_q_harmful_ratio": sum(delta <= config.harmful_delta for delta in deltas)
-        / len(rows),
-        "mean_top_q_verified_regret": mean(
-            float(row["top_q_verified_regret"]) for row in rows
-        ),
+        "top_q_harmful_ratio": sum(delta <= config.harmful_delta for delta in deltas) / len(rows),
+        "mean_top_q_verified_regret": mean(float(row["top_q_verified_regret"]) for row in rows),
     }
 
 
@@ -153,9 +149,7 @@ def _gate(summary: Mapping[str, object], config: ActionValueDatasetConfig) -> di
     reasons = []
     if float(summary["mean_high_q_verified_spearman"]) < config.minimum_q_verified_spearman:
         reasons.append("800-Q verified Spearman is below 0.35")
-    if float(summary["mean_cross_budget_q_spearman"]) < (
-        config.minimum_cross_budget_q_spearman
-    ):
+    if float(summary["mean_cross_budget_q_spearman"]) < (config.minimum_cross_budget_q_spearman):
         reasons.append("cross-budget Q Spearman is below 0.70")
     if float(summary["mean_cross_budget_q_drift"]) > config.maximum_cross_budget_q_drift:
         reasons.append("cross-budget Q drift exceeds 0.03")
@@ -189,9 +183,7 @@ def run_action_value_dataset(config: ActionValueDatasetConfig) -> Path:
             *(_excluded_identities(payload, partition) for payload in excluded_payloads)
         )
         available = tuple(
-            record
-            for record in all_records[partition]
-            if _identity(record) not in forbidden
+            record for record in all_records[partition] if _identity(record) not in forbidden
         )
         count = config.train_positions if partition == "train" else config.validation_positions
         selected[partition] = select_stratified_records(
@@ -201,6 +193,25 @@ def run_action_value_dataset(config: ActionValueDatasetConfig) -> Path:
         _identity(row) for row in selected["validation"]
     }:
         raise ValueError("fresh action-value train/validation identities overlap")
+
+    store = SnapshotStore(config.telemetry_path)
+    dashboard = store.read()
+    total_searches = 2 * sum(map(len, selected.values()))
+    completed_searches = 0
+    dashboard = replace(
+        dashboard,
+        updated_at=datetime.now(UTC).isoformat(),
+        mode=RunMode.EVALUATION,
+        mode_detail=f"Action-value teacher audit · 0/{total_searches}",
+        pilot_status=PilotStatus.REPLAY,
+        pilot_steps_planned=total_searches,
+        pilot_steps_completed=0,
+        pilot_steps_attempted=0,
+        pilot_stop_reason="teacher_audit_running",
+        pilot_stop_detail="Clean 512/800 search and independent verification",
+        promotion_ready=False,
+    )
+    store.write_atomic(dashboard)
 
     network = HarbiChessNetwork(_network_config(run))
     network.load_weights(str(run["baseline"]["path"]))
@@ -244,6 +255,17 @@ def run_action_value_dataset(config: ActionValueDatasetConfig) -> Path:
 
                 with ThreadPoolExecutor(max_workers=min(config.workers, len(records))) as pool:
                     results[budget] = tuple(pool.map(inspect, range(len(records))))
+                completed_searches += len(records)
+                dashboard = replace(
+                    dashboard,
+                    updated_at=datetime.now(UTC).isoformat(),
+                    mode_detail=(
+                        f"Action-value teacher audit · {completed_searches}/{total_searches}"
+                    ),
+                    pilot_steps_completed=completed_searches,
+                    pilot_steps_attempted=completed_searches,
+                )
+                store.write_atomic(dashboard)
 
             work = []
             for index, record in enumerate(records):
@@ -286,8 +308,7 @@ def run_action_value_dataset(config: ActionValueDatasetConfig) -> Path:
                         "cross_budget_q_drift": mean(
                             abs(low_q[action] - high_q[action]) for action in common
                         ),
-                        "top_two_q_overlap": len(set(_top(low_q, 2)) & set(_top(high_q, 2)))
-                        / 2,
+                        "top_two_q_overlap": len(set(_top(low_q, 2)) & set(_top(high_q, 2))) / 2,
                         "top_q_action": top_q,
                         "top_q_verified_delta_vs_raw": (
                             verified[index][top_q] - verified[index][raw_top]
@@ -323,6 +344,7 @@ def run_action_value_dataset(config: ActionValueDatasetConfig) -> Path:
                 "train_shard": str(config.train_shard),
                 "validation_shard": str(config.validation_shard),
                 "output_dir": str(config.output_dir),
+                "telemetry_path": str(config.telemetry_path),
             },
             "summaries": summaries,
             "gate": {
@@ -337,19 +359,40 @@ def run_action_value_dataset(config: ActionValueDatasetConfig) -> Path:
             "elapsed_seconds": time.perf_counter() - started,
         },
     )
+    dashboard = replace(
+        dashboard,
+        updated_at=datetime.now(UTC).isoformat(),
+        mode=RunMode.IDLE,
+        mode_detail=(
+            "Action-value teacher audit passed"
+            if gate["passed"]
+            else "Action-value teacher audit failed"
+        ),
+        teacher_qualification_status="passed" if gate["passed"] else "failed",
+        teacher_qualification_positions=sum(map(len, output_rows.values())),
+        teacher_qualification_result=str(result_path),
+        pilot_status=PilotStatus.PASSED if gate["passed"] else PilotStatus.FAILED,
+        pilot_steps_completed=total_searches,
+        pilot_steps_attempted=total_searches,
+        pilot_stop_reason="teacher_audit_complete",
+        pilot_stop_detail=(
+            "Raw Q teacher passed frozen gates" if gate["passed"] else "; ".join(gate["reasons"])
+        ),
+        promotion_ready=False,
+    )
+    store.write_atomic(dashboard)
     return result_path
 
 
 def main(argv: Sequence[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--excluded-q-result", required=True, type=Path)
-    parser.add_argument(
-        "--additional-excluded-q-result", action="append", default=[], type=Path
-    )
+    parser.add_argument("--additional-excluded-q-result", action="append", default=[], type=Path)
     parser.add_argument("--run-result", required=True, type=Path)
     parser.add_argument("--train-shard", required=True, type=Path)
     parser.add_argument("--validation-shard", required=True, type=Path)
     parser.add_argument("--output-dir", required=True, type=Path)
+    parser.add_argument("--telemetry", type=Path, default=Path("artifacts/dashboard/state.json"))
     parser.add_argument("--seed", type=int, default=2026082824)
     parser.add_argument("--train-positions", type=int, default=96)
     parser.add_argument("--validation-positions", type=int, default=48)
@@ -361,6 +404,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             train_shard=arguments.train_shard,
             validation_shard=arguments.validation_shard,
             output_dir=arguments.output_dir,
+            telemetry_path=arguments.telemetry,
             additional_excluded_q_results=tuple(arguments.additional_excluded_q_result),
             seed=arguments.seed,
             train_positions=arguments.train_positions,
