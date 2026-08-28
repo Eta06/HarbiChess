@@ -90,6 +90,26 @@ def test_tactical_sweep_reports_budget_regressions_and_oracle_mass() -> None:
     )
 
 
+def test_tactical_sweep_supports_full_gumbel_allocation() -> None:
+    rules = PythonChessRules()
+    result = run_tactical_sweep(
+        MaterialEvaluator(rules),
+        rules=rules,
+        budgets=(8, 16),
+        workers=2,
+        seed=17,
+        search_kind="full-gumbel",
+        max_considered_actions=4,
+        cases=(TACTICAL_CASES[0], TACTICAL_CASES[-2]),
+    )
+
+    assert [sweep["budget"] for sweep in result["budgets"]] == [8, 16]
+    assert all(
+        sum(row["leader_visits"] for row in sweep["cases"]) > 0
+        for sweep in result["budgets"]
+    )
+
+
 def test_tactical_sweep_rejects_bad_schedule_and_fixture() -> None:
     rules = PythonChessRules()
     evaluator = MaterialEvaluator(rules)
