@@ -93,7 +93,7 @@ class SpatialPolicyLearner:
         learning_rate: float,
         max_gradient_norm: float,
     ) -> None:
-        self.head = network.spatial_policy_adapter
+        self.head = network.policy_adapter
         self.optimizer = optim.AdamW(learning_rate=learning_rate, weight_decay=0.0)
         self.max_gradient_norm = max_gradient_norm
         self._loss_and_grad = nn.value_and_grad(self.head, self._loss)
