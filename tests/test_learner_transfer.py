@@ -4,6 +4,7 @@ from harbichess.evaluation.model_quality import ModelQualityMetrics
 from harbichess.training.learner_transfer import (
     LearnerTransferConfig,
     _candidate_reasons,
+    _select_validation_snapshots,
 )
 
 
@@ -56,3 +57,11 @@ def test_transfer_gate_requires_policy_value_calibration_and_tactical_retention(
 
     assert not passed
     assert len(failed) == 6
+
+
+def test_transfer_checkpoint_selection_is_even_and_metric_blind() -> None:
+    snapshots = [(step, float(100 - step), object()) for step in range(10)]
+
+    selected = _select_validation_snapshots(snapshots, maximum=4)
+
+    assert [step for step, _, _ in selected] == [0, 3, 6, 9]
