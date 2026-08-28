@@ -13,7 +13,7 @@ import tempfile
 import threading
 import time
 from collections import Counter
-from dataclasses import asdict, dataclass, replace
+from dataclasses import asdict, dataclass, field, replace
 from datetime import UTC, datetime
 from pathlib import Path
 
@@ -35,6 +35,7 @@ from harbichess.dashboard.state import (
     TerminationSnapshot,
     empty_snapshot,
 )
+from harbichess.replay.coverage import ReplayCoverageThresholds, measure_replay_coverage
 from harbichess.replay.diversity import DiversityMetrics, measure_diversity
 from harbichess.replay.merge import merge_continuation_replay
 from harbichess.replay.schema import ReplayRecord, records_from_game
@@ -112,6 +113,11 @@ class OcakRunConfig:
     teacher_oracle_depth: int | None = None
     teacher_oracle_workers: int = 0
     tactical_gate_budgets: tuple[int, ...] = (64, 512)
+    generation_only: bool = False
+    teacher_qualification_result: Path | None = None
+    replay_coverage_thresholds: ReplayCoverageThresholds = field(
+        default_factory=ReplayCoverageThresholds
+    )
 
     def __post_init__(self) -> None:
         if not self.run_id or Path(self.run_id).name != self.run_id:
@@ -121,7 +127,6 @@ class OcakRunConfig:
             self.workers,
             self.simulations,
             self.max_plies,
-            self.training_steps,
             self.batch_size,
             self.telemetry_interval_steps,
             self.validation_interval_steps,
@@ -132,6 +137,8 @@ class OcakRunConfig:
             self.value_channels,
             self.value_hidden,
         )
+        if not self.generation_only and self.training_steps <= 0:
+            raise ValueError("training_steps must be positive when learner is enabled")
         if any(value <= 0 for value in positive) or self.exploration_plies < 0:
             raise ValueError("OCAK run counts and network dimensions must be positive")
         if not 0.0 < self.validation_fraction < 1.0:
@@ -176,6 +183,8 @@ class OcakRunConfig:
             raise ValueError("teacher oracle workers require an enabled oracle")
         if any(budget <= 0 for budget in self.tactical_gate_budgets):
             raise ValueError("tactical gate budgets must be positive")
+        if self.generation_only and self.teacher_qualification_result is None:
+            raise ValueError("generation-only replay requires a teacher qualification result")
         if self.root_halving_enabled:
             root_halving = RootHalvingConfig(
                 top_actions=self.root_halving_top_actions,
@@ -407,6 +416,21 @@ def run_ocak_sanity(
         os.fsync(handle.fileno())
     os.replace(temporary_baseline, baseline_path)
     baseline_sha256 = _sha256(baseline_path)
+    teacher_qualification = None
+    if config.teacher_qualification_result is not None:
+        with config.teacher_qualification_result.open(encoding="utf-8") as handle:
+            teacher_qualification = json.load(handle)
+        qualified_budgets = teacher_qualification.get("gate", {}).get(
+            "qualified_oracle_budgets", []
+        )
+        qualified_baseline = teacher_qualification.get("baseline", {}).get("model_sha256")
+        qualified_depth = teacher_qualification.get("config", {}).get("oracle_depth")
+        if qualified_baseline != baseline_sha256:
+            raise ValueError("teacher qualification baseline does not match generation model")
+        if config.simulations not in qualified_budgets:
+            raise ValueError("generation search budget is not teacher-qualified")
+        if config.teacher_oracle_depth != qualified_depth:
+            raise ValueError("generation oracle depth does not match teacher qualification")
     rules = PythonChessRules()
     completed_games: list[SelfPlayGame] = []
     completed_positions = 0
@@ -605,6 +629,111 @@ def run_ocak_sanity(
             continuation_replay_samples=len(continuation_records),
             diversity=_diversity_snapshot(diversity_metrics),
         )
+
+        if config.generation_only:
+            generated_records = (*generated_train_records, *validation_records)
+            coverage = measure_replay_coverage(
+                generated_records,
+                thresholds=config.replay_coverage_thresholds,
+                rules=rules,
+            )
+            result_path = run_root / "result.json"
+            total_seconds = time.perf_counter() - started
+            reasons = coverage.reasons
+            result_payload = {
+                "run_id": config.run_id,
+                "source_commit": commit,
+                "created_at": _now(),
+                "passed": coverage.passed,
+                "reasons": reasons,
+                "mode": "generation_only",
+                "config": {
+                    **asdict(config),
+                    "artifact_root": str(config.artifact_root),
+                    "telemetry_path": str(config.telemetry_path),
+                    "continuation_shards": [],
+                    "initial_model": str(config.initial_model),
+                    "teacher_qualification_result": str(
+                        config.teacher_qualification_result
+                    ),
+                },
+                "system": {
+                    "platform": platform.platform(),
+                    "machine": platform.machine(),
+                    "mlx_device": mx.device_info(),
+                },
+                "timing": {
+                    "self_play_seconds": self_play_seconds,
+                    "training_seconds": 0.0,
+                    "total_seconds": total_seconds,
+                },
+                "inference": {
+                    **asdict(inference_statistics),
+                    "average_batch_size": inference_statistics.average_batch_size,
+                    "average_queue_wait_ms": inference_statistics.average_queue_wait_ms,
+                },
+                "diversity": asdict(diversity_metrics),
+                "coverage": coverage.to_dict(),
+                "teacher_qualification": {
+                    "path": str(config.teacher_qualification_result),
+                    "qualified_budgets": qualified_budgets,
+                    "oracle_depth": qualified_depth,
+                    "baseline_model_sha256": qualified_baseline,
+                },
+                "baseline": {
+                    "checkpoint_id": initial_checkpoint,
+                    "path": str(baseline_path),
+                    "model_sha256": baseline_sha256,
+                },
+                "replay": {
+                    "train": asdict(train_header),
+                    "validation": asdict(validation_header),
+                    "continuation": [],
+                    "continuation_samples": 0,
+                    "continuation_duplicates_removed": 0,
+                    "continuation_batch_fraction": 0.0,
+                },
+                "checkpoint": None,
+                "validation_checkpoints": [],
+            }
+            _atomic_json(result_path, result_payload)
+            publish(
+                mode=RunMode.IDLE,
+                mode_detail=(
+                    "Fresh replay qualified · learner remains gated"
+                    if coverage.passed
+                    else "Fresh replay rejected by coverage/teacher telemetry gate"
+                ),
+                pilot_status=(
+                    PilotStatus.REPLAY if coverage.passed else PilotStatus.FAILED
+                ),
+                pilot_stop_reason="generation_only",
+                pilot_stop_detail=(
+                    "Learner intentionally not started; replay qualification completed"
+                ),
+                pilot_reasons=reasons,
+                active_checkpoint=initial_checkpoint,
+                candidate_checkpoint="None",
+                promoted_checkpoint="None",
+                checkpoint_status=CheckpointStatus.NONE,
+                checkpoint_path="",
+                checkpoint_verified=False,
+            )
+            return OcakRunResult(
+                run_id=config.run_id,
+                source_commit=commit,
+                passed=coverage.passed,
+                reasons=reasons,
+                games=config.games,
+                replay_samples=len(generated_records),
+                validation_samples=len(validation_records),
+                training_steps=0,
+                self_play_seconds=self_play_seconds,
+                training_seconds=0.0,
+                total_seconds=total_seconds,
+                checkpoint_path="",
+                result_path=str(result_path),
+            )
 
         network.set_dtype(mx.float32)
         network.train()
@@ -1076,6 +1205,8 @@ def _parser() -> argparse.ArgumentParser:
     parser.add_argument("--teacher-oracle-depth", type=int)
     parser.add_argument("--teacher-oracle-workers", type=int, default=0)
     parser.add_argument("--tactical-gate-budgets", default="64,512")
+    parser.add_argument("--generation-only", action="store_true")
+    parser.add_argument("--teacher-qualification-result", type=Path)
     return parser
 
 
@@ -1129,6 +1260,8 @@ def main(argv: list[str] | None = None) -> int:
             tactical_gate_budgets=tuple(
                 int(value) for value in arguments.tactical_gate_budgets.split(",") if value
             ),
+            generation_only=arguments.generation_only,
+            teacher_qualification_result=arguments.teacher_qualification_result,
         )
     )
     print(json.dumps(asdict(result), indent=2))
