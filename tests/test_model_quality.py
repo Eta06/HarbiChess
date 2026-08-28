@@ -27,6 +27,7 @@ def test_model_quality_reports_policy_and_calibration_metrics() -> None:
 
     assert metrics.samples == metrics.known_value_samples == 4
     assert math.isfinite(metrics.teacher_policy_cross_entropy)
+    assert metrics.global_teacher_policy_cross_entropy > metrics.teacher_policy_cross_entropy
     assert 0.0 <= metrics.teacher_top_action_agreement <= 1.0
     assert math.isfinite(metrics.value_cross_entropy)
     assert 0.0 <= metrics.value_accuracy <= 1.0
