@@ -13,8 +13,10 @@ from harbichess.core.state import ChessMove, ChessState, Side
 from harbichess.selfplay.game import SelfPlayGame, SelfPlaySample
 
 REPLAY_SCHEMA_VERSION = 2
-TARGET_SCHEMA_VERSION = 10
-SUPPORTED_TARGET_SCHEMA_VERSIONS = frozenset({3, 4, 5, 6, 7, 8, 9, TARGET_SCHEMA_VERSION})
+TARGET_SCHEMA_VERSION = 11
+SUPPORTED_TARGET_SCHEMA_VERSIONS = frozenset(
+    {3, 4, 5, 6, 7, 8, 9, 10, TARGET_SCHEMA_VERSION}
+)
 
 
 @dataclass(frozen=True, slots=True)
@@ -303,6 +305,11 @@ class ReplayRecord:
     root_search_adjusted: bool = False
     root_search_first_margin: float | None = None
     root_search_final_margin: float | None = None
+    raw_policy: tuple[tuple[int, float], ...] = ()
+    teacher_policy_tv: float | None = None
+    teacher_policy_kl: float | None = None
+    teacher_argmax_changed: bool | None = None
+    teacher_search_value_delta: float | None = None
 
     def __post_init__(self) -> None:
         if not self.game_id or self.game_index < 0 or self.seed < 0 or self.ply != len(self.moves):
@@ -347,6 +354,32 @@ class ReplayRecord:
             for margin in root_margins
         ):
             raise ValueError("root-search confidence margins must be finite and bounded")
+        raw_indices = [action for action, _ in self.raw_policy]
+        raw_probabilities = [probability for _, probability in self.raw_policy]
+        if self.raw_policy and (
+            len(raw_indices) != len(set(raw_indices))
+            or any(not 0 <= action < POLICY_SIZE for action in raw_indices)
+            or any(not math.isfinite(value) or value < 0 for value in raw_probabilities)
+            or not math.isclose(sum(raw_probabilities), 1.0, abs_tol=1e-6)
+        ):
+            raise ValueError("raw network policy must be unique, legal-sized, and normalized")
+        teacher_metrics = (self.teacher_policy_tv, self.teacher_policy_kl)
+        if self.raw_policy:
+            if any(
+                value is None or not math.isfinite(value) or value < 0
+                for value in teacher_metrics
+            ):
+                raise ValueError("raw policy requires finite non-negative teacher metrics")
+            assert self.teacher_policy_tv is not None
+            if self.teacher_policy_tv > 1.0 or self.teacher_argmax_changed is None:
+                raise ValueError("teacher policy evidence is outside its valid range")
+        elif any(value is not None for value in (*teacher_metrics, self.teacher_argmax_changed)):
+            raise ValueError("teacher policy evidence requires a raw network policy")
+        if self.teacher_search_value_delta is not None and (
+            not math.isfinite(self.teacher_search_value_delta)
+            or not -2.0 <= self.teacher_search_value_delta <= 2.0
+        ):
+            raise ValueError("teacher search value delta must be finite and bounded")
 
     @property
     def state(self) -> ChessState:
@@ -360,6 +393,8 @@ class ReplayRecord:
         legal_actions = {move_to_action(board, move) for move in board.legal_moves}
         if any(action not in legal_actions for action, _ in self.policy):
             raise ValueError("replay policy contains an illegal action")
+        if any(action not in legal_actions for action, _ in self.raw_policy):
+            raise ValueError("raw network policy contains an illegal action")
         if self.continuation_evidence is not None:
             evidence_actions = {
                 *self.continuation_evidence.repeat_actions,
@@ -385,6 +420,10 @@ class ReplayRecord:
         parsed["side_to_move"] = Side(parsed["side_to_move"])
         parsed["policy"] = tuple(
             (int(action), float(probability)) for action, probability in parsed["policy"]
+        )
+        parsed["raw_policy"] = tuple(
+            (int(action), float(probability))
+            for action, probability in parsed.get("raw_policy", ())
         )
         evidence = parsed.get("continuation_evidence")
         parsed["continuation_evidence"] = (
@@ -415,6 +454,12 @@ def record_from_sample(
         )
     )
     selected = move_to_action(board, board.parse_uci(sample.selected_move.uci))
+    raw_policy = tuple(
+        sorted(
+            (move_to_action(board, board.parse_uci(move.uci)), probability)
+            for move, probability in sample.raw_policy
+        )
+    )
     record = ReplayRecord(
         game_id=f"{run_id}-{game.game_index:012d}",
         game_index=game.game_index,
@@ -431,6 +476,11 @@ def record_from_sample(
         root_search_adjusted=sample.root_search_adjusted,
         root_search_first_margin=sample.root_search_first_margin,
         root_search_final_margin=sample.root_search_final_margin,
+        raw_policy=raw_policy,
+        teacher_policy_tv=sample.teacher_policy_tv,
+        teacher_policy_kl=sample.teacher_policy_kl,
+        teacher_argmax_changed=sample.teacher_argmax_changed,
+        teacher_search_value_delta=sample.teacher_search_value_delta,
     )
     record.validate_rules(rules)
     return record
