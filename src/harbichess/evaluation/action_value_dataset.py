@@ -63,6 +63,7 @@ class ActionValueDatasetConfig:
     maximum_harmful_ratio: float = 0.10
     harmful_delta: float = -0.025
     maximum_verified_regret: float = 0.10
+    additional_excluded_q_results: tuple[Path, ...] = ()
 
     def __post_init__(self) -> None:
         if (
@@ -172,7 +173,10 @@ def _gate(summary: Mapping[str, object], config: ActionValueDatasetConfig) -> di
 def run_action_value_dataset(config: ActionValueDatasetConfig) -> Path:
     if config.output_dir.exists():
         raise FileExistsError(f"action-value dataset output exists: {config.output_dir}")
-    excluded = json.loads(config.excluded_q_result.read_text(encoding="utf-8"))
+    excluded_payloads = [
+        json.loads(path.read_text(encoding="utf-8"))
+        for path in (config.excluded_q_result, *config.additional_excluded_q_results)
+    ]
     run = json.loads(config.run_result.read_text(encoding="utf-8"))
     rules = PythonChessRules()
     all_records = {
@@ -181,7 +185,9 @@ def run_action_value_dataset(config: ActionValueDatasetConfig) -> Path:
     }
     selected = {}
     for index, partition in enumerate(("train", "validation")):
-        forbidden = _excluded_identities(excluded, partition)
+        forbidden = set().union(
+            *(_excluded_identities(payload, partition) for payload in excluded_payloads)
+        )
         available = tuple(
             record
             for record in all_records[partition]
@@ -287,6 +293,7 @@ def run_action_value_dataset(config: ActionValueDatasetConfig) -> Path:
                             verified[index][top_q] - verified[index][raw_top]
                         ),
                         "top_q_verified_regret": best - verified[index][top_q],
+                        "verified_values": tuple(sorted(verified[index].items())),
                     }
                 )
             output_rows[partition] = tuple(rows)
@@ -309,6 +316,9 @@ def run_action_value_dataset(config: ActionValueDatasetConfig) -> Path:
             "config": {
                 **asdict(config),
                 "excluded_q_result": str(config.excluded_q_result),
+                "additional_excluded_q_results": tuple(
+                    map(str, config.additional_excluded_q_results)
+                ),
                 "run_result": str(config.run_result),
                 "train_shard": str(config.train_shard),
                 "validation_shard": str(config.validation_shard),
@@ -333,6 +343,9 @@ def run_action_value_dataset(config: ActionValueDatasetConfig) -> Path:
 def main(argv: Sequence[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--excluded-q-result", required=True, type=Path)
+    parser.add_argument(
+        "--additional-excluded-q-result", action="append", default=[], type=Path
+    )
     parser.add_argument("--run-result", required=True, type=Path)
     parser.add_argument("--train-shard", required=True, type=Path)
     parser.add_argument("--validation-shard", required=True, type=Path)
@@ -345,6 +358,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             train_shard=arguments.train_shard,
             validation_shard=arguments.validation_shard,
             output_dir=arguments.output_dir,
+            additional_excluded_q_results=tuple(arguments.additional_excluded_q_result),
         )
     )
     print(path)
