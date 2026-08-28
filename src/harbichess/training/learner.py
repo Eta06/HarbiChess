@@ -49,6 +49,7 @@ class TrainingMetrics:
     value_loss: float
     total_loss: float
     gradient_norm: float
+    unclipped_gradient_norm: float
 
 
 @dataclass(frozen=True, slots=True)
@@ -62,6 +63,7 @@ class LearnerSnapshot:
 class PreparedTrainingBatch:
     inputs: mx.array
     policy_targets: mx.array
+    legal_masks: mx.array
     wdl_targets: mx.array
     value_weights: mx.array
 
@@ -76,6 +78,7 @@ class PreparedTrainingBatch:
         return PreparedTrainingBatch(
             mx.take(self.inputs, rows, axis=0),
             mx.take(self.policy_targets, rows, axis=0),
+            mx.take(self.legal_masks, rows, axis=0),
             mx.take(self.wdl_targets, rows, axis=0),
             mx.take(self.value_weights, rows, axis=0),
         )
@@ -102,10 +105,12 @@ class MLXLearner:
         self,
         inputs: mx.array,
         policy_targets: mx.array,
+        legal_masks: mx.array,
         wdl_targets: mx.array,
         value_weights: mx.array,
     ) -> tuple[mx.array, mx.array, mx.array]:
         policy_logits, wdl_logits = self.network(inputs)
+        policy_logits = mx.where(legal_masks, policy_logits, mx.array(-1e9))
         policy_loss = nn.losses.cross_entropy(
             policy_logits,
             policy_targets,
@@ -124,16 +129,19 @@ class MLXLearner:
         return total, policy_loss, value_loss
 
     @staticmethod
-    def _arrays(batch: TrainingBatch) -> tuple[mx.array, mx.array, mx.array, mx.array]:
+    def _arrays(
+        batch: TrainingBatch,
+    ) -> tuple[mx.array, mx.array, mx.array, mx.array, mx.array]:
         shape = batch.positions[0].shape
         if any(position.shape != shape for position in batch.positions):
             raise ValueError("training positions must share one encoded shape")
         inputs = mx.array([position.values for position in batch.positions], dtype=mx.float32)
         inputs = inputs.reshape((len(batch.positions), *shape))
         policies = mx.array(batch.policy_targets, dtype=mx.float32)
+        legal_masks = mx.array(batch.legal_masks, dtype=mx.bool_)
         wdl = mx.array(batch.wdl_targets, dtype=mx.int32)
         value_weights = mx.array(batch.value_weights, dtype=mx.float32)
-        return inputs, policies, wdl, value_weights
+        return inputs, policies, legal_masks, wdl, value_weights
 
     @classmethod
     def prepare_batch(cls, batch: TrainingBatch) -> PreparedTrainingBatch:
@@ -141,6 +149,7 @@ class MLXLearner:
         mx.eval(
             prepared.inputs,
             prepared.policy_targets,
+            prepared.legal_masks,
             prepared.wdl_targets,
             prepared.value_weights,
         )
@@ -149,11 +158,12 @@ class MLXLearner:
     @staticmethod
     def _prepared_arrays(
         batch: TrainingBatch | PreparedTrainingBatch,
-    ) -> tuple[mx.array, mx.array, mx.array, mx.array]:
+    ) -> tuple[mx.array, mx.array, mx.array, mx.array, mx.array]:
         if isinstance(batch, PreparedTrainingBatch):
             return (
                 batch.inputs,
                 batch.policy_targets,
+                batch.legal_masks,
                 batch.wdl_targets,
                 batch.value_weights,
             )
@@ -173,14 +183,15 @@ class MLXLearner:
         self,
         batch: TrainingBatch | PreparedTrainingBatch,
     ) -> TrainingMetrics:
-        inputs, policies, wdl, value_weights = self._prepared_arrays(batch)
+        inputs, policies, legal_masks, wdl, value_weights = self._prepared_arrays(batch)
         (total, policy_loss, value_loss), gradients = self._loss_and_grad(
             inputs,
             policies,
+            legal_masks,
             wdl,
             value_weights,
         )
-        gradients, gradient_norm = optim.clip_grad_norm(
+        gradients, unclipped_gradient_norm = optim.clip_grad_norm(
             gradients,
             self.config.max_gradient_norm,
         )
@@ -189,32 +200,36 @@ class MLXLearner:
             total,
             policy_loss,
             value_loss,
-            gradient_norm,
+            unclipped_gradient_norm,
             gradients_finite,
             gradients,
         )
         if not bool(gradients_finite.item()) or not all(
             math.isfinite(float(value.item()))
-            for value in (total, policy_loss, value_loss, gradient_norm)
+            for value in (total, policy_loss, value_loss, unclipped_gradient_norm)
         ):
             raise NonFiniteTrainingError("non-finite loss or gradient; optimizer was not updated")
         self.optimizer.update(self.network, gradients)
         mx.eval(self.network.parameters(), self.optimizer.state)
         self.step += 1
+        raw_norm = float(unclipped_gradient_norm.item())
         return TrainingMetrics(
             step=self.step,
             policy_loss=float(policy_loss.item()),
             value_loss=float(value_loss.item()),
             total_loss=float(total.item()),
-            gradient_norm=float(gradient_norm.item()),
+            gradient_norm=min(raw_norm, self.config.max_gradient_norm),
+            unclipped_gradient_norm=raw_norm,
         )
 
     def evaluate_loss(
         self,
         batch: TrainingBatch | PreparedTrainingBatch,
     ) -> tuple[float, float, float]:
-        inputs, policies, wdl, value_weights = self._prepared_arrays(batch)
-        total, policy_loss, value_loss = self._loss(inputs, policies, wdl, value_weights)
+        inputs, policies, legal_masks, wdl, value_weights = self._prepared_arrays(batch)
+        total, policy_loss, value_loss = self._loss(
+            inputs, policies, legal_masks, wdl, value_weights
+        )
         mx.eval(total, policy_loss, value_loss)
         return float(total.item()), float(policy_loss.item()), float(value_loss.item())
 
