@@ -120,7 +120,8 @@ def _dense_labels(
         action = move_to_action(board, chess.Move.from_uci(str(uci)))
         targets[action] = float(target)
         weights[action] = float(weight)
-        sparse[action] = float(target)
+        if float(weight) > 0:
+            sparse[action] = float(target)
     if not math.isclose(sum(weights), 1.0, abs_tol=1e-6):
         raise ValueError("uncertainty label weights must sum to one")
     return targets, weights, sparse
