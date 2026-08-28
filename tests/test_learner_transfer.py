@@ -13,13 +13,15 @@ from harbichess.training.learner_transfer import (
 )
 
 
-def _quality(*, policy: float, value: float, ece: float) -> ModelQualityMetrics:
+def _quality(
+    *, policy: float, value: float, ece: float, top_agreement: float = 0.5
+) -> ModelQualityMetrics:
     return ModelQualityMetrics(
         samples=100,
         known_value_samples=80,
         teacher_policy_cross_entropy=policy,
         global_teacher_policy_cross_entropy=8.0,
-        teacher_top_action_agreement=0.5,
+        teacher_top_action_agreement=top_agreement,
         value_cross_entropy=value,
         value_accuracy=0.4,
         expected_score_ece=ece,
@@ -52,7 +54,7 @@ def test_transfer_gate_requires_policy_value_calibration_and_tactical_retention(
         maximum_gradient_norm=1.0,
     )
     failed = _candidate_reasons(
-        _quality(policy=3.95, value=1.03, ece=0.13),
+        _quality(policy=3.95, value=1.03, ece=0.13, top_agreement=0.4),
         _tactical(3, (5, 7)),
         baseline_quality=baseline,
         baseline_tactical=baseline_tactical,
@@ -61,7 +63,8 @@ def test_transfer_gate_requires_policy_value_calibration_and_tactical_retention(
     )
 
     assert not passed
-    assert len(failed) == 6
+    assert len(failed) == 7
+    assert "teacher top-action agreement regressed" in failed
 
 
 def test_transfer_checkpoint_selection_is_even_and_metric_blind() -> None:
