@@ -23,9 +23,13 @@ class MLXPolicyValueBackend:
         *,
         dtype: mx.Dtype = mx.bfloat16,
         compiled: bool = True,
+        fixed_batch_size: int | None = None,
     ) -> None:
+        if fixed_batch_size is not None and fixed_batch_size <= 0:
+            raise ValueError("fixed MLX batch size must be positive")
         self.network = network or HarbiChessNetwork()
         self.dtype = dtype
+        self.fixed_batch_size = fixed_batch_size
         self.network.set_dtype(dtype)
         self.network.eval()
         mx.eval(self.network.parameters())
@@ -102,9 +106,21 @@ class MLXPolicyValueBackend:
             for position in positions
         ):
             raise ValueError("all positions in an MLX batch must share shape and schema")
-        inputs = mx.array([position.values for position in positions], dtype=self.dtype)
-        inputs = inputs.reshape((len(positions), *shape))
+        actual_size = len(positions)
+        if self.fixed_batch_size is not None and actual_size > self.fixed_batch_size:
+            raise ValueError("MLX batch exceeds configured fixed batch size")
+        padded_positions = list(positions)
+        if self.fixed_batch_size is not None:
+            padded_positions.extend(
+                positions[-1] for _ in range(self.fixed_batch_size - actual_size)
+            )
+        inputs = mx.array(
+            [position.values for position in padded_positions], dtype=self.dtype
+        )
+        inputs = inputs.reshape((len(padded_positions), *shape))
         policy, wdl = self._thread_forward()(inputs)
+        policy = policy[:actual_size]
+        wdl = wdl[:actual_size]
         mx.eval(policy, wdl)
         return policy, wdl
 
