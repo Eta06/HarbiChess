@@ -207,12 +207,14 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument("--dataset-result", required=True, type=Path)
     parser.add_argument("--label-result", required=True, type=Path)
     parser.add_argument("--output-dir", required=True, type=Path)
+    parser.add_argument("--seed", type=int, default=2026082846)
     arguments = parser.parse_args(argv)
     result = run_decisive_pair_teacher(
         DecisivePairTeacherConfig(
             dataset_result=arguments.dataset_result,
             label_result=arguments.label_result,
             output_dir=arguments.output_dir,
+            seed=arguments.seed,
         )
     )
     print(result)
