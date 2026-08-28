@@ -1073,6 +1073,9 @@ def run_ocak_sanity(
                 "initial_validation_value": report.initial_validation_value_loss,
                 "final_validation_value": report.final_validation_value_loss,
                 "maximum_gradient_norm": report.maximum_gradient_norm,
+                "maximum_unclipped_gradient_norm": (
+                    report.maximum_unclipped_gradient_norm
+                ),
                 "attempted_steps": report.attempted_steps,
                 "best_validation_step": report.best_validation_step,
                 "best_validation_loss": report.best_validation_loss,
