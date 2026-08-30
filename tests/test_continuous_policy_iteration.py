@@ -26,6 +26,7 @@ from harbichess.training.continuous_policy_iteration import (  # noqa: E402
     _LearnerState,
     _paired_mean_interval,
     _policy_gate,
+    _search_tactical_gate,
     _select_continuation_starts,
     _select_continuation_state_starts,
     _select_numeric_checkpoint,
@@ -174,6 +175,30 @@ def test_continuous_wdl_gate_keeps_relative_and_absolute_floors() -> None:
     )
 
     assert len(reasons) == 8
+
+
+def test_cumulative_pilot_local_wdl_gate_uses_its_own_tuning_baseline() -> None:
+    baseline = _wdl(cross_entropy=0.95, macro_cross_entropy=1.03)
+    candidate = _wdl(cross_entropy=0.951, macro_cross_entropy=1.029)
+
+    assert _continuous_wdl_gate(
+        baseline,
+        candidate,
+        require_legacy_absolute_floors=False,
+    ) == ()
+
+
+def test_search_tactical_gate_ignores_raw_policy_but_preserves_solved_cases() -> None:
+    baseline = {
+        "raw": {"solved": 1},
+        "budgets": [{"solved": 5, "cases": [{"case": str(i), "solved": i < 5} for i in range(8)]}],
+    }
+    candidate = {
+        "raw": {"solved": 0},
+        "budgets": [{"solved": 5, "cases": [{"case": str(i), "solved": i < 5} for i in range(8)]}],
+    }
+
+    assert _search_tactical_gate(baseline, candidate) == ()
 
 
 def test_rolling_policy_buffer_preserves_generation_order() -> None:
