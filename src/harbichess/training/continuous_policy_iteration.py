@@ -62,9 +62,16 @@ from harbichess.evaluation.teacher_qualification import (
     _atomic_json,
     select_stratified_records,
 )
+from harbichess.replay.shard import ShardMetadata, write_shard_atomic
+from harbichess.replay.split import ReplaySplit
 from harbichess.search.batching import SharedBatchEvaluator
 from harbichess.search.evaluator import NeuralPositionEvaluator
 from harbichess.search.full_gumbel import FullGumbelConfig, FullGumbelMCTS
+from harbichess.selfplay.continuous_replay import (
+    ContinuousReplayConfig,
+    generate_continuous_replay,
+)
+from harbichess.training.batch import GameBalancedSampler
 from harbichess.training.decoupled_value_transfer import (
     _material_quality,
     _MixedWDLSampler,
@@ -106,6 +113,11 @@ class ContinuousPolicyIterationConfig:
     steps_per_update: int = 40
     batch_size: int = 64
     learning_rate: float = 1e-4
+    selfplay_games_per_update: int = 12
+    selfplay_workers: int = 12
+    selfplay_simulations: int = 64
+    selfplay_max_plies: int = 96
+    minimum_known_selfplay_games: int = 4
     ranking_positions: int = 32
     ranking_depth: int = 4
     tactical_seed: int = 2026082883
@@ -131,6 +143,11 @@ class ContinuousPolicyIterationConfig:
             self.fixed_inference_batch_size,
             self.steps_per_update,
             self.batch_size,
+            self.selfplay_games_per_update,
+            self.selfplay_workers,
+            self.selfplay_simulations,
+            self.selfplay_max_plies,
+            self.minimum_known_selfplay_games,
             self.ranking_positions,
             self.ranking_depth,
             self.tactical_seed,
@@ -152,6 +169,10 @@ class ContinuousPolicyIterationConfig:
             raise ValueError("continuous policy iteration configuration is invalid")
         if self.rolling_generations > self.updates:
             raise ValueError("rolling generations cannot exceed update count")
+        if self.batch_size % 2:
+            raise ValueError("continuous value batch size must be even")
+        if self.minimum_known_selfplay_games > self.selfplay_games_per_update:
+            raise ValueError("minimum known games cannot exceed self-play games")
         if len(self.expected_initial_sha256) != 64:
             raise ValueError("initial candidate hash must be SHA-256")
 
@@ -573,6 +594,7 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
     used_train: set[str] = set()
     used_validation: set[str] = set()
     rolling: list[PreparedTransfer] = []
+    rolling_value_records = []
     accepted = []
     target_artifacts = []
     stopped_reason = None
@@ -609,6 +631,105 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
             / "checkpoints"
             / f"update-{update - 1:03d}"
             / "model.safetensors"
+        )
+        completed_selfplay_games = 0
+
+        def on_game_complete(_game, current_update=update) -> None:
+            nonlocal completed_selfplay_games, snapshot
+            completed_selfplay_games += 1
+            elapsed = time.perf_counter() - started
+            snapshot = replace(
+                snapshot,
+                updated_at=datetime.now(UTC).isoformat(),
+                mode=RunMode.SELF_PLAY,
+                mode_detail=(
+                    f"DEVRIYE latest-network replay · update {current_update}/{config.updates} · "
+                    f"{completed_selfplay_games}/{config.selfplay_games_per_update} games"
+                ),
+                active_games=config.selfplay_games_per_update - completed_selfplay_games,
+                completed_games=completed_selfplay_games,
+                lifetime_games=snapshot.lifetime_games + 1,
+                games_per_hour=completed_selfplay_games / max(elapsed, 1e-9) * 3600.0,
+            )
+            store.write_atomic(snapshot)
+
+        snapshot = replace(
+            snapshot,
+            updated_at=datetime.now(UTC).isoformat(),
+            mode=RunMode.SELF_PLAY,
+            mode_detail=f"DEVRIYE latest-network replay · update {update}/{config.updates}",
+            active_games=config.selfplay_games_per_update,
+            completed_games=0,
+        )
+        store.write_atomic(snapshot)
+        replay_run_id = f"{config.output_dir.name}-update-{update:03d}"
+        _, replay_records, replay_metrics = generate_continuous_replay(
+            _clone(network),
+            run_id=replay_run_id,
+            run_seed=config.seed + update * 10_000,
+            config=ContinuousReplayConfig(
+                games=config.selfplay_games_per_update,
+                workers=config.selfplay_workers,
+                simulations=config.selfplay_simulations,
+                max_considered_actions=config.max_considered_actions,
+                max_plies=config.selfplay_max_plies,
+                fixed_inference_batch_size=config.fixed_inference_batch_size,
+                inference_wait_seconds=config.inference_wait_seconds,
+            ),
+            on_game_complete=on_game_complete,
+        )
+        replay_path = config.output_dir / "replay" / f"update-{update:03d}.jsonl.gz"
+        source_commit = subprocess.check_output(
+            ["git", "rev-parse", "HEAD"], text=True
+        ).strip()
+        replay_header = write_shard_atomic(
+            replay_path,
+            replay_records,
+            ShardMetadata(
+                run_id=replay_run_id,
+                generation=update,
+                source_checkpoint=teacher_sha256,
+                source_commit=source_commit,
+                created_at=datetime.now(UTC).isoformat(),
+                split=ReplaySplit.TRAIN,
+            ),
+        )
+        known_replay_records = tuple(
+            record for record in replay_records if record.outcome_value is not None
+        )
+        if int(replay_metrics["known_outcome_games"]) < config.minimum_known_selfplay_games:
+            reason = (
+                "fresh replay has fewer than the preregistered minimum of "
+                f"{config.minimum_known_selfplay_games} known-outcome games"
+            )
+            accepted.append(
+                {
+                    "update": update,
+                    "accepted": False,
+                    "rollback": True,
+                    "reasons": [reason],
+                    "teacher_sha256": teacher_sha256,
+                    "selfplay": replay_metrics,
+                    "replay_path": str(replay_path),
+                    "replay_header": asdict(replay_header),
+                }
+            )
+            stopped_reason = f"update-{update:03d}-insufficient-fresh-value-replay"
+            break
+        rolling_value_records.append(known_replay_records)
+        rolling_value_records = rolling_value_records[-config.rolling_generations :]
+        fresh_value_records = tuple(
+            record for generation in rolling_value_records for record in generation
+        )
+        fresh_wdl_inputs, _ = _prepare_value(fresh_value_records, rules)
+        fresh_wdl_labels = mx.array(
+            [{1: 0, 0: 1, -1: 2}[int(record.outcome_value)] for record in fresh_value_records],
+            dtype=mx.int32,
+        )
+        snapshot = replace(
+            snapshot,
+            replay_samples=len(fresh_value_records),
+            replay_capacity=sum(len(generation) for generation in rolling_value_records),
         )
         snapshot = replace(
             snapshot,
@@ -653,7 +774,12 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
         )
 
         policy_rng = random.Random(config.seed + update * 10)
-        value_sampler = _MixedWDLSampler(train_records, seed=config.seed + update * 10 + 1)
+        historical_value_sampler = _MixedWDLSampler(
+            train_records, seed=config.seed + update * 10 + 1
+        )
+        fresh_value_sampler = GameBalancedSampler(
+            fresh_value_records, seed=config.seed + update * 10 + 2
+        )
         curve = []
         validation_checkpoints = []
         maximum_gradient = 0.0
@@ -669,15 +795,32 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
             policy_indices = tuple(
                 policy_rng.randrange(len(policy_buffer.records)) for _ in range(config.batch_size)
             )
-            value_indices = value_sampler.sample_indices(config.batch_size)
+            half_value_batch = config.batch_size // 2
+            historical_value_indices = historical_value_sampler.sample_indices(half_value_batch)
+            fresh_value_indices = fresh_value_sampler.sample_indices(half_value_batch)
             policy_rows = mx.array(policy_indices, dtype=mx.int32)
-            value_rows = mx.array(value_indices, dtype=mx.int32)
+            historical_value_rows = mx.array(historical_value_indices, dtype=mx.int32)
+            fresh_value_rows = mx.array(fresh_value_indices, dtype=mx.int32)
+            value_inputs = mx.concatenate(
+                (
+                    mx.take(wdl_train_inputs, historical_value_rows, axis=0),
+                    mx.take(fresh_wdl_inputs, fresh_value_rows, axis=0),
+                ),
+                axis=0,
+            )
+            value_targets = mx.concatenate(
+                (
+                    mx.take(wdl_labels, historical_value_rows, axis=0),
+                    mx.take(fresh_wdl_labels, fresh_value_rows, axis=0),
+                ),
+                axis=0,
+            )
             metric = learner.train_step(
                 mx.take(policy_buffer.inputs, policy_rows, axis=0),
                 mx.take(policy_buffer.targets, policy_rows, axis=0),
                 mx.take(policy_buffer.legal_masks, policy_rows, axis=0),
-                mx.take(wdl_train_inputs, value_rows, axis=0),
-                mx.take(wdl_labels, value_rows, axis=0),
+                value_inputs,
+                value_targets,
             )
             maximum_gradient = max(maximum_gradient, float(metric["gradient_norm"]))
             validation_payload = None
@@ -803,6 +946,12 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
                 "teacher_sha256": teacher_sha256,
                 "target_path": str(target_path),
                 "target_metrics": target_metrics,
+                "selfplay": replay_metrics,
+                "replay_path": str(replay_path),
+                "replay_header": asdict(replay_header),
+                "rolling_value_generations": len(rolling_value_records),
+                "rolling_value_rows": len(fresh_value_records),
+                "value_batch_mix": {"historical": 32, "fresh": 32},
                 "rolling_policy_rows": len(policy_buffer.records),
                 "steps": config.steps_per_update,
                 "selected_local_step": selected_checkpoint["local_step"],
