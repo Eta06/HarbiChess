@@ -179,3 +179,39 @@ The next experiment changes checkpoint selection, not compute or thresholds:
 The fresh run uses seed `2026090301`. Run `03` is diagnostic evidence for the
 hypothesis only and is excluded from training, checkpoint selection, confidence
 intervals, and power calculations.
+
+## Stable-function rehearsal experiment recorded before execution
+
+Run `pusula-continuous-pilot-20260830-04` remains failed and cannot authorize
+production. It passed all fresh-learning endpoints by wide margins, but failed
+all five old-capability non-inferiority endpoints. The audit identified two
+mechanisms that permitted cumulative forgetting despite a frozen MIHVER base:
+
+- each local checkpoint was compared with the immediately preceding update, so
+  several locally acceptable changes accumulated beyond the original-model
+  margin;
+- the historical half of every value batch was trained again against sampled
+  game outcomes instead of preserving the qualified MIHVER WDL function. This
+  allowed the plastic residual to rewrite calibration on the old distribution
+  even though all MIHVER parameters stayed frozen.
+
+The next fresh experiment changes the continual-learning constraint, not the
+final statistical gate:
+
+- historical fit examples receive the original MIHVER soft WDL distribution as
+  a distillation target; fresh fit examples retain empirical soft outcome
+  targets formed only from byte-identical fresh states;
+- the fixed 32 historical / 32 fresh value batch composition remains unchanged;
+- every value checkpoint is compared with the update-0 MIHVER metrics on the
+  historical tuning partition, never merely with the preceding update;
+- checkpoint eligibility uses the already frozen point margins `+0.003` CE,
+  `+0.005` macro CE, `+0.003` Brier, `-0.010` Pearson, and `+0.010` ECE with
+  absolute ECE `<=0.120`, together with all fresh-direction requirements;
+- the independent final historical holdout remains invisible until the one-time
+  cumulative test.
+
+All final bootstrap margins, 20,000 samples, replay/search/training budgets,
+three-update horizon, arena/tactical/continuation safeguards, and exact-resume
+requirements remain unchanged. Run `04` replay and checkpoints are excluded.
+The replacement uses seed `2026090401` and a new output directory. This is a
+fresh prospective test; run `04` is not reclassified.
