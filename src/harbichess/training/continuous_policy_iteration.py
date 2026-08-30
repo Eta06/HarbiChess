@@ -47,6 +47,7 @@ from harbichess.evaluation.cumulative_value_gate import (
     CumulativeGateConfig,
     PredictionGame,
     evaluate_cumulative_gate,
+    paired_bootstrap,
 )
 from harbichess.evaluation.decoupled_value_qualification import (
     DecoupledValueQualificationConfig,
@@ -694,6 +695,23 @@ def _fresh_wdl_direction_gate(
     ):
         reasons.append("fresh tuning WDL Pearson regressed")
     return tuple(reasons)
+
+
+def _fresh_wdl_harm_gate(result: dict[str, object]) -> tuple[str, ...]:
+    """Reject only statistically supported local fresh-capability harm."""
+
+    intervals = result["intervals"]
+    labels = {
+        "cross_entropy": "CE",
+        "macro_cross_entropy": "macro CE",
+        "brier": "Brier",
+        "pearson": "Pearson",
+    }
+    return tuple(
+        f"paired fresh tuning {label} shows harm"
+        for metric, label in labels.items()
+        if float(intervals[metric]["high"]) < 0.0  # type: ignore[index]
+    )
 
 
 def _old_wdl_point_noninferiority_gate(
@@ -1489,18 +1507,12 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
                 fresh_wdl_validation_inputs,
                 fresh_validation_outcomes,
             )
-            fresh_value_reasons = (
-                _fresh_wdl_direction_gate(fresh_wdl_before, fresh_value_validation)
-                if config.stable_plastic_value
-                else ()
-            )
             value_reasons = (
                 *(
                     _old_wdl_point_noninferiority_gate(initial_wdl, value_validation)
                     if config.stable_plastic_value
                     else _continuous_wdl_gate(previous_wdl, value_validation)
                 ),
-                *fresh_value_reasons,
             )
             value_validation_checkpoints.append(
                 {
@@ -1613,9 +1625,6 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
                                 *_old_wdl_point_noninferiority_gate(
                                     initial_wdl, interpolated_old
                                 ),
-                                *_fresh_wdl_direction_gate(
-                                    fresh_wdl_before, interpolated_fresh
-                                ),
                             ),
                             "state": interpolated_state,
                         }
@@ -1644,11 +1653,23 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
             fresh_wdl_validation_inputs,
             fresh_validation_outcomes,
         )
-        fresh_numeric_reasons = (
-            _fresh_wdl_direction_gate(fresh_wdl_before, after_fresh_wdl)
-            if config.stable_plastic_value
-            else ()
-        )
+        fresh_wdl_safety = None
+        fresh_numeric_reasons = ()
+        if config.stable_plastic_value:
+            fresh_wdl_safety = paired_bootstrap(
+                _prediction_games(
+                    previous_network,
+                    network,
+                    fresh_value_validation_records,
+                    rules=rules,
+                ),
+                improvement=True,
+                config=CumulativeGateConfig(
+                    bootstrap_samples=2_000,
+                    seed=config.seed + update * 10 + 8,
+                ),
+            )
+            fresh_numeric_reasons = _fresh_wdl_harm_gate(fresh_wdl_safety)
         numeric_reasons = (
             *_policy_gate(before_policy, after_policy),
             *(
@@ -1665,7 +1686,7 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
             )
         if not value_checkpoint_eligible:
             numeric_reasons = (
-                "no validation checkpoint independently passed historical and fresh WDL gates",
+                "no value checkpoint remained inside the historical WDL trust region",
                 *numeric_reasons,
             )
         after_material = _material_quality(network, *material_validation)
@@ -1786,6 +1807,7 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
                 "wdl_after": after_wdl,
                 "fresh_wdl_before": fresh_wdl_before,
                 "fresh_wdl_after": after_fresh_wdl,
+                "fresh_wdl_safety": fresh_wdl_safety,
                 "material": after_material,
                 "continuation": continuation,
                 "tactical": tactical,
@@ -2117,8 +2139,8 @@ def main(argv: Sequence[str] | None = None) -> int:
             selfplay_games_per_update=192 if arguments.pusula else 96,
             minimum_known_selfplay_games=48 if arguments.pusula else 24,
             final_arena_pairs=32 if arguments.pusula else 8,
-            final_qualification_games=768 if arguments.pusula else 0,
-            minimum_final_known_games=192 if arguments.pusula else 0,
+            final_qualification_games=2_688 if arguments.pusula else 0,
+            minimum_final_known_games=744 if arguments.pusula else 0,
         )
     )
     print(result)
