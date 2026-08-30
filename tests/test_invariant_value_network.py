@@ -97,3 +97,14 @@ def test_invariant_projection_receives_current_piece_counts() -> None:
 
     assert float((piece_value[0, 0] - empty_value[0, 0]).item()) == 1.0
     assert float((piece_value[0, 1] - empty_value[0, 1]).item()) == 0.0
+
+
+def test_tower_freeze_preserves_global_anchor() -> None:
+    _, target = _networks()
+
+    target.freeze_to_value_tower()
+    names = {name for name, _ in tree_flatten(target.trainable_parameters())}
+
+    assert names
+    assert "invariant_value_linear.weight" not in names
+    assert all(name.startswith("value_tower_") for name in names)
