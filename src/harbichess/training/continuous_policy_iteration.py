@@ -215,6 +215,7 @@ _TRAINABLE_PREFIXES = (
 _POLICY_PREFIXES = _TRAINABLE_PREFIXES[:2]
 _VALUE_PREFIXES = _TRAINABLE_PREFIXES[2:]
 _STABLE_TRAINABLE_PREFIXES = (*_POLICY_PREFIXES, *PLASTIC_VALUE_PREFIXES)
+_VALUE_TRUST_REGION_ALPHAS = (1.0, 0.75, 0.5, 0.25, 0.125, 0.0625, 0.03125)
 
 
 @dataclass(frozen=True, slots=True)
@@ -301,6 +302,30 @@ class _ContinuousHeadLearner:
 
     def reset_optimizer(self) -> None:
         self.optimizer = optim.Adam(learning_rate=self.learning_rate)
+
+
+def _interpolate_value_state(
+    base: _LearnerState,
+    candidate: _LearnerState,
+    *,
+    alpha: float,
+    value_prefixes: tuple[str, ...],
+) -> _LearnerState:
+    """Scale one candidate value update without changing its direction."""
+
+    if not 0.0 <= alpha <= 1.0:
+        raise ValueError("value interpolation alpha must be in [0, 1]")
+    base_weights = dict(base.weights)
+    weights = []
+    for name, candidate_value in candidate.weights:
+        base_value = base_weights[name]
+        value = (
+            base_value + alpha * (candidate_value - base_value)
+            if name.startswith(value_prefixes)
+            else base_value
+        )
+        weights.append((name, value))
+    return _LearnerState(candidate.step, tuple(weights), candidate.optimizer)
 
 
 def _clone(network):
@@ -1548,8 +1573,46 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
             policy_checkpoints or validation_checkpoints,
             key=lambda checkpoint: int(checkpoint["local_step"]),
         )
+        constrained_value_checkpoints = value_validation_checkpoints
+        if config.stable_plastic_value:
+            constrained_value_checkpoints = []
+            for checkpoint in value_validation_checkpoints:
+                for alpha in _VALUE_TRUST_REGION_ALPHAS:
+                    interpolated_state = _interpolate_value_state(
+                        before_state,
+                        checkpoint["state"],
+                        alpha=alpha,
+                        value_prefixes=value_prefixes,
+                    )
+                    learner.restore(interpolated_state)
+                    interpolated_old = _wdl_quality(
+                        network, wdl_validation_inputs, validation_outcomes
+                    )
+                    interpolated_fresh = _wdl_quality(
+                        network,
+                        fresh_wdl_validation_inputs,
+                        fresh_validation_outcomes,
+                    )
+                    constrained_value_checkpoints.append(
+                        {
+                            "local_step": checkpoint["local_step"],
+                            "learner_step": checkpoint["learner_step"],
+                            "alpha": alpha,
+                            "wdl": interpolated_old,
+                            "fresh_wdl": interpolated_fresh,
+                            "reasons": (
+                                *_old_wdl_point_noninferiority_gate(
+                                    initial_wdl, interpolated_old
+                                ),
+                                *_fresh_wdl_direction_gate(
+                                    fresh_wdl_before, interpolated_fresh
+                                ),
+                            ),
+                            "state": interpolated_state,
+                        }
+                    )
         value_checkpoint, value_checkpoint_eligible = _select_value_checkpoint(
-            value_validation_checkpoints
+            constrained_value_checkpoints
         )
         learner.restore(
             _compose_headwise_state(
@@ -1705,6 +1768,7 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
                 ),
                 "selected_policy_local_step": policy_checkpoint["local_step"],
                 "selected_wdl_local_step": value_checkpoint["local_step"],
+                "selected_wdl_alpha": value_checkpoint.get("alpha", 1.0),
                 "optimizer_reset_after_composition": True,
                 "learner_step": learner.step,
                 "maximum_gradient_norm": maximum_gradient,
@@ -1728,6 +1792,10 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
                 "value_validation_checkpoints": [
                     {key: value for key, value in checkpoint.items() if key != "state"}
                     for checkpoint in value_validation_checkpoints
+                ],
+                "value_trust_region_checkpoints": [
+                    {key: value for key, value in checkpoint.items() if key != "state"}
+                    for checkpoint in constrained_value_checkpoints
                 ],
                 "curve": curve,
             }
