@@ -72,7 +72,6 @@ from harbichess.selfplay.continuous_replay import (
     ContinuousReplayConfig,
     generate_continuous_replay,
 )
-from harbichess.training.batch import GameBalancedSampler
 from harbichess.training.decoupled_value_transfer import (
     _material_quality,
     _MixedWDLSampler,
@@ -86,6 +85,7 @@ from harbichess.training.full_gumbel_transfer import (
 )
 from harbichess.training.invariant_wdl_transfer import _wdl_quality
 from harbichess.training.joint_policy_value_transfer import (
+    OutcomeGameBalancedSampler,
     _continuation_ranking,
     _parameter_hash,
     _sha256,
@@ -778,6 +778,24 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
         fresh_value_records = tuple(
             record for generation in rolling_value_records for record in generation
         )
+        fresh_outcomes = {record.outcome_value for record in fresh_value_records}
+        if fresh_outcomes != {-1, 0, 1}:
+            reason = "rolling fresh replay does not contain win, draw, and loss rows"
+            accepted.append(
+                {
+                    "update": update,
+                    "accepted": False,
+                    "rollback": True,
+                    "reasons": [reason],
+                    "teacher_sha256": teacher_sha256,
+                    "selfplay": replay_metrics,
+                    "replay_path": str(replay_path),
+                    "replay_header": asdict(replay_header),
+                    "rolling_value_outcomes": sorted(fresh_outcomes),
+                }
+            )
+            stopped_reason = f"update-{update:03d}-incomplete-fresh-outcome-coverage"
+            break
         fresh_wdl_inputs, _ = _prepare_value(fresh_value_records, rules)
         fresh_wdl_labels = mx.array(
             [{1: 0, 0: 1, -1: 2}[int(record.outcome_value)] for record in fresh_value_records],
@@ -834,7 +852,7 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
         historical_value_sampler = _MixedWDLSampler(
             train_records, seed=config.seed + update * 10 + 1
         )
-        fresh_value_sampler = GameBalancedSampler(
+        fresh_value_sampler = OutcomeGameBalancedSampler(
             fresh_value_records, seed=config.seed + update * 10 + 2
         )
         curve = []
@@ -1009,6 +1027,7 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
                 "rolling_value_generations": len(rolling_value_records),
                 "rolling_value_rows": len(fresh_value_records),
                 "value_batch_mix": {"historical": 32, "fresh": 32},
+                "fresh_value_sampling": "outcome-then-game-balanced",
                 "rolling_policy_rows": len(policy_buffer.records),
                 "steps": config.steps_per_update,
                 "selected_local_step": selected_checkpoint["local_step"],
