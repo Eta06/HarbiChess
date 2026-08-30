@@ -718,6 +718,49 @@ def _select_continuation_starts(
     )
 
 
+def _select_continuation_state_starts(
+    records,
+    *,
+    updates: int,
+    games_per_update: int,
+    seed: int,
+):
+    """Select non-overlapping states when the game pool is smaller than the run."""
+
+    per_phase_per_update = games_per_update // 3
+    required_per_phase = updates * per_phase_per_update
+    phases = {
+        "opening": tuple(record for record in records if record.ply < 20),
+        "middlegame": tuple(record for record in records if 20 <= record.ply < 80),
+        "endgame": tuple(record for record in records if record.ply >= 80),
+    }
+
+    def key(record) -> bytes:
+        return hashlib.blake2b(
+            f"{seed}:{_identity(record)}".encode(), digest_size=16
+        ).digest()
+
+    selected_by_phase = {}
+    for phase, candidates in phases.items():
+        unique = {_identity(record): record for record in candidates}
+        ordered = sorted(unique.values(), key=key)
+        if len(ordered) < required_per_phase:
+            raise ValueError(
+                f"continuation pool has fewer than {required_per_phase} distinct {phase} states"
+            )
+        selected_by_phase[phase] = tuple(ordered[:required_per_phase])
+    return tuple(
+        tuple(
+            selected_by_phase[phase][
+                update * per_phase_per_update : (update + 1) * per_phase_per_update
+            ][offset]
+            for phase in ("opening", "middlegame", "endgame")
+            for offset in range(per_phase_per_update)
+        )
+        for update in range(updates)
+    )
+
+
 def _soft_value_targets(historical, fresh) -> tuple[mx.array, mx.array, dict[str, int]]:
     counts = {}
     for record in (*historical, *fresh):
@@ -905,6 +948,21 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
         {record.game_id for record in validation_records}
     )
     rules = PythonChessRules()
+    continuation_starts = (
+        _select_continuation_state_starts(
+            train_records,
+            updates=config.updates,
+            games_per_update=config.selfplay_games_per_update,
+            seed=config.seed + 3000,
+        )
+        if config.stable_plastic_value
+        else _select_continuation_starts(
+            train_records,
+            updates=config.updates,
+            games_per_update=config.selfplay_games_per_update,
+            seed=config.seed + 3000,
+        )
+    )
     wdl_train_inputs, _ = _prepare_value(train_records, rules)
     wdl_validation_inputs, _ = _prepare_value(tuning_records, rules)
     train_outcomes = tuple(int(record.outcome_value) for record in train_records)
@@ -922,13 +980,6 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
         count=config.ranking_positions,
         seed=2026083091,
     )
-    continuation_starts = _select_continuation_starts(
-        train_records,
-        updates=config.updates,
-        games_per_update=config.selfplay_games_per_update,
-        seed=config.seed + 3000,
-    )
-
     store = SnapshotStore(config.telemetry_path)
     snapshot = replace(
         store.read(),
