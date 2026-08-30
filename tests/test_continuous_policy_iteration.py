@@ -53,6 +53,15 @@ def test_config_rejects_impossible_rolling_window() -> None:
         _config(updates=2, rolling_generations=3)
 
 
+def test_config_defaults_use_scaled_qualified_teacher_set() -> None:
+    config = _config()
+
+    assert config.train_targets_per_update == 768
+    assert config.validation_targets_per_update == 192
+    assert config.steps_per_update == 40
+    assert config.batch_size == 64
+
+
 def test_config_requires_an_even_mixed_value_batch() -> None:
     with pytest.raises(ValueError, match="value batch size must be even"):
         _config(batch_size=63)
