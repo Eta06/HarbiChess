@@ -140,6 +140,46 @@ class OutcomeGameBalancedSampler:
         return tuple(selected)
 
 
+class FixedOutcomeRatioGameBalancedSampler:
+    """Sample a fixed outcome mix, then games uniformly inside each outcome."""
+
+    def __init__(
+        self,
+        records: tuple[ReplayRecord, ...],
+        *,
+        seed: int,
+        outcome_counts: dict[int, int],
+    ) -> None:
+        if set(outcome_counts) != {-1, 0, 1} or any(
+            count <= 0 for count in outcome_counts.values()
+        ):
+            raise ValueError("fixed outcome counts require positive loss, draw, and win rows")
+        self._rng = random.Random(seed)
+        self._outcome_counts = dict(outcome_counts)
+        grouped: dict[int, dict[str, list[int]]] = {
+            outcome: defaultdict(list) for outcome in (-1, 0, 1)
+        }
+        for index, record in enumerate(records):
+            if record.outcome_value is None:
+                raise ValueError("value sampler accepts only known outcomes")
+            grouped[record.outcome_value][record.game_id].append(index)
+        if any(not games for games in grouped.values()):
+            raise ValueError("value sampler requires win, draw, and loss rows")
+        self._grouped = grouped
+        self._games = {outcome: tuple(sorted(games)) for outcome, games in grouped.items()}
+
+    def sample_indices(self, size: int) -> tuple[int, ...]:
+        if size != sum(self._outcome_counts.values()):
+            raise ValueError("sample size must match fixed outcome counts")
+        selected = []
+        for outcome in (-1, 0, 1):
+            for _ in range(self._outcome_counts[outcome]):
+                game = self._rng.choice(self._games[outcome])
+                selected.append(self._rng.choice(self._grouped[outcome][game]))
+        self._rng.shuffle(selected)
+        return tuple(selected)
+
+
 class JointPolicyValueLearner:
     def __init__(
         self,
