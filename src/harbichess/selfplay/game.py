@@ -277,7 +277,10 @@ def play_game(
         else:
             policy_moves = target_search.moves
             repetition_redirected = False
-        if settings.value_policy_temperature is None:
+        action_weights = getattr(target_search, "action_weights", ())
+        if action_weights and not settings.repetition_target_transform:
+            policy = tuple(action_weights)
+        elif settings.value_policy_temperature is None:
             total_visits = sum(statistics.visits for statistics in policy_moves)
             if total_visits <= 0:
                 raise RuntimeError("non-terminal search returned no visited moves")
