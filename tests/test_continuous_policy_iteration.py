@@ -30,6 +30,7 @@ from harbichess.training.continuous_policy_iteration import (  # noqa: E402
     _LearnerState,
     _local_arena_catastrophic_gate,
     _old_wdl_point_noninferiority_gate,
+    _old_wdl_statistical_noninferiority_gate,
     _paired_mean_interval,
     _policy_gate,
     _search_tactical_gate,
@@ -222,6 +223,25 @@ def test_old_tuning_gate_uses_frozen_noninferiority_margins() -> None:
             },
         )
     ) == 5
+
+
+def test_old_local_gate_requires_statistical_margin_violation() -> None:
+    intervals = {
+        metric: {"low": -0.01, "high": 0.01}
+        for metric in ("cross_entropy", "macro_cross_entropy", "brier", "pearson", "ece_10")
+    }
+    inconclusive = {"intervals": intervals, "candidate": {"ece_10": 0.05}}
+    harmful = {
+        "intervals": {
+            **intervals,
+            "cross_entropy": {"low": 0.004, "high": 0.006},
+            "pearson": {"low": -0.03, "high": -0.02},
+        },
+        "candidate": {"ece_10": 0.13},
+    }
+
+    assert _old_wdl_statistical_noninferiority_gate(inconclusive) == ()
+    assert len(_old_wdl_statistical_noninferiority_gate(harmful)) == 3
 
 
 def test_search_tactical_gate_ignores_raw_policy_but_preserves_solved_cases() -> None:
