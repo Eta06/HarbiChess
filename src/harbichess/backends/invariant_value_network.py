@@ -146,3 +146,13 @@ class HarbiChessInvariantValueNetwork(HarbiChessNetwork):
 
         self.freeze()
         self.invariant_value_linear.unfreeze()
+
+    def freeze_to_value_tower(self) -> None:
+        """Preserve the qualified global anchor and train only the spatial value tower."""
+
+        self.freeze()
+        self.value_tower_stem.unfreeze()
+        for block in self.value_tower_blocks:
+            block.unfreeze()
+        self.value_tower_hidden.unfreeze()
+        self.value_tower_output.unfreeze()
