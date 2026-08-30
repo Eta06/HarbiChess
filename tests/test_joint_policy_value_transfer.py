@@ -7,6 +7,7 @@ mx = pytest.importorskip("mlx.core")
 from harbichess.core.state import Side  # noqa: E402
 from harbichess.replay.schema import ReplayRecord  # noqa: E402
 from harbichess.training.joint_policy_value_transfer import (  # noqa: E402
+    FixedOutcomeRatioGameBalancedSampler,
     JointPolicyValueTransferConfig,
     OutcomeGameBalancedSampler,
     _audit_perspective,
@@ -50,6 +51,27 @@ def test_outcome_sampler_uses_every_class_and_rejects_unknown_rows() -> None:
     assert sum(records[index].outcome_value == 1 for index in selected) == 4
     with pytest.raises(ValueError, match="known outcomes"):
         OutcomeGameBalancedSampler((*records, _record("unknown", 0, Side.WHITE, None)), seed=7)
+
+
+def test_fixed_outcome_sampler_preserves_preregistered_class_mix() -> None:
+    records = tuple(
+        _record(f"game-{outcome}-{index}", 0, Side.WHITE, outcome)
+        for outcome in (-1, 0, 1)
+        for index in range(2)
+    )
+    sampler = FixedOutcomeRatioGameBalancedSampler(
+        records,
+        seed=7,
+        outcome_counts={-1: 2, 0: 4, 1: 2},
+    )
+
+    selected = sampler.sample_indices(8)
+
+    assert sum(records[index].outcome_value == -1 for index in selected) == 2
+    assert sum(records[index].outcome_value == 0 for index in selected) == 4
+    assert sum(records[index].outcome_value == 1 for index in selected) == 2
+    with pytest.raises(ValueError, match="fixed outcome counts"):
+        sampler.sample_indices(7)
 
 
 def test_perspective_audit_accepts_alternating_decisive_and_unknown_games() -> None:
