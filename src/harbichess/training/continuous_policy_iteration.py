@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import math
 import os
@@ -171,6 +172,8 @@ class ContinuousPolicyIterationConfig:
             raise ValueError("rolling generations cannot exceed update count")
         if self.batch_size % 2:
             raise ValueError("continuous value batch size must be even")
+        if self.selfplay_games_per_update % 3:
+            raise ValueError("self-play games must divide evenly across three phases")
         if self.minimum_known_selfplay_games > self.selfplay_games_per_update:
             raise ValueError("minimum known games cannot exceed self-play games")
         if len(self.expected_initial_sha256) != 64:
@@ -503,6 +506,52 @@ def _select_numeric_checkpoint(checkpoints: Sequence[dict[str, object]]):
     return selected, bool(eligible)
 
 
+def _select_continuation_starts(
+    records,
+    *,
+    updates: int,
+    games_per_update: int,
+    seed: int,
+):
+    per_phase_per_update = games_per_update // 3
+    required_per_phase = updates * per_phase_per_update
+    phases = {
+        "opening": tuple(record for record in records if record.ply < 20),
+        "middlegame": tuple(record for record in records if 20 <= record.ply < 80),
+        "endgame": tuple(record for record in records if record.ply >= 80),
+    }
+
+    def key(label: str) -> bytes:
+        return hashlib.blake2b(f"{seed}:{label}".encode(), digest_size=16).digest()
+
+    selected_by_phase = {}
+    for phase, candidates in phases.items():
+        by_game = {}
+        for record in candidates:
+            by_game.setdefault(record.game_id, []).append(record)
+        chosen = []
+        for game_id in sorted(by_game, key=lambda value: key(f"game:{phase}:{value}")):
+            rows = sorted(by_game[game_id], key=lambda record: key(_identity(record)))
+            chosen.append(rows[0])
+            if len(chosen) == required_per_phase:
+                break
+        if len(chosen) < required_per_phase:
+            raise ValueError(
+                f"continuation pool has fewer than {required_per_phase} distinct {phase} games"
+            )
+        selected_by_phase[phase] = tuple(chosen)
+    return tuple(
+        tuple(
+            selected_by_phase[phase][
+                update * per_phase_per_update : (update + 1) * per_phase_per_update
+            ][offset]
+            for phase in ("opening", "middlegame", "endgame")
+            for offset in range(per_phase_per_update)
+        )
+        for update in range(updates)
+    )
+
+
 def _load_initial(
     config: ContinuousPolicyIterationConfig,
 ) -> tuple[HarbiChessDecoupledValueNetwork, Path]:
@@ -552,6 +601,12 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
         rules=rules,
         count=config.ranking_positions,
         seed=2026083091,
+    )
+    continuation_starts = _select_continuation_starts(
+        train_records,
+        updates=config.updates,
+        games_per_update=config.selfplay_games_per_update,
+        seed=config.seed + 3000,
     )
 
     store = SnapshotStore(config.telemetry_path)
@@ -677,11 +732,13 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
                 inference_wait_seconds=config.inference_wait_seconds,
             ),
             on_game_complete=on_game_complete,
+            initial_states=tuple(record.state for record in continuation_starts[update - 1]),
+        )
+        replay_metrics["starting_records"] = tuple(
+            _identity(record) for record in continuation_starts[update - 1]
         )
         replay_path = config.output_dir / "replay" / f"update-{update:03d}.jsonl.gz"
-        source_commit = subprocess.check_output(
-            ["git", "rev-parse", "HEAD"], text=True
-        ).strip()
+        source_commit = subprocess.check_output(["git", "rev-parse", "HEAD"], text=True).strip()
         replay_header = write_shard_atomic(
             replay_path,
             replay_records,
