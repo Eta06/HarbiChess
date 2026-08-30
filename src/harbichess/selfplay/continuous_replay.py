@@ -3,11 +3,13 @@
 from __future__ import annotations
 
 import time
-from collections.abc import Callable
+from collections import Counter
+from collections.abc import Callable, Sequence
 from dataclasses import asdict, dataclass
 
 from harbichess.backends.mlx_backend import MLXPolicyValueBackend
 from harbichess.chess.rules import PythonChessRules
+from harbichess.core.state import ChessState
 from harbichess.replay.diversity import measure_diversity
 from harbichess.replay.schema import ReplayRecord, records_from_game
 from harbichess.search.batching import SharedBatchEvaluator
@@ -57,6 +59,7 @@ def generate_continuous_replay(
     run_seed: int,
     config: ContinuousReplayConfig | None = None,
     on_game_complete: Callable[[SelfPlayGame], None] | None = None,
+    initial_states: Sequence[ChessState] | None = None,
 ) -> tuple[tuple[SelfPlayGame, ...], tuple[ReplayRecord, ...], dict[str, object]]:
     """Play one versioned generation; max-ply outcomes remain unknown in replay."""
 
@@ -95,6 +98,8 @@ def generate_continuous_replay(
                 search_root_noise=False,
             ),
             on_game_complete=on_game_complete,
+            initial_states=initial_states,
+            max_additional_plies=settings.max_plies if initial_states is not None else None,
         )
     finally:
         batcher.close()
@@ -105,6 +110,15 @@ def generate_continuous_replay(
     diversity = measure_diversity(games)
     known_games = sum(game.outcome.termination != "max_plies" for game in games)
     known_records = sum(record.outcome_value is not None for record in records)
+    start_phases = Counter(
+        "opening"
+        if game.samples[0].state.ply < 20
+        else "middlegame"
+        if game.samples[0].state.ply < 80
+        else "endgame"
+        for game in games
+        if game.samples
+    )
     return (
         games,
         records,
@@ -114,6 +128,7 @@ def generate_continuous_replay(
             "positions": len(records),
             "known_outcome_games": known_games,
             "known_outcome_records": known_records,
+            "start_phases": tuple(sorted(start_phases.items())),
             "terminations": tuple(
                 sorted(
                     {
