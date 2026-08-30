@@ -74,3 +74,23 @@ def test_global_wdl_freeze_excludes_spatial_tower_and_release() -> None:
         "global_value_output.weight",
         "global_value_output.bias",
     }
+
+
+def test_continuous_freeze_trains_only_policy_and_invariant_wdl_heads() -> None:
+    _, target = _networks()
+
+    target.freeze_to_continuous_heads()
+    names = {name for name, _ in tree_flatten(target.trainable_parameters())}
+
+    assert names == {
+        "policy_conv.weight",
+        "policy_conv.bias",
+        "policy_linear.weight",
+        "policy_linear.bias",
+        "invariant_value_linear.weight",
+        "invariant_value_linear.bias",
+        "global_value_hidden.weight",
+        "global_value_hidden.bias",
+        "global_value_output.weight",
+        "global_value_output.bias",
+    }
