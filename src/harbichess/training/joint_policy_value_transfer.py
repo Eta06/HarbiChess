@@ -363,6 +363,12 @@ def _spearman(left: Sequence[float], right: Sequence[float]) -> float:
     return numerator / denominator if denominator else 0.0
 
 
+def _network_value_logits(network, inputs: mx.array) -> mx.array:
+    """Use the complete public value path, including representation extensions."""
+
+    return network(inputs)[1]
+
+
 def _continuation_ranking(
     baseline,
     candidate,
@@ -386,8 +392,8 @@ def _continuation_ranking(
         inputs = mx.array([position.values for position in positions], dtype=mx.float32).reshape(
             (len(positions), *shape)
         )
-        baseline_logits = baseline._value_logits(baseline._trunk(inputs))
-        candidate_logits = candidate._value_logits(candidate._trunk(inputs))
+        baseline_logits = _network_value_logits(baseline, inputs)
+        candidate_logits = _network_value_logits(candidate, inputs)
         mx.eval(baseline_logits, candidate_logits)
 
         def expected(rows: list[list[float]]) -> tuple[float, ...]:
