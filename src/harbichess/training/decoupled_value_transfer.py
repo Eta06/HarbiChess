@@ -82,6 +82,8 @@ class DecoupledValueTransferConfig:
 _MATERIAL_PREFIX = ("material_value_linear.",)
 _PRODUCTION_PREFIXES = (
     "invariant_value_linear.",
+    "global_value_hidden.",
+    "global_value_output.",
     "value_tower_stem.",
     "value_tower_blocks.",
     "value_tower_hidden.",
