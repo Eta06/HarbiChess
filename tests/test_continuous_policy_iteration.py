@@ -23,6 +23,7 @@ from harbichess.training.continuous_policy_iteration import (  # noqa: E402
     _compose_headwise_state,
     _continuous_wdl_gate,
     _ContinuousHeadLearner,
+    _fresh_wdl_direction_gate,
     _LearnerState,
     _paired_mean_interval,
     _policy_gate,
@@ -31,6 +32,7 @@ from harbichess.training.continuous_policy_iteration import (  # noqa: E402
     _select_continuation_state_starts,
     _select_numeric_checkpoint,
     _select_qualification_starts,
+    _select_value_checkpoint,
     _soft_value_targets,
     _split_fit_tuning,
     _verify_resume_exactness,
@@ -199,6 +201,50 @@ def test_search_tactical_gate_ignores_raw_policy_but_preserves_solved_cases() ->
     }
 
     assert _search_tactical_gate(baseline, candidate) == ()
+
+
+def test_fresh_wdl_gate_requires_all_preregistered_directions() -> None:
+    baseline = {
+        **_wdl(),
+        "brier": 0.55,
+    }
+    candidate = {
+        **_wdl(cross_entropy=0.89, macro_cross_entropy=0.91, expected_score_pearson=0.46),
+        "brier": 0.54,
+    }
+
+    assert _fresh_wdl_direction_gate(baseline, candidate) == ()
+    assert len(
+        _fresh_wdl_direction_gate(
+            baseline,
+            {**candidate, "cross_entropy": 0.91, "brier": 0.56},
+        )
+    ) == 2
+
+
+def test_value_checkpoint_uses_best_fresh_ce_among_safe_steps() -> None:
+    checkpoints = (
+        {
+            "local_step": 1,
+            "fresh_wdl": {"cross_entropy": 0.90, "macro_cross_entropy": 0.91},
+            "reasons": (),
+        },
+        {
+            "local_step": 8,
+            "fresh_wdl": {"cross_entropy": 0.84, "macro_cross_entropy": 0.89},
+            "reasons": (),
+        },
+        {
+            "local_step": 20,
+            "fresh_wdl": {"cross_entropy": 0.80, "macro_cross_entropy": 0.85},
+            "reasons": ("historical regression",),
+        },
+    )
+
+    selected, eligible = _select_value_checkpoint(checkpoints)
+
+    assert eligible is True
+    assert selected["local_step"] == 8
 
 
 def test_rolling_policy_buffer_preserves_generation_order() -> None:
