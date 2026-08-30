@@ -23,8 +23,10 @@ from harbichess.training.continuous_policy_iteration import (  # noqa: E402
     _compose_headwise_state,
     _continuous_wdl_gate,
     _ContinuousHeadLearner,
+    _empirical_fresh_value_targets,
     _fresh_wdl_direction_gate,
     _LearnerState,
+    _old_wdl_point_noninferiority_gate,
     _paired_mean_interval,
     _policy_gate,
     _search_tactical_gate,
@@ -35,6 +37,7 @@ from harbichess.training.continuous_policy_iteration import (  # noqa: E402
     _select_value_checkpoint,
     _soft_value_targets,
     _split_fit_tuning,
+    _stable_value_distillation_targets,
     _verify_resume_exactness,
 )
 from harbichess.training.full_gumbel_transfer import (  # noqa: E402
@@ -188,6 +191,34 @@ def test_cumulative_pilot_local_wdl_gate_uses_its_own_tuning_baseline() -> None:
         candidate,
         require_legacy_absolute_floors=False,
     ) == ()
+
+
+def test_old_tuning_gate_uses_frozen_noninferiority_margins() -> None:
+    baseline = {**_wdl(), "brier": 0.55}
+    within = {
+        **_wdl(
+            cross_entropy=0.903,
+            macro_cross_entropy=0.925,
+            expected_score_pearson=0.44,
+            ece_10=0.04,
+        ),
+        "brier": 0.553,
+    }
+
+    assert _old_wdl_point_noninferiority_gate(baseline, within) == ()
+    assert len(
+        _old_wdl_point_noninferiority_gate(
+            baseline,
+            {
+                **within,
+                "cross_entropy": 0.904,
+                "macro_cross_entropy": 0.926,
+                "brier": 0.554,
+                "expected_score_pearson": 0.439,
+                "ece_10": 0.041,
+            },
+        )
+    ) == 5
 
 
 def test_search_tactical_gate_ignores_raw_policy_but_preserves_solved_cases() -> None:
@@ -416,6 +447,34 @@ def test_soft_value_targets_preserve_conflicting_outcome_uncertainty() -> None:
         "ambiguous_fit_states": 1,
         "ambiguous_fit_rows": 2,
     }
+
+
+def test_fresh_soft_targets_do_not_mix_historical_outcomes() -> None:
+    fresh = (
+        SimpleNamespace(root_fen="same", moves=(1, 2), outcome_value=1),
+        SimpleNamespace(root_fen="same", moves=(1, 2), outcome_value=0),
+        SimpleNamespace(root_fen="other", moves=(3,), outcome_value=-1),
+    )
+
+    targets, summary = _empirical_fresh_value_targets(fresh)
+
+    assert targets.tolist() == [[0.5, 0.5, 0.0], [0.5, 0.5, 0.0], [0.0, 0.0, 1.0]]
+    assert summary == {
+        "unique_fresh_fit_states": 2,
+        "ambiguous_fresh_fit_states": 1,
+        "ambiguous_fresh_fit_rows": 2,
+    }
+
+
+def test_stable_value_targets_distill_reference_probabilities() -> None:
+    network = HarbiChessDecoupledValueNetwork.from_base(_network())
+    inputs = mx.zeros((3, 8, 8, network.config.input_channels))
+    expected = mx.softmax(network(inputs)[1], axis=1)
+
+    targets = _stable_value_distillation_targets(network, inputs)
+
+    assert mx.max(mx.abs(targets - expected)).item() == 0.0
+    assert mx.max(mx.abs(mx.sum(targets, axis=1) - 1.0)).item() < 1e-6
 
 
 def test_qualification_starts_are_phase_balanced_and_deterministic() -> None:
