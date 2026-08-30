@@ -119,8 +119,11 @@ In addition to the cumulative statistical gate:
   champion promotion claim;
 - replay target schema, source hashes, split disjointness, finite gradients, and
   checkpoint hashes verify;
-- a saved update checkpoint must resume model, optimizer, learner step, rolling
-  replay provenance, and RNG/sampler state so the next controlled step matches an
+- every accepted update publishes a checksummed boundary checkpoint containing
+  model, optimizer, learner step, rolling replay/target provenance, and the next
+  update seed. Sampling streams are deliberately reconstructed from the global
+  seed plus update index at boundaries, so no hidden mutable sampler state crosses
+  updates. A restored checkpoint's next controlled step must match an
   uninterrupted reference within `1e-7`.
 
 Production continuous generation is authorized only if all three local updates,
