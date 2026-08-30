@@ -25,6 +25,7 @@ from harbichess.training.continuous_policy_iteration import (  # noqa: E402
     _ContinuousHeadLearner,
     _empirical_fresh_value_targets,
     _fresh_wdl_direction_gate,
+    _interpolate_value_state,
     _LearnerState,
     _old_wdl_point_noninferiority_gate,
     _paired_mean_interval,
@@ -427,6 +428,50 @@ def test_plastic_headwise_composition_selects_only_plastic_value_parameters() ->
     assert weights["policy_linear.bias"].item() == 20.0
     assert weights["global_value_output.bias"].item() == 200.0
     assert weights["plastic_value_output.bias"].item() == 1000.0
+
+
+def test_value_trust_region_scales_only_plastic_value_delta() -> None:
+    base = _LearnerState(
+        step=4,
+        weights=(
+            ("policy_linear.bias", mx.array([2.0])),
+            ("plastic_value_output.bias", mx.array([4.0])),
+        ),
+        optimizer=(("state", mx.array([1.0])),),
+    )
+    candidate = _LearnerState(
+        step=9,
+        weights=(
+            ("policy_linear.bias", mx.array([20.0])),
+            ("plastic_value_output.bias", mx.array([12.0])),
+        ),
+        optimizer=(("state", mx.array([3.0])),),
+    )
+
+    interpolated = _interpolate_value_state(
+        base,
+        candidate,
+        alpha=0.25,
+        value_prefixes=PLASTIC_VALUE_PREFIXES,
+    )
+    weights = dict(interpolated.weights)
+
+    assert interpolated.step == 9
+    assert weights["policy_linear.bias"].item() == 2.0
+    assert weights["plastic_value_output.bias"].item() == 6.0
+    assert interpolated.optimizer == candidate.optimizer
+
+
+def test_value_trust_region_rejects_invalid_alpha() -> None:
+    state = _LearnerState(0, (("plastic_value_output.bias", mx.array([0.0])),), ())
+
+    with pytest.raises(ValueError, match="alpha"):
+        _interpolate_value_state(
+            state,
+            state,
+            alpha=1.1,
+            value_prefixes=PLASTIC_VALUE_PREFIXES,
+        )
 
 
 def test_soft_value_targets_preserve_conflicting_outcome_uncertainty() -> None:
