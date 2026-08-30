@@ -134,3 +134,21 @@ In addition to the cumulative statistical gate:
 Production continuous generation is authorized only if all three local updates,
 the 192-game fresh cumulative gate, continuation/tactical/search safeguards, and
 resume-integrity test pass. Promotion remains a separate later decision.
+
+## Replacement-run correction recorded before execution
+
+Run `pusula-continuous-pilot-20260830-02` remains failed and is not evaluated
+again. It exposed two code paths that contradicted this protocol: a legacy
+absolute macro-CE cutoff from a different validation distribution made the new
+tuning baseline fail before learning, and a raw-policy tactical check rejected a
+candidate despite the preregistered Full Gumbel `5/8` capability being retained.
+
+The replacement run keeps every cumulative margin, sample size, compute setting,
+and non-statistical final gate above unchanged. Its local WDL safety check is the
+already specified previous-update-relative catastrophic bound (`+0.01` CE,
+`+0.01` macro CE, `-0.02` Pearson, plus the existing outcome-margin and ECE
+floors). Its tactical safety check is Full Gumbel `>=5/8` with no loss of a
+baseline-solved case; raw-policy solve count remains telemetry, not a gate. The
+replacement uses new seed `2026090201`, new continuation trajectories, new
+teacher selections, and a new output directory. No result from run `02` enters
+qualification or power estimation.
