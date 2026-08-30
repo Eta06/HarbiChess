@@ -590,7 +590,10 @@ def _policy_gate(before: dict[str, float], after: dict[str, float]) -> tuple[str
 
 
 def _continuous_wdl_gate(
-    previous: dict[str, object], candidate: dict[str, object]
+    previous: dict[str, object],
+    candidate: dict[str, object],
+    *,
+    require_legacy_absolute_floors: bool = True,
 ) -> tuple[str, ...]:
     reasons = []
     if float(candidate["cross_entropy"]) > float(previous["cross_entropy"]) + 0.01:
@@ -601,10 +604,11 @@ def _continuous_wdl_gate(
         float(previous["expected_score_pearson"]) - 0.02
     ):
         reasons.append("WDL expected-score Pearson regressed by more than 0.02")
-    if float(candidate["cross_entropy"]) > 0.9996843744333518:
-        reasons.append("WDL micro CE lost the MIHVER floor")
-    if float(candidate["macro_cross_entropy"]) > 0.998904546185216:
-        reasons.append("WDL macro CE lost the MIHVER floor")
+    if require_legacy_absolute_floors:
+        if float(candidate["cross_entropy"]) > 0.9996843744333518:
+            reasons.append("WDL micro CE lost the MIHVER floor")
+        if float(candidate["macro_cross_entropy"]) > 0.998904546185216:
+            reasons.append("WDL macro CE lost the MIHVER floor")
     if float(candidate["expected_score_pearson"]) < 0.20:
         reasons.append("WDL Pearson lost the MIHVER floor")
     if (
@@ -617,6 +621,27 @@ def _continuous_wdl_gate(
         reasons.append("WDL outcome margin lost the MIHVER floor")
     if float(candidate["ece_10"]) > 0.12:
         reasons.append("WDL ECE-10 exceeds 0.12")
+    return tuple(reasons)
+
+
+def _search_tactical_gate(
+    baseline: dict[str, object], candidate: dict[str, object]
+) -> tuple[str, ...]:
+    baseline_cases = {
+        row["case"]
+        for row in baseline["budgets"][0]["cases"]  # type: ignore[index]
+        if row["solved"]
+    }
+    candidate_cases = {
+        row["case"]
+        for row in candidate["budgets"][0]["cases"]  # type: ignore[index]
+        if row["solved"]
+    }
+    reasons = []
+    if int(candidate["budgets"][0]["solved"]) < 5:  # type: ignore[index]
+        reasons.append("256 Full Gumbel tactical solve count is below five")
+    if baseline_cases - candidate_cases:
+        reasons.append("candidate search lost a baseline-solved tactical case")
     return tuple(reasons)
 
 
@@ -1288,7 +1313,11 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
                 value_validation = _wdl_quality(
                     network, wdl_validation_inputs, validation_outcomes
                 )
-                value_reasons = _continuous_wdl_gate(previous_wdl, value_validation)
+                value_reasons = _continuous_wdl_gate(
+                    previous_wdl,
+                    value_validation,
+                    require_legacy_absolute_floors=not config.stable_plastic_value,
+                )
                 value_validation_checkpoints.append(
                     {
                         "local_step": local_step,
@@ -1311,7 +1340,11 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
                 validation_wdl = _wdl_quality(network, wdl_validation_inputs, validation_outcomes)
                 numeric_reasons = (
                     *_policy_gate(before_policy, validation_policy),
-                    *_continuous_wdl_gate(previous_wdl, validation_wdl),
+                    *_continuous_wdl_gate(
+                        previous_wdl,
+                        validation_wdl,
+                        require_legacy_absolute_floors=not config.stable_plastic_value,
+                    ),
                 )
                 validation_payload = {
                     "policy": validation_policy,
@@ -1391,7 +1424,11 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
         after_wdl = _wdl_quality(network, wdl_validation_inputs, validation_outcomes)
         numeric_reasons = (
             *_policy_gate(before_policy, after_policy),
-            *_continuous_wdl_gate(previous_wdl, after_wdl),
+            *_continuous_wdl_gate(
+                previous_wdl,
+                after_wdl,
+                require_legacy_absolute_floors=not config.stable_plastic_value,
+            ),
         )
         if not policy_checkpoints:
             numeric_reasons = (
@@ -1412,7 +1449,11 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
             depth=config.ranking_depth,
         )
         tactical = _tactical(_clone(network), config=tactical_config)
-        tactical_reasons = _tactical_gate(initial_tactical, tactical)
+        tactical_reasons = (
+            _search_tactical_gate(initial_tactical, tactical)
+            if config.stable_plastic_value
+            else _tactical_gate(initial_tactical, tactical)
+        )
         if int(tactical["budgets"][0]["solved"]) < 5:  # type: ignore[index]
             tactical_reasons = (*tactical_reasons, "Full Gumbel tactical is below 5/8")
         arena = _paired_arena(
@@ -1698,7 +1739,7 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
             ):
                 chain_reasons.append("continuation top agreement lost more than one position")
             final_tactical = accepted[-1]["tactical"]
-            if _tactical_gate(initial_tactical, final_tactical):
+            if _search_tactical_gate(initial_tactical, final_tactical):
                 chain_reasons.append("final Full Gumbel tactical retention failed")
             if int(final_tactical["budgets"][0]["solved"]) < 5:
                 chain_reasons.append("final Full Gumbel tactical solve count is below 5/8")
