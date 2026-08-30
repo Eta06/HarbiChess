@@ -33,6 +33,12 @@ reference:
 
 Candidate minus original MIHVER on the untouched historical stability set:
 
+The original game-disjoint MIHVER validation partition is reserved exclusively
+for this final old-capability test. A second, game-disjoint tuning subset is
+split from the historical training partition before update 1 and is used for
+checkpoint selection and all intermediate safety checks. The old-capability
+holdout therefore cannot influence training, checkpoint choice, or early stop.
+
 | Endpoint | Pass condition |
 |---|---|
 | position-weighted WDL CE | one-sided upper bound `<= +0.003` |
@@ -92,6 +98,9 @@ Planning artifact:
   buffers.
 - Merge contradictory byte-identical fit states into empirical soft WDL targets;
   unique states remain one-hot. No validation outcome enters target aggregation.
+- The word `validation` in per-update policy targets means the fixed tuning
+  subset split from historical training data. It does not refer to the untouched
+  final old-capability holdout.
 - Per-update local gates retain DEVRIYE policy imitation, WDL catastrophic
   floors, continuation floor, Full Gumbel tactical retention, immutable MIHVER,
   and search score floor.
