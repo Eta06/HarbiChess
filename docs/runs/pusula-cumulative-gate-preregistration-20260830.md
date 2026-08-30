@@ -93,6 +93,11 @@ Planning artifact:
   DEVRIYE policy-learning path; no search/temperature/target heuristic changes.
 - Run exactly three updates, 192 phase-stratified self-play attempts per update,
   24 workers, 64 self-play simulations, max ply 96.
+- Starting positions are distinct replay states across the three updates and are
+  never reused. Multiple states may originate from one historical trajectory;
+  requiring a distinct historical game per attempt would exceed the fixed pool
+  and does not add an independent outcome because every generated continuation
+  still receives its own seed and game-cluster identity.
 - Retain the existing 768 train / 192 validation Full Gumbel-256 policy targets,
   40 learner steps, batch 64, learning rate `1e-4`, and two-generation rolling
   buffers.
