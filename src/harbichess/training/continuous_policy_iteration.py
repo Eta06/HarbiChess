@@ -187,6 +187,8 @@ _TRAINABLE_PREFIXES = (
     "global_value_hidden.",
     "global_value_output.",
 )
+_POLICY_PREFIXES = _TRAINABLE_PREFIXES[:2]
+_VALUE_PREFIXES = _TRAINABLE_PREFIXES[2:]
 
 
 @dataclass(frozen=True, slots=True)
@@ -199,6 +201,7 @@ class _LearnerState:
 class _ContinuousHeadLearner:
     def __init__(self, network: HarbiChessDecoupledValueNetwork, *, learning_rate: float) -> None:
         self.network = network
+        self.learning_rate = learning_rate
         self.optimizer = optim.Adam(learning_rate=learning_rate)
         self.step = 0
         self._loss_and_grad = nn.value_and_grad(network, self._loss)
@@ -269,6 +272,9 @@ class _ContinuousHeadLearner:
         self.optimizer.state = tree_unflatten(list(state.optimizer))
         self.step = state.step
         mx.eval(self.network.parameters(), self.optimizer.state)
+
+    def reset_optimizer(self) -> None:
+        self.optimizer = optim.Adam(learning_rate=self.learning_rate)
 
 
 def _clone(network) -> HarbiChessDecoupledValueNetwork:
@@ -504,6 +510,32 @@ def _select_numeric_checkpoint(checkpoints: Sequence[dict[str, object]]):
         ),
     )
     return selected, bool(eligible)
+
+
+def _compose_headwise_state(
+    policy_checkpoint: dict[str, object],
+    value_checkpoint: dict[str, object],
+) -> _LearnerState:
+    policy_state = policy_checkpoint["state"]
+    value_state = value_checkpoint["state"]
+    if not isinstance(policy_state, _LearnerState) or not isinstance(value_state, _LearnerState):
+        raise TypeError("head-wise checkpoints require learner states")
+    policy_weights = dict(policy_state.weights)
+    value_weights = dict(value_state.weights)
+    weights = tuple(
+        (
+            name,
+            value_weights[name] if name.startswith(_VALUE_PREFIXES) else value,
+        )
+        for name, value in policy_state.weights
+    )
+    if set(policy_weights) != set(value_weights):
+        raise ValueError("head-wise checkpoint parameter trees differ")
+    return _LearnerState(
+        step=max(policy_state.step, value_state.step),
+        weights=weights,
+        optimizer=policy_state.optimizer,
+    )
 
 
 def _select_continuation_starts(
@@ -956,20 +988,48 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
                 store.write_atomic(snapshot)
             curve.append({**metric, "validation": validation_payload})
 
-        selected_checkpoint, has_eligible_checkpoint = _select_numeric_checkpoint(
-            validation_checkpoints
+        policy_checkpoints = tuple(
+            checkpoint
+            for checkpoint in validation_checkpoints
+            if not _policy_gate(before_policy, checkpoint["policy"])
         )
-        learner.restore(selected_checkpoint["state"])
-        after_policy = selected_checkpoint["policy"]
-        after_wdl = selected_checkpoint["wdl"]
+        value_checkpoints = tuple(
+            checkpoint
+            for checkpoint in validation_checkpoints
+            if not _continuous_wdl_gate(previous_wdl, checkpoint["wdl"])
+        )
+        policy_checkpoint = min(
+            policy_checkpoints or validation_checkpoints,
+            key=lambda checkpoint: int(checkpoint["local_step"]),
+        )
+        value_checkpoint = min(
+            value_checkpoints or validation_checkpoints,
+            key=lambda checkpoint: int(checkpoint["local_step"]),
+        )
+        learner.restore(_compose_headwise_state(policy_checkpoint, value_checkpoint))
+        learner.reset_optimizer()
+        composed_policy_logits = network(prepared_validation.inputs)[0]
+        mx.eval(composed_policy_logits)
+        after_policy = _policy_quality(
+            composed_policy_logits,
+            prepared_validation.targets,
+            prepared_validation.legal_masks,
+        )
+        after_wdl = _wdl_quality(network, wdl_validation_inputs, validation_outcomes)
         numeric_reasons = (
-            ()
-            if has_eligible_checkpoint
-            else (
-                "no validation checkpoint passed policy and WDL gates",
-                *selected_checkpoint["reasons"],
-            )
+            *_policy_gate(before_policy, after_policy),
+            *_continuous_wdl_gate(previous_wdl, after_wdl),
         )
+        if not policy_checkpoints:
+            numeric_reasons = (
+                "no validation checkpoint independently passed policy gates",
+                *numeric_reasons,
+            )
+        if not value_checkpoints:
+            numeric_reasons = (
+                "no validation checkpoint independently passed WDL gates",
+                *numeric_reasons,
+            )
         after_material = _material_quality(network, *material_validation)
         continuation = _continuation_ranking(
             release,
@@ -1032,7 +1092,13 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
                 "fresh_value_sampling": "fixed-8-loss-16-draw-8-win-then-game-balanced",
                 "rolling_policy_rows": len(policy_buffer.records),
                 "steps": config.steps_per_update,
-                "selected_local_step": selected_checkpoint["local_step"],
+                "selected_local_step": max(
+                    int(policy_checkpoint["local_step"]),
+                    int(value_checkpoint["local_step"]),
+                ),
+                "selected_policy_local_step": policy_checkpoint["local_step"],
+                "selected_wdl_local_step": value_checkpoint["local_step"],
+                "optimizer_reset_after_composition": True,
                 "learner_step": learner.step,
                 "maximum_gradient_norm": maximum_gradient,
                 "policy_before": before_policy,
