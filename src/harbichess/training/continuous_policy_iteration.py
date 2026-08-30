@@ -891,6 +891,8 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
         )
         curve = []
         validation_checkpoints = []
+        value_validation_checkpoints = []
+        value_checkpoint_found = False
         maximum_gradient = 0.0
         snapshot = replace(
             snapshot,
@@ -932,6 +934,21 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
                 value_targets,
             )
             maximum_gradient = max(maximum_gradient, float(metric["gradient_norm"]))
+            if not value_checkpoint_found:
+                value_validation = _wdl_quality(
+                    network, wdl_validation_inputs, validation_outcomes
+                )
+                value_reasons = _continuous_wdl_gate(previous_wdl, value_validation)
+                value_validation_checkpoints.append(
+                    {
+                        "local_step": local_step,
+                        "learner_step": learner.step,
+                        "wdl": value_validation,
+                        "reasons": value_reasons,
+                        "state": learner.snapshot(),
+                    }
+                )
+                value_checkpoint_found = not value_reasons
             validation_payload = None
             if local_step % 10 == 0:
                 validation_policy_logits = network(prepared_validation.inputs)[0]
@@ -995,15 +1012,15 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
         )
         value_checkpoints = tuple(
             checkpoint
-            for checkpoint in validation_checkpoints
-            if not _continuous_wdl_gate(previous_wdl, checkpoint["wdl"])
+            for checkpoint in value_validation_checkpoints
+            if not checkpoint["reasons"]
         )
         policy_checkpoint = min(
             policy_checkpoints or validation_checkpoints,
             key=lambda checkpoint: int(checkpoint["local_step"]),
         )
         value_checkpoint = min(
-            value_checkpoints or validation_checkpoints,
+            value_checkpoints or value_validation_checkpoints,
             key=lambda checkpoint: int(checkpoint["local_step"]),
         )
         learner.restore(_compose_headwise_state(policy_checkpoint, value_checkpoint))
@@ -1114,6 +1131,10 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
                 "validation_checkpoints": [
                     {key: value for key, value in checkpoint.items() if key != "state"}
                     for checkpoint in validation_checkpoints
+                ],
+                "value_validation_checkpoints": [
+                    {key: value for key, value in checkpoint.items() if key != "state"}
+                    for checkpoint in value_validation_checkpoints
                 ],
                 "curve": curve,
             }
