@@ -1,16 +1,25 @@
 from pathlib import Path
 
 import pytest
+from mlx.utils import tree_flatten
 
 mx = pytest.importorskip("mlx.core")
 
+from harbichess.backends.decoupled_value_network import (  # noqa: E402
+    HarbiChessDecoupledValueNetwork,
+)
+from harbichess.backends.mlx_backend import MLXPolicyValueBackend  # noqa: E402
 from harbichess.training.continuous_policy_iteration import (  # noqa: E402
     ContinuousPolicyIterationConfig,
+    _clone,
     _combine_policy,
     _continuous_wdl_gate,
     _policy_gate,
 )
-from harbichess.training.full_gumbel_transfer import PreparedTransfer  # noqa: E402
+from harbichess.training.full_gumbel_transfer import (  # noqa: E402
+    PreparedTransfer,
+    _network,
+)
 
 
 def _config(**overrides) -> ContinuousPolicyIterationConfig:
@@ -87,3 +96,21 @@ def test_rolling_policy_buffer_preserves_generation_order() -> None:
     assert combined.inputs.tolist() == [[1.0], [2.0]]
     assert combined.targets.tolist() == [[0.75, 0.25], [0.25, 0.75]]
     assert combined.wdl_targets == (1, 0)
+
+
+def test_inference_clone_does_not_quantize_live_learner() -> None:
+    live = HarbiChessDecoupledValueNetwork.from_base(_network())
+    before = {name: mx.array(value) for name, value in tree_flatten(live.parameters())}
+    mx.eval(list(before.values()))
+
+    inference = _clone(live)
+    MLXPolicyValueBackend(inference)
+    after = dict(tree_flatten(live.parameters()))
+
+    assert {str(value.dtype) for _, value in tree_flatten(inference.parameters())} == {
+        "mlx.core.bfloat16"
+    }
+    assert {str(value.dtype) for value in after.values()} == {"mlx.core.float32"}
+    assert all(
+        float(mx.max(mx.abs(after[name] - value)).item()) == 0.0 for name, value in before.items()
+    )
