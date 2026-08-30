@@ -80,3 +80,20 @@ def test_freeze_modes_never_expose_release_parameters() -> None:
         "invariant_value_linear.weight",
         "invariant_value_linear.bias",
     }
+
+
+def test_invariant_projection_receives_current_piece_counts() -> None:
+    _, target = _networks()
+    weights = [[0.0] * 20 for _ in range(3)]
+    weights[0][0] = 1.0
+    target.invariant_value_linear.weight = mx.array(weights)
+    target.invariant_value_linear.bias = mx.zeros((3,))
+    empty = mx.zeros((1, 8, 8, target.config.input_channels))
+    one_piece = empty.at[0, 4, 5, 0].add(1.0)
+
+    empty_value = target._value_residual(empty)
+    piece_value = target._value_residual(one_piece)
+    mx.eval(empty_value, piece_value)
+
+    assert float((piece_value[0, 0] - empty_value[0, 0]).item()) == 1.0
+    assert float((piece_value[0, 1] - empty_value[0, 1]).item()) == 0.0
