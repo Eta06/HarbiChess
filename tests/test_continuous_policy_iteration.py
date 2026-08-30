@@ -27,6 +27,7 @@ from harbichess.training.continuous_policy_iteration import (  # noqa: E402
     _fresh_wdl_direction_gate,
     _interpolate_value_state,
     _LearnerState,
+    _local_arena_catastrophic_gate,
     _old_wdl_point_noninferiority_gate,
     _paired_mean_interval,
     _policy_gate,
@@ -233,6 +234,14 @@ def test_search_tactical_gate_ignores_raw_policy_but_preserves_solved_cases() ->
     }
 
     assert _search_tactical_gate(baseline, candidate) == ()
+
+
+def test_local_arena_rejects_only_supported_catastrophic_regression() -> None:
+    uncertain = {"score_interval": {"low": 0.25, "high": 0.4375}}
+    catastrophic = {"score_interval": {"low": 0.0, "high": 0.25}}
+
+    assert _local_arena_catastrophic_gate(uncertain) == ()
+    assert len(_local_arena_catastrophic_gate(catastrophic)) == 1
 
 
 def test_fresh_wdl_gate_requires_all_preregistered_directions() -> None:
