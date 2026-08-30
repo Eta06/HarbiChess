@@ -31,9 +31,10 @@ Pearson separately instead of reducing each domain to one CE gradient.
   1. `onehot-generalized-mgda`: six-objective MGDA without state aggregation;
   2. `soft-state-mean`: aggregated targets with an equal mean gradient;
   3. `soft-state-generalized-mgda`: aggregated targets with six-objective MGDA.
-- Generalized MGDA uses a deterministic 100-iteration Frank-Wolfe minimum-norm
-  convex solver. Report objective weights, gradient Gram/cosine evidence, and
-  target aggregation counts.
+- Generalized MGDA first normalizes each objective gradient to unit L2 so a
+  numerically small loss cannot win only by scale, then uses a deterministic
+  100-iteration Frank-Wolfe minimum-norm convex solver. Report objective weights,
+  gradient Gram/cosine evidence, and target aggregation counts.
 - Policy, search, replay exposure, MIHVER, and validation gates do not change.
 
 ## Gate
