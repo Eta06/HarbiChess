@@ -5,7 +5,7 @@ from __future__ import annotations
 import hashlib
 import math
 import random
-from collections.abc import Callable
+from collections.abc import Callable, Sequence
 from concurrent.futures import ThreadPoolExecutor
 from dataclasses import dataclass
 
@@ -381,12 +381,19 @@ def play_parallel_games(
     max_workers: int,
     config: SelfPlayConfig | None = None,
     on_game_complete: Callable[[SelfPlayGame], None] | None = None,
+    initial_states: Sequence[ChessState] | None = None,
 ) -> tuple[SelfPlayGame, ...]:
     if game_count <= 0 or max_workers <= 0:
         raise ValueError("game_count and max_workers must be positive")
-    initial_state = rules.initial_state()
+    if initial_states is not None and len(initial_states) != game_count:
+        raise ValueError("initial state count must match game count")
 
     def play(game_index: int) -> SelfPlayGame:
+        initial_state = (
+            rules.initial_state()
+            if initial_states is None
+            else initial_states[game_index - first_game_index]
+        )
         game = play_game(
             mcts,
             rules,
