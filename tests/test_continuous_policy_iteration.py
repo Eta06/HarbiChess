@@ -15,6 +15,7 @@ from harbichess.training.continuous_policy_iteration import (  # noqa: E402
     _combine_policy,
     _continuous_wdl_gate,
     _policy_gate,
+    _select_numeric_checkpoint,
 )
 from harbichess.training.full_gumbel_transfer import (  # noqa: E402
     PreparedTransfer,
@@ -114,3 +115,31 @@ def test_inference_clone_does_not_quantize_live_learner() -> None:
     assert all(
         float(mx.max(mx.abs(after[name] - value)).item()) == 0.0 for name, value in before.items()
     )
+
+
+def test_checkpoint_selection_ignores_better_but_ineligible_final_step() -> None:
+    checkpoints = (
+        {
+            "local_step": 10,
+            "policy": {"cross_entropy": 1.8},
+            "wdl": {"macro_cross_entropy": 0.9},
+            "reasons": (),
+        },
+        {
+            "local_step": 20,
+            "policy": {"cross_entropy": 1.7},
+            "wdl": {"macro_cross_entropy": 0.91},
+            "reasons": (),
+        },
+        {
+            "local_step": 40,
+            "policy": {"cross_entropy": 1.6},
+            "wdl": {"macro_cross_entropy": 1.1},
+            "reasons": ("WDL regression",),
+        },
+    )
+
+    selected, eligible = _select_numeric_checkpoint(checkpoints)
+
+    assert eligible is True
+    assert selected["local_step"] == 20
