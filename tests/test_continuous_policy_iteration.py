@@ -1,4 +1,5 @@
 from pathlib import Path
+from types import SimpleNamespace
 
 import pytest
 from mlx.utils import tree_flatten
@@ -15,6 +16,7 @@ from harbichess.training.continuous_policy_iteration import (  # noqa: E402
     _combine_policy,
     _continuous_wdl_gate,
     _policy_gate,
+    _select_continuation_starts,
     _select_numeric_checkpoint,
 )
 from harbichess.training.full_gumbel_transfer import (  # noqa: E402
@@ -59,6 +61,32 @@ def test_config_requires_an_even_mixed_value_batch() -> None:
 def test_config_rejects_unreachable_known_game_floor() -> None:
     with pytest.raises(ValueError, match="minimum known games"):
         _config(selfplay_games_per_update=3, minimum_known_selfplay_games=4)
+
+
+def test_config_requires_equal_opening_middle_endgame_quota() -> None:
+    with pytest.raises(ValueError, match="three phases"):
+        _config(selfplay_games_per_update=10)
+
+
+def test_continuation_starts_are_phase_balanced_and_non_overlapping() -> None:
+    records = tuple(
+        SimpleNamespace(game_id=f"{phase}-{index}", game_index=index, ply=ply)
+        for phase, ply in (("opening", 8), ("middle", 40), ("end", 90))
+        for index in range(8)
+    )
+
+    starts = _select_continuation_starts(records, updates=2, games_per_update=6, seed=7)
+
+    assert tuple(
+        (
+            sum(record.ply < 20 for record in update),
+            sum(20 <= record.ply < 80 for record in update),
+            sum(record.ply >= 80 for record in update),
+        )
+        for update in starts
+    ) == ((2, 2, 2), (2, 2, 2))
+    identities = {(record.game_id, record.ply) for update in starts for record in update}
+    assert len(identities) == 12
 
 
 def test_policy_gate_requires_imitation_gain_without_top_action_regression() -> None:
