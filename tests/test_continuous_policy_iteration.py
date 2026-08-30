@@ -51,6 +51,16 @@ def test_config_rejects_impossible_rolling_window() -> None:
         _config(updates=2, rolling_generations=3)
 
 
+def test_config_requires_an_even_mixed_value_batch() -> None:
+    with pytest.raises(ValueError, match="value batch size must be even"):
+        _config(batch_size=63)
+
+
+def test_config_rejects_unreachable_known_game_floor() -> None:
+    with pytest.raises(ValueError, match="minimum known games"):
+        _config(selfplay_games_per_update=3, minimum_known_selfplay_games=4)
+
+
 def test_policy_gate_requires_imitation_gain_without_top_action_regression() -> None:
     before = {"cross_entropy": 2.0, "top_action_agreement": 0.25}
 
