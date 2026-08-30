@@ -13,6 +13,8 @@ from datetime import UTC, datetime
 from pathlib import Path
 
 import mlx.core as mx
+import mlx.nn as nn
+import mlx.optimizers as optim
 
 from harbichess.backends.invariant_value_network import HarbiChessInvariantValueNetwork
 from harbichess.chess.rules import PythonChessRules
@@ -46,6 +48,7 @@ class InvariantValueProbeConfig:
     validation_interval: int = 20
     learning_rate: float = 2e-3
     seed: int = 2026083061
+    distributional_targets: bool = False
 
     def __post_init__(self) -> None:
         if (
@@ -71,6 +74,48 @@ _NEW_PREFIXES = (
     "value_tower_hidden.",
     "value_tower_output.",
 )
+
+
+def _material_soft_targets(values: mx.array) -> mx.array:
+    wins = mx.maximum(values, mx.array(0.0))
+    losses = mx.maximum(-values, mx.array(0.0))
+    draws = 1.0 - mx.abs(values)
+    return mx.stack((wins, draws, losses), axis=1)
+
+
+class _DistributionalProbeLearner:
+    def __init__(self, network, *, learning_rate: float) -> None:
+        self.network = network
+        self.optimizer = optim.Adam(learning_rate=learning_rate)
+        self.loss_and_grad = nn.value_and_grad(network, self._loss)
+
+    @staticmethod
+    def _loss(network, inputs: mx.array, targets: mx.array) -> mx.array:
+        _, logits = network(inputs)
+        return nn.losses.cross_entropy(
+            logits, _material_soft_targets(targets), reduction="mean"
+        )
+
+    def step(self, inputs: mx.array, targets: mx.array) -> float:
+        loss, gradients = self.loss_and_grad(self.network, inputs, targets)
+        self.optimizer.update(self.network, gradients)
+        mx.eval(loss, self.network.parameters(), self.optimizer.state)
+        return float(loss.item())
+
+
+def _distribution_quality(network, inputs: mx.array, targets: mx.array) -> dict[str, float]:
+    _, logits = network(inputs)
+    probabilities = mx.softmax(logits, axis=1)
+    soft_targets = _material_soft_targets(targets)
+    cross_entropy = -mx.mean(
+        mx.sum(soft_targets * mx.log(mx.maximum(probabilities, mx.array(1e-12))), axis=1)
+    )
+    draw_mae = mx.mean(mx.abs(probabilities[:, 1] - soft_targets[:, 1]))
+    mx.eval(cross_entropy, draw_mae)
+    return {
+        "soft_target_cross_entropy": float(cross_entropy.item()),
+        "draw_probability_mae": float(draw_mae.item()),
+    }
 
 
 def _initial_equivalence(base, target, inputs: mx.array) -> dict[str, float | bool | str]:
@@ -110,8 +155,13 @@ def _run_arm(
         network.freeze_to_global_linear()
     else:
         network.freeze_release_parameters()
-    learner = _ProbeLearner(network, learning_rate=config.learning_rate)
+    learner = (
+        _DistributionalProbeLearner(network, learning_rate=config.learning_rate)
+        if config.distributional_targets
+        else _ProbeLearner(network, learning_rate=config.learning_rate)
+    )
     baseline = _quality(network, *validation)
+    baseline_distribution = _distribution_quality(network, *validation)
     best_mse = float(baseline["mse"])
     best_step = 0
     best_weights = _snapshot(network)
@@ -140,6 +190,7 @@ def _run_arm(
         store.write_atomic(snapshot)
     network.load_weights(list(best_weights))
     selected = _quality(network, *validation)
+    selected_distribution = _distribution_quality(network, *validation)
     release_hash_after = _parameter_hash(network, excluded_prefixes=_NEW_PREFIXES)
     reasons = []
     if float(equivalence["maximum_policy_logit_delta"]) != 0.0:
@@ -166,8 +217,10 @@ def _run_arm(
         "equivalence": equivalence,
         "release_parameter_hash_after": release_hash_after,
         "baseline": baseline,
+        "baseline_distribution": baseline_distribution,
         "selected_step": best_step,
         "selected": selected,
+        "selected_distribution": selected_distribution,
         "passed": not reasons,
         "reasons": reasons,
         "curve": curve,
@@ -293,6 +346,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument("--model", required=True, type=Path)
     parser.add_argument("--runs-root", type=Path, default=Path("artifacts/runs"))
     parser.add_argument("--telemetry", type=Path, default=Path("artifacts/dashboard/state.json"))
+    parser.add_argument("--distributional-targets", action="store_true")
     arguments = parser.parse_args(argv)
     print(
         run_invariant_value_probe(
@@ -301,6 +355,7 @@ def main(argv: Sequence[str] | None = None) -> int:
                 model_path=arguments.model,
                 runs_root=arguments.runs_root,
                 telemetry_path=arguments.telemetry,
+                distributional_targets=arguments.distributional_targets,
             )
         )
     )
