@@ -10,6 +10,11 @@ from harbichess.backends.decoupled_value_network import (  # noqa: E402
     HarbiChessDecoupledValueNetwork,
 )
 from harbichess.backends.mlx_backend import MLXPolicyValueBackend  # noqa: E402
+from harbichess.backends.plastic_value_network import (  # noqa: E402
+    PLASTIC_VALUE_PREFIXES,
+    HarbiChessPlasticValueNetwork,
+)
+from harbichess.core.state import Side  # noqa: E402
 from harbichess.training.continuous_policy_iteration import (  # noqa: E402
     ContinuousPolicyIterationConfig,
     _clone,
@@ -17,9 +22,13 @@ from harbichess.training.continuous_policy_iteration import (  # noqa: E402
     _compose_headwise_state,
     _continuous_wdl_gate,
     _LearnerState,
+    _paired_mean_interval,
     _policy_gate,
     _select_continuation_starts,
     _select_numeric_checkpoint,
+    _select_qualification_starts,
+    _soft_value_targets,
+    _split_fit_tuning,
 )
 from harbichess.training.full_gumbel_transfer import (  # noqa: E402
     PreparedTransfer,
@@ -80,6 +89,11 @@ def test_config_rejects_unreachable_known_game_floor() -> None:
 def test_config_requires_equal_opening_middle_endgame_quota() -> None:
     with pytest.raises(ValueError, match="three phases"):
         _config(selfplay_games_per_update=10)
+
+
+def test_stable_plastic_config_requires_fresh_final_qualification() -> None:
+    with pytest.raises(ValueError, match="final qualification"):
+        _config(stable_plastic_value=True)
 
 
 def test_continuation_starts_are_phase_balanced_and_non_overlapping() -> None:
@@ -227,3 +241,125 @@ def test_headwise_checkpoint_composition_keeps_policy_and_value_times_separate()
     assert weights["policy_linear.bias"].item() == 20.0
     assert weights["global_value_output.bias"].item() == 100.0
     assert weights["stem.bias"].item() == 2.0
+
+
+def test_plastic_clone_preserves_network_type_and_outputs() -> None:
+    base = HarbiChessDecoupledValueNetwork.from_base(_network())
+    network = HarbiChessPlasticValueNetwork.from_mihver(base)
+    inputs = mx.zeros((2, 8, 8, network.config.input_channels))
+    before = network(inputs)
+
+    cloned = _clone(network)
+    after = cloned(inputs)
+    mx.eval(*before, *after)
+
+    assert isinstance(cloned, HarbiChessPlasticValueNetwork)
+    assert all(
+        float(mx.max(mx.abs(left - right)).item()) == 0.0
+        for left, right in zip(before, after, strict=True)
+    )
+
+
+def test_plastic_headwise_composition_selects_only_plastic_value_parameters() -> None:
+    policy_state = _LearnerState(
+        step=20,
+        weights=(
+            ("policy_linear.bias", mx.array([20.0])),
+            ("global_value_output.bias", mx.array([200.0])),
+            ("plastic_value_output.bias", mx.array([2000.0])),
+        ),
+        optimizer=(("step", mx.array(20)),),
+    )
+    value_state = _LearnerState(
+        step=10,
+        weights=(
+            ("policy_linear.bias", mx.array([10.0])),
+            ("global_value_output.bias", mx.array([100.0])),
+            ("plastic_value_output.bias", mx.array([1000.0])),
+        ),
+        optimizer=(("step", mx.array(10)),),
+    )
+
+    composed = _compose_headwise_state(
+        {"state": policy_state},
+        {"state": value_state},
+        value_prefixes=PLASTIC_VALUE_PREFIXES,
+    )
+
+    weights = dict(composed.weights)
+    assert weights["policy_linear.bias"].item() == 20.0
+    assert weights["global_value_output.bias"].item() == 200.0
+    assert weights["plastic_value_output.bias"].item() == 1000.0
+
+
+def test_soft_value_targets_preserve_conflicting_outcome_uncertainty() -> None:
+    historical = (
+        SimpleNamespace(root_fen="same", moves=(1, 2), outcome_value=1),
+        SimpleNamespace(root_fen="other", moves=(3,), outcome_value=-1),
+    )
+    fresh = (
+        SimpleNamespace(root_fen="same", moves=(1, 2), outcome_value=0),
+    )
+
+    historical_targets, fresh_targets, summary = _soft_value_targets(historical, fresh)
+
+    assert historical_targets.tolist() == [[0.5, 0.5, 0.0], [0.0, 0.0, 1.0]]
+    assert fresh_targets.tolist() == [[0.5, 0.5, 0.0]]
+    assert summary == {
+        "unique_fit_states": 2,
+        "ambiguous_fit_states": 1,
+        "ambiguous_fit_rows": 2,
+    }
+
+
+def test_qualification_starts_are_phase_balanced_and_deterministic() -> None:
+    records = tuple(
+        SimpleNamespace(game_id=f"{phase}-{index}", game_index=index, ply=ply)
+        for phase, ply in (("opening", 8), ("middle", 40), ("end", 90))
+        for index in range(5)
+    )
+
+    first = _select_qualification_starts(records, count=9, seed=17)
+    second = _select_qualification_starts(records, count=9, seed=17)
+
+    assert tuple((row.game_id, row.game_index, row.ply) for row in first) == tuple(
+        (row.game_id, row.game_index, row.ply) for row in second
+    )
+    assert sum(row.ply < 20 for row in first) == 3
+    assert sum(20 <= row.ply < 80 for row in first) == 3
+    assert sum(row.ply >= 80 for row in first) == 3
+
+
+def test_fit_tuning_split_is_game_disjoint_and_outcome_stratified() -> None:
+    records = tuple(
+        SimpleNamespace(
+            game_id=f"{outcome}-{game}",
+            game_index=game,
+            ply=ply,
+            outcome_value=outcome if ply % 2 == 0 else -outcome,
+            side_to_move=Side.WHITE if ply % 2 == 0 else Side.BLACK,
+        )
+        for outcome in (-1, 0, 1)
+        for game in range(10)
+        for ply in range(2)
+    )
+
+    fit, tuning, summary = _split_fit_tuning(records, seed=29)
+
+    fit_games = {row.game_id for row in fit}
+    tuning_games = {row.game_id for row in tuning}
+    assert fit_games.isdisjoint(tuning_games)
+    assert len(fit_games) == 24
+    assert len(tuning_games) == 6
+    assert {int(row.game_id.rsplit("-", 1)[0]) for row in tuning} == {-1, 0, 1}
+    assert summary["game_overlap"] == 0
+
+
+def test_paired_mean_interval_is_reproducible() -> None:
+    values = (-0.02, 0.01, 0.03, 0.04)
+
+    first = _paired_mean_interval(values, samples=1000, seed=23)
+    second = _paired_mean_interval(values, samples=1000, seed=23)
+
+    assert first == second
+    assert first["estimate"] == pytest.approx(0.015)
