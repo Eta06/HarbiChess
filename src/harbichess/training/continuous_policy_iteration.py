@@ -551,7 +551,7 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
         fixed_inference_batch_size=config.fixed_inference_batch_size,
         inference_wait_seconds=config.inference_wait_seconds,
     )
-    initial_tactical = _tactical(network, config=tactical_config)
+    initial_tactical = _tactical(_clone(network), config=tactical_config)
     initial_checkpoint = config.output_dir / "checkpoints" / "update-000" / "model.safetensors"
     initial_sha256 = _save_network(network, initial_checkpoint)
 
@@ -709,13 +709,13 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
             rules=rules,
             depth=config.ranking_depth,
         )
-        tactical = _tactical(network, config=tactical_config)
+        tactical = _tactical(_clone(network), config=tactical_config)
         tactical_reasons = _tactical_gate(initial_tactical, tactical)
         if int(tactical["budgets"][0]["solved"]) < 5:  # type: ignore[index]
             tactical_reasons = (*tactical_reasons, "Full Gumbel tactical is below 5/8")
         arena = _paired_arena(
             previous_network,
-            network,
+            _clone(network),
             pairs=config.arena_pairs_per_update,
             simulations=config.arena_simulations_per_update,
             seed=config.seed + 1000 + update,
@@ -782,7 +782,7 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
     else:
         final_arena = _paired_arena(
             initial_network,
-            network,
+            _clone(network),
             pairs=config.final_arena_pairs,
             simulations=config.final_arena_simulations,
             seed=config.seed + 2000,
