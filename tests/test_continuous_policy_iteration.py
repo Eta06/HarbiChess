@@ -27,6 +27,7 @@ from harbichess.training.continuous_policy_iteration import (  # noqa: E402
     _paired_mean_interval,
     _policy_gate,
     _select_continuation_starts,
+    _select_continuation_state_starts,
     _select_numeric_checkpoint,
     _select_qualification_starts,
     _soft_value_targets,
@@ -118,6 +119,37 @@ def test_continuation_starts_are_phase_balanced_and_non_overlapping() -> None:
     ) == ((2, 2, 2), (2, 2, 2))
     identities = {(record.game_id, record.ply) for update in starts for record in update}
     assert len(identities) == 12
+
+
+def test_state_continuation_starts_allow_distinct_positions_from_same_game() -> None:
+    records = tuple(
+        SimpleNamespace(game_id=phase, game_index=0, ply=base_ply + offset)
+        for phase, base_ply in (("opening", 0), ("middle", 20), ("end", 80))
+        for offset in range(6)
+    )
+
+    starts = _select_continuation_state_starts(
+        records,
+        updates=2,
+        games_per_update=6,
+        seed=11,
+    )
+
+    identities = {
+        (record.game_id, record.game_index, record.ply)
+        for update in starts
+        for record in update
+    }
+    assert len(identities) == 12
+    assert all(
+        (
+            sum(record.ply < 20 for record in update),
+            sum(20 <= record.ply < 80 for record in update),
+            sum(record.ply >= 80 for record in update),
+        )
+        == (2, 2, 2)
+        for update in starts
+    )
 
 
 def test_policy_gate_requires_imitation_gain_without_top_action_regression() -> None:
