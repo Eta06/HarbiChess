@@ -52,3 +52,25 @@ def test_wdl_training_cannot_change_material_head() -> None:
 
     assert names
     assert not any(name.startswith("material_value_linear.") for name in names)
+    assert {
+        "global_value_hidden.weight",
+        "global_value_hidden.bias",
+        "global_value_output.weight",
+        "global_value_output.bias",
+    } <= names
+
+
+def test_global_wdl_freeze_excludes_spatial_tower_and_release() -> None:
+    _, target = _networks()
+
+    target.freeze_to_global_wdl()
+    names = {name for name, _ in tree_flatten(target.trainable_parameters())}
+
+    assert names == {
+        "invariant_value_linear.weight",
+        "invariant_value_linear.bias",
+        "global_value_hidden.weight",
+        "global_value_hidden.bias",
+        "global_value_output.weight",
+        "global_value_output.bias",
+    }
