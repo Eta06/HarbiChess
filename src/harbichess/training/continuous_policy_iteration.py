@@ -1220,12 +1220,20 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
             "elapsed_seconds": time.perf_counter() - started,
         },
     )
-    detail = (
-        "DEVRIYE continuous pilot passed · generation integration authorized"
-        if passed
-        else "DEVRIYE continuous pilot failed · latest rolled back"
+    diagnostic_checkpoint = next(
+        (
+            row.get("checkpoint_path")
+            for row in reversed(accepted)
+            if row.get("checkpoint_path")
+        ),
+        None,
     )
-    final_checkpoint = accepted[-1].get("checkpoint_path") if passed else None
+    if passed:
+        detail = "DEVRIYE continuous pilot passed · generation integration authorized"
+    elif stopped_reason is not None:
+        detail = "DEVRIYE update rejected · learner rolled back · production blocked"
+    else:
+        detail = "DEVRIYE final chain rejected · diagnostic checkpoints retained"
     store.write_atomic(
         replace(
             snapshot,
@@ -1233,14 +1241,22 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
             mode=RunMode.IDLE,
             mode_detail=detail,
             pilot_status=PilotStatus.PASSED if passed else PilotStatus.FAILED,
-            pilot_stop_reason="continuous_chain_gate",
+            pilot_stop_reason=stopped_reason or "continuous_chain_gate",
             pilot_stop_detail=detail,
             pilot_reasons=tuple(chain_reasons),
             candidate_checkpoint=(
-                Path(str(final_checkpoint)).parent.name if final_checkpoint else "None"
+                Path(str(diagnostic_checkpoint)).parent.name
+                if diagnostic_checkpoint
+                else "None"
             ),
-            checkpoint_status=(CheckpointStatus.VERIFIED if passed else CheckpointStatus.NONE),
-            checkpoint_path=str(final_checkpoint or ""),
+            checkpoint_status=(
+                CheckpointStatus.VERIFIED
+                if passed
+                else CheckpointStatus.FAILED
+                if diagnostic_checkpoint
+                else CheckpointStatus.NONE
+            ),
+            checkpoint_path=str(diagnostic_checkpoint or ""),
             checkpoint_verified=passed,
             promotion_ready=False,
         )
