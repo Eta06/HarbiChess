@@ -71,6 +71,7 @@ class JointPolicyValueTransferConfig:
     ranking_depth: int = 4
     seed: int = 2026083017
     arena_seed: int = 2026083029
+    require_head_warmup_gate: bool = True
 
     def __post_init__(self) -> None:
         counts = (
@@ -603,10 +604,16 @@ def run_joint_policy_value_transfer(config: JointPolicyValueTransferConfig) -> P
 
     joint_result = continuation = tactical = candidate = arena = arena_control = arena_gate = None
     passed = False
-    if not warmup_reasons:
-        warmup.unfreeze()
+    if not warmup_reasons or not config.require_head_warmup_gate:
+        transfer = warmup
+        joint_start = "qualified_value_head_warmup"
+        if warmup_reasons:
+            transfer = _network()
+            transfer.load_weights(str(config.model_path))
+            joint_start = "release_baseline_shared_representation_audit"
+        transfer.unfreeze()
         joint = JointPolicyValueLearner(
-            warmup,
+            transfer,
             learning_rate=config.joint_learning_rate,
             weight_decay=config.weight_decay,
         )
@@ -635,9 +642,9 @@ def run_joint_policy_value_transfer(config: JointPolicyValueTransferConfig) -> P
             if step % config.validation_interval:
                 continue
             quality = {
-                "train": _quality(warmup, train_policy, train_value, train_outcomes),
+                "train": _quality(transfer, train_policy, train_value, train_outcomes),
                 "validation": _quality(
-                    warmup, validation_policy, validation_value, validation_outcomes
+                    transfer, validation_policy, validation_value, validation_outcomes
                 ),
             }
             reasons = (
@@ -668,7 +675,7 @@ def run_joint_policy_value_transfer(config: JointPolicyValueTransferConfig) -> P
             joint_curve.append(row)
             macro = float(quality["validation"]["value"]["macro_cross_entropy"])  # type: ignore[index]
             if not reasons:
-                eligible.append((macro, step, _snapshot(warmup)))
+                eligible.append((macro, step, _snapshot(transfer)))
             if macro < best_macro:
                 best_macro = macro
                 stale = 0
@@ -696,22 +703,22 @@ def run_joint_policy_value_transfer(config: JointPolicyValueTransferConfig) -> P
             selected_macro, selected_step, selected_weights = min(
                 eligible, key=lambda item: (item[0], item[1])
             )
-            warmup.load_weights(list(selected_weights))
+            transfer.load_weights(list(selected_weights))
             selected_quality = {
-                "train": _quality(warmup, train_policy, train_value, train_outcomes),
+                "train": _quality(transfer, train_policy, train_value, train_outcomes),
                 "validation": _quality(
-                    warmup, validation_policy, validation_value, validation_outcomes
+                    transfer, validation_policy, validation_value, validation_outcomes
                 ),
             }
             candidate_dir = config.output_dir / "candidate"
             candidate_dir.mkdir()
             candidate_path = candidate_dir / "model.safetensors"
             temporary = candidate_dir / ".model.tmp.safetensors"
-            warmup.save_weights(str(temporary))
+            transfer.save_weights(str(temporary))
             os.replace(temporary, candidate_path)
             continuation = _continuation_ranking(
                 baseline,
-                warmup,
+                transfer,
                 ranking_records,
                 rules=rules,
                 depth=config.ranking_depth,
@@ -770,6 +777,7 @@ def run_joint_policy_value_transfer(config: JointPolicyValueTransferConfig) -> P
                 arena_gate = {"passed": not strict_reasons, "reasons": strict_reasons}
                 passed = not strict_reasons
             joint_result = {
+                "joint_start": joint_start,
                 "passed_numeric_gate": True,
                 "stop_reason": joint_stop,
                 "selected_step": selected_step,
@@ -780,6 +788,7 @@ def run_joint_policy_value_transfer(config: JointPolicyValueTransferConfig) -> P
             }
         else:
             joint_result = {
+                "joint_start": joint_start,
                 "passed_numeric_gate": False,
                 "stop_reason": joint_stop,
                 "curve": joint_curve,
@@ -842,9 +851,14 @@ def run_joint_policy_value_transfer(config: JointPolicyValueTransferConfig) -> P
         if passed
         else (
             "KRITIK value warmup failed · representation audit required"
-            if warmup_reasons
+            if warmup_reasons and config.require_head_warmup_gate
             else "KRITIK joint transfer failed · continuous learner blocked"
         )
+    )
+    stop_reasons = (
+        warmup_reasons
+        if warmup_reasons and config.require_head_warmup_gate
+        else (joint_result or {}).get("prearena_reasons", ())
     )
     snapshot = replace(
         snapshot,
@@ -856,7 +870,7 @@ def run_joint_policy_value_transfer(config: JointPolicyValueTransferConfig) -> P
             "all_joint_transfer_gates_passed" if passed else "frozen_joint_transfer_gate"
         ),
         pilot_stop_detail=detail,
-        pilot_reasons=tuple(warmup_reasons or (joint_result or {}).get("prearena_reasons", ())),  # type: ignore[arg-type]
+        pilot_reasons=tuple(stop_reasons),  # type: ignore[arg-type]
         promotion_ready=False,
     )
     store.write_atomic(snapshot)
@@ -871,6 +885,11 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument("--train-shard", type=Path, required=True)
     parser.add_argument("--validation-shard", type=Path, required=True)
     parser.add_argument("--telemetry", type=Path, default=Path("artifacts/dashboard/state.json"))
+    parser.add_argument(
+        "--joint-representation-audit",
+        action="store_true",
+        help="run the preregistered all-network joint arm even when head-only warmup fails",
+    )
     arguments = parser.parse_args(argv)
     print(
         run_joint_policy_value_transfer(
@@ -881,6 +900,7 @@ def main(argv: Sequence[str] | None = None) -> int:
                 train_shard=arguments.train_shard,
                 validation_shard=arguments.validation_shard,
                 telemetry_path=arguments.telemetry,
+                require_head_warmup_gate=not arguments.joint_representation_audit,
             )
         )
     )
