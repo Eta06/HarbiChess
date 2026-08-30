@@ -467,6 +467,21 @@ def _continuation_floor(result: dict[str, object]) -> tuple[str, ...]:
     return tuple(reasons)
 
 
+def _select_numeric_checkpoint(checkpoints: Sequence[dict[str, object]]):
+    if not checkpoints:
+        raise ValueError("continuous update produced no validation checkpoints")
+    eligible = [checkpoint for checkpoint in checkpoints if not checkpoint["reasons"]]
+    selected = min(
+        eligible or checkpoints,
+        key=lambda checkpoint: (
+            float(checkpoint["policy"]["cross_entropy"]),  # type: ignore[index]
+            float(checkpoint["wdl"]["macro_cross_entropy"]),  # type: ignore[index]
+            int(checkpoint["local_step"]),
+        ),
+    )
+    return selected, bool(eligible)
+
+
 def _load_initial(
     config: ContinuousPolicyIterationConfig,
 ) -> tuple[HarbiChessDecoupledValueNetwork, Path]:
@@ -640,6 +655,7 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
         policy_rng = random.Random(config.seed + update * 10)
         value_sampler = _MixedWDLSampler(train_records, seed=config.seed + update * 10 + 1)
         curve = []
+        validation_checkpoints = []
         maximum_gradient = 0.0
         snapshot = replace(
             snapshot,
@@ -663,9 +679,34 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
                 mx.take(wdl_train_inputs, value_rows, axis=0),
                 mx.take(wdl_labels, value_rows, axis=0),
             )
-            curve.append(metric)
             maximum_gradient = max(maximum_gradient, float(metric["gradient_norm"]))
+            validation_payload = None
             if local_step % 10 == 0:
+                validation_policy_logits = network(prepared_validation.inputs)[0]
+                mx.eval(validation_policy_logits)
+                validation_policy = _policy_quality(
+                    validation_policy_logits,
+                    prepared_validation.targets,
+                    prepared_validation.legal_masks,
+                )
+                validation_wdl = _wdl_quality(network, wdl_validation_inputs, validation_outcomes)
+                numeric_reasons = (
+                    *_policy_gate(before_policy, validation_policy),
+                    *_continuous_wdl_gate(previous_wdl, validation_wdl),
+                )
+                validation_payload = {
+                    "policy": validation_policy,
+                    "wdl": validation_wdl,
+                    "reasons": numeric_reasons,
+                }
+                validation_checkpoints.append(
+                    {
+                        "local_step": local_step,
+                        "learner_step": learner.step,
+                        **validation_payload,
+                        "state": learner.snapshot(),
+                    }
+                )
                 elapsed = time.perf_counter() - started
                 history = HistoryPoint(
                     training_step=learner.step,
@@ -679,7 +720,8 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
                     positions_per_second=(learner.step * config.batch_size / max(elapsed, 1e-9)),
                     policy_loss=float(metric["policy_loss"]),
                     value_loss=float(metric["value_loss"]),
-                    validation_loss=None,
+                    validation_loss=float(validation_policy["cross_entropy"])
+                    + float(validation_wdl["cross_entropy"]),
                 )
                 snapshot = replace(
                     snapshot,
@@ -692,15 +734,22 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
                     history=(*snapshot.history, history)[-240:],
                 )
                 store.write_atomic(snapshot)
+            curve.append({**metric, "validation": validation_payload})
 
-        after_policy_logits = network(prepared_validation.inputs)[0]
-        mx.eval(after_policy_logits)
-        after_policy = _policy_quality(
-            after_policy_logits,
-            prepared_validation.targets,
-            prepared_validation.legal_masks,
+        selected_checkpoint, has_eligible_checkpoint = _select_numeric_checkpoint(
+            validation_checkpoints
         )
-        after_wdl = _wdl_quality(network, wdl_validation_inputs, validation_outcomes)
+        learner.restore(selected_checkpoint["state"])
+        after_policy = selected_checkpoint["policy"]
+        after_wdl = selected_checkpoint["wdl"]
+        numeric_reasons = (
+            ()
+            if has_eligible_checkpoint
+            else (
+                "no validation checkpoint passed policy and WDL gates",
+                *selected_checkpoint["reasons"],
+            )
+        )
         after_material = _material_quality(network, *material_validation)
         continuation = _continuation_ranking(
             release,
@@ -722,8 +771,7 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
             config=config,
         )
         reasons = [
-            *_policy_gate(before_policy, after_policy),
-            *_continuous_wdl_gate(previous_wdl, after_wdl),
+            *numeric_reasons,
             *_continuation_floor(continuation),
             *tactical_reasons,
         ]
@@ -757,6 +805,7 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
                 "target_metrics": target_metrics,
                 "rolling_policy_rows": len(policy_buffer.records),
                 "steps": config.steps_per_update,
+                "selected_local_step": selected_checkpoint["local_step"],
                 "learner_step": learner.step,
                 "maximum_gradient_norm": maximum_gradient,
                 "policy_before": before_policy,
@@ -769,6 +818,10 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
                 "arena": arena,
                 "checkpoint_path": str(checkpoint_path) if accepted_update else None,
                 "checkpoint_sha256": checkpoint_sha256,
+                "validation_checkpoints": [
+                    {key: value for key, value in checkpoint.items() if key != "state"}
+                    for checkpoint in validation_checkpoints
+                ],
                 "curve": curve,
             }
         )
@@ -888,6 +941,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument("--model", required=True, type=Path)
     parser.add_argument("--runs-root", type=Path, default=Path("artifacts/runs"))
     parser.add_argument("--telemetry", type=Path, default=Path("artifacts/dashboard/state.json"))
+    parser.add_argument("--seed", type=int, default=2026083101)
     arguments = parser.parse_args(argv)
     result = run_continuous_policy_iteration(
         ContinuousPolicyIterationConfig(
@@ -896,6 +950,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             model_path=arguments.model,
             runs_root=arguments.runs_root,
             telemetry_path=arguments.telemetry,
+            seed=arguments.seed,
         )
     )
     print(result)
