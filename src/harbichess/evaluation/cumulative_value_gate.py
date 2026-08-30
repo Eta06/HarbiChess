@@ -59,6 +59,8 @@ class CumulativeGateConfig:
     fresh_macro_ce_minimum_improvement: float = 0.0
     fresh_brier_minimum_improvement: float = 0.0
     fresh_pearson_minimum_improvement: float = 0.0
+    fresh_ece_margin: float = 0.020
+    fresh_ece_absolute_maximum: float = 0.150
 
     def __post_init__(self) -> None:
         if not 0.0 < self.confidence_level < 1.0 or self.bootstrap_samples <= 0:
@@ -74,6 +76,8 @@ class CumulativeGateConfig:
             self.fresh_macro_ce_minimum_improvement,
             self.fresh_brier_minimum_improvement,
             self.fresh_pearson_minimum_improvement,
+            self.fresh_ece_margin,
+            self.fresh_ece_absolute_maximum,
         )
         if any(value < 0.0 for value in margins):
             raise ValueError("cumulative gate margins must be non-negative")
@@ -300,6 +304,10 @@ def evaluate_cumulative_gate(
         >= settings.fresh_brier_minimum_improvement,
         "fresh_pearson_superior": fresh_intervals["pearson"]["low"] + 1e-12
         >= settings.fresh_pearson_minimum_improvement,
+        "fresh_ece_noninferior": fresh_intervals["ece_10"]["low"] + 1e-12
+        >= -settings.fresh_ece_margin,
+        "fresh_ece_absolute": fresh["candidate"]["ece_10"]
+        <= settings.fresh_ece_absolute_maximum,
     }
     return {
         "config": asdict(settings),
