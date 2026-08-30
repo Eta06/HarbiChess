@@ -122,3 +122,19 @@ def test_shared_representation_audit_is_explicit_opt_in() -> None:
         ).require_head_warmup_gate
         is False
     )
+
+
+def test_joint_transfer_requires_positive_loss_weights() -> None:
+    inputs = {
+        "output_dir": Path("output"),
+        "model_path": Path("model"),
+        "target_result": Path("target"),
+        "train_shard": Path("train"),
+        "validation_shard": Path("validation"),
+    }
+
+    balanced = JointPolicyValueTransferConfig(**inputs, policy_weight=0.25)
+    assert balanced.policy_weight == 0.25
+    assert balanced.value_weight == 1.0
+    with pytest.raises(ValueError, match="optimizer"):
+        JointPolicyValueTransferConfig(**inputs, policy_weight=0.0)
