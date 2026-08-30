@@ -474,9 +474,9 @@ def _select_numeric_checkpoint(checkpoints: Sequence[dict[str, object]]):
     selected = min(
         eligible or checkpoints,
         key=lambda checkpoint: (
+            int(checkpoint["local_step"]),
             float(checkpoint["policy"]["cross_entropy"]),  # type: ignore[index]
             float(checkpoint["wdl"]["macro_cross_entropy"]),  # type: ignore[index]
-            int(checkpoint["local_step"]),
         ),
     )
     return selected, bool(eligible)
