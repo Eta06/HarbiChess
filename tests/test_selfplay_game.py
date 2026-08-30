@@ -6,6 +6,7 @@ import pytest
 from harbichess.chess.rules import PythonChessRules
 from harbichess.core.state import ChessMove, TerminalResult
 from harbichess.search.continuation import transform_repetition_target
+from harbichess.search.full_gumbel import FullGumbelSearchResult
 from harbichess.search.mcts import MoveStatistics, SearchResult
 from harbichess.selfplay.game import (
     SelfPlayConfig,
@@ -83,6 +84,38 @@ def test_self_play_records_clean_prior_to_teacher_policy_telemetry() -> None:
         0.2 * math.log(0.2 / 0.7) + 0.8 * math.log(0.8 / 0.3)
     )
     assert sample.teacher_search_value_delta == pytest.approx(0.25)
+
+
+def test_full_gumbel_replay_uses_improved_policy_instead_of_sparse_visits() -> None:
+    rules = PythonChessRules()
+    visited = ChessMove("e2e4")
+    selected = ChessMove("d2d4")
+
+    class GumbelSearch:
+        def search(self, state, *, rng: random.Random, add_root_noise: bool):
+            del state, rng, add_root_noise
+            return FullGumbelSearchResult(
+                moves=(
+                    MoveStatistics(visited, 4, 0.6, 0.1),
+                    MoveStatistics(selected, 0, 0.4, 0.2),
+                ),
+                root_value=0.1,
+                simulations=4,
+                selected_action=selected,
+                action_weights=((visited, 0.45), (selected, 0.55)),
+            )
+
+    game = play_game(
+        GumbelSearch(),
+        rules,
+        rules.initial_state(),
+        game_index=0,
+        seed=1,
+        config=SelfPlayConfig(max_plies=1, temperature=0.0),
+    )
+
+    assert game.samples[0].selected_move == selected
+    assert game.samples[0].visit_policy == ((visited, 0.45), (selected, 0.55))
 
 
 def test_parallel_games_receive_reproducible_unique_seeds() -> None:
