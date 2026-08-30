@@ -15,12 +15,14 @@ from harbichess.backends.plastic_value_network import (  # noqa: E402
     HarbiChessPlasticValueNetwork,
 )
 from harbichess.core.state import Side  # noqa: E402
+from harbichess.training.continuous_checkpoint import save_continuous_resume  # noqa: E402
 from harbichess.training.continuous_policy_iteration import (  # noqa: E402
     ContinuousPolicyIterationConfig,
     _clone,
     _combine_policy,
     _compose_headwise_state,
     _continuous_wdl_gate,
+    _ContinuousHeadLearner,
     _LearnerState,
     _paired_mean_interval,
     _policy_gate,
@@ -29,6 +31,7 @@ from harbichess.training.continuous_policy_iteration import (  # noqa: E402
     _select_qualification_starts,
     _soft_value_targets,
     _split_fit_tuning,
+    _verify_resume_exactness,
 )
 from harbichess.training.full_gumbel_transfer import (  # noqa: E402
     PreparedTransfer,
@@ -363,3 +366,60 @@ def test_paired_mean_interval_is_reproducible() -> None:
 
     assert first == second
     assert first["estimate"] == pytest.approx(0.015)
+
+
+def test_saved_update_reproduces_next_controlled_training_step(tmp_path: Path) -> None:
+    network = HarbiChessPlasticValueNetwork.from_mihver(
+        HarbiChessDecoupledValueNetwork.from_base(_network())
+    )
+    network.freeze_to_stable_continuous_heads()
+    learner = _ContinuousHeadLearner(network, learning_rate=1e-4)
+    state = learner.snapshot()
+    checkpoint = tmp_path / "checkpoints" / "update-001"
+    checkpoint.mkdir(parents=True)
+    network.save_weights(str(checkpoint / "model.safetensors"))
+    replay = tmp_path / "replay.jsonl.gz"
+    target = tmp_path / "target.json"
+    replay.write_bytes(b"replay")
+    target.write_text("{}\n", encoding="utf-8")
+    save_continuous_resume(
+        checkpoint,
+        update=1,
+        learner_step=state.step,
+        next_update_seed=53,
+        source_commit="abc123",
+        config_sha256="a" * 64,
+        optimizer_state=state.optimizer,
+        rolling_replay_files=(replay,),
+        rolling_target_files=(target,),
+    )
+    inputs = mx.zeros((4, 8, 8, network.config.input_channels))
+    policy_targets = mx.full((4, network.config.policy_size), 1 / network.config.policy_size)
+    policy_buffer = PreparedTransfer(
+        records=(None,) * 4,
+        inputs=inputs,
+        targets=policy_targets,
+        legal_masks=mx.ones((4, network.config.policy_size), dtype=mx.bool_),
+        wdl_targets=(0,) * 4,
+    )
+    value_targets = mx.array(
+        ((1.0, 0.0, 0.0), (0.0, 1.0, 0.0), (0.0, 0.0, 1.0), (0.5, 0.5, 0.0))
+    )
+
+    result = _verify_resume_exactness(
+        checkpoint,
+        in_memory_state=state,
+        network=network,
+        learning_rate=1e-4,
+        policy_buffer=policy_buffer,
+        historical_inputs=inputs,
+        historical_targets=value_targets,
+        fresh_inputs=inputs,
+        fresh_targets=value_targets,
+        batch_size=4,
+        seed=53,
+    )
+
+    assert result["passed"] is True
+    assert result["maximum_parameter_delta"] == 0.0
+    assert result["maximum_metric_delta"] == 0.0
