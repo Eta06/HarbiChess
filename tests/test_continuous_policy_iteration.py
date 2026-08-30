@@ -25,6 +25,7 @@ from harbichess.training.continuous_policy_iteration import (  # noqa: E402
     _ContinuousHeadLearner,
     _empirical_fresh_value_targets,
     _fresh_wdl_direction_gate,
+    _fresh_wdl_harm_gate,
     _interpolate_value_state,
     _LearnerState,
     _local_arena_catastrophic_gate,
@@ -261,6 +262,24 @@ def test_fresh_wdl_gate_requires_all_preregistered_directions() -> None:
             {**candidate, "cross_entropy": 0.91, "brier": 0.56},
         )
     ) == 2
+
+
+def test_fresh_local_gate_rejects_only_supported_harm() -> None:
+    inconclusive = {
+        "intervals": {
+            metric: {"low": -0.01, "high": 0.01}
+            for metric in ("cross_entropy", "macro_cross_entropy", "brier", "pearson")
+        }
+    }
+    harmful = {
+        "intervals": {
+            **inconclusive["intervals"],
+            "cross_entropy": {"low": -0.02, "high": -0.001},
+        }
+    }
+
+    assert _fresh_wdl_harm_gate(inconclusive) == ()
+    assert _fresh_wdl_harm_gate(harmful) == ("paired fresh tuning CE shows harm",)
 
 
 def test_value_checkpoint_uses_best_fresh_ce_among_safe_steps() -> None:
