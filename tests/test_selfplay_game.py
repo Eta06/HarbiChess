@@ -137,6 +137,40 @@ def test_parallel_games_receive_reproducible_unique_seeds() -> None:
     assert sorted(game.game_index for game in completed) == [10, 11, 12, 13]
 
 
+def test_parallel_games_preserve_supplied_continuation_states() -> None:
+    rules = PythonChessRules()
+    first = rules.apply(rules.initial_state(), ChessMove("f2f3"))
+    second = rules.apply(rules.initial_state(), ChessMove("e2e4"))
+
+    games = play_parallel_games(
+        ScriptedSearch(),
+        rules,
+        run_seed=42,
+        first_game_index=0,
+        game_count=2,
+        max_workers=2,
+        config=SelfPlayConfig(max_plies=1),
+        initial_states=(first, second),
+    )
+
+    assert tuple(game.final_state for game in games) == (first, second)
+
+
+def test_parallel_games_require_one_continuation_state_per_game() -> None:
+    rules = PythonChessRules()
+
+    with pytest.raises(ValueError, match="initial state count"):
+        play_parallel_games(
+            ScriptedSearch(),
+            rules,
+            run_seed=42,
+            first_game_index=0,
+            game_count=2,
+            max_workers=2,
+            initial_states=(rules.initial_state(),),
+        )
+
+
 def test_self_play_configuration_validation_and_ply_adjudication() -> None:
     with pytest.raises(ValueError, match="ply limits"):
         SelfPlayConfig(max_plies=0)
