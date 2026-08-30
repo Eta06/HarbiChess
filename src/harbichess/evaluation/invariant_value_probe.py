@@ -49,6 +49,7 @@ class InvariantValueProbeConfig:
     learning_rate: float = 2e-3
     seed: int = 2026083061
     distributional_targets: bool = False
+    expected_mse_weight: float = 0.0
 
     def __post_init__(self) -> None:
         if (
@@ -63,6 +64,7 @@ class InvariantValueProbeConfig:
             <= 0
             or self.steps % self.validation_interval
             or self.learning_rate <= 0
+            or self.expected_mse_weight < 0
         ):
             raise ValueError("invariant value probe configuration is invalid")
 
@@ -84,17 +86,23 @@ def _material_soft_targets(values: mx.array) -> mx.array:
 
 
 class _DistributionalProbeLearner:
-    def __init__(self, network, *, learning_rate: float) -> None:
+    def __init__(
+        self, network, *, learning_rate: float, expected_mse_weight: float
+    ) -> None:
         self.network = network
+        self.expected_mse_weight = expected_mse_weight
         self.optimizer = optim.Adam(learning_rate=learning_rate)
         self.loss_and_grad = nn.value_and_grad(network, self._loss)
 
-    @staticmethod
-    def _loss(network, inputs: mx.array, targets: mx.array) -> mx.array:
+    def _loss(self, network, inputs: mx.array, targets: mx.array) -> mx.array:
         _, logits = network(inputs)
-        return nn.losses.cross_entropy(
+        distributional = nn.losses.cross_entropy(
             logits, _material_soft_targets(targets), reduction="mean"
         )
+        probabilities = mx.softmax(logits, axis=1)
+        expected = probabilities[:, 0] - probabilities[:, 2]
+        scalar = mx.mean(mx.square(expected - targets))
+        return distributional + self.expected_mse_weight * scalar
 
     def step(self, inputs: mx.array, targets: mx.array) -> float:
         loss, gradients = self.loss_and_grad(self.network, inputs, targets)
@@ -156,7 +164,11 @@ def _run_arm(
     else:
         network.freeze_release_parameters()
     learner = (
-        _DistributionalProbeLearner(network, learning_rate=config.learning_rate)
+        _DistributionalProbeLearner(
+            network,
+            learning_rate=config.learning_rate,
+            expected_mse_weight=config.expected_mse_weight,
+        )
         if config.distributional_targets
         else _ProbeLearner(network, learning_rate=config.learning_rate)
     )
@@ -347,6 +359,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument("--runs-root", type=Path, default=Path("artifacts/runs"))
     parser.add_argument("--telemetry", type=Path, default=Path("artifacts/dashboard/state.json"))
     parser.add_argument("--distributional-targets", action="store_true")
+    parser.add_argument("--expected-mse-weight", type=float, default=0.0)
     arguments = parser.parse_args(argv)
     print(
         run_invariant_value_probe(
@@ -356,6 +369,7 @@ def main(argv: Sequence[str] | None = None) -> int:
                 runs_root=arguments.runs_root,
                 telemetry_path=arguments.telemetry,
                 distributional_targets=arguments.distributional_targets,
+                expected_mse_weight=arguments.expected_mse_weight,
             )
         )
     )
