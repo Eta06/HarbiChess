@@ -10,6 +10,7 @@ from harbichess.training.joint_policy_value_transfer import (  # noqa: E402
     JointPolicyValueTransferConfig,
     OutcomeGameBalancedSampler,
     _audit_perspective,
+    _network_value_logits,
     _spearman,
     _value_gate_reasons,
     _value_quality,
@@ -91,6 +92,20 @@ def test_value_metrics_gate_requires_calibrated_outcome_separation() -> None:
 def test_spearman_preserves_order_and_detects_reversal() -> None:
     assert _spearman((1.0, 2.0, 3.0), (10.0, 20.0, 30.0)) == pytest.approx(1.0)
     assert _spearman((1.0, 2.0, 3.0), (30.0, 20.0, 10.0)) == pytest.approx(-1.0)
+
+
+def test_value_diagnostic_uses_complete_public_forward_path() -> None:
+    class ResidualNetwork:
+        def __call__(self, inputs):
+            return mx.zeros((inputs.shape[0], 1)), mx.full((inputs.shape[0], 3), 7.0)
+
+        def _trunk(self, _inputs):
+            raise AssertionError("release-only trunk path must not be used")
+
+    logits = _network_value_logits(ResidualNetwork(), mx.zeros((2, 8, 8, 104)))
+    mx.eval(logits)
+
+    assert logits.tolist() == [[7.0, 7.0, 7.0], [7.0, 7.0, 7.0]]
 
 
 def test_joint_transfer_config_requires_aligned_schedules() -> None:
