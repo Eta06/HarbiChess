@@ -60,6 +60,9 @@ def test_config_defaults_use_scaled_qualified_teacher_set() -> None:
     assert config.validation_targets_per_update == 192
     assert config.steps_per_update == 40
     assert config.batch_size == 64
+    assert config.selfplay_games_per_update == 96
+    assert config.selfplay_workers == 24
+    assert config.minimum_known_selfplay_games == 24
 
 
 def test_config_requires_an_even_mixed_value_batch() -> None:
