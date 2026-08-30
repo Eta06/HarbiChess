@@ -117,7 +117,7 @@ def test_inference_clone_does_not_quantize_live_learner() -> None:
     )
 
 
-def test_checkpoint_selection_ignores_better_but_ineligible_final_step() -> None:
+def test_checkpoint_selection_uses_earliest_eligible_step() -> None:
     checkpoints = (
         {
             "local_step": 10,
@@ -142,4 +142,4 @@ def test_checkpoint_selection_ignores_better_but_ineligible_final_step() -> None
     selected, eligible = _select_numeric_checkpoint(checkpoints)
 
     assert eligible is True
-    assert selected["local_step"] == 20
+    assert selected["local_step"] == 10
