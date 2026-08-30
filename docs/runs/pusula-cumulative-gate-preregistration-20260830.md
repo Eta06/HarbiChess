@@ -215,3 +215,36 @@ three-update horizon, arena/tactical/continuation safeguards, and exact-resume
 requirements remain unchanged. Run `04` replay and checkpoints are excluded.
 The replacement uses seed `2026090401` and a new output directory. This is a
 fresh prospective test; run `04` is not reclassified.
+
+## Residual trust-region experiment recorded before execution
+
+Run `pusula-continuous-pilot-20260831-05` remains failed. Stable-function
+distillation allowed update 1 to pass, but update 2 was rolled back: even its
+first full optimizer step put historical tuning CE `0.000272` beyond the frozen
+point margin while already improving every fresh metric. No update-2 checkpoint
+satisfied both sides of the constraint, so update 3 and final qualification did
+not run.
+
+This identifies optimizer-step resolution at the cumulative boundary rather
+than lack of a useful fresh gradient. The next experiment adds a deterministic
+value-only trust-region line search after the unchanged 40-step learner:
+
+- for every saved value checkpoint, scale its plastic-value parameter delta
+  from the accepted update boundary by the fixed alpha grid
+  `{1, 0.75, 0.5, 0.25, 0.125, 0.0625, 0.03125}`;
+- policy parameters are not interpolated and retain their independent existing
+  checkpoint selection;
+- an interpolated value state is eligible only if it satisfies the frozen
+  update-0 historical tuning point margins and improves fresh CE, macro CE,
+  Brier, and Pearson in their required directions;
+- select minimum fresh CE, then minimum fresh macro CE, then earliest learner
+  step exactly as before; reset optimizer after headwise composition exactly as
+  before;
+- alpha zero is excluded because a no-learning state cannot satisfy the fresh
+  improvement requirement.
+
+This changes neither gradient direction nor training exposure and introduces no
+new final tolerance. All cumulative bootstrap, sample-size, compute, replay,
+search, arena, tactical, continuation, data-integrity, and resume gates remain
+unchanged. Run `05` data is excluded. The prospective replacement uses seed
+`2026090501` and a new output directory; run `05` is not reclassified.
