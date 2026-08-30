@@ -27,6 +27,7 @@ from harbichess.evaluation.corrected_replay_value_transfer import (
 )
 from harbichess.evaluation.deterministic_value_probe import _prepare, _round_robin
 from harbichess.evaluation.teacher_qualification import _atomic_json
+from harbichess.training.batch import GameBalancedSampler
 from harbichess.training.full_gumbel_transfer import _network, _snapshot
 from harbichess.training.invariant_wdl_transfer import _wdl_quality
 from harbichess.training.joint_policy_value_transfer import (
@@ -53,6 +54,7 @@ class DecoupledValueTransferConfig:
     validation_interval: int = 20
     material_seed: int = 2026083061
     wdl_seed: int = 2026083073
+    wdl_sampling_mode: str = "outcome"
 
     def __post_init__(self) -> None:
         if (
@@ -73,6 +75,8 @@ class DecoupledValueTransferConfig:
             or self.wdl_steps % self.validation_interval
         ):
             raise ValueError("decoupled value transfer configuration is invalid")
+        if self.wdl_sampling_mode not in {"outcome", "mixed", "natural"}:
+            raise ValueError("WDL sampling mode must be outcome, mixed, or natural")
 
 
 _MATERIAL_PREFIX = ("material_value_linear.",)
@@ -161,6 +165,36 @@ class _WDLLearner:
         return float(loss.item()), float(norm.item())
 
 
+class _MixedWDLSampler:
+    """Combine fixed-size outcome-balanced and natural game-balanced draws."""
+
+    def __init__(self, records, *, seed: int) -> None:
+        self._outcome = OutcomeGameBalancedSampler(records, seed=seed)
+        self._natural = GameBalancedSampler(records, seed=seed + 1)
+        self._rng = random.Random(seed + 2)
+
+    def sample_indices(self, batch_size: int) -> tuple[int, ...]:
+        if batch_size <= 1:
+            raise ValueError("mixed WDL sampler requires at least two rows")
+        outcome_size = batch_size // 2
+        selected = [
+            *self._outcome.sample_indices(outcome_size),
+            *self._natural.sample_indices(batch_size - outcome_size),
+        ]
+        self._rng.shuffle(selected)
+        return tuple(selected)
+
+
+def _wdl_sampler(records, *, mode: str, seed: int):
+    if mode == "outcome":
+        return OutcomeGameBalancedSampler(records, seed=seed)
+    if mode == "natural":
+        return GameBalancedSampler(records, seed=seed)
+    if mode == "mixed":
+        return _MixedWDLSampler(records, seed=seed)
+    raise ValueError(f"unsupported WDL sampling mode: {mode}")
+
+
 def _train_material(
     base,
     train: tuple[mx.array, mx.array],
@@ -245,7 +279,11 @@ def _train_wdl_arm(
     train_outcomes = tuple(int(record.outcome_value) for record in train_records)
     validation_outcomes = tuple(int(record.outcome_value) for record in validation_records)
     labels = mx.array([{1: 0, 0: 1, -1: 2}[value] for value in train_outcomes], dtype=mx.int32)
-    sampler = OutcomeGameBalancedSampler(train_records, seed=config.wdl_seed)
+    sampler = _wdl_sampler(
+        train_records,
+        mode=config.wdl_sampling_mode,
+        seed=config.wdl_seed,
+    )
     learner = _WDLLearner(network, learning_rate=config.wdl_learning_rate)
     best = (math.inf, 0, _snapshot(network))
     eligible = []
@@ -470,6 +508,11 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument("--model", required=True, type=Path)
     parser.add_argument("--runs-root", type=Path, default=Path("artifacts/runs"))
     parser.add_argument("--telemetry", type=Path, default=Path("artifacts/dashboard/state.json"))
+    parser.add_argument(
+        "--wdl-sampling-mode",
+        choices=("outcome", "mixed", "natural"),
+        default="outcome",
+    )
     arguments = parser.parse_args(argv)
     print(
         run_decoupled_value_transfer(
@@ -478,6 +521,7 @@ def main(argv: Sequence[str] | None = None) -> int:
                 model_path=arguments.model,
                 runs_root=arguments.runs_root,
                 telemetry_path=arguments.telemetry,
+                wdl_sampling_mode=arguments.wdl_sampling_mode,
             )
         )
     )
