@@ -670,6 +670,15 @@ def _search_tactical_gate(
     return tuple(reasons)
 
 
+def _local_arena_catastrophic_gate(arena: dict[str, object]) -> tuple[str, ...]:
+    """Reject locally only when paired evidence supports catastrophic weakness."""
+
+    interval = arena["score_interval"]
+    if float(interval["high"]) < 0.375:  # type: ignore[index]
+        return ("per-update search score upper bound is below catastrophic floor 0.375",)
+    return ()
+
+
 def _fresh_wdl_direction_gate(
     baseline: dict[str, object], candidate: dict[str, object]
 ) -> tuple[str, ...]:
@@ -1694,8 +1703,7 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
             reasons.append("continuous learner changed a frozen parameter")
         if maximum_gradient > 5.0:
             reasons.append("gradient norm exceeded 5.0")
-        if float(arena["score_rate"]) < 0.375:
-            reasons.append("per-update search score is below catastrophic floor 0.375")
+        reasons.extend(_local_arena_catastrophic_gate(arena))
         checkpoint_path = (
             config.output_dir / "checkpoints" / f"update-{update:03d}" / "model.safetensors"
         )
