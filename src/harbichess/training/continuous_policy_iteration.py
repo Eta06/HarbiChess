@@ -645,6 +645,38 @@ def _search_tactical_gate(
     return tuple(reasons)
 
 
+def _fresh_wdl_direction_gate(
+    baseline: dict[str, object], candidate: dict[str, object]
+) -> tuple[str, ...]:
+    reasons = []
+    if float(candidate["cross_entropy"]) >= float(baseline["cross_entropy"]):
+        reasons.append("fresh tuning WDL CE did not improve")
+    if float(candidate["macro_cross_entropy"]) > float(baseline["macro_cross_entropy"]):
+        reasons.append("fresh tuning macro WDL CE regressed")
+    if float(candidate["brier"]) > float(baseline["brier"]):
+        reasons.append("fresh tuning WDL Brier regressed")
+    if float(candidate["expected_score_pearson"]) < float(
+        baseline["expected_score_pearson"]
+    ):
+        reasons.append("fresh tuning WDL Pearson regressed")
+    return tuple(reasons)
+
+
+def _select_value_checkpoint(checkpoints: Sequence[dict[str, object]]):
+    if not checkpoints:
+        raise ValueError("continuous update produced no value checkpoints")
+    eligible = [checkpoint for checkpoint in checkpoints if not checkpoint["reasons"]]
+    selected = min(
+        eligible or checkpoints,
+        key=lambda checkpoint: (
+            float(checkpoint["fresh_wdl"]["cross_entropy"]),  # type: ignore[index]
+            float(checkpoint["fresh_wdl"]["macro_cross_entropy"]),  # type: ignore[index]
+            int(checkpoint["local_step"]),
+        ),
+    )
+    return selected, bool(eligible)
+
+
 def _continuation_floor(result: dict[str, object]) -> tuple[str, ...]:
     reasons = []
     if float(result["candidate_mean_spearman"]) < 0.05:
@@ -854,7 +886,10 @@ def _split_fit_tuning(records, *, seed: int, tuning_fraction: float = 0.20):
                 f"{seed}:{game_id}".encode(), digest_size=16
             ).digest(),
         )
-        tuning_count = max(1, round(len(game_ids) * tuning_fraction))
+        tuning_count = min(
+            max(0, len(game_ids) - 1),
+            max(1, round(len(game_ids) * tuning_fraction)),
+        )
         tuning_games.update(game_ids[:tuning_count])
     fit = tuple(record for record in records if record.game_id not in tuning_games)
     tuning = tuple(record for record in records if record.game_id in tuning_games)
@@ -1046,6 +1081,7 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
     used_validation: set[str] = set()
     rolling: list[PreparedTransfer] = []
     rolling_value_records = []
+    rolling_value_validation_records = []
     rolling_replay_paths: list[Path] = []
     accepted = []
     target_artifacts = []
@@ -1170,16 +1206,36 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
             )
             stopped_reason = f"update-{update:03d}-insufficient-fresh-value-replay"
             break
-        rolling_value_records.append(known_replay_records)
+        fresh_fit_generation, fresh_validation_generation, fresh_value_split = (
+            _split_fit_tuning(
+                known_replay_records,
+                seed=config.seed + update * 10_000 + 1,
+            )
+        )
+        rolling_value_records.append(fresh_fit_generation)
         rolling_value_records = rolling_value_records[-config.rolling_generations :]
+        rolling_value_validation_records.append(fresh_validation_generation)
+        rolling_value_validation_records = rolling_value_validation_records[
+            -config.rolling_generations :
+        ]
         rolling_replay_paths.append(replay_path)
         rolling_replay_paths = rolling_replay_paths[-config.rolling_generations :]
         fresh_value_records = tuple(
             record for generation in rolling_value_records for record in generation
         )
+        fresh_value_validation_records = tuple(
+            record
+            for generation in rolling_value_validation_records
+            for record in generation
+        )
         fresh_outcomes = {record.outcome_value for record in fresh_value_records}
-        if fresh_outcomes != {-1, 0, 1}:
-            reason = "rolling fresh replay does not contain win, draw, and loss rows"
+        fresh_validation_outcomes_set = {
+            record.outcome_value for record in fresh_value_validation_records
+        }
+        if fresh_outcomes != {-1, 0, 1} or fresh_validation_outcomes_set != {-1, 0, 1}:
+            reason = (
+                "rolling fresh fit and tuning replay do not both contain win, draw, and loss"
+            )
             accepted.append(
                 {
                     "update": update,
@@ -1191,11 +1247,25 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
                     "replay_path": str(replay_path),
                     "replay_header": asdict(replay_header),
                     "rolling_value_outcomes": sorted(fresh_outcomes),
+                    "rolling_value_validation_outcomes": sorted(
+                        fresh_validation_outcomes_set
+                    ),
                 }
             )
             stopped_reason = f"update-{update:03d}-incomplete-fresh-outcome-coverage"
             break
         fresh_wdl_inputs, _ = _prepare_value(fresh_value_records, rules)
+        fresh_wdl_validation_inputs, _ = _prepare_value(
+            fresh_value_validation_records, rules
+        )
+        fresh_validation_outcomes = tuple(
+            int(record.outcome_value) for record in fresh_value_validation_records
+        )
+        fresh_wdl_before = _wdl_quality(
+            previous_network,
+            fresh_wdl_validation_inputs,
+            fresh_validation_outcomes,
+        )
         fresh_wdl_labels = mx.array(
             [{1: 0, 0: 1, -1: 2}[int(record.outcome_value)] for record in fresh_value_records],
             dtype=mx.int32,
@@ -1267,7 +1337,6 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
         curve = []
         validation_checkpoints = []
         value_validation_checkpoints = []
-        value_checkpoint_found = False
         maximum_gradient = 0.0
         snapshot = replace(
             snapshot,
@@ -1309,25 +1378,37 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
                 value_targets,
             )
             maximum_gradient = max(maximum_gradient, float(metric["gradient_norm"]))
-            if not value_checkpoint_found:
-                value_validation = _wdl_quality(
-                    network, wdl_validation_inputs, validation_outcomes
-                )
-                value_reasons = _continuous_wdl_gate(
+            value_validation = _wdl_quality(
+                network, wdl_validation_inputs, validation_outcomes
+            )
+            fresh_value_validation = _wdl_quality(
+                network,
+                fresh_wdl_validation_inputs,
+                fresh_validation_outcomes,
+            )
+            fresh_value_reasons = (
+                _fresh_wdl_direction_gate(fresh_wdl_before, fresh_value_validation)
+                if config.stable_plastic_value
+                else ()
+            )
+            value_reasons = (
+                *_continuous_wdl_gate(
                     previous_wdl,
                     value_validation,
                     require_legacy_absolute_floors=not config.stable_plastic_value,
-                )
-                value_validation_checkpoints.append(
-                    {
-                        "local_step": local_step,
-                        "learner_step": learner.step,
-                        "wdl": value_validation,
-                        "reasons": value_reasons,
-                        "state": learner.snapshot(),
-                    }
-                )
-                value_checkpoint_found = not value_reasons
+                ),
+                *fresh_value_reasons,
+            )
+            value_validation_checkpoints.append(
+                {
+                    "local_step": local_step,
+                    "learner_step": learner.step,
+                    "wdl": value_validation,
+                    "fresh_wdl": fresh_value_validation,
+                    "reasons": value_reasons,
+                    "state": learner.snapshot(),
+                }
+            )
             validation_payload = None
             if local_step % 10 == 0:
                 validation_policy_logits = network(prepared_validation.inputs)[0]
@@ -1349,6 +1430,7 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
                 validation_payload = {
                     "policy": validation_policy,
                     "wdl": validation_wdl,
+                    "fresh_wdl": fresh_value_validation,
                     "reasons": numeric_reasons,
                 }
                 validation_checkpoints.append(
@@ -1393,18 +1475,12 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
             for checkpoint in validation_checkpoints
             if not _policy_gate(before_policy, checkpoint["policy"])
         )
-        value_checkpoints = tuple(
-            checkpoint
-            for checkpoint in value_validation_checkpoints
-            if not checkpoint["reasons"]
-        )
         policy_checkpoint = min(
             policy_checkpoints or validation_checkpoints,
             key=lambda checkpoint: int(checkpoint["local_step"]),
         )
-        value_checkpoint = min(
-            value_checkpoints or value_validation_checkpoints,
-            key=lambda checkpoint: int(checkpoint["local_step"]),
+        value_checkpoint, value_checkpoint_eligible = _select_value_checkpoint(
+            value_validation_checkpoints
         )
         learner.restore(
             _compose_headwise_state(
@@ -1422,6 +1498,16 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
             prepared_validation.legal_masks,
         )
         after_wdl = _wdl_quality(network, wdl_validation_inputs, validation_outcomes)
+        after_fresh_wdl = _wdl_quality(
+            network,
+            fresh_wdl_validation_inputs,
+            fresh_validation_outcomes,
+        )
+        fresh_numeric_reasons = (
+            _fresh_wdl_direction_gate(fresh_wdl_before, after_fresh_wdl)
+            if config.stable_plastic_value
+            else ()
+        )
         numeric_reasons = (
             *_policy_gate(before_policy, after_policy),
             *_continuous_wdl_gate(
@@ -1429,15 +1515,16 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
                 after_wdl,
                 require_legacy_absolute_floors=not config.stable_plastic_value,
             ),
+            *fresh_numeric_reasons,
         )
         if not policy_checkpoints:
             numeric_reasons = (
                 "no validation checkpoint independently passed policy gates",
                 *numeric_reasons,
             )
-        if not value_checkpoints:
+        if not value_checkpoint_eligible:
             numeric_reasons = (
-                "no validation checkpoint independently passed WDL gates",
+                "no validation checkpoint independently passed historical and fresh WDL gates",
                 *numeric_reasons,
             )
         after_material = _material_quality(network, *material_validation)
@@ -1533,6 +1620,8 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
                 "replay_header": asdict(replay_header),
                 "rolling_value_generations": len(rolling_value_records),
                 "rolling_value_rows": len(fresh_value_records),
+                "rolling_value_validation_rows": len(fresh_value_validation_records),
+                "fresh_value_split": fresh_value_split,
                 "value_batch_mix": {"historical": 32, "fresh": 32},
                 "fresh_value_sampling": "fixed-8-loss-16-draw-8-win-then-game-balanced",
                 "soft_value_targets": soft_target_metrics,
@@ -1551,6 +1640,8 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
                 "policy_after": after_policy,
                 "wdl_before": previous_wdl,
                 "wdl_after": after_wdl,
+                "fresh_wdl_before": fresh_wdl_before,
+                "fresh_wdl_after": after_fresh_wdl,
                 "material": after_material,
                 "continuation": continuation,
                 "tactical": tactical,
