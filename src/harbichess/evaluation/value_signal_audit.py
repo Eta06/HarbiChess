@@ -289,17 +289,37 @@ def _train_arm(
 
 def _diagnosis(arms: dict[str, dict[str, object]]) -> dict[str, object]:
     passed = {label for label, arm in arms.items() if arm["passed"]}
+    position = arms["position-split-all"]
+    position_baseline = position["baseline"]
+    position_selected = position["selected"]["validation"]  # type: ignore[index]
+    position_memorized = (
+        int(position["selected_step"]) > 0
+        and float(position_selected["macro_cross_entropy"])  # type: ignore[index]
+        < float(position_baseline["macro_cross_entropy"])  # type: ignore[index]
+        and float(position_selected["expected_score_pearson"]) >= 0.20  # type: ignore[index]
+        and min(
+            float(position_selected["loss_draw_margin"]),  # type: ignore[index]
+            float(position_selected["win_draw_margin"]),  # type: ignore[index]
+        )
+        >= 0.03
+    )
     if "game-disjoint-shuffled" in passed:
         verdict = "leakage_or_spurious_game_identity"
     elif "game-disjoint-late32" in passed and "game-disjoint-all" not in passed:
         verdict = "early_ply_monte_carlo_variance"
     elif "position-split-all" in passed and "game-disjoint-all" not in passed:
         verdict = "insufficient_independent_games"
+    elif position_memorized and "game-disjoint-all" not in passed:
+        verdict = "position_memorization_without_game_generalization"
     elif not passed:
         verdict = "value_head_or_signal_not_learnable_at_fixed_exposure"
     else:
         verdict = "game_disjoint_value_signal_is_learnable"
-    return {"verdict": verdict, "passed_arms": sorted(passed)}
+    return {
+        "verdict": verdict,
+        "passed_arms": sorted(passed),
+        "position_split_partial_memorization": position_memorized,
+    }
 
 
 def run_value_signal_audit(config: ValueSignalAuditConfig) -> Path:
