@@ -662,6 +662,43 @@ def _fresh_wdl_direction_gate(
     return tuple(reasons)
 
 
+def _old_wdl_point_noninferiority_gate(
+    baseline: dict[str, object], candidate: dict[str, object]
+) -> tuple[str, ...]:
+    """Keep checkpoint tuning aligned with the preregistered cumulative margins.
+
+    This operates only on the historical *tuning* partition.  The independent
+    final old-capability holdout remains unseen until cumulative qualification.
+    """
+
+    reasons = []
+    epsilon = 1e-12
+    if (
+        float(candidate["cross_entropy"]) - float(baseline["cross_entropy"])
+        > 0.003 + epsilon
+    ):
+        reasons.append("historical tuning WDL CE exceeded the +0.003 margin")
+    if (
+        float(candidate["macro_cross_entropy"])
+        - float(baseline["macro_cross_entropy"])
+        > 0.005 + epsilon
+    ):
+        reasons.append("historical tuning macro WDL CE exceeded the +0.005 margin")
+    if float(candidate["brier"]) - float(baseline["brier"]) > 0.003 + epsilon:
+        reasons.append("historical tuning WDL Brier exceeded the +0.003 margin")
+    if (
+        float(candidate["expected_score_pearson"])
+        - float(baseline["expected_score_pearson"])
+        < -0.010 - epsilon
+    ):
+        reasons.append("historical tuning WDL Pearson exceeded the -0.010 margin")
+    if float(candidate["ece_10"]) - float(baseline["ece_10"]) > 0.010 + epsilon:
+        reasons.append("historical tuning WDL ECE exceeded the +0.010 margin")
+    if float(candidate["ece_10"]) > 0.120:
+        reasons.append("historical tuning absolute WDL ECE exceeds 0.120")
+    return tuple(reasons)
+
+
 def _select_value_checkpoint(checkpoints: Sequence[dict[str, object]]):
     if not checkpoints:
         raise ValueError("continuous update produced no value checkpoints")
@@ -838,6 +875,34 @@ def _soft_value_targets(historical, fresh) -> tuple[mx.array, mx.array, dict[str
         "ambiguous_fit_states": len(ambiguous),
         "ambiguous_fit_rows": sum(sum(value.values()) for value in ambiguous),
     }
+
+
+def _empirical_fresh_value_targets(records) -> tuple[mx.array, dict[str, int]]:
+    """Merge contradictory fresh outcomes without leaking historical labels."""
+
+    counts = {}
+    for record in records:
+        key = (record.root_fen, record.moves)
+        counts.setdefault(key, Counter())[int(record.outcome_value)] += 1
+    rows = []
+    for record in records:
+        outcomes = counts[(record.root_fen, record.moves)]
+        total = sum(outcomes.values())
+        rows.append((outcomes[1] / total, outcomes[0] / total, outcomes[-1] / total))
+    ambiguous = [value for value in counts.values() if len(value) > 1]
+    return mx.array(rows, dtype=mx.float32), {
+        "unique_fresh_fit_states": len(counts),
+        "ambiguous_fresh_fit_states": len(ambiguous),
+        "ambiguous_fresh_fit_rows": sum(sum(value.values()) for value in ambiguous),
+    }
+
+
+def _stable_value_distillation_targets(network, inputs: mx.array) -> mx.array:
+    """Return frozen MIHVER soft WDL targets for continual-learning rehearsal."""
+
+    targets = mx.stop_gradient(mx.softmax(network(inputs)[1], axis=1))
+    mx.eval(targets)
+    return targets
 
 
 def _select_qualification_starts(records, *, count: int, seed: int):
@@ -1030,7 +1095,11 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
     hard_wdl_labels = mx.array(
         [{1: 0, 0: 1, -1: 2}[value] for value in train_outcomes], dtype=mx.int32
     )
-    wdl_labels = hard_wdl_labels
+    wdl_labels = (
+        _stable_value_distillation_targets(initial_network, wdl_train_inputs)
+        if config.stable_plastic_value
+        else hard_wdl_labels
+    )
     material_records = _round_robin(tuning_records, 4096)
     material_validation = _prepare_value(material_records, rules)
     material_baseline = _material_quality(network, *material_validation)
@@ -1272,10 +1341,10 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
         )
         soft_target_metrics = None
         if config.stable_plastic_value:
-            wdl_labels, fresh_wdl_labels, soft_target_metrics = _soft_value_targets(
-                train_records, fresh_value_records
+            fresh_wdl_labels, soft_target_metrics = _empirical_fresh_value_targets(
+                fresh_value_records
             )
-            mx.eval(wdl_labels, fresh_wdl_labels)
+            mx.eval(fresh_wdl_labels)
         else:
             wdl_labels = hard_wdl_labels
         snapshot = replace(
@@ -1392,10 +1461,10 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
                 else ()
             )
             value_reasons = (
-                *_continuous_wdl_gate(
-                    previous_wdl,
-                    value_validation,
-                    require_legacy_absolute_floors=not config.stable_plastic_value,
+                *(
+                    _old_wdl_point_noninferiority_gate(initial_wdl, value_validation)
+                    if config.stable_plastic_value
+                    else _continuous_wdl_gate(previous_wdl, value_validation)
                 ),
                 *fresh_value_reasons,
             )
@@ -1421,10 +1490,10 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
                 validation_wdl = _wdl_quality(network, wdl_validation_inputs, validation_outcomes)
                 numeric_reasons = (
                     *_policy_gate(before_policy, validation_policy),
-                    *_continuous_wdl_gate(
-                        previous_wdl,
-                        validation_wdl,
-                        require_legacy_absolute_floors=not config.stable_plastic_value,
+                    *(
+                        _old_wdl_point_noninferiority_gate(initial_wdl, validation_wdl)
+                        if config.stable_plastic_value
+                        else _continuous_wdl_gate(previous_wdl, validation_wdl)
                     ),
                 )
                 validation_payload = {
@@ -1510,10 +1579,10 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
         )
         numeric_reasons = (
             *_policy_gate(before_policy, after_policy),
-            *_continuous_wdl_gate(
-                previous_wdl,
-                after_wdl,
-                require_legacy_absolute_floors=not config.stable_plastic_value,
+            *(
+                _old_wdl_point_noninferiority_gate(initial_wdl, after_wdl)
+                if config.stable_plastic_value
+                else _continuous_wdl_gate(previous_wdl, after_wdl)
             ),
             *fresh_numeric_reasons,
         )
@@ -1622,7 +1691,10 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
                 "rolling_value_rows": len(fresh_value_records),
                 "rolling_value_validation_rows": len(fresh_value_validation_records),
                 "fresh_value_split": fresh_value_split,
-                "value_batch_mix": {"historical": 32, "fresh": 32},
+                "value_batch_mix": {
+                    "historical_mihver_distillation": 32,
+                    "fresh_empirical_outcome": 32,
+                },
                 "fresh_value_sampling": "fixed-8-loss-16-draw-8-win-then-game-balanced",
                 "soft_value_targets": soft_target_metrics,
                 "rolling_policy_rows": len(policy_buffer.records),
