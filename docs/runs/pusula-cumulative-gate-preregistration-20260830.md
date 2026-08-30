@@ -152,3 +152,30 @@ baseline-solved case; raw-policy solve count remains telemetry, not a gate. The
 replacement uses new seed `2026090201`, new continuation trajectories, new
 teacher selections, and a new output directory. No result from run `02` enters
 qualification or power estimation.
+
+## Fresh value-selection experiment recorded before execution
+
+Run `pusula-continuous-pilot-20260830-03` remains failed because it missed
+`fresh_ce_superior` and `old_ece_noninferior`; it is not reclassified and none of
+its replay enters the next run. The audit found that the implementation stopped
+value validation after the first locally safe gradient step. Consequently each
+of its three selected value checkpoints was local step 1, despite the frozen
+40-step budget. It also had no game-disjoint fresh tuning partition for choosing
+which checkpoint transferred new evidence.
+
+The next experiment changes checkpoint selection, not compute or thresholds:
+
+- deterministically reserve 20% of each update's known fresh games, stratified by
+  result, as a game-disjoint fresh tuning partition; these rows never train;
+- evaluate all 40 value checkpoints against both historical tuning and rolling
+  fresh tuning;
+- eligible checkpoints must pass the existing historical local safety bounds and
+  improve fresh CE, macro CE, Brier, and Pearson in their correct direction;
+- among eligible checkpoints select minimum fresh CE, then minimum fresh macro
+  CE, then earliest step; policy checkpoint selection remains unchanged;
+- keep every cumulative margin, 768-attempt qualification size, search budget,
+  replay attempt count, learner step count, and final guardrail unchanged.
+
+The fresh run uses seed `2026090301`. Run `03` is diagnostic evidence for the
+hypothesis only and is excluded from training, checkpoint selection, confidence
+intervals, and power calculations.
