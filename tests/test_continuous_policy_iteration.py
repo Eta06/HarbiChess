@@ -14,7 +14,9 @@ from harbichess.training.continuous_policy_iteration import (  # noqa: E402
     ContinuousPolicyIterationConfig,
     _clone,
     _combine_policy,
+    _compose_headwise_state,
     _continuous_wdl_gate,
+    _LearnerState,
     _policy_gate,
     _select_continuation_starts,
     _select_numeric_checkpoint,
@@ -193,3 +195,35 @@ def test_checkpoint_selection_uses_earliest_eligible_step() -> None:
 
     assert eligible is True
     assert selected["local_step"] == 10
+
+
+def test_headwise_checkpoint_composition_keeps_policy_and_value_times_separate() -> None:
+    policy_state = _LearnerState(
+        step=20,
+        weights=(
+            ("policy_linear.bias", mx.array([20.0])),
+            ("global_value_output.bias", mx.array([200.0])),
+            ("stem.bias", mx.array([2.0])),
+        ),
+        optimizer=(("step", mx.array(20)),),
+    )
+    value_state = _LearnerState(
+        step=10,
+        weights=(
+            ("policy_linear.bias", mx.array([10.0])),
+            ("global_value_output.bias", mx.array([100.0])),
+            ("stem.bias", mx.array([1.0])),
+        ),
+        optimizer=(("step", mx.array(10)),),
+    )
+
+    composed = _compose_headwise_state(
+        {"state": policy_state},
+        {"state": value_state},
+    )
+
+    weights = dict(composed.weights)
+    assert composed.step == 20
+    assert weights["policy_linear.bias"].item() == 20.0
+    assert weights["global_value_output.bias"].item() == 100.0
+    assert weights["stem.bias"].item() == 2.0
