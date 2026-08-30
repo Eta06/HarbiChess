@@ -159,7 +159,7 @@ def run_decoupled_value_qualification(config: DecoupledValueQualificationConfig)
         mode=RunMode.EVALUATION,
         mode_detail="MIHVER continuation action-value qualification",
         run_id=config.output_dir.name,
-        pilot_status=PilotStatus.EVALUATING,
+        pilot_status=PilotStatus.TRAINING,
         pilot_steps_planned=2,
         pilot_steps_completed=0,
     )
