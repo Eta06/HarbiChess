@@ -62,6 +62,8 @@ class JointPolicyValueTransferConfig:
     warmup_learning_rate: float = 5e-4
     joint_learning_rate: float = 1e-4
     weight_decay: float = 1e-4
+    policy_weight: float = 1.0
+    value_weight: float = 1.0
     batch_size: int = 64
     warmup_steps: int = 400
     joint_steps: int = 400
@@ -92,7 +94,16 @@ class JointPolicyValueTransferConfig:
             or self.joint_steps % self.validation_interval
         ):
             raise ValueError("joint transfer schedules must align with validation interval")
-        if min(self.warmup_learning_rate, self.joint_learning_rate) <= 0 or self.weight_decay < 0:
+        if (
+            min(
+                self.warmup_learning_rate,
+                self.joint_learning_rate,
+                self.policy_weight,
+                self.value_weight,
+            )
+            <= 0
+            or self.weight_decay < 0
+        ):
             raise ValueError("joint transfer optimizer configuration is invalid")
         if len(self.expected_model_sha256) != 64:
             raise ValueError("joint transfer expected model hash must be SHA-256")
@@ -130,8 +141,18 @@ class OutcomeGameBalancedSampler:
 
 
 class JointPolicyValueLearner:
-    def __init__(self, network, *, learning_rate: float, weight_decay: float) -> None:
+    def __init__(
+        self,
+        network,
+        *,
+        learning_rate: float,
+        weight_decay: float,
+        policy_weight: float = 1.0,
+        value_weight: float = 1.0,
+    ) -> None:
         self.network = network
+        self.policy_weight = policy_weight
+        self.value_weight = value_weight
         self.optimizer = optim.AdamW(learning_rate=learning_rate, weight_decay=weight_decay)
         self._loss_and_grad = nn.value_and_grad(network, self._loss)
 
@@ -148,7 +169,11 @@ class JointPolicyValueLearner:
         policy_logits = mx.where(legal_masks, policy_logits, mx.array(-1e9))
         policy_loss = nn.losses.cross_entropy(policy_logits, policy_targets, reduction="mean")
         value_loss = nn.losses.cross_entropy(value_logits, value_targets, reduction="mean")
-        return policy_loss + value_loss, policy_loss, value_loss
+        return (
+            self.policy_weight * policy_loss + self.value_weight * value_loss,
+            policy_loss,
+            value_loss,
+        )
 
     def train_step(
         self,
@@ -616,6 +641,8 @@ def run_joint_policy_value_transfer(config: JointPolicyValueTransferConfig) -> P
             transfer,
             learning_rate=config.joint_learning_rate,
             weight_decay=config.weight_decay,
+            policy_weight=config.policy_weight,
+            value_weight=config.value_weight,
         )
         policy_rng = random.Random(config.seed)
         value_sampler = OutcomeGameBalancedSampler(train_value_records, seed=config.seed)
@@ -890,6 +917,8 @@ def main(argv: Sequence[str] | None = None) -> int:
         action="store_true",
         help="run the preregistered all-network joint arm even when head-only warmup fails",
     )
+    parser.add_argument("--policy-weight", type=float, default=1.0)
+    parser.add_argument("--value-weight", type=float, default=1.0)
     arguments = parser.parse_args(argv)
     print(
         run_joint_policy_value_transfer(
@@ -901,6 +930,8 @@ def main(argv: Sequence[str] | None = None) -> int:
                 validation_shard=arguments.validation_shard,
                 telemetry_path=arguments.telemetry,
                 require_head_warmup_gate=not arguments.joint_representation_audit,
+                policy_weight=arguments.policy_weight,
+                value_weight=arguments.value_weight,
             )
         )
     )
