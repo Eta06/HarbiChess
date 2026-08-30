@@ -80,3 +80,13 @@ class HarbiChessDecoupledValueNetwork(HarbiChessInvariantValueNetwork):
         self.freeze_release_parameters()
         self.global_value_hidden.unfreeze()
         self.global_value_output.unfreeze()
+
+    def freeze_to_continuous_heads(self) -> None:
+        """Train policy and invariant WDL heads without disturbing their representations."""
+
+        self.freeze()
+        self.policy_conv.unfreeze()
+        self.policy_linear.unfreeze()
+        self.invariant_value_linear.unfreeze()
+        self.global_value_hidden.unfreeze()
+        self.global_value_output.unfreeze()
