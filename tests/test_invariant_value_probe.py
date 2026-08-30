@@ -66,3 +66,19 @@ def test_material_soft_targets_identify_draw_probability() -> None:
     ):
         assert actual == pytest.approx(expected)
     assert [sum(row) for row in rows] == pytest.approx([1.0, 1.0, 1.0])
+
+
+def test_balanced_objective_weight_must_be_non_negative() -> None:
+    config = InvariantValueProbeConfig(
+        output_dir=Path("output"),
+        model_path=Path("model"),
+        distributional_targets=True,
+        expected_mse_weight=39.0,
+    )
+    assert config.expected_mse_weight == 39.0
+    with pytest.raises(ValueError, match="configuration"):
+        InvariantValueProbeConfig(
+            output_dir=Path("output"),
+            model_path=Path("model"),
+            expected_mse_weight=-1.0,
+        )
