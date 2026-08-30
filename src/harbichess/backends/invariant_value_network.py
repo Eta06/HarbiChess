@@ -9,6 +9,7 @@ import mlx.nn as nn
 from mlx.utils import tree_flatten
 
 from harbichess.backends.mlx_network import HarbiChessNetwork, NetworkConfig, ResidualBlock
+from harbichess.chess.encoding import HISTORY_STEPS, METADATA_PLANES, PIECE_PLANES_PER_STEP
 
 
 @dataclass(frozen=True, slots=True)
@@ -33,7 +34,9 @@ class HarbiChessInvariantValueNetwork(HarbiChessNetwork):
     ) -> None:
         super().__init__(config)
         self.invariant_config = invariant_config or InvariantValueConfig()
-        self.invariant_value_linear = nn.Linear(self.config.input_channels, 3)
+        self.invariant_value_linear = nn.Linear(
+            PIECE_PLANES_PER_STEP + METADATA_PLANES, 3
+        )
         self.value_tower_stem = nn.Conv2d(
             self.config.input_channels,
             self.invariant_config.tower_channels,
@@ -73,8 +76,15 @@ class HarbiChessInvariantValueNetwork(HarbiChessNetwork):
         return target
 
     def _value_residual(self, inputs: mx.array) -> mx.array:
-        global_planes = mx.mean(inputs, axis=(1, 2))
-        invariant = self.invariant_value_linear(global_planes)
+        current_piece_counts = mx.sum(
+            inputs[:, :, :, :PIECE_PLANES_PER_STEP], axis=(1, 2)
+        )
+        metadata_start = HISTORY_STEPS * PIECE_PLANES_PER_STEP
+        metadata = mx.mean(inputs[:, :, :, metadata_start:], axis=(1, 2))
+        invariant_features = mx.concatenate(
+            (current_piece_counts, metadata), axis=1
+        )
+        invariant = self.invariant_value_linear(invariant_features)
         tower = nn.relu(self.value_tower_stem(inputs))
         for block in self.value_tower_blocks:
             tower = block(tower)
