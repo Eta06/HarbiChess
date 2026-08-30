@@ -50,19 +50,13 @@ class SelfPlayConfig:
             or self.max_plies <= 0
             or not 0.0 <= self.repetition_value_tolerance <= 2.0
             or not 0.0 <= self.minimum_repeating_policy_mass <= 1.0
-            or (
-                self.value_policy_temperature is not None
-                and self.value_policy_temperature <= 0
-            )
+            or (self.value_policy_temperature is not None and self.value_policy_temperature <= 0)
             or self.value_policy_prior_visits < 0
             or self.maximum_value_logit_adjustment < 0
             or self.selection_dirichlet_alpha <= 0
             or not 0.0 <= self.selection_dirichlet_fraction <= 1.0
             or (self.search_root_noise and self.selection_dirichlet_fraction > 0)
-            or (
-                self.root_halving_config is not None
-                and self.value_policy_temperature is not None
-            )
+            or (self.root_halving_config is not None and self.value_policy_temperature is not None)
             or (
                 self.separate_clean_target_search
                 and (
@@ -143,11 +137,20 @@ def _teacher_telemetry(
     raw = dict(raw_policy)
     target = dict(policy)
     moves = raw.keys() | target.keys()
-    tv = 0.5 * sum(abs(raw.get(move, 0.0) - target.get(move, 0.0)) for move in moves)
-    kl = sum(
-        probability * math.log(probability / max(raw.get(move, 0.0), 1e-12))
-        for move, probability in policy
-        if probability > 0
+    tv = min(
+        1.0,
+        max(
+            0.0,
+            0.5 * sum(abs(raw.get(move, 0.0) - target.get(move, 0.0)) for move in moves),
+        ),
+    )
+    kl = max(
+        0.0,
+        sum(
+            probability * math.log(probability / max(raw.get(move, 0.0), 1e-12))
+            for move, probability in policy
+            if probability > 0
+        ),
     )
     raw_action = min(raw_policy, key=lambda item: (-item[1], item[0].uci))[0]
     teacher_action = min(policy, key=lambda item: (-item[1], item[0].uci))[0]
@@ -177,8 +180,7 @@ def _select_from_policy(
         noise = [rng.gammavariate(dirichlet_alpha, 1.0) for _ in policy]
         noise_total = sum(noise)
         weights = [
-            (1.0 - dirichlet_fraction) * weight
-            + dirichlet_fraction * sample / noise_total
+            (1.0 - dirichlet_fraction) * weight + dirichlet_fraction * sample / noise_total
             for weight, sample in zip(weights, noise, strict=True)
         ]
     threshold = rng.random() * sum(weights)
@@ -296,9 +298,7 @@ def play_game(
                 config=ValueImprovedPolicyConfig(
                     advantage_temperature=settings.value_policy_temperature,
                     prior_visits=settings.value_policy_prior_visits,
-                    maximum_logit_adjustment=(
-                        settings.maximum_value_logit_adjustment
-                    ),
+                    maximum_logit_adjustment=(settings.maximum_value_logit_adjustment),
                 ),
             )
         if settings.selection_dirichlet_fraction > 0:
@@ -336,9 +336,7 @@ def play_game(
             visit_policy=policy,
             selected_move=selected_move,
             root_value=root_value,
-            outcome_value=(
-                None if outcome.termination == "max_plies" else outcome.value_for(side)
-            ),
+            outcome_value=(None if outcome.termination == "max_plies" else outcome.value_for(side)),
             repetition_redirected=repetition_redirected,
             root_search_adjusted=root_search_adjusted,
             root_search_first_margin=root_search_first_margin,
