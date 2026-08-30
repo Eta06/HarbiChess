@@ -248,3 +248,26 @@ new final tolerance. All cumulative bootstrap, sample-size, compute, replay,
 search, arena, tactical, continuation, data-integrity, and resume gates remain
 unchanged. Run `05` data is excluded. The prospective replacement uses seed
 `2026090501` and a new output directory; run `05` is not reclassified.
+
+## Evidence-aware local arena experiment recorded before execution
+
+Run `pusula-continuous-pilot-20260831-06` remains failed. Its first update
+passed policy, value, continuation, material, and Full Gumbel tactical checks,
+but the 8-game local arena observed `0W/5D/3L` and triggered the point-score
+catastrophic floor at `0.3125`. The color-paired bootstrap interval was
+`[0.2500, 0.4375]`; therefore this small arena did not establish that true
+strength was below the `0.375` catastrophic boundary.
+
+For the next fresh experiment, the local arena retains the same four opening
+pairs, search budget, seeds derived from the new run seed, and catastrophic
+boundary. It rolls an update back only when the pre-existing color-paired 95%
+bootstrap *upper* bound is below `0.375`. A low point estimate with an upper
+bound crossing the boundary is inconclusive locally, not success. The final
+64-game gate remains unchanged: point score `>=0.50` and lower bound `>=0.45`.
+Thus uncertainty is treated in the correct direction at both stages without
+weakening the production gate.
+
+Every other trust-region, WDL, replay, training, cumulative bootstrap,
+tactical, continuation, integrity, and resume condition remains unchanged.
+Run `06` data is excluded, and the fresh replacement uses seed `2026090601` in
+a new output directory. Run `06` is not reclassified.
