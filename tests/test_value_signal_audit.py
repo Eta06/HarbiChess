@@ -70,13 +70,39 @@ def test_shuffled_results_remain_internally_perspective_consistent() -> None:
 
 
 def test_diagnosis_prioritizes_shuffled_leakage_and_position_memorization() -> None:
+    failed = {
+        "passed": False,
+        "selected_step": 0,
+        "baseline": {"macro_cross_entropy": 1.1},
+        "selected": {
+            "validation": {
+                "macro_cross_entropy": 1.1,
+                "expected_score_pearson": 0.0,
+                "loss_draw_margin": 0.0,
+                "win_draw_margin": 0.0,
+            }
+        },
+    }
+    passed = {**failed, "passed": True}
+    memorized = {
+        **failed,
+        "selected_step": 140,
+        "selected": {
+            "validation": {
+                "macro_cross_entropy": 1.06,
+                "expected_score_pearson": 0.21,
+                "loss_draw_margin": 0.06,
+                "win_draw_margin": 0.04,
+            }
+        },
+    }
     assert (
         _diagnosis(
             {
-                "game-disjoint-all": {"passed": False},
-                "position-split-all": {"passed": True},
-                "game-disjoint-late32": {"passed": False},
-                "game-disjoint-shuffled": {"passed": False},
+                "game-disjoint-all": failed,
+                "position-split-all": passed,
+                "game-disjoint-late32": failed,
+                "game-disjoint-shuffled": failed,
             }
         )["verdict"]
         == "insufficient_independent_games"
@@ -84,14 +110,24 @@ def test_diagnosis_prioritizes_shuffled_leakage_and_position_memorization() -> N
     assert (
         _diagnosis(
             {
-                "game-disjoint-all": {"passed": False},
-                "position-split-all": {"passed": False},
-                "game-disjoint-late32": {"passed": False},
-                "game-disjoint-shuffled": {"passed": True},
+                "game-disjoint-all": failed,
+                "position-split-all": failed,
+                "game-disjoint-late32": failed,
+                "game-disjoint-shuffled": passed,
             }
         )["verdict"]
         == "leakage_or_spurious_game_identity"
     )
+    partial = _diagnosis(
+        {
+            "game-disjoint-all": failed,
+            "position-split-all": memorized,
+            "game-disjoint-late32": failed,
+            "game-disjoint-shuffled": failed,
+        }
+    )
+    assert partial["verdict"] == "position_memorization_without_game_generalization"
+    assert partial["position_split_partial_memorization"] is True
 
 
 def test_value_signal_config_requires_aligned_steps() -> None:
