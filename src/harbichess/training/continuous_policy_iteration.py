@@ -10,6 +10,7 @@ import os
 import random
 import subprocess
 import time
+from collections import Counter, defaultdict
 from collections.abc import Sequence
 from concurrent.futures import ThreadPoolExecutor
 from dataclasses import asdict, dataclass, replace
@@ -23,6 +24,10 @@ from mlx.utils import tree_flatten, tree_unflatten
 
 from harbichess.backends.decoupled_value_network import HarbiChessDecoupledValueNetwork
 from harbichess.backends.mlx_backend import MLXPolicyValueBackend
+from harbichess.backends.plastic_value_network import (
+    PLASTIC_VALUE_PREFIXES,
+    HarbiChessPlasticValueNetwork,
+)
 from harbichess.chess.rules import PythonChessRules
 from harbichess.core.state import Side
 from harbichess.dashboard.state import (
@@ -37,6 +42,11 @@ from harbichess.evaluation.corrected_replay_value_transfer import (
     CorrectedReplayValueTransferConfig,
     _load_games,
     _split_games,
+)
+from harbichess.evaluation.cumulative_value_gate import (
+    CumulativeGateConfig,
+    PredictionGame,
+    evaluate_cumulative_gate,
 )
 from harbichess.evaluation.decoupled_value_qualification import (
     DecoupledValueQualificationConfig,
@@ -131,6 +141,9 @@ class ContinuousPolicyIterationConfig:
     arena_workers: int = 16
     bootstrap_samples: int = 10_000
     seed: int = 2026083101
+    stable_plastic_value: bool = False
+    final_qualification_games: int = 0
+    minimum_final_known_games: int = 0
 
     def __post_init__(self) -> None:
         counts = (
@@ -178,6 +191,14 @@ class ContinuousPolicyIterationConfig:
             raise ValueError("minimum known games cannot exceed self-play games")
         if len(self.expected_initial_sha256) != 64:
             raise ValueError("initial candidate hash must be SHA-256")
+        if self.final_qualification_games < 0 or self.minimum_final_known_games < 0:
+            raise ValueError("final qualification game counts cannot be negative")
+        if self.minimum_final_known_games > self.final_qualification_games:
+            raise ValueError("known qualification floor cannot exceed attempts")
+        if self.final_qualification_games and self.final_qualification_games % 3:
+            raise ValueError("final qualification games must divide across three phases")
+        if self.stable_plastic_value and not self.final_qualification_games:
+            raise ValueError("stable plastic pilot requires a final qualification set")
 
 
 _TRAINABLE_PREFIXES = (
@@ -189,6 +210,7 @@ _TRAINABLE_PREFIXES = (
 )
 _POLICY_PREFIXES = _TRAINABLE_PREFIXES[:2]
 _VALUE_PREFIXES = _TRAINABLE_PREFIXES[2:]
+_STABLE_TRAINABLE_PREFIXES = (*_POLICY_PREFIXES, *PLASTIC_VALUE_PREFIXES)
 
 
 @dataclass(frozen=True, slots=True)
@@ -277,8 +299,15 @@ class _ContinuousHeadLearner:
         self.optimizer = optim.Adam(learning_rate=self.learning_rate)
 
 
-def _clone(network) -> HarbiChessDecoupledValueNetwork:
-    clone = HarbiChessDecoupledValueNetwork.from_base(_network())
+def _clone(network):
+    if isinstance(network, HarbiChessPlasticValueNetwork):
+        clone = HarbiChessPlasticValueNetwork(
+            network.config,
+            invariant_config=network.invariant_config,
+            plastic_config=network.plastic_config,
+        )
+    else:
+        clone = HarbiChessDecoupledValueNetwork.from_base(_network())
     clone.load_weights(list(tree_flatten(network.parameters())))
     mx.eval(clone.parameters())
     return clone
@@ -515,6 +544,8 @@ def _select_numeric_checkpoint(checkpoints: Sequence[dict[str, object]]):
 def _compose_headwise_state(
     policy_checkpoint: dict[str, object],
     value_checkpoint: dict[str, object],
+    *,
+    value_prefixes: tuple[str, ...] = _VALUE_PREFIXES,
 ) -> _LearnerState:
     policy_state = policy_checkpoint["state"]
     value_state = value_checkpoint["state"]
@@ -525,7 +556,7 @@ def _compose_headwise_state(
     weights = tuple(
         (
             name,
-            value_weights[name] if name.startswith(_VALUE_PREFIXES) else value,
+            value_weights[name] if name.startswith(value_prefixes) else value,
         )
         for name, value in policy_state.weights
     )
@@ -584,9 +615,140 @@ def _select_continuation_starts(
     )
 
 
+def _soft_value_targets(historical, fresh) -> tuple[mx.array, mx.array, dict[str, int]]:
+    counts = {}
+    for record in (*historical, *fresh):
+        key = (record.root_fen, record.moves)
+        counts.setdefault(key, Counter())[int(record.outcome_value)] += 1
+
+    def build(records):
+        rows = []
+        for record in records:
+            outcomes = counts[(record.root_fen, record.moves)]
+            total = sum(outcomes.values())
+            rows.append((outcomes[1] / total, outcomes[0] / total, outcomes[-1] / total))
+        return mx.array(rows, dtype=mx.float32)
+
+    ambiguous = [value for value in counts.values() if len(value) > 1]
+    return build(historical), build(fresh), {
+        "unique_fit_states": len(counts),
+        "ambiguous_fit_states": len(ambiguous),
+        "ambiguous_fit_rows": sum(sum(value.values()) for value in ambiguous),
+    }
+
+
+def _select_qualification_starts(records, *, count: int, seed: int):
+    per_phase = count // 3
+    phases = {
+        "opening": tuple(record for record in records if record.ply < 20),
+        "middlegame": tuple(record for record in records if 20 <= record.ply < 80),
+        "endgame": tuple(record for record in records if record.ply >= 80),
+    }
+
+    def key(record) -> bytes:
+        return hashlib.blake2b(
+            f"{seed}:{_identity(record)}".encode(), digest_size=16
+        ).digest()
+
+    selected = []
+    for phase in ("opening", "middlegame", "endgame"):
+        unique = {_identity(record): record for record in phases[phase]}
+        ordered = sorted(unique.values(), key=key)
+        if len(ordered) < per_phase:
+            raise ValueError(f"qualification pool lacks {per_phase} distinct {phase} states")
+        selected.extend(ordered[:per_phase])
+    return tuple(selected)
+
+
+def _split_fit_tuning(records, *, seed: int, tuning_fraction: float = 0.20):
+    """Reserve game-disjoint tuning data without touching the final old holdout."""
+
+    if not 0.0 < tuning_fraction < 1.0:
+        raise ValueError("tuning fraction must be between zero and one")
+    by_game = defaultdict(list)
+    for record in records:
+        by_game[record.game_id].append(record)
+    by_outcome = defaultdict(list)
+    for game_id, game_records in by_game.items():
+        first = min(game_records, key=lambda record: record.ply)
+        white_outcome = int(first.outcome_value) * (
+            1 if first.side_to_move is Side.WHITE else -1
+        )
+        by_outcome[white_outcome].append(game_id)
+    tuning_games = set()
+    for outcome in (-1, 0, 1):
+        game_ids = sorted(
+            by_outcome[outcome],
+            key=lambda game_id: hashlib.blake2b(
+                f"{seed}:{game_id}".encode(), digest_size=16
+            ).digest(),
+        )
+        tuning_count = max(1, round(len(game_ids) * tuning_fraction))
+        tuning_games.update(game_ids[:tuning_count])
+    fit = tuple(record for record in records if record.game_id not in tuning_games)
+    tuning = tuple(record for record in records if record.game_id in tuning_games)
+    if not fit or not tuning:
+        raise ValueError("fit/tuning split produced an empty partition")
+    return fit, tuning, {
+        "fit_games": len({record.game_id for record in fit}),
+        "tuning_games": len(tuning_games),
+        "fit_rows": len(fit),
+        "tuning_rows": len(tuning),
+        "game_overlap": len(
+            {record.game_id for record in fit} & {record.game_id for record in tuning}
+        ),
+    }
+
+
+def _paired_mean_interval(
+    values: tuple[float, ...], *, samples: int, seed: int
+) -> dict[str, float]:
+    if len(values) < 2:
+        raise ValueError("paired interval requires at least two observations")
+    rng = random.Random(seed)
+    means = sorted(
+        sum(values[rng.randrange(len(values))] for _ in values) / len(values)
+        for _ in range(samples)
+    )
+    return {
+        "estimate": sum(values) / len(values),
+        "low": means[round((len(means) - 1) * 0.05)],
+        "high": means[round((len(means) - 1) * 0.95)],
+    }
+
+
+def _prediction_games(baseline, candidate, records, *, rules):
+    inputs, _ = _prepare_value(records, rules)
+    baseline_probabilities = mx.softmax(baseline(inputs)[1], axis=1)
+    candidate_probabilities = mx.softmax(candidate(inputs)[1], axis=1)
+    mx.eval(baseline_probabilities, candidate_probabilities)
+    grouped = defaultdict(lambda: {"outcomes": [], "baseline": [], "candidate": []})
+    for record, baseline_row, candidate_row in zip(
+        records,
+        baseline_probabilities.tolist(),
+        candidate_probabilities.tolist(),
+        strict=True,
+    ):
+        if record.outcome_value is None:
+            continue
+        group = grouped[record.game_id]
+        group["outcomes"].append(int(record.outcome_value))
+        group["baseline"].append(tuple(float(value) for value in baseline_row))
+        group["candidate"].append(tuple(float(value) for value in candidate_row))
+    return tuple(
+        PredictionGame(
+            game_id=game_id,
+            outcomes=tuple(group["outcomes"]),
+            baseline_probabilities=tuple(group["baseline"]),
+            candidate_probabilities=tuple(group["candidate"]),
+        )
+        for game_id, group in sorted(grouped.items())
+    )
+
+
 def _load_initial(
     config: ContinuousPolicyIterationConfig,
-) -> tuple[HarbiChessDecoupledValueNetwork, Path]:
+):
     source = json.loads(config.value_result.read_text(encoding="utf-8"))
     selected = source.get("selected_wdl_arm")
     if not source.get("passed") or selected != "global-wdl":
@@ -596,7 +758,11 @@ def _load_initial(
         raise ValueError("MIHVER initial checkpoint hash does not match preregistration")
     network = HarbiChessDecoupledValueNetwork.from_base(_network())
     network.load_weights(str(path))
-    network.freeze_to_continuous_heads()
+    if config.stable_plastic_value:
+        network = HarbiChessPlasticValueNetwork.from_mihver(network)
+        network.freeze_to_stable_continuous_heads()
+    else:
+        network.freeze_to_continuous_heads()
     mx.eval(network.parameters())
     return network, path
 
@@ -605,12 +771,17 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
     if config.output_dir.exists():
         raise FileExistsError(f"continuous pilot output exists: {config.output_dir}")
     config.output_dir.mkdir(parents=True)
+    stage = "PUSULA" if config.stable_plastic_value else "DEVRIYE"
     network, initial_path = _load_initial(config)
     initial_network = _clone(network)
     release = _network()
     release.load_weights(str(config.model_path))
     learner = _ContinuousHeadLearner(network, learning_rate=config.learning_rate)
-    nontrainable_hash = _parameter_hash(network, excluded_prefixes=_TRAINABLE_PREFIXES)
+    trainable_prefixes = (
+        _STABLE_TRAINABLE_PREFIXES if config.stable_plastic_value else _TRAINABLE_PREFIXES
+    )
+    value_prefixes = PLASTIC_VALUE_PREFIXES if config.stable_plastic_value else _VALUE_PREFIXES
+    nontrainable_hash = _parameter_hash(network, excluded_prefixes=trainable_prefixes)
 
     pool_config = CorrectedReplayValueTransferConfig(
         output_dir=config.output_dir,
@@ -618,18 +789,32 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
         runs_root=config.runs_root,
     )
     games, provenance = _load_games(pool_config)
-    train_records, validation_records, split = _split_games(games, seed=pool_config.seed)
+    historical_fit_records, validation_records, split = _split_games(
+        games, seed=pool_config.seed
+    )
+    train_records, tuning_records, tuning_split = _split_fit_tuning(
+        historical_fit_records,
+        seed=config.seed + 7000,
+    )
+    split["continuous_tuning"] = tuning_split
+    split["final_old_holdout_rows"] = len(validation_records)
+    split["final_old_holdout_games"] = len(
+        {record.game_id for record in validation_records}
+    )
     rules = PythonChessRules()
     wdl_train_inputs, _ = _prepare_value(train_records, rules)
-    wdl_validation_inputs, _ = _prepare_value(validation_records, rules)
+    wdl_validation_inputs, _ = _prepare_value(tuning_records, rules)
     train_outcomes = tuple(int(record.outcome_value) for record in train_records)
-    validation_outcomes = tuple(int(record.outcome_value) for record in validation_records)
-    wdl_labels = mx.array([{1: 0, 0: 1, -1: 2}[value] for value in train_outcomes], dtype=mx.int32)
-    material_records = _round_robin(validation_records, 4096)
+    validation_outcomes = tuple(int(record.outcome_value) for record in tuning_records)
+    hard_wdl_labels = mx.array(
+        [{1: 0, 0: 1, -1: 2}[value] for value in train_outcomes], dtype=mx.int32
+    )
+    wdl_labels = hard_wdl_labels
+    material_records = _round_robin(tuning_records, 4096)
     material_validation = _prepare_value(material_records, rules)
     material_baseline = _material_quality(network, *material_validation)
     ranking_records = select_stratified_records(
-        validation_records,
+        tuning_records,
         rules=rules,
         count=config.ranking_positions,
         seed=2026083091,
@@ -646,7 +831,7 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
         store.read(),
         updated_at=datetime.now(UTC).isoformat(),
         mode=RunMode.TRAINING,
-        mode_detail="DEVRIYE continuous pilot · baseline qualification",
+        mode_detail=f"{stage} continuous pilot · baseline qualification",
         run_id=config.output_dir.name,
         pilot_status=PilotStatus.TRAINING,
         pilot_steps_planned=config.updates * config.steps_per_update,
@@ -693,7 +878,7 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
             record for record in train_records if _identity(record) not in used_train
         )
         available_validation = tuple(
-            record for record in validation_records if _identity(record) not in used_validation
+            record for record in tuning_records if _identity(record) not in used_validation
         )
         selected = {
             "train": select_target_records(
@@ -730,7 +915,7 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
                 updated_at=datetime.now(UTC).isoformat(),
                 mode=RunMode.SELF_PLAY,
                 mode_detail=(
-                    f"DEVRIYE latest-network replay · update {current_update}/{config.updates} · "
+                    f"{stage} latest-network replay · update {current_update}/{config.updates} · "
                     f"{completed_selfplay_games}/{config.selfplay_games_per_update} games"
                 ),
                 active_games=config.selfplay_games_per_update - completed_selfplay_games,
@@ -744,7 +929,7 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
             snapshot,
             updated_at=datetime.now(UTC).isoformat(),
             mode=RunMode.SELF_PLAY,
-            mode_detail=f"DEVRIYE latest-network replay · update {update}/{config.updates}",
+            mode_detail=f"{stage} latest-network replay · update {update}/{config.updates}",
             active_games=config.selfplay_games_per_update,
             completed_games=0,
         )
@@ -833,6 +1018,14 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
             [{1: 0, 0: 1, -1: 2}[int(record.outcome_value)] for record in fresh_value_records],
             dtype=mx.int32,
         )
+        soft_target_metrics = None
+        if config.stable_plastic_value:
+            wdl_labels, fresh_wdl_labels, soft_target_metrics = _soft_value_targets(
+                train_records, fresh_value_records
+            )
+            mx.eval(wdl_labels, fresh_wdl_labels)
+        else:
+            wdl_labels = hard_wdl_labels
         snapshot = replace(
             snapshot,
             replay_samples=len(fresh_value_records),
@@ -842,7 +1035,7 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
             snapshot,
             updated_at=datetime.now(UTC).isoformat(),
             mode=RunMode.EVALUATION,
-            mode_detail=f"DEVRIYE latest teacher targets · update {update}/{config.updates}",
+            mode_detail=f"{stage} latest teacher targets · update {update}/{config.updates}",
             active_games=config.train_targets_per_update + config.validation_targets_per_update,
         )
         store.write_atomic(snapshot)
@@ -898,7 +1091,7 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
             snapshot,
             updated_at=datetime.now(UTC).isoformat(),
             mode=RunMode.TRAINING,
-            mode_detail=f"DEVRIYE continuous learner · update {update}/{config.updates}",
+            mode_detail=f"{stage} continuous learner · update {update}/{config.updates}",
             active_games=0,
         )
         store.write_atomic(snapshot)
@@ -1023,7 +1216,13 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
             value_checkpoints or value_validation_checkpoints,
             key=lambda checkpoint: int(checkpoint["local_step"]),
         )
-        learner.restore(_compose_headwise_state(policy_checkpoint, value_checkpoint))
+        learner.restore(
+            _compose_headwise_state(
+                policy_checkpoint,
+                value_checkpoint,
+                value_prefixes=value_prefixes,
+            )
+        )
         learner.reset_optimizer()
         composed_policy_logits = network(prepared_validation.inputs)[0]
         mx.eval(composed_policy_logits)
@@ -1074,7 +1273,7 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
         ]
         if after_material != material_baseline:
             reasons.append("auxiliary material predictions changed")
-        if _parameter_hash(network, excluded_prefixes=_TRAINABLE_PREFIXES) != nontrainable_hash:
+        if _parameter_hash(network, excluded_prefixes=trainable_prefixes) != nontrainable_hash:
             reasons.append("continuous learner changed a frozen parameter")
         if maximum_gradient > 5.0:
             reasons.append("gradient norm exceeded 5.0")
@@ -1107,6 +1306,7 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
                 "rolling_value_rows": len(fresh_value_records),
                 "value_batch_mix": {"historical": 32, "fresh": 32},
                 "fresh_value_sampling": "fixed-8-loss-16-draw-8-win-then-game-balanced",
+                "soft_value_targets": soft_target_metrics,
                 "rolling_policy_rows": len(policy_buffer.records),
                 "steps": config.steps_per_update,
                 "selected_local_step": max(
@@ -1143,6 +1343,9 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
             break
 
     final_arena = None
+    final_qualification = None
+    cumulative_gate = None
+    continuation_interval = None
     chain_reasons = []
     if len(accepted) != config.updates or not all(row["accepted"] for row in accepted):
         chain_reasons.append("not all preregistered continuous updates were accepted")
@@ -1159,22 +1362,178 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
         final_continuation = accepted[-1]["continuation"]
         if float(final_arena["score_rate"]) < 0.50:
             chain_reasons.append("final search score against MIHVER start is below 0.50")
-        if float(final_wdl["cross_entropy"]) > float(initial_wdl["cross_entropy"]):
-            chain_reasons.append("final WDL micro CE regressed versus MIHVER start")
-        if float(final_wdl["macro_cross_entropy"]) > float(initial_wdl["macro_cross_entropy"]):
-            chain_reasons.append("final WDL macro CE regressed versus MIHVER start")
-        if float(final_wdl["expected_score_pearson"]) < float(
-            initial_wdl["expected_score_pearson"]
-        ):
-            chain_reasons.append("final WDL Pearson regressed versus MIHVER start")
-        if float(final_continuation["candidate_mean_spearman"]) < float(
-            initial_continuation["candidate_mean_spearman"]
-        ):
-            chain_reasons.append("final continuation Spearman regressed versus MIHVER start")
-        if float(final_continuation["candidate_verified_top_agreement"]) < float(
-            initial_continuation["candidate_verified_top_agreement"]
-        ):
-            chain_reasons.append("final continuation top agreement regressed versus MIHVER start")
+        if config.stable_plastic_value:
+            if float(final_arena["score_interval"]["low"]) < 0.45:
+                chain_reasons.append("final search score lower bound is below 0.45")
+            starts = _select_qualification_starts(
+                validation_records,
+                count=config.final_qualification_games,
+                seed=config.seed + 4000,
+            )
+            snapshot = replace(
+                snapshot,
+                updated_at=datetime.now(UTC).isoformat(),
+                mode=RunMode.SELF_PLAY,
+                mode_detail=(
+                    "PUSULA held-out cumulative qualification · "
+                    f"{config.final_qualification_games} fixed attempts"
+                ),
+                active_games=config.final_qualification_games,
+            )
+            store.write_atomic(snapshot)
+            qualification_run_id = f"{config.output_dir.name}-final-qualification"
+            completed_qualification_games = 0
+            qualification_started = time.perf_counter()
+
+            def on_qualification_game_complete(_game) -> None:
+                nonlocal completed_qualification_games, snapshot
+                completed_qualification_games += 1
+                elapsed = time.perf_counter() - qualification_started
+                snapshot = replace(
+                    snapshot,
+                    updated_at=datetime.now(UTC).isoformat(),
+                    mode_detail=(
+                        "PUSULA held-out cumulative qualification · "
+                        f"{completed_qualification_games}/"
+                        f"{config.final_qualification_games} games"
+                    ),
+                    active_games=(
+                        config.final_qualification_games - completed_qualification_games
+                    ),
+                    completed_games=completed_qualification_games,
+                    lifetime_games=snapshot.lifetime_games + 1,
+                    games_per_hour=(
+                        completed_qualification_games / max(elapsed, 1e-9) * 3600.0
+                    ),
+                )
+                store.write_atomic(snapshot)
+
+            _, qualification_records, qualification_metrics = generate_continuous_replay(
+                _clone(network),
+                run_id=qualification_run_id,
+                run_seed=config.seed + 5000,
+                config=ContinuousReplayConfig(
+                    games=config.final_qualification_games,
+                    workers=config.selfplay_workers,
+                    simulations=config.selfplay_simulations,
+                    max_considered_actions=config.max_considered_actions,
+                    max_plies=config.selfplay_max_plies,
+                    fixed_inference_batch_size=config.fixed_inference_batch_size,
+                    inference_wait_seconds=config.inference_wait_seconds,
+                ),
+                on_game_complete=on_qualification_game_complete,
+                initial_states=tuple(record.state for record in starts),
+            )
+            qualification_path = config.output_dir / "replay" / "final-qualification.jsonl.gz"
+            final_checkpoint = Path(str(accepted[-1]["checkpoint_path"]))
+            qualification_header = write_shard_atomic(
+                qualification_path,
+                qualification_records,
+                ShardMetadata(
+                    run_id=qualification_run_id,
+                    generation=config.updates + 1,
+                    source_checkpoint=_sha256(final_checkpoint),
+                    source_commit=subprocess.check_output(
+                        ["git", "rev-parse", "HEAD"], text=True
+                    ).strip(),
+                    created_at=datetime.now(UTC).isoformat(),
+                    split=ReplaySplit.VALIDATION,
+                ),
+            )
+            known_qualification = tuple(
+                record for record in qualification_records if record.outcome_value is not None
+            )
+            known_games = len({record.game_id for record in known_qualification})
+            final_qualification = {
+                "path": str(qualification_path),
+                "header": asdict(qualification_header),
+                "metrics": qualification_metrics,
+                "known_games": known_games,
+                "required_known_games": config.minimum_final_known_games,
+                "starting_records": tuple(_identity(record) for record in starts),
+            }
+            if known_games < config.minimum_final_known_games:
+                chain_reasons.append(
+                    "final fresh qualification has fewer than 192 known terminal games"
+                )
+            else:
+                old_prediction_games = _prediction_games(
+                    initial_network,
+                    network,
+                    validation_records,
+                    rules=rules,
+                )
+                fresh_prediction_games = _prediction_games(
+                    initial_network,
+                    network,
+                    known_qualification,
+                    rules=rules,
+                )
+                cumulative_gate = evaluate_cumulative_gate(
+                    old_prediction_games,
+                    fresh_prediction_games,
+                    config=CumulativeGateConfig(),
+                )
+                if not cumulative_gate["passed"]:
+                    failed_checks = [
+                        name for name, passed_check in cumulative_gate["checks"].items()
+                        if not passed_check
+                    ]
+                    chain_reasons.append(
+                        "cumulative statistical gate failed: " + ", ".join(failed_checks)
+                    )
+            initial_rows = {
+                row["identity"]: row for row in initial_continuation["rows"]
+            }
+            final_rows = {row["identity"]: row for row in final_continuation["rows"]}
+            if set(initial_rows) != set(final_rows):
+                chain_reasons.append("continuation comparison identities changed")
+            else:
+                continuation_deltas = tuple(
+                    float(final_rows[identity]["candidate_spearman"])
+                    - float(initial_rows[identity]["candidate_spearman"])
+                    for identity in sorted(initial_rows)
+                )
+                continuation_interval = _paired_mean_interval(
+                    continuation_deltas,
+                    samples=20_000,
+                    seed=config.seed + 6000,
+                )
+                if continuation_interval["low"] < -0.020:
+                    chain_reasons.append(
+                        "continuation Spearman lower bound is below -0.020"
+                    )
+            if float(final_continuation["candidate_verified_top_agreement"]) < (
+                float(initial_continuation["candidate_verified_top_agreement"])
+                - 1.0 / config.ranking_positions
+            ):
+                chain_reasons.append("continuation top agreement lost more than one position")
+            final_tactical = accepted[-1]["tactical"]
+            if _tactical_gate(initial_tactical, final_tactical):
+                chain_reasons.append("final Full Gumbel tactical retention failed")
+            if int(final_tactical["budgets"][0]["solved"]) < 5:
+                chain_reasons.append("final Full Gumbel tactical solve count is below 5/8")
+        else:
+            if float(final_wdl["cross_entropy"]) > float(initial_wdl["cross_entropy"]):
+                chain_reasons.append("final WDL micro CE regressed versus MIHVER start")
+            if float(final_wdl["macro_cross_entropy"]) > float(
+                initial_wdl["macro_cross_entropy"]
+            ):
+                chain_reasons.append("final WDL macro CE regressed versus MIHVER start")
+            if float(final_wdl["expected_score_pearson"]) < float(
+                initial_wdl["expected_score_pearson"]
+            ):
+                chain_reasons.append("final WDL Pearson regressed versus MIHVER start")
+            if float(final_continuation["candidate_mean_spearman"]) < float(
+                initial_continuation["candidate_mean_spearman"]
+            ):
+                chain_reasons.append("final continuation Spearman regressed versus MIHVER start")
+            if float(final_continuation["candidate_verified_top_agreement"]) < float(
+                initial_continuation["candidate_verified_top_agreement"]
+            ):
+                chain_reasons.append(
+                    "final continuation top agreement regressed versus MIHVER start"
+                )
     passed = not chain_reasons
     result_path = config.output_dir / "result.json"
     _atomic_json(
@@ -1212,6 +1571,9 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
             "target_artifacts": target_artifacts,
             "stopped_reason": stopped_reason,
             "final_arena": final_arena,
+            "final_qualification": final_qualification,
+            "cumulative_gate": cumulative_gate,
+            "continuation_interval": continuation_interval,
             "passed": passed,
             "reasons": chain_reasons,
             "continuous_generation_authorized": passed,
@@ -1229,11 +1591,11 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
         None,
     )
     if passed:
-        detail = "DEVRIYE continuous pilot passed · generation integration authorized"
+        detail = f"{stage} continuous pilot passed · generation integration authorized"
     elif stopped_reason is not None:
-        detail = "DEVRIYE update rejected · learner rolled back · production blocked"
+        detail = f"{stage} update rejected · learner rolled back · production blocked"
     else:
-        detail = "DEVRIYE final chain rejected · diagnostic checkpoints retained"
+        detail = f"{stage} final chain rejected · diagnostic checkpoints retained"
     store.write_atomic(
         replace(
             snapshot,
@@ -1272,6 +1634,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument("--runs-root", type=Path, default=Path("artifacts/runs"))
     parser.add_argument("--telemetry", type=Path, default=Path("artifacts/dashboard/state.json"))
     parser.add_argument("--seed", type=int, default=2026083101)
+    parser.add_argument("--pusula", action="store_true")
     arguments = parser.parse_args(argv)
     result = run_continuous_policy_iteration(
         ContinuousPolicyIterationConfig(
@@ -1281,6 +1644,12 @@ def main(argv: Sequence[str] | None = None) -> int:
             runs_root=arguments.runs_root,
             telemetry_path=arguments.telemetry,
             seed=arguments.seed,
+            stable_plastic_value=arguments.pusula,
+            selfplay_games_per_update=192 if arguments.pusula else 96,
+            minimum_known_selfplay_games=48 if arguments.pusula else 24,
+            final_arena_pairs=32 if arguments.pusula else 8,
+            final_qualification_games=768 if arguments.pusula else 0,
+            minimum_final_known_games=192 if arguments.pusula else 0,
         )
     )
     print(result)
