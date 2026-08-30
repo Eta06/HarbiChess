@@ -271,3 +271,41 @@ Every other trust-region, WDL, replay, training, cumulative bootstrap,
 tactical, continuation, integrity, and resume condition remains unchanged.
 Run `06` data is excluded, and the fresh replacement uses seed `2026090601` in
 a new output directory. Run `06` is not reclassified.
+
+## Local fresh-safety and calibration experiment recorded before execution
+
+Run `pusula-continuous-pilot-20260831-07` remains failed. It generated 57 known
+terminal games; the game-disjoint fresh tuning partition therefore contained
+only 11 games. MIHVER happened to score CE `0.598816` and Pearson `0.871615` on
+that small partition. Every value checkpoint moved CE/Brier/macro CE by roughly
+`1e-4` in the wrong direction, so the point-direction intersection rejected the
+update even though it could not establish harm at game level.
+
+The next fresh experiment separates local safety from final superiority:
+
+- value checkpoint eligibility still requires the unchanged update-0
+  historical trust-region margins;
+- local fresh tuning uses a deterministic 2,000-sample game-clustered paired
+  bootstrap and rolls back only if the 95% upper bound for baseline-minus-
+  candidate CE, macro CE, Brier, or candidate-minus-baseline Pearson is below
+  zero;
+- an interval crossing zero is inconclusive and can continue, but cannot
+  authorize production; fresh superiority remains exclusively the final blind
+  cumulative gate;
+- checkpoint selection still minimizes fresh tuning CE, then macro CE, within
+  the historical trust region.
+
+The audit also adds the missing final fresh-calibration safeguards before this
+run: paired ECE deterioration lower improvement bound at least `-0.020`, and
+candidate absolute ECE at most `0.150`. Run `04` is used only for variance
+planning: its 310-game paired ECE interval implies approximate game-level SD
+`0.20345`. One-sided alpha `0.05`, power `0.80`, zero assumed deterioration,
+15% inflation, and rounding to 24 require 744 known games. Therefore the final
+qualification is fixed prospectively at exactly 2,688 phase-balanced attempts
+with at least 744 known terminal games. It cannot be extended after results.
+
+All other final margins, 20,000 bootstrap samples, three-update learner/replay/
+search compute, trust-region alpha grid, arena, tactical, continuation,
+integrity, and resume gates remain unchanged. Run `07` data is excluded. The
+new run uses seed `2026090701` and a new output directory; no earlier result is
+reclassified.
