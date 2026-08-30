@@ -82,6 +82,10 @@ from harbichess.selfplay.continuous_replay import (
     ContinuousReplayConfig,
     generate_continuous_replay,
 )
+from harbichess.training.continuous_checkpoint import (
+    load_continuous_resume,
+    save_continuous_resume,
+)
 from harbichess.training.decoupled_value_transfer import (
     _material_quality,
     _MixedWDLSampler,
@@ -319,6 +323,105 @@ def _save_network(network, path: Path) -> str:
     network.save_weights(str(temporary))
     os.replace(temporary, path)
     return _sha256(path)
+
+
+def _config_sha256(config: ContinuousPolicyIterationConfig) -> str:
+    payload = {
+        key: str(value) if isinstance(value, Path) else value
+        for key, value in asdict(config).items()
+    }
+    return hashlib.sha256(
+        json.dumps(payload, sort_keys=True, separators=(",", ":")).encode()
+    ).hexdigest()
+
+
+def _verify_resume_exactness(
+    checkpoint_dir: Path,
+    *,
+    in_memory_state: _LearnerState,
+    network,
+    learning_rate: float,
+    policy_buffer: PreparedTransfer,
+    historical_inputs: mx.array,
+    historical_targets: mx.array,
+    fresh_inputs: mx.array,
+    fresh_targets: mx.array,
+    batch_size: int,
+    seed: int,
+) -> dict[str, float | int | bool]:
+    manifest, optimizer = load_continuous_resume(checkpoint_dir)
+    memory_learner = _ContinuousHeadLearner(_clone(network), learning_rate=learning_rate)
+    memory_learner.restore(in_memory_state)
+    disk_network = _clone(network)
+    disk_network.load_weights(manifest.model_file)
+    disk_state = _LearnerState(
+        step=manifest.learner_step,
+        weights=tuple(
+            (name, mx.array(value))
+            for name, value in tree_flatten(disk_network.parameters())
+        ),
+        optimizer=optimizer,
+    )
+    disk_learner = _ContinuousHeadLearner(disk_network, learning_rate=learning_rate)
+    disk_learner.restore(disk_state)
+
+    rng = random.Random(seed)
+    policy_rows = mx.array(
+        tuple(rng.randrange(len(policy_buffer.records)) for _ in range(batch_size)),
+        dtype=mx.int32,
+    )
+    half = batch_size // 2
+    historical_rows = mx.array(
+        tuple(rng.randrange(historical_inputs.shape[0]) for _ in range(half)),
+        dtype=mx.int32,
+    )
+    fresh_rows = mx.array(
+        tuple(rng.randrange(fresh_inputs.shape[0]) for _ in range(half)),
+        dtype=mx.int32,
+    )
+    value_inputs = mx.concatenate(
+        (
+            mx.take(historical_inputs, historical_rows, axis=0),
+            mx.take(fresh_inputs, fresh_rows, axis=0),
+        ),
+        axis=0,
+    )
+    value_targets = mx.concatenate(
+        (
+            mx.take(historical_targets, historical_rows, axis=0),
+            mx.take(fresh_targets, fresh_rows, axis=0),
+        ),
+        axis=0,
+    )
+    arguments = (
+        mx.take(policy_buffer.inputs, policy_rows, axis=0),
+        mx.take(policy_buffer.targets, policy_rows, axis=0),
+        mx.take(policy_buffer.legal_masks, policy_rows, axis=0),
+        value_inputs,
+        value_targets,
+    )
+    memory_metrics = memory_learner.train_step(*arguments)
+    disk_metrics = disk_learner.train_step(*arguments)
+    differences = tuple(
+        float(mx.max(mx.abs(left - right)).item())
+        for (_, left), (_, right) in zip(
+            tree_flatten(memory_learner.network.parameters()),
+            tree_flatten(disk_learner.network.parameters()),
+            strict=True,
+        )
+    )
+    metric_delta = max(
+        abs(float(memory_metrics[key]) - float(disk_metrics[key]))
+        for key in ("total_loss", "policy_loss", "value_loss", "gradient_norm")
+    )
+    maximum_delta = max(differences, default=0.0)
+    return {
+        "passed": maximum_delta <= 1e-7 and metric_delta <= 1e-7,
+        "maximum_parameter_delta": maximum_delta,
+        "maximum_metric_delta": metric_delta,
+        "learner_step": manifest.learner_step,
+        "next_update_seed": manifest.next_update_seed,
+    }
 
 
 def _combine_policy(generations: Sequence[PreparedTransfer]) -> PreparedTransfer:
@@ -867,6 +970,7 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
     used_validation: set[str] = set()
     rolling: list[PreparedTransfer] = []
     rolling_value_records = []
+    rolling_replay_paths: list[Path] = []
     accepted = []
     target_artifacts = []
     stopped_reason = None
@@ -992,6 +1096,8 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
             break
         rolling_value_records.append(known_replay_records)
         rolling_value_records = rolling_value_records[-config.rolling_generations :]
+        rolling_replay_paths.append(replay_path)
+        rolling_replay_paths = rolling_replay_paths[-config.rolling_generations :]
         fresh_value_records = tuple(
             record for generation in rolling_value_records for record in generation
         )
@@ -1279,14 +1385,45 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
             reasons.append("gradient norm exceeded 5.0")
         if float(arena["score_rate"]) < 0.375:
             reasons.append("per-update search score is below catastrophic floor 0.375")
-        accepted_update = not reasons
         checkpoint_path = (
             config.output_dir / "checkpoints" / f"update-{update:03d}" / "model.safetensors"
         )
         checkpoint_sha256 = None
-        if accepted_update:
+        resume_integrity = None
+        if not reasons:
             checkpoint_sha256 = _save_network(network, checkpoint_path)
-        else:
+            boundary_state = learner.snapshot()
+            resume_state = save_continuous_resume(
+                checkpoint_path.parent,
+                update=update,
+                learner_step=boundary_state.step,
+                next_update_seed=config.seed + (update + 1) * 10,
+                source_commit=source_commit,
+                config_sha256=_config_sha256(config),
+                optimizer_state=boundary_state.optimizer,
+                rolling_replay_files=tuple(rolling_replay_paths),
+                rolling_target_files=tuple(
+                    Path(path)
+                    for path in target_artifacts[-config.rolling_generations :]
+                ),
+            )
+            resume_integrity = _verify_resume_exactness(
+                checkpoint_path.parent,
+                in_memory_state=boundary_state,
+                network=network,
+                learning_rate=config.learning_rate,
+                policy_buffer=policy_buffer,
+                historical_inputs=wdl_train_inputs,
+                historical_targets=wdl_labels,
+                fresh_inputs=fresh_wdl_inputs,
+                fresh_targets=fresh_wdl_labels,
+                batch_size=config.batch_size,
+                seed=resume_state.next_update_seed,
+            )
+            if not resume_integrity["passed"]:
+                reasons.append("update-boundary checkpoint resume was not exact within 1e-7")
+        accepted_update = not reasons
+        if not accepted_update:
             learner.restore(before_state)
             rolling.pop()
             stopped_reason = f"update-{update:03d}-rollback"
@@ -1328,6 +1465,7 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
                 "arena": arena,
                 "checkpoint_path": str(checkpoint_path) if accepted_update else None,
                 "checkpoint_sha256": checkpoint_sha256,
+                "resume_integrity": resume_integrity,
                 "validation_checkpoints": [
                     {key: value for key, value in checkpoint.items() if key != "state"}
                     for checkpoint in validation_checkpoints
