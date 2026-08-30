@@ -151,9 +151,11 @@ def test_parallel_games_preserve_supplied_continuation_states() -> None:
         max_workers=2,
         config=SelfPlayConfig(max_plies=1),
         initial_states=(first, second),
+        max_additional_plies=1,
     )
 
-    assert tuple(game.final_state for game in games) == (first, second)
+    assert tuple(game.samples[0].state for game in games) == (first, second)
+    assert tuple(game.final_state.ply for game in games) == (2, 2)
 
 
 def test_parallel_games_require_one_continuation_state_per_game() -> None:
@@ -168,6 +170,16 @@ def test_parallel_games_require_one_continuation_state_per_game() -> None:
             game_count=2,
             max_workers=2,
             initial_states=(rules.initial_state(),),
+        )
+    with pytest.raises(ValueError, match="additional ply limit"):
+        play_parallel_games(
+            ScriptedSearch(),
+            rules,
+            run_seed=42,
+            first_game_index=0,
+            game_count=1,
+            max_workers=1,
+            max_additional_plies=0,
         )
 
 
