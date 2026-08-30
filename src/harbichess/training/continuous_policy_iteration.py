@@ -85,7 +85,7 @@ from harbichess.training.full_gumbel_transfer import (
 )
 from harbichess.training.invariant_wdl_transfer import _wdl_quality
 from harbichess.training.joint_policy_value_transfer import (
-    OutcomeGameBalancedSampler,
+    FixedOutcomeRatioGameBalancedSampler,
     _continuation_ranking,
     _parameter_hash,
     _sha256,
@@ -103,8 +103,8 @@ class ContinuousPolicyIterationConfig:
         "6c535585e952b3d8ba5ff2331fe4dc992d94c586fdfa6a7c3c0cbc9e2d229dbb"
     )
     updates: int = 3
-    train_targets_per_update: int = 96
-    validation_targets_per_update: int = 48
+    train_targets_per_update: int = 768
+    validation_targets_per_update: int = 192
     rolling_generations: int = 2
     simulations: int = 256
     max_considered_actions: int = 16
@@ -852,8 +852,10 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
         historical_value_sampler = _MixedWDLSampler(
             train_records, seed=config.seed + update * 10 + 1
         )
-        fresh_value_sampler = OutcomeGameBalancedSampler(
-            fresh_value_records, seed=config.seed + update * 10 + 2
+        fresh_value_sampler = FixedOutcomeRatioGameBalancedSampler(
+            fresh_value_records,
+            seed=config.seed + update * 10 + 2,
+            outcome_counts={-1: 8, 0: 16, 1: 8},
         )
         curve = []
         validation_checkpoints = []
@@ -1027,7 +1029,7 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
                 "rolling_value_generations": len(rolling_value_records),
                 "rolling_value_rows": len(fresh_value_records),
                 "value_batch_mix": {"historical": 32, "fresh": 32},
-                "fresh_value_sampling": "outcome-then-game-balanced",
+                "fresh_value_sampling": "fixed-8-loss-16-draw-8-win-then-game-balanced",
                 "rolling_policy_rows": len(policy_buffer.records),
                 "steps": config.steps_per_update,
                 "selected_local_step": selected_checkpoint["local_step"],
