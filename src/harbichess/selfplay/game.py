@@ -7,7 +7,7 @@ import math
 import random
 from collections.abc import Callable, Sequence
 from concurrent.futures import ThreadPoolExecutor
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 
 from harbichess.chess.rules import PythonChessRules
 from harbichess.core.state import (
@@ -382,11 +382,14 @@ def play_parallel_games(
     config: SelfPlayConfig | None = None,
     on_game_complete: Callable[[SelfPlayGame], None] | None = None,
     initial_states: Sequence[ChessState] | None = None,
+    max_additional_plies: int | None = None,
 ) -> tuple[SelfPlayGame, ...]:
     if game_count <= 0 or max_workers <= 0:
         raise ValueError("game_count and max_workers must be positive")
     if initial_states is not None and len(initial_states) != game_count:
         raise ValueError("initial state count must match game count")
+    if max_additional_plies is not None and max_additional_plies <= 0:
+        raise ValueError("additional ply limit must be positive")
 
     def play(game_index: int) -> SelfPlayGame:
         initial_state = (
@@ -394,13 +397,19 @@ def play_parallel_games(
             if initial_states is None
             else initial_states[game_index - first_game_index]
         )
+        game_config = config
+        if max_additional_plies is not None:
+            game_config = replace(
+                config or SelfPlayConfig(),
+                max_plies=initial_state.ply + max_additional_plies,
+            )
         game = play_game(
             mcts,
             rules,
             initial_state,
             game_index=game_index,
             seed=derive_game_seed(run_seed, game_index),
-            config=config,
+            config=game_config,
         )
         if on_game_complete is not None:
             on_game_complete(game)
