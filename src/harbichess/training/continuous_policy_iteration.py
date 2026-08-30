@@ -114,11 +114,11 @@ class ContinuousPolicyIterationConfig:
     steps_per_update: int = 40
     batch_size: int = 64
     learning_rate: float = 1e-4
-    selfplay_games_per_update: int = 12
-    selfplay_workers: int = 12
+    selfplay_games_per_update: int = 96
+    selfplay_workers: int = 24
     selfplay_simulations: int = 64
     selfplay_max_plies: int = 96
-    minimum_known_selfplay_games: int = 4
+    minimum_known_selfplay_games: int = 24
     ranking_positions: int = 32
     ranking_depth: int = 4
     tactical_seed: int = 2026082883
