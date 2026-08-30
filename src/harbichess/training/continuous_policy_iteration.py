@@ -751,6 +751,28 @@ def _old_wdl_point_noninferiority_gate(
     return tuple(reasons)
 
 
+def _old_wdl_statistical_noninferiority_gate(
+    result: dict[str, object],
+) -> tuple[str, ...]:
+    """Reject local old-capability harm only when paired evidence exceeds a margin."""
+
+    intervals = result["intervals"]
+    reasons = []
+    for metric, margin, label in (
+        ("cross_entropy", 0.003, "CE"),
+        ("macro_cross_entropy", 0.005, "macro CE"),
+        ("brier", 0.003, "Brier"),
+        ("ece_10", 0.010, "ECE"),
+    ):
+        if float(intervals[metric]["low"]) > margin:  # type: ignore[index]
+            reasons.append(f"paired historical tuning {label} exceeds its margin")
+    if float(intervals["pearson"]["high"]) < -0.010:  # type: ignore[index]
+        reasons.append("paired historical tuning Pearson exceeds its margin")
+    if float(result["candidate"]["ece_10"]) > 0.120:  # type: ignore[index]
+        reasons.append("historical tuning absolute WDL ECE exceeds 0.120")
+    return tuple(reasons)
+
+
 def _select_value_checkpoint(checkpoints: Sequence[dict[str, object]]):
     if not checkpoints:
         raise ValueError("continuous update produced no value checkpoints")
@@ -1040,8 +1062,9 @@ def _paired_mean_interval(
     }
 
 
-def _prediction_games(baseline, candidate, records, *, rules):
-    inputs, _ = _prepare_value(records, rules)
+def _prediction_games(baseline, candidate, records, *, rules, inputs=None):
+    if inputs is None:
+        inputs, _ = _prepare_value(records, rules)
     baseline_probabilities = mx.softmax(baseline(inputs)[1], axis=1)
     candidate_probabilities = mx.softmax(candidate(inputs)[1], axis=1)
     mx.eval(baseline_probabilities, candidate_probabilities)
@@ -1598,7 +1621,7 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
         if config.stable_plastic_value:
             constrained_value_checkpoints = []
             for checkpoint in value_validation_checkpoints:
-                for alpha in _VALUE_TRUST_REGION_ALPHAS:
+                for alpha_index, alpha in enumerate(_VALUE_TRUST_REGION_ALPHAS):
                     interpolated_state = _interpolate_value_state(
                         before_state,
                         checkpoint["state"],
@@ -1614,6 +1637,25 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
                         fresh_wdl_validation_inputs,
                         fresh_validation_outcomes,
                     )
+                    old_wdl_safety = paired_bootstrap(
+                        _prediction_games(
+                            initial_network,
+                            network,
+                            tuning_records,
+                            rules=rules,
+                            inputs=wdl_validation_inputs,
+                        ),
+                        improvement=False,
+                        config=CumulativeGateConfig(
+                            bootstrap_samples=2_000,
+                            seed=(
+                                config.seed
+                                + update * 10_000
+                                + int(checkpoint["local_step"]) * 10
+                                + alpha_index
+                            ),
+                        ),
+                    )
                     constrained_value_checkpoints.append(
                         {
                             "local_step": checkpoint["local_step"],
@@ -1621,10 +1663,9 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
                             "alpha": alpha,
                             "wdl": interpolated_old,
                             "fresh_wdl": interpolated_fresh,
-                            "reasons": (
-                                *_old_wdl_point_noninferiority_gate(
-                                    initial_wdl, interpolated_old
-                                ),
+                            "old_wdl_safety": old_wdl_safety,
+                            "reasons": _old_wdl_statistical_noninferiority_gate(
+                                old_wdl_safety
                             ),
                             "state": interpolated_state,
                         }
@@ -1654,6 +1695,7 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
             fresh_validation_outcomes,
         )
         fresh_wdl_safety = None
+        old_wdl_safety = value_checkpoint.get("old_wdl_safety")
         fresh_numeric_reasons = ()
         if config.stable_plastic_value:
             fresh_wdl_safety = paired_bootstrap(
@@ -1673,7 +1715,7 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
         numeric_reasons = (
             *_policy_gate(before_policy, after_policy),
             *(
-                _old_wdl_point_noninferiority_gate(initial_wdl, after_wdl)
+                _old_wdl_statistical_noninferiority_gate(old_wdl_safety)
                 if config.stable_plastic_value
                 else _continuous_wdl_gate(previous_wdl, after_wdl)
             ),
@@ -1805,6 +1847,7 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
                 "policy_after": after_policy,
                 "wdl_before": previous_wdl,
                 "wdl_after": after_wdl,
+                "old_wdl_safety": old_wdl_safety,
                 "fresh_wdl_before": fresh_wdl_before,
                 "fresh_wdl_after": after_fresh_wdl,
                 "fresh_wdl_safety": fresh_wdl_safety,
