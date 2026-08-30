@@ -309,3 +309,38 @@ search compute, trust-region alpha grid, arena, tactical, continuation,
 integrity, and resume gates remain unchanged. Run `07` data is excluded. The
 new run uses seed `2026090701` and a new output directory; no earlier result is
 reclassified.
+
+## Paired historical safety experiment recorded before execution
+
+Run `pusula-continuous-pilot-20260831-08` remains failed. Updates 1 and 2 passed;
+update 3 exhausted the point-estimate historical trust region. Its smallest
+tested residual step missed the CE boundary by about `0.000004`, while ECE-10
+also showed discontinuous bin changes. The update was rolled back and neither
+final arena nor final qualification ran.
+
+A cached, non-qualifying schedule audit tested joint-to-anchor consolidation
+from update 1 onward. It preserved useful fresh CE/Brier/Pearson gradients, but
+no fixed schedule simultaneously satisfied every historical *point* endpoint;
+ECE bin crossings dominated several otherwise safe schedules. This shows that
+changing step count or adding still smaller alpha values would mask the local
+statistical defect rather than solve it.
+
+The next fresh experiment applies the same evidence rule to historical local
+safety that the final gate already uses:
+
+- every fixed trust-region checkpoint is compared with update-0 MIHVER on the
+  game-disjoint historical tuning games using a deterministic 2,000-sample
+  whole-game paired bootstrap;
+- reject CE, macro CE, Brier, or ECE only when the deterioration interval's
+  lower bound exceeds its unchanged margin; reject Pearson only when its upper
+  bound is below `-0.010`;
+- retain the absolute tuning ECE ceiling `0.120`;
+- an interval crossing a margin is locally inconclusive, never a production
+  pass; the independent final holdout still requires every powered one-sided
+  20,000-sample non-inferiority interval to pass.
+
+Bootstrap seeds are fixed as run seed + update x 10,000 + learner step x 10 +
+alpha-grid index. The trust-region grid, selection order, training/search/replay
+compute, 2,688-attempt final calibration qualification, all final margins, and
+all non-statistical gates remain unchanged. Run `08` data and its schedule audit
+are excluded. The new run uses seed `2026090801`; no failed run is reclassified.
