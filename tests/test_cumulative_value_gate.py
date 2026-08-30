@@ -53,6 +53,26 @@ def test_cumulative_gate_requires_old_noninferiority_and_fresh_superiority() -> 
     assert all(result["checks"].values())
 
 
+def test_cumulative_gate_requires_fresh_calibration_safety() -> None:
+    baseline = ((0.9, 0.05, 0.05), (0.05, 0.9, 0.05), (0.05, 0.05, 0.9))
+    better = ((0.95, 0.025, 0.025), (0.025, 0.95, 0.025), (0.025, 0.025, 0.95))
+    old = tuple(_game(f"old-{index}", baseline, baseline) for index in range(6))
+    fresh = tuple(_game(f"fresh-{index}", baseline, better) for index in range(6))
+
+    result = evaluate_cumulative_gate(
+        old,
+        fresh,
+        config=CumulativeGateConfig(
+            bootstrap_samples=100,
+            seed=13,
+            fresh_ece_absolute_maximum=0.01,
+        ),
+    )
+
+    assert not result["passed"]
+    assert not result["checks"]["fresh_ece_absolute"]
+
+
 def test_power_plan_is_deterministic_inflated_and_rounded() -> None:
     plan = paired_power_plan(
         standard_deviation=0.02,
