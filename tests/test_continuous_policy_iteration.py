@@ -31,7 +31,6 @@ from harbichess.training.continuous_policy_iteration import (  # noqa: E402
     _interpolate_value_state,
     _LearnerState,
     _local_arena_catastrophic_gate,
-    _old_wdl_point_noninferiority_gate,
     _old_wdl_statistical_noninferiority_gate,
     _paired_mean_interval,
     _policy_gate,
@@ -212,34 +211,6 @@ def test_cumulative_pilot_local_wdl_gate_uses_its_own_tuning_baseline() -> None:
     ) == ()
 
 
-def test_old_tuning_gate_uses_frozen_noninferiority_margins() -> None:
-    baseline = {**_wdl(), "brier": 0.55}
-    within = {
-        **_wdl(
-            cross_entropy=0.903,
-            macro_cross_entropy=0.925,
-            expected_score_pearson=0.44,
-            ece_10=0.04,
-        ),
-        "brier": 0.553,
-    }
-
-    assert _old_wdl_point_noninferiority_gate(baseline, within) == ()
-    assert len(
-        _old_wdl_point_noninferiority_gate(
-            baseline,
-            {
-                **within,
-                "cross_entropy": 0.904,
-                "macro_cross_entropy": 0.926,
-                "brier": 0.554,
-                "expected_score_pearson": 0.439,
-                "ece_10": 0.041,
-            },
-        )
-    ) == 5
-
-
 def test_old_local_gate_requires_statistical_margin_violation() -> None:
     intervals = {
         metric: {"low": -0.01, "high": 0.01}
@@ -257,6 +228,22 @@ def test_old_local_gate_requires_statistical_margin_violation() -> None:
 
     assert _old_wdl_statistical_noninferiority_gate(inconclusive) == ()
     assert len(_old_wdl_statistical_noninferiority_gate(harmful)) == 3
+
+
+def test_old_local_gate_does_not_reject_an_unpowered_point_estimate() -> None:
+    result = {
+        "intervals": {
+            "cross_entropy": {"low": -0.001, "high": 0.007},
+            "macro_cross_entropy": {"low": -0.003, "high": 0.001},
+            "brier": {"low": -0.001, "high": 0.005},
+            "pearson": {"low": -0.002, "high": 0.001},
+            "ece_10": {"low": -0.02, "high": 0.008},
+        },
+        "candidate": {"ece_10": 0.05},
+    }
+
+    assert result["intervals"]["cross_entropy"]["high"] > 0.003
+    assert _old_wdl_statistical_noninferiority_gate(result) == ()
 
 
 def test_search_tactical_gate_ignores_raw_policy_but_preserves_solved_cases() -> None:
