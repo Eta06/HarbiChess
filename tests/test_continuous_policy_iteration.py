@@ -347,6 +347,11 @@ def test_value_checkpoint_uses_best_fresh_ce_among_safe_steps() -> None:
             "fresh_wdl": {"cross_entropy": 0.80, "macro_cross_entropy": 0.85},
             "reasons": ("historical regression",),
         },
+        {
+            "local_step": 30,
+            "fresh_wdl": {"cross_entropy": 0.79, "macro_cross_entropy": 0.84},
+            "reasons": ("paired fresh Pearson harm",),
+        },
     )
 
     selected, eligible = _select_value_checkpoint(checkpoints)
