@@ -135,6 +135,7 @@ class ContinuousPolicyIterationConfig:
     selfplay_max_plies: int = 96
     minimum_known_selfplay_games: int = 24
     ranking_positions: int = 32
+    final_ranking_positions: int = 1_440
     ranking_depth: int = 4
     tactical_seed: int = 2026082883
     arena_pairs_per_update: int = 4
@@ -168,6 +169,7 @@ class ContinuousPolicyIterationConfig:
             self.selfplay_max_plies,
             self.minimum_known_selfplay_games,
             self.ranking_positions,
+            self.final_ranking_positions,
             self.ranking_depth,
             self.tactical_seed,
             self.arena_pairs_per_update,
@@ -216,7 +218,17 @@ _TRAINABLE_PREFIXES = (
 _POLICY_PREFIXES = _TRAINABLE_PREFIXES[:2]
 _VALUE_PREFIXES = _TRAINABLE_PREFIXES[2:]
 _STABLE_TRAINABLE_PREFIXES = (*_POLICY_PREFIXES, *PLASTIC_VALUE_PREFIXES)
-_VALUE_TRUST_REGION_ALPHAS = (1.0, 0.75, 0.5, 0.25, 0.125, 0.0625, 0.03125)
+_VALUE_TRUST_REGION_ALPHAS = (
+    1.0,
+    0.75,
+    0.5,
+    0.25,
+    0.125,
+    0.0625,
+    0.03125,
+    0.015625,
+    0.0078125,
+)
 
 
 @dataclass(frozen=True, slots=True)
@@ -695,6 +707,16 @@ def _fresh_wdl_direction_gate(
     ):
         reasons.append("fresh tuning WDL Pearson regressed")
     return tuple(reasons)
+
+
+def _fresh_wdl_calibration_gate(
+    baseline: dict[str, object], candidate: dict[str, object]
+) -> tuple[str, ...]:
+    """Apply the preregistered fresh ECE margin during checkpoint selection."""
+
+    if float(candidate["ece_10"]) > float(baseline["ece_10"]) + 0.020:
+        return ("fresh tuning WDL ECE exceeded the +0.020 margin",)
+    return ()
 
 
 def _fresh_wdl_harm_gate(result: dict[str, object]) -> tuple[str, ...]:
@@ -1405,6 +1427,11 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
         fresh_validation_outcomes = tuple(
             int(record.outcome_value) for record in fresh_value_validation_records
         )
+        initial_fresh_wdl = _wdl_quality(
+            initial_network,
+            fresh_wdl_validation_inputs,
+            fresh_validation_outcomes,
+        )
         fresh_wdl_before = _wdl_quality(
             previous_network,
             fresh_wdl_validation_inputs,
@@ -1664,8 +1691,19 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
                             "wdl": interpolated_old,
                             "fresh_wdl": interpolated_fresh,
                             "old_wdl_safety": old_wdl_safety,
-                            "reasons": _old_wdl_statistical_noninferiority_gate(
-                                old_wdl_safety
+                            "reasons": (
+                                *_old_wdl_point_noninferiority_gate(
+                                    initial_wdl, interpolated_old
+                                ),
+                                *_old_wdl_statistical_noninferiority_gate(
+                                    old_wdl_safety
+                                ),
+                                *_fresh_wdl_direction_gate(
+                                    initial_fresh_wdl, interpolated_fresh
+                                ),
+                                *_fresh_wdl_calibration_gate(
+                                    initial_fresh_wdl, interpolated_fresh
+                                ),
                             ),
                             "state": interpolated_state,
                         }
@@ -1849,6 +1887,7 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
                 "wdl_after": after_wdl,
                 "old_wdl_safety": old_wdl_safety,
                 "fresh_wdl_before": fresh_wdl_before,
+                "fresh_wdl_initial": initial_fresh_wdl,
                 "fresh_wdl_after": after_fresh_wdl,
                 "fresh_wdl_safety": fresh_wdl_safety,
                 "material": after_material,
@@ -1880,6 +1919,7 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
     final_qualification = None
     cumulative_gate = None
     continuation_interval = None
+    final_continuation_evaluation = None
     chain_reasons = []
     if len(accepted) != config.updates or not all(row["accepted"] for row in accepted):
         chain_reasons.append("not all preregistered continuous updates were accepted")
@@ -1899,6 +1939,31 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
         if config.stable_plastic_value:
             if float(final_arena["score_interval"]["low"]) < 0.45:
                 chain_reasons.append("final search score lower bound is below 0.45")
+            final_ranking_records = select_stratified_records(
+                validation_records,
+                rules=rules,
+                count=config.final_ranking_positions,
+                seed=config.seed + 3500,
+            )
+            final_initial_continuation = _continuation_ranking(
+                release,
+                initial_network,
+                final_ranking_records,
+                rules=rules,
+                depth=config.ranking_depth,
+            )
+            final_continuation = _continuation_ranking(
+                release,
+                network,
+                final_ranking_records,
+                rules=rules,
+                depth=config.ranking_depth,
+            )
+            final_continuation_evaluation = {
+                "positions": config.final_ranking_positions,
+                "initial": final_initial_continuation,
+                "candidate": final_continuation,
+            }
             starts = _select_qualification_starts(
                 validation_records,
                 count=config.final_qualification_games,
@@ -1988,7 +2053,8 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
             }
             if known_games < config.minimum_final_known_games:
                 chain_reasons.append(
-                    "final fresh qualification has fewer than 192 known terminal games"
+                    "final fresh qualification has fewer than the preregistered "
+                    f"{config.minimum_final_known_games} known terminal games"
                 )
             else:
                 old_prediction_games = _prediction_games(
@@ -2017,7 +2083,7 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
                         "cumulative statistical gate failed: " + ", ".join(failed_checks)
                     )
             initial_rows = {
-                row["identity"]: row for row in initial_continuation["rows"]
+                row["identity"]: row for row in final_initial_continuation["rows"]
             }
             final_rows = {row["identity"]: row for row in final_continuation["rows"]}
             if set(initial_rows) != set(final_rows):
@@ -2038,8 +2104,8 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
                         "continuation Spearman lower bound is below -0.020"
                     )
             if float(final_continuation["candidate_verified_top_agreement"]) < (
-                float(initial_continuation["candidate_verified_top_agreement"])
-                - 1.0 / config.ranking_positions
+                float(final_initial_continuation["candidate_verified_top_agreement"])
+                - 1.0 / config.final_ranking_positions
             ):
                 chain_reasons.append("continuation top agreement lost more than one position")
             final_tactical = accepted[-1]["tactical"]
@@ -2108,6 +2174,7 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
             "final_qualification": final_qualification,
             "cumulative_gate": cumulative_gate,
             "continuation_interval": continuation_interval,
+            "final_continuation_evaluation": final_continuation_evaluation,
             "passed": passed,
             "reasons": chain_reasons,
             "continuous_generation_authorized": passed,
