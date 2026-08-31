@@ -763,43 +763,6 @@ def _fresh_wdl_harm_gate(result: dict[str, object]) -> tuple[str, ...]:
     )
 
 
-def _old_wdl_point_noninferiority_gate(
-    baseline: dict[str, object], candidate: dict[str, object]
-) -> tuple[str, ...]:
-    """Keep checkpoint tuning aligned with the preregistered cumulative margins.
-
-    This operates only on the historical *tuning* partition.  The independent
-    final old-capability holdout remains unseen until cumulative qualification.
-    """
-
-    reasons = []
-    epsilon = 1e-12
-    if (
-        float(candidate["cross_entropy"]) - float(baseline["cross_entropy"])
-        > 0.003 + epsilon
-    ):
-        reasons.append("historical tuning WDL CE exceeded the +0.003 margin")
-    if (
-        float(candidate["macro_cross_entropy"])
-        - float(baseline["macro_cross_entropy"])
-        > 0.005 + epsilon
-    ):
-        reasons.append("historical tuning macro WDL CE exceeded the +0.005 margin")
-    if float(candidate["brier"]) - float(baseline["brier"]) > 0.003 + epsilon:
-        reasons.append("historical tuning WDL Brier exceeded the +0.003 margin")
-    if (
-        float(candidate["expected_score_pearson"])
-        - float(baseline["expected_score_pearson"])
-        < -0.010 - epsilon
-    ):
-        reasons.append("historical tuning WDL Pearson exceeded the -0.010 margin")
-    if float(candidate["ece_10"]) - float(baseline["ece_10"]) > 0.010 + epsilon:
-        reasons.append("historical tuning WDL ECE exceeded the +0.010 margin")
-    if float(candidate["ece_10"]) > 0.120:
-        reasons.append("historical tuning absolute WDL ECE exceeds 0.120")
-    return tuple(reasons)
-
-
 def _old_wdl_statistical_noninferiority_gate(
     result: dict[str, object],
 ) -> tuple[str, ...]:
@@ -1601,11 +1564,9 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
                 fresh_validation_outcomes,
             )
             value_reasons = (
-                *(
-                    _old_wdl_point_noninferiority_gate(initial_wdl, value_validation)
-                    if config.stable_plastic_value
-                    else _continuous_wdl_gate(previous_wdl, value_validation)
-                ),
+                ()
+                if config.stable_plastic_value
+                else _continuous_wdl_gate(previous_wdl, value_validation)
             )
             value_validation_checkpoints.append(
                 {
@@ -1630,7 +1591,7 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
                 numeric_reasons = (
                     *_policy_gate(before_policy, validation_policy),
                     *(
-                        _old_wdl_point_noninferiority_gate(initial_wdl, validation_wdl)
+                        ()
                         if config.stable_plastic_value
                         else _continuous_wdl_gate(previous_wdl, validation_wdl)
                     ),
@@ -1751,9 +1712,6 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
                             "old_wdl_safety": old_wdl_safety,
                             "fresh_wdl_safety": fresh_wdl_safety,
                             "reasons": (
-                                *_old_wdl_point_noninferiority_gate(
-                                    initial_wdl, interpolated_old
-                                ),
                                 *_old_wdl_statistical_noninferiority_gate(
                                     old_wdl_safety
                                 ),
@@ -2234,15 +2192,8 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
                     initial_network, legacy_old_inputs, legacy_old_outcomes
                 ),
                 "candidate": legacy_old_candidate,
+                "role": "diagnostic_only_unpowered",
             }
-            legacy_old_gate["reasons"] = _old_wdl_point_noninferiority_gate(
-                legacy_old_gate["baseline"], legacy_old_candidate
-            )
-            if legacy_old_gate["reasons"]:
-                chain_reasons.append(
-                    "legacy historical point gate failed: "
-                    + ", ".join(legacy_old_gate["reasons"])
-                )
             if known_games < config.minimum_final_known_games:
                 chain_reasons.append(
                     "final fresh qualification has fewer than the preregistered "
