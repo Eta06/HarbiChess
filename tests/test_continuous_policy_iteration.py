@@ -40,6 +40,7 @@ from harbichess.training.continuous_policy_iteration import (  # noqa: E402
     _select_continuation_state_starts,
     _select_numeric_checkpoint,
     _select_qualification_starts,
+    _select_tactical_policy_checkpoint,
     _select_value_checkpoint,
     _soft_value_targets,
     _split_fit_tuning,
@@ -352,6 +353,19 @@ def test_value_checkpoint_uses_best_fresh_ce_among_safe_steps() -> None:
 
     assert eligible is True
     assert selected["local_step"] == 8
+
+
+def test_policy_checkpoint_prefers_earliest_tactical_safe_step() -> None:
+    checkpoints = (
+        {"local_step": 20, "reasons": ("lost tactic",)},
+        {"local_step": 30, "reasons": ()},
+        {"local_step": 40, "reasons": ()},
+    )
+
+    selected, eligible = _select_tactical_policy_checkpoint(checkpoints)
+
+    assert eligible is True
+    assert selected["local_step"] == 30
 
 
 def test_rolling_policy_buffer_preserves_generation_order() -> None:
