@@ -283,6 +283,12 @@ def test_fresh_wdl_gate_requires_all_preregistered_directions() -> None:
     assert len(
         _fresh_wdl_direction_gate(
             baseline,
+            {**candidate, "cross_entropy": 0.899},
+        )
+    ) == 1
+    assert len(
+        _fresh_wdl_direction_gate(
+            baseline,
             {**candidate, "cross_entropy": 0.91, "brier": 0.56},
         )
     ) == 2
