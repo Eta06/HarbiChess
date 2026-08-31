@@ -811,7 +811,43 @@ def _select_tactical_policy_checkpoint(checkpoints: Sequence[dict[str, object]])
     return selected, bool(eligible)
 
 
-def _continuation_floor(result: dict[str, object]) -> tuple[str, ...]:
+def _local_continuation_noninferiority_gate(
+    result: dict[str, object], *, samples: int, seed: int
+) -> dict[str, object]:
+    """Screen local continuation drift without imposing an absolute point floor."""
+
+    rows = result["rows"]
+    spearman = _paired_mean_interval(
+        tuple(
+            float(row["candidate_spearman"]) - float(row["baseline_spearman"])
+            for row in rows  # type: ignore[union-attr]
+        ),
+        samples=samples,
+        seed=seed,
+    )
+    verified_top = _paired_mean_interval(
+        tuple(
+            float(bool(row["candidate_verified_top"]))
+            - float(bool(row["baseline_verified_top"]))
+            for row in rows  # type: ignore[union-attr]
+        ),
+        samples=samples,
+        seed=seed + 1,
+    )
+    reasons = []
+    if float(spearman["high"]) < -0.020:
+        reasons.append("paired continuation Spearman proves deterioration beyond -0.020")
+    if float(verified_top["high"]) < -0.125:
+        reasons.append("paired continuation top agreement proves deterioration beyond -0.125")
+    return {
+        "spearman_interval": spearman,
+        "verified_top_interval": verified_top,
+        "reasons": tuple(reasons),
+        "passed": not reasons,
+    }
+
+
+def _absolute_continuation_floor(result: dict[str, object]) -> tuple[str, ...]:
     reasons = []
     if float(result["candidate_mean_spearman"]) < 0.05:
         reasons.append("continuation mean Spearman is below 0.05")
@@ -1729,6 +1765,53 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
         value_checkpoint, value_checkpoint_eligible = _select_value_checkpoint(
             constrained_value_checkpoints
         )
+        continuation = None
+        continuation_safety = None
+        if config.stable_plastic_value:
+            eligible_value_checkpoints = sorted(
+                (
+                    checkpoint
+                    for checkpoint in constrained_value_checkpoints
+                    if not checkpoint["reasons"]
+                ),
+                key=lambda checkpoint: (
+                    float(checkpoint["fresh_wdl"]["cross_entropy"]),
+                    float(checkpoint["fresh_wdl"]["macro_cross_entropy"]),
+                    int(checkpoint["local_step"]),
+                ),
+            )
+            continuation_candidates = eligible_value_checkpoints or [value_checkpoint]
+            value_checkpoint_eligible = False
+            for continuation_index, checkpoint in enumerate(continuation_candidates):
+                learner.restore(checkpoint["state"])
+                candidate_continuation = _continuation_ranking(
+                    initial_network,
+                    network,
+                    ranking_records,
+                    rules=rules,
+                    depth=config.ranking_depth,
+                )
+                candidate_safety = _local_continuation_noninferiority_gate(
+                    candidate_continuation,
+                    samples=2_000,
+                    seed=(
+                        config.seed
+                        + update * 30_000
+                        + continuation_index * 2
+                    ),
+                )
+                checkpoint["continuation"] = candidate_continuation
+                checkpoint["continuation_safety"] = candidate_safety
+                if not candidate_safety["reasons"] and eligible_value_checkpoints:
+                    value_checkpoint = checkpoint
+                    value_checkpoint_eligible = True
+                    continuation = candidate_continuation
+                    continuation_safety = candidate_safety
+                    break
+            if continuation is None:
+                value_checkpoint = continuation_candidates[0]
+                continuation = value_checkpoint["continuation"]
+                continuation_safety = value_checkpoint["continuation_safety"]
         policy_tactical_checkpoints = []
         for checkpoint in policy_checkpoints or validation_checkpoints:
             composed_state = _compose_headwise_state(
@@ -1801,13 +1884,14 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
                 *numeric_reasons,
             )
         after_material = _material_quality(network, *material_validation)
-        continuation = _continuation_ranking(
-            release,
-            network,
-            ranking_records,
-            rules=rules,
-            depth=config.ranking_depth,
-        )
+        if continuation is None:
+            continuation = _continuation_ranking(
+                release,
+                network,
+                ranking_records,
+                rules=rules,
+                depth=config.ranking_depth,
+            )
         tactical = _tactical(_clone(network), config=tactical_config)
         tactical_reasons = (
             _search_tactical_gate(initial_tactical, tactical)
@@ -1826,7 +1910,11 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
         )
         reasons = [
             *numeric_reasons,
-            *_continuation_floor(continuation),
+            *(
+                continuation_safety["reasons"]
+                if config.stable_plastic_value
+                else _absolute_continuation_floor(continuation)
+            ),
             *tactical_reasons,
         ]
         if after_material != material_baseline:
