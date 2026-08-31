@@ -90,6 +90,7 @@ def test_config_defaults_use_scaled_qualified_teacher_set() -> None:
     assert config.selfplay_games_per_update == 96
     assert config.selfplay_workers == 24
     assert config.minimum_known_selfplay_games == 24
+    assert config.historical_value_weight == 2.0
     assert config.final_ranking_positions == 1_440
     assert _VALUE_TRUST_REGION_ALPHAS[-1] == pytest.approx(0.0078125)
 
@@ -112,6 +113,15 @@ def test_config_requires_equal_opening_middle_endgame_quota() -> None:
 def test_stable_plastic_config_requires_fresh_final_qualification() -> None:
     with pytest.raises(ValueError, match="final qualification"):
         _config(stable_plastic_value=True)
+
+
+def test_stable_plastic_config_requires_powered_old_qualification() -> None:
+    with pytest.raises(ValueError, match="old qualification"):
+        _config(
+            stable_plastic_value=True,
+            final_qualification_games=3,
+            minimum_final_known_games=1,
+        )
 
 
 def test_continuation_starts_are_phase_balanced_and_non_overlapping() -> None:
@@ -689,6 +699,7 @@ def test_saved_update_reproduces_next_controlled_training_step(tmp_path: Path) -
         fresh_inputs=inputs,
         fresh_targets=value_targets,
         batch_size=4,
+        historical_value_weight=2.0,
         seed=53,
     )
 
