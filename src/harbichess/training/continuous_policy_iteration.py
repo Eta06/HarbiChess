@@ -837,6 +837,17 @@ def _select_value_checkpoint(checkpoints: Sequence[dict[str, object]]):
     return selected, bool(eligible)
 
 
+def _select_tactical_policy_checkpoint(checkpoints: Sequence[dict[str, object]]):
+    if not checkpoints:
+        raise ValueError("continuous update produced no policy checkpoints")
+    eligible = [checkpoint for checkpoint in checkpoints if not checkpoint["reasons"]]
+    selected = min(
+        eligible or checkpoints,
+        key=lambda checkpoint: int(checkpoint["local_step"]),
+    )
+    return selected, bool(eligible)
+
+
 def _continuation_floor(result: dict[str, object]) -> tuple[str, ...]:
     reasons = []
     if float(result["candidate_mean_spearman"]) < 0.05:
@@ -1672,10 +1683,6 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
             for checkpoint in validation_checkpoints
             if not _policy_gate(before_policy, checkpoint["policy"])
         )
-        policy_checkpoint = min(
-            policy_checkpoints or validation_checkpoints,
-            key=lambda checkpoint: int(checkpoint["local_step"]),
-        )
         constrained_value_checkpoints = value_validation_checkpoints
         if config.stable_plastic_value:
             constrained_value_checkpoints = []
@@ -1743,12 +1750,33 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
         value_checkpoint, value_checkpoint_eligible = _select_value_checkpoint(
             constrained_value_checkpoints
         )
-        learner.restore(
-            _compose_headwise_state(
-                policy_checkpoint,
+        policy_tactical_checkpoints = []
+        for checkpoint in policy_checkpoints or validation_checkpoints:
+            composed_state = _compose_headwise_state(
+                checkpoint,
                 value_checkpoint,
                 value_prefixes=value_prefixes,
             )
+            learner.restore(composed_state)
+            checkpoint_tactical = _tactical(_clone(network), config=tactical_config)
+            checkpoint_tactical_reasons = _search_tactical_gate(
+                initial_tactical, checkpoint_tactical
+            )
+            policy_tactical_checkpoints.append(
+                {
+                    "local_step": checkpoint["local_step"],
+                    "learner_step": checkpoint["learner_step"],
+                    "policy": checkpoint["policy"],
+                    "tactical": checkpoint_tactical,
+                    "reasons": checkpoint_tactical_reasons,
+                    "state": composed_state,
+                }
+            )
+        policy_checkpoint, policy_tactical_eligible = (
+            _select_tactical_policy_checkpoint(policy_tactical_checkpoints)
+        )
+        learner.restore(
+            policy_checkpoint["state"]
         )
         learner.reset_optimizer()
         composed_policy_logits = network(prepared_validation.inputs)[0]
@@ -1794,6 +1822,11 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
         if not policy_checkpoints:
             numeric_reasons = (
                 "no validation checkpoint independently passed policy gates",
+                *numeric_reasons,
+            )
+        if not policy_tactical_eligible:
+            numeric_reasons = (
+                "no policy checkpoint retained Full Gumbel tactical capability",
                 *numeric_reasons,
             )
         if not value_checkpoint_eligible:
@@ -1941,6 +1974,10 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
                 "value_trust_region_checkpoints": [
                     {key: value for key, value in checkpoint.items() if key != "state"}
                     for checkpoint in constrained_value_checkpoints
+                ],
+                "policy_tactical_checkpoints": [
+                    {key: value for key, value in checkpoint.items() if key != "state"}
+                    for checkpoint in policy_tactical_checkpoints
                 ],
                 "curve": curve,
             }
