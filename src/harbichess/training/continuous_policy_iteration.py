@@ -1722,6 +1722,25 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
                             ),
                         ),
                     )
+                    fresh_wdl_safety = paired_bootstrap(
+                        _prediction_games(
+                            previous_network,
+                            network,
+                            fresh_value_validation_records,
+                            rules=rules,
+                            inputs=fresh_wdl_validation_inputs,
+                        ),
+                        improvement=True,
+                        config=CumulativeGateConfig(
+                            bootstrap_samples=2_000,
+                            seed=(
+                                config.seed
+                                + update * 20_000
+                                + int(checkpoint["local_step"]) * 10
+                                + alpha_index
+                            ),
+                        ),
+                    )
                     constrained_value_checkpoints.append(
                         {
                             "local_step": checkpoint["local_step"],
@@ -1730,6 +1749,7 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
                             "wdl": interpolated_old,
                             "fresh_wdl": interpolated_fresh,
                             "old_wdl_safety": old_wdl_safety,
+                            "fresh_wdl_safety": fresh_wdl_safety,
                             "reasons": (
                                 *_old_wdl_point_noninferiority_gate(
                                     initial_wdl, interpolated_old
@@ -1743,6 +1763,7 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
                                 *_fresh_wdl_calibration_gate(
                                     initial_fresh_wdl, interpolated_fresh
                                 ),
+                                *_fresh_wdl_harm_gate(fresh_wdl_safety),
                             ),
                             "state": interpolated_state,
                         }
@@ -1792,23 +1813,10 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
             fresh_wdl_validation_inputs,
             fresh_validation_outcomes,
         )
-        fresh_wdl_safety = None
+        fresh_wdl_safety = value_checkpoint.get("fresh_wdl_safety")
         old_wdl_safety = value_checkpoint.get("old_wdl_safety")
         fresh_numeric_reasons = ()
         if config.stable_plastic_value:
-            fresh_wdl_safety = paired_bootstrap(
-                _prediction_games(
-                    previous_network,
-                    network,
-                    fresh_value_validation_records,
-                    rules=rules,
-                ),
-                improvement=True,
-                config=CumulativeGateConfig(
-                    bootstrap_samples=2_000,
-                    seed=config.seed + update * 10 + 8,
-                ),
-            )
             fresh_numeric_reasons = _fresh_wdl_harm_gate(fresh_wdl_safety)
         numeric_reasons = (
             *_policy_gate(before_policy, after_policy),
