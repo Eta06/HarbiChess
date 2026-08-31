@@ -31,6 +31,7 @@ from harbichess.training.continuous_policy_iteration import (  # noqa: E402
     _interpolate_value_state,
     _LearnerState,
     _local_arena_catastrophic_gate,
+    _local_continuation_noninferiority_gate,
     _old_wdl_statistical_noninferiority_gate,
     _paired_mean_interval,
     _policy_gate,
@@ -265,6 +266,40 @@ def test_local_arena_rejects_only_supported_catastrophic_regression() -> None:
 
     assert _local_arena_catastrophic_gate(uncertain) == ()
     assert len(_local_arena_catastrophic_gate(catastrophic)) == 1
+
+
+def test_local_continuation_gate_uses_paired_relative_deterioration() -> None:
+    improved = {
+        "rows": [
+            {
+                "baseline_spearman": 0.04,
+                "candidate_spearman": 0.05,
+                "baseline_verified_top": index % 2 == 0,
+                "candidate_verified_top": True,
+            }
+            for index in range(32)
+        ]
+    }
+    harmful = {
+        "rows": [
+            {
+                "baseline_spearman": 0.20,
+                "candidate_spearman": -0.20,
+                "baseline_verified_top": True,
+                "candidate_verified_top": False,
+            }
+            for _ in range(32)
+        ]
+    }
+
+    assert _local_continuation_noninferiority_gate(
+        improved, samples=100, seed=7
+    )["passed"]
+    rejected = _local_continuation_noninferiority_gate(
+        harmful, samples=100, seed=7
+    )
+    assert not rejected["passed"]
+    assert len(rejected["reasons"]) == 2
 
 
 def test_fresh_wdl_gate_requires_all_preregistered_directions() -> None:
