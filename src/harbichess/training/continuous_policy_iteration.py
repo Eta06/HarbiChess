@@ -696,8 +696,11 @@ def _fresh_wdl_direction_gate(
     baseline: dict[str, object], candidate: dict[str, object]
 ) -> tuple[str, ...]:
     reasons = []
-    if float(candidate["cross_entropy"]) >= float(baseline["cross_entropy"]):
-        reasons.append("fresh tuning WDL CE did not improve")
+    if (
+        float(baseline["cross_entropy"]) - float(candidate["cross_entropy"])
+        < 0.002
+    ):
+        reasons.append("fresh tuning WDL CE improvement is below 0.002")
     if float(candidate["macro_cross_entropy"]) > float(baseline["macro_cross_entropy"]):
         reasons.append("fresh tuning macro WDL CE regressed")
     if float(candidate["brier"]) > float(baseline["brier"]):
@@ -2246,8 +2249,8 @@ def main(argv: Sequence[str] | None = None) -> int:
             telemetry_path=arguments.telemetry,
             seed=arguments.seed,
             stable_plastic_value=arguments.pusula,
-            selfplay_games_per_update=192 if arguments.pusula else 96,
-            minimum_known_selfplay_games=48 if arguments.pusula else 24,
+            selfplay_games_per_update=768 if arguments.pusula else 96,
+            minimum_known_selfplay_games=192 if arguments.pusula else 24,
             final_arena_pairs=32 if arguments.pusula else 8,
             final_qualification_games=2_688 if arguments.pusula else 0,
             minimum_final_known_games=744 if arguments.pusula else 0,
