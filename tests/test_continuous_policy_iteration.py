@@ -17,6 +17,7 @@ from harbichess.backends.plastic_value_network import (  # noqa: E402
 from harbichess.core.state import Side  # noqa: E402
 from harbichess.training.continuous_checkpoint import save_continuous_resume  # noqa: E402
 from harbichess.training.continuous_policy_iteration import (  # noqa: E402
+    _VALUE_TRUST_REGION_ALPHAS,
     ContinuousPolicyIterationConfig,
     _clone,
     _combine_policy,
@@ -24,6 +25,7 @@ from harbichess.training.continuous_policy_iteration import (  # noqa: E402
     _continuous_wdl_gate,
     _ContinuousHeadLearner,
     _empirical_fresh_value_targets,
+    _fresh_wdl_calibration_gate,
     _fresh_wdl_direction_gate,
     _fresh_wdl_harm_gate,
     _interpolate_value_state,
@@ -88,6 +90,8 @@ def test_config_defaults_use_scaled_qualified_teacher_set() -> None:
     assert config.selfplay_games_per_update == 96
     assert config.selfplay_workers == 24
     assert config.minimum_known_selfplay_games == 24
+    assert config.final_ranking_positions == 1_440
+    assert _VALUE_TRUST_REGION_ALPHAS[-1] == pytest.approx(0.0078125)
 
 
 def test_config_requires_an_even_mixed_value_batch() -> None:
@@ -282,6 +286,13 @@ def test_fresh_wdl_gate_requires_all_preregistered_directions() -> None:
             {**candidate, "cross_entropy": 0.91, "brier": 0.56},
         )
     ) == 2
+
+
+def test_fresh_calibration_gate_uses_preregistered_ece_margin() -> None:
+    baseline = {"ece_10": 0.08}
+
+    assert _fresh_wdl_calibration_gate(baseline, {"ece_10": 0.10}) == ()
+    assert len(_fresh_wdl_calibration_gate(baseline, {"ece_10": 0.101})) == 1
 
 
 def test_fresh_local_gate_rejects_only_supported_harm() -> None:
