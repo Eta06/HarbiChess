@@ -129,6 +129,7 @@ class ContinuousPolicyIterationConfig:
     steps_per_update: int = 40
     batch_size: int = 64
     learning_rate: float = 1e-4
+    historical_value_weight: float = 2.0
     selfplay_games_per_update: int = 96
     selfplay_workers: int = 24
     selfplay_simulations: int = 64
@@ -150,6 +151,8 @@ class ContinuousPolicyIterationConfig:
     stable_plastic_value: bool = False
     final_qualification_games: int = 0
     minimum_final_known_games: int = 0
+    old_qualification_games: int = 0
+    minimum_old_qualification_known_games: int = 0
 
     def __post_init__(self) -> None:
         counts = (
@@ -184,6 +187,7 @@ class ContinuousPolicyIterationConfig:
         if (
             min(counts) <= 0
             or self.learning_rate <= 0
+            or self.historical_value_weight <= 0
             or self.inference_wait_seconds < 0
             or self.arena_opening_plies < 0
         ):
@@ -198,14 +202,25 @@ class ContinuousPolicyIterationConfig:
             raise ValueError("minimum known games cannot exceed self-play games")
         if len(self.expected_initial_sha256) != 64:
             raise ValueError("initial candidate hash must be SHA-256")
-        if self.final_qualification_games < 0 or self.minimum_final_known_games < 0:
+        if min(
+            self.final_qualification_games,
+            self.minimum_final_known_games,
+            self.old_qualification_games,
+            self.minimum_old_qualification_known_games,
+        ) < 0:
             raise ValueError("final qualification game counts cannot be negative")
         if self.minimum_final_known_games > self.final_qualification_games:
             raise ValueError("known qualification floor cannot exceed attempts")
+        if self.minimum_old_qualification_known_games > self.old_qualification_games:
+            raise ValueError("old known qualification floor cannot exceed attempts")
         if self.final_qualification_games and self.final_qualification_games % 3:
             raise ValueError("final qualification games must divide across three phases")
+        if self.old_qualification_games and self.old_qualification_games % 3:
+            raise ValueError("old qualification games must divide across three phases")
         if self.stable_plastic_value and not self.final_qualification_games:
             raise ValueError("stable plastic pilot requires a final qualification set")
+        if self.stable_plastic_value and not self.old_qualification_games:
+            raise ValueError("stable plastic pilot requires an old qualification set")
 
 
 _TRAINABLE_PREFIXES = (
@@ -254,12 +269,14 @@ class _ContinuousHeadLearner:
         legal_masks: mx.array,
         value_inputs: mx.array,
         value_targets: mx.array,
+        value_weights: mx.array,
     ) -> tuple[mx.array, mx.array, mx.array]:
         policy_logits = network(policy_inputs)[0]
         value_logits = network(value_inputs)[1]
         policy_logits = mx.where(legal_masks, policy_logits, mx.array(-1e9))
         policy_loss = nn.losses.cross_entropy(policy_logits, policy_targets, reduction="mean")
-        value_loss = nn.losses.cross_entropy(value_logits, value_targets, reduction="mean")
+        value_losses = nn.losses.cross_entropy(value_logits, value_targets, reduction="none")
+        value_loss = mx.sum(value_losses * value_weights) / mx.sum(value_weights)
         return policy_loss + value_loss, policy_loss, value_loss
 
     def train_step(
@@ -269,6 +286,7 @@ class _ContinuousHeadLearner:
         legal_masks: mx.array,
         value_inputs: mx.array,
         value_targets: mx.array,
+        value_weights: mx.array,
     ) -> dict[str, float | int]:
         (total, policy, value), gradients = self._loss_and_grad(
             self.network,
@@ -277,6 +295,7 @@ class _ContinuousHeadLearner:
             legal_masks,
             value_inputs,
             value_targets,
+            value_weights,
         )
         gradients, norm = optim.clip_grad_norm(gradients, 5.0)
         mx.eval(total, policy, value, norm, gradients)
@@ -385,6 +404,7 @@ def _verify_resume_exactness(
     fresh_inputs: mx.array,
     fresh_targets: mx.array,
     batch_size: int,
+    historical_value_weight: float,
     seed: int,
 ) -> dict[str, float | int | bool]:
     manifest, optimizer = load_continuous_resume(checkpoint_dir)
@@ -437,6 +457,10 @@ def _verify_resume_exactness(
         mx.take(policy_buffer.legal_masks, policy_rows, axis=0),
         value_inputs,
         value_targets,
+        mx.array(
+            (historical_value_weight,) * half + (1.0,) * half,
+            dtype=mx.float32,
+        ),
     )
     memory_metrics = memory_learner.train_step(*arguments)
     disk_metrics = disk_learner.train_step(*arguments)
@@ -1550,6 +1574,11 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
                 mx.take(policy_buffer.legal_masks, policy_rows, axis=0),
                 value_inputs,
                 value_targets,
+                mx.array(
+                    (config.historical_value_weight,) * half_value_batch
+                    + (1.0,) * half_value_batch,
+                    dtype=mx.float32,
+                ),
             )
             maximum_gradient = max(maximum_gradient, float(metric["gradient_norm"]))
             value_validation = _wdl_quality(
@@ -1841,6 +1870,7 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
                 fresh_inputs=fresh_wdl_inputs,
                 fresh_targets=fresh_wdl_labels,
                 batch_size=config.batch_size,
+                historical_value_weight=config.historical_value_weight,
                 seed=resume_state.next_update_seed,
             )
             if not resume_integrity["passed"]:
@@ -1920,6 +1950,8 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
 
     final_arena = None
     final_qualification = None
+    old_qualification = None
+    legacy_old_gate = None
     cumulative_gate = None
     continuation_interval = None
     final_continuation_evaluation = None
@@ -1967,6 +1999,97 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
                 "initial": final_initial_continuation,
                 "candidate": final_continuation,
             }
+            old_starts = _select_qualification_starts(
+                validation_records,
+                count=config.old_qualification_games,
+                seed=config.seed + 3750,
+            )
+            completed_old_qualification_games = 0
+            old_qualification_started = time.perf_counter()
+
+            def on_old_qualification_game_complete(_game) -> None:
+                nonlocal completed_old_qualification_games, snapshot
+                completed_old_qualification_games += 1
+                elapsed = time.perf_counter() - old_qualification_started
+                snapshot = replace(
+                    snapshot,
+                    updated_at=datetime.now(UTC).isoformat(),
+                    mode=RunMode.SELF_PLAY,
+                    mode_detail=(
+                        "PUSULA sealed old-distribution qualification · "
+                        f"{completed_old_qualification_games}/"
+                        f"{config.old_qualification_games} games"
+                    ),
+                    active_games=(
+                        config.old_qualification_games
+                        - completed_old_qualification_games
+                    ),
+                    completed_games=completed_old_qualification_games,
+                    games_per_hour=(
+                        completed_old_qualification_games
+                        / max(elapsed, 1e-9)
+                        * 3600.0
+                    ),
+                )
+                store.write_atomic(snapshot)
+
+            old_run_id = f"{config.output_dir.name}-old-qualification"
+            _, old_qualification_records, old_qualification_metrics = (
+                generate_continuous_replay(
+                    _clone(initial_network),
+                    run_id=old_run_id,
+                    run_seed=config.seed + 4250,
+                    config=ContinuousReplayConfig(
+                        games=config.old_qualification_games,
+                        workers=config.selfplay_workers,
+                        simulations=config.selfplay_simulations,
+                        max_considered_actions=config.max_considered_actions,
+                        max_plies=config.selfplay_max_plies,
+                        fixed_inference_batch_size=config.fixed_inference_batch_size,
+                        inference_wait_seconds=config.inference_wait_seconds,
+                    ),
+                    on_game_complete=on_old_qualification_game_complete,
+                    initial_states=tuple(record.state for record in old_starts),
+                )
+            )
+            old_qualification_path = (
+                config.output_dir / "replay" / "old-qualification.jsonl.gz"
+            )
+            old_qualification_header = write_shard_atomic(
+                old_qualification_path,
+                old_qualification_records,
+                ShardMetadata(
+                    run_id=old_run_id,
+                    generation=config.updates + 1,
+                    source_checkpoint=initial_sha256,
+                    source_commit=subprocess.check_output(
+                        ["git", "rev-parse", "HEAD"], text=True
+                    ).strip(),
+                    created_at=datetime.now(UTC).isoformat(),
+                    split=ReplaySplit.VALIDATION,
+                ),
+            )
+            known_old_qualification = tuple(
+                record
+                for record in old_qualification_records
+                if record.outcome_value is not None
+            )
+            known_old_games = len(
+                {record.game_id for record in known_old_qualification}
+            )
+            old_qualification = {
+                "path": str(old_qualification_path),
+                "header": asdict(old_qualification_header),
+                "metrics": old_qualification_metrics,
+                "known_games": known_old_games,
+                "required_known_games": config.minimum_old_qualification_known_games,
+                "starting_records": tuple(_identity(record) for record in old_starts),
+            }
+            if known_old_games < config.minimum_old_qualification_known_games:
+                chain_reasons.append(
+                    "sealed old qualification has fewer than the preregistered "
+                    f"{config.minimum_old_qualification_known_games} known terminal games"
+                )
             starts = _select_qualification_starts(
                 validation_records,
                 count=config.final_qualification_games,
@@ -2054,16 +2177,37 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
                 "required_known_games": config.minimum_final_known_games,
                 "starting_records": tuple(_identity(record) for record in starts),
             }
+            legacy_old_inputs, _ = _prepare_value(validation_records, rules)
+            legacy_old_outcomes = tuple(
+                int(record.outcome_value) for record in validation_records
+            )
+            legacy_old_candidate = _wdl_quality(
+                network, legacy_old_inputs, legacy_old_outcomes
+            )
+            legacy_old_gate = {
+                "baseline": _wdl_quality(
+                    initial_network, legacy_old_inputs, legacy_old_outcomes
+                ),
+                "candidate": legacy_old_candidate,
+            }
+            legacy_old_gate["reasons"] = _old_wdl_point_noninferiority_gate(
+                legacy_old_gate["baseline"], legacy_old_candidate
+            )
+            if legacy_old_gate["reasons"]:
+                chain_reasons.append(
+                    "legacy historical point gate failed: "
+                    + ", ".join(legacy_old_gate["reasons"])
+                )
             if known_games < config.minimum_final_known_games:
                 chain_reasons.append(
                     "final fresh qualification has fewer than the preregistered "
                     f"{config.minimum_final_known_games} known terminal games"
                 )
-            else:
+            elif known_old_games >= config.minimum_old_qualification_known_games:
                 old_prediction_games = _prediction_games(
                     initial_network,
                     network,
-                    validation_records,
+                    known_old_qualification,
                     rules=rules,
                 )
                 fresh_prediction_games = _prediction_games(
@@ -2175,6 +2319,8 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
             "stopped_reason": stopped_reason,
             "final_arena": final_arena,
             "final_qualification": final_qualification,
+            "old_qualification": old_qualification,
+            "legacy_old_gate": legacy_old_gate,
             "cumulative_gate": cumulative_gate,
             "continuation_interval": continuation_interval,
             "final_continuation_evaluation": final_continuation_evaluation,
@@ -2254,6 +2400,8 @@ def main(argv: Sequence[str] | None = None) -> int:
             final_arena_pairs=32 if arguments.pusula else 8,
             final_qualification_games=2_688 if arguments.pusula else 0,
             minimum_final_known_games=744 if arguments.pusula else 0,
+            old_qualification_games=1_536 if arguments.pusula else 0,
+            minimum_old_qualification_known_games=384 if arguments.pusula else 0,
         )
     )
     print(result)
