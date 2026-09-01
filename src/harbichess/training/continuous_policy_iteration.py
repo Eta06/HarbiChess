@@ -26,6 +26,7 @@ from harbichess.backends.decoupled_value_network import HarbiChessDecoupledValue
 from harbichess.backends.mlx_backend import MLXPolicyValueBackend
 from harbichess.backends.plastic_value_network import (
     PLASTIC_VALUE_PREFIXES,
+    VALUE_CALIBRATION_PREFIXES,
     HarbiChessPlasticValueNetwork,
 )
 from harbichess.chess.rules import PythonChessRules
@@ -105,6 +106,7 @@ from harbichess.training.joint_policy_value_transfer import (
     _parameter_hash,
     _sha256,
 )
+from harbichess.training.value_calibration import fit_guarded_scalar_calibration
 
 
 @dataclass(frozen=True, slots=True)
@@ -153,6 +155,7 @@ class ContinuousPolicyIterationConfig:
     minimum_final_known_games: int = 0
     old_qualification_games: int = 0
     minimum_old_qualification_known_games: int = 0
+    calibration_guard_pearson_margin: float = 0.005
 
     def __post_init__(self) -> None:
         counts = (
@@ -188,6 +191,7 @@ class ContinuousPolicyIterationConfig:
             min(counts) <= 0
             or self.learning_rate <= 0
             or self.historical_value_weight <= 0
+            or self.calibration_guard_pearson_margin < 0
             or self.inference_wait_seconds < 0
             or self.arena_opening_plies < 0
         ):
@@ -232,7 +236,11 @@ _TRAINABLE_PREFIXES = (
 )
 _POLICY_PREFIXES = _TRAINABLE_PREFIXES[:2]
 _VALUE_PREFIXES = _TRAINABLE_PREFIXES[2:]
-_STABLE_TRAINABLE_PREFIXES = (*_POLICY_PREFIXES, *PLASTIC_VALUE_PREFIXES)
+_STABLE_TRAINABLE_PREFIXES = (
+    *_POLICY_PREFIXES,
+    *PLASTIC_VALUE_PREFIXES,
+    *VALUE_CALIBRATION_PREFIXES,
+)
 _VALUE_TRUST_REGION_ALPHAS = (
     1.0,
     0.75,
@@ -856,6 +864,10 @@ def _absolute_continuation_floor(result: dict[str, object]) -> tuple[str, ...]:
     return tuple(reasons)
 
 
+# Historical one-shot ablations still import the pre-PUSULA helper name.
+_continuation_floor = _absolute_continuation_floor
+
+
 def _select_numeric_checkpoint(checkpoints: Sequence[dict[str, object]]):
     if not checkpoints:
         raise ValueError("continuous update produced no validation checkpoints")
@@ -1104,6 +1116,40 @@ def _split_fit_tuning(records, *, seed: int, tuning_fraction: float = 0.20):
     }
 
 
+def _split_fit_calibration_tuning(records, *, seed: int):
+    """Reserve disjoint fresh games for scalar fitting and checkpoint tuning."""
+
+    fit, held_out, outer = _split_fit_tuning(
+        records,
+        seed=seed,
+        tuning_fraction=0.40,
+    )
+    calibration, tuning, inner = _split_fit_tuning(
+        held_out,
+        seed=seed + 1,
+        tuning_fraction=0.50,
+    )
+    fit_games = {record.game_id for record in fit}
+    calibration_games = {record.game_id for record in calibration}
+    tuning_games = {record.game_id for record in tuning}
+    overlap = (
+        (fit_games & calibration_games)
+        | (fit_games & tuning_games)
+        | (calibration_games & tuning_games)
+    )
+    return fit, calibration, tuning, {
+        "fit_games": len(fit_games),
+        "calibration_games": len(calibration_games),
+        "tuning_games": len(tuning_games),
+        "fit_rows": len(fit),
+        "calibration_rows": len(calibration),
+        "tuning_rows": len(tuning),
+        "game_overlap": len(overlap),
+        "outer": outer,
+        "inner": inner,
+    }
+
+
 def _paired_mean_interval(
     values: tuple[float, ...], *, samples: int, seed: int
 ) -> dict[str, float]:
@@ -1185,7 +1231,11 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
     trainable_prefixes = (
         _STABLE_TRAINABLE_PREFIXES if config.stable_plastic_value else _TRAINABLE_PREFIXES
     )
-    value_prefixes = PLASTIC_VALUE_PREFIXES if config.stable_plastic_value else _VALUE_PREFIXES
+    value_prefixes = (
+        (*PLASTIC_VALUE_PREFIXES, *VALUE_CALIBRATION_PREFIXES)
+        if config.stable_plastic_value
+        else _VALUE_PREFIXES
+    )
     nontrainable_hash = _parameter_hash(network, excluded_prefixes=trainable_prefixes)
 
     pool_config = CorrectedReplayValueTransferConfig(
@@ -1284,6 +1334,7 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
     used_validation: set[str] = set()
     rolling: list[PreparedTransfer] = []
     rolling_value_records = []
+    rolling_value_calibration_records = []
     rolling_value_validation_records = []
     rolling_replay_paths: list[Path] = []
     accepted = []
@@ -1409,14 +1460,30 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
             )
             stopped_reason = f"update-{update:03d}-insufficient-fresh-value-replay"
             break
-        fresh_fit_generation, fresh_validation_generation, fresh_value_split = (
-            _split_fit_tuning(
+        if config.stable_plastic_value:
+            (
+                fresh_fit_generation,
+                fresh_calibration_generation,
+                fresh_validation_generation,
+                fresh_value_split,
+            ) = _split_fit_calibration_tuning(
                 known_replay_records,
                 seed=config.seed + update * 10_000 + 1,
             )
-        )
+        else:
+            fresh_fit_generation, fresh_validation_generation, fresh_value_split = (
+                _split_fit_tuning(
+                    known_replay_records,
+                    seed=config.seed + update * 10_000 + 1,
+                )
+            )
+            fresh_calibration_generation = ()
         rolling_value_records.append(fresh_fit_generation)
         rolling_value_records = rolling_value_records[-config.rolling_generations :]
+        rolling_value_calibration_records.append(fresh_calibration_generation)
+        rolling_value_calibration_records = rolling_value_calibration_records[
+            -config.rolling_generations :
+        ]
         rolling_value_validation_records.append(fresh_validation_generation)
         rolling_value_validation_records = rolling_value_validation_records[
             -config.rolling_generations :
@@ -1431,13 +1498,29 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
             for generation in rolling_value_validation_records
             for record in generation
         )
+        fresh_value_calibration_records = tuple(
+            record
+            for generation in rolling_value_calibration_records
+            for record in generation
+        )
         fresh_outcomes = {record.outcome_value for record in fresh_value_records}
+        fresh_calibration_outcomes_set = {
+            record.outcome_value for record in fresh_value_calibration_records
+        }
         fresh_validation_outcomes_set = {
             record.outcome_value for record in fresh_value_validation_records
         }
-        if fresh_outcomes != {-1, 0, 1} or fresh_validation_outcomes_set != {-1, 0, 1}:
+        if (
+            fresh_outcomes != {-1, 0, 1}
+            or fresh_validation_outcomes_set != {-1, 0, 1}
+            or (
+                config.stable_plastic_value
+                and fresh_calibration_outcomes_set != {-1, 0, 1}
+            )
+        ):
             reason = (
-                "rolling fresh fit and tuning replay do not both contain win, draw, and loss"
+                "rolling fresh fit, calibration, and tuning replay do not all contain "
+                "win, draw, and loss"
             )
             accepted.append(
                 {
@@ -1450,6 +1533,9 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
                     "replay_path": str(replay_path),
                     "replay_header": asdict(replay_header),
                     "rolling_value_outcomes": sorted(fresh_outcomes),
+                    "rolling_value_calibration_outcomes": sorted(
+                        fresh_calibration_outcomes_set
+                    ),
                     "rolling_value_validation_outcomes": sorted(
                         fresh_validation_outcomes_set
                     ),
@@ -1458,6 +1544,20 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
             stopped_reason = f"update-{update:03d}-incomplete-fresh-outcome-coverage"
             break
         fresh_wdl_inputs, _ = _prepare_value(fresh_value_records, rules)
+        fresh_wdl_calibration_inputs = None
+        fresh_calibration_labels = ()
+        fresh_calibration_game_ids = ()
+        if config.stable_plastic_value:
+            fresh_wdl_calibration_inputs, _ = _prepare_value(
+                fresh_value_calibration_records, rules
+            )
+            fresh_calibration_labels = tuple(
+                {1: 0, 0: 1, -1: 2}[int(record.outcome_value)]
+                for record in fresh_value_calibration_records
+            )
+            fresh_calibration_game_ids = tuple(
+                record.game_id for record in fresh_value_calibration_records
+            )
         fresh_wdl_validation_inputs, _ = _prepare_value(
             fresh_value_validation_records, rules
         )
@@ -1754,9 +1854,6 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
                                 *_fresh_wdl_direction_gate(
                                     initial_fresh_wdl, interpolated_fresh
                                 ),
-                                *_fresh_wdl_calibration_gate(
-                                    initial_fresh_wdl, interpolated_fresh
-                                ),
                                 *_fresh_wdl_harm_gate(fresh_wdl_safety),
                             ),
                             "state": interpolated_state,
@@ -1784,6 +1881,73 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
             value_checkpoint_eligible = False
             for continuation_index, checkpoint in enumerate(continuation_candidates):
                 learner.restore(checkpoint["state"])
+                if fresh_wdl_calibration_inputs is None:
+                    raise RuntimeError("stable value calibration inputs are unavailable")
+                calibration_logits = network(fresh_wdl_calibration_inputs)[1]
+                guard_logits = network(wdl_validation_inputs)[1]
+                calibration = fit_guarded_scalar_calibration(
+                    calibration_logits,
+                    fresh_calibration_labels,
+                    guard_logits,
+                    validation_outcomes,
+                    fit_group_ids=fresh_calibration_game_ids,
+                    guard_pearson_margin=config.calibration_guard_pearson_margin,
+                )
+                mx.eval(network.value_logit_scale)
+                inherited_scale = math.exp(float(network.value_logit_scale.item()))
+                network.set_value_logit_scale(
+                    inherited_scale * calibration.selected.logit_scale
+                )
+                checkpoint["state"] = learner.snapshot()
+                checkpoint["calibration"] = calibration.to_dict()
+                checkpoint["wdl"] = _wdl_quality(
+                    network, wdl_validation_inputs, validation_outcomes
+                )
+                checkpoint["fresh_wdl"] = _wdl_quality(
+                    network,
+                    fresh_wdl_validation_inputs,
+                    fresh_validation_outcomes,
+                )
+                checkpoint["old_wdl_safety"] = paired_bootstrap(
+                    _prediction_games(
+                        initial_network,
+                        network,
+                        tuning_records,
+                        rules=rules,
+                        inputs=wdl_validation_inputs,
+                    ),
+                    improvement=False,
+                    config=CumulativeGateConfig(
+                        bootstrap_samples=2_000,
+                        seed=config.seed + update * 40_000 + continuation_index * 2,
+                    ),
+                )
+                checkpoint["fresh_wdl_safety"] = paired_bootstrap(
+                    _prediction_games(
+                        previous_network,
+                        network,
+                        fresh_value_validation_records,
+                        rules=rules,
+                        inputs=fresh_wdl_validation_inputs,
+                    ),
+                    improvement=True,
+                    config=CumulativeGateConfig(
+                        bootstrap_samples=2_000,
+                        seed=config.seed + update * 40_000 + continuation_index * 2 + 1,
+                    ),
+                )
+                checkpoint["reasons"] = (
+                    *_old_wdl_statistical_noninferiority_gate(
+                        checkpoint["old_wdl_safety"]
+                    ),
+                    *_fresh_wdl_direction_gate(
+                        initial_fresh_wdl, checkpoint["fresh_wdl"]
+                    ),
+                    *_fresh_wdl_calibration_gate(
+                        initial_fresh_wdl, checkpoint["fresh_wdl"]
+                    ),
+                    *_fresh_wdl_harm_gate(checkpoint["fresh_wdl_safety"]),
+                )
                 candidate_continuation = _continuation_ranking(
                     initial_network,
                     network,
@@ -1802,7 +1966,11 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
                 )
                 checkpoint["continuation"] = candidate_continuation
                 checkpoint["continuation_safety"] = candidate_safety
-                if not candidate_safety["reasons"] and eligible_value_checkpoints:
+                if (
+                    not checkpoint["reasons"]
+                    and not candidate_safety["reasons"]
+                    and eligible_value_checkpoints
+                ):
                     value_checkpoint = checkpoint
                     value_checkpoint_eligible = True
                     continuation = candidate_continuation
@@ -1981,6 +2149,9 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
                 "replay_header": asdict(replay_header),
                 "rolling_value_generations": len(rolling_value_records),
                 "rolling_value_rows": len(fresh_value_records),
+                "rolling_value_calibration_rows": len(
+                    fresh_value_calibration_records
+                ),
                 "rolling_value_validation_rows": len(fresh_value_validation_records),
                 "fresh_value_split": fresh_value_split,
                 "value_batch_mix": {
@@ -1998,6 +2169,7 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
                 "selected_policy_local_step": policy_checkpoint["local_step"],
                 "selected_wdl_local_step": value_checkpoint["local_step"],
                 "selected_wdl_alpha": value_checkpoint.get("alpha", 1.0),
+                "value_calibration": value_checkpoint.get("calibration"),
                 "optimizer_reset_after_composition": True,
                 "learner_step": learner.step,
                 "maximum_gradient_norm": maximum_gradient,
