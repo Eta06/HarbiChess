@@ -12,6 +12,7 @@ from harbichess.backends.decoupled_value_network import (  # noqa: E402
 from harbichess.backends.mlx_backend import MLXPolicyValueBackend  # noqa: E402
 from harbichess.backends.plastic_value_network import (  # noqa: E402
     PLASTIC_VALUE_PREFIXES,
+    VALUE_CALIBRATION_PREFIXES,
     HarbiChessPlasticValueNetwork,
 )
 from harbichess.core.state import Side  # noqa: E402
@@ -43,6 +44,7 @@ from harbichess.training.continuous_policy_iteration import (  # noqa: E402
     _select_tactical_policy_checkpoint,
     _select_value_checkpoint,
     _soft_value_targets,
+    _split_fit_calibration_tuning,
     _split_fit_tuning,
     _stable_value_distillation_targets,
     _verify_resume_exactness,
@@ -521,6 +523,7 @@ def test_plastic_headwise_composition_selects_only_plastic_value_parameters() ->
             ("policy_linear.bias", mx.array([20.0])),
             ("global_value_output.bias", mx.array([200.0])),
             ("plastic_value_output.bias", mx.array([2000.0])),
+            ("value_logit_scale", mx.array([2.0])),
         ),
         optimizer=(("step", mx.array(20)),),
     )
@@ -530,6 +533,7 @@ def test_plastic_headwise_composition_selects_only_plastic_value_parameters() ->
             ("policy_linear.bias", mx.array([10.0])),
             ("global_value_output.bias", mx.array([100.0])),
             ("plastic_value_output.bias", mx.array([1000.0])),
+            ("value_logit_scale", mx.array([1.0])),
         ),
         optimizer=(("step", mx.array(10)),),
     )
@@ -537,13 +541,14 @@ def test_plastic_headwise_composition_selects_only_plastic_value_parameters() ->
     composed = _compose_headwise_state(
         {"state": policy_state},
         {"state": value_state},
-        value_prefixes=PLASTIC_VALUE_PREFIXES,
+        value_prefixes=(*PLASTIC_VALUE_PREFIXES, *VALUE_CALIBRATION_PREFIXES),
     )
 
     weights = dict(composed.weights)
     assert weights["policy_linear.bias"].item() == 20.0
     assert weights["global_value_output.bias"].item() == 200.0
     assert weights["plastic_value_output.bias"].item() == 1000.0
+    assert weights["value_logit_scale"].item() == 1.0
 
 
 def test_value_trust_region_scales_only_plastic_value_delta() -> None:
@@ -679,6 +684,33 @@ def test_fit_tuning_split_is_game_disjoint_and_outcome_stratified() -> None:
     assert len(tuning_games) == 6
     assert {int(row.game_id.rsplit("-", 1)[0]) for row in tuning} == {-1, 0, 1}
     assert summary["game_overlap"] == 0
+
+
+def test_fit_calibration_tuning_split_is_three_way_game_disjoint() -> None:
+    records = tuple(
+        SimpleNamespace(
+            game_id=f"{outcome}-{game}",
+            game_index=game,
+            ply=ply,
+            outcome_value=outcome if ply % 2 == 0 else -outcome,
+            side_to_move=Side.WHITE if ply % 2 == 0 else Side.BLACK,
+        )
+        for outcome in (-1, 0, 1)
+        for game in range(10)
+        for ply in range(2)
+    )
+
+    fit, calibration, tuning, summary = _split_fit_calibration_tuning(records, seed=31)
+    partitions = tuple({row.game_id for row in rows} for rows in (fit, calibration, tuning))
+
+    assert tuple(map(len, partitions)) == (18, 6, 6)
+    assert not (partitions[0] & partitions[1] | partitions[0] & partitions[2])
+    assert not partitions[1] & partitions[2]
+    assert summary["game_overlap"] == 0
+    assert all(
+        {int(game_id.rsplit("-", 1)[0]) for game_id in games} == {-1, 0, 1}
+        for games in partitions
+    )
 
 
 def test_paired_mean_interval_is_reproducible() -> None:
