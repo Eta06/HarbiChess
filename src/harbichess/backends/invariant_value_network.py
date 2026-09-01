@@ -94,10 +94,19 @@ class HarbiChessInvariantValueNetwork(HarbiChessNetwork):
         tower_hidden = nn.relu(self.value_tower_hidden(pooled))
         return invariant + self.value_tower_output(tower_hidden)
 
+    def _calibrate_value_logits(self, logits: mx.array) -> mx.array:
+        """Apply an optional production calibration without changing base networks."""
+
+        return logits
+
+    def _production_value_logits(self, inputs: mx.array, trunk: mx.array) -> mx.array:
+        logits = self._value_logits(trunk) + self._value_residual(inputs)
+        return self._calibrate_value_logits(logits)
+
     def __call__(self, inputs: mx.array) -> tuple[mx.array, mx.array]:
         trunk = self._trunk(inputs)
         policy_logits = self.policy_linear(self._policy_features(trunk))
-        value_logits = self._value_logits(trunk) + self._value_residual(inputs)
+        value_logits = self._production_value_logits(inputs, trunk)
         return policy_logits, value_logits
 
     def masked_policy_value(
@@ -127,7 +136,7 @@ class HarbiChessInvariantValueNetwork(HarbiChessNetwork):
         policy_logits = (
             mx.sum(policy[:, None, :] * selected_weights, axis=2) + selected_bias
         )
-        value_logits = self._value_logits(trunk) + self._value_residual(inputs)
+        value_logits = self._production_value_logits(inputs, trunk)
         return policy_logits, value_logits
 
     def freeze_release_parameters(self) -> None:
