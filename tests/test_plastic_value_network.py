@@ -84,6 +84,7 @@ def test_stable_mode_exposes_policy_and_only_plastic_value_parameters() -> None:
         for name in names
     )
     assert not any(name.startswith(MIHVER_VALUE_PREFIXES) for name in names)
+    assert "value_logit_scale" not in names
 
 
 def test_low_lr_mode_exposes_mihver_and_plastic_value_parameters() -> None:
