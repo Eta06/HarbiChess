@@ -51,6 +51,27 @@ def test_zero_initialized_plastic_path_is_function_preserving() -> None:
     assert mx.array_equal(value, base_value).item()
 
 
+def test_scalar_calibration_changes_only_value_confidence() -> None:
+    _, plastic = _networks()
+    inputs = mx.random.normal((3, 8, 8, plastic.config.input_channels))
+    policy_before, value_before = plastic(inputs)
+
+    plastic.set_value_logit_scale(2.0)
+    policy_after, value_after = plastic(inputs)
+    mx.eval(policy_before, value_before, policy_after, value_after)
+
+    assert mx.array_equal(policy_after, policy_before).item()
+    assert mx.allclose(value_after, value_before * 2.0).item()
+    assert plastic.value_temperature == pytest.approx(0.5)
+
+
+def test_scalar_calibration_rejects_nonpositive_scale() -> None:
+    _, plastic = _networks()
+
+    with pytest.raises(ValueError, match="finite and positive"):
+        plastic.set_value_logit_scale(0.0)
+
+
 def test_stable_mode_exposes_policy_and_only_plastic_value_parameters() -> None:
     _, plastic = _networks()
     plastic.freeze_to_stable_continuous_heads()
