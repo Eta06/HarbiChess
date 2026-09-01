@@ -26,6 +26,30 @@ class ScalarCalibration:
         return asdict(self)
 
 
+@dataclass(frozen=True, slots=True)
+class GuardedScalarCalibration:
+    """Fresh-optimal calibration clipped by an old-capability guard."""
+
+    selected: ScalarCalibration
+    unconstrained: ScalarCalibration
+    guard_pearson_before: float
+    guard_pearson_unconstrained: float
+    guard_pearson_selected: float
+    guard_pearson_margin: float
+    constraint_active: bool
+
+    def to_dict(self) -> dict[str, object]:
+        return {
+            "selected": self.selected.to_dict(),
+            "unconstrained": self.unconstrained.to_dict(),
+            "guard_pearson_before": self.guard_pearson_before,
+            "guard_pearson_unconstrained": self.guard_pearson_unconstrained,
+            "guard_pearson_selected": self.guard_pearson_selected,
+            "guard_pearson_margin": self.guard_pearson_margin,
+            "constraint_active": self.constraint_active,
+        }
+
+
 def _rows(logits: mx.array) -> tuple[tuple[float, float, float], ...]:
     if logits.ndim != 2 or logits.shape[1] != 3 or logits.shape[0] == 0:
         raise ValueError("WDL logits must have shape (non-zero rows, 3)")
@@ -75,6 +99,32 @@ def _objective(
             - row[label]
         )
     return loss, derivative
+
+
+def _expected_score_pearson(
+    rows: Sequence[Sequence[float]], outcomes: Sequence[int], scale: float
+) -> float:
+    expected = []
+    for row in rows:
+        scaled = tuple(scale * value for value in row)
+        maximum = max(scaled)
+        exponentials = tuple(math.exp(value - maximum) for value in scaled)
+        total = sum(exponentials)
+        expected.append((exponentials[0] - exponentials[2]) / total)
+    mean_expected = sum(expected) / len(expected)
+    mean_outcome = sum(outcomes) / len(outcomes)
+    centered_expected = tuple(value - mean_expected for value in expected)
+    centered_outcome = tuple(value - mean_outcome for value in outcomes)
+    denominator = math.sqrt(
+        sum(value * value for value in centered_expected)
+        * sum(value * value for value in centered_outcome)
+    )
+    if not denominator:
+        return 0.0
+    return sum(
+        left * right
+        for left, right in zip(centered_expected, centered_outcome, strict=True)
+    ) / denominator
 
 
 def fit_scalar_calibration(
@@ -132,6 +182,89 @@ def fit_scalar_calibration(
         iterations=used_iterations,
         rows=len(rows),
         groups=groups,
+    )
+
+
+def fit_guarded_scalar_calibration(
+    fit_logits: mx.array,
+    fit_labels: Sequence[int],
+    guard_logits: mx.array,
+    guard_outcomes: Sequence[int],
+    *,
+    fit_group_ids: Sequence[Hashable] | None = None,
+    guard_pearson_margin: float = 0.005,
+    minimum_scale: float = 0.25,
+    maximum_scale: float = 4.0,
+    iterations: int = 64,
+) -> GuardedScalarCalibration:
+    """Clip fresh CE-optimal scale at an old-distribution Pearson margin."""
+
+    if not math.isfinite(guard_pearson_margin) or guard_pearson_margin < 0:
+        raise ValueError("guard Pearson margin must be finite and non-negative")
+    unconstrained = fit_scalar_calibration(
+        fit_logits,
+        fit_labels,
+        group_ids=fit_group_ids,
+        minimum_scale=minimum_scale,
+        maximum_scale=maximum_scale,
+        iterations=iterations,
+    )
+    fit_rows = _rows(fit_logits)
+    fit_weights, fit_groups = _weights(len(fit_rows), fit_group_ids)
+    guard_rows = _rows(guard_logits)
+    if len(guard_outcomes) != len(guard_rows) or any(
+        outcome not in (-1, 0, 1) for outcome in guard_outcomes
+    ):
+        raise ValueError("guard outcomes must match logits and be in {-1, 0, 1}")
+    before = _expected_score_pearson(guard_rows, guard_outcomes, 1.0)
+    unconstrained_pearson = _expected_score_pearson(
+        guard_rows, guard_outcomes, unconstrained.logit_scale
+    )
+    minimum_pearson = before - guard_pearson_margin
+    if unconstrained_pearson >= minimum_pearson:
+        return GuardedScalarCalibration(
+            selected=unconstrained,
+            unconstrained=unconstrained,
+            guard_pearson_before=before,
+            guard_pearson_unconstrained=unconstrained_pearson,
+            guard_pearson_selected=unconstrained_pearson,
+            guard_pearson_margin=guard_pearson_margin,
+            constraint_active=False,
+        )
+
+    low, high = 0.0, 1.0
+    for _ in range(iterations):
+        middle = (low + high) / 2.0
+        scale = 1.0 + middle * (unconstrained.logit_scale - 1.0)
+        pearson = _expected_score_pearson(guard_rows, guard_outcomes, scale)
+        if pearson >= minimum_pearson:
+            low = middle
+        else:
+            high = middle
+    selected_scale = 1.0 + low * (unconstrained.logit_scale - 1.0)
+    selected_loss, _ = _objective(
+        fit_rows, fit_labels, fit_weights, selected_scale
+    )
+    before_loss, _ = _objective(fit_rows, fit_labels, fit_weights, 1.0)
+    selected = ScalarCalibration(
+        logit_scale=selected_scale,
+        temperature=1.0 / selected_scale,
+        fit_cross_entropy_before=before_loss,
+        fit_cross_entropy_after=selected_loss,
+        iterations=iterations,
+        rows=len(fit_rows),
+        groups=fit_groups,
+    )
+    return GuardedScalarCalibration(
+        selected=selected,
+        unconstrained=unconstrained,
+        guard_pearson_before=before,
+        guard_pearson_unconstrained=unconstrained_pearson,
+        guard_pearson_selected=_expected_score_pearson(
+            guard_rows, guard_outcomes, selected_scale
+        ),
+        guard_pearson_margin=guard_pearson_margin,
+        constraint_active=True,
     )
 
 
