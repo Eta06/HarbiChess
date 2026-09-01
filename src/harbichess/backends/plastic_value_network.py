@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import math
 from dataclasses import dataclass
 
 import mlx.core as mx
@@ -70,6 +71,7 @@ class HarbiChessPlasticValueNetwork(HarbiChessDecoupledValueNetwork):
         )
         self.plastic_value_hidden = nn.Linear(combined_features, self.plastic_config.hidden)
         self.plastic_value_output = nn.Linear(self.plastic_config.hidden, 3)
+        self.value_logit_scale = mx.zeros((1,))
         self._zero_plastic_output()
 
     def _zero_plastic_output(self) -> None:
@@ -110,6 +112,20 @@ class HarbiChessPlasticValueNetwork(HarbiChessDecoupledValueNetwork):
 
     def _value_residual(self, inputs: mx.array) -> mx.array:
         return super()._value_residual(inputs) + self._plastic_value_residual(inputs)
+
+    def _calibrate_value_logits(self, logits: mx.array) -> mx.array:
+        return logits * mx.exp(self.value_logit_scale)
+
+    @property
+    def value_temperature(self) -> float:
+        mx.eval(self.value_logit_scale)
+        return math.exp(-float(self.value_logit_scale.item()))
+
+    def set_value_logit_scale(self, scale: float) -> None:
+        if not math.isfinite(scale) or scale <= 0:
+            raise ValueError("value logit scale must be finite and positive")
+        self.value_logit_scale = mx.array((math.log(scale),), dtype=mx.float32)
+        mx.eval(self.value_logit_scale)
 
     def _unfreeze_plastic_value(self) -> None:
         self.plastic_invariant_hidden.unfreeze()
@@ -153,6 +169,8 @@ PLASTIC_VALUE_PREFIXES = (
     "plastic_value_hidden.",
     "plastic_value_output.",
 )
+
+VALUE_CALIBRATION_PREFIXES = ("value_logit_scale",)
 
 MIHVER_VALUE_PREFIXES = (
     "invariant_value_linear.",
