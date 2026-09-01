@@ -26,6 +26,7 @@ from harbichess.training.continuous_policy_iteration import (  # noqa: E402
     _continuous_wdl_gate,
     _ContinuousHeadLearner,
     _empirical_fresh_value_targets,
+    _final_continuation_noninferiority_gate,
     _fresh_wdl_calibration_gate,
     _fresh_wdl_direction_gate,
     _fresh_wdl_harm_gate,
@@ -39,6 +40,7 @@ from harbichess.training.continuous_policy_iteration import (  # noqa: E402
     _search_tactical_gate,
     _select_continuation_starts,
     _select_continuation_state_starts,
+    _select_game_paired_continuation_records,
     _select_numeric_checkpoint,
     _select_qualification_starts,
     _select_tactical_policy_checkpoint,
@@ -302,6 +304,103 @@ def test_local_continuation_gate_uses_paired_relative_deterioration() -> None:
     )
     assert not rejected["passed"]
     assert len(rejected["reasons"]) == 2
+
+
+def test_final_continuation_gate_uses_one_game_paired_interval() -> None:
+    initial_rows = [
+        {
+            "identity": f"position-{index}",
+            "game_id": f"game-{index}",
+            "candidate_spearman": 0.20,
+            "candidate_verified_top": True,
+        }
+        for index in range(24)
+    ]
+    retained_rows = [
+        {
+            **row,
+            "candidate_spearman": 0.19,
+            "candidate_verified_top": True,
+        }
+        for row in initial_rows
+    ]
+    harmed_rows = [
+        {
+            **row,
+            "candidate_spearman": 0.10,
+            "candidate_verified_top": False,
+        }
+        for row in initial_rows
+    ]
+    initial = {"rows": initial_rows}
+
+    retained = _final_continuation_noninferiority_gate(
+        initial,
+        {"rows": retained_rows, "candidate_mean_spearman": 0.19, "passed": True},
+        samples=100,
+        seed=17,
+        margin=0.02,
+    )
+    harmed = _final_continuation_noninferiority_gate(
+        initial,
+        {"rows": harmed_rows, "candidate_mean_spearman": 0.10, "passed": True},
+        samples=100,
+        seed=17,
+        margin=0.02,
+    )
+
+    assert retained["passed"]
+    assert retained["games"] == 24
+    assert not harmed["passed"]
+    assert not harmed["checks"]["spearman_noninferior"]
+    assert not harmed["checks"]["verified_top_noninferior"]
+
+
+def test_final_continuation_gate_rejects_repeated_game_clusters() -> None:
+    rows = [
+        {
+            "identity": f"position-{index}",
+            "game_id": "same-game",
+            "candidate_spearman": 0.20,
+            "candidate_verified_top": True,
+        }
+        for index in range(2)
+    ]
+
+    with pytest.raises(ValueError, match="repeated game clusters"):
+        _final_continuation_noninferiority_gate(
+            {"rows": rows},
+            {"rows": rows, "candidate_mean_spearman": 0.20, "passed": True},
+            samples=100,
+            seed=19,
+            margin=0.02,
+        )
+
+
+def test_continuation_selection_uses_one_record_per_game(monkeypatch) -> None:
+    records = tuple(
+        SimpleNamespace(game_id=game_id, marker=marker)
+        for game_id, marker in (
+            ("game-a", 1),
+            ("game-a", 2),
+            ("game-b", 3),
+            ("game-c", 4),
+        )
+    )
+    monkeypatch.setattr(
+        "harbichess.training.continuous_policy_iteration.select_stratified_records",
+        lambda records, **_: records,
+    )
+
+    selected = _select_game_paired_continuation_records(
+        records,
+        rules=SimpleNamespace(),
+        count=3,
+        seed=23,
+    )
+
+    assert [record.marker for record in selected] == [1, 3, 4]
+    assert len({record.game_id for record in selected}) == 3
 
 
 def test_fresh_wdl_gate_requires_all_preregistered_directions() -> None:
