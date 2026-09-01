@@ -49,6 +49,7 @@ from harbichess.evaluation.cumulative_value_gate import (
     PredictionGame,
     evaluate_cumulative_gate,
     paired_bootstrap,
+    paired_power_plan,
 )
 from harbichess.evaluation.decoupled_value_qualification import (
     DecoupledValueQualificationConfig,
@@ -149,6 +150,10 @@ class ContinuousPolicyIterationConfig:
     arena_max_plies: int = 96
     arena_workers: int = 16
     bootstrap_samples: int = 10_000
+    final_continuation_bootstrap_samples: int = 20_000
+    final_continuation_margin: float = 0.020
+    final_continuation_top_planning_sd: float = 0.244214
+    final_continuation_spearman_planning_sd: float = 0.205404
     seed: int = 2026083101
     stable_plastic_value: bool = False
     final_qualification_games: int = 0
@@ -185,6 +190,7 @@ class ContinuousPolicyIterationConfig:
             self.arena_max_plies,
             self.arena_workers,
             self.bootstrap_samples,
+            self.final_continuation_bootstrap_samples,
             self.seed,
         )
         if (
@@ -192,6 +198,9 @@ class ContinuousPolicyIterationConfig:
             or self.learning_rate <= 0
             or self.historical_value_weight <= 0
             or self.calibration_guard_pearson_margin < 0
+            or self.final_continuation_margin <= 0
+            or self.final_continuation_top_planning_sd <= 0
+            or self.final_continuation_spearman_planning_sd <= 0
             or self.inference_wait_seconds < 0
             or self.arena_opening_plies < 0
         ):
@@ -855,6 +864,95 @@ def _local_continuation_noninferiority_gate(
     }
 
 
+def _select_game_paired_continuation_records(
+    records,
+    *,
+    rules: PythonChessRules,
+    count: int,
+    seed: int,
+):
+    """Select at most one stratified record from every generated game."""
+
+    distinct_games = {record.game_id for record in records}
+    if len(distinct_games) < count:
+        raise ValueError(
+            f"continuation gate requires {count} distinct games, found "
+            f"{len(distinct_games)}"
+        )
+    ordered = select_stratified_records(
+        records,
+        rules=rules,
+        count=len(records),
+        seed=seed,
+    )
+    selected = []
+    used_games = set()
+    for record in ordered:
+        if record.game_id in used_games:
+            continue
+        selected.append(record)
+        used_games.add(record.game_id)
+        if len(selected) == count:
+            break
+    if len(selected) != count:
+        raise ValueError("continuation game-paired selection is incomplete")
+    return tuple(selected)
+
+
+def _final_continuation_noninferiority_gate(
+    initial: dict[str, object],
+    candidate: dict[str, object],
+    *,
+    samples: int,
+    seed: int,
+    margin: float,
+) -> dict[str, object]:
+    """Evaluate continuation retention with one paired row per sealed game."""
+
+    initial_rows = {row["identity"]: row for row in initial["rows"]}  # type: ignore[index]
+    candidate_rows = {row["identity"]: row for row in candidate["rows"]}  # type: ignore[index]
+    if set(initial_rows) != set(candidate_rows):
+        raise ValueError("continuation comparison identities changed")
+    game_ids = tuple(str(candidate_rows[identity]["game_id"]) for identity in candidate_rows)
+    if len(set(game_ids)) != len(game_ids):
+        raise ValueError("continuation gate contains repeated game clusters")
+    ordered_identities = tuple(sorted(initial_rows))
+    spearman = _paired_mean_interval(
+        tuple(
+            float(candidate_rows[identity]["candidate_spearman"])
+            - float(initial_rows[identity]["candidate_spearman"])
+            for identity in ordered_identities
+        ),
+        samples=samples,
+        seed=seed,
+    )
+    verified_top = _paired_mean_interval(
+        tuple(
+            float(bool(candidate_rows[identity]["candidate_verified_top"]))
+            - float(bool(initial_rows[identity]["candidate_verified_top"]))
+            for identity in ordered_identities
+        ),
+        samples=samples,
+        seed=seed + 1,
+    )
+    checks = {
+        "spearman_noninferior": float(spearman["low"]) >= -margin,
+        "verified_top_noninferior": float(verified_top["low"]) >= -margin,
+        "candidate_correlation_positive": float(candidate["candidate_mean_spearman"])
+        > 0.0,
+        "release_relative_qualification": bool(candidate["passed"]),
+    }
+    return {
+        "games": len(game_ids),
+        "bootstrap_samples": samples,
+        "margin": margin,
+        "spearman_interval": spearman,
+        "verified_top_interval": verified_top,
+        "checks": checks,
+        "passed": all(checks.values()),
+    }
+
+
 def _absolute_continuation_floor(result: dict[str, object]) -> tuple[str, ...]:
     reasons = []
     if float(result["candidate_mean_spearman"]) < 0.05:
@@ -1222,7 +1320,7 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
     if config.output_dir.exists():
         raise FileExistsError(f"continuous pilot output exists: {config.output_dir}")
     config.output_dir.mkdir(parents=True)
-    stage = "PUSULA" if config.stable_plastic_value else "DEVRIYE"
+    stage = "DENGE" if config.stable_plastic_value else "DEVRIYE"
     network, initial_path = _load_initial(config)
     initial_network = _clone(network)
     release = _network()
@@ -1375,11 +1473,16 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
             / "model.safetensors"
         )
         completed_selfplay_games = 0
+        selfplay_started = time.perf_counter()
 
-        def on_game_complete(_game, current_update=update) -> None:
+        def on_game_complete(
+            _game,
+            current_update=update,
+            current_selfplay_started=selfplay_started,
+        ) -> None:
             nonlocal completed_selfplay_games, snapshot
             completed_selfplay_games += 1
-            elapsed = time.perf_counter() - started
+            elapsed = time.perf_counter() - current_selfplay_started
             snapshot = replace(
                 snapshot,
                 updated_at=datetime.now(UTC).isoformat(),
@@ -2217,6 +2320,8 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
     legacy_old_gate = None
     cumulative_gate = None
     continuation_interval = None
+    continuation_gate = None
+    continuation_power = None
     final_continuation_evaluation = None
     chain_reasons = []
     if len(accepted) != config.updates or not all(row["accepted"] for row in accepted):
@@ -2237,31 +2342,6 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
         if config.stable_plastic_value:
             if float(final_arena["score_interval"]["low"]) < 0.45:
                 chain_reasons.append("final search score lower bound is below 0.45")
-            final_ranking_records = select_stratified_records(
-                validation_records,
-                rules=rules,
-                count=config.final_ranking_positions,
-                seed=config.seed + 3500,
-            )
-            final_initial_continuation = _continuation_ranking(
-                release,
-                initial_network,
-                final_ranking_records,
-                rules=rules,
-                depth=config.ranking_depth,
-            )
-            final_continuation = _continuation_ranking(
-                release,
-                network,
-                final_ranking_records,
-                rules=rules,
-                depth=config.ranking_depth,
-            )
-            final_continuation_evaluation = {
-                "positions": config.final_ranking_positions,
-                "initial": final_initial_continuation,
-                "candidate": final_continuation,
-            }
             old_starts = _select_qualification_starts(
                 validation_records,
                 count=config.old_qualification_games,
@@ -2348,6 +2428,86 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
                 "required_known_games": config.minimum_old_qualification_known_games,
                 "starting_records": tuple(_identity(record) for record in old_starts),
             }
+            try:
+                final_ranking_records = _select_game_paired_continuation_records(
+                    old_qualification_records,
+                    rules=rules,
+                    count=config.final_ranking_positions,
+                    seed=config.seed + 3500,
+                )
+            except ValueError as error:
+                chain_reasons.append(str(error))
+                final_initial_continuation = None
+                final_continuation = None
+            else:
+                final_initial_continuation = _continuation_ranking(
+                    release,
+                    initial_network,
+                    final_ranking_records,
+                    rules=rules,
+                    depth=config.ranking_depth,
+                )
+                final_continuation = _continuation_ranking(
+                    release,
+                    network,
+                    final_ranking_records,
+                    rules=rules,
+                    depth=config.ranking_depth,
+                )
+                continuation_gate = _final_continuation_noninferiority_gate(
+                    final_initial_continuation,
+                    final_continuation,
+                    samples=config.final_continuation_bootstrap_samples,
+                    seed=config.seed + 6000,
+                    margin=config.final_continuation_margin,
+                )
+                continuation_interval = continuation_gate["spearman_interval"]
+                continuation_power = {
+                    "verified_top": asdict(
+                        paired_power_plan(
+                            standard_deviation=(
+                                config.final_continuation_top_planning_sd
+                            ),
+                            null_boundary=-config.final_continuation_margin,
+                            assumed_effect=0.0,
+                            round_to=24,
+                        )
+                    ),
+                    "spearman": asdict(
+                        paired_power_plan(
+                            standard_deviation=(
+                                config.final_continuation_spearman_planning_sd
+                            ),
+                            null_boundary=-config.final_continuation_margin,
+                            assumed_effect=0.0,
+                            round_to=24,
+                        )
+                    ),
+                }
+                power_floor = max(
+                    int(continuation_power["verified_top"]["rounded_games"]),
+                    int(continuation_power["spearman"]["rounded_games"]),
+                )
+                if config.final_ranking_positions < power_floor:
+                    chain_reasons.append(
+                        "continuation sample is below the preregistered power floor"
+                    )
+                if not continuation_gate["passed"]:
+                    failed_checks = [
+                        name
+                        for name, check in continuation_gate["checks"].items()
+                        if not check
+                    ]
+                    chain_reasons.append(
+                        "game-paired continuation gate failed: "
+                        + ", ".join(failed_checks)
+                    )
+                final_continuation_evaluation = {
+                    "games": config.final_ranking_positions,
+                    "one_position_per_game": True,
+                    "initial": final_initial_continuation,
+                    "candidate": final_continuation,
+                }
             if known_old_games < config.minimum_old_qualification_known_games:
                 chain_reasons.append(
                     "sealed old qualification has fewer than the preregistered "
@@ -2485,32 +2645,6 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
                     chain_reasons.append(
                         "cumulative statistical gate failed: " + ", ".join(failed_checks)
                     )
-            initial_rows = {
-                row["identity"]: row for row in final_initial_continuation["rows"]
-            }
-            final_rows = {row["identity"]: row for row in final_continuation["rows"]}
-            if set(initial_rows) != set(final_rows):
-                chain_reasons.append("continuation comparison identities changed")
-            else:
-                continuation_deltas = tuple(
-                    float(final_rows[identity]["candidate_spearman"])
-                    - float(initial_rows[identity]["candidate_spearman"])
-                    for identity in sorted(initial_rows)
-                )
-                continuation_interval = _paired_mean_interval(
-                    continuation_deltas,
-                    samples=20_000,
-                    seed=config.seed + 6000,
-                )
-                if continuation_interval["low"] < -0.020:
-                    chain_reasons.append(
-                        "continuation Spearman lower bound is below -0.020"
-                    )
-            if float(final_continuation["candidate_verified_top_agreement"]) < (
-                float(final_initial_continuation["candidate_verified_top_agreement"])
-                - 1.0 / config.final_ranking_positions
-            ):
-                chain_reasons.append("continuation top agreement lost more than one position")
             final_tactical = accepted[-1]["tactical"]
             if _search_tactical_gate(initial_tactical, final_tactical):
                 chain_reasons.append("final Full Gumbel tactical retention failed")
@@ -2579,6 +2713,8 @@ def run_continuous_policy_iteration(config: ContinuousPolicyIterationConfig) -> 
             "legacy_old_gate": legacy_old_gate,
             "cumulative_gate": cumulative_gate,
             "continuation_interval": continuation_interval,
+            "continuation_gate": continuation_gate,
+            "continuation_power": continuation_power,
             "final_continuation_evaluation": final_continuation_evaluation,
             "passed": passed,
             "reasons": chain_reasons,
