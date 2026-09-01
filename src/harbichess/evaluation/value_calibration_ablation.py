@@ -39,7 +39,10 @@ from harbichess.training.joint_policy_value_transfer import (
     _continuation_ranking,
     _sha256,
 )
-from harbichess.training.value_calibration import fit_scalar_calibration
+from harbichess.training.value_calibration import (
+    fit_guarded_scalar_calibration,
+    fit_scalar_calibration,
+)
 
 
 @dataclass(frozen=True, slots=True)
@@ -58,6 +61,8 @@ class ValueCalibrationAblationConfig:
     search_workers: int = 24
     fixed_inference_batch_size: int = 12
     inference_wait_seconds: float = 0.00025
+    guard_pearson_margin: float | None = None
+    old_split_seed: int = 2026091603
 
     def __post_init__(self) -> None:
         if min(
@@ -68,8 +73,11 @@ class ValueCalibrationAblationConfig:
             self.tactical_seed,
             self.search_workers,
             self.fixed_inference_batch_size,
+            self.old_split_seed,
         ) <= 0 or self.inference_wait_seconds < 0:
             raise ValueError("DENGE calibration ablation configuration is invalid")
+        if self.guard_pearson_margin is not None and self.guard_pearson_margin < 0:
+            raise ValueError("DENGE guard Pearson margin cannot be negative")
 
 
 def _phase(record: ReplayRecord) -> str:
@@ -209,12 +217,36 @@ def run_value_calibration_ablation(config: ValueCalibrationAblationConfig) -> Pa
     )
     fit_inputs, _ = _prepare(fit_records, rules)
     fit_logits = raw(fit_inputs)[1]
-    calibration = fit_scalar_calibration(
-        fit_logits,
-        _labels(fit_records),
-        group_ids=tuple(record.game_id for record in fit_records),
+    old_records = tuple(
+        record
+        for record in read_shard(Path(source["old_qualification"]["path"])).records
+        if record.outcome_value is not None
     )
-    calibrated.set_value_logit_scale(calibration.logit_scale)
+    old_split = None
+    if config.guard_pearson_margin is None:
+        calibration = fit_scalar_calibration(
+            fit_logits,
+            _labels(fit_records),
+            group_ids=tuple(record.game_id for record in fit_records),
+        )
+        selected_calibration = calibration
+        old_test_records = old_records
+    else:
+        old_guard_records, old_test_records, old_split = _game_disjoint_halves(
+            old_records, seed=config.old_split_seed
+        )
+        old_guard_inputs, _ = _prepare(old_guard_records, rules)
+        old_guard_logits = raw(old_guard_inputs)[1]
+        calibration = fit_guarded_scalar_calibration(
+            fit_logits,
+            _labels(fit_records),
+            old_guard_logits,
+            tuple(int(record.outcome_value) for record in old_guard_records),
+            fit_group_ids=tuple(record.game_id for record in fit_records),
+            guard_pearson_margin=config.guard_pearson_margin,
+        )
+        selected_calibration = calibration.selected
+    calibrated.set_value_logit_scale(selected_calibration.logit_scale)
     test_inputs, _ = _prepare(test_records, rules)
     raw_test = _wdl_quality(raw, test_inputs, tuple(int(r.outcome_value) for r in test_records))
     calibrated_test = _wdl_quality(
@@ -227,13 +259,8 @@ def run_value_calibration_ablation(config: ValueCalibrationAblationConfig) -> Pa
     policy_bitwise = bool(mx.array_equal(raw_policy, calibrated_policy).item())
 
     publish("DENGE calibration ablation · old capability")
-    old_records = tuple(
-        record
-        for record in read_shard(Path(source["old_qualification"]["path"])).records
-        if record.outcome_value is not None
-    )
-    old_inputs, _ = _prepare(old_records, rules)
-    old_outcomes = tuple(int(record.outcome_value) for record in old_records)
+    old_inputs, _ = _prepare(old_test_records, rules)
+    old_outcomes = tuple(int(record.outcome_value) for record in old_test_records)
     raw_old = _wdl_quality(raw, old_inputs, old_outcomes)
     calibrated_old = _wdl_quality(calibrated, old_inputs, old_outcomes)
 
@@ -329,6 +356,7 @@ def run_value_calibration_ablation(config: ValueCalibrationAblationConfig) -> Pa
         "source_checkpoint_sha256": _sha256(checkpoint),
         "split": split,
         "calibration": calibration.to_dict(),
+        "old_split": old_split,
         "fresh_test": {
             "raw": raw_test,
             "calibrated": calibrated_test,
@@ -381,6 +409,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument("--model", required=True, type=Path)
     parser.add_argument("--runs-root", type=Path, default=Path("artifacts/runs"))
     parser.add_argument("--telemetry", type=Path, default=Path("artifacts/dashboard/state.json"))
+    parser.add_argument("--guard-pearson-margin", type=float)
     arguments = parser.parse_args(argv)
     result = run_value_calibration_ablation(
         ValueCalibrationAblationConfig(
@@ -390,6 +419,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             model_path=arguments.model,
             runs_root=arguments.runs_root,
             telemetry_path=arguments.telemetry,
+            guard_pearson_margin=arguments.guard_pearson_margin,
         )
     )
     print(result)
