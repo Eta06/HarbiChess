@@ -461,6 +461,9 @@ def _continuation_ranking(
         rows.append(
             {
                 "identity": f"{record.game_id}:{record.game_index}:{record.ply}",
+                "game_id": record.game_id,
+                "game_index": record.game_index,
+                "ply": record.ply,
                 "legal_actions": len(moves),
                 "baseline_spearman": baseline_rho,
                 "candidate_spearman": candidate_rho,
