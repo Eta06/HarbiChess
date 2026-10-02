@@ -254,5 +254,30 @@
       "bytes": 291,
       "sha256": "daba1b7501a1eb91b0062154b8ec9cbc121703568eccff3fe83d813fb7cff44a"
     }
-  ]
+  ],
+  "transport": {
+    "archive_name": "harbichess-PORT-linux-20261002.tar.gz",
+    "archive_sha256": "77846c8a557b301cdc4687f77c4c22e366036c39993e21c04152780ebca71235",
+    "parts": [
+      {
+        "name": "harbichess-PORT-linux-20261002.tar.gz.part00",
+        "bytes": 20971520,
+        "sha256": "ced0ee1084319f7e51de55e645d5e38f2376af8ab516844ef0b16b4b679359e8"
+      },
+      {
+        "name": "harbichess-PORT-linux-20261002.tar.gz.part01",
+        "bytes": 14048651,
+        "sha256": "673e87204c018debe375e0f5295d2ffc24089754e2a720bc2693ca7ca176d236"
+      }
+    ],
+    "reassemble": "cat harbichess-PORT-linux-20261002.tar.gz.part00 harbichess-PORT-linux-20261002.tar.gz.part01 > harbichess-PORT-linux-20261002.tar.gz"
+  },
+  "publication": {
+    "status": "blocked",
+    "release_url": "https://github.com/Eta06/HarbiChess/releases/tag/port-linux-preflight-20261002",
+    "observed_remote_assets": 0,
+    "reason": "HTTP 400 Bad Content-Length on GitHub uploads endpoint, including 10560-byte manifest with exact Content-Length and complete body",
+    "local_archive_verified": true,
+    "remote_integrity_verified": false
+  }
 }
