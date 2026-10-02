@@ -72,6 +72,7 @@ def arena(
         or wall_seconds <= 0
     ):
         raise ValueError("positive budgets and 1..8 opening pairs required")
+    source_commit = subprocess.check_output(["git", "rev-parse", "HEAD"], text=True).strip()
     torch.set_num_threads(threads)
     rules = PythonChessRules()
     bridges = []
