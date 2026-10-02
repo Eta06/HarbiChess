@@ -22,6 +22,10 @@ Do not compare equal-step training as equivalent algorithms or reuse optimizer s
 ## Restore and warm start
 
 Follow `docs/research/README.md` to verify the old Release SHA256SUMS and member manifest.
+The PORT Release asset upload is currently blocked (HTTP 400); use the published source/manifest
+and preserved local files until upload is fixed. Its prepared binary archive is transported as
+ordered part00/part01; concatenate before verifying SHA256SUMS. Do not mistake its empty
+Release record for a completed remote backup.
 Extract to a separate directory. Keep originals; do not overwrite archived provenance.
 
 ```bash
