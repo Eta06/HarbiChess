@@ -219,7 +219,11 @@ def _masked_kl(
     candidate_log = candidate_logits - mx.logsumexp(candidate_logits, axis=1, keepdims=True)
     value = mx.mean(mx.sum(mx.exp(base_log) * (base_log - candidate_log), axis=1))
     mx.eval(value)
-    return float(value.item())
+    result = float(value.item())
+    # KL is non-negative; near-identical FP32 distributions can cancel below zero.
+    if not math.isfinite(result) or result < -1e-5:
+        raise ValueError("invalid KL diagnostic outside floating-point roundoff")
+    return max(0.0, result)
 
 
 def _anchor_drift(
