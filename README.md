@@ -1,9 +1,11 @@
 # HarbiChess
 
 HarbiChess is a neural-guided chess engine that learns primarily through
-reinforcement learning and self-play. Its first-class training target is Apple
-Silicon through MLX, while chess rules, search, data formats, and training
-contracts remain backend-independent.
+reinforcement learning and self-play. It supports Apple Silicon through MLX and
+Linux through a PyTorch CPU/CUDA backend. Rules, encoding, search and replay are
+shared. Linux CPU inference/training and MLX CPU parity are tested; CUDA and
+Apple Metal device validation remain separate. See [the Linux runtime guide](docs/PORT-runtime.md)
+and [the measured PORT results](docs/runs/PORT-linux-result-20261002.md).
 
 ## Architecture
 
@@ -23,9 +25,9 @@ produces the training targets.
 HarbiChess uses `uv` and requires Python 3.12 or newer.
 
 ```bash
-uv sync --extra dev
-uv run pytest
-uv run ruff check .
+uv sync --extra dev --extra torch --extra parity
+.venv/bin/pytest
+.venv/bin/ruff check .
 uv run harbichess-mlx-smoke --size 512 --iterations 5
 uv run harbichess-network-benchmark --batches 1,8,16,32,64,128
 uv run harbichess-search-benchmark --games 16,32,64,128 --simulations 32
@@ -43,13 +45,15 @@ npm run build
 ```
 
 The network benchmark executes the actual history-aware 104-plane board input
-through the MLX residual policy/WDL model. End-to-end self-play concurrency will
-be calibrated separately once MCTS and the shared inference queue are present.
+through the MLX residual policy/WDL model. Linux uses `harbichess-torch-loop` and
+the PyTorch inference benchmark described in the runtime guide. Measure backend
+batch throughput and complete self-play wall throughput separately.
 
-The search pipeline now uses legal-masked PUCT, independent per-game random
-streams, and a shared inference worker that batches parallel actors onto MLX.
-Self-play records visit-policy targets and final outcomes from each position's
-side-to-move perspective.
+Search supports legal-masked PUCT and Full Gumbel with independent game RNG
+streams and a shared inference worker. The Linux rolling loop trains fresh search
+policy targets and observed terminal WDL from the side-to-move perspective.
+Ply-capped games keep unknown value masks. Latest learners and release champions
+remain distinct; the PORT pilot did not demonstrate a strength gain.
 
 The standalone dashboard listens on `http://127.0.0.1:8765` by default. It
 reads a low-frequency atomic telemetry snapshot and never imports or blocks the
