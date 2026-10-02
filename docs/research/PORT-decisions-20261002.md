@@ -16,11 +16,15 @@ Bu not Linux taşıma kararlarını açıklar; DENGE failed sonucunu veya yeni g
 - NHWC flatten korunur, yalnız conv OHWI↔OIHW dönüşür. Aynı policy action index ve STM
   win/draw/loss logits; search value=P(win)-P(loss), backup her ply'da işaret değiştirir.
 - Linux learner aynı legal-masked CE ve terminal WDL CE'yi kullanır; max-ply value_weight=0.
+  PyTorch AdamW beta=(0.9,0.999), eps=1e-8, bias correction=True; mevcut MLX 0.32
+  AdamW default bias_correction=False. Loss aynı olsa da optimizer update dinamiği eşdeğer değildir.
+  Yeni CPU pilotu bias-corrected AdamW kullanır; bu kontrollü Linux başlangıcıdır, MLX
+  eski training deneyi yeniden üretilmiş sayılmaz.
   Model conversion version=1 weights-only warm start'tır. MLX Adam state→Torch Adam state
   aktarımı yapılmaz. Frameworkler arası bitwise training devamlılığı iddia edilmez.
 - PyTorch checkpoint version=1 model + AdamW + torch/CUDA RNG + sampler RNG + rolling replay
   hash'leri + cursor + config/runtime içerir. Aynı runtime koşulları korunmadan exact resume reddedilir.
-  Tam run dizini taşınabilir; referanslar göreli. Generation içi kesinti son tamamlanmış generation'a
+  Tam run dizini taşınabilir; referanslar göreli ve run_id dizin adından bağımsız saklanır. Generation içi kesinti son tamamlanmış generation'a
   döner. Çok worker'lı batch zamanlaması bitwise self-play garantisi vermez; farklı yeniden üretilmiş
   partial replay üzerine yazılmaz, uyumsuzluk reddedilir. Testteki tam CLI exactlik tek worker/CPU'dadır.
 - Tek snapshot üzerinde thread actors ve bir inference worker: fork edilmiş ML framework state'i,
