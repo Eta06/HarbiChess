@@ -2,6 +2,8 @@
 
 Kalıcı kaynak GitHub'dır. Notlar ve kararlar Git'te, büyük model/replay dosyaları commit-linked Releases'ta tutulur. Space okunabilir kopyadır; otomatik senkronizasyon veya zamanlanmış görev kurulmamıştır.
 
+- [PORT Linux sonucu](../runs/PORT-linux-result-20261002.md), [çalıştırma/resume](../PORT-runtime.md)
+  ve [teknik kararlar](PORT-decisions-20261002.md): gerçek CPU training/inference ve güç sınırları.
 - [Güncel değerlendirme](status-20261002.md): başarı, başarısızlık ve doğrulama açıkları.
 - [Codeword rehberi](codewords.md): araştırma snapshot'ındaki 54 prefix ve 896 commit.
 - [Tarihsel deney raporları](../runs/).
