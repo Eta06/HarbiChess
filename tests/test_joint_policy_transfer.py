@@ -121,3 +121,21 @@ def test_target_batch_selects_board_inputs_not_frozen_features() -> None:
     assert inputs[:, 0, 0, 0].tolist() == [16, 0]
     assert targets[:, 0].tolist() == [8, 0]
     assert masks.shape == targets.shape
+
+
+def test_kl_diagnostic_is_nonnegative_and_matches_probability_reference() -> None:
+    import math
+
+    import pytest
+
+    base = mx.array(((0.0, 1.0, -1.0),), dtype=mx.float32)
+    shifted = base + 0.125
+    assert 0.0 <= _masked_kl(base, shifted) < 1e-6
+    candidate = mx.array(((0.1, 0.8, -0.9),), dtype=mx.float32)
+    p = [math.exp(x) for x in (0.0, 1.0, -1.0)]
+    q = [math.exp(x) for x in (0.1, 0.8, -0.9)]
+    p, q = [x / sum(p) for x in p], [x / sum(q) for x in q]
+    expected = sum(x * math.log(x / y) for x, y in zip(p, q, strict=True))
+    assert _masked_kl(base, candidate) == pytest.approx(expected, abs=2e-7)
+    with pytest.raises(ValueError, match="invalid KL"):
+        _masked_kl(base, mx.array(((float("nan"), 0.0, 0.0),)))
