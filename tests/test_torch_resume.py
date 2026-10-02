@@ -158,6 +158,9 @@ def test_cli_generation_resume_matches_uninterrupted_run(tmp_path):
 
     run(full, 2)
     run(resumed, 1)
+    relocated = resumed.parent / "run-renamed"
+    resumed.rename(relocated)
+    resumed = relocated
     run(resumed, 2, resumed / "checkpoints/generation-000001")
     a = load_file(str(full / "checkpoints/generation-000002/model.safetensors"))
     b = load_file(str(resumed / "checkpoints/generation-000002/model.safetensors"))
