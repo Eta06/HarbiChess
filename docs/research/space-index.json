@@ -1,0 +1,256 @@
+{
+  "snapshot_date": "2026-10-02",
+  "main_page_id": "page_bfc28b10daa081919e1650eca18c61c7",
+  "children": [
+    {
+      "title": "Codeword rehberi",
+      "page_id": "page_26e6b0758af081919a5739c6380ba6af",
+      "url": "https://chatgpt.com/space/page_26e6b0758af081919a5739c6380ba6af"
+    },
+    {
+      "title": "Deney raporları",
+      "page_id": "page_fe908a4de6d48191a1924e6591db6780",
+      "url": "https://chatgpt.com/space/page_fe908a4de6d48191a1924e6591db6780"
+    },
+    {
+      "title": "Mimari ilerleme ve güncel audit",
+      "page_id": "page_909c13083b2481918f1bcaef034d9f01",
+      "url": "https://chatgpt.com/space/page_909c13083b2481918f1bcaef034d9f01"
+    },
+    {
+      "title": "Katkı ve araştırma kayıt kuralları",
+      "page_id": "page_ffe70cbfc7b08191a1ac9ae9c9b4d665",
+      "url": "https://chatgpt.com/space/page_ffe70cbfc7b08191a1ac9ae9c9b4d665"
+    }
+  ],
+  "reports": [
+    {
+      "title": "Tarihsel raporlar 01",
+      "page_id": "page_fac5466a01988191be1b2de7a850cb6e",
+      "url": "https://chatgpt.com/space/page_fac5466a01988191be1b2de7a850cb6e",
+      "source_paths": [
+        "docs/model-quality.md",
+        "docs/ocak-training-guardrails.md",
+        "docs/runs/agustos-branch-confidence-20260825.md",
+        "docs/runs/akis-uncertainty-policy-preregistration-20260828.md",
+        "docs/runs/akis-uncertainty-policy-result-20260828.md",
+        "docs/runs/aktar-fixed-batch-result-20260828.md",
+        "docs/runs/aktar-fixed-shape-preregistration-20260828.md",
+        "docs/runs/aktar-full-gumbel-transfer-preregistration-20260828.md",
+        "docs/runs/aktar-full-gumbel-transfer-result-20260828.md",
+        "docs/runs/aktar-policy-anchor-preregistration-20260828.md",
+        "docs/runs/aktar-policy-anchor-result-20260828.md",
+        "docs/runs/aktar-target-provenance-result-20260828.md",
+        "docs/runs/aktarim-fit-preregistration-20260828.md",
+        "docs/runs/aktarim-fit-result-20260828.md",
+        "docs/runs/aralik-continuous-value-regret-20260826.md",
+        "docs/runs/atak-value-improved-target-findings-20260826.md"
+      ]
+    },
+    {
+      "title": "Tarihsel raporlar 02",
+      "page_id": "page_cbc3d5ad713c8191bf59c404d7645b0f",
+      "url": "https://chatgpt.com/space/page_cbc3d5ad713c8191bf59c404d7645b0f",
+      "source_paths": [
+        "docs/runs/atak-value-improved-target-preregistration-20260826.md",
+        "docs/runs/bag-move-conditioned-q-preregistration-20260828.md",
+        "docs/runs/bag-move-conditioned-q-result-20260828.md",
+        "docs/runs/baglanti-relational-policy-preregistration-20260828.md",
+        "docs/runs/baglanti-relational-policy-result-20260828.md",
+        "docs/runs/cipa-anchored-transfer-preregistration-20260828.md",
+        "docs/runs/cipa-anchored-transfer-result-20260828.md",
+        "docs/runs/deger-action-value-preregistration-20260828.md",
+        "docs/runs/deger-action-value-result-20260828.md",
+        "docs/runs/denge-calibration-ablation-preregistration-20260901.md",
+        "docs/runs/denge-consensus-target-preregistration-20260828.md",
+        "docs/runs/denge-consensus-target-result-20260828.md",
+        "docs/runs/denge-constrained-calibration-preregistration-20260901.md",
+        "docs/runs/denge-fresh-cumulative-preregistration-20260901.md",
+        "docs/runs/denge-fresh-cumulative-result-20260901.md",
+        "docs/runs/denge-game-paired-continuation-preregistration-20260902.md",
+        "docs/runs/devir-micro-arena-20260824.md",
+        "docs/runs/devriye-cached-headwise-composition-result-20260830.md",
+        "docs/runs/devriye-continuous-pilot-preregistration-20260830.md"
+      ]
+    },
+    {
+      "title": "Tarihsel raporlar 03",
+      "page_id": "page_0f2e4ab933c88191887ea0c027438756",
+      "url": "https://chatgpt.com/space/page_0f2e4ab933c88191887ea0c027438756",
+      "source_paths": [
+        "docs/runs/devriye-continuous-pilot-result-20260830.md",
+        "docs/runs/devriye-fresh-value-replay-preregistration-20260830.md",
+        "docs/runs/devriye-headwise-checkpoint-preregistration-20260830.md",
+        "docs/runs/devriye-independent-outcome-scale-preregistration-20260830.md",
+        "docs/runs/devriye-inference-dtype-isolation-audit-20260830.md",
+        "docs/runs/devriye-minimum-sufficient-update-preregistration-20260830.md",
+        "docs/runs/devriye-outcome-balanced-rolling-replay-preregistration-20260830.md",
+        "docs/runs/devriye-pooled-value-reservoir-preregistration-20260830.md",
+        "docs/runs/devriye-scaled-teacher-transfer-preregistration-20260830.md",
+        "docs/runs/devriye-stratified-continuation-replay-preregistration-20260830.md",
+        "docs/runs/devriye-validation-checkpoint-preregistration-20260830.md",
+        "docs/runs/devriye-value-cadence-preregistration-20260830.md",
+        "docs/runs/devriye-value-gradient-batch-preregistration-20260830.md",
+        "docs/runs/devriye-value-multiobjective-preregistration-20260830.md",
+        "docs/runs/devriye-value-stability-plasticity-preregistration-20260830.md",
+        "docs/runs/doku-spatial-q-preregistration-20260828.md",
+        "docs/runs/doku-spatial-q-result-20260828.md",
+        "docs/runs/ekim-multi-ply-repetition-risk-20260825.md",
+        "docs/runs/esas-fpu-allocation-preregistration-20260828.md",
+        "docs/runs/esas-fpu-allocation-result-20260828.md"
+      ]
+    },
+    {
+      "title": "Tarihsel raporlar 04",
+      "page_id": "page_1b340d388bb48191b18e5a17daf5d16e",
+      "url": "https://chatgpt.com/space/page_1b340d388bb48191b18e5a17daf5d16e",
+      "source_paths": [
+        "docs/runs/esas-full-gumbel-preregistration-20260828.md",
+        "docs/runs/esas-full-gumbel-result-20260828.md",
+        "docs/runs/esas-mechanism-audit-20260828.md",
+        "docs/runs/esas-short-horizon-value-preregistration-20260828.md",
+        "docs/runs/esas-system-teacher-preregistration-20260828.md",
+        "docs/runs/esas-system-teacher-result-20260828.md",
+        "docs/runs/esas-value-interference-preregistration-20260828.md",
+        "docs/runs/esas-value-learning-result-20260828.md",
+        "docs/runs/eylul-v4-evidence-gate-20260825.md",
+        "docs/runs/fren-policy-projection-preregistration-20260828.md",
+        "docs/runs/fren-policy-projection-result-20260828.md",
+        "docs/runs/hacim-expanded-label-preregistration-20260828.md",
+        "docs/runs/hacim-expanded-label-result-20260828.md"
+      ]
+    },
+    {
+      "title": "Tarihsel raporlar 05",
+      "page_id": "page_f5ec8e24e5cc8191ab5aa6eb19f17db3",
+      "url": "https://chatgpt.com/space/page_f5ec8e24e5cc8191ab5aa6eb19f17db3",
+      "source_paths": [
+        "docs/runs/haziran-recency-profile-20260825.md",
+        "docs/runs/kanit-fresh-pairwise-validation-preregistration-20260828.md",
+        "docs/runs/kanit-fresh-pairwise-validation-result-20260828.md",
+        "docs/runs/kanit-v7-arena-preregistration-20260826.md",
+        "docs/runs/kanit-v7-frozen-evidence-20260826.md",
+        "docs/runs/kasim-value-aware-repetition-20260826.md",
+        "docs/runs/kilavuz-policy-improvement-preregistration-20260828.md",
+        "docs/runs/kilavuz-policy-improvement-result-20260828.md",
+        "docs/runs/kilic-root-halving-findings-20260826.md",
+        "docs/runs/kilic-root-halving-preregistration-20260826.md",
+        "docs/runs/kok-joint-transfer-preregistration-20260828.md",
+        "docs/runs/kok-joint-transfer-result-20260828.md",
+        "docs/runs/kopru-capacity-matrix-preregistration-20260828.md"
+      ]
+    },
+    {
+      "title": "Tarihsel raporlar 06",
+      "page_id": "page_77c0e33e98388191bbb2ff7f37c6437b",
+      "url": "https://chatgpt.com/space/page_77c0e33e98388191bbb2ff7f37c6437b",
+      "source_paths": [
+        "docs/runs/kopru-capacity-performance-intersection-20260828.md",
+        "docs/runs/kopru-clean-target-sanity-preregistration-20260828.md",
+        "docs/runs/kopru-confidence-policy-transfer-preregistration-20260828.md",
+        "docs/runs/kopru-dual-search-preregistration-20260828.md",
+        "docs/runs/kopru-legal-policy-ablation-preregistration-20260828.md",
+        "docs/runs/kopru-performance-and-transfer-report-20260828.md",
+        "docs/runs/kopru-qualified-replay-transfer-preregistration-20260828.md",
+        "docs/runs/kopru-replay-transfer-preregistration-20260828.md",
+        "docs/runs/kritik-corrected-replay-scale-preregistration-20260830.md",
+        "docs/runs/kritik-deterministic-value-probe-preregistration-20260830.md",
+        "docs/runs/kritik-gradient-balanced-joint-preregistration-20260830.md",
+        "docs/runs/kritik-joint-policy-value-preregistration-20260830.md",
+        "docs/runs/kritik-joint-policy-value-result-20260830.md",
+        "docs/runs/kritik-shared-representation-preregistration-20260830.md"
+      ]
+    },
+    {
+      "title": "Tarihsel raporlar 07",
+      "page_id": "page_447f7586c6088191a98f74aba582b716",
+      "url": "https://chatgpt.com/space/page_447f7586c6088191a98f74aba582b716",
+      "source_paths": [
+        "docs/runs/kritik-value-collapse-audit-result-20260830.md",
+        "docs/runs/kritik-value-signal-audit-preregistration-20260830.md",
+        "docs/runs/marj-pairwise-teacher-preregistration-20260828.md",
+        "docs/runs/mart-performance-candidate-20260825.md",
+        "docs/runs/mayis-continuation-replay-20260825.md",
+        "docs/runs/mihenk-teacher-consistency-preregistration-20260828.md",
+        "docs/runs/mihenk-teacher-consistency-result-20260828.md",
+        "docs/runs/mihver-balanced-material-preregistration-20260830.md",
+        "docs/runs/mihver-count-scaled-value-preregistration-20260830.md",
+        "docs/runs/mihver-decoupled-value-heads-preregistration-20260830.md",
+        "docs/runs/mihver-distributional-material-preregistration-20260830.md",
+        "docs/runs/mihver-invariant-value-preregistration-20260830.md",
+        "docs/runs/mihver-mixed-WDL-sampling-preregistration-20260830.md",
+        "docs/runs/mihver-nonlinear-invariant-preregistration-20260830.md",
+        "docs/runs/mihver-value-downstream-preregistration-20260830.md"
+      ]
+    },
+    {
+      "title": "Tarihsel raporlar 08",
+      "page_id": "page_d58fa4223b408191a1a1ad89f70baece",
+      "url": "https://chatgpt.com/space/page_d58fa4223b408191a1a1ad89f70baece",
+      "source_paths": [
+        "docs/runs/mihver-value-representation-result-20260830.md",
+        "docs/runs/mihver-wdl-calibration-preregistration-20260830.md",
+        "docs/runs/nisan-policy-iteration-20260825.md",
+        "docs/runs/ocak-sanity-20260824.md",
+        "docs/runs/odak-sequential-halving-preregistration-20260828.md",
+        "docs/runs/odak-sequential-halving-result-20260828.md",
+        "docs/runs/olcek-spatial-q-result-20260828.md",
+        "docs/runs/olcek-uncertainty-q-preregistration-20260828.md",
+        "docs/runs/omurga-search-diagnostics-20260826.md",
+        "docs/runs/omurga-teacher-qualification-20260826.md"
+      ]
+    },
+    {
+      "title": "Tarihsel raporlar 09",
+      "page_id": "page_4597da8652648191be9aec25993a6d74",
+      "url": "https://chatgpt.com/space/page_4597da8652648191be9aec25993a6d74",
+      "source_paths": [
+        "docs/runs/omurga-value-teacher-recovery-20260828.md",
+        "docs/runs/pusula-continuation-noninferiority-preregistration-20260831.md",
+        "docs/runs/pusula-cumulative-gate-preregistration-20260830.md",
+        "docs/runs/pusula-independent-game-scale-preregistration-20260831.md",
+        "docs/runs/pusula-paired-cumulative-preregistration-20260831.md",
+        "docs/runs/pusula-paired-fresh-selection-preregistration-20260831.md",
+        "docs/runs/pusula-powered-old-calibration-preregistration-20260831.md",
+        "docs/runs/pusula-powered-retention-preregistration-20260831.md",
+        "docs/runs/pusula-tactical-policy-selection-preregistration-20260831.md"
+      ]
+    },
+    {
+      "title": "Tarihsel raporlar 10",
+      "page_id": "page_daa25010427881918018c610815731fa",
+      "url": "https://chatgpt.com/space/page_daa25010427881918018c610815731fa",
+      "source_paths": [
+        "docs/runs/sinav-fresh-validation-preregistration-20260828.md",
+        "docs/runs/sinav-fresh-validation-result-20260828.md",
+        "docs/runs/siper-conservative-policy-preregistration-20260828.md",
+        "docs/runs/siper-conservative-policy-result-20260828.md",
+        "docs/runs/subat-pilot-and-arena-20260824.md",
+        "docs/runs/temmuz-continuation-ablation-20260825.md",
+        "docs/runs/terazi-search-q-preregistration-20260828.md",
+        "docs/runs/terazi-search-q-result-20260828.md",
+        "docs/runs/teshis-teacher-instability-result-20260828.md",
+        "docs/runs/uncertainty-consensus-round-summary-20260828.md",
+        "docs/runs/uyum-agreement-target-preregistration-20260828.md",
+        "docs/runs/uyum-agreement-target-result-20260828.md",
+        "docs/runs/veri-coverage-transfer-preregistration-20260828.md",
+        "docs/runs/veri-coverage-transfer-result-20260828.md",
+        "docs/runs/yakinsama-policy-fit-preregistration-20260828.md",
+        "docs/runs/yakinsama-policy-fit-result-20260828.md",
+        "docs/runs/yapi-spatial-policy-preregistration-20260828.md",
+        "docs/runs/yapi-spatial-policy-result-20260828.md",
+        "docs/runs/yelken-constrained-residual-preregistration-20260830.md",
+        "docs/runs/yelken-soft-wdl-preregistration-20260830.md",
+        "docs/runs/yelken-stable-plastic-preregistration-20260830.md"
+      ]
+    },
+    {
+      "title": "Tarihsel raporlar 11",
+      "page_id": "page_fec7d37774548191ba04197992469ce7",
+      "url": "https://chatgpt.com/space/page_fec7d37774548191ba04197992469ce7",
+      "source_paths": [
+        "docs/runs/yelken-stable-plastic-result-20260830.md"
+      ]
+    }
+  ]
+}
