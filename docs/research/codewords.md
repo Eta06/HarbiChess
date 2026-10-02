@@ -1275,3 +1275,14 @@ Cumulative non-inferiority, bootstrap/power, holdout ve production-readiness gat
 - [69818ab](https://github.com/Eta06/HarbiChess/commit/69818ab91f6de2f8b545fcd99ab582c4b89eb4d4) PUSULA: select continuation-safe value step
 - [8e2f6bf](https://github.com/Eta06/HarbiChess/commit/8e2f6bfa2bca566ec522a3b23aba1f1d0cad440c) PUSULA: test paired continuation safety
 - [3739f4b](https://github.com/Eta06/HarbiChess/commit/3739f4bf6ae637100eadf6f22c643ab769fc975f) PUSULA: preregister continuation noninferiority
+
+## PORT — 2 Ekim 2026
+
+Linux CPU/CUDA için PyTorch inference/training, MLX ile ortak schema ve loss sözleşmeleri,
+base/invariant/MIHVER/DENGE ağırlık aktarımı, optimizer/RNG/replay içeren version 1 resume,
+fresh search policy + terminal WDL rolling self-play. CPU thread/batch, gerçek wall-clock ve
+Stockfish/random/frozen-network teşhisleri. Apple/Metal ve CUDA cihaz testi ayrı doğrulama
+borcudur; mevcut MLX yolu korunur. Prefix başarı veya promotion anlamına gelmez.
+
+- [Ön kayıt](../runs/PORT-linux-preregistration-20261002.md)
+- [Linux sonucu](../runs/PORT-linux-result-20261002.md)
