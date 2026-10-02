@@ -16,6 +16,7 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
+torch = ["torch>=2.8,<3", "safetensors>=0.6,<1", "numpy>=2,<3"]
 dev = [
   "pytest>=8.4,<9",
   "pytest-cov>=6.2,<7",
@@ -23,6 +24,8 @@ dev = [
 ]
 
 [project.scripts]
+harbichess-torch-loop = "harbichess.training.torch_loop:main"
+harbichess-convert-mlx = "harbichess.backends.torch_network:main"
 harbichess-mlx-smoke = "harbichess.backends.mlx_smoke:main"
 harbichess-network-benchmark = "harbichess.benchmarks.network:main"
 harbichess-search-benchmark = "harbichess.benchmarks.search:main"
@@ -49,3 +52,13 @@ target-version = "py312"
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "UP", "B", "SIM", "RUF"]
+
+# CPU wheels fit the allocated Linux host. CUDA can be installed explicitly
+# in a GPU environment without changing chess/model/checkpoint semantics.
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true
+
+[tool.uv.sources]
+torch = [{ index = "pytorch-cpu", marker = "sys_platform == 'linux'" }]
