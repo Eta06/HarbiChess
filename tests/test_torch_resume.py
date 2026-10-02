@@ -118,7 +118,8 @@ torch.save({"weights":learner.network.state_dict(),"indices":indices,
         load_checkpoint(checkpoint, expected_run_config={"seed": 92})
 
 
-def test_cli_generation_resume_matches_uninterrupted_run(tmp_path):
+@pytest.mark.parametrize("early_v1", [False, True])
+def test_cli_generation_resume_matches_uninterrupted_run(tmp_path, early_v1):
     # Same run basename is part of replay game identity; different parent directories isolate runs.
     full, resumed = tmp_path / "full/run", tmp_path / "resumed/run"
     full.parent.mkdir()
@@ -158,6 +159,12 @@ def test_cli_generation_resume_matches_uninterrupted_run(tmp_path):
 
     run(full, 2)
     run(resumed, 1)
+    if early_v1:
+        # Recreate the first published v1 cursor format before run_id was stored.
+        pointer = resumed / "checkpoints/generation-000001/checkpoint.json"
+        payload = json.loads(pointer.read_text())
+        payload["run_state"].pop("run_id")
+        pointer.write_text(json.dumps(payload))
     relocated = resumed.parent / "run-renamed"
     resumed.rename(relocated)
     resumed = relocated
