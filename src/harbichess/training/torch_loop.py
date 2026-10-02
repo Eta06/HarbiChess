@@ -108,6 +108,12 @@ def run_loop(
         )
         state = manifest["run_state"]
         active_paths = tuple((resume / p).resolve() for p in manifest["replay"])
+        # Migrate early v1 cursors using immutable replay provenance after relocation.
+        if "run_id" not in state:
+            names = {read_shard(p).header.run_id for p in active_paths}
+            if len(names) > 1:
+                raise ValueError("resume replay has inconsistent run identities")
+            state["run_id"] = next(iter(names), directory.name)
     else:
         directory.mkdir(parents=True, exist_ok=False)
         torch.manual_seed(config.seed)
@@ -128,6 +134,7 @@ def run_loop(
             network, config=LearnerConfig(learning_rate=config.learning_rate), device=config.device
         )
         state = {
+            "run_id": directory.name,
             "generation": 0,
             "next_game": 0,
             "history": [],
@@ -192,12 +199,12 @@ def run_loop(
                     r
                     for g in games[:-1]
                     if split == ReplaySplit.TRAIN
-                    for r in records_from_game(g, run_id=directory.name, rules=rules)
+                    for r in records_from_game(g, run_id=state["run_id"], rules=rules)
                 )
                 for split in (ReplaySplit.TRAIN,)
             }
             fresh[ReplaySplit.VALIDATION] = records_from_game(
-                games[-1], run_id=directory.name, rules=rules
+                games[-1], run_id=state["run_id"], rules=rules
             )
             paths = []
             snapshot_sha = sha256(
@@ -220,7 +227,7 @@ def run_loop(
                         path,
                         records,
                         ShardMetadata(
-                            directory.name,
+                            state["run_id"],
                             generation,
                             snapshot_sha,
                             source,
