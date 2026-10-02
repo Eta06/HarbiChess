@@ -30,6 +30,9 @@ Bu not Linux taşıma kararlarını açıklar; DENGE failed sonucunu veya yeni g
 - Tek snapshot üzerinde thread actors ve bir inference worker: fork edilmiş ML framework state'i,
   eşzamanlı learner/inference mutation ve Apple spawn farklarını bu yeni Linux yolunda önler.
   Eski MLX araştırma CLI'ları halen MLX gerektirir; Linux'un yeni giriş noktası torch-loop'tur.
+  Sonradan MLX 0.32.1 Linux CPU paketi doğrulama extra'sı olarak eklendi: eski suite artık
+  collection aşamasında atlanmaz. Bu, Apple Metal cihaz testi veya bütün eski pilotların
+  Linux operasyonel qualification'ı değildir; full unit suite ve gerçek CPU parity doğrulanır.
 - Frozen qualified MIHVER ağırlıklarıyla başla; DENGE başarısız son checkpoint'i başlangıç yapma.
   Plain rolling fresh search policy + observed terminal WDL, all-parameter AdamW. Her generation
   yeni actor snapshot'ı, optimizer devamlı, üç generation replay window, oyun dengeli sampler.
