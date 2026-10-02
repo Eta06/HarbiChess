@@ -164,7 +164,7 @@ def arena(
         "summary": paired_summary(games, seed),
         "games": games,
         "promotion_ready": False,
-        "source_commit": subprocess.check_output(["git", "rev-parse", "HEAD"], text=True).strip(),
+        "source_commit": source_commit,
     }
 
 
