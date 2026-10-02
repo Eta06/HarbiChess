@@ -16,6 +16,7 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
+parity = ["mlx[cpu]>=0.32,<0.33; platform_system == 'Linux'"]
 torch = ["torch>=2.8,<3", "safetensors>=0.6,<1", "numpy>=2,<3"]
 dev = [
   "pytest>=8.4,<9",
