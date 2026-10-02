@@ -157,14 +157,29 @@ as stronger-than-teacher proof.
 
 ## Artifacts and recovery
 
-[PORT Release](https://github.com/Eta06/HarbiChess/releases/tag/port-linux-preflight-20261002):
-50 files, four complete model/optimizer checkpoints, six fresh replay shards, raw game/measurement
+[PORT Release record](https://github.com/Eta06/HarbiChess/releases/tag/port-linux-preflight-20261002)
+is published, but **asset upload is blocked and remote backup is incomplete (0 assets)**.
+The locally verified archive contains 50 files, four complete model/optimizer checkpoints, six fresh replay shards, raw game/measurement
 JSON, initial/final test failures and successes, source snapshots, source/model/data hashes and logs.
 Raw archive SHA-256 `77846c8a557b301cdc4687f77c4c22e366036c39993e21c04152780ebca71235`.
 [Member manifest](../research/PORT-artifact-manifest-20261002.json). Archive source checkpoint
 metadata is retained; publication is not promotion. Originals and downloaded historical archives
-were not deleted. Verify Release SHA256SUMS, extract to an empty directory, verify member hashes,
+were not deleted. After the upload block is resolved, download both ordered parts, concatenate part00 then part01
+to `harbichess-PORT-linux-20261002.tar.gz`, verify SHA256SUMS, extract to an empty directory and
+verify member hashes,
 then use [runtime/resume guide](../PORT-runtime.md). All generated artifacts stay outside Git history.
+
+Upload failure: initial short target SHA was rejected (422), corrected to full SHA. Release asset
+POSTs then returned 400 Bad Content-Length through gh release upload, gh api with explicit length
+and curl. Splitting the archive into 20 MiB/14 MiB parts did not solve it; the 10,560-byte JSON
+manifest also failed. A filtered HTTP/1.1 trace confirms Content-Length=10560, 100 Continue and
+10560 bytes completely sent before the 400. HTTP/1.0 is unsupported (426); no proxy/network
+policy bypass was attempted. Actual Git push and Space writes succeed. This is an unresolved
+upload-path failure, not a verified loss of repository push permissions. Release notes and Space
+state name the gap; no remote checksum success is claimed. Prepared archive/parts/SHA256SUMS
+remain at `/workspace/work/harbichess/release/`, and original run artifacts remain intact.
+A future retry must inspect the existing Release/assets before uploading, then compare each
+remote digest and reconstructed archive/member hashes. Do not call backup complete before that.
 
 | Checkpoint | Learner step | Model SHA-256 | Training source commit |
 |---|---:|---|---|
