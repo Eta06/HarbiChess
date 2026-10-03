@@ -1,11 +1,11 @@
 import chess
 
-from harbichess.chess.rules import PythonChessRules
+from harbichess.chess.experimental_rule_cache import CachedPythonChessRules
 from harbichess.core.state import ChessMove
 
 
 def test_cached_claim_flags_and_identical_board_with_different_history():
-    rules = PythonChessRules()
+    rules = CachedPythonChessRules()
     state = rules.initial_state()
     for uci in ("g1f3", "g8f6", "f3g1", "f6g8", "g1f3", "g8f6", "f3g1"):
         state = rules.apply(state, ChessMove(uci))
@@ -21,7 +21,7 @@ def test_cached_claim_flags_and_identical_board_with_different_history():
 
 
 def test_fact_cache_is_bounded_and_agrees_with_independent_rules():
-    rules = PythonChessRules(board_cache_size=2)
+    rules = CachedPythonChessRules(board_cache_size=2)
     state = rules.initial_state()
     for uci in ("e2e4", "c7c5", "g1f3", "d7d6", "d2d4", "c5d4"):
         state = rules.apply(state, ChessMove(uci))
