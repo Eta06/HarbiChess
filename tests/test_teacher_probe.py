@@ -4,7 +4,7 @@ import chess
 import chess.engine
 import pytest
 
-from harbichess.evaluation.teacher_probe import freeze_panel, reference_info
+from harbichess.evaluation.teacher_probe import freeze_panel, last_complete_info, reference_info
 
 
 @pytest.mark.parametrize("turn", [chess.WHITE, chess.BLACK])
@@ -59,3 +59,23 @@ def test_panel_preserves_history_and_rejects_illegal_source(tmp_path):
     source.write_text(json.dumps({"games": [game]}))
     with pytest.raises(ValueError, match="illegal source"):
         freeze_panel(source)
+
+
+def test_completed_uci_packet_ignores_stale_bounds_and_partial_aspiration():
+    score = chess.engine.PovScore(chess.engine.Cp(35), chess.WHITE)
+    wdl = chess.engine.PovWdl(chess.engine.Wdl(100, 800, 100), chess.WHITE)
+    pv = [chess.Move.from_uci("e2e4")]
+    exact = {"score": score, "wdl": wdl, "pv": pv, "depth": 8}
+    bounded = {
+        **exact,
+        "score": chess.engine.PovScore(chess.engine.Cp(80), chess.WHITE),
+        "lowerbound": True,
+        "depth": 9,
+    }
+    assert last_complete_info([bounded, exact, {"nodes": 1000}, bounded]) == exact
+    merged = dict(bounded)
+    merged.update(exact)
+    assert merged["lowerbound"]  # python-chess summary flags survive a later complete score.
+    assert "lowerbound" not in last_complete_info([bounded, exact])
+    with pytest.raises(ValueError, match="no completed"):
+        last_complete_info([bounded])
