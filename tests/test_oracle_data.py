@@ -71,8 +71,20 @@ def test_multipv_requires_full_unbounded_common_depth():
     assert [p["depth"] for p in complete_multipv(packets, 2)] == [5, 5]
     with pytest.raises(ValueError, match="no coherent"):
         complete_multipv(packets[2:], 2)
-    packets.append(packet(6, 2, "d2d4"))
+    packets.extend([packet(6, 1, "e2e4"), packet(6, 2, "d2d4")])
     assert [p["depth"] for p in complete_multipv(packets, 2)] == [6, 6]
+
+
+def test_same_depth_reordering_cannot_mix_two_multipv_cycles():
+    packets = [
+        packet(5, 1, "e2e4"),
+        packet(5, 2, "d2d4"),
+        packet(5, 1, "d2d4"),
+        packet(5, 2, "e2e4"),
+        packet(5, 1, "e2e4", lowerbound=True),
+        packet(5, 2, "d2d4"),
+    ]
+    assert [p["pv"][0].uci() for p in complete_multipv(packets, 2)] == ["d2d4", "e2e4"]
 
 
 def test_policy_temperature_and_large_mate_scores_are_finite():
