@@ -1,3 +1,7 @@
+import json
+import subprocess
+import sys
+
 import chess
 import mlx.core as mx
 import mlx.nn as nn
@@ -121,3 +125,69 @@ def test_pair_destination_preserves_special_move_action_geometry(fen):
         target = move.to_square if board.turn else chess.square_mirror(move.to_square)
         assert network._destinations[action] == target
     assert BoardEncoder().encode_board(board).shape == (8, 8, 104)
+
+
+def test_portable_pairwise_mlx_round_trip_without_torch_import(tmp_path):
+    torch.set_num_threads(1)
+    torch.manual_seed(191)
+    network = TorchChessNetwork(
+        NetworkConfig(trunk_channels=4, residual_blocks=1, value_hidden=4),
+        architecture="pairwise",
+        invariant={"channels": 4, "blocks": 1, "hidden": 4},
+    )
+    original = tmp_path / "torch.safetensors"
+    exported = tmp_path / "mlx.safetensors"
+    save_weights(original, network)
+    # A fresh interpreter actively refuses Torch imports: Apple inference and
+    # serialization must work with the project's MLX-only dependency set.
+    script = '''
+import importlib.abc, json, pathlib, sys
+class RefuseTorch(importlib.abc.MetaPathFinder):
+    def find_spec(self, fullname, path, target=None):
+        if fullname == "torch" or fullname.startswith("torch."):
+            raise RuntimeError("Torch is not available in this MLX process")
+sys.meta_path.insert(0, RefuseTorch())
+import mlx.core as mx
+from harbichess.backends.pairwise_network import HarbiChessPairwiseNetwork
+network = HarbiChessPairwiseNetwork.from_portable(pathlib.Path(sys.argv[1]))
+policy, value = network(mx.zeros((1,8,8,104)))
+mx.eval(policy, value)
+assert policy.shape == (1,4672) and value.shape == (1,3)
+network.save_portable(pathlib.Path(sys.argv[2]), provenance={"test": "mlx-only"})
+try:
+    network.save_portable(pathlib.Path(sys.argv[2]))
+except FileExistsError:
+    pass
+else:
+    raise AssertionError("overwrote immutable weights")
+assert "torch" not in sys.modules
+'''
+    subprocess.run(
+        [sys.executable, "-c", script, str(original), str(exported)], check=True, timeout=30
+    )
+    restored = load_weights(exported)
+    assert restored.specification == network.specification
+    assert all(torch.equal(v, restored.state_dict()[k]) for k, v in network.state_dict().items())
+    mlx = HarbiChessPairwiseNetwork.from_portable(exported)
+    board = chess.Board()
+    board.push_uci("e2e4")
+    encoded = BoardEncoder().encode_board(board)
+    inputs = np.array(encoded.values, dtype=np.float32).reshape(1, *encoded.shape)
+    actual, expected = network(torch.tensor(inputs)), mlx(mx.array(inputs))
+    mx.eval(expected)
+    for a, e in zip(actual, expected, strict=True):
+        np.testing.assert_allclose(a.detach().numpy(), np.array(e), atol=2e-5, rtol=2e-5)
+    arrays, metadata = mx.load(exported, return_metadata=True)
+    header = json.loads(metadata["harbichess"])
+    assert header["transfer"] == "weights-only"
+    for field, bad_value in [("schema", 999), ("layout", "unknown")]:
+        bad_header = {**header, field: bad_value}
+        bad = tmp_path / f"bad-{field}.safetensors"
+        mx.save_safetensors(bad, arrays, {"harbichess": json.dumps(bad_header)})
+        with pytest.raises(ValueError):
+            HarbiChessPairwiseNetwork.from_portable(bad)
+    arrays["stem.weight"] = mx.full(arrays["stem.weight"].shape, float("nan"))
+    bad = tmp_path / "bad-finite.safetensors"
+    mx.save_safetensors(bad, arrays, metadata)
+    with pytest.raises(ValueError, match="non-finite"):
+        HarbiChessPairwiseNetwork.from_portable(bad)
