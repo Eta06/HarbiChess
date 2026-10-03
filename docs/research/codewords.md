@@ -1276,6 +1276,14 @@ Cumulative non-inferiority, bootstrap/power, holdout ve production-readiness gat
 - [8e2f6bf](https://github.com/Eta06/HarbiChess/commit/8e2f6bfa2bca566ec522a3b23aba1f1d0cad440c) PUSULA: test paired continuation safety
 - [3739f4b](https://github.com/Eta06/HarbiChess/commit/3739f4bf6ae637100eadf6f22c643ab769fc975f) PUSULA: preregister continuation noninferiority
 
+## AYNA — 3 Ekim 2026
+
+Sabit tam-history pozisyonlarında policy/search/value hatasını ayrı Stockfish
+referanslarıyla ölçme; tanıya göre gerçek öğrenme ve bağımsız güç/hız deneyi.
+Codeword başarı veya promotion değildir.
+
+- [Teacher tanısı ön kaydı](../runs/AYNA-teacher-preregistration-20261003.md)
+
 ## MERCEK — 3 Ekim 2026
 
 Laya/Jev karar mekanizmasının birincil kaynak incelemesi, küçük compute bütçesinde
