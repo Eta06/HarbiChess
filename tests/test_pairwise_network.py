@@ -103,6 +103,16 @@ def test_real_mlx_cpu_pairwise_forward_masked_soft_loss_and_gradients(tmp_path):
     restored = load_weights(exported)
     assert restored.architecture == "pairwise"
     assert all(torch.equal(v, restored.state_dict()[k]) for k, v in network.state_dict().items())
+    assert mlx_learner.train_step(prepared).step == 1
+    snapshot = mlx_learner.snapshot()
+    assert mlx_learner.train_step(prepared).step == 2
+    expected_parameters = {
+        key: np.array(value) for key, value in tree_flatten(mlx.parameters())
+    }
+    mlx_learner.restore(snapshot)
+    assert mlx_learner.train_step(prepared).step == 2
+    for key, value in tree_flatten(mlx.parameters()):
+        np.testing.assert_array_equal(np.array(value), expected_parameters[key])
 
 
 @pytest.mark.parametrize(
