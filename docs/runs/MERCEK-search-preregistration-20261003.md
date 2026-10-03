@@ -83,3 +83,8 @@ teacher or publication-quality result is established by these 48 games.
 Raw artifacts remain outside Git, with hashes and compact results in the run
 report. The existing PORT Release asset HTTP 400 blocker remains unresolved;
 local preservation is not remote backup. Failed/inconclusive results remain recorded.
+
+Pre-launch correction: `/usr/bin/time` is absent. The first measurement launcher
+failed before starting Python/Stockfish or producing any game. Preserve that
+failure; use Python `resource.getrusage` (self/children) and `time.monotonic`
+instead. Seed, arms, model, stop budgets and outcome criteria stay unchanged.
