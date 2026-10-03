@@ -1,0 +1,741 @@
+{
+  "schema": 1,
+  "seed": 20261005,
+  "source": "lichess-org/chess-openings CC0 plus explicitly marked seeded legal suffixes for short book lines",
+  "selection": "24 twelve-ply continuations, component-disjoint from all teacher train/validation and AYNA selfplay arena; roots never occurred in 192 prior arena games; components may overlap prior AYNA 32-family arena but roots are new; no outcome/engine-quality based selection",
+  "splits": {
+    "arena": [
+      {
+        "family": 0,
+        "prefix4": [
+          "e2e4",
+          "c7c5",
+          "b2b4",
+          "c5b4"
+        ],
+        "opening": {
+          "moves": [
+            "e2e4",
+            "c7c5",
+            "b2b4",
+            "c5b4",
+            "a2a3",
+            "d7d5",
+            "e4d5",
+            "d8d5",
+            "g1f3",
+            "e7e5",
+            "c1b2",
+            "b8c6"
+          ],
+          "eco": "B20",
+          "name": "Sicilian Defense: Wing Gambit, Romanian Defense",
+          "fen": "r1b1kbnr/pp3ppp/2n5/3qp3/1p6/P4N2/1BPP1PPP/RN1QKB1R w KQkq - 2 7"
+        }
+      },
+      {
+        "family": 1,
+        "prefix4": [
+          "d2d4",
+          "g8f6",
+          "c2c4",
+          "d7d6"
+        ],
+        "opening": {
+          "moves": [
+            "d2d4",
+            "g8f6",
+            "c2c4",
+            "d7d6",
+            "b1c3",
+            "b8d7",
+            "e2e4",
+            "e7e5",
+            "g1f3",
+            "g7g6",
+            "f1e2",
+            "f8g7"
+          ],
+          "eco": "E94",
+          "name": "King's Indian Defense: Orthodox Variation, Positional Defense",
+          "fen": "r1bqk2r/pppn1pbp/3p1np1/4p3/2PPP3/2N2N2/PP2BPPP/R1BQK2R w KQkq - 2 7"
+        }
+      },
+      {
+        "family": 2,
+        "prefix4": [
+          "e2e4",
+          "e7e5",
+          "f1c4",
+          "b8c6"
+        ],
+        "opening": {
+          "moves": [
+            "e2e4",
+            "e7e5",
+            "f1c4",
+            "b8c6",
+            "b1c3",
+            "g8f6",
+            "d2d3",
+            "f8c5",
+            "f2f4",
+            "d7d6",
+            "g1f3",
+            "c8g4"
+          ],
+          "eco": "C30",
+          "name": "King's Gambit Declined: Classical, Svenonius Variation",
+          "fen": "r2qk2r/ppp2ppp/2np1n2/2b1p3/2B1PPb1/2NP1N2/PPP3PP/R1BQK2R w KQkq - 2 7"
+        }
+      },
+      {
+        "family": 3,
+        "prefix4": [
+          "g1f3",
+          "c7c5",
+          "c2c4",
+          "g7g6"
+        ],
+        "opening": {
+          "moves": [
+            "g1f3",
+            "c7c5",
+            "c2c4",
+            "g7g6",
+            "d2d4",
+            "f8g7",
+            "e2e4",
+            "d8a5",
+            "b2b4",
+            "e8f8",
+            "b1a3",
+            "f7f5"
+          ],
+          "eco": "A04",
+          "name": "Modern Defense: Semi-Averbakh Variation, Pterodactyl Variation",
+          "fen": "rnb2knr/pp1pp1bp/6p1/q1p2p2/1PPPP3/N4N2/P4PPP/R1BQKB1R w KQ - 0 7",
+          "extension": "seeded uniform legal suffix from CC0 eight-ply root"
+        }
+      },
+      {
+        "family": 4,
+        "prefix4": [
+          "e2e4",
+          "e7e5",
+          "g1f3",
+          "g8f6"
+        ],
+        "opening": {
+          "moves": [
+            "e2e4",
+            "e7e5",
+            "g1f3",
+            "g8f6",
+            "f3e5",
+            "d7d6",
+            "e5f3",
+            "f6e4",
+            "d2d4",
+            "d6d5",
+            "f1d3",
+            "f8e7"
+          ],
+          "eco": "C42",
+          "name": "Petrov's Defense: Classical Attack, Mason Variation",
+          "fen": "rnbqk2r/ppp1bppp/8/3p4/3Pn3/3B1N2/PPP2PPP/RNBQK2R w KQkq - 2 7"
+        }
+      },
+      {
+        "family": 5,
+        "prefix4": [
+          "d2d4",
+          "d7d5",
+          "c2c4",
+          "b8c6"
+        ],
+        "opening": {
+          "moves": [
+            "d2d4",
+            "d7d5",
+            "c2c4",
+            "b8c6",
+            "c4d5",
+            "d8d5",
+            "e2e3",
+            "e7e5",
+            "b1c3",
+            "f8b4",
+            "c1d2",
+            "b4c3"
+          ],
+          "eco": "D07",
+          "name": "Queen's Gambit Declined: Chigorin Defense, Exchange Variation, Costa's Line",
+          "fen": "r1b1k1nr/ppp2ppp/2n5/3qp3/3P4/2b1P3/PP1B1PPP/R2QKBNR w KQkq - 0 7"
+        }
+      },
+      {
+        "family": 6,
+        "prefix4": [
+          "c2c4",
+          "e7e5",
+          "b1c3",
+          "b8c6"
+        ],
+        "opening": {
+          "moves": [
+            "c2c4",
+            "e7e5",
+            "b1c3",
+            "b8c6",
+            "g2g3",
+            "g7g6",
+            "f1g2",
+            "f8g7",
+            "e2e3",
+            "d7d6",
+            "g1e2",
+            "c8e6"
+          ],
+          "eco": "A25",
+          "name": "English Opening: King's English Variation, Bremen-Hort Variation",
+          "fen": "r2qk1nr/ppp2pbp/2npb1p1/4p3/2P5/2N1P1P1/PP1PNPBP/R1BQK2R w KQkq - 2 7"
+        }
+      },
+      {
+        "family": 7,
+        "prefix4": [
+          "c2c4",
+          "g8f6",
+          "g2g3",
+          "c7c6"
+        ],
+        "opening": {
+          "moves": [
+            "c2c4",
+            "g8f6",
+            "g2g3",
+            "c7c6",
+            "g1f3",
+            "d7d5",
+            "b2b3",
+            "c8g4",
+            "f3g1",
+            "g4e2",
+            "c4c5",
+            "a7a5"
+          ],
+          "eco": "A12",
+          "name": "R\u00e9ti Opening: Anglo-Slav Variation, Torre System",
+          "fen": "rn1qkb1r/1p2pppp/2p2n2/p1Pp4/8/1P4P1/P2PbP1P/RNBQKBNR w KQkq - 0 7",
+          "extension": "seeded uniform legal suffix from CC0 eight-ply root"
+        }
+      },
+      {
+        "family": 8,
+        "prefix4": [
+          "e2e4",
+          "e7e5",
+          "d2d4",
+          "e5d4"
+        ],
+        "opening": {
+          "moves": [
+            "e2e4",
+            "e7e5",
+            "d2d4",
+            "e5d4",
+            "d1d4",
+            "b8c6",
+            "d4e3",
+            "g8f6",
+            "b1c3",
+            "f8b4",
+            "c1d2",
+            "e8g8"
+          ],
+          "eco": "C22",
+          "name": "Center Game: Kupreichik Variation",
+          "fen": "r1bq1rk1/pppp1ppp/2n2n2/8/1b2P3/2N1Q3/PPPB1PPP/R3KBNR w KQ - 7 7"
+        }
+      },
+      {
+        "family": 9,
+        "prefix4": [
+          "g2g4",
+          "d7d5",
+          "f1g2",
+          "c8g4"
+        ],
+        "opening": {
+          "moves": [
+            "g2g4",
+            "d7d5",
+            "f1g2",
+            "c8g4",
+            "c2c4",
+            "d5d4",
+            "g2b7",
+            "b8d7",
+            "g1f3",
+            "g4e6",
+            "b7c6",
+            "e6c4"
+          ],
+          "eco": "A00",
+          "name": "Grob Opening: Grob Gambit, Fritz Gambit, Romford Countergambit",
+          "fen": "r2qkbnr/p1pnpppp/2B5/8/2bp4/5N2/PP1PPP1P/RNBQK2R w KQkq - 0 7",
+          "extension": "seeded uniform legal suffix from CC0 eight-ply root"
+        }
+      },
+      {
+        "family": 10,
+        "prefix4": [
+          "g1f3",
+          "d7d5",
+          "b2b3",
+          "g8f6"
+        ],
+        "opening": {
+          "moves": [
+            "g1f3",
+            "d7d5",
+            "b2b3",
+            "g8f6",
+            "c1b2",
+            "g7g6",
+            "c2c4",
+            "c7c6",
+            "h2h4",
+            "f8g7",
+            "b2a3",
+            "d8d7"
+          ],
+          "eco": "A12",
+          "name": "R\u00e9ti Opening: Anglo-Slav Variation, Bled Variation",
+          "fen": "rnb1k2r/pp1qppbp/2p2np1/3p4/2P4P/BP3N2/P2PPPP1/RN1QKB1R w KQkq - 3 7",
+          "extension": "seeded uniform legal suffix from CC0 eight-ply root"
+        }
+      },
+      {
+        "family": 11,
+        "prefix4": [
+          "d2d4",
+          "g8f6",
+          "b1c3",
+          "d7d5"
+        ],
+        "opening": {
+          "moves": [
+            "d2d4",
+            "g8f6",
+            "b1c3",
+            "d7d5",
+            "c1g5",
+            "b8d7",
+            "g1f3",
+            "g7g6",
+            "b2b3",
+            "h8g8",
+            "d1c1",
+            "g8g7"
+          ],
+          "eco": "D01",
+          "name": "Richter-Veresov Attack: Two Knights System, Gr\u00fcnfeld Defense",
+          "fen": "r1bqkb2/pppnpprp/5np1/3p2B1/3P4/1PN2N2/P1P1PPPP/R1Q1KB1R w KQq - 3 7",
+          "extension": "seeded uniform legal suffix from CC0 eight-ply root"
+        }
+      },
+      {
+        "family": 12,
+        "prefix4": [
+          "g1f3",
+          "e7e6",
+          "c2c4",
+          "a7a6"
+        ],
+        "opening": {
+          "moves": [
+            "g1f3",
+            "e7e6",
+            "c2c4",
+            "a7a6",
+            "b1c3",
+            "c7c5",
+            "g2g3",
+            "b7b5",
+            "c4b5",
+            "f8d6",
+            "b5b6",
+            "c8b7"
+          ],
+          "eco": "A04",
+          "name": "Zukertort Opening: Shabalov Gambit",
+          "fen": "rn1qk1nr/1b1p1ppp/pP1bp3/2p5/8/2N2NP1/PP1PPP1P/R1BQKB1R w KQkq - 1 7",
+          "extension": "seeded uniform legal suffix from CC0 eight-ply root"
+        }
+      },
+      {
+        "family": 13,
+        "prefix4": [
+          "e2e4",
+          "e7e5",
+          "f2f4",
+          "b8c6"
+        ],
+        "opening": {
+          "moves": [
+            "e2e4",
+            "e7e5",
+            "f2f4",
+            "b8c6",
+            "g1f3",
+            "g7g5",
+            "f4g5",
+            "h7h6",
+            "c2c4",
+            "h8h7",
+            "c4c5",
+            "c6d4"
+          ],
+          "eco": "C30",
+          "name": "King's Gambit Declined: Hobbs-Zilbermints Gambit",
+          "fen": "r1bqkbn1/pppp1p1r/7p/2P1p1P1/3nP3/5N2/PP1P2PP/RNBQKB1R w KQq - 1 7",
+          "extension": "seeded uniform legal suffix from CC0 eight-ply root"
+        }
+      },
+      {
+        "family": 14,
+        "prefix4": [
+          "b1a3",
+          "e7e5",
+          "d2d3",
+          "f8a3"
+        ],
+        "opening": {
+          "moves": [
+            "b1a3",
+            "e7e5",
+            "d2d3",
+            "f8a3",
+            "b2a3",
+            "d7d5",
+            "e2e3",
+            "c7c5",
+            "f2f4",
+            "d8d7",
+            "e1d2",
+            "d7b5"
+          ],
+          "eco": "A00",
+          "name": "Sodium Attack: Celadon Variation",
+          "fen": "rnb1k1nr/pp3ppp/8/1qppp3/5P2/P2PP3/P1PK2PP/R1BQ1BNR w kq - 3 7",
+          "extension": "seeded uniform legal suffix from CC0 eight-ply root"
+        }
+      },
+      {
+        "family": 15,
+        "prefix4": [
+          "e2e4",
+          "b8c6",
+          "d2d4",
+          "e7e5"
+        ],
+        "opening": {
+          "moves": [
+            "e2e4",
+            "b8c6",
+            "d2d4",
+            "e7e5",
+            "d4e5",
+            "c6e5",
+            "f2f4",
+            "e5g6",
+            "h2h3",
+            "d8e7",
+            "d1h5",
+            "e7g5"
+          ],
+          "eco": "B00",
+          "name": "Nimzowitsch Defense: Kennedy Variation, Main Line",
+          "fen": "r1b1kbnr/pppp1ppp/6n1/6qQ/4PP2/7P/PPP3P1/RNB1KBNR w KQkq - 3 7",
+          "extension": "seeded uniform legal suffix from CC0 eight-ply root"
+        }
+      },
+      {
+        "family": 16,
+        "prefix4": [
+          "d2d4",
+          "d7d5",
+          "g1f3",
+          "c7c5"
+        ],
+        "opening": {
+          "moves": [
+            "d2d4",
+            "d7d5",
+            "g1f3",
+            "c7c5",
+            "e2e3",
+            "g8f6",
+            "b1d2",
+            "e7e6",
+            "g2g3",
+            "b8c6",
+            "d2b1",
+            "d8e7"
+          ],
+          "eco": "D05",
+          "name": "Queen's Pawn Game: Zukertort Variation",
+          "fen": "r1b1kb1r/pp2qppp/2n1pn2/2pp4/3P4/4PNP1/PPP2P1P/RNBQKB1R w KQkq - 3 7",
+          "extension": "seeded uniform legal suffix from CC0 eight-ply root"
+        }
+      },
+      {
+        "family": 17,
+        "prefix4": [
+          "d2d4",
+          "e7e6",
+          "c2c4",
+          "b7b6"
+        ],
+        "opening": {
+          "moves": [
+            "d2d4",
+            "e7e6",
+            "c2c4",
+            "b7b6",
+            "e2e4",
+            "c8b7",
+            "f2f3",
+            "f7f5",
+            "c1e3",
+            "f8d6",
+            "e3d2",
+            "d8f6"
+          ],
+          "eco": "A40",
+          "name": "English Defense: Poli Gambit",
+          "fen": "rn2k1nr/pbpp2pp/1p1bpq2/5p2/2PPP3/5P2/PP1B2PP/RN1QKBNR w KQkq - 4 7",
+          "extension": "seeded uniform legal suffix from CC0 eight-ply root"
+        }
+      },
+      {
+        "family": 18,
+        "prefix4": [
+          "d2d4",
+          "d7d6",
+          "g1f3",
+          "g7g6"
+        ],
+        "opening": {
+          "moves": [
+            "d2d4",
+            "d7d6",
+            "g1f3",
+            "g7g6",
+            "c2c4",
+            "f8g7",
+            "e2e4",
+            "c8g4",
+            "d1b3",
+            "a7a5",
+            "b3c2",
+            "g8h6"
+          ],
+          "eco": "A41",
+          "name": "Robatsch Defense: Rossolimo Variation",
+          "fen": "rn1qk2r/1pp1ppbp/3p2pn/p7/2PPP1b1/5N2/PPQ2PPP/RNB1KB1R w KQkq - 2 7",
+          "extension": "seeded uniform legal suffix from CC0 eight-ply root"
+        }
+      },
+      {
+        "family": 19,
+        "prefix4": [
+          "c2c4",
+          "c7c5",
+          "e2e4",
+          "b8c6"
+        ],
+        "opening": {
+          "moves": [
+            "c2c4",
+            "c7c5",
+            "e2e4",
+            "b8c6",
+            "b1c3",
+            "g7g6",
+            "g2g3",
+            "f8g7",
+            "d2d4",
+            "e7e6",
+            "d1d2",
+            "g7e5"
+          ],
+          "eco": "A36",
+          "name": "English Opening: Symmetrical Variation, Botvinnik System",
+          "fen": "r1bqk1nr/pp1p1p1p/2n1p1p1/2p1b3/2PPP3/2N3P1/PP1Q1P1P/R1B1KBNR w KQkq - 2 7",
+          "extension": "seeded uniform legal suffix from CC0 eight-ply root"
+        }
+      },
+      {
+        "family": 20,
+        "prefix4": [
+          "e2e4",
+          "c7c6",
+          "b1c3",
+          "d7d5"
+        ],
+        "opening": {
+          "moves": [
+            "e2e4",
+            "c7c6",
+            "b1c3",
+            "d7d5",
+            "g1f3",
+            "c8g4",
+            "h2h3",
+            "g4h5",
+            "d2d3",
+            "d8c7",
+            "a2a4",
+            "c7g3"
+          ],
+          "eco": "B11",
+          "name": "Caro-Kann Defense: Two Knights Attack, Mindeno Variation, Retreat Line",
+          "fen": "rn2kbnr/pp2pppp/2p5/3p3b/P3P3/2NP1NqP/1PP2PP1/R1BQKB1R w KQkq - 1 7",
+          "extension": "seeded uniform legal suffix from CC0 eight-ply root"
+        }
+      },
+      {
+        "family": 21,
+        "prefix4": [
+          "d2d4",
+          "e7e6",
+          "c2c4",
+          "c7c5"
+        ],
+        "opening": {
+          "moves": [
+            "d2d4",
+            "e7e6",
+            "c2c4",
+            "c7c5",
+            "d4d5",
+            "e6d5",
+            "c4d5",
+            "d7d6",
+            "b1c3",
+            "g7g6",
+            "e2e4",
+            "f8g7"
+          ],
+          "eco": "A40",
+          "name": "Benoni Defense: Franco-Sicilian Hybrid",
+          "fen": "rnbqk1nr/pp3pbp/3p2p1/2pP4/4P3/2N5/PP3PPP/R1BQKBNR w KQkq - 1 7"
+        }
+      },
+      {
+        "family": 22,
+        "prefix4": [
+          "d2d4",
+          "d7d5",
+          "c2c4",
+          "d5c4"
+        ],
+        "opening": {
+          "moves": [
+            "d2d4",
+            "d7d5",
+            "c2c4",
+            "d5c4",
+            "g1f3",
+            "g8f6",
+            "e2e3",
+            "e7e6",
+            "f1c4",
+            "c7c5",
+            "e1g1",
+            "a7a6"
+          ],
+          "eco": "D27",
+          "name": "Queen's Gambit Accepted: Classical Defense, Main Line",
+          "fen": "rnbqkb1r/1p3ppp/p3pn2/2p5/2BP4/4PN2/PP3PPP/RNBQ1RK1 w kq - 0 7"
+        }
+      },
+      {
+        "family": 23,
+        "prefix4": [
+          "c2c4",
+          "g8f6",
+          "g2g3",
+          "g7g6"
+        ],
+        "opening": {
+          "moves": [
+            "c2c4",
+            "g8f6",
+            "g2g3",
+            "g7g6",
+            "f1g2",
+            "f8g7",
+            "d2d4",
+            "d7d5",
+            "f2f3",
+            "f6g8",
+            "c1h6",
+            "c8d7"
+          ],
+          "eco": "D71",
+          "name": "Neo-Gr\u00fcnfeld Defense: Exchange Variation",
+          "fen": "rn1qk1nr/pppbppbp/6pB/3p4/2PP4/5PP1/PP2P1BP/RN1QK1NR w KQkq - 3 7",
+          "extension": "seeded uniform legal suffix from CC0 eight-ply root"
+        }
+      }
+    ]
+  },
+  "source_receipts": [
+    {
+      "file": "README.md",
+      "url": "https://raw.githubusercontent.com/lichess-org/chess-openings/master/README.md",
+      "status": 200,
+      "sha256": "c0bedd93a117f318a3bd087a3af640652f4369ca461429d4dfbeee4614dc5eae",
+      "bytes": 2661
+    },
+    {
+      "file": "a.tsv",
+      "url": "https://raw.githubusercontent.com/lichess-org/chess-openings/master/a.tsv",
+      "status": 200,
+      "sha256": "41722fa3d44f294357326fe2ca1b956d9e56490b30efcfa68db61114c9df7e10",
+      "bytes": 66338
+    },
+    {
+      "file": "b.tsv",
+      "url": "https://raw.githubusercontent.com/lichess-org/chess-openings/master/b.tsv",
+      "status": 200,
+      "sha256": "310f0997d5a26ac6c9abfabac028e47e78f24356a6ba322cfffbf8f5a3f88d25",
+      "bytes": 77372
+    },
+    {
+      "file": "c.tsv",
+      "url": "https://raw.githubusercontent.com/lichess-org/chess-openings/master/c.tsv",
+      "status": 200,
+      "sha256": "b2e64f32e42e6418b327d03a55af65f3a18e762f7cbc0efffc7e9d1ed3aa7343",
+      "bytes": 132306
+    },
+    {
+      "file": "d.tsv",
+      "url": "https://raw.githubusercontent.com/lichess-org/chess-openings/master/d.tsv",
+      "status": 200,
+      "sha256": "58cad40b886bd499717eabcce281d4bfcf00eeadbdc00552f42042cf4aac50d2",
+      "bytes": 69199
+    },
+    {
+      "file": "e.tsv",
+      "url": "https://raw.githubusercontent.com/lichess-org/chess-openings/master/e.tsv",
+      "status": 200,
+      "sha256": "2787c571c16758343352be5a3e1272cb79af9ad32f20884ea6af982026efbe13",
+      "bytes": 43453
+    }
+  ]
+}
