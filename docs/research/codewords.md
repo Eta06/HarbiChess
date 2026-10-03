@@ -1276,6 +1276,14 @@ Cumulative non-inferiority, bootstrap/power, holdout ve production-readiness gat
 - [8e2f6bf](https://github.com/Eta06/HarbiChess/commit/8e2f6bfa2bca566ec522a3b23aba1f1d0cad440c) PUSULA: test paired continuation safety
 - [3739f4b](https://github.com/Eta06/HarbiChess/commit/3739f4bf6ae637100eadf6f22c643ab769fc975f) PUSULA: preregister continuation noninferiority
 
+## UFUK — 3 Ekim 2026
+
+Kaynak/rengin etiket örnekleme yanlılığını kaldıran daha geniş teacher curriculum,
+aynı veri üzerinde frozen policy-head ve end-to-end kompakt ağ kontrolü, yeni
+hamle devamlarıyla güç testi. Başarı veya promotion adı değildir.
+
+- [Ön kayıt](../runs/UFUK-balanced-preregistration-20261003.md)
+
 ## AYNA — 3 Ekim 2026
 
 Sabit tam-history pozisyonlarında policy/search/value hatasını ayrı Stockfish
