@@ -59,9 +59,12 @@ def run(
     learning_rate: float = 2e-4,
     max_train_rows: int | None = None,
     max_validation_rows: int | None = None,
+    qualification_kind: str = "both-heads",
 ) -> dict:
     if min(max_steps, interval, patience, batch_size, wall_seconds) <= 0:
         raise ValueError("training budgets must be positive")
+    if qualification_kind not in ("both-heads", "policy-with-frozen-value"):
+        raise ValueError("unsupported registered qualification kind")
     torch.set_num_threads(1)
     torch.use_deterministic_algorithms(True)
     started = time.perf_counter()
@@ -92,6 +95,8 @@ def run(
         config["qualification_reference_sha256"] = sha256(qualification_reference)
     if max_train_rows is not None or max_validation_rows is not None:
         config["panel_caps"] = {"train": max_train_rows, "validation": max_validation_rows}
+    if qualification_kind != "both-heads":
+        config["qualification_kind"] = qualification_kind
     if resume:
         learner, manifest, _ = load_checkpoint(resume, expected_run_config=config)
         state = manifest["run_state"]
@@ -191,10 +196,12 @@ def run(
     checkpoint()
     baseline = state.get("qualification_reference", state["evaluations"][0])
     best = next(row for row in state["evaluations"] if row["step"] == state["best_step"])
-    qualified = (
-        baseline["policy_ce"] - best["policy_ce"] >= 0.10
-        and baseline["value_ce"] - best["value_ce"] >= 0.10
+    value_qualified = (
+        baseline["value_ce"] - best["value_ce"] >= 0.10
+        if qualification_kind == "both-heads"
+        else abs(baseline["value_ce"] - best["value_ce"]) <= 1e-6
     )
+    qualified = baseline["policy_ce"] - best["policy_ce"] >= 0.10 and value_qualified
     usage = resource.getrusage(resource.RUSAGE_SELF)
     result = {
         "schema": 1,
@@ -238,6 +245,11 @@ def main() -> None:
     parser.add_argument("--seed", type=int, default=20261003)
     parser.add_argument("--max-train-rows", type=int)
     parser.add_argument("--max-validation-rows", type=int)
+    parser.add_argument(
+        "--qualification-kind",
+        choices=("both-heads", "policy-with-frozen-value"),
+        default="both-heads",
+    )
     args = parser.parse_args()
     print(
         json.dumps(
@@ -257,6 +269,7 @@ def main() -> None:
                 seed=args.seed,
                 max_train_rows=args.max_train_rows,
                 max_validation_rows=args.max_validation_rows,
+                qualification_kind=args.qualification_kind,
             )
         ),
         flush=True,
