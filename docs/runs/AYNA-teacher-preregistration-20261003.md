@@ -32,7 +32,8 @@ Per position:
 
 1. Raw initial policy's argmax/legal ranks and STM WDL.
 2. Full Gumbel 16 and 128, considered actions=16, Gumbel=0, unchanged scales.
-3. Same learned priors/search at 16, with only leaf value replaced by Stockfish
+3. Same learned priors/search at 16, with only evaluated-node value (root and
+   leaves) replaced by Stockfish
    at 1024 nodes. This is an oracle-assisted diagnostic, not a deployable neural
    strength result or an equal-compute comparison.
 4. Cold-cache Stockfish 4096 and 32768-node top moves/STM score/WDL to assess
@@ -78,3 +79,7 @@ Next training selection follows measured deficits; it can be supervised
 warm start/reanalysis plus fresh self-play rather than a mandatory old architecture.
 Heldout games/families for final strength are created separately before candidate
 selection; these diagnostic rows cannot become its independent test.
+
+Command (run once after source checks/commit):
+
+    .venv/bin/python -m harbichess.evaluation.teacher_probe artifacts/mercek-search-20261003/arena-16.json artifacts/port-loop-20261002/checkpoints/generation-000000/model.safetensors artifacts/port-loop-20261002/checkpoints/generation-000003/model.safetensors /workspace/work/harbichess/stockfish/stockfish-linux-x86-64-universal artifacts/ayna-teacher-20261003 --wall-seconds 900
