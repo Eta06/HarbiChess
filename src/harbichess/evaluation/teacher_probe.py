@@ -9,7 +9,9 @@ import math
 import random
 import resource
 import subprocess
+import threading
 import time
+from contextlib import suppress
 from pathlib import Path
 
 import chess
@@ -97,6 +99,22 @@ def reference_info(info: dict, board: chess.Board) -> dict:
     }
 
 
+def last_complete_info(packets) -> dict:
+    """Use one coherent completed score packet; merged info retains stale flags."""
+    selected = None
+    for info in packets:
+        if (
+            all(k in info for k in ("score", "wdl", "pv"))
+            and info["pv"]
+            and not info.get("lowerbound")
+            and not info.get("upperbound")
+        ):
+            selected = dict(info)
+    if selected is None:
+        raise ValueError("engine produced no completed unbounded score packet")
+    return selected
+
+
 class StockfishReference:
     def __init__(self, path: Path, rules: PythonChessRules, deadline: float, log) -> None:
         self.rules, self.deadline, self.log = rules, deadline, log
@@ -117,10 +135,22 @@ class StockfishReference:
             raise ValueError("forced reference root move must be legal")
         started = time.perf_counter()
         # Changing game identity sends ucinewgame; no prior query's TT is retained.
-        info = self.engine.analyse(
-            board, chess.engine.Limit(nodes=nodes), root_moves=root_moves, game=object()
-        )
+        watchdog = threading.Timer(min(15, self.deadline - started), self.engine.close)
+        watchdog.start()
+        try:
+            with self.engine.analysis(
+                board, chess.engine.Limit(nodes=nodes), root_moves=root_moves, game=object()
+            ) as analysis:
+                info = last_complete_info(analysis)
+                best_move = analysis.wait().move
+                actual_nodes = analysis.info.get("nodes", info.get("nodes"))
+        finally:
+            watchdog.cancel()
         result = reference_info(info, board)
+        result["completed_iteration_nodes"] = result["nodes"]
+        result["nodes"] = actual_nodes
+        result["engine_bestmove"] = best_move.uci() if best_move else None
+        result["score_source"] = "last complete unbounded UCI packet"
         if result["lowerbound"] or result["upperbound"]:
             raise ValueError("bounded engine score is not an exact candidate reference")
         if forced and result["move"] != forced.uci:
@@ -144,7 +174,8 @@ class StockfishReference:
         return result
 
     def close(self) -> None:
-        self.engine.quit()
+        with suppress(chess.engine.EngineTerminatedError):
+            self.engine.quit()
 
 
 class OracleValueEvaluator:
