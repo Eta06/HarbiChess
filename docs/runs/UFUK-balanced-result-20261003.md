@@ -14,14 +14,14 @@ The previous AYNA self-learning strength failure remains failed, with raw eviden
 ## Corrected collection and independent integrity audit
 
 - Existing allocation:4CPU quota,16GiB, noGPU/CUDA, no purchased resources.
--1024trajectories/80511reference rows,48train/16development-validation families,
+- 1024trajectories/80511reference rows,48train/16development-validation families,
  16trajectories per family, both actor sources and STM colours, seed20261005.
--Three spawned workers, one Torch thread and one Stockfish19 thread each;
+- Three spawned workers, one Torch thread and one Stockfish19 thread each;
  native soft WDL and top4CPsoftmax policy at32768requested nodes/Hash16MiB.
  Teacher20%soft-policy exploration before ply40; frozen neural raw-policy actor.
--Actual80511queries/2,620,158,864nodes; collection wall1111.5780s,
+- Actual80511queries/2,620,158,864nodes; collection wall1111.5780s,
  childCPU3737.5625s. Requested budgets are distinct from actual node counts.
--Data source`71f03d04cd00af91bd4bd4ba47b76a6f569597f9`;
+- Data source`71f03d04cd00af91bd4bd4ba47b76a6f569597f9`;
  manifestSHA`b34a3870b494b4cc0fe8a1df87960fe5e2406a5c9a2ed341d1b93fed0e0e094f`.
  Stockfish SHA`0f83d24cc46d2c66c60f16001af5444873bc112b7d028594513426894c12da19`.
 
@@ -68,8 +68,8 @@ Head policy delta0.082206<0.10 required; value unchanged as expected. No thresho
 relaxation, no head arena. All deltas policy0.241553/value0.553064 satisfy the fixed
 0.10/0.10 rule. Selected weights:
 
--Head SHA`37ee86842e183b304f98b124288832727d0784e01351c5311000e8ae59e52bc2`.
--All SHA`18f2aae5a4dca317229b87af17ee393a4e786db3369e54aaf32c926a811cb5ae`.
+- Head SHA`37ee86842e183b304f98b124288832727d0784e01351c5311000e8ae59e52bc2`.
+- All SHA`18f2aae5a4dca317229b87af17ee393a4e786db3369e54aaf32c926a811cb5ae`.
 
 Head source`47d0535dd634f049b7648a7106f3553e8a861a65`, wall584.7644s,
  CPU587.1009s/peakRSS5332528KiB. All source`22e1b4a04bb5dbdf889db05d39f05d73d05f764a`,
