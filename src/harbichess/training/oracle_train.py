@@ -54,6 +54,8 @@ def run(
     batch_size: int = 64,
     wall_seconds: float = 1800,
     seed: int = 20261003,
+    trainable_prefixes: tuple[str, ...] = (),
+    qualification_reference: Path | None = None,
 ) -> dict:
     if min(max_steps, interval, patience, batch_size, wall_seconds) <= 0:
         raise ValueError("training budgets must be positive")
@@ -78,6 +80,10 @@ def run(
             p.name: sha256(p) for p in (Path(__file__), Path(__file__).with_name("oracle_data.py"))
         },
     }
+    if trainable_prefixes:
+        config["trainable_prefixes"] = list(trainable_prefixes)
+    if qualification_reference:
+        config["qualification_reference_sha256"] = sha256(qualification_reference)
     if resume:
         learner, manifest, _ = load_checkpoint(resume, expected_run_config=config)
         state = manifest["run_state"]
@@ -90,7 +96,13 @@ def run(
             raise FileExistsError("new learning runs require a fresh directory")
         directory.mkdir(parents=True)
         torch.manual_seed(seed)
-        learner = TorchLearner(load_weights(weights), config=LearnerConfig())
+        network = load_weights(weights)
+        if trainable_prefixes:
+            for name, parameter in network.named_parameters():
+                parameter.requires_grad_(name.startswith(trainable_prefixes))
+            if not any(p.requires_grad for p in network.parameters()):
+                raise ValueError("trainable prefixes match no parameters")
+        learner = TorchLearner(network, config=LearnerConfig())
         baseline = evaluate(learner, validation)
         state = {
             "cursor": 0,
@@ -98,6 +110,10 @@ def run(
             "best_score": baseline["total_ce"],
             "evaluations": [{"step": 0, **baseline}],
         }
+        if qualification_reference:
+            state["qualification_reference"] = evaluate(
+                TorchLearner(load_weights(qualification_reference)), validation
+            )
         publish_json(
             directory / "metadata.json",
             {"source_commit": source, "config": config, "panels": panel_info},
@@ -165,7 +181,7 @@ def run(
     if stop_at is not None and learner.step == stop_at and stop_at < max_steps:
         reason = "registered process boundary"
     checkpoint()
-    baseline = state["evaluations"][0]
+    baseline = state.get("qualification_reference", state["evaluations"][0])
     best = next(row for row in state["evaluations"] if row["step"] == state["best_step"])
     qualified = (
         baseline["policy_ce"] - best["policy_ce"] >= 0.10
@@ -205,6 +221,8 @@ def main() -> None:
     parser.add_argument("--resume", type=Path)
     parser.add_argument("--stop-at", type=int)
     parser.add_argument("--wall-seconds", type=float, default=1800)
+    parser.add_argument("--trainable-prefix", action="append", default=[])
+    parser.add_argument("--qualification-reference", type=Path)
     args = parser.parse_args()
     print(
         json.dumps(
@@ -215,6 +233,8 @@ def main() -> None:
                 resume=args.resume,
                 stop_at=args.stop_at,
                 wall_seconds=args.wall_seconds,
+                trainable_prefixes=tuple(args.trainable_prefix),
+                qualification_reference=args.qualification_reference,
             )
         ),
         flush=True,
