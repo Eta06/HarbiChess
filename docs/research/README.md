@@ -23,6 +23,12 @@ Kalıcı kaynak GitHub'dır. Notlar ve kararlar Git'te, büyük model/replay dos
   olumlu sınırlı hedef tanıları; maç gücü veya self-learning başarısı değil.
 - [Value sabit policy dalı protokolü](../runs/UFUK-policy-adapter-preregistration-20261003.md):
   aynı veride temsil karşılaştırması; dönüşüm weights-only, sonra tam native resume.
+- [Policy dalı sonucu](../runs/UFUK-policy-adapter-result-20261003.md): ek temsil eşiği başarısız.
+- [Sabit bütçede kök genişliği](../runs/UFUK-root-budget-result-20261003.md) ve
+  [gerçek eşlemeli maçlar](../runs/UFUK-root-arena-result-20261003.md): aynı model/16sim
+  dar search %87,5 skor; model öğrenmesi değil, sınırlı geliştirme search kazanımı.
+- [Dar search ile yeni self-play ön kaydı](../runs/UFUK-narrow-selfplay-preregistration-20261003.md):
+  final/başlangıç aynı search kullanır; taze model öğrenmesi ayrıca ölçülür.
 - [Codeword rehberi](codewords.md): araştırma snapshot'ındaki 54 prefix ve 896 commit.
 - [Tarihsel deney raporları](../runs/).
 - [Dosya manifesti](archive-20261002-manifest.json): 944 artifact/distribution dosyasının boyutu ve SHA-256 değeri.
