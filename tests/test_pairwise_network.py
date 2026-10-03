@@ -61,7 +61,8 @@ def test_real_mlx_cpu_pairwise_forward_masked_soft_loss_and_gradients(tmp_path):
     masked_mx = mlx.masked_policy_value(x, mx.array(actions.numpy()))
     mx.eval(masked_mx)
     np.testing.assert_allclose(masked[0].detach().numpy(), np.array(masked_mx[0]), atol=2e-5)
-    assert torch.equal(masked[0], actual[0].gather(1, actions))
+    # Selected dot products reassociate FP32 sums; require numerical, not bitwise parity.
+    torch.testing.assert_close(masked[0], actual[0].gather(1, actions), atol=2e-5, rtol=2e-5)
     learner = TorchLearner(network, config=LearnerConfig())
     losses = learner._loss(batch)
     losses[0].backward()
