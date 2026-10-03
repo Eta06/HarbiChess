@@ -41,7 +41,9 @@ class HarbiChessPairwiseNetwork(HarbiChessDecoupledValueNetwork):
             [[2 * (s % 8) / 7 - 1, 2 * (s // 8) / 7 - 1] for s in range(64)]
         )
 
-    def _pair_policy(self, inputs: mx.array, trunk: mx.array) -> mx.array:
+    def _pair_policy(
+        self, inputs: mx.array, trunk: mx.array, actions: mx.array | None = None
+    ) -> mx.array:
         size = inputs.shape[0]
         squares = trunk.reshape(size, 64, -1)
         pieces = inputs[:, :, :, :12].reshape(size, 64, 12)
@@ -57,6 +59,21 @@ class HarbiChessPairwiseNetwork(HarbiChessDecoupledValueNetwork):
             axis=2,
         )
         hidden = nn.relu(self.pair_hidden(features))
+        if actions is not None:
+            origins, destinations, planes = actions // 73, self._destinations[actions], actions % 73
+            origin_hidden = mx.take_along_axis(hidden, origins[:, :, None], axis=1)
+            destination_hidden = mx.take_along_axis(hidden, destinations[:, :, None], axis=1)
+            logits = mx.sum(
+                self.pair_query(origin_hidden) * self.pair_key(destination_hidden), axis=2
+            ) / math.sqrt(32)
+            for layer, vectors in (
+                (self.pair_origin_planes, origin_hidden),
+                (self.pair_destination_planes, destination_hidden),
+            ):
+                logits = (
+                    logits + mx.sum(vectors * layer.weight[planes], axis=2) + layer.bias[planes]
+                )
+            return mx.where(self._geometric[actions], logits, mx.array(-1e9))
         pair = (
             self.pair_query(hidden) @ mx.transpose(self.pair_key(hidden), (0, 2, 1)) / math.sqrt(32)
         )
@@ -79,5 +96,7 @@ class HarbiChessPairwiseNetwork(HarbiChessDecoupledValueNetwork):
             or action_indices.shape[1] == 0
         ):
             raise ValueError("masked actions must have shape (batch, non-zero actions)")
-        policy, value = self(inputs)
-        return mx.take_along_axis(policy, action_indices, axis=1), value
+        trunk = self._trunk(inputs)
+        return self._pair_policy(inputs, trunk, action_indices), self._production_value_logits(
+            inputs, trunk
+        )
