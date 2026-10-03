@@ -1,0 +1,248 @@
+{
+  "schema_version": 1,
+  "date_utc": "2026-10-03",
+  "purpose": "MERCEK source inspection; author claims are not local reproduction",
+  "laya_hf_revision": "55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851",
+  "laya_github_commit": "fa9a2a7070b1789912a49ae24603bbfb1a78b001",
+  "laya_weights_downloaded": false,
+  "laya_inference_run": false,
+  "raw_snapshot_location": "/workspace/work/harbichess/research-20261003",
+  "remote_snapshot_backup_verified": false,
+  "connector_failures": [
+    "hugging_face_paper_search: UNAVAILABLE, not returned by tools/list",
+    "hugging_face_dataset_search: UNAVAILABLE, not returned by tools/list"
+  ],
+  "sources": [
+    {
+      "file": "laya-readme.md",
+      "url": "https://huggingface.co/convaiinnovations/laya/raw/main/README.md",
+      "status": 200,
+      "bytes": 23187,
+      "sha256": "00355613796b3f5860b0d5b20392381d26580ec242e04a1fd150c7f116858602"
+    },
+    {
+      "file": "laya-config.json",
+      "url": "https://huggingface.co/convaiinnovations/laya/raw/main/config.json",
+      "error": "HTTP Error 404: Not Found"
+    },
+    {
+      "file": "laya-modeling.py",
+      "url": "https://huggingface.co/convaiinnovations/laya/raw/main/modeling_laya.py",
+      "error": "HTTP Error 404: Not Found"
+    },
+    {
+      "file": "laya-card-meta.json",
+      "url": "https://huggingface.co/api/models/convaiinnovations/laya",
+      "status": 200,
+      "bytes": 4354,
+      "sha256": "09374673f2db1d62c0abadb2ba166458ea78d52ea54ae07fe7870440d3995790"
+    },
+    {
+      "file": "laya-typed-readme.md",
+      "url": "https://huggingface.co/convaiinnovations/laya-typed-decisions/raw/main/README.md",
+      "status": 200,
+      "bytes": 6343,
+      "sha256": "83e67a995a70a9a9ef6cc1f8c68da654f11eee081c9bb14de07c37b08fcc3113"
+    },
+    {
+      "file": "laya-blog-search.json",
+      "url": "https://huggingface.co/api/papers/search?q=Laya%20Jev%20decision%20model&limit=5",
+      "status": 200,
+      "bytes": 30914,
+      "sha256": "479ab9d816aeea6c3ffcab03de789a411b9d2ab2abb55c472c40764e673adcd8"
+    },
+    {
+      "file": "grounded-chess.md",
+      "url": "https://huggingface.co/papers/2603.20510.md",
+      "status": 200,
+      "bytes": 71408,
+      "sha256": "f127361f02d64e7ce7989a6aa2c558500e665fb065bfec6acaa27f8dc279617b"
+    },
+    {
+      "file": "chess-rl.md",
+      "url": "https://huggingface.co/papers/2604.05134.md",
+      "status": 200,
+      "bytes": 99528,
+      "sha256": "3758fb80bc920f79cd31d9665f6e91e9e92ba3af6176176cb103f3c7b08a9057"
+    },
+    {
+      "file": "chessgpt.md",
+      "url": "https://huggingface.co/papers/2306.09200.md",
+      "status": 200,
+      "bytes": 109397,
+      "sha256": "2406ba068bfc4b5cea2d4ec9c765a1c64742b0120d78c4183305ede60630dc90"
+    },
+    {
+      "file": "knapsack-rl.md",
+      "url": "https://huggingface.co/papers/2509.25849.md",
+      "status": 200,
+      "bytes": 92316,
+      "sha256": "397946b77436292f9543704a84cbac6c74054d48b4b48ab3a8320f4da3458382"
+    },
+    {
+      "file": "laya-agent.py",
+      "url": "https://raw.githubusercontent.com/NandhaKishorM/laya/fa9a2a7070b1789912a49ae24603bbfb1a78b001/laya/agent.py",
+      "status": 200,
+      "bytes": 111253,
+      "sha256": "63160e021015e0df6ed9bc3b65957f919178b3e98a23f020c2995cffb7c381b1"
+    },
+    {
+      "file": "laya-calibrate.py",
+      "url": "https://raw.githubusercontent.com/NandhaKishorM/laya/fa9a2a7070b1789912a49ae24603bbfb1a78b001/laya/calibrate.py",
+      "status": 200,
+      "bytes": 27621,
+      "sha256": "b0cfa4682f9613de71e983543c8ec8acecb127f98e57772a7ae242ca3c377a0e"
+    },
+    {
+      "file": "laya-common.py",
+      "url": "https://huggingface.co/convaiinnovations/laya/resolve/55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851/rl_common.py",
+      "status": 200,
+      "bytes": 19139,
+      "sha256": "8d83611d480c971d640a7b7d3aa2f2219c5e8455e9cc2329fd073681bd8be23e"
+    },
+    {
+      "file": "laya-agent-config.json",
+      "url": "https://huggingface.co/convaiinnovations/laya/resolve/55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851/rl_agent_config.json",
+      "status": 200,
+      "bytes": 745,
+      "sha256": "ae287b56bbcf5f8c4f4541ae9dfd00c914c4c48b940b8398c3058af37ba92bbd"
+    },
+    {
+      "file": "gumbel-paper.pdf",
+      "url": "https://openreview.net/pdf?id=bERaNdoegnO",
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "file": "laya-github-commit.json",
+      "url": "https://api.github.com/repos/NandhaKishorM/laya/commits/main",
+      "status": 200,
+      "bytes": 10408,
+      "sha256": "67b946f4c48a200ec5dc342c0d752d57ac2ab36d963e6befc4c19f8e68c85330"
+    },
+    {
+      "file": "laya-readme-pinned.md",
+      "url": "https://huggingface.co/convaiinnovations/laya/raw/55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851/README.md",
+      "status": 200,
+      "bytes": 23187,
+      "sha256": "00355613796b3f5860b0d5b20392381d26580ec242e04a1fd150c7f116858602"
+    },
+    {
+      "file": "laya-train-notebook.ipynb",
+      "url": "https://raw.githubusercontent.com/NandhaKishorM/laya/main/notebooks/laya_finetune_typed_decisions_2xT4_kaggle.ipynb",
+      "status": 200,
+      "bytes": 41289,
+      "sha256": "d97004a95c878e4d2d8158d0f91efa7922cdc854d7454d7a0ccda115444eccb0"
+    },
+    {
+      "file": "chessbench-license.txt",
+      "url": "https://raw.githubusercontent.com/google-deepmind/searchless_chess/main/LICENSE",
+      "status": 200,
+      "bytes": 11358,
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+    },
+    {
+      "file": "laya-github-license.txt",
+      "url": "https://raw.githubusercontent.com/NandhaKishorM/laya/main/LICENSE",
+      "status": 200,
+      "bytes": 10173,
+      "sha256": "a6cba85bc92e0cff7a450b1d873c0eaa2e9fc96bf472df0247a26bec77bf3ff9"
+    },
+    {
+      "file": "lichess-database.html",
+      "url": "https://database.lichess.org/",
+      "status": 200,
+      "bytes": 473380,
+      "sha256": "2de41019f5ebac052730387b58fd619d714de49a941be29e41bec78b3158cdec"
+    },
+    {
+      "file": "nnue-pytorch-readme.json",
+      "url": "https://api.github.com/repos/official-stockfish/nnue-pytorch/readme",
+      "status": 200,
+      "bytes": 5887,
+      "sha256": "819d7699ba7bc9cfc8cc4feadc9e25cb763de0c073e8bc2a797f4f24fd36b5c3"
+    },
+    {
+      "file": "stockfish-readme.md",
+      "url": "https://raw.githubusercontent.com/official-stockfish/Stockfish/master/README.md",
+      "status": 200,
+      "bytes": 7772,
+      "sha256": "ae3ef5c2282400d643c6e923d0b8b8d8fe35cf98762701f0379c79bde16c3a26"
+    },
+    {
+      "file": "chessformer-search.json",
+      "url": "https://huggingface.co/api/papers/search?q=ChessFormer%20Leela%20Chess%20Zero&limit=3",
+      "status": 200,
+      "bytes": 17838,
+      "sha256": "0ab583d938bb8496a156af8540cae1266abaf02c345127de13388498a1e9ceae"
+    },
+    {
+      "file": "searchless-paper.md",
+      "url": "https://huggingface.co/papers/2402.04494.md",
+      "status": 200,
+      "bytes": 122923,
+      "sha256": "aa03880ebcffa011ed22abaa8dee3fee081f5ed2bf4346b95b139674ad567209"
+    },
+    {
+      "file": "searchless-meta.json",
+      "url": "https://huggingface.co/api/papers/2402.04494",
+      "status": 200,
+      "bytes": 6859,
+      "sha256": "10dc4be0c91f403cf98d59ffe2d4bcb88efa453f48daed3db040b276abd77091"
+    },
+    {
+      "file": "searchless-readme.md",
+      "url": "https://raw.githubusercontent.com/google-deepmind/searchless_chess/main/README.md",
+      "status": 200,
+      "bytes": 11083,
+      "sha256": "df0800f57ee673873ddc7a3f6681a4e583c4d42fdc68b33b6666eccbcfed1e37"
+    },
+    {
+      "file": "decision-transformer.md",
+      "url": "https://huggingface.co/papers/2106.01345.md",
+      "status": 200,
+      "bytes": 75127,
+      "sha256": "a7049b9c7cd11dd92c6ef7a170c11e38c1c6ae60d0fb2d40b3277b78b83d866f"
+    },
+    {
+      "file": "gumbel-openreview.html",
+      "url": "https://openreview.net/forum?id=bERaNdoegnO",
+      "status": 200,
+      "bytes": 4789,
+      "sha256": "89785f1ea859f0873d0d00e3fd7ff4050777843a8fb6a01e00146e304bb2189a"
+    },
+    {
+      "file": "laya-search.json",
+      "url": "https://huggingface.co/api/models?search=laya&limit=10",
+      "status": 200,
+      "bytes": 5720,
+      "sha256": "7039d73819adc577d1fd0e4d7278aa97fc8e2d4fd878167f178c8fe2c7d2b172"
+    },
+    {
+      "file": "chess-paper-search.json",
+      "url": "https://huggingface.co/api/papers/search?q=chess%20language%20model%20reinforcement%20learning&limit=8",
+      "status": 200,
+      "bytes": 51707,
+      "sha256": "02ed165dd67dcf12bbba1012cc1ddf85fd7ce1c95db28cce13c2db24e99985ec"
+    },
+    {
+      "file": "compute-paper-search.json",
+      "url": "https://huggingface.co/api/papers/search?q=chess%20adaptive%20search%20compute%20budget%20policy&limit=6",
+      "status": 200,
+      "bytes": 40204,
+      "sha256": "fb59e5767f12c523cc8fa681759f2d1b53c223e0af0128ba0bac899b61eef877"
+    },
+    {
+      "file": "chess-datasets.json",
+      "url": "https://huggingface.co/api/datasets?author=DeepMind&search=chess&limit=5",
+      "status": 200,
+      "bytes": 2,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "url": "https://huggingface.co/blog/sora-2/laya-ai-model-how-it-works-run-it-locally-and-eva",
+      "file": "laya-page.html",
+      "status": 404,
+      "note": "User supplied reference, rechecked on 2026-10-03; identified independently using user Jev-alternative clue."
+    }
+  ]
+}
