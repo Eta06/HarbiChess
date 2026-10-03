@@ -2,10 +2,16 @@
 
 from __future__ import annotations
 
+import json
 import math
+import os
+import tempfile
+from dataclasses import asdict
+from pathlib import Path
 
 import mlx.core as mx
 import mlx.nn as nn
+from mlx.utils import tree_flatten
 
 from harbichess.backends.decoupled_value_network import HarbiChessDecoupledValueNetwork
 from harbichess.backends.invariant_value_network import InvariantValueConfig
@@ -40,6 +46,84 @@ class HarbiChessPairwiseNetwork(HarbiChessDecoupledValueNetwork):
         self._coordinates = mx.array(
             [[2 * (s % 8) / 7 - 1, 2 * (s // 8) / 7 - 1] for s in range(64)]
         )
+
+    @classmethod
+    def from_portable(cls, path: Path) -> HarbiChessPairwiseNetwork:
+        """Load version-1 Torch OIHW or MLX OHWI weights without importing Torch.
+
+        This restores model weights only, never optimizer/RNG/training state.
+        Unversioned legacy models must use their original architecture loaders.
+        """
+        weights, header = mx.load(path, return_metadata=True)
+        if "harbichess" not in header:
+            raise ValueError("pairwise weights require versioned HarbiChess metadata")
+        metadata = json.loads(header["harbichess"])
+        if metadata["schema"] != 1:
+            raise ValueError("unsupported weight schema")
+        specification = metadata["specification"]
+        if specification["architecture"] != "pairwise":
+            raise ValueError("pairwise loader requires pairwise architecture")
+        if metadata["layout"] == "torch-oihw":
+            weights = {
+                key: mx.transpose(value, (0, 2, 3, 1)) if value.ndim == 4 else value
+                for key, value in weights.items()
+            }
+        elif metadata["layout"] != "mlx-ohwi":
+            raise ValueError("unsupported tensor layout")
+        if any(not bool(mx.all(mx.isfinite(value))) for value in weights.values()):
+            raise ValueError("non-finite model weights")
+        invariant = specification["invariant"]
+        network = cls(
+            NetworkConfig(**specification["config"]),
+            invariant_config=InvariantValueConfig(
+                invariant["channels"], invariant["blocks"], invariant["hidden"]
+            ),
+        )
+        network.load_weights(list(weights.items()), strict=True)
+        # Preserve even unused specification fields, without making them parameters.
+        network._portable_specification = specification
+        return network
+
+    def save_portable(self, path: Path, *, provenance: dict | None = None) -> None:
+        """Atomically publish versioned MLX weights for either backend, no overwrite."""
+        if path.exists():
+            raise FileExistsError(path)
+        v = self.invariant_config
+        specification = getattr(
+            self,
+            "_portable_specification",
+            {
+                "config": asdict(self.config),
+                "architecture": "pairwise",
+                "invariant": {
+                    "channels": v.tower_channels,
+                    "blocks": v.tower_blocks,
+                    "hidden": v.tower_hidden,
+                },
+                "plastic": {"channels": 16, "blocks": 2, "hidden": 64, "invariant_hidden": 32},
+            },
+        )
+        weights = dict(tree_flatten(self.parameters()))
+        mx.eval(weights)
+        if any(not bool(mx.all(mx.isfinite(value))) for value in weights.values()):
+            raise ValueError("non-finite model weights")
+        metadata = {
+            "schema": 1,
+            "layout": "mlx-ohwi",
+            "specification": specification,
+            "transfer": "weights-only",
+            "provenance": provenance or {},
+        }
+        path.parent.mkdir(parents=True, exist_ok=True)
+        fd, temporary = tempfile.mkstemp(dir=path.parent, suffix=".safetensors")
+        os.close(fd)
+        try:
+            mx.save_safetensors(temporary, weights, {"harbichess": json.dumps(metadata)})
+            with open(temporary, "rb") as handle:
+                os.fsync(handle.fileno())
+            os.link(temporary, path)
+        finally:
+            os.unlink(temporary)
 
     def _pair_policy(
         self, inputs: mx.array, trunk: mx.array, actions: mx.array | None = None
