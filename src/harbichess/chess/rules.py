@@ -55,19 +55,6 @@ class PythonChessRules:
         while len(cache) > self.board_cache_size:
             cache.popitem(last=False)
 
-    def _facts(self, state: ChessState) -> dict:
-        """Only immutable derived values; full history and thread are part of identity."""
-        cache = getattr(self._thread_local, "fact_cache", None)
-        if cache is None:
-            cache = OrderedDict()
-            self._thread_local.fact_cache = cache
-        if state not in cache:
-            cache[state] = {}
-        cache.move_to_end(state)
-        while len(cache) > self.board_cache_size:
-            cache.popitem(last=False)
-        return cache[state]
-
     def _cached_board(self, state: ChessState) -> chess.Board:
         cache = self._cache()
         cached = cache.get(state)
@@ -115,28 +102,18 @@ class PythonChessRules:
         return self._cached_board(state)
 
     def view(self, state: ChessState) -> PositionView:
-        facts = self._facts(state)
-        if "view" in facts:
-            return facts["view"]
         board = self._cached_board(state)
-        result = PositionView(
+        return PositionView(
             fen=board.fen(),
             side_to_move=Side.WHITE if board.turn is chess.WHITE else Side.BLACK,
             in_check=board.is_check(),
             halfmove_clock=board.halfmove_clock,
             fullmove_number=board.fullmove_number,
         )
-        facts["view"] = result
-        return result
 
     def legal_moves(self, state: ChessState) -> tuple[ChessMove, ...]:
-        facts = self._facts(state)
-        if "legal" in facts:
-            return facts["legal"]
         board = self._cached_board(state)
-        result = tuple(ChessMove(move.uci()) for move in sorted(board.legal_moves, key=str))
-        facts["legal"] = result
-        return result
+        return tuple(ChessMove(move.uci()) for move in sorted(board.legal_moves, key=str))
 
     def apply(self, state: ChessState, move: ChessMove) -> ChessState:
         result = ChessState(root_fen=state.root_fen, moves=(*state.moves, move))
@@ -153,19 +130,12 @@ class PythonChessRules:
         return result
 
     def outcome(self, state: ChessState, *, claim_draw: bool = False) -> GameOutcome | None:
-        facts = self._facts(state)
-        key = "claimed_outcome" if claim_draw else "forced_outcome"
-        if key in facts:
-            return facts[key]
         board = self._cached_board(state)
         outcome = board.outcome(claim_draw=claim_draw)
         if outcome is None:
-            facts[key] = None
             return None
         result = TerminalResult(outcome.result())
-        result = GameOutcome(result=result, termination=outcome.termination.name.lower())
-        facts[key] = result
-        return result
+        return GameOutcome(result=result, termination=outcome.termination.name.lower())
 
     def claimable_threefold_moves(
         self,
