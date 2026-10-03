@@ -165,7 +165,9 @@ class TorchChessNetwork(nn.Module):
             x = block(x)
         return torch.cat((x.mean(dim=(2, 3)), x.amax(dim=(2, 3))), dim=1)
 
-    def _features(self, inputs: torch.Tensor) -> tuple[torch.Tensor, torch.Tensor]:
+    def _features(
+        self, inputs: torch.Tensor, actions: torch.Tensor | None = None
+    ) -> tuple[torch.Tensor, torch.Tensor]:
         c = self.config
         if inputs.ndim != 4 or tuple(inputs.shape[1:]) != (8, 8, c.input_channels):
             raise ValueError(f"network input must have shape (batch, 8, 8, {c.input_channels})")
@@ -174,7 +176,7 @@ class TorchChessNetwork(nn.Module):
         for block in self.blocks:
             trunk = block(trunk)
         policy = (
-            self._pair_policy(inputs, trunk)
+            self._pair_policy(inputs, trunk, actions)
             if self.architecture == "pairwise"
             else self._flatten(torch.relu(self.policy_conv(trunk)))
         )
@@ -196,7 +198,9 @@ class TorchChessNetwork(nn.Module):
             logits = (logits + self.plastic_value_output(hidden)) * self.value_logit_scale.exp()
         return policy, logits
 
-    def _pair_policy(self, inputs: torch.Tensor, trunk: torch.Tensor) -> torch.Tensor:
+    def _pair_policy(
+        self, inputs: torch.Tensor, trunk: torch.Tensor, actions: torch.Tensor | None = None
+    ) -> torch.Tensor:
         size = inputs.shape[0]
         squares = trunk.permute(0, 2, 3, 1).reshape(size, 64, -1)
         pieces = inputs[:, :, :, :12].reshape(size, 64, 12)
@@ -212,6 +216,19 @@ class TorchChessNetwork(nn.Module):
             2,
         )
         hidden = torch.relu(self.pair_hidden(features))
+        if actions is not None:
+            origins, destinations, planes = actions // 73, self._destinations[actions], actions % 73
+            origin_hidden = hidden.gather(1, origins[:, :, None].expand(-1, -1, 64))
+            destination_hidden = hidden.gather(1, destinations[:, :, None].expand(-1, -1, 64))
+            logits = (self.pair_query(origin_hidden) * self.pair_key(destination_hidden)).sum(
+                2
+            ) / math.sqrt(32)
+            for layer, vectors in (
+                (self.pair_origin_planes, origin_hidden),
+                (self.pair_destination_planes, destination_hidden),
+            ):
+                logits = logits + (vectors * layer.weight[planes]).sum(2) + layer.bias[planes]
+            return logits.masked_fill(~self._geometric[actions], -1e9)
         pair = self.pair_query(hidden) @ self.pair_key(hidden).transpose(1, 2) / math.sqrt(32)
         origin = torch.arange(4672, device=inputs.device) // 73
         planes = torch.arange(4672, device=inputs.device) % 73
@@ -231,9 +248,11 @@ class TorchChessNetwork(nn.Module):
             raise ValueError("masked actions must have shape (batch, non-zero actions)")
         if torch.any(actions < 0) or torch.any(actions >= self.config.policy_size):
             raise ValueError("masked action index out of range")
-        features, value = self._features(inputs)
+        features, value = self._features(
+            inputs, actions if self.architecture == "pairwise" else None
+        )
         if self.architecture == "pairwise":
-            return features.gather(1, actions), value
+            return features, value
         weights = self.policy_linear.weight[actions]
         logits = (features[:, None, :] * weights).sum(2) + self.policy_linear.bias[actions]
         return logits, value
