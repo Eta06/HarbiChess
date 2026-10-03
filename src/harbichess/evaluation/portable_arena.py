@@ -67,6 +67,7 @@ def arena(
     opening_pairs: int = 8,
     openings: tuple[tuple[str, ...], ...] | None = None,
     opening_source_sha256: str | None = None,
+    candidate_policy_only: bool = False,
 ) -> dict:
     frozen_openings = OPENINGS if openings is None else openings
     if (
@@ -124,7 +125,11 @@ def arena(
                         raise TimeoutError("arena wall budget exhausted")
                     move_started = time.perf_counter()
                     if rules.view(state).side_to_move == color:
-                        move = candidate_search.search(state, rng=rng).selected_action
+                        if candidate_policy_only:
+                            priors = candidate_search.evaluator.evaluate(state).priors
+                            move = min(priors, key=lambda item: (-item[1], item[0].uci))[0]
+                        else:
+                            move = candidate_search.search(state, rng=rng).selected_action
                     elif other_search:
                         move = other_search.search(state, rng=rng).selected_action
                     elif engine:
@@ -178,6 +183,15 @@ def arena(
         "promotion_ready": False,
         "source_commit": source_commit,
         "opening_source_sha256": opening_source_sha256,
+        **(
+            {
+                "candidate_selection": "raw_policy_argmax",
+                "candidate_neural_simulations_per_move": 0,
+                "opponent_neural_simulations_per_move": simulations if other_search else None,
+            }
+            if candidate_policy_only
+            else {}
+        ),
     }
 
 
@@ -197,6 +211,7 @@ def main() -> None:
     parser.add_argument("--split", default="arena")
     parser.add_argument("--seed", type=int, default=20261002)
     parser.add_argument("--threads", type=int, default=1)
+    parser.add_argument("--candidate-policy-only", action="store_true")
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     opponent = args.opponent if args.opponent in ("random", "stockfish") else Path(args.opponent)
@@ -220,6 +235,7 @@ def main() -> None:
             else None
         ),
         opening_source_sha256=sha256(args.openings) if args.openings else None,
+        candidate_policy_only=args.candidate_policy_only,
     )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2) + "\n")
