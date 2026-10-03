@@ -69,7 +69,7 @@ separated CC0 opening families. V1 collection failed on mixed same-depth
 MultiPV rankings; completed files were not used. V2 requires one consecutive
 unbounded PV 1..K cycle; failure packets are saved, original failure preserved.
 
-V2 collection source 981605797b40b31e28d651e709482882698b5f16: 128 games,
+V2 collection source 9816057404313df34ce669e43b1d69e1324208ef: 128 games,
 3601 rows, 68.6804 s, child CPU 264.2124 s with four spawn workers. The dataset
 manifest SHA is 33640698d2462894376b48d7afbed76ddd6b3a20544bd543985ed395690c3cd4.
 48 train families/2605 rows and 16 validation families/996 rows, zero current-
