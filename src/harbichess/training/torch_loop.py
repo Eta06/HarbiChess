@@ -16,6 +16,7 @@ from dataclasses import asdict, dataclass
 from datetime import UTC, datetime
 from pathlib import Path
 
+import chess
 import torch
 
 from harbichess.backends.torch_network import TorchChessNetwork, load_weights, sha256
@@ -73,6 +74,8 @@ def run_loop(
     legacy_mlx: bool = False,
     resume: Path | None = None,
     actor_mode: str = "thread",
+    trainable_prefixes: tuple[str, ...] = (),
+    opening_book: Path | None = None,
 ) -> dict:
     if generations <= 0 or wall_seconds <= 0 or actor_mode not in ("thread", "process"):
         raise ValueError("generation target and wall budget must be positive")
@@ -86,6 +89,25 @@ def run_loop(
     children_started = resource.getrusage(resource.RUSAGE_CHILDREN)
     deadline = started + wall_seconds
     run_config = asdict(config)
+    if trainable_prefixes:
+        if any(not isinstance(prefix, str) or not prefix for prefix in trainable_prefixes):
+            raise ValueError("trainable prefixes must be nonempty strings")
+        run_config["trainable_prefixes"] = list(trainable_prefixes)
+    if opening_book is not None:
+        book = json.loads(opening_book.read_text())
+        if book["schema"] != 1:
+            raise ValueError("unsupported opening book schema")
+        openings = [row["opening"]["moves"] for row in book["splits"]["train"]]
+        if not openings:
+            raise ValueError("training opening book is empty")
+        for moves in openings:
+            board = chess.Board()
+            for uci in moves:
+                board.push_uci(uci)
+            if board.outcome(claim_draw=True) is not None or len(moves) >= config.max_plies:
+                raise ValueError("training opening must be nonterminal within ply budget")
+        run_config["actor_openings"] = openings
+        run_config["opening_source_sha256"] = sha256(opening_book)
     if actor_mode == "process":
         if config.device != "cpu" or config.threads != 1:
             raise ValueError("process actors require CPU and one Torch thread")
@@ -122,6 +144,11 @@ def run_loop(
                 )
             )
         )
+        if trainable_prefixes:
+            for name, parameter in network.named_parameters():
+                parameter.requires_grad_(name.startswith(trainable_prefixes))
+            if not any(parameter.requires_grad for parameter in network.parameters()):
+                raise ValueError("trainable prefixes select no network parameters")
         learner = TorchLearner(
             network, config=LearnerConfig(learning_rate=config.learning_rate), device=config.device
         )
@@ -157,13 +184,13 @@ def run_loop(
                     directory
                     / f"checkpoints/generation-{generation - 1:06d}"
                     / "model.safetensors",
-                    asdict(config),
+                    run_config,
                     indices,
                     deadline,
                 )
             else:
                 games, stats = collect_thread_games(
-                    learner.network, asdict(config), indices, deadline
+                    learner.network, run_config, indices, deadline
                 )
             generation_seconds = time.perf_counter() - generation_start
             fresh = {
@@ -330,6 +357,8 @@ def main() -> None:
     parser.add_argument("--legacy-mlx", action="store_true")
     parser.add_argument("--resume", type=Path)
     parser.add_argument("--actor-mode", choices=("thread", "process"), default="thread")
+    parser.add_argument("--trainable-prefix", action="append", default=[])
+    parser.add_argument("--opening-book", type=Path, help="Versioned book; train split only")
     for name, field in LoopConfig.__dataclass_fields__.items():
         parser.add_argument(
             "--" + name.replace("_", "-"), type=type(field.default), default=field.default
@@ -345,6 +374,8 @@ def main() -> None:
         legacy_mlx=args.legacy_mlx,
         resume=args.resume,
         actor_mode=args.actor_mode,
+        trainable_prefixes=tuple(args.trainable_prefix),
+        opening_book=args.opening_book,
     )
 
 
