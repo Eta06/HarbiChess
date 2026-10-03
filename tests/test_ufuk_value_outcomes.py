@@ -1,19 +1,23 @@
 """Real value updates isolate policy and match optimizer/RNG resume."""
 
 import copy
+import hashlib
+import json
 from types import SimpleNamespace
 
 import pytest
 import torch
 
-from harbichess.backends.torch_network import TorchChessNetwork
+from harbichess.backends.torch_network import TorchChessNetwork, load_weights, sha256
 from harbichess.core.network_config import NetworkConfig
 from harbichess.training.config import LearnerConfig
 from harbichess.training.torch_checkpoint import load_checkpoint, save_checkpoint
 from harbichess.training.torch_learner import TorchLearner
 from harbichess.training.ufuk_value_outcomes import (
+    LEGACY_REPORT_V1_SHA256,
     VALUE_PREFIXES,
     late_games,
+    migrate_reporting_v1,
     sample_indices,
     value_parameters,
     value_step,
@@ -119,3 +123,57 @@ def test_late_window_excludes_unknown_and_rejects_mixed_support():
     assert [[r.ply for r in group] for group in selected] == [list(range(13, 45))]
     with pytest.raises(ValueError, match="mixed known/unknown"):
         late_games(rows("mixed", 1, 1) + rows("mixed", None, 2))
+
+
+def test_reporting_migration_preserves_complete_native_state(tmp_path):
+    network, _, inputs, targets = setup()
+    learner = TorchLearner(network, config=LearnerConfig(learning_rate=5e-5, policy_weight=0))
+    value_step(learner, inputs, targets, inputs, targets.roll(1, 1), include_self=True)
+    cache = tmp_path / "cache"
+    cache.mkdir()
+    torch.save({"fixture": inputs}, cache / "panel.pt")
+    (cache / "panel.json").write_text('{"schema":1}\n')
+    old_run = tmp_path / "old"
+    old_run.mkdir()
+    line = json.dumps({"step": 1, "native": [0], "own": [1]}, separators=(",", ":"))
+    (old_run / "sampling.jsonl").write_text(line + "\n")
+    digest = hashlib.sha256(("0" * 64 + line).encode()).hexdigest()
+    checkpoint = old_run / "checkpoints/step-000001"
+    config = {
+        "code_sha256": {"ufuk_value_outcomes.py": LEGACY_REPORT_V1_SHA256},
+        "cache_sha256": sha256(cache / "panel.pt"),
+        "cache_metadata_sha256": sha256(cache / "panel.json"),
+    }
+    save_checkpoint(
+        checkpoint,
+        learner=learner,
+        sampler=None,
+        replay_paths=(cache / "panel.pt", cache / "panel.json"),
+        run_state={"cursor": 1, "best_step": 1, "sample_trace_sha256": digest},
+        run_config=config,
+        source_commit="0" * 40,
+    )
+    original_manifest = (checkpoint / "checkpoint.json").read_bytes()
+    new_run = tmp_path / "v2"
+    migration = migrate_reporting_v1(new_run, checkpoint, cache)
+    migrated = new_run / "checkpoints/step-000001"
+    old_state = torch.load(checkpoint / "training.pt", weights_only=True)
+    new_state = torch.load(migrated / "training.pt", weights_only=True)
+
+    def equal(a, b):
+        if isinstance(a, torch.Tensor):
+            return torch.equal(a, b)
+        if isinstance(a, dict):
+            return a.keys() == b.keys() and all(equal(a[k], b[k]) for k in a)
+        if isinstance(a, list | tuple):
+            return len(a) == len(b) and all(equal(x, y) for x, y in zip(a, b, strict=True))
+        return a == b
+
+    assert equal(old_state, new_state)
+    assert all(
+        torch.equal(v, load_weights(migrated / "model.safetensors").state_dict()[k])
+        for k, v in network.state_dict().items()
+    )
+    assert (checkpoint / "checkpoint.json").read_bytes() == original_manifest
+    assert (new_run / "sampling.jsonl").read_bytes() == (old_run / "sampling.jsonl").read_bytes()
+    assert migration["training_updates"] == 0
