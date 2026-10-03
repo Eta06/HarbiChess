@@ -76,11 +76,16 @@ def run_loop(
     actor_mode: str = "thread",
     trainable_prefixes: tuple[str, ...] = (),
     opening_book: Path | None = None,
+    max_root_actions: int | None = None,
 ) -> dict:
     if generations <= 0 or wall_seconds <= 0 or actor_mode not in ("thread", "process"):
         raise ValueError("generation target and wall budget must be positive")
     if resume and weights:
         raise ValueError("resume and weights warm-start are mutually exclusive")
+    if max_root_actions is not None and (
+        type(max_root_actions) is not int or max_root_actions <= 0
+    ):
+        raise ValueError("max root actions must be a positive integer")
     torch.set_num_threads(config.threads)
     torch.use_deterministic_algorithms(True)
     source = subprocess.check_output(["git", "rev-parse", "HEAD"], text=True).strip()
@@ -89,6 +94,8 @@ def run_loop(
     children_started = resource.getrusage(resource.RUSAGE_CHILDREN)
     deadline = started + wall_seconds
     run_config = asdict(config)
+    if max_root_actions is not None:
+        run_config["max_root_actions"] = max_root_actions
     if trainable_prefixes:
         if any(not isinstance(prefix, str) or not prefix for prefix in trainable_prefixes):
             raise ValueError("trainable prefixes must be nonempty strings")
@@ -189,9 +196,7 @@ def run_loop(
                     deadline,
                 )
             else:
-                games, stats = collect_thread_games(
-                    learner.network, run_config, indices, deadline
-                )
+                games, stats = collect_thread_games(learner.network, run_config, indices, deadline)
             generation_seconds = time.perf_counter() - generation_start
             fresh = {
                 split: tuple(
@@ -362,6 +367,7 @@ def main() -> None:
     parser.add_argument("--actor-mode", choices=("thread", "process"), default="thread")
     parser.add_argument("--trainable-prefix", action="append", default=[])
     parser.add_argument("--opening-book", type=Path, help="Versioned book; train split only")
+    parser.add_argument("--max-root-actions", type=int)
     for name, field in LoopConfig.__dataclass_fields__.items():
         parser.add_argument(
             "--" + name.replace("_", "-"), type=type(field.default), default=field.default
@@ -379,6 +385,7 @@ def main() -> None:
         actor_mode=args.actor_mode,
         trainable_prefixes=tuple(args.trainable_prefix),
         opening_book=args.opening_book,
+        max_root_actions=args.max_root_actions,
     )
 
 
