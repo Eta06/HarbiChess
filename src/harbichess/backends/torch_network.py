@@ -10,6 +10,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import math
 import os
 import tempfile
 from dataclasses import asdict
@@ -20,11 +21,12 @@ from safetensors import safe_open
 from safetensors.torch import load_file, save_file
 from torch import nn
 
+from harbichess.chess.actions import action_destination_square
 from harbichess.chess.encoding import HISTORY_STEPS, METADATA_PLANES, PIECE_PLANES_PER_STEP
 from harbichess.core.network_config import NetworkConfig
 
 WEIGHT_SCHEMA = 1
-ARCHITECTURES = ("base", "invariant", "decoupled", "plastic")
+ARCHITECTURES = ("base", "invariant", "decoupled", "plastic", "pairwise")
 
 
 class ResidualBlock(nn.Module):
@@ -83,7 +85,7 @@ class TorchChessNetwork(nn.Module):
             self.value_tower_hidden = nn.Linear(2 * v["channels"], v["hidden"])
             self.value_tower_output = nn.Linear(v["hidden"], 3)
             self._zero(self.invariant_value_linear, self.value_tower_output)
-        if architecture in ("decoupled", "plastic"):
+        if architecture in ("decoupled", "plastic", "pairwise"):
             self.material_value_linear = nn.Linear(features, 1)
             self.global_value_hidden = nn.Linear(features, 64)
             self.global_value_output = nn.Linear(64, 3)
@@ -101,6 +103,28 @@ class TorchChessNetwork(nn.Module):
             self.plastic_value_output = nn.Linear(v["hidden"], 3)
             self.value_logit_scale = nn.Parameter(torch.zeros(1))
             self._zero(self.plastic_value_output)
+        if architecture == "pairwise":
+            if c.policy_size != 4672:
+                raise ValueError("pairwise policy requires canonical 4672-action schema")
+            del self.policy_conv, self.policy_linear
+            self.pair_hidden = nn.Linear(c.trunk_channels + 34, 64)
+            self.pair_query = nn.Linear(64, 32)
+            self.pair_key = nn.Linear(64, 32)
+            self.pair_origin_planes = nn.Linear(64, 73)
+            self.pair_destination_planes = nn.Linear(64, 73)
+            self._zero(self.pair_origin_planes, self.pair_destination_planes)
+            destinations = [action_destination_square(i) for i in range(4672)]
+            self.register_buffer(
+                "_destinations", torch.tensor([s or 0 for s in destinations]), persistent=False
+            )
+            self.register_buffer(
+                "_geometric", torch.tensor([s is not None for s in destinations]), persistent=False
+            )
+            self.register_buffer(
+                "_coordinates",
+                torch.tensor([[2 * (s % 8) / 7 - 1, 2 * (s // 8) / 7 - 1] for s in range(64)]),
+                persistent=False,
+            )
 
     @staticmethod
     def _zero(*layers: nn.Linear) -> None:
@@ -149,7 +173,11 @@ class TorchChessNetwork(nn.Module):
         trunk = torch.relu(self.stem(x))
         for block in self.blocks:
             trunk = block(trunk)
-        policy = self._flatten(torch.relu(self.policy_conv(trunk)))
+        policy = (
+            self._pair_policy(inputs, trunk)
+            if self.architecture == "pairwise"
+            else self._flatten(torch.relu(self.policy_conv(trunk)))
+        )
         value = torch.relu(self.value_hidden(self._flatten(torch.relu(self.value_conv(trunk)))))
         logits = self.value_output(value)
         if self.architecture != "base":
@@ -157,7 +185,7 @@ class TorchChessNetwork(nn.Module):
             tower = self._tower(x, self.value_tower_stem, self.value_tower_blocks)
             logits = logits + self.invariant_value_linear(invariants)
             logits = logits + self.value_tower_output(torch.relu(self.value_tower_hidden(tower)))
-        if self.architecture in ("decoupled", "plastic"):
+        if self.architecture in ("decoupled", "plastic", "pairwise"):
             logits = logits + self.global_value_output(
                 torch.relu(self.global_value_hidden(invariants))
             )
@@ -168,9 +196,33 @@ class TorchChessNetwork(nn.Module):
             logits = (logits + self.plastic_value_output(hidden)) * self.value_logit_scale.exp()
         return policy, logits
 
+    def _pair_policy(self, inputs: torch.Tensor, trunk: torch.Tensor) -> torch.Tensor:
+        size = inputs.shape[0]
+        squares = trunk.permute(0, 2, 3, 1).reshape(size, 64, -1)
+        pieces = inputs[:, :, :, :12].reshape(size, 64, 12)
+        global_features = self._invariants(inputs)
+        normalized = torch.cat((global_features[:, :12] / 8, global_features[:, 12:]), 1)
+        features = torch.cat(
+            (
+                squares,
+                pieces,
+                normalized[:, None, :].expand(-1, 64, -1),
+                self._coordinates[None].expand(size, -1, -1),
+            ),
+            2,
+        )
+        hidden = torch.relu(self.pair_hidden(features))
+        pair = self.pair_query(hidden) @ self.pair_key(hidden).transpose(1, 2) / math.sqrt(32)
+        origin = torch.arange(4672, device=inputs.device) // 73
+        planes = torch.arange(4672, device=inputs.device) % 73
+        logits = pair[:, origin, self._destinations]
+        logits = logits + self.pair_origin_planes(hidden)[:, origin, planes]
+        logits = logits + self.pair_destination_planes(hidden)[:, self._destinations, planes]
+        return logits.masked_fill(~self._geometric, -1e9)
+
     def forward(self, inputs: torch.Tensor) -> tuple[torch.Tensor, torch.Tensor]:
         policy, value = self._features(inputs)
-        return self.policy_linear(policy), value
+        return (policy if self.architecture == "pairwise" else self.policy_linear(policy)), value
 
     def masked_policy_value(
         self, inputs: torch.Tensor, actions: torch.Tensor
@@ -180,6 +232,8 @@ class TorchChessNetwork(nn.Module):
         if torch.any(actions < 0) or torch.any(actions >= self.config.policy_size):
             raise ValueError("masked action index out of range")
         features, value = self._features(inputs)
+        if self.architecture == "pairwise":
+            return features.gather(1, actions), value
         weights = self.policy_linear.weight[actions]
         logits = (features[:, None, :] * weights).sum(2) + self.policy_linear.bias[actions]
         return logits, value
@@ -224,6 +278,9 @@ def save_weights(
 
 
 def _infer_mlx(weights: dict[str, torch.Tensor]) -> TorchChessNetwork:
+    if "pair_hidden.weight" in weights:
+        raise ValueError("pairwise weights require the versioned architecture specification")
+
     def blocks(prefix: str) -> int:
         return len({k.split(".")[1] for k in weights if k.startswith(prefix + ".")})
 
