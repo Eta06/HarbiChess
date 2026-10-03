@@ -37,14 +37,26 @@ at most 600 seconds total arena process wall. Terminate on timeout, illegal
 move, nonfinite output or process failure; preserve logs and any partial evidence,
 report incomplete rather than retrying with changed budgets. No long training.
 
-Exact command template (run once for each listed N):
+Exact command template (run once for each listed N; Python API used because
+the existing CLI has no seed argument):
 
 ```bash
-.venv/bin/python -m harbichess.evaluation.portable_arena \
-  artifacts/port-loop-20261002/checkpoints/generation-000000/model.safetensors stockfish \
-  --stockfish /workspace/work/harbichess/stockfish/stockfish-linux-x86-64-universal \
-  --simulations N --nodes 32 --max-plies 192 --opening-pairs 8 \
-  --wall-seconds 180 --output artifacts/mercek-search-20261003/arena-N.json
+.venv/bin/python - "$N" <<'PY'
+import json, sys
+from pathlib import Path
+from harbichess.evaluation.portable_arena import arena
+n = int(sys.argv[1])
+result = arena(
+    Path('artifacts/port-loop-20261002/checkpoints/generation-000000/model.safetensors'),
+    opponent='stockfish',
+    stockfish=Path('/workspace/work/harbichess/stockfish/stockfish-linux-x86-64-universal'),
+    simulations=n, nodes=32, max_plies=192, opening_pairs=8,
+    wall_seconds=180, seed=20261003, threads=1,
+)
+out = Path(f'artifacts/mercek-search-20261003/arena-{n}.json')
+out.parent.mkdir(parents=True, exist_ok=True)
+out.write_text(json.dumps(result, indent=2) + '\n')
+PY
 ```
 
 ## Measurement and interpretation
