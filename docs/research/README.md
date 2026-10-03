@@ -16,8 +16,13 @@ Kalıcı kaynak GitHub'dır. Notlar ve kararlar Git'te, büyük model/replay dos
   [search sinyali](../runs/UFUK-search-signal-result-20261003.md),
   [raw-selector maçı](../runs/UFUK-policy-search-result-20261003.md) ve
   [CPU derleme ölçümü](../runs/UFUK-compile-result-20261003.md).
-- [UFUK derinlik kontrolü ön kayıt](../runs/UFUK-depth-preregistration-20261003.md):
-  aynı başlangıç işlevi/veri/örnekleme akışıyla kapasite deneyi; henüz sonuç değil.
+- [UFUK derinlik kontrolü sonucu](../runs/UFUK-depth-result-20261003.md):
+  aynı başlangıç işlevi/örnekleme akışıyla kapasite eşiği başarısız.
+- [Native search hedefi](../runs/UFUK-policy-target-result-20261003.md) ve
+  [gerçek depolanmış self-play hedefi](../runs/UFUK-replay-target-result-20261003.md):
+  olumlu sınırlı hedef tanıları; maç gücü veya self-learning başarısı değil.
+- [Value sabit policy dalı protokolü](../runs/UFUK-policy-adapter-preregistration-20261003.md):
+  aynı veride temsil karşılaştırması; dönüşüm weights-only, sonra tam native resume.
 - [Codeword rehberi](codewords.md): araştırma snapshot'ındaki 54 prefix ve 896 commit.
 - [Tarihsel deney raporları](../runs/).
 - [Dosya manifesti](archive-20261002-manifest.json): 944 artifact/distribution dosyasının boyutu ve SHA-256 değeri.
