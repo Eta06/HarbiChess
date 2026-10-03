@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+import json
 import math
 import random
 import subprocess
@@ -68,12 +69,17 @@ def arena(
     openings: tuple[tuple[str, ...], ...] | None = None,
     opening_source_sha256: str | None = None,
     candidate_policy_only: bool = False,
+    candidate_root_actions: int | None = None,
+    opponent_root_actions: int | None = None,
+    record_engine_nodes: bool = False,
+    progress_path: Path | None = None,
 ) -> dict:
     frozen_openings = OPENINGS if openings is None else openings
     if (
         not 1 <= opening_pairs <= len(frozen_openings)
         or min(nodes, simulations, max_plies, threads) <= 0
         or wall_seconds <= 0
+        or any(k is not None and k <= 0 for k in (candidate_root_actions, opponent_root_actions))
     ):
         raise ValueError("positive budgets and valid frozen opening count required")
     # Validate the entire suite before loading a candidate or starting a game.
@@ -90,22 +96,38 @@ def arena(
     engine_id = None
     started = time.perf_counter()
     deadline = started + wall_seconds
-    config = FullGumbelConfig(
-        simulations=simulations, max_considered_actions=min(16, simulations), gumbel_scale=0.0
-    )
+    progress = None
+    if progress_path is not None:
+        progress_path.parent.mkdir(parents=True, exist_ok=True)
+        progress = progress_path.open("x")
 
-    def search(weights):
+    def event(data):
+        if progress is not None:
+            progress.write(json.dumps(data) + "\n")
+            progress.flush()
+
+    def search(weights, root_actions):
         bridge = SharedBatchEvaluator(
             TorchPolicyValueBackend(load_weights(weights)), max_batch_size=1, max_wait_seconds=0
         )
         bridges.append(bridge)
         return FullGumbelMCTS(
-            NeuralPositionEvaluator(bridge, rules=rules), rules=rules, config=config
+            NeuralPositionEvaluator(bridge, rules=rules),
+            rules=rules,
+            config=FullGumbelConfig(
+                simulations=simulations,
+                max_considered_actions=min(
+                    16 if root_actions is None else root_actions, simulations
+                ),
+                gumbel_scale=0.0,
+            ),
         )
 
-    candidate_search = search(candidate)
-    other_search = search(opponent) if isinstance(opponent, Path) else None
     try:
+        candidate_search = search(candidate, candidate_root_actions)
+        other_search = (
+            search(opponent, opponent_root_actions) if isinstance(opponent, Path) else None
+        )
         if opponent == "stockfish":
             if stockfish is None:
                 raise ValueError("Stockfish executable required")
@@ -120,6 +142,8 @@ def arena(
                     state = rules.apply(state, ChessMove(move))
                 game_started = time.perf_counter()
                 side_times = []
+                engine_nodes = []
+                event({"type": "game_start", "pair": pair, "color": color, "opening": opening})
                 while rules.outcome(state, claim_draw=True) is None and state.ply < max_plies:
                     if time.perf_counter() >= deadline:
                         raise TimeoutError("arena wall budget exhausted")
@@ -134,13 +158,39 @@ def arena(
                         move = other_search.search(state, rng=rng).selected_action
                     elif engine:
                         result = engine.play(
-                            rules.board(state), chess.engine.Limit(nodes=nodes), game=(pair, color)
+                            rules.board(state),
+                            chess.engine.Limit(nodes=nodes),
+                            game=(pair, color),
+                            info=chess.engine.INFO_BASIC
+                            if record_engine_nodes
+                            else chess.engine.INFO_NONE,
                         )
+                        if record_engine_nodes:
+                            actual_nodes = result.info.get("nodes")
+                            if not isinstance(actual_nodes, int) or actual_nodes < 0:
+                                raise ValueError("engine actual node count missing")
+                            engine_nodes.append(
+                                {
+                                    "ply": state.ply + 1,
+                                    "nodes": actual_nodes,
+                                    "wall_seconds": time.perf_counter() - move_started,
+                                }
+                            )
                         move = ChessMove(result.move.uci())
                     else:
                         move = rng.choice(sorted(rules.legal_moves(state), key=lambda m: m.uci))
                     state = rules.apply(state, move)
                     side_times.append(time.perf_counter() - move_started)
+                    event(
+                        {
+                            "type": "move",
+                            "pair": pair,
+                            "color": color,
+                            "ply": state.ply,
+                            "move": move.uci,
+                            "wall_seconds": side_times[-1],
+                        }
+                    )
                 outcome = rules.outcome(state, claim_draw=True)
                 games.append(
                     {
@@ -153,14 +203,20 @@ def arena(
                         "moves": [m.uci for m in state.moves],
                         "wall_seconds": time.perf_counter() - game_started,
                         "move_wall_seconds": side_times,
+                        **(
+                            {"stockfish_nodes_by_move": engine_nodes} if record_engine_nodes else {}
+                        ),
                     }
                 )
+                event({"type": "game_end", "game": games[-1]})
     finally:
         if engine:
             engine.quit()
         statistics = [bridge.statistics for bridge in bridges]
         for bridge in bridges:
             bridge.close()
+        if progress is not None:
+            progress.close()
     elapsed = time.perf_counter() - started
     return {
         "candidate_sha256": sha256(candidate),
@@ -185,6 +241,25 @@ def arena(
         "opening_source_sha256": opening_source_sha256,
         **(
             {
+                "candidate_root_actions": candidate_search.config.max_considered_actions,
+                "opponent_root_actions": other_search.config.max_considered_actions
+                if other_search
+                else None,
+            }
+            if candidate_root_actions is not None or opponent_root_actions is not None
+            else {}
+        ),
+        **(
+            {
+                "stockfish_actual_nodes": sum(
+                    n["nodes"] for g in games for n in g["stockfish_nodes_by_move"]
+                )
+            }
+            if record_engine_nodes
+            else {}
+        ),
+        **(
+            {
                 "candidate_selection": "raw_policy_argmax",
                 "candidate_neural_simulations_per_move": 0,
                 "opponent_neural_simulations_per_move": simulations if other_search else None,
@@ -196,8 +271,6 @@ def arena(
 
 
 def main() -> None:
-    import json
-
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("candidate", type=Path)
     parser.add_argument("opponent", help="random, stockfish or portable weight file")
@@ -212,6 +285,10 @@ def main() -> None:
     parser.add_argument("--seed", type=int, default=20261002)
     parser.add_argument("--threads", type=int, default=1)
     parser.add_argument("--candidate-policy-only", action="store_true")
+    parser.add_argument("--candidate-root-actions", type=int)
+    parser.add_argument("--opponent-root-actions", type=int)
+    parser.add_argument("--record-engine-nodes", action="store_true")
+    parser.add_argument("--progress", type=Path)
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     opponent = args.opponent if args.opponent in ("random", "stockfish") else Path(args.opponent)
@@ -236,6 +313,10 @@ def main() -> None:
         ),
         opening_source_sha256=sha256(args.openings) if args.openings else None,
         candidate_policy_only=args.candidate_policy_only,
+        candidate_root_actions=args.candidate_root_actions,
+        opponent_root_actions=args.opponent_root_actions,
+        record_engine_nodes=args.record_engine_nodes,
+        progress_path=args.progress,
     )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2) + "\n")
