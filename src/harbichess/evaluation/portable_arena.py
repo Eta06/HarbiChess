@@ -65,13 +65,21 @@ def arena(
     threads: int = 1,
     wall_seconds: float = 900,
     opening_pairs: int = 8,
+    openings: tuple[tuple[str, ...], ...] | None = None,
+    opening_source_sha256: str | None = None,
 ) -> dict:
+    frozen_openings = OPENINGS if openings is None else openings
     if (
-        not 1 <= opening_pairs <= len(OPENINGS)
+        not 1 <= opening_pairs <= len(frozen_openings)
         or min(nodes, simulations, max_plies, threads) <= 0
         or wall_seconds <= 0
     ):
-        raise ValueError("positive budgets and 1..8 opening pairs required")
+        raise ValueError("positive budgets and valid frozen opening count required")
+    # Validate the entire suite before loading a candidate or starting a game.
+    for opening in frozen_openings[:opening_pairs]:
+        board = chess.Board()
+        for uci in opening:
+            board.push_uci(uci)
     source_commit = subprocess.check_output(["git", "rev-parse", "HEAD"], text=True).strip()
     torch.set_num_threads(threads)
     rules = PythonChessRules()
@@ -103,16 +111,18 @@ def arena(
             engine = chess.engine.SimpleEngine.popen_uci(str(stockfish), timeout=15)
             engine.configure({"Threads": 1, "Hash": 16})
             engine_id = engine.id
-        for pair, opening in enumerate(OPENINGS[:opening_pairs]):
+        for pair, opening in enumerate(frozen_openings[:opening_pairs]):
             for color in (Side.WHITE, Side.BLACK):
                 rng = random.Random(f"{seed}:{pair}:{color}")
                 state = rules.initial_state()
                 for move in opening:
                     state = rules.apply(state, ChessMove(move))
                 game_started = time.perf_counter()
+                side_times = []
                 while rules.outcome(state, claim_draw=True) is None and state.ply < max_plies:
                     if time.perf_counter() >= deadline:
                         raise TimeoutError("arena wall budget exhausted")
+                    move_started = time.perf_counter()
                     if rules.view(state).side_to_move == color:
                         move = candidate_search.search(state, rng=rng).selected_action
                     elif other_search:
@@ -125,6 +135,7 @@ def arena(
                     else:
                         move = rng.choice(sorted(rules.legal_moves(state), key=lambda m: m.uci))
                     state = rules.apply(state, move)
+                    side_times.append(time.perf_counter() - move_started)
                 outcome = rules.outcome(state, claim_draw=True)
                 games.append(
                     {
@@ -136,6 +147,7 @@ def arena(
                         "score": (outcome.value_for(color) + 1) / 2 if outcome else 0.5,
                         "moves": [m.uci for m in state.moves],
                         "wall_seconds": time.perf_counter() - game_started,
+                        "move_wall_seconds": side_times,
                     }
                 )
     finally:
@@ -165,6 +177,7 @@ def arena(
         "games": games,
         "promotion_ready": False,
         "source_commit": source_commit,
+        "opening_source_sha256": opening_source_sha256,
     }
 
 
@@ -180,6 +193,10 @@ def main() -> None:
     parser.add_argument("--max-plies", type=int, default=192)
     parser.add_argument("--wall-seconds", type=float, default=900)
     parser.add_argument("--opening-pairs", type=int, default=8)
+    parser.add_argument("--openings", type=Path, help="Frozen versioned opening split JSON")
+    parser.add_argument("--split", default="arena")
+    parser.add_argument("--seed", type=int, default=20261002)
+    parser.add_argument("--threads", type=int, default=1)
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     opponent = args.opponent if args.opponent in ("random", "stockfish") else Path(args.opponent)
@@ -192,6 +209,17 @@ def main() -> None:
         max_plies=args.max_plies,
         wall_seconds=args.wall_seconds,
         opening_pairs=args.opening_pairs,
+        seed=args.seed,
+        threads=args.threads,
+        openings=(
+            tuple(
+                tuple(row["opening"]["moves"])
+                for row in json.loads(args.openings.read_text())["splits"][args.split]
+            )
+            if args.openings
+            else None
+        ),
+        opening_source_sha256=sha256(args.openings) if args.openings else None,
     )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2) + "\n")
