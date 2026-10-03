@@ -8,7 +8,16 @@ Kalıcı kaynak GitHub'dır. Notlar ve kararlar Git'te, büyük model/replay dos
   48 gerçek oyun, 16/64/128 simulation; güç artışı doğrulanmadı, ana öğrenme tanısı öncelikli.
 - [PORT Linux sonucu](../runs/PORT-linux-result-20261002.md), [çalıştırma/resume](../PORT-runtime.md)
   ve [teknik kararlar](PORT-decisions-20261002.md): gerçek CPU training/inference ve güç sınırları.
-- [Güncel değerlendirme](status-20261002.md): başarı, başarısızlık ve doğrulama açıkları.
+- [Güncel değerlendirme](status-20261003.md): gerçek Linux/MLX CPU, öğretici kazanımı,
+  başarısız self-learning, güç/hız ölçümleri ve açık Release yedekleme sorunu.
+- [2 Ekim tarihsel değerlendirme](status-20261002.md): o günkü arşiv/audit durumu korunur.
+- [UFUK öğretici sonucu](../runs/UFUK-balanced-result-20261003.md),
+  [başarısız gerçek self-play](../runs/UFUK-selfplay-result-20261003.md),
+  [search sinyali](../runs/UFUK-search-signal-result-20261003.md),
+  [raw-selector maçı](../runs/UFUK-policy-search-result-20261003.md) ve
+  [CPU derleme ölçümü](../runs/UFUK-compile-result-20261003.md).
+- [UFUK derinlik kontrolü ön kayıt](../runs/UFUK-depth-preregistration-20261003.md):
+  aynı başlangıç işlevi/veri/örnekleme akışıyla kapasite deneyi; henüz sonuç değil.
 - [Codeword rehberi](codewords.md): araştırma snapshot'ındaki 54 prefix ve 896 commit.
 - [Tarihsel deney raporları](../runs/).
 - [Dosya manifesti](archive-20261002-manifest.json): 944 artifact/distribution dosyasının boyutu ve SHA-256 değeri.
