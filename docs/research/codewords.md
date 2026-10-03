@@ -1276,6 +1276,14 @@ Cumulative non-inferiority, bootstrap/power, holdout ve production-readiness gat
 - [8e2f6bf](https://github.com/Eta06/HarbiChess/commit/8e2f6bfa2bca566ec522a3b23aba1f1d0cad440c) PUSULA: test paired continuation safety
 - [3739f4b](https://github.com/Eta06/HarbiChess/commit/3739f4bf6ae637100eadf6f22c643ab769fc975f) PUSULA: preregister continuation noninferiority
 
+## MERCEK — 3 Ekim 2026
+
+Laya/Jev karar mekanizmasının birincil kaynak incelemesi, küçük compute bütçesinde
+search kalitesi tanısı ve özgün katkı için ölçülebilir araştırma planı. Başarı veya
+model promotion kodu değildir; dış Laya modelinin adı değiştirilmez.
+
+- [Search bütçesi ön kaydı](../runs/MERCEK-search-preregistration-20261003.md)
+
 ## PORT — 2 Ekim 2026
 
 Linux CPU/CUDA için PyTorch inference/training, MLX ile ortak schema ve loss sözleşmeleri,
