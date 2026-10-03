@@ -341,14 +341,18 @@ def load_weights(path: Path, *, legacy_mlx: bool = False) -> TorchChessNetwork:
     if raw is None:
         if not legacy_mlx:
             raise ValueError("unversioned weights: explicitly select legacy MLX warm start")
-        network = _infer_mlx(weights)
+        with torch.random.fork_rng(devices=[]):
+            network = _infer_mlx(weights)
         layout = "mlx-ohwi"
     else:
         metadata = json.loads(raw)
         if metadata["schema"] != WEIGHT_SCHEMA:
             raise ValueError("unsupported weight schema")
         layout = metadata["layout"]
-        network = TorchChessNetwork.from_specification(metadata["specification"])
+        # Constructor initialization is discarded by loading the complete weights.
+        # Keep it from changing a caller's sampling RNG, especially across sizes.
+        with torch.random.fork_rng(devices=[]):
+            network = TorchChessNetwork.from_specification(metadata["specification"])
     if layout not in ("mlx-ohwi", "torch-oihw"):
         raise ValueError("unsupported tensor layout")
     if layout == "mlx-ohwi":
