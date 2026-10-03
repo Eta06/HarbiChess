@@ -148,7 +148,7 @@ def generate_game(job: dict) -> dict:
         while len(board.move_stack) < 160 and board.outcome(claim_draw=True) is None:
             ply = len(board.move_stack)
             legal = sorted(board.legal_moves, key=lambda move: move.uci())
-            labelled = (ply - 8) % 2 == job["game"] % 2
+            labelled = job.get("label_every_ply", False) or (ply - 8) % 2 == job["game"] % 2
             refs = analyse(32768, min(4, len(legal))) if labelled else None
             probabilities = soft_policy(refs) if refs else None
             if labelled:
@@ -219,8 +219,19 @@ def generate_game(job: dict) -> dict:
 
 
 def generate(
-    directory: Path, openings: Path, weights: Path, stockfish: Path, *, wall_seconds=1800
+    directory: Path,
+    openings: Path,
+    weights: Path,
+    stockfish: Path,
+    *,
+    wall_seconds=1800,
+    games_per_family: int = 2,
+    workers: int = 4,
+    seed: int | None = None,
+    balanced: bool = False,
 ) -> dict:
+    if games_per_family < 2 or not 1 <= workers <= 4 or (balanced and games_per_family % 4):
+        raise ValueError("invalid bounded actor schedule")
     directory.mkdir(parents=True, exist_ok=True)
     frozen = json.loads(openings.read_text())
     metadata = {
@@ -229,13 +240,15 @@ def generate(
         "openings_sha256": sha256(openings),
         "weights_sha256": sha256(weights),
         "stockfish_sha256": sha256(stockfish),
-        "seed": frozen["seed"],
-        "workers": 4,
+        "seed": frozen["seed"] if seed is None else seed,
+        "workers": workers,
         "label_nodes": 32768,
         "actor_nodes": 4096,
         "max_plies": 160,
         "policy_temperature_cp": 100,
         "target_semantics": "engine-reference",
+        "games_per_family": games_per_family,
+        "collection_plan": "balanced-every-ply-v2" if balanced else "original-parity-v1",
     }
     manifest = directory / "metadata.json"
     if manifest.exists():
@@ -246,11 +259,11 @@ def generate(
     jobs = []
     for split in ("train", "validation"):
         for opening in frozen["splits"][split]:
-            for game in range(2):
+            for game in range(games_per_family):
                 family = opening["family"]
                 path = directory / f"{split}-{family:03d}-{game}.json.gz"
-                seed = int.from_bytes(
-                    hashlib.sha256(f"{frozen['seed']}:{split}:{family}:{game}".encode()).digest()[
+                job_seed = int.from_bytes(
+                    hashlib.sha256(f"{metadata['seed']}:{split}:{family}:{game}".encode()).digest()[
                         :8
                     ]
                 )
@@ -258,14 +271,17 @@ def generate(
                     split=split,
                     family=family,
                     game=game,
-                    seed=seed,
-                    actor="engine-engine" if game == 0 else "neural-engine",
-                    neural_color=family % 2 == 0,
+                    seed=job_seed,
+                    actor="engine-engine"
+                    if (game % 4 < 2 if balanced else game % 2 == 0)
+                    else "neural-engine",
+                    neural_color=(family + (game // 4 if balanced else 0)) % 2 == 0,
                     opening=opening["opening"]["moves"],
                     weights=str(weights.resolve()),
                     stockfish=str(stockfish.resolve()),
                     output=str(path.resolve()),
                     deadline=time.time() + wall_seconds,
+                    label_every_ply=balanced,
                 )
                 if path.exists():
                     previous = read_game(path)
@@ -275,7 +291,7 @@ def generate(
                     jobs.append(job)
     started = time.perf_counter()
     with ProcessPoolExecutor(
-        max_workers=4, mp_context=multiprocessing.get_context("spawn")
+        max_workers=workers, mp_context=multiprocessing.get_context("spawn")
     ) as pool:
         futures = {pool.submit(generate_game, job): job for job in jobs}
         for i, future in enumerate(as_completed(futures), 1):
@@ -351,7 +367,13 @@ def prepare_rows(rows: list[dict]) -> TorchTrainingBatch:
     return TorchTrainingBatch(inputs, policies, masks, wdl, torch.ones(len(rows)))
 
 
-def load_panels(directory: Path) -> tuple[TorchTrainingBatch, TorchTrainingBatch, dict]:
+def load_panels(
+    directory: Path,
+    *,
+    max_train_rows: int | None = None,
+    max_validation_rows: int | None = None,
+    seed: int = 20261003,
+) -> tuple[TorchTrainingBatch, TorchTrainingBatch, dict]:
     manifest = json.loads((directory / "dataset.json").read_text())
     rows: dict[str, list] = {"train": [], "validation": []}
     for filename, digest in manifest["files"].items():
@@ -366,13 +388,24 @@ def load_panels(directory: Path) -> tuple[TorchTrainingBatch, TorchTrainingBatch
     training_keys = {row["position_key"] for row in rows["train"]}
     initial_validation = len(rows["validation"])
     rows["validation"] = [r for r in rows["validation"] if r["position_key"] not in training_keys]
+    overlap = initial_validation - len(rows["validation"])
+    available = {split: len(panel) for split, panel in rows.items()}
+    for split, limit in (("train", max_train_rows), ("validation", max_validation_rows)):
+        if limit is not None:
+            if limit <= 0:
+                raise ValueError("learning panel row caps must be positive")
+            if len(rows[split]) > limit:
+                rng = random.Random(f"{seed}:{split}")
+                selected = sorted(rng.sample(range(len(rows[split])), limit))
+                rows[split] = [rows[split][i] for i in selected]
     summary = {
         "train_rows": len(rows["train"]),
         "validation_rows": len(rows["validation"]),
-        "removed_validation_position_overlap": initial_validation - len(rows["validation"]),
+        "removed_validation_position_overlap": overlap,
         "train_families": sorted({r["family"] for r in rows["train"]}),
         "validation_families": sorted({r["family"] for r in rows["validation"]}),
         "dataset_sha256": sha256(directory / "dataset.json"),
+        "available_rows": available,
     }
     return prepare_rows(rows["train"]), prepare_rows(rows["validation"]), summary
 
@@ -384,6 +417,10 @@ def main() -> None:
     parser.add_argument("--weights", required=True, type=Path)
     parser.add_argument("--stockfish", required=True, type=Path)
     parser.add_argument("--wall-seconds", type=float, default=1800)
+    parser.add_argument("--games-per-family", type=int, default=2)
+    parser.add_argument("--workers", type=int, default=4)
+    parser.add_argument("--seed", type=int)
+    parser.add_argument("--balanced", action="store_true")
     args = parser.parse_args()
     print(
         json.dumps(
@@ -393,6 +430,10 @@ def main() -> None:
                 args.weights,
                 args.stockfish,
                 wall_seconds=args.wall_seconds,
+                games_per_family=args.games_per_family,
+                workers=args.workers,
+                seed=args.seed,
+                balanced=args.balanced,
             )
         ),
         flush=True,
