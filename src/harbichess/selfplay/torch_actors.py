@@ -46,7 +46,7 @@ def search_snapshot(network, config, deadline, *, threaded):
         rules=rules,
         config=FullGumbelConfig(
             simulations=config["simulations"],
-            max_considered_actions=min(16, config["simulations"]),
+            max_considered_actions=min(config.get("max_root_actions", 16), config["simulations"]),
             gumbel_scale=config["gumbel_scale"],
         ),
     )
