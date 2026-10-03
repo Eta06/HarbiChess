@@ -8,6 +8,7 @@ import json
 import math
 import os
 import random
+import shutil
 import subprocess
 import time
 from pathlib import Path
@@ -32,6 +33,78 @@ VALUE_PREFIXES = (
     "global_value_",
     "plastic_value_",
 )
+LEGACY_REPORT_V1_SHA256 = "15c1cbbdca2ce56be2ea50fb82ab9acd1fc81dba77102047e8af0710799cb8de"
+
+
+def migrate_reporting_v1(destination: Path, checkpoint: Path, cache: Path) -> dict:
+    """Copy complete native state into reporting v2; never edit the original run."""
+    torch.set_num_threads(1)
+    torch.use_deterministic_algorithms(True)
+    if destination.exists():
+        raise FileExistsError(destination)
+    original = json.loads((checkpoint / "checkpoint.json").read_text())
+    config = original["run_config"]
+    if config["code_sha256"].get(Path(__file__).name) != LEGACY_REPORT_V1_SHA256:
+        raise ValueError("only the recorded reporting-v1 experiment can be migrated")
+    for name, digest in config["code_sha256"].items():
+        if name == Path(__file__).name:
+            continue
+        path = Path(__file__).with_name(name)
+        if name == "torch_network.py":
+            path = Path(__file__).parents[1] / "backends" / name
+        if sha256(path) != digest:
+            raise ValueError("migration changes numerical dependency; refused")
+    if (
+        sha256(cache / "panel.pt") != config["cache_sha256"]
+        or sha256(cache / "panel.json") != config["cache_metadata_sha256"]
+    ):
+        raise ValueError("migration input cache mismatch")
+    new_config = json.loads(json.dumps(config))
+    new_config["reporting_schema"] = 2
+    new_config["code_sha256"][Path(__file__).name] = sha256(Path(__file__))
+    trace = checkpoint.parent.parent / "sampling.jsonl"
+    lines = trace.read_text().splitlines()
+    digest = "0" * 64
+    for index, line in enumerate(lines, 1):
+        if json.loads(line)["step"] != index:
+            raise ValueError("migration trace chronology mismatch")
+        digest = hashlib.sha256((digest + line).encode()).hexdigest()
+    if len(lines) != original["step"] or digest != original["run_state"]["sample_trace_sha256"]:
+        raise ValueError("migration requires exact native sample trace")
+    source = subprocess.check_output(["git", "rev-parse", "HEAD"], text=True).strip()
+    destination.mkdir(parents=True)
+    shutil.copyfile(trace, destination / "sampling.jsonl")
+    steps = sorted({original["step"], original["run_state"]["best_step"]})
+    for step in steps:
+        old = checkpoint.parent / f"step-{step:06d}"
+        learner, manifest, _ = load_checkpoint(old, expected_run_config=config)
+        save_checkpoint(
+            destination / "checkpoints" / old.name,
+            learner=learner,
+            sampler=None,
+            replay_paths=(cache / "panel.pt", cache / "panel.json"),
+            run_state=manifest["run_state"],
+            run_config=new_config,
+            source_commit=source,
+        )
+    receipt = {
+        "schema": 2,
+        "migration": "reporting-v1-to-v2",
+        "original_source": original["source_commit"],
+        "original_checkpoint": str(checkpoint),
+        "packaging_source": source,
+        "steps": steps,
+        "step": original["step"],
+        "optimizer_and_rng_preserved": True,
+        "training_updates": 0,
+        "sample_trace_sha256": digest,
+        "scope": (
+            "Only result publication/profile metadata changed. Native optimizer/tensors/RNG/"
+            "cursor and exact cache preserved; originals untouched."
+        ),
+    }
+    publish_json(destination / "reporting-migration.json", receipt)
+    return receipt
 
 
 def value_parameters(network) -> None:
@@ -276,6 +349,7 @@ def train(
         k: v.clone() for k, v in base.state_dict().items() if not k.startswith(VALUE_PREFIXES)
     }
     config = {
+        "reporting_schema": 2,
         "task": "late-outcome-value-calibration",
         "schema": 1,
         "arm": arm,
@@ -388,10 +462,15 @@ def train(
         )
         return valid
 
-    valid = True if resume else inspect()
+    valid = state["evaluations"][-1]["retention_passed"] if resume else inspect()
     reason = "max_steps"
+    already_stopped = resume and learner.step - state["best_step"] >= patience
+    if already_stopped:
+        reason = "heldout patience"
+    if not valid:
+        reason = "native retention failed"
     with trace.open("a") as stream:
-        while valid and learner.step < max_steps:
+        while valid and not already_stopped and learner.step < max_steps:
             if time.perf_counter() - started >= wall_seconds:
                 reason = "wall budget"
                 break
@@ -450,7 +529,14 @@ def train(
         "new_paid_resources": False,
         "promotion_ready": False,
     }
-    publish_json(directory / "result.json", report)
+    publish_json(directory / f"session-step-{learner.step:06d}.json", report)
+    temporary = directory / "result-latest.json.pending"
+    with temporary.open("x") as stream:
+        json.dump(report, stream)
+        stream.write("\n")
+        stream.flush()
+        os.fsync(stream.fileno())
+    os.replace(temporary, directory / "result.json")
     return {k: v for k, v in report.items() if k not in {"state", "config"}}
 
 
@@ -466,9 +552,15 @@ def main():
     fit.add_argument("--arm", choices=("anchor", "self"), required=True)
     fit.add_argument("--resume", type=Path)
     fit.add_argument("--stop-at", type=int)
+    migration = modes.add_parser("migrate-reporting-v1")
+    for name in ("destination", "checkpoint", "cache"):
+        migration.add_argument(name, type=Path)
     args = vars(parser.parse_args())
     mode = args.pop("mode")
-    print(json.dumps(prepare(**args) if mode == "prepare" else train(**args)), flush=True)
+    action = {"prepare": prepare, "train": train, "migrate-reporting-v1": migrate_reporting_v1}[
+        mode
+    ]
+    print(json.dumps(action(**args)), flush=True)
 
 
 if __name__ == "__main__":
