@@ -33,24 +33,29 @@ ORACLE_SCHEMA = 1
 
 def complete_multipv(packets, count: int) -> list[dict]:
     """Do not combine stale merged bounds or different-depth PV scores."""
-    iterations: dict[int, dict[int, dict]] = {}
+    group: list[dict] = []
+    depth = None
     selected = None
     for info in packets:
+        if not all(k in info for k in ("score", "wdl", "pv", "depth")) or not info["pv"]:
+            continue
+        index = info.get("multipv", 1)
+        if index == 1:
+            group, depth = [], info["depth"]
         if (
-            not all(k in info for k in ("score", "wdl", "pv", "depth"))
-            or not info["pv"]
+            info["depth"] != depth
+            or index != len(group) + 1
             or info.get("lowerbound")
             or info.get("upperbound")
         ):
+            group, depth = [], None
             continue
-        group = iterations.setdefault(info["depth"], {})
-        group[info.get("multipv", 1)] = dict(info)
-        if all(i in group for i in range(1, count + 1)):
-            candidate = [group[i] for i in range(1, count + 1)]
-            if len({x["pv"][0] for x in candidate}) != count:
+        group.append(dict(info))
+        if len(group) == count:
+            if len({x["pv"][0] for x in group}) != count:
                 raise ValueError("duplicate MultiPV moves")
             if selected is None or info["depth"] >= selected[0]["depth"]:
-                selected = candidate
+                selected = list(group)
     if selected is None:
         raise ValueError("no coherent completed MultiPV iteration")
     return selected
@@ -107,13 +112,29 @@ def generate_game(job: dict) -> dict:
             raise TimeoutError("oracle generation wall budget exhausted")
         timer = threading.Timer(min(15, remaining), engine.close)
         timer.start()
+        packets = []
         try:
             with engine.analysis(
                 board, chess.engine.Limit(nodes=nodes), multipv=count, game=object()
             ) as analysis:
-                info = complete_multipv(analysis, count)
+                for packet in analysis:
+                    packets.append(packet)
+                info = complete_multipv(packets, count)
                 analysis.wait()
                 actual = analysis.info.get("nodes", info[-1].get("nodes", 0))
+        except Exception as error:
+            publish_json(
+                Path(job["output"]).with_suffix(".failure.json"),
+                {
+                    "error": str(error),
+                    "job": {k: v for k, v in job.items() if k != "deadline"},
+                    "fen": board.fen(),
+                    "moves": [m.uci() for m in board.move_stack],
+                    "rows_before_failure": len(rows),
+                    "uci_packets": [str(p) for p in packets],
+                },
+            )
+            raise
         finally:
             timer.cancel()
         calls += 1
