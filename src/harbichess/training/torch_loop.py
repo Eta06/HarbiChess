@@ -293,6 +293,9 @@ def run_loop(
                 / training_seconds,
                 "rolling_train_rows": len(train_records),
                 "rolling_validation_rows": len(validation_records),
+                "rolling_validation_terminal_rows": sum(
+                    record.outcome_value is not None for record in validation_records
+                ),
                 "fixed_loss_before": before,
                 "fixed_loss_after": learner.evaluate_loss(fixed),
                 "heldout_loss_before": held_before,
