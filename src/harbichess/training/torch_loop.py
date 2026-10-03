@@ -1,7 +1,7 @@
 """Bounded fresh self-play policy iteration; generation-boundary exact resume.
 
-Actors share one inference snapshot through a batching thread. Learning occurs
-only after actors drain, so no model/optimizer races or forked framework state.
+Actors share an inference snapshot through a batching thread, or explicitly use
+spawned CPU processes. Learning occurs only after actors drain, without forks.
 Partial generations remain diagnostic artifacts and restart from the last commit.
 """
 
@@ -12,24 +12,20 @@ import json
 import resource
 import subprocess
 import time
-from concurrent.futures import ThreadPoolExecutor
 from dataclasses import asdict, dataclass
 from datetime import UTC, datetime
 from pathlib import Path
 
 import torch
 
-from harbichess.backends.torch_backend import TorchPolicyValueBackend
 from harbichess.backends.torch_network import TorchChessNetwork, load_weights, sha256
 from harbichess.chess.rules import PythonChessRules
 from harbichess.core.network_config import NetworkConfig
 from harbichess.replay.schema import records_from_game
 from harbichess.replay.shard import ShardMetadata, read_shard, write_shard_atomic
 from harbichess.replay.split import ReplaySplit
-from harbichess.search.batching import SharedBatchEvaluator
-from harbichess.search.evaluator import NeuralPositionEvaluator
-from harbichess.search.full_gumbel import FullGumbelConfig, FullGumbelMCTS
-from harbichess.selfplay.game import SelfPlayConfig, derive_game_seed, play_game
+from harbichess.selfplay.game import derive_game_seed
+from harbichess.selfplay.torch_actors import collect_process_games, collect_thread_games
 from harbichess.training.batch import GameBalancedSampler, build_training_batch
 from harbichess.training.config import LearnerConfig
 from harbichess.training.torch_checkpoint import load_checkpoint, save_checkpoint
@@ -67,16 +63,6 @@ class LoopConfig:
         LearnerConfig(learning_rate=self.learning_rate)
 
 
-class _DeadlineEvaluator:
-    def __init__(self, evaluator: NeuralPositionEvaluator, deadline: float) -> None:
-        self.evaluator, self.deadline = evaluator, deadline
-
-    def evaluate(self, state):
-        if time.perf_counter() >= self.deadline:
-            raise TimeoutError("wall-clock budget exhausted; resume last complete generation")
-        return self.evaluator.evaluate(state)
-
-
 def run_loop(
     directory: Path,
     *,
@@ -86,8 +72,9 @@ def run_loop(
     weights: Path | None = None,
     legacy_mlx: bool = False,
     resume: Path | None = None,
+    actor_mode: str = "thread",
 ) -> dict:
-    if generations <= 0 or wall_seconds <= 0:
+    if generations <= 0 or wall_seconds <= 0 or actor_mode not in ("thread", "process"):
         raise ValueError("generation target and wall budget must be positive")
     if resume and weights:
         raise ValueError("resume and weights warm-start are mutually exclusive")
@@ -96,8 +83,13 @@ def run_loop(
     source = subprocess.check_output(["git", "rev-parse", "HEAD"], text=True).strip()
     started = time.perf_counter()
     cpu_started = time.process_time()
+    children_started = resource.getrusage(resource.RUSAGE_CHILDREN)
     deadline = started + wall_seconds
     run_config = asdict(config)
+    if actor_mode == "process":
+        if config.device != "cpu" or config.threads != 1:
+            raise ValueError("process actors require CPU and one Torch thread")
+        run_config["actor_mode"] = actor_mode
     sampler = None
     rules = PythonChessRules()
     if resume:
@@ -159,40 +151,20 @@ def run_loop(
             generation_start = time.perf_counter()
             if generation_start >= deadline:
                 raise TimeoutError("wall-clock budget exhausted")
-            backend = TorchPolicyValueBackend(learner.network, device=config.device)
-            bridge = SharedBatchEvaluator(
-                backend, max_batch_size=config.workers, max_wait_seconds=0.00025
-            )
-            try:
-                evaluator = _DeadlineEvaluator(
-                    NeuralPositionEvaluator(bridge, rules=rules), deadline
+            indices = range(state["next_game"], state["next_game"] + config.games)
+            if actor_mode == "process":
+                games, stats = collect_process_games(
+                    directory
+                    / f"checkpoints/generation-{generation - 1:06d}"
+                    / "model.safetensors",
+                    asdict(config),
+                    indices,
+                    deadline,
                 )
-                search = FullGumbelMCTS(
-                    evaluator,
-                    rules=rules,
-                    config=FullGumbelConfig(
-                        simulations=config.simulations,
-                        max_considered_actions=min(16, config.simulations),
-                        gumbel_scale=config.gumbel_scale,
-                    ),
+            else:
+                games, stats = collect_thread_games(
+                    learner.network, asdict(config), indices, deadline
                 )
-
-                def game(index, search=search):
-                    return play_game(
-                        search,
-                        rules,
-                        rules.initial_state(),
-                        game_index=index,
-                        seed=derive_game_seed(config.seed, index),
-                        config=SelfPlayConfig(max_plies=config.max_plies, search_root_noise=False),
-                    )
-
-                indices = range(state["next_game"], state["next_game"] + config.games)
-                with ThreadPoolExecutor(max_workers=config.workers) as pool:
-                    games = tuple(pool.map(game, indices))
-                stats = asdict(bridge.statistics)
-            finally:
-                bridge.close()
             generation_seconds = time.perf_counter() - generation_start
             fresh = {
                 split: tuple(
@@ -332,6 +304,10 @@ def run_loop(
             "last_complete_checkpoint": f"checkpoints/generation-{state['generation']:06d}",
             "wall_seconds": time.perf_counter() - started,
             "process_cpu_seconds": time.process_time() - cpu_started,
+            "children_cpu_seconds": resource.getrusage(resource.RUSAGE_CHILDREN).ru_utime
+            + resource.getrusage(resource.RUSAGE_CHILDREN).ru_stime
+            - children_started.ru_utime
+            - children_started.ru_stime,
             "peak_rss_kib": resource.getrusage(resource.RUSAGE_SELF).ru_maxrss,
             "promotion_ready": False,
             "new_paid_resources": False,
@@ -353,6 +329,7 @@ def main() -> None:
     parser.add_argument("--weights", type=Path)
     parser.add_argument("--legacy-mlx", action="store_true")
     parser.add_argument("--resume", type=Path)
+    parser.add_argument("--actor-mode", choices=("thread", "process"), default="thread")
     for name, field in LoopConfig.__dataclass_fields__.items():
         parser.add_argument(
             "--" + name.replace("_", "-"), type=type(field.default), default=field.default
@@ -367,6 +344,7 @@ def main() -> None:
         weights=args.weights,
         legacy_mlx=args.legacy_mlx,
         resume=args.resume,
+        actor_mode=args.actor_mode,
     )
 
 
