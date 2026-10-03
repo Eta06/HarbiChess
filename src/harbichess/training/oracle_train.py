@@ -56,6 +56,9 @@ def run(
     seed: int = 20261003,
     trainable_prefixes: tuple[str, ...] = (),
     qualification_reference: Path | None = None,
+    learning_rate: float = 2e-4,
+    max_train_rows: int | None = None,
+    max_validation_rows: int | None = None,
 ) -> dict:
     if min(max_steps, interval, patience, batch_size, wall_seconds) <= 0:
         raise ValueError("training budgets must be positive")
@@ -63,7 +66,10 @@ def run(
     torch.use_deterministic_algorithms(True)
     started = time.perf_counter()
     source = subprocess.check_output(["git", "rev-parse", "HEAD"], text=True).strip()
-    training, validation, panel_info = load_panels(dataset)
+    training, validation, panel_info = load_panels(
+        dataset, max_train_rows=max_train_rows, max_validation_rows=max_validation_rows, seed=seed
+    )
+    learner_config = LearnerConfig(learning_rate=learning_rate)
     config = {
         "task": "engine-reference-bootstrap",
         "oracle_schema": ORACLE_SCHEMA,
@@ -75,7 +81,7 @@ def run(
         "interval": interval,
         "patience": patience,
         "batch_size": batch_size,
-        "learner": asdict(LearnerConfig()),
+        "learner": asdict(learner_config),
         "code_sha256": {
             p.name: sha256(p) for p in (Path(__file__), Path(__file__).with_name("oracle_data.py"))
         },
@@ -84,6 +90,8 @@ def run(
         config["trainable_prefixes"] = list(trainable_prefixes)
     if qualification_reference:
         config["qualification_reference_sha256"] = sha256(qualification_reference)
+    if max_train_rows is not None or max_validation_rows is not None:
+        config["panel_caps"] = {"train": max_train_rows, "validation": max_validation_rows}
     if resume:
         learner, manifest, _ = load_checkpoint(resume, expected_run_config=config)
         state = manifest["run_state"]
@@ -102,7 +110,7 @@ def run(
                 parameter.requires_grad_(name.startswith(trainable_prefixes))
             if not any(p.requires_grad for p in network.parameters()):
                 raise ValueError("trainable prefixes match no parameters")
-        learner = TorchLearner(network, config=LearnerConfig())
+        learner = TorchLearner(network, config=learner_config)
         baseline = evaluate(learner, validation)
         state = {
             "cursor": 0,
@@ -223,6 +231,13 @@ def main() -> None:
     parser.add_argument("--wall-seconds", type=float, default=1800)
     parser.add_argument("--trainable-prefix", action="append", default=[])
     parser.add_argument("--qualification-reference", type=Path)
+    parser.add_argument("--learning-rate", type=float, default=2e-4)
+    parser.add_argument("--max-steps", type=int, default=6000)
+    parser.add_argument("--interval", type=int, default=200)
+    parser.add_argument("--patience", type=int, default=1000)
+    parser.add_argument("--seed", type=int, default=20261003)
+    parser.add_argument("--max-train-rows", type=int)
+    parser.add_argument("--max-validation-rows", type=int)
     args = parser.parse_args()
     print(
         json.dumps(
@@ -235,6 +250,13 @@ def main() -> None:
                 wall_seconds=args.wall_seconds,
                 trainable_prefixes=tuple(args.trainable_prefix),
                 qualification_reference=args.qualification_reference,
+                learning_rate=args.learning_rate,
+                max_steps=args.max_steps,
+                interval=args.interval,
+                patience=args.patience,
+                seed=args.seed,
+                max_train_rows=args.max_train_rows,
+                max_validation_rows=args.max_validation_rows,
             )
         ),
         flush=True,
