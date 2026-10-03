@@ -57,8 +57,10 @@ learner step, game cursor, run identity and complete-generation history. The rep
 checkpoint directory form a unit: relocate the complete run directory. Never copy only weights
 and call it resume. Early version 1 cursors missing run_id are migrated from replay provenance.
 
-Actors drain before learning. CPU threads share a frozen inference copy; no process fork or
-concurrent learner mutation. One-worker deterministic CPU CLI resume is tested bitwise. Multiple
+Actors drain before learning. Default CPU threads share a frozen inference copy.
+Explicit `--actor-mode process` spawns independent one-thread CPU actors from immutable
+weights; it never forks an initialized Torch process. Its configuration is checkpointed;
+a thread/process cross-mode resume is refused. No concurrent learner mutation. One-worker deterministic CPU CLI resume is tested bitwise. Multiple
 actor batching can change floating-point aggregation/timing, so it has seed reproducibility but
 no blanket bitwise claim. A partial generation restarts from the last complete boundary; if its
 regenerated replay differs, the process rejects it and keeps the earlier diagnostic bytes.
@@ -89,3 +91,38 @@ The default 16-game arena is diagnostic. Caps are scored 0.5 only for that diagn
 separately, and never converted to known training draws. Pair bootstrap can degenerate on tiny
 samples; a wide Hoeffding interval is also shown, conditional on independent opening families.
 No general Elo or promotion claim follows from this fixed suite.
+
+## Compact pairwise weights on Apple/MLX
+
+The AYNA/UFUK `pairwise` architecture uses the same version1 weight container,
+104encoder planes,4672actions and STM win/draw/loss meaning. Its explicit
+architecture specification is required; unversioned pairwise files are rejected.
+Old dense/MIHVER/DENGE classes and checkpoints keep their existing loaders.
+The legacy smoke CLI instantiates the dense architecture; select the pairwise
+class explicitly for a pairwise model.
+
+```python
+from pathlib import Path
+import mlx.core as mx
+from harbichess.backends.pairwise_network import HarbiChessPairwiseNetwork
+from harbichess.backends.mlx_backend import MLXPolicyValueBackend
+from harbichess.training.learner import MLXLearner
+
+network = HarbiChessPairwiseNetwork.from_portable(Path("model.safetensors"))
+learner = MLXLearner(network)
+# learner.train_step(validated_training_batch) uses the existing MLX optimizer.
+# Choose a separate inference copy after updates, as in the existing self-play path.
+backend = MLXPolicyValueBackend(network, dtype=mx.float32, compiled=False)
+network.save_portable(Path("new-mlx-weights.safetensors"))
+```
+
+`from_portable` converts OIHW→OHWI when needed; `save_portable` publishes OHWI
+with versioned metadata, refuses overwrite and rejects nonfinite weights. Neither
+imports Torch; a fresh-process test actively blocks Torch imports. Output exports
+load directly in the Torch backend. This is **weights-only** transfer; optimizer,
+RNG, data cursor and replay do not cross frameworks. Native MLX optimizer snapshot
+restore of a real pairwise training update is tested separately. Linux native
+engine-dataset collection/training CLI currently uses Torch; this example does
+not claim an MLX-native replacement CLI or Apple Metal device validation.
+Real Linux MLX CPU forward/masked policy/soft WDL CE/gradient/update tests run
+without skips. Metal/CUDA/BF16 speed and device resume still require those devices.
