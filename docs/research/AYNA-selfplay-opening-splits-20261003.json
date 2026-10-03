@@ -1,0 +1,535 @@
+{
+  "schema": 1,
+  "seed": 20261004,
+  "source": "lichess-org/chess-openings CC0",
+  "selection": "20 components unused by any original 96 train/validation/arena or MERCEK family; transpositions merged",
+  "previous_split_sha256": "019c5b4a49ac287ca03effb65b33ed97daa2e702ddd4a6972491969e27912b24",
+  "splits": {
+    "arena": [
+      {
+        "family": 0,
+        "prefix4": [
+          "e2e4",
+          "e7e5",
+          "d2d3",
+          "d7d5"
+        ],
+        "opening": {
+          "moves": [
+            "e2e4",
+            "e7e5",
+            "d2d3",
+            "d7d5",
+            "e4d5",
+            "c7c6",
+            "d5c6",
+            "b8c6"
+          ],
+          "eco": "C20",
+          "name": "King's Pawn Game: Weber Gambit",
+          "fen": "r1bqkbnr/pp3ppp/2n5/4p3/8/3P4/PPP2PPP/RNBQKBNR w KQkq - 0 5"
+        }
+      },
+      {
+        "family": 1,
+        "prefix4": [
+          "a2a3",
+          "e7e5",
+          "b2b3",
+          "d7d5"
+        ],
+        "opening": {
+          "moves": [
+            "a2a3",
+            "e7e5",
+            "b2b3",
+            "d7d5",
+            "c2c3",
+            "g8f6",
+            "d2d3",
+            "b8c6"
+          ],
+          "eco": "A00",
+          "name": "Formation: Hippopotamus Attack",
+          "fen": "r1bqkb1r/ppp2ppp/2n2n2/3pp3/8/PPPP4/4PPPP/RNBQKBNR w KQkq - 1 5"
+        }
+      },
+      {
+        "family": 2,
+        "prefix4": [
+          "e2e4",
+          "c7c5",
+          "b1c3",
+          "b8c6"
+        ],
+        "opening": {
+          "moves": [
+            "e2e4",
+            "c7c5",
+            "b1c3",
+            "b8c6",
+            "g2g3",
+            "g7g6",
+            "f1g2",
+            "f8g7"
+          ],
+          "eco": "B25",
+          "name": "Sicilian Defense: Closed, Botvinnik Defense, with Nge2",
+          "fen": "r1bqk1nr/pp1pppbp/2n3p1/2p5/4P3/2N3P1/PPPP1PBP/R1BQK1NR w KQkq - 2 5"
+        }
+      },
+      {
+        "family": 3,
+        "prefix4": [
+          "c2c4",
+          "g8f6",
+          "b1c3",
+          "c7c5"
+        ],
+        "opening": {
+          "moves": [
+            "c2c4",
+            "g8f6",
+            "b1c3",
+            "c7c5",
+            "g2g3",
+            "d7d5",
+            "c4d5",
+            "f6d5"
+          ],
+          "eco": "A34",
+          "name": "English Opening: Symmetrical Variation, Rubinstein Variation",
+          "fen": "rnbqkb1r/pp2pppp/8/2pn4/8/2N3P1/PP1PPP1P/R1BQKBNR w KQkq - 0 5"
+        }
+      },
+      {
+        "family": 4,
+        "prefix4": [
+          "d2d4",
+          "f7f5",
+          "g2g3",
+          "g8f6"
+        ],
+        "opening": {
+          "moves": [
+            "d2d4",
+            "f7f5",
+            "g2g3",
+            "g8f6",
+            "f1g2",
+            "g7g6",
+            "g1f3",
+            "f8g7"
+          ],
+          "eco": "A88",
+          "name": "Dutch Defense: Leningrad Variation, Warsaw Variation",
+          "fen": "rnbqk2r/ppppp1bp/5np1/5p2/3P4/5NP1/PPP1PPBP/RNBQK2R w KQkq - 2 5"
+        }
+      },
+      {
+        "family": 5,
+        "prefix4": [
+          "e2e4",
+          "e7e6",
+          "b1c3",
+          "d7d5"
+        ],
+        "opening": {
+          "moves": [
+            "e2e4",
+            "e7e6",
+            "b1c3",
+            "d7d5",
+            "d2d4",
+            "g8f6",
+            "c1g5",
+            "f8b4"
+          ],
+          "eco": "C12",
+          "name": "French Defense: McCutcheon Variation, Duras Variation",
+          "fen": "rnbqk2r/ppp2ppp/4pn2/3p2B1/1b1PP3/2N5/PPP2PPP/R2QKBNR w KQkq - 3 5"
+        }
+      },
+      {
+        "family": 6,
+        "prefix4": [
+          "e2e4",
+          "c7c5",
+          "c2c3",
+          "d7d5"
+        ],
+        "opening": {
+          "moves": [
+            "e2e4",
+            "c7c5",
+            "c2c3",
+            "d7d5",
+            "e4d5",
+            "d8d5",
+            "d2d4",
+            "g7g6"
+          ],
+          "eco": "B22",
+          "name": "Sicilian Defense: Alapin Variation, Barmen Defense",
+          "fen": "rnb1kbnr/pp2pp1p/6p1/2pq4/3P4/2P5/PP3PPP/RNBQKBNR w KQkq - 0 5"
+        }
+      },
+      {
+        "family": 7,
+        "prefix4": [
+          "e2e4",
+          "e7e5",
+          "f1c4",
+          "f8c5"
+        ],
+        "opening": {
+          "moves": [
+            "e2e4",
+            "e7e5",
+            "f1c4",
+            "f8c5",
+            "c2c3",
+            "d7d5",
+            "c4d5",
+            "g8f6"
+          ],
+          "eco": "C23",
+          "name": "Bishop's Opening: Lewis Countergambit",
+          "fen": "rnbqk2r/ppp2ppp/5n2/2bBp3/4P3/2P5/PP1P1PPP/RNBQK1NR w KQkq - 1 5"
+        }
+      },
+      {
+        "family": 8,
+        "prefix4": [
+          "b1c3",
+          "d7d5",
+          "f2f4",
+          "d5d4"
+        ],
+        "opening": {
+          "moves": [
+            "b1c3",
+            "d7d5",
+            "f2f4",
+            "d5d4",
+            "c3e4",
+            "f7f5",
+            "e4f2",
+            "g8f6"
+          ],
+          "eco": "A00",
+          "name": "Van Geet Opening: Jendrossek Gambit",
+          "fen": "rnbqkb1r/ppp1p1pp/5n2/5p2/3p1P2/8/PPPPPNPP/R1BQKBNR w KQkq - 2 5"
+        }
+      },
+      {
+        "family": 9,
+        "prefix4": [
+          "d2d4",
+          "g8f6",
+          "c2c4",
+          "c7c5"
+        ],
+        "opening": {
+          "moves": [
+            "d2d4",
+            "g8f6",
+            "c2c4",
+            "c7c5",
+            "d4d5",
+            "e7e6",
+            "b1c3",
+            "e6d5"
+          ],
+          "eco": "A66",
+          "name": "Benoni Defense: Mikenas Variation",
+          "fen": "rnbqkb1r/pp1p1ppp/5n2/2pp4/2P5/2N5/PP2PPPP/R1BQKBNR w KQkq - 0 5"
+        }
+      },
+      {
+        "family": 10,
+        "prefix4": [
+          "g1f3",
+          "g8f6",
+          "g2g3",
+          "g7g6"
+        ],
+        "opening": {
+          "moves": [
+            "g1f3",
+            "g8f6",
+            "g2g3",
+            "g7g6",
+            "b2b3",
+            "f8g7",
+            "c1b2",
+            "e8g8"
+          ],
+          "eco": "A05",
+          "name": "Zukertort Opening: Double Fianchetto Attack",
+          "fen": "rnbq1rk1/ppppppbp/5np1/8/8/1P3NP1/PBPPPP1P/RN1QKB1R w KQ - 3 5"
+        }
+      },
+      {
+        "family": 11,
+        "prefix4": [
+          "e2e4",
+          "e7e5",
+          "b1c3",
+          "b8c6"
+        ],
+        "opening": {
+          "moves": [
+            "e2e4",
+            "e7e5",
+            "f2f4",
+            "e5f4",
+            "g1f3",
+            "g7g5",
+            "f1c4",
+            "g5g4"
+          ],
+          "eco": "C37",
+          "name": "King's Gambit Accepted: Muzio Gambit, Kling and Horwitz Counterattack",
+          "fen": "rnbqkbnr/pppp1p1p/8/8/2B1Ppp1/5N2/PPPP2PP/RNBQK2R w KQkq - 0 5"
+        }
+      },
+      {
+        "family": 12,
+        "prefix4": [
+          "c2c4",
+          "c7c5",
+          "b1c3",
+          "b8c6"
+        ],
+        "opening": {
+          "moves": [
+            "c2c4",
+            "c7c5",
+            "b1c3",
+            "b8c6",
+            "g2g3",
+            "g7g6",
+            "f1g2",
+            "f8g7"
+          ],
+          "eco": "A37",
+          "name": "English Opening: Symmetrical Variation, Botvinnik System Reversed, with Nf3",
+          "fen": "r1bqk1nr/pp1pppbp/2n3p1/2p5/2P5/2N3P1/PP1PPPBP/R1BQK1NR w KQkq - 2 5"
+        }
+      },
+      {
+        "family": 13,
+        "prefix4": [
+          "g2g3",
+          "e7e5",
+          "a2a3",
+          "d7d5"
+        ],
+        "opening": {
+          "moves": [
+            "g2g3",
+            "e7e5",
+            "a2a3",
+            "d7d5",
+            "g1f3",
+            "e5e4",
+            "f3h4",
+            "f8e7"
+          ],
+          "eco": "A00",
+          "name": "Hungarian Opening: Burk Gambit",
+          "fen": "rnbqk1nr/ppp1bppp/8/3p4/4p2N/P5P1/1PPPPP1P/RNBQKB1R w KQkq - 2 5"
+        }
+      },
+      {
+        "family": 14,
+        "prefix4": [
+          "f2f4",
+          "e7e5",
+          "f4e5",
+          "d7d6"
+        ],
+        "opening": {
+          "moves": [
+            "f2f4",
+            "e7e5",
+            "f4e5",
+            "d7d6",
+            "e5d6",
+            "f8d6",
+            "g1f3",
+            "g7g5"
+          ],
+          "eco": "A02",
+          "name": "Bird Opening: From's Gambit, Lasker Variation",
+          "fen": "rnbqk1nr/ppp2p1p/3b4/6p1/8/5N2/PPPPP1PP/RNBQKB1R w KQkq - 0 5"
+        }
+      },
+      {
+        "family": 15,
+        "prefix4": [
+          "e2e4",
+          "g7g6",
+          "d2d4",
+          "g8f6"
+        ],
+        "opening": {
+          "moves": [
+            "e2e4",
+            "g7g6",
+            "d2d4",
+            "g8f6",
+            "e4e5",
+            "f6h5",
+            "f1e2",
+            "d7d6"
+          ],
+          "eco": "B06",
+          "name": "Modern Defense: Norwegian Defense, Norwegian Gambit",
+          "fen": "rnbqkb1r/ppp1pp1p/3p2p1/4P2n/3P4/8/PPP1BPPP/RNBQK1NR w KQkq - 0 5"
+        }
+      },
+      {
+        "family": 16,
+        "prefix4": [
+          "e2e4",
+          "e7e5",
+          "d1e2",
+          "b8c6"
+        ],
+        "opening": {
+          "moves": [
+            "e2e4",
+            "e7e5",
+            "d1e2",
+            "b8c6",
+            "c2c3",
+            "g8f6",
+            "g1f3",
+            "f8c5"
+          ],
+          "eco": "C20",
+          "name": "King's Pawn Opening: Van Hooydoon Gambit",
+          "fen": "r1bqk2r/pppp1ppp/2n2n2/2b1p3/4P3/2P2N2/PP1PQPPP/RNB1KB1R w KQkq - 3 5"
+        }
+      },
+      {
+        "family": 17,
+        "prefix4": [
+          "e2e4",
+          "c7c5",
+          "d2d4",
+          "c5d4"
+        ],
+        "opening": {
+          "moves": [
+            "e2e4",
+            "c7c5",
+            "d2d4",
+            "c5d4",
+            "c2c3",
+            "d4c3",
+            "b1c3",
+            "b8c6"
+          ],
+          "eco": "B21",
+          "name": "Sicilian Defense: Smith-Morra Gambit Accepted, Sozin Formation",
+          "fen": "r1bqkbnr/pp1ppppp/2n5/8/4P3/2N5/PP3PPP/R1BQKBNR w KQkq - 1 5"
+        }
+      },
+      {
+        "family": 18,
+        "prefix4": [
+          "c2c4",
+          "e7e6",
+          "d2d4",
+          "b7b6"
+        ],
+        "opening": {
+          "moves": [
+            "c2c4",
+            "e7e6",
+            "d2d4",
+            "b7b6",
+            "b1c3",
+            "c8b7",
+            "e2e4",
+            "f7f5"
+          ],
+          "eco": "A40",
+          "name": "English Defense: Hartlaub Gambit Accepted",
+          "fen": "rn1qkbnr/pbpp2pp/1p2p3/5p2/2PPP3/2N5/PP3PPP/R1BQKBNR w KQkq - 0 5"
+        }
+      },
+      {
+        "family": 19,
+        "prefix4": [
+          "c2c4",
+          "e7e6",
+          "g1f3",
+          "d7d5"
+        ],
+        "opening": {
+          "moves": [
+            "c2c4",
+            "e7e6",
+            "g1f3",
+            "d7d5",
+            "b2b3",
+            "g8f6",
+            "c1b2",
+            "f8e7"
+          ],
+          "eco": "A13",
+          "name": "English Opening: Agincourt Defense",
+          "fen": "rnbqk2r/ppp1bppp/4pn2/3p4/2P5/1P3N2/PB1PPPPP/RN1QKB1R w KQkq - 3 5"
+        }
+      }
+    ]
+  },
+  "source_receipts": [
+    {
+      "file": "README.md",
+      "url": "https://raw.githubusercontent.com/lichess-org/chess-openings/master/README.md",
+      "status": 200,
+      "sha256": "c0bedd93a117f318a3bd087a3af640652f4369ca461429d4dfbeee4614dc5eae",
+      "bytes": 2661
+    },
+    {
+      "file": "a.tsv",
+      "url": "https://raw.githubusercontent.com/lichess-org/chess-openings/master/a.tsv",
+      "status": 200,
+      "sha256": "41722fa3d44f294357326fe2ca1b956d9e56490b30efcfa68db61114c9df7e10",
+      "bytes": 66338
+    },
+    {
+      "file": "b.tsv",
+      "url": "https://raw.githubusercontent.com/lichess-org/chess-openings/master/b.tsv",
+      "status": 200,
+      "sha256": "310f0997d5a26ac6c9abfabac028e47e78f24356a6ba322cfffbf8f5a3f88d25",
+      "bytes": 77372
+    },
+    {
+      "file": "c.tsv",
+      "url": "https://raw.githubusercontent.com/lichess-org/chess-openings/master/c.tsv",
+      "status": 200,
+      "sha256": "b2e64f32e42e6418b327d03a55af65f3a18e762f7cbc0efffc7e9d1ed3aa7343",
+      "bytes": 132306
+    },
+    {
+      "file": "d.tsv",
+      "url": "https://raw.githubusercontent.com/lichess-org/chess-openings/master/d.tsv",
+      "status": 200,
+      "sha256": "58cad40b886bd499717eabcce281d4bfcf00eeadbdc00552f42042cf4aac50d2",
+      "bytes": 69199
+    },
+    {
+      "file": "e.tsv",
+      "url": "https://raw.githubusercontent.com/lichess-org/chess-openings/master/e.tsv",
+      "status": 200,
+      "sha256": "2787c571c16758343352be5a3e1272cb79af9ad32f20884ea6af982026efbe13",
+      "bytes": 43453
+    }
+  ]
+}
