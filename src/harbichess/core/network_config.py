@@ -6,6 +6,22 @@ from harbichess.chess.actions import POLICY_SIZE
 from harbichess.chess.encoding import ENCODER_CHANNELS
 
 
+def validate_policy_adapter(specification: dict | None) -> dict | None:
+    """An optional, versioned policy-only branch; never modifies value features."""
+    if specification is None:
+        return None
+    if (
+        not isinstance(specification, dict)
+        or set(specification) != {"schema", "blocks"}
+        or type(specification["schema"]) is not int
+        or specification["schema"] != 1
+        or type(specification["blocks"]) is not int
+        or specification["blocks"] <= 0
+    ):
+        raise ValueError("unsupported policy adapter specification")
+    return dict(specification)
+
+
 @dataclass(frozen=True, slots=True)
 class NetworkConfig:
     input_channels: int = ENCODER_CHANNELS
