@@ -15,6 +15,7 @@ import torch
 from harbichess.backends.torch_backend import TorchPolicyValueBackend
 from harbichess.backends.torch_network import TorchChessNetwork, load_weights
 from harbichess.chess.rules import PythonChessRules
+from harbichess.core.state import ChessMove
 from harbichess.search.batching import SharedBatchEvaluator
 from harbichess.search.evaluator import NeuralPositionEvaluator
 from harbichess.search.full_gumbel import FullGumbelConfig, FullGumbelMCTS
@@ -53,10 +54,14 @@ def search_snapshot(network, config, deadline, *, threaded):
 
 
 def actor_game(search, rules, config, index):
+    initial = rules.initial_state()
+    if config.get("actor_openings"):
+        for uci in config["actor_openings"][index % len(config["actor_openings"])]:
+            initial = rules.apply(initial, ChessMove(uci))
     return play_game(
         search,
         rules,
-        rules.initial_state(),
+        initial,
         game_index=index,
         seed=derive_game_seed(config["seed"], index),
         config=SelfPlayConfig(max_plies=config["max_plies"], search_root_noise=False),
