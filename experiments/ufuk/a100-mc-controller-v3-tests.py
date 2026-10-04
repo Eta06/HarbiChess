@@ -55,8 +55,7 @@ class Tests(unittest.TestCase):
                 "input_sha256": {"initial_weights": "e" * 64},
             },
             "artifacts": {
-                name: c.sha(native / name)
-                for name in ("actor.json", "model.safetensors")
+                name: c.sha(native / name) for name in ("actor.json", "model.safetensors")
             },
         }
         (native / "checkpoint.json").write_text(json.dumps(manifest))
@@ -89,9 +88,7 @@ class Tests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as d:
             root = Path(d)
             _, state = self.fixture(root)
-            self.assertEqual(
-                c.verify_boundary(root, 20261205, "a" * 40, 40, 2000), state
-            )
+            self.assertEqual(c.verify_boundary(root, 20261205, "a" * 40, 40, 2000), state)
 
     def test_native_bit_artifact_corruption_rejected(self):
         with tempfile.TemporaryDirectory() as d:
