@@ -1,0 +1,315 @@
+{
+  "schema": "ufuk-fixed-lineage-confirmation3-preregistration-v1",
+  "status": "frozen-before-formal-execution",
+  "qualification_ledger_slot": 3,
+  "required_before_freeze": [
+    "Original fixed two-seed40epoch lineage/18000clocks unchanged; original formal2failure preserved",
+    "Versioned external correctedaudit/eval scripts committed and SHA pinned with separatehelper source provenance",
+    "New48+48books independent originalPGN/fullprefix/exclusion auditPASS before games",
+    "Slot3 consumes an additional MAX8qualification attempt; allstrength/cap/uncertainty/latency/native/portability gates unchanged",
+    "No finalcandidate heldoutstrength outcomes observed or used for current/confirmation decisions"
+  ],
+  "seeds": [
+    20261205,
+    20261206
+  ],
+  "initial_model_sha256": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03",
+  "warm_start": "weights only; new Adam; fixed immutable e8 base",
+  "fresh_teacher_or_engine_labels": false,
+  "proposed_epochs": 40,
+  "actors": {
+    "games": 128,
+    "max_additional_plies": 256,
+    "claim_draw": true,
+    "temperature": 1.0
+  },
+  "epoch_steps": 256,
+  "fresh_transitions_per_seed": 1310720,
+  "objective": {
+    "policy_clip": 0.2,
+    "behavior_kl_stop": 0.02,
+    "policy_anchor_weight": 0.03,
+    "value_weight": 0.2,
+    "value_anchor_weight": 0.02
+  },
+  "schedule": {
+    "passes": 4,
+    "minibatch_size": 1024,
+    "max_gradient_norm": 5.0
+  },
+  "learning_rate": 0.0001,
+  "weight_decay": 0.0001,
+  "device": "cuda:0",
+  "selection": "CURRENT epoch40 only; no EMA/cherry-picked checkpoint or pooled seed rescue",
+  "native_checkpoint_interval_epochs": 1,
+  "mandatory_process_boundary": "epoch1 stop then fresh-process resume40 with same original absolute deadline",
+  "whole_training_seconds_per_seed": 18000,
+  "hard_user_deadline_utc": "2026-10-05T06:00:00Z",
+  "training_failure": "No exact epoch40/required native replay or original deadline violation => incomplete/failed; preserve all receipts and do not change epochs/seed/gates after outcomes",
+  "mathematics": "Only completed own games label every recorded mover state with final WDL. Ordinary caps and epoch tails are UNKNOWN and excluded. Uniform completed-game then uniform position replacement sampling weights decisions inversely by game length and conditions on observed completion. PPO clips per-action pi/mu at T1; it is a surrogate, not unbiased current-policy full-trajectory Monte Carlo correction. Whole-buffer game-balanced behavior KL postpass breach restores model+Adam+all global and sampler RNG and stops that epoch's remaining passes; rejected attempts remain counted.",
+  "strength": {
+    "books": "Fresh48+48PGNsource/rootblocks chosen prospectively by20261305/06, mapped to original two trainingseeds; second excludes first. Allformal2/old685k training/teacher/arena/fullprefix exclusions retained. No model or engine queries during book selection/audit.",
+    "arms_per_seed": [
+      "final40 vs e8",
+      "final40 vs SF512",
+      "e8 vs SF512"
+    ],
+    "games_per_arm": 96,
+    "total_games": 576,
+    "neural_simulations": 16,
+    "root_actions": 4,
+    "batch_and_latency_settings": "same frozen max4 root actions/batching/search for both neural arms; CPU float32 one thread; exact unchanged latency probe",
+    "total_history_ply_cap": 400,
+    "stockfish_nodes": 512,
+    "stockfish_threads": 1,
+    "stockfish_hash_mib": 16,
+    "stockfish_sha256": "0f83d24cc46d2c66c60f16001af5444873bc112b7d028594513426894c12da19",
+    "arm_whole_seconds": 3600,
+    "per_seed_required": {
+      "direct_point_score_strict_gt": 0.6,
+      "direct_adjusted_lower_strict_gt": 0.5,
+      "paired_final_minus_initial_SF_point_gain_strict_gt": 0.1,
+      "paired_SF_gain_adjusted_lower_strict_gt": 0,
+      "final_absolute_SF_score_at_least": 0.25,
+      "caps_every_arm_at_most": 0.05,
+      "adversarial_cap_lower_gates": "same direct>.5 and SF delta>0 with final caps losses/reference caps wins",
+      "median_latency_final_over_initial_at_most": 1.1
+    },
+    "uncertainty": "50000 paired source-root-block bootstrap resamples preserving both colours and shared SF-arm matching; fixed NumPy PCG64 seed20261107+trainingseed; linear98.75% two-sided quantiles .00625/.99375 for4primary comparisons. All4 inferential bounds and bothseeds required. MAX8 prospectively preregistered method families => IUT/unionbound nominalglobalalpha<=.05 assuming bootstrap marginal coverage, not an exact guarantee. No optional stopping, changed books or postoutcome threshold relaxation.",
+    "claim_scope": "Replicated gains on these disjoint frozen source-root suites at fixed search budget only; no general Elo/Stockfish-level claim",
+    "frozen_books": {
+      "20261205": {
+        "path": "/content/harbichess-fullgame-method2-inputs/confirmation3/book-20261205.json",
+        "sha256": "aad7655a3d5b0fe9ae29f60487c4e24ee4a99a6c20d89470808bb8633aac0e05",
+        "selection_seed": 20261305,
+        "independent_PGN_audit_sha256": "e143453a048538ee1db69d4fbc9141900c8d0d51774a9cf062dad4ccc3d45853",
+        "exclusion_sources_sha256": "b6f00920f5159337ee4c636b60680a11e0eeeb3b7612e1fbf0c2ff9b3f290ee2",
+        "exclusion_positions_sha256": "8f597f752affa67863c83b9387c526817e1131239a551bfc28c2ec75f6db00e2",
+        "audit_status": "pass-roots-only-no-games",
+        "independent_source_blocks": 48,
+        "paired_colours": 2,
+        "exclude_all_original_formal2_and_old_training_teacher_arena_sources_roots_fullprefixes": true
+      },
+      "20261206": {
+        "path": "/content/harbichess-fullgame-method2-inputs/confirmation3/book-20261206.json",
+        "sha256": "ddad7ca17009be3690f2fa090a6c9b9780395c4b02e88f9e0d82409cf5171c90",
+        "selection_seed": 20261306,
+        "independent_PGN_audit_sha256": "260a219c25a252e2afc4789c90d21a13a1e8c2f4707af516145c76bb86b820fe",
+        "exclusion_sources_sha256": "e1d16667acc1e9e5f099858c218b19c91108369420de63c32fb118cb2f0f3e92",
+        "exclusion_positions_sha256": "31341326a185fbb35996b570fc1adadab726594df256a98f2de345cf0144e029",
+        "audit_status": "pass-roots-only-no-games",
+        "independent_source_blocks": 48,
+        "paired_colours": 2,
+        "exclude_all_original_formal2_and_old_training_teacher_arena_sources_roots_fullprefixes": true
+      }
+    },
+    "runtime": "ALL6arms on SAME A100 CPU/Torch2.11.0+cu130, oneTorchCPUthread, FP32, same original clean231producer; CPU hardware/runtime receipt bound by owner launches, CUDA disabled for arenas. Stockfish verified originalsf19universal binarySHA unchanged.",
+    "resources": {
+      "memory_max_bytes": 68719476736,
+      "disk_min_free_bytes": 8589934592,
+      "scope": "New prospective confirmation3 on allocated83GiB A100 host; not relaxation of strength/statistical/latency/cap gates. Original15GiBlocal resource failure remains preserved. Guard snapshots recorded before kill."
+    }
+  },
+  "independent_audits_proposed": {
+    "full_native_and_terminal_data_seconds_per_seed": "INCREMENTAL shared21000seconds from originaltraining start includingwaiting;18000training+3000tail;never per-epoch reset",
+    "fresh_epoch1_to_epoch2_replay_seconds_per_seed": 600,
+    "duplicate_replay_epochs_total": 2,
+    "duplicate_replay_fresh_transitions_total": 65536,
+    "duplicate_replay_optimizer_attempts": "actual receipt count; cannot assert fixed update count because completed-game coverage and KL rejections vary",
+    "audit_excluded_from_training_counts": true,
+    "scheduling": "Incremental immutable epoch audits whiletraining after eachatomiccheckpoint+journal; explicitlycontrolledCPU1thread/GPUcontexts/memory; check all exactsame data as fullaudit. Final GPUparity/replays andCPUlatency afterbothtraining quiesce.",
+    "neural_receipt_epochs": [
+      1,
+      2,
+      10,
+      20,
+      30,
+      40
+    ],
+    "neural_rows_per_epoch_per_seed": 18,
+    "final_actual_cpu_cuda_and_torch_cpu_mlx_cpu_full_masked18parity_required": true,
+    "incremental_original_deadline_rule": "auditdeadline=min(originaltrainingdeadline+3000,06UTC),whole21000maximumfromoriginaltrainingstart"
+  },
+  "source_commit": "2312652dc52a894e9726f48321117cf114270355",
+  "memory_max_bytes": 68719476736,
+  "disk_min_free_bytes": 8589934592,
+  "budget_basis": {
+    "measured_baseline_production_shape_epoch_seconds": 308,
+    "linear40epoch_solo_seconds": 12320,
+    "registered_whole_ceiling_seconds": 18000,
+    "uncertainty": "Fixed5h ceiling retained prospectively before formal outcomes. Actual one-epoch compiled CLI170.09s; twoGPU production jobs plus two strict incremental audit jobs contend. Later completion buffers/PPO passes differ. No extension or fewer epochs after outcomes.",
+    "measured_compiled_whole_cli_epoch_seconds": 170.09127511599945,
+    "measured_profile_with_independent_native_audit_seconds": 262.59988164901733
+  },
+  "device_config": "cuda:0; deterministic FP32/noTF32;oneTorchCPUthread",
+  "production_directory_policy": "New empty per-seed namespace; never reuse original failed method1 paths or alter original20:13 deadline",
+  "actual_pause_resume": "After epoch1 controller observes completed immutable native1/journal1, launches a new CLI process --resume native1 --max-epochs40 under unchanged original per-seed18000deadline; no state reset",
+  "original_method1_deadline_unchanged_utc": "2026-10-04T20:13:22.678Z",
+  "physical_schedule_assumption": {
+    "planned_first_launch_utc": "2026-10-04T20:25:00Z or later after frozen controls deployed; actual first clocks recorded once before Popen",
+    "training_ceiling_end_utc": "Actual first launch+18000 seconds, no later than2026-10-05T06:00:00Z",
+    "incremental_audits": "Start immutable per-epoch audits alongside training, strictall41native+all1.31Mactor/legal/terminal+selectedneuralchecks, oneauditor/seed; end<=originaltrainingdeadline+3000 and06UTC. Shared CPU/GPU contention counts toward original5h training ceiling; audit performs0optimizersteps. Existing3600posthoc fullaudit ceiling NOT empirically justified.",
+    "baseline_arenas": "TwoNEW e8-SF512 A100CPU arms AFTERthisFULLregistration/ledger freeze; same hardware/runtime as laterfinalarms,3600whole each; outcomes withheld from all training choices. Bothoriginalbaseline records preserved, neither reused.",
+    "posttraining": "Only remaining audit tail<=3000, twofreshCLIreplays<=600each preferablyGPUserialized, actualCPU-CUDA finalparity, localCPU-MLX finalparity and quiescent latency; finaldirect/finalSF two3600arms sequential perseed/twoseedsCPUparallel.",
+    "worst_after5h_training_seconds_excluding_small_sync_parity_latency": 11400,
+    "nominal_end_at20_15start": "At20:25launch nominal all conservative stages04:35UTC plus transport/parity/latency;06UTC hardstop",
+    "risk": "Actual32k reconciliation224s includes duplicate strictloads and actor/labels; sequential all1.31M may exceed3600. Incremental work overlaps fixedtraining whilechecking every immutable epoch. If auditor cannotcatchup or resourcecontention breaks original5h/training gates, classifyincomplete withoutdroppingchecks.",
+    "scheduling_frozen": "A100 two production seeds plus one read-only incremental auditor per seed; local CPU two immutable e8-SF baseline arms in parallel after FULL freeze, outcomes withheld from all training decisions."
+  },
+  "immutable_inputs": {
+    "manifest_sha256": "7f481a0e91139122b8709763b96dc916661839f5dc1b292a8377cdb6bcc69271",
+    "manifest": {
+      "seeds": {
+        "20261205": {
+          "initial_weights": {
+            "path": "/content/harbichess-inputs/initial-e8.safetensors",
+            "sha256": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03"
+          },
+          "book": {
+            "path": "/content/harbichess-inputs/book.json",
+            "sha256": "f2f3038728cce4c56987c9068f900d30ed99f996f99e03a38c41bbbc1f3c9958"
+          },
+          "experiment_config": {
+            "path": "/content/harbichess-fullgame-method2-inputs/config-20261205.json",
+            "sha256": "e627c631e27773dfe17a7e2cc59351e3c48c073e50c8a49a2ee042bec799508b"
+          }
+        },
+        "20261206": {
+          "initial_weights": {
+            "path": "/content/harbichess-inputs/initial-e8.safetensors",
+            "sha256": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03"
+          },
+          "book": {
+            "path": "/content/harbichess-inputs/book.json",
+            "sha256": "f2f3038728cce4c56987c9068f900d30ed99f996f99e03a38c41bbbc1f3c9958"
+          },
+          "experiment_config": {
+            "path": "/content/harbichess-fullgame-method2-inputs/config-20261206.json",
+            "sha256": "f9789b2eeb0469d812edf77dffe14b984aa7c5f499ac1775b531a1c4e2deccc2"
+          }
+        }
+      }
+    },
+    "protocol": "This immutable registration is injected as fourth native input by its finalized file SHA; absent from three-input manifest to prevent self-reference.",
+    "native_protocol_note": "Producer uses ORIGINALformal2registrationSHA/path. This confirmation3registration controls only sidecar audits/evaluation and NEVER replaces the native fourth protocol input."
+  },
+  "infrastructure_evidence": {
+    "actual_e8_cuda_17_tests": {
+      "source": "e36f0fa0c9bedd0d8dbb89a01fe691be1c095f65",
+      "passed": 17,
+      "skipped": 0
+    },
+    "baseline_clean_cli_full_native_pause_resume_sha256": "6c0d65bfb3c647c8dab7688c887723299667413c307383cc7e56c2d125f22f0a",
+    "promoted_cache_clean_cli_full_native_pause_resume_sha256": "7d43e09ba6c9ff529314559f4d6389407c54c9d6683f0d613c4e965b3c288962",
+    "promoted_whole_profile_and_independent_native_result_sha256": "5058602e190b0fe65295d9d0b015fa7acc27ae7c1969bac5e2525f3bfd7cc6d4",
+    "original_development_full_native_terminal_reconciliation_sha256": "bb0346f0301927ca0b366e92f6b665e56424bc86e2d71485f6129007e65d6229",
+    "repository_formal_control_tests": {
+      "passed": 24,
+      "skipped": 0,
+      "ruff": "pass"
+    },
+    "producer_src_tree": "35f66353cec6e638112596a15c317c3b85ece2d4",
+    "production_source_package_same_as_measured_cuda_source": true
+  },
+  "controller_sha256": "1b5827dd4f0203fb0791abe9a5f89a2ea64cc88e5ee7ade11533fbeeddc3fec0",
+  "registered_utc": "2026-10-04T20:37:59.682116+00:00",
+  "helper_sha256": {
+    "a100-mc-all-gates-qualification.py": "9567d36d1024192d0db742bb2a49afbf735833b8eb15c2e932a522d41a9febb7",
+    "a100-mc-all-gates-tests.py": "8388a6245482161e85e05ad197cd62e9a0bf8fc33eb6ead1c84a2085c2a6627b",
+    "a100-mc-baseline-strength-controller-v3.py": "1b5827dd4f0203fb0791abe9a5f89a2ea64cc88e5ee7ade11533fbeeddc3fec0",
+    "a100-mc-confirmation3-tests.py": "c00e87226d868298cb0db994fd46a308ec0608a57de947ee0399f9ca127226f5",
+    "a100-mc-controller-v3-tests.py": "e635dd8aa5bf2f3af5a892a73f4635160a2882d65516f4d5c624f2c680c4ad59",
+    "a100-mc-final-portable-parity.py": "685b0f227302b5d5adce0ae01b4b31486b0ffbd5d3151397f4af0fd46a5e453d",
+    "a100-mc-final-two-arm-controller.py": "eab954e418e255bcbe4f348ef0f70d7ff7feafe3c427585e0138154c5f94bd20",
+    "a100-mc-fixed-candidate-eligibility-v2-neural.py": "e24d382ace6b26044cee90f91b888ed1d0181ff9f3bfffd655b12a887ac67ab2",
+    "a100-mc-fresh-cli-replay.py": "c5fd919affa81a9d63c906eeef643c1c4eb8e201e63d74d4fdcb4001cf466126",
+    "a100-mc-incremental-audit-controller.py": "c41b7abb1a35f9579b9c2568d6a75e93c828156664c878cf09584d075497064f",
+    "a100-mc-incremental-neural-tests.py": "ed604f3fffd99959b72588baaa30bad11cb530637ed83761a3687cb8c65a8471",
+    "a100-mc-native-terminal-audit-v3-incremental.py": "009a1aa602dea5b192000e37bc69699da96db761963ebfcf4b8e10b97624967d",
+    "a100-mc-strength-analysis.py": "04756cdd5d1e84f6b750726716e39f7e08bb168ed9b772b79f60b3c6a929785b",
+    "a100-mc-strength-latency.py": "e4509be7e8df7fcdc726ed3d2b3c8500e73fc7f9402793646d9240095c84e29f",
+    "a100-mc-strength-tests.py": "bb42bb34b51115c6a9286d3f740b9a71a937a9a72f5fa417eafdbfb9ba029ad4",
+    "a100-mc-whole-training-controller-v3-18000.py": "0d69479b6e06f7039e52df13aa78befca1295508de8367b22f544156bb77ea92"
+  },
+  "frozen_portable_probe_requirement": {
+    "path": "docs/research/UFUK-width-latency-probes-20261004.json",
+    "sha256": "1089fd0cca308c24bb040a840352d0ad18aa85a7bdcd17608133456bf08bed9f",
+    "positions": 18,
+    "fixed_in_code_before_formal_execution": true,
+    "applies_to": "both actual CUDA/MLXCPU parity and quiescent CPU masked latency"
+  },
+  "research_status": "Own-terminal Monte Carlo and clipped PPO/anchoring/cache compilation use known mechanisms. No novelty or Stockfish-level claim. Candidate strength remains unknown.",
+  "release_backup_state": "GitHub release asset route currently400BadContentLength; separate SHA-verified Cloud Environment snapshots retained. No claim of verified Release artifact durability.",
+  "helper_source_commit": "bf9a45b572d0c300f5777aa35d7d1ab0790f0b2e",
+  "registration_role": "Independent fresh-book confirmation of BOTH original fixedCURRENT40 self-play-trained candidates. Starts NO training; producer/source/config/native inputs and original clocks unchanged. Original formal2 remains incomplete/nonqualified.",
+  "fixed_lineage": {
+    "producer_source_commit": "2312652dc52a894e9726f48321117cf114270355",
+    "original_training_protocol_sha256": "d2b8df68f0db92b1712dcfeba70a63d582b721270fb679e093d9f393ce25792c",
+    "training_root_template": "/content/harbichess-runs/fullgame-method2-seed-{seed}/run",
+    "original_training_launch": {
+      "status": "two-fixed40-training-and-two-readonly-auditors-launched",
+      "registration_sha256": "d2b8df68f0db92b1712dcfeba70a63d582b721270fb679e093d9f393ce25792c",
+      "source_commit": "2312652dc52a894e9726f48321117cf114270355",
+      "processes": [
+        {
+          "pid": 31248,
+          "owned_process_group": 31248,
+          "role": "training",
+          "seed": 20261205,
+          "same_original_training_started_epoch": 1791145487.0410345,
+          "source_commit": "2312652dc52a894e9726f48321117cf114270355"
+        },
+        {
+          "pid": 31249,
+          "owned_process_group": 31249,
+          "role": "audit",
+          "seed": 20261205,
+          "same_original_training_started_epoch": 1791145487.0410345,
+          "source_commit": "2312652dc52a894e9726f48321117cf114270355"
+        },
+        {
+          "pid": 31250,
+          "owned_process_group": 31250,
+          "role": "training",
+          "seed": 20261206,
+          "same_original_training_started_epoch": 1791145487.054162,
+          "source_commit": "2312652dc52a894e9726f48321117cf114270355"
+        },
+        {
+          "pid": 31251,
+          "owned_process_group": 31251,
+          "role": "audit",
+          "seed": 20261206,
+          "same_original_training_started_epoch": 1791145487.054162,
+          "source_commit": "2312652dc52a894e9726f48321117cf114270355"
+        }
+      ],
+      "finished_epoch": 1791145487.06863
+    },
+    "fixed_selection": "BOTH original CURRENTepoch40 ONLY, fixed before any formal2 or formal3 candidate games; no checkpoint/seed/optimizer/candidate replacement.",
+    "new_training_presentations": 0,
+    "training_presentations_once_per_original_seed": 1310720,
+    "source_and_native_protocol_rewrite": false
+  },
+  "validation_repair": {
+    "original_failures": "docs/runs/UFUK-method2-validation-failure-and-lineage-20261004.json",
+    "actual_e8_material_elements": 21,
+    "actual_e8_material_nonzero_elements": 20,
+    "invariant": "Every byte of all21 unused parameters, including real zero, equals original frozen e8 in ALLbase/behavior/current native0..40. No all-nonzero assumption.",
+    "preserve_original_failed_audit_prefix": true,
+    "new_audit_root_template": "/content/harbichess-runs/fullgame-confirmation3-audit-seed-{seed}",
+    "budget": "Same first original20:24:47trainingclock+21000 including prior failed/waiting/newaudit time; all41/all1.31M/108neural checks; no skip/reset.",
+    "original_audit_manifest_reused_byte_identical": true,
+    "full_audit_and_fresh_duplicate_replay_same_manifest_required": true,
+    "local_qualification": {
+      "actual_e8_full128actor_native0_CPU_strictrestore_and_zero_signedzero_mutation_tests_passed": 2,
+      "pure_sidecar_controls_passed": 27,
+      "skips": 0,
+      "ruff": "pass",
+      "root_final_allgate_book_pin_and_new_controller_guard_checks_passed": 6
+    },
+    "actual_final_cuda_or_full41_audit": "Pending actual execution; no claim from CPU tests."
+  },
+  "do_not_execute_training_controller": "Copied originalslot2 wholetraininghelper is sibling utility ONLY. Confirmation3 starts NO model training. No native source/config/optimizer/reset or new budget.",
+  "novelty": "Validation repair and fresh confirmation are not a new learning algorithm or novel mechanism. MC/PPO own-terminal learning must independently pass ALL unchanged gates."
+}
