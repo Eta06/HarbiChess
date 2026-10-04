@@ -11,6 +11,7 @@ import copy
 import hashlib
 import json
 import math
+import os
 import random
 from dataclasses import asdict, dataclass
 from pathlib import Path
@@ -79,10 +80,12 @@ class TorchOnlineConfig:
     max_gradient_norm: float
     ema_decay: float
     importance_maximum: float
+    device: str = "cpu"
 
     def __post_init__(self):
         if (
-            type(self.seed) is not int
+            self.device not in ("cpu", "cuda:0")
+            or type(self.seed) is not int
             or self.seed < 0
             or any(
                 not math.isfinite(value) or value <= 0
@@ -97,9 +100,12 @@ class TorchOnlineConfig:
 
 
 def _run_config(config, initial_sha256, actors, input_paths):
+    configuration = asdict(config)
+    if config.device == "cpu":
+        configuration.pop("device")  # Preserve existing CPU run-config bytes.
     return {
         "schema": ONLINE_LEARNER_SCHEMA,
-        "config": asdict(config),
+        "config": configuration,
         "initial_weights_sha256": initial_sha256,
         "actor_book_sha256": actors.book_sha256,
         "input_sha256": {name: sha256(path) for name, path in input_paths.items()},
@@ -107,6 +113,22 @@ def _run_config(config, initial_sha256, actors, input_paths):
         "transfer": "weights-only-warm-start-optimizer-reset",
         "sampling": "normalized-current-policy-fixed-temperature-float64-v1",
     }
+
+
+def _prepare_device(device):
+    if device == "cuda:0":
+        # Must precede the first CUDA context/matmul in a fresh process.
+        os.environ.setdefault("CUBLAS_WORKSPACE_CONFIG", ":4096:8")
+        if os.environ["CUBLAS_WORKSPACE_CONFIG"] not in (":4096:8", ":16:8"):
+            raise ValueError("deterministic CUDA requires CUBLAS_WORKSPACE_CONFIG")
+        if not torch.cuda.is_available():
+            raise ValueError("configured cuda:0 is unavailable")
+        torch.backends.cuda.matmul.allow_tf32 = False
+        torch.backends.cudnn.allow_tf32 = False
+        torch.backends.cudnn.benchmark = False
+        torch.backends.cudnn.deterministic = True
+    torch.set_num_threads(1)
+    torch.use_deterministic_algorithms(True)
 
 
 class TorchOnlineLearner:
@@ -120,14 +142,13 @@ class TorchOnlineLearner:
     ):
         if "initial_weights" not in input_paths or "book" not in input_paths:
             raise ValueError("online learning requires immutable initial_weights and book inputs")
-        torch.set_num_threads(1)
-        torch.use_deterministic_algorithms(True)
+        _prepare_device(config.device)
         torch.manual_seed(config.seed)
         np.random.seed(config.seed % 2**32)
         random.seed(config.seed)
         self = cls()
         self.config, self.input_paths, self.source_commit = config, dict(input_paths), source_commit
-        self.online = load_weights(input_paths["initial_weights"]).train()
+        self.online = load_weights(input_paths["initial_weights"]).to(config.device).train()
         if (
             self.online.config.input_channels != ENCODER_CHANNELS
             or self.online.config.policy_size != 4672
@@ -145,6 +166,7 @@ class TorchOnlineLearner:
             weight_decay=config.weight_decay,
             betas=(0.9, 0.999),
             eps=1e-8,
+            foreach=False if config.device == "cuda:0" else None,
         )
         self.actors = OnlineActors(
             read_online_train_book(input_paths["book"]),
@@ -168,8 +190,7 @@ class TorchOnlineLearner:
         input_paths: dict[str, Path],
         source_commit: str,
     ):
-        torch.set_num_threads(1)
-        torch.use_deterministic_algorithms(True)
+        _prepare_device(config.device)
         openings = read_online_train_book(input_paths["book"])
         provisional = OnlineActors(openings, config=config.actors, rng=random.Random(0))
         expected = _run_config(
@@ -180,6 +201,7 @@ class TorchOnlineLearner:
             expected_run_config=expected,
             expected_input_paths=input_paths,
             expected_source_commit=source_commit,
+            device=config.device,
         )
         state = loaded.run_state
         if (
@@ -244,7 +266,7 @@ class TorchOnlineLearner:
             "maximize": False,
             "capturable": False,
             "differentiable": False,
-            "foreach": None,
+            "foreach": False if self.config.device == "cuda:0" else None,
             "fused": None,
         }
         if len(self.optimizer.param_groups) != 1 or any(
@@ -261,7 +283,8 @@ class TorchOnlineLearner:
         return torch.tensor(
             np.array(
                 [self.encoder.encode(state).values for state in states], dtype=np.float32
-            ).reshape(-1, 8, 8, self.online.config.input_channels)
+            ).reshape(-1, 8, 8, self.online.config.input_channels),
+            device=self.config.device,
         )
 
     def train_update(self) -> dict:
@@ -272,18 +295,21 @@ class TorchOnlineLearner:
         legal = [legal_action_indices(self.actors.rules.inspect(state)) for state in pre]
         width = max(map(len, legal))
         masks = np.array([[index < len(row) for index in range(width)] for row in legal])
-        indices = torch.tensor([list(row) + [row[0]] * (width - len(row)) for row in legal])
+        indices = torch.tensor(
+            [list(row) + [row[0]] * (width - len(row)) for row in legal],
+            device=self.config.device,
+        )
         inputs = self._inputs(pre)
         policy, value = self.online.masked_policy_value(inputs, indices)
-        mask_tensor = torch.tensor(masks)
+        mask_tensor = torch.tensor(masks, device=self.config.device)
         with torch.no_grad():
-            probabilities = policy.masked_fill(~mask_tensor, -torch.inf).softmax(1).numpy()
-            online_wdl = value.softmax(1).numpy()
+            probabilities = policy.masked_fill(~mask_tensor, -torch.inf).softmax(1).cpu().numpy()
+            online_wdl = value.softmax(1).cpu().numpy()
             base_policy, base_value = self.base.masked_policy_value(inputs, indices)
             base_probabilities = (
-                base_policy.masked_fill(~mask_tensor, -torch.inf).softmax(1).numpy()
+                base_policy.masked_fill(~mask_tensor, -torch.inf).softmax(1).cpu().numpy()
             )
-            base_wdl = base_value.softmax(1).numpy()
+            base_wdl = base_value.softmax(1).cpu().numpy()
         transitions = self.actors.step(
             tuple(
                 tuple(float(p) for p in row[: len(actions)])
@@ -295,11 +321,12 @@ class TorchOnlineLearner:
         if nonterminal:
             states = tuple(transitions[index].post for index in nonterminal)
             first_actions = torch.tensor(
-                [[legal_action_indices(self.actors.rules.inspect(state))[0]] for state in states]
+                [[legal_action_indices(self.actors.rules.inspect(state))[0]] for state in states],
+                device=self.config.device,
             )
             with torch.no_grad():
                 _, ema_value = self.ema.masked_policy_value(self._inputs(states), first_actions)
-                ema_wdl = ema_value.softmax(1).numpy()
+                ema_wdl = ema_value.softmax(1).cpu().numpy()
             ema_post = dict(zip(nonterminal, ema_wdl, strict=True))
         target_rows = [
             build_one_ply_target(
