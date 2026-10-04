@@ -1,0 +1,1132 @@
+{
+  "schema": 1,
+  "source_commit": "44c6b8858cc35d5d5d6981f3364d0362e43417e2",
+  "parent_inventory_sha256": "4d614f10508162f79a9e4ea151a98c263deb80610e35c13f1e9540ca4e381f2f",
+  "parent_archive_sha256": "091ac0a206ea869d59b41b74bea3be0484ae3096e4beac2711344617fc09bc98",
+  "prior_supplement_inventory_sha256": "81a077d702bde18add6c3ca0753a2479ff7842609c6b66f3d58ae1bf67ca69a5",
+  "prior_supplement_archive_sha256": "5546ccf5d571e8ed5d06bea8c4b64b582650416fc5f9d9e19ce70c43e603708b",
+  "third_inventory_sha256": "70ad060492159f4711725b6bd91410393a7ad90573376a4c2053c7c3c73b509d",
+  "third_archive_sha256": "3f3c4e30b79699bb271aa966cbf7f8ff597a83772f8c511e34901ed696ed49c7",
+  "fourth_inventory_sha256": "3830d00927727d46d79e52f7f69cfebbc7bcf4b3cd46d63d35472a27dc123078",
+  "fourth_archive_sha256": "0b8ad1655701f1184c571f2941cd6c4c132deebadaedce6666563bb199e812b2",
+  "active_artifact_prefix_excluded": "ufuk-broad-",
+  "file_count": 221,
+  "uncompressed_bytes": 115895102,
+  "files": [
+    {
+      "path": "artifacts/ufuk-git-readback-joint-context-result.json",
+      "bytes": 702,
+      "sha256": "0551ce7e94196ac54023bdd16c1270fbe7923015d61d60c2b28ac2e268330ac7"
+    },
+    {
+      "path": "artifacts/ufuk-git-readback-packed-source.json",
+      "bytes": 1760,
+      "sha256": "f7e5e0dc0b33fa1535aca1d35a8ea4a5f4f47470572d086f49fc8e5f2c6b7958"
+    },
+    {
+      "path": "artifacts/ufuk-joint-context-context-train-20261004/checkpoints/step-000000/checkpoint.json",
+      "bytes": 144462,
+      "sha256": "0c4115ceb21862ac36ac5390a3db3341a1ef6d218e019fcca4dddcb137399048"
+    },
+    {
+      "path": "artifacts/ufuk-joint-context-context-train-20261004/checkpoints/step-000000/model.safetensors",
+      "bytes": 323356,
+      "sha256": "5bd1c5d333077c3c0a7de77152b488868018187c3b87ff780f06e89e1959fa9c"
+    },
+    {
+      "path": "artifacts/ufuk-joint-context-context-train-20261004/checkpoints/step-000000/training.pt",
+      "bytes": 7152,
+      "sha256": "f3d1293721c23e3dd3a8106b3bd53dc8d4e3966f1086e12eeae95d06c95949fd"
+    },
+    {
+      "path": "artifacts/ufuk-joint-context-context-train-20261004/checkpoints/step-001000/checkpoint.json",
+      "bytes": 144725,
+      "sha256": "2d0dccc8109670588f05a2ef059a09c938b5933318bf1ffd8360c439a0dd4680"
+    },
+    {
+      "path": "artifacts/ufuk-joint-context-context-train-20261004/checkpoints/step-001000/model.safetensors",
+      "bytes": 323356,
+      "sha256": "9d50704801646b8b227fb63f15fb42f10b937a6ab1b821160894894c7674cca8"
+    },
+    {
+      "path": "artifacts/ufuk-joint-context-context-train-20261004/checkpoints/step-001000/training.pt",
+      "bytes": 695276,
+      "sha256": "bff463d73915b8c81933f0e18f5ed342fcbdca2f81549cce8a4c4fc1e8392422"
+    },
+    {
+      "path": "artifacts/ufuk-joint-context-context-train-20261004/checkpoints/step-002000/checkpoint.json",
+      "bytes": 144980,
+      "sha256": "0f9fca9e402d0e16a8559d6a564985b00645715c1acf01d710cd3345a4eb6a63"
+    },
+    {
+      "path": "artifacts/ufuk-joint-context-context-train-20261004/checkpoints/step-002000/model.safetensors",
+      "bytes": 323356,
+      "sha256": "f0baa9f573af051de8b8b63e3d5b6589c45eef343d2639ddc3aff3b94c5dfb80"
+    },
+    {
+      "path": "artifacts/ufuk-joint-context-context-train-20261004/checkpoints/step-002000/training.pt",
+      "bytes": 695276,
+      "sha256": "f878cfcebb5c7f641345460fd1527361e3680c8ead6612b19e3faf5ee8954dd1"
+    },
+    {
+      "path": "artifacts/ufuk-joint-context-context-train-20261004/checkpoints/step-003000/checkpoint.json",
+      "bytes": 145241,
+      "sha256": "3a3f8c5512bd045b560d1742a65b1c76a27d6df4660fbf041c3e395cc04eb627"
+    },
+    {
+      "path": "artifacts/ufuk-joint-context-context-train-20261004/checkpoints/step-003000/model.safetensors",
+      "bytes": 323356,
+      "sha256": "d2d999ad0ea50591c66de974f00c1a5d5c7b1129be8b4903dd78054b80dd2b57"
+    },
+    {
+      "path": "artifacts/ufuk-joint-context-context-train-20261004/checkpoints/step-003000/training.pt",
+      "bytes": 695276,
+      "sha256": "b0be198ab8d892c0067ad29124d07c897acebcc575eda655e331d60fe3d3b231"
+    },
+    {
+      "path": "artifacts/ufuk-joint-context-context-train-20261004/checkpoints/step-004000/checkpoint.json",
+      "bytes": 145496,
+      "sha256": "37af59ff99a98c559557f4c169b95e581b2308a272ad5b48f3222db23abe343a"
+    },
+    {
+      "path": "artifacts/ufuk-joint-context-context-train-20261004/checkpoints/step-004000/model.safetensors",
+      "bytes": 323356,
+      "sha256": "1f92543e3036103e66583929ac421a0ef03638a6a10e439e3f3f6c6bbb2ded1b"
+    },
+    {
+      "path": "artifacts/ufuk-joint-context-context-train-20261004/checkpoints/step-004000/training.pt",
+      "bytes": 695276,
+      "sha256": "cd0401e787166152ee8b86d0967358d8ebf10218edfcdd9078528e4cd6fdedca"
+    },
+    {
+      "path": "artifacts/ufuk-joint-context-context-train-20261004/checkpoints/step-005000/checkpoint.json",
+      "bytes": 145753,
+      "sha256": "1a65848a2d043f3c9d41931d3fb8273adeb3fb8e877314544fca379b0c9f8dce"
+    },
+    {
+      "path": "artifacts/ufuk-joint-context-context-train-20261004/checkpoints/step-005000/model.safetensors",
+      "bytes": 323356,
+      "sha256": "e0bce0dec6b3dff233c45c95290f17406c5a2bc03471c2ac8cba054091849b7f"
+    },
+    {
+      "path": "artifacts/ufuk-joint-context-context-train-20261004/checkpoints/step-005000/training.pt",
+      "bytes": 695276,
+      "sha256": "15816953de07ee9f2b436a7501c6af41fb1917a21223e2db53fbbe25751eb59a"
+    },
+    {
+      "path": "artifacts/ufuk-joint-context-context-train-20261004/checkpoints/step-006000/checkpoint.json",
+      "bytes": 146011,
+      "sha256": "cdf30bc5fb335313355a9d14563dc55ba3fb8c2ce0f577dcd31d4a333eb21382"
+    },
+    {
+      "path": "artifacts/ufuk-joint-context-context-train-20261004/checkpoints/step-006000/model.safetensors",
+      "bytes": 323356,
+      "sha256": "72111491c59f40eb7fc1c7a1a845984a88985853a6e15f316bcd963c0ef8514b"
+    },
+    {
+      "path": "artifacts/ufuk-joint-context-context-train-20261004/checkpoints/step-006000/training.pt",
+      "bytes": 695276,
+      "sha256": "b4f78b248d575732063ffbd84e429247dc9cce4367ab6b39c7b15482222a5172"
+    },
+    {
+      "path": "artifacts/ufuk-joint-context-context-train-20261004/checkpoints/step-007000/checkpoint.json",
+      "bytes": 146269,
+      "sha256": "d0169e4a385cf7c8b53e1f68611c56110cf6b7b234d248d2c3ee94cf9d17e3f5"
+    },
+    {
+      "path": "artifacts/ufuk-joint-context-context-train-20261004/checkpoints/step-007000/model.safetensors",
+      "bytes": 323356,
+      "sha256": "6cab0ed677990fa88af69cb941dc3397e3924dcab56051f8a517d26488c17ea1"
+    },
+    {
+      "path": "artifacts/ufuk-joint-context-context-train-20261004/checkpoints/step-007000/training.pt",
+      "bytes": 695276,
+      "sha256": "4860a8fe9f9f34df1a3318a1c166c89036bfa25286e6f9479f19d0013c8c3ea2"
+    },
+    {
+      "path": "artifacts/ufuk-joint-context-context-train-20261004/checkpoints/step-008000/checkpoint.json",
+      "bytes": 146526,
+      "sha256": "8400901cfb512908e35fa8834f8bb694425a2bc329dac913d41162e2353fd351"
+    },
+    {
+      "path": "artifacts/ufuk-joint-context-context-train-20261004/checkpoints/step-008000/model.safetensors",
+      "bytes": 323356,
+      "sha256": "80cdd6914c96141148218b122f69e389ca35ad58bdceb1d6388bc100c47925f2"
+    },
+    {
+      "path": "artifacts/ufuk-joint-context-context-train-20261004/checkpoints/step-008000/training.pt",
+      "bytes": 695276,
+      "sha256": "68ac5d3de11785505e26c06ec083fbafb6657e1032d320c000ccbc4b12a5eddd"
+    },
+    {
+      "path": "artifacts/ufuk-joint-context-context-train-20261004/checkpoints/step-009000/checkpoint.json",
+      "bytes": 146781,
+      "sha256": "ec7625ca728874a4374e3a8e7dc0403dfae046b4394118a41b56d006cf727691"
+    },
+    {
+      "path": "artifacts/ufuk-joint-context-context-train-20261004/checkpoints/step-009000/model.safetensors",
+      "bytes": 323356,
+      "sha256": "a39ceade04706640cec694f12f37038a426769d0c9e6050f7718259f75133d74"
+    },
+    {
+      "path": "artifacts/ufuk-joint-context-context-train-20261004/checkpoints/step-009000/training.pt",
+      "bytes": 695276,
+      "sha256": "29cfd18148111d9c5b6ff0efb70c96fef853e9fca77b671c39ddc75dec5940de"
+    },
+    {
+      "path": "artifacts/ufuk-joint-context-context-train-20261004/checkpoints/step-010000/checkpoint.json",
+      "bytes": 147042,
+      "sha256": "2195b7ec3bdfd62e7041ef985097ec83d94773ca846c6ab725564b2f38360412"
+    },
+    {
+      "path": "artifacts/ufuk-joint-context-context-train-20261004/checkpoints/step-010000/model.safetensors",
+      "bytes": 323356,
+      "sha256": "55045ee178a3f6a043b9014a432c11eb9142ff47e372e9799f86443abe8865e7"
+    },
+    {
+      "path": "artifacts/ufuk-joint-context-context-train-20261004/checkpoints/step-010000/training.pt",
+      "bytes": 695276,
+      "sha256": "cdff93d0f4d1c562928673b576254df577e4bedb1a87bd1d8c92f21452cf228b"
+    },
+    {
+      "path": "artifacts/ufuk-joint-context-context-train-20261004/checkpoints/step-010500/checkpoint.json",
+      "bytes": 147042,
+      "sha256": "8cd9204f3dc5c78c5617b692c0086ba321b41334d2cc282c90660a1669a2e888"
+    },
+    {
+      "path": "artifacts/ufuk-joint-context-context-train-20261004/checkpoints/step-010500/model.safetensors",
+      "bytes": 323356,
+      "sha256": "0c6bf044d571e95c6df3e86b3479518edabbf1a7f88c0cf0428c0afc4e468191"
+    },
+    {
+      "path": "artifacts/ufuk-joint-context-context-train-20261004/checkpoints/step-010500/training.pt",
+      "bytes": 695276,
+      "sha256": "f218e378b566954bfdc31a75ed6160ba12981f5b3cf6f6b30befb91de8fd3ee8"
+    },
+    {
+      "path": "artifacts/ufuk-joint-context-context-train-20261004/joint-context-guard-profile.json",
+      "bytes": 2897,
+      "sha256": "ae2a010c6c8c61f15cb3cecb1291da7b2b673419efa5416eddcba5eadc4a289c"
+    },
+    {
+      "path": "artifacts/ufuk-joint-context-context-train-20261004/joint-context-phase-result-step-001000.json",
+      "bytes": 1113,
+      "sha256": "ca16cedb0c91042392f7b1297e62efbad02d7073bb8f4918ff7b8faa027c4a55"
+    },
+    {
+      "path": "artifacts/ufuk-joint-context-context-train-20261004/joint-context-phase-result-step-010500.json",
+      "bytes": 1207,
+      "sha256": "0f9f750082dc66da760659349760055b615185b6bffae833947572200013fdae"
+    },
+    {
+      "path": "artifacts/ufuk-joint-context-context-train-20261004/metadata.json",
+      "bytes": 3681,
+      "sha256": "f269035947c23481c7c9b3f5cd2ec659e3fa81bdcc7ae5a8063162a7269faff6"
+    },
+    {
+      "path": "artifacts/ufuk-joint-context-context-train-20261004/progress.jsonl",
+      "bytes": 4664,
+      "sha256": "a0e2bfa35c6305536bd856ad3e59814cd9a9824e57e7c4efffa11e67407af271"
+    },
+    {
+      "path": "artifacts/ufuk-joint-context-context-train-20261004/result-step-001000.json",
+      "bytes": 864,
+      "sha256": "9a7c3d4e66930f51f0db98c7ea4b4a4063503c250184b18f34159a72a288db08"
+    },
+    {
+      "path": "artifacts/ufuk-joint-context-context-train-20261004/result-step-010500.json",
+      "bytes": 955,
+      "sha256": "11d5d916dc7aa5923f4f6fb0bb7494fd81b6b0cbc0c242d7e952a20e61b12149"
+    },
+    {
+      "path": "artifacts/ufuk-joint-context-control-train-20261004/checkpoints/step-000000/checkpoint.json",
+      "bytes": 142242,
+      "sha256": "4ec3a556b1a3b8b76a310218a1216ff8ee2192bae9b2cd5bd4de5a5551b9e658"
+    },
+    {
+      "path": "artifacts/ufuk-joint-context-control-train-20261004/checkpoints/step-000000/model.safetensors",
+      "bytes": 294764,
+      "sha256": "186ceab92249a2131489f529eecd2f71e167db91a2e3edd89abf1956b5d20915"
+    },
+    {
+      "path": "artifacts/ufuk-joint-context-control-train-20261004/checkpoints/step-000000/training.pt",
+      "bytes": 7088,
+      "sha256": "6a66d9c2d006b2a2a11912fc2b2314b070317d56f371ac43f62efae64aec13eb"
+    },
+    {
+      "path": "artifacts/ufuk-joint-context-control-train-20261004/checkpoints/step-001000/checkpoint.json",
+      "bytes": 142507,
+      "sha256": "f6f965b0b58460c03902e1928a41142659f77013708f2cae19db50f1d9f8ddeb"
+    },
+    {
+      "path": "artifacts/ufuk-joint-context-control-train-20261004/checkpoints/step-001000/model.safetensors",
+      "bytes": 294764,
+      "sha256": "0df60d6f35d57ae99d0e3b32916d79734012b00326c806fbe6f7ffb2f5dba3ec"
+    },
+    {
+      "path": "artifacts/ufuk-joint-context-control-train-20261004/checkpoints/step-001000/training.pt",
+      "bytes": 622586,
+      "sha256": "84642f2be2bd5494563a5d90aa19fa3629901eb123379242266dd636fd173c61"
+    },
+    {
+      "path": "artifacts/ufuk-joint-context-control-train-20261004/checkpoints/step-002000/checkpoint.json",
+      "bytes": 142765,
+      "sha256": "40f0fdaaac071934fa3b04be54e9f2e050d9a022e3775f600e2864fc802930e2"
+    },
+    {
+      "path": "artifacts/ufuk-joint-context-control-train-20261004/checkpoints/step-002000/model.safetensors",
+      "bytes": 294764,
+      "sha256": "73116b2d39915405314dd6491242a5d918fcfa12dc28bda308d03d9f04e78dee"
+    },
+    {
+      "path": "artifacts/ufuk-joint-context-control-train-20261004/checkpoints/step-002000/training.pt",
+      "bytes": 622586,
+      "sha256": "ec2f21317ab4f35b7cf8e1894e2c0bcf5a9eed3a3f7141dd557306229ad64de4"
+    },
+    {
+      "path": "artifacts/ufuk-joint-context-control-train-20261004/checkpoints/step-003000/checkpoint.json",
+      "bytes": 143022,
+      "sha256": "f99bf5c433f1ddba3882006faca24ecb7dccd42c31bd64fb46edbc7a5cabe35d"
+    },
+    {
+      "path": "artifacts/ufuk-joint-context-control-train-20261004/checkpoints/step-003000/model.safetensors",
+      "bytes": 294764,
+      "sha256": "4803916ae53a80258349ddddc8ab3817a6b9bb6371ba35975ea6560b265fdbb0"
+    },
+    {
+      "path": "artifacts/ufuk-joint-context-control-train-20261004/checkpoints/step-003000/training.pt",
+      "bytes": 622586,
+      "sha256": "e4393c6db9c537b01ac243f0af0cdfa9598da644aaa63be1cf1c16c1eb7369e5"
+    },
+    {
+      "path": "artifacts/ufuk-joint-context-control-train-20261004/checkpoints/step-004000/checkpoint.json",
+      "bytes": 143279,
+      "sha256": "dbac436a7bdcc07e7df58a7464d3ffdfd129cefc366596eb70eeb7b7c4b7b0bf"
+    },
+    {
+      "path": "artifacts/ufuk-joint-context-control-train-20261004/checkpoints/step-004000/model.safetensors",
+      "bytes": 294764,
+      "sha256": "e0848e7cdd3b6dc2c5114e4052b2c3cab3fd4e87edb3a587c9d07f52e021fafa"
+    },
+    {
+      "path": "artifacts/ufuk-joint-context-control-train-20261004/checkpoints/step-004000/training.pt",
+      "bytes": 622586,
+      "sha256": "275f38f6d0fdeee2150146f531ee6187520fa23910c3202eba5d3e5ce83c1e5b"
+    },
+    {
+      "path": "artifacts/ufuk-joint-context-control-train-20261004/checkpoints/step-005000/checkpoint.json",
+      "bytes": 143536,
+      "sha256": "5a2df46ceb88f04721f7a7d6160463c5ac88906578a7078f36ee5fbb10ea09ac"
+    },
+    {
+      "path": "artifacts/ufuk-joint-context-control-train-20261004/checkpoints/step-005000/model.safetensors",
+      "bytes": 294764,
+      "sha256": "60e57de5bbaf83748149e092b40c04e184905694c5d4c405f94e5cd3d2013a6e"
+    },
+    {
+      "path": "artifacts/ufuk-joint-context-control-train-20261004/checkpoints/step-005000/training.pt",
+      "bytes": 622586,
+      "sha256": "2758acaa43f313a05e2974534601dc54e99f2a1f15efcdbb4c22bf4bcbc2f0e3"
+    },
+    {
+      "path": "artifacts/ufuk-joint-context-control-train-20261004/checkpoints/step-006000/checkpoint.json",
+      "bytes": 143794,
+      "sha256": "d83e9db04143f49f620fcc268feb10404e4646e1dea67d80221ca1a4bd6366f2"
+    },
+    {
+      "path": "artifacts/ufuk-joint-context-control-train-20261004/checkpoints/step-006000/model.safetensors",
+      "bytes": 294764,
+      "sha256": "0958b5b7ee691887f2901f3758e264cab465ace24f3c202d6931181c2b293865"
+    },
+    {
+      "path": "artifacts/ufuk-joint-context-control-train-20261004/checkpoints/step-006000/training.pt",
+      "bytes": 622586,
+      "sha256": "62d2a94326ad96b40108824f61198f6ebf9ec3a62b0fa0f0d16196722c5bb289"
+    },
+    {
+      "path": "artifacts/ufuk-joint-context-control-train-20261004/checkpoints/step-007000/checkpoint.json",
+      "bytes": 144051,
+      "sha256": "63700db17501047da4672fec794b941bfb8ae65351758ce8bf004f33bfca9d7e"
+    },
+    {
+      "path": "artifacts/ufuk-joint-context-control-train-20261004/checkpoints/step-007000/model.safetensors",
+      "bytes": 294764,
+      "sha256": "a4d5ca1afccedf95478876c02b714b4b476a8ee49c629a07940b594ee21c7eda"
+    },
+    {
+      "path": "artifacts/ufuk-joint-context-control-train-20261004/checkpoints/step-007000/training.pt",
+      "bytes": 622586,
+      "sha256": "7fa938f0e41b45dcd0bbba1edf78c9f0567d2fabcc7487db7e4278256605fecb"
+    },
+    {
+      "path": "artifacts/ufuk-joint-context-control-train-20261004/checkpoints/step-007500/checkpoint.json",
+      "bytes": 144051,
+      "sha256": "bfcb3580cc97059da00d717edb2c17c5620ae781227119a8d9f30a80102907ac"
+    },
+    {
+      "path": "artifacts/ufuk-joint-context-control-train-20261004/checkpoints/step-007500/model.safetensors",
+      "bytes": 294764,
+      "sha256": "8145697f4120bd6257186ad8d3a907674e3b3542d9c0be604107e8de70121ccb"
+    },
+    {
+      "path": "artifacts/ufuk-joint-context-control-train-20261004/checkpoints/step-007500/training.pt",
+      "bytes": 622586,
+      "sha256": "a66414e6a9dee8f09e2beaa38268f7f1e39d82b256497664029d28f9a3741952"
+    },
+    {
+      "path": "artifacts/ufuk-joint-context-control-train-20261004/joint-context-guard-profile.json",
+      "bytes": 1917,
+      "sha256": "ab1bb0ee7f2787c4a10f0fbe2d5ec55a9c87c8d3683ca96f74e7d92e912f871c"
+    },
+    {
+      "path": "artifacts/ufuk-joint-context-control-train-20261004/joint-context-phase-result-step-001000.json",
+      "bytes": 1104,
+      "sha256": "470de9cd5094827a173cdfcb34ad21576b5f90ebc3a4a96290eb6f41804a8003"
+    },
+    {
+      "path": "artifacts/ufuk-joint-context-control-train-20261004/joint-context-phase-result-step-007500.json",
+      "bytes": 1196,
+      "sha256": "e4647d1a4944a3e7c70fc6e5f9aa923fb9f5c3f3b7caee196230c675d64940a9"
+    },
+    {
+      "path": "artifacts/ufuk-joint-context-control-train-20261004/metadata.json",
+      "bytes": 2701,
+      "sha256": "5e6f75d2f402f8fc62fd0a93446758c6a387fec3eb374c3662cc8531b42abcc8"
+    },
+    {
+      "path": "artifacts/ufuk-joint-context-control-train-20261004/progress.jsonl",
+      "bytes": 3259,
+      "sha256": "a8b22d6b98ff61bc789849df49f73009df423211edeb64c55a59a06daa7e6e82"
+    },
+    {
+      "path": "artifacts/ufuk-joint-context-control-train-20261004/result-step-001000.json",
+      "bytes": 856,
+      "sha256": "03b0e2239080026ceb63df44a4a81a9aecb741e648a08bb7bd97f37627a6c99f"
+    },
+    {
+      "path": "artifacts/ufuk-joint-context-control-train-20261004/result-step-007500.json",
+      "bytes": 946,
+      "sha256": "42aaef19ea95b4673651f5da58d1a171968eb23fd4c7f6767c10053008f85f6c"
+    },
+    {
+      "path": "artifacts/ufuk-joint-context-experiment-20261004/context-pause-command.json",
+      "bytes": 870,
+      "sha256": "70ff52ee970c7f7ccff061f7f867e45c00c5eb00bcc2858ee50d82e30a10bdec"
+    },
+    {
+      "path": "artifacts/ufuk-joint-context-experiment-20261004/context-pause.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "artifacts/ufuk-joint-context-experiment-20261004/context-pause.stdout.log",
+      "bytes": 2329,
+      "sha256": "98221ded9fce3ed30f9ddb806984f6e5eef8daed0ead9cf38d86e73f2ca3fecf"
+    },
+    {
+      "path": "artifacts/ufuk-joint-context-experiment-20261004/context-resume-command.json",
+      "bytes": 985,
+      "sha256": "85a76440a14797f96357bf6c8c915362e4fed74b64ec6dc714b24987f496fe49"
+    },
+    {
+      "path": "artifacts/ufuk-joint-context-experiment-20261004/context-resume.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "artifacts/ufuk-joint-context-experiment-20261004/context-resume.stdout.log",
+      "bytes": 6167,
+      "sha256": "8f7f47aa283b04f8ae96d885adaad751b25e689468751d46d0177e102456202a"
+    },
+    {
+      "path": "artifacts/ufuk-joint-context-experiment-20261004/context-selection.json",
+      "bytes": 5786,
+      "sha256": "7e355b6014f6a5c34db1c775b9a0b336a45b4edb093ea8e7172db82c54270d6e"
+    },
+    {
+      "path": "artifacts/ufuk-joint-context-experiment-20261004/control-pause-command.json",
+      "bytes": 870,
+      "sha256": "a5d6cd328725436306ed391e0dc4461061f87643042227862414eba4e5273106"
+    },
+    {
+      "path": "artifacts/ufuk-joint-context-experiment-20261004/control-pause.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "artifacts/ufuk-joint-context-experiment-20261004/control-pause.stdout.log",
+      "bytes": 2322,
+      "sha256": "5a7eb290f3d485dede89ef45544682d125725ec77dc7a461fefd8a0affd54d2e"
+    },
+    {
+      "path": "artifacts/ufuk-joint-context-experiment-20261004/control-resume-command.json",
+      "bytes": 988,
+      "sha256": "194d749c05e94dd1ab10f4c18655626f3df4264eaf729cb5c7bf464a7e794fd6"
+    },
+    {
+      "path": "artifacts/ufuk-joint-context-experiment-20261004/control-resume.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "artifacts/ufuk-joint-context-experiment-20261004/control-resume.stdout.log",
+      "bytes": 4751,
+      "sha256": "77598f181b1459b4f7a3ed6602711319075257859a8239ea2a343fdc14893620"
+    },
+    {
+      "path": "artifacts/ufuk-joint-context-experiment-20261004/control-selection.json",
+      "bytes": 5007,
+      "sha256": "16e17d9baa20ef8da3b426faf5d392605bf6d07a4acabce453c51b8c5c2c3759"
+    },
+    {
+      "path": "artifacts/ufuk-joint-context-experiment-20261004/integrity-audit.json",
+      "bytes": 80453,
+      "sha256": "ef0768344aa7eceba2ade83abc50b3a3668d3081442e3ee1b7141f5856ca4783"
+    },
+    {
+      "path": "artifacts/ufuk-joint-context-experiment-20261004/latency.json",
+      "bytes": 176172,
+      "sha256": "d645b72937b5e2099a88f1d804f0c8c839178e4cc6c765664effd40c782a31d8"
+    },
+    {
+      "path": "artifacts/ufuk-joint-context-experiment-20261004/result.json",
+      "bytes": 12920,
+      "sha256": "84992d2eb693f7e13d92d089ec7708793549eeccffccb1507a29384634bf0c5e"
+    },
+    {
+      "path": "artifacts/ufuk-joint-context-experiment-20261004/trained-portable-parity.json",
+      "bytes": 861,
+      "sha256": "c422e272bfe2cfa614374b419b106f8ae54184f005b88bf317f5ec8423715a0f"
+    },
+    {
+      "path": "artifacts/ufuk-joint-context-preflight-20261004/transfer-preflight.json",
+      "bytes": 919,
+      "sha256": "2b548a237957e0ab2c6aa2d020b32bef423c13ddf2f379c0f9d80ff2a2080903"
+    },
+    {
+      "path": "artifacts/ufuk-packed-benchmark-0-cached-20261004/benchmark.json",
+      "bytes": 1358,
+      "sha256": "3f123c15d41a4384366d45d3df4cfa04d0bb2504fc32e8dd1b6f882bf99e9db5"
+    },
+    {
+      "path": "artifacts/ufuk-packed-benchmark-0-cached-20261004/checkpoints/step-000000/checkpoint.json",
+      "bytes": 142924,
+      "sha256": "f334e1717bd524e41e1cc23c0745a24009386e4a1c0329b7bcb15f595ae3630c"
+    },
+    {
+      "path": "artifacts/ufuk-packed-benchmark-0-cached-20261004/checkpoints/step-000000/model.safetensors",
+      "bytes": 294764,
+      "sha256": "7a81a45534cd9da9628e8cbe107596c40b393b26c3a5206f24978256a01dc877"
+    },
+    {
+      "path": "artifacts/ufuk-packed-benchmark-0-cached-20261004/checkpoints/step-000000/training.pt",
+      "bytes": 7088,
+      "sha256": "6a66d9c2d006b2a2a11912fc2b2314b070317d56f371ac43f62efae64aec13eb"
+    },
+    {
+      "path": "artifacts/ufuk-packed-benchmark-0-cached-20261004/checkpoints/step-000100/checkpoint.json",
+      "bytes": 143184,
+      "sha256": "bda47a987cf203d159453a69895e98defb636189ed7a1f552e2be1f40c1464ee"
+    },
+    {
+      "path": "artifacts/ufuk-packed-benchmark-0-cached-20261004/checkpoints/step-000100/model.safetensors",
+      "bytes": 294764,
+      "sha256": "1500540074c41c92dbe1cae288833c2543fede49e2c3329c5b90cd7e6eea02b7"
+    },
+    {
+      "path": "artifacts/ufuk-packed-benchmark-0-cached-20261004/checkpoints/step-000100/training.pt",
+      "bytes": 622586,
+      "sha256": "8604f64d9955be80896721554bc120e7174174653bb3c905d329f3e86a89be12"
+    },
+    {
+      "path": "artifacts/ufuk-packed-benchmark-0-cached-20261004/metadata.json",
+      "bytes": 1916,
+      "sha256": "8302002bc00c4fd8e7bdf87e25697530ab43cf85f7e3c443b307ea9f2ba3a2b7"
+    },
+    {
+      "path": "artifacts/ufuk-packed-benchmark-0-cached-20261004/progress.jsonl",
+      "bytes": 461,
+      "sha256": "cefaae8fc37fc1af1a10558507e9a13912e1bfed8f26fa290167b78029054a4e"
+    },
+    {
+      "path": "artifacts/ufuk-packed-benchmark-0-cached-20261004/result-step-000100.json",
+      "bytes": 844,
+      "sha256": "a48682e974387c64bccaa021bf8b0c8aae793c155ecc579bb741e0750fc128ff"
+    },
+    {
+      "path": "artifacts/ufuk-packed-benchmark-0-uncached-20261004/benchmark.json",
+      "bytes": 1370,
+      "sha256": "4f2737dab215eff960b25471156894f5701ceba417af13246d6400beab50df64"
+    },
+    {
+      "path": "artifacts/ufuk-packed-benchmark-0-uncached-20261004/checkpoints/step-000000/checkpoint.json",
+      "bytes": 140779,
+      "sha256": "dffa7f0a512b0f8c67d7af979e2af3ce0c444d16d9ccdbecaba941e620d1c8ef"
+    },
+    {
+      "path": "artifacts/ufuk-packed-benchmark-0-uncached-20261004/checkpoints/step-000000/model.safetensors",
+      "bytes": 294764,
+      "sha256": "7a81a45534cd9da9628e8cbe107596c40b393b26c3a5206f24978256a01dc877"
+    },
+    {
+      "path": "artifacts/ufuk-packed-benchmark-0-uncached-20261004/checkpoints/step-000000/training.pt",
+      "bytes": 7088,
+      "sha256": "6a66d9c2d006b2a2a11912fc2b2314b070317d56f371ac43f62efae64aec13eb"
+    },
+    {
+      "path": "artifacts/ufuk-packed-benchmark-0-uncached-20261004/checkpoints/step-000100/checkpoint.json",
+      "bytes": 141039,
+      "sha256": "f34ce73ff1cf9c7f9f1764222cd5c9ebecca161d26cc9fb8a9ab09933083552f"
+    },
+    {
+      "path": "artifacts/ufuk-packed-benchmark-0-uncached-20261004/checkpoints/step-000100/model.safetensors",
+      "bytes": 294764,
+      "sha256": "1500540074c41c92dbe1cae288833c2543fede49e2c3329c5b90cd7e6eea02b7"
+    },
+    {
+      "path": "artifacts/ufuk-packed-benchmark-0-uncached-20261004/checkpoints/step-000100/training.pt",
+      "bytes": 622586,
+      "sha256": "8604f64d9955be80896721554bc120e7174174653bb3c905d329f3e86a89be12"
+    },
+    {
+      "path": "artifacts/ufuk-packed-benchmark-0-uncached-20261004/metadata.json",
+      "bytes": 1454,
+      "sha256": "ba6a3b4fab28fc4a1825cd93ac23e4954e7136729039e1c95e1e06f447e39715"
+    },
+    {
+      "path": "artifacts/ufuk-packed-benchmark-0-uncached-20261004/progress.jsonl",
+      "bytes": 461,
+      "sha256": "5578f1b3af176c96b72d7b721e2fd1a0388e9f93c59b4495b6e91b10c21561c1"
+    },
+    {
+      "path": "artifacts/ufuk-packed-benchmark-0-uncached-20261004/result-step-000100.json",
+      "bytes": 853,
+      "sha256": "1d1e85f2b420ca32a6af27a496a059b189883472067d8ea84513a102c54520c8"
+    },
+    {
+      "path": "artifacts/ufuk-packed-benchmark-1-cached-20261004/benchmark.json",
+      "bytes": 1354,
+      "sha256": "676d637ec6f414bd3cb5170921ce2ab96c6be9586ea99177dd9cb7559d23c08f"
+    },
+    {
+      "path": "artifacts/ufuk-packed-benchmark-1-cached-20261004/checkpoints/step-000000/checkpoint.json",
+      "bytes": 142922,
+      "sha256": "8b92fbdbd85db417783f8e43b2a082d1a845fb97d5e5493833a318444791118a"
+    },
+    {
+      "path": "artifacts/ufuk-packed-benchmark-1-cached-20261004/checkpoints/step-000000/model.safetensors",
+      "bytes": 294764,
+      "sha256": "7a81a45534cd9da9628e8cbe107596c40b393b26c3a5206f24978256a01dc877"
+    },
+    {
+      "path": "artifacts/ufuk-packed-benchmark-1-cached-20261004/checkpoints/step-000000/training.pt",
+      "bytes": 7088,
+      "sha256": "5fb85dfc8b21433bfc25a7672120254e25c8310321a414170511c90d5d08fa21"
+    },
+    {
+      "path": "artifacts/ufuk-packed-benchmark-1-cached-20261004/checkpoints/step-000100/checkpoint.json",
+      "bytes": 143181,
+      "sha256": "004dcff5bd648c1e313f138b9fc13deea37a7d179f14fb2d4ca4c34617782ba3"
+    },
+    {
+      "path": "artifacts/ufuk-packed-benchmark-1-cached-20261004/checkpoints/step-000100/model.safetensors",
+      "bytes": 294764,
+      "sha256": "4fe1ae250a7d27ec0ebbc9daeddb8e23dcbbf51d0780b73733f7f931ad3ba1d6"
+    },
+    {
+      "path": "artifacts/ufuk-packed-benchmark-1-cached-20261004/checkpoints/step-000100/training.pt",
+      "bytes": 622586,
+      "sha256": "1bfacb2f24351d8210a3f8109c0ba229a6e2bcbf0c9272c6f34f6d6c5c1f5f04"
+    },
+    {
+      "path": "artifacts/ufuk-packed-benchmark-1-cached-20261004/metadata.json",
+      "bytes": 1916,
+      "sha256": "1c0cf0de70ba91fcd1a0481fb8ff100bb0bc48b5efb75baa19e0b3b496400799"
+    },
+    {
+      "path": "artifacts/ufuk-packed-benchmark-1-cached-20261004/progress.jsonl",
+      "bytes": 472,
+      "sha256": "726e61699a0d65f81875303a0e86f4d37a1b6ebf68a19b2305cd585ac4ae3db0"
+    },
+    {
+      "path": "artifacts/ufuk-packed-benchmark-1-cached-20261004/result-step-000100.json",
+      "bytes": 841,
+      "sha256": "d81640bf436a823a2991caaa4a726f68e10142146132264e65047f12e17c1ab9"
+    },
+    {
+      "path": "artifacts/ufuk-packed-benchmark-1-uncached-20261004/benchmark.json",
+      "bytes": 1361,
+      "sha256": "7bb20d4d37605383206a24ba94d3dd96c2454d6971c4397a06c01eed40219d00"
+    },
+    {
+      "path": "artifacts/ufuk-packed-benchmark-1-uncached-20261004/checkpoints/step-000000/checkpoint.json",
+      "bytes": 140777,
+      "sha256": "2c46f3415d167f8f2ed4d6943381612b66af1440935628eecbf3fb70c74df704"
+    },
+    {
+      "path": "artifacts/ufuk-packed-benchmark-1-uncached-20261004/checkpoints/step-000000/model.safetensors",
+      "bytes": 294764,
+      "sha256": "7a81a45534cd9da9628e8cbe107596c40b393b26c3a5206f24978256a01dc877"
+    },
+    {
+      "path": "artifacts/ufuk-packed-benchmark-1-uncached-20261004/checkpoints/step-000000/training.pt",
+      "bytes": 7088,
+      "sha256": "5fb85dfc8b21433bfc25a7672120254e25c8310321a414170511c90d5d08fa21"
+    },
+    {
+      "path": "artifacts/ufuk-packed-benchmark-1-uncached-20261004/checkpoints/step-000100/checkpoint.json",
+      "bytes": 141036,
+      "sha256": "9a3cf20a4db7066df4df59e87579d0225f8c33c12e3e6a9493420880892d0b04"
+    },
+    {
+      "path": "artifacts/ufuk-packed-benchmark-1-uncached-20261004/checkpoints/step-000100/model.safetensors",
+      "bytes": 294764,
+      "sha256": "4fe1ae250a7d27ec0ebbc9daeddb8e23dcbbf51d0780b73733f7f931ad3ba1d6"
+    },
+    {
+      "path": "artifacts/ufuk-packed-benchmark-1-uncached-20261004/checkpoints/step-000100/training.pt",
+      "bytes": 622586,
+      "sha256": "1bfacb2f24351d8210a3f8109c0ba229a6e2bcbf0c9272c6f34f6d6c5c1f5f04"
+    },
+    {
+      "path": "artifacts/ufuk-packed-benchmark-1-uncached-20261004/metadata.json",
+      "bytes": 1454,
+      "sha256": "69393f746afbfa9a632b3d088f23a327388027da041b4d1b075f1b49d65e819c"
+    },
+    {
+      "path": "artifacts/ufuk-packed-benchmark-1-uncached-20261004/progress.jsonl",
+      "bytes": 472,
+      "sha256": "e9e901513382011912a9fbbb722da642f67f643dba5337c0f64fe1419675c11b"
+    },
+    {
+      "path": "artifacts/ufuk-packed-benchmark-1-uncached-20261004/result-step-000100.json",
+      "bytes": 844,
+      "sha256": "e142d78ba2dc0a9fc1dcfedf8c55f79e0ed209ea03e11b1d2323763884ad96be"
+    },
+    {
+      "path": "artifacts/ufuk-packed-benchmark-2-cached-20261004/benchmark.json",
+      "bytes": 1354,
+      "sha256": "998503c3d10418d40ce21d7a50a304e69772d169520753f8d7a36e9aff7fd2f3"
+    },
+    {
+      "path": "artifacts/ufuk-packed-benchmark-2-cached-20261004/checkpoints/step-000000/checkpoint.json",
+      "bytes": 142922,
+      "sha256": "2ca5081522dfa7d6ca568b848a3ba909c6b8efa43d43b9267f975563cfb5672c"
+    },
+    {
+      "path": "artifacts/ufuk-packed-benchmark-2-cached-20261004/checkpoints/step-000000/model.safetensors",
+      "bytes": 294764,
+      "sha256": "7a81a45534cd9da9628e8cbe107596c40b393b26c3a5206f24978256a01dc877"
+    },
+    {
+      "path": "artifacts/ufuk-packed-benchmark-2-cached-20261004/checkpoints/step-000000/training.pt",
+      "bytes": 7088,
+      "sha256": "568213ef7cc06deabf911c129af9e1f7cf9d8d7afe7ab1773eb4637391820d4e"
+    },
+    {
+      "path": "artifacts/ufuk-packed-benchmark-2-cached-20261004/checkpoints/step-000100/checkpoint.json",
+      "bytes": 143182,
+      "sha256": "0d1d12b835c096262fa442259d0722f936dd214a538e9aef87866a7afb2b3259"
+    },
+    {
+      "path": "artifacts/ufuk-packed-benchmark-2-cached-20261004/checkpoints/step-000100/model.safetensors",
+      "bytes": 294764,
+      "sha256": "5c2bdc1c437b95c5e78d78a839756af72cc605cc26c564922007d4b4cd94d2d0"
+    },
+    {
+      "path": "artifacts/ufuk-packed-benchmark-2-cached-20261004/checkpoints/step-000100/training.pt",
+      "bytes": 622586,
+      "sha256": "42cc7660cbf9d00ebd8663f9405267a9f8f4e5f100d613e16f5ab5aec1c6a2f6"
+    },
+    {
+      "path": "artifacts/ufuk-packed-benchmark-2-cached-20261004/metadata.json",
+      "bytes": 1916,
+      "sha256": "558d74f709c3340f74283f111db938779b4ab1a0c49b5557fb5ebc148e244aae"
+    },
+    {
+      "path": "artifacts/ufuk-packed-benchmark-2-cached-20261004/progress.jsonl",
+      "bytes": 461,
+      "sha256": "bfa782713cbb4285fb42a8cc94056e82ddc7e911cb62f9347a7df717733cadd4"
+    },
+    {
+      "path": "artifacts/ufuk-packed-benchmark-2-cached-20261004/result-step-000100.json",
+      "bytes": 840,
+      "sha256": "809f75923c4f30189f490b97edb03a7883bff1be662be0d9af36f9ef13aa2529"
+    },
+    {
+      "path": "artifacts/ufuk-packed-benchmark-2-uncached-20261004/benchmark.json",
+      "bytes": 1359,
+      "sha256": "ed72e98f5486baf67f15d67593ed1814c449fb15fb39ae5d0ec52c852609fb98"
+    },
+    {
+      "path": "artifacts/ufuk-packed-benchmark-2-uncached-20261004/checkpoints/step-000000/checkpoint.json",
+      "bytes": 140777,
+      "sha256": "2ed6ed07ad7fbd76f05f79bb1e8015d8b0c38da3b97262d7b11c219d79c0ee09"
+    },
+    {
+      "path": "artifacts/ufuk-packed-benchmark-2-uncached-20261004/checkpoints/step-000000/model.safetensors",
+      "bytes": 294764,
+      "sha256": "7a81a45534cd9da9628e8cbe107596c40b393b26c3a5206f24978256a01dc877"
+    },
+    {
+      "path": "artifacts/ufuk-packed-benchmark-2-uncached-20261004/checkpoints/step-000000/training.pt",
+      "bytes": 7088,
+      "sha256": "568213ef7cc06deabf911c129af9e1f7cf9d8d7afe7ab1773eb4637391820d4e"
+    },
+    {
+      "path": "artifacts/ufuk-packed-benchmark-2-uncached-20261004/checkpoints/step-000100/checkpoint.json",
+      "bytes": 141037,
+      "sha256": "d9fc1558007616aba1e49487fbdf2e706898877fd9827aa7614fd04a4bb3298c"
+    },
+    {
+      "path": "artifacts/ufuk-packed-benchmark-2-uncached-20261004/checkpoints/step-000100/model.safetensors",
+      "bytes": 294764,
+      "sha256": "5c2bdc1c437b95c5e78d78a839756af72cc605cc26c564922007d4b4cd94d2d0"
+    },
+    {
+      "path": "artifacts/ufuk-packed-benchmark-2-uncached-20261004/checkpoints/step-000100/training.pt",
+      "bytes": 622586,
+      "sha256": "42cc7660cbf9d00ebd8663f9405267a9f8f4e5f100d613e16f5ab5aec1c6a2f6"
+    },
+    {
+      "path": "artifacts/ufuk-packed-benchmark-2-uncached-20261004/metadata.json",
+      "bytes": 1454,
+      "sha256": "f37a95f12e56a2ce81b1aec8cc9fe94501c6c9ddb25bad288f602bc6208899d9"
+    },
+    {
+      "path": "artifacts/ufuk-packed-benchmark-2-uncached-20261004/progress.jsonl",
+      "bytes": 461,
+      "sha256": "c2e8c5f7501ba6f3905bf8d45efbaa3f0f69151a6e826b7d1c10393bc8f6368b"
+    },
+    {
+      "path": "artifacts/ufuk-packed-benchmark-2-uncached-20261004/result-step-000100.json",
+      "bytes": 843,
+      "sha256": "cf36ab1a3c2812b3c673d93461d5acbac26ad09ad0019f4d3fc06982dbd86de4"
+    },
+    {
+      "path": "artifacts/ufuk-packed-benchmark-3-cached-20261004/benchmark.json",
+      "bytes": 1358,
+      "sha256": "5fd703e69f1b42b0f14f9be74fca835331182c22722ac8fdf6fb90405f3f93d0"
+    },
+    {
+      "path": "artifacts/ufuk-packed-benchmark-3-cached-20261004/checkpoints/step-000000/checkpoint.json",
+      "bytes": 142923,
+      "sha256": "263df73423f80893c0d70c5260350b11e66dda2f9f3a49f126753d0693f5ff95"
+    },
+    {
+      "path": "artifacts/ufuk-packed-benchmark-3-cached-20261004/checkpoints/step-000000/model.safetensors",
+      "bytes": 294764,
+      "sha256": "7a81a45534cd9da9628e8cbe107596c40b393b26c3a5206f24978256a01dc877"
+    },
+    {
+      "path": "artifacts/ufuk-packed-benchmark-3-cached-20261004/checkpoints/step-000000/training.pt",
+      "bytes": 7088,
+      "sha256": "6b670f09af7322622f90f3eb67482ccc0df2923fc219511f56b176e586ddb982"
+    },
+    {
+      "path": "artifacts/ufuk-packed-benchmark-3-cached-20261004/checkpoints/step-000100/checkpoint.json",
+      "bytes": 143183,
+      "sha256": "b4101f69b65399ec65c4da87256f16e420bc01288de5d22028a321a8233bf95c"
+    },
+    {
+      "path": "artifacts/ufuk-packed-benchmark-3-cached-20261004/checkpoints/step-000100/model.safetensors",
+      "bytes": 294764,
+      "sha256": "59a0b1577a049e0b63e93d213e88692885a57b7a4ab4798db5d5aba083a01912"
+    },
+    {
+      "path": "artifacts/ufuk-packed-benchmark-3-cached-20261004/checkpoints/step-000100/training.pt",
+      "bytes": 622586,
+      "sha256": "3ae6d4e48699ad6e8436814513ada4a88a4e3f7e5567ce49611c7dd9c3a715a8"
+    },
+    {
+      "path": "artifacts/ufuk-packed-benchmark-3-cached-20261004/metadata.json",
+      "bytes": 1916,
+      "sha256": "34891cc658753936af6a54b9da3c56ecc5e508c138a3c994d4f4f6dd1ab66d21"
+    },
+    {
+      "path": "artifacts/ufuk-packed-benchmark-3-cached-20261004/progress.jsonl",
+      "bytes": 477,
+      "sha256": "4ff39ead28013f7ffde7e63bae9347291976c29cf10470ded9a17b41b07a8eec"
+    },
+    {
+      "path": "artifacts/ufuk-packed-benchmark-3-cached-20261004/result-step-000100.json",
+      "bytes": 844,
+      "sha256": "b33707aa079d2a3d69fc8ea9c68144f780984696a294ccbee9f43daa1e9e5662"
+    },
+    {
+      "path": "artifacts/ufuk-packed-benchmark-3-uncached-20261004/benchmark.json",
+      "bytes": 1362,
+      "sha256": "30bde012b56c0dbe5df42a6057ba6bc1448bb98dcebff2003020764b154227cb"
+    },
+    {
+      "path": "artifacts/ufuk-packed-benchmark-3-uncached-20261004/checkpoints/step-000000/checkpoint.json",
+      "bytes": 140778,
+      "sha256": "2c5047df895ec85f9f2f7153670b8ec989a9ca66eddcf0ddd12ee0d27d2d4112"
+    },
+    {
+      "path": "artifacts/ufuk-packed-benchmark-3-uncached-20261004/checkpoints/step-000000/model.safetensors",
+      "bytes": 294764,
+      "sha256": "7a81a45534cd9da9628e8cbe107596c40b393b26c3a5206f24978256a01dc877"
+    },
+    {
+      "path": "artifacts/ufuk-packed-benchmark-3-uncached-20261004/checkpoints/step-000000/training.pt",
+      "bytes": 7088,
+      "sha256": "6b670f09af7322622f90f3eb67482ccc0df2923fc219511f56b176e586ddb982"
+    },
+    {
+      "path": "artifacts/ufuk-packed-benchmark-3-uncached-20261004/checkpoints/step-000100/checkpoint.json",
+      "bytes": 141038,
+      "sha256": "edbd90fa312b0c73cc3fb4f650c3a6e9aefd527e6b247cd6fe60003f39cc3547"
+    },
+    {
+      "path": "artifacts/ufuk-packed-benchmark-3-uncached-20261004/checkpoints/step-000100/model.safetensors",
+      "bytes": 294764,
+      "sha256": "59a0b1577a049e0b63e93d213e88692885a57b7a4ab4798db5d5aba083a01912"
+    },
+    {
+      "path": "artifacts/ufuk-packed-benchmark-3-uncached-20261004/checkpoints/step-000100/training.pt",
+      "bytes": 622586,
+      "sha256": "3ae6d4e48699ad6e8436814513ada4a88a4e3f7e5567ce49611c7dd9c3a715a8"
+    },
+    {
+      "path": "artifacts/ufuk-packed-benchmark-3-uncached-20261004/metadata.json",
+      "bytes": 1454,
+      "sha256": "71c4d3a9f3f926f756bd7470c1e768e0d33cce6e5c5288b8763339b312e0e2b0"
+    },
+    {
+      "path": "artifacts/ufuk-packed-benchmark-3-uncached-20261004/progress.jsonl",
+      "bytes": 477,
+      "sha256": "570f5f1a365e429030ffec7cef32bf2d78d0f975286052c7814f85ce048cd747"
+    },
+    {
+      "path": "artifacts/ufuk-packed-benchmark-3-uncached-20261004/result-step-000100.json",
+      "bytes": 846,
+      "sha256": "7cb43c345cb7929f0431d52c681a9ef62deecb54fd9bf2337050eb74f7254473"
+    },
+    {
+      "path": "artifacts/ufuk-packed-experiment-20261004/batch-selection-overhead.json",
+      "bytes": 676,
+      "sha256": "983581d2ed1ad1dc556c27fa88d29b331a7e182218376d243cdd329205da1f76"
+    },
+    {
+      "path": "artifacts/ufuk-packed-experiment-20261004/driver-result.json",
+      "bytes": 6928,
+      "sha256": "03ce0818947a0c0804920bfce9928b2c01b556acd605284ede1973b0b449a59e"
+    },
+    {
+      "path": "artifacts/ufuk-packed-experiment-20261004/integrity-audit.json",
+      "bytes": 19527,
+      "sha256": "f3911634f69679deb6c5b26c83f0b608bfdb5c72da2f6da6cb75a1cd3c5bebf7"
+    },
+    {
+      "path": "artifacts/ufuk-packed-experiment-20261004/prepare-command.json",
+      "bytes": 768,
+      "sha256": "32e3e3f2fe3ffbeeddb378fd9ca107d45d3fb988c0fed5dc658153c6ad5bc86b"
+    },
+    {
+      "path": "artifacts/ufuk-packed-experiment-20261004/prepare.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "artifacts/ufuk-packed-experiment-20261004/prepare.stdout.log",
+      "bytes": 373,
+      "sha256": "0a82c850e4f62f7468eb348d483d34f28447027dbde1aacf1ae5aafc8fa07c8b"
+    },
+    {
+      "path": "artifacts/ufuk-packed-experiment-20261004/round-0-cached-command.json",
+      "bytes": 635,
+      "sha256": "466676c4d43980962a473a5955479843eee03abb61ff0205ec0bb8c32f7703e5"
+    },
+    {
+      "path": "artifacts/ufuk-packed-experiment-20261004/round-0-cached.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "artifacts/ufuk-packed-experiment-20261004/round-0-cached.stdout.log",
+      "bytes": 1539,
+      "sha256": "41cd69422f192e9cc949fd0786f37cbf4955315022ef36afa60e00292c8b6e3c"
+    },
+    {
+      "path": "artifacts/ufuk-packed-experiment-20261004/round-0-uncached-command.json",
+      "bytes": 644,
+      "sha256": "658c3e5b97030651d01c6653a5cc9a0b7e0536343f00f6da3c6a631e3e69d41d"
+    },
+    {
+      "path": "artifacts/ufuk-packed-experiment-20261004/round-0-uncached.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "artifacts/ufuk-packed-experiment-20261004/round-0-uncached.stdout.log",
+      "bytes": 1542,
+      "sha256": "bec6e965136ab3c7688150408d29fb5e43059abdae51923f36a4b5e4b4739646"
+    },
+    {
+      "path": "artifacts/ufuk-packed-experiment-20261004/round-1-cached-command.json",
+      "bytes": 636,
+      "sha256": "3fa7be3e1f2791fef1ad6cc14bb059a2e3be7b99472047d47a3ec251118f915d"
+    },
+    {
+      "path": "artifacts/ufuk-packed-experiment-20261004/round-1-cached.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "artifacts/ufuk-packed-experiment-20261004/round-1-cached.stdout.log",
+      "bytes": 1548,
+      "sha256": "054f510d087c93a6167df3c3ed340fff32874666894379efc5c39c6e9357f41b"
+    },
+    {
+      "path": "artifacts/ufuk-packed-experiment-20261004/round-1-uncached-command.json",
+      "bytes": 644,
+      "sha256": "ea883d425b7fbe594dbd5b128ce8aff724488387785ea2433d61b4a125e612c9"
+    },
+    {
+      "path": "artifacts/ufuk-packed-experiment-20261004/round-1-uncached.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "artifacts/ufuk-packed-experiment-20261004/round-1-uncached.stdout.log",
+      "bytes": 1552,
+      "sha256": "d3879bb0cc2a4aa840e35def0f120baa3f5af64dd14a0976ffc67ed134382d93"
+    },
+    {
+      "path": "artifacts/ufuk-packed-experiment-20261004/round-2-cached-command.json",
+      "bytes": 636,
+      "sha256": "e251c4c6bc962fd943d61f7a5ca1167d0e305b16bf8f76d3623cf9237ab8eca6"
+    },
+    {
+      "path": "artifacts/ufuk-packed-experiment-20261004/round-2-cached.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "artifacts/ufuk-packed-experiment-20261004/round-2-cached.stdout.log",
+      "bytes": 1538,
+      "sha256": "726cabd6ee6cdcc9374bc72cdc4f56c47bf0dacedfcb8619e32805b7becad263"
+    },
+    {
+      "path": "artifacts/ufuk-packed-experiment-20261004/round-2-uncached-command.json",
+      "bytes": 644,
+      "sha256": "b1c58257675b2e3451a845ed400d8b544ad307fa7dea3b5f1e7c2dc6834231d0"
+    },
+    {
+      "path": "artifacts/ufuk-packed-experiment-20261004/round-2-uncached.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "artifacts/ufuk-packed-experiment-20261004/round-2-uncached.stdout.log",
+      "bytes": 1540,
+      "sha256": "a69661fe965cc362f53826c90cfc6be1103c2c55a199e216fdeff21d1e4a2880"
+    },
+    {
+      "path": "artifacts/ufuk-packed-experiment-20261004/round-3-cached-command.json",
+      "bytes": 636,
+      "sha256": "ac9442879f7b911e738784d3d7ff995354f5bdd69c6755cd7b920f202d674d69"
+    },
+    {
+      "path": "artifacts/ufuk-packed-experiment-20261004/round-3-cached.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "artifacts/ufuk-packed-experiment-20261004/round-3-cached.stdout.log",
+      "bytes": 1555,
+      "sha256": "828c96c6b0bb7302f456bf91c7b7d63b40c5c34f62b3815dd04695e666a02d39"
+    },
+    {
+      "path": "artifacts/ufuk-packed-experiment-20261004/round-3-uncached-command.json",
+      "bytes": 644,
+      "sha256": "414b93fd4a245dad206a1aca94142f4e426d24ad0ea4b6c5a213ec5be2a03add"
+    },
+    {
+      "path": "artifacts/ufuk-packed-experiment-20261004/round-3-uncached.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "artifacts/ufuk-packed-experiment-20261004/round-3-uncached.stdout.log",
+      "bytes": 1557,
+      "sha256": "057655bf94d3ea3f9befa66d47326e79114d0b1f7b39090daa1a4d0292391941"
+    },
+    {
+      "path": "artifacts/ufuk-packed-native-20261004/ep.npy",
+      "bytes": 80639,
+      "sha256": "6694727dbffb336a2745999295b811f63e35bdeac2130e3e9cb0a7fc3605d408"
+    },
+    {
+      "path": "artifacts/ufuk-packed-native-20261004/family.npy",
+      "bytes": 322172,
+      "sha256": "d2caa7c4f79d17f44cab3bf5724606ef21eb49137674aac245353b8218c0f3a5"
+    },
+    {
+      "path": "artifacts/ufuk-packed-native-20261004/legal.npy",
+      "bytes": 4387720,
+      "sha256": "89cca002772b06310c54d545120b93ad46e54f73b1175569f37b2809cd9f80ba"
+    },
+    {
+      "path": "artifacts/ufuk-packed-native-20261004/legal_offsets.npy",
+      "bytes": 644224,
+      "sha256": "b4f61ca1df67b0256f150203be847971b0de5d0ea61bf276ec0cad6e45d1dbcf"
+    },
+    {
+      "path": "artifacts/ufuk-packed-native-20261004/metadata.npy",
+      "bytes": 2576480,
+      "sha256": "e60f29caaf36310015c6513a0d4b083d4d1afcb351d8a7bf42bc63ae268b307d"
+    },
+    {
+      "path": "artifacts/ufuk-packed-native-20261004/pieces.npy",
+      "bytes": 61832576,
+      "sha256": "7686d069f1263909b3b6e1a9b0547b9951b8e2d545fd12082afe371831fbe1d9"
+    },
+    {
+      "path": "artifacts/ufuk-packed-native-20261004/policy.npy",
+      "bytes": 627184,
+      "sha256": "8f32d37c71ed805ffb9f3f09a76e35b44c2f5ff85c5ae268ccc81060fd04bdcf"
+    },
+    {
+      "path": "artifacts/ufuk-packed-native-20261004/policy_offsets.npy",
+      "bytes": 644224,
+      "sha256": "eff3853e22d09eae7c4d72febe249811a7a3d9ac6bf996ca9ba287eba51a3968"
+    },
+    {
+      "path": "artifacts/ufuk-packed-native-20261004/position_key.npy",
+      "bytes": 7729184,
+      "sha256": "13419b6360249ce122add302b3cbf6193294bd9afb6121dafd39f2b940046121"
+    },
+    {
+      "path": "artifacts/ufuk-packed-native-20261004/prepared.json",
+      "bytes": 96738,
+      "sha256": "fbe4edb78a647060069330b1ec2fbe723c08e04f926021ce51e137e6bc50ec5f"
+    },
+    {
+      "path": "artifacts/ufuk-packed-native-20261004/probabilities.npy",
+      "bytes": 1254240,
+      "sha256": "fd1d5fa9940014298ada19cb92740aedfc5b0a585ff4ffe58ec89a53deaf795b"
+    },
+    {
+      "path": "artifacts/ufuk-packed-native-20261004/split.npy",
+      "bytes": 80639,
+      "sha256": "b369c9df9bef9905fa63545560bb25bc201c039cb0cf783a562212e325d8756c"
+    },
+    {
+      "path": "artifacts/ufuk-packed-native-20261004/wdl.npy",
+      "bytes": 966260,
+      "sha256": "9db431c1949676648ca045a1f49afaa0528e080661ed89d0fc1bcd9c01f1404c"
+    }
+  ],
+  "remote_backup_complete": false,
+  "scope": "Fifth delta after verified2149file parent,143/239/89file prior deltas. Old archived hashes unchanged. Completed21joint native checkpoints,80511exact packed source arrays and16matched packing benchmark checkpoints included. Any future ufuk-broad- artifacts excluded. All four previous archives required; remote backup still incomplete.",
+  "archive": {
+    "workspace_path": "/workspace/work/harbichess/release/joint-packed-supplement-20261004/HarbiChess-UFUK-joint-packed-20261004.tar.gz",
+    "bytes": 32521832,
+    "sha256": "928ce1aa6215fcd69ef98d093584a19e340b625e12f070046f3ff5466ed89729",
+    "stream_restored_verified_members": 223
+  },
+  "wall_seconds": 3.4390211169957183,
+  "remote_upload_status": "Authorized Release upload400 Bad Content-Length remains blocked; local restoration verification is not remote backup. /codex output path is OS permission blocked, no direct user-output download claim."
+}
