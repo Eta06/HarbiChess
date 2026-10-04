@@ -7,8 +7,6 @@ import subprocess
 import tarfile
 import threading
 import time
-from pathlib import Path
-
 import a100_release_backup as backup
 
 
@@ -54,10 +52,7 @@ def _make_git_repo(root):
     subprocess.run(["git", "init", "--quiet"], cwd=root, check=True)
     subprocess.run(["git", "config", "user.name", "Scratch Test"], cwd=root, check=True)
     subprocess.run(["git", "config", "user.email", "scratch@example.invalid"], cwd=root, check=True)
-    reg = root / "registration.json"
-    reg.write_text(json.dumps({"schema": "ufuk-method2-formal-registration-v3"}) + "\n")
-    subprocess.run(["git", "add", "registration.json"], cwd=root, check=True)
-    subprocess.run(["git", "commit", "--quiet", "-m", "fixture"], cwd=root, check=True)
+    subprocess.run(["git", "commit", "--quiet", "--allow-empty", "-m", "fixture"], cwd=root, check=True)
     return subprocess.run(
         ["git", "rev-parse", "HEAD"], cwd=root, check=True, capture_output=True, text=True
     ).stdout.strip()
@@ -76,9 +71,19 @@ def test_pack_two_epochs_metadata_prefix_and_sha_names(tmp_path, monkeypatch):
         "protocol": input2 / "protocol.json",
     }
     for name, path in inputs_files.items():
-        path.write_bytes(name.encode())
+        if name != "protocol":
+            path.write_bytes(name.encode())
     repo = tmp_path / "repo"
     source = _make_git_repo(repo)
+    protocol_data = (
+        json.dumps(
+            {"schema": "ufuk-method2-formal-registration-v3", "source_commit": source},
+            sort_keys=True,
+        )
+        + "\n"
+    ).encode()
+    inputs_files["protocol"].write_bytes(protocol_data)
+    monkeypatch.setattr(backup, "EXPECTED_PROTOCOL_SHA256", _hash(inputs_files["protocol"]))
     runs = content / "harbichess-runs"
     run = runs / "fullgame-method2-seed-20261205" / "run"
     (run / "checkpoints").mkdir(parents=True)
@@ -102,7 +107,6 @@ def test_pack_two_epochs_metadata_prefix_and_sha_names(tmp_path, monkeypatch):
     monkeypatch.setattr(backup, "RUNS", runs)
     monkeypatch.setattr(backup, "SOURCE_REPO", repo)
     monkeypatch.setattr(backup, "INPUT_ROOTS", (input1, input2))
-    monkeypatch.setattr(backup, "REGISTRATION_REL", Path("registration.json"))
     monkeypatch.setattr(backup, "OUTPUT_ROOT", runs / "release-packages")
     package_dir = backup.pack_seed(20261205, base_url="https://test123.trycloudflare.com")
     package = json.loads((package_dir / "package.json").read_text())
@@ -157,6 +161,7 @@ def test_pack_two_epochs_metadata_prefix_and_sha_names(tmp_path, monkeypatch):
         names = set(tar.getnames())
         assert "metadata/source.bundle" in names
         assert "metadata/registration/registration.json" in names
+        assert tar.extractfile("metadata/registration/registration.json").read() == protocol_data
         assert "restore-content/harbichess-inputs/book.json" in names
         assert "metadata/restore.txt" in names
         assert not any("logs" in name or ".ssh" in name for name in names)
@@ -171,6 +176,34 @@ def test_pack_two_epochs_metadata_prefix_and_sha_names(tmp_path, monkeypatch):
         assert "run-config-seed-mismatch" in str(exc)
     else:
         raise AssertionError("packager accepted checkpoint from another seed")
+
+
+def test_registration_requires_exact_protocol_digest_and_source(tmp_path, monkeypatch):
+    protocol = tmp_path / "registration.json"
+    source = "1" * 40
+    payload = json.dumps(
+        {"schema": "ufuk-method2-formal-registration-v3", "source_commit": source},
+        sort_keys=True,
+    ).encode()
+    protocol.write_bytes(payload)
+    digest = _hash(protocol)
+    inputs = {"protocol": (protocol, digest)}
+
+    monkeypatch.setattr(backup, "EXPECTED_PROTOCOL_SHA256", "0" * 64)
+    try:
+        backup._load_fixed_registration(inputs, source)
+    except backup.BackupError as exc:
+        assert "native-protocol-not-registered" in str(exc)
+    else:
+        raise AssertionError("accepted unregistered native protocol digest")
+
+    monkeypatch.setattr(backup, "EXPECTED_PROTOCOL_SHA256", digest)
+    try:
+        backup._load_fixed_registration(inputs, "2" * 40)
+    except backup.BackupError as exc:
+        assert "source-commit-mismatch" in str(exc)
+    else:
+        raise AssertionError("accepted protocol pinned to another source commit")
 
 
 def test_readonly_server_serves_only_manifest_sha_files(tmp_path):
