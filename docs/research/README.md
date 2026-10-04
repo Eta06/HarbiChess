@@ -59,8 +59,20 @@ Kalıcı kaynak GitHub'dır. Notlar ve kararlar Git'te, büyük model/replay dos
   5.120 gerçek oyun kökü tam denetlendi; ilk toplama 1.356 trajectory/39.079 etikette
   kök başına renk kontrolü nedeniyle eksik durdu. Hiç yeni training yapılmadı.
 - [Kök başına renk eşlemeli v4 protokolü](../runs/UFUK-broad-history-v4-preregistration-20261004.md):
-  ayrı sabit kaynakta çalışıyor; ilk dört gerçek oyun kontrolü geçti. Eski toplam
-  10.800s mutlak deadline devralındı, bütçe sıfırlanmadı. Coverage/güç sonucu henüz yok.
+  eski toplam10.800s mutlak deadline devralındı, bütçe sıfırlanmadı.
+- [Tamamlanan v4 koleksiyonu](../runs/UFUK-broad-history-v4-collection-result-20261004.md):
+  20.480oyun/586.867etiket/19,135milyar gerçekSFnode; bütün dosya ve satırlar
+  denetlendi,3splitoverlap açık.9019,8s sabit aşama; teacher veri bütünlüğü geçti,
+  henüz yeni model training veya güç sonucu değil. Eski80511byte korumalı merge çalışıyor.
+- [Ortak training kontrolleri](../runs/UFUK-broad-history-controls-20261004.md):
+  aynı eski/yeni heldout panelleri, ayrı policy/value/Q, exact freshprocessAdam/RNG/
+  örnek sırası/seçim resume ve gerçek cachedCLI düzeltmesi. Pinnedf4c10e5suite572pass/0skip.
+- [Bağımsız güç ve hız protokolü](../runs/UFUK-broad-history-strength-preregistration-20261004.md):
+  yeni48source-game/96renkeşlemeli oyun/arm, sabit16sim/max4/SF512, ayarlı belirsizlik/
+  cap/süre/hız kapıları önceden kayıtlı; teacherpretraining self-learning değildir.
+- [Eylül/Ağustos/Mayıs2026 birincil araştırması](UFUK-efficient-selfplay-primary-20261004.md):
+  efficientselfplay/prior-directedRL/PMCTStammetinleri; hedef/throughput artışı güç
+  garantisi değil.8GPU ölçeği burada yok; aktif protokol veya özgünlük iddiası değiştirilmedi.
 - Yerel hash ve tüm üye geri-okuma doğrulaması yapılmış arşiv zinciri:
   [2.149 dosyalık parent](../runs/UFUK-artifact-archive-20261003.json),
   [143 dosyalık width/range/offline ek](../runs/UFUK-artifact-supplement-20261004.json),
@@ -76,7 +88,7 @@ Kalıcı kaynak GitHub'dır. Notlar ve kararlar Git'te, büyük model/replay dos
 - [CodeProjects / HarbiChess](https://chatgpt.com/space/page_bfc28b10daa081919e1650eca18c61c7): 151 tarihsel belge, mimari audit ve katkı kuralları.
 - [Space sayfa eşlemesi](space-index.json).
 - [Araştırma arşivi](https://github.com/Eta06/HarbiChess/releases/tag/research-archive-20261002).
-
+  
 ## 2 Ekim 2026 arşivi
 
 Kaynak snapshot: `3804f197665c131b0d7e0e52de2d18e14ed9c5c2`. Sonraki ARSIV commitleri dokümantasyon ve arşiv indeksidir; eski checkpoint provenance'ını değiştirmez. Bu bir production model sürümü veya promotion değildir. DENGE başarısızlığı korunur.
