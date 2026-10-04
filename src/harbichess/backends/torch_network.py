@@ -21,9 +21,14 @@ from safetensors import safe_open
 from safetensors.torch import load_file, save_file
 from torch import nn
 
+from harbichess.backends.torch_context import PolicyContextBlock
 from harbichess.chess.actions import action_destination_square
 from harbichess.chess.encoding import HISTORY_STEPS, METADATA_PLANES, PIECE_PLANES_PER_STEP
-from harbichess.core.network_config import NetworkConfig, validate_policy_adapter
+from harbichess.core.network_config import (
+    NetworkConfig,
+    validate_policy_adapter,
+    validate_policy_context,
+)
 
 WEIGHT_SCHEMA = 1
 ARCHITECTURES = ("base", "invariant", "decoupled", "plastic", "pairwise")
@@ -50,6 +55,7 @@ class TorchChessNetwork(nn.Module):
         invariant: dict[str, int] | None = None,
         plastic: dict[str, int] | None = None,
         policy_adapter: dict | None = None,
+        policy_context: dict | None = None,
     ) -> None:
         super().__init__()
         if architecture not in ARCHITECTURES:
@@ -57,8 +63,11 @@ class TorchChessNetwork(nn.Module):
         self.config = config or NetworkConfig()
         self.architecture = architecture
         self._policy_adapter = validate_policy_adapter(policy_adapter)
+        self._policy_context = validate_policy_context(policy_context, self.config.trunk_channels)
         if self._policy_adapter is not None and architecture != "pairwise":
             raise ValueError("policy adapter requires pairwise architecture")
+        if self._policy_context is not None and architecture != "pairwise":
+            raise ValueError("policy context requires pairwise architecture")
         self.invariant = invariant or {"channels": 16, "blocks": 2, "hidden": 32}
         self.plastic = plastic or {
             "channels": 16,
@@ -111,6 +120,13 @@ class TorchChessNetwork(nn.Module):
             if c.policy_size != 4672:
                 raise ValueError("pairwise policy requires canonical 4672-action schema")
             del self.policy_conv, self.policy_linear
+            if self._policy_context is not None:
+                self.policy_context_blocks = nn.ModuleList(
+                    [
+                        PolicyContextBlock(c.trunk_channels, self._policy_context["heads"])
+                        for _ in range(self._policy_context["blocks"])
+                    ]
+                )
             if self._policy_adapter is not None:
                 self.policy_adapter_blocks = nn.ModuleList(
                     [ResidualBlock(c.trunk_channels) for _ in range(self._policy_adapter["blocks"])]
@@ -152,6 +168,8 @@ class TorchChessNetwork(nn.Module):
         }
         if self._policy_adapter is not None:
             specification["policy_adapter"] = dict(self._policy_adapter)
+        if self._policy_context is not None:
+            specification["policy_context"] = dict(self._policy_context)
         return specification
 
     @classmethod
@@ -160,6 +178,7 @@ class TorchChessNetwork(nn.Module):
             NetworkConfig(**specification["config"]),
             **{k: specification[k] for k in ("architecture", "invariant", "plastic")},
             policy_adapter=specification.get("policy_adapter"),
+            policy_context=specification.get("policy_context"),
         )
 
     @staticmethod
@@ -219,6 +238,8 @@ class TorchChessNetwork(nn.Module):
             trunk = block(trunk)
         size = inputs.shape[0]
         squares = trunk.permute(0, 2, 3, 1).reshape(size, 64, -1)
+        for block in getattr(self, "policy_context_blocks", ()):
+            squares = block(squares)
         pieces = inputs[:, :, :, :12].reshape(size, 64, 12)
         global_features = self._invariants(inputs)
         normalized = torch.cat((global_features[:, :12] / 8, global_features[:, 12:]), 1)
