@@ -1,0 +1,26 @@
+{
+  "repo": "/workspace/work/harbichess/search-acting-source-4515a7c",
+  "python": "/workspace/HarbiChess/.venv/bin/python",
+  "helper": "/workspace/HarbiChess/experiments/ufuk/search-acting-method5/own5_parity.py",
+  "probes": "/workspace/HarbiChess/docs/research/UFUK-width-latency-probes-20261004.json",
+  "qualification_config": "/workspace/HarbiChess/experiments/ufuk/search-acting-method5/frozen/strength-bindings.json",
+  "qualification_config_sha256": "5fa34fdc69a49b78fecae17ee9ade86da994c548bbda81473d86c454c6cc733a",
+  "root": "/workspace/work/harbichess/own45-mlx-transport/method5-bridge-owned",
+  "mirror": "/workspace/HarbiChess/artifacts/ufuk-a100-mirror-20261004",
+  "expected_runs": {
+    "20261525": "/content/harbichess-runs/search-acting-method5-seed-20261525/run",
+    "20261526": "/content/harbichess-runs/search-acting-method5-seed-20261526/run"
+  },
+  "remote_manifest": "/content/harbichess-fullgame-method2-inputs/method5-portable-model-manifest.json",
+  "remote_receipt": "/content/harbichess-fullgame-method2-inputs/method5-final-mlx-cpu-parity.json",
+  "owner_transport_argv": [
+    "/workspace/HarbiChess/.venv/bin/python",
+    "/workspace/HarbiChess/experiments/ufuk/own45-cohort/owner_mlx_transport.py",
+    "--audit-root",
+    "/workspace/work/harbichess/own45-mlx-transport/method5-transport-receipts",
+    "--ssh-helper-sha256",
+    "ccc3b1bf660abf9d6f08d6a0dfbe11563f9f5cad6494c3d62d7346a8f513a89e"
+  ],
+  "owner_transport_script": "/workspace/HarbiChess/experiments/ufuk/own45-cohort/owner_mlx_transport.py",
+  "owner_transport_script_sha256": "9ed377cd9deada198750f5623a09a52fdedf2edccdec4702a60ec9e1ce3ff11b"
+}
