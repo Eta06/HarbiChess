@@ -220,3 +220,35 @@ def test_prepared_native_soft_targets_real_mlx_loss_gradient_and_update(tmp_path
     optimizer.update(model, gradients)
     mx.eval(model.parameters(), optimizer.state)
     assert not np.array_equal(before, np.array(model.stem.weight))
+
+
+def test_prepared_cli_uses_cache_in_actual_training_checkpoint(tmp_path):
+    source, cache = tmp_path / "source", tmp_path / "cache"
+    make_dataset(source)
+    prepare(cache, source=source)
+    weights = tmp_path / "weights.safetensors"
+    save_weights(
+        weights,
+        TorchChessNetwork(
+            NetworkConfig(trunk_channels=2, residual_blocks=1, value_hidden=2),
+            architecture="pairwise",
+            invariant={"channels": 2, "blocks": 1, "hidden": 2},
+        ),
+    )
+    directory = tmp_path / "cli"
+    subprocess.run(
+        [
+            sys.executable, "-m", "harbichess.training.oracle_train", str(directory),
+            "--dataset", str(source), "--weights", str(weights),
+            "--prepared-cache", str(cache), "--max-steps", "1", "--interval", "1",
+        ],
+        check=True,
+        capture_output=True,
+        text=True,
+    )
+    manifest = json.loads((directory / "checkpoints/step-000001/checkpoint.json").read_text())
+    assert manifest["run_config"]["prepared_oracle"]["manifest_sha256"] == digest(
+        cache / "prepared.json"
+    )
+    assert sum(name.endswith(".npy") for name in manifest["replay"]) == 12
+    assert manifest["step"] == 1 and manifest["transfer"] == "full-training"
