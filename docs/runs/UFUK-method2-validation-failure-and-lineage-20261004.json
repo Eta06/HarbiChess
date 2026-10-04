@@ -104,15 +104,16 @@
   ],
   "baseline_failure": {
     "seed": 20261205,
-    "reason": "15GiB host cgroup memory guard exhausted77.75s after launch",
+    "reason": "Generic whole/resource guard failed at77.75s; no actual violation snapshot was logged. Original3600deadline still had3522s; failed child preserved.",
     "process_returncode": -15,
     "partial_progress_rows": 3836,
     "original_result_sha256": "bd5e24968b1df85480fed02016f22c61742625cb92c2a5278bf61f46786f458f",
     "outcomes_inspected_for_tuning": false,
-    "preserved": true
+    "preserved": true,
+    "exact_guard_condition": "Not directly observed. Transient total memory is plausible from14.65GB filecache plus Torch processes;20:28readback is post-exit and below15GiB threshold. No claim that off-peak sample proves the failing condition."
   },
   "baseline_20261206": "Completed immutable96games; outcome scores withheld; this completion cannot rescue original incomplete confirmation.",
-  "host_memory_diagnosis": "At20:28UTC cgroup memory.current15.5GB, memory.statfile14.65GB/anon101.9MB; cached old files counted toward conservative15GiB total-memory guard, not neural tensor memory alone.",
+  "host_memory_diagnosis": "At20:28UTC AFTER baseline process exit: memory.current15504924672B (14.44GiB), memory.statfile14651334656B/anon101863424B; disk13791662080Bfree (>8GiB). These off-peak observations cannot identify the exact failed OR-guard branch. New prospective remote baseline records guard metric/bytes/disk/time before termination.",
   "next_confirmation": "Separate prospective ledger3; fresh disjoint48+48source-root books; BOTH original fixedCURRENT40 candidates only; same original training18000/audit21000 deadlines and native inputs; versioned audit/evaluator sidecars. No original-method2-compliant PASS or checkpoint selection. New games only after new controls frozen.",
   "strength_gate_passed": false
 }
