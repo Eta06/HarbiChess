@@ -1,0 +1,43 @@
+{
+  "MAX_families": 8,
+  "arm_wall_seconds": 3600,
+  "books_sha256": {
+    "20261425": "3fcb0d8e7542f93a093de4387a0cb15eb2862dcfc72291cab22832c4847e16ca",
+    "20261426": "39f073aa0f8a79431550b3295ab292518a8f0229c16910c474166340af5b3cff"
+  },
+  "fixed_epochs": 24,
+  "games_per_arm": 96,
+  "helper_sha256": {
+    "own45_cohort.py": "57473769d392ad820938edacba8ce113129145c3e510c68d18b23868ad5641b8",
+    "ownv1_all_gates.py": "5a5eac3c3552771566d14c6cb8cfdc49e1fdb6d1a8a79ae15fec117d1df0bbb0",
+    "ownv1_audit_controller.py": "58a0422ab13865c939e8d888f46eacd09554d2a8fc0565d495ad70a755efe5bc",
+    "ownv1_audit_support.py": "d147370fbc73f1dedca3ca93d2c1b60dede9adc667f5b14fa3013981fba874a2",
+    "ownv1_baseline.py": "753af419289206326e23a4f24e77f9514dd3ef812a6edcd06fe2c2ffdb224a7f",
+    "ownv1_eligibility.py": "0f581f2ef7e8e25c54c71b977d0e5ee380b9bfdf19f3fec47998c6e86566c660",
+    "ownv1_final_arms.py": "98b3067bd13de7856338f8c88ea67bdfab5ea18023a8e94485456d1b72c44824",
+    "ownv1_formal_config_factory.py": "30c9c19aceb120d07566057b53c50f239d22c816c8002e58e6830e93c96bb761",
+    "ownv1_fresh_cli_replay.py": "11a8453f37f5b7b3d73cf0fcc3a1c2eaca67b5e2c9cd08bfde323fa373b1009b",
+    "ownv1_full_audit.py": "e0ae056937a39faf04c05958725c80240c9fabdfcfdebe10dedc4221aa5bf2a7",
+    "ownv1_latency.py": "c7e3c7655b9c8493040f5776ac181b19e6699274394179565b90d24e37606a44",
+    "ownv1_mlx_receipt_bridge.py": "5e62559389488c2616df04c1265e56a8b7f407489bffea6752ecb4762a74a089",
+    "ownv1_owner_config_factory.py": "73a836904ec44e4e5eb12fcf86ac6502dc2c48a96f34a1557cefe9f810094ad3",
+    "ownv1_parity.py": "41a776ad8dec7777e33c54750f63b685f3436511695d2ee0a33a17388d8a0f78",
+    "ownv1_posttraining.py": "1a1b421e77183c12011e53a3689896b0bced4bca811c141137ad5e118522e7d4",
+    "ownv1_qualify_e1.py": "9dd2c55bb84374a3221b43b35448ca916b0161a5a9281b09ba8e05a2bc11bb6a",
+    "ownv1_qualify_e1_controller.py": "5e8b5ea95f6b4f745a325401917690d467726be68e62e9dda9a3c96284912fc8",
+    "ownv1_strength_analysis.py": "314cc44ac17b21fe81e4154093aa06d7c314f447ea972d6f1044e62a03d822ac",
+    "ownv1_strength_config.py": "a6c87c58c1212de798dad9bf8035b22439ef79aba3ea180c98774ba1583e1018",
+    "ownv1_strength_runtime.py": "e792934560db88784114a7638b00d6938086deabaed59e747cf6a17decaf6d78",
+    "ownv1_training_controller.py": "c4b57a2942259cc5cf472ef84f368b4f5607d4ec48edd0fa1be589bdf3eb3b95"
+  },
+  "native_schema": "torch-ownsearch-native-cuda-v1",
+  "qualification_ledger_slot": 4,
+  "runtime_scope": "same-A100-CPU-one-thread-Torch2.11-all-six-arms",
+  "schema": "ufuk-ownv1-strength-bindings-v1",
+  "seeds": [
+    20261425,
+    20261426
+  ],
+  "source_commit": "a278bba67bce962cb9294f0d24040e02e9acf1f4",
+  "status": "frozen-before-formal-execution"
+}
