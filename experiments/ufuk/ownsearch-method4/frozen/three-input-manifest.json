@@ -1,0 +1,32 @@
+{
+  "seeds": {
+    "20261425": {
+      "book": {
+        "path": "/content/harbichess-inputs/book.json",
+        "sha256": "f2f3038728cce4c56987c9068f900d30ed99f996f99e03a38c41bbbc1f3c9958"
+      },
+      "experiment_config": {
+        "path": "/content/harbichess-fullgame-method2-inputs/own45-formal-deadline-v2-20261004/method4/frozen/config-20261425.json",
+        "sha256": "f432be6740adfb44e65f7758a7a8fae428312aa6255bfe5dbe22da031a5eeff9"
+      },
+      "initial_weights": {
+        "path": "/content/harbichess-inputs/initial-e8.safetensors",
+        "sha256": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03"
+      }
+    },
+    "20261426": {
+      "book": {
+        "path": "/content/harbichess-inputs/book.json",
+        "sha256": "f2f3038728cce4c56987c9068f900d30ed99f996f99e03a38c41bbbc1f3c9958"
+      },
+      "experiment_config": {
+        "path": "/content/harbichess-fullgame-method2-inputs/own45-formal-deadline-v2-20261004/method4/frozen/config-20261426.json",
+        "sha256": "41033105a13a08cfd1282654db2b56f60e82255f8ef306ec82d5010966ddee0a"
+      },
+      "initial_weights": {
+        "path": "/content/harbichess-inputs/initial-e8.safetensors",
+        "sha256": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03"
+      }
+    }
+  }
+}
