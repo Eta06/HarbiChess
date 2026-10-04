@@ -97,6 +97,18 @@ def stop(process):
             process.wait(timeout=10)
 
 
+def validate_training_clock(registration, first, deadline, now):
+    earliest = registration["earliest_training_epoch"]
+    assert type(earliest) in (int, float)
+    assert earliest <= first <= now
+    assert deadline == first + registration["whole_training_seconds_per_seed"]
+    assert now < deadline < END
+    assert (
+        first + registration["whole_audit_seconds_from_originalfirstclock"]
+        + registration["posttraining_reserve_seconds"] < END
+    )
+
+
 def main():
     parser = argparse.ArgumentParser()
     for name in ("repo", "python", "registration", "input-manifest", "root"):
@@ -122,7 +134,7 @@ def main():
     assert type(epochs) is int and epochs >= 8
     deadline = args.deadline_epoch
     assert deadline == args.started_epoch + reg["whole_training_seconds_per_seed"]
-    assert args.started_epoch <= time.time() < deadline < END
+    validate_training_clock(reg, args.started_epoch, deadline, time.time())
     validate_mc_barrier(reg["mc_completion_barrier"], args.started_epoch)
     source = reg["source_commit"]
     assert (
