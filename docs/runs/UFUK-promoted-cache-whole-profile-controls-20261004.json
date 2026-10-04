@@ -1,0 +1,38 @@
+{
+  "schema": "UFUK-promoted-cache-tiny-and-whole-profile-controls-v2",
+  "registered_epoch": 1791144683.7488656,
+  "source_commit": "76f4890dea90bdd84ed0f4874aa4c5ad2c4c814f",
+  "controller_sha256": "e40cdcf1e2862377e02d7f615e5985c3fd0c31f7553ec26f96a7112f4cec8c23",
+  "tiny_helper_sha256": "a415fe0059d20cd4336fcde6b87b4b6b01e29293e31ca28d6073a42eda127a86",
+  "baseline_actual_CUDA_qualification_sha256": "6c0d65bfb3c647c8dab7688c887723299667413c307383cc7e56c2d125f22f0a",
+  "original_development_reconciliation_sha256": "bb0346f0301927ca0b366e92f6b665e56424bc86e2d71485f6129007e65d6229",
+  "stage_budgets": {
+    "overall_whole_seconds_max": 1080,
+    "tiny_whole_seconds_max": 180,
+    "single_fullshape_epoch_and_independent_strictload_whole_seconds_max": 900
+  },
+  "memory_max_bytes": 68719476736,
+  "disk_min_free_bytes": 8589934592,
+  "inputs": {
+    "initial_e8_sha256": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03",
+    "tiny_book_sha256": "3e8e380db5b85258131e97b44d79bae4c90e9d3128649f49e31c4105ec4ea90d",
+    "profile_book_sha256": "f2f3038728cce4c56987c9068f900d30ed99f996f99e03a38c41bbbc1f3c9958",
+    "tiny_config_sha256": "5a67dfbededb6f568f30976b4d37f23cda2b98e804f80c8af753b52cf42d468b",
+    "tiny_protocol_sha256": "b6bf8e5cd350380d36db46317f0058b0442048b2222ef6d9f3f9362dd18edb30",
+    "profile_config_sha256": "e27886c70645cf1cdfb3a43fb052075bd7d8c69b4b0d7194d483de44ebcab92f",
+    "profile_protocol_sha256": "7da552cc826a92f0b9203843f4001af01c60b0148d23b280e584d274c6739445"
+  },
+  "profile_fixed_budget": {
+    "epochs": 1,
+    "actors": 128,
+    "steps": 256,
+    "new_transitions": 32768,
+    "passes": 4,
+    "minibatch": 1024,
+    "original_seed": 20261202
+  },
+  "required": "Tiny whole2/pause1/freshresume2 plus independent final native loads. Profile actual CLI separate from fresh strictnative1 and oldnew serialized journal/actor/Adam/RNG exact; source-tag headers exempted only from file byte comparison, actual three models all tensor storage bits exact. All old artifacts and immutable inputs rehashed before/after.",
+  "performance_claim": "Whole CLI/external total measured under recorded concurrent original method1 workloads; core5.2x not assumed whole5.2x. Profile model never strengthcandidate.",
+  "prior_unexecuted_controller": "b599509241cf577d6f0399d6cc8c43bc5d205fe4133beb2ab2b837389863e9fd rootreview caught shared-book error before GPU execution; preserved in scratch as prior-invalid-unexecuted. This v2 requires separate books.",
+  "failure_policy": "Retain original logs/statuses and no new epochs/retry/deadline extension. Training completion alone never strength."
+}
