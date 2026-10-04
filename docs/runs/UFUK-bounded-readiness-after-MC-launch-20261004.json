@@ -1,0 +1,11 @@
+{
+  "status": "waiting-only-original-MC-latency-before-two-separate-bounded-readiness-jobs",
+  "pid": 69412,
+  "owned_process_group": 69412,
+  "root": "/content/harbichess-runs/continuation-readiness-after-MC-20261004",
+  "spec_sha256": "9b29fb792c91dfd68c2f5b92d727fa79c65be31a77502476b920a1260a0fc911",
+  "supervisor_sha256": "49f5d77399ce01c6688fc80e270bbb6c21c7a91997bb5f0b7c4fb7c053f16e58",
+  "started_epoch": 1791154230.2215524,
+  "long_training_or_profile_started": false,
+  "MC_native_and_training_and_audit_clocks_unchanged": true
+}
