@@ -60,6 +60,7 @@ def run(
     max_train_rows: int | None = None,
     max_validation_rows: int | None = None,
     qualification_kind: str = "both-heads",
+    prepared_cache: Path | None = None,
 ) -> dict:
     if min(max_steps, interval, patience, batch_size, wall_seconds) <= 0:
         raise ValueError("training budgets must be positive")
@@ -69,9 +70,17 @@ def run(
     torch.use_deterministic_algorithms(True)
     started = time.perf_counter()
     source = subprocess.check_output(["git", "rev-parse", "HEAD"], text=True).strip()
-    training, validation, panel_info = load_panels(
-        dataset, max_train_rows=max_train_rows, max_validation_rows=max_validation_rows, seed=seed
-    )
+    panel_arguments = {
+        "max_train_rows": max_train_rows, "max_validation_rows": max_validation_rows, "seed": seed
+    }
+    if prepared_cache is None:
+        training, validation, panel_info = load_panels(dataset, **panel_arguments)
+    else:
+        from harbichess.training.prepared_oracle_torch import load_prepared_panels
+
+        training, validation, panel_info = load_prepared_panels(
+            prepared_cache, dataset, **panel_arguments
+        )
     learner_config = LearnerConfig(learning_rate=learning_rate)
     config = {
         "task": "engine-reference-bootstrap",
@@ -97,6 +106,17 @@ def run(
         config["panel_caps"] = {"train": max_train_rows, "validation": max_validation_rows}
     if qualification_kind != "both-heads":
         config["qualification_kind"] = qualification_kind
+    if prepared_cache is not None:
+        from harbichess.chess import packed_encoding
+        from harbichess.training import prepared_oracle, prepared_oracle_torch
+
+        config["prepared_oracle"] = {
+            "schema": 1, "manifest_sha256": sha256(prepared_cache / "prepared.json"),
+            "code_sha256": {
+                module.__name__: sha256(Path(module.__file__))
+                for module in (packed_encoding, prepared_oracle, prepared_oracle_torch)
+            },
+        }
     if resume:
         learner, manifest, _ = load_checkpoint(resume, expected_run_config=config)
         state = manifest["run_state"]
@@ -136,6 +156,8 @@ def run(
         dataset / "dataset.json",
         dataset / "metadata.json",
     )
+    if prepared_cache is not None:
+        inputs += (prepared_cache / "prepared.json", *sorted(prepared_cache.glob("*.npy")))
 
     def checkpoint() -> None:
         state["cursor"] = learner.step
@@ -245,6 +267,7 @@ def main() -> None:
     parser.add_argument("--seed", type=int, default=20261003)
     parser.add_argument("--max-train-rows", type=int)
     parser.add_argument("--max-validation-rows", type=int)
+    parser.add_argument("--prepared-cache", type=Path)
     parser.add_argument(
         "--qualification-kind",
         choices=("both-heads", "policy-with-frozen-value"),
