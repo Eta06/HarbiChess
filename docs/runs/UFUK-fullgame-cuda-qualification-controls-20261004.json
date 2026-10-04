@@ -1,0 +1,105 @@
+{
+  "schema": "UFUK-fullgame-actual-CUDA-qualification-prereg-v1",
+  "created_epoch": 1791141755.2414584,
+  "scope": "Infrastructure only; no production/strength qualification and fixtures never counted as self-learning evidence",
+  "source_commit": "e36f0fa0c9bedd0d8dbb89a01fe691be1c095f65",
+  "whole_shared_seconds": 180,
+  "max_epochs": 2,
+  "pause_at_epoch": 1,
+  "checkpoint_every_epoch": true,
+  "memory_max_bytes": 68719476736,
+  "disk_min_free_bytes": 8589934592,
+  "fixture": "Two legal nonterminal both-color queen endings; actual unchanged teacher-origin e8 weights; terminal-only own gameplay infrastructure audit",
+  "weights_sha256": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03",
+  "book_sha256": "3e8e380db5b85258131e97b44d79bae4c90e9d3128649f49e31c4105ec4ea90d",
+  "config_sha256": "5a67dfbededb6f568f30976b4d37f23cda2b98e804f80c8af753b52cf42d468b",
+  "config": {
+    "seed": 20261201,
+    "actors": {
+      "games": 8,
+      "max_additional_plies": 4,
+      "claim_draw": false,
+      "temperature": 1.0
+    },
+    "objective": {
+      "policy_clip": 0.2,
+      "behavior_kl_stop": 0.02,
+      "policy_anchor_weight": 0.03,
+      "value_weight": 0.2,
+      "value_anchor_weight": 0.02
+    },
+    "schedule": {
+      "minibatch_size": 32,
+      "passes": 2,
+      "max_gradient_norm": 5.0
+    },
+    "epoch_steps": 4,
+    "learning_rate": 0.0001,
+    "weight_decay": 0.0001,
+    "device": "cuda:0"
+  },
+  "book": {
+    "schema": 1,
+    "splits": {
+      "train": [
+        {
+          "source_game": "infra-white",
+          "root_ply": 0,
+          "opening": {
+            "root_fen": "7k/5Q2/6K1/8/8/8/8/8 w - - 0 1",
+            "moves": []
+          }
+        },
+        {
+          "source_game": "infra-black",
+          "root_ply": 0,
+          "opening": {
+            "root_fen": "8/8/8/8/8/6k1/5q2/7K b - - 0 1",
+            "moves": []
+          }
+        }
+      ]
+    }
+  },
+  "qualifier_sha256": "b6c627e7543c3035b84ffa4d8da99e7d11a3dd8579ac9eec9171a9565a0297c2",
+  "passing_requirements": [
+    "actualCUDA no skipped GPU case",
+    "whole2 versus pause1/freshresume2 bitexact two canonical journals + six fullnative files",
+    "accepted terminal optimizer updates >0",
+    "both finals independent thirdprocess strictnative loads all current/base/behavior/Adam/allCPU+CUDA/Python/NP/actor/sampler state",
+    "all input SHAs unchanged; totalduration180 includingimports/nativeaudits",
+    "no implicit reset/oldschema masquerading as fullresume"
+  ],
+  "cpu_preverification": {
+    "root": "16passed,1explicitactualCUDAuntested11.35s;RuffPASS",
+    "agent_final": {
+      "actualCUDA_executed": false,
+      "cleanCLI_executed": false,
+      "core_files_observed": {
+        "src/harbichess/selfplay/online_actor.py": "b544082b72b9771f87a4bf09f5f8c1613887dcbbf8ae76531a4efd12532f0017",
+        "src/harbichess/selfplay/online_epoch.py": "748052d73cf01dc560dc7432514b54cc63b194f59d366dd66b8df6f6acc6d162",
+        "src/harbichess/training/fullgame_own_targets.py": "4592305598a13b89e1cae3b13e66ca08159e4ede139265cbc214b828143049dd",
+        "src/harbichess/training/torch_fullgame_ppo.py": "5e377dde7e5b6846e5e4cfc00cf97debfa752a4f02415b9ba9da627ec8d2c5b9",
+        "tests/test_fullgame_own_epoch.py": "81bf2507eaf049a07b03b35e4a0df548d9f17a4cc9900c318ab76647f4139883"
+      },
+      "cpu_tests": "....s............                                                        [100%]\n16 passed, 1 skipped in 11.30s",
+      "limited_review_fixes": "actual epoch-initial sampler provenance; frozen material exact storage bytes incl signedzero; save+strictload corruption tests",
+      "owned_files": {
+        "src/harbichess/training/torch_fullgame_checkpoint.py": "399f3fb533bc81a410d6887263f02bd9a3afea5d5628d23416ddcfabd42b1aee",
+        "src/harbichess/training/torch_fullgame_learner.py": "b38d93e9b5b19801f3ba13ec7ac33f0e7736691a2ad287937f46abc0a377d6b0",
+        "src/harbichess/training/torch_fullgame_run.py": "2ef67ad43df89e1c55924dce60e1a260933c74b066af9b6be8ce30a9a4f7a23c",
+        "tests/test_fullgame_native.py": "00e158c88fab8f5838f6c7c74dc888354f096f7d6760a75c387637c97fcd4031"
+      },
+      "qualifier_sha256": "b6c627e7543c3035b84ffa4d8da99e7d11a3dd8579ac9eec9171a9565a0297c2",
+      "ruff": "All checks passed!",
+      "schema": "fullgame-scratch-CPU-qualification-v1",
+      "source_pin_status": "scratch integration uncommitted; clean CLI unavailable pending parent review/promotion"
+    },
+    "independent_reviewer": "# Full-game native integration independent review\n\nVerdict: suitable to advance to actual e8 CUDA infrastructure qualification after the minor provenance/bit-check fixes below. This is not production selection, CUDA qualification, or strength evidence. Main primary cache/journal experiment is unchanged.\n\nThe earlier blocking defects are corrected: immutable base WDL is carried independently, T=1 and fresh opening roots are required, zero-action freshly reset games are retained without a false truncation counter, and native state has independent epoch/actor/optimizer attempted/accepted/rejected counters. Terminal mover WDL alternates correctly; natural draws receive draw WDL, and caps/tails remain unknown and excluded. Clipped action ratios and game-uniform/position-uniform sampling remain explicit surrogate objectives with completion-selection/inverse-length weighting limitations.\n\nThe model used for collection is a separate eval/no-gradient behavior snapshot copied once per epoch. Base is immutable and hashed. Whole-buffer KL is game-balanced and evaluated after each pass; a rejected pass restores model, Adam, Python/NumPy/TorchCPU/allCUDA and sampler RNG, then stops. Rejected update costs remain in attempted/rejected counters. Interrupted phases leave closed=False and cannot publish native state.\n\nClosed native snapshots contain current/base/behavior, Adam, global/actor/seed-sampler RNG, last sampler RNG, full actor cursor, independent counters, source/input/runtime pins, chain, and last frozen epoch archive. Buffers are explicitly closed-empty; subsequent epoch sampling draws a fresh seed from preserved seed RNG. Loader checks model portable/native digests, full last-epoch legality/targets, actor and behavior match, archived chain, and restores all RNG after observational model loading. No midpass resume is claimed. Runner requires clean pinned checkout/import origins, immutable source/config/inputs/resources and original absolute deadline across pause/resume. Guards run at inference/minibatch/KL chunks and before/after publication; a supervising owned-process whole deadline remains necessary to interrupt long initialization/serialization operations.\n\nMinor fixes communicated directly:\n\n- `sampler_rng_state_before_epoch` currently returns the variable captured before each pass; with multiple passes it records the last attempted pass's starting state. Capture an independent epoch-start state once. This does not change current replay dynamics but is incorrect provenance.\n- Frozen inherited material validation uses numerical torch.equal. Replace with byte-view equality for promised all21 storage-bit invariant, including signed zero. Base digest is already exact bytes.\n\nIndependent bounded CPU evidence: first invocation from /workspace produced 13 PASS, one explicit actualCUDA SKIP, and one sourceguard test failure because its required Git-checkout working directory was absent. Reran only that test from the pinned checkout: 1 PASS. Combined: all14 tests pass under required cwd; one actualCUDA case remains unexecuted. CPU exact freshprocess whole2 versus pause1/resume2 journals and six native files pass. No GPU or additional experiment was run by reviewer.\n\nThe prepared CUDA qualifier correctly runs clean CLI whole2 and pause1/fresh-resume2 with one shared <=180s deadline, requires positive accepted terminal updates, compares journals and six native payload bytes, and strictly loads both final native containers in a further process. Input SHA and CUDA schema are checked; root must inject actual e8 weights/frozen config and keep parent whole deadline and failure receipts. It is infrastructure evidence only; retain explicit duplicate presentation/update costs. Promotion to production still requires actual CUDA success, frozen protocol/config/resources/final-selection and qualification ledger assignment before execution. No heldout outcome was observed in this review.\n"
+  },
+  "limitations": [
+    "CPU acceptance does not prove actualCUDA/AppleMetal or strength",
+    "PPO is a clipped perdecision surrogate, not unbiased fulltrajectory IS",
+    "completed-only and game-balanced selection change targetdistribution; unknowncaps/tails excluded, not draws"
+  ]
+}
