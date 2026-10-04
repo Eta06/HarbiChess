@@ -25,9 +25,7 @@ def fixture():
     }
     return {
         "replicated_strength_pass": True,
-        "seed_results": [
-            dict(copy.deepcopy(row), seed=seed) for seed in (20261205, 20261206)
-        ],
+        "seed_results": [dict(copy.deepcopy(row), seed=seed) for seed in (20261205, 20261206)],
     }
 
 
@@ -38,9 +36,7 @@ class Tests(unittest.TestCase):
     def test_empty_or_missing_replication_never_passes(self):
         for rows in ([], fixture()["seed_results"][:1]):
             with self.assertRaises(AssertionError):
-                m.require_strength_gates(
-                    {"replicated_strength_pass": True, "seed_results": rows}
-                )
+                m.require_strength_gates({"replicated_strength_pass": True, "seed_results": rows})
 
     def test_true_flags_cannot_hide_failed_direct_sf_or_caps(self):
         for field, value in (
