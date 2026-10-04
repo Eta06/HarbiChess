@@ -1,0 +1,166 @@
+{
+  "schema": "ufuk-ownsearch-method4-prospective-DRAFT-v1",
+  "status": "NOT_FROZEN_DO_NOT_EXECUTE",
+  "qualification_ledger_slot": 4,
+  "seeds": [
+    20261425,
+    20261426
+  ],
+  "book_selection_seeds": [
+    20261505,
+    20261506
+  ],
+  "source_commit": "ROOT_ACTUAL_QUALIFIED_OWNV1_SOURCE_PIN_BEFORE_FORMAL",
+  "learner_schema": "torch-fresh-sparse-ownsearch-v1",
+  "native_schema": "torch-ownsearch-native-cuda-v1",
+  "fixed_epochs": "UNFROZEN_PROFILE_WALL_ONLY_ROOT_DECISION",
+  "whole_training_seconds_per_seed": "UNFROZEN_PROFILE_AND06LEASE_BASIS",
+  "whole_audit_seconds_from_originalfirstclock": "UNFROZEN_PROSPECTIVE_ALLDATA_COST",
+  "controller_sha256": "ROOT_FINAL_CONTROLLER_SHA",
+  "three_input_manifest_sha256": "ROOT_FINAL_INPUT_MANIFEST_SHA",
+  "configs": {
+    "20261425": {
+      "actors": {
+        "claim_draw": true,
+        "games": 128,
+        "max_additional_plies": 256,
+        "temperature": 1.0
+      },
+      "device": "cuda:0",
+      "epoch_steps": 256,
+      "learning_rate": 2.5e-05,
+      "objective": {
+        "behavior_kl_stop": 0.02,
+        "policy_anchor_weight": 0.03,
+        "policy_weight": 1.0,
+        "value_anchor_weight": 0.02,
+        "value_weight": 0.2
+      },
+      "schedule": {
+        "max_gradient_norm": 5.0,
+        "minibatch_size": 1024,
+        "passes": 4
+      },
+      "search": {
+        "block_plies": 8,
+        "gumbel_scale": 0.0,
+        "max_considered_actions": 4,
+        "maxvisit_init": 50.0,
+        "simulations": 16,
+        "value_scale": 0.1
+      },
+      "seed": 20261425,
+      "weight_decay": 0.0001
+    },
+    "20261426": {
+      "actors": {
+        "claim_draw": true,
+        "games": 128,
+        "max_additional_plies": 256,
+        "temperature": 1.0
+      },
+      "device": "cuda:0",
+      "epoch_steps": 256,
+      "learning_rate": 2.5e-05,
+      "objective": {
+        "behavior_kl_stop": 0.02,
+        "policy_anchor_weight": 0.03,
+        "policy_weight": 1.0,
+        "value_anchor_weight": 0.02,
+        "value_weight": 0.2
+      },
+      "schedule": {
+        "max_gradient_norm": 5.0,
+        "minibatch_size": 1024,
+        "passes": 4
+      },
+      "search": {
+        "block_plies": 8,
+        "gumbel_scale": 0.0,
+        "max_considered_actions": 4,
+        "maxvisit_init": 50.0,
+        "simulations": 16,
+        "value_scale": 0.1
+      },
+      "seed": 20261426,
+      "weight_decay": 0.0001
+    }
+  },
+  "infrastructure_profile_pass": false,
+  "selection": "BOTHfixedCURRENT_E only; no MCschema relabel/checkpoint/seed/budget/outcome-dependentselection",
+  "no_external_teacher_or_engine_training_labels": true,
+  "ownsearch_scope": "RawT1 actor experience remains unchanged; one exogenous random offset/8ply block, own frozenmodel16simulation/max4alllegal improved-policy CE; terminal WDL only completedgames, caps/tails unknownexcluded; this is self-search distillation plus terminalcritic, not unbiased PPO/fulltrajectorypolicygradient. Same frozenbehavior/baseKLrollback and complete schedule/search/sampler/global RNG recovery.",
+  "strength": {
+    "books": "NEW virgin48+48 selection20261505/06; map to training20261425/26; all historical/training/teacher/formal2/confirmation3 source/root/fullprefix exclusions and firstnewbook excluded from second",
+    "arms_per_seed": [
+      "fixedCURRENT_E vs e8",
+      "fixedCURRENT_E vs SF512",
+      "e8 vs SF512"
+    ],
+    "games_per_arm": 96,
+    "total_games": 576,
+    "neural_simulations": 16,
+    "root_actions": 4,
+    "batch_and_latency_settings": "same frozen max4 root actions/batching/search for both neural arms; CPU float32 one thread; exact unchanged latency probe",
+    "total_history_ply_cap": 400,
+    "stockfish_nodes": 512,
+    "stockfish_threads": 1,
+    "stockfish_hash_mib": 16,
+    "stockfish_sha256": "0f83d24cc46d2c66c60f16001af5444873bc112b7d028594513426894c12da19",
+    "arm_whole_seconds": 3600,
+    "per_seed_required": {
+      "direct_point_score_strict_gt": 0.6,
+      "direct_adjusted_lower_strict_gt": 0.5,
+      "paired_final_minus_initial_SF_point_gain_strict_gt": 0.1,
+      "paired_SF_gain_adjusted_lower_strict_gt": 0,
+      "final_absolute_SF_score_at_least": 0.25,
+      "caps_every_arm_at_most": 0.05,
+      "adversarial_cap_lower_gates": "same direct>.5 and SF delta>0 with final caps losses/reference caps wins",
+      "median_latency_final_over_initial_at_most": 1.1
+    },
+    "uncertainty": "50000 paired source-root-block bootstrap resamples preserving both colours and shared SF-arm matching; fixed NumPy PCG64 seed20261107+trainingseed; linear98.75% two-sided quantiles .00625/.99375 for4primary comparisons. All4 inferential bounds and bothseeds required. MAX8 prospectively preregistered method families => IUT/unionbound nominalglobalalpha<=.05 assuming bootstrap marginal coverage, not an exact guarantee. No optional stopping, changed books or postoutcome threshold relaxation.",
+    "claim_scope": "Replicated gains on these disjoint frozen source-root suites at fixed search budget only; no general Elo/Stockfish-level claim",
+    "frozen_books": {
+      "20261425": "3fcb0d8e7542f93a093de4387a0cb15eb2862dcfc72291cab22832c4847e16ca",
+      "20261426": "39f073aa0f8a79431550b3295ab292518a8f0229c16910c474166340af5b3cff"
+    },
+    "runtime": "ALL6arms SAMEactualA100CPU/Torch2.11+cu130, one thread FP32, SAMEactualqualifiedOWNv1 producer source pin (not original MC231); verified SF512 binary unchanged",
+    "resources": {
+      "memory_max_bytes": 68719476736,
+      "disk_min_free_bytes": 8589934592,
+      "scope": "New prospectiveslot4 A100CPU64GiB/8GiB guard; all6arms3600unchanged. No MCbudget reset or thresholdrelaxation."
+    }
+  },
+  "MAX8_rule": "50000 paired source-root-block bootstrap resamples preserving both colours and shared SF-arm matching; fixed NumPy PCG64 seed20261107+trainingseed; linear98.75% two-sided quantiles .00625/.99375 for4primary comparisons. All4 inferential bounds and bothseeds required. MAX8 prospectively preregistered method families => IUT/unionbound nominalglobalalpha<=.05 assuming bootstrap marginal coverage, not an exact guarantee. No optional stopping, changed books or postoutcome threshold relaxation.",
+  "prior_methods": "OriginalMC/confirmation3 continues independently; no results used to decide params/E/launch method4. Can launch ONLY conditionalthroughputfeasible and before finalMCoutcomes are viewed.",
+  "compute_admission": "Do NOT launch ownsearch training/audits/baselines until original MC both40+all41audits+freshCLI replay+CUDA parity+maskedCPU latency stages complete. Active MC quiescence60 unchanged. Freeze completed process/latency hashes as mc_completion_barrier; no outcomes read. Then actual retained-learning development profile, remaining lease and all fixed pipeline reserve must support E>=8 before06. No hypothetical throughput claim.",
+  "audit_spec": {
+    "all_native": "E+1 exactOWNv1 strictloads; allcurrent/base/behavior/Adam/allPythonNumPyTorchCPUallCUDA plus actor/sampler/schedule/all128search RNG/counters/chains/pendingclosed/21unusedactuale8bytes",
+    "all_data": "32768*E rawactorlegal/fullhistory/moverterminalWDL/unknownexcluded; all own_search exogenousoffset schedule/selectedroots/legal targetnormalization/sourcehistories/visitreceipts/search RNG accounting; exact lastfullarchive",
+    "neural_roots": 108,
+    "selected_epochs": "Freeze SIXdistinct epochs starting1,2 before training; 18 history-only deduplicated roots per epoch covering both movers/ply spread FROM ORIGINAL first+last full wavefront groups. Recompute ENTIRE groups to preserve exact batch composition; prescribed108 subset, actual neural roots/positions larger and counted separately.",
+    "fresh_replay": "ONE600whole freshCLI1->2 perseed same4inputs/originalsource/config; sixpayload bytes+journal2 ledger exact; duplicate65536presentations total counts separate; ownschema fullglobal/schedule/search/sampler state",
+    "budget": "Fixedoneoriginalfirstclock+registeredceiling, includingwaiting; no audit resets/no uncheckedtail/nonoptimizeraudits",
+    "raw_neural_packets": "108 prescribed roots also EXACT behavior/base policy/WDL/T1mu validated with ORIGINAL128actor-step fullbatch inference, bothmodels; extra2*128 peruniquebatch cost explicit, no scalar/subsetclaim"
+  },
+  "blockers": [
+    "QuarterLR training-only duplicate diagnosis retained12/16 attempts; fullshape quarterLR/native/current-source actual CUDA qualification still required",
+    "E/budgets/source/input/helper/book hashes UNFROZEN",
+    "Generic allnative auditor and fresh replay prepared but actual OWNv1 CUDA execution unverified",
+    "Original MC masked latency completion barrier not yet available; do not interfere with immutable60s quiescence",
+    "LocalMLX transport/parity and whole06 feasibility required",
+    "New slot4 adapters/pipeline prepared and10puretestsPASS; actual CUDA/native/replay/parity/latency/arena orchestration UNEXECUTED",
+    "Root reported fresh book provenance audit done; helper/registration/source pins still UNFROZEN"
+  ],
+  "mc_completion_barrier": {
+    "status": "UNFROZEN_REAL_COMPLETION_HASHES_REQUIRED_BEFORE_NEW_LAUNCH",
+    "coordinator_sha256": "b00f2fe341c6886beac9377b3b3b17a7302b1856c1315f0f8480451b8b00581f",
+    "process_receipts": "Freeze exact replay-20261205/replay-20261206/eligibility/cuda-parity/latency-process-result.json paths and SHAs after all five owners finish; all returncode0 before original NEWfirstclock; no score read",
+    "latency_receipt": "Freeze actual same-parent latency.json path and SHA without inspecting ratios"
+  },
+  "training_only_development_evidence": {
+    "original_fullshape_profile": "PASS734.1927whole; CLI487.5405/audit243.9038;4attempted0committed; unchangedmodel not learning",
+    "quarter_LR_diagnosis": "Root-reported before original300s deadline: LR.000025;16attempted12committed4discarded;3acceptedpasses1rejected;changedmodel;0newraw/0newsearch; original4095search+18264terminal;32768duplicate minibatch presentations; no nativecandidate",
+    "decision": "Draft proposes quarterLR from TRAIN-only evidence; actual fullshape native/source qualification, fixed E/budgets/root registration still required"
+  }
+}
