@@ -1,7 +1,6 @@
 import json
 
 import pytest
-
 from ownv1_posttraining import wait_json
 
 
