@@ -92,6 +92,18 @@ def read_game(path: Path) -> dict:
     return data
 
 
+def generation_limit(job: dict, board: chess.Board) -> int:
+    """Legacy default160 is unchanged; versioned short continuations are strict."""
+    max_plies = job.get("max_plies", 160)
+    if "max_plies" in job and (
+        type(max_plies) is not int
+        or not len(board.move_stack) < max_plies <= 512
+        or board.outcome(claim_draw=True) is not None
+    ):
+        raise ValueError("invalid continuation bound or terminal/drawn oracle root")
+    return max_plies
+
+
 def generate_game(job: dict) -> dict:
     torch.set_num_threads(1)
     torch.manual_seed(job["seed"])
@@ -99,6 +111,7 @@ def generate_game(job: dict) -> dict:
     board = chess.Board()
     for move in job["opening"]:
         board.push_uci(move)
+    max_plies = generation_limit(job, board)
     network = load_weights(Path(job["weights"])).eval() if job["actor"] == "neural-engine" else None
     engine = chess.engine.SimpleEngine.popen_uci(job["stockfish"], timeout=15)
     engine.configure({"Threads": 1, "Hash": 16, "UCI_ShowWDL": True})
@@ -145,7 +158,7 @@ def generate_game(job: dict) -> dict:
         ]
 
     try:
-        while len(board.move_stack) < 160 and board.outcome(claim_draw=True) is None:
+        while len(board.move_stack) < max_plies and board.outcome(claim_draw=True) is None:
             ply = len(board.move_stack)
             legal = sorted(board.legal_moves, key=lambda move: move.uci())
             labelled = job.get("label_every_ply", False) or (ply - 8) % 2 == job["game"] % 2
@@ -229,9 +242,14 @@ def generate(
     workers: int = 4,
     seed: int | None = None,
     balanced: bool = False,
+    continuation_plies: int | None = None,
 ) -> dict:
     if games_per_family < 2 or not 1 <= workers <= 4 or (balanced and games_per_family % 4):
         raise ValueError("invalid bounded actor schedule")
+    if continuation_plies is not None and (
+        type(continuation_plies) is not int or not 1 <= continuation_plies <= 64
+    ):
+        raise ValueError("continuation_plies must be a positive bounded integer<=64")
     directory.mkdir(parents=True, exist_ok=True)
     frozen = json.loads(openings.read_text())
     metadata = {
@@ -250,6 +268,12 @@ def generate(
         "games_per_family": games_per_family,
         "collection_plan": "balanced-every-ply-v2" if balanced else "original-parity-v1",
     }
+    if continuation_plies is not None:
+        metadata.update(
+            collection_plan="balanced-true-history-v3" if balanced else "true-history-v3",
+            continuation_plies=continuation_plies,
+            max_plies="opening length plus continuation_plies",
+        )
     manifest = directory / "metadata.json"
     if manifest.exists():
         if json.loads(manifest.read_text()) != metadata:
@@ -283,6 +307,8 @@ def generate(
                     deadline=time.time() + wall_seconds,
                     label_every_ply=balanced,
                 )
+                if continuation_plies is not None:
+                    job["max_plies"] = len(job["opening"]) + continuation_plies
                 if path.exists():
                     previous = read_game(path)
                     if previous["job"] != {k: v for k, v in job.items() if k != "deadline"}:
@@ -421,6 +447,7 @@ def main() -> None:
     parser.add_argument("--workers", type=int, default=4)
     parser.add_argument("--seed", type=int)
     parser.add_argument("--balanced", action="store_true")
+    parser.add_argument("--continuation-plies", type=int)
     args = parser.parse_args()
     print(
         json.dumps(
@@ -434,6 +461,7 @@ def main() -> None:
                 workers=args.workers,
                 seed=args.seed,
                 balanced=args.balanced,
+                continuation_plies=args.continuation_plies,
             )
         ),
         flush=True,
