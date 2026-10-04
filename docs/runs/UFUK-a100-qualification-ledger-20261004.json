@@ -3,8 +3,8 @@
   "registered_before_first_strength_game": true,
   "created_utc": "2026-10-04T18:15:47.238052+00:00",
   "max_new_formal_method_attempts": 8,
-  "fixed_current_method_attempt": 1,
-  "current_method": "anchored-sampled-policy-TD0-on-A100",
+  "fixed_current_method_attempt": 2,
+  "current_method": "own-terminal-completed-game-MC-clipped-PPO-with-immutable-e8-anchors",
   "qualification_rule": "BOTH fixed seeds must pass ALL four lower-bound inferential gates and ALL observed effect/cap/latency/native/parity gates",
   "one_sided_bad_component_alpha_nominal": 0.00625,
   "stage_joint_claim_test": "intersection-union: null ANY required true directscore<=.50 or true pairedSFgain<=0; allcomponent lowerbounds must reject",
@@ -31,7 +31,24 @@
         20261105,
         20261106
       ],
-      "status": "registered-no-strength-games-yet"
+      "status": "incomplete-original-fixed10000-candidates-unavailable",
+      "result": "docs/runs/UFUK-method1-original-budget-final-result-20261004.json",
+      "strength_games": 0,
+      "qualified": false
+    },
+    {
+      "number": 2,
+      "protocol": "docs/runs/UFUK-method2-fullgame-self-learning-preregistration-20261004.json",
+      "protocol_sha256": "d2b8df68f0db92b1712dcfeba70a63d582b721270fb679e093d9f393ce25792c",
+      "source_commit": "2312652dc52a894e9726f48321117cf114270355",
+      "seeds": [
+        20261205,
+        20261206
+      ],
+      "status": "registered-before-production-and-first-strength-game",
+      "candidate": "CURRENTepoch40-only",
+      "strength_gate_unchanged": true,
+      "strength_games_at_registration": 0
     }
   ]
 }
