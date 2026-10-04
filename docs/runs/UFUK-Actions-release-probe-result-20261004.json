@@ -1,0 +1,44 @@
+{
+  "asset": {
+    "anonymous_api_endpoint_readback": {
+      "bytes": 543,
+      "credentials_sent": false,
+      "http_status": 200,
+      "redirect_host": "release-assets.githubusercontent.com",
+      "sha256": "a7b139423f04a18f974bcbfdbf5248800d2624e8680aa85350dfbff29d0f320c",
+      "signed_url_recorded": false
+    },
+    "anonymous_download_url": "https://github.com/Eta06/HarbiChess/releases/download/port-linux-preflight-20261002/UFUK-A100-parent-inventory-transport-proof-20261004.json",
+    "anonymous_readback": {
+      "bytes": 543,
+      "http_status": 200,
+      "sha256": "a7b139423f04a18f974bcbfdbf5248800d2624e8680aa85350dfbff29d0f320c"
+    },
+    "bytes": 543,
+    "github_digest": "sha256:a7b139423f04a18f974bcbfdbf5248800d2624e8680aa85350dfbff29d0f320c",
+    "id": 610791703,
+    "metadata_url": "https://api.github.com/repos/Eta06/HarbiChess/releases/assets/610791703",
+    "name": "UFUK-A100-parent-inventory-transport-proof-20261004.json",
+    "sha256": "a7b139423f04a18f974bcbfdbf5248800d2624e8680aa85350dfbff29d0f320c",
+    "state": "uploaded"
+  },
+  "observed_utc": "2026-10-04T22:11:00Z",
+  "release": {
+    "id": 401698693,
+    "tag": "port-linux-preflight-20261002",
+    "url": "https://github.com/Eta06/HarbiChess/releases/tag/port-linux-preflight-20261002"
+  },
+  "schema": "public-github-actions-release-probe-receipt-v1",
+  "scope": "one 543-byte public manifest only; no checkpoint/replay backup claim",
+  "security": "Run logs were fetched from the public Actions API and inspected in-memory with URL/token redaction; no signed redirect URL, token, or credential was recorded. The independent asset GET was unauthenticated. No additional workflow run/upload was triggered.",
+  "workflow": {
+    "conclusion": "failure",
+    "event": "workflow_dispatch",
+    "failure": "The workflow uploaded the asset, then rejected the GitHub asset API URL because its assertion incorrectly expected the release-scoped path. Actual API URL is /repos/Eta06/HarbiChess/releases/assets/{asset_id}.",
+    "head_branch": "main",
+    "head_sha": "92ea2d02d10bd4e41464a3ed9072da957f5ae99f",
+    "run_id": 37238983828,
+    "run_url": "https://github.com/Eta06/HarbiChess/actions/runs/37238983828",
+    "workflow": "Upload public A100 inventory probe"
+  }
+}
