@@ -1,0 +1,71 @@
+{
+  "status": "versioned-two-audits-and-fresh-two-baselines-launched",
+  "registration_sha256": "36a055c69e03fddcc170e1bb4514c24a72c978f0983d3e04d2169afe0e8cfad6",
+  "producer_source_commit": "2312652dc52a894e9726f48321117cf114270355",
+  "helper_source_commit": "bf9a45b572d0c300f5777aa35d7d1ab0790f0b2e",
+  "original_training_untouched": true,
+  "runtime": {
+    "torch_version": "2.11.0+cu130",
+    "python_version": "3.13.15 (main, Aug  6 2026, 11:06:22) [GCC 13.3.0]",
+    "python_executable": "/usr/bin/python3",
+    "python_executable_sha256": "bac00abc4dfc76da8fd1a09023b9454e4d34f591172af79bbfa7ee43091165d6",
+    "hostname": "045ceeb3ddfe",
+    "boot_id": "b1cf1620-f1c7-4571-832f-989ee44a5aa4",
+    "cpu_affinity": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11
+    ],
+    "cpu": "model name\t: Intel(R) Xeon(R) CPU @ 2.20GHz",
+    "cuda_visible_for_arenas": "disabled; TorchCPU one thread",
+    "producer_source_commit": "2312652dc52a894e9726f48321117cf114270355",
+    "helper_source_commit": "bf9a45b572d0c300f5777aa35d7d1ab0790f0b2e",
+    "registration_sha256": "36a055c69e03fddcc170e1bb4514c24a72c978f0983d3e04d2169afe0e8cfad6",
+    "stockfish_sha256": "0f83d24cc46d2c66c60f16001af5444873bc112b7d028594513426894c12da19"
+  },
+  "processes": [
+    {
+      "seed": 20261205,
+      "role": "read-only-original-clock-all41audit",
+      "pid": 34967,
+      "owned_process_group": 34967,
+      "root": "/content/harbichess-runs/fullgame-confirmation3-audit-seed-20261205"
+    },
+    {
+      "seed": 20261205,
+      "role": "A100CPU-frozen-newbook-e8SFbaseline",
+      "pid": 34968,
+      "owned_process_group": 34968,
+      "root": "/content/harbichess-runs/fullgame-confirmation3-baseline-seed-20261205",
+      "started_epoch": 1791146354.4994328,
+      "absolute_deadline_epoch": 1791149954.4994328
+    },
+    {
+      "seed": 20261206,
+      "role": "read-only-original-clock-all41audit",
+      "pid": 34969,
+      "owned_process_group": 34969,
+      "root": "/content/harbichess-runs/fullgame-confirmation3-audit-seed-20261206"
+    },
+    {
+      "seed": 20261206,
+      "role": "A100CPU-frozen-newbook-e8SFbaseline",
+      "pid": 34970,
+      "owned_process_group": 34970,
+      "root": "/content/harbichess-runs/fullgame-confirmation3-baseline-seed-20261206",
+      "started_epoch": 1791146354.5119767,
+      "absolute_deadline_epoch": 1791149954.5119767
+    }
+  ],
+  "finished_epoch": 1791146354.5183384,
+  "scope": "Actual launched audits/baselines and original fixed training lineage only. No full audit/strength/novelty PASS claim."
+}
