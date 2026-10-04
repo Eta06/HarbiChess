@@ -1,0 +1,23 @@
+{
+  "schema": "ufuk-actual-ownsearch-CUDA-infrastructure-protocol-v1",
+  "status": "prospective-fixed-infrastructure-only",
+  "producer_source_commit": "c93b79b8140b31fe1f4d0ca96adddd857991925b",
+  "scope": "Own-model sparseGumbel policy CE plus completed own-game WDL; fresh raw actorT1. Tiny fixtures and unit rollouts are infrastructure audit cost, no production or strength candidate.",
+  "actual_hardware": "Existing authorized NVIDIA A100-SXM4-40GB, no new allocation.",
+  "source_and_inputs_immutable": true,
+  "units_whole_max_seconds": 180,
+  "cli_whole_max_seconds": 180,
+  "combined_whole_max_seconds": 360,
+  "unit_requirement": "Exactly11passed0skip including actualCUDA freshprocess native replay branch; other unit cases CPU.",
+  "cli_requirement": "Real immutablee8, whole2 vs pause1+newprocessresume2 all2journals+6nativepayloads byteexact inclAdam/global/allCUDA/actor/searchschedule/search/samplerRNG; BOTH final strictload in fresh process; positive search-policy,known terminal-value andUNKNOWNexcluded-value rows.",
+  "tiny_config_sha256": "bb6d28d0627d9e6236318fc3f1839b59eddeb54316ea77a90f50d838dfddc007",
+  "tiny_book_sha256": "9340b54b6ac01ead55b9b790ddaa13e951e278a66f59c9009efae2d26ba68b6e",
+  "test_sha256": "2261bb9ca9a9bf3980bcdf429884dd317ac9af4e0ab7d117e5875f5164b03e21",
+  "helper_sha256": "45e5cc935c2266ea7b5557712447222d1f56043088ce1f205d2e2ab19d619327",
+  "controller_sha256": "a6b3fd1e9bbcb9c55c1919cbad32bda7a1a0c28d31f7e673e9b3afead9f45dc2",
+  "initial_e8_sha256": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03",
+  "memory_max_bytes": 68719476736,
+  "disk_min_free_bytes": 8589934592,
+  "failure": "Anytimeout/skip/native/targets/source mismatch preservesfailedreceipt; no automaticretry or schema/gate weakening.",
+  "lineage": "No source,input,seed,optimizer,budget,checkpoint changes to running original2312652 MC40 jobs or confirmation3."
+}
