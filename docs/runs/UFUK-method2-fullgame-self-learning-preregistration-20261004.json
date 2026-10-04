@@ -1,0 +1,221 @@
+{
+  "schema": "ufuk-method2-formal-registration-v3",
+  "status": "frozen-before-formal-execution",
+  "qualification_ledger_slot": 2,
+  "required_before_freeze": [
+    "actual e8 CUDA clean CLI infrastructure qualification PASS",
+    "one explicitly budgeted development epoch throughput measured without heldout strength labels",
+    "source/script/config/book/protocol SHA pins and original whole deadlines recorded",
+    "method2 ledger entry committed before formal execution",
+    "explicit family2 ledger assignment and MAX8IUT interpretation retained",
+    "Both config SHA pins differ only fixed seed; original e8/book/protocol/source/control-script/audit evidence SHA pins",
+    "training scheduling/concurrency chosen prospectively; baseline SF arenas may overlap training only after all formal choices frozen; completed baseline outcomes cannot steer training/config/candidate/stop rules"
+  ],
+  "seeds": [
+    20261205,
+    20261206
+  ],
+  "initial_model_sha256": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03",
+  "warm_start": "weights only; new Adam; fixed immutable e8 base",
+  "fresh_teacher_or_engine_labels": false,
+  "proposed_epochs": 40,
+  "actors": {
+    "games": 128,
+    "max_additional_plies": 256,
+    "claim_draw": true,
+    "temperature": 1.0
+  },
+  "epoch_steps": 256,
+  "fresh_transitions_per_seed": 1310720,
+  "objective": {
+    "policy_clip": 0.2,
+    "behavior_kl_stop": 0.02,
+    "policy_anchor_weight": 0.03,
+    "value_weight": 0.2,
+    "value_anchor_weight": 0.02
+  },
+  "schedule": {
+    "passes": 4,
+    "minibatch_size": 1024,
+    "max_gradient_norm": 5.0
+  },
+  "learning_rate": 0.0001,
+  "weight_decay": 0.0001,
+  "device": "cuda:0",
+  "selection": "CURRENT epoch40 only; no EMA/cherry-picked checkpoint or pooled seed rescue",
+  "native_checkpoint_interval_epochs": 1,
+  "mandatory_process_boundary": "epoch1 stop then fresh-process resume40 with same original absolute deadline",
+  "whole_training_seconds_per_seed": 18000,
+  "hard_user_deadline_utc": "2026-10-05T06:00:00Z",
+  "training_failure": "No exact epoch40/required native replay or original deadline violation => incomplete/failed; preserve all receipts and do not change epochs/seed/gates after outcomes",
+  "mathematics": "Only completed own games label every recorded mover state with final WDL. Ordinary caps and epoch tails are UNKNOWN and excluded. Uniform completed-game then uniform position replacement sampling weights decisions inversely by game length and conditions on observed completion. PPO clips per-action pi/mu at T1; it is a surrogate, not unbiased current-policy full-trajectory Monte Carlo correction. Whole-buffer game-balanced behavior KL postpass breach restores model+Adam+all global and sampler RNG and stops that epoch's remaining passes; rejected attempts remain counted.",
+  "strength": {
+    "books": "Two fresh48 source blocks; distinct source games and root positions across seeds and all old training/teacher/arena/proposed books; exclude historical685kposition universe and prior book full prefixes",
+    "arms_per_seed": [
+      "final40 vs e8",
+      "final40 vs SF512",
+      "e8 vs SF512"
+    ],
+    "games_per_arm": 96,
+    "total_games": 576,
+    "neural_simulations": 16,
+    "root_actions": 4,
+    "batch_and_latency_settings": "same frozen max4 root actions/batching/search for both neural arms; CPU float32 one thread; exact unchanged latency probe",
+    "total_history_ply_cap": 400,
+    "stockfish_nodes": 512,
+    "stockfish_threads": 1,
+    "stockfish_hash_mib": 16,
+    "stockfish_sha256": "0f83d24cc46d2c66c60f16001af5444873bc112b7d028594513426894c12da19",
+    "arm_whole_seconds": 3600,
+    "per_seed_required": {
+      "direct_point_score_strict_gt": 0.6,
+      "direct_adjusted_lower_strict_gt": 0.5,
+      "paired_final_minus_initial_SF_point_gain_strict_gt": 0.1,
+      "paired_SF_gain_adjusted_lower_strict_gt": 0,
+      "final_absolute_SF_score_at_least": 0.25,
+      "caps_every_arm_at_most": 0.05,
+      "adversarial_cap_lower_gates": "same direct>.5 and SF delta>0 with final caps losses/reference caps wins",
+      "median_latency_final_over_initial_at_most": 1.1
+    },
+    "uncertainty": "50000 paired source-root-block bootstrap resamples preserving both colours and shared SF-arm matching; fixed NumPy PCG64 seed20261107+trainingseed; linear98.75% two-sided quantiles .00625/.99375 for4primary comparisons. All4 inferential bounds and bothseeds required. MAX8 prospectively preregistered method families => IUT/unionbound nominalglobalalpha<=.05 assuming bootstrap marginal coverage, not an exact guarantee. No optional stopping, changed books or postoutcome threshold relaxation.",
+    "claim_scope": "Replicated gains on these disjoint frozen source-root suites at fixed search budget only; no general Elo/Stockfish-level claim",
+    "frozen_books": {
+      "20261205": {
+        "path": "/workspace/work/harbichess/a100-mc-strength-books/20261205/opening-splits.json",
+        "sha256": "b09f7dc1f4a8510c595c9732df195746f7a7455d1ccdc6ca8046301f70b3b0dc"
+      },
+      "20261206": {
+        "path": "/workspace/work/harbichess/a100-mc-strength-books/20261206/opening-splits.json",
+        "sha256": "b790f63d616b5d54164e6d1358acffd3ae1dcf7f6c66f20865f9f09f0fadf70b"
+      }
+    }
+  },
+  "independent_audits_proposed": {
+    "full_native_and_terminal_data_seconds_per_seed": "INCREMENTAL shared21000seconds from originaltraining start includingwaiting;18000training+3000tail;never per-epoch reset",
+    "fresh_epoch1_to_epoch2_replay_seconds_per_seed": 600,
+    "duplicate_replay_epochs_total": 2,
+    "duplicate_replay_fresh_transitions_total": 65536,
+    "duplicate_replay_optimizer_attempts": "actual receipt count; cannot assert fixed update count because completed-game coverage and KL rejections vary",
+    "audit_excluded_from_training_counts": true,
+    "scheduling": "Incremental immutable epoch audits whiletraining after eachatomiccheckpoint+journal; explicitlycontrolledCPU1thread/GPUcontexts/memory; check all exactsame data as fullaudit. Final GPUparity/replays andCPUlatency afterbothtraining quiesce.",
+    "neural_receipt_epochs": [
+      1,
+      2,
+      10,
+      20,
+      30,
+      40
+    ],
+    "neural_rows_per_epoch_per_seed": 18,
+    "final_actual_cpu_cuda_and_torch_cpu_mlx_cpu_full_masked18parity_required": true,
+    "incremental_original_deadline_rule": "auditdeadline=min(originaltrainingdeadline+3000,06UTC),whole21000maximumfromoriginaltrainingstart"
+  },
+  "source_commit": "2312652dc52a894e9726f48321117cf114270355",
+  "memory_max_bytes": 68719476736,
+  "disk_min_free_bytes": 8589934592,
+  "budget_basis": {
+    "measured_baseline_production_shape_epoch_seconds": 308,
+    "linear40epoch_solo_seconds": 12320,
+    "registered_whole_ceiling_seconds": 18000,
+    "uncertainty": "Fixed5h ceiling retained prospectively before formal outcomes. Actual one-epoch compiled CLI170.09s; twoGPU production jobs plus two strict incremental audit jobs contend. Later completion buffers/PPO passes differ. No extension or fewer epochs after outcomes.",
+    "measured_compiled_whole_cli_epoch_seconds": 170.09127511599945,
+    "measured_profile_with_independent_native_audit_seconds": 262.59988164901733
+  },
+  "device_config": "cuda:0; deterministic FP32/noTF32;oneTorchCPUthread",
+  "production_directory_policy": "New empty per-seed namespace; never reuse original failed method1 paths or alter original20:13 deadline",
+  "actual_pause_resume": "After epoch1 controller observes completed immutable native1/journal1, launches a new CLI process --resume native1 --max-epochs40 under unchanged original per-seed18000deadline; no state reset",
+  "original_method1_deadline_unchanged_utc": "2026-10-04T20:13:22.678Z",
+  "physical_schedule_assumption": {
+    "planned_first_launch_utc": "2026-10-04T20:25:00Z or later after frozen controls deployed; actual first clocks recorded once before Popen",
+    "training_ceiling_end_utc": "Actual first launch+18000 seconds, no later than2026-10-05T06:00:00Z",
+    "incremental_audits": "Start immutable per-epoch audits alongside training, strictall41native+all1.31Mactor/legal/terminal+selectedneuralchecks, oneauditor/seed; end<=originaltrainingdeadline+3000 and06UTC. Shared CPU/GPU contention counts toward original5h training ceiling; audit performs0optimizersteps. Existing3600posthoc fullaudit ceiling NOT empirically justified.",
+    "baseline_arenas": "Both e8-SF512 arms after FULLregistration frozen, CPU1thread perseed,3600whole, parallel withGPUtraining; no outcomes influenceconfig/candidate/stop choices.",
+    "posttraining": "Only remaining audit tail<=3000, twofreshCLIreplays<=600each preferablyGPUserialized, actualCPU-CUDA finalparity, localCPU-MLX finalparity and quiescent latency; finaldirect/finalSF two3600arms sequential perseed/twoseedsCPUparallel.",
+    "worst_after5h_training_seconds_excluding_small_sync_parity_latency": 11400,
+    "nominal_end_at20_15start": "At20:25launch nominal all conservative stages04:35UTC plus transport/parity/latency;06UTC hardstop",
+    "risk": "Actual32k reconciliation224s includes duplicate strictloads and actor/labels; sequential all1.31M may exceed3600. Incremental work overlaps fixedtraining whilechecking every immutable epoch. If auditor cannotcatchup or resourcecontention breaks original5h/training gates, classifyincomplete withoutdroppingchecks.",
+    "scheduling_frozen": "A100 two production seeds plus one read-only incremental auditor per seed; local CPU two immutable e8-SF baseline arms in parallel after FULL freeze, outcomes withheld from all training decisions."
+  },
+  "immutable_inputs": {
+    "manifest_sha256": "7f481a0e91139122b8709763b96dc916661839f5dc1b292a8377cdb6bcc69271",
+    "manifest": {
+      "seeds": {
+        "20261205": {
+          "initial_weights": {
+            "path": "/content/harbichess-inputs/initial-e8.safetensors",
+            "sha256": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03"
+          },
+          "book": {
+            "path": "/content/harbichess-inputs/book.json",
+            "sha256": "f2f3038728cce4c56987c9068f900d30ed99f996f99e03a38c41bbbc1f3c9958"
+          },
+          "experiment_config": {
+            "path": "/content/harbichess-fullgame-method2-inputs/config-20261205.json",
+            "sha256": "e627c631e27773dfe17a7e2cc59351e3c48c073e50c8a49a2ee042bec799508b"
+          }
+        },
+        "20261206": {
+          "initial_weights": {
+            "path": "/content/harbichess-inputs/initial-e8.safetensors",
+            "sha256": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03"
+          },
+          "book": {
+            "path": "/content/harbichess-inputs/book.json",
+            "sha256": "f2f3038728cce4c56987c9068f900d30ed99f996f99e03a38c41bbbc1f3c9958"
+          },
+          "experiment_config": {
+            "path": "/content/harbichess-fullgame-method2-inputs/config-20261206.json",
+            "sha256": "f9789b2eeb0469d812edf77dffe14b984aa7c5f499ac1775b531a1c4e2deccc2"
+          }
+        }
+      }
+    },
+    "protocol": "This immutable registration is injected as fourth native input by its finalized file SHA; absent from three-input manifest to prevent self-reference."
+  },
+  "infrastructure_evidence": {
+    "actual_e8_cuda_17_tests": {
+      "source": "e36f0fa0c9bedd0d8dbb89a01fe691be1c095f65",
+      "passed": 17,
+      "skipped": 0
+    },
+    "baseline_clean_cli_full_native_pause_resume_sha256": "6c0d65bfb3c647c8dab7688c887723299667413c307383cc7e56c2d125f22f0a",
+    "promoted_cache_clean_cli_full_native_pause_resume_sha256": "7d43e09ba6c9ff529314559f4d6389407c54c9d6683f0d613c4e965b3c288962",
+    "promoted_whole_profile_and_independent_native_result_sha256": "5058602e190b0fe65295d9d0b015fa7acc27ae7c1969bac5e2525f3bfd7cc6d4",
+    "original_development_full_native_terminal_reconciliation_sha256": "bb0346f0301927ca0b366e92f6b665e56424bc86e2d71485f6129007e65d6229",
+    "repository_formal_control_tests": {
+      "passed": 24,
+      "skipped": 0,
+      "ruff": "pass"
+    },
+    "producer_src_tree": "35f66353cec6e638112596a15c317c3b85ece2d4",
+    "production_source_package_same_as_measured_cuda_source": true
+  },
+  "controller_sha256": "0d69479b6e06f7039e52df13aa78befca1295508de8367b22f544156bb77ea92",
+  "registered_utc": "2026-10-04T20:22:38.669849+00:00",
+  "helper_sha256": {
+    "a100-mc-all-gates-qualification.py": "c1162957de358750cb59c9fa7c2f8a051442e60a8cc589a8474dfef5e0200c20",
+    "a100-mc-all-gates-tests.py": "8388a6245482161e85e05ad197cd62e9a0bf8fc33eb6ead1c84a2085c2a6627b",
+    "a100-mc-baseline-strength-controller-v3.py": "7ae7b85a8d1b73002cddad8fd77c00fdbc7fbaefde3c8b3c8f7bfaa4ed5e234d",
+    "a100-mc-controller-v3-tests.py": "e635dd8aa5bf2f3af5a892a73f4635160a2882d65516f4d5c624f2c680c4ad59",
+    "a100-mc-final-portable-parity.py": "685b0f227302b5d5adce0ae01b4b31486b0ffbd5d3151397f4af0fd46a5e453d",
+    "a100-mc-final-two-arm-controller.py": "9afb97a4505f44a1441f12258c510435ecc0a9f2ce685ba25f7b677d41ba63a9",
+    "a100-mc-fixed-candidate-eligibility-v2-neural.py": "32e734d90d5e4be259db58c044d0489da1e4189ea7666f06ffb7683de5f356cc",
+    "a100-mc-fresh-cli-replay.py": "c5fd919affa81a9d63c906eeef643c1c4eb8e201e63d74d4fdcb4001cf466126",
+    "a100-mc-incremental-audit-controller.py": "c41b7abb1a35f9579b9c2568d6a75e93c828156664c878cf09584d075497064f",
+    "a100-mc-incremental-neural-tests.py": "ed604f3fffd99959b72588baaa30bad11cb530637ed83761a3687cb8c65a8471",
+    "a100-mc-native-terminal-audit-v3-incremental.py": "c9c2ca42a0480a17c3e323acc389a35ec5f9b47e8febfb5b205f4f5ac84510f3",
+    "a100-mc-strength-analysis.py": "c65612d82fc1e19007050280df8b28529e02fdc4d0940ff804930567c01dcf45",
+    "a100-mc-strength-latency.py": "e4509be7e8df7fcdc726ed3d2b3c8500e73fc7f9402793646d9240095c84e29f",
+    "a100-mc-strength-tests.py": "bb42bb34b51115c6a9286d3f740b9a71a937a9a72f5fa417eafdbfb9ba029ad4",
+    "a100-mc-whole-training-controller-v3-18000.py": "0d69479b6e06f7039e52df13aa78befca1295508de8367b22f544156bb77ea92"
+  },
+  "frozen_portable_probe_requirement": {
+    "path": "docs/research/UFUK-width-latency-probes-20261004.json",
+    "sha256": "1089fd0cca308c24bb040a840352d0ad18aa85a7bdcd17608133456bf08bed9f",
+    "positions": 18,
+    "fixed_in_code_before_formal_execution": true,
+    "applies_to": "both actual CUDA/MLXCPU parity and quiescent CPU masked latency"
+  },
+  "research_status": "Own-terminal Monte Carlo and clipped PPO/anchoring/cache compilation use known mechanisms. No novelty or Stockfish-level claim. Candidate strength remains unknown.",
+  "release_backup_state": "GitHub release asset route currently400BadContentLength; separate SHA-verified Cloud Environment snapshots retained. No claim of verified Release artifact durability."
+}
