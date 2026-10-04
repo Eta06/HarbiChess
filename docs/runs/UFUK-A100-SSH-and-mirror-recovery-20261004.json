@@ -1,0 +1,32 @@
+{
+  "schema": "ufuk-a100-ssh-mirror-recovery-v1",
+  "scope": "Access and read-only local monitor fairness only; no runtime reset, training restart, model or experiment modification",
+  "persistent_public_key_receipt": {
+    "status": "owner-provided-public-key-appended-existing-keys-preserved",
+    "hostname": "045ceeb3ddfe",
+    "time": 1791152752.9849014,
+    "authorized_keys_before_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "authorized_keys_after_sha256": "1a077f8e3b85664f4b169ab0cde2abfcf483e7b10f92ecba7bd9cc773d16a37d",
+    "private_key_uploaded_to_runtime": false,
+    "google_managed_authorized_keys_unchanged": true,
+    "owner_public_authorization_file": "/root/.ssh/authorized_keys2"
+  },
+  "mirror_fairness_receipt": {
+    "status": "owned-local-mirror-monitor-replaced-fairness-only",
+    "old_pid": 869413,
+    "new_pid": 884472,
+    "time": 1791152955.6020806,
+    "before_sha256": "be28aa37afa84bd0375fb1028dc754990c77d5cf5af16e317c309f5adbae70a4",
+    "after_sha256": "d7286f323d088fa0e39c76fd31fc11084426fd4de1607e2d16e9dbd806acf6b1",
+    "canonical_catalog_and_old_snapshots_preserved": true,
+    "remote_training_changed": false,
+    "one_group_per_cycle": true,
+    "small_latest_native_payloads_prioritized": true
+  },
+  "transport": "Owner-provided Cloudflare SSH to a100.emda.tr; strict independently owner-verified host key; builtin Colab CLI retained for existing-assignment exec",
+  "host_public_fingerprint": "SHA256:vFtmfMnhUSAuQ3eT4suvioz5TPDrKMmDMo3GEfX50lY",
+  "hostname": "045ceeb3ddfe",
+  "boot_id": "b1cf1620-f1c7-4571-832f-989ee44a5aa4",
+  "diagnosis": "Google-managed .ssh/authorized_keys became empty after builtin SSH ended; sshd already accepts authorized_keys2, so only supplied public key was appended there. Private key and Google-managed first file unchanged.",
+  "credentials_recorded": false
+}
