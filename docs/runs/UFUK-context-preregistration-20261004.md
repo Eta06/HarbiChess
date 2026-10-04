@@ -18,8 +18,8 @@ Standard attention/zero residual initialization is not a novel algorithm.
 Original18f pairwise16channel trunk. Optional policy_context schema1,
 blocks2/heads4, tokens64×16; LayerNorm epsilon1e-5 inside each residual branch,
 QKV projection, scaled-dot-product attention, output projection, ReLU feedforward
-16→32→16 and learned64×16zero-initialized positional features. Attention/output
-and secondFF weights+bias zero so initial function is preserved; active random
+16→32→16 and learned64×16zero-initialized positional features. Attention output
+projection and secondFF weights+bias zero so initial function is preserved; active random
 QKV/firstFF features allow bridges then features to learn. Context applies only
 to policy tokens, never mutates original trunk or value. Original55583shared/
 value parameters frozen, onlypair_* and policy_context_blocks.* trainable;
