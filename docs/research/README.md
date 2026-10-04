@@ -67,6 +67,10 @@ Kalıcı kaynak GitHub'dır. Notlar ve kararlar Git'te, büyük model/replay dos
 - [Ortak training kontrolleri](../runs/UFUK-broad-history-controls-20261004.md):
   aynı eski/yeni heldout panelleri, ayrı policy/value/Q, exact freshprocessAdam/RNG/
   örnek sırası/seçim resume ve gerçek cachedCLI düzeltmesi. Pinnedf4c10e5suite572pass/0skip.
+- [İki seed ile kontrollü training ön kaydı](../runs/UFUK-broad-history-training-preregistration-20261004.md)
+  ve [57kanıt dosyası](../runs/UFUK-broad-history-training-registration-evidence-20261004.json):
+  667369tam104girdi birebir, ortak eski/yeni panel, tam native1000update resume,
+  ayrı learning/retention/replication kuralları; eğitim RUNNING, henüz güç sonucu yok.
 - [Bağımsız güç ve hız protokolü](../runs/UFUK-broad-history-strength-preregistration-20261004.md):
   yeni48source-game/96renkeşlemeli oyun/arm, sabit16sim/max4/SF512, ayarlı belirsizlik/
   cap/süre/hız kapıları önceden kayıtlı; teacherpretraining self-learning değildir.
@@ -86,6 +90,9 @@ Kalıcı kaynak GitHub'dır. Notlar ve kararlar Git'te, büyük model/replay dos
 - [Tarihsel deney raporları](../runs/).
 - [Dosya manifesti](archive-20261002-manifest.json): 944 artifact/distribution dosyasının boyutu ve SHA-256 değeri.
 - [CodeProjects / HarbiChess](https://chatgpt.com/space/page_bfc28b10daa081919e1650eca18c61c7): 151 tarihsel belge, mimari audit ve katkı kuralları.
+- [Altıncı veri arşivi](../runs/UFUK-artifact-broad-data-supplement-20261004.json):
+  43443tarüyesi okunup hash doğrulandı; tamamlanmış broad veri/packedinput/PGN ve
+  v3başarısızlığı korunur. Aktif training state kapsam dışı; remote binary backup eksik.
 - [Space sayfa eşlemesi](space-index.json).
 - [Araştırma arşivi](https://github.com/Eta06/HarbiChess/releases/tag/research-archive-20261002).
   
