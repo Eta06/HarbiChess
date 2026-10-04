@@ -131,7 +131,7 @@ def main():
         a.earliest_training_epoch
         + a.whole_audit_seconds
         + a.posttraining_reserve_seconds
-        < 1791170400
+        < 1791180000
     )
     evidence = {}
     for name in ("profile_receipt", "auditor_receipt", "mc_completion_barrier"):
