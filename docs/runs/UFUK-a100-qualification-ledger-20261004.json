@@ -3,8 +3,8 @@
   "registered_before_first_strength_game": true,
   "created_utc": "2026-10-04T18:15:47.238052+00:00",
   "max_new_formal_method_attempts": 8,
-  "fixed_current_method_attempt": 2,
-  "current_method": "own-terminal-completed-game-MC-clipped-PPO-with-immutable-e8-anchors",
+  "fixed_current_method_attempt": 3,
+  "current_method": "fixed-own-terminal-MC40-fresh-book-confirmation3-with-versioned-auditor",
   "qualification_rule": "BOTH fixed seeds must pass ALL four lower-bound inferential gates and ALL observed effect/cap/latency/native/parity gates",
   "one_sided_bad_component_alpha_nominal": 0.00625,
   "stage_joint_claim_test": "intersection-union: null ANY required true directscore<=.50 or true pairedSFgain<=0; allcomponent lowerbounds must reject",
@@ -45,10 +45,58 @@
         20261205,
         20261206
       ],
-      "status": "registered-before-production-and-first-strength-game",
+      "status": "incomplete-original-auditor-and-baseline-qualification-preserved",
       "candidate": "CURRENTepoch40-only",
       "strength_gate_unchanged": true,
-      "strength_games_at_registration": 0
+      "strength_games_at_registration": 0,
+      "qualified": false,
+      "result": "docs/runs/UFUK-method2-validation-failure-and-lineage-20261004.json",
+      "candidate_strength_games": 0,
+      "training": "Originalfixed40continues with all original inputs/deadlines; no originalformal2PASSclaim"
+    },
+    {
+      "number": 3,
+      "protocol": "docs/runs/UFUK-confirmation3-fixed-lineage-preregistration-20261004.json",
+      "protocol_sha256": "36a055c69e03fddcc170e1bb4514c24a72c978f0983d3e04d2169afe0e8cfad6",
+      "source_commit": "2312652dc52a894e9726f48321117cf114270355",
+      "helper_source_commit": "bf9a45b572d0c300f5777aa35d7d1ab0790f0b2e",
+      "seeds": [
+        20261205,
+        20261206
+      ],
+      "status": "registered-before-new-confirmation-games",
+      "candidate": "BOTHoriginalCURRENTepoch40-only-reused-fixed-lineage",
+      "new_training": false,
+      "original_training_inputs_and_deadlines_unchanged": true,
+      "new_virgin_books": {
+        "20261205": {
+          "path": "/content/harbichess-fullgame-method2-inputs/confirmation3/book-20261205.json",
+          "sha256": "aad7655a3d5b0fe9ae29f60487c4e24ee4a99a6c20d89470808bb8633aac0e05",
+          "selection_seed": 20261305,
+          "independent_PGN_audit_sha256": "e143453a048538ee1db69d4fbc9141900c8d0d51774a9cf062dad4ccc3d45853",
+          "exclusion_sources_sha256": "b6f00920f5159337ee4c636b60680a11e0eeeb3b7612e1fbf0c2ff9b3f290ee2",
+          "exclusion_positions_sha256": "8f597f752affa67863c83b9387c526817e1131239a551bfc28c2ec75f6db00e2",
+          "audit_status": "pass-roots-only-no-games",
+          "independent_source_blocks": 48,
+          "paired_colours": 2,
+          "exclude_all_original_formal2_and_old_training_teacher_arena_sources_roots_fullprefixes": true
+        },
+        "20261206": {
+          "path": "/content/harbichess-fullgame-method2-inputs/confirmation3/book-20261206.json",
+          "sha256": "ddad7ca17009be3690f2fa090a6c9b9780395c4b02e88f9e0d82409cf5171c90",
+          "selection_seed": 20261306,
+          "independent_PGN_audit_sha256": "260a219c25a252e2afc4789c90d21a13a1e8c2f4707af516145c76bb86b820fe",
+          "exclusion_sources_sha256": "e1d16667acc1e9e5f099858c218b19c91108369420de63c32fb118cb2f0f3e92",
+          "exclusion_positions_sha256": "31341326a185fbb35996b570fc1adadab726594df256a98f2de345cf0144e029",
+          "audit_status": "pass-roots-only-no-games",
+          "independent_source_blocks": 48,
+          "paired_colours": 2,
+          "exclude_all_original_formal2_and_old_training_teacher_arena_sources_roots_fullprefixes": true
+        }
+      },
+      "candidate_strength_games_at_registration": 0,
+      "qualified": false,
+      "strength_gate_unchanged": true
     }
   ]
 }
