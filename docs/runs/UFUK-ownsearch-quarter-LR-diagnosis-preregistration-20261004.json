@@ -1,0 +1,29 @@
+{
+  "schema": "ownsearch-quarter-lr-duplicate-diagnosis-preregistration-v1",
+  "status": "frozen-before-execution",
+  "registered_utc": "2026-10-04T21:34:51.943378+00:00",
+  "source_commit": "c93b79b8140b31fe1f4d0ca96adddd857991925b",
+  "input_and_helper_sha256": {
+    "profile_result": "560b1fa8af4de03c99b0b0126480b787b89bff8ca9b0fd47e10243166bc8f288",
+    "profile_journal": "d94f7de5135e322117d03a928d12160b3bce831f7727c96bd0128b1d52ae218e",
+    "config": "cb5d35ff364534c4e47adfacfb5e18cc29ab3f80ba68f3750bb0e589ab48f229",
+    "weights": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03",
+    "book": "f2f3038728cce4c56987c9068f900d30ed99f996f99e03a38c41bbbc1f3c9958",
+    "helper": "959cb46611e0536046a6d99a73b8b8744ff2ddfddd9e20f21266a81dcce4b287",
+    "common_helper": "a6b3fd1e9bbcb9c55c1919cbad32bda7a1a0c28d31f7e673e9b3afead9f45dc2"
+  },
+  "controller_sha256": "05db24d2d4f96fd1a062c46813dafa88d6e91ec1a1d58779fc64231ea12373db",
+  "original_observed_behavior_kl": 0.03746061862259548,
+  "original_accepted_updates": 0,
+  "original_attempted_updates": 4,
+  "hypothesis": "Quarter the learning rate from1e-4 to2.5e-5 for the existing four-step pass; trust-region update size, not extra targets/data, caused original pass rejection. No KL or strength threshold changes.",
+  "fixed_intervention": "One quarter-LR run only; same4095 exogenously searched roots/18264 terminal-value rows, same sampler seed, original4passes/minibatch1024/AdamW/clip5/anchors/searchtargets/known mover-WDL. No tuning on heldout outcomes.",
+  "scope": "Duplicate development fitting from fresh originale8/freshAdam; no raw actor/search advancement,0newselfplay/0newsearch, no native checkpoint or formal candidate/resume.",
+  "success_for_next_admission_only": "At least one retained pass, finite changed current weights and all21 unused material bits preserved; positive result permits prospectively new formal configuration. Not chess strength/self-learning success.",
+  "failure": "Zero committed updates/invalidstate/original300s or64GiB/8GiB violation preserves failure. No automaticretry/sweep/guard relaxation.",
+  "whole_ceiling_seconds": 300,
+  "memory_max_bytes": 68719476736,
+  "disk_min_free_bytes": 8589934592,
+  "existing_MC40_and_confirmation3_unchanged": true,
+  "novelty": "Standard trust-region learning-rate reduction; no novel algorithm claim."
+}
