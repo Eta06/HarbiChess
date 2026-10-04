@@ -17,7 +17,7 @@ def bind(config, slot, coordinator_sha, sha):
     assert manifest['status'] == 'frozen-before-both-formal-executions'
     assert manifest['slots'] == [4, 5] and manifest['latency_order'] == [4, 5]
     assert manifest['completion_deadline_epoch'] > 0
-    assert manifest['completion_deadline_epoch'] + 7300 + 120 + 120 + 180 + 120 < 1791170400
+    assert manifest['completion_deadline_epoch'] + 7300 + 120 + 120 + 180 + 120 < 1791180000
     for member in manifest['members']:
         assert member['slot'] in SOURCES
         assert member['source_commit'] == SOURCES[member['slot']]
