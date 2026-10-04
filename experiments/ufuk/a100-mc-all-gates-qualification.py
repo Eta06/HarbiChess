@@ -1,8 +1,8 @@
 """Conjunctive method2 claim gate; no training, arenas or alternate selection."""
 
 import argparse
-import json
 import hashlib
+import json
 import time
 from pathlib import Path
 
@@ -20,10 +20,7 @@ def require_strength_gates(strength):
     assert strength["replicated_strength_pass"] is True
     for row in strength["seed_results"]:
         assert row["strength_pass"] is True and all(row["gates"].values())
-        assert (
-            row["direct"]["mean"] > 0.60
-            and row["direct"]["ci_adjusted_98_75"][0] > 0.50
-        )
+        assert row["direct"]["mean"] > 0.60 and row["direct"]["ci_adjusted_98_75"][0] > 0.50
         assert (
             row["sf_paired_delta"]["mean"] > 0.10
             and row["sf_paired_delta"]["ci_adjusted_98_75"][0] > 0
@@ -61,10 +58,7 @@ def main():
     strength = receipts["strength_analysis"]
     sm = receipts["strength_manifest"]
     latency = receipts["latency"]
-    assert (
-        eligible["status"]
-        == "eligible-both-fixedCURRENT40-for-preregistered-strength-only"
-    )
+    assert eligible["status"] == "eligible-both-fixedCURRENT40-for-preregistered-strength-only"
     assert [row["seed"] for row in eligible["seeds"]] == [20261205, 20261206]
     assert [row["seed"] for row in sm["seeds"]] == [20261205, 20261206] and strength[
         "manifest_sha256"
@@ -75,24 +69,18 @@ def main():
         and strength["replicates"] == 50000
         and strength["two_sided_ci"] == 0.9875
     )
-    assert (
-        strength["analysis_seed"] == 20261107
-        and strength["quantiles"] == "numpy linear"
-    )
+    assert strength["analysis_seed"] == 20261107 and strength["quantiles"] == "numpy linear"
     assert strength["analysis_sha256"] == sha(
         Path(__file__).with_name("a100-mc-strength-analysis.py")
     )
-    model_shas = {
-        str(row["seed"]): row["candidate_sha256"] for row in eligible["seeds"]
-    }
+    model_shas = {str(row["seed"]): row["candidate_sha256"] for row in eligible["seeds"]}
     book_shas = {
         20261205: "b09f7dc1f4a8510c595c9732df195746f7a7455d1ccdc6ca8046301f70b3b0dc",
         20261206: "b790f63d616b5d54164e6d1358acffd3ae1dcf7f6c66f20865f9f09f0fadf70b",
     }
     for row in sm["seeds"]:
         assert any(
-            candidate["seed"] == row["seed"]
-            and candidate["source_commit"] == sm["source_commit"]
+            candidate["seed"] == row["seed"] and candidate["source_commit"] == sm["source_commit"]
             for candidate in eligible["seeds"]
         )
         assert (
@@ -114,8 +102,7 @@ def main():
     )
     for seed, digest in model_shas.items():
         assert (
-            latency["weights_sha256"][seed] == digest
-            and latency["ratios_vs_initial"][seed] <= 1.10
+            latency["weights_sha256"][seed] == digest and latency["ratios_vs_initial"][seed] <= 1.10
         )
     for name, backend in (("cuda_parity", "cuda"), ("mlx_cpu_parity", "mlx")):
         receipt = receipts[name]
@@ -129,9 +116,7 @@ def main():
             == latency["probe_sha256"]
             == "1089fd0cca308c24bb040a840352d0ad18aa85a7bdcd17608133456bf08bed9f"
         )
-        assert {
-            str(row["seed"]): row["weights_sha256"] for row in receipt["models"]
-        } == model_shas
+        assert {str(row["seed"]): row["weights_sha256"] for row in receipt["models"]} == model_shas
     result = {
         "schema": "ufuk-method2-all-gates-conjunctive-qualification-v1",
         "status": "all-fixed-method2-gates-pass-on-two-frozen-source-root-suites",
@@ -140,7 +125,12 @@ def main():
         "receipt_sha256": {name: m[name]["sha256"] for name in receipts},
         "candidate_sha256": model_shas,
         "time_epoch": time.time(),
-        "limits": "Requires actual matching immutable receipts. Nominal bootstrap/IUT/MAX8-family interpretation; no general Elo or Stockfish-level claim. Prospective ledger/protocol registration and external quiescence remain root-reviewed facts.",
+        "limits": (
+            "Requires actual matching immutable receipts. Nominal bootstrap/IU"
+            "T/MAX8-family interpretation; no general Elo or Stockfish-level c"
+            "laim. Prospective ledger/protocol registration and external quies"
+            "cence remain root-reviewed facts."
+        ),
     }
     with a.output.open("x") as f:
         json.dump(result, f, indent=2)
