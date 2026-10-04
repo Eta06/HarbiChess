@@ -1,0 +1,28 @@
+name: Upload allowlisted public A100 artifacts
+
+on:
+  workflow_dispatch:
+
+permissions: {}
+
+concurrency:
+  group: a100-allowlisted-release-delivery
+  cancel-in-progress: false
+
+jobs:
+  transfer-verified-assets:
+    if: github.repository == 'Eta06/HarbiChess' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    permissions:
+      contents: write
+    steps:
+      - name: Check out the dispatched source
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+
+      - name: Fetch allowlisted public files, publish, and verify anonymous readback
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 scripts/upload_allowlisted_a100_artifacts.py
