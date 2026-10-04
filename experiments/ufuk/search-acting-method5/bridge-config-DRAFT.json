@@ -1,0 +1,19 @@
+{
+ "repo": "/workspace/work/harbichess/search-acting-source-4515a7c",
+ "python": "/workspace/HarbiChess/.venv/bin/python",
+ "helper": "ROOT_STAGED_OWN5_PARITY_WITH_SIBLINGS",
+ "probes": "/workspace/HarbiChess/docs/research/UFUK-width-latency-probes-20261004.json",
+ "qualification_config": "ROOT_MIRRORED_FROZEN_STRENGTH_BINDINGS",
+ "qualification_config_sha256": "ROOT_ACTUAL_SHA",
+ "root": "ROOT_ABSENT_LOCAL_METHOD5_BRIDGE_ROOT",
+ "mirror": "ROOT_EXISTING_CONTENT_MIRROR_ROOT",
+ "expected_runs": {
+   "20261525": "/content/harbichess-runs/search-acting-method5-seed-20261525/run",
+   "20261526": "/content/harbichess-runs/search-acting-method5-seed-20261526/run"
+ },
+ "remote_manifest": "/content/harbichess-fullgame-method2-inputs/method5-portable-model-manifest.json",
+ "remote_receipt": "/content/harbichess-fullgame-method2-inputs/method5-final-mlx-cpu-parity.json",
+ "owner_transport_argv": ["ROOT_LOCAL_PYTHON", "ROOT_OWNER_TRANSPORT_ADAPTER"],
+ "owner_transport_script": "ROOT_OWNER_TRANSPORT_ADAPTER",
+ "owner_transport_script_sha256": "ROOT_ACTUAL_PINNED_ADAPTER_SHA"
+}
