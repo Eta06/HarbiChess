@@ -1,0 +1,60 @@
+{
+  "all_96_records_independently_replayed": true,
+  "all_ratings_timecontrols_ply_fen_legality_verified": true,
+  "audit_sha256": {
+    "20261505": "b14c0ab1d53bfc1859ca122d0c6e937b66929126f03b689bc53a71864070e7af",
+    "20261506": "87dcd38c141c2e641486b17c52a7c9c9a692fec00b45cb63237cd4744e0ec9bb"
+  },
+  "book_sha256": {
+    "20261505": "3fcb0d8e7542f93a093de4387a0cb15eb2862dcfc72291cab22832c4847e16ca",
+    "20261506": "39f073aa0f8a79431550b3295ab292518a8f0229c16910c474166340af5b3cff"
+  },
+  "first_book_fullprefix_keys_in_second_exclusions": 1416,
+  "first_book_source_ids_in_second_exclusions": 48,
+  "no_model_engine_game_or_update": true,
+  "qualification_ledger_slot": 4,
+  "root_counts": {
+    "20261505": 48,
+    "20261506": 48
+  },
+  "root_overlap": 0,
+  "root_ply_counts": {
+    "20261505": {
+      "16": 11,
+      "24": 16,
+      "32": 8,
+      "48": 7,
+      "64": 6
+    },
+    "20261506": {
+      "16": 11,
+      "24": 10,
+      "32": 13,
+      "48": 8,
+      "64": 6
+    }
+  },
+  "same_pgn_sha256": "5b8c29f91628ed27d468dc6355bf3eaad98a03bcdf638c32f3c3106bff162c8a",
+  "same_source_commit_all_runs": "635413e426ef5b09cb76073c0955898912247466",
+  "schema": "ownsearch-method4-two-book-crossaudit-v1",
+  "second_exclusion_union_counts": {
+    "positions": 827927,
+    "sources": 5504
+  },
+  "selection_to_training_seed": {
+    "20261505": 20261425,
+    "20261506": 20261426
+  },
+  "source_commit_clean_at_both_freezes": true,
+  "source_overlap": 0,
+  "source_record_counts": {
+    "20261505": 48,
+    "20261506": 48
+  },
+  "status": "pass-roots-only-no-games",
+  "unique_source_records_across_both": 96,
+  "whole_seconds": {
+    "20261505": 46.85136903398961,
+    "20261506": 46.23630834800133
+  }
+}
