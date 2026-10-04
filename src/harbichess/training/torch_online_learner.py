@@ -34,7 +34,7 @@ from harbichess.training.torch_online_checkpoint import (
 )
 from harbichess.training.torch_online_objective import online_loss
 
-ONLINE_LEARNER_SCHEMA = "torch-fresh-one-ply-v1"
+ONLINE_LEARNER_SCHEMA = "torch-fresh-one-ply-v2"
 
 
 def read_online_train_book(path: Path) -> tuple[ActorOpening, ...]:
@@ -364,7 +364,10 @@ class TorchOnlineLearner:
             for target, current in zip(
                 self.ema.parameters(), self.online.parameters(), strict=True
             ):
-                target.mul_(self.config.ema_decay).add_(current, alpha=1 - self.config.ema_decay)
+                if current.requires_grad:
+                    target.mul_(self.config.ema_decay).add_(
+                        current, alpha=1 - self.config.ema_decay
+                    )
         self.update += 1
         samples = []
         for row, label in zip(transitions, target_rows, strict=True):
