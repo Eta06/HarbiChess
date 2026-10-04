@@ -63,7 +63,7 @@ def test_factory_rejects_infrastructure_only_zero_committed_updates():
     qualification = {
         "source_commit": factory.SOURCE,
         "status": "pass-actualCUDA-E1-full-data-original-groups-raw-packets-and-targeted-mutations",
-        "audit_report": {"raw_actor_replayed": 32768, "optimizer_committed": 0},
+        "audit_report": {"epoch": 1, "raw_actor_replayed": 32768, "optimizer_committed": 0},
     }
     with pytest.raises(AssertionError):
         factory.check_training_evidence(profile, qualification)
