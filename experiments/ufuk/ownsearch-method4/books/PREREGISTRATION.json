@@ -1,0 +1,13 @@
+{
+  "schema": "ownsearch-method4-virgin-roots-prereg-v1",
+  "qualification_ledger_slot": 4,
+  "purpose": "Freeze two unused 48-root source-disjoint strength books only; no inference, engine query, SGD, played games, or outcome inspection.",
+  "selection_seeds": [20261505, 20261506],
+  "training_seed_map": {"20261505": 20261425, "20261506": 20261426},
+  "selection_order": "20261505 first; its source IDs and every root/full-history position are excluded before selecting 20261506",
+  "excluded_inheritance": "All prior capacity source/root/fullprefix exclusions, all docs research opening-splits books, formal2 4096+1024 training book and both formal2 48-root books, previous strength-second book, both confirmation3 books, plus first new method4 book for seed 20261506.",
+  "selection": "same existing history_openings.freeze and original lichess-standard-2026-09-prefix-32MiB.pgn; 48 source-record-disjoint arena roots per seed",
+  "per_seed_wall_seconds": {"selection_ceiling":600, "selection_plus_independent_replay_ceiling":900},
+  "independent_audit": "reparse each selected source record independently; verify record SHA, source Site, standard start, ELO>=2000 each, base time control>=60, chosen ply in [16,24,32,48,64,96], legal full prefix, exact FEN/history and nonterminal root; capture all record/root/exclusion hashes",
+  "prohibitions": ["do not query models or engines", "do not run games", "do not train", "do not register or launch method4", "do not modify main source or prior exclusion artifacts"]
+}
