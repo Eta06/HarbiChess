@@ -24,10 +24,7 @@ def main():
     p.add_argument("--manifest-sha256", required=True)
     p.add_argument("--audit-script-sha256", required=True)
     a = p.parse_args()
-    assert (
-        c.sha(a.manifest) == a.manifest_sha256
-        and c.sha(a.audit_script) == a.audit_script_sha256
-    )
+    assert c.sha(a.manifest) == a.manifest_sha256 and c.sha(a.audit_script) == a.audit_script_sha256
     m = c.read(a.manifest)
     source = m["source_commit"]
     started = m["original_training_started_epoch"]
@@ -36,9 +33,7 @@ def main():
     deadline = min(started + 21000, c.HARD_DEADLINE)
     assert started <= time.time() < deadline
     assert (
-        subprocess.check_output(
-            ["git", "rev-parse", "HEAD"], cwd=a.repo, text=True
-        ).strip()
+        subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=a.repo, text=True).strip()
         == source
         and not subprocess.check_output(
             ["git", "status", "--porcelain"], cwd=a.repo, text=True
@@ -57,7 +52,10 @@ def main():
         "registered_audit_wholemaximum_seconds": 21000,
         "memory_max_bytes": 64 * 1024**3,
         "disk_min_free_bytes": 8 * 1024**3,
-        "scope": "Read-only immutable all41native/all40data audits; includes waiting;0optimizerupdates; no per-epoch reset/resume/skip",
+        "scope": (
+            "Read-only immutable all41native/all40data audits; includes waitin"
+            "g;0optimizerupdates; no per-epoch reset/resume/skip"
+        ),
         "status": "running",
     }
     args = [
@@ -114,9 +112,7 @@ def main():
                     or __import__("shutil").disk_usage(a.root).free < 8 * 1024**3
                 ):
                     c.terminate(process)
-                    raise TimeoutError(
-                        "Originalwhole21000audit/resourceceilings exhausted"
-                    )
+                    raise TimeoutError("Originalwhole21000audit/resourceceilings exhausted")
                 time.sleep(0.5)
         assert process.returncode == 0 and time.time() <= deadline
         final = c.read(a.root / "full-audit-result.json")
