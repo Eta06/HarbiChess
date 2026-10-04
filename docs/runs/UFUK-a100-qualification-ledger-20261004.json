@@ -3,8 +3,8 @@
   "registered_before_first_strength_game": true,
   "created_utc": "2026-10-04T18:15:47.238052+00:00",
   "max_new_formal_method_attempts": 8,
-  "fixed_current_method_attempt": 3,
-  "current_method": "fixed-own-terminal-MC40-fresh-book-confirmation3-with-versioned-auditor",
+  "fixed_current_method_attempt": 5,
+  "current_method": "fixed-ownsearch4-and-search-acting5-prospective-two-seed-independent-cohort",
   "qualification_rule": "BOTH fixed seeds must pass ALL four lower-bound inferential gates and ALL observed effect/cap/latency/native/parity gates",
   "one_sided_bad_component_alpha_nominal": 0.00625,
   "stage_joint_claim_test": "intersection-union: null ANY required true directscore<=.50 or true pairedSFgain<=0; allcomponent lowerbounds must reject",
@@ -97,6 +97,48 @@
       "candidate_strength_games_at_registration": 0,
       "qualified": false,
       "strength_gate_unchanged": true
+    },
+    {
+      "number": 4,
+      "protocol": "experiments/ufuk/ownsearch-method4/frozen/registration.json",
+      "protocol_sha256": "df8f7459aa36fcea89fadd8685ecfed55eb361a3eb7333977440e45af4c5ae3e",
+      "source_commit": "a278bba67bce962cb9294f0d24040e02e9acf1f4",
+      "seeds": [
+        20261425,
+        20261426
+      ],
+      "status": "frozen-prospectively-before-formal-jobs-or-new-strength-outcomes",
+      "fixed_epochs": 24,
+      "candidate": "BOTH fixed CURRENT only; no checkpoint/seed/outcome selection",
+      "no_external_teacher_training_labels": true,
+      "fresh_training_expected_per_seed": 786432,
+      "strength_games_at_registration": 0,
+      "qualified": false,
+      "whole_training_seconds_per_seed": 10800,
+      "whole_audit_seconds_from_originalfirstclock": 12600,
+      "posttraining_reserve_seconds": 10020
+    },
+    {
+      "number": 5,
+      "protocol": "experiments/ufuk/search-acting-method5/frozen/registration.json",
+      "protocol_sha256": "a9ae975e6ecb486f964ee0514d98fb4bc9d50d3b949ecabd0cf1e441bd75d271",
+      "source_commit": "4515a7c0dda3b4f9615c2fc78a47c872ab14699d",
+      "seeds": [
+        20261525,
+        20261526
+      ],
+      "status": "frozen-prospectively-before-formal-jobs-or-new-strength-outcomes",
+      "fixed_epochs": 8,
+      "candidate": "BOTH fixed CURRENT only; no checkpoint/seed/outcome selection",
+      "no_external_teacher_training_labels": true,
+      "fresh_training_expected_per_seed": 262144,
+      "strength_games_at_registration": 0,
+      "qualified": false,
+      "whole_training_seconds_per_seed": 6000,
+      "whole_audit_seconds_from_originalfirstclock": 9000,
+      "posttraining_reserve_seconds": 13620
     }
-  ]
+  ],
+  "hard_deadline_epoch_for_new_controls": 1791180000,
+  "earlier_wrong_global_epoch_preserved_in_historical_protocols": 1791170400
 }
