@@ -109,6 +109,24 @@ def _acquire_lock(directory, source):
     raise RuntimeError("could not acquire online run owner")
 
 
+def _memory_metric():
+    return "cgroup-v2-current" if Path("/sys/fs/cgroup/memory.current").is_file() \
+        else "system-used-including-cache"
+
+
+def _memory_usage(metric):
+    if metric == "cgroup-v2-current":
+        return int(Path("/sys/fs/cgroup/memory.current").read_text())
+    if metric == "system-used-including-cache":
+        values = {
+            row.split(":")[0]: int(row.split()[1]) * 1024
+            for row in Path("/proc/meminfo").read_text().splitlines()
+            if row.startswith(("MemTotal:", "MemFree:"))
+        }
+        return values["MemTotal"] - values["MemFree"]
+    raise ValueError("unknown registered memory metric")
+
+
 def run_online(
     directory: Path,
     *,
@@ -120,6 +138,8 @@ def run_online(
     deadline_epoch: float,
     stop_at: int | None = None,
     resume: Path | None = None,
+    memory_max_bytes: int = 15 * 1024**3,
+    disk_min_free_bytes: int = 8 * 1024**3,
 ) -> dict:
     started = time.perf_counter()
     cpu_started = time.process_time()
@@ -131,6 +151,10 @@ def run_online(
         or max_updates <= 0
         or type(checkpoint_interval) is not int
         or checkpoint_interval <= 0
+        or type(memory_max_bytes) is not int
+        or memory_max_bytes <= 0
+        or type(disk_min_free_bytes) is not int
+        or disk_min_free_bytes <= 0
         or not math.isfinite(deadline_epoch)
         or deadline_epoch <= time.time()
         or (stop_at is not None and (type(stop_at) is not int or not 0 < stop_at <= max_updates))
@@ -146,10 +170,14 @@ def run_online(
         ["git", "status", "--porcelain"], text=True
     ):
         raise ValueError("online invocation requires the declared clean source checkout")
+    configuration = asdict(config)
+    if config.device == "cpu":
+        configuration.pop("device")
+    memory_metric = _memory_metric()
     metadata = {
         "schema": 1,
         "source_commit": source_commit,
-        "config": asdict(config),
+        "config": configuration,
         "inputs": {
             name: {
                 "relative_path": os.path.relpath(path.resolve(), directory.resolve()),
@@ -160,13 +188,16 @@ def run_online(
         "max_updates": max_updates,
         "checkpoint_interval": checkpoint_interval,
         "absolute_deadline_epoch": deadline_epoch,
-        "memory_max_bytes": 15 * 1024**3,
-        "disk_min_free_bytes": 8 * 1024**3,
+        "memory_max_bytes": memory_max_bytes,
+        "disk_min_free_bytes": disk_min_free_bytes,
         "scope": (
             "Fresh one-ply self-play transitions consumed once, one AdamW+EMA update per batch. "
             "No engine queries or automatic strength promotion."
         ),
     }
+    # Original CPU/cgroup-v2 metadata stays byte-compatible.
+    if config.device != "cpu" or memory_metric != "cgroup-v2-current":
+        metadata["memory_metric"] = memory_metric
     if resume is None:
         directory.mkdir(parents=True, exist_ok=False)
         (directory / "journal").mkdir()
@@ -199,13 +230,10 @@ def run_online(
         def guard():
             if time.time() >= deadline_epoch:
                 raise TimeoutError("registered absolute online deadline exhausted; no extension")
-            if (
-                int(Path("/sys/fs/cgroup/memory.current").read_text())
-                > metadata["memory_max_bytes"]
-            ):
-                raise RuntimeError("online memory current including cache>15GiB")
+            if _memory_usage(memory_metric) > metadata["memory_max_bytes"]:
+                raise RuntimeError("online registered memory ceiling exceeded")
             if shutil.disk_usage(directory).free < metadata["disk_min_free_bytes"]:
-                raise RuntimeError("online free disk<8GiB")
+                raise RuntimeError("online registered disk free floor violated")
 
         guard()
         if resume is None:
@@ -296,6 +324,8 @@ def main():
     parser.add_argument("--deadline-epoch", type=float, required=True)
     parser.add_argument("--stop-at", type=int)
     parser.add_argument("--resume", type=Path)
+    parser.add_argument("--memory-max-bytes", type=int, default=15 * 1024**3)
+    parser.add_argument("--disk-min-free-bytes", type=int, default=8 * 1024**3)
     args = parser.parse_args()
     configuration = json.loads(args.config.read_text())
     configuration["actors"] = OnlineActorConfig(**configuration["actors"])
@@ -309,6 +339,8 @@ def main():
             "protocol": args.protocol,
         },
         config=TorchOnlineConfig(**configuration),
+        memory_max_bytes=args.memory_max_bytes,
+        disk_min_free_bytes=args.disk_min_free_bytes,
         source_commit=args.source_commit,
         max_updates=args.max_updates,
         checkpoint_interval=args.checkpoint_interval,
