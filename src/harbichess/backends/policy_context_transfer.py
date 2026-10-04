@@ -17,6 +17,7 @@ def transfer(source: Path, destination: Path, *, heads=4, blocks=2, seed=2026102
             original.architecture != "pairwise"
             or original._policy_adapter is not None
             or original._policy_context is not None
+            or original._value_sparse is not None
         ):
             raise ValueError("context transfer requires plain versioned pairwise model")
         specification = {
