@@ -38,6 +38,21 @@ def validate_policy_context(specification: dict | None, channels: int) -> dict |
     return dict(specification)
 
 
+def validate_sparse_value(specification: dict | None, input_channels: int) -> dict | None:
+    if specification is None:
+        return None
+    if (
+        not isinstance(specification, dict)
+        or set(specification) != {"schema", "channels", "hidden"}
+        or any(type(specification[key]) is not int for key in specification)
+        or specification["schema"] != 1
+        or min(specification["channels"], specification["hidden"]) <= 0
+        or input_channels != ENCODER_CHANNELS
+    ):
+        raise ValueError("unsupported sparse value specification")
+    return dict(specification)
+
+
 @dataclass(frozen=True, slots=True)
 class NetworkConfig:
     input_channels: int = ENCODER_CHANNELS
