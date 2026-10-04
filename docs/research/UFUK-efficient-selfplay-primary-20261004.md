@@ -80,8 +80,8 @@ unversioned action/encoding migration is introduced into existing recordings.
 ## Searchless RL beyond imitation, August2026
 
 Szymon Miłosz, Piotr Duch, Szymon Grabowski,
-[Beyond Search-Imitation: Prior-Directed Exploration for Searchless Chess]
-(https://arxiv.org/html/2608.27757v1), arXiv2608.27757v1/27August2026.
+[Beyond Search-Imitation: Prior-Directed Exploration for Searchless Chess](https://arxiv.org/html/2608.27757v1),
+arXiv2608.27757v1/27August2026.
 HTMLSHA5a7bfc6283b4be1b89b13177cd4c2df36a03450fc48b1f804ccf9b6c9f1e19d2.
 
 Released strong Chessformer initialization, fixed base-policy prior, forward
