@@ -264,11 +264,31 @@ class FullGamePPOTrainConfig:
             raise ValueError("invalid full-game PPO training schedule")
 
 
-def _tensor_batch(network, encoder, rules, rows, device):
+def compile_epoch_features(targets, encoder, *, guard=None):
+    """Readonly features owned by ONE completed epoch; no global cache or RNG."""
+    features = {}
+    for index, row in enumerate(targets):
+        if guard is not None and index % 128 == 0:
+            guard()
+        state = row.transition.pre
+        if state in features:
+            if features[state][1] != row.legal_actions:
+                raise ValueError("same full-history state has conflicting legal support")
+            continue
+        values = np.array(encoder.encode(state).values, dtype=np.float32)
+        values.setflags(write=False)
+        features[state] = (values, row.legal_actions)
+    return features
+
+
+def _tensor_batch(network, encoder, rules, rows, device, features=None):
     size = len(rows)
     width = max(len(row.legal_actions) for row in rows)
     input_array = np.array(
-        [encoder.encode(row.transition.pre).values for row in rows], dtype=np.float32
+        [
+            encoder.encode(row.transition.pre).values if features is None
+            else features[row.transition.pre][0] for row in rows
+        ], dtype=np.float32
     ).reshape(size, 8, 8, network.config.input_channels)
     indices = np.zeros((size, width), dtype=np.int64)
     mask = np.zeros((size, width), dtype=np.bool_)
@@ -305,7 +325,7 @@ def _tensor_batch(network, encoder, rules, rows, device):
     )
 
 
-def _whole_dataset_kls(network, encoder, rules, targets, *, device, guard=None):
+def _whole_dataset_kls(network, encoder, rules, targets, *, device, guard=None, features=None):
     """Mean over games, then positions, so long episodes do not dominate KL."""
     grouped = {}
     for row in targets:
@@ -319,7 +339,9 @@ def _whole_dataset_kls(network, encoder, rules, targets, *, device, guard=None):
             for start in range(0, len(rows), 128):
                 if guard is not None:
                     guard()
-                tensors = _tensor_batch(network, encoder, rules, rows[start:start + 128], device)
+                tensors = _tensor_batch(
+                    network, encoder, rules, rows[start:start + 128], device, features
+                )
                 inputs, indices, mask, _, _, _, behavior, base, _, _ = tensors
                 logits, _ = network.masked_policy_value(inputs, indices)
                 log_policy = F.log_softmax(logits.masked_fill(~mask, -torch.inf), dim=1)
@@ -367,13 +389,14 @@ def train_fullgame_policy_epoch(
         parameter.device.type != device.split(":")[0] for parameter in parameters
     ):
         raise ValueError("PPO network must have trainable parameters on the configured device")
+    features = compile_epoch_features(targets.targets, encoder, guard=guard)
     sampler = GameBalancedSampler(targets.targets, seed=seed)
     sampler_rng_initial = sampler.rng.getstate()
     minibatches_per_pass = max(1, math.ceil(len(targets.targets) / schedule.minibatch_size))
     if guard is not None:
         guard()
     before_behavior_kl, before_base_kl = _whole_dataset_kls(
-        network, encoder, rules, targets.targets, device=device, guard=guard
+        network, encoder, rules, targets.targets, device=device, guard=guard, features=features
     )
     if before_behavior_kl > objective.behavior_kl_stop:
         raise ValueError("collection behavior snapshot differs beyond the full-buffer KL gate")
@@ -396,7 +419,7 @@ def train_fullgame_policy_epoch(
                 guard()
             rows = sampler.sample(schedule.minibatch_size)
             inputs, indices, mask, actions, old_p, advantages, behavior, base, wdl, base_wdl = (
-                _tensor_batch(network, encoder, rules, rows, device)
+                _tensor_batch(network, encoder, rules, rows, device, features)
             )
             logits, value_logits = network.masked_policy_value(inputs, indices)
             loss = fullgame_ppo_loss(
@@ -434,7 +457,7 @@ def train_fullgame_policy_epoch(
         if guard is not None:
             guard()
         behavior_kl, base_kl = _whole_dataset_kls(
-            network, encoder, rules, targets.targets, device=device, guard=guard
+            network, encoder, rules, targets.targets, device=device, guard=guard, features=features
         )
         if behavior_kl > objective.behavior_kl_stop:
             network.load_state_dict(model_before, strict=True)
@@ -453,7 +476,7 @@ def train_fullgame_policy_epoch(
     if guard is not None:
         guard()
     final_behavior_kl, final_base_kl = _whole_dataset_kls(
-        network, encoder, rules, targets.targets, device=device, guard=guard
+        network, encoder, rules, targets.targets, device=device, guard=guard, features=features
     )
     if rejected:
         # The final audit is observational too: if its guard callback advances
