@@ -140,6 +140,9 @@ def main():
         "ownv1_strength_runtime.py",
         "ownv1_posttraining.py",
     }
+    cohort_helper = a.helpers / "own45_cohort.py"
+    if cohort_helper.is_file():
+        helpers[cohort_helper.name] = sha(cohort_helper)
     assert required <= set(helpers)
     a.output.mkdir(parents=True, exist_ok=False)
     draft = json.loads(a.template.read_text())
