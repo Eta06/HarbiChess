@@ -1,0 +1,1815 @@
+{
+  "schema": 1,
+  "source_commit": "53899b6891a14f407b2a52633756914297ccd696",
+  "previous_archives": [
+    {
+      "inventory_path": "/workspace/work/harbichess/release/UFUK-artifact-inventory-20261003.json",
+      "inventory_sha256": "4d614f10508162f79a9e4ea151a98c263deb80610e35c13f1e9540ca4e381f2f",
+      "archive_sha256": "091ac0a206ea869d59b41b74bea3be0484ae3096e4beac2711344617fc09bc98"
+    },
+    {
+      "inventory_path": "/workspace/work/harbichess/release/supplement-20261004/UFUK-supplement-inventory-20261004.json",
+      "inventory_sha256": "81a077d702bde18add6c3ca0753a2479ff7842609c6b66f3d58ae1bf67ca69a5",
+      "archive_sha256": "5546ccf5d571e8ed5d06bea8c4b64b582650416fc5f9d9e19ce70c43e603708b"
+    },
+    {
+      "inventory_path": "/workspace/work/harbichess/release/context-tactical-supplement-20261004/UFUK-context-tactical-inventory-20261004.json",
+      "inventory_sha256": "70ad060492159f4711725b6bd91410393a7ad90573376a4c2053c7c3c73b509d",
+      "archive_sha256": "3f3c4e30b79699bb271aa966cbf7f8ff597a83772f8c511e34901ed696ed49c7"
+    },
+    {
+      "inventory_path": "/workspace/work/harbichess/release/sparse-search-supplement-20261004/UFUK-sparse-search-inventory-20261004.json",
+      "inventory_sha256": "3830d00927727d46d79e52f7f69cfebbc7bcf4b3cd46d63d35472a27dc123078",
+      "archive_sha256": "0b8ad1655701f1184c571f2941cd6c4c132deebadaedce6666563bb199e812b2"
+    },
+    {
+      "inventory_path": "/workspace/work/harbichess/release/joint-packed-supplement-20261004/UFUK-joint-packed-inventory-20261004.json",
+      "inventory_sha256": "505147920108bb78dde226b7f385452fb86343b115e5026b3f48ed09430ce56d",
+      "archive_sha256": "928ce1aa6215fcd69ef98d093584a19e340b625e12f070046f3ff5466ed89729"
+    },
+    {
+      "inventory_path": "/workspace/work/harbichess/release/broad-data-supplement-20261004/UFUK-broad-data-inventory-20261004.json",
+      "inventory_sha256": "07f0b8a19365e1ae27fba8e4a29eee80879929f761a75dd09ac3668ab4b749be",
+      "archive_sha256": "ff97d29bd7791cb6b152256ba71f3f5deadcf29cc886903094429be80c130f79"
+    }
+  ],
+  "previous_artifact_files_verified_unchanged": 46278,
+  "previous_archive_files_verified_unchanged": 6,
+  "file_count": 351,
+  "uncompressed_bytes": 355696047,
+  "files": [
+    {
+      "path": "artifacts/ufuk-broad-v4-complete-native-audit-20261004/all-native-checkpoints-command.json",
+      "bytes": 505,
+      "sha256": "2afef6cc49c1909bf6982ecba2c7a840ab1d4c985d384c496300209fc1786aed"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-complete-native-audit-20261004/all-native-checkpoints-result.json",
+      "bytes": 626,
+      "sha256": "04f8cba9bbd34b7650a459bb4d3040193b5240197af3d17017101c5f241ed2b2"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-complete-native-audit-20261004/all-native-checkpoints.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-complete-native-audit-20261004/all-native-checkpoints.stdout.log",
+      "bytes": 600,
+      "sha256": "f94072b0ef7c9c73f671d60b8844f79b7e2b90e8fb2b3d7d089a0fa7f4fdb988"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-complete-native-audit-20261004/profile.json",
+      "bytes": 520,
+      "sha256": "cf11a6b339cb975c9ccc23c1c11a8d9126bb2ccf8f1037b9ef8ff17042fb8953"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-complete-native-audit-20261004/progress.json",
+      "bytes": 120,
+      "sha256": "c383d65eb089a8287e4de612bd4949c614ee4a1b6a45a27543d19e9d0bc1f232"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-complete-native-audit-20261004/result.json",
+      "bytes": 1358,
+      "sha256": "0d928b514f59d38db3543cc7fc947d57ba9a6e9b51de6e02f0dd61313c3d902f"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-posttraining-checks-20261004/learning-gates-command.json",
+      "bytes": 499,
+      "sha256": "0a1078d91bea4e21770a2981a720e5565d6b21dc4cc57b4349547d6847ae4903"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-posttraining-checks-20261004/learning-gates-result.json",
+      "bytes": 621,
+      "sha256": "5110bdf1e65ae96f5f6d806eb3af33a160e1772373f8e70630464459c300e3d7"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-posttraining-checks-20261004/learning-gates.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-posttraining-checks-20261004/learning-gates.stdout.log",
+      "bytes": 778,
+      "sha256": "9b27be825c48fb8467d3c7c71332f9cc35651edae8049ca79cd6bb8d74ccd688"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-posttraining-checks-20261004/profile.json",
+      "bytes": 509,
+      "sha256": "a80bdac365c24257e7436f78bf987bd951d6d5fb3acbc893c34aa5b013cb9bb2"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-posttraining-checks-20261004/progress.json",
+      "bytes": 116,
+      "sha256": "99241625c7ff170888c42fed04eee5245f72e6a81d1facb1b1c6d3787cc642e5"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-posttraining-checks-20261004/result.json",
+      "bytes": 2178,
+      "sha256": "8ef2e2350aefc88015d87ac100e31989aefb7173436dc791b75eac6189c6b42a"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-posttraining-checks-20261004/trained-portable-parity-command.json",
+      "bytes": 503,
+      "sha256": "bb03c140e65ec59d8ee1ee19ca4b5b73bae1209703a8e52aeccd047961ddfa5d"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-posttraining-checks-20261004/trained-portable-parity-result.json",
+      "bytes": 623,
+      "sha256": "a8b594dc336cfebe1f5c243b31dfd8f6857453778523078db1983d7f692b87c3"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-posttraining-checks-20261004/trained-portable-parity.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-posttraining-checks-20261004/trained-portable-parity.stdout.log",
+      "bytes": 1654,
+      "sha256": "14bb9fa000f1cc080e7e7d011a8323b11800a841c277b81c8446f5f991a314fd"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261026-candidate-20261004/checkpoints/step-000000/checkpoint.json",
+      "bytes": 3317183,
+      "sha256": "4116b4ad9c5bce4584d239d6e467e236d7c8de0dab46fcd51661f209501c976d"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261026-candidate-20261004/checkpoints/step-000000/model.safetensors",
+      "bytes": 294764,
+      "sha256": "b618b0d11672347666e37c4cb5b508dca3060d99cbd047417d770bdd15596b4e"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261026-candidate-20261004/checkpoints/step-000000/training.pt",
+      "bytes": 7088,
+      "sha256": "568213ef7cc06deabf911c129af9e1f7cf9d8d7afe7ab1773eb4637391820d4e"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261026-candidate-20261004/checkpoints/step-001000/checkpoint.json",
+      "bytes": 3317862,
+      "sha256": "6b06d7146046a91cefdfbac58668d2fa3730c8fe25e7577b6d9d1125fbb9ebfb"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261026-candidate-20261004/checkpoints/step-001000/model.safetensors",
+      "bytes": 294764,
+      "sha256": "ee1069b56c4db0658df6611c0bf1105c30c1755420d3ae1c992f7096c8fbf2a9"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261026-candidate-20261004/checkpoints/step-001000/training.pt",
+      "bytes": 622586,
+      "sha256": "849a0d740964d14925baac9fdd8b1a59245fdb268426d31bb4c676fed1633d96"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261026-candidate-20261004/checkpoints/step-002000/checkpoint.json",
+      "bytes": 3318535,
+      "sha256": "ddf225ad224eb5f4cd5a3a2a8a5b023f915faf946ba9c6f12a74169a7cb6df0e"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261026-candidate-20261004/checkpoints/step-002000/model.safetensors",
+      "bytes": 294764,
+      "sha256": "c1e2293bb4583c5f035413ebc632a6efa40371c4b6aadd3772064e109b60137f"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261026-candidate-20261004/checkpoints/step-002000/training.pt",
+      "bytes": 622586,
+      "sha256": "adabcad97ab7d571e67639c2c02eff55317063aeb0886b89c353475127407f82"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261026-candidate-20261004/checkpoints/step-003000/checkpoint.json",
+      "bytes": 3319201,
+      "sha256": "58528dfd57cb34eee6032157c74dcbcabe048594ec6fe4aa320abc56cb9f0be1"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261026-candidate-20261004/checkpoints/step-003000/model.safetensors",
+      "bytes": 294764,
+      "sha256": "de081d223d02685492052ecf118a58ce4a7a134109c1a6420fe7fb237a3aaf79"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261026-candidate-20261004/checkpoints/step-003000/training.pt",
+      "bytes": 622586,
+      "sha256": "3225c3c07f6e8f0532bfe7228701d3314f9710a954ac737f6924785ce9beb462"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261026-candidate-20261004/checkpoints/step-004000/checkpoint.json",
+      "bytes": 3319867,
+      "sha256": "75e7893296e8d0166dcb5e04ce0643b2bdcce2dac83611c783098ac07c0e0dad"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261026-candidate-20261004/checkpoints/step-004000/model.safetensors",
+      "bytes": 294764,
+      "sha256": "593f1d04f01ff705193c7007d91b3298ac9e35671fde095fe6286b71c6f360c9"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261026-candidate-20261004/checkpoints/step-004000/training.pt",
+      "bytes": 622586,
+      "sha256": "adbbbc7ed3cb0f9f321b104b5df2640c18a57b857fda47d230df58b5edfbac29"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261026-candidate-20261004/checkpoints/step-005000/checkpoint.json",
+      "bytes": 3320540,
+      "sha256": "489339006f8d80d653fea11b84ac9a5630ef39551b6c44373dbb98fd337e2719"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261026-candidate-20261004/checkpoints/step-005000/model.safetensors",
+      "bytes": 294764,
+      "sha256": "96417f5449799ffac945a82c2af9ac75d60fb771d9c6a60c7bb90b7d1bb57348"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261026-candidate-20261004/checkpoints/step-005000/training.pt",
+      "bytes": 622586,
+      "sha256": "0c50cab400f7a32e05526472a4dbedbe195b8dc4be3b6fa9c91973cbfab412ac"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261026-candidate-20261004/checkpoints/step-006000/checkpoint.json",
+      "bytes": 3321209,
+      "sha256": "94a95a26e4d2a0e0fc2418b3799243e7ec534d07732adf177ccf4e898a35b0b9"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261026-candidate-20261004/checkpoints/step-006000/model.safetensors",
+      "bytes": 294764,
+      "sha256": "8d71fc6da9a3688461998e4ad0bea55be42f7c96176439bb6d3712a467ee3206"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261026-candidate-20261004/checkpoints/step-006000/training.pt",
+      "bytes": 622586,
+      "sha256": "042e6ce14d692c1411657eb42578e5c2b8268ad9ffc118b9e01d0e03f4ac3687"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261026-candidate-20261004/checkpoints/step-007000/checkpoint.json",
+      "bytes": 3321876,
+      "sha256": "8413ce949d3828d196c1f58460a7692b957d9a7f73e8e6f983f74d37b1334fc4"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261026-candidate-20261004/checkpoints/step-007000/model.safetensors",
+      "bytes": 294764,
+      "sha256": "6cad556e89cfa0b67705bbfe6d8b0c0dd7fbbc02481f1648e62570c6239e0c47"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261026-candidate-20261004/checkpoints/step-007000/training.pt",
+      "bytes": 622586,
+      "sha256": "87fde534f3d6dc4acb9858635c9e114b2d4a04cbbeab823734e03a44de4fcf61"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261026-candidate-20261004/checkpoints/step-008000/checkpoint.json",
+      "bytes": 3322548,
+      "sha256": "081dca58782f73a50525a23b4c3ae63070b1954502403f07a9be2724b83d67bd"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261026-candidate-20261004/checkpoints/step-008000/model.safetensors",
+      "bytes": 294764,
+      "sha256": "aa04a9bb90e997f824ada7a7a5a380bb5938f39970204ae0ea7598b0cfe8ea29"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261026-candidate-20261004/checkpoints/step-008000/training.pt",
+      "bytes": 622586,
+      "sha256": "71263b21f4c82db970a826ecab24fd1f3b9023f19260f067398f49e4c60387a9"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261026-candidate-20261004/checkpoints/step-009000/checkpoint.json",
+      "bytes": 3323218,
+      "sha256": "30983b6ed852e29b5f08dbeac182be4ddbb84c1929c9c63e693d9a9f4392a611"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261026-candidate-20261004/checkpoints/step-009000/model.safetensors",
+      "bytes": 294764,
+      "sha256": "74f15cb7d72b0200f8c5362159cf7d6e4adb9d8590f8403cc02f5a8abe2ced1e"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261026-candidate-20261004/checkpoints/step-009000/training.pt",
+      "bytes": 622586,
+      "sha256": "f47232f9c632cf4ab9729e676f0ff33dd7a394223022451aea3e084858f444e8"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261026-candidate-20261004/checkpoints/step-010000/checkpoint.json",
+      "bytes": 3323889,
+      "sha256": "f659e4ecc758d4149aedb452678461c86a74bb058e1a9d9463825c39dbb40df0"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261026-candidate-20261004/checkpoints/step-010000/model.safetensors",
+      "bytes": 294764,
+      "sha256": "262d46e831585af0c54f26a7aa94288f3148940b04cf2db1033cf6cab3136ac3"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261026-candidate-20261004/checkpoints/step-010000/training.pt",
+      "bytes": 622586,
+      "sha256": "8eff6aca872f7d192691b1f358c930ec2e6a8b5e1faf17defcf2b1fc69498d56"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261026-candidate-20261004/checkpoints/step-011000/checkpoint.json",
+      "bytes": 3324556,
+      "sha256": "1a5187e66355491f3e207f8c2e451af2db3a66ead2b4fef5cde7d7579ff752b9"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261026-candidate-20261004/checkpoints/step-011000/model.safetensors",
+      "bytes": 294764,
+      "sha256": "8b98b748c6dfd2c6906c263d739ff6410b2346175dc517473facb32495bdf6f2"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261026-candidate-20261004/checkpoints/step-011000/training.pt",
+      "bytes": 622586,
+      "sha256": "f7eb4146c6b4f602e1e55a0e0bb93ef9df77ce6433d4e05e9b5d2e1c2aae0c47"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261026-candidate-20261004/checkpoints/step-012000/checkpoint.json",
+      "bytes": 3325226,
+      "sha256": "bad9b876d39126a391d94dbcfc88412abd8cdbe662dbcf53c4b9bdc812f9a8fa"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261026-candidate-20261004/checkpoints/step-012000/model.safetensors",
+      "bytes": 294764,
+      "sha256": "9ec5cde289705e981cfc3ca1bf846bc59be9f40dae52decdd0d2d10cda9822a8"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261026-candidate-20261004/checkpoints/step-012000/training.pt",
+      "bytes": 622586,
+      "sha256": "50d9b31ad33bbe1caa7a90a00a0220350d3e6786e50dcfd69e18621bb107005e"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261026-candidate-20261004/checkpoints/step-013000/checkpoint.json",
+      "bytes": 3325897,
+      "sha256": "3bdb2ec42ba47a7f12106ce60495328c5b1eb34f8612bd064ccc4c0affa29d99"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261026-candidate-20261004/checkpoints/step-013000/model.safetensors",
+      "bytes": 294764,
+      "sha256": "4745e1168ee1da772ad3db743c527c4c1d9b02dd49907d8a802559b689f198b3"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261026-candidate-20261004/checkpoints/step-013000/training.pt",
+      "bytes": 622586,
+      "sha256": "5237af624f968bc703738f4fe2e1867bc085899b2cc71bc372a8a7b1843da5ba"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261026-candidate-20261004/checkpoints/step-014000/checkpoint.json",
+      "bytes": 3326565,
+      "sha256": "6cb6bcf0165ca5573155573f42ab31585be15366d5f59b06debff1b9748f31f0"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261026-candidate-20261004/checkpoints/step-014000/model.safetensors",
+      "bytes": 294764,
+      "sha256": "5f630ccc4e36f22ed5b5bfa46f97670415f5ef1a05251f0a10a99924aff07954"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261026-candidate-20261004/checkpoints/step-014000/training.pt",
+      "bytes": 622586,
+      "sha256": "4e7dc954a0b1bc3e7919e21a2c7edef2cb16c2fb09602f93b05162ff6962b494"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261026-candidate-20261004/checkpoints/step-015000/checkpoint.json",
+      "bytes": 3327230,
+      "sha256": "caefd628efcc242737b55fac321c51bf02f160c83dd62b26b1d769dc2f44ea2b"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261026-candidate-20261004/checkpoints/step-015000/model.safetensors",
+      "bytes": 294764,
+      "sha256": "a3f6afffad205f0f43cec40d772457186ac1ecfbfc57a88e751ca049c2de9704"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261026-candidate-20261004/checkpoints/step-015000/training.pt",
+      "bytes": 622586,
+      "sha256": "7bc4cc5c9cb9eb19ed557d5e7bc0455fe5465e80c1bc623033e536b70aa98fd7"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261026-candidate-20261004/checkpoints/step-016000/checkpoint.json",
+      "bytes": 3327897,
+      "sha256": "3e44e31dfcb08926645db37af860f5ec51aa81f0d6aeef88e11d2576029ad13c"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261026-candidate-20261004/checkpoints/step-016000/model.safetensors",
+      "bytes": 294764,
+      "sha256": "83c3e58f749547379a0e7b9417037e8238f0b281efb225d5c6f19c68c502e005"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261026-candidate-20261004/checkpoints/step-016000/training.pt",
+      "bytes": 622586,
+      "sha256": "ed342676ff1487e2382f4184bf39261e02c606450a7cde2a16e5c9e96131c9fe"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261026-candidate-20261004/checkpoints/step-017000/checkpoint.json",
+      "bytes": 3328570,
+      "sha256": "5125928d03253a37c18b5214e462e6b099cafc5d9c0b61a43064d1cc06eef752"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261026-candidate-20261004/checkpoints/step-017000/model.safetensors",
+      "bytes": 294764,
+      "sha256": "98a344f69ad1279ed5b1f6cf92045ee97b04ad62ed8a3c2d1d68209e67abb241"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261026-candidate-20261004/checkpoints/step-017000/training.pt",
+      "bytes": 622586,
+      "sha256": "566850a2e58cd749929c6e6a54df5a99e84bf893c799e7d402f29d74909e49f6"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261026-candidate-20261004/checkpoints/step-018000/checkpoint.json",
+      "bytes": 3329237,
+      "sha256": "c86d2a6f986d3acafc2708e2b1317d4f3bb1175174e17e288c7399bbbfcf977f"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261026-candidate-20261004/checkpoints/step-018000/model.safetensors",
+      "bytes": 294764,
+      "sha256": "4d43daf0d8f83f83b7489b5b76081b3b024d62ad3ba906aed340210c76a99e8a"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261026-candidate-20261004/checkpoints/step-018000/training.pt",
+      "bytes": 622586,
+      "sha256": "c67c37b94013d7aa4a54e2d535e15600dc5aa88149bf5f440c05569c9be2e7e9"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261026-candidate-20261004/checkpoints/step-019000/checkpoint.json",
+      "bytes": 3329909,
+      "sha256": "2a65c741c1b1eff482f661090dc94ccddd7312dfd21266c9996951e028756dad"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261026-candidate-20261004/checkpoints/step-019000/model.safetensors",
+      "bytes": 294764,
+      "sha256": "846182bbcbbafd3e60f35c474783dc7d30efbe659e79c165295146216829cf12"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261026-candidate-20261004/checkpoints/step-019000/training.pt",
+      "bytes": 622586,
+      "sha256": "929bfc1ccc5555c4ee93212886071d1ff2e57687e2370299207f30426639936b"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261026-candidate-20261004/checkpoints/step-020000/checkpoint.json",
+      "bytes": 3330578,
+      "sha256": "1bf34750dd5ca9be6cb461ae004d073e6196b8b563b17163c7ae1b4b2e19decf"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261026-candidate-20261004/checkpoints/step-020000/model.safetensors",
+      "bytes": 294764,
+      "sha256": "aefb4806f1cde1c957aa98bd5c9ce8c5d157bbe549755c98ad27fbe60b69a86a"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261026-candidate-20261004/checkpoints/step-020000/training.pt",
+      "bytes": 622586,
+      "sha256": "878ea419c996dcc4fb1961174efa4e72406a46eb5a04414def6ce540dbd608e0"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261026-candidate-20261004/checkpoints/step-021000/checkpoint.json",
+      "bytes": 3331250,
+      "sha256": "b0eb207a007aaa1bdf93a3809014f3135391b6c8ac9c3a300adde307a3d64496"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261026-candidate-20261004/checkpoints/step-021000/model.safetensors",
+      "bytes": 294764,
+      "sha256": "8fdf2937bc4ed783729a86d8e2faf7f01d88910f3b5907735fe49f1b423bd688"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261026-candidate-20261004/checkpoints/step-021000/training.pt",
+      "bytes": 622586,
+      "sha256": "498140a7183c71c703a94f2035551ba55da5775607cfdda07b5532f495bcb99d"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261026-candidate-20261004/checkpoints/step-022000/checkpoint.json",
+      "bytes": 3331915,
+      "sha256": "118cf755a2aea1a5c12c0f870c8329eba5b10a1a9d28ba5cf7637c064211cd0e"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261026-candidate-20261004/checkpoints/step-022000/model.safetensors",
+      "bytes": 294764,
+      "sha256": "11172f1a7a695997e590758abfd97a657d10671ffe2d461b6ef8171a879ffd7a"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261026-candidate-20261004/checkpoints/step-022000/training.pt",
+      "bytes": 622586,
+      "sha256": "cfca9d5393151280f29b1706163600a5263fb767e91db68bdc119288b27bc245"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261026-candidate-20261004/checkpoints/step-023000/checkpoint.json",
+      "bytes": 3332583,
+      "sha256": "a9a8fce81d9700260a63081da7c02f1a484a3920ee4f2fcc241353cedacca2c3"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261026-candidate-20261004/checkpoints/step-023000/model.safetensors",
+      "bytes": 294764,
+      "sha256": "66963823547bf84f76083abbaf66c6dd5461e2b45de888197516129cbb27e864"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261026-candidate-20261004/checkpoints/step-023000/training.pt",
+      "bytes": 622586,
+      "sha256": "081701586cfb216203cb12dc2d63afca3ae5390249b84c48930fce81f64ea123"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261026-candidate-20261004/checkpoints/step-024000/checkpoint.json",
+      "bytes": 3333251,
+      "sha256": "978a1d423f28fcfc01869da87772359bbde0fc079f7c92bfa05c5b19c3fe2636"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261026-candidate-20261004/checkpoints/step-024000/model.safetensors",
+      "bytes": 294764,
+      "sha256": "e6f1ec0f6704d3ef9d19eca008cd5234f91d5ee425ec12a652094ef98ceb995f"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261026-candidate-20261004/checkpoints/step-024000/training.pt",
+      "bytes": 622586,
+      "sha256": "34507574bfdf016f7de633509bf5ced49275c535879e3478ef10892418be5038"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261026-candidate-20261004/checkpoints/step-025000/checkpoint.json",
+      "bytes": 3333921,
+      "sha256": "53dffdbcfeca694fde5972d7cc92bcc6e84f1aa84329bc195afd39a072f161c8"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261026-candidate-20261004/checkpoints/step-025000/model.safetensors",
+      "bytes": 294764,
+      "sha256": "ba717c7381d1e652ac4a0567f97bd3a5f8b461a93a8b74d278e5da25d5eacade"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261026-candidate-20261004/checkpoints/step-025000/training.pt",
+      "bytes": 622586,
+      "sha256": "8e00d2f201da3a55ad6c0f4d98e30772079b9c867220b11ee830aac3278d7d05"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261026-candidate-20261004/checkpoints/step-026000/checkpoint.json",
+      "bytes": 3334589,
+      "sha256": "670488d6013a2487f06e9ca2872c02c02c78b3e71c1c864c055808a87aa52bc4"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261026-candidate-20261004/checkpoints/step-026000/model.safetensors",
+      "bytes": 294764,
+      "sha256": "6ea8cd48e7089bd881d426b9d5880e60ffc8e19258af1400933aaa45092bcfbf"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261026-candidate-20261004/checkpoints/step-026000/training.pt",
+      "bytes": 622586,
+      "sha256": "a2fa7b452bf9cc08c97ba02d46c8fa70baa13fa55620aea32c36e08cef587eec"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261026-candidate-20261004/checkpoints/step-027000/checkpoint.json",
+      "bytes": 3335260,
+      "sha256": "dcd236e23884403125061a77f4cd93adaa97ea7fec025820becbf65ab43cdb3f"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261026-candidate-20261004/checkpoints/step-027000/model.safetensors",
+      "bytes": 294764,
+      "sha256": "d65b89fc8babcad7aa72a6a8ac7e23aee784ebddf148b713c31780b880983057"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261026-candidate-20261004/checkpoints/step-027000/training.pt",
+      "bytes": 622586,
+      "sha256": "c7a95d99d50a2da1b8bf2990687bb126c196cbe7a02e18bb2c6249567c5b71f5"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261026-candidate-20261004/checkpoints/step-028000/checkpoint.json",
+      "bytes": 3335931,
+      "sha256": "adf411c6501ca51354fde924bf238599353051ef79ecf98281aeb1e8372d2cf0"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261026-candidate-20261004/checkpoints/step-028000/model.safetensors",
+      "bytes": 294764,
+      "sha256": "83b03b58a2f089423de292296f463a286877bebe64591ac5c96142b47cf1b7d5"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261026-candidate-20261004/checkpoints/step-028000/training.pt",
+      "bytes": 622586,
+      "sha256": "ac1de73a7ef17a7cc32f0c4abe01f30b6c1c3a259dc9c56794735c694524b771"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261026-candidate-20261004/checkpoints/step-029000/checkpoint.json",
+      "bytes": 3336596,
+      "sha256": "87e70d4b5c4dc449d6ac60cf73e8ec1d35281839deb0eeef8cec0a4b1773274e"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261026-candidate-20261004/checkpoints/step-029000/model.safetensors",
+      "bytes": 294764,
+      "sha256": "3e26cb50634d9dba40bdb8f109591fca288242a83526accac9e384b0c387cccc"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261026-candidate-20261004/checkpoints/step-029000/training.pt",
+      "bytes": 622586,
+      "sha256": "b2d0a7ff2625256a57a0e2d2d95490faf8046694661ff637d9aa87e4a3dbf22d"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261026-candidate-20261004/checkpoints/step-030000/checkpoint.json",
+      "bytes": 3337268,
+      "sha256": "742eec9c5af421c8adab483ece948611b05dc464276c087956d7c59c6b868918"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261026-candidate-20261004/checkpoints/step-030000/model.safetensors",
+      "bytes": 294764,
+      "sha256": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261026-candidate-20261004/checkpoints/step-030000/training.pt",
+      "bytes": 622586,
+      "sha256": "504349e003834698e43f2fc0f764ac99f8d9fcc7bda990b0fbbd4bbb4aca2b7e"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261026-candidate-20261004/metadata.json",
+      "bytes": 52293,
+      "sha256": "a4f782c46e0950e1fb2ce71f74644d82ea578ddd8b2b5b0e53f5bb4ac2057d74"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261026-candidate-20261004/progress.jsonl",
+      "bytes": 24303,
+      "sha256": "80856da1e691da1df2f0b44c037b954f26834b3ef8773d5f60bd0e397acf4323"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261026-candidate-20261004/result-step-001000.json",
+      "bytes": 1411,
+      "sha256": "afda5653c4073b4a233590fa9b372c1f91f364a9427cb770a6961fcc0abf213d"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261026-candidate-20261004/result-step-030000.json",
+      "bytes": 1513,
+      "sha256": "65b85b8bee932eea73578eb49eed717fcbc5c82cce8aca51571ead90f060b8c0"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261026-control-20261004/checkpoints/step-000000/checkpoint.json",
+      "bytes": 3363725,
+      "sha256": "8d1922e0b823d0e0e42f6c4b985425303aaeccb8d93a1e0c04ff1a0550f21d3d"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261026-control-20261004/checkpoints/step-000000/model.safetensors",
+      "bytes": 294764,
+      "sha256": "b618b0d11672347666e37c4cb5b508dca3060d99cbd047417d770bdd15596b4e"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261026-control-20261004/checkpoints/step-000000/training.pt",
+      "bytes": 7088,
+      "sha256": "568213ef7cc06deabf911c129af9e1f7cf9d8d7afe7ab1773eb4637391820d4e"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261026-control-20261004/checkpoints/step-001000/checkpoint.json",
+      "bytes": 3364401,
+      "sha256": "ebb88565053f97890bdbdcac0c17ff697748fcd35ac79b2eea63f51bb552b4b9"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261026-control-20261004/checkpoints/step-001000/model.safetensors",
+      "bytes": 294764,
+      "sha256": "626570b239c17ebbd0211a24881371807839a21b11f0696a83700168e57aef65"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261026-control-20261004/checkpoints/step-001000/training.pt",
+      "bytes": 622586,
+      "sha256": "7d8e6b9da62d1cd58686dd6c91b1e447d6073ac43102e97edde3339585aaade1"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261026-control-20261004/checkpoints/step-002000/checkpoint.json",
+      "bytes": 3365074,
+      "sha256": "0c94c6de0384409fcc2f01afd07bac00913c3daa7ff2d9a9f3b3669196704618"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261026-control-20261004/checkpoints/step-002000/model.safetensors",
+      "bytes": 294764,
+      "sha256": "6484ccd5ba42811e41d39b52ec41b58f09cffd304442d162e99c498ec5513f6c"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261026-control-20261004/checkpoints/step-002000/training.pt",
+      "bytes": 622586,
+      "sha256": "f5295ce1e6d452d5d7a6e5b7aed74066e4eac1fb51fd1d58e29b55cc1648e7f3"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261026-control-20261004/checkpoints/step-003000/checkpoint.json",
+      "bytes": 3365741,
+      "sha256": "045a558f3c552383855f921a55f22dcef5a64654e9a247ddb18cd2cbc256056a"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261026-control-20261004/checkpoints/step-003000/model.safetensors",
+      "bytes": 294764,
+      "sha256": "b12ff9aa84d5d6502f0b385b8b263c47f35e171c651584c9abe0a4fc89e58d1c"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261026-control-20261004/checkpoints/step-003000/training.pt",
+      "bytes": 622586,
+      "sha256": "e7724516a953f6e0d2bd45d8255ad3620a17a8391f60eac113f82e09e3dcfd26"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261026-control-20261004/checkpoints/step-004000/checkpoint.json",
+      "bytes": 3366409,
+      "sha256": "35e1ae93b8bc89c50c7f2a6940d5ea620c630dea2a384c423974f5e22fb4be86"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261026-control-20261004/checkpoints/step-004000/model.safetensors",
+      "bytes": 294764,
+      "sha256": "db3f7d51eb65b7ce9c831663cf8684d3997cc24c7272bb16ed447cde3a186b02"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261026-control-20261004/checkpoints/step-004000/training.pt",
+      "bytes": 622586,
+      "sha256": "0c742175e38d9a677592530f85e66f524d78695bda45b0512e39db0daee967b8"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261026-control-20261004/checkpoints/step-005000/checkpoint.json",
+      "bytes": 3367079,
+      "sha256": "3430dfc734a7ad7a95284cd1938c4aeeaeee1b3addc26af5a67fd1aa588af46d"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261026-control-20261004/checkpoints/step-005000/model.safetensors",
+      "bytes": 294764,
+      "sha256": "6da5a08d7d1b130fce16fe66ec5ccf131f33245dbce65e5fcf0c101e27e00d94"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261026-control-20261004/checkpoints/step-005000/training.pt",
+      "bytes": 622586,
+      "sha256": "10846c6e4b39e534205aa3e254a0df8ae92a63ce0c709db60a3669c1e1ff42b0"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261026-control-20261004/checkpoints/step-006000/checkpoint.json",
+      "bytes": 3367749,
+      "sha256": "6685257b45636fff1247a39f8e7ddf87629c8d9ccc27732668f11ec06d6d124f"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261026-control-20261004/checkpoints/step-006000/model.safetensors",
+      "bytes": 294764,
+      "sha256": "e28fb48dc391b05fa3a07eeceb792458f9e3acb966894220cb1f5a821800b757"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261026-control-20261004/checkpoints/step-006000/training.pt",
+      "bytes": 622586,
+      "sha256": "f92bed07d7ff5a1ca6a7dc531f973d03df7918a8ad6837528e001310f8116aad"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261026-control-20261004/checkpoints/step-007000/checkpoint.json",
+      "bytes": 3368413,
+      "sha256": "2ba8db523d002d7d7495b614ee96db2a3aac869030366679186b41d5c036d36f"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261026-control-20261004/checkpoints/step-007000/model.safetensors",
+      "bytes": 294764,
+      "sha256": "630f7ff8fa70cf8547f5519a7ec636de29a6221ce89c1aeedbacbd9bf71710f2"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261026-control-20261004/checkpoints/step-007000/training.pt",
+      "bytes": 622586,
+      "sha256": "0b4326080f00e6413075ecdb476564f6fde06839126d116f0ce04401b975ce3b"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261026-control-20261004/checkpoints/step-008000/checkpoint.json",
+      "bytes": 3369080,
+      "sha256": "9de7d1f54aec26149b617610bfc8a515922ab6787c7432d0cab4e548b41c5a8e"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261026-control-20261004/checkpoints/step-008000/model.safetensors",
+      "bytes": 294764,
+      "sha256": "3ac61d79d431c1b6327c4515d36c1f4325ade755e768da7b231bb929dad9b525"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261026-control-20261004/checkpoints/step-008000/training.pt",
+      "bytes": 622586,
+      "sha256": "cf0fecddceb83df0e016603ce2931a6618f86f5899d1d38a7dd1bf80b0b9b821"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261026-control-20261004/checkpoints/step-009000/checkpoint.json",
+      "bytes": 3369750,
+      "sha256": "135da49bf99025c9a1bbf93784e90475dc3e31ea00c6509d154f2e1407c7a182"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261026-control-20261004/checkpoints/step-009000/model.safetensors",
+      "bytes": 294764,
+      "sha256": "dcf4bd58bde48c55ea634051da4e8440b574d04aa75a58614de888a6edbcb5ea"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261026-control-20261004/checkpoints/step-009000/training.pt",
+      "bytes": 622586,
+      "sha256": "f878db72529f9a81959fe30d32a7aef63ab592701b5a0a63854671818135d6a1"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261026-control-20261004/checkpoints/step-009500/checkpoint.json",
+      "bytes": 3369750,
+      "sha256": "a0ed26435b217304b1e2b94fc9d037c5b7ebe6c64b466c6ae76b8596d768436b"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261026-control-20261004/checkpoints/step-009500/model.safetensors",
+      "bytes": 294764,
+      "sha256": "c47f012d7c291f6e765b25a1ba3b31196309656d99c43bd23946aae11cf8f1b5"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261026-control-20261004/checkpoints/step-009500/training.pt",
+      "bytes": 622586,
+      "sha256": "6c5665e56e55979c0a7d340912b0c13734631513b5ecbdaf1dacbda19674eaa3"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261026-control-20261004/metadata.json",
+      "bytes": 11329,
+      "sha256": "ef7b9108ad99f83cd2c72c36ea0d0aee5af1a6d0c28aedbdb6a78bbd1b265615"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261026-control-20261004/progress.jsonl",
+      "bytes": 7225,
+      "sha256": "74e363d2a685aee8e382c5a3a4e9e7fdc94680dbc7ee9383e5d3bd5fd6821f3a"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261026-control-20261004/result-step-001000.json",
+      "bytes": 1403,
+      "sha256": "f3a9004f9d63470bfcb17f97ea43054f95fa89fb23415e9b0998283f244ce81b"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261026-control-20261004/result-step-009500.json",
+      "bytes": 1512,
+      "sha256": "555297739717c3e88b3bfe79cb18e34dce1cb52deca1d1a52088ca69601493b5"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261028-candidate-20261004/checkpoints/step-000000/checkpoint.json",
+      "bytes": 3317184,
+      "sha256": "0c820c2fce1514a0bbb0bf36085dad84db6c2590826280a5a820f6daa50b7716"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261028-candidate-20261004/checkpoints/step-000000/model.safetensors",
+      "bytes": 294764,
+      "sha256": "b618b0d11672347666e37c4cb5b508dca3060d99cbd047417d770bdd15596b4e"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261028-candidate-20261004/checkpoints/step-000000/training.pt",
+      "bytes": 7088,
+      "sha256": "9423ad087d42626c96ea3895cfe3c41a032b724f4f7d3f26ce2905fdb2e844ed"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261028-candidate-20261004/checkpoints/step-001000/checkpoint.json",
+      "bytes": 3317861,
+      "sha256": "5b1bff2221f51cb68392aa35adf3d3d39c34510069e788c5adea818e307ca36a"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261028-candidate-20261004/checkpoints/step-001000/model.safetensors",
+      "bytes": 294764,
+      "sha256": "3d27a319aa26439bac0d580d9c06da20b98cc0130b4b5bba86e15957e9d4a78b"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261028-candidate-20261004/checkpoints/step-001000/training.pt",
+      "bytes": 622586,
+      "sha256": "8015bdff2f8465857edf401d8226f35b215ed7b7059210c423ede99ecb1a12b5"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261028-candidate-20261004/checkpoints/step-002000/checkpoint.json",
+      "bytes": 3318532,
+      "sha256": "08638b169c64a0559f5fd6d94c347943247292a30034012b8bc086286f36dfd5"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261028-candidate-20261004/checkpoints/step-002000/model.safetensors",
+      "bytes": 294764,
+      "sha256": "7df4fde22db08628d3ef48aee00d238d86cd31661c81a65440fd814d49b38014"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261028-candidate-20261004/checkpoints/step-002000/training.pt",
+      "bytes": 622586,
+      "sha256": "b075704ce4a173e6073edebe00da14d85030106e502893c6f797425ddbbce371"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261028-candidate-20261004/checkpoints/step-003000/checkpoint.json",
+      "bytes": 3319200,
+      "sha256": "a2bc0cc6fd904f5dfe5debb2ad49b166d0ddfb058c50d41537ffa2d61fbea4ef"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261028-candidate-20261004/checkpoints/step-003000/model.safetensors",
+      "bytes": 294764,
+      "sha256": "2c82ab8995922a2156b12ab6218b8028ead580d6df2b1db647c7c432f3a40ba0"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261028-candidate-20261004/checkpoints/step-003000/training.pt",
+      "bytes": 622586,
+      "sha256": "6144b64f08c8c18231e3d7b565489f4eb69816682e08addb6ebab318416c1e59"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261028-candidate-20261004/checkpoints/step-004000/checkpoint.json",
+      "bytes": 3319873,
+      "sha256": "c589bd3f32da8cda581f19c4dd9b84bafb72198b184b94a98d2b752d853b8020"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261028-candidate-20261004/checkpoints/step-004000/model.safetensors",
+      "bytes": 294764,
+      "sha256": "9a8b953aa5f011390eefdb9debadac204e12d37ddf956b5a13a995f1cd3e0bb3"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261028-candidate-20261004/checkpoints/step-004000/training.pt",
+      "bytes": 622586,
+      "sha256": "d686635faf00d97adfe10df3371a8183330035a46e3ffb59d5a056b92fe58707"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261028-candidate-20261004/checkpoints/step-005000/checkpoint.json",
+      "bytes": 3320543,
+      "sha256": "9c97394345c1d31ed3ab3d0e1a6b57c6e85724dce337eb6685ed427a31deb93a"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261028-candidate-20261004/checkpoints/step-005000/model.safetensors",
+      "bytes": 294764,
+      "sha256": "f0141d763f938ada2f32afb63f10618c21958a297df52aad4dc61468f89d0116"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261028-candidate-20261004/checkpoints/step-005000/training.pt",
+      "bytes": 622586,
+      "sha256": "ff7f686764ebbacd4b6e7f30b96973f94b107cd16adf1b0dec19dd345454cd02"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261028-candidate-20261004/checkpoints/step-006000/checkpoint.json",
+      "bytes": 3321210,
+      "sha256": "8b18607994d645ef865c37f806f1a606e9f3f89a2b09646602382d9dfbe69da8"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261028-candidate-20261004/checkpoints/step-006000/model.safetensors",
+      "bytes": 294764,
+      "sha256": "162c92fc869d593b4699eee49483d2507609705af84c8b42908daa417b3cd946"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261028-candidate-20261004/checkpoints/step-006000/training.pt",
+      "bytes": 622586,
+      "sha256": "597bf58fcf7be7a06ee2c854bfe9223d827f158abb5ab97ee1739671a2921346"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261028-candidate-20261004/checkpoints/step-007000/checkpoint.json",
+      "bytes": 3321877,
+      "sha256": "a2162a5376ca7a76da8be7b9511484f9d52097ffc72c195fc551bfa138407dd2"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261028-candidate-20261004/checkpoints/step-007000/model.safetensors",
+      "bytes": 294764,
+      "sha256": "368ba09fe6a554a3bd7d41a035d3af06e6151df135ccde67415f8d96837ef752"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261028-candidate-20261004/checkpoints/step-007000/training.pt",
+      "bytes": 622586,
+      "sha256": "2193e91c336d4e870ff7a1e464a454defd08d8d3be7ed83a5a98ceae9455d4a9"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261028-candidate-20261004/checkpoints/step-008000/checkpoint.json",
+      "bytes": 3322549,
+      "sha256": "4dadef39c380911b2754927f979f693a4ad7c20ce40228b25fbeabd46770b619"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261028-candidate-20261004/checkpoints/step-008000/model.safetensors",
+      "bytes": 294764,
+      "sha256": "e5693eddfc22191d95172fc1cf687fdb7d087257bec0ec93c1d4793eccbf00a6"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261028-candidate-20261004/checkpoints/step-008000/training.pt",
+      "bytes": 622586,
+      "sha256": "b5769f777f5e57a4939545187920f1a8d1dd99b1fce86d841986bf19e8654dd1"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261028-candidate-20261004/checkpoints/step-009000/checkpoint.json",
+      "bytes": 3323218,
+      "sha256": "d07be6fddeabff21c562868328b1ef6c58d795aae21538b7d6ae7b292bf86d97"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261028-candidate-20261004/checkpoints/step-009000/model.safetensors",
+      "bytes": 294764,
+      "sha256": "cd89b8e1cf7410867858bd0645cf5bcffbc256470b4eb9fad3d9b39be3e9b48d"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261028-candidate-20261004/checkpoints/step-009000/training.pt",
+      "bytes": 622586,
+      "sha256": "fbdbccacd852b5922bd7ed90fecef2d9500357daee89e182eb8aa0d4c783da03"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261028-candidate-20261004/checkpoints/step-010000/checkpoint.json",
+      "bytes": 3323888,
+      "sha256": "4961f193f1335f4acfa3821eb322a0ce4228bd35f536d1debf41aabb40fec1fb"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261028-candidate-20261004/checkpoints/step-010000/model.safetensors",
+      "bytes": 294764,
+      "sha256": "6f16dadb8df6589c9a3089a8838ec7471bb58c1f9ed9877d4e6368f1a62d0e6b"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261028-candidate-20261004/checkpoints/step-010000/training.pt",
+      "bytes": 622586,
+      "sha256": "ef4e9135f150e8c2490bd9cfa260b1b73d438c440f0379c17bec42a953bb014c"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261028-candidate-20261004/checkpoints/step-011000/checkpoint.json",
+      "bytes": 3324558,
+      "sha256": "287f6b094d295a0f44a8767a3d18ac95519c1a9453d5e61262e28ddc3882abb1"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261028-candidate-20261004/checkpoints/step-011000/model.safetensors",
+      "bytes": 294764,
+      "sha256": "75b0f90290da925e8d98b5d839d9a4d68d86f641c19179d7b4385c551d8576b4"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261028-candidate-20261004/checkpoints/step-011000/training.pt",
+      "bytes": 622586,
+      "sha256": "67903fceff402aed2a26650ffbae701177c2584c0561c4486ad96cb205639dd4"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261028-candidate-20261004/checkpoints/step-012000/checkpoint.json",
+      "bytes": 3325226,
+      "sha256": "2c7898f34699583ebc1084b13039ec5f7d22a0e01aca0ccdedcf65e9ecd057b1"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261028-candidate-20261004/checkpoints/step-012000/model.safetensors",
+      "bytes": 294764,
+      "sha256": "18da8f15d2fe1e61b492b71c12a7749bc609dd99683d30024a3c34157efe4e49"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261028-candidate-20261004/checkpoints/step-012000/training.pt",
+      "bytes": 622586,
+      "sha256": "484dd74da11708b823dec409702555ecd212d92b5c018fc81fdb816b3cccd5cd"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261028-candidate-20261004/checkpoints/step-013000/checkpoint.json",
+      "bytes": 3325893,
+      "sha256": "162d3243e4d0ee263ed91e5bcbff446813af6f821332eb2702df4115906f88f1"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261028-candidate-20261004/checkpoints/step-013000/model.safetensors",
+      "bytes": 294764,
+      "sha256": "e1ba61edadfaf652db3fd0ecf9a300205aaeb3c8757644909a6318b6754ef091"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261028-candidate-20261004/checkpoints/step-013000/training.pt",
+      "bytes": 622586,
+      "sha256": "d193d3048c9e031060194a66102258432aeaa51503f886d9ffca3ab774809555"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261028-candidate-20261004/checkpoints/step-014000/checkpoint.json",
+      "bytes": 3326563,
+      "sha256": "d9e6c205ef1c56595251027b37d6b5355fb29cfbbdd49521edbe9796922fe99e"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261028-candidate-20261004/checkpoints/step-014000/model.safetensors",
+      "bytes": 294764,
+      "sha256": "dfc21377cf3fd2bc2fc17e6d3f5541253f8273ddd30fe5087e0bf23131479084"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261028-candidate-20261004/checkpoints/step-014000/training.pt",
+      "bytes": 622586,
+      "sha256": "6fd3653c84fef44b9fdfd9f316d3d2fbb47a1499a94d515d55f6dd1951c4c2b6"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261028-candidate-20261004/checkpoints/step-015000/checkpoint.json",
+      "bytes": 3327234,
+      "sha256": "bc022e00623ded21cb7ec2dff9fe2f2ff561e6e025539d0b71d29f60984cce3d"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261028-candidate-20261004/checkpoints/step-015000/model.safetensors",
+      "bytes": 294764,
+      "sha256": "98d4a87c7fd28d4b7570a6e392b555630f2707325734fdca33b933e551b0ed04"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261028-candidate-20261004/checkpoints/step-015000/training.pt",
+      "bytes": 622586,
+      "sha256": "233eb21f05874d433cdba1cecf0d9f3e15678892694ec3b5658ae278216d332f"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261028-candidate-20261004/checkpoints/step-016000/checkpoint.json",
+      "bytes": 3327906,
+      "sha256": "bb3b7a998e2a3982f2ffc5be7c12b6a1ed1506cc46678edffbad7ebbc7e7d318"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261028-candidate-20261004/checkpoints/step-016000/model.safetensors",
+      "bytes": 294764,
+      "sha256": "d64ac1f2760b60bef271f51b03e56635463d823efd206f3bdb7cd14cae26d94a"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261028-candidate-20261004/checkpoints/step-016000/training.pt",
+      "bytes": 622586,
+      "sha256": "5097551b1d122b964fa931c07f86975fb45d576dd3010be26930dc2072b422bb"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261028-candidate-20261004/checkpoints/step-017000/checkpoint.json",
+      "bytes": 3328577,
+      "sha256": "b5bd380fdd33d104b11b49697c2040a3938a88cc08139436bfb2c86bb74d7859"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261028-candidate-20261004/checkpoints/step-017000/model.safetensors",
+      "bytes": 294764,
+      "sha256": "b02b3588fb12a79d1f3bc3f34e5151df47461b6285e00016ba7836f835f5b657"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261028-candidate-20261004/checkpoints/step-017000/training.pt",
+      "bytes": 622586,
+      "sha256": "c78b224f77df1a7ccbd094f4e828a7e5e4e7d3ba0e300dbc8568b22e2f24d6d7"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261028-candidate-20261004/checkpoints/step-018000/checkpoint.json",
+      "bytes": 3329245,
+      "sha256": "0df9c9df087f7d01a46b1feb0a75338da81d7798debdc279392bbc86771eb627"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261028-candidate-20261004/checkpoints/step-018000/model.safetensors",
+      "bytes": 294764,
+      "sha256": "74a516347e44b151ad45c3683d8e5b4c920d2416eda14a8349675b9f5a82ae55"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261028-candidate-20261004/checkpoints/step-018000/training.pt",
+      "bytes": 622586,
+      "sha256": "85b0b12adf207a0730a77196351a3064f29888dc23c78cde5293198178f3908e"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261028-candidate-20261004/checkpoints/step-019000/checkpoint.json",
+      "bytes": 3329915,
+      "sha256": "ec55fe48c0a4584d2f54b73f423194c4d821707c30f161f1f92fabb13b24d84d"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261028-candidate-20261004/checkpoints/step-019000/model.safetensors",
+      "bytes": 294764,
+      "sha256": "d29fd656fe78d07b3b77f85c4f66eeeab62c231ef5f6f4190a52a129cd2400d9"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261028-candidate-20261004/checkpoints/step-019000/training.pt",
+      "bytes": 622586,
+      "sha256": "96f70c34643d94e6786b812738a678ce93ca0edfd2a95bf8b626a7a4cca4527f"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261028-candidate-20261004/checkpoints/step-020000/checkpoint.json",
+      "bytes": 3330586,
+      "sha256": "c3b260173d0f237fb51987d82b14d75da755f3e3e2fe118f4db5024ff4b616fc"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261028-candidate-20261004/checkpoints/step-020000/model.safetensors",
+      "bytes": 294764,
+      "sha256": "2e79d9a7d9a5b71d56dc43cc162741da3ff4782fdce30a1eb6e43299e07933c3"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261028-candidate-20261004/checkpoints/step-020000/training.pt",
+      "bytes": 622586,
+      "sha256": "71b04054b9c948ffffed62216e7167a3191077fb843001250b990d687ac15213"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261028-candidate-20261004/checkpoints/step-021000/checkpoint.json",
+      "bytes": 3331255,
+      "sha256": "57b81d8a38332178c96dbf8a022ecc0b72d257462259d4743d2f3cba54bae9ae"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261028-candidate-20261004/checkpoints/step-021000/model.safetensors",
+      "bytes": 294764,
+      "sha256": "70df55c9971f158cf2a9329e70c10ceaf93feccfdf4e8adeadc546e2524d2200"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261028-candidate-20261004/checkpoints/step-021000/training.pt",
+      "bytes": 622586,
+      "sha256": "f7eab2356e24ed29f90bfdb440e68f59118639497304395c78a07fe845cb37d1"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261028-candidate-20261004/checkpoints/step-022000/checkpoint.json",
+      "bytes": 3331926,
+      "sha256": "e688e018496dc1eb1f57b785075da784859e93dbdee8cad4369ee9ec7c3d2157"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261028-candidate-20261004/checkpoints/step-022000/model.safetensors",
+      "bytes": 294764,
+      "sha256": "d7014db113536585f9dea4d5d4c5dc5a24a531d653ef3877e1311b518e8e0936"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261028-candidate-20261004/checkpoints/step-022000/training.pt",
+      "bytes": 622586,
+      "sha256": "3c7f8066116648a7b6ace1abbb97575d50c311293c02517c91e6d430de49cd2e"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261028-candidate-20261004/checkpoints/step-023000/checkpoint.json",
+      "bytes": 3332596,
+      "sha256": "98c2d8edcd403cf1c06027e07324a92da6604a37d61252e690fbbd63291cf1e4"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261028-candidate-20261004/checkpoints/step-023000/model.safetensors",
+      "bytes": 294764,
+      "sha256": "7d88dcb932ba293d99460bb7f64591a0fcc947bdb53042d763ac4c9b46838bf8"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261028-candidate-20261004/checkpoints/step-023000/training.pt",
+      "bytes": 622586,
+      "sha256": "709345b8038d6664a9ccb7cce8bc77c04c5510f32432cf6086772cf496e06bbb"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261028-candidate-20261004/checkpoints/step-024000/checkpoint.json",
+      "bytes": 3333267,
+      "sha256": "8e96243722005cffdbfbdeb4064cc268a3de25451774a354d047e6650c412170"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261028-candidate-20261004/checkpoints/step-024000/model.safetensors",
+      "bytes": 294764,
+      "sha256": "0f6d915d10666ff95827d79cfced3cef0de3615b9fc52f50360d9565bffc9d61"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261028-candidate-20261004/checkpoints/step-024000/training.pt",
+      "bytes": 622586,
+      "sha256": "0b51f2ee57a9c63cfc90bd0a40707e542d223e0c5f331257e2967674dce94e18"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261028-candidate-20261004/checkpoints/step-025000/checkpoint.json",
+      "bytes": 3333935,
+      "sha256": "e49efd929b94c111c61a0c9941af897d0a24e9f29b5b4f1f258ebbe3af84dab9"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261028-candidate-20261004/checkpoints/step-025000/model.safetensors",
+      "bytes": 294764,
+      "sha256": "6822c60c46f33daf265a14a2d7648d3fb4c849d984ded28eaaf43f0e966e14b7"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261028-candidate-20261004/checkpoints/step-025000/training.pt",
+      "bytes": 622586,
+      "sha256": "1245b927e53f693837a4102211a5c7d40b04de63433e795dafa28ce76bcdf514"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261028-candidate-20261004/checkpoints/step-026000/checkpoint.json",
+      "bytes": 3334608,
+      "sha256": "c84552470fc876075c68bf786c29dbc7d69af3b65257863ab5b09cb3ba1f2b01"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261028-candidate-20261004/checkpoints/step-026000/model.safetensors",
+      "bytes": 294764,
+      "sha256": "f3db2533b28cceaf947646086ea10da40848d70a4a0b596fa6ec979d6cba4415"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261028-candidate-20261004/checkpoints/step-026000/training.pt",
+      "bytes": 622586,
+      "sha256": "6455205965f517c272640396506b047a581480192a65db47a92b661ef99b03a8"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261028-candidate-20261004/checkpoints/step-027000/checkpoint.json",
+      "bytes": 3335279,
+      "sha256": "cb8b2cf4b39cf4ced1fccdb036d6981aea4083696ceb99537824da9c4d505648"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261028-candidate-20261004/checkpoints/step-027000/model.safetensors",
+      "bytes": 294764,
+      "sha256": "828459c38793a2f8ea6bc3cb17c93dc42b8479f6ca9750973daff8b5dc406738"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261028-candidate-20261004/checkpoints/step-027000/training.pt",
+      "bytes": 622586,
+      "sha256": "4d14f5ea66b01aa821b20a712bc61abe2a6092a2b83fdfd64cefaf79a277c806"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261028-candidate-20261004/checkpoints/step-028000/checkpoint.json",
+      "bytes": 3335946,
+      "sha256": "809d1b57042fa0c506dea835569a3ef9f4eff10efabe4e8e3ad789ba39589c65"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261028-candidate-20261004/checkpoints/step-028000/model.safetensors",
+      "bytes": 294764,
+      "sha256": "1d27979b03d04146a1d842cb38a5d2fedc97a64935c681177a44f7cd5fbe3db3"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261028-candidate-20261004/checkpoints/step-028000/training.pt",
+      "bytes": 622586,
+      "sha256": "325610fe4b541d572c11956354d209a300a814831eb24c08656da729af0740b0"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261028-candidate-20261004/checkpoints/step-029000/checkpoint.json",
+      "bytes": 3336614,
+      "sha256": "3a85098e6eb1f85eb82d18c6b462e97401487793323421a4ee9e7f28cc9392b8"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261028-candidate-20261004/checkpoints/step-029000/model.safetensors",
+      "bytes": 294764,
+      "sha256": "48cefddfb5476e5106afffcb895ed91ca4e78dc073db5190d7b0d70d283d212c"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261028-candidate-20261004/checkpoints/step-029000/training.pt",
+      "bytes": 622586,
+      "sha256": "330b66b6c54e2ea36cea9f1009c607c2f340edc8603ca9cc9e572b6ebe753c60"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261028-candidate-20261004/checkpoints/step-030000/checkpoint.json",
+      "bytes": 3337283,
+      "sha256": "b3db61e2ee8db16148f91c7b51a138ab3b0220707ca7178cfa9f5c56ae7b5c56"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261028-candidate-20261004/checkpoints/step-030000/model.safetensors",
+      "bytes": 294764,
+      "sha256": "a6e7974d997761614bb1efb0fb2b6ea501cb61b3d2f21730bd396764fcdfdb3d"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261028-candidate-20261004/checkpoints/step-030000/training.pt",
+      "bytes": 622586,
+      "sha256": "963f00b3319965129e06e5a0bbf522c0778e02f7da3eb89d9bd40fa1119c5ff1"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261028-candidate-20261004/metadata.json",
+      "bytes": 52293,
+      "sha256": "1b03803f707b43cb0b3ae3f7c61d37df95ac4e661d37ee4fe44938cb5ced2e20"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261028-candidate-20261004/progress.jsonl",
+      "bytes": 24322,
+      "sha256": "ad5744ae38ab4a348257f7f5cf30efc24b4faa2f6dd6d460d1830ee98a3b0b27"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261028-candidate-20261004/result-step-001000.json",
+      "bytes": 1410,
+      "sha256": "4f3bdcf6df99392476f0486fef93bc6e80a5eef09f698286c1f17ef159173b36"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261028-candidate-20261004/result-step-030000.json",
+      "bytes": 1518,
+      "sha256": "74ea4359ce533f5353b91a80e68e4ac43ba0832285810e2e9ffb126ba0ef993a"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261028-control-20261004/checkpoints/step-000000/checkpoint.json",
+      "bytes": 3363726,
+      "sha256": "47b97af3a93ee0db0a1773229f72104b44bf6c0291a3ab5b76059c41c519c1e5"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261028-control-20261004/checkpoints/step-000000/model.safetensors",
+      "bytes": 294764,
+      "sha256": "b618b0d11672347666e37c4cb5b508dca3060d99cbd047417d770bdd15596b4e"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261028-control-20261004/checkpoints/step-000000/training.pt",
+      "bytes": 7088,
+      "sha256": "9423ad087d42626c96ea3895cfe3c41a032b724f4f7d3f26ce2905fdb2e844ed"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261028-control-20261004/checkpoints/step-001000/checkpoint.json",
+      "bytes": 3364402,
+      "sha256": "b47241d505c3cf89747e156193fd8215a796dfe65ea02b91001706e126159ce3"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261028-control-20261004/checkpoints/step-001000/model.safetensors",
+      "bytes": 294764,
+      "sha256": "9ab525071d37f73b655557ae52815bb8d4a21a291acfebcd1ba20f3f33087d7e"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261028-control-20261004/checkpoints/step-001000/training.pt",
+      "bytes": 622586,
+      "sha256": "9e88b1127719c08e5ca40f60f96873ecdb3316aa0ccec3f91ce05b31f4e83afd"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261028-control-20261004/checkpoints/step-002000/checkpoint.json",
+      "bytes": 3365075,
+      "sha256": "3032ac9eaff6396888c0ab7792ea07cc8689950c1dbb2d80a2cfce61eb0b4c41"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261028-control-20261004/checkpoints/step-002000/model.safetensors",
+      "bytes": 294764,
+      "sha256": "a4544327acdf3c7c1117f1a373d9f1640f23be84647467d66fad530cdeacd6fd"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261028-control-20261004/checkpoints/step-002000/training.pt",
+      "bytes": 622586,
+      "sha256": "b67bdf00fd3b38ad23f533df8c8c9292858d114deedeacb74dd1c7823d28f787"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261028-control-20261004/checkpoints/step-003000/checkpoint.json",
+      "bytes": 3365742,
+      "sha256": "00b40f08fc345901c0c3a2afd16243f6d88d2be870d2e0fdaad6e0dc7334adb2"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261028-control-20261004/checkpoints/step-003000/model.safetensors",
+      "bytes": 294764,
+      "sha256": "d35d7cb05612f96e5a0940b8b6592fe9072e75a44f07324c7453afce02bc1869"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261028-control-20261004/checkpoints/step-003000/training.pt",
+      "bytes": 622586,
+      "sha256": "fa1a46ac65613dac0ed3621e346dca5ddfccf9aef6e2493740b0692593403cf2"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261028-control-20261004/checkpoints/step-004000/checkpoint.json",
+      "bytes": 3366410,
+      "sha256": "6770ee21f66d414dc15ae08b9efc048e0c69f5d842cb5a18773760d5e50a9a41"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261028-control-20261004/checkpoints/step-004000/model.safetensors",
+      "bytes": 294764,
+      "sha256": "04ba5ed7d1561075246aa16bd9eabcd2a90ccdad4fe64c573d67c49f88d8b4c9"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261028-control-20261004/checkpoints/step-004000/training.pt",
+      "bytes": 622586,
+      "sha256": "145cded3e09538293f711c5ca45ddb346476ebc15798a27d662e1cb82a6e235a"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261028-control-20261004/checkpoints/step-005000/checkpoint.json",
+      "bytes": 3367076,
+      "sha256": "ae9dccf4ca14b73bc9cf663352ddadb293efdc7667a2d72071b70073ca9230b5"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261028-control-20261004/checkpoints/step-005000/model.safetensors",
+      "bytes": 294764,
+      "sha256": "6c60c4dadf8a9e44ffa40f441304be3dbffa8d91486a3606e88644680653f004"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261028-control-20261004/checkpoints/step-005000/training.pt",
+      "bytes": 622586,
+      "sha256": "6c1083d8a97c419c6daf0b9ef7bf036c3e1c410c324fb6ace0791d540d280397"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261028-control-20261004/checkpoints/step-006000/checkpoint.json",
+      "bytes": 3367744,
+      "sha256": "5f246474e04d74f15666568c2b7c1c7c3698e8beee708fc01ab4256b63720613"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261028-control-20261004/checkpoints/step-006000/model.safetensors",
+      "bytes": 294764,
+      "sha256": "a8c28c2756fd3130e8f9457dcc75358e5dcb9ff66b059666053c399bc0e7100e"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261028-control-20261004/checkpoints/step-006000/training.pt",
+      "bytes": 622586,
+      "sha256": "d1e0f8218fbde36fbb76acff0a728ce44a57d4e54c7d191861d3e8d26f70b5f4"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261028-control-20261004/checkpoints/step-007000/checkpoint.json",
+      "bytes": 3368415,
+      "sha256": "23a44e009b5888259750a972fce35950c4924d5729bb49a22fb146144ba157dc"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261028-control-20261004/checkpoints/step-007000/model.safetensors",
+      "bytes": 294764,
+      "sha256": "59a9cbe6460202beb728030d87b8f0d647e7eef64bb0d6082e44ea0d026e5198"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261028-control-20261004/checkpoints/step-007000/training.pt",
+      "bytes": 622586,
+      "sha256": "baf87d728527f984fdc6c63e3403fdfb7614ef69be7885ae1b33bc121e6f7eda"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261028-control-20261004/checkpoints/step-008000/checkpoint.json",
+      "bytes": 3369082,
+      "sha256": "8a525228b18ee12cfac4a42a7bf9e8f3149ff56b9d42f24393e44b7f1034c783"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261028-control-20261004/checkpoints/step-008000/model.safetensors",
+      "bytes": 294764,
+      "sha256": "20d60d0c2703cf631689d86e6eccde83b37c8b8332df4ca192612e16d12506a8"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261028-control-20261004/checkpoints/step-008000/training.pt",
+      "bytes": 622586,
+      "sha256": "f7b0438ed72a095c12f1e585e8e27f82faa5cb39bd333f515b1d0550b1f1de8d"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261028-control-20261004/checkpoints/step-009000/checkpoint.json",
+      "bytes": 3369749,
+      "sha256": "2ae911035217c16350816aaf496f66a0e3ce30434e149729407bbf4e3cb480d4"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261028-control-20261004/checkpoints/step-009000/model.safetensors",
+      "bytes": 294764,
+      "sha256": "2c24b45646510798097761c3169545fe05476d4137ff1897eff9157c37d2841c"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261028-control-20261004/checkpoints/step-009000/training.pt",
+      "bytes": 622586,
+      "sha256": "79adefea4be070a7077711f8c48d37179585fbd6db181e54d359bb62d9303d91"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261028-control-20261004/checkpoints/step-009500/checkpoint.json",
+      "bytes": 3369749,
+      "sha256": "e1ac205e1a3488a7b885bd2e3cf325d4be907592eb03e02c09a4c76e5904b80e"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261028-control-20261004/checkpoints/step-009500/model.safetensors",
+      "bytes": 294764,
+      "sha256": "8d91121c6ecab0de93cc390403f03a4e58af157fe53d765d7d27b95062c28700"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261028-control-20261004/checkpoints/step-009500/training.pt",
+      "bytes": 622586,
+      "sha256": "6865f4ce05193b4df4815573aa23373de861922a528e2ac41b78307845c53cac"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261028-control-20261004/metadata.json",
+      "bytes": 11329,
+      "sha256": "e2a701190a3bf7f87dc772efb2411cca3594982d331b30ffe2f8619a3ad3abe2"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261028-control-20261004/progress.jsonl",
+      "bytes": 7236,
+      "sha256": "e454d1ca47e3442cddd9f62ef4336e682c095994b65b92bf9ccc53bf73200b24"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261028-control-20261004/result-step-001000.json",
+      "bytes": 1410,
+      "sha256": "521d9b8e9bb32683e2da3f970bb5a7dbe411087ef76ff8cac3405206d0e5e901"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-train-seed-20261028-control-20261004/result-step-009500.json",
+      "bytes": 1514,
+      "sha256": "342f016f00a882b2f757370f6e83bcbda587d02c8da18d859b35f88a8c309cb9"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-training-controller-20261004/all-native-checkpoints-audit.json",
+      "bytes": 59166,
+      "sha256": "d36ff19ca6fb56a5fa934a51d457513826e0a5fcb01c7dffd4ebc3414a178571"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-training-controller-20261004/completed-runs.json",
+      "bytes": 23293,
+      "sha256": "24dbd12df89c91560d7db0c65538025cdb7ccf4b845b3a0fdc3ac9d3a387ee79"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-training-controller-20261004/learning-gates.json",
+      "bytes": 7689,
+      "sha256": "a091abfd60d4df910413b0809fed07ec92f4f26a2bdce46fd3cda87d7566a305"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-training-controller-20261004/profile.json",
+      "bytes": 1264,
+      "sha256": "d7d860aa09f7c5ab757d86788e32b8c978003e2db38107bd4d019a657498b5ab"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-training-controller-20261004/progress.json",
+      "bytes": 36097,
+      "sha256": "62359771037de4554e60d909feaa5c97b56ee8cca93b0dbc48c25e465d4dc825"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-training-controller-20261004/result.json",
+      "bytes": 36097,
+      "sha256": "62359771037de4554e60d909feaa5c97b56ee8cca93b0dbc48c25e465d4dc825"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-training-controller-20261004/seed-20261026-candidate-boundary-command.json",
+      "bytes": 1394,
+      "sha256": "96e97e1c1b7f0e5082bdfa621be22db086709c89f380eab8b08a5874335c7c03"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-training-controller-20261004/seed-20261026-candidate-boundary-result.json",
+      "bytes": 1515,
+      "sha256": "af4bd6fddf522e7d5b7c0d3485fcaeea1f5e86ebf5f0ca1ef9cab843cba793f0"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-training-controller-20261004/seed-20261026-candidate-boundary.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-training-controller-20261004/seed-20261026-candidate-boundary.stdout.log",
+      "bytes": 52808,
+      "sha256": "148b996254f6c06524464909c5d848924f1e45680bf7dd8168665d078c4e478c"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-training-controller-20261004/seed-20261026-candidate-production-resume-audit-command.json",
+      "bytes": 726,
+      "sha256": "1ab86e1f21c6986edc5859d11609543349023d6bf5bdb469fd5fcc25890a0204"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-training-controller-20261004/seed-20261026-candidate-production-resume-audit-result.json",
+      "bytes": 848,
+      "sha256": "2a4fb65421db27ea26962ad6e6dff56da07e905e4c4c18022476049071503838"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-training-controller-20261004/seed-20261026-candidate-production-resume-audit.json",
+      "bytes": 1303,
+      "sha256": "9a90d5de00bdc0e6c3293da57e2fa6108d2b34727ca0d91b0be093699eacd38f"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-training-controller-20261004/seed-20261026-candidate-production-resume-audit.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-training-controller-20261004/seed-20261026-candidate-production-resume-audit.stdout.log",
+      "bytes": 1239,
+      "sha256": "2e698390ca7fefbb644ca5d87ddc79d60e1b59b55e1f6cfba52d602a953feb66"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-training-controller-20261004/seed-20261026-candidate-resume-command.json",
+      "bytes": 1499,
+      "sha256": "4085891d21c264c09fd52e2e4c280874fd07c8acc254bff643bef51dd1e842e7"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-training-controller-20261004/seed-20261026-candidate-resume-result.json",
+      "bytes": 1617,
+      "sha256": "010bfa72364b7ad99785f01849c3bf5bad7cc8f31c333f56cd1ee3d2de2c5840"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-training-controller-20261004/seed-20261026-candidate-resume.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-training-controller-20261004/seed-20261026-candidate-resume.stdout.log",
+      "bytes": 75580,
+      "sha256": "6ed2fe7688730fdcb2166edcacea849a01278463caeefebb117145dd445282b0"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-training-controller-20261004/seed-20261026-control-boundary-command.json",
+      "bytes": 1374,
+      "sha256": "b3828ca675014f97efccfb4c3026a99566f0ed4738e2bcd7fb19bb322a16b8e5"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-training-controller-20261004/seed-20261026-control-boundary-result.json",
+      "bytes": 1494,
+      "sha256": "e512112226760ca4afcbb5bcf8cebfa6e57f43c143231ef0d73e8dc20d1b8635"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-training-controller-20261004/seed-20261026-control-boundary.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-training-controller-20261004/seed-20261026-control-boundary.stdout.log",
+      "bytes": 11816,
+      "sha256": "da008d1003806347a42ac56732dbb50c15d2ec6b09e4f135610ee29484640302"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-training-controller-20261004/seed-20261026-control-production-resume-audit-command.json",
+      "bytes": 717,
+      "sha256": "d5ee1a3780e9c078040173a2cf22477a65907cfd5e487d2e59425a2765608114"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-training-controller-20261004/seed-20261026-control-production-resume-audit-result.json",
+      "bytes": 838,
+      "sha256": "c7009396aa06b08ab9667d8e8f5d4b05fbe14c7f53b52fb261b348a9a04c0692"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-training-controller-20261004/seed-20261026-control-production-resume-audit.json",
+      "bytes": 1302,
+      "sha256": "85776e7cbdd8d52c3f22dd41de26c60eb6a4c8d8bc0f395593e20238e420eb7f"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-training-controller-20261004/seed-20261026-control-production-resume-audit.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-training-controller-20261004/seed-20261026-control-production-resume-audit.stdout.log",
+      "bytes": 1238,
+      "sha256": "25b7e19522d37104d4251a2813f121f92d200cf2692b35eded41f5db6bf092fd"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-training-controller-20261004/seed-20261026-control-resume-command.json",
+      "bytes": 1475,
+      "sha256": "653f71e9bf2ebced789273d4f5495e6f5fedc0040cb11b5aaaa812a8d8648564"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-training-controller-20261004/seed-20261026-control-resume-result.json",
+      "bytes": 1594,
+      "sha256": "672c52b20cae67c8fbdba0c78c9219db69634299e891be95d937f0217e104ccd"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-training-controller-20261004/seed-20261026-control-resume.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-training-controller-20261004/seed-20261026-control-resume.stdout.log",
+      "bytes": 17556,
+      "sha256": "90525e2c83ee86a102205fe371abb491180e8ace2e24456036b7e7a71cc5ec06"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-training-controller-20261004/seed-20261028-candidate-boundary-command.json",
+      "bytes": 1395,
+      "sha256": "3e8ed6be2f865d4c19cd247d072ab6a2c68c176e030350b273b6761480181c19"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-training-controller-20261004/seed-20261028-candidate-boundary-result.json",
+      "bytes": 1516,
+      "sha256": "ae652d62b6abeef6eec1325be498847d0db7d4748086677b0d5723daf09757a1"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-training-controller-20261004/seed-20261028-candidate-boundary.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-training-controller-20261004/seed-20261028-candidate-boundary.stdout.log",
+      "bytes": 52807,
+      "sha256": "8b7c75757981118b8a26e1dd8b0c1ac4ca1004745bfe2bd51e225e01c8db952f"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-training-controller-20261004/seed-20261028-candidate-production-resume-audit-command.json",
+      "bytes": 726,
+      "sha256": "0db4ee7504b94ab3a24a62dd9a6a75f69feda3170a65f6e63d02052bddaaad46"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-training-controller-20261004/seed-20261028-candidate-production-resume-audit-result.json",
+      "bytes": 848,
+      "sha256": "896b73dc5d7453ff54c33b175d58c914e85cd832d546fb441afd721da6d6adce"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-training-controller-20261004/seed-20261028-candidate-production-resume-audit.json",
+      "bytes": 1303,
+      "sha256": "65ea2afa0987bca79f5ade0dee3fda6ff4235b3cf21ca9f4ff994aa55170fd0e"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-training-controller-20261004/seed-20261028-candidate-production-resume-audit.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-training-controller-20261004/seed-20261028-candidate-production-resume-audit.stdout.log",
+      "bytes": 1239,
+      "sha256": "7e58336979980e69db01dbe98a9ff11db416ec38e31ce045d9fab38e9c512874"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-training-controller-20261004/seed-20261028-candidate-resume-command.json",
+      "bytes": 1498,
+      "sha256": "78541ce4cf38d5c06cf03c580aadf5b12e3a275c53086a02c41c829c0cd1e304"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-training-controller-20261004/seed-20261028-candidate-resume-result.json",
+      "bytes": 1620,
+      "sha256": "ca1373d47951e80edb5e269f1f96cb422c2f125cab935fe340058c7ae9199f8f"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-training-controller-20261004/seed-20261028-candidate-resume.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-training-controller-20261004/seed-20261028-candidate-resume.stdout.log",
+      "bytes": 75603,
+      "sha256": "2be98d549316c325ac726d2279c5555114bebda6a2aa6ed4a231c56f912cd4d1"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-training-controller-20261004/seed-20261028-control-boundary-command.json",
+      "bytes": 1378,
+      "sha256": "89b5a12124fb598693a5ac25b77243d9dfa84f4f04686468f7fbbd1f34843ce1"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-training-controller-20261004/seed-20261028-control-boundary-result.json",
+      "bytes": 1499,
+      "sha256": "0dd41c93e5bd236485825aa7a3494fee20dd2a98f8bbb361d8cd64e164d1c831"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-training-controller-20261004/seed-20261028-control-boundary.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-training-controller-20261004/seed-20261028-control-boundary.stdout.log",
+      "bytes": 11844,
+      "sha256": "d69aa3e7cb5455dd42c3c3dfc945db8d5ebf7b4ce367487e22cb045cccf6dc78"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-training-controller-20261004/seed-20261028-control-production-resume-audit-command.json",
+      "bytes": 722,
+      "sha256": "9e5de949f94de6abb376026e7a533dfbb5bf2bc6e60394f10527243639570700"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-training-controller-20261004/seed-20261028-control-production-resume-audit-result.json",
+      "bytes": 843,
+      "sha256": "08dde447a1e210a413fd53e2c34c741e85b607d5fd05d67fbfa419af9e88a0ef"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-training-controller-20261004/seed-20261028-control-production-resume-audit.json",
+      "bytes": 1310,
+      "sha256": "8a42a70419d56baba3c5e115977d584e6c5b3c641420a390d157f017551d2fd2"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-training-controller-20261004/seed-20261028-control-production-resume-audit.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-training-controller-20261004/seed-20261028-control-production-resume-audit.stdout.log",
+      "bytes": 1246,
+      "sha256": "e6f7d5a80de8de08e845215ea1e9c3f4e17453743c284fbf61be0856fb50a567"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-training-controller-20261004/seed-20261028-control-resume-command.json",
+      "bytes": 1477,
+      "sha256": "415296874dd54d453b87057dff4af622583b29e03d5546340df95c6ea4f1bf0b"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-training-controller-20261004/seed-20261028-control-resume-result.json",
+      "bytes": 1599,
+      "sha256": "1b44c0c72bf3361a1fdb493351c94ed4f1ba322c427b78623ba797b9338dc1b1"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-training-controller-20261004/seed-20261028-control-resume.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-training-controller-20261004/seed-20261028-control-resume.stdout.log",
+      "bytes": 17548,
+      "sha256": "cba8ee83832e0bb27f4592c8d3f4238635aa4901e913e29aea67f601bb774f91"
+    },
+    {
+      "path": "artifacts/ufuk-broad-v4-training-controller-20261004/trained-portable-parity.json",
+      "bytes": 1826,
+      "sha256": "92cd4b1d680b73fcc999923304d89d0f059bb1427460201f0465d70b81b3385f"
+    },
+    {
+      "path": "artifacts/ufuk-git-readback-broad-training-status.json",
+      "bytes": 894,
+      "sha256": "32f14c799ca6c395e724f49b249fc7beb56a3cb102f8d00829aaed054a730d83"
+    },
+    {
+      "path": "artifacts/ufuk-git-readback-broad-verification-controls.json",
+      "bytes": 488,
+      "sha256": "c297223a2e915afe88d24c19afc79df048706f4dfecadf207ddfe6c9ea95daa6"
+    },
+    {
+      "path": "artifacts/ufuk-source-regression-20261004/command.json",
+      "bytes": 456,
+      "sha256": "f67ff326ec7e0a26dadc4b0d1262b366f61df97399c09842c43449f3ec6675ed"
+    },
+    {
+      "path": "artifacts/ufuk-source-regression-20261004/result.json",
+      "bytes": 598,
+      "sha256": "4630c648c343753515ee5f422aadfbccb4337848a78f2e7cb70370c13eaa7136"
+    },
+    {
+      "path": "artifacts/ufuk-source-regression-20261004/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "artifacts/ufuk-source-regression-20261004/stdout.log",
+      "bytes": 741,
+      "sha256": "8f707dbc843a6096fe07fb99aca77b194dacf560f1be3de2fc16a97e09b8f88c"
+    }
+  ],
+  "active_artifact_prefixes_excluded": [
+    "ufuk-broad-v4-strength-arena-"
+  ],
+  "remote_backup_complete": false,
+  "scope": "Seventh verified local delta: every completed broad native model/Adam/RNG/input manifest, all terminal79kupdate four-run traces, four production resume audits, selected real TorchMLXCPU parity, both-seed learning gates, every native checkpoint audit, latest source proofs/tests. All six prior archives required. Future strength arena artifacts excluded. No remote binary backup or model promotion claim.",
+  "archive": {
+    "workspace_path": "/workspace/work/harbichess/release/broad-training-supplement-20261004/HarbiChess-UFUK-broad-training-20261004.tar.gz",
+    "bytes": 147054070,
+    "sha256": "ec6c3ced7108c6bc0cd14ffa0ce0e271c29fcb77405afe1bf6a4b40005b84e87",
+    "stream_restored_verified_members": 353
+  },
+  "wall_seconds": 15.641832169989357,
+  "remote_upload_status": "400BadContentLength unresolved; verified local archive only.",
+  "archive_script_sha256": "c9c2c06c474cafb39af2c7a840f927e53b86b20fe9738dda2b3cdb9f7ded7ccb",
+  "command": [
+    "/workspace/HarbiChess/.venv/bin/python",
+    "/workspace/work/harbichess/archive-ufuk-broad-training.py"
+  ]
+}
