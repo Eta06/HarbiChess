@@ -1,0 +1,74 @@
+{
+  "audit_sha256": {
+    "20261605": "d7c90e7537ed6543c8306f18557ea1d12d22bbb31e29067e1b19ddcc52827042",
+    "20261606": "a91a36b4c191db487e65ea7c44635042b4edc92fcaae0563f4c3a5a9922b36d9"
+  },
+  "book_sha256": {
+    "20261605": "ac6cdba2238d376e22e3db2ee1ba63773892bf6493b66360f76a9b6df8ab8117",
+    "20261606": "de740d4977a4938d1769cb861682a53f86ee39201ab79a2b13b9a2095b1bf5e4"
+  },
+  "exclusion_counts": {
+    "20261605": {
+      "positions": 829107,
+      "sources": 5552
+    },
+    "20261606": {
+      "positions": 830308,
+      "sources": 5600
+    }
+  },
+  "first_method5_root_keys_in_second_exclusions": 48,
+  "first_method5_source_ids_in_second_exclusions": 48,
+  "games_played": 0,
+  "method4_book_inputs": [
+    {
+      "path": "/workspace/work/harbichess/ownsearch-method4-books/20261505/opening-splits.json",
+      "sha256": "3fcb0d8e7542f93a093de4387a0cb15eb2862dcfc72291cab22832c4847e16ca"
+    },
+    {
+      "path": "/workspace/work/harbichess/ownsearch-method4-books/20261506/opening-splits.json",
+      "sha256": "39f073aa0f8a79431550b3295ab292518a8f0229c16910c474166340af5b3cff"
+    }
+  ],
+  "method4_exclusion_inputs": [
+    {
+      "count": 5456,
+      "path": "/workspace/work/harbichess/ownsearch-method4-books/20261505/excluded-source-games.json",
+      "sha256": "c1b328b9d64a1a1f933d631779798fd408b897ea5ae64e3a5bdd2d3a19f31132"
+    },
+    {
+      "count": 826769,
+      "path": "/workspace/work/harbichess/ownsearch-method4-books/20261505/excluded-position-keys.json",
+      "sha256": "46b606fc8a15ece594c81d45648a74519e1625e5f152d895d12cf2ee3ca56394"
+    },
+    {
+      "count": 5504,
+      "path": "/workspace/work/harbichess/ownsearch-method4-books/20261506/excluded-source-games.json",
+      "sha256": "aff5158cff0ebfa6005f23dbd81839ecf87a94a9a735e177a3a2f0da2734a3d4"
+    },
+    {
+      "count": 827927,
+      "path": "/workspace/work/harbichess/ownsearch-method4-books/20261506/excluded-position-keys.json",
+      "sha256": "6545f0e894c5ccfcd035425a0ab29f9776d7c29d4ac69f19d46132875a073924"
+    }
+  ],
+  "method4_fullprefix_positions_excluded_both_seeds": 2865,
+  "method4_source_ids_excluded_both_seeds": 96,
+  "model_or_engine_queries": 0,
+  "optimizer_updates": 0,
+  "pgn_sha256": "5b8c29f91628ed27d468dc6355bf3eaad98a03bcdf638c32f3c3106bff162c8a",
+  "qualification_ledger_slot": 5,
+  "root_counts": {
+    "20261605": 48,
+    "20261606": 48
+  },
+  "root_overlap": 0,
+  "schema": "ownsearch-method5-two-book-crossaudit-v1",
+  "selection_to_training_seed": {
+    "20261605": 20261525,
+    "20261606": 20261526
+  },
+  "source_commit": "635413e426ef5b09cb76073c0955898912247466",
+  "source_overlap": 0,
+  "status": "pass-roots-only-no-games"
+}
