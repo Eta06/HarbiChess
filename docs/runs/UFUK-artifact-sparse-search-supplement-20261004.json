@@ -1,0 +1,470 @@
+{
+  "schema": 1,
+  "source_commit": "099eb9d1cad79f126db8d7d04640688c57a1796b",
+  "parent_inventory_sha256": "4d614f10508162f79a9e4ea151a98c263deb80610e35c13f1e9540ca4e381f2f",
+  "parent_archive_sha256": "091ac0a206ea869d59b41b74bea3be0484ae3096e4beac2711344617fc09bc98",
+  "prior_supplement_inventory_sha256": "81a077d702bde18add6c3ca0753a2479ff7842609c6b66f3d58ae1bf67ca69a5",
+  "prior_supplement_archive_sha256": "5546ccf5d571e8ed5d06bea8c4b64b582650416fc5f9d9e19ce70c43e603708b",
+  "third_inventory_sha256": "70ad060492159f4711725b6bd91410393a7ad90573376a4c2053c7c3c73b509d",
+  "third_archive_sha256": "3f3c4e30b79699bb271aa966cbf7f8ff597a83772f8c511e34901ed696ed49c7",
+  "active_artifact_prefix_excluded": "ufuk-joint-context",
+  "file_count": 89,
+  "uncompressed_bytes": 21012653,
+  "files": [
+    {
+      "path": "artifacts/ufuk-all-legal-20261004/integrity-audit.json",
+      "bytes": 425,
+      "sha256": "935031e8483fff1f9242a75be9ee8a695ddba38a6eb693990ee2475e6b56061a"
+    },
+    {
+      "path": "artifacts/ufuk-all-legal-20261004/metadata.json",
+      "bytes": 1262,
+      "sha256": "77659e698e8aee6c26b7f0b80640915a64e86a4ecf34d12202fb1f81a5ee065d"
+    },
+    {
+      "path": "artifacts/ufuk-all-legal-20261004/positions.jsonl",
+      "bytes": 361345,
+      "sha256": "3a7cfe498359f0c352b6504b53dc59ee08a3626ac33afb5f849f1e1ed3874cdb"
+    },
+    {
+      "path": "artifacts/ufuk-all-legal-20261004/preflight.json",
+      "bytes": 699,
+      "sha256": "8bcc7a84ba0789954d4d2ca5fe87476f582a4b00a793e2f29cad648949f1f459"
+    },
+    {
+      "path": "artifacts/ufuk-all-legal-20261004/result.json",
+      "bytes": 7036,
+      "sha256": "f373abebf0876f54583afff6604b10cd70c73056c1a77ef925610a10d2013dd3"
+    },
+    {
+      "path": "artifacts/ufuk-git-readback-all-legal-result.json",
+      "bytes": 693,
+      "sha256": "6ec0842d9e64d9d11a1e90153c412fb2bf472820ec48e2e8b78cfbef93942d3a"
+    },
+    {
+      "path": "artifacts/ufuk-git-readback-all-legal-source.json",
+      "bytes": 1313,
+      "sha256": "b50e251ffe6629c8d14c17ccfb67ad09d24dd326e2627b16d537b6ea4677ea01"
+    },
+    {
+      "path": "artifacts/ufuk-git-readback-joint-context-source.json",
+      "bytes": 1589,
+      "sha256": "7984ffa3be9caaf1ab35c8e55a005c87723de8e423fb936a2c4d8981b15070df"
+    },
+    {
+      "path": "artifacts/ufuk-git-readback-sparse-value-result.json",
+      "bytes": 700,
+      "sha256": "1fa47ea415a2c514848fccf0cc9adfd64d84353561f0798f7863d03b5112ca4b"
+    },
+    {
+      "path": "artifacts/ufuk-git-readback-sparse-value-source.json",
+      "bytes": 3318,
+      "sha256": "e5c6f0965b6953c960e44559ed17efb9b02ba006260636771a2d5b0d1b24b87d"
+    },
+    {
+      "path": "artifacts/ufuk-sparse-value-control-train-20261004/checkpoints/step-000000/checkpoint.json",
+      "bytes": 140270,
+      "sha256": "05ffc5c5b5b172c0b4ec153da8df04c320e0d014b45ec20a0e87afb20dd803af"
+    },
+    {
+      "path": "artifacts/ufuk-sparse-value-control-train-20261004/checkpoints/step-000000/model.safetensors",
+      "bytes": 294764,
+      "sha256": "be950e3a5fa37c964eedf636043ae9ac8a8091062d5409223953f9a5d5132bc4"
+    },
+    {
+      "path": "artifacts/ufuk-sparse-value-control-train-20261004/checkpoints/step-000000/training.pt",
+      "bytes": 7088,
+      "sha256": "45af3cc706de2b059c75a6d8c342018f17a463b8c582d58e90a0cf6a3d602f5e"
+    },
+    {
+      "path": "artifacts/ufuk-sparse-value-control-train-20261004/checkpoints/step-000500/checkpoint.json",
+      "bytes": 140530,
+      "sha256": "baafd3f3eb42b301ec95c057e19b30ae55709d0a41cdea744753bbc0fe6cf050"
+    },
+    {
+      "path": "artifacts/ufuk-sparse-value-control-train-20261004/checkpoints/step-000500/model.safetensors",
+      "bytes": 294764,
+      "sha256": "5175e76b236a157bcae9a48cbbf8fbd32aaa84d51569dc2116389bbdbf286559"
+    },
+    {
+      "path": "artifacts/ufuk-sparse-value-control-train-20261004/checkpoints/step-000500/training.pt",
+      "bytes": 277259,
+      "sha256": "7471b2fb22f094b5d6f1fad6ffe1f6c066b8bff8cc02b9695922dd7055329ba6"
+    },
+    {
+      "path": "artifacts/ufuk-sparse-value-control-train-20261004/checkpoints/step-001000/checkpoint.json",
+      "bytes": 140789,
+      "sha256": "57146f97c7851de2e1ae537014f6234aa844ad0a88821179f266e766f1f68de8"
+    },
+    {
+      "path": "artifacts/ufuk-sparse-value-control-train-20261004/checkpoints/step-001000/model.safetensors",
+      "bytes": 294764,
+      "sha256": "8c544354c33e294c2152263edf05c206a41c596e55a3cd52909e3ad1aabd5953"
+    },
+    {
+      "path": "artifacts/ufuk-sparse-value-control-train-20261004/checkpoints/step-001000/training.pt",
+      "bytes": 277259,
+      "sha256": "9457494d469fc6fd784a06567c321b6c85f9ba399152a2dce53929f69acede76"
+    },
+    {
+      "path": "artifacts/ufuk-sparse-value-control-train-20261004/checkpoints/step-001500/checkpoint.json",
+      "bytes": 141046,
+      "sha256": "30cf47b0b4e9d64f619fd32414596706b717ae73cc671cfa539f45e4cc4e2e28"
+    },
+    {
+      "path": "artifacts/ufuk-sparse-value-control-train-20261004/checkpoints/step-001500/model.safetensors",
+      "bytes": 294764,
+      "sha256": "1a22bd5ab85d5bbd4d1683d797558eed63b4907d2e56ac5033e47602c94f2d97"
+    },
+    {
+      "path": "artifacts/ufuk-sparse-value-control-train-20261004/checkpoints/step-001500/training.pt",
+      "bytes": 277259,
+      "sha256": "1ad1a2290b09cf712b3fe013f2486e67a82fcb9dfa0ca86ecc27c1222d4a9973"
+    },
+    {
+      "path": "artifacts/ufuk-sparse-value-control-train-20261004/checkpoints/step-002000/checkpoint.json",
+      "bytes": 141304,
+      "sha256": "ffe53d71d55005d2e65857d5871f73cf5e5c0081326667a72f77fcf2c990322b"
+    },
+    {
+      "path": "artifacts/ufuk-sparse-value-control-train-20261004/checkpoints/step-002000/model.safetensors",
+      "bytes": 294764,
+      "sha256": "59f41447b50bffa80b8f9ef825ea9f1c4500a9863dadca8cc85332c06f7fcec0"
+    },
+    {
+      "path": "artifacts/ufuk-sparse-value-control-train-20261004/checkpoints/step-002000/training.pt",
+      "bytes": 277259,
+      "sha256": "0011ed594f1fcaff25f7eb9fbc6b664b2f366d70e7b49d5f43d79a380a445ac2"
+    },
+    {
+      "path": "artifacts/ufuk-sparse-value-control-train-20261004/checkpoints/step-002500/checkpoint.json",
+      "bytes": 141561,
+      "sha256": "4d13bd983209bc33c3fefd11d6c98166c7570779a055e1a64ab8475053264505"
+    },
+    {
+      "path": "artifacts/ufuk-sparse-value-control-train-20261004/checkpoints/step-002500/model.safetensors",
+      "bytes": 294764,
+      "sha256": "47877518c99da62f259e12b6ed8f80235c9c8065efa59f1600c24010e730e4cd"
+    },
+    {
+      "path": "artifacts/ufuk-sparse-value-control-train-20261004/checkpoints/step-002500/training.pt",
+      "bytes": 277259,
+      "sha256": "c9567cee395411c68c95a4b744eea74d635d235c8e9d2cdb543b34a5a6411047"
+    },
+    {
+      "path": "artifacts/ufuk-sparse-value-control-train-20261004/metadata.json",
+      "bytes": 1527,
+      "sha256": "f04a5db6597e301eff22f3f64df80e5bdce6f4a17339661addf4d7ee2b3485f7"
+    },
+    {
+      "path": "artifacts/ufuk-sparse-value-control-train-20261004/progress.jsonl",
+      "bytes": 2368,
+      "sha256": "64ca93cc33b3fc5e86af7810a537256401145edeffc58d75e4ebbf6d19e0c709"
+    },
+    {
+      "path": "artifacts/ufuk-sparse-value-control-train-20261004/result-step-000500.json",
+      "bytes": 855,
+      "sha256": "a9bef39b6df708288c9100acd798f5f408eea7c3cf0a4af81a2ac0da393de581"
+    },
+    {
+      "path": "artifacts/ufuk-sparse-value-control-train-20261004/result-step-002500.json",
+      "bytes": 946,
+      "sha256": "eb0af230440d9307ea1c196a09004b55dbb63c8484945a9b013b9cf9988d3f27"
+    },
+    {
+      "path": "artifacts/ufuk-sparse-value-control-train-20261004/sparse-guard-profile.json",
+      "bytes": 2564,
+      "sha256": "d805cbb3112e3ba91503415ad055893ebc8a8909ef5cd03290ddb4527d27bd8f"
+    },
+    {
+      "path": "artifacts/ufuk-sparse-value-control-train-20261004/sparse-phase-result-step-000500.json",
+      "bytes": 1104,
+      "sha256": "d85841bb0a59997b154cf66abe0aff4558ebdbe4de05669d451e7777dfbc907a"
+    },
+    {
+      "path": "artifacts/ufuk-sparse-value-control-train-20261004/sparse-phase-result-step-002500.json",
+      "bytes": 1198,
+      "sha256": "6aad6afeb086a50cd2a60bfbca509e72c414ca52a727e46c678acce21f4dbd0c"
+    },
+    {
+      "path": "artifacts/ufuk-sparse-value-experiment-20261004/control-pause-command.json",
+      "bytes": 857,
+      "sha256": "87b5d64da31bdf6fc4c120e6847109593e20548b7ff8779d12f833e770acc10a"
+    },
+    {
+      "path": "artifacts/ufuk-sparse-value-experiment-20261004/control-pause.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "artifacts/ufuk-sparse-value-experiment-20261004/control-pause.stdout.log",
+      "bytes": 2333,
+      "sha256": "073a911863ffe689704bd2e1b44d4a5cb799f3ffae65f30787cf73cd44845221"
+    },
+    {
+      "path": "artifacts/ufuk-sparse-value-experiment-20261004/control-resume-command.json",
+      "bytes": 973,
+      "sha256": "cb73d54c1ee5794ace4ea0b4521b5129b1ee7ca4a5922a8e759c4aac67dae569"
+    },
+    {
+      "path": "artifacts/ufuk-sparse-value-experiment-20261004/control-resume.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "artifacts/ufuk-sparse-value-experiment-20261004/control-resume.stdout.log",
+      "bytes": 3847,
+      "sha256": "c8d5a74f31a20331072be5cc007a083d30268407f6ab277508f2ec4f0a6058a5"
+    },
+    {
+      "path": "artifacts/ufuk-sparse-value-experiment-20261004/control-selection.json",
+      "bytes": 4460,
+      "sha256": "60ee9ce3fc03f1ab97e3c53ff5ed6482c4caa4f2e845b4b1059cb1aa1f90ce83"
+    },
+    {
+      "path": "artifacts/ufuk-sparse-value-experiment-20261004/integrity-audit.json",
+      "bytes": 43154,
+      "sha256": "8db3d946bd245cb2e27dbd260c093ea4e4da06870cb32674cefc3067655d005a"
+    },
+    {
+      "path": "artifacts/ufuk-sparse-value-experiment-20261004/latency.json",
+      "bytes": 116474,
+      "sha256": "71bdb33dfac30e63e40d2ee94acc00ed93c1e03ea88d83053144b49a3c5631c9"
+    },
+    {
+      "path": "artifacts/ufuk-sparse-value-experiment-20261004/result.json",
+      "bytes": 11423,
+      "sha256": "c9fd228fa9b2e9ab9a144cb8b7523329f0a4f4d485ecdeca9a53d01dd0f65730"
+    },
+    {
+      "path": "artifacts/ufuk-sparse-value-experiment-20261004/sparse-pause-command.json",
+      "bytes": 858,
+      "sha256": "68d3bc397c14a4341ec3c2f08ef911921ba9c4e67497185938804643b27ea333"
+    },
+    {
+      "path": "artifacts/ufuk-sparse-value-experiment-20261004/sparse-pause.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "artifacts/ufuk-sparse-value-experiment-20261004/sparse-pause.stdout.log",
+      "bytes": 2338,
+      "sha256": "55d1fc5564db907b3f9c91ce8acc9c698b791de7c34d9704132c32453f5e28c4"
+    },
+    {
+      "path": "artifacts/ufuk-sparse-value-experiment-20261004/sparse-resume-command.json",
+      "bytes": 974,
+      "sha256": "052baf4c6514faf10ebed367b190ebb039e29bb25849fcc583d73b5272147f8f"
+    },
+    {
+      "path": "artifacts/ufuk-sparse-value-experiment-20261004/sparse-resume.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "artifacts/ufuk-sparse-value-experiment-20261004/sparse-resume.stdout.log",
+      "bytes": 5324,
+      "sha256": "d4589b064f89193aa913c959bc28cb256d60e26ed372e2d3cfdd0a449647c110"
+    },
+    {
+      "path": "artifacts/ufuk-sparse-value-experiment-20261004/sparse-selection.json",
+      "bytes": 5234,
+      "sha256": "bfec4083c9f15c6bfd1f9c28007288f54cc3364c7b3af94cc5bd0d2a10f8f29a"
+    },
+    {
+      "path": "artifacts/ufuk-sparse-value-experiment-20261004/trained-portable-parity.json",
+      "bytes": 862,
+      "sha256": "e439322efccf33e38eba9495d744125d5c8a6fc335d7186d17b03f5dfe426963"
+    },
+    {
+      "path": "artifacts/ufuk-sparse-value-sparse-train-20261004/checkpoints/step-000000/checkpoint.json",
+      "bytes": 139640,
+      "sha256": "e94d28f024300c7d5120c2744e682e6917d5ed3660aa30d7bfe9fa50ce50650c"
+    },
+    {
+      "path": "artifacts/ufuk-sparse-value-sparse-train-20261004/checkpoints/step-000000/model.safetensors",
+      "bytes": 759896,
+      "sha256": "2d3dfe7fc04e41182cdd8125a75a73bbe1ef653a4c1e199384e503784127abf9"
+    },
+    {
+      "path": "artifacts/ufuk-sparse-value-sparse-train-20261004/checkpoints/step-000000/training.pt",
+      "bytes": 7152,
+      "sha256": "f67b690654fa79380ec7949f4c5027ad5e568df72c144b263b20eb0cb3984f0b"
+    },
+    {
+      "path": "artifacts/ufuk-sparse-value-sparse-train-20261004/checkpoints/step-000500/checkpoint.json",
+      "bytes": 139901,
+      "sha256": "f38f7b681a4c6399ac4f926952657465129dc5fcd7ab1eb956ccc806f236f051"
+    },
+    {
+      "path": "artifacts/ufuk-sparse-value-sparse-train-20261004/checkpoints/step-000500/model.safetensors",
+      "bytes": 759896,
+      "sha256": "1e1562a4324980620cb54d512dd848d75eb35f356e114248596dc66e5641b094"
+    },
+    {
+      "path": "artifacts/ufuk-sparse-value-sparse-train-20261004/checkpoints/step-000500/training.pt",
+      "bytes": 941053,
+      "sha256": "727da082dda670ddc7f50695ddb63acbd4003d1c89ebbda75f4304516f188789"
+    },
+    {
+      "path": "artifacts/ufuk-sparse-value-sparse-train-20261004/checkpoints/step-001000/checkpoint.json",
+      "bytes": 140159,
+      "sha256": "7b65078775d60acb4c765c5d02ddaeae9854bd4fd00dd47c10f781b4e20908be"
+    },
+    {
+      "path": "artifacts/ufuk-sparse-value-sparse-train-20261004/checkpoints/step-001000/model.safetensors",
+      "bytes": 759896,
+      "sha256": "c404232f1fa3d350e0eb38a919172469abb9e13eb87640e3664f6ab82f002067"
+    },
+    {
+      "path": "artifacts/ufuk-sparse-value-sparse-train-20261004/checkpoints/step-001000/training.pt",
+      "bytes": 941053,
+      "sha256": "53fec4ed46e65880ab7193caed35f5073b504a71924eb6fa38a9bf00ba85e1ea"
+    },
+    {
+      "path": "artifacts/ufuk-sparse-value-sparse-train-20261004/checkpoints/step-001500/checkpoint.json",
+      "bytes": 140413,
+      "sha256": "cdefb59613e61333ea2de9f784a2579e21111b92a4c339d105540a74e94b8472"
+    },
+    {
+      "path": "artifacts/ufuk-sparse-value-sparse-train-20261004/checkpoints/step-001500/model.safetensors",
+      "bytes": 759896,
+      "sha256": "15882e0e9c967f6231aefa0a7121cef8daedd65895b9ee0cb916ac8cab4c93ed"
+    },
+    {
+      "path": "artifacts/ufuk-sparse-value-sparse-train-20261004/checkpoints/step-001500/training.pt",
+      "bytes": 941053,
+      "sha256": "c15b3126efca81b8f779b7eaa305ca572d4ec85c86bc3dc94798b62bd6abc5dd"
+    },
+    {
+      "path": "artifacts/ufuk-sparse-value-sparse-train-20261004/checkpoints/step-002000/checkpoint.json",
+      "bytes": 140670,
+      "sha256": "e90e06209572cf0ea3de07e6d72be25960dab608036b91ab17be977bc0a5f257"
+    },
+    {
+      "path": "artifacts/ufuk-sparse-value-sparse-train-20261004/checkpoints/step-002000/model.safetensors",
+      "bytes": 759896,
+      "sha256": "731fe9a6292997d86f883d96da472389d577459598a005e14124c9fe65a3f393"
+    },
+    {
+      "path": "artifacts/ufuk-sparse-value-sparse-train-20261004/checkpoints/step-002000/training.pt",
+      "bytes": 941053,
+      "sha256": "f9e04f518ea4f3a7f13d6fe198273bed97d25f3b066f96d8b69b4ffc3f3c7b98"
+    },
+    {
+      "path": "artifacts/ufuk-sparse-value-sparse-train-20261004/checkpoints/step-002500/checkpoint.json",
+      "bytes": 140924,
+      "sha256": "1f30fec0285865ddbd5715c2c1d55ccbc4ad2d19e85fe749cfd885dbf9d02d84"
+    },
+    {
+      "path": "artifacts/ufuk-sparse-value-sparse-train-20261004/checkpoints/step-002500/model.safetensors",
+      "bytes": 759896,
+      "sha256": "be0a7b2c574e3096952bad77abd67064eb1e7822522fe056b81e3c718ad2e6d1"
+    },
+    {
+      "path": "artifacts/ufuk-sparse-value-sparse-train-20261004/checkpoints/step-002500/training.pt",
+      "bytes": 941053,
+      "sha256": "e6051e75d3405a21d3aeffcceffdc723a7e47dad804785ebdf18c49e70f4e229"
+    },
+    {
+      "path": "artifacts/ufuk-sparse-value-sparse-train-20261004/checkpoints/step-003000/checkpoint.json",
+      "bytes": 141181,
+      "sha256": "61e7fa98d3421cc0c412276968b3d691546ccfdd48db382b4b9174fe94e0026b"
+    },
+    {
+      "path": "artifacts/ufuk-sparse-value-sparse-train-20261004/checkpoints/step-003000/model.safetensors",
+      "bytes": 759896,
+      "sha256": "98681019e14b56e1cf6554aacc13e4c4a098395217aaae2d53599f4c6b069c64"
+    },
+    {
+      "path": "artifacts/ufuk-sparse-value-sparse-train-20261004/checkpoints/step-003000/training.pt",
+      "bytes": 941053,
+      "sha256": "43803c2a952c150e24895f3b6265bf47e679265d73788930d45a0382cbb455bb"
+    },
+    {
+      "path": "artifacts/ufuk-sparse-value-sparse-train-20261004/checkpoints/step-003500/checkpoint.json",
+      "bytes": 141437,
+      "sha256": "e247e3e51b4712513d93392c66a8d6f9401cdde5d965d1cd310605c696581285"
+    },
+    {
+      "path": "artifacts/ufuk-sparse-value-sparse-train-20261004/checkpoints/step-003500/model.safetensors",
+      "bytes": 759896,
+      "sha256": "fc594554cad9b1de22800474e5bf5e81e33a5f4fa40a9f4350f0af11baa52ec2"
+    },
+    {
+      "path": "artifacts/ufuk-sparse-value-sparse-train-20261004/checkpoints/step-003500/training.pt",
+      "bytes": 941053,
+      "sha256": "acab6bf9f316821f61fe7329145d3d57a9951e357454d019ce971af10aed235f"
+    },
+    {
+      "path": "artifacts/ufuk-sparse-value-sparse-train-20261004/checkpoints/step-004000/checkpoint.json",
+      "bytes": 141695,
+      "sha256": "de36ae3f1361c0321de9ea4013234d3a8789be5eeef4381c3439906ed265e53a"
+    },
+    {
+      "path": "artifacts/ufuk-sparse-value-sparse-train-20261004/checkpoints/step-004000/model.safetensors",
+      "bytes": 759896,
+      "sha256": "085a7aef6c451ff8ec200bc7d2a71f0e5b2b046a47a65102ea4cfafec3169920"
+    },
+    {
+      "path": "artifacts/ufuk-sparse-value-sparse-train-20261004/checkpoints/step-004000/training.pt",
+      "bytes": 941053,
+      "sha256": "599d2948c6bf7eb9216ae99e9e0fde2deafd1ef6bcebdd00402d67384fd0270b"
+    },
+    {
+      "path": "artifacts/ufuk-sparse-value-sparse-train-20261004/metadata.json",
+      "bytes": 1502,
+      "sha256": "5cb594a09d1983d4cd0d46540384424ca68ab624dbd7933384b6dd002444a5d0"
+    },
+    {
+      "path": "artifacts/ufuk-sparse-value-sparse-train-20261004/progress.jsonl",
+      "bytes": 3844,
+      "sha256": "f300deb403a816d728d5bf4053e20efb89ed763ddd92d158fcdd23158180c796"
+    },
+    {
+      "path": "artifacts/ufuk-sparse-value-sparse-train-20261004/result-step-000500.json",
+      "bytes": 858,
+      "sha256": "14069e487d16c5eb536992eb7afb16402e2bdc25bc4d3480a2b8b9b90bb2045a"
+    },
+    {
+      "path": "artifacts/ufuk-sparse-value-sparse-train-20261004/result-step-004000.json",
+      "bytes": 949,
+      "sha256": "01e240a689129096529a5f4882f2ec69e2da435d4122ba8cc4d18a702023f6c3"
+    },
+    {
+      "path": "artifacts/ufuk-sparse-value-sparse-train-20261004/sparse-guard-profile.json",
+      "bytes": 5067,
+      "sha256": "e23bafcfc8ac2e1b5b7ebfcc03697893a44c482d85369dec928e1cdbf8ecc3a8"
+    },
+    {
+      "path": "artifacts/ufuk-sparse-value-sparse-train-20261004/sparse-phase-result-step-000500.json",
+      "bytes": 1107,
+      "sha256": "2f4167d0ece760303b440148e4c9876edd6c763408996b9b822ee3ba3cdc7a67"
+    },
+    {
+      "path": "artifacts/ufuk-sparse-value-sparse-train-20261004/sparse-phase-result-step-004000.json",
+      "bytes": 1202,
+      "sha256": "8936c5cadd5040001aa7e575cc7ac88cacdfcf182c32e3a43ad1d4fb24a31846"
+    },
+    {
+      "path": "artifacts/ufuk-sparse-value-transfer-20261004/model.safetensors",
+      "bytes": 760184,
+      "sha256": "c7ebff584db59a7db913c199773c96d73abdf90f8065f8f9726bb687f5d83a37"
+    },
+    {
+      "path": "artifacts/ufuk-sparse-value-transfer-20261004/transfer-preflight.json",
+      "bytes": 1760,
+      "sha256": "84a86b2ef1f00a6a926cb095aed2493ee5a8f155791c877b70716a458b56959d"
+    }
+  ],
+  "remote_backup_complete": false,
+  "scope": "Fourth delta after verified2149file parent,143file first supplement and239file context supplement. Old archived hashes unchanged; all15full sparse-value model/optimizer checkpoints and completed all-legal diagnostics included. Active joint-context artifacts explicitly excluded to avoid copying mutable progress. Parent and previous deltas required.",
+  "archive": {
+    "workspace_path": "/workspace/work/harbichess/release/sparse-search-supplement-20261004/HarbiChess-UFUK-sparse-search-20261004.tar.gz",
+    "bytes": 17140744,
+    "sha256": "0b8ad1655701f1184c571f2941cd6c4c132deebadaedce6666563bb199e812b2",
+    "stream_restored_verified_members": 91
+  },
+  "wall_seconds": 1.7493688440008555,
+  "remote_upload_status": "Authorized Release upload400 Bad Content-Length remains blocked; local restoration verification is not remote backup. /codex output path is OS permission blocked, no direct user-output download claim."
+}
