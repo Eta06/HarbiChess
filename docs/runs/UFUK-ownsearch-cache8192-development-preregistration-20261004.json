@@ -1,0 +1,41 @@
+{
+  "book_remote_path": "/content/harbichess-inputs/book.json",
+  "current_MC_confirmation_unchanged": true,
+  "frozen_helper_sha256": {
+    "audit_profile.py": "85bbbfe3667a47d2cef10c80e308c2333b04305b039216ec3b80d4d532ec0945",
+    "profile_cache_owned.py": "caf88cb07393d7a56aad43d48814e29e42183465b675a429ee35d880bc148170",
+    "qualify_cuda_owned.py": "a6b3fd1e9bbcb9c55c1919cbad32bda7a1a0c28d31f7e673e9b3afead9f45dc2"
+  },
+  "hard_deadline_utc": "2026-10-05T06:00:00Z",
+  "input_manifest_sha256": "1bb47a762e3d6755388c15c3be33dbdbde9a35a7aafc946b6cd89be6e8dc9a97",
+  "protocol": {
+    "admission": "Formal ownsearch admission additionally requires positive retained optimizer updates and changed final NN. Audit/profile PASS alone proves infrastructure only; no strength gain.",
+    "audit_helper_sha256": "85bbbfe3667a47d2cef10c80e308c2333b04305b039216ec3b80d4d532ec0945",
+    "book_sha256": "f2f3038728cce4c56987c9068f900d30ed99f996f99e03a38c41bbbc1f3c9958",
+    "common_helper_sha256": "a6b3fd1e9bbcb9c55c1919cbad32bda7a1a0c28d31f7e673e9b3afead9f45dc2",
+    "config_sha256": "cb5d35ff364534c4e47adfacfb5e18cc29ab3f80ba68f3750bb0e589ab48f229",
+    "cost_accounting": "32768 physically regenerated development transitions, duplicate of earlierc93 epoch actor experience by cache-only equivalence; exact duplicate checked if receipt matches. Audit32768 actor/recomputed search are infrastructure duplication, never new formal learning. Record wholeCLI/audit separately including contention.",
+    "disk_min_free_bytes": 8589934592,
+    "failure": "Original900deadline shared CLI+audit; preserve successCLI independently ifauditfails; no automaticretry/budgetextension or weakergate.",
+    "independent_audit": "Fresh strictnative0+1; ALL32768legalrawactorRNG/moverterminal/UNKNOWN labels; allbase/behavior and21material storagebits; exact samplerstates/counters; prospectively first+last COMPLETE original128-slot wavefront neural-search groups only, otherroots structural ledger checks;0auditSGD.",
+    "initial_e8_sha256": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03",
+    "memory_max_bytes": 68719476736,
+    "prior_evidence": {
+      "TRAIN_only_quarterLR_result_sha256": "61eeb84e5d0eed427b2fc1f75119f992abb0abcd516f189acf20b3e786da9ba5",
+      "old_failure": "c93 LR1e-4 first pass KL.0374606>.02,4attempted0committed; preserved. QuarterLR duplicate-only diagnosis12committed4discarded, no checkpoint/strength.",
+      "original_c93_profile_result_sha256": "560b1fa8af4de03c99b0b0126480b787b89bff8ca9b0fd47e10243166bc8f288"
+    },
+    "profile_controller_sha256": "caf88cb07393d7a56aad43d48814e29e42183465b675a429ee35d880bc148170",
+    "qualification_result_sha256": "48aa9a5d0800eac3b8a553fef541514d45bc1b3e2d3cd582fe3d0467571157c1",
+    "schema": "ufuk-ownsearch-cache8192-quarterLR-development-protocol-v2",
+    "scope": "Exactly ONE development epoch; real14CUDA+e8cleanCLI cache-only qualification required. No candidate promotion, heldout outcomes or strength eligibility.",
+    "source_commit": "a278bba67bce962cb9294f0d24040e02e9acf1f4",
+    "status": "prospective-fixed-development-only",
+    "updates": "Exactly ONE128x256=32768 physical development actor transitions from initiale8/newAdam; identical actor RNG/book/seed to earlierc93 TRAIN profile. QuarterLR.000025 prospectively supported by TRAIN-only diagnosis; unchanged KLstop.02/objectives/4passes1024. No new external teacher labels.",
+    "whole_profile_max_seconds": 900
+  },
+  "protocol_sha256": "4a04701009c613d7eba3384b60b54ed8f307649d1e2d0ad30784eb4daf87a12a",
+  "qualifying_receipt_remote_path": "/content/harbichess-runs/ownsearch-cache-CUDA-readiness-a278bba-20261004/result.json",
+  "schema": "ufuk-ownsearch-cache8192-fullshape-development-preregistration-v2",
+  "status": "frozen-before-profile-execution"
+}
