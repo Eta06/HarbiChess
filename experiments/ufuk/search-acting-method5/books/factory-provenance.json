@@ -1,0 +1,109 @@
+{
+  "all_96_records_independently_replayed": true,
+  "all_ratings_timecontrols_ply_fen_legality_verified": true,
+  "audit_sha256": {
+    "20261605": "d7c90e7537ed6543c8306f18557ea1d12d22bbb31e29067e1b19ddcc52827042",
+    "20261606": "a91a36b4c191db487e65ea7c44635042b4edc92fcaae0563f4c3a5a9922b36d9"
+  },
+  "book_sha256": {
+    "20261605": "ac6cdba2238d376e22e3db2ee1ba63773892bf6493b66360f76a9b6df8ab8117",
+    "20261606": "de740d4977a4938d1769cb861682a53f86ee39201ab79a2b13b9a2095b1bf5e4"
+  },
+  "bound_inputs": [
+    {
+      "kind": "combined-cross-audit",
+      "path": "/workspace/work/harbichess/search-acting-method5-books/combined-audit.json",
+      "sha256": "b8172a63f49d31e6f8c097e490f70f0d6302c5378422f697007cbb46416ab9da"
+    },
+    {
+      "kind": "independent-pgn-replay-audit",
+      "path": "/workspace/work/harbichess/search-acting-method5-books/20261605/audit.json",
+      "selection_seed": "20261605",
+      "sha256": "d7c90e7537ed6543c8306f18557ea1d12d22bbb31e29067e1b19ddcc52827042"
+    },
+    {
+      "kind": "frozen-opening-book",
+      "path": "/workspace/work/harbichess/search-acting-method5-books/20261605/opening-splits.json",
+      "selection_seed": "20261605",
+      "sha256": "ac6cdba2238d376e22e3db2ee1ba63773892bf6493b66360f76a9b6df8ab8117"
+    },
+    {
+      "kind": "independent-pgn-replay-audit",
+      "path": "/workspace/work/harbichess/search-acting-method5-books/20261606/audit.json",
+      "selection_seed": "20261606",
+      "sha256": "a91a36b4c191db487e65ea7c44635042b4edc92fcaae0563f4c3a5a9922b36d9"
+    },
+    {
+      "kind": "frozen-opening-book",
+      "path": "/workspace/work/harbichess/search-acting-method5-books/20261606/opening-splits.json",
+      "selection_seed": "20261606",
+      "sha256": "de740d4977a4938d1769cb861682a53f86ee39201ab79a2b13b9a2095b1bf5e4"
+    }
+  ],
+  "derivation": "Added claims are derived from the two frozen audit reports and their 48 audited_roots each. Unique source records, source IDs and root keys were recomputed and matched against both exact-hash books. The original combined-audit.json was not modified.",
+  "first_method5_root_keys_in_second_exclusions": 48,
+  "first_method5_source_ids_in_second_exclusions": 48,
+  "method4_fullprefix_positions_excluded_both_seeds": 2865,
+  "method4_source_ids_excluded_both_seeds": 96,
+  "no_model_engine_game_or_update": true,
+  "per_book_independent_audit": {
+    "20261605": {
+      "audit_sha256": "d7c90e7537ed6543c8306f18557ea1d12d22bbb31e29067e1b19ddcc52827042",
+      "book_sha256": "ac6cdba2238d376e22e3db2ee1ba63773892bf6493b66360f76a9b6df8ab8117",
+      "independently_replayed_roots": 48,
+      "root_count": 48,
+      "script_sha256": "cee118f3c79924dc268cc1760a4fdd56d0bef4f85b02085c3ed42ce946e0e514",
+      "selection_seconds": 29.190441252998426,
+      "training_seed": 20261525,
+      "whole_seconds": 48.62930693299859
+    },
+    "20261606": {
+      "audit_sha256": "a91a36b4c191db487e65ea7c44635042b4edc92fcaae0563f4c3a5a9922b36d9",
+      "book_sha256": "de740d4977a4938d1769cb861682a53f86ee39201ab79a2b13b9a2095b1bf5e4",
+      "independently_replayed_roots": 48,
+      "root_count": 48,
+      "script_sha256": "cee118f3c79924dc268cc1760a4fdd56d0bef4f85b02085c3ed42ce946e0e514",
+      "selection_seconds": 28.75097416700737,
+      "training_seed": 20261526,
+      "whole_seconds": 48.46299352200003
+    }
+  },
+  "pgn_sha256": "5b8c29f91628ed27d468dc6355bf3eaad98a03bcdf638c32f3c3106bff162c8a",
+  "qualification_ledger_slot": 5,
+  "root_counts": {
+    "20261605": 48,
+    "20261606": 48
+  },
+  "root_overlap": 0,
+  "root_ply_counts": {
+    "20261605": {
+      "16": 14,
+      "24": 7,
+      "32": 11,
+      "48": 11,
+      "64": 5
+    },
+    "20261606": {
+      "16": 16,
+      "24": 9,
+      "32": 12,
+      "48": 9,
+      "64": 1,
+      "96": 1
+    }
+  },
+  "same_source_commit_all_runs": "635413e426ef5b09cb76073c0955898912247466",
+  "schema": "ownsearch-method5-factory-book-provenance-derived-v1",
+  "selection_to_training_seed": {
+    "20261605": 20261525,
+    "20261606": 20261526
+  },
+  "source_commit_clean_at_both_freezes": true,
+  "source_overlap": 0,
+  "source_record_counts": {
+    "20261605": 48,
+    "20261606": 48
+  },
+  "status": "pass-roots-only-no-games",
+  "unique_source_records_across_both": 96
+}
