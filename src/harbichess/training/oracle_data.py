@@ -104,6 +104,12 @@ def generation_limit(job: dict, board: chess.Board) -> int:
     return max_plies
 
 
+def neural_colour(family: int, game: int, *, balanced: bool, short_history: bool) -> bool:
+    """v4 pairs neural colours per root; old schedules retain their original meaning."""
+    cycle = game % 2 if balanced and short_history else game // 4 if balanced else 0
+    return (family + cycle) % 2 == 0
+
+
 def generate_game(job: dict) -> dict:
     torch.set_num_threads(1)
     torch.manual_seed(job["seed"])
@@ -270,10 +276,12 @@ def generate(
     }
     if continuation_plies is not None:
         metadata.update(
-            collection_plan="balanced-true-history-v3" if balanced else "true-history-v3",
+            collection_plan="balanced-true-history-v4" if balanced else "true-history-v3",
             continuation_plies=continuation_plies,
             max_plies="opening length plus continuation_plies",
         )
+        if balanced:
+            metadata["neural_colour_schedule"] = "opposite-colours-within-each-root-v1"
     manifest = directory / "metadata.json"
     if manifest.exists():
         if json.loads(manifest.read_text()) != metadata:
@@ -299,7 +307,12 @@ def generate(
                     actor="engine-engine"
                     if (game % 4 < 2 if balanced else game % 2 == 0)
                     else "neural-engine",
-                    neural_color=(family + (game // 4 if balanced else 0)) % 2 == 0,
+                    neural_color=neural_colour(
+                        family,
+                        game,
+                        balanced=balanced,
+                        short_history=continuation_plies is not None,
+                    ),
                     opening=opening["opening"]["moves"],
                     weights=str(weights.resolve()),
                     stockfish=str(stockfish.resolve()),
