@@ -1,3 +1,4 @@
+import hashlib
 import io
 import random
 
@@ -92,4 +93,44 @@ def test_missing_result_cannot_publish_even_if_parser_accepts(tmp_path):
             train_families=1,
             validation_families=1,
         )
+    assert not (tmp_path / "refused.json").exists()
+
+
+def test_arena_excludes_entire_source_games_even_with_another_root_seed(tmp_path):
+    pgn = tmp_path / "prefix.pgn"
+    pgn.write_text(
+        "".join(record(f"game{i:04d}", i + 1) for i in range(8))
+        + '[Event "partial"]\n1. e4 '
+    )
+    arguments = dict(pgn=pgn, excluded_keys=set(), source_receipts={},
+                     train_families=2, validation_families=2, seed=42)
+    original = freeze(output=tmp_path / "training-book.json", **arguments)
+    excluded = {row["source_game"] for rows in original["splits"].values() for row in rows}
+    assert "excluded_source_games" not in original and "requested_split_counts" not in original
+    arena = freeze(output=tmp_path / "arena.json", **{**arguments, "seed": 43},
+                   excluded_games=excluded, split_counts={"arena": 2})
+    assert set(arena["splits"]) == {"arena"} and len(arena["splits"]["arena"]) == 2
+    assert not {row["source_game"] for row in arena["splits"]["arena"]} & excluded
+    assert arena["selection_counts"]["excluded_source_game"] == len(excluded)
+    assert arena["excluded_source_games_sha256"] == hashlib.sha256(
+        ("\n".join(sorted(excluded)) + "\n").encode()
+    ).hexdigest()
+    assert arena["requested_split_counts"] == {"arena": 2}
+    for row in arena["splits"]["arena"]:
+        board = chess.Board()
+        for move in row["opening"]["moves"]:
+            board.push_uci(move)
+        assert board.fen() == row["opening"]["fen"]
+    with pytest.raises(ValueError, match="insufficient"):
+        freeze(output=tmp_path / "all-excluded.json", **arguments,
+               excluded_games={f"https://lichess.org/game{i:04d}" for i in range(8)},
+               split_counts={"arena": 2})
+    assert not (tmp_path / "all-excluded.json").exists()
+
+
+@pytest.mark.parametrize("counts", [{}, {"unknown": 2}, {"arena": 0}, {"arena": True}])
+def test_invalid_explicit_root_splits_refused_before_reading(tmp_path, counts):
+    with pytest.raises(ValueError, match="split counts"):
+        freeze(tmp_path / "not-opened.pgn", tmp_path / "refused.json", excluded_keys=set(),
+               source_receipts={}, split_counts=counts)
     assert not (tmp_path / "refused.json").exists()
