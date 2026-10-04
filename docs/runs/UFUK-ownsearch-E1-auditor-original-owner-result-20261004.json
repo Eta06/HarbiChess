@@ -1,0 +1,13 @@
+{
+  "absolute_deadline_epoch": 1791152757.0986977,
+  "controller_sha256": "5e8b5ea95f6b4f745a325401917690d467726be68e62e9dda9a3c96284912fc8",
+  "error": null,
+  "finished_epoch": 1791152386.0541005,
+  "manifest_sha256": "b9dfa317614057a2bd1cb931b6f7396333d8113c355fa8e116609b5c3cf788dc",
+  "original_qualification_started_epoch": 1791151857.0986977,
+  "qualification_sha256": "636f597df9e9922dcdbe6c17c7a382ac3cfc34e47b35c254efc2320888227fef",
+  "returncode": 0,
+  "scope": "E1 DEVELOPMENT ONLY; does not claim E+1 formal audit or strength qualification",
+  "source_commit": "a278bba67bce962cb9294f0d24040e02e9acf1f4",
+  "status": "completed-actualCUDA-E1-auditor-development-qualification-only"
+}
