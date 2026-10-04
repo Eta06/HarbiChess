@@ -1,0 +1,1217 @@
+{
+  "schema": 1,
+  "source_commit": "209cc278d8031ac71de6e86026b16e71a76daa76",
+  "parent_inventory_sha256": "4d614f10508162f79a9e4ea151a98c263deb80610e35c13f1e9540ca4e381f2f",
+  "parent_archive_sha256": "091ac0a206ea869d59b41b74bea3be0484ae3096e4beac2711344617fc09bc98",
+  "prior_supplement_inventory_sha256": "81a077d702bde18add6c3ca0753a2479ff7842609c6b66f3d58ae1bf67ca69a5",
+  "prior_supplement_archive_sha256": "5546ccf5d571e8ed5d06bea8c4b64b582650416fc5f9d9e19ce70c43e603708b",
+  "file_count": 239,
+  "uncompressed_bytes": 43222734,
+  "files": [
+    {
+      "path": "artifacts/ufuk-context-context-train-20261004/checkpoints/step-000000/checkpoint.json",
+      "bytes": 140749,
+      "sha256": "c3dcc028ae0ec3f9c7d9f74427af14eca40a7d93f63016bcebcfafd91aa13c59"
+    },
+    {
+      "path": "artifacts/ufuk-context-context-train-20261004/checkpoints/step-000000/model.safetensors",
+      "bytes": 323356,
+      "sha256": "b3a3b62168d7f137e24c9517550212be66bfe17c72cd1d25933ea4b4efff7556"
+    },
+    {
+      "path": "artifacts/ufuk-context-context-train-20261004/checkpoints/step-000000/training.pt",
+      "bytes": 7152,
+      "sha256": "015526fbec1b33175d42f610e81e7f0a1fcffe0285e1797c24d7ef85718b5881"
+    },
+    {
+      "path": "artifacts/ufuk-context-context-train-20261004/checkpoints/step-000250/checkpoint.json",
+      "bytes": 141013,
+      "sha256": "2bb4ba6b62e8c11b6ab51b6a9c89a0d066c55cf4b7fb710988527803d3e90b87"
+    },
+    {
+      "path": "artifacts/ufuk-context-context-train-20261004/checkpoints/step-000250/model.safetensors",
+      "bytes": 323356,
+      "sha256": "38403cdab970724b2f4b9fc0ea2b0698ea8d23f6b6a9262c64985f46d1c1f83c"
+    },
+    {
+      "path": "artifacts/ufuk-context-context-train-20261004/checkpoints/step-000250/training.pt",
+      "bytes": 222104,
+      "sha256": "9a07c37316884675f742e3e407f4d2bc2b4f77b114308c3f1e55b3794368aa9b"
+    },
+    {
+      "path": "artifacts/ufuk-context-context-train-20261004/checkpoints/step-000500/checkpoint.json",
+      "bytes": 141269,
+      "sha256": "a1e85f17893c144cd68e3c4aab29e0cb65ad6f57b183824a3635605ec24fc428"
+    },
+    {
+      "path": "artifacts/ufuk-context-context-train-20261004/checkpoints/step-000500/model.safetensors",
+      "bytes": 323356,
+      "sha256": "59d7199f2b466c88ce1e10ed2c68920528ee4d47c9380dade30ba35a2e46085d"
+    },
+    {
+      "path": "artifacts/ufuk-context-context-train-20261004/checkpoints/step-000500/training.pt",
+      "bytes": 222104,
+      "sha256": "a45f4659177ecf1d0b1a708ba4c8c86477bbeb2be3c4dbb21acaadfe9260db6b"
+    },
+    {
+      "path": "artifacts/ufuk-context-context-train-20261004/checkpoints/step-000750/checkpoint.json",
+      "bytes": 141526,
+      "sha256": "9f75dc8f64a703ccc391dd08f83a19ee9468d7953e7b7cda72f1c37e950a59d2"
+    },
+    {
+      "path": "artifacts/ufuk-context-context-train-20261004/checkpoints/step-000750/model.safetensors",
+      "bytes": 323356,
+      "sha256": "97cbc5e2913fcd61395282b37debaeae0802247507a808bd4a98bd7572160cf0"
+    },
+    {
+      "path": "artifacts/ufuk-context-context-train-20261004/checkpoints/step-000750/training.pt",
+      "bytes": 222104,
+      "sha256": "257ba2e7713ca4a20f8372a997c7ef984be4f591cb2b4f635c79756addeb0e4d"
+    },
+    {
+      "path": "artifacts/ufuk-context-context-train-20261004/checkpoints/step-001000/checkpoint.json",
+      "bytes": 141783,
+      "sha256": "f2a3c291c5aaa68fbe66e771f28993581c3195b1fef049e93c57d7e0d976bfc3"
+    },
+    {
+      "path": "artifacts/ufuk-context-context-train-20261004/checkpoints/step-001000/model.safetensors",
+      "bytes": 323356,
+      "sha256": "fcafe20e461b195b742917be63e6ccd24986dc1500978b8c83690cdbe84c731f"
+    },
+    {
+      "path": "artifacts/ufuk-context-context-train-20261004/checkpoints/step-001000/training.pt",
+      "bytes": 222104,
+      "sha256": "8b8aa8cd68de9c34557f8fc20cd20a6fd5d45be95ae094ce9bb81bc63ed822a9"
+    },
+    {
+      "path": "artifacts/ufuk-context-context-train-20261004/checkpoints/step-001250/checkpoint.json",
+      "bytes": 142040,
+      "sha256": "0eeead37d3ab08b6ed0e12c6cdf915956474438f734b21e7fe5afb64abf4d6fa"
+    },
+    {
+      "path": "artifacts/ufuk-context-context-train-20261004/checkpoints/step-001250/model.safetensors",
+      "bytes": 323356,
+      "sha256": "2665ab11105de90cf31ea2a8c8ad124ff53cdbd63317c5a262474f7b930754a1"
+    },
+    {
+      "path": "artifacts/ufuk-context-context-train-20261004/checkpoints/step-001250/training.pt",
+      "bytes": 222104,
+      "sha256": "ff6e931ac3eefd0b674460ada1734ec283fdb1b85cf89422b3a93e73d562013a"
+    },
+    {
+      "path": "artifacts/ufuk-context-context-train-20261004/checkpoints/step-001500/checkpoint.json",
+      "bytes": 142297,
+      "sha256": "2e2793410033bb49214718c0e4b660339e0c961bba66cacc095537e3d16f9564"
+    },
+    {
+      "path": "artifacts/ufuk-context-context-train-20261004/checkpoints/step-001500/model.safetensors",
+      "bytes": 323356,
+      "sha256": "6a08cd58796b148b0d641d6219d47cb949d3741759dc238900a0fae335228073"
+    },
+    {
+      "path": "artifacts/ufuk-context-context-train-20261004/checkpoints/step-001500/training.pt",
+      "bytes": 222104,
+      "sha256": "b4ea46f5c5279f70890fd784f08933828c3174b15b3afcdce45adfcd8f31144d"
+    },
+    {
+      "path": "artifacts/ufuk-context-context-train-20261004/checkpoints/step-001750/checkpoint.json",
+      "bytes": 142552,
+      "sha256": "70ce35f29ca9ba4d715fcfe62c8e0be1a112c57d97c95f298c337b43edf88448"
+    },
+    {
+      "path": "artifacts/ufuk-context-context-train-20261004/checkpoints/step-001750/model.safetensors",
+      "bytes": 323356,
+      "sha256": "93cce3c9214f7e330bd818f2557d22d81c667c4f26ad9d8f34ef87dc658fdb96"
+    },
+    {
+      "path": "artifacts/ufuk-context-context-train-20261004/checkpoints/step-001750/training.pt",
+      "bytes": 222104,
+      "sha256": "dabf208c950a4d4410c01f4f9f3226406a18520198f6bfbbaa7d1733dc87a911"
+    },
+    {
+      "path": "artifacts/ufuk-context-context-train-20261004/checkpoints/step-002000/checkpoint.json",
+      "bytes": 142808,
+      "sha256": "2b97e6df3098ff460df73443e8ee80c13d7d5cb0273638124537dffeeb5c2e39"
+    },
+    {
+      "path": "artifacts/ufuk-context-context-train-20261004/checkpoints/step-002000/model.safetensors",
+      "bytes": 323356,
+      "sha256": "38173c144d96cf10b2e1a5ba108fbe946413dc7039617395846cca126fe3e140"
+    },
+    {
+      "path": "artifacts/ufuk-context-context-train-20261004/checkpoints/step-002000/training.pt",
+      "bytes": 222104,
+      "sha256": "c39cb4c9154ea6c7a5658ffdcabe67a9feb3c7da81a499f1dbbb3408609eace1"
+    },
+    {
+      "path": "artifacts/ufuk-context-context-train-20261004/checkpoints/step-002250/checkpoint.json",
+      "bytes": 143066,
+      "sha256": "c53f1cfb1aefc75a67f852ec9f1a11c480be2b640e9910cec2812506c8c26c74"
+    },
+    {
+      "path": "artifacts/ufuk-context-context-train-20261004/checkpoints/step-002250/model.safetensors",
+      "bytes": 323356,
+      "sha256": "b15981d896063ef3dfcf9b52e295777fa2a35a31c7d76afd091fddaa9a594f91"
+    },
+    {
+      "path": "artifacts/ufuk-context-context-train-20261004/checkpoints/step-002250/training.pt",
+      "bytes": 222104,
+      "sha256": "11111a0c96ee2309c37fd984ffaa78b054416bbcc5f8370c9321f7f9d4af6e92"
+    },
+    {
+      "path": "artifacts/ufuk-context-context-train-20261004/checkpoints/step-002500/checkpoint.json",
+      "bytes": 143323,
+      "sha256": "21dad10a6818e5976d07f2492f6f4c41d4df38d61a87a4287af476f6b6fbaf98"
+    },
+    {
+      "path": "artifacts/ufuk-context-context-train-20261004/checkpoints/step-002500/model.safetensors",
+      "bytes": 323356,
+      "sha256": "677e8d307239d253eda803442ccdf4402ebf410a81ef7b5e3a18c302fe48d1f4"
+    },
+    {
+      "path": "artifacts/ufuk-context-context-train-20261004/checkpoints/step-002500/training.pt",
+      "bytes": 222104,
+      "sha256": "4f6b279d305c9681ee5dbaa1d1a7257e9e2f37c2bade9dd316f0280629e0790a"
+    },
+    {
+      "path": "artifacts/ufuk-context-context-train-20261004/checkpoints/step-002750/checkpoint.json",
+      "bytes": 143578,
+      "sha256": "79c294aa2538d46c58b867e8e4333affdad27d7b0b42762fd170c9a1821a3fa9"
+    },
+    {
+      "path": "artifacts/ufuk-context-context-train-20261004/checkpoints/step-002750/model.safetensors",
+      "bytes": 323356,
+      "sha256": "c8bbf09fb28ffc6f46ba3a1563e9e65291afa99dd55d63aa9b7be7a598f6b98e"
+    },
+    {
+      "path": "artifacts/ufuk-context-context-train-20261004/checkpoints/step-002750/training.pt",
+      "bytes": 222104,
+      "sha256": "48e71892215c5d5780e21b35fdce3e6ec9a0ede443568fb820338f0113622f6d"
+    },
+    {
+      "path": "artifacts/ufuk-context-context-train-20261004/checkpoints/step-003000/checkpoint.json",
+      "bytes": 143836,
+      "sha256": "70329fdcab836ed938481e49819c0c96c74722a26673fe9a3f72bcc910304222"
+    },
+    {
+      "path": "artifacts/ufuk-context-context-train-20261004/checkpoints/step-003000/model.safetensors",
+      "bytes": 323356,
+      "sha256": "4c55028e0cddc2b66f3c76e0d37e8adbaefaaebd9ad84ddaf8ab6d05dcb0bc13"
+    },
+    {
+      "path": "artifacts/ufuk-context-context-train-20261004/checkpoints/step-003000/training.pt",
+      "bytes": 222104,
+      "sha256": "73d24096fa03a93ff50d68eb3e04f482887f2b928ad2905d4fe6f27af73eda66"
+    },
+    {
+      "path": "artifacts/ufuk-context-context-train-20261004/checkpoints/step-003250/checkpoint.json",
+      "bytes": 144092,
+      "sha256": "b5c91d9c8ca2afc7926da7bd89c35dd68fc6860714ecce9525b9e9fcf1978c7a"
+    },
+    {
+      "path": "artifacts/ufuk-context-context-train-20261004/checkpoints/step-003250/model.safetensors",
+      "bytes": 323356,
+      "sha256": "4a0004908f29fd2b25dcc7d41900112dec7578e049ebaa5be5d7aae3dc32e3b7"
+    },
+    {
+      "path": "artifacts/ufuk-context-context-train-20261004/checkpoints/step-003250/training.pt",
+      "bytes": 222104,
+      "sha256": "63d0e7f9ba6356403b2c671c2c97d999bd9626825f8ddbf6ea7072b13444b39c"
+    },
+    {
+      "path": "artifacts/ufuk-context-context-train-20261004/checkpoints/step-003500/checkpoint.json",
+      "bytes": 144347,
+      "sha256": "3dbae329b493174b837e875ed0e9d1458e5abb1bf5f128c116d27b0bb900af57"
+    },
+    {
+      "path": "artifacts/ufuk-context-context-train-20261004/checkpoints/step-003500/model.safetensors",
+      "bytes": 323356,
+      "sha256": "8b249473c4f640b0e93640a12c018ca0cf17e42288ec302fb0e2ab386b036e6b"
+    },
+    {
+      "path": "artifacts/ufuk-context-context-train-20261004/checkpoints/step-003500/training.pt",
+      "bytes": 222104,
+      "sha256": "3c4b628675533114599ed589fe39f7a2bbcd965ffa154505fb9f6eaf7d5c27f9"
+    },
+    {
+      "path": "artifacts/ufuk-context-context-train-20261004/checkpoints/step-003750/checkpoint.json",
+      "bytes": 144603,
+      "sha256": "ae15e2f1ef1ecff9957554608ca6b44b4c03fe5b1e761b4b527a7f37276e21bd"
+    },
+    {
+      "path": "artifacts/ufuk-context-context-train-20261004/checkpoints/step-003750/model.safetensors",
+      "bytes": 323356,
+      "sha256": "2dc97dff906735a87a4195719fb1fb79f128f8ede2c95fe8600969b1dda2d568"
+    },
+    {
+      "path": "artifacts/ufuk-context-context-train-20261004/checkpoints/step-003750/training.pt",
+      "bytes": 222104,
+      "sha256": "5a56f5ebfb0d5b2126239e0f7b298a293dedbb8d7354aaae73265b9c68ddd791"
+    },
+    {
+      "path": "artifacts/ufuk-context-context-train-20261004/checkpoints/step-004000/checkpoint.json",
+      "bytes": 144860,
+      "sha256": "10b81e860088ee6602d0b5ea0583ed3bc781951ea04a5ac034a4d6e9f083a302"
+    },
+    {
+      "path": "artifacts/ufuk-context-context-train-20261004/checkpoints/step-004000/model.safetensors",
+      "bytes": 323356,
+      "sha256": "6f15fcbf0623d7f1bb2a85a52ed52628bca0449442aeb2ec5699476915caa437"
+    },
+    {
+      "path": "artifacts/ufuk-context-context-train-20261004/checkpoints/step-004000/training.pt",
+      "bytes": 222104,
+      "sha256": "22681b6215d977c64068d626b9a56308479541cfcff3b382aa8562204967f73f"
+    },
+    {
+      "path": "artifacts/ufuk-context-context-train-20261004/checkpoints/step-004250/checkpoint.json",
+      "bytes": 145116,
+      "sha256": "3a861dfda28ae09e359104cc09255594f711883fdf2612961e5f5f7fa6e621e1"
+    },
+    {
+      "path": "artifacts/ufuk-context-context-train-20261004/checkpoints/step-004250/model.safetensors",
+      "bytes": 323356,
+      "sha256": "70a9255c6e64abb9e8798b156a5af0ba42f0ba755d6d601bca69382f9ee8c2db"
+    },
+    {
+      "path": "artifacts/ufuk-context-context-train-20261004/checkpoints/step-004250/training.pt",
+      "bytes": 222104,
+      "sha256": "45a64e0cddf77993890d3d20f791d35393875165bc225afdff32bb612247c9c2"
+    },
+    {
+      "path": "artifacts/ufuk-context-context-train-20261004/checkpoints/step-004500/checkpoint.json",
+      "bytes": 145373,
+      "sha256": "02a5f03b014b4c21423344de31734580eec95b95ea0c16fb0a5cc2ec026342d7"
+    },
+    {
+      "path": "artifacts/ufuk-context-context-train-20261004/checkpoints/step-004500/model.safetensors",
+      "bytes": 323356,
+      "sha256": "d837ba1e7fc9aed619b108d7669e7f003afecbfbf2c4fc7d8304b36f8bcc5516"
+    },
+    {
+      "path": "artifacts/ufuk-context-context-train-20261004/checkpoints/step-004500/training.pt",
+      "bytes": 222104,
+      "sha256": "a50269ba301c50589ea10a31b3a1b067a5b732edd89d5554d2470df958a06d7a"
+    },
+    {
+      "path": "artifacts/ufuk-context-context-train-20261004/checkpoints/step-004750/checkpoint.json",
+      "bytes": 145627,
+      "sha256": "de14f204c83839f92f74a4b63c4c122b2cc0fe381791bdc4250bd89a9146053f"
+    },
+    {
+      "path": "artifacts/ufuk-context-context-train-20261004/checkpoints/step-004750/model.safetensors",
+      "bytes": 323356,
+      "sha256": "323e5d03e706b77e3373788dfc52086d483e4e797f5cb27b08124e38ee0b2fef"
+    },
+    {
+      "path": "artifacts/ufuk-context-context-train-20261004/checkpoints/step-004750/training.pt",
+      "bytes": 222104,
+      "sha256": "a8b40c4965bcb3d606fdf316116b5b62d3cad9e2c17d7e8bce8f91324c841237"
+    },
+    {
+      "path": "artifacts/ufuk-context-context-train-20261004/checkpoints/step-005000/checkpoint.json",
+      "bytes": 145880,
+      "sha256": "32454a3682c90be350408f04e1cbec0e51dc315e05e92f92f36b099f476869f8"
+    },
+    {
+      "path": "artifacts/ufuk-context-context-train-20261004/checkpoints/step-005000/model.safetensors",
+      "bytes": 323356,
+      "sha256": "24f8a1520726007052df1307e75932d093e3571a16e94df720cae44b145990e9"
+    },
+    {
+      "path": "artifacts/ufuk-context-context-train-20261004/checkpoints/step-005000/training.pt",
+      "bytes": 222104,
+      "sha256": "d28bff771a96d0178d968a1f95883fdf3021be8f94048e304353e5e73db33527"
+    },
+    {
+      "path": "artifacts/ufuk-context-context-train-20261004/checkpoints/step-005250/checkpoint.json",
+      "bytes": 146136,
+      "sha256": "e1f8e5af8dcdebe6288af2f3c0be7cbea5cc9ecffa956a42782c706ceac84faa"
+    },
+    {
+      "path": "artifacts/ufuk-context-context-train-20261004/checkpoints/step-005250/model.safetensors",
+      "bytes": 323356,
+      "sha256": "27885a970bab22963d7871ced91bab3c01ad6fb6aa65c612b9ddc42cf5ab89be"
+    },
+    {
+      "path": "artifacts/ufuk-context-context-train-20261004/checkpoints/step-005250/training.pt",
+      "bytes": 222104,
+      "sha256": "6ce46022ead369ea964d83cf44d9e9a90e2c5ff322cd7c2ae9c4ab3eafb73ac5"
+    },
+    {
+      "path": "artifacts/ufuk-context-context-train-20261004/checkpoints/step-005500/checkpoint.json",
+      "bytes": 146395,
+      "sha256": "c25ba949115bbdab45f85c01b095ec27289c00bf409fcbca0b10e37348a73ef4"
+    },
+    {
+      "path": "artifacts/ufuk-context-context-train-20261004/checkpoints/step-005500/model.safetensors",
+      "bytes": 323356,
+      "sha256": "0fda920d6c9d7dad94de43e9f1ed64be89f23764036419ddf8393e355e386ec3"
+    },
+    {
+      "path": "artifacts/ufuk-context-context-train-20261004/checkpoints/step-005500/training.pt",
+      "bytes": 222104,
+      "sha256": "52ab5f5d5c41c96fa0cdc82802232c93fdd2c4710ad5968d14b7d2ff373dac00"
+    },
+    {
+      "path": "artifacts/ufuk-context-context-train-20261004/checkpoints/step-005750/checkpoint.json",
+      "bytes": 146652,
+      "sha256": "4db13403cf92236f515d474eb3af450371b0953b7317c3838f0fbba79330ee28"
+    },
+    {
+      "path": "artifacts/ufuk-context-context-train-20261004/checkpoints/step-005750/model.safetensors",
+      "bytes": 323356,
+      "sha256": "7817f3e517acdad2edea87a788a4654678ca5547f9e63451dece323b79371b39"
+    },
+    {
+      "path": "artifacts/ufuk-context-context-train-20261004/checkpoints/step-005750/training.pt",
+      "bytes": 222104,
+      "sha256": "e7128c3a7a868272af3a828fb1562b87bc4ee55e3d78b08290e23298da158365"
+    },
+    {
+      "path": "artifacts/ufuk-context-context-train-20261004/checkpoints/step-006000/checkpoint.json",
+      "bytes": 146908,
+      "sha256": "ef2426a587267f038834995a83d58e6adbe87e97417bfc90fc3e8e5cffb139ae"
+    },
+    {
+      "path": "artifacts/ufuk-context-context-train-20261004/checkpoints/step-006000/model.safetensors",
+      "bytes": 323356,
+      "sha256": "ba0d54f3b06f480144f1bfa9c3ccabe479c327cab3ecf3e47e87c3fe8a115a7a"
+    },
+    {
+      "path": "artifacts/ufuk-context-context-train-20261004/checkpoints/step-006000/training.pt",
+      "bytes": 222104,
+      "sha256": "0a03fc852d7c61e1aae682da9b3cd5950b4b970cf13aea77a4a2bd4708547eb4"
+    },
+    {
+      "path": "artifacts/ufuk-context-context-train-20261004/checkpoints/step-006250/checkpoint.json",
+      "bytes": 147164,
+      "sha256": "07a8e98b9e5a968017427d1f7c4603f10d71e215b5f4ebf547a14ba0d0a983b6"
+    },
+    {
+      "path": "artifacts/ufuk-context-context-train-20261004/checkpoints/step-006250/model.safetensors",
+      "bytes": 323356,
+      "sha256": "9f60e61bc0ed22ba153f285ba63ddba7199cca70f093db089d8eab9c5894390e"
+    },
+    {
+      "path": "artifacts/ufuk-context-context-train-20261004/checkpoints/step-006250/training.pt",
+      "bytes": 222104,
+      "sha256": "64f9ff68ea3b85435841a188bc9ddcaa1bf3079697b18ae165b09b7545fe4f22"
+    },
+    {
+      "path": "artifacts/ufuk-context-context-train-20261004/checkpoints/step-006500/checkpoint.json",
+      "bytes": 147417,
+      "sha256": "e5c629e662bc55f2ed896f9b5bed892bcd65dc2eb1f715e3439e0c087fe7a18d"
+    },
+    {
+      "path": "artifacts/ufuk-context-context-train-20261004/checkpoints/step-006500/model.safetensors",
+      "bytes": 323356,
+      "sha256": "13b4d03302ee91c504531d660adb687e8e7f209f3085a9d30083992402e457c7"
+    },
+    {
+      "path": "artifacts/ufuk-context-context-train-20261004/checkpoints/step-006500/training.pt",
+      "bytes": 222104,
+      "sha256": "aa109ff5b16bf9c329e3740c5cdb7c92beb22ac405579e05d2fb6afa7fbcf712"
+    },
+    {
+      "path": "artifacts/ufuk-context-context-train-20261004/checkpoints/step-006750/checkpoint.json",
+      "bytes": 147673,
+      "sha256": "af6488b40886a1dd2e99510a794d2b72edf72ec5775a121ad97212c3b6a0f918"
+    },
+    {
+      "path": "artifacts/ufuk-context-context-train-20261004/checkpoints/step-006750/model.safetensors",
+      "bytes": 323356,
+      "sha256": "47f398d004512e4c4272fc7edcaaabbd7519adea1c1cb732d7971dfce63564a9"
+    },
+    {
+      "path": "artifacts/ufuk-context-context-train-20261004/checkpoints/step-006750/training.pt",
+      "bytes": 222104,
+      "sha256": "75d07e23b3c19af60052526437235221e19bc3d507e370157ab068bbce356cad"
+    },
+    {
+      "path": "artifacts/ufuk-context-context-train-20261004/checkpoints/step-007000/checkpoint.json",
+      "bytes": 147930,
+      "sha256": "6877458c99bc75bf4c28ef9fdbeda0751fe95f9236d1b3ecdca16cd3f10b183f"
+    },
+    {
+      "path": "artifacts/ufuk-context-context-train-20261004/checkpoints/step-007000/model.safetensors",
+      "bytes": 323356,
+      "sha256": "94a3ff17af42636234912f18bada8ae9063989a9fdb8c757bb58e2ea7d1f7f9f"
+    },
+    {
+      "path": "artifacts/ufuk-context-context-train-20261004/checkpoints/step-007000/training.pt",
+      "bytes": 222104,
+      "sha256": "d13cf2264136df7f0a3c666957eac5ab07699e4fe93fca36cbdec90e33e3331d"
+    },
+    {
+      "path": "artifacts/ufuk-context-context-train-20261004/checkpoints/step-007250/checkpoint.json",
+      "bytes": 148187,
+      "sha256": "6262114901e070b01162bd0ec28211571f5eab7608a3e73d9c4c2f19924035a0"
+    },
+    {
+      "path": "artifacts/ufuk-context-context-train-20261004/checkpoints/step-007250/model.safetensors",
+      "bytes": 323356,
+      "sha256": "27b54e201dcbe306493d400baf847d3bbe6a4a2ea76f3c42f73e0e73c882935f"
+    },
+    {
+      "path": "artifacts/ufuk-context-context-train-20261004/checkpoints/step-007250/training.pt",
+      "bytes": 222104,
+      "sha256": "9a5bdaeda6be0bd2d0576a728459da8edbca29944dd1305657a33a4ffca95152"
+    },
+    {
+      "path": "artifacts/ufuk-context-context-train-20261004/checkpoints/step-007500/checkpoint.json",
+      "bytes": 148444,
+      "sha256": "7c9e2b4d072c06dd8681425bb1647dc44ce7dc427740390e1c60bf32bd012b4a"
+    },
+    {
+      "path": "artifacts/ufuk-context-context-train-20261004/checkpoints/step-007500/model.safetensors",
+      "bytes": 323356,
+      "sha256": "f0dc9d54e49ba3031e5e69cfde5a4549f2f40923cd6f4b667a9710a30adb0fdb"
+    },
+    {
+      "path": "artifacts/ufuk-context-context-train-20261004/checkpoints/step-007500/training.pt",
+      "bytes": 222104,
+      "sha256": "8d7489abac9b5fee0082cf59e6d4a4004118e415132d64b268a40edcc16f98d3"
+    },
+    {
+      "path": "artifacts/ufuk-context-context-train-20261004/checkpoints/step-007750/checkpoint.json",
+      "bytes": 148700,
+      "sha256": "5371cc0775b384f95e1384c88d9aec5647367d84179766ef8a540eaee7cd3232"
+    },
+    {
+      "path": "artifacts/ufuk-context-context-train-20261004/checkpoints/step-007750/model.safetensors",
+      "bytes": 323356,
+      "sha256": "d670ef77e307ab4941713b874707694b5e2a2a62bb76c51f6cdadcb85c65012f"
+    },
+    {
+      "path": "artifacts/ufuk-context-context-train-20261004/checkpoints/step-007750/training.pt",
+      "bytes": 222104,
+      "sha256": "348484733690c4491f69b98b7597f47f4f0224faccb0e355f400dd03ee53ab37"
+    },
+    {
+      "path": "artifacts/ufuk-context-context-train-20261004/checkpoints/step-008000/checkpoint.json",
+      "bytes": 148959,
+      "sha256": "a08626c1b41a5fa961fca6a5777162741474842ae699e5ef5c6acf515724f21e"
+    },
+    {
+      "path": "artifacts/ufuk-context-context-train-20261004/checkpoints/step-008000/model.safetensors",
+      "bytes": 323356,
+      "sha256": "93b4a2649128036a300d37a48a78ac5b691c7662be1e7fea16711830d6ec35d9"
+    },
+    {
+      "path": "artifacts/ufuk-context-context-train-20261004/checkpoints/step-008000/training.pt",
+      "bytes": 222104,
+      "sha256": "c07e8b044d3ed144850d855a909d53547d3f79db9f186efba29ff1b9beef7b02"
+    },
+    {
+      "path": "artifacts/ufuk-context-context-train-20261004/context-guard-profile.json",
+      "bytes": 4160,
+      "sha256": "e5c7cbf61f44e87a438b14f3ef2bf472ada21ed0d61b4cb63404b91bf74c35c9"
+    },
+    {
+      "path": "artifacts/ufuk-context-context-train-20261004/context-phase-result-step-000250.json",
+      "bytes": 1108,
+      "sha256": "de75e2d30bab454dd324f9b7bbecf8174213cbfe0e18021e2baca8f7c1777ae1"
+    },
+    {
+      "path": "artifacts/ufuk-context-context-train-20261004/context-phase-result-step-008000.json",
+      "bytes": 1194,
+      "sha256": "da26a0fe75097a05b76aedc936472bb8ccb8c5d38dbee480f1acd2bf73e33277"
+    },
+    {
+      "path": "artifacts/ufuk-context-context-train-20261004/metadata.json",
+      "bytes": 1514,
+      "sha256": "a74fd6e5044b754fd196c30969728b879074d2353fabc5b377aa0c456a2b87d9"
+    },
+    {
+      "path": "artifacts/ufuk-context-context-train-20261004/progress.jsonl",
+      "bytes": 15349,
+      "sha256": "6bc9cae50fd6de22a638ab7e1e3415b1a49e6e3f112df22b5b5a97854b156fe0"
+    },
+    {
+      "path": "artifacts/ufuk-context-context-train-20261004/result-step-000250.json",
+      "bytes": 858,
+      "sha256": "ba207b79aaba2bb7f4584f01348c4d71e27393069396f546e00461b0dc87d10b"
+    },
+    {
+      "path": "artifacts/ufuk-context-context-train-20261004/result-step-008000.json",
+      "bytes": 941,
+      "sha256": "9dfe31b9ab206161493c7df9e7f14156472d1a7c5f38073673b130d5c2b64ab8"
+    },
+    {
+      "path": "artifacts/ufuk-context-control-train-20261004/checkpoints/step-000000/checkpoint.json",
+      "bytes": 139633,
+      "sha256": "52be0febe42eedd84f0d544bdafdedcdce22e081ea5d77512be1c16844be5bfb"
+    },
+    {
+      "path": "artifacts/ufuk-context-control-train-20261004/checkpoints/step-000000/model.safetensors",
+      "bytes": 294764,
+      "sha256": "11f1736088b68803b20a3dfd09c72ed195f61163834ebdc5e8891804dd48c0ee"
+    },
+    {
+      "path": "artifacts/ufuk-context-control-train-20261004/checkpoints/step-000000/training.pt",
+      "bytes": 7088,
+      "sha256": "b5366a6d85a19a1c4e31fbab7895e07c5aa4859348398089936cc6247ac2a175"
+    },
+    {
+      "path": "artifacts/ufuk-context-control-train-20261004/checkpoints/step-000250/checkpoint.json",
+      "bytes": 139896,
+      "sha256": "a7d14381f18795bccfc2aa09fdcd5c04d6f0b236c64a9dcfbe121694c42d2748"
+    },
+    {
+      "path": "artifacts/ufuk-context-control-train-20261004/checkpoints/step-000250/model.safetensors",
+      "bytes": 294764,
+      "sha256": "71103a5e2c80e0625c6498c64966500f166383989e878d52224077061b9f583d"
+    },
+    {
+      "path": "artifacts/ufuk-context-control-train-20261004/checkpoints/step-000250/training.pt",
+      "bytes": 149611,
+      "sha256": "6884163a56f281a2937ecd42d1c1add940a068a82b81cda02cae4dba57750a7f"
+    },
+    {
+      "path": "artifacts/ufuk-context-control-train-20261004/checkpoints/step-000500/checkpoint.json",
+      "bytes": 140149,
+      "sha256": "2042290631002182acc968ec222227a81c4069fc8915a52cc8fbe2d3aa711b24"
+    },
+    {
+      "path": "artifacts/ufuk-context-control-train-20261004/checkpoints/step-000500/model.safetensors",
+      "bytes": 294764,
+      "sha256": "47eb22d3461d5eb663630a6caff40638bec80c411b650d932817cd86ee6d6c87"
+    },
+    {
+      "path": "artifacts/ufuk-context-control-train-20261004/checkpoints/step-000500/training.pt",
+      "bytes": 149611,
+      "sha256": "ce8cb35fb4e062bf45bea7356765a2761f8d8bd58d8b1eed862477e53bd5e165"
+    },
+    {
+      "path": "artifacts/ufuk-context-control-train-20261004/checkpoints/step-000750/checkpoint.json",
+      "bytes": 140404,
+      "sha256": "1f23b7bf29d6738f511023e7b86527dea8ac85d4e006184e09029fa40a0b4aec"
+    },
+    {
+      "path": "artifacts/ufuk-context-control-train-20261004/checkpoints/step-000750/model.safetensors",
+      "bytes": 294764,
+      "sha256": "4320c1145cbbaab2d9b905df6e47831c7e4a6351b3cdf2da49e0a1b34b591382"
+    },
+    {
+      "path": "artifacts/ufuk-context-control-train-20261004/checkpoints/step-000750/training.pt",
+      "bytes": 149611,
+      "sha256": "d2b6bd2af0ea5c8a4706fc59001042cb3d9b692cb8962aa541707d7f0d323e46"
+    },
+    {
+      "path": "artifacts/ufuk-context-control-train-20261004/checkpoints/step-001000/checkpoint.json",
+      "bytes": 140663,
+      "sha256": "9962eda2a8720a68174c24545a0332f00810f8b9d53b9a65ccab4c5c6ef7b67b"
+    },
+    {
+      "path": "artifacts/ufuk-context-control-train-20261004/checkpoints/step-001000/model.safetensors",
+      "bytes": 294764,
+      "sha256": "a1d750da7bb08c7b6869b1e67dfe8221cce97c0d1c827e87ee7b66c6c72cc703"
+    },
+    {
+      "path": "artifacts/ufuk-context-control-train-20261004/checkpoints/step-001000/training.pt",
+      "bytes": 149611,
+      "sha256": "04820b8b9e590caa955182fbe6545058b695232a5c08ff2d3f00aab3aedde538"
+    },
+    {
+      "path": "artifacts/ufuk-context-control-train-20261004/checkpoints/step-001250/checkpoint.json",
+      "bytes": 140920,
+      "sha256": "b0b5f18dc16d7c8ca18a2b7f1f07d3950d86fa7433115e1af33679b3fff65790"
+    },
+    {
+      "path": "artifacts/ufuk-context-control-train-20261004/checkpoints/step-001250/model.safetensors",
+      "bytes": 294764,
+      "sha256": "a1bba7cc1d1f0fd897497e4fcbf83b8c610ef8499111a295ada511bb3efefde5"
+    },
+    {
+      "path": "artifacts/ufuk-context-control-train-20261004/checkpoints/step-001250/training.pt",
+      "bytes": 149611,
+      "sha256": "3548dd9ae48dd4876c4ff3bc05ab2a232040a7e22752a26aa90424e17a8c3ece"
+    },
+    {
+      "path": "artifacts/ufuk-context-control-train-20261004/checkpoints/step-001500/checkpoint.json",
+      "bytes": 141178,
+      "sha256": "b123a839dec23de36455c5b016d67b8084568a49784c0a101e8dd43a4fe1c789"
+    },
+    {
+      "path": "artifacts/ufuk-context-control-train-20261004/checkpoints/step-001500/model.safetensors",
+      "bytes": 294764,
+      "sha256": "5cfbcb96d7df4106bdff7bc7c92caae7372e220096f240aaf519ba9a00e7b0ae"
+    },
+    {
+      "path": "artifacts/ufuk-context-control-train-20261004/checkpoints/step-001500/training.pt",
+      "bytes": 149611,
+      "sha256": "2002decba21642ddb557f3e978a8a0f36ac6775ddecf95d6adea1cb05c5474fb"
+    },
+    {
+      "path": "artifacts/ufuk-context-control-train-20261004/checkpoints/step-001750/checkpoint.json",
+      "bytes": 141434,
+      "sha256": "2536820f0928d65059d16cb935e593a278e1e8f3b3570ea2aa9b0463a84c9b04"
+    },
+    {
+      "path": "artifacts/ufuk-context-control-train-20261004/checkpoints/step-001750/model.safetensors",
+      "bytes": 294764,
+      "sha256": "767d5cac42524e3767809c9548e3dc2536ddf75014cb265c39c29be297dce68a"
+    },
+    {
+      "path": "artifacts/ufuk-context-control-train-20261004/checkpoints/step-001750/training.pt",
+      "bytes": 149611,
+      "sha256": "46a2b5083bd9da7a717e4b4abb076ae925af1001b077934891f0de014c83e3fe"
+    },
+    {
+      "path": "artifacts/ufuk-context-control-train-20261004/checkpoints/step-002000/checkpoint.json",
+      "bytes": 141687,
+      "sha256": "4a5cabdf92686208547f507a1b23a8e35e59140fbebd3e4e6049f13d9c2ac6f0"
+    },
+    {
+      "path": "artifacts/ufuk-context-control-train-20261004/checkpoints/step-002000/model.safetensors",
+      "bytes": 294764,
+      "sha256": "54729ab7852e9e863d2e49b61e7bd5846df017a48a463038bcea1633285b7e7e"
+    },
+    {
+      "path": "artifacts/ufuk-context-control-train-20261004/checkpoints/step-002000/training.pt",
+      "bytes": 149611,
+      "sha256": "a373443a75c079c99f1e34751298745eadce3cda01425a5a837d482831532f25"
+    },
+    {
+      "path": "artifacts/ufuk-context-control-train-20261004/checkpoints/step-002250/checkpoint.json",
+      "bytes": 141945,
+      "sha256": "1319ba49886711c1e676a3bc18e7412b8ce83e3eaa4fb45a7b9cea69aa3c42b0"
+    },
+    {
+      "path": "artifacts/ufuk-context-control-train-20261004/checkpoints/step-002250/model.safetensors",
+      "bytes": 294764,
+      "sha256": "cc23c3da10fa89f17e2ee6ef4931efd9513eb4e333051ffbba105f15d2f87373"
+    },
+    {
+      "path": "artifacts/ufuk-context-control-train-20261004/checkpoints/step-002250/training.pt",
+      "bytes": 149611,
+      "sha256": "2ec36a59e97c2e298479dad1cd78e48fd5273c960d3d1454c27f7d3b341079b4"
+    },
+    {
+      "path": "artifacts/ufuk-context-control-train-20261004/checkpoints/step-002500/checkpoint.json",
+      "bytes": 142200,
+      "sha256": "b877b1a6c6852091013a528379046a4e91863fd28c1c74b7e36dbbbea3c37998"
+    },
+    {
+      "path": "artifacts/ufuk-context-control-train-20261004/checkpoints/step-002500/model.safetensors",
+      "bytes": 294764,
+      "sha256": "55aed1e4553cb6c64ed3bd1e83e57a1576988c7a95811227809dc7d466ae5d16"
+    },
+    {
+      "path": "artifacts/ufuk-context-control-train-20261004/checkpoints/step-002500/training.pt",
+      "bytes": 149611,
+      "sha256": "e4754ac074c34db3d9304cd2323dbdd092fefa033e9752c8261c69dfc426c67e"
+    },
+    {
+      "path": "artifacts/ufuk-context-control-train-20261004/checkpoints/step-002750/checkpoint.json",
+      "bytes": 142457,
+      "sha256": "410b4d96f708abf66d337c9b76f167d06e421cff369a90c0dd785d8a29e1f1ba"
+    },
+    {
+      "path": "artifacts/ufuk-context-control-train-20261004/checkpoints/step-002750/model.safetensors",
+      "bytes": 294764,
+      "sha256": "afa2b2662461c2054b125857d9903cd6cd84f4380ee15453f82ddee5dfe92bf6"
+    },
+    {
+      "path": "artifacts/ufuk-context-control-train-20261004/checkpoints/step-002750/training.pt",
+      "bytes": 149611,
+      "sha256": "470f45ebc85dd6fa6f7ea30dae8f7e0652c0f70eb76d395f7d976c8555dd120c"
+    },
+    {
+      "path": "artifacts/ufuk-context-control-train-20261004/checkpoints/step-003000/checkpoint.json",
+      "bytes": 142713,
+      "sha256": "a4a2b71cb4bf6ce22596a2ec6a01150cc1742f95245b4b0ce851c089eaf35822"
+    },
+    {
+      "path": "artifacts/ufuk-context-control-train-20261004/checkpoints/step-003000/model.safetensors",
+      "bytes": 294764,
+      "sha256": "b3add92925bc624cb4a527ee27a06e8bbe9d30b94b8ee6933e65bed09c534ed3"
+    },
+    {
+      "path": "artifacts/ufuk-context-control-train-20261004/checkpoints/step-003000/training.pt",
+      "bytes": 149611,
+      "sha256": "c0c93d44bba8cf105fda7c6e19bc888b3fdb2f3ecd8d624dd8349b228273c9e3"
+    },
+    {
+      "path": "artifacts/ufuk-context-control-train-20261004/checkpoints/step-003250/checkpoint.json",
+      "bytes": 142967,
+      "sha256": "e3382ea8449ca4cb7f563356b24677b9160e629136a404cf2ece8de54a15a3bc"
+    },
+    {
+      "path": "artifacts/ufuk-context-control-train-20261004/checkpoints/step-003250/model.safetensors",
+      "bytes": 294764,
+      "sha256": "db6e7fac8570baffea318eef0d8571dfd630c7d0454a42fbe9d5870af2773155"
+    },
+    {
+      "path": "artifacts/ufuk-context-control-train-20261004/checkpoints/step-003250/training.pt",
+      "bytes": 149611,
+      "sha256": "e2842a32ab674f0a684d07ad8c0df65c7b2b005b6f4ff0484adfcb819cea6e41"
+    },
+    {
+      "path": "artifacts/ufuk-context-control-train-20261004/checkpoints/step-003500/checkpoint.json",
+      "bytes": 143223,
+      "sha256": "f268e82d936726b7bc4fc83ac32b4cffca5179eea0e5c4271c118c3c7edec962"
+    },
+    {
+      "path": "artifacts/ufuk-context-control-train-20261004/checkpoints/step-003500/model.safetensors",
+      "bytes": 294764,
+      "sha256": "851f6b79b47e97005d56b6cb41e8046e53366dedf90e76f37a4e294bdb2d0e39"
+    },
+    {
+      "path": "artifacts/ufuk-context-control-train-20261004/checkpoints/step-003500/training.pt",
+      "bytes": 149611,
+      "sha256": "efac96ff78244b7d4c46267c00f1c6cc12d05577f2c41e0993b32f6693b40271"
+    },
+    {
+      "path": "artifacts/ufuk-context-control-train-20261004/checkpoints/step-003750/checkpoint.json",
+      "bytes": 143481,
+      "sha256": "f20c538201ea1350d3cd7115bb8ae7b58cc31b38a20c4aabe4de3755b8138da2"
+    },
+    {
+      "path": "artifacts/ufuk-context-control-train-20261004/checkpoints/step-003750/model.safetensors",
+      "bytes": 294764,
+      "sha256": "38883288dd22c382ae81ef51564a50018020d4a08171a8cf0f8f85e3a92bb86f"
+    },
+    {
+      "path": "artifacts/ufuk-context-control-train-20261004/checkpoints/step-003750/training.pt",
+      "bytes": 149611,
+      "sha256": "c6309ad239b93bf3a77dccaf01a80b7c21b51a185e6e008f8b3efd5e76ef0015"
+    },
+    {
+      "path": "artifacts/ufuk-context-control-train-20261004/checkpoints/step-004000/checkpoint.json",
+      "bytes": 143738,
+      "sha256": "4c683ed06e3282c16f114cd52e339a709b26c06226c29b228de9da1ff2395746"
+    },
+    {
+      "path": "artifacts/ufuk-context-control-train-20261004/checkpoints/step-004000/model.safetensors",
+      "bytes": 294764,
+      "sha256": "f4d7481d9ba1d453603d4423f281bfc6cbdcc9699a66c39c6090f0a7aed836f4"
+    },
+    {
+      "path": "artifacts/ufuk-context-control-train-20261004/checkpoints/step-004000/training.pt",
+      "bytes": 149611,
+      "sha256": "6f046b05a8c92c5efa2f4e80b566b30b4a705037b93e6f7e7dc13e465190d92e"
+    },
+    {
+      "path": "artifacts/ufuk-context-control-train-20261004/checkpoints/step-004250/checkpoint.json",
+      "bytes": 143994,
+      "sha256": "e4cb45d456d9c0cfd1684bdadb489c854adaab24fe0e697c43c16a6dc332170d"
+    },
+    {
+      "path": "artifacts/ufuk-context-control-train-20261004/checkpoints/step-004250/model.safetensors",
+      "bytes": 294764,
+      "sha256": "4740c4e7d21b3d31a961d22a0d27b0b855345ca87cf65ee0ef486657a40379e4"
+    },
+    {
+      "path": "artifacts/ufuk-context-control-train-20261004/checkpoints/step-004250/training.pt",
+      "bytes": 149611,
+      "sha256": "9edc67cef49f0a16b74876d79fe0bf798899bbe454df9d8a707d13333a3ede27"
+    },
+    {
+      "path": "artifacts/ufuk-context-control-train-20261004/checkpoints/step-004500/checkpoint.json",
+      "bytes": 144251,
+      "sha256": "e36028eb65e24fda8a401035e93c36c5f66fd8e379c27bb09ecc2faf3606ba0e"
+    },
+    {
+      "path": "artifacts/ufuk-context-control-train-20261004/checkpoints/step-004500/model.safetensors",
+      "bytes": 294764,
+      "sha256": "3183b39b7e29b8bd3e2963f00bb2fbb8d6b7f857c2178fec00693e8327893936"
+    },
+    {
+      "path": "artifacts/ufuk-context-control-train-20261004/checkpoints/step-004500/training.pt",
+      "bytes": 149611,
+      "sha256": "38c6edf267f14dafbb3a2025a4dfa126c00f659b4fd2a9b51e4956bcf1243adb"
+    },
+    {
+      "path": "artifacts/ufuk-context-control-train-20261004/checkpoints/step-004750/checkpoint.json",
+      "bytes": 144507,
+      "sha256": "a07c29c4f8debb49a52b203ed4f065c8f98080eca24117f9810f6f2d6b1a52c7"
+    },
+    {
+      "path": "artifacts/ufuk-context-control-train-20261004/checkpoints/step-004750/model.safetensors",
+      "bytes": 294764,
+      "sha256": "1bb88d228307882cf75a1a62a3d6f92868cd75e97ba52b7c9e2c76909a0cac64"
+    },
+    {
+      "path": "artifacts/ufuk-context-control-train-20261004/checkpoints/step-004750/training.pt",
+      "bytes": 149611,
+      "sha256": "dc369dc934c674d8b6722e0d34eb80c6917b29713263fe95124c6443d63bbaf8"
+    },
+    {
+      "path": "artifacts/ufuk-context-control-train-20261004/checkpoints/step-005000/checkpoint.json",
+      "bytes": 144763,
+      "sha256": "ce44c3542ddf3055178130484fb51c4fde34276b8ea85ac141abce0538c230a1"
+    },
+    {
+      "path": "artifacts/ufuk-context-control-train-20261004/checkpoints/step-005000/model.safetensors",
+      "bytes": 294764,
+      "sha256": "d2a3bc1887221339904e36207a39c27d475cc4fdbf3291a57c4550d1091800d5"
+    },
+    {
+      "path": "artifacts/ufuk-context-control-train-20261004/checkpoints/step-005000/training.pt",
+      "bytes": 149611,
+      "sha256": "01608459363427f05c84bc9341556d7460c7ef68a7cd2487b99bb26e7a1f35e4"
+    },
+    {
+      "path": "artifacts/ufuk-context-control-train-20261004/checkpoints/step-005250/checkpoint.json",
+      "bytes": 145019,
+      "sha256": "76787da261c493ac933f7101a9de9430534b60fd63f84bca9fdba9346fa9cb06"
+    },
+    {
+      "path": "artifacts/ufuk-context-control-train-20261004/checkpoints/step-005250/model.safetensors",
+      "bytes": 294764,
+      "sha256": "c650b31d2cb6679a2a1ad432e9e9e14d17a5da14a2c548db93e84cbc879a3285"
+    },
+    {
+      "path": "artifacts/ufuk-context-control-train-20261004/checkpoints/step-005250/training.pt",
+      "bytes": 149611,
+      "sha256": "25e342f5f1f83bc854011f23b5b84300f2493ade21a1778ec23c36e43780b769"
+    },
+    {
+      "path": "artifacts/ufuk-context-control-train-20261004/checkpoints/step-005500/checkpoint.json",
+      "bytes": 145274,
+      "sha256": "4332e7384998afeb60ab2daefee9fb8a1259a7099ad5691604771987dfdbc34f"
+    },
+    {
+      "path": "artifacts/ufuk-context-control-train-20261004/checkpoints/step-005500/model.safetensors",
+      "bytes": 294764,
+      "sha256": "a83830c5d87b952e8f4fc6178172dbfbcc2ea00b79b4ee566f8b814f0cf0adf8"
+    },
+    {
+      "path": "artifacts/ufuk-context-control-train-20261004/checkpoints/step-005500/training.pt",
+      "bytes": 149611,
+      "sha256": "bd3c3c72528390e406239e05f54d48279d7bbef48f9d7a945f2ec09480e68d4e"
+    },
+    {
+      "path": "artifacts/ufuk-context-control-train-20261004/checkpoints/step-005750/checkpoint.json",
+      "bytes": 145531,
+      "sha256": "d0c0f1380baa28bb2deb8a5efecb9ad2d21b8f1d07f4d1dadc2c0faa81e998a9"
+    },
+    {
+      "path": "artifacts/ufuk-context-control-train-20261004/checkpoints/step-005750/model.safetensors",
+      "bytes": 294764,
+      "sha256": "25b48a8b7df14f70435d9c85fd8703622c5e71aa0acd59f31597d2d5a689d5f4"
+    },
+    {
+      "path": "artifacts/ufuk-context-control-train-20261004/checkpoints/step-005750/training.pt",
+      "bytes": 149611,
+      "sha256": "85a350c5b2983e92280979ea4b34e7cebd562f10e31cc150a92620589e989ef2"
+    },
+    {
+      "path": "artifacts/ufuk-context-control-train-20261004/checkpoints/step-006000/checkpoint.json",
+      "bytes": 145787,
+      "sha256": "a2110e48cb0e1680e3abc5ef6a75cfa496b989e7cba5766555ff1ed72f721e38"
+    },
+    {
+      "path": "artifacts/ufuk-context-control-train-20261004/checkpoints/step-006000/model.safetensors",
+      "bytes": 294764,
+      "sha256": "b0f3d60591ea35876e5338ca9c7302b2bab88e7e94f7ab6f1844201bcfe9bdda"
+    },
+    {
+      "path": "artifacts/ufuk-context-control-train-20261004/checkpoints/step-006000/training.pt",
+      "bytes": 149611,
+      "sha256": "89d08820cde4ca2db492f35f2792c4dd561101c63fc0f9b96633f42eb450f3c9"
+    },
+    {
+      "path": "artifacts/ufuk-context-control-train-20261004/checkpoints/step-006250/checkpoint.json",
+      "bytes": 146042,
+      "sha256": "ea56fad05f729f3f13c6edf637385ff9a910bd468eb09687e96b2a64b8ca8b68"
+    },
+    {
+      "path": "artifacts/ufuk-context-control-train-20261004/checkpoints/step-006250/model.safetensors",
+      "bytes": 294764,
+      "sha256": "bebdd89607f534b4e357420d059fce7efb633877fe837c10fe6bfa6d50852de9"
+    },
+    {
+      "path": "artifacts/ufuk-context-control-train-20261004/checkpoints/step-006250/training.pt",
+      "bytes": 149611,
+      "sha256": "35189e8f8f1d3aaaa17bac6c69ef61e2005bfeba65c77fba9303b13ea0a51351"
+    },
+    {
+      "path": "artifacts/ufuk-context-control-train-20261004/checkpoints/step-006500/checkpoint.json",
+      "bytes": 146300,
+      "sha256": "9d6b0299c66aef12d6a2eaec5d2c1c9c4f5940d2a05dd07558c877d64f5b32ae"
+    },
+    {
+      "path": "artifacts/ufuk-context-control-train-20261004/checkpoints/step-006500/model.safetensors",
+      "bytes": 294764,
+      "sha256": "dee6fce2399904c357242b09eb20c9ab8f7b8c94dcf151f977f61ce62bf593c6"
+    },
+    {
+      "path": "artifacts/ufuk-context-control-train-20261004/checkpoints/step-006500/training.pt",
+      "bytes": 149611,
+      "sha256": "a0ac4b50ab6d480d191ebd58be5b574c618ab9db6136900826460fdfcad98dbc"
+    },
+    {
+      "path": "artifacts/ufuk-context-control-train-20261004/checkpoints/step-006750/checkpoint.json",
+      "bytes": 146558,
+      "sha256": "c2d71bc69b0af0fb648935f46d14ff401ff59111f9dbda31458b8b76c41e8d10"
+    },
+    {
+      "path": "artifacts/ufuk-context-control-train-20261004/checkpoints/step-006750/model.safetensors",
+      "bytes": 294764,
+      "sha256": "2bcc7623fef856c7fa17b3162f2b85cf2fee5e439775da34e1bad2a37dee0f43"
+    },
+    {
+      "path": "artifacts/ufuk-context-control-train-20261004/checkpoints/step-006750/training.pt",
+      "bytes": 149611,
+      "sha256": "a3f8a5dc629a0dd8c85717c57ea3d061f8f38183d3a7d6798aced8bf7e0ae000"
+    },
+    {
+      "path": "artifacts/ufuk-context-control-train-20261004/checkpoints/step-007000/checkpoint.json",
+      "bytes": 146815,
+      "sha256": "03f2742922b285821a01a528a38ab74da165187bcdd639d203b41855d10bbd44"
+    },
+    {
+      "path": "artifacts/ufuk-context-control-train-20261004/checkpoints/step-007000/model.safetensors",
+      "bytes": 294764,
+      "sha256": "bc1c264dcdaf07562439dc6f0b3830e12f6bac2c5d67e43c8bc5654dceef1682"
+    },
+    {
+      "path": "artifacts/ufuk-context-control-train-20261004/checkpoints/step-007000/training.pt",
+      "bytes": 149611,
+      "sha256": "54545560ea89ee2b8853c552b1e2d9bf5f592bc250ef2601176c735d09a73062"
+    },
+    {
+      "path": "artifacts/ufuk-context-control-train-20261004/checkpoints/step-007250/checkpoint.json",
+      "bytes": 147071,
+      "sha256": "b0c1e2a1c2b764d32af93f8988356e67866c2456b666ab635c1f467c0556f965"
+    },
+    {
+      "path": "artifacts/ufuk-context-control-train-20261004/checkpoints/step-007250/model.safetensors",
+      "bytes": 294764,
+      "sha256": "52deee6c8de8d4b2f028c989f95525acbc8199ea0df3a76d4fe642073d6e79cf"
+    },
+    {
+      "path": "artifacts/ufuk-context-control-train-20261004/checkpoints/step-007250/training.pt",
+      "bytes": 149611,
+      "sha256": "edf1c7b7656498cfb60aec74c17f6a487d950672b7b96e6b410afc35a8f7ab60"
+    },
+    {
+      "path": "artifacts/ufuk-context-control-train-20261004/checkpoints/step-007500/checkpoint.json",
+      "bytes": 147325,
+      "sha256": "7e05ed453271d4a7530b0068273761d31040b9332a44ef674cab96484574dafa"
+    },
+    {
+      "path": "artifacts/ufuk-context-control-train-20261004/checkpoints/step-007500/model.safetensors",
+      "bytes": 294764,
+      "sha256": "983f3be188980249184d121a0097f7970bfad732ef8efff4244996a1ade5c22f"
+    },
+    {
+      "path": "artifacts/ufuk-context-control-train-20261004/checkpoints/step-007500/training.pt",
+      "bytes": 149611,
+      "sha256": "13bf7821a25607f634069d915a5ddc59c0cd21954170819eeeedbd47dec186e4"
+    },
+    {
+      "path": "artifacts/ufuk-context-control-train-20261004/checkpoints/step-007750/checkpoint.json",
+      "bytes": 147584,
+      "sha256": "35e4e51e24250c250648b90d71baa934e5a5ebc1da5c7cc738da6718612d8faa"
+    },
+    {
+      "path": "artifacts/ufuk-context-control-train-20261004/checkpoints/step-007750/model.safetensors",
+      "bytes": 294764,
+      "sha256": "ff67dc593829e253959041dfcc21fbe386cdb1851d6044655e2ad76a357e7722"
+    },
+    {
+      "path": "artifacts/ufuk-context-control-train-20261004/checkpoints/step-007750/training.pt",
+      "bytes": 149611,
+      "sha256": "44f6a72ed8d4a18801911ce0921a41ff5fda7a9b4aec8ce010a7159b023c899d"
+    },
+    {
+      "path": "artifacts/ufuk-context-control-train-20261004/checkpoints/step-008000/checkpoint.json",
+      "bytes": 147840,
+      "sha256": "7a28a0e52438c7e9ff4f7612fb35ac83c39a925d33104cc35ebbd0395debf1f4"
+    },
+    {
+      "path": "artifacts/ufuk-context-control-train-20261004/checkpoints/step-008000/model.safetensors",
+      "bytes": 294764,
+      "sha256": "ec9498ae07a3fe90ad382e66e15d05fe6b3d318cc8b0ab3a9031a7513d200125"
+    },
+    {
+      "path": "artifacts/ufuk-context-control-train-20261004/checkpoints/step-008000/training.pt",
+      "bytes": 149611,
+      "sha256": "2e16eede25f8be8848e35fca9311a0c37f661bd2d088d37e9d05a8eb05b70a87"
+    },
+    {
+      "path": "artifacts/ufuk-context-control-train-20261004/context-guard-profile.json",
+      "bytes": 4134,
+      "sha256": "cc5aa378e252c9a480f27ac882be77794367c918849f2a4aaaca8daa37dc55aa"
+    },
+    {
+      "path": "artifacts/ufuk-context-control-train-20261004/context-phase-result-step-000250.json",
+      "bytes": 1108,
+      "sha256": "2bbfd60dc99e6940c2583b09d609fb9cd8c35a0183df74032e451358309f30ce"
+    },
+    {
+      "path": "artifacts/ufuk-context-control-train-20261004/context-phase-result-step-008000.json",
+      "bytes": 1194,
+      "sha256": "e1ce897c37ea4ca0e59e64a1127e5a278f4177f72f1c9b1ac130933f28fc4def"
+    },
+    {
+      "path": "artifacts/ufuk-context-control-train-20261004/metadata.json",
+      "bytes": 1488,
+      "sha256": "b07b75ea2fc26fdc73029df5b251c2cbc959d4697f869d80972dad43bd011072"
+    },
+    {
+      "path": "artifacts/ufuk-context-control-train-20261004/progress.jsonl",
+      "bytes": 15359,
+      "sha256": "d281251e7f9ad3ec2b6fa16f9573f95cb49d4c8668efc57c6b524a9862bebceb"
+    },
+    {
+      "path": "artifacts/ufuk-context-control-train-20261004/result-step-000250.json",
+      "bytes": 858,
+      "sha256": "8358b29226df939aa9f6364e4c0cbb8270464a10c3d03d1ad2128f20e468ac37"
+    },
+    {
+      "path": "artifacts/ufuk-context-control-train-20261004/result-step-008000.json",
+      "bytes": 940,
+      "sha256": "dcd77909e0b1cbfec72fa5c2d4dc2f9f2496bac11b62c1794565037f97c49e1d"
+    },
+    {
+      "path": "artifacts/ufuk-context-experiment-20261004/context-pause-command.json",
+      "bytes": 832,
+      "sha256": "2e040b781516573a8f808c1206b7f880407c981e1d8b7fc8827629cde88cd640"
+    },
+    {
+      "path": "artifacts/ufuk-context-experiment-20261004/context-pause.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "artifacts/ufuk-context-experiment-20261004/context-pause.stdout.log",
+      "bytes": 2338,
+      "sha256": "04e661e335354a737ad5af8b7cc8aa0a2abbf2c1ac2de02142c6a67695660b6c"
+    },
+    {
+      "path": "artifacts/ufuk-context-experiment-20261004/context-resume-command.json",
+      "bytes": 945,
+      "sha256": "270ff13d3a43c68c6252edf8a44460dd40899e1b4cdfea84be32233379fc6873"
+    },
+    {
+      "path": "artifacts/ufuk-context-experiment-20261004/context-resume.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "artifacts/ufuk-context-experiment-20261004/context-resume.stdout.log",
+      "bytes": 16823,
+      "sha256": "2264d41c97dd0e1a3afd0583caa513c7efda8362fa39dd5ff3ddab9052f5cfc0"
+    },
+    {
+      "path": "artifacts/ufuk-context-experiment-20261004/context-selection.json",
+      "bytes": 11330,
+      "sha256": "43322546bb10c5bec892158e373f3a75ca04d4e39dd6153268336b14b0e86165"
+    },
+    {
+      "path": "artifacts/ufuk-context-experiment-20261004/control-pause-command.json",
+      "bytes": 832,
+      "sha256": "e14bba85df84dea32d40f57a2e184ec5c1dc3113c1752030748727ddf51afa02"
+    },
+    {
+      "path": "artifacts/ufuk-context-experiment-20261004/control-pause.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "artifacts/ufuk-context-experiment-20261004/control-pause.stdout.log",
+      "bytes": 2340,
+      "sha256": "b9a59cb59ab46668bad3feb8c2b5318ff2527bb7fbb77664aa946e80a7dfde4a"
+    },
+    {
+      "path": "artifacts/ufuk-context-experiment-20261004/control-resume-command.json",
+      "bytes": 946,
+      "sha256": "6919f8919810518ddadbda1202d6923b475465311f8a0a7fd610bddbe941fab9"
+    },
+    {
+      "path": "artifacts/ufuk-context-experiment-20261004/control-resume.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "artifacts/ufuk-context-experiment-20261004/control-resume.stdout.log",
+      "bytes": 16830,
+      "sha256": "bb240ef5a1309b77b8f0b74273f38d47922c49e86d7e9afc3750707d1e478ffc"
+    },
+    {
+      "path": "artifacts/ufuk-context-experiment-20261004/control-selection.json",
+      "bytes": 11319,
+      "sha256": "66b2d923d2f83a302a7783228a868db005014381d5967f80796973048d3335e5"
+    },
+    {
+      "path": "artifacts/ufuk-context-experiment-20261004/integrity-audit.json",
+      "bytes": 201316,
+      "sha256": "a143241755012e20db834350c9090e65de057fca68afe5308abe573ae334b35d"
+    },
+    {
+      "path": "artifacts/ufuk-context-experiment-20261004/latency.json",
+      "bytes": 117696,
+      "sha256": "62294df170394664ce45805a59ede3f45bb0f9b78cd86bdba839a2d6ad1de0ad"
+    },
+    {
+      "path": "artifacts/ufuk-context-experiment-20261004/result.json",
+      "bytes": 26127,
+      "sha256": "b19bb42659106434e652eb877958084370766ac28289f59f0d003b11b5f25d01"
+    },
+    {
+      "path": "artifacts/ufuk-context-experiment-20261004/trained-portable-parity.json",
+      "bytes": 858,
+      "sha256": "b54d67bf6afdf526e51f390be7603037a75969ddf099b4f72112b5ba89e9c080"
+    },
+    {
+      "path": "artifacts/ufuk-context-transfer-20261004/model.safetensors",
+      "bytes": 323548,
+      "sha256": "e146fd4e1cc103ef42bc0fb3e7a0a7fcd3d33a2431179b9d0840757f52ec28d5"
+    },
+    {
+      "path": "artifacts/ufuk-context-transfer-20261004/transfer-preflight.json",
+      "bytes": 1491,
+      "sha256": "3266e889cd109de966795ab381c482dfff33455f734c4d46bfd3defb05d007f8"
+    },
+    {
+      "path": "artifacts/ufuk-git-readback-completed4oct.json",
+      "bytes": 2434,
+      "sha256": "048d0a2347fb36b408a78ea1a37fb4ce22f4dbf801061d66be7c385e43e99fc1"
+    },
+    {
+      "path": "artifacts/ufuk-git-readback-context-source.json",
+      "bytes": 2867,
+      "sha256": "dfc48c6973ab14b1917591819a8c088c4a87a2d43033c643d7739ec8fcfab7a1"
+    },
+    {
+      "path": "artifacts/ufuk-git-readback-context-tactical.json",
+      "bytes": 1146,
+      "sha256": "38be2ff999a34023d6bbba603e8345e488548204bbe358cb94a35ed332bd1d06"
+    },
+    {
+      "path": "artifacts/ufuk-tactical-leaf-20261004/integrity-audit.json",
+      "bytes": 527,
+      "sha256": "abe692693fc704dac28bab16d2b27da0e2968f9afd7d3dccaf3354da1a3a0a1d"
+    },
+    {
+      "path": "artifacts/ufuk-tactical-leaf-20261004/metadata.json",
+      "bytes": 743,
+      "sha256": "1b974fb072316af106979fe884e11a28d0b09e94b6c39b8d34ad4c5c5fa7d6de"
+    },
+    {
+      "path": "artifacts/ufuk-tactical-leaf-20261004/positions.jsonl",
+      "bytes": 592678,
+      "sha256": "d644fcd1b3e80e03c2e8378fa932bc087d633805926ec6c0170273ed1ba0345d"
+    },
+    {
+      "path": "artifacts/ufuk-tactical-leaf-20261004/result.json",
+      "bytes": 5831,
+      "sha256": "848ba1d04f390cd3ade87ddc76ad83e65d815226957a189e730d6b036ea7d237"
+    }
+  ],
+  "remote_backup_complete": false,
+  "scope": "Delta after verified2149file parent and143file width/range/offline supplement. Every old owned artifact hash unchanged; all context66full model/optimizer checkpoints and tactical/source-readback evidence included. Parent needed for original dataset/cache/models.",
+  "archive": {
+    "workspace_path": "/workspace/work/harbichess/release/context-tactical-supplement-20261004/HarbiChess-UFUK-context-tactical-20261004.tar.gz",
+    "bytes": 32721657,
+    "sha256": "3f3c4e30b79699bb271aa966cbf7f8ff597a83772f8c511e34901ed696ed49c7",
+    "stream_restored_verified_members": 241
+  },
+  "wall_seconds": 2.3173308449986507,
+  "remote_upload_status": "Authorized Release upload400 Bad Content-Length remains blocked; local restoration verification is not remote backup. /codex output path is OS permission blocked, no direct user-output download claim."
+}
