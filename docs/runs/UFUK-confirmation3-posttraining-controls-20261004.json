@@ -1,0 +1,17 @@
+{
+  "schema": "ufuk-confirmation3-frozen-posttraining-coordinator-v1",
+  "status": "frozen-before-coordinator-execution",
+  "source_commit": "2312652dc52a894e9726f48321117cf114270355",
+  "confirmation3_registration_sha256": "36a055c69e03fddcc170e1bb4514c24a72c978f0983d3e04d2169afe0e8cfad6",
+  "qualification_ledger_slot": 3,
+  "config_sha256": "5c159ccb0e059fe1f6478580fb7f498fb6e2fc58a7bae04158e427df494d0c97",
+  "coordinator_sha256": "b00f2fe341c6886beac9377b3b3b17a7302b1856c1315f0f8480451b8b00581f",
+  "test_sha256": "19ca88b3810265f19e549f38d5e4002491d9ca6c218019b45f9df5193475860b",
+  "helper_source": "bf9a45b572d0c300f5777aa35d7d1ab0790f0b2e; all registered helper hashes unchanged",
+  "controls": "Wait BOTH original fixed40 complete within original18000clocks and corrected all41audits within sameoriginal21000clocks; BOTHauditcontrollerscompleted/fullreceiptchainrehashed; serialized600s exact epoch1\u21922 duplicates; originalpaths/source/inputmanifests; fixed eligibility; actualCUDA18parity; trueGPU/CPUquiescentA100 maskedlatency; BOTHnewbook final96direct+96SF arms sameA100CPU/Torch2.11/FP32/1thread/unchanged3600perarm; exact owner-transported localMLXCPU receipt; fixed statisticalanalysis/allgatejoin withsame6hashboundreceipts.",
+  "statistical_or_model_selection_change": false,
+  "completed_baselines": "Both virgin A100e8SF baselines completed; ONLYcompletion/hash read, outcomes withheld from anytraining/epoch/methodchoice.",
+  "tests": "4meaningful deadline/publication/quiescence tests PASS, RuffPASS; no coordinator jobs yet.",
+  "backup": "SHA-verified separate A100\u2192CloudEnvironment mirrors; Release framing400 persists, noReleaseclaim.",
+  "hard_deadline_utc": "2026-10-05T06:00:00Z"
+}
