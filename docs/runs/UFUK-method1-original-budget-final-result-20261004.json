@@ -1,0 +1,73 @@
+{
+  "schema": "method1-original-whole-budget-final-receipt-v1",
+  "recorded_utc": "2026-10-04T20:22:38.666994+00:00",
+  "status": "incomplete-original-fixed10000-candidates-unavailable",
+  "strength_games": 0,
+  "strength_gate_passed": false,
+  "incomplete_native_or_journal_tail_does_not_qualify": true,
+  "seeds": [
+    {
+      "seed": 20261105,
+      "original_started_epoch": 1791137602.6783178,
+      "original_absolute_deadline_epoch": 1791144802.6783178,
+      "finished_epoch": 1791144803.0453115,
+      "termination": "immutable whole budget exhausted; owned resume process SIGTERM returncode -15",
+      "last_published_update": 5695,
+      "last_published_fresh_transitions": 728960,
+      "journals": 5695,
+      "last_full_native_step": 5500,
+      "fixed_candidate_step": 10000,
+      "candidate_available": false,
+      "root_result_sha256": "49c939f5371d3d08b9e165148bd4fc9df28b908f2a9c20494c4feb2e1908858e",
+      "last_progress_sha256": "0372daac842b8561120037d55da53eedb930ff3f6b149534b8c32dacfff8431a",
+      "stale_progress_status": "running describes last publication, not a live process",
+      "native_manifests": [
+        "/content/harbichess-runs/oneply-cache-seed-20261105/run/checkpoints/step-00000000/checkpoint.json",
+        "/content/harbichess-runs/oneply-cache-seed-20261105/run/checkpoints/step-00000090/checkpoint.json",
+        "/content/harbichess-runs/oneply-cache-seed-20261105/run/checkpoints/step-00000500/checkpoint.json",
+        "/content/harbichess-runs/oneply-cache-seed-20261105/run/checkpoints/step-00001000/checkpoint.json",
+        "/content/harbichess-runs/oneply-cache-seed-20261105/run/checkpoints/step-00001500/checkpoint.json",
+        "/content/harbichess-runs/oneply-cache-seed-20261105/run/checkpoints/step-00002000/checkpoint.json",
+        "/content/harbichess-runs/oneply-cache-seed-20261105/run/checkpoints/step-00002500/checkpoint.json",
+        "/content/harbichess-runs/oneply-cache-seed-20261105/run/checkpoints/step-00003000/checkpoint.json",
+        "/content/harbichess-runs/oneply-cache-seed-20261105/run/checkpoints/step-00003500/checkpoint.json",
+        "/content/harbichess-runs/oneply-cache-seed-20261105/run/checkpoints/step-00004000/checkpoint.json",
+        "/content/harbichess-runs/oneply-cache-seed-20261105/run/checkpoints/step-00004500/checkpoint.json",
+        "/content/harbichess-runs/oneply-cache-seed-20261105/run/checkpoints/step-00005000/checkpoint.json",
+        "/content/harbichess-runs/oneply-cache-seed-20261105/run/checkpoints/step-00005500/checkpoint.json"
+      ]
+    },
+    {
+      "seed": 20261106,
+      "original_started_epoch": 1791137602.6782463,
+      "original_absolute_deadline_epoch": 1791144802.6782463,
+      "finished_epoch": 1791144802.996007,
+      "termination": "immutable whole budget exhausted; owned resume process SIGTERM returncode -15",
+      "last_published_update": 5682,
+      "last_published_fresh_transitions": 727296,
+      "journals": 5682,
+      "last_full_native_step": 5500,
+      "fixed_candidate_step": 10000,
+      "candidate_available": false,
+      "root_result_sha256": "e4146034b197a901d547b245f8668c969f1900b275e174b32c18596df2d05fcf",
+      "last_progress_sha256": "12c5ab6de8209b7d9deb25b049c5286c84975e38c62d3ab403e91dd65b40255f",
+      "stale_progress_status": "running describes last publication, not a live process",
+      "native_manifests": [
+        "/content/harbichess-runs/oneply-cache-seed-20261106/run/checkpoints/step-00000000/checkpoint.json",
+        "/content/harbichess-runs/oneply-cache-seed-20261106/run/checkpoints/step-00000087/checkpoint.json",
+        "/content/harbichess-runs/oneply-cache-seed-20261106/run/checkpoints/step-00000500/checkpoint.json",
+        "/content/harbichess-runs/oneply-cache-seed-20261106/run/checkpoints/step-00001000/checkpoint.json",
+        "/content/harbichess-runs/oneply-cache-seed-20261106/run/checkpoints/step-00001500/checkpoint.json",
+        "/content/harbichess-runs/oneply-cache-seed-20261106/run/checkpoints/step-00002000/checkpoint.json",
+        "/content/harbichess-runs/oneply-cache-seed-20261106/run/checkpoints/step-00002500/checkpoint.json",
+        "/content/harbichess-runs/oneply-cache-seed-20261106/run/checkpoints/step-00003000/checkpoint.json",
+        "/content/harbichess-runs/oneply-cache-seed-20261106/run/checkpoints/step-00003500/checkpoint.json",
+        "/content/harbichess-runs/oneply-cache-seed-20261106/run/checkpoints/step-00004000/checkpoint.json",
+        "/content/harbichess-runs/oneply-cache-seed-20261106/run/checkpoints/step-00004500/checkpoint.json",
+        "/content/harbichess-runs/oneply-cache-seed-20261106/run/checkpoints/step-00005000/checkpoint.json",
+        "/content/harbichess-runs/oneply-cache-seed-20261106/run/checkpoints/step-00005500/checkpoint.json"
+      ]
+    }
+  ],
+  "preservation": "All original and recovered prefixes/native payloads remain unchanged; runtime recovery duplicate work stays separate."
+}
