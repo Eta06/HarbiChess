@@ -1,0 +1,32 @@
+{
+  "schema": "ownsearch-cache8192-CUDA-qualification-protocol-v2",
+  "status": "prospective-infrastructure-only",
+  "source_commit": "a278bba67bce962cb9294f0d24040e02e9acf1f4",
+  "baseline_source": "c93b79b8140b31fe1f4d0ca96adddd857991925b",
+  "runtime_only_source_difference": [
+    "src/harbichess/training/torch_ownsearch_learner.py",
+    "src/harbichess/training/torch_ownsearch_checkpoint.py"
+  ],
+  "cache_entries": 8192,
+  "global_PythonChessRules_default": 512,
+  "migration": "Separate immutable clean producer; original c93 native/source/fullresume retained. No old checkpoint source relabelling. Future formal run fresh originale8/newAdam, not weights-only fullresume. Native CPU/CUDAv1 schema/config/state layout unchanged.",
+  "qualification": "Exactly14 actualCUDApasses0skips (original11 plus CPU fresh/resumed cache guard and CPU/CUDA true-c93 vs cached allstate equivalence); e8 whole2/pause1/freshresume2 ALL2journals+6nativepayloads exact +BOTHfreshstrictloads.",
+  "scope": "Tiny4actors16steps/cap8/pass2/batch4/KL1 infrastructure fixture differs from full128x256/.02KL production. No strength candidate/model promotion/freshselflearningcount.",
+  "wall_ceiling_seconds": 360,
+  "unit_phase_seconds": 180,
+  "CLI_phase_seconds": 180,
+  "memory_max_bytes": 68719476736,
+  "disk_min_free_bytes": 8589934592,
+  "failure": "Preserve original failed prefix; no automaticrerun/budgetextension/changedtestinventory/gates.",
+  "initial_e8_sha256": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03",
+  "config_sha256": "bb6d28d0627d9e6236318fc3f1839b59eddeb54316ea77a90f50d838dfddc007",
+  "book_sha256": "9340b54b6ac01ead55b9b790ddaa13e951e278a66f59c9009efae2d26ba68b6e",
+  "unit_test_sha256": {
+    "tests/test_ownsearch_stage.py": "2261bb9ca9a9bf3980bcdf429884dd317ac9af4e0ab7d117e5875f5164b03e21",
+    "tests/test_ownsearch_cache8192.py": "fbd92d83e2942d3883f048626f54f3917cb96a2c81723233855e7d8da6b20801"
+  },
+  "new_controller_sha256": "5b75b73a9ad53142a5f418bfd9608c58338acd59cfdbe705a0123d76ab7ead4f",
+  "original_common_helper_sha256": "a6b3fd1e9bbcb9c55c1919cbad32bda7a1a0c28d31f7e673e9b3afead9f45dc2",
+  "CLI_helper_sha256": "45e5cc935c2266ea7b5557712447222d1f56043088ce1f205d2e2ab19d619327",
+  "current_MC_confirmation3_untouched": true
+}
