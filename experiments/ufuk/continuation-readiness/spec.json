@@ -1,0 +1,72 @@
+{
+  "schema": "ufuk-bounded-readiness-after-original-MC-v1",
+  "supervisor_sha256": "49f5d77399ce01c6688fc80e270bbb6c21c7a91997bb5f0b7c4fb7c053f16e58",
+  "jobs": {
+    "own4-E1-readonly-requalification": {
+      "whole_seconds": 900,
+      "checkout": "/content/HarbiChess-ownsearch-cache-a278bba",
+      "protocol": "/content/harbichess-fullgame-method2-inputs/continuation-readiness-20261004/own4-e1/E1-auditor-requalification-v2-protocol.json",
+      "command": [
+        "/usr/bin/python3",
+        "/content/harbichess-fullgame-method2-inputs/continuation-readiness-20261004/own4-e1/ownv1_qualify_e1_controller.py",
+        "--root",
+        "/content/harbichess-runs/ownsearch-E1-auditor-requalification-v2-a278bba-20261004",
+        "--python",
+        "/usr/bin/python3",
+        "--helper",
+        "/content/harbichess-fullgame-method2-inputs/continuation-readiness-20261004/own4-e1/ownv1_qualify_e1.py",
+        "--helper-sha256",
+        "9dd2c55bb84374a3221b43b35448ca916b0161a5a9281b09ba8e05a2bc11bb6a"
+      ],
+      "frozen_sha256": {
+        "/content/harbichess-fullgame-method2-inputs/continuation-readiness-20261004/own4-e1/ownv1_qualify_e1.py": "9dd2c55bb84374a3221b43b35448ca916b0161a5a9281b09ba8e05a2bc11bb6a",
+        "/content/harbichess-fullgame-method2-inputs/continuation-readiness-20261004/own4-e1/ownv1_qualify_e1_controller.py": "5e8b5ea95f6b4f745a325401917690d467726be68e62e9dda9a3c96284912fc8",
+        "/content/harbichess-fullgame-method2-inputs/continuation-readiness-20261004/own4-e1/ownv1_full_audit.py": "e0ae056937a39faf04c05958725c80240c9fabdfcfdebe10dedc4221aa5bf2a7",
+        "/content/harbichess-fullgame-method2-inputs/continuation-readiness-20261004/own4-e1/ownv1_audit_support.py": "d147370fbc73f1dedca3ca93d2c1b60dede9adc667f5b14fa3013981fba874a2",
+        "/content/harbichess-fullgame-method2-inputs/continuation-readiness-20261004/own4-e1/E1-auditor-requalification-v2-protocol.json": "84f0459f05b1b7dfd2cc6d243c5a40f1650216df047e7facc6fcc4130ccfc83a"
+      }
+    },
+    "search-acting-v2-CUDA": {
+      "whole_seconds": 360,
+      "checkout": "/content/HarbiChess-search-acting-v2-4515a7c",
+      "command": [
+        "/usr/bin/python3",
+        "/content/harbichess-fullgame-method2-inputs/continuation-readiness-20261004/v2/qualify_search_acting_cuda_owned.py",
+        "--checkout",
+        "/content/HarbiChess-search-acting-v2-4515a7c",
+        "--output",
+        "/content/harbichess-runs/search-acting-v2-CUDA-readiness-4515a7c-20261004",
+        "--python",
+        "/usr/bin/python3",
+        "--weights",
+        "/content/harbichess-inputs/initial-e8.safetensors",
+        "--book",
+        "/content/harbichess-fullgame-method2-inputs/continuation-readiness-20261004/v2/v2-cuda-qualifier-book.json",
+        "--config",
+        "/content/harbichess-fullgame-method2-inputs/continuation-readiness-20261004/v2/v2-cuda-qualifier-config.json",
+        "--protocol",
+        "/content/harbichess-fullgame-method2-inputs/continuation-readiness-20261004/v2/CUDA-preregistration.json",
+        "--helper",
+        "/content/harbichess-fullgame-method2-inputs/continuation-readiness-20261004/v2/qualify_search_acting_cli.py",
+        "--input-manifest",
+        "/content/harbichess-fullgame-method2-inputs/continuation-readiness-20261004/v2/input-manifest.json",
+        "--source-commit",
+        "4515a7c0dda3b4f9615c2fc78a47c872ab14699d",
+        "--helper-sha256",
+        "b9455a1660c5741ea6bb7101bee2383f57a5379e6e730acd57e798f0c9a71500",
+        "--test-sha256",
+        "70997b8b447c0a7520a5d62e5a1066898cb1eceb3531563b6de13ff98ec9e14e",
+        "--input-manifest-sha256",
+        "6f7e6654162f6a747070076696692dbbb61d61a55594d74ed19bcb89802786fd"
+      ],
+      "frozen_sha256": {
+        "/content/harbichess-fullgame-method2-inputs/continuation-readiness-20261004/v2/qualify_search_acting_cuda_owned.py": "7dd899cc44db8ed9093064f92dd2ce705710df700bcaf14b6e749a0de73c1388",
+        "/content/harbichess-fullgame-method2-inputs/continuation-readiness-20261004/v2/qualify_search_acting_cli.py": "b9455a1660c5741ea6bb7101bee2383f57a5379e6e730acd57e798f0c9a71500",
+        "/content/harbichess-fullgame-method2-inputs/continuation-readiness-20261004/v2/v2-cuda-qualifier-config.json": "f8c39d7a11c4b499895273aa5c18bbe16cfd9213db870f93237b49866b30ca46",
+        "/content/harbichess-fullgame-method2-inputs/continuation-readiness-20261004/v2/v2-cuda-qualifier-book.json": "9340b54b6ac01ead55b9b790ddaa13e951e278a66f59c9009efae2d26ba68b6e",
+        "/content/harbichess-fullgame-method2-inputs/continuation-readiness-20261004/v2/CUDA-preregistration.json": "be5c50fb7e474921a9773342d5315d67e84c3f39eba6d4bf574f20082fcf8da6",
+        "/content/harbichess-fullgame-method2-inputs/continuation-readiness-20261004/v2/input-manifest.json": "6f7e6654162f6a747070076696692dbbb61d61a55594d74ed19bcb89802786fd"
+      }
+    }
+  }
+}
