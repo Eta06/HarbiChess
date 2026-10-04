@@ -8,7 +8,7 @@ import subprocess
 from contextlib import suppress
 from pathlib import Path
 
-HARD_DEADLINE = 1791170400
+HARD_DEADLINE = 1791180000
 
 
 def sha(p):
