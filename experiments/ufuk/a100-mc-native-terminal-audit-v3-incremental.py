@@ -11,30 +11,32 @@ import gzip
 import hashlib
 import json
 import random
+import shutil
 import subprocess
 import time
-import shutil
 from pathlib import Path
+
 import numpy as np
 import torch
-from harbichess.selfplay.online_actor import OnlineActorConfig, OnlineActors
+
+import harbichess.training.torch_fullgame_checkpoint as cm
+import harbichess.training.torch_fullgame_learner as lm
+from harbichess.backends.torch_network import sha256
 from harbichess.chess.actions import legal_action_indices
+from harbichess.selfplay.online_actor import OnlineActorConfig, OnlineActors
 from harbichess.selfplay.online_epoch import deserialize_policy_epoch
 from harbichess.training.fullgame_own_targets import build_fullgame_targets
-from harbichess.training.torch_fullgame_ppo import (
-    FullGamePPOConfig,
-    FullGamePPOTrainConfig,
-    torch_model_digest,
-    make_torch_epoch_inference,
-)
-import harbichess.training.torch_fullgame_learner as lm
-import harbichess.training.torch_fullgame_checkpoint as cm
 from harbichess.training.torch_fullgame_learner import (
     TorchFullGameConfig,
     TorchFullGameLearner,
     canonical,
 )
-from harbichess.backends.torch_network import sha256
+from harbichess.training.torch_fullgame_ppo import (
+    FullGamePPOConfig,
+    FullGamePPOTrainConfig,
+    make_torch_epoch_inference,
+    torch_model_digest,
+)
 from harbichess.training.torch_fullgame_run import clean_source
 
 NEURAL_AUDIT_EPOCHS = (1, 2, 10, 20, 30, 40)
@@ -50,9 +52,7 @@ def select_neural_rows(actions, rules):
     selected = []
     for side in ("white", "black"):
         rows = [
-            row
-            for row in unique.values()
-            if rules.view(row.transition.pre).side_to_move == side
+            row for row in unique.values() if rules.view(row.transition.pre).side_to_move == side
         ]
         rows.sort(
             key=lambda row: (
@@ -90,18 +90,19 @@ def check_neural_rows(native, rows, guard):
         maximum = 0.0
         for computed, row in zip(getattr(result, output_field), rows, strict=True):
             expected = getattr(row, receipt_field)
-            difference = float(
-                np.max(np.abs(np.asarray(computed) - np.asarray(expected)))
-            )
+            difference = float(np.max(np.abs(np.asarray(computed) - np.asarray(expected))))
             maximum = max(maximum, difference)
-            assert np.allclose(
-                computed, expected, atol=NEURAL_TOLERANCE, rtol=NEURAL_TOLERANCE
-            ), f"Native neural receipt mismatch {receipt_field}: {difference}"
+            assert np.allclose(computed, expected, atol=NEURAL_TOLERANCE, rtol=NEURAL_TOLERANCE), (
+                f"Native neural receipt mismatch {receipt_field}: {difference}"
+            )
         errors[receipt_field] = maximum
     guard()
     return {
         "samples": 18,
-        "selection": "nine distinct full histories per mover spread over history length; fixed state-only order",
+        "selection": (
+            "nine distinct full histories per mover spread over history length"
+            "; fixed state-only order"
+        ),
         "max_absolute_errors": errors,
         "atol": NEURAL_TOLERANCE,
         "rtol": NEURAL_TOLERANCE,
@@ -159,13 +160,8 @@ def main():
     spec = json.loads(a.manifest.read_text())
     source = spec["source_commit"]
     clean_source(source)
-    assert (
-        subprocess.check_output(["git", "rev-parse", "HEAD"], text=True).strip()
-        == source
-    )
-    assert not subprocess.check_output(
-        ["git", "status", "--porcelain"], text=True
-    ).strip()
+    assert subprocess.check_output(["git", "rev-parse", "HEAD"], text=True).strip() == source
+    assert not subprocess.check_output(["git", "status", "--porcelain"], text=True).strip()
     paths = {name: Path(row["path"]).resolve() for name, row in spec["inputs"].items()}
     for name, path in paths.items():
         assert sha256(path) == spec["inputs"][name]["sha256"]
@@ -211,9 +207,7 @@ def main():
     lm.read_online_train_book = cm.read_online_train_book = cached
     kw = dict(config=config, input_paths=paths, source_commit=source)
     initial = TorchFullGameLearner.resume(a.run / "checkpoints/epoch-00000000", **kw)
-    initial_manifest_sha256 = sha256(
-        a.run / "checkpoints/epoch-00000000/checkpoint.json"
-    )
+    initial_manifest_sha256 = sha256(a.run / "checkpoints/epoch-00000000/checkpoint.json")
     checkpoint0_receipt = {
         "schema": "ufuk-method2-incremental-native0-audit-v1",
         "epoch": 0,
@@ -225,27 +219,19 @@ def main():
         "seed": config.seed,
         "fresh_transitions": 0,
         "optimizer_accepted_updates": 0,
-        "actor_cursor_sha256": hashlib.sha256(
-            canonical(initial.actors.cursor())
-        ).hexdigest(),
+        "actor_cursor_sha256": hashlib.sha256(canonical(initial.actors.cursor())).hexdigest(),
         "native_global_Adam_RNG_strictload": True,
         "audit_optimizer_updates": 0,
     }
     with (a.output.parent / f"{a.output.name}.epoch-00000000.json").open("x") as f:
         json.dump(checkpoint0_receipt, f, indent=2)
         f.write("\n")
-    base = {
-        name: value.detach().cpu().clone()
-        for name, value in initial.base.state_dict().items()
-    }
+    base = {name: value.detach().cpu().clone() for name, value in initial.base.state_dict().items()}
     previous_online = {
-        name: value.detach().cpu().clone()
-        for name, value in initial.online.state_dict().items()
+        name: value.detach().cpu().clone() for name, value in initial.online.state_dict().items()
     }
     unused = {
-        name: value
-        for name, value in base.items()
-        if name.startswith("material_value_linear.")
+        name: value for name, value in base.items() if name.startswith("material_value_linear.")
     }
     assert (
         sum(x.numel() for x in unused.values()) == 21
@@ -253,9 +239,7 @@ def main():
     )
     actor_rng = random.Random()
     actor_rng.setstate(initial.actors.rng.getstate())
-    actors = OnlineActors(
-        pool, config=config.actors, rng=actor_rng, cursor=initial.actors.cursor()
-    )
+    actors = OnlineActors(pool, config=config.actors, rng=actor_rng, cursor=initial.actors.cursor())
     seed_rng = random.Random()
     seed_rng.setstate(initial.sampler_seed_rng.getstate())
     chain = hashlib.sha256(b"").hexdigest()
@@ -270,9 +254,7 @@ def main():
         data = (a.run / "journal" / f"epoch-{index:08d}.json.gz").read_bytes()
         record = json.loads(gzip.decompress(data))
         claimed = record.pop("sample_chain_sha256")
-        assert (
-            record["previous_sample_chain_sha256"] == chain and record["epoch"] == index
-        )
+        assert record["previous_sample_chain_sha256"] == chain and record["epoch"] == index
         chain = hashlib.sha256(bytes.fromhex(chain) + canonical(record)).hexdigest()
         assert chain == claimed
         epoch = deserialize_policy_epoch(canonical(record["collection"]))
@@ -300,9 +282,7 @@ def main():
             actors.cursor() == epoch.next_actor_cursor
             and actors.rng.getstate() == epoch.next_actor_rng_state
         )
-        labels = build_fullgame_targets(
-            actors.rules, epoch, claim_draw=config.actors.claim_draw
-        )
+        labels = build_fullgame_targets(actors.rules, epoch, claim_draw=config.actors.claim_draw)
         for name, value in record["target_counts"].items():
             assert getattr(labels, name) == value
             if type(value) is int:
@@ -312,9 +292,7 @@ def main():
         # continuity of UNKNOWN episodes is also checked by target builder.
         attempted += record["training"]["optimizer_steps_attempted"]
         accepted += record["training"]["optimizer_steps_committed"]
-        native = TorchFullGameLearner.resume(
-            a.run / "checkpoints" / f"epoch-{index:08d}", **kw
-        )
+        native = TorchFullGameLearner.resume(a.run / "checkpoints" / f"epoch-{index:08d}", **kw)
         assert (
             native.epoch == index
             and native.sample_chain_sha256 == chain
@@ -350,21 +328,16 @@ def main():
                 "checkpoint_manifest_sha256": sha256(
                     a.run / "checkpoints" / f"epoch-{index:08d}" / "checkpoint.json"
                 ),
-                "journal_sha256": sha256(
-                    a.run / "journal" / f"epoch-{index:08d}.json.gz"
-                ),
+                "journal_sha256": sha256(a.run / "journal" / f"epoch-{index:08d}.json.gz"),
                 "native_artifact_sha256": json.loads(
-                    (
-                        a.run / "checkpoints" / f"epoch-{index:08d}" / "checkpoint.json"
-                    ).read_text()
+                    (a.run / "checkpoints" / f"epoch-{index:08d}" / "checkpoint.json").read_text()
                 )["artifacts"],
                 "complete_games": labels.complete_games,
                 "trained_transitions": len(labels.targets),
             }
         )
         previous_online = {
-            name: value.detach().cpu().clone()
-            for name, value in native.online.state_dict().items()
+            name: value.detach().cpu().clone() for name, value in native.online.state_dict().items()
         }
         del native
         guard()
@@ -385,9 +358,7 @@ def main():
             "original_audit_deadline_epoch": a.deadline_epoch,
             "finished_epoch": time.time(),
         }
-        with (a.output.parent / f"{a.output.name}.epoch-{index:08d}.json").open(
-            "x"
-        ) as f:
+        with (a.output.parent / f"{a.output.name}.epoch-{index:08d}.json").open("x") as f:
             json.dump(progress, f, indent=2)
             f.write("\n")
     assert (
@@ -403,14 +374,13 @@ def main():
     ]
     assert accepted > 0
     receipt_files = [
-        a.output.parent / f"{a.output.name}.epoch-{index:08d}.json"
-        for index in range(41)
+        a.output.parent / f"{a.output.name}.epoch-{index:08d}.json" for index in range(41)
     ]
     assert all(path.is_file() and not path.is_symlink() for path in receipt_files)
     initial_check = json.loads(receipt_files[0].read_text())
-    assert initial_check["epoch"] == 0 and initial_check[
-        "native_manifest_sha256"
-    ] == sha256(a.run / "checkpoints/epoch-00000000/checkpoint.json")
+    assert initial_check["epoch"] == 0 and initial_check["native_manifest_sha256"] == sha256(
+        a.run / "checkpoints/epoch-00000000/checkpoint.json"
+    )
     assert (
         initial_check["source_commit"] == source
         and initial_check["seed"] == config.seed
@@ -433,18 +403,13 @@ def main():
             and proof["actor_steps"] == index * 256
         )
         native_state = json.loads(
-            (
-                a.run / "checkpoints" / f"epoch-{index:08d}" / "checkpoint.json"
-            ).read_text()
+            (a.run / "checkpoints" / f"epoch-{index:08d}" / "checkpoint.json").read_text()
         )["state"]
         assert (
             proof["sample_chain_sha256"] == native_state["sample_chain_sha256"]
-            and proof["optimizer_attempted"]
-            == native_state["optimizer_attempted_updates"]
-            and proof["optimizer_accepted"]
-            == native_state["optimizer_accepted_updates"]
-            and proof["optimizer_rejected"]
-            == native_state["optimizer_rejected_updates"]
+            and proof["optimizer_attempted"] == native_state["optimizer_attempted_updates"]
+            and proof["optimizer_accepted"] == native_state["optimizer_accepted_updates"]
+            and proof["optimizer_rejected"] == native_state["optimizer_rejected_updates"]
         )
         assert proof["latest_checkpoint"]["checkpoint_manifest_sha256"] == sha256(
             a.run / "checkpoints" / f"epoch-{index:08d}" / "checkpoint.json"
@@ -452,9 +417,7 @@ def main():
         assert proof["latest_checkpoint"]["journal_sha256"] == sha256(
             a.run / "journal" / f"epoch-{index:08d}.json.gz"
         )
-        for name, digest in proof["latest_checkpoint"][
-            "native_artifact_sha256"
-        ].items():
+        for name, digest in proof["latest_checkpoint"]["native_artifact_sha256"].items():
             guard()
             assert sha256(a.run / "checkpoints" / f"epoch-{index:08d}" / name) == digest
     for name, path in paths.items():
@@ -471,7 +434,11 @@ def main():
             str(path): sha256(path) for path in receipt_files
         },
         "independent_native0_manifest_sha256": initial_manifest_sha256,
-        "audit_schedule": "incrementalimmutable-per-epoch whiletraining; exactsame allnative/allactor/allterminal and selectedneuralchecks; originalshared21000maximum with3000tail, no per-epoch reset",
+        "audit_schedule": (
+            "incrementalimmutable-per-epoch whiletraining; exactsame allnative"
+            "/allactor/allterminal and selectedneuralchecks; originalshared210"
+            "00maximum with3000tail, no per-epoch reset"
+        ),
         "independently_replayed_fresh_transitions": 1310720,
         "terminal_data_counts": counts,
         "optimizer_attempts": attempted,
@@ -484,8 +451,19 @@ def main():
         "optimizer_updates_performed_by_this_audit": 0,
         "neural_receipt_validation": neural_receipts,
         "neural_audit_epochs": list(NEURAL_AUDIT_EPOCHS),
-        "neural_receipt_scope": "Only selected108history rows perseed independently evaluated on actual device; other rows neural values not recomputed. All actor/legal/terminal histories are replayed. Final CPU-CUDA and TorchCPU-MLXCPU18full/masked sameweights parity remain separate mandatory gates.",
-        "limits": "Official native validates Adam/all global RNG containers; independent epoch1->2 audit must additionally regenerate next epoch and compare every native payload bit. This full audit itself does not prove optimizer trajectory or strength.",
+        "neural_receipt_scope": (
+            "Only selected108history rows perseed independently evaluated on a"
+            "ctual device; other rows neural values not recomputed. All actor/"
+            "legal/terminal histories are replayed. Final CPU-CUDA and TorchCP"
+            "U-MLXCPU18full/masked sameweights parity remain separate mandator"
+            "y gates."
+        ),
+        "limits": (
+            "Official native validates Adam/all global RNG containers; indepen"
+            "dent epoch1->2 audit must additionally regenerate next epoch and "
+            "compare every native payload bit. This full audit itself does not"
+            " prove optimizer trajectory or strength."
+        ),
     }
     with a.output.open("x") as f:
         json.dump(result, f, indent=2)
