@@ -1,10 +1,23 @@
-# AYNA / UFUK atomic commit ledger
+# AYNA/UFUK atomic commit ledger: completed4October round
 
-Coverage after MERCEK `f3f215a` through `d2026e41acdfeea5982bd05b78f32822b3adfb87`: 92 commits, each exactly one meaningful file. Verified author and committer **Emir Tunahan Alim <emrtnhalim@gmail.com>**, no co-author trailers. Push authentication is separately Eta06; authorship does not imply that GitHub account.
+174commits after MERCEKbasef3f215a through16fbdf840d614573bc8a4593c6853769b3e1b435, all verified
+one meaningful file per commit, author+committerEmir Tunahan Alim
+<emrtnhalim@gmail.com>, no co-authors. Push identityEta06/admin is separate.
+PORT/MERCEK ledgers cover earlier authorized phases; old research remains intact.
 
-Material tests at depth source95551ab:496passed41.67s/zero skips; actual MLXCPU parity and archived full optimizer/RNG one-update compatibility verified. AppleMetal/CUDA device tests unavailable. Controlled depth training is still in progress at this ledger snapshot. Main Stockfish/AlphaZero-strength and successful self-learning objective remains unmet. Previous failures preserved.
+Latest fullsuite512passed/zero skips43.79s, real Torch/MLXCPU and native resume.
+AppleMetal/CUDA unavailable. Main strong/fast/reliable self-learning and
+Stockfish/AlphaZero-level objective remains unmet; recent width,Qrange,offline
+control,narrow self-learning and value-outcome strength gates failed. Search-only
+narrow-root bounded development success is not model learning.
 
-New large binaries remain locally preserved; Release upload400 prevents completed remote backup. PORT/MERCEK ledgers cover earlier phases. Subsequent result/artifact/status commits are appended to this ledger before the final report. The ledger cannot contain its own creating commit; that mapping is in Git and the final message.
+Verified2149file local parent archive plus143file delta, all member hashes restored;
+GitHubRelease binary upload400 still prevents completed new remote backup.
+Exact text remote readback is separate from binary backup. Current status and
+individual reports contain full limits/settings/source and uncertainty.
+
+This ledger cannot include its own creating commit; that mapping is in Git and
+reported with the completed round. Later stages append/reconcile this ledger.
 
 | Commit | File | Change |
 | --- | --- | --- |
@@ -100,3 +113,85 @@ New large binaries remain locally preserved; Release upload400 prevents complete
 | [95551ab](https://github.com/Eta06/HarbiChess/commit/95551ab01bcd0ddd9f849d9e6cc7dcdd6a4cf0ed) | `tests/test_depth_transfer.py` | UFUK: verify identical logits real MLX parity and trainable new residual branches |
 | [bd43e2d](https://github.com/Eta06/HarbiChess/commit/bd43e2d23529d128ed5bfde97315fed922d91fdb) | `docs/research/status-20261003.md` | UFUK: reconcile measured runtime speed failures and still unmet chess objective |
 | [d2026e4](https://github.com/Eta06/HarbiChess/commit/d2026e41acdfeea5982bd05b78f32822b3adfb87) | `docs/research/README.md` | UFUK: index current measured status while preserving historical audit |
+| [b18c8ea](https://github.com/Eta06/HarbiChess/commit/b18c8ea3e45c5e94124a3e09e96cc63cd85b59b3) | `docs/runs/AYNA-UFUK-commits-20261003.md` | UFUK: map atomic phase commits to files and verify exact authorship |
+| [83105ae](https://github.com/Eta06/HarbiChess/commit/83105ae80b6b8956b986a293f820e64a3f8c2641) | `docs/runs/UFUK-policy-target-preregistration-20261003.md` | UFUK: preregister actual self search soft target quality on balanced histories |
+| [dd4daaf](https://github.com/Eta06/HarbiChess/commit/dd4daafe0936e1d66b6473b3376fef33002fb49a) | `src/harbichess/evaluation/policy_signal.py` | UFUK: measure actual soft search targets against all legal finite engine references |
+| [ca61ac6](https://github.com/Eta06/HarbiChess/commit/ca61ac6267304f7814f5be866908ee27c4b9c860) | `docs/runs/UFUK-depth-result-20261003.md` | UFUK: retain failed same sample depth gate and verified archived optimizer resume |
+| [6f6528c](https://github.com/Eta06/HarbiChess/commit/6f6528cccac27db39389b43c429a15149c27613e) | `docs/runs/UFUK-depth-evidence-20261003.json` | UFUK: preserve capacity run commands curves and preflight provenance corrections |
+| [badf10e](https://github.com/Eta06/HarbiChess/commit/badf10e519e407345cd9ffdd4e44306ce88ba754) | `docs/runs/UFUK-policy-target-result-20261003.md` | UFUK: record bounded positive actual search target diagnostic without strength claim |
+| [1491db8](https://github.com/Eta06/HarbiChess/commit/1491db834eebec69c9531e1cd0a9e2b71ed0f4b4) | `docs/runs/UFUK-policy-target-evidence-20261003.json` | UFUK: preserve all legal target references histories and independent probability audit |
+| [d6b8f96](https://github.com/Eta06/HarbiChess/commit/d6b8f96c92524a7035a623ade5fb38b61dae7060) | `docs/runs/UFUK-replay-target-preregistration-20261003.md` | UFUK: preregister quality audit of actual stored self play probabilities |
+| [d0540e7](https://github.com/Eta06/HarbiChess/commit/d0540e794dbabe35d25a1afc75e32897b4f40705) | `src/harbichess/evaluation/replay_policy_signal.py` | UFUK: audit stored self search targets without rerunning a stochastic teacher |
+| [15bf2ba](https://github.com/Eta06/HarbiChess/commit/15bf2baf5380fd3cc78d08f4a4ee44f23afb517e) | `docs/runs/UFUK-policy-adapter-preregistration-20261003.md` | UFUK: preregister value-safe policy adapter against identical self replay control |
+| [4860e75](https://github.com/Eta06/HarbiChess/commit/4860e7542160c4c2c7f0ea94b2821c0a851aede2) | `docs/runs/UFUK-depth-evidence-20261003.json` | UFUK: preserve checkpoint RNG equality audit for failed depth comparison |
+| [6458a91](https://github.com/Eta06/HarbiChess/commit/6458a91a0fd1cae85821922d26bc50a5a3271d20) | `docs/runs/UFUK-policy-target-evidence-20261003.json` | UFUK: add explicit command receipt to bounded policy target evidence |
+| [7f7121e](https://github.com/Eta06/HarbiChess/commit/7f7121e55028de3be0a9df558e549d4af89d6531) | `docs/runs/UFUK-replay-target-result-20261003.md` | UFUK: record positive stored self target diagnostic and limits |
+| [3a5c459](https://github.com/Eta06/HarbiChess/commit/3a5c459ab0be317840881771fa050480c52e7b4c) | `docs/runs/UFUK-replay-target-evidence-20261003.json` | UFUK: preserve actual replay probabilities all legal references and source reconstruction |
+| [d50dc21](https://github.com/Eta06/HarbiChess/commit/d50dc21a2b224a44fd7b2c794e92759382173872) | `src/harbichess/core/network_config.py` | UFUK: validate optional versioned policy adapter specification |
+| [7d069d0](https://github.com/Eta06/HarbiChess/commit/7d069d0a7d1ea8d21988f4b56b20090ac137d134) | `src/harbichess/backends/torch_network.py` | UFUK: isolate learnable policy residual branch from shared value features |
+| [32ebc85](https://github.com/Eta06/HarbiChess/commit/32ebc850180ece8471075a852cd67710ab231016) | `src/harbichess/backends/pairwise_network.py` | UFUK: preserve MLX portable policy adapter forward and serialization |
+| [5d5f24a](https://github.com/Eta06/HarbiChess/commit/5d5f24ad25e9945f9aa2496f13fac902da974a84) | `src/harbichess/backends/policy_adapter.py` | UFUK: transfer identical policy function without resetting old artifacts |
+| [794a118](https://github.com/Eta06/HarbiChess/commit/794a118c807b38058cdf9cef9b978b65ab4d5da6) | `tests/test_policy_adapter.py` | UFUK: verify real MLX gradients value isolation and native adapter resume |
+| [bc32b7d](https://github.com/Eta06/HarbiChess/commit/bc32b7d2defb104776a2d9b80983af6e72bdfabe) | `src/harbichess/training/replay_distill.py` | UFUK: learn fixed own search targets with whole family holdout and full resume |
+| [59dde8d](https://github.com/Eta06/HarbiChess/commit/59dde8df863d4306bc7e210454ad0e94829b24d8) | `tests/test_replay_distill.py` | UFUK: verify unknown masks and exact sampler optimizer resume in distillation |
+| [47c0b0f](https://github.com/Eta06/HarbiChess/commit/47c0b0f64f4da82fd2cbd482b4107e456f60c1cf) | `docs/research/status-20261003.md` | UFUK: update measured status with failed capacity and positive stored target diagnostics |
+| [637c711](https://github.com/Eta06/HarbiChess/commit/637c711a8af2b10137ce76852b9432df126a1eff) | `docs/research/README.md` | UFUK: index failed capacity and measured policy target follow-up protocols |
+| [1eb58fd](https://github.com/Eta06/HarbiChess/commit/1eb58fdc2944f8626839e439c9f65481456626b3) | `docs/runs/UFUK-root-budget-preregistration-20261003.md` | UFUK: preregister root breadth depth test under fixed sixteen simulations |
+| [5a71974](https://github.com/Eta06/HarbiChess/commit/5a719749e9efa8ce1c60477bff95d13fa203538c) | `src/harbichess/evaluation/root_budget.py` | UFUK: measure fixed root breadth with all legal frozen references and real calls |
+| [912b458](https://github.com/Eta06/HarbiChess/commit/912b4588660c1a43f459713dd95e7120c443251e) | `docs/runs/UFUK-root-arena-preregistration-20261003.md` | UFUK: preregister matched root width games after positive search diagnostic |
+| [75213a2](https://github.com/Eta06/HarbiChess/commit/75213a22df0280fe242d1bb0cc804c04be96a747) | `docs/runs/UFUK-policy-adapter-result-20261003.md` | UFUK: record failed policy representation comparison with frozen value |
+| [8dca9c6](https://github.com/Eta06/HarbiChess/commit/8dca9c6ec5271529bca8b43a0c4120c2b76f619c) | `docs/runs/UFUK-policy-adapter-evidence-20261003.json` | UFUK: preserve fixed self learning curves full resume metadata and test failures |
+| [0a06e14](https://github.com/Eta06/HarbiChess/commit/0a06e14528c0abc29e44d624c8e8993603705710) | `docs/runs/UFUK-root-budget-result-20261003.md` | UFUK: record positive bounded root breadth depth effect without strength claim |
+| [aa03de3](https://github.com/Eta06/HarbiChess/commit/aa03de341f15772025a9776b33d81ec249c564d1) | `docs/runs/UFUK-root-budget-evidence-20261003.json` | UFUK: preserve every equal budget root choice and independent reference audit |
+| [22d1128](https://github.com/Eta06/HarbiChess/commit/22d112820672200e3ce7b14e993062e72cc34383) | `docs/research/UFUK-root-opening-splits-20261003.json` | UFUK: freeze twenty four new roots before matched search width games |
+| [d26201a](https://github.com/Eta06/HarbiChess/commit/d26201a05538e103201465f49723d6e3483e7454) | `src/harbichess/evaluation/portable_arena.py` | UFUK: compare root widths and durably record moves and actual engine nodes |
+| [79a319d](https://github.com/Eta06/HarbiChess/commit/79a319db917262d3b6d3d83f9c40149b267d3ee0) | `tests/test_root_width_arena.py` | UFUK: verify root configuration durable traces and actual engine node accounting |
+| [bf4723b](https://github.com/Eta06/HarbiChess/commit/bf4723b80566f134f1e02e5edc624c5dfa2241b3) | `docs/runs/UFUK-narrow-selfplay-preregistration-20261003.md` | UFUK: preregister fresh narrow search policy iteration against same search control |
+| [d7807b9](https://github.com/Eta06/HarbiChess/commit/d7807b984a4a84eaa18ee21afdb0d5bff5e9b83a) | `docs/runs/UFUK-root-arena-result-20261003.md` | UFUK: record strong narrow search control win and uncertain Stockfish delta |
+| [fe35e51](https://github.com/Eta06/HarbiChess/commit/fe35e51515805b598a751e12f03831f062cf85b5) | `docs/runs/UFUK-root-arena-evidence-20261003.json` | UFUK: preserve all played moves actual engine nodes and root generation failures |
+| [5e7722c](https://github.com/Eta06/HarbiChess/commit/5e7722c4f5e4623d901f3e75e17e423ec9fbac67) | `docs/research/UFUK-narrow-self-opening-splits-20261003.json` | UFUK: freeze fresh model learning arena roots before new self play |
+| [f595e12](https://github.com/Eta06/HarbiChess/commit/f595e12462e075b64aff57cf9fe998ad1adec3bb) | `src/harbichess/training/torch_loop.py` | UFUK: persist explicit root action limit while preserving legacy resume config |
+| [e1f0898](https://github.com/Eta06/HarbiChess/commit/e1f089807805df9d7d8c228af768046715ef30db) | `src/harbichess/selfplay/torch_actors.py` | UFUK: propagate root budget consistently to shared and spawned actors |
+| [96c4ef4](https://github.com/Eta06/HarbiChess/commit/96c4ef48485749cf0e58f117ea3867fce726686a) | `tests/test_narrow_loop.py` | UFUK: verify actor root budget and reject changed search setting on full resume |
+| [1187ae1](https://github.com/Eta06/HarbiChess/commit/1187ae18176a3afac0c3a516ea75674605dbc5ec) | `docs/research/status-20261003.md` | UFUK: distinguish proven development search gain from still unproven model learning |
+| [bf5d062](https://github.com/Eta06/HarbiChess/commit/bf5d0621dfc2e3883ce13b9af7926472deb3ead7) | `docs/research/README.md` | UFUK: index measured root search gain and separate fresh model learning gate |
+| [bf5703e](https://github.com/Eta06/HarbiChess/commit/bf5703e3d1aeab480986d8f872c8514df37a29e0) | `docs/runs/UFUK-narrow-selfplay-result-20261003.md` | UFUK: record failed equal search self learning and full native resume audit |
+| [d7dca10](https://github.com/Eta06/HarbiChess/commit/d7dca100e05ac248e1a2a2a096b5cf320eeec9fc) | `docs/runs/UFUK-narrow-selfplay-evidence-20261003.json` | UFUK: preserve six generation replay integrity and all matched model games |
+| [4f0a003](https://github.com/Eta06/HarbiChess/commit/4f0a003361b26c380d74fe32466f7e207c90c138) | `docs/runs/UFUK-value-calibration-preregistration-20261003.md` | UFUK: preregister late outcome value learning against matched anchor control |
+| [3a52f33](https://github.com/Eta06/HarbiChess/commit/3a52f33f036c5da9bd5d6296d566087b7559d6cb) | `docs/research/UFUK-value-opening-splits-20261003.json` | UFUK: freeze fresh value calibration match roots before optimization |
+| [2c62c41](https://github.com/Eta06/HarbiChess/commit/2c62c41007c628993127c99a885ff7a9d96d74e1) | `src/harbichess/training/ufuk_value_outcomes.py` | UFUK: isolate native anchor and late own outcome value training with exact resume |
+| [66a5e1b](https://github.com/Eta06/HarbiChess/commit/66a5e1bd21e4b90792f96eb34aa43c98442369ed) | `tests/test_ufuk_value_outcomes.py` | UFUK: verify self value contribution frozen policy and bitwise optimizer sampler resume |
+| [13c9963](https://github.com/Eta06/HarbiChess/commit/13c99631c3e816034cf51492c3ad55a99f256d7d) | `docs/runs/UFUK-value-reporting-v2-20261003.md` | UFUK: preserve publication failure and define versioned full state reporting migration |
+| [ed4a311](https://github.com/Eta06/HarbiChess/commit/ed4a311954ca8e6d67d89b434b90769b0be2a12d) | `src/harbichess/training/ufuk_value_outcomes.py` | UFUK: publish immutable training sessions and migrate reporting v1 full state safely |
+| [13cfd89](https://github.com/Eta06/HarbiChess/commit/13cfd890a2f33e57fb51fe20229ad8173145cc28) | `tests/test_ufuk_value_outcomes.py` | UFUK: verify bitwise model optimizer RNG preservation in reporting migration |
+| [31dff93](https://github.com/Eta06/HarbiChess/commit/31dff933a152112c4792baf54840ca744819ddef) | `docs/runs/UFUK-value-checkpoint-qualification-20261003.md` | UFUK: preserve failed value stop and apply preregistered valid checkpoint selection |
+| [94f0fed](https://github.com/Eta06/HarbiChess/commit/94f0fed8bf60656f7cab7b50f7acb6e4d294248e) | `docs/runs/UFUK-target-entropy-preregistration-20261003.md` | UFUK: preregister soft target entropy floor before further capacity changes |
+| [a6cb3c3](https://github.com/Eta06/HarbiChess/commit/a6cb3c34a4b18427188edce7b63e59620bb58619) | `docs/runs/UFUK-value-outcome-result-20261003.md` | UFUK: record failed late outcome value game gate and preserved native retention stop |
+| [10601c5](https://github.com/Eta06/HarbiChess/commit/10601c58ccd4529bae1b9e96395df05684b30680) | `docs/runs/UFUK-value-outcome-evidence-20261003.json` | UFUK: preserve complete value control migration sample traces and paired games |
+| [a6660c6](https://github.com/Eta06/HarbiChess/commit/a6660c69affe0a6cd8aa4e375453e54d32850e4f) | `docs/runs/UFUK-target-entropy-result-20261003.md` | UFUK: report large native excess CE over measured soft target entropy |
+| [53d44fb](https://github.com/Eta06/HarbiChess/commit/53d44fb880bfcb7ec1d426ba5f015023167215e6) | `docs/runs/UFUK-target-entropy-evidence-20261003.json` | UFUK: preserve all native per row entropy and exact diagnostic script |
+| [d83cd87](https://github.com/Eta06/HarbiChess/commit/d83cd8730ff50dab50fc3928f7a4d44d7e83660b) | `docs/runs/UFUK-width-preregistration-20261004.md` | UFUK: preregister same function width capacity with CPU speed and game gates |
+| [c560633](https://github.com/Eta06/HarbiChess/commit/c560633ec278a4369fcc6c266c092f74b3f06752) | `docs/runs/UFUK-width-preregistration-20261004.md` | UFUK: clarify legacy patience and preserve unused book preflight failure |
+| [6879555](https://github.com/Eta06/HarbiChess/commit/6879555fd22ba407f831eb20c42fc83c4b51d074) | `src/harbichess/backends/ufuk_width_transfer.py` | UFUK: add versioned active feature width transfer with zero output bridges |
+| [58024da](https://github.com/Eta06/HarbiChess/commit/58024dac0f3fcfdc108403a20fcfc0025f9ddccc) | `tests/test_ufuk_width_transfer.py` | UFUK: verify real Torch MLX CPU width parity and trainable new features |
+| [d59cdfd](https://github.com/Eta06/HarbiChess/commit/d59cdfd6a720f16061e4294fff8b7ea847812760) | `src/harbichess/training/ufuk_width_guard.py` | UFUK: guard native training value retention with full failed state checkpoints |
+| [7708b7a](https://github.com/Eta06/HarbiChess/commit/7708b7a3be12747a1b2a83ecac2f50acdb86b475) | `tests/test_ufuk_width_guard.py` | UFUK: verify complete state retention and failed checkpoint continuation refusal |
+| [29d2445](https://github.com/Eta06/HarbiChess/commit/29d24455e62740aca7aed0a5d2eb83bf63f0dfa0) | `docs/research/UFUK-width-opening-splits-20261004.json` | UFUK: freeze 24 unseen 36 ply roots from registered value parent |
+| [a340169](https://github.com/Eta06/HarbiChess/commit/a340169260e3563d1f94c9a05e13791a22cddddd) | `docs/research/UFUK-width-latency-probes-20261004.json` | UFUK: freeze 18 real history latency probes before width updates |
+| [aa4b28f](https://github.com/Eta06/HarbiChess/commit/aa4b28fd87a056d123c365bb4bfb4fdbccc71dba) | `docs/runs/UFUK-artifact-archive-20261003.json` | UFUK: record verified 2149 file local archive and incomplete remote backup |
+| [758bd6d](https://github.com/Eta06/HarbiChess/commit/758bd6df68b2abe0835811b346da7b1cffa48033) | `docs/research/UFUK-search-scaling-audit-20261004.md` | UFUK: audit primary Gumbel Q normalization and separate future hypotheses |
+| [7c0aa4a](https://github.com/Eta06/HarbiChess/commit/7c0aa4ae1fee0920d202c0a4ee339cc2c1445839) | `docs/runs/UFUK-q-range-preregistration-20261004.md` | UFUK: preregister Q range floor contrasts and adjusted selection gates |
+| [de0e25c](https://github.com/Eta06/HarbiChess/commit/de0e25ca4869032d97a11228b94c17dd2f0117a5) | `docs/runs/UFUK-width-result-20261004.md` | UFUK: report failed width learning gate with real resume and latency evidence |
+| [e085737](https://github.com/Eta06/HarbiChess/commit/e0857379f07be716b80a89e735283a8281f58e41) | `docs/runs/UFUK-width-evidence-20261004.json` | UFUK: preserve all width checkpoints sampling audit errors and latency calls |
+| [fcea8a9](https://github.com/Eta06/HarbiChess/commit/fcea8a9abb0308686f7e77884ef304e49da76e13) | `src/harbichess/search/q_range_floor.py` | UFUK: add isolated Q range damping without changing historical search defaults |
+| [7719ced](https://github.com/Eta06/HarbiChess/commit/7719ceda1b36e115d50aa7c9fa9cedf85222c5e5) | `tests/test_q_range_floor.py` | UFUK: verify exact default search terminal mate backup and small range damping |
+| [54ae3e5](https://github.com/Eta06/HarbiChess/commit/54ae3e5ba56c36910ca08829602bcd5ddcc04fbf) | `docs/research/UFUK-q-range-opening-splits-20261004.json` | UFUK: freeze 24 unseen 40 ply roots before range floor diagnostics |
+| [7602d33](https://github.com/Eta06/HarbiChess/commit/7602d33f86df9a59f73eda877010a916de1a7962) | `docs/runs/UFUK-q-range-result-20261004.md` | UFUK: report both Q range floors failed adjusted mechanism gates |
+| [59b982c](https://github.com/Eta06/HarbiChess/commit/59b982c77f8a1d4bf1ab9e5f560c6a24bce94730) | `docs/runs/UFUK-q-range-evidence-20261004.json` | UFUK: preserve full range contrasts default repeat audit and primary source |
+| [824dc14](https://github.com/Eta06/HarbiChess/commit/824dc14815c638640881aee9e0a3ba64d3461e3d) | `docs/runs/UFUK-offline-control-preregistration-20261004.md` | UFUK: preregister retained offline control strength on new stage families |
+| [bbdac81](https://github.com/Eta06/HarbiChess/commit/bbdac81feead83971304a8be728fa0cbddfcf061) | `docs/research/UFUK-offline-control-opening-splits-20261004.json` | UFUK: freeze 24 new four ply stage families from uniform legal stress roots |
+| [9ecaa22](https://github.com/Eta06/HarbiChess/commit/9ecaa225e08e96c70236bd663b496554e627246a) | `docs/runs/UFUK-offline-control-result-20261004.md` | UFUK: report offline control failed fresh family and Stockfish512 strength |
+| [670fb48](https://github.com/Eta06/HarbiChess/commit/670fb4832f220f600dadd6ac7fdfc1512e6c67a2) | `docs/runs/UFUK-offline-control-evidence-20261004.json` | UFUK: preserve all 144 offline control games real nodes and full state audit |
+| [77dedac](https://github.com/Eta06/HarbiChess/commit/77dedac999d18b0ba9f2440093a2377db880d42e) | `docs/runs/UFUK-artifact-supplement-20261004.json` | UFUK: archive and restore verify 143 new artifacts after unchanged parent |
+| [1433554](https://github.com/Eta06/HarbiChess/commit/1433554c491ed11364d52ae407e3321444c22593) | `docs/research/status-20261004.md` | UFUK: reconcile completed failures runtime real resources and backup limits |
+| [16fbdf8](https://github.com/Eta06/HarbiChess/commit/16fbdf840d614573bc8a4593c6853769b3e1b435) | `docs/research/README.md` | UFUK: index completed learning capacity diagnostics and verified local archives |
