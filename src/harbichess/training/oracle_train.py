@@ -293,6 +293,7 @@ def main() -> None:
                 max_train_rows=args.max_train_rows,
                 max_validation_rows=args.max_validation_rows,
                 qualification_kind=args.qualification_kind,
+                prepared_cache=args.prepared_cache,
             )
         ),
         flush=True,
