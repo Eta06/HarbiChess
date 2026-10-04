@@ -1,0 +1,735 @@
+{
+  "schema": 1,
+  "source_commit": "670fb4832f220f600dadd6ac7fdfc1512e6c67a2",
+  "parent_inventory_sha256": "4d614f10508162f79a9e4ea151a98c263deb80610e35c13f1e9540ca4e381f2f",
+  "parent_archive_sha256": "091ac0a206ea869d59b41b74bea3be0484ae3096e4beac2711344617fc09bc98",
+  "file_count": 143,
+  "uncompressed_bytes": 69550590,
+  "files": [
+    {
+      "path": "artifacts/ufuk-git-readback-completed-round-20261004.json",
+      "bytes": 3379,
+      "sha256": "9fce54861b0b51346507f32f327b0aede1b02b535d84276308a701e35f3acdcc"
+    },
+    {
+      "path": "artifacts/ufuk-offline-control-arena-20261004/candidate-vs-initial-command.json",
+      "bytes": 1813,
+      "sha256": "b0b894a87b59d67d36e571cf0485c8904a10ed9a7c9fa328ad10bee8b6aa556d"
+    },
+    {
+      "path": "artifacts/ufuk-offline-control-arena-20261004/candidate-vs-initial-progress.jsonl",
+      "bytes": 813005,
+      "sha256": "9efc3d114a02076aa8b8a5bbe07dfaadd4739b71d61dd56b291c2448485aef4b"
+    },
+    {
+      "path": "artifacts/ufuk-offline-control-arena-20261004/candidate-vs-initial.json",
+      "bytes": 286857,
+      "sha256": "764a81fa2b7f6287ef36af17d6e6c14b27855f3d95a8c290e5e0a0585774eba1"
+    },
+    {
+      "path": "artifacts/ufuk-offline-control-arena-20261004/candidate-vs-stockfish512-command.json",
+      "bytes": 1843,
+      "sha256": "d8b1785de715dd20fd35d885f13c72d607d60dcb6429789d6cbf8d107d33ef37"
+    },
+    {
+      "path": "artifacts/ufuk-offline-control-arena-20261004/candidate-vs-stockfish512-progress.jsonl",
+      "bytes": 513594,
+      "sha256": "85d261f3abee9b9b32747ff93efbc4ad8528ecae2fd699c62c79c57b0bcb6595"
+    },
+    {
+      "path": "artifacts/ufuk-offline-control-arena-20261004/candidate-vs-stockfish512.json",
+      "bytes": 322059,
+      "sha256": "cc99d6f645b4b38b3858445408194ee18e7293a58263a9c8420b03daf6ef5870"
+    },
+    {
+      "path": "artifacts/ufuk-offline-control-arena-20261004/gate.json",
+      "bytes": 3002,
+      "sha256": "6015fbd2db428e705d65aefe5c3f432077ddc65aca38a143bf2603f4967c698e"
+    },
+    {
+      "path": "artifacts/ufuk-offline-control-arena-20261004/initial-vs-stockfish512-command.json",
+      "bytes": 1811,
+      "sha256": "f78a78202193f1230a5a7290a7574f4bf9a49a22fe4563d00c294d3a93209ec6"
+    },
+    {
+      "path": "artifacts/ufuk-offline-control-arena-20261004/initial-vs-stockfish512-progress.jsonl",
+      "bytes": 536306,
+      "sha256": "44434d6692e4e3319169796596a88027c22e15325414f8c91128b86d90dad8de"
+    },
+    {
+      "path": "artifacts/ufuk-offline-control-arena-20261004/initial-vs-stockfish512.json",
+      "bytes": 335231,
+      "sha256": "9d7b4083ce2ac7c460338168a946840d791f7f091f86ad1a043810e271295afb"
+    },
+    {
+      "path": "artifacts/ufuk-offline-control-arena-20261004/integrity-audit.json",
+      "bytes": 4315,
+      "sha256": "ce82107d6274372c18a0896261c474e08fa99febd4852438e0df9284fb3144f7"
+    },
+    {
+      "path": "artifacts/ufuk-offline-control-preflight-20261004.json",
+      "bytes": 431,
+      "sha256": "df38c10bf65b360c76655db7f23f653ffc7cc320759fcac8dabcea4f5c58d951"
+    },
+    {
+      "path": "artifacts/ufuk-q-range-20261004/default-readback-audit.json",
+      "bytes": 196,
+      "sha256": "537eb4931296101fbfb88b11affd3ac59e5fd0b5ae48123d191f0a0950edd721"
+    },
+    {
+      "path": "artifacts/ufuk-q-range-20261004/integrity-audit.json",
+      "bytes": 204,
+      "sha256": "7d894daaf14d9f688852b361e6e95cacff4fdb3c878f84acf6ddd9175fb16441"
+    },
+    {
+      "path": "artifacts/ufuk-q-range-20261004/metadata.json",
+      "bytes": 685,
+      "sha256": "2661259164721e173e118bfc155798fd38a36422c89ddceeb3e58ea7146b4a0c"
+    },
+    {
+      "path": "artifacts/ufuk-q-range-20261004/positions.jsonl",
+      "bytes": 568880,
+      "sha256": "001eea0a282dfb98999f7e7ca15a9d00f8eddc5c3f811b85299ab1466f880c15"
+    },
+    {
+      "path": "artifacts/ufuk-q-range-20261004/result.json",
+      "bytes": 5116,
+      "sha256": "be3c957750539263f85736aec421e8231689763a1f58094d943a1f286598fd8d"
+    },
+    {
+      "path": "artifacts/ufuk-width-control-train-20261004/checkpoints/step-000000/checkpoint.json",
+      "bytes": 140778,
+      "sha256": "2833015fd602e4d4b88e9d80253fb0e97bd67db80dc31c7bca30955152b8ee5d"
+    },
+    {
+      "path": "artifacts/ufuk-width-control-train-20261004/checkpoints/step-000000/model.safetensors",
+      "bytes": 294764,
+      "sha256": "3b7bb9c26a15e327df548b7416405307e92dabe5c48ebd7d59a2c185827a5edb"
+    },
+    {
+      "path": "artifacts/ufuk-width-control-train-20261004/checkpoints/step-000000/training.pt",
+      "bytes": 7088,
+      "sha256": "342eba5699b45e2d0e40651d89fbd8fe6151f0eb5c02b9f0032b71049b274bd1"
+    },
+    {
+      "path": "artifacts/ufuk-width-control-train-20261004/checkpoints/step-000250/checkpoint.json",
+      "bytes": 141033,
+      "sha256": "9de0cf8dd340c82c312d499e0cf3c912c4b6da1d55e07d8c1df4855db1648d74"
+    },
+    {
+      "path": "artifacts/ufuk-width-control-train-20261004/checkpoints/step-000250/model.safetensors",
+      "bytes": 294764,
+      "sha256": "ceebd93517c205172bbec36fdb91aa7bc7a3a834b0be6750209d5cf3402cae05"
+    },
+    {
+      "path": "artifacts/ufuk-width-control-train-20261004/checkpoints/step-000250/training.pt",
+      "bytes": 622586,
+      "sha256": "205dbefc0baf187004f667b995bc4aa04b9d6ce765923472e2944788b4fe267a"
+    },
+    {
+      "path": "artifacts/ufuk-width-control-train-20261004/checkpoints/step-000500/checkpoint.json",
+      "bytes": 141289,
+      "sha256": "e11c5188a03a1747c9e41ed300b94bc4587e33a987892f79379f4fea07523c8a"
+    },
+    {
+      "path": "artifacts/ufuk-width-control-train-20261004/checkpoints/step-000500/model.safetensors",
+      "bytes": 294764,
+      "sha256": "dfdf5cc81a55fc601b23c1f637f22953e97f27fb13719dd772922f53e76eeb3d"
+    },
+    {
+      "path": "artifacts/ufuk-width-control-train-20261004/checkpoints/step-000500/training.pt",
+      "bytes": 622586,
+      "sha256": "4c15ae6b1b2dd6a544165a4cba59fab12a0f6a11fa3cfce61c22bed0864544e0"
+    },
+    {
+      "path": "artifacts/ufuk-width-control-train-20261004/checkpoints/step-000750/checkpoint.json",
+      "bytes": 141544,
+      "sha256": "f39ea419ad490d26932d23dc1c327981d12fab0793132fb48c6a8f502057cfb4"
+    },
+    {
+      "path": "artifacts/ufuk-width-control-train-20261004/checkpoints/step-000750/model.safetensors",
+      "bytes": 294764,
+      "sha256": "31e2377a3a8d684ef5669e0a457fd628cc4cb819c077fdb939b5037e4a4a95f8"
+    },
+    {
+      "path": "artifacts/ufuk-width-control-train-20261004/checkpoints/step-000750/training.pt",
+      "bytes": 622586,
+      "sha256": "22ead5bfcf1de73080f493b5070d61be9686429e13588202fc6b24741e876ff3"
+    },
+    {
+      "path": "artifacts/ufuk-width-control-train-20261004/checkpoints/step-001000/checkpoint.json",
+      "bytes": 141804,
+      "sha256": "866c64658b9c1748e54c5721dd2f2fda0a35c645725cf040811c7db7540d6724"
+    },
+    {
+      "path": "artifacts/ufuk-width-control-train-20261004/checkpoints/step-001000/model.safetensors",
+      "bytes": 294764,
+      "sha256": "f1453549c01d2a83c9c0b6d5b94f943eb6fb1f696f981d9280572fec2e9285f2"
+    },
+    {
+      "path": "artifacts/ufuk-width-control-train-20261004/checkpoints/step-001000/training.pt",
+      "bytes": 622586,
+      "sha256": "adf1a9ee787ef69afbdb1fa01b27188503db55008437420dc5d56588bbb0505c"
+    },
+    {
+      "path": "artifacts/ufuk-width-control-train-20261004/checkpoints/step-001250/checkpoint.json",
+      "bytes": 142060,
+      "sha256": "a30514e0a45c1038316292645f462c7bc9d8bbe076352cbdbfa1c5928d43fbf3"
+    },
+    {
+      "path": "artifacts/ufuk-width-control-train-20261004/checkpoints/step-001250/model.safetensors",
+      "bytes": 294764,
+      "sha256": "4ac78b605f6d2749c28023c58596b4abbfc43554d9fdc2e2eb0180b60c678911"
+    },
+    {
+      "path": "artifacts/ufuk-width-control-train-20261004/checkpoints/step-001250/training.pt",
+      "bytes": 622586,
+      "sha256": "5087c9f7f836909aedef9c71e08224b8ddcc109f883f8d3f129362e38f663986"
+    },
+    {
+      "path": "artifacts/ufuk-width-control-train-20261004/checkpoints/step-001500/checkpoint.json",
+      "bytes": 142319,
+      "sha256": "d254f229084cab8b0df9689d49cad5b06a3d0cdc9efa56bb79b83e8977ee004e"
+    },
+    {
+      "path": "artifacts/ufuk-width-control-train-20261004/checkpoints/step-001500/model.safetensors",
+      "bytes": 294764,
+      "sha256": "94405a93f28d8eaea5269fd49087847fb305d3638177d2de39d65f851b35b6d5"
+    },
+    {
+      "path": "artifacts/ufuk-width-control-train-20261004/checkpoints/step-001500/training.pt",
+      "bytes": 622586,
+      "sha256": "68169599d2be495b39b33eb7484a68d357f0a6cb39e56f5b4f0a23cc82e9df15"
+    },
+    {
+      "path": "artifacts/ufuk-width-control-train-20261004/checkpoints/step-001750/checkpoint.json",
+      "bytes": 142576,
+      "sha256": "2ae8cf6e9d785ec9f0f18bb4323232ba8542ee5280ec417620a6e6e9c4596335"
+    },
+    {
+      "path": "artifacts/ufuk-width-control-train-20261004/checkpoints/step-001750/model.safetensors",
+      "bytes": 294764,
+      "sha256": "57af1fadaf502e22cd99cad72938a6a79e0702cbb7ffe852968cebd2656aa0d2"
+    },
+    {
+      "path": "artifacts/ufuk-width-control-train-20261004/checkpoints/step-001750/training.pt",
+      "bytes": 622586,
+      "sha256": "a0630781d33c245a8f864dea0fa0b179aa4653c89cde7dacf98ab2a28735bfe7"
+    },
+    {
+      "path": "artifacts/ufuk-width-control-train-20261004/checkpoints/step-002000/checkpoint.json",
+      "bytes": 142833,
+      "sha256": "3c568b3f4d0eb137889a34af8a60a515174035a1e0749ec3977aaddfe5112e33"
+    },
+    {
+      "path": "artifacts/ufuk-width-control-train-20261004/checkpoints/step-002000/model.safetensors",
+      "bytes": 294764,
+      "sha256": "74411ca10007cacc1df5e9b26063eb0b307c6b508bad6422754bca111c6bf2f5"
+    },
+    {
+      "path": "artifacts/ufuk-width-control-train-20261004/checkpoints/step-002000/training.pt",
+      "bytes": 622586,
+      "sha256": "0366885e986c073dbf23e03e83140b6d2b323c3c63e1580caeedf82662d497cf"
+    },
+    {
+      "path": "artifacts/ufuk-width-control-train-20261004/checkpoints/step-002250/checkpoint.json",
+      "bytes": 143089,
+      "sha256": "1421594b398150a35ac8f051e85953c80818511e071df161abad93b88d5dcfa8"
+    },
+    {
+      "path": "artifacts/ufuk-width-control-train-20261004/checkpoints/step-002250/model.safetensors",
+      "bytes": 294764,
+      "sha256": "d75085a2eb434f4c557b393974666e64bf5e6cafab94043af16d9ea503496943"
+    },
+    {
+      "path": "artifacts/ufuk-width-control-train-20261004/checkpoints/step-002250/training.pt",
+      "bytes": 622586,
+      "sha256": "c55b68842310a96350e1ae5c393a22bb86dfb4f5055301a8d150fa77901928ea"
+    },
+    {
+      "path": "artifacts/ufuk-width-control-train-20261004/checkpoints/step-002500/checkpoint.json",
+      "bytes": 143343,
+      "sha256": "22c170b72bd31ed3be9a1755d4ec09c0a2871140a7a62af88b367bfd5afcf0f5"
+    },
+    {
+      "path": "artifacts/ufuk-width-control-train-20261004/checkpoints/step-002500/model.safetensors",
+      "bytes": 294764,
+      "sha256": "913db188dd0cc6a9e03dc838c454ec7bae63d638d80faea05b5c8e41e77e36c1"
+    },
+    {
+      "path": "artifacts/ufuk-width-control-train-20261004/checkpoints/step-002500/training.pt",
+      "bytes": 622586,
+      "sha256": "572daf1dc88a139bdb20c7b36b9ffa20331dfe8abf5cd0f760293e49b9967b53"
+    },
+    {
+      "path": "artifacts/ufuk-width-control-train-20261004/checkpoints/step-002750/checkpoint.json",
+      "bytes": 143600,
+      "sha256": "c99d7cb8faf8454aafedec9307ad41377bcf5a2d2e3498a01ec1acbdc4eb1e72"
+    },
+    {
+      "path": "artifacts/ufuk-width-control-train-20261004/checkpoints/step-002750/model.safetensors",
+      "bytes": 294764,
+      "sha256": "3700b3eae9c659165f11e39f48947f91972b5658f284ed48b4c031a8ab68ff48"
+    },
+    {
+      "path": "artifacts/ufuk-width-control-train-20261004/checkpoints/step-002750/training.pt",
+      "bytes": 622586,
+      "sha256": "de15c3406751a9598a5d3f85e3cfc89b58ec60ac045964406fd5548a8a31face"
+    },
+    {
+      "path": "artifacts/ufuk-width-control-train-20261004/checkpoints/step-003000/checkpoint.json",
+      "bytes": 143858,
+      "sha256": "2990ab6f088f3d5e468ae811ad105ba97cd98d630c266bb38e098424cebe403f"
+    },
+    {
+      "path": "artifacts/ufuk-width-control-train-20261004/checkpoints/step-003000/model.safetensors",
+      "bytes": 294764,
+      "sha256": "a7b51fc5f29741917079ef9d545a760dbde0a2ee3753d44ff7565ca102bb01db"
+    },
+    {
+      "path": "artifacts/ufuk-width-control-train-20261004/checkpoints/step-003000/training.pt",
+      "bytes": 622586,
+      "sha256": "5958bd0528a6620aab0e5578edbfb0618514a398d9d1cf83a38b5e72b6f37df6"
+    },
+    {
+      "path": "artifacts/ufuk-width-control-train-20261004/checkpoints/step-003250/checkpoint.json",
+      "bytes": 144117,
+      "sha256": "1ad4c66659a532383a703da98a5d0a7162a9ed2cc336b4df6adb68f3dd4d21a4"
+    },
+    {
+      "path": "artifacts/ufuk-width-control-train-20261004/checkpoints/step-003250/model.safetensors",
+      "bytes": 294764,
+      "sha256": "d9fb95f3108b91120f3b2fd1001f98044640a047a8bc0481c13f6b2d26708eb8"
+    },
+    {
+      "path": "artifacts/ufuk-width-control-train-20261004/checkpoints/step-003250/training.pt",
+      "bytes": 622586,
+      "sha256": "c9d8670748709e8951a4b99630383a424a8773e7519e50d00a0590c58fbc4de2"
+    },
+    {
+      "path": "artifacts/ufuk-width-control-train-20261004/checkpoints/step-003500/checkpoint.json",
+      "bytes": 144373,
+      "sha256": "8c53700a1afa28f3316054417880fa5371bf4b371a6924cf4b482712f6dbaa05"
+    },
+    {
+      "path": "artifacts/ufuk-width-control-train-20261004/checkpoints/step-003500/model.safetensors",
+      "bytes": 294764,
+      "sha256": "1c4fbe38ca80e2b700fd929d844e9ce71eaa2dc4121e34b231a7bf0f8d9c9648"
+    },
+    {
+      "path": "artifacts/ufuk-width-control-train-20261004/checkpoints/step-003500/training.pt",
+      "bytes": 622586,
+      "sha256": "7f9f3672845b57083b4548e3a96d1d0e62cda2c26a26c54d8eef60ced0c039e2"
+    },
+    {
+      "path": "artifacts/ufuk-width-control-train-20261004/checkpoints/step-003750/checkpoint.json",
+      "bytes": 144629,
+      "sha256": "20d41eea15cc2eb45553a50b8c492b25330e15d071dadf82f4cfa074c8d1803d"
+    },
+    {
+      "path": "artifacts/ufuk-width-control-train-20261004/checkpoints/step-003750/model.safetensors",
+      "bytes": 294764,
+      "sha256": "eae50a5997bf639218600a803500690efb81a21e8c0ad08137196822c3e2b6e2"
+    },
+    {
+      "path": "artifacts/ufuk-width-control-train-20261004/checkpoints/step-003750/training.pt",
+      "bytes": 622586,
+      "sha256": "9cf958c9e4e84864dbe9d6c08aa56f4063a56caae1334f2deb82e696ccacdab3"
+    },
+    {
+      "path": "artifacts/ufuk-width-control-train-20261004/checkpoints/step-004000/checkpoint.json",
+      "bytes": 144884,
+      "sha256": "08f51ce29d5fad5422e38273cd98c28524b318e112067863bf58092e7792cf16"
+    },
+    {
+      "path": "artifacts/ufuk-width-control-train-20261004/checkpoints/step-004000/model.safetensors",
+      "bytes": 294764,
+      "sha256": "62ed20d981d2e8fa751a42592e9f5edb31f24ecb9147306f02c729e1ce79ea4f"
+    },
+    {
+      "path": "artifacts/ufuk-width-control-train-20261004/checkpoints/step-004000/training.pt",
+      "bytes": 622586,
+      "sha256": "9dee356a604b51f9e30c0b1142996714f2c61c9ab7340a79ba2600772a08e589"
+    },
+    {
+      "path": "artifacts/ufuk-width-control-train-20261004/metadata.json",
+      "bytes": 1454,
+      "sha256": "fedeeca8f6d3a68d656c2598d9683e22c41bd0c9490e488614491ca96a7356ad"
+    },
+    {
+      "path": "artifacts/ufuk-width-control-train-20261004/progress.jsonl",
+      "bytes": 7607,
+      "sha256": "cd3cb3c50b6913f45c9651675ad040ec2de104063570fe6f3d37851918a89d6f"
+    },
+    {
+      "path": "artifacts/ufuk-width-control-train-20261004/result-step-000250.json",
+      "bytes": 853,
+      "sha256": "da76c40eb50206b5232f98ab42966a44f69a3e835f5218c1f325cba9dd2ea0a0"
+    },
+    {
+      "path": "artifacts/ufuk-width-control-train-20261004/result-step-004000.json",
+      "bytes": 943,
+      "sha256": "aac86bdfbee5b2fde1e085811742ff81af96393cfbe5f6f1410c9706b6813db9"
+    },
+    {
+      "path": "artifacts/ufuk-width-control-train-20261004/width-guard-profile.json",
+      "bytes": 573,
+      "sha256": "d9fb5539eb2818d109eb76299cbf6f2de3694ffb9646c2fd3cc3b9f9b93a71a7"
+    },
+    {
+      "path": "artifacts/ufuk-width-control-train-20261004/width-phase-result-step-000250.json",
+      "bytes": 1775,
+      "sha256": "cb4d283154c729d4473cdba70a1186a0495a151b21e078c83b88bf811dce0d47"
+    },
+    {
+      "path": "artifacts/ufuk-width-control-train-20261004/width-phase-result-step-004000.json",
+      "bytes": 1868,
+      "sha256": "7bcdd1c7f0a48d9c66638745a2a053a31ce4632fcf57bfb8ebd655f953057d26"
+    },
+    {
+      "path": "artifacts/ufuk-width-experiment-20261004/control-pause-command.json",
+      "bytes": 821,
+      "sha256": "1566fed86c6a042951ecab8d88395277dde4435992c80329f146539965d81a75"
+    },
+    {
+      "path": "artifacts/ufuk-width-experiment-20261004/control-pause.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "artifacts/ufuk-width-experiment-20261004/control-pause.stdout.log",
+      "bytes": 2408,
+      "sha256": "6c40cd34484b953c6a07ff015a3e962085eceff4efd4bb50d579ede48bcdf0de"
+    },
+    {
+      "path": "artifacts/ufuk-width-experiment-20261004/control-resume-command.json",
+      "bytes": 923,
+      "sha256": "416e4a848f76a00913ca6015adbbfd33ce9dab79104791597b15b7117d6ecb79"
+    },
+    {
+      "path": "artifacts/ufuk-width-experiment-20261004/control-resume.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "artifacts/ufuk-width-experiment-20261004/control-resume.stdout.log",
+      "bytes": 9164,
+      "sha256": "eb0640409f808af989d26591892c8028d0438a2f515de74a5f5b1264f9377a59"
+    },
+    {
+      "path": "artifacts/ufuk-width-experiment-20261004/control-selection.json",
+      "bytes": 7185,
+      "sha256": "2599ae7dc0d5bf957f5e38fa988e39fa5bd19ea292d68e2dd05215d7b6638a4d"
+    },
+    {
+      "path": "artifacts/ufuk-width-experiment-20261004/integrity-audit.json",
+      "bytes": 23839,
+      "sha256": "053b855111a346822134aad369d50bb6b66de220edadba348c56da987ab02448"
+    },
+    {
+      "path": "artifacts/ufuk-width-experiment-20261004/latency.json",
+      "bytes": 120044,
+      "sha256": "704b70880e049e5479acef1bcc90cb8f87272aeded775e76fb56a2fb82a741b8"
+    },
+    {
+      "path": "artifacts/ufuk-width-experiment-20261004/result.json",
+      "bytes": 15414,
+      "sha256": "d5097de78b918f3d2240b0b7f7381526b6288a129168bb563c83a3cc36a62b8a"
+    },
+    {
+      "path": "artifacts/ufuk-width-experiment-20261004/width-pause-command.json",
+      "bytes": 795,
+      "sha256": "1be09f6ecf4592836ef49d6399fb090e9a2bcc8285f835ca0c868f4a307123f1"
+    },
+    {
+      "path": "artifacts/ufuk-width-experiment-20261004/width-pause.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "artifacts/ufuk-width-experiment-20261004/width-pause.stdout.log",
+      "bytes": 2418,
+      "sha256": "3d288f8a7f30636a734ff161c237d5d7c59a3790c4f158ee33d5363e56eb390c"
+    },
+    {
+      "path": "artifacts/ufuk-width-experiment-20261004/width-resume-command.json",
+      "bytes": 905,
+      "sha256": "c589f0d828afca6ebfb2a6669bfc82ad1651083a3922c5a212056584c7e0bfb5"
+    },
+    {
+      "path": "artifacts/ufuk-width-experiment-20261004/width-resume.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "artifacts/ufuk-width-experiment-20261004/width-resume.stdout.log",
+      "bytes": 7276,
+      "sha256": "909bc3334f1b80828a9faf00b7bf84024e456afcf1fe6f73a2002f63c63a0a41"
+    },
+    {
+      "path": "artifacts/ufuk-width-experiment-20261004/width-selection.json",
+      "bytes": 6116,
+      "sha256": "2003c21b2d6b30f83316327b28e6cf37c68a3165d8b147e95cad9ff4054d0e2e"
+    },
+    {
+      "path": "artifacts/ufuk-width-preflight-20261004/incorrect-parent-book.json",
+      "bytes": 53712,
+      "sha256": "fa9958a912a2b2c59651c7c0b944007b9d3a7c92e0082f080e118ca340aebdf8"
+    },
+    {
+      "path": "artifacts/ufuk-width-preflight-20261004/parent-correction.json",
+      "bytes": 247,
+      "sha256": "317c2848dea44c26d2a943b6963c0c8afda2045d71ed1b2237e66d913bc4df92"
+    },
+    {
+      "path": "artifacts/ufuk-width-transfer-20261004/model.safetensors",
+      "bytes": 1216356,
+      "sha256": "ab077bbcfe11f64e8e1918b0e8dd538ae11222d7fef846a3583724406ba8933f"
+    },
+    {
+      "path": "artifacts/ufuk-width-transfer-20261004/transfer-preflight.json",
+      "bytes": 1546,
+      "sha256": "0914410596701d61cb9215c9c90e74845232031ca58c231b5407b6f7d5f92757"
+    },
+    {
+      "path": "artifacts/ufuk-width-width-train-20261004/checkpoints/step-000000/checkpoint.json",
+      "bytes": 140778,
+      "sha256": "a07e7dc54161b91e86c04635db90dea8fd02c07ee17e98a1a0e36f6d8d63193b"
+    },
+    {
+      "path": "artifacts/ufuk-width-width-train-20261004/checkpoints/step-000000/model.safetensors",
+      "bytes": 1216044,
+      "sha256": "1b1d7144b3692260537d6a27e148a0567457f732ed65d54df066a330afb51b6e"
+    },
+    {
+      "path": "artifacts/ufuk-width-width-train-20261004/checkpoints/step-000000/training.pt",
+      "bytes": 7088,
+      "sha256": "342eba5699b45e2d0e40651d89fbd8fe6151f0eb5c02b9f0032b71049b274bd1"
+    },
+    {
+      "path": "artifacts/ufuk-width-width-train-20261004/checkpoints/step-000250/checkpoint.json",
+      "bytes": 141037,
+      "sha256": "2383081953d711915dbd382306680e1160e17c9186d970f84839fc5cbd9b6db2"
+    },
+    {
+      "path": "artifacts/ufuk-width-width-train-20261004/checkpoints/step-000250/model.safetensors",
+      "bytes": 1216052,
+      "sha256": "58f6440a22757a7ebc0250c7d6b6742b8734c8a48d6c96cc59e7e1a2e4036fe0"
+    },
+    {
+      "path": "artifacts/ufuk-width-width-train-20261004/checkpoints/step-000250/training.pt",
+      "bytes": 2465018,
+      "sha256": "91498ff312a8880f887ffab8cd3d65aa72158c70c49885fc1eac3fde468610c9"
+    },
+    {
+      "path": "artifacts/ufuk-width-width-train-20261004/checkpoints/step-000500/checkpoint.json",
+      "bytes": 141293,
+      "sha256": "ac3880ddb05f47d2d3eda0abc3634413a2b8c197e9421ab6d03b7d58ee939100"
+    },
+    {
+      "path": "artifacts/ufuk-width-width-train-20261004/checkpoints/step-000500/model.safetensors",
+      "bytes": 1216052,
+      "sha256": "f19bfd83367eaffe3d7580b88c6ffc2a8caa65c9e96be8333d615c7fe4eb1f93"
+    },
+    {
+      "path": "artifacts/ufuk-width-width-train-20261004/checkpoints/step-000500/training.pt",
+      "bytes": 2465082,
+      "sha256": "41c193463ff132458cef2bb06161d81105f7fe518dc5f7d4228ab2b856acbb84"
+    },
+    {
+      "path": "artifacts/ufuk-width-width-train-20261004/checkpoints/step-000750/checkpoint.json",
+      "bytes": 141547,
+      "sha256": "6a990d63a3add6000c05a1629377580b69d5bc9e6d8276e1fbb03b8b21384999"
+    },
+    {
+      "path": "artifacts/ufuk-width-width-train-20261004/checkpoints/step-000750/model.safetensors",
+      "bytes": 1216052,
+      "sha256": "c8353e338a623956293915b8bb6d5aa7a6d64b7d37ab02996d2bd115114398b0"
+    },
+    {
+      "path": "artifacts/ufuk-width-width-train-20261004/checkpoints/step-000750/training.pt",
+      "bytes": 2465082,
+      "sha256": "f7df6bfd247eb18fa71504f489c1391ea6c3ad50d8ee259f26e1b7a996f9d63a"
+    },
+    {
+      "path": "artifacts/ufuk-width-width-train-20261004/checkpoints/step-001000/checkpoint.json",
+      "bytes": 141807,
+      "sha256": "aa32b84510bec734d8ee5617e13100f53fc46fa340b917e61a809c0bef44a70c"
+    },
+    {
+      "path": "artifacts/ufuk-width-width-train-20261004/checkpoints/step-001000/model.safetensors",
+      "bytes": 1216052,
+      "sha256": "86974ee8c28414c7297b1241c7335d883c89304716f82bcc78cf4359fe593b0f"
+    },
+    {
+      "path": "artifacts/ufuk-width-width-train-20261004/checkpoints/step-001000/training.pt",
+      "bytes": 2465082,
+      "sha256": "93d2fc7bd6b02c8da436977a25542b049742686c2ef4f1a0eea779b6279f9a2c"
+    },
+    {
+      "path": "artifacts/ufuk-width-width-train-20261004/checkpoints/step-001250/checkpoint.json",
+      "bytes": 142065,
+      "sha256": "15bc97973c06c3843de8b1047d2e41b6471dab18fa1e0b85136f554a9fdd624f"
+    },
+    {
+      "path": "artifacts/ufuk-width-width-train-20261004/checkpoints/step-001250/model.safetensors",
+      "bytes": 1216052,
+      "sha256": "b25c169bf19a0a464aa846ad5d3c7627ecd8d3ab23e476c8dbd461fbf4d7ec06"
+    },
+    {
+      "path": "artifacts/ufuk-width-width-train-20261004/checkpoints/step-001250/training.pt",
+      "bytes": 2465082,
+      "sha256": "a548e171968429f1d2245944ed296b6e3cb88aedf8f25ecb017211256b83d606"
+    },
+    {
+      "path": "artifacts/ufuk-width-width-train-20261004/checkpoints/step-001500/checkpoint.json",
+      "bytes": 142322,
+      "sha256": "123c4ed21a8e43b2a3b77553855b4d7015fcf73417d6d6662a956f8f5a1a60ab"
+    },
+    {
+      "path": "artifacts/ufuk-width-width-train-20261004/checkpoints/step-001500/model.safetensors",
+      "bytes": 1216052,
+      "sha256": "4e7b9a4fde38c24455a9bfd121b4ee07c347d87fa33413382aa959c0dfd74add"
+    },
+    {
+      "path": "artifacts/ufuk-width-width-train-20261004/checkpoints/step-001500/training.pt",
+      "bytes": 2465082,
+      "sha256": "a575f9fa8b25097ca084d06a891cf725d9cd7a39d4b5c21dfc4efa99779b42e1"
+    },
+    {
+      "path": "artifacts/ufuk-width-width-train-20261004/checkpoints/step-001750/checkpoint.json",
+      "bytes": 142578,
+      "sha256": "58465efca17e9890054818471675d3277dda67434ed70b712d46a94fa83c1896"
+    },
+    {
+      "path": "artifacts/ufuk-width-width-train-20261004/checkpoints/step-001750/model.safetensors",
+      "bytes": 1216052,
+      "sha256": "1de27ff3fe4d938b1675f1aa6fafa9d448cc6da939c8295db076556591b4b647"
+    },
+    {
+      "path": "artifacts/ufuk-width-width-train-20261004/checkpoints/step-001750/training.pt",
+      "bytes": 2465082,
+      "sha256": "b6152afdc6c890f244d3660023ab2a604fd03abd786b9308a6a44f727ab49696"
+    },
+    {
+      "path": "artifacts/ufuk-width-width-train-20261004/checkpoints/step-002000/checkpoint.json",
+      "bytes": 142834,
+      "sha256": "5ef17004065e471712085605b89f23242852eceddcd58173ed78f682c513925c"
+    },
+    {
+      "path": "artifacts/ufuk-width-width-train-20261004/checkpoints/step-002000/model.safetensors",
+      "bytes": 1216052,
+      "sha256": "292644311c9203ffe7c0c504f4a358f537093e1bfb51787a0457af19277a8816"
+    },
+    {
+      "path": "artifacts/ufuk-width-width-train-20261004/checkpoints/step-002000/training.pt",
+      "bytes": 2465082,
+      "sha256": "f2bfe4a8af78e23e5bf13c7feb8477148573c246a6533c97d728f4721d0273b7"
+    },
+    {
+      "path": "artifacts/ufuk-width-width-train-20261004/checkpoints/step-002250/checkpoint.json",
+      "bytes": 143092,
+      "sha256": "1cb6e421ef5f02619819d4e5ce21eada5addf3727069079d3cdacb2822f9f958"
+    },
+    {
+      "path": "artifacts/ufuk-width-width-train-20261004/checkpoints/step-002250/model.safetensors",
+      "bytes": 1216052,
+      "sha256": "41d266b48f78c4cf94f8a08b2fef822221f1d1f834dc285a1fef97bf7e178e8b"
+    },
+    {
+      "path": "artifacts/ufuk-width-width-train-20261004/checkpoints/step-002250/training.pt",
+      "bytes": 2465082,
+      "sha256": "da415cce0823e21c6eff7fbb76cfbbeccbb8eae1b03aba2372beead0b0a2c5a4"
+    },
+    {
+      "path": "artifacts/ufuk-width-width-train-20261004/checkpoints/step-002500/checkpoint.json",
+      "bytes": 143348,
+      "sha256": "20f3c12461a362f8fcb757e91740ed2dee7206b4d9b2c2989327fe4b47b00ed1"
+    },
+    {
+      "path": "artifacts/ufuk-width-width-train-20261004/checkpoints/step-002500/model.safetensors",
+      "bytes": 1216052,
+      "sha256": "e81c8478377fc810875d196e0159a892e9121eb0a60b59715e44ffc648432bd0"
+    },
+    {
+      "path": "artifacts/ufuk-width-width-train-20261004/checkpoints/step-002500/training.pt",
+      "bytes": 2465082,
+      "sha256": "1ad31de137b3dae9375b20b408a5cecb9e9054a531027465e1d94057cfca1228"
+    },
+    {
+      "path": "artifacts/ufuk-width-width-train-20261004/checkpoints/step-002750/checkpoint.json",
+      "bytes": 143606,
+      "sha256": "6a4917914ee93b5d84160659c181e74a4d3cef3e13062b64766a9076d30032cf"
+    },
+    {
+      "path": "artifacts/ufuk-width-width-train-20261004/checkpoints/step-002750/model.safetensors",
+      "bytes": 1216052,
+      "sha256": "5b65dbc2b6363aae5fbb5e676bc9c1513a6e2b2edd48bc2b09545b7f40cd106b"
+    },
+    {
+      "path": "artifacts/ufuk-width-width-train-20261004/checkpoints/step-002750/training.pt",
+      "bytes": 2465082,
+      "sha256": "a227730756fdeedae1349ac0925c48e31137709b7cc3642559ca21977aac1287"
+    },
+    {
+      "path": "artifacts/ufuk-width-width-train-20261004/checkpoints/step-003000/checkpoint.json",
+      "bytes": 143861,
+      "sha256": "99a01d4ffc79e591ed0e433f2230851293fd63b74aa71baf55fb0eb73d0c43f3"
+    },
+    {
+      "path": "artifacts/ufuk-width-width-train-20261004/checkpoints/step-003000/model.safetensors",
+      "bytes": 1216052,
+      "sha256": "da4e57037cd595bbd7e8e2efef6c5fc81e6499652bffc1f4b8c4e102e3bcced7"
+    },
+    {
+      "path": "artifacts/ufuk-width-width-train-20261004/checkpoints/step-003000/training.pt",
+      "bytes": 2465082,
+      "sha256": "e372729eec20e6e6a20407be88105a3148c120b28edc3a22a9952bbd84626dd7"
+    },
+    {
+      "path": "artifacts/ufuk-width-width-train-20261004/metadata.json",
+      "bytes": 1454,
+      "sha256": "44d96796fe7317dbae72cbed2b1051ece0876bdab9371d7702bfaf3cb5ad28d9"
+    },
+    {
+      "path": "artifacts/ufuk-width-width-train-20261004/progress.jsonl",
+      "bytes": 5720,
+      "sha256": "dea141e7842816edcaff7879097ba3542a862ccc62a9709f7c862406b1d1b7d6"
+    },
+    {
+      "path": "artifacts/ufuk-width-width-train-20261004/result-step-000250.json",
+      "bytes": 856,
+      "sha256": "c5d3d01b0f6a8de047843eb93b997a572f8b4aee842abe3eb789eeedbed56067"
+    },
+    {
+      "path": "artifacts/ufuk-width-width-train-20261004/result-step-003000.json",
+      "bytes": 944,
+      "sha256": "bd4ce8414ac401949d1ff56ac81b0496466b68913bd4160a917b4bcc53e742e3"
+    },
+    {
+      "path": "artifacts/ufuk-width-width-train-20261004/width-guard-profile.json",
+      "bytes": 573,
+      "sha256": "352cbf8916586709c4e42bc83bd49c00041f16560f41bd6f66a9071e7229b55e"
+    },
+    {
+      "path": "artifacts/ufuk-width-width-train-20261004/width-phase-result-step-000250.json",
+      "bytes": 1779,
+      "sha256": "1f4f4aa687b4bcea65071ef995b39e298e45ef76fec5d04bf909ec9bd5bff9d8"
+    },
+    {
+      "path": "artifacts/ufuk-width-width-train-20261004/width-phase-result-step-003000.json",
+      "bytes": 1870,
+      "sha256": "4b8e35ca0b7bcf9e27231201b87b8d78d6e020b57eba38805c4e179fb3be36bd"
+    }
+  ],
+  "remote_backup_complete": false,
+  "scope": "Delta after verified2149file parent archive. Every old owned artifact hash unchanged; new width full model/optimizer checkpoints and range/offline evidence included. Parent needed for original dataset/cache/models.",
+  "archive": {
+    "workspace_path": "/workspace/work/harbichess/release/supplement-20261004/HarbiChess-UFUK-supplement-20261004.tar.gz",
+    "bytes": 57536268,
+    "sha256": "5546ccf5d571e8ed5d06bea8c4b64b582650416fc5f9d9e19ce70c43e603708b",
+    "stream_restored_verified_members": 145
+  },
+  "wall_seconds": 3.3811320819950197,
+  "remote_upload_status": "Authorized Release upload400 Bad Content-Length remains blocked; local restoration verification is not remote backup. /codex output path is OS permission blocked, no direct user-output download claim."
+}
