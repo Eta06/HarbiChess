@@ -1,0 +1,33 @@
+{
+  "actors": {
+    "claim_draw": true,
+    "games": 128,
+    "max_additional_plies": 256,
+    "temperature": 1.0
+  },
+  "device": "cuda:0",
+  "epoch_steps": 256,
+  "learning_rate": 2.5e-05,
+  "objective": {
+    "behavior_kl_stop": 0.02,
+    "policy_anchor_weight": 0.03,
+    "policy_weight": 1.0,
+    "value_anchor_weight": 0.02,
+    "value_weight": 0.2
+  },
+  "schedule": {
+    "max_gradient_norm": 5.0,
+    "minibatch_size": 1024,
+    "passes": 4
+  },
+  "search": {
+    "block_plies": 8,
+    "gumbel_scale": 0.0,
+    "max_considered_actions": 4,
+    "maxvisit_init": 50.0,
+    "simulations": 16,
+    "value_scale": 0.1
+  },
+  "seed": 20261425,
+  "weight_decay": 0.0001
+}
