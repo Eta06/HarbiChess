@@ -145,6 +145,7 @@ def main():
         run=run, source_commit=spec["source_commit"], deadline_epoch=a.deadline_epoch
     )
     final, report = audit.audit_epoch(aa, config, paths, initial, 1, True)
+    assert report["epoch"] == 1
     assert report["raw_actor_replayed"] == 32768
     assert (
         report["prescribed_neural_roots_verified"]
