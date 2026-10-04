@@ -296,15 +296,6 @@ def main():
                 launch(
                     "replay-" + str(row["seed"]),
                     "a100-mc-fresh-cli-replay.py",
-                    "harbichess.training.torch_online_run",
-                    "harbichess.training.torch_search_run",
-                    "a100-mc-whole-training-controller",
-                    "a100-mc-incremental-audit-controller",
-                    "a100-mc-baseline-strength-controller",
-                    "a100-mc-final-two-arm-controller",
-                    "devqualification",
-                    "dev-qualification",
-                    "pytest",
                     [
                         "--run",
                         row["run"],
