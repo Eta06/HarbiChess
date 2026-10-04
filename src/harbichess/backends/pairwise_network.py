@@ -17,11 +17,13 @@ from harbichess.backends.decoupled_value_network import HarbiChessDecoupledValue
 from harbichess.backends.invariant_value_network import InvariantValueConfig
 from harbichess.backends.mlx_context import PolicyContextBlock
 from harbichess.backends.mlx_network import ResidualBlock
+from harbichess.backends.mlx_sparse_value import SparseValueHead
 from harbichess.chess.actions import action_destination_square
 from harbichess.core.network_config import (
     NetworkConfig,
     validate_policy_adapter,
     validate_policy_context,
+    validate_sparse_value,
 )
 
 
@@ -35,10 +37,12 @@ class HarbiChessPairwiseNetwork(HarbiChessDecoupledValueNetwork):
         invariant_config: InvariantValueConfig | None = None,
         policy_adapter: dict | None = None,
         policy_context: dict | None = None,
+        value_sparse: dict | None = None,
     ) -> None:
         super().__init__(config, invariant_config=invariant_config)
         self._policy_adapter = validate_policy_adapter(policy_adapter)
         self._policy_context = validate_policy_context(policy_context, self.config.trunk_channels)
+        self._value_sparse = validate_sparse_value(value_sparse, self.config.input_channels)
         if self.config.policy_size != 4672:
             raise ValueError("pairwise policy requires canonical 4672-action schema")
         del self["policy_conv"], self["policy_linear"]
@@ -69,6 +73,10 @@ class HarbiChessPairwiseNetwork(HarbiChessDecoupledValueNetwork):
         self._coordinates = mx.array(
             [[2 * (s % 8) / 7 - 1, 2 * (s // 8) / 7 - 1] for s in range(64)]
         )
+        if self._value_sparse is not None:
+            self.value_sparse_head = SparseValueHead(
+                self._value_sparse["channels"], self._value_sparse["hidden"]
+            )
 
     @classmethod
     def from_portable(cls, path: Path) -> HarbiChessPairwiseNetwork:
@@ -103,6 +111,7 @@ class HarbiChessPairwiseNetwork(HarbiChessDecoupledValueNetwork):
             ),
             policy_adapter=specification.get("policy_adapter"),
             policy_context=specification.get("policy_context"),
+            value_sparse=specification.get("value_sparse"),
         )
         network.load_weights(list(weights.items()), strict=True)
         # Preserve even unused specification fields, without making them parameters.
@@ -132,6 +141,8 @@ class HarbiChessPairwiseNetwork(HarbiChessDecoupledValueNetwork):
             specification = {**specification, "policy_adapter": dict(self._policy_adapter)}
         if self._policy_context is not None:
             specification = {**specification, "policy_context": dict(self._policy_context)}
+        if self._value_sparse is not None:
+            specification = {**specification, "value_sparse": dict(self._value_sparse)}
         weights = dict(tree_flatten(self.parameters()))
         mx.eval(weights)
         if any(not bool(mx.all(mx.isfinite(value))) for value in weights.values()):
@@ -199,6 +210,11 @@ class HarbiChessPairwiseNetwork(HarbiChessDecoupledValueNetwork):
         logits += self.pair_origin_planes(hidden)[:, origins, planes]
         logits += self.pair_destination_planes(hidden)[:, self._destinations, planes]
         return mx.where(self._geometric, logits, mx.array(-1e9))
+
+    def _production_value_logits(self, inputs: mx.array, trunk: mx.array) -> mx.array:
+        if self._value_sparse is not None:
+            return self.value_sparse_head(inputs)
+        return super()._production_value_logits(inputs, trunk)
 
     def __call__(self, inputs: mx.array) -> tuple[mx.array, mx.array]:
         trunk = self._trunk(inputs)
