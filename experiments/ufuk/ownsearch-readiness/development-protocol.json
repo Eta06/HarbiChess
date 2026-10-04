@@ -1,0 +1,20 @@
+{
+  "schema": "ufuk-ownsearch-fullshape-development-protocol-v1",
+  "status": "prospective-fixed-development-only",
+  "source_commit": "c93b79b8140b31fe1f4d0ca96adddd857991925b",
+  "initial_e8_sha256": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03",
+  "book_sha256": "f2f3038728cce4c56987c9068f900d30ed99f996f99e03a38c41bbbc1f3c9958",
+  "config_sha256": "a4df02e860cbfc73544f3d4a52608c0f8add97f2243df65a60952174be09d33e",
+  "qualification_result_sha256": "05afe3f699fe55a304e2441391cfd283217b301fb2fa747e0fb13734a19685fa",
+  "profile_controller_sha256": "03cbc5e6676452dcd30bb1f818e365717f5f15c585cd35b2a876a5380fd9fc74",
+  "audit_helper_sha256": "85bbbfe3667a47d2cef10c80e308c2333b04305b039216ec3b80d4d532ec0945",
+  "common_helper_sha256": "a6b3fd1e9bbcb9c55c1919cbad32bda7a1a0c28d31f7e673e9b3afead9f45dc2",
+  "whole_profile_max_seconds": 900,
+  "memory_max_bytes": 68719476736,
+  "disk_min_free_bytes": 8589934592,
+  "updates": "Exactly ONE128actors\u00d7256steps=32768freshdevelopment transitions; CUDA/T1 own16sim/max4/random8plyblock targets; completedownWDL, UNKNOWNexcludedvalue;4passes/minibatch1024/KLstop.02; no newexternalteacherlabels.",
+  "independent_audit": "Fresh strictnative0+1; ALL32768legalrawactorRNG/moverterminal/UNKNOWN labels; allbase/behavior and21material storagebits; exact samplerstates/counters; prospectively first+last COMPLETE original128-slot wavefront neural-search groups only, otherroots structural ledger checks;0auditSGD.",
+  "cost_accounting": "Developmentfresh32768 is separate fromformaltraining. Audit32768 replay/selectedneuralpositions areduplicateinfrastructure, notnewlearning. Record wholeCLI/audit wall-clock separately and contention; no utilization-onlyspeedclaim.",
+  "scope": "No candidate promotion/strength gate/seed selection. Requires existing actualCUDA11zero-skip+e8cleanCLI nativeexact receipt beforelaunch.",
+  "failure": "Original900deadline shared CLI+audit; preserve successCLI independently ifauditfails; no automaticretry/budgetextension or weakergate."
+}
