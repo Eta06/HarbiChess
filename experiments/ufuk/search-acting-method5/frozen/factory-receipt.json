@@ -1,0 +1,8 @@
+{
+  "factory_sha256": "6708e327e49adedf1f21400091bf8a7745a501a361679a76aa11eb6eee0bf265",
+  "fixed_epochs_explicit_root_argument": 8,
+  "note": "No strength packets read. Native protocol is fourth input; no registration self-hash.",
+  "registration_sha256": "a9ae975e6ecb486f964ee0514d98fb4bc9d50d3b949ecabd0cf1e441bd75d271",
+  "status": "frozen-before-formal-execution",
+  "strength_bindings_sha256": "5fa34fdc69a49b78fecae17ee9ade86da994c548bbda81473d86c454c6cc733a"
+}
