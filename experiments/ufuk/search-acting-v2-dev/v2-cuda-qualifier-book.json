@@ -1,0 +1,31 @@
+{
+  "schema": 1,
+  "splits": {
+    "train": [
+      {
+        "opening": {
+          "moves": [],
+          "root_fen": "7k/5Q2/6K1/8/8/8/8/8 w - - 0 1"
+        },
+        "root_ply": 0,
+        "source_game": "infra-white"
+      },
+      {
+        "opening": {
+          "moves": [],
+          "root_fen": "8/8/8/8/8/6k1/5q2/7K b - - 0 1"
+        },
+        "root_ply": 0,
+        "source_game": "infra-black"
+      },
+      {
+        "opening": {
+          "moves": [],
+          "root_fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
+        },
+        "root_ply": 0,
+        "source_game": "infra-broad"
+      }
+    ]
+  }
+}
