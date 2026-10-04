@@ -1,0 +1,489 @@
+{
+  "schema": 1,
+  "remote_text_restore": {
+    "status": "pass",
+    "remote_commit": "cfef56e8bfe460a98ed2826708c196b3cc4b9e9b",
+    "files": [
+      {
+        "path": "docs/runs/UFUK-width-result-20261004.md",
+        "bytes": 5090,
+        "sha256": "7eb06a451a19ce6972e4cff76d95af5c50ea30597cbbb184ef596f8345391b4e",
+        "embedded_exact_utf8_restored": 0
+      },
+      {
+        "path": "docs/runs/UFUK-width-evidence-20261004.json",
+        "bytes": 4840181,
+        "sha256": "9bcdb8e3e9612b598cb30694e8c59a51f1e5bebc986c645b77a18993b3711cc6",
+        "embedded_exact_utf8_restored": 91
+      },
+      {
+        "path": "docs/runs/UFUK-q-range-result-20261004.md",
+        "bytes": 2714,
+        "sha256": "d70b17524e340bb7b106f5f14338beb6f0e6beefb97e975873bcb4e988c7f9d1",
+        "embedded_exact_utf8_restored": 0
+      },
+      {
+        "path": "docs/runs/UFUK-q-range-evidence-20261004.json",
+        "bytes": 663037,
+        "sha256": "611211dac75beeb94e2e3082432f3a124a3b5f0e92db5962185dbf84097d4457",
+        "embedded_exact_utf8_restored": 15
+      },
+      {
+        "path": "docs/runs/UFUK-offline-control-result-20261004.md",
+        "bytes": 4044,
+        "sha256": "09746a6bf24c64891f53a4c785d565faa143b7e7d47e8794f6684eaee22ef684",
+        "embedded_exact_utf8_restored": 0
+      },
+      {
+        "path": "docs/runs/UFUK-offline-control-evidence-20261004.json",
+        "bytes": 3208545,
+        "sha256": "d2b2b3a6a05edb68789b480ea9e16ac29dbe1b2b4c1187f795c954fb324371bc",
+        "embedded_exact_utf8_restored": 19
+      },
+      {
+        "path": "docs/runs/UFUK-artifact-supplement-20261004.json",
+        "bytes": 31451,
+        "sha256": "5c42eb5eb6d0a212d203aa5313dba1b9be8b4ffd5282369596e7f3051ea1665c",
+        "embedded_exact_utf8_restored": 0
+      },
+      {
+        "path": "docs/runs/AYNA-UFUK-commits-20261003.md",
+        "bytes": 39564,
+        "sha256": "c90cf27be707d72839624172ae633b4bc737fe1844d1bb27c2d2a1bff0255438",
+        "embedded_exact_utf8_restored": 0
+      },
+      {
+        "path": "docs/research/status-20261004.md",
+        "bytes": 7848,
+        "sha256": "d87de97253a69376da1fcefd07f2c364f71d8631bc28790ed56c043cdad3d31c",
+        "embedded_exact_utf8_restored": 0
+      },
+      {
+        "path": "docs/research/README.md",
+        "bytes": 6725,
+        "sha256": "77de9bb0905a578ec4fd49df83921648becfceb85b26c7eb725c00026ce65aac",
+        "embedded_exact_utf8_restored": 0
+      }
+    ],
+    "embedded_exact_utf8_restored": 125,
+    "scope": "Exact remote text hash readback and actual UTF8 file extraction, not a remote binary backup."
+  },
+  "space_readback": {
+    "page_id": "page_bfc28b10daa081919e1650eca18c61c7",
+    "sequence": 14,
+    "status": "### 4 Ekim 2026 \u2014 geni\u015flik, Q-range ve saklanan model g\u00fc\u00e7 testleri ba\u015far\u0131s\u0131z\n\n**Ana hedef hen\u00fcz ba\u015far\u0131lmad\u0131.** Stockfish/AlphaZero benzeri g\u00fc\u00e7l\u00fc, h\u0131zl\u0131, g\u00fcvenilir self-learning veya makale \u00f6zg\u00fcnl\u00fc\u011f\u00fc kan\u0131tlanm\u0131\u015f de\u011fil. Dar root search\u2019in \u00f6nceki 0,875 skoru ayn\u0131 modelde s\u0131n\u0131rl\u0131 search kazanc\u0131; model \u00f6\u011frenmesi say\u0131lm\u0131yor. \u00d6nceki 192 oyunluk self-learning ve own-outcome value g\u00fc\u00e7 ba\u015far\u0131s\u0131zl\u0131klar\u0131 da korunuyor.\n\nGeni\u015flik hipotezi tamamland\u0131: **72.497\u2192302.801 parametre**, ba\u015flang\u0131\u00e7 fonksiyonu ayn\u0131, kontrol 4.000/geni\u015f 3.000 ger\u00e7ek g\u00fcncelleme. Se\u00e7ilen ge\u00e7erli native policy CE **2,622844 / 2,623800**; geni\u015f model kazanc\u0131 **0,00874<0,05**, kontrol fark\u0131 **\u22120,000956<0,03**. \u00d6\u011frenme kap\u0131s\u0131 ba\u015far\u0131s\u0131z, ma\u00e7 veya promotion yap\u0131lmad\u0131. Kontrol/geni\u015f whole-wall **458/623 saniye**. **30 tam checkpoint** ger\u00e7ekten y\u00fcklendi; optimizer/RNG/veri/cursor do\u011fruland\u0131 ve 13 ortak \u00f6rnekleme RNG\u2019si ayn\u0131. Median legal-masked B1 latency **1,66\u00d7**, \u22642\u00d7 h\u0131z kap\u0131s\u0131 ge\u00e7ti ama \u00f6\u011frenme ba\u015far\u0131s\u0131zl\u0131\u011f\u0131n\u0131 de\u011fi\u015ftirmiyor. [Sonu\u00e7](https://github.com/Eta06/HarbiChess/blob/cfef56e8bfe460a98ed2826708c196b3cc4b9e9b/docs/runs/UFUK-width-result-20261004.md).\n\nDeepMind Mctx kayna\u011f\u0131n\u0131 sabit committen okuyarak Q normalizasyonunu tekrar inceledim; ayr\u0131 floor0,05/0,20 deneyi **128 pozisyon, 6.477 de\u011ferlendirme, 14,2 saniye**, yeni teacher \u00e7a\u011fr\u0131s\u0131 yok. \u0130ki kol da selected ve soft-target kalite ortalamas\u0131nda geriye gitti; d\u00f6rt kar\u015f\u0131la\u015ft\u0131rma i\u00e7in d\u00fczeltilmi\u015f bootstrap kap\u0131lar\u0131 ba\u015far\u0131s\u0131z. Tarihsel FullGumbel varsay\u0131lan\u0131 korunuyor, arena/training yok. [Sonu\u00e7](https://github.com/Eta06/HarbiChess/blob/cfef56e8bfe460a98ed2826708c196b3cc4b9e9b/docs/runs/UFUK-q-range-result-20261004.md).\n\n\u00d6nceki adapter kar\u015f\u0131la\u015ft\u0131rmas\u0131n\u0131n saklanan offline-control8000 modelini **yeni ve ayr\u0131 \u00f6n kay\u0131tla** s\u0131nad\u0131m; eski mimari ba\u015far\u0131s\u0131zl\u0131\u011f\u0131n\u0131 ba\u015far\u0131l\u0131 saymad\u0131m. 24 yeni stage stress ailesi, 1.202 kaynak dosyas\u0131yla ilk4 ge\u00e7mi\u015f/FEN \u00e7ak\u0131\u015fmas\u0131 kontrol\u00fc; kendi hedef CE kazan\u0131m\u0131 0,07654 olsa da ilk model kar\u015f\u0131s\u0131nda **12/22/14, skor0,47917, %95[0,40625;0,55208]**, s\u0131f\u0131r bilinmeyen cap: **g\u00fc\u00e7 ba\u015far\u0131s\u0131z**. Daha g\u00fc\u00e7l\u00fc **Stockfish512** referans\u0131nda aday **2/3/43,0,07292**, ilk model **3/6/39,0,125**; ger\u00e7ek node say\u0131lar\u0131 kaydedildi. B\u00fct\u00e7eler e\u015fit compute de\u011fil, natural-opening/Elo iddias\u0131 yok. T\u00fcm **144 oyun / 12.998 legal ply** ve kal\u0131c\u0131 hamle izleri do\u011fruland\u0131. [Sonu\u00e7](https://github.com/Eta06/HarbiChess/blob/cfef56e8bfe460a98ed2826708c196b3cc4b9e9b/docs/runs/UFUK-offline-control-result-20261004.md).\n\nMevcut **4 CPU /16 GiB/GPU yok** Linux ortam\u0131 korunuyor, yeni \u00fccretli kaynak yok. **512 test ge\u00e7ti, s\u0131f\u0131r skip (43,79 s)**. Ger\u00e7ek Torch ve MLX CPU forward/loss/gradient/update/portable/full-native-resume \u00e7al\u0131\u015f\u0131yor; Apple Metal/CUDA burada test edilemedi. Weights-only d\u00f6n\u00fc\u015f\u00fcm full optimizer resume diye g\u00f6sterilmiyor. Audit V1\u2019in t\u00fcm parametrelerde Adam-state varsay\u0131m\u0131 d\u00fczeltildi: WDL\u2019de kullan\u0131lmayan tarihsel yard\u0131mc\u0131 material head\u2019in 21 parametresi de\u011fi\u015fmiyor, iki tensor state\u2019i yok; mevcut 46 Adam state\u2019i eksiksiz. \u0130lk hata/script/log korundu; e\u011fitim de\u011fi\u015ftirilmedi.\n\nGitHub push hesab\u0131 **Eta06/admin**, author+committer **Emir Tunahan Alim <emrtnhalim@gmail.com>**, co-author yok. AYNA/UFUK i\u00e7in bu turda **174 tek-dosya atomik commit** kimlikleri denetlendi; ledger commit\u2019i **cfef56e** ayr\u0131ca kay\u0131tta. Push ve uzak readback tamamland\u0131: 10 g\u00fcncel Git dosyas\u0131 ve i\u00e7lerindeki **125 tam UTF-8 kan\u0131t dosyas\u0131** ger\u00e7ekten geri indirildi/hashlendi/a\u00e7\u0131ld\u0131. [Commit/hash/dosya e\u015flemesi](https://github.com/Eta06/HarbiChess/blob/cfef56e8bfe460a98ed2826708c196b3cc4b9e9b/docs/runs/AYNA-UFUK-commits-20261003.md), [g\u00fcncel teknik durum](https://github.com/Eta06/HarbiChess/blob/cfef56e8bfe460a98ed2826708c196b3cc4b9e9b/docs/research/status-20261004.md).\n\nYerel binary ar\u015fiv **2.149 dosya /295.312.271 bayt**, ek **143 dosya /57.536.268 bayt**; ar\u015fivden t\u00fcm \u00fcyeler geri okunup hashleri ge\u00e7ti, eski artifact\u2019ler de\u011fi\u015fmedi. **GitHub Releases yeni binary yede\u011fi h\u00e2l\u00e2 tamamlanmad\u0131:** yetkili upload HTTP400 Bad Content-Length d\u00f6nd\u00fc. Exact Git metni binary checkpoint/replay yede\u011fi de\u011fildir; workspace\u2019te korunuyor. OS /codex \u00e7\u0131kt\u0131s\u0131n\u0131 engelledi\u011fi i\u00e7in do\u011frudan indirilebilir dosya iddias\u0131 yok. [Ek envanter ve restore](https://github.com/Eta06/HarbiChess/blob/cfef56e8bfe460a98ed2826708c196b3cc4b9e9b/docs/runs/UFUK-artifact-supplement-20261004.json).\n\nSonraki hipotez: global ta\u015f etkile\u015fimlerini k\u00fc\u00e7\u00fck bir policy-context attention kolunda, sabit value ve ayn\u0131 native-control b\u00fct\u00e7esiyle s\u0131namak; i\u015fe yarayaca\u011f\u0131 varsay\u0131lm\u0131yor. Lc0\u2019nun primary attention kodu sabit committen okundu; standart attention \u00f6zg\u00fcn bulu\u015f diye sunulmayacak. Laya d\u0131\u015f referans ve dataset/LLM fikirleri sonraya b\u0131rak\u0131l\u0131yor; ana satran\u00e7 hedefinin \u00f6n\u00fcne ge\u00e7miyor. Eski g\u00fcnl\u00fck a\u015fa\u011f\u0131da aynen korunuyor.",
+    "historical_blocks_preserved": 42,
+    "status_exact_readback": true,
+    "old_hashes": [
+      {
+        "id": "656a7f01-62f0-4c4c-8faf-a62535859ca3",
+        "hash": "adb34ff5342656f1a999976fe981b8dfeffc0052b5cca99fab9689a73246c904"
+      },
+      {
+        "id": "0b44118c-a133-47aa-b985-be8fe097076a",
+        "hash": "88f3bb9a991267aae5e914722ef1726a6b71b2ee987785ba67833c46626e0a47"
+      },
+      {
+        "id": "37a76942-ad80-4332-827e-78ccec7302f6",
+        "hash": "2450c12953a9433e5a023e387e4cd9dd0d6a9d8fb806d04283af2e1ec7d03beb"
+      },
+      {
+        "id": "394ef973-2580-482e-9b91-12f66aa7bbac",
+        "hash": "3c50568d01b2fa1c4034948a42fc87dd387fe4835506fc7a0032a60a6e586b28"
+      },
+      {
+        "id": "937aa3ea-b1e7-4a25-80e4-ef3dbd7c5415",
+        "hash": "1029124df0c9cdecc267c98696e2e8469af2f28786e5eb4974f051a6c2d378ab"
+      },
+      {
+        "id": "e94797f7-67a2-4602-b36f-834a79864b7f",
+        "hash": "d7c6c59ee0a34fbc101f7cc0070861fbef5a7e08be304aa1899a2bdceef2b8b7"
+      },
+      {
+        "id": "cd2a8fed-67aa-4ee3-8bd8-c139fb6bdb8d",
+        "hash": "2bf93956e8b00f3b7fea74fe6310c012b2ce47e7c5121fbdc12193c479ef2c6d"
+      },
+      {
+        "id": "ef926c8b-434c-46f2-b04f-7a1ff285915a",
+        "hash": "b2b90c1a0c933fa46fc88597d888bd56035979085892ddcd9962f875193fd9b2"
+      },
+      {
+        "id": "85715f73-31d1-4b7a-872f-d785c9b1c8d5",
+        "hash": "b637e35bfd45f48408cb894133439dcace51b2c0ee7d5705305c29723e4e46ed"
+      },
+      {
+        "id": "07d51c64-b7d5-43fa-869a-f2a79ad33dda",
+        "hash": "769d177a712bdaf7c8a507d0c3070f17c2be85d112317200090c13249f6216dd"
+      },
+      {
+        "id": "9c5eab87-36a8-4194-8a51-fff00261953f",
+        "hash": "42676d73d3ca33b541119666485a134143e49d1b6ce7afa36c25d918563609fd"
+      },
+      {
+        "id": "0e6475e9-40d6-430c-8e17-e031332426f6",
+        "hash": "481a085b53c051bb977f834d446ebd1992c68c2aede07b76b4b7445d2c662618"
+      },
+      {
+        "id": "0a8e194a-9ba6-4c1f-8f06-d822288f7b1a",
+        "hash": "3967cf1a5b6ad530943787f70039421f2ffb6e8d1ef37be0fa68a1f537272177"
+      },
+      {
+        "id": "b4c3ae4f-aa74-4eea-a079-dcd37e8621fe",
+        "hash": "863fb62bea27e17db8109ff7d1fcbfc8c62324b781ad3f394727b4239c84fabc"
+      },
+      {
+        "id": "bf78facb-2662-4202-aa17-80297591e708",
+        "hash": "50bd486c11062f11bd86fe9cf2716ca7ee3a88fe7c7464f62e9400d921360945"
+      },
+      {
+        "id": "3201a228-7db6-4ba7-9375-1c520026f7ee",
+        "hash": "130529898de5561dc331f1051f89b4003e8b926bd2defa7f3752e0b1c32ec8ae"
+      },
+      {
+        "id": "5157a00c-685b-4549-96bc-8ff39bdbfe1b",
+        "hash": "0ed6bdb2c404bc756e3d6894d79bc6d44a9beba6305e020428e01db17fc2bce3"
+      },
+      {
+        "id": "2efe02bc-b420-4954-b9ea-f528dd9b9b2b",
+        "hash": "79030cf2a3c622fde62c5a2254768c88a68eda34528a72b925d06c9b74c6f250"
+      },
+      {
+        "id": "fd94253c-3974-4554-9f58-2023a03654a2",
+        "hash": "61dcdc66075e8aaeb00b1da40c78638e8ef92f7e79bbdcc56d8f369a36143a37"
+      },
+      {
+        "id": "c7e9729d-53d4-4cbd-ad6b-a9afd8cd2c72",
+        "hash": "883be0e45c28fb1746ad828663d30814438a54bac0095923bbb6ad4492c09070"
+      },
+      {
+        "id": "1de2fb2e-c10f-4dbf-a262-7cc633156fa9",
+        "hash": "38554801612970fc8ddd425f30e9d18f35419cae8e3a60383ae7d82b11d6d9f6"
+      },
+      {
+        "id": "8e48d07b-48ac-453e-9641-80768aea72f7",
+        "hash": "6d59ef9f8da8aaf2a08feed8d82c4895d19ec436f2f63692b3d863d548e58056"
+      },
+      {
+        "id": "9876e269-1c8d-449e-b25a-6f0f9fd7a77e",
+        "hash": "8a9331fbbd135aa6273dc32b956110aa52909e76643694540384690e3bed95ae"
+      },
+      {
+        "id": "0c6b2b11-c449-4a25-b67c-5e6a98dc801c",
+        "hash": "38b6463434941eb2cbc29e0a05a79b44a90e619a00b496f93bed5523e999cbd4"
+      },
+      {
+        "id": "7ae9f3a9-4003-432a-bf83-409812ed5b20",
+        "hash": "a255e2955ba49745fa87df12db88d445ecd2830f2b356abefa2aa596f3b20071"
+      },
+      {
+        "id": "3aa88d5f-0f8a-42c4-8f20-cd30fc4daf62",
+        "hash": "1b05d61a978fb7f14f6c4348c40fd11c67278843f23188ae16cc73b91a5389ad"
+      },
+      {
+        "id": "38af8df7-7587-421f-afa5-4512090d7bc7",
+        "hash": "8efceabdc3217c6932c4ad4034e9a5290109b6f9b58d8c2857f3f4cc58408215"
+      },
+      {
+        "id": "6f7a820e-bf36-43e5-9329-2307c7469769",
+        "hash": "842b193fe6a8a1a51c6bbb758b5c2f5a38269081446bf20cfe0437f6a08af410"
+      },
+      {
+        "id": "ea81a59f-2ecc-4de0-9303-36a3b537317a",
+        "hash": "b5688aa2f4d8ae39524ab1ad688234315bd1002d0d2b01b191c2e51792c9e7be"
+      },
+      {
+        "id": "4e041121-b56e-4ec1-b4d7-e91dc6ab683c",
+        "hash": "10a1ba63c1d5b5f7082fd7d7d7d0f61fa4d14c44fe7165e53ef213b76c9b43e5"
+      },
+      {
+        "id": "40414c57-4739-46c8-b7c6-da4c61c13fd3",
+        "hash": "17af41a519bb8fde3511fd41fa64dabece50c82a7f5f08c276fa10fa84121401"
+      },
+      {
+        "id": "77554ed5-8798-42c8-a8c5-41ba84a65280",
+        "hash": "6c8e5dc74a7756e0b301328acee3db4a12fda6d907ca39c8fdaee693361d409b"
+      },
+      {
+        "id": "99cd6140-0284-41b9-a718-e16a6fddf132",
+        "hash": "82c273d4e1ae79dae1aac6068067dcb7b7f15b9e40a6ff84a02bcb9a3b8f95fd"
+      },
+      {
+        "id": "59f4f974-3bd6-4c06-b721-424f3894251d",
+        "hash": "c33a07c900f4a4971b3a1230fc5439ba1fe18570378ca574c35945a94ebb4a93"
+      },
+      {
+        "id": "637a75ff-f765-42b0-8bb8-9c59b29e9454",
+        "hash": "1349a8cd0cacb16264365197b8c4e98240ab482d28eebeb66875406a3fed284c"
+      },
+      {
+        "id": "db6596a5-6b0d-4864-a60a-8f7c62578283",
+        "hash": "33cc82e0ae47a3349a5721da73afc5d6daa7615742c1879dfe683d34bcb139d9"
+      },
+      {
+        "id": "7c2e4b37-00b9-4611-b395-b57c6830135d",
+        "hash": "64449c52005c95cf9e2928d88876f4921236ec702ba6c26a771083c82023768a"
+      },
+      {
+        "id": "9f00f527-daa5-4dd5-a42e-79077b409c9c",
+        "hash": "47d1f8e38aab85d99388eb06d58f9136a2f12f9730d2005b79552bed7a65b64e"
+      },
+      {
+        "id": "88587feb-bfd5-48dd-8ff1-3f666614d7a4",
+        "hash": "5a0767cec5d99d712e88d64644ad574ae187115950a93eddbe2abde91c4e698e"
+      },
+      {
+        "id": "a1fadf77-e066-4ed5-bbb8-252368c03127",
+        "hash": "eaf0ad1b24b93ebd84b772dd24b25b2f68a5b3f3d2429042db8379d29dfa69ea"
+      },
+      {
+        "id": "6f612663-9c6d-4625-b2e4-5a831eecd5d8",
+        "hash": "2c1077c4bd65cc377816313815a1e606e75d646136c85d66638d7b814c9bd191"
+      },
+      {
+        "id": "cf3bcd30-e330-48a4-9f34-68fa78ec405a",
+        "hash": "e68429ed7fd12f3cd8d25ac7a0f32c83ca4bcaba31abddf02beab457b301e8e8"
+      },
+      {
+        "id": "60472a79-15ce-4c11-a1ab-7a54e2564be2",
+        "hash": "9d5f95ba04df8874c43f326b4b23dba3059438de2e03d840829e1203a457a036"
+      }
+    ],
+    "new_hashes": [
+      {
+        "id": "656a7f01-62f0-4c4c-8faf-a62535859ca3",
+        "hash": "adb34ff5342656f1a999976fe981b8dfeffc0052b5cca99fab9689a73246c904"
+      },
+      {
+        "id": "0b44118c-a133-47aa-b985-be8fe097076a",
+        "hash": "88f3bb9a991267aae5e914722ef1726a6b71b2ee987785ba67833c46626e0a47"
+      },
+      {
+        "id": "37a76942-ad80-4332-827e-78ccec7302f6",
+        "hash": "7368c582ddd946eaab1af045fdda6d3a614cdb5f0404348d95b75a5a6330ef5c"
+      },
+      {
+        "id": "8cf69687-ce1b-405e-9230-e682849142c2",
+        "hash": "ca6b2643506ef6cc0691835d1b5995eba1e5505ade48ecfcc3a0da46c9e1175c"
+      },
+      {
+        "id": "c3d88122-e663-48a8-a4bd-703bdda312f4",
+        "hash": "bba4efead5eeefda327670b5692a46a754ee8d64fdea55f84fb916b4baeea8fd"
+      },
+      {
+        "id": "e2e8a592-db2f-4e3b-b36a-bc1c00017b74",
+        "hash": "84776d9b7e222ccf790fced89daa9caaaeea8d6f87267ec1e31b4eee4c78856b"
+      },
+      {
+        "id": "5767141d-b012-4622-b98c-de1aaa6f12e2",
+        "hash": "9e27011160cfca1d3eaf1177ca26469c1e2acc1e455e4297b0fa6883abd954b3"
+      },
+      {
+        "id": "1bf1570d-31ef-486a-9094-cce713342c9a",
+        "hash": "12d16f0432442aeb13e03dc8cf9177b2ae54c645dcb671cc83d59835b3108603"
+      },
+      {
+        "id": "b48856c8-0d4a-43ff-bc8f-294a65dacd3a",
+        "hash": "a6e84746d04b60ea77a4de45c4fa33152c2c5541b5d04c039dd0e7aef1adab6b"
+      },
+      {
+        "id": "2c229e78-512c-4b1f-a164-a2d7cf7ece34",
+        "hash": "b921e5aa6188b8ea6e02ac98ffd50d03bda41feeedc721a6b5559af1576e1064"
+      },
+      {
+        "id": "bc7d7b22-23e2-4422-acfd-4ae3bf3b9d8e",
+        "hash": "a5c1d5206f550ee5dbf0f7db5f5ac9b0b981be6ae5db37653025b257f105b9f3"
+      },
+      {
+        "id": "31c136d4-fd3d-4b75-b1dc-2a573401e965",
+        "hash": "2450c12953a9433e5a023e387e4cd9dd0d6a9d8fb806d04283af2e1ec7d03beb"
+      },
+      {
+        "id": "394ef973-2580-482e-9b91-12f66aa7bbac",
+        "hash": "3c50568d01b2fa1c4034948a42fc87dd387fe4835506fc7a0032a60a6e586b28"
+      },
+      {
+        "id": "937aa3ea-b1e7-4a25-80e4-ef3dbd7c5415",
+        "hash": "1029124df0c9cdecc267c98696e2e8469af2f28786e5eb4974f051a6c2d378ab"
+      },
+      {
+        "id": "e94797f7-67a2-4602-b36f-834a79864b7f",
+        "hash": "d7c6c59ee0a34fbc101f7cc0070861fbef5a7e08be304aa1899a2bdceef2b8b7"
+      },
+      {
+        "id": "cd2a8fed-67aa-4ee3-8bd8-c139fb6bdb8d",
+        "hash": "2bf93956e8b00f3b7fea74fe6310c012b2ce47e7c5121fbdc12193c479ef2c6d"
+      },
+      {
+        "id": "ef926c8b-434c-46f2-b04f-7a1ff285915a",
+        "hash": "b2b90c1a0c933fa46fc88597d888bd56035979085892ddcd9962f875193fd9b2"
+      },
+      {
+        "id": "85715f73-31d1-4b7a-872f-d785c9b1c8d5",
+        "hash": "b637e35bfd45f48408cb894133439dcace51b2c0ee7d5705305c29723e4e46ed"
+      },
+      {
+        "id": "07d51c64-b7d5-43fa-869a-f2a79ad33dda",
+        "hash": "769d177a712bdaf7c8a507d0c3070f17c2be85d112317200090c13249f6216dd"
+      },
+      {
+        "id": "9c5eab87-36a8-4194-8a51-fff00261953f",
+        "hash": "42676d73d3ca33b541119666485a134143e49d1b6ce7afa36c25d918563609fd"
+      },
+      {
+        "id": "0e6475e9-40d6-430c-8e17-e031332426f6",
+        "hash": "481a085b53c051bb977f834d446ebd1992c68c2aede07b76b4b7445d2c662618"
+      },
+      {
+        "id": "0a8e194a-9ba6-4c1f-8f06-d822288f7b1a",
+        "hash": "3967cf1a5b6ad530943787f70039421f2ffb6e8d1ef37be0fa68a1f537272177"
+      },
+      {
+        "id": "b4c3ae4f-aa74-4eea-a079-dcd37e8621fe",
+        "hash": "863fb62bea27e17db8109ff7d1fcbfc8c62324b781ad3f394727b4239c84fabc"
+      },
+      {
+        "id": "bf78facb-2662-4202-aa17-80297591e708",
+        "hash": "50bd486c11062f11bd86fe9cf2716ca7ee3a88fe7c7464f62e9400d921360945"
+      },
+      {
+        "id": "3201a228-7db6-4ba7-9375-1c520026f7ee",
+        "hash": "130529898de5561dc331f1051f89b4003e8b926bd2defa7f3752e0b1c32ec8ae"
+      },
+      {
+        "id": "5157a00c-685b-4549-96bc-8ff39bdbfe1b",
+        "hash": "0ed6bdb2c404bc756e3d6894d79bc6d44a9beba6305e020428e01db17fc2bce3"
+      },
+      {
+        "id": "2efe02bc-b420-4954-b9ea-f528dd9b9b2b",
+        "hash": "79030cf2a3c622fde62c5a2254768c88a68eda34528a72b925d06c9b74c6f250"
+      },
+      {
+        "id": "fd94253c-3974-4554-9f58-2023a03654a2",
+        "hash": "61dcdc66075e8aaeb00b1da40c78638e8ef92f7e79bbdcc56d8f369a36143a37"
+      },
+      {
+        "id": "c7e9729d-53d4-4cbd-ad6b-a9afd8cd2c72",
+        "hash": "883be0e45c28fb1746ad828663d30814438a54bac0095923bbb6ad4492c09070"
+      },
+      {
+        "id": "1de2fb2e-c10f-4dbf-a262-7cc633156fa9",
+        "hash": "38554801612970fc8ddd425f30e9d18f35419cae8e3a60383ae7d82b11d6d9f6"
+      },
+      {
+        "id": "8e48d07b-48ac-453e-9641-80768aea72f7",
+        "hash": "6d59ef9f8da8aaf2a08feed8d82c4895d19ec436f2f63692b3d863d548e58056"
+      },
+      {
+        "id": "9876e269-1c8d-449e-b25a-6f0f9fd7a77e",
+        "hash": "8a9331fbbd135aa6273dc32b956110aa52909e76643694540384690e3bed95ae"
+      },
+      {
+        "id": "0c6b2b11-c449-4a25-b67c-5e6a98dc801c",
+        "hash": "38b6463434941eb2cbc29e0a05a79b44a90e619a00b496f93bed5523e999cbd4"
+      },
+      {
+        "id": "7ae9f3a9-4003-432a-bf83-409812ed5b20",
+        "hash": "a255e2955ba49745fa87df12db88d445ecd2830f2b356abefa2aa596f3b20071"
+      },
+      {
+        "id": "3aa88d5f-0f8a-42c4-8f20-cd30fc4daf62",
+        "hash": "1b05d61a978fb7f14f6c4348c40fd11c67278843f23188ae16cc73b91a5389ad"
+      },
+      {
+        "id": "38af8df7-7587-421f-afa5-4512090d7bc7",
+        "hash": "8efceabdc3217c6932c4ad4034e9a5290109b6f9b58d8c2857f3f4cc58408215"
+      },
+      {
+        "id": "6f7a820e-bf36-43e5-9329-2307c7469769",
+        "hash": "842b193fe6a8a1a51c6bbb758b5c2f5a38269081446bf20cfe0437f6a08af410"
+      },
+      {
+        "id": "ea81a59f-2ecc-4de0-9303-36a3b537317a",
+        "hash": "b5688aa2f4d8ae39524ab1ad688234315bd1002d0d2b01b191c2e51792c9e7be"
+      },
+      {
+        "id": "4e041121-b56e-4ec1-b4d7-e91dc6ab683c",
+        "hash": "10a1ba63c1d5b5f7082fd7d7d7d0f61fa4d14c44fe7165e53ef213b76c9b43e5"
+      },
+      {
+        "id": "40414c57-4739-46c8-b7c6-da4c61c13fd3",
+        "hash": "17af41a519bb8fde3511fd41fa64dabece50c82a7f5f08c276fa10fa84121401"
+      },
+      {
+        "id": "77554ed5-8798-42c8-a8c5-41ba84a65280",
+        "hash": "6c8e5dc74a7756e0b301328acee3db4a12fda6d907ca39c8fdaee693361d409b"
+      },
+      {
+        "id": "99cd6140-0284-41b9-a718-e16a6fddf132",
+        "hash": "82c273d4e1ae79dae1aac6068067dcb7b7f15b9e40a6ff84a02bcb9a3b8f95fd"
+      },
+      {
+        "id": "59f4f974-3bd6-4c06-b721-424f3894251d",
+        "hash": "c33a07c900f4a4971b3a1230fc5439ba1fe18570378ca574c35945a94ebb4a93"
+      },
+      {
+        "id": "637a75ff-f765-42b0-8bb8-9c59b29e9454",
+        "hash": "1349a8cd0cacb16264365197b8c4e98240ab482d28eebeb66875406a3fed284c"
+      },
+      {
+        "id": "db6596a5-6b0d-4864-a60a-8f7c62578283",
+        "hash": "33cc82e0ae47a3349a5721da73afc5d6daa7615742c1879dfe683d34bcb139d9"
+      },
+      {
+        "id": "7c2e4b37-00b9-4611-b395-b57c6830135d",
+        "hash": "64449c52005c95cf9e2928d88876f4921236ec702ba6c26a771083c82023768a"
+      },
+      {
+        "id": "9f00f527-daa5-4dd5-a42e-79077b409c9c",
+        "hash": "47d1f8e38aab85d99388eb06d58f9136a2f12f9730d2005b79552bed7a65b64e"
+      },
+      {
+        "id": "88587feb-bfd5-48dd-8ff1-3f666614d7a4",
+        "hash": "5a0767cec5d99d712e88d64644ad574ae187115950a93eddbe2abde91c4e698e"
+      },
+      {
+        "id": "a1fadf77-e066-4ed5-bbb8-252368c03127",
+        "hash": "eaf0ad1b24b93ebd84b772dd24b25b2f68a5b3f3d2429042db8379d29dfa69ea"
+      },
+      {
+        "id": "6f612663-9c6d-4625-b2e4-5a831eecd5d8",
+        "hash": "2c1077c4bd65cc377816313815a1e606e75d646136c85d66638d7b814c9bd191"
+      },
+      {
+        "id": "cf3bcd30-e330-48a4-9f34-68fa78ec405a",
+        "hash": "e68429ed7fd12f3cd8d25ac7a0f32c83ca4bcaba31abddf02beab457b301e8e8"
+      },
+      {
+        "id": "60472a79-15ce-4c11-a1ab-7a54e2564be2",
+        "hash": "9d5f95ba04df8874c43f326b4b23dba3059438de2e03d840829e1203a457a036"
+      }
+    ]
+  },
+  "files": [
+    {
+      "path": "work/readback-ufuk-completed4oct.py",
+      "bytes": 2400,
+      "sha256": "ff6a08a404a62ceeabc7c869cee0b5ad6f59d188d75a25dedb8927718702d106",
+      "text": "import concurrent.futures\nimport hashlib\nimport json\nfrom pathlib import Path\nimport subprocess\nimport urllib.request\n\nroot=Path('/workspace/HarbiChess')\ncommit=subprocess.check_output(['git','rev-parse','HEAD'],cwd=root,text=True).strip()\nassert subprocess.check_output(['git','ls-remote','origin','refs/heads/main'],cwd=root,text=True).split()[0]==commit\ndestination=Path('/workspace/work/harbichess/ufuk-git-restored-completed4oct')\nassert not destination.exists();destination.mkdir()\nnames=['UFUK-width-result-20261004.md','UFUK-width-evidence-20261004.json','UFUK-q-range-result-20261004.md','UFUK-q-range-evidence-20261004.json','UFUK-offline-control-result-20261004.md','UFUK-offline-control-evidence-20261004.json','UFUK-artifact-supplement-20261004.json','AYNA-UFUK-commits-20261003.md']\npaths=['docs/runs/'+name for name in names]+['docs/research/status-20261004.md','docs/research/README.md']\ndef fetch(path):\n    with urllib.request.urlopen(f'https://raw.githubusercontent.com/Eta06/HarbiChess/{commit}/{path}',timeout=90) as response:content=response.read()\n    assert content==(root/path).read_bytes()\n    local=destination/path;local.parent.mkdir(parents=True,exist_ok=True);local.write_bytes(content)\n    restored=0\n    if '-evidence-' in path:\n        for f in json.loads(content)['files']:\n            binary=f['text'].encode();assert len(binary)==f['bytes'] and hashlib.sha256(binary).hexdigest()==f['sha256']\n            relative=Path(f['path']);assert not relative.is_absolute() and '..' not in relative.parts\n            target=destination/(Path(path).name+'-restored')/relative;target.parent.mkdir(parents=True,exist_ok=True);target.write_bytes(binary)\n            assert hashlib.sha256(target.read_bytes()).hexdigest()==f['sha256'];restored+=1\n    return {'path':path,'bytes':len(content),'sha256':hashlib.sha256(content).hexdigest(),'embedded_exact_utf8_restored':restored}\nwith concurrent.futures.ThreadPoolExecutor(max_workers=3) as pool:files=list(pool.map(fetch,paths))\nreport={'status':'pass','remote_commit':commit,'files':files,'embedded_exact_utf8_restored':sum(f['embedded_exact_utf8_restored'] for f in files),'scope':'Exact remote text hash readback and actual UTF8 file extraction, not a remote binary backup.'}\np=root/'artifacts/ufuk-git-readback-completed4oct.json';assert not p.exists();p.write_text(json.dumps(report,indent=2)+'\\n');print(json.dumps(report))\n"
+    },
+    {
+      "path": "work/space-status14-readback-20261004.json",
+      "bytes": 19112,
+      "sha256": "c224358c67a1afed118670bb202dd27b9c843aef9c1fae0e2d5b10e35234a257",
+      "text": "{\n  \"page_id\": \"page_bfc28b10daa081919e1650eca18c61c7\",\n  \"sequence\": 14,\n  \"status\": \"### 4 Ekim 2026 \u2014 geni\u015flik, Q-range ve saklanan model g\u00fc\u00e7 testleri ba\u015far\u0131s\u0131z\\n\\n**Ana hedef hen\u00fcz ba\u015far\u0131lmad\u0131.** Stockfish/AlphaZero benzeri g\u00fc\u00e7l\u00fc, h\u0131zl\u0131, g\u00fcvenilir self-learning veya makale \u00f6zg\u00fcnl\u00fc\u011f\u00fc kan\u0131tlanm\u0131\u015f de\u011fil. Dar root search\u2019in \u00f6nceki 0,875 skoru ayn\u0131 modelde s\u0131n\u0131rl\u0131 search kazanc\u0131; model \u00f6\u011frenmesi say\u0131lm\u0131yor. \u00d6nceki 192 oyunluk self-learning ve own-outcome value g\u00fc\u00e7 ba\u015far\u0131s\u0131zl\u0131klar\u0131 da korunuyor.\\n\\nGeni\u015flik hipotezi tamamland\u0131: **72.497\u2192302.801 parametre**, ba\u015flang\u0131\u00e7 fonksiyonu ayn\u0131, kontrol 4.000/geni\u015f 3.000 ger\u00e7ek g\u00fcncelleme. Se\u00e7ilen ge\u00e7erli native policy CE **2,622844 / 2,623800**; geni\u015f model kazanc\u0131 **0,00874<0,05**, kontrol fark\u0131 **\u22120,000956<0,03**. \u00d6\u011frenme kap\u0131s\u0131 ba\u015far\u0131s\u0131z, ma\u00e7 veya promotion yap\u0131lmad\u0131. Kontrol/geni\u015f whole-wall **458/623 saniye**. **30 tam checkpoint** ger\u00e7ekten y\u00fcklendi; optimizer/RNG/veri/cursor do\u011fruland\u0131 ve 13 ortak \u00f6rnekleme RNG\u2019si ayn\u0131. Median legal-masked B1 latency **1,66\u00d7**, \u22642\u00d7 h\u0131z kap\u0131s\u0131 ge\u00e7ti ama \u00f6\u011frenme ba\u015far\u0131s\u0131zl\u0131\u011f\u0131n\u0131 de\u011fi\u015ftirmiyor. [Sonu\u00e7](https://github.com/Eta06/HarbiChess/blob/cfef56e8bfe460a98ed2826708c196b3cc4b9e9b/docs/runs/UFUK-width-result-20261004.md).\\n\\nDeepMind Mctx kayna\u011f\u0131n\u0131 sabit committen okuyarak Q normalizasyonunu tekrar inceledim; ayr\u0131 floor0,05/0,20 deneyi **128 pozisyon, 6.477 de\u011ferlendirme, 14,2 saniye**, yeni teacher \u00e7a\u011fr\u0131s\u0131 yok. \u0130ki kol da selected ve soft-target kalite ortalamas\u0131nda geriye gitti; d\u00f6rt kar\u015f\u0131la\u015ft\u0131rma i\u00e7in d\u00fczeltilmi\u015f bootstrap kap\u0131lar\u0131 ba\u015far\u0131s\u0131z. Tarihsel FullGumbel varsay\u0131lan\u0131 korunuyor, arena/training yok. [Sonu\u00e7](https://github.com/Eta06/HarbiChess/blob/cfef56e8bfe460a98ed2826708c196b3cc4b9e9b/docs/runs/UFUK-q-range-result-20261004.md).\\n\\n\u00d6nceki adapter kar\u015f\u0131la\u015ft\u0131rmas\u0131n\u0131n saklanan offline-control8000 modelini **yeni ve ayr\u0131 \u00f6n kay\u0131tla** s\u0131nad\u0131m; eski mimari ba\u015far\u0131s\u0131zl\u0131\u011f\u0131n\u0131 ba\u015far\u0131l\u0131 saymad\u0131m. 24 yeni stage stress ailesi, 1.202 kaynak dosyas\u0131yla ilk4 ge\u00e7mi\u015f/FEN \u00e7ak\u0131\u015fmas\u0131 kontrol\u00fc; kendi hedef CE kazan\u0131m\u0131 0,07654 olsa da ilk model kar\u015f\u0131s\u0131nda **12/22/14, skor0,47917, %95[0,40625;0,55208]**, s\u0131f\u0131r bilinmeyen cap: **g\u00fc\u00e7 ba\u015far\u0131s\u0131z**. Daha g\u00fc\u00e7l\u00fc **Stockfish512** referans\u0131nda aday **2/3/43,0,07292**, ilk model **3/6/39,0,125**; ger\u00e7ek node say\u0131lar\u0131 kaydedildi. B\u00fct\u00e7eler e\u015fit compute de\u011fil, natural-opening/Elo iddias\u0131 yok. T\u00fcm **144 oyun / 12.998 legal ply** ve kal\u0131c\u0131 hamle izleri do\u011fruland\u0131. [Sonu\u00e7](https://github.com/Eta06/HarbiChess/blob/cfef56e8bfe460a98ed2826708c196b3cc4b9e9b/docs/runs/UFUK-offline-control-result-20261004.md).\\n\\nMevcut **4 CPU /16 GiB/GPU yok** Linux ortam\u0131 korunuyor, yeni \u00fccretli kaynak yok. **512 test ge\u00e7ti, s\u0131f\u0131r skip (43,79 s)**. Ger\u00e7ek Torch ve MLX CPU forward/loss/gradient/update/portable/full-native-resume \u00e7al\u0131\u015f\u0131yor; Apple Metal/CUDA burada test edilemedi. Weights-only d\u00f6n\u00fc\u015f\u00fcm full optimizer resume diye g\u00f6sterilmiyor. Audit V1\u2019in t\u00fcm parametrelerde Adam-state varsay\u0131m\u0131 d\u00fczeltildi: WDL\u2019de kullan\u0131lmayan tarihsel yard\u0131mc\u0131 material head\u2019in 21 parametresi de\u011fi\u015fmiyor, iki tensor state\u2019i yok; mevcut 46 Adam state\u2019i eksiksiz. \u0130lk hata/script/log korundu; e\u011fitim de\u011fi\u015ftirilmedi.\\n\\nGitHub push hesab\u0131 **Eta06/admin**, author+committer **Emir Tunahan Alim <emrtnhalim@gmail.com>**, co-author yok. AYNA/UFUK i\u00e7in bu turda **174 tek-dosya atomik commit** kimlikleri denetlendi; ledger commit\u2019i **cfef56e** ayr\u0131ca kay\u0131tta. Push ve uzak readback tamamland\u0131: 10 g\u00fcncel Git dosyas\u0131 ve i\u00e7lerindeki **125 tam UTF-8 kan\u0131t dosyas\u0131** ger\u00e7ekten geri indirildi/hashlendi/a\u00e7\u0131ld\u0131. [Commit/hash/dosya e\u015flemesi](https://github.com/Eta06/HarbiChess/blob/cfef56e8bfe460a98ed2826708c196b3cc4b9e9b/docs/runs/AYNA-UFUK-commits-20261003.md), [g\u00fcncel teknik durum](https://github.com/Eta06/HarbiChess/blob/cfef56e8bfe460a98ed2826708c196b3cc4b9e9b/docs/research/status-20261004.md).\\n\\nYerel binary ar\u015fiv **2.149 dosya /295.312.271 bayt**, ek **143 dosya /57.536.268 bayt**; ar\u015fivden t\u00fcm \u00fcyeler geri okunup hashleri ge\u00e7ti, eski artifact\u2019ler de\u011fi\u015fmedi. **GitHub Releases yeni binary yede\u011fi h\u00e2l\u00e2 tamamlanmad\u0131:** yetkili upload HTTP400 Bad Content-Length d\u00f6nd\u00fc. Exact Git metni binary checkpoint/replay yede\u011fi de\u011fildir; workspace\u2019te korunuyor. OS /codex \u00e7\u0131kt\u0131s\u0131n\u0131 engelledi\u011fi i\u00e7in do\u011frudan indirilebilir dosya iddias\u0131 yok. [Ek envanter ve restore](https://github.com/Eta06/HarbiChess/blob/cfef56e8bfe460a98ed2826708c196b3cc4b9e9b/docs/runs/UFUK-artifact-supplement-20261004.json).\\n\\nSonraki hipotez: global ta\u015f etkile\u015fimlerini k\u00fc\u00e7\u00fck bir policy-context attention kolunda, sabit value ve ayn\u0131 native-control b\u00fct\u00e7esiyle s\u0131namak; i\u015fe yarayaca\u011f\u0131 varsay\u0131lm\u0131yor. Lc0\u2019nun primary attention kodu sabit committen okundu; standart attention \u00f6zg\u00fcn bulu\u015f diye sunulmayacak. Laya d\u0131\u015f referans ve dataset/LLM fikirleri sonraya b\u0131rak\u0131l\u0131yor; ana satran\u00e7 hedefinin \u00f6n\u00fcne ge\u00e7miyor. Eski g\u00fcnl\u00fck a\u015fa\u011f\u0131da aynen korunuyor.\",\n  \"historical_blocks_preserved\": 42,\n  \"status_exact_readback\": true,\n  \"old_hashes\": [\n    {\n      \"id\": \"656a7f01-62f0-4c4c-8faf-a62535859ca3\",\n      \"hash\": \"adb34ff5342656f1a999976fe981b8dfeffc0052b5cca99fab9689a73246c904\"\n    },\n    {\n      \"id\": \"0b44118c-a133-47aa-b985-be8fe097076a\",\n      \"hash\": \"88f3bb9a991267aae5e914722ef1726a6b71b2ee987785ba67833c46626e0a47\"\n    },\n    {\n      \"id\": \"37a76942-ad80-4332-827e-78ccec7302f6\",\n      \"hash\": \"2450c12953a9433e5a023e387e4cd9dd0d6a9d8fb806d04283af2e1ec7d03beb\"\n    },\n    {\n      \"id\": \"394ef973-2580-482e-9b91-12f66aa7bbac\",\n      \"hash\": \"3c50568d01b2fa1c4034948a42fc87dd387fe4835506fc7a0032a60a6e586b28\"\n    },\n    {\n      \"id\": \"937aa3ea-b1e7-4a25-80e4-ef3dbd7c5415\",\n      \"hash\": \"1029124df0c9cdecc267c98696e2e8469af2f28786e5eb4974f051a6c2d378ab\"\n    },\n    {\n      \"id\": \"e94797f7-67a2-4602-b36f-834a79864b7f\",\n      \"hash\": \"d7c6c59ee0a34fbc101f7cc0070861fbef5a7e08be304aa1899a2bdceef2b8b7\"\n    },\n    {\n      \"id\": \"cd2a8fed-67aa-4ee3-8bd8-c139fb6bdb8d\",\n      \"hash\": \"2bf93956e8b00f3b7fea74fe6310c012b2ce47e7c5121fbdc12193c479ef2c6d\"\n    },\n    {\n      \"id\": \"ef926c8b-434c-46f2-b04f-7a1ff285915a\",\n      \"hash\": \"b2b90c1a0c933fa46fc88597d888bd56035979085892ddcd9962f875193fd9b2\"\n    },\n    {\n      \"id\": \"85715f73-31d1-4b7a-872f-d785c9b1c8d5\",\n      \"hash\": \"b637e35bfd45f48408cb894133439dcace51b2c0ee7d5705305c29723e4e46ed\"\n    },\n    {\n      \"id\": \"07d51c64-b7d5-43fa-869a-f2a79ad33dda\",\n      \"hash\": \"769d177a712bdaf7c8a507d0c3070f17c2be85d112317200090c13249f6216dd\"\n    },\n    {\n      \"id\": \"9c5eab87-36a8-4194-8a51-fff00261953f\",\n      \"hash\": \"42676d73d3ca33b541119666485a134143e49d1b6ce7afa36c25d918563609fd\"\n    },\n    {\n      \"id\": \"0e6475e9-40d6-430c-8e17-e031332426f6\",\n      \"hash\": \"481a085b53c051bb977f834d446ebd1992c68c2aede07b76b4b7445d2c662618\"\n    },\n    {\n      \"id\": \"0a8e194a-9ba6-4c1f-8f06-d822288f7b1a\",\n      \"hash\": \"3967cf1a5b6ad530943787f70039421f2ffb6e8d1ef37be0fa68a1f537272177\"\n    },\n    {\n      \"id\": \"b4c3ae4f-aa74-4eea-a079-dcd37e8621fe\",\n      \"hash\": \"863fb62bea27e17db8109ff7d1fcbfc8c62324b781ad3f394727b4239c84fabc\"\n    },\n    {\n      \"id\": \"bf78facb-2662-4202-aa17-80297591e708\",\n      \"hash\": \"50bd486c11062f11bd86fe9cf2716ca7ee3a88fe7c7464f62e9400d921360945\"\n    },\n    {\n      \"id\": \"3201a228-7db6-4ba7-9375-1c520026f7ee\",\n      \"hash\": \"130529898de5561dc331f1051f89b4003e8b926bd2defa7f3752e0b1c32ec8ae\"\n    },\n    {\n      \"id\": \"5157a00c-685b-4549-96bc-8ff39bdbfe1b\",\n      \"hash\": \"0ed6bdb2c404bc756e3d6894d79bc6d44a9beba6305e020428e01db17fc2bce3\"\n    },\n    {\n      \"id\": \"2efe02bc-b420-4954-b9ea-f528dd9b9b2b\",\n      \"hash\": \"79030cf2a3c622fde62c5a2254768c88a68eda34528a72b925d06c9b74c6f250\"\n    },\n    {\n      \"id\": \"fd94253c-3974-4554-9f58-2023a03654a2\",\n      \"hash\": \"61dcdc66075e8aaeb00b1da40c78638e8ef92f7e79bbdcc56d8f369a36143a37\"\n    },\n    {\n      \"id\": \"c7e9729d-53d4-4cbd-ad6b-a9afd8cd2c72\",\n      \"hash\": \"883be0e45c28fb1746ad828663d30814438a54bac0095923bbb6ad4492c09070\"\n    },\n    {\n      \"id\": \"1de2fb2e-c10f-4dbf-a262-7cc633156fa9\",\n      \"hash\": \"38554801612970fc8ddd425f30e9d18f35419cae8e3a60383ae7d82b11d6d9f6\"\n    },\n    {\n      \"id\": \"8e48d07b-48ac-453e-9641-80768aea72f7\",\n      \"hash\": \"6d59ef9f8da8aaf2a08feed8d82c4895d19ec436f2f63692b3d863d548e58056\"\n    },\n    {\n      \"id\": \"9876e269-1c8d-449e-b25a-6f0f9fd7a77e\",\n      \"hash\": \"8a9331fbbd135aa6273dc32b956110aa52909e76643694540384690e3bed95ae\"\n    },\n    {\n      \"id\": \"0c6b2b11-c449-4a25-b67c-5e6a98dc801c\",\n      \"hash\": \"38b6463434941eb2cbc29e0a05a79b44a90e619a00b496f93bed5523e999cbd4\"\n    },\n    {\n      \"id\": \"7ae9f3a9-4003-432a-bf83-409812ed5b20\",\n      \"hash\": \"a255e2955ba49745fa87df12db88d445ecd2830f2b356abefa2aa596f3b20071\"\n    },\n    {\n      \"id\": \"3aa88d5f-0f8a-42c4-8f20-cd30fc4daf62\",\n      \"hash\": \"1b05d61a978fb7f14f6c4348c40fd11c67278843f23188ae16cc73b91a5389ad\"\n    },\n    {\n      \"id\": \"38af8df7-7587-421f-afa5-4512090d7bc7\",\n      \"hash\": \"8efceabdc3217c6932c4ad4034e9a5290109b6f9b58d8c2857f3f4cc58408215\"\n    },\n    {\n      \"id\": \"6f7a820e-bf36-43e5-9329-2307c7469769\",\n      \"hash\": \"842b193fe6a8a1a51c6bbb758b5c2f5a38269081446bf20cfe0437f6a08af410\"\n    },\n    {\n      \"id\": \"ea81a59f-2ecc-4de0-9303-36a3b537317a\",\n      \"hash\": \"b5688aa2f4d8ae39524ab1ad688234315bd1002d0d2b01b191c2e51792c9e7be\"\n    },\n    {\n      \"id\": \"4e041121-b56e-4ec1-b4d7-e91dc6ab683c\",\n      \"hash\": \"10a1ba63c1d5b5f7082fd7d7d7d0f61fa4d14c44fe7165e53ef213b76c9b43e5\"\n    },\n    {\n      \"id\": \"40414c57-4739-46c8-b7c6-da4c61c13fd3\",\n      \"hash\": \"17af41a519bb8fde3511fd41fa64dabece50c82a7f5f08c276fa10fa84121401\"\n    },\n    {\n      \"id\": \"77554ed5-8798-42c8-a8c5-41ba84a65280\",\n      \"hash\": \"6c8e5dc74a7756e0b301328acee3db4a12fda6d907ca39c8fdaee693361d409b\"\n    },\n    {\n      \"id\": \"99cd6140-0284-41b9-a718-e16a6fddf132\",\n      \"hash\": \"82c273d4e1ae79dae1aac6068067dcb7b7f15b9e40a6ff84a02bcb9a3b8f95fd\"\n    },\n    {\n      \"id\": \"59f4f974-3bd6-4c06-b721-424f3894251d\",\n      \"hash\": \"c33a07c900f4a4971b3a1230fc5439ba1fe18570378ca574c35945a94ebb4a93\"\n    },\n    {\n      \"id\": \"637a75ff-f765-42b0-8bb8-9c59b29e9454\",\n      \"hash\": \"1349a8cd0cacb16264365197b8c4e98240ab482d28eebeb66875406a3fed284c\"\n    },\n    {\n      \"id\": \"db6596a5-6b0d-4864-a60a-8f7c62578283\",\n      \"hash\": \"33cc82e0ae47a3349a5721da73afc5d6daa7615742c1879dfe683d34bcb139d9\"\n    },\n    {\n      \"id\": \"7c2e4b37-00b9-4611-b395-b57c6830135d\",\n      \"hash\": \"64449c52005c95cf9e2928d88876f4921236ec702ba6c26a771083c82023768a\"\n    },\n    {\n      \"id\": \"9f00f527-daa5-4dd5-a42e-79077b409c9c\",\n      \"hash\": \"47d1f8e38aab85d99388eb06d58f9136a2f12f9730d2005b79552bed7a65b64e\"\n    },\n    {\n      \"id\": \"88587feb-bfd5-48dd-8ff1-3f666614d7a4\",\n      \"hash\": \"5a0767cec5d99d712e88d64644ad574ae187115950a93eddbe2abde91c4e698e\"\n    },\n    {\n      \"id\": \"a1fadf77-e066-4ed5-bbb8-252368c03127\",\n      \"hash\": \"eaf0ad1b24b93ebd84b772dd24b25b2f68a5b3f3d2429042db8379d29dfa69ea\"\n    },\n    {\n      \"id\": \"6f612663-9c6d-4625-b2e4-5a831eecd5d8\",\n      \"hash\": \"2c1077c4bd65cc377816313815a1e606e75d646136c85d66638d7b814c9bd191\"\n    },\n    {\n      \"id\": \"cf3bcd30-e330-48a4-9f34-68fa78ec405a\",\n      \"hash\": \"e68429ed7fd12f3cd8d25ac7a0f32c83ca4bcaba31abddf02beab457b301e8e8\"\n    },\n    {\n      \"id\": \"60472a79-15ce-4c11-a1ab-7a54e2564be2\",\n      \"hash\": \"9d5f95ba04df8874c43f326b4b23dba3059438de2e03d840829e1203a457a036\"\n    }\n  ],\n  \"new_hashes\": [\n    {\n      \"id\": \"656a7f01-62f0-4c4c-8faf-a62535859ca3\",\n      \"hash\": \"adb34ff5342656f1a999976fe981b8dfeffc0052b5cca99fab9689a73246c904\"\n    },\n    {\n      \"id\": \"0b44118c-a133-47aa-b985-be8fe097076a\",\n      \"hash\": \"88f3bb9a991267aae5e914722ef1726a6b71b2ee987785ba67833c46626e0a47\"\n    },\n    {\n      \"id\": \"37a76942-ad80-4332-827e-78ccec7302f6\",\n      \"hash\": \"7368c582ddd946eaab1af045fdda6d3a614cdb5f0404348d95b75a5a6330ef5c\"\n    },\n    {\n      \"id\": \"8cf69687-ce1b-405e-9230-e682849142c2\",\n      \"hash\": \"ca6b2643506ef6cc0691835d1b5995eba1e5505ade48ecfcc3a0da46c9e1175c\"\n    },\n    {\n      \"id\": \"c3d88122-e663-48a8-a4bd-703bdda312f4\",\n      \"hash\": \"bba4efead5eeefda327670b5692a46a754ee8d64fdea55f84fb916b4baeea8fd\"\n    },\n    {\n      \"id\": \"e2e8a592-db2f-4e3b-b36a-bc1c00017b74\",\n      \"hash\": \"84776d9b7e222ccf790fced89daa9caaaeea8d6f87267ec1e31b4eee4c78856b\"\n    },\n    {\n      \"id\": \"5767141d-b012-4622-b98c-de1aaa6f12e2\",\n      \"hash\": \"9e27011160cfca1d3eaf1177ca26469c1e2acc1e455e4297b0fa6883abd954b3\"\n    },\n    {\n      \"id\": \"1bf1570d-31ef-486a-9094-cce713342c9a\",\n      \"hash\": \"12d16f0432442aeb13e03dc8cf9177b2ae54c645dcb671cc83d59835b3108603\"\n    },\n    {\n      \"id\": \"b48856c8-0d4a-43ff-bc8f-294a65dacd3a\",\n      \"hash\": \"a6e84746d04b60ea77a4de45c4fa33152c2c5541b5d04c039dd0e7aef1adab6b\"\n    },\n    {\n      \"id\": \"2c229e78-512c-4b1f-a164-a2d7cf7ece34\",\n      \"hash\": \"b921e5aa6188b8ea6e02ac98ffd50d03bda41feeedc721a6b5559af1576e1064\"\n    },\n    {\n      \"id\": \"bc7d7b22-23e2-4422-acfd-4ae3bf3b9d8e\",\n      \"hash\": \"a5c1d5206f550ee5dbf0f7db5f5ac9b0b981be6ae5db37653025b257f105b9f3\"\n    },\n    {\n      \"id\": \"31c136d4-fd3d-4b75-b1dc-2a573401e965\",\n      \"hash\": \"2450c12953a9433e5a023e387e4cd9dd0d6a9d8fb806d04283af2e1ec7d03beb\"\n    },\n    {\n      \"id\": \"394ef973-2580-482e-9b91-12f66aa7bbac\",\n      \"hash\": \"3c50568d01b2fa1c4034948a42fc87dd387fe4835506fc7a0032a60a6e586b28\"\n    },\n    {\n      \"id\": \"937aa3ea-b1e7-4a25-80e4-ef3dbd7c5415\",\n      \"hash\": \"1029124df0c9cdecc267c98696e2e8469af2f28786e5eb4974f051a6c2d378ab\"\n    },\n    {\n      \"id\": \"e94797f7-67a2-4602-b36f-834a79864b7f\",\n      \"hash\": \"d7c6c59ee0a34fbc101f7cc0070861fbef5a7e08be304aa1899a2bdceef2b8b7\"\n    },\n    {\n      \"id\": \"cd2a8fed-67aa-4ee3-8bd8-c139fb6bdb8d\",\n      \"hash\": \"2bf93956e8b00f3b7fea74fe6310c012b2ce47e7c5121fbdc12193c479ef2c6d\"\n    },\n    {\n      \"id\": \"ef926c8b-434c-46f2-b04f-7a1ff285915a\",\n      \"hash\": \"b2b90c1a0c933fa46fc88597d888bd56035979085892ddcd9962f875193fd9b2\"\n    },\n    {\n      \"id\": \"85715f73-31d1-4b7a-872f-d785c9b1c8d5\",\n      \"hash\": \"b637e35bfd45f48408cb894133439dcace51b2c0ee7d5705305c29723e4e46ed\"\n    },\n    {\n      \"id\": \"07d51c64-b7d5-43fa-869a-f2a79ad33dda\",\n      \"hash\": \"769d177a712bdaf7c8a507d0c3070f17c2be85d112317200090c13249f6216dd\"\n    },\n    {\n      \"id\": \"9c5eab87-36a8-4194-8a51-fff00261953f\",\n      \"hash\": \"42676d73d3ca33b541119666485a134143e49d1b6ce7afa36c25d918563609fd\"\n    },\n    {\n      \"id\": \"0e6475e9-40d6-430c-8e17-e031332426f6\",\n      \"hash\": \"481a085b53c051bb977f834d446ebd1992c68c2aede07b76b4b7445d2c662618\"\n    },\n    {\n      \"id\": \"0a8e194a-9ba6-4c1f-8f06-d822288f7b1a\",\n      \"hash\": \"3967cf1a5b6ad530943787f70039421f2ffb6e8d1ef37be0fa68a1f537272177\"\n    },\n    {\n      \"id\": \"b4c3ae4f-aa74-4eea-a079-dcd37e8621fe\",\n      \"hash\": \"863fb62bea27e17db8109ff7d1fcbfc8c62324b781ad3f394727b4239c84fabc\"\n    },\n    {\n      \"id\": \"bf78facb-2662-4202-aa17-80297591e708\",\n      \"hash\": \"50bd486c11062f11bd86fe9cf2716ca7ee3a88fe7c7464f62e9400d921360945\"\n    },\n    {\n      \"id\": \"3201a228-7db6-4ba7-9375-1c520026f7ee\",\n      \"hash\": \"130529898de5561dc331f1051f89b4003e8b926bd2defa7f3752e0b1c32ec8ae\"\n    },\n    {\n      \"id\": \"5157a00c-685b-4549-96bc-8ff39bdbfe1b\",\n      \"hash\": \"0ed6bdb2c404bc756e3d6894d79bc6d44a9beba6305e020428e01db17fc2bce3\"\n    },\n    {\n      \"id\": \"2efe02bc-b420-4954-b9ea-f528dd9b9b2b\",\n      \"hash\": \"79030cf2a3c622fde62c5a2254768c88a68eda34528a72b925d06c9b74c6f250\"\n    },\n    {\n      \"id\": \"fd94253c-3974-4554-9f58-2023a03654a2\",\n      \"hash\": \"61dcdc66075e8aaeb00b1da40c78638e8ef92f7e79bbdcc56d8f369a36143a37\"\n    },\n    {\n      \"id\": \"c7e9729d-53d4-4cbd-ad6b-a9afd8cd2c72\",\n      \"hash\": \"883be0e45c28fb1746ad828663d30814438a54bac0095923bbb6ad4492c09070\"\n    },\n    {\n      \"id\": \"1de2fb2e-c10f-4dbf-a262-7cc633156fa9\",\n      \"hash\": \"38554801612970fc8ddd425f30e9d18f35419cae8e3a60383ae7d82b11d6d9f6\"\n    },\n    {\n      \"id\": \"8e48d07b-48ac-453e-9641-80768aea72f7\",\n      \"hash\": \"6d59ef9f8da8aaf2a08feed8d82c4895d19ec436f2f63692b3d863d548e58056\"\n    },\n    {\n      \"id\": \"9876e269-1c8d-449e-b25a-6f0f9fd7a77e\",\n      \"hash\": \"8a9331fbbd135aa6273dc32b956110aa52909e76643694540384690e3bed95ae\"\n    },\n    {\n      \"id\": \"0c6b2b11-c449-4a25-b67c-5e6a98dc801c\",\n      \"hash\": \"38b6463434941eb2cbc29e0a05a79b44a90e619a00b496f93bed5523e999cbd4\"\n    },\n    {\n      \"id\": \"7ae9f3a9-4003-432a-bf83-409812ed5b20\",\n      \"hash\": \"a255e2955ba49745fa87df12db88d445ecd2830f2b356abefa2aa596f3b20071\"\n    },\n    {\n      \"id\": \"3aa88d5f-0f8a-42c4-8f20-cd30fc4daf62\",\n      \"hash\": \"1b05d61a978fb7f14f6c4348c40fd11c67278843f23188ae16cc73b91a5389ad\"\n    },\n    {\n      \"id\": \"38af8df7-7587-421f-afa5-4512090d7bc7\",\n      \"hash\": \"8efceabdc3217c6932c4ad4034e9a5290109b6f9b58d8c2857f3f4cc58408215\"\n    },\n    {\n      \"id\": \"6f7a820e-bf36-43e5-9329-2307c7469769\",\n      \"hash\": \"842b193fe6a8a1a51c6bbb758b5c2f5a38269081446bf20cfe0437f6a08af410\"\n    },\n    {\n      \"id\": \"ea81a59f-2ecc-4de0-9303-36a3b537317a\",\n      \"hash\": \"b5688aa2f4d8ae39524ab1ad688234315bd1002d0d2b01b191c2e51792c9e7be\"\n    },\n    {\n      \"id\": \"4e041121-b56e-4ec1-b4d7-e91dc6ab683c\",\n      \"hash\": \"10a1ba63c1d5b5f7082fd7d7d7d0f61fa4d14c44fe7165e53ef213b76c9b43e5\"\n    },\n    {\n      \"id\": \"40414c57-4739-46c8-b7c6-da4c61c13fd3\",\n      \"hash\": \"17af41a519bb8fde3511fd41fa64dabece50c82a7f5f08c276fa10fa84121401\"\n    },\n    {\n      \"id\": \"77554ed5-8798-42c8-a8c5-41ba84a65280\",\n      \"hash\": \"6c8e5dc74a7756e0b301328acee3db4a12fda6d907ca39c8fdaee693361d409b\"\n    },\n    {\n      \"id\": \"99cd6140-0284-41b9-a718-e16a6fddf132\",\n      \"hash\": \"82c273d4e1ae79dae1aac6068067dcb7b7f15b9e40a6ff84a02bcb9a3b8f95fd\"\n    },\n    {\n      \"id\": \"59f4f974-3bd6-4c06-b721-424f3894251d\",\n      \"hash\": \"c33a07c900f4a4971b3a1230fc5439ba1fe18570378ca574c35945a94ebb4a93\"\n    },\n    {\n      \"id\": \"637a75ff-f765-42b0-8bb8-9c59b29e9454\",\n      \"hash\": \"1349a8cd0cacb16264365197b8c4e98240ab482d28eebeb66875406a3fed284c\"\n    },\n    {\n      \"id\": \"db6596a5-6b0d-4864-a60a-8f7c62578283\",\n      \"hash\": \"33cc82e0ae47a3349a5721da73afc5d6daa7615742c1879dfe683d34bcb139d9\"\n    },\n    {\n      \"id\": \"7c2e4b37-00b9-4611-b395-b57c6830135d\",\n      \"hash\": \"64449c52005c95cf9e2928d88876f4921236ec702ba6c26a771083c82023768a\"\n    },\n    {\n      \"id\": \"9f00f527-daa5-4dd5-a42e-79077b409c9c\",\n      \"hash\": \"47d1f8e38aab85d99388eb06d58f9136a2f12f9730d2005b79552bed7a65b64e\"\n    },\n    {\n      \"id\": \"88587feb-bfd5-48dd-8ff1-3f666614d7a4\",\n      \"hash\": \"5a0767cec5d99d712e88d64644ad574ae187115950a93eddbe2abde91c4e698e\"\n    },\n    {\n      \"id\": \"a1fadf77-e066-4ed5-bbb8-252368c03127\",\n      \"hash\": \"eaf0ad1b24b93ebd84b772dd24b25b2f68a5b3f3d2429042db8379d29dfa69ea\"\n    },\n    {\n      \"id\": \"6f612663-9c6d-4625-b2e4-5a831eecd5d8\",\n      \"hash\": \"2c1077c4bd65cc377816313815a1e606e75d646136c85d66638d7b814c9bd191\"\n    },\n    {\n      \"id\": \"cf3bcd30-e330-48a4-9f34-68fa78ec405a\",\n      \"hash\": \"e68429ed7fd12f3cd8d25ac7a0f32c83ca4bcaba31abddf02beab457b301e8e8\"\n    },\n    {\n      \"id\": \"60472a79-15ce-4c11-a1ab-7a54e2564be2\",\n      \"hash\": \"9d5f95ba04df8874c43f326b4b23dba3059438de2e03d840829e1203a457a036\"\n    }\n  ]\n}\n"
+    },
+    {
+      "path": "work/archive-ufuk-supplement-20261004.py",
+      "bytes": 4881,
+      "sha256": "410d7291948827abc0fd336fbf15ae2cf0a4cf533cac17c2b2918ee15c81a770",
+      "text": "import hashlib\nimport json\nfrom pathlib import Path\nimport subprocess\nimport tarfile\nimport time\n\nroot=Path('/workspace/HarbiChess');work=Path('/workspace/work/harbichess');started=time.perf_counter()\nparent=work/'release/UFUK-artifact-inventory-20261003.json';base=json.loads(parent.read_text());known={f['path']:f for f in base['files']}\ndef digest(p):\n    h=hashlib.sha256()\n    with p.open('rb') as stream:\n        for b in iter(lambda:stream.read(1024*1024),b''):h.update(b)\n    return h.hexdigest()\npaths=[]\nfor p in sorted((root/'artifacts').rglob('*')):\n    if not p.is_file() or p.is_symlink():continue\n    relative=p.relative_to(root)\n    if any(part.startswith('.') for part in relative.parts) or not relative.parts[1].startswith(('port-','mercek-','ayna-','ufuk-')):continue\n    name=str(relative)\n    if name in known:\n        assert digest(p)==known[name]['sha256'],'old archived artifact changed: '+name\n    else:paths.append((p,name))\nfiles=[{'path':name,'bytes':p.stat().st_size,'sha256':digest(p)} for p,name in paths]\noutput=work/'release/supplement-20261004';output.mkdir(exist_ok=True,parents=True)\nmanifest=output/'UFUK-supplement-inventory-20261004.json';assert not manifest.exists()\ninventory={'schema':1,'source_commit':subprocess.check_output(['git','rev-parse','HEAD'],cwd=root,text=True).strip(),'parent_inventory_sha256':digest(parent),'parent_archive_sha256':'091ac0a206ea869d59b41b74bea3be0484ae3096e4beac2711344617fc09bc98','file_count':len(files),'uncompressed_bytes':sum(f['bytes'] for f in files),'files':files,'remote_backup_complete':False,'scope':'Delta after verified2149file parent archive. Every old owned artifact hash unchanged; new width full model/optimizer checkpoints and range/offline evidence included. Parent needed for original dataset/cache/models.'}\nmanifest.write_text(json.dumps(inventory,indent=2)+'\\n')\ninstructions=output/'RESTORE.txt';instructions.write_text('\u00d6nce 2149dosyal\u0131k parent ar\u015fivini bo\u015f bir Git checkout k\u00f6k\u00fcne a\u00e7\u0131n ve hashlerini do\u011frulay\u0131n; sonra bu supplementi ayn\u0131 k\u00f6ke a\u00e7\u0131n. Parent+delta birlikte tam yerel deney envanteridir. Uzak GitHub Releases binary upload400 nedeniyle TAMAMLANMADI.\\n\\nWidth sourceaa4b28f, Torch2.14.1+cpu/CPU1/deterministic=True, dataset b34a3870,seed20261017,40k/20k caps,AdamW5e-5,B64,6000max/250interval/1500patience. Guard profile ve native run_config aynen korunur; optimizer/RNG/cursor/replay ba\u011fl\u0131d\u0131r. Aktar\u0131m modeli ab077weights-only/resetoptimizer; checkpoints/* i\u00e7inde model+training.pt+checkpoint.json ise full state. Tam kay\u0131tl\u0131 source/runtime ve parent dataset olmadan fullresume iddias\u0131 yok. Zatenpatience ile durmu\u015f ba\u015far\u0131s\u0131z deneyin devam\u0131 yeni protokol gerektirir; farkl\u0131 backend/optimizer exactresume de\u011fildir.\\n\\nOffline8000model/optimizer/replay-input cache parent ar\u015fivindedir; source59dde8d, originalmutlakmetadata i\u00e7in /workspace/HarbiChess ve /workspace/work/harbichess d\u00fczeni gerekir. Parent RESTORE.txt cache/observer bytehash gereksinimlerini a\u00e7\u0131klar. Ba\u015far\u0131s\u0131zwidth/range/\u00f6\u011frenme sonu\u00e7lar\u0131 korunur; ar\u015fivleme promotion de\u011fildir.\\n')\narchive=output/'HarbiChess-UFUK-supplement-20261004.tar.gz';assert not archive.exists()\nwith tarfile.open(archive,'w:gz',compresslevel=6) as tar:\n    tar.add(manifest,arcname=manifest.name,recursive=False);tar.add(instructions,arcname='RESTORE.txt',recursive=False)\n    for p,name in paths:tar.add(p,arcname=name,recursive=False)\nexpected={f['path']:f for f in files}\nfor p,name in [(manifest,manifest.name),(instructions,'RESTORE.txt')]:expected[name]={'bytes':p.stat().st_size,'sha256':digest(p)}\nrestored=0\nwith tarfile.open(archive,'r|gz') as tar:\n    for member in tar:\n        assert member.isfile() and member.name in expected and not Path(member.name).is_absolute() and '..' not in Path(member.name).parts\n        stream=tar.extractfile(member);h=hashlib.sha256();size=0\n        for b in iter(lambda:stream.read(1024*1024),b''):h.update(b);size+=len(b)\n        assert size==expected[member.name]['bytes'] and h.hexdigest()==expected[member.name]['sha256'];restored+=1\nassert restored==len(expected)\nassert all(digest(p)==f['sha256'] for (p,name),f in zip(paths,files,strict=True))\nreceipt={**inventory,'archive':{'workspace_path':str(archive),'bytes':archive.stat().st_size,'sha256':digest(archive),'stream_restored_verified_members':restored},'wall_seconds':time.perf_counter()-started,'remote_upload_status':'Authorized Release upload400 Bad Content-Length remains blocked; local restoration verification is not remote backup. /codex output path is OS permission blocked, no direct user-output download claim.'}\np=root/'docs/runs/UFUK-artifact-supplement-20261004.json';assert not p.exists();p.write_text(json.dumps(receipt,indent=2)+'\\n');print(json.dumps({k:receipt[k] for k in ['file_count','uncompressed_bytes','archive','wall_seconds','remote_backup_complete']}))\n"
+    },
+    {
+      "path": "work/ufuk-artifact-supplement.log",
+      "bytes": 391,
+      "sha256": "cae177d80fb7cab31281a6a4ac413012448b13f0c17b4982c1554e91d8329333",
+      "text": "{\"file_count\": 143, \"uncompressed_bytes\": 69550590, \"archive\": {\"workspace_path\": \"/workspace/work/harbichess/release/supplement-20261004/HarbiChess-UFUK-supplement-20261004.tar.gz\", \"bytes\": 57536268, \"sha256\": \"5546ccf5d571e8ed5d06bea8c4b64b582650416fc5f9d9e19ce70c43e603708b\", \"stream_restored_verified_members\": 145}, \"wall_seconds\": 3.3811320819950197, \"remote_backup_complete\": false}\n"
+    }
+  ],
+  "scope": "Completed cfef56e Git text readback/actual125file restore and Space14 historical preservation. Local binary archive only; remote binary backup incomplete. Later changes have separate profiles."
+}
