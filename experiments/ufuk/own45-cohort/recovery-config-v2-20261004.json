@@ -1,0 +1,24 @@
+{
+  "expected_original_firstclock": 1791156456.0081534,
+  "launcher_sha256": "f9853b49fd9b1f634253372a0645cce4460f0a1be961abe7c3006e0be1f69d3b",
+  "original_clock": "/content/harbichess-fullgame-method2-inputs/formal45-production/common-original-firstclock.json",
+  "original_clock_sha256": "f85711110421609d874ba5e8af7814571c164e3d9cf5dc49b510fdb688b1fe6d",
+  "original_failure": "/content/harbichess-fullgame-method2-inputs/formal45-production/failure.json",
+  "original_failure_sha256": "7bb624f4a247280a2079a169e2c84bb7d642282784909addaa24ffbdf7c771ea",
+  "original_launch_config": "/content/harbichess-fullgame-method2-inputs/own45-launch-inputs-20261004/frozen-launch-config-20261004.json",
+  "original_launch_config_sha256": "4bcafca872abae42bda6d2e968fe56524182e080e04f6eb3bce7cb7d70a03bb8",
+  "original_paths_config4": "/content/harbichess-fullgame-method2-inputs/formal45-production/paths-config-4.json",
+  "original_paths_config4_sha256": "cf20d2036cc7046231a009858576c75f5b07410f83026fda023e53f12d51d27b",
+  "owner_factories": {
+    "4": {
+      "path": "/content/harbichess-fullgame-method2-inputs/formal45-recovery-supplement/ownv1_owner_config_factory_v2.py",
+      "sha256": "dd88dae37afa48a086ae0e12e6a211598a9a04a8177b05f0823871cf25221aaa"
+    },
+    "5": {
+      "path": "/content/harbichess-fullgame-method2-inputs/formal45-recovery-supplement/own5_owner_config_factory_v2.py",
+      "sha256": "88c3dadfb84376edc0021d5008de1f7648326bfcc362552390b9ec2357832cec"
+    }
+  },
+  "recovery_root": "/content/harbichess-fullgame-method2-inputs/formal45-recovery-control-v2",
+  "schema": "root-owned-formal45-recovery-v2"
+}
