@@ -1,0 +1,20 @@
+{
+  "status": "corrected-MC-posttraining-owner-started-no-training-audit-baseline-restart",
+  "pid": 68453,
+  "owned_process_group": 68453,
+  "started_epoch": 1791154006.5479317,
+  "root": "/content/harbichess-runs/fullgame-confirmation3-posttraining-recovery-v2",
+  "coordinator_sha256": "686265b09284d1e8c879406510910991d2d8f1a71bf60b610372eac00e76e100",
+  "config_sha256": "3d8bea96db7e7439adcdaa52eb0413ffb863fbfa4b8082f6a4052059ecc4ece4",
+  "original_waiting_owner_controlled_stop": true,
+  "original_failure_path": "/content/harbichess-runs/fullgame-confirmation3-posttraining/orchestration-failure.json",
+  "original_failure_sha256": "98d18438eb8213c0fa981c0ee645df8ea30b6c0cd1371fe687fd801f5e44d9eb",
+  "original_failure": {
+    "status": "failed-or-incomplete-preserved-no-retry",
+    "error": "KeyboardInterrupt('Owner interruption 15')",
+    "finished_epoch": 1791154006.444218
+  },
+  "original_training_and_audit_clocks_unchanged": true,
+  "source_commit": "2312652dc52a894e9726f48321117cf114270355",
+  "registration_sha256": "36a055c69e03fddcc170e1bb4514c24a72c978f0983d3e04d2169afe0e8cfad6"
+}
