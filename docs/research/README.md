@@ -44,11 +44,20 @@ Kalıcı kaynak GitHub'dır. Notlar ve kararlar Git'te, büyük model/replay dos
 - [Taktik leaf kontrolleri](../runs/UFUK-tactical-leaf-result-20261004.md) ve
   [CPU primary-source araştırması](UFUK-cpu-tactical-mechanisms-20261004.md):
   neural/static/quiescent karşılaştırmasında kalite, süre ve checked fallback kapıları başarısız.
-- [2.149 dosyalık yerel arşiv](../runs/UFUK-artifact-archive-20261003.json) ve
-  [143 dosyalık ek](../runs/UFUK-artifact-supplement-20261004.json): tüm üyeler geri okunup
-  [239 dosyalık context/tactical ek](../runs/UFUK-artifact-context-tactical-supplement-20261004.json):
-  bütün üyeler geri okunup hashleri doğrulandı; Release upload400 yüzünden
-  yeni uzak binary yedek hâlâ eksik.
+- [Sparse value sonucu](../runs/UFUK-sparse-value-result-20261004.md):15tam native
+  checkpoint, gerçekTorch/MLXCPU parity, inference31,6%hızlandı; dört öğrenme kapısı başarısız.
+- [Eşit süreli all-legal arama](../runs/UFUK-all-legal-result-20261004.md):128pozisyon,
+  learned/MCTS ve learned/material kalite farkları negatif;18,75%ilkderinlik tamamlanamadı,
+  maç/promotion/default değişimi yok.
+- [Joint gövde/policy/value protokolü](../runs/UFUK-joint-context-preregistration-20261004.md):
+  yeni kontrollü eğitim çalışıyor; henüz tamamlanmış sonuç/güç/self-learning iddiası yok.
+- Yerel hash ve tüm üye geri-okuma doğrulaması yapılmış arşiv zinciri:
+  [2.149 dosyalık parent](../runs/UFUK-artifact-archive-20261003.json),
+  [143 dosyalık width/range/offline ek](../runs/UFUK-artifact-supplement-20261004.json),
+  [239 dosyalık context/tactical ek](../runs/UFUK-artifact-context-tactical-supplement-20261004.json),
+  [89 dosyalık sparse/search ek](../runs/UFUK-artifact-sparse-search-supplement-20261004.json).
+  Son ek aktif joint eğitimin değişen dosyalarını dışarıda tutar. Release upload400
+  yüzünden yeni uzak binary yedek hâlâ eksik; GitUTF8kanıtı bunun yerine geçmez.
 - [Codeword rehberi](codewords.md): araştırma snapshot'ındaki 54 prefix ve 896 commit.
 - [Tarihsel deney raporları](../runs/).
 - [Dosya manifesti](archive-20261002-manifest.json): 944 artifact/distribution dosyasının boyutu ve SHA-256 değeri.
