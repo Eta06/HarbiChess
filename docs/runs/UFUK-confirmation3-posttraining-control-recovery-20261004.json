@@ -1,0 +1,19 @@
+{
+  "schema": "ufuk-confirmation3-posttraining-control-recovery-v2",
+  "status": "corrected-before-replay-call-new-control-root-only",
+  "original_coordinator_sha256": "b00f2fe341c6886beac9377b3b3b17a7302b1856c1315f0f8480451b8b00581f",
+  "corrected_coordinator_sha256": "686265b09284d1e8c879406510910991d2d8f1a71bf60b610372eac00e76e100",
+  "original_control_root": "/content/harbichess-runs/fullgame-confirmation3-posttraining",
+  "new_control_root": "/content/harbichess-runs/fullgame-confirmation3-posttraining-recovery-v2",
+  "cause": "Nine quiescence process-name strings were accidentally passed as extra positional replay launch arguments; Python signature rejects the call.",
+  "preservation": "Original coordinator output/failure/owner records remain. Stop only original waiting wrapper after checking it has launched no phase command; preserve every training/audit/baseline process and artifact.",
+  "source_commit": "2312652dc52a894e9726f48321117cf114270355",
+  "native_original_four_inputs_and_training_audit_clocks_unchanged": true,
+  "qualification_ledger_slot": 3,
+  "thresholds_changed": false,
+  "model_selection_changed": false,
+  "outcomes_read": false,
+  "tests": "Six coordinator tests pass, including binding all seven actual launch calls against real signature and rejecting original bad call; reviewer matched all CLI flags against actual target argparse definitions",
+  "original_config_sha256": "5c159ccb0e059fe1f6478580fb7f498fb6e2fc58a7bae04158e427df494d0c97",
+  "new_config_sha256": "3d8bea96db7e7439adcdaa52eb0413ffb863fbfa4b8082f6a4052059ecc4ece4"
+}
