@@ -1,12 +1,12 @@
 """Explicit frozen e8-v-SF512 arm only; outcomes cannot steer training."""
 
 import argparse
+import importlib.util
 import json
 import os
 import subprocess
 import time
 from pathlib import Path
-import importlib.util
 
 spec = importlib.util.spec_from_file_location(
     "training_control",
@@ -39,27 +39,18 @@ def main():
     a = p.parse_args()
     assert c.sha(a.registration) == a.registration_sha256
     r = c.read(a.registration)
-    assert (
-        r["status"] == "frozen-before-formal-execution"
-        and r["qualification_ledger_slot"] == 2
-    )
+    assert r["status"] == "frozen-before-formal-execution" and r["qualification_ledger_slot"] == 2
     assert (
         a.deadline_epoch == a.started_epoch + 3600
         and a.started_epoch <= time.time() < a.deadline_epoch <= c.HARD_DEADLINE
     )
     assert (
-        c.sha(a.weights)
-        == "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03"
+        c.sha(a.weights) == "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03"
         and c.sha(a.book) == BOOKS[a.seed]
     )
+    assert c.sha(a.stockfish) == "0f83d24cc46d2c66c60f16001af5444873bc112b7d028594513426894c12da19"
     assert (
-        c.sha(a.stockfish)
-        == "0f83d24cc46d2c66c60f16001af5444873bc112b7d028594513426894c12da19"
-    )
-    assert (
-        subprocess.check_output(
-            ["git", "rev-parse", "HEAD"], cwd=a.repo, text=True
-        ).strip()
+        subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=a.repo, text=True).strip()
         == r["source_commit"]
         and not subprocess.check_output(
             ["git", "status", "--porcelain"], cwd=a.repo, text=True
@@ -113,7 +104,10 @@ def main():
         "started_epoch": a.started_epoch,
         "original_deadline_epoch": a.deadline_epoch,
         "status": "running",
-        "scope": "Heldout evaluation after formal freeze; never training labels or candidate/config/epoch selection.",
+        "scope": (
+            "Heldout evaluation after formal freeze; never training labels or "
+            "candidate/config/epoch selection."
+        ),
     }
     c.publish(a.root / "command.json", receipt)
     env = {
@@ -148,9 +142,7 @@ def main():
                     or __import__("shutil").disk_usage(a.root).free < 8 * 1024**3
                 ):
                     c.terminate(process)
-                    raise TimeoutError(
-                        "Baseline original3600whole/resource guard exhausted"
-                    )
+                    raise TimeoutError("Baseline original3600whole/resource guard exhausted")
                 time.sleep(0.5)
         assert process.returncode == 0 and time.time() <= a.deadline_epoch
         result = c.read(a.root / "arena.json")
