@@ -38,9 +38,17 @@ Kalıcı kaynak GitHub'dır. Notlar ve kararlar Git'te, büyük model/replay dos
   başarısız learning/mechanism kapıları, gerçek tam resume ve CPU latency.
 - [Saklanan offline control güç testi](../runs/UFUK-offline-control-result-20261004.md):
   yeni stage aileleri/aynı search, model güç kapısı başarısız; SF512 referansı zayıflığı gösterdi.
+- [Global policy context sonucu](../runs/UFUK-context-result-20261004.md):
+  iki kol8.000update,66tam checkpoint, gerçek eğitilmiş MLXCPU parity;
+  native öğrenme başarısız, hız kapısı geçti, maç/promotion yok.
+- [Taktik leaf kontrolleri](../runs/UFUK-tactical-leaf-result-20261004.md) ve
+  [CPU primary-source araştırması](UFUK-cpu-tactical-mechanisms-20261004.md):
+  neural/static/quiescent karşılaştırmasında kalite, süre ve checked fallback kapıları başarısız.
 - [2.149 dosyalık yerel arşiv](../runs/UFUK-artifact-archive-20261003.json) ve
   [143 dosyalık ek](../runs/UFUK-artifact-supplement-20261004.json): tüm üyeler geri okunup
-  hashleri doğrulandı; Release upload400 yüzünden yeni uzak binary yedek hâlâ eksik.
+  [239 dosyalık context/tactical ek](../runs/UFUK-artifact-context-tactical-supplement-20261004.json):
+  bütün üyeler geri okunup hashleri doğrulandı; Release upload400 yüzünden
+  yeni uzak binary yedek hâlâ eksik.
 - [Codeword rehberi](codewords.md): araştırma snapshot'ındaki 54 prefix ve 896 commit.
 - [Tarihsel deney raporları](../runs/).
 - [Dosya manifesti](archive-20261002-manifest.json): 944 artifact/distribution dosyasının boyutu ve SHA-256 değeri.
