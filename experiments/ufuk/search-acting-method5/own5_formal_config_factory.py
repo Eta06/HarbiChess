@@ -198,6 +198,7 @@ def main():
         if a.freeze
         else "NOT_FROZEN_DO_NOT_EXECUTE",
         "source_commit": SOURCE,
+        "earliest_training_epoch": a.earliest_training_epoch,
         "fixed_epochs": epochs,
         "whole_training_seconds_per_seed": a.whole_training_seconds,
         "whole_audit_seconds_from_originalfirstclock": a.whole_audit_seconds,
