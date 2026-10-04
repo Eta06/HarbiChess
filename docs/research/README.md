@@ -49,14 +49,23 @@ Kalıcı kaynak GitHub'dır. Notlar ve kararlar Git'te, büyük model/replay dos
 - [Eşit süreli all-legal arama](../runs/UFUK-all-legal-result-20261004.md):128pozisyon,
   learned/MCTS ve learned/material kalite farkları negatif;18,75%ilkderinlik tamamlanamadı,
   maç/promotion/default değişimi yok.
-- [Joint gövde/policy/value protokolü](../runs/UFUK-joint-context-preregistration-20261004.md):
-  yeni kontrollü eğitim çalışıyor; henüz tamamlanmış sonuç/güç/self-learning iddiası yok.
+- [Joint gövde/policy/value sonucu](../runs/UFUK-joint-context-result-20261004.md):
+  18.000 gerçek update/21tam native checkpoint; model/context öğrenme kapıları başarısız,
+  maç/promotion yok. Hız ve portable parity sonuçları başarısız öğrenmeyi değiştirmez.
+- [Exact packed veri sonucu](../runs/UFUK-packed-data-result-20261004.md):
+  80.511 örnekte bütün104history inputleri birebir;16native state eşit. İlk hazırlama
+  dahil süre191,7/527,5s ve tepeRSS oranı0,09936: altyapı geçti, güç iddiası değil.
+- [Daha çeşitli tam geçmiş protokolü](../runs/UFUK-broad-history-preregistration-20261004.md):
+  sınırlı CC0PGN kaynağı/5.120 oyun ailesi/kontrollü SF19 referansları; kök seçimi
+  sürüyor, henüz yeni teacher collection veya training başlamadı.
 - Yerel hash ve tüm üye geri-okuma doğrulaması yapılmış arşiv zinciri:
   [2.149 dosyalık parent](../runs/UFUK-artifact-archive-20261003.json),
   [143 dosyalık width/range/offline ek](../runs/UFUK-artifact-supplement-20261004.json),
   [239 dosyalık context/tactical ek](../runs/UFUK-artifact-context-tactical-supplement-20261004.json),
-  [89 dosyalık sparse/search ek](../runs/UFUK-artifact-sparse-search-supplement-20261004.json).
-  Son ek aktif joint eğitimin değişen dosyalarını dışarıda tutar. Release upload400
+  [89 dosyalık sparse/search ek](../runs/UFUK-artifact-sparse-search-supplement-20261004.json),
+  [221 dosyalık joint/packed ek](../runs/UFUK-artifact-joint-packed-supplement-20261004.json).
+  Son ek tamamlanan21joint/16packed native checkpoint ve exact prepared arrays içerir.
+  İlerideki broad veri artifactleri bu arşivin dışındadır. Release upload400
   yüzünden yeni uzak binary yedek hâlâ eksik; GitUTF8kanıtı bunun yerine geçmez.
 - [Codeword rehberi](codewords.md): araştırma snapshot'ındaki 54 prefix ve 896 commit.
 - [Tarihsel deney raporları](../runs/).
