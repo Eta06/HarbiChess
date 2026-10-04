@@ -59,3 +59,20 @@ outputs. Passing game strength without speed gate is not strong-and-fast success
 even both passes remain bounded development evidence, not Stockfish/AlphaZero
 level, general Elo, reliable closed-loop self-learning or publishable novelty.
 Existing4CPUquota/16GiB/noGPU/no paid allocation.
+
+Pre-update implementation clarification: reuse the existing native trainer's
+patience on total policy+value CE; final experiment selection remains minimum
+policy CE among value/Q-valid checkpoints. Its legacy default both-heads arena
+qualification is recorded but is not this experiment's qualification gate.
+The experiment-only guard publishes the complete current optimizer/RNG/cursor
+checkpoint before stopping a retention violation and forbids continuing that
+failed checkpoint. Fixed latency probes are indices0,7,...119 (18 rows) of the
+previously frozen128-position native target panel, with complete histories and
+source SHA recorded before production updates. No score-based probe selection.
+
+Book preflight error, before transfer/updates: the first generator extended the
+28-ply narrow-self book instead of the registered32-ply value book. That unused
+output and script/log are preserved under ufuk-width-preflight-20261004. The
+corrected generator uses the required32-ply parent and four legal suffix moves;
+its24 roots/hash are separately committed before updates. No measurement or
+training result was used to choose the correction.
