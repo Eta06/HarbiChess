@@ -15,7 +15,7 @@ from pathlib import Path
 from ownv1_audit_support import check_source, publish, sha
 from ownv1_strength_config import SEEDS, validate_config
 
-END = 1791170400
+END = 1791180000
 PROBE_SHA = "1089fd0cca308c24bb040a840352d0ad18aa85a7bdcd17608133456bf08bed9f"
 
 
