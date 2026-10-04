@@ -8,6 +8,7 @@ import shutil
 import signal
 import subprocess
 import time
+from contextlib import suppress
 from pathlib import Path
 
 SF_SHA = "0f83d24cc46d2c66c60f16001af5444873bc112b7d028594513426894c12da19"
@@ -70,17 +71,13 @@ def command(python, candidate, opponent, book, stockfish, seed, directory, secon
 
 
 def terminate(process):
-    try:
+    with suppress(ProcessLookupError):
         os.killpg(process.pid, signal.SIGTERM)
-    except ProcessLookupError:
-        pass
     try:
         process.wait(timeout=3)
     except subprocess.TimeoutExpired:
-        try:
+        with suppress(ProcessLookupError):
             os.killpg(process.pid, signal.SIGKILL)
-        except ProcessLookupError:
-            pass
         process.wait(timeout=3)
 
 
@@ -104,19 +101,12 @@ def main():
         raise ValueError("frozen3600arm budget and unexpired harddeadline required")
     if sha(args.stockfish) != SF_SHA:
         raise ValueError("frozenSF binary hash mismatch")
-    if (
-        sha(args.initial)
-        != "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03"
-    ):
+    if sha(args.initial) != "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03":
         raise ValueError("initiale8 hash mismatch")
-    source = subprocess.check_output(
-        ["git", "rev-parse", "HEAD"], cwd=args.repo, text=True
-    ).strip()
+    source = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=args.repo, text=True).strip()
     if source != args.source_commit:
         raise ValueError("sourcecommit mismatch")
-    if subprocess.check_output(
-        ["git", "status", "--porcelain"], cwd=args.repo, text=True
-    ).strip():
+    if subprocess.check_output(["git", "status", "--porcelain"], cwd=args.repo, text=True).strip():
         raise ValueError("exact clean source required")
     if (
         sha(args.baseline_arena) != args.baseline_arena_sha256
@@ -132,10 +122,7 @@ def main():
         and baseline["opening_source_sha256"] == sha(args.book)
         and len(baseline["games"]) == 96
     )
-    assert (
-        eligible["status"]
-        == "eligible-both-fixedCURRENT40-for-preregistered-strength-only"
-    )
+    assert eligible["status"] == "eligible-both-fixedCURRENT40-for-preregistered-strength-only"
     assert any(
         row["seed"] == args.seed
         and row["epoch"] == 40
@@ -162,7 +149,10 @@ def main():
         "baseline_arena_sha256": args.baseline_arena_sha256,
         "eligible_receipt_sha256": args.eligible_receipt_sha256,
         "controller_sha256": sha(__file__),
-        "scope": "Sequential CPU strength arms using immutable final model snapshots; no training or teacher labels.",
+        "scope": (
+            "Sequential CPU strength arms using immutable final model snapshot"
+            "s; no training or teacher labels."
+        ),
     }
     publish(args.run_dir / "profile.json", profile)
     receipts = []
@@ -178,7 +168,7 @@ def main():
             ("direct", args.candidate, args.initial),
             ("final_sf", args.candidate, "stockfish"),
         ]:
-            for k, v in inputs.items():
+            for v in inputs.values():
                 if sha(v["path"]) != v["sha256"]:
                     raise ValueError("immutable input changed")
             directory = args.run_dir / name
