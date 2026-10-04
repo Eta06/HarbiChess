@@ -1,0 +1,146 @@
+{
+  "Apple_Metal_hardware": "UNTESTED",
+  "clock": {
+    "original_training_started_epoch": 1791156456.0081534,
+    "pid": 78947,
+    "sampler_sha256": "f0e666eea221ca3747a35e5746aacf74ad627585302a27f2bd71b9447b0dd7f2",
+    "schema": "own45-common-original-firstclock-v1",
+    "scope": "includes all following stage/config/registration writes",
+    "slots": [
+      4,
+      5
+    ]
+  },
+  "four_native_run_inventories": {
+    "/content/harbichess-runs/ownsearch-method4-seed-20261425/run": {
+      "checkpoints": [
+        "epoch-00000000",
+        "epoch-00000001"
+      ],
+      "top": [
+        ".online-active.json",
+        "checkpoints",
+        "invocation-1791157268137718911-command.json",
+        "invocation-1791157268137718911-result.json",
+        "invocation-1791157655049746899-command.json",
+        "journal",
+        "metadata.json",
+        "progress.json"
+      ]
+    },
+    "/content/harbichess-runs/ownsearch-method4-seed-20261426/run": {
+      "checkpoints": [
+        "epoch-00000000",
+        "epoch-00000001"
+      ],
+      "top": [
+        ".online-active.json",
+        "checkpoints",
+        "invocation-1791157267959559509-command.json",
+        "invocation-1791157267959559509-result.json",
+        "invocation-1791157651828392874-command.json",
+        "journal",
+        "metadata.json",
+        "progress.json"
+      ]
+    },
+    "/content/harbichess-runs/search-acting-method5-seed-20261525/run": {
+      "checkpoints": [
+        "epoch-00000000",
+        "epoch-00000001"
+      ],
+      "top": [
+        ".online-active.json",
+        "checkpoints",
+        "invocation-1791157268515515415-command.json",
+        "invocation-1791157268515515415-result.json",
+        "invocation-1791157768638871761-command.json",
+        "journal",
+        "metadata.json",
+        "progress.json"
+      ]
+    },
+    "/content/harbichess-runs/search-acting-method5-seed-20261526/run": {
+      "checkpoints": [
+        "epoch-00000000",
+        "epoch-00000001"
+      ],
+      "top": [
+        ".online-active.json",
+        "checkpoints",
+        "invocation-1791157267962073583-command.json",
+        "invocation-1791157267962073583-result.json",
+        "invocation-1791157768063729400-command.json",
+        "journal",
+        "metadata.json",
+        "progress.json"
+      ]
+    }
+  },
+  "frozen_protocols_sources_models_and_budgets_unchanged": true,
+  "hard_deadline_epoch": 1791180000,
+  "method4": {
+    "audit_seconds": 12600,
+    "fixed_current_epoch": 24,
+    "seeds": [
+      20261425,
+      20261426
+    ],
+    "source_commit": "a278bba67bce962cb9294f0d24040e02e9acf1f4",
+    "training_seconds": 10800
+  },
+  "method5": {
+    "audit_seconds": 9000,
+    "fixed_current_epoch": 8,
+    "seeds": [
+      20261525,
+      20261526
+    ],
+    "source_commit": "4515a7c0dda3b4f9615c2fc78a47c872ab14699d",
+    "training_seconds": 6000
+  },
+  "native_full_resume_not_weights_only": true,
+  "observed_epoch": 1791158130.9812636,
+  "original_setup_failure": {
+    "occurred_before_any_training_or_baseline_roots": true,
+    "path": "/content/harbichess-fullgame-method2-inputs/formal45-production/failure.json",
+    "reason": "old owner factory unconditionally required output-sha256 even for output-directory creation",
+    "sha256": "7bb624f4a247280a2079a169e2c84bb7d642282784909addaa24ffbdf7c771ea"
+  },
+  "recovery_launch_receipt": {
+    "command": [
+      "/usr/bin/python3",
+      "/content/harbichess-fullgame-method2-inputs/formal45-recovery-supplement/recover_cohort.py",
+      "--config",
+      "/content/harbichess-fullgame-method2-inputs/formal45-recovery-supplement/recovery-config-v2-20261004.json",
+      "--config-sha256",
+      "6bad50cfc618ae9062031a16a468d1160f03d9187757b2a5ca6253e78d04a2dc",
+      "--execute"
+    ],
+    "config_sha256": "6bad50cfc618ae9062031a16a468d1160f03d9187757b2a5ca6253e78d04a2dc",
+    "control_started_epoch": 1791157263.4876125,
+    "controller_sha256": "f9853b49fd9b1f634253372a0645cce4460f0a1be961abe7c3006e0be1f69d3b",
+    "model_source_commits": [
+      "a278bba67bce962cb9294f0d24040e02e9acf1f4",
+      "4515a7c0dda3b4f9615c2fc78a47c872ab14699d"
+    ],
+    "old_training_clocks_and_all_protocols_preserved": true,
+    "original_training_started_epoch": 1791156456.0081534,
+    "pid": 82337,
+    "recovery_root": "/content/harbichess-fullgame-method2-inputs/formal45-recovery-control-v2",
+    "status": "original-clock-formal45-control-recovery-started"
+  },
+  "recovery_time_charged_to_original_budget": true,
+  "remote_owner_completion": {
+    "cohort_sha256": "85d8d34dcbdd195d49b2d847946f0d237d048a59975c4a8476f7bef95e0e51d9",
+    "config_sha256": "6bad50cfc618ae9062031a16a468d1160f03d9187757b2a5ca6253e78d04a2dc",
+    "firstclock": 1791156456.0081534,
+    "scope": "completion only, no scores read",
+    "status": "all-four-fixed-training-audit-owners-started"
+  },
+  "runtime_boot_id": "b1cf1620-f1c7-4571-832f-989ee44a5aa4",
+  "schema": "ufuk-formal45-original-clock-recovery-result-v2",
+  "scope": "Control-only versioned argparse repair; raw old failure/helpers preserved, no threshold or native producer edits.",
+  "status": "four-training-owners-passed-native1-and-fresh-process-resumed-fixed-targets",
+  "strength_status": "UNMET; no own45 heldout outcomes opened"
+}
