@@ -6,6 +6,11 @@ import json
 import time
 from pathlib import Path
 
+BOOKS = {
+    20261205: "aad7655a3d5b0fe9ae29f60487c4e24ee4a99a6c20d89470808bb8633aac0e05",
+    20261206: "ddad7ca17009be3690f2fa090a6c9b9780395c4b02e88f9e0d82409cf5171c90",
+}
+
 
 def sha(p):
     return hashlib.sha256(Path(p).read_bytes()).hexdigest()
@@ -80,10 +85,6 @@ def main():
         Path(__file__).with_name("a100-mc-strength-analysis.py")
     )
     model_shas = {str(row["seed"]): row["candidate_sha256"] for row in eligible["seeds"]}
-    book_shas = {
-        20261205: "b09f7dc1f4a8510c595c9732df195746f7a7455d1ccdc6ca8046301f70b3b0dc",
-        20261206: "b790f63d616b5d54164e6d1358acffd3ae1dcf7f6c66f20865f9f09f0fadf70b",
-    }
     for row in sm["seeds"]:
         assert any(
             candidate["seed"] == row["seed"] and candidate["source_commit"] == sm["source_commit"]
@@ -94,7 +95,7 @@ def main():
             and row["initial_sha256"]
             == "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03"
         )
-        assert sha(row["book"]) == book_shas[row["seed"]]
+        assert sha(row["book"]) == BOOKS[row["seed"]]
     assert (
         latency["speed_pass"] is True
         and latency["cpu_threads"] == 1
