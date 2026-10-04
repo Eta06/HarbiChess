@@ -1,7 +1,6 @@
 """One prospectively fixed learning-rate check on already audited development data."""
 
 import argparse
-import dataclasses
 import gzip
 import json
 import time
@@ -101,7 +100,7 @@ def main():
         sampler_seed = learner.sampler_seed_rng.randrange(2**63)
         if sampler_seed != record["sampler_seed"]:
             raise ValueError("Original deterministic minibatch seed differs")
-        actor_cursor = dataclasses.asdict(learner.actors.cursor())
+        actor_cursor = canonical(learner.actors.cursor())
         actor_rng = learner.actors.rng.getstate()
         schedule_rng = learner.schedule_rng.getstate()
         search_rng = [r.getstate() for r in learner.search_rngs]
@@ -120,7 +119,7 @@ def main():
             guard=lambda: guard(a.deadline_epoch, a.output),
         )
         torch.cuda.synchronize()
-        if actor_cursor != dataclasses.asdict(learner.actors.cursor()):
+        if actor_cursor != canonical(learner.actors.cursor()):
             raise ValueError("Diagnosis consumed actor transitions")
         assert learner.actors.rng.getstate() == actor_rng
         assert learner.schedule_rng.getstate() == schedule_rng
