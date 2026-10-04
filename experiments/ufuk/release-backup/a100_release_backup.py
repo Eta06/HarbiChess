@@ -28,9 +28,8 @@ INPUT_ROOTS = (
     Path("/content/harbichess-inputs"),
     Path("/content/harbichess-fullgame-method2-inputs"),
 )
-REGISTRATION_REL = Path(
-    "docs/runs/UFUK-method2-fullgame-self-learning-preregistration-20261004.json"
-)
+REGISTRATION_NAME = "registration.json"
+EXPECTED_PROTOCOL_SHA256 = "d2b8df68f0db92b1712dcfeba70a63d582b721270fb679e093d9f393ce25792c"
 OUTPUT_ROOT = RUNS / "release-packages"
 NATIVE_FILES = (
     "model.safetensors",
@@ -214,6 +213,24 @@ def _resolve_native_inputs(native0: Path, manifest: dict) -> dict[str, tuple[Pat
     return output
 
 
+def _load_fixed_registration(
+    input_records: dict[str, tuple[Path, str]], source_commit: str
+) -> tuple[Path, bytes]:
+    path, digest = input_records["protocol"]
+    if digest != EXPECTED_PROTOCOL_SHA256 or sha256_file(path) != digest:
+        raise BackupError("native-protocol-not-registered-formal-registration")
+    data = path.read_bytes()
+    try:
+        registration = json.loads(data)
+    except Exception as exc:
+        raise BackupError("fixed-registration-json-invalid") from exc
+    if registration.get("schema") != "ufuk-method2-formal-registration-v3":
+        raise BackupError("fixed-registration-schema-mismatch")
+    if registration.get("source_commit") != source_commit:
+        raise BackupError("fixed-registration-source-commit-mismatch")
+    return path, data
+
+
 def _assert_source_repo(repo: Path, source_commit: str) -> None:
     if (
         repo.is_symlink()
@@ -325,12 +342,7 @@ def pack_seed(seed: int, *, base_url: str) -> Path:
 
     input_records = _resolve_native_inputs(dirs[0][1], verified[0][2])
     repo = SOURCE_REPO
-    reg_path = repo / REGISTRATION_REL
-    _regular_file(reg_path)
-    reg_data = reg_path.read_bytes()
-    registration = json.loads(reg_data)
-    if registration.get("schema") != "ufuk-method2-formal-registration-v3":
-        raise BackupError("fixed-registration-schema-mismatch")
+    reg_path, reg_data = _load_fixed_registration(input_records, source_commit)
 
     OUTPUT_ROOT.mkdir(parents=True, exist_ok=True)
     if OUTPUT_ROOT.is_symlink() or not OUTPUT_ROOT.resolve().is_relative_to(
@@ -416,7 +428,7 @@ def pack_seed(seed: int, *, base_url: str) -> Path:
         os.chmod(restore_text, 0o600)
         metadata_files = [
             ("metadata/source.bundle", bundle_path),
-            (f"metadata/registration/{REGISTRATION_REL.name}", reg_path),
+                          (f"metadata/registration/{REGISTRATION_NAME}", reg_path),
             ("metadata/run-metadata.json", metadata_path),
             ("metadata/restore.txt", restore_text),
         ]
