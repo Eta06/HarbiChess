@@ -2,11 +2,13 @@
 
 import argparse
 import json
-import time
 import statistics
+import time
 from pathlib import Path
+
 import chess
 import torch
+
 from harbichess.backends.torch_network import load_weights, sha256
 from harbichess.chess.actions import legal_action_indices
 from harbichess.chess.encoding import BoardEncoder
@@ -45,9 +47,7 @@ def main():
             raise ValueError("probehistory mismatch")
         inputs.append(
             (
-                torch.tensor(BoardEncoder().encode_board(board).values).reshape(
-                    1, 8, 8, 104
-                ),
+                torch.tensor(BoardEncoder().encode_board(board).values).reshape(1, 8, 8, 104),
                 torch.tensor([legal_action_indices(board)]),
             )
         )
@@ -68,10 +68,7 @@ def main():
                     t = time.perf_counter_ns()
                     policy, wdl = models[k].masked_policy_value(x, actions)
                     dt = time.perf_counter_ns() - t
-                    if (
-                        not torch.isfinite(policy).all()
-                        or not torch.isfinite(wdl).all()
-                    ):
+                    if not torch.isfinite(policy).all() or not torch.isfinite(wdl).all():
                         raise ValueError("nonfinite inference")
                     samples[k].append(dt)
     medians = {k: statistics.median(v) for k, v in samples.items()}
@@ -92,7 +89,11 @@ def main():
         "timed_rounds": 200,
         "script_sha256": sha256(Path(__file__)),
         "samples_nanoseconds": samples,
-        "scope": "Batch1 masked FP32 CPU policy+WDL; encoding/setup excluded; rotated3arms; quiescence must be enforced externally; not game throughput.",
+        "scope": (
+            "Batch1 masked FP32 CPU policy+WDL; encoding/setup excluded; rotat"
+            "ed3arms; quiescence must be enforced externally; not game through"
+            "put."
+        ),
     }
     with a.output.open("x") as f:
         json.dump(result, f, indent=2)
