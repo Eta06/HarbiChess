@@ -25,5 +25,6 @@
   "required_equivalence": "Storage bits including signed zero and Adam 0d counters: all current/base/behavior weights, Adam, all Python/NumPy/TorchCPU/allCUDA RNGs, actor closedcursor/RNG, samplerseed/lastsampler. Complete metrics must equal actual epoch1 and both branches strictnative1. All immutableinputs rehashed.",
   "clock_budget_policy": "Absolute deadline generated at owned prooflaunch and shared across both cases; original production deadlines unchanged. External supervisor terminates only own child processgroup at whole900.",
   "candidate_eligibility": false,
-  "failure_policy": "Preserve failure; do not alter immutable actual development artifacts or rerun selfplay. Promotion only if actual CUDA proof passes."
+  "failure_policy": "Preserve failure; do not alter immutable actual development artifacts or rerun selfplay. Promotion only if actual CUDA proof passes.",
+  "owned_external_controller_sha256": "3fd28f8c17f99a2b33e89628eb892eff38be715f37858d1cacfd0fef5c034d10"
 }
