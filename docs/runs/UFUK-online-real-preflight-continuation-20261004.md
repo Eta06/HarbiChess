@@ -1,0 +1,9 @@
+# UFUK — continuation of an interrupted waiting supervisor
+
+The originally registered real-e8 preflight did not begin: only profile/progress existed; no updated-suite command/result, no absolute online budget, no run folder or update journal. The original waiting supervisor is no longer alive. Preserve its evidence; do not claim an active preflight or successful test.
+
+This prospective continuation retains sourceca11c9eccc2133efb2044dead2c2084b3efb709d, the same immutable config/protocol, seed20261104, four actors, five unique audit updates/twenty transitions, three fresh-process replay audit updates/twelve repeated presentations, all four complete native checkpoints and actualTorchCPU/MLXCPU18-probe portability checks. No production learning, games or promotion. Exact copied scripts are frozen in continuation-controls before execution; only the output directory, audit filename and quiescence requirement change. The original scripts and controls are untouched.
+
+Wait for the separately recorded capacity recovery terminal and all its owned processes to exit. Require recovered-integrity-pass-learning-failed-no-games; never use the interrupted capacity receipts to pretend a completed valid experiment. The original waiting deadline remains1791110657.9335656+52000. Updated full suite retains180whole seconds and zero skip/failure. Only after the suite passes does the unchanged900whole-second online preflight budget start; both CLI processes and all audits share that same absolute deadline. CPU1FP32/memory15GiB/free-disk8GiB guards unchanged. No extension or hyperparameter/model/seed/gate changes.
+
+Conjunctive success remains pass-infrastructure-only. The main strong/fast/self-learning target remains unmet. Failure is retained and requires an explicitly versioned repair instead of stealth editing the frozen source.
