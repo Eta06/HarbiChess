@@ -6,6 +6,7 @@ import unittest
 from pathlib import Path
 from types import SimpleNamespace as NS
 from unittest.mock import patch
+
 from harbichess.chess.rules import PythonChessRules
 from harbichess.core.state import ChessMove
 
@@ -28,9 +29,7 @@ class Tests(unittest.TestCase):
                     target_wdl=(1, 0, 0),
                 )
             )
-            state = rules.apply(
-                state, ChessMove(("g1f3", "g8f6", "f3g1", "f6g8")[index % 4])
-            )
+            state = rules.apply(state, ChessMove(("g1f3", "g8f6", "f3g1", "f6g8")[index % 4]))
         one = m.select_neural_rows(rows, rules)
         for row in rows:
             row.target_wdl = (0, 0, 1)
@@ -48,9 +47,7 @@ class Tests(unittest.TestCase):
 
     def test_behavior_and_base_wdl_mismatch_rejected(self):
         row = NS(
-            transition=NS(
-                pre=NS(root_fen="x", moves=()), source_id="s", game_index=1, slot=0
-            ),
+            transition=NS(pre=NS(root_fen="x", moves=()), source_id="s", game_index=1, slot=0),
             legal_actions=(1, 2),
             policy=(0.4, 0.6),
             behavior_policy=(0.4, 0.6),
@@ -58,9 +55,7 @@ class Tests(unittest.TestCase):
             base_policy=(0.5, 0.5),
             base_wdl=(0.2, 0.3, 0.5),
         )
-        native = NS(
-            behavior=object(), base=object(), encoder=None, config=NS(device="cpu")
-        )
+        native = NS(behavior=object(), base=object(), encoder=None, config=NS(device="cpu"))
         result = NS(
             policy=((0.4, 0.6),) * 18,
             wdl=((0.3, 0.4, 0.3),) * 18,
@@ -76,9 +71,9 @@ class Tests(unittest.TestCase):
             patch.object(m, "torch_model_digest", return_value="synthetic"),
         ):
             self.assertEqual(
-                m.check_neural_rows(native, [row] * 18, lambda: None)[
-                    "max_absolute_errors"
-                ]["base_wdl"],
+                m.check_neural_rows(native, [row] * 18, lambda: None)["max_absolute_errors"][
+                    "base_wdl"
+                ],
                 0,
             )
             result.base_wdl = ((0.3, 0.3, 0.4),) * 18
