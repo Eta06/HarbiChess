@@ -3,6 +3,7 @@
 import importlib.util
 import unittest
 from pathlib import Path
+
 import numpy as np
 
 spec = importlib.util.spec_from_file_location(
@@ -15,10 +16,7 @@ spec.loader.exec_module(a)
 def book():
     return {
         "splits": {
-            "arena": [
-                {"source_game": str(i), "opening": {"moves": ["e2e4"]}}
-                for i in range(48)
-            ]
+            "arena": [{"source_game": str(i), "opening": {"moves": ["e2e4"]}} for i in range(48)]
         }
     }
 
@@ -70,16 +68,12 @@ class Tests(unittest.TestCase):
             a.block_scores(result((1, 1), True), book())
 
     def test_equal_reference_delta_exact_zero(self):
-        r = a.assess_seed(
-            result(), result((0.5, 0)), result((0.5, 0)), book(), 20261205
-        )
+        r = a.assess_seed(result(), result((0.5, 0)), result((0.5, 0)), book(), 20261205)
         self.assertEqual(r["sf_paired_delta"]["ci_adjusted_98_75"], [0, 0])
         self.assertFalse(r["strength_pass"])
 
     def test_identical_colour_blocks_no_individual_resampling(self):
-        r = a.assess_seed(
-            result((1, 0)), result((1, 0)), result((0, 0)), book(), 20261205
-        )
+        r = a.assess_seed(result((1, 0)), result((1, 0)), result((0, 0)), book(), 20261205)
         self.assertEqual(r["direct"]["ci_adjusted_98_75"], [0.5, 0.5])
 
     def test_large_signal_pass(self):
@@ -87,9 +81,7 @@ class Tests(unittest.TestCase):
         self.assertTrue(r["strength_pass"])
 
     def test_caps_adversarial_not_fake_draw(self):
-        r = a.assess_seed(
-            result(), result((0.5, 0.5), True), result((0, 0)), book(), 20261205
-        )
+        r = a.assess_seed(result(), result((0.5, 0.5), True), result((0, 0)), book(), 20261205)
         self.assertEqual(r["sf_delta_adversarial_caps"]["mean"], 0)
         self.assertFalse(r["strength_pass"])
 
@@ -99,9 +91,7 @@ class Tests(unittest.TestCase):
 
     def test_exact_boundary_does_not_pass_prior_strict_direct(self):
         # Pure synthetic score mean .60 is impossible on96 WDL; threshold is still strict.
-        r = a.assess_seed(
-            result((0.5, 0.5)), result(), result((0, 0)), book(), 20261205
-        )
+        r = a.assess_seed(result((0.5, 0.5)), result(), result((0, 0)), book(), 20261205)
         self.assertFalse(r["gates"]["direct_mean_gt_060"])
 
 
