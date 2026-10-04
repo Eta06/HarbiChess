@@ -1,0 +1,43 @@
+{
+  "source_commit": "2312652dc52a894e9726f48321117cf114270355",
+  "qualification_ledger_slot": 3,
+  "repo": "/content/HarbiChess-fullgame-method2",
+  "helpers": "/content/harbichess-fullgame-method2-inputs/confirmation3/helpers",
+  "python": "/usr/bin/python3",
+  "registration": "/content/harbichess-fullgame-method2-inputs/confirmation3/registration.json",
+  "root": "/content/harbichess-runs/fullgame-confirmation3-posttraining",
+  "probes": "/content/harbichess-fullgame-method2-inputs/UFUK-width-latency-probes-20261004.json",
+  "initial": "/content/harbichess-inputs/initial-e8.safetensors",
+  "stockfish": "/content/harbichess-tools/stockfish-linux-x86-64-universal",
+  "mlx_receipt": "/content/harbichess-fullgame-method2-inputs/confirmation3/final-mlx-cpu-parity.json",
+  "mlx_receipt_sha_file": "/content/harbichess-fullgame-method2-inputs/confirmation3/final-mlx-cpu-parity.sha256",
+  "seeds": [
+    {
+      "seed": 20261205,
+      "run": "/content/harbichess-runs/fullgame-method2-seed-20261205/run",
+      "audit_manifest": "/content/harbichess-fullgame-method2-inputs/audit-manifest-20261205.json",
+      "audit_manifest_sha256": "3464e663cda3528cec081ef390bc83ac7c68f718ae435989693461eab376c8e6",
+      "full_audit": "/content/harbichess-runs/fullgame-confirmation3-audit-seed-20261205/full-audit-result.json",
+      "baseline_arena": "/content/harbichess-runs/fullgame-confirmation3-baseline-seed-20261205/arena.json",
+      "baseline_arena_sha256": "4c80560d4591b591bbfaae67db540c00c602a8cc658d1884db2604b2e22623b9",
+      "book": "/content/harbichess-fullgame-method2-inputs/confirmation3/book-20261205.json"
+    },
+    {
+      "seed": 20261206,
+      "run": "/content/harbichess-runs/fullgame-method2-seed-20261206/run",
+      "audit_manifest": "/content/harbichess-fullgame-method2-inputs/audit-manifest-20261206.json",
+      "audit_manifest_sha256": "5ca63542ed11cacaf709f230fcfda41ad29ccf36dc6f0afd802246ff9c1485f5",
+      "full_audit": "/content/harbichess-runs/fullgame-confirmation3-audit-seed-20261206/full-audit-result.json",
+      "baseline_arena": "/content/harbichess-runs/fullgame-confirmation3-baseline-seed-20261206/arena.json",
+      "baseline_arena_sha256": "6cde2b505f4bbd5074dd257f87f93fea716d0068b6c8c4919986fa06f7364cbd",
+      "book": "/content/harbichess-fullgame-method2-inputs/confirmation3/book-20261206.json"
+    }
+  ],
+  "exchange_manifest": "/content/harbichess-fullgame-method2-inputs/confirmation3/portable-model-manifest.json",
+  "expected_runtime": {
+    "python_executable_sha256": "bac00abc4dfc76da8fd1a09023b9454e4d34f591172af79bbfa7ee43091165d6",
+    "torch_version": "2.11.0+cu130",
+    "hostname": "045ceeb3ddfe",
+    "boot_id": "b1cf1620-f1c7-4571-832f-989ee44a5aa4"
+  }
+}
