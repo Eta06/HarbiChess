@@ -21,8 +21,10 @@ class ConfirmationTests(unittest.TestCase):
         base = module("a100-mc-baseline-strength-controller-v3")
         final = module("a100-mc-final-two-arm-controller")
         analysis = module("a100-mc-strength-analysis")
+        final_gate = module("a100-mc-all-gates-qualification")
         self.assertEqual(base.BOOKS, final.BOOKS)
         self.assertEqual(base.BOOKS, analysis.BOOKS)
+        self.assertEqual(base.BOOKS, final_gate.BOOKS)
         self.assertEqual(set(base.BOOKS), {20261205, 20261206})
 
     def test_guard_snapshot_names_exact_failure_and_boundary(self):
