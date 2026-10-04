@@ -28,6 +28,14 @@ def wait_json(path, deadline):
 def quiescent(deadline):
     forbidden = (
         "torch_ownsearch_run",
+        "torch_search_acting_run",
+        "search_acting_audit",
+        "ownv2_training_controller",
+        "ownv2_audit_controller",
+        "ownv2_baseline",
+        "ownv2_final_arms",
+        "profile_search_acting",
+        "qualify_search_acting",
         "torch_fullgame_run",
         "torch_online_run",
         "portable_arena",
@@ -87,6 +95,12 @@ def main():
     for name, digest in q["helper_sha256"].items():
         assert sha(helpers / name) == digest
     check_source(repo, q["source_commit"])
+    cohort = None
+    if "cohort" in c:
+        assert sha(helpers / "own45_cohort.py") == c["cohort"]["helper_sha256"]
+        import own45_cohort
+
+        cohort = own45_cohort.bind(c, 4, sha(Path(__file__)), sha)
     if not a.execute:
         print(
             json.dumps(
@@ -176,6 +190,7 @@ def main():
 
     try:
         rows, models = [], []
+        cohort_artifacts = {}
         for row in c["seeds"]:
             first = row["original_training_started_epoch"]
             train = wait_json(
@@ -216,6 +231,10 @@ def main():
             assert len(receipts) == q["fixed_epochs"] + 1
             for path, digest in receipts.items():
                 assert sha(path) == digest
+                cohort_artifacts[path] = digest
+            cohort_artifacts[row["full_audit"]] = sha(row["full_audit"])
+            for field in ("training_result", "audit_controller_result"):
+                cohort_artifacts[row[field]] = sha(row[field])
             assert sha(row["book"]) == BOOKS[row["seed"]]
         # Both fixed candidates/all data complete BEFORE any final strength observation.
         for row in c["seeds"]:
@@ -310,6 +329,14 @@ def main():
             )
             assert baseline["returncode"] == 0
             assert baseline["finished_epoch"] <= row["baseline_deadline_epoch"]
+        if cohort is not None:
+            own45_cohort.publish_ready(
+                cohort, 4, root,
+                ["replay-20261425-process-result.json", "replay-20261426-process-result.json",
+                 "eligibility-process-result.json", "cuda-parity-process-result.json"],
+                sha, publish, cohort_artifacts,
+            )
+            own45_cohort.before_latency(cohort, 4, wait_json, sha)
         quiescent(min(time.time() + 60, END))
         finish(
             launch(
@@ -332,6 +359,8 @@ def main():
                 True,
             )
         )
+        if cohort is not None:
+            own45_cohort.after_latency(cohort, 4, root, wait_json, sha, publish)
         runtime = {
             "hostname": os.uname().nodename,
             "boot_id": Path("/proc/sys/kernel/random/boot_id").read_text().strip(),
