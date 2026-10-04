@@ -1,0 +1,152 @@
+{
+  "schema": 1,
+  "source_commit": "311cd80b82c3d46f7182dca543e25667e4d66e63",
+  "seeds": [
+    20261105,
+    20261106
+  ],
+  "initial_weights_sha256": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03",
+  "training_book_sha256": "f2f3038728cce4c56987c9068f900d30ed99f996f99e03a38c41bbbc1f3c9958",
+  "configs": {
+    "cuda_preflight": {
+      "seed": 20261104,
+      "actors": {
+        "games": 4,
+        "max_additional_plies": 8,
+        "claim_draw": true,
+        "temperature": 1.0
+      },
+      "objective": {
+        "policy_anchor_weight": 0.03,
+        "value_target_weight": 0.2,
+        "value_anchor_weight": 0.02
+      },
+      "learning_rate": 0.0001,
+      "weight_decay": 0.0001,
+      "max_gradient_norm": 5.0,
+      "ema_decay": 0.9,
+      "importance_maximum": 1.0,
+      "device": "cuda:0"
+    },
+    "20261105": {
+      "seed": 20261105,
+      "actors": {
+        "games": 128,
+        "max_additional_plies": 256,
+        "claim_draw": true,
+        "temperature": 1.0
+      },
+      "objective": {
+        "policy_anchor_weight": 0.03,
+        "value_target_weight": 0.2,
+        "value_anchor_weight": 0.02
+      },
+      "learning_rate": 0.0001,
+      "weight_decay": 0.0001,
+      "max_gradient_norm": 5.0,
+      "ema_decay": 0.9,
+      "importance_maximum": 1.0,
+      "device": "cuda:0"
+    },
+    "20261106": {
+      "seed": 20261106,
+      "actors": {
+        "games": 128,
+        "max_additional_plies": 256,
+        "claim_draw": true,
+        "temperature": 1.0
+      },
+      "objective": {
+        "policy_anchor_weight": 0.03,
+        "value_target_weight": 0.2,
+        "value_anchor_weight": 0.02
+      },
+      "learning_rate": 0.0001,
+      "weight_decay": 0.0001,
+      "max_gradient_norm": 5.0,
+      "ema_decay": 0.9,
+      "importance_maximum": 1.0,
+      "device": "cuda:0"
+    }
+  },
+  "max_updates_per_seed": 10000,
+  "transitions_per_seed": 1280000,
+  "checkpoint_interval": 500,
+  "planned_process_boundary": 1000,
+  "training_whole_ceiling_seconds_per_seed": 7200,
+  "cuda_preflight_whole_ceiling_seconds": 900,
+  "hard_deadline_epoch": 1791170400,
+  "memory_ceiling_bytes": 68719476736,
+  "disk_free_floor_bytes": 8589934592,
+  "final_selection": "fixed step10000 CURRENT; never EMA/bestloss/seed selection",
+  "gate_spec": {
+    "schema": 1,
+    "frozen_at_utc": "2026-10-04T17:59:34.074019+00:00",
+    "fixed_training_seeds": [
+      20261105,
+      20261106
+    ],
+    "primary_comparisons": 4,
+    "bootstrap_replicates": 50000,
+    "two_sided_confidence": 0.9875,
+    "analysis_seed_base": 20261107,
+    "direct_mean_strict_gt": 0.6,
+    "direct_adjusted_lower_strict_gt": 0.5,
+    "sf_paired_gain_strict_gt": 0.1,
+    "sf_paired_gain_adjusted_lower_strict_gt": 0,
+    "final_sf_absolute_minimum": 0.25,
+    "each_arm_cap_maximum": 0.05,
+    "adversarial_cap_ci_gates": true,
+    "latency_ratio_maximum": 1.1,
+    "scope": "Prospective scripts/books only; no training/arena/latency/teacher outcomes.15synthetic tests PASS.",
+    "files": [
+      {
+        "path": "/workspace/work/harbichess/a100-strength-analysis.py",
+        "bytes": 8492,
+        "sha256": "bac92c35d09ca33db47fe20084fface0e4809b624211b3073c0165ef37fecee4"
+      },
+      {
+        "path": "/workspace/work/harbichess/a100-strength-controller.py",
+        "bytes": 6205,
+        "sha256": "92128fdd0c9a4877dec83028beb13a0cad42b19cb46c466291137e75dc8b9284"
+      },
+      {
+        "path": "/workspace/work/harbichess/a100-strength-freeze-second-book.py",
+        "bytes": 4383,
+        "sha256": "a4f3eec7c9808229235e69e7cb5603b9e5bdbc902674a121d0ab2534a8865dbf"
+      },
+      {
+        "path": "/workspace/work/harbichess/a100-strength-latency.py",
+        "bytes": 3390,
+        "sha256": "4fb8f9cb967c2eaf0b72fa9855a2e91965d4ac35749a7c13420e29fbc3bcf4d6"
+      },
+      {
+        "path": "/workspace/work/harbichess/a100-strength-tests.py",
+        "bytes": 4908,
+        "sha256": "500d37378ce718caa40de60453fdb0077cbe08fb129e51b8326ac72c7016d0d9"
+      },
+      {
+        "path": "/workspace/work/harbichess/a100-strength-usage.md",
+        "bytes": 6580,
+        "sha256": "386f50e6cc68d85d67d356c61585db821f16b62704193f7c3ea984d41f4495e7"
+      },
+      {
+        "path": "/workspace/work/harbichess/a100-strength-second-book/opening-splits.json",
+        "bytes": 71187,
+        "sha256": "512a4ee6836b05f950bd800c85853bfef3078dbf2bde3640c84d2d25caee10a7"
+      },
+      {
+        "path": "/workspace/work/harbichess/a100-strength-second-book/audit.json",
+        "bytes": 16722,
+        "sha256": "21be74fb94d7ee1572e28214888fe8ca4be9abaadc43cc160c27e1fab7c2de1e"
+      }
+    ]
+  },
+  "no_teacher_training": true,
+  "stop_rules": [
+    "finite/integrity/resource/absolutedeadline failure preserves failed/incomplete",
+    "no optional stopping on favourable strength",
+    "complete all prospective 6 strength arms absent integrity/safety failure"
+  ],
+  "novelty": "No novelty claimed for TD0, native CUDA resume or bootstrap statistics. Alternative mechanisms remain unexecuted."
+}
