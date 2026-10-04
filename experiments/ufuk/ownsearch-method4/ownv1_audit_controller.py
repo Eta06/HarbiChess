@@ -10,7 +10,7 @@ from pathlib import Path
 from ownv1_audit_support import check_source, guard, publish, sha
 from ownv1_training_controller import read, stop
 
-END = 1791170400
+END = 1791180000
 
 
 def main():
