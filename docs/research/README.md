@@ -8,7 +8,7 @@ Kalıcı kaynak GitHub'dır. Notlar ve kararlar Git'te, büyük model/replay dos
   48 gerçek oyun, 16/64/128 simulation; güç artışı doğrulanmadı, ana öğrenme tanısı öncelikli.
 - [PORT Linux sonucu](../runs/PORT-linux-result-20261002.md), [çalıştırma/resume](../PORT-runtime.md)
   ve [teknik kararlar](PORT-decisions-20261002.md): gerçek CPU training/inference ve güç sınırları.
-- [Güncel değerlendirme](status-20261003.md): gerçek Linux/MLX CPU, öğretici kazanımı,
+- [Güncel değerlendirme](status-20261004.md): gerçek Linux/MLX CPU, öğretici kazanımı,
   başarısız self-learning, güç/hız ölçümleri ve açık Release yedekleme sorunu.
 - [2 Ekim tarihsel değerlendirme](status-20261002.md): o günkü arşiv/audit durumu korunur.
 - [UFUK öğretici sonucu](../runs/UFUK-balanced-result-20261003.md),
@@ -29,6 +29,18 @@ Kalıcı kaynak GitHub'dır. Notlar ve kararlar Git'te, büyük model/replay dos
   dar search %87,5 skor; model öğrenmesi değil, sınırlı geliştirme search kazanımı.
 - [Dar search ile yeni self-play ön kaydı](../runs/UFUK-narrow-selfplay-preregistration-20261003.md):
   final/başlangıç aynı search kullanır; taze model öğrenmesi ayrıca ölçülür.
+- [Dar self-learning sonucu](../runs/UFUK-narrow-selfplay-result-20261003.md),
+  [own-outcome value sonucu](../runs/UFUK-value-outcome-result-20261003.md):
+  loss ilerlemesi oyun gücü başarısı sayılmadı; iki güç kapısı da başarısız.
+- [Ölçülen hedef entropisi](../runs/UFUK-target-entropy-result-20261003.md),
+  [genişlik sonucu](../runs/UFUK-width-result-20261004.md),
+  [Q-range normalizasyonu](../runs/UFUK-q-range-result-20261004.md): yeni hipotezler,
+  başarısız learning/mechanism kapıları, gerçek tam resume ve CPU latency.
+- [Saklanan offline control güç testi](../runs/UFUK-offline-control-result-20261004.md):
+  yeni stage aileleri/aynı search, model güç kapısı başarısız; SF512 referansı zayıflığı gösterdi.
+- [2.149 dosyalık yerel arşiv](../runs/UFUK-artifact-archive-20261003.json) ve
+  [143 dosyalık ek](../runs/UFUK-artifact-supplement-20261004.json): tüm üyeler geri okunup
+  hashleri doğrulandı; Release upload400 yüzünden yeni uzak binary yedek hâlâ eksik.
 - [Codeword rehberi](codewords.md): araştırma snapshot'ındaki 54 prefix ve 896 commit.
 - [Tarihsel deney raporları](../runs/).
 - [Dosya manifesti](archive-20261002-manifest.json): 944 artifact/distribution dosyasının boyutu ve SHA-256 değeri.
