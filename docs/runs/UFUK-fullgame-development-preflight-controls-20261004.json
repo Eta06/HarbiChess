@@ -1,0 +1,53 @@
+{
+  "schema": "UFUK-own-terminal-fullgame-development-shape-preflight-v1",
+  "created_epoch": 1791142160.6837924,
+  "source_commit": "e36f0fa0c9bedd0d8dbb89a01fe691be1c095f65",
+  "not_formal_method_attempt": true,
+  "no_strength_matches": true,
+  "seed": 20261202,
+  "config": {
+    "seed": 20261202,
+    "actors": {
+      "games": 128,
+      "max_additional_plies": 256,
+      "claim_draw": true,
+      "temperature": 1.0
+    },
+    "objective": {
+      "policy_clip": 0.2,
+      "behavior_kl_stop": 0.02,
+      "policy_anchor_weight": 0.03,
+      "value_weight": 0.2,
+      "value_anchor_weight": 0.02
+    },
+    "schedule": {
+      "minibatch_size": 1024,
+      "passes": 4,
+      "max_gradient_norm": 5.0
+    },
+    "epoch_steps": 256,
+    "learning_rate": 0.0001,
+    "weight_decay": 0.0001,
+    "device": "cuda:0"
+  },
+  "config_sha256": "e27886c70645cf1cdfb3a43fb052075bd7d8c69b4b0d7194d483de44ebcab92f",
+  "weights_sha256": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03",
+  "book_sha256": "f2f3038728cce4c56987c9068f900d30ed99f996f99e03a38c41bbbc1f3c9958",
+  "max_epochs": 1,
+  "fixed_current_checkpoint_not_eligible_as_candidate": true,
+  "whole_seconds_maximum": 900,
+  "memory_max_bytes": 68719476736,
+  "disk_min_free_bytes": 8589934592,
+  "purpose": "Measure actual complete128actor256step ownterminal collection+fourpass PPO+fullnative wallclock, learned signalcoverage/unknown counts/accepted optimizer work; no heldout strength outcomes or thresholdselection",
+  "hypothesis": "Fullgame returns expose more observed terminal signal than oldTD0; game-balanced PPO with boundedbehaviorKL may be computationallyfeasible. This pilot does not prove gain",
+  "stopping_rule": "Whole900s/resource/nativeerror abort; all failure artifacts kept. Exactlyone fixed epoch; no choosing any model fromthisrun. Optional source-identical per-epoch featurecache only after exactcontrolled CPU+CUDA witnesses; formalmethod2 must separately preregister before anyproduction",
+  "infrastructure_prerequisite": "prior registeredactuale8CUDAwhole2/pause1/freshresume2 success before execution",
+  "measurements": [
+    "wholewallclockincludingpoolvalidation/imports/nativewrite",
+    "freshtransitions32768",
+    "terminalcomplete-games/trainedrows vs UNKNOWNcap/tails",
+    "attemptedaccepteddiscardedoptimizersteps andfull-bufferKL",
+    "CPU/RAM/disk/GPU sampleonlydiagnostic, not success",
+    "source/input/model/native/journalSHAprovenance"
+  ]
+}
