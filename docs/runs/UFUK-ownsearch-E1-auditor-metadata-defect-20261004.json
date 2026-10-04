@@ -1,0 +1,11 @@
+{
+  "schema": "ufuk-ownsearch-E1-auditor-metadata-defect-v1",
+  "status": "original-qualification-report-metadata-invalid-preserved",
+  "source_commit": "a278bba67bce962cb9294f0d24040e02e9acf1f4",
+  "actual_native_epoch": 1,
+  "reported_epoch": 32,
+  "cause": "audit_epoch parameter index is shadowed by for index, indices in enumerate(batches); report epoch uses last search-wavefront index",
+  "scope": "Actual native path, epoch assertions, counts, journal and full data checks preceding loop remained E1; raw receipts are preserved without correction. Formal4 is not registered or launched.",
+  "required_next": "Prospective helper correction and fresh read-only qualification with new own first deadline; do not reset previous qualification/profile clock or reuse invalid metadata as qualified report.",
+  "training_loss_or_strength_success": false
+}
