@@ -12,7 +12,7 @@ from own5_audit_support import check_source, guard, publish, sha
 from own5_strength_config import BOOKS, SEEDS, validate_config
 from own5_training_controller import stop
 
-END = 1791170400
+END = 1791180000
 
 
 def wait_json(path, deadline):
