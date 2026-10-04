@@ -1,0 +1,179 @@
+{
+  "absolute_deadline_epoch": 1791154945.323838,
+  "cli_absolute_deadline_epoch": 1791154840.0409257,
+  "cli_result": {
+    "absolute_deadline_epoch": 1791154840.0409257,
+    "audit_optimizer_attempted_updates": 24,
+    "both_final_full_native_freshprocess_strictload": true,
+    "byte_exact_artifacts": {
+      "checkpoints/epoch-00000002/actor.json": "4e4c65ce128b85659174255d5853dab07206895fc002191ab6183f269a93e387",
+      "checkpoints/epoch-00000002/base.safetensors": "d75f54ea291ab24e8042bf4b783876a8fb2370ee8a17dcdfcbcfd4fdcc82e9ad",
+      "checkpoints/epoch-00000002/behavior.safetensors": "2ca0ad090c6f7304cdd7c6ba80d5ae11ad7d2d0d77068db3cbe95a8b939d9ed0",
+      "checkpoints/epoch-00000002/last-frozen-epoch.json.gz": "3d00cb91efbd678c0d5f141101bc6f222c37db9337ee22655255382479a36c14",
+      "checkpoints/epoch-00000002/model.safetensors": "50d26dc2487dd4c751c21d48e99e51aba2c313e25159a793e0b7dd5aedce9019",
+      "checkpoints/epoch-00000002/training.pt": "bdad94ff6c44082e7dbec4426eaaf0622c912bde08a75273a48ed6ad69a39c09",
+      "journal/epoch-00000001.json.gz": "029ec380e3f6f58839ef3d12a303c781c979ef4062a21e30c0a27618e76cbbf5",
+      "journal/epoch-00000002.json.gz": "3d00cb91efbd678c0d5f141101bc6f222c37db9337ee22655255382479a36c14"
+    },
+    "duplicate_qualification_fresh_transitions": 128,
+    "finished_epoch": 1791154686.7790484,
+    "input_sha256": {
+      "book": "9340b54b6ac01ead55b9b790ddaa13e951e278a66f59c9009efae2d26ba68b6e",
+      "config": "f8c39d7a11c4b499895273aa5c18bbe16cfd9213db870f93237b49866b30ca46",
+      "protocol": "be5c50fb7e474921a9773342d5315d67e84c3f39eba6d4bf574f20082fcf8da6",
+      "weights": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03"
+    },
+    "last_epoch_UNKNOWN_excluded_value_rows": 32,
+    "last_epoch_known_terminal_rows": 32,
+    "last_epoch_policy_target_rows": 12,
+    "per_run_epochs": 2,
+    "schema": "actual-CUDA-search-acting-CLI-qualification-v2",
+    "scope": "Infrastructure replay qualification; excluded from production/strength claims.",
+    "source_commit": "4515a7c0dda3b4f9615c2fc78a47c872ab14699d",
+    "started_epoch": 1791154660.1218975,
+    "status": "pass",
+    "unique_fresh_transitions": 128
+  },
+  "cli_result_sha256": "dafa16ab15e680e228c94fe44a5703efb1eb6cfa79a1663c605f9e64eaf9f4b0",
+  "controller_sha256": "7dd899cc44db8ed9093064f92dd2ce705710df700bcaf14b6e749a0de73c1388",
+  "disk_min_free_bytes": 8589934592,
+  "duplicate_CLI_fresh_presentations": 128,
+  "finished_epoch": 1791154686.8400946,
+  "helper_sha256": "b9455a1660c5741ea6bb7101bee2383f57a5379e6e730acd57e798f0c9a71500",
+  "input_manifest_sha256": "6f7e6654162f6a747070076696692dbbb61d61a55594d74ed19bcb89802786fd",
+  "input_sha256": {
+    "book": "9340b54b6ac01ead55b9b790ddaa13e951e278a66f59c9009efae2d26ba68b6e",
+    "config": "f8c39d7a11c4b499895273aa5c18bbe16cfd9213db870f93237b49866b30ca46",
+    "protocol": "be5c50fb7e474921a9773342d5315d67e84c3f39eba6d4bf574f20082fcf8da6",
+    "weights": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03"
+  },
+  "memory_max_bytes": 68719476736,
+  "phases": [
+    {
+      "absolute_deadline_epoch": 1791154765.390994,
+      "command": [
+        "/usr/bin/python3",
+        "-c",
+        "\nimport json,torch\nfrom harbichess.training.torch_online_learner import _prepare_device\nfrom harbichess.training.torch_online_checkpoint import _runtime\nassert torch.cuda.is_available() and 'A100' in torch.cuda.get_device_name(0)\n_prepare_device('cuda:0')\nprint(json.dumps(_runtime('cuda:0'),sort_keys=True))\n"
+      ],
+      "finished_epoch": 1791154589.1069152,
+      "owned_pid": 70960,
+      "owned_process_group": 70960,
+      "phase": "runtime",
+      "returncode": 0,
+      "started_epoch": 1791154585.4916515,
+      "status": "pass",
+      "whole_seconds": 3.6152637004852295
+    },
+    {
+      "absolute_deadline_epoch": 1791154765.390994,
+      "command": [
+        "/usr/bin/python3",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/test_search_acting_stage.py",
+        "--junitxml",
+        "/content/harbichess-runs/search-acting-v2-CUDA-readiness-4515a7c-20261004/units.xml"
+      ],
+      "finished_epoch": 1791154660.0324497,
+      "owned_pid": 70987,
+      "owned_process_group": 70987,
+      "phase": "units",
+      "returncode": 0,
+      "started_epoch": 1791154589.1109922,
+      "status": "pass",
+      "whole_seconds": 70.921457529068
+    },
+    {
+      "absolute_deadline_epoch": 1791154840.0409257,
+      "command": [
+        "/usr/bin/python3",
+        "/content/harbichess-fullgame-method2-inputs/continuation-readiness-20261004/v2/qualify_search_acting_cli.py",
+        "--checkout",
+        "/content/HarbiChess-search-acting-v2-4515a7c",
+        "--output",
+        "/content/harbichess-runs/search-acting-v2-CUDA-readiness-4515a7c-20261004/cli",
+        "--weights",
+        "/content/harbichess-inputs/initial-e8.safetensors",
+        "--book",
+        "/content/harbichess-fullgame-method2-inputs/continuation-readiness-20261004/v2/v2-cuda-qualifier-book.json",
+        "--config",
+        "/content/harbichess-fullgame-method2-inputs/continuation-readiness-20261004/v2/v2-cuda-qualifier-config.json",
+        "--protocol",
+        "/content/harbichess-fullgame-method2-inputs/continuation-readiness-20261004/v2/CUDA-preregistration.json",
+        "--source-commit",
+        "4515a7c0dda3b4f9615c2fc78a47c872ab14699d",
+        "--deadline-epoch",
+        "1791154840.0409257",
+        "--memory-max-bytes",
+        "68719476736",
+        "--disk-min-free-bytes",
+        "8589934592"
+      ],
+      "finished_epoch": 1791154686.8265226,
+      "owned_pid": 71337,
+      "owned_process_group": 71337,
+      "phase": "cli",
+      "returncode": 0,
+      "started_epoch": 1791154660.0414255,
+      "status": "pass",
+      "whole_seconds": 26.785097122192383
+    }
+  ],
+  "runtime": {
+    "byteorder": "little",
+    "cuda": {
+      "capabilities": [
+        [
+          8,
+          0
+        ]
+      ],
+      "cudnn": 92700,
+      "cudnn_benchmark": false,
+      "cudnn_deterministic": true,
+      "cudnn_tf32": false,
+      "devices": [
+        "NVIDIA A100-SXM4-40GB"
+      ],
+      "matmul_tf32": false,
+      "version": "13.0",
+      "workspace": ":4096:8"
+    },
+    "deterministic": true,
+    "device": "cuda:0",
+    "machine": "x86_64",
+    "numpy": "2.1.3",
+    "python": "3.13.15",
+    "threads": 1,
+    "torch": "2.11.0+cu130"
+  },
+  "schema": "owned360-actual-CUDA-search-acting-qualification-v2",
+  "scope": "Infrastructure only; no production/candidate/strength eligibility",
+  "source_commit": "4515a7c0dda3b4f9615c2fc78a47c872ab14699d",
+  "started_epoch": 1791154585.390994,
+  "status": "pass-all16-no-skip-actualCUDA-and-e8-cleanCLI-search-acting-v2-native-replay",
+  "test_sha256": "70997b8b447c0a7520a5d62e5a1066898cb1eceb3531563b6de13ff98ec9e14e",
+  "unit_absolute_deadline_epoch": 1791154765.390994,
+  "unit_cases": [
+    "test_schedule_before_outcomes_uses_separate_rng_and_both_parities",
+    "test_unknown_and_illegal_zero_gradient_terminal_white_black_pov",
+    "test_actual_e8_native_partial_rejection_and_unused_storage",
+    "test_real_fresh_process_two_vs_pause_one_resume_two_native_bytes[cpu]",
+    "test_real_fresh_process_two_vs_pause_one_resume_two_native_bytes[cuda:0]",
+    "test_rejected_pass_restores_model_adam_globals_and_both_sampler_rngs[cpu]",
+    "test_rejected_pass_restores_model_adam_globals_and_both_sampler_rngs[cuda:0]",
+    "test_closed_ledger_schedule_tamper_rejected",
+    "test_zero_search_selection_still_trains_fresh_known_outcomes",
+    "test_known_terminal_root_never_calls_network_both_movers[7k/6Q1/5K2/8/8/8/8/8 b - - 0 1]",
+    "test_known_terminal_root_never_calls_network_both_movers[8/8/8/8/8/5k2/6q1/7K w - - 0 1]",
+    "test_same_record_policy_CE_zero_ablation_changes_only_policy_term",
+    "test_preaction_masked_search_and_actual_mu_raw_pi_archive",
+    "test_v1_native_and_non_e8_fresh_rejected",
+    "test_completed_own_outcomes_and_caps_use_rules_not_search_value",
+    "test_real_e8_raw_reference_kl_zero_despite_search_mu_at_same_point02_gate"
+  ],
+  "unit_duplicate_cost_scope": "Unit rollouts/gradients separately charged infrastructure; not production fresh count",
+  "whole_seconds": 101.44910049438477
+}
