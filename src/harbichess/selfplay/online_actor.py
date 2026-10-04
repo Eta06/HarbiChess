@@ -203,6 +203,37 @@ class OnlineActors:
             ],
         }
 
+    def close_policy_epoch(self) -> tuple[dict, ...]:
+        """Record every still-live game as unknown and start fresh games.
+
+        Call only after a fixed-policy collection epoch. Active histories are
+        deliberately not continued under the next policy snapshot; each game
+        with at least one collected move is returned as an explicit unknown
+        policy-epoch truncation. Fresh, zero-action games stay at their opening
+        root for the next epoch.
+        """
+        closed = []
+        games = list(self.games)
+        for slot, game in enumerate(self.games):
+            opening = self.openings[game.opening_index]
+            if game.state == opening.state:
+                # This game began on the final collection step and has no
+                # behavior trajectory to discard; keep it fresh for next epoch.
+                continue
+            closed.append({
+                "slot": slot,
+                "game_index": game.game_index,
+                "source_id": opening.source_id,
+                "opening_index": game.opening_index,
+                "root_fen": game.state.root_fen,
+                "moves": [move.uci for move in game.state.moves],
+                "termination": "policy-epoch-truncation",
+            })
+            self.terminations["policy-epoch-truncation"] += 1
+            games[slot] = self._new_game()
+        self.games = tuple(games)
+        return tuple(closed)
+
     def _restore(self, cursor):
         if (
             cursor["schema"] != ONLINE_ACTOR_SCHEMA
