@@ -7,9 +7,11 @@ import argparse
 import json
 import time
 from pathlib import Path
+
 import chess
 import numpy as np
 import torch
+
 from harbichess.backends.torch_network import load_weights, sha256
 from harbichess.chess.actions import legal_action_indices
 from harbichess.chess.encoding import BoardEncoder
@@ -31,6 +33,7 @@ def main():
         assert torch.cuda.is_available(), "Actual CUDA required; no fallback"
     else:
         import mlx.core as mx
+
         from harbichess.backends.pairwise_network import HarbiChessPairwiseNetwork
 
         mx.set_default_device(mx.cpu)
@@ -114,9 +117,7 @@ def main():
         "schema": "ufuk-method2-final-portable18parity-v1",
         "status": "pass-sameweights-full-and-legalmasked18fullhistories",
         "backend": a.backend,
-        "device": "cuda:0 actual"
-        if a.backend == "cuda"
-        else "MLXCPU actual; AppleMetal untested",
+        "device": "cuda:0 actual" if a.backend == "cuda" else "MLXCPU actual; AppleMetal untested",
         "models": reports,
         "probes_sha256": PROBE_SHA,
         "manifest_sha256": sha256(a.manifest),
@@ -125,7 +126,10 @@ def main():
         "rtol": 2e-5,
         "torch_version": torch.__version__,
         "whole_seconds_after_import": time.time() - started,
-        "scope": "Raw policy/value logits and legal masked heads parity; not strength, speed or game outcome evidence.",
+        "scope": (
+            "Raw policy/value logits and legal masked heads parity; not streng"
+            "th, speed or game outcome evidence."
+        ),
     }
     with a.output.open("x") as f:
         json.dump(receipt, f, indent=2)
