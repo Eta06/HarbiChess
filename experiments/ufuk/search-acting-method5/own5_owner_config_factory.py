@@ -1,6 +1,7 @@
 """Build exact sidecar owner configs from an already frozen slot5 registration."""
 import argparse
 import json
+import time
 from pathlib import Path
 
 from own5_audit_support import publish, sha
@@ -42,6 +43,13 @@ def main():
     original = json.loads(a.three_input_manifest.read_text())
     q = validate_config(json.loads(a.qualification_config.read_text()))
     paths = json.loads(a.paths_config.read_text())
+    clock_path = Path(paths["common_original_firstclock_receipt"])
+    assert sha(clock_path) == paths["common_original_firstclock_receipt_sha256"]
+    clock = json.loads(clock_path.read_text())
+    assert clock["schema"] == "own45-common-original-firstclock-v1"
+    assert clock["slots"] == [4, 5]
+    common_first = clock["original_training_started_epoch"]
+    assert type(common_first) in (int, float) and common_first <= time.time()
     assert reg['source_commit'] == q['source_commit'] == SOURCE
     assert reg['fixed_epochs'] == q['fixed_epochs']
     assert reg['three_input_manifest_sha256'] == a.three_input_manifest_sha256
@@ -60,6 +68,8 @@ def main():
             assert sha(info['path']) == info['sha256']
         inputs4['seeds'][str(seed)] = inputs
         first = row['original_training_started_epoch']
+        assert first == common_first
+        assert reg['earliest_training_epoch'] <= first <= time.time()
         assert first + reg['whole_audit_seconds_from_originalfirstclock'] + \
                reg['posttraining_reserve_seconds'] < 1791170400
         full = audit_manifest(reg, inputs, seed, first,
