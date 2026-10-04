@@ -7,6 +7,7 @@ import subprocess
 import tarfile
 import threading
 import time
+
 import a100_release_backup as backup
 
 
@@ -52,7 +53,9 @@ def _make_git_repo(root):
     subprocess.run(["git", "init", "--quiet"], cwd=root, check=True)
     subprocess.run(["git", "config", "user.name", "Scratch Test"], cwd=root, check=True)
     subprocess.run(["git", "config", "user.email", "scratch@example.invalid"], cwd=root, check=True)
-    subprocess.run(["git", "commit", "--quiet", "--allow-empty", "-m", "fixture"], cwd=root, check=True)
+    subprocess.run(
+        ["git", "commit", "--quiet", "--allow-empty", "-m", "fixture"], cwd=root, check=True
+    )
     return subprocess.run(
         ["git", "rev-parse", "HEAD"], cwd=root, check=True, capture_output=True, text=True
     ).stdout.strip()
