@@ -13,6 +13,7 @@ import signal
 import subprocess
 import time
 import traceback
+from contextlib import suppress
 from pathlib import Path
 
 HARD_DEADLINE = 1791170400.0
@@ -36,17 +37,13 @@ def publish(path, data):
 
 
 def terminate(process):
-    try:
+    with suppress(ProcessLookupError):
         os.killpg(process.pid, signal.SIGTERM)
-    except ProcessLookupError:
-        pass
     try:
         process.wait(timeout=3)
     except subprocess.TimeoutExpired:
-        try:
+        with suppress(ProcessLookupError):
             os.killpg(process.pid, signal.SIGKILL)
-        except ProcessLookupError:
-            pass
         process.wait(timeout=3)
 
 
@@ -67,9 +64,7 @@ def cpu_total_memory():
         for line in Path("/proc/meminfo").read_text().splitlines()
         if ":" in line
     }
-    return values["MemTotal"] - values[
-        "MemAvailable"
-    ], "system-used-MemTotal-minus-MemAvailable"
+    return values["MemTotal"] - values["MemAvailable"], "system-used-MemTotal-minus-MemAvailable"
 
 
 def verify_boundary(root, seed, source, epoch, deadline):
@@ -150,10 +145,7 @@ def main():
     )
     repo = a.repo.resolve()
     assert (
-        subprocess.check_output(
-            ["git", "rev-parse", "HEAD"], cwd=repo, text=True
-        ).strip()
-        == source
+        subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=repo, text=True).strip() == source
     )
     assert not subprocess.check_output(
         ["git", "status", "--porcelain"], cwd=repo, text=True
@@ -257,10 +249,10 @@ def main():
         str(8 * 1024**3),
     ]
     phases = (
-        ("pause1", common + ["--stop-at", "1"]),
+        ("pause1", [*common, "--stop-at", "1"]),
         (
             "freshresume40",
-            common + ["--resume", str(root / "run/checkpoints/epoch-00000001")],
+            [*common, "--resume", str(root / "run/checkpoints/epoch-00000001")],
         ),
     )
     receipts = []
@@ -281,9 +273,7 @@ def main():
             }
             publish(root / (name + "-command.json"), receipt)
             if begin >= deadline:
-                raise TimeoutError(
-                    "Original wholetraining budget exhausted before next phase"
-                )
+                raise TimeoutError("Original wholetraining budget exhausted before next phase")
             process = None
             failure = None
             try:
@@ -323,9 +313,7 @@ def main():
                 if process.returncode != 0:
                     failure = failure or f"childreturncode{process.returncode}"
                 if time.time() > deadline:
-                    failure = (
-                        failure or "child/publication after original wholedeadline"
-                    )
+                    failure = failure or "child/publication after original wholedeadline"
             except BaseException as e:
                 failure = repr(e)
                 if process is not None and process.poll() is None:
@@ -342,23 +330,21 @@ def main():
                 publish(root / (name + "-receipt.json"), receipt)
             if failure:
                 raise RuntimeError(failure)
-            verify_boundary(
-                root, a.seed, source, 1 if name == "pause1" else 40, deadline
-            )
+            verify_boundary(root, a.seed, source, 1 if name == "pause1" else 40, deadline)
         assert sorted(
             p.name
             for p in (root / "run/checkpoints").iterdir()
             if p.is_dir() and p.name.startswith("epoch-")
         ) == [f"epoch-{i:08d}" for i in range(41)]
-        assert sorted(
-            p.name for p in (root / "run/journal").glob("epoch-*.json.gz")
-        ) == [f"epoch-{i:08d}.json.gz" for i in range(1, 41)]
+        assert sorted(p.name for p in (root / "run/journal").glob("epoch-*.json.gz")) == [
+            f"epoch-{i:08d}.json.gz" for i in range(1, 41)
+        ]
         final = root / "run/checkpoints/epoch-00000040/model.safetensors"
         if time.time() > deadline:
-            raise TimeoutError(
-                "Final inventory publication after original wholedeadline"
-            )
-        status = "completed-fixedCURRENT40-awaiting-independent-integrity-latency-portability-strength"
+            raise TimeoutError("Final inventory publication after original wholedeadline")
+        status = (
+            "completed-fixedCURRENT40-awaiting-independent-integrity-latency-portability-strength"
+        )
     except BaseException as e:
         error = {"error": repr(e), "traceback": traceback.format_exc()}
         raise
@@ -370,10 +356,11 @@ def main():
             "error": error,
             "finished_epoch": time.time(),
             "whole_seconds_since_first_launch": time.time() - started,
-            "fixed_current40_sha256": sha(final)
-            if status.startswith("completed")
-            else None,
-            "scope": "No checkpointselection or qualification; preserve failed/incomplete runs and all native/journal evidence.",
+            "fixed_current40_sha256": sha(final) if status.startswith("completed") else None,
+            "scope": (
+                "No checkpointselection or qualification; preserve failed/incomple"
+                "te runs and all native/journal evidence."
+            ),
         }
         publish(root / "result.json", result)
 
