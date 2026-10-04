@@ -118,13 +118,10 @@ def main():
             and r["sample_chain_sha256"] == state["sample_chain_sha256"]
             for r in completed
         )
-        commands = [
-            read(path) for path in sorted(run.glob("invocation-*-command.json"))
-        ]
+        commands = [read(path) for path in sorted(run.glob("invocation-*-command.json"))]
         assert any(
             c["resume"]
-            and Path(c["resume"]).resolve()
-            == (run / "checkpoints/epoch-00000001").resolve()
+            and Path(c["resume"]).resolve() == (run / "checkpoints/epoch-00000001").resolve()
             for c in commands
         )
         out.append(
@@ -148,7 +145,10 @@ def main():
         "manifest_sha256": sha(a.manifest),
         "script_sha256": sha(Path(__file__)),
         "time_epoch": time.time(),
-        "scope": "No strength gain or model promotion. Quiescent latency and all four inferential/both-seed strength gates remain required.",
+        "scope": (
+            "No strength gain or model promotion. Quiescent latency and all fo"
+            "ur inferential/both-seed strength gates remain required."
+        ),
     }
     with a.output.open("x") as f:
         json.dump(result, f, indent=2)
