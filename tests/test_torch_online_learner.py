@@ -113,6 +113,41 @@ def test_actual_legal_selfplay_targets_updates_fixed_base_and_ema_tracking(tmp_p
     for key, value in initial.items():
         if key.startswith("material_value_linear."):
             assert torch.equal(value, learner.online.state_dict()[key])
+            assert torch.equal(value, learner.ema.state_dict()[key])
+
+
+def test_nonzero_frozen_material_survives_ema_and_native_resume_bitwise(tmp_path):
+    make_inputs(tmp_path)
+    from harbichess.backends.torch_network import load_weights
+
+    model = load_weights(tmp_path / "initial.safetensors")
+    with torch.no_grad():
+        for name, parameter in model.named_parameters():
+            if name.startswith("material_value_linear."):
+                parameter.copy_(
+                    torch.linspace(-0.29137, 0.41319, parameter.numel()).reshape(parameter.shape)
+                )
+    (tmp_path / "initial.safetensors").rename(tmp_path / "original-fixture.safetensors")
+    save_weights(tmp_path / "initial.safetensors", model)
+    learner = fresh(tmp_path)
+    frozen = {
+        name: value.clone()
+        for name, value in learner.online.state_dict().items()
+        if name.startswith("material_value_linear.")
+    }
+    for _ in range(5):
+        learner.train_update()
+        for network in (learner.online, learner.base, learner.ema):
+            for name, value in frozen.items():
+                assert torch.equal(value, network.state_dict()[name])
+    learner.checkpoint(tmp_path / "step5")
+    restored = TorchOnlineLearner.resume(
+        tmp_path / "step5", config=config(), input_paths=inputs(tmp_path), source_commit=SOURCE
+    )
+    restored.train_update()
+    for network in (restored.online, restored.base, restored.ema):
+        for name, value in frozen.items():
+            assert torch.equal(value, network.state_dict()[name])
 
 
 def test_fresh_process_next_real_rollouts_losses_all_models_optimizer_and_rng_exact(tmp_path):
