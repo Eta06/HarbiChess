@@ -27,6 +27,7 @@ def widen(
             old.architecture != "pairwise"
             or old._policy_adapter is not None
             or old._policy_context is not None
+            or old._value_sparse is not None
         ):
             raise ValueError("width transfer requires plain versioned pairwise weights")
         c, v = old.config.trunk_channels, old.invariant["channels"]
