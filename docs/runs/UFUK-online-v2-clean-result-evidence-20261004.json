@@ -1,0 +1,144 @@
+{
+  "schema": 1,
+  "status": "pass-infrastructure-only",
+  "source_commit": "5327e4b7f4bcb10b741968db8022c198c5d87609",
+  "registration_commit": "d2a836d9c68e1eef5165dff69671d412c6494129",
+  "result": {
+    "status": "pass-infrastructure-only",
+    "profile": {
+      "status": "awaiting-quiescent-capacity-terminal",
+      "source_commit": "5327e4b7f4bcb10b741968db8022c198c5d87609",
+      "registration_commit": "d2a836d9c68e1eef5165dff69671d412c6494129",
+      "registration_sha256": "46ac4ce6f98c6eb70ed8174edc714bac98f84f6cc13f9c9cc1c877ee44842bbe",
+      "controller_sha256": "fbb0c0b9288153d67d1b1e268e9ff6a60d56c1481009a449253a58da3dd4abda",
+      "full_suite_whole_seconds": 180,
+      "online_entire_preflight_whole_seconds": 900,
+      "unique_audit_updates": 5,
+      "unique_audit_transitions": 20,
+      "replayed_audit_updates": 3,
+      "replayed_presentations": 12,
+      "scope": "New independently bounded v2 clean proof; originalEMA/fix-budget failures retained, completedfullsuite reused."
+    },
+    "prior_capacity_terminal_statuses": {
+      "capacity_recovery": "recovered-integrity-pass-learning-failed-no-games",
+      "full_suite": "661passed-child-exit0-outer-timing-unknown"
+    },
+    "phases": [
+      {
+        "command": [
+          "/workspace/HarbiChess/.venv/bin/python",
+          "-m",
+          "harbichess.training.torch_online_run",
+          "/workspace/HarbiChess/artifacts/ufuk-online-v2-clean-proof-20261004/run",
+          "--weights",
+          "/workspace/HarbiChess/artifacts/ufuk-broad-v4-train-seed-20261026-candidate-20261004/checkpoints/step-030000/model.safetensors",
+          "--book",
+          "/workspace/HarbiChess/docs/research/UFUK-broad-history-opening-splits-20261004.json",
+          "--config",
+          "/workspace/HarbiChess/docs/runs/UFUK-online-real-preflight-config-20261004.json",
+          "--protocol",
+          "/workspace/HarbiChess/docs/runs/UFUK-online-v2-clean-proof-20261004.json",
+          "--source-commit",
+          "5327e4b7f4bcb10b741968db8022c198c5d87609",
+          "--max-updates",
+          "5",
+          "--checkpoint-interval",
+          "2",
+          "--deadline-epoch",
+          "1791135053.0094457",
+          "--stop-at",
+          "2"
+        ],
+        "cwd": "/workspace/work/harbichess/online-ema-v2-pinned",
+        "source_commit": "5327e4b7f4bcb10b741968db8022c198c5d87609",
+        "started_epoch": 1791134153.0095623,
+        "absolute_deadline_epoch": 1791135053.0094457,
+        "remaining_whole_seconds_at_launch": 899.9998834133148,
+        "PYTHONPATH": "/workspace/work/harbichess/online-ema-v2-pinned/src",
+        "OMP_NUM_THREADS": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "returncode": 0,
+        "failure": null,
+        "whole_wall_seconds": 27.018790921007167,
+        "finished_epoch": 1791134180.0283322
+      },
+      {
+        "command": [
+          "/workspace/HarbiChess/.venv/bin/python",
+          "-m",
+          "harbichess.training.torch_online_run",
+          "/workspace/HarbiChess/artifacts/ufuk-online-v2-clean-proof-20261004/run",
+          "--weights",
+          "/workspace/HarbiChess/artifacts/ufuk-broad-v4-train-seed-20261026-candidate-20261004/checkpoints/step-030000/model.safetensors",
+          "--book",
+          "/workspace/HarbiChess/docs/research/UFUK-broad-history-opening-splits-20261004.json",
+          "--config",
+          "/workspace/HarbiChess/docs/runs/UFUK-online-real-preflight-config-20261004.json",
+          "--protocol",
+          "/workspace/HarbiChess/docs/runs/UFUK-online-v2-clean-proof-20261004.json",
+          "--source-commit",
+          "5327e4b7f4bcb10b741968db8022c198c5d87609",
+          "--max-updates",
+          "5",
+          "--checkpoint-interval",
+          "2",
+          "--deadline-epoch",
+          "1791135053.0094457",
+          "--resume",
+          "/workspace/HarbiChess/artifacts/ufuk-online-v2-clean-proof-20261004/run/checkpoints/step-00000002"
+        ],
+        "cwd": "/workspace/work/harbichess/online-ema-v2-pinned",
+        "source_commit": "5327e4b7f4bcb10b741968db8022c198c5d87609",
+        "started_epoch": 1791134180.0288308,
+        "absolute_deadline_epoch": 1791135053.0094457,
+        "remaining_whole_seconds_at_launch": 872.980614900589,
+        "PYTHONPATH": "/workspace/work/harbichess/online-ema-v2-pinned/src",
+        "OMP_NUM_THREADS": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "returncode": 0,
+        "failure": null,
+        "whole_wall_seconds": 41.026242699997965,
+        "finished_epoch": 1791134221.0550187
+      },
+      {
+        "command": [
+          "/workspace/HarbiChess/.venv/bin/python",
+          "/workspace/work/harbichess/audit-ufuk-online-v2-clean-proof.py",
+          "1791135053.0094457"
+        ],
+        "cwd": "/workspace/work/harbichess/online-ema-v2-pinned",
+        "source_commit": "5327e4b7f4bcb10b741968db8022c198c5d87609",
+        "started_epoch": 1791134221.055468,
+        "absolute_deadline_epoch": 1791135053.0094457,
+        "remaining_whole_seconds_at_launch": 831.9539775848389,
+        "PYTHONPATH": "/workspace/work/harbichess/online-ema-v2-pinned/src",
+        "OMP_NUM_THREADS": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "returncode": 0,
+        "failure": null,
+        "whole_wall_seconds": 242.15985660700244,
+        "finished_epoch": 1791134463.2152696
+      }
+    ],
+    "full_suite_stdout_sha256": "f704be1507c595323d9fa9d3ea368e576299b198df6b1081d2d9e0ecc79cbc9b",
+    "audit_sha256": "1359700a696b50442996c038e7b84ca37145720cd421c9776d27206296155e61",
+    "whole_preflight_seconds": 310.20646381378174,
+    "unique_audit_updates": 5,
+    "unique_audit_transitions": 20,
+    "replayed_audit_updates": 3,
+    "replayed_presentations": 12,
+    "scope": "Infrastructure-only; actual main-model production self-learning/strength/higher baseline target not achieved here."
+  },
+  "files": {
+    "artifacts/ufuk-online-v2-clean-proof-20261004/result.json": {
+      "bytes": 5423,
+      "sha256": "71d13b48d5a59ea376f9ede98762d01c4ec30cb3a2a30a2e137d4551215b3672",
+      "utf8": "{\n  \"status\": \"pass-infrastructure-only\",\n  \"profile\": {\n    \"status\": \"awaiting-quiescent-capacity-terminal\",\n    \"source_commit\": \"5327e4b7f4bcb10b741968db8022c198c5d87609\",\n    \"registration_commit\": \"d2a836d9c68e1eef5165dff69671d412c6494129\",\n    \"registration_sha256\": \"46ac4ce6f98c6eb70ed8174edc714bac98f84f6cc13f9c9cc1c877ee44842bbe\",\n    \"controller_sha256\": \"fbb0c0b9288153d67d1b1e268e9ff6a60d56c1481009a449253a58da3dd4abda\",\n    \"full_suite_whole_seconds\": 180,\n    \"online_entire_preflight_whole_seconds\": 900,\n    \"unique_audit_updates\": 5,\n    \"unique_audit_transitions\": 20,\n    \"replayed_audit_updates\": 3,\n    \"replayed_presentations\": 12,\n    \"scope\": \"New independently bounded v2 clean proof; originalEMA/fix-budget failures retained, completedfullsuite reused.\"\n  },\n  \"prior_capacity_terminal_statuses\": {\n    \"capacity_recovery\": \"recovered-integrity-pass-learning-failed-no-games\",\n    \"full_suite\": \"661passed-child-exit0-outer-timing-unknown\"\n  },\n  \"phases\": [\n    {\n      \"command\": [\n        \"/workspace/HarbiChess/.venv/bin/python\",\n        \"-m\",\n        \"harbichess.training.torch_online_run\",\n        \"/workspace/HarbiChess/artifacts/ufuk-online-v2-clean-proof-20261004/run\",\n        \"--weights\",\n        \"/workspace/HarbiChess/artifacts/ufuk-broad-v4-train-seed-20261026-candidate-20261004/checkpoints/step-030000/model.safetensors\",\n        \"--book\",\n        \"/workspace/HarbiChess/docs/research/UFUK-broad-history-opening-splits-20261004.json\",\n        \"--config\",\n        \"/workspace/HarbiChess/docs/runs/UFUK-online-real-preflight-config-20261004.json\",\n        \"--protocol\",\n        \"/workspace/HarbiChess/docs/runs/UFUK-online-v2-clean-proof-20261004.json\",\n        \"--source-commit\",\n        \"5327e4b7f4bcb10b741968db8022c198c5d87609\",\n        \"--max-updates\",\n        \"5\",\n        \"--checkpoint-interval\",\n        \"2\",\n        \"--deadline-epoch\",\n        \"1791135053.0094457\",\n        \"--stop-at\",\n        \"2\"\n      ],\n      \"cwd\": \"/workspace/work/harbichess/online-ema-v2-pinned\",\n      \"source_commit\": \"5327e4b7f4bcb10b741968db8022c198c5d87609\",\n      \"started_epoch\": 1791134153.0095623,\n      \"absolute_deadline_epoch\": 1791135053.0094457,\n      \"remaining_whole_seconds_at_launch\": 899.9998834133148,\n      \"PYTHONPATH\": \"/workspace/work/harbichess/online-ema-v2-pinned/src\",\n      \"OMP_NUM_THREADS\": \"1\",\n      \"OPENBLAS_NUM_THREADS\": \"1\",\n      \"returncode\": 0,\n      \"failure\": null,\n      \"whole_wall_seconds\": 27.018790921007167,\n      \"finished_epoch\": 1791134180.0283322\n    },\n    {\n      \"command\": [\n        \"/workspace/HarbiChess/.venv/bin/python\",\n        \"-m\",\n        \"harbichess.training.torch_online_run\",\n        \"/workspace/HarbiChess/artifacts/ufuk-online-v2-clean-proof-20261004/run\",\n        \"--weights\",\n        \"/workspace/HarbiChess/artifacts/ufuk-broad-v4-train-seed-20261026-candidate-20261004/checkpoints/step-030000/model.safetensors\",\n        \"--book\",\n        \"/workspace/HarbiChess/docs/research/UFUK-broad-history-opening-splits-20261004.json\",\n        \"--config\",\n        \"/workspace/HarbiChess/docs/runs/UFUK-online-real-preflight-config-20261004.json\",\n        \"--protocol\",\n        \"/workspace/HarbiChess/docs/runs/UFUK-online-v2-clean-proof-20261004.json\",\n        \"--source-commit\",\n        \"5327e4b7f4bcb10b741968db8022c198c5d87609\",\n        \"--max-updates\",\n        \"5\",\n        \"--checkpoint-interval\",\n        \"2\",\n        \"--deadline-epoch\",\n        \"1791135053.0094457\",\n        \"--resume\",\n        \"/workspace/HarbiChess/artifacts/ufuk-online-v2-clean-proof-20261004/run/checkpoints/step-00000002\"\n      ],\n      \"cwd\": \"/workspace/work/harbichess/online-ema-v2-pinned\",\n      \"source_commit\": \"5327e4b7f4bcb10b741968db8022c198c5d87609\",\n      \"started_epoch\": 1791134180.0288308,\n      \"absolute_deadline_epoch\": 1791135053.0094457,\n      \"remaining_whole_seconds_at_launch\": 872.980614900589,\n      \"PYTHONPATH\": \"/workspace/work/harbichess/online-ema-v2-pinned/src\",\n      \"OMP_NUM_THREADS\": \"1\",\n      \"OPENBLAS_NUM_THREADS\": \"1\",\n      \"returncode\": 0,\n      \"failure\": null,\n      \"whole_wall_seconds\": 41.026242699997965,\n      \"finished_epoch\": 1791134221.0550187\n    },\n    {\n      \"command\": [\n        \"/workspace/HarbiChess/.venv/bin/python\",\n        \"/workspace/work/harbichess/audit-ufuk-online-v2-clean-proof.py\",\n        \"1791135053.0094457\"\n      ],\n      \"cwd\": \"/workspace/work/harbichess/online-ema-v2-pinned\",\n      \"source_commit\": \"5327e4b7f4bcb10b741968db8022c198c5d87609\",\n      \"started_epoch\": 1791134221.055468,\n      \"absolute_deadline_epoch\": 1791135053.0094457,\n      \"remaining_whole_seconds_at_launch\": 831.9539775848389,\n      \"PYTHONPATH\": \"/workspace/work/harbichess/online-ema-v2-pinned/src\",\n      \"OMP_NUM_THREADS\": \"1\",\n      \"OPENBLAS_NUM_THREADS\": \"1\",\n      \"returncode\": 0,\n      \"failure\": null,\n      \"whole_wall_seconds\": 242.15985660700244,\n      \"finished_epoch\": 1791134463.2152696\n    }\n  ],\n  \"full_suite_stdout_sha256\": \"f704be1507c595323d9fa9d3ea368e576299b198df6b1081d2d9e0ecc79cbc9b\",\n  \"audit_sha256\": \"1359700a696b50442996c038e7b84ca37145720cd421c9776d27206296155e61\",\n  \"whole_preflight_seconds\": 310.20646381378174,\n  \"unique_audit_updates\": 5,\n  \"unique_audit_transitions\": 20,\n  \"replayed_audit_updates\": 3,\n  \"replayed_presentations\": 12,\n  \"scope\": \"Infrastructure-only; actual main-model production self-learning/strength/higher baseline target not achieved here.\"\n}\n"
+    },
+    "/workspace/work/harbichess/audit-ufuk-online-v2-clean-proof.py": {
+      "bytes": 15417,
+      "sha256": "f2a29e10b918a407da41013c34b8d37169d36454a2d3881c2ce4ea591e89b140",
+      "utf8": "import gzip\nimport hashlib\nimport json\nimport math\nimport os\nfrom pathlib import Path\nimport random\nimport subprocess\nimport sys\nimport time\nfrom collections import Counter\n\nimport chess\nimport mlx.core as mx\nimport numpy as np\nimport torch\n\nfrom harbichess.backends.pairwise_network import HarbiChessPairwiseNetwork\nfrom harbichess.backends.torch_network import load_weights, sha256\nfrom harbichess.chess.actions import legal_action_indices, move_to_action\nfrom harbichess.chess.encoding import BoardEncoder\nfrom harbichess.chess.rules import PythonChessRules\nfrom harbichess.core.state import ChessMove, ChessState, Side\nfrom harbichess.training.online_objective import OnlineObjectiveConfig\nfrom harbichess.selfplay.online_actor import OnlineActorConfig\nfrom harbichess.training.torch_online_learner import TorchOnlineConfig, TorchOnlineLearner\n\nroot=Path('/workspace/HarbiChess')\nwork=Path('/workspace/work/harbichess')\nsource='5327e4b7f4bcb10b741968db8022c198c5d87609'\ndirectory=root/'artifacts/ufuk-online-v2-clean-proof-20261004'\nrun=directory/'run'\nstarted=time.perf_counter()\ndeadline=float(sys.argv[1])\ntorch.set_num_threads(1);torch.use_deterministic_algorithms(True);mx.set_default_device(mx.cpu)\nassert subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip()==source\nassert subprocess.check_output(['git','status','--porcelain'],text=True)==''\ninputs={'initial_weights':root/'artifacts/ufuk-broad-v4-train-seed-20261026-candidate-20261004/checkpoints/step-030000/model.safetensors',\n        'book':root/'docs/research/UFUK-broad-history-opening-splits-20261004.json',\n        'experiment_config':root/'docs/runs/UFUK-online-real-preflight-config-20261004.json',\n        'protocol':root/'docs/runs/UFUK-online-v2-clean-proof-20261004.json'}\nassert sha256(inputs['initial_weights'])=='e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03'\nassert sha256(inputs['book'])=='f2f3038728cce4c56987c9068f900d30ed99f996f99e03a38c41bbbc1f3c9958'\nraw_config=json.loads(inputs['experiment_config'].read_text())\nconfig=TorchOnlineConfig(**(raw_config|{'actors':OnlineActorConfig(**raw_config['actors']),\n                                     'objective':OnlineObjectiveConfig(**raw_config['objective'])}))\nassert config.seed==20261104 and config.actors.games==4 and config.actors.max_additional_plies==8\n\ndef guard():\n    assert time.time()<deadline,'original whole preflight budget exhausted'\n    assert int(Path('/sys/fs/cgroup/memory.current').read_text())<=15*1024**3\n    assert __import__('shutil').disk_usage(root).free>=8*1024**3\n\ndef same(a,b):\n    if isinstance(b,torch.Tensor):assert isinstance(a,torch.Tensor) and a.dtype==b.dtype and torch.equal(a,b)\n    elif isinstance(b,dict):\n        assert a.keys()==b.keys()\n        for key in b:same(a[key],b[key])\n    elif isinstance(b,(list,tuple)):\n        assert type(a)is type(b) and len(a)==len(b)\n        for x,y in zip(a,b,strict=True):same(x,y)\n    else:assert a==b\n\nwarm=load_weights(inputs['initial_weights'])\noriginal={k:v.clone() for k,v in warm.state_dict().items()}\nassert sum(v.numel() for k,v in original.items() if k.startswith('material_value_linear.'))==21\nnative={};native_states={};native_report=[]\nfor update in (0,2,4,5):\n    guard();path=run/'checkpoints'/f'step-{update:08d}'\n    loaded=TorchOnlineLearner.resume(path,config=config,input_paths=inputs,source_commit=source)\n    assert loaded.update==update and loaded.actors.steps==update\n    assert loaded.run_config['input_sha256']=={k:sha256(v) for k,v in inputs.items()}\n    for name,model in [('current',loaded.online),('base',loaded.base),('ema',loaded.ema)]:\n        actual=model.state_dict();assert actual.keys()==original.keys()\n        assert all(torch.isfinite(value).all() for value in actual.values())\n        if name=='base' or update==0:same(actual,original)\n        for key,value in actual.items():\n            if key.startswith('material_value_linear.'):same(value,original[key])\n    native[update]=loaded\n    native_states[update]=torch.load(path/'training.pt',map_location='cpu',weights_only=True)\n    native_report.append({'update':update,'checkpoint':str(path),'manifest_sha256':sha256(path/'checkpoint.json'),\n                         'actor_sha256':sha256(path/'actor.json'),'training_sha256':sha256(path/'training.pt'),\n                         'models':{name:sha256(path/name) for name in ('model.safetensors','base.safetensors','ema.safetensors')},\n                         'sample_chain_sha256':loaded.sample_chain_sha256,'all_full_native_states_loaded':True})\nfor prefixes in [('pair_',),('value_','global_value_','invariant_value_linear.')]:\n    assert any(not torch.equal(v,native[5].online.state_dict()[k]) for k,v in original.items() if k.startswith(prefixes))\n\n# Independent book/RNG/rule/target replay, without calling the actor or target builder.\nrules=PythonChessRules();book=json.loads(inputs['book'].read_text());roots=[];source_ids=[]\nassert len(book['splits']['train'])==4096 and len(book['splits']['validation'])==1024\nfor row in book['splits']['train']:\n    state=ChessState(row['opening'].get('root_fen',chess.STARTING_FEN),tuple(ChessMove(m) for m in row['opening']['moves']))\n    assert rules.view(state).fen==row['opening']['fen'];assert state.ply==row['root_ply']\n    assert rules.outcome(state,claim_draw=True)is None\n    roots.append(state);source_ids.append(row['source_game'])\nassert len(set(source_ids))==4096\nassert not set(source_ids)&{row['source_game'] for row in book['splits']['validation']}\nbook_encoded=[{'source_id':name,'root_fen':state.root_fen,'moves':[m.uci for m in state.moves]} for name,state in zip(source_ids,roots,strict=True)]\nlogical_book=hashlib.sha256(json.dumps(book_encoded,sort_keys=True,separators=(',',':')).encode()).hexdigest()\nassert logical_book==native[0].actors.book_sha256\nrng=random.Random(config.seed)\nactive=[]\nfor game in range(4):\n    index=rng.randrange(len(roots));active.append({'game_index':game,'opening_index':index,'state':roots[index]})\nnext_game=4;terminations=Counter();chain=hashlib.sha256(b'').hexdigest();records=[];legal_history_plies=0;outcomes=Counter()\n\ndef cursor(step):\n    return {'schema':'online-actors-full-history-v1','config':raw_config['actors'],'book_sha256':logical_book,\n            'steps':step,'next_game':next_game,'terminations':dict(sorted(terminations.items())),\n            'games':[{'game_index':a['game_index'],'opening_index':a['opening_index'],'root_fen':a['state'].root_fen,\n                      'moves':[m.uci for m in a['state'].moves]} for a in active]}\n\ndef check_cursor(step):\n    assert cursor(step)==native[step].actors.cursor()\n    assert rng.getstate()==native_states[step]['actor_rng']\n    assert chain==native[step].sample_chain_sha256\n\ndef distribution(values):\n    assert len(values)>0 and all(math.isfinite(x) and 0<=x<=1 for x in values)\n    assert math.isclose(math.fsum(values),1,rel_tol=0,abs_tol=1e-6)\n\ncheck_cursor(0)\nfor step in range(1,6):\n    guard();path=run/'journal'/f'update-{step:08d}.json.gz';record=json.loads(gzip.decompress(path.read_bytes()))\n    records.append(record)\n    payload=dict(record);previous=payload.pop('previous_sample_chain_sha256');current=payload.pop('sample_chain_sha256')\n    assert previous==chain\n    chain=hashlib.sha256(bytes.fromhex(chain)+json.dumps(payload,sort_keys=True,separators=(',',':'),allow_nan=False).encode()).hexdigest()\n    assert chain==current and record['update']==step and record['policy_model_update']==step-1\n    assert record['schema']=='torch-fresh-one-ply-v2' and record['transitions']==4 and len(record['samples'])==4\n    for slot,sample in enumerate(record['samples']):\n        a=active[slot];pre=a['state'];index=a['opening_index'];board=rules.inspect(pre)\n        assert sample['slot']==slot and sample['game_index']==a['game_index']\n        assert sample['source_id']==source_ids[index]\n        assert sample['root_fen']==pre.root_fen and sample['pre_moves']==[m.uci for m in pre.moves]\n        assert rules.outcome(pre,claim_draw=True)is None\n        legal=legal_action_indices(board);assert sample['legal_actions']==list(legal)\n        distribution(sample['online_policy']);distribution(sample['base_policy'])\n        distribution(sample['online_pre_wdl']);distribution(sample['base_wdl'])\n        assert len(sample['online_policy'])==len(sample['base_policy'])==len(legal)\n        probabilities=tuple(p/math.fsum(sample['online_policy']) for p in sample['online_policy'])\n        logs=tuple(math.log(p) if p>0 else -math.inf for p in probabilities);largest=max(logs)\n        weights=tuple(math.exp((x-largest)/config.actors.temperature) for x in logs)\n        mu=tuple(w/math.fsum(weights) for w in weights)\n        chosen=rng.choices(range(len(legal)),weights=mu,k=1)[0]\n        parsed=chess.Move.from_uci(sample['action']);assert move_to_action(board,parsed)==legal[chosen]\n        p,proposal=probabilities[chosen],mu[chosen];assert p>0 and proposal>0\n        assert math.isclose(sample['policy_probability'],p,rel_tol=0,abs_tol=1e-15)\n        assert math.isclose(sample['behavior_probability'],proposal,rel_tol=0,abs_tol=1e-15)\n        assert math.isclose(sample['importance'],min(config.importance_maximum,p/proposal),rel_tol=0,abs_tol=1e-14)\n        post=rules.apply(pre,ChessMove(sample['action']));legal_history_plies+=post.ply\n        outcome=rules.outcome(post,claim_draw=True);cutoff=post.ply-roots[index].ply>=config.actors.max_additional_plies\n        assert sample['rollout_cutoff']==cutoff and sample['target_schema']=='one-ply-stm-wdl-v1'\n        if outcome is None:\n            assert sample['terminal_result']is None and sample['terminal_termination']is None\n            assert sample['target_source']=='ema-bootstrap';distribution(sample['ema_post_wdl'])\n            target=sample['ema_post_wdl'][::-1];outcomes['bootstrap-cutoff' if cutoff else 'bootstrap-ongoing']+=1\n        else:\n            assert sample['terminal_result']==outcome.result.value and sample['terminal_termination']==outcome.termination\n            assert sample['target_source']=='observed-terminal' and sample['ema_post_wdl']is None\n            value=outcome.value_for(Side.WHITE if board.turn else Side.BLACK)\n            target=[float(value==1),float(value==0),float(value==-1)];outcomes['observed-terminal']+=1\n        assert sample['mover_target_wdl']==target\n        advantage=target[0]+.5*target[1]-(sample['online_pre_wdl'][0]+.5*sample['online_pre_wdl'][1])\n        assert sample['advantage']==advantage\n        if outcome is not None or cutoff:\n            terminations[outcome.termination if outcome else 'unknown-rollout-cutoff']+=1\n            new_index=rng.randrange(len(roots));active[slot]={'game_index':next_game,'opening_index':new_index,'state':roots[new_index]};next_game+=1\n        else:active[slot]={'game_index':a['game_index'],'opening_index':index,'state':post}\n    assert record['terminated_games']==dict(terminations)\n    if step in native:check_cursor(step)\n\n# Real checkpoint2 fresh-process replay, audit-only 3 updates/12 presentations.\nguard();replayed=TorchOnlineLearner.resume(run/'checkpoints/step-00000002',config=config,input_paths=inputs,source_commit=source)\nfor expected in records[2:]:\n    guard();actual=replayed.train_update();assert actual==expected\nsame(replayed.online.state_dict(),native[5].online.state_dict())\nsame(replayed.base.state_dict(),native[5].base.state_dict())\nsame(replayed.ema.state_dict(),native[5].ema.state_dict())\nsame(replayed.optimizer.state_dict(),native_states[5]['optimizer'])\nassert replayed.actors.cursor()==native[5].actors.cursor()\nassert replayed.actors.rng.getstate()==native_states[5]['actor_rng']\nassert random.getstate()==native_states[5]['python_rng']\nsame(torch.get_rng_state(),native_states[5]['torch_rng'])\nnumpy_state=np.random.get_state();saved_numpy=native_states[5]['numpy_rng']\nassert numpy_state[0]==saved_numpy['kind'] and np.array_equal(numpy_state[1],saved_numpy['keys'].numpy())\nassert numpy_state[2:]==(saved_numpy['position'],saved_numpy['has_gauss'],saved_numpy['cached_gauss'])\nassert replayed.sample_chain_sha256==native[5].sample_chain_sha256\n\n# Actual unchanged18history full/masked model portability probes, no optimizer transfer.\nprobe=root/'docs/research/UFUK-width-latency-probes-20261004.json'\nassert sha256(probe)=='1089fd0cca308c24bb040a840352d0ad18aa85a7bdcd17608133456bf08bed9f'\nboards=[]\nfor row in json.loads(probe.read_text())['positions']:\n    board=chess.Board(row['root_fen'])\n    for uci in row['moves']:board.push_uci(uci)\n    assert board.fen()==row['fen'];boards.append(board)\nassert len(boards)==18\nencoded=torch.tensor([BoardEncoder().encode_board(board).values for board in boards]).reshape(-1,8,8,104)\nparity={}\nwith torch.no_grad():\n    for name,path in [('step0-current',run/'checkpoints/step-00000000/model.safetensors'),\n                      ('step5-current',run/'checkpoints/step-00000005/model.safetensors'),\n                      ('step5-ema',run/'checkpoints/step-00000005/ema.safetensors')]:\n        guard();t=load_weights(path).eval();m=HarbiChessPairwiseNetwork.from_portable(path);m.eval()\n        ta=t(encoded);ma=m(mx.array(encoded.numpy()));mx.eval(ma);errors=[]\n        for x,y in zip(ta,ma,strict=True):\n            np.testing.assert_allclose(x.numpy(),np.array(y),atol=2e-5,rtol=2e-5);errors.append(float(np.max(np.abs(x.numpy()-np.array(y)))))\n        masked=[]\n        for index,board in enumerate(boards):\n            guard();actions=torch.tensor([legal_action_indices(board)])\n            a=t.masked_policy_value(encoded[index:index+1],actions)\n            b=m.masked_policy_value(mx.array(encoded[index:index+1].numpy()),mx.array(actions.numpy()));mx.eval(b)\n            for x,y in zip(a,b,strict=True):\n                np.testing.assert_allclose(x.numpy(),np.array(y),atol=2e-5,rtol=2e-5);masked.append(float(np.max(np.abs(x.numpy()-np.array(y)))))\n        parity[name]={'weights_sha256':sha256(path),'full_policy_max_error':errors[0],'wdl_max_error':errors[1],'masked_max_error':max(masked)}\nguard()\nreport={'status':'pass-infrastructure-only','source_commit':source,'script_sha256':sha256(Path(__file__)),\n        'input_sha256':{k:sha256(v) for k,v in inputs.items()},'complete_checkpoints':native_report,\n        'unique_audit_updates':5,'unique_audit_transitions':20,'replayed_audit_updates':3,'replayed_presentations':12,\n        'independently_audited_journals':5,'independent_legal_history_plies':legal_history_plies,\n        'independent_sampling_rng_and_all_native_actor_cursors_exact':True,'all_fresh_next_trajectory_loss_model_adam_rng_exact':True,\n        'initial_function_tensors_base_and_material_exact':True,'actual_policy_and_value_parameters_changed':True,\n        'target_sources':dict(outcomes),'sample_chain_sha256':chain,'parity':parity,'portable_probes':18,\n        'parity_tolerance':{'atol':2e-5,'rtol':2e-5},'actual_devices':'TorchCPU/MLXCPU; AppleMetal/CUDA/BF16 device-untested',\n        'wall_seconds_after_import':time.perf_counter()-started,'finished_epoch':time.time(),'absolute_deadline_epoch':deadline,\n        'scope':'Actual real-e8 online CLI/native/independent20transition semantics/fresh process3update replay/portable parity infrastructure only. All8updates audit-only, no learning progress/strength/production promotion.'}\np=directory/'independent-audit.json';assert not p.exists();p.write_text(json.dumps(report,indent=2)+'\\n');print(json.dumps(report),flush=True)\n"
+    }
+  }
+}
