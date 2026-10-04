@@ -1,0 +1,40 @@
+{
+  "scope": "AST actualhelper argv crosscheck/no jobs/inference/outcomes",
+  "launches": [
+    {
+      "helper": "own5_eligibility.py",
+      "all_flags_known": true,
+      "all_required_literal_flags_supplied": true
+    },
+    {
+      "helper": "own5_parity.py",
+      "all_flags_known": true,
+      "all_required_literal_flags_supplied": true
+    },
+    {
+      "helper": "own5_latency.py",
+      "all_flags_known": true,
+      "all_required_literal_flags_supplied": true
+    },
+    {
+      "helper": "own5_strength_analysis.py",
+      "all_flags_known": true,
+      "all_required_literal_flags_supplied": true
+    },
+    {
+      "helper": "own5_all_gates.py",
+      "all_flags_known": true,
+      "all_required_literal_flags_supplied": true
+    },
+    {
+      "helper": "own5_fresh_cli_replay.py",
+      "all_flags_known": true,
+      "all_required_literal_flags_supplied": true
+    },
+    {
+      "helper": "own5_final_arms.py",
+      "all_flags_known": true,
+      "all_required_literal_flags_supplied": true
+    }
+  ]
+}
