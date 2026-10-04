@@ -62,20 +62,31 @@ class PythonChessRules:
             cache.move_to_end(state)
             return cached
 
-        if not state.moves:
+        # Cold misses must not recursively fill the LRU with every prefix.
+        # Many independent long actor cursors otherwise evict one another's
+        # final boards. Reuse the nearest cached ancestor, preserving its stack,
+        # then validate/replay only the missing suffix and remember this state.
+        ancestor_ply = len(state.moves)
+        board = None
+        while ancestor_ply > 0:
+            ancestor_ply -= 1
+            ancestor = ChessState(state.root_fen, state.moves[:ancestor_ply])
+            cached_ancestor = cache.get(ancestor)
+            if cached_ancestor is not None:
+                cache.move_to_end(ancestor)
+                board = cached_ancestor.copy(stack=True)
+                break
+        if board is None:
             board = chess.Board(state.root_fen)
-        else:
-            parent_state = ChessState(root_fen=state.root_fen, moves=state.moves[:-1])
-            board = self._cached_board(parent_state).copy(stack=True)
-            encoded_move = state.moves[-1]
+            ancestor_ply = 0
+        for ply in range(ancestor_ply, len(state.moves)):
+            encoded_move = state.moves[ply]
             try:
                 move = chess.Move.from_uci(encoded_move.uci)
             except ValueError as error:
-                raise IllegalMoveError(
-                    f"invalid move at ply {state.ply - 1}: {encoded_move.uci}"
-                ) from error
+                raise IllegalMoveError(f"invalid move at ply {ply}: {encoded_move.uci}") from error
             if move not in board.legal_moves:
-                raise IllegalMoveError(f"illegal move at ply {state.ply - 1}: {encoded_move.uci}")
+                raise IllegalMoveError(f"illegal move at ply {ply}: {encoded_move.uci}")
             board.push(move)
         self._remember(state, board)
         return board
