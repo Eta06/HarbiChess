@@ -1,0 +1,24 @@
+{
+  "schema": "ufuk-search-acting-v2-CUDA-readiness-prereg-v1",
+  "status": "frozen-before-development-execution",
+  "source_commit": "4515a7c0dda3b4f9615c2fc78a47c872ab14699d",
+  "scope": "Only16actualCUDA unitpasses/zeroSkip plus real-e8 whole2/pause1/freshresume2 full nativebytes; noformal5/strength. No longrun or profile implicitly authorized by this control.",
+  "qualification_whole_seconds": 360,
+  "unit_seconds": 180,
+  "cleanCLI_seconds": 180,
+  "helper_sha256": {
+    "qualify_search_acting_cuda_owned.py": "7dd899cc44db8ed9093064f92dd2ce705710df700bcaf14b6e749a0de73c1388",
+    "qualify_search_acting_cli.py": "b9455a1660c5741ea6bb7101bee2383f57a5379e6e730acd57e798f0c9a71500"
+  },
+  "test_sha256": "70997b8b447c0a7520a5d62e5a1066898cb1eceb3531563b6de13ff98ec9e14e",
+  "config_sha256": "f8c39d7a11c4b499895273aa5c18bbe16cfd9213db870f93237b49866b30ca46",
+  "book_sha256": "9340b54b6ac01ead55b9b790ddaa13e951e278a66f59c9009efae2d26ba68b6e",
+  "weights_sha256": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03",
+  "earliest_start": "Onlyafter repairedMC686265 coordinator original two600replays/eligibility/CUDA/maskedlatency completion receipts have returncode0 and SHA verified. No score/speedgatevalues used.",
+  "mc_barrier_root": "/content/harbichess-runs/fullgame-confirmation3-posttraining-recovery-v2",
+  "mc_coordinator_sha256": "686265b09284d1e8c879406510910991d2d8f1a71bf60b610372eac00e76e100",
+  "KL_reference": "rawNNpolicy on searched states; actualsearchmu remains separate and honestly archived",
+  "initialization": "e8weights +newAdam, no v1fullresume",
+  "memory_max_bytes": 68719476736,
+  "disk_min_free_bytes": 8589934592
+}
