@@ -35,17 +35,32 @@ OPENINGS = (
 
 
 def paired_summary(games: list[dict], seed: int) -> dict:
+    if not games or len(games) % 2:
+        raise ValueError("paired summary requires complete nonempty colour pairs")
+    if any(
+        game["score"] not in (0, 0.5, 1)
+        or (game["termination"] == "max_plies" and game["score"] != 0.5)
+        for game in games
+    ):
+        raise ValueError("invalid score or unknown cap mislabelled as a terminal result")
     pairs = [(games[i]["score"] + games[i + 1]["score"]) / 2 for i in range(0, len(games), 2)]
     score = sum(pairs) / len(pairs)
     rng = random.Random(seed)
     bootstrap = sorted(sum(rng.choices(pairs, k=len(pairs))) / len(pairs) for _ in range(10000))
     radius = math.sqrt(math.log(40) / (2 * len(pairs)))
+    capped = sum(game["termination"] == "max_plies" for game in games)
     return {
         "wins": sum(g["score"] == 1 for g in games),
         "draws": sum(g["score"] == 0.5 for g in games),
         "losses": sum(g["score"] == 0 for g in games),
         "score": score,
-        "capped_games": sum(g["termination"] == "max_plies" for g in games),
+        "capped_games": capped,
+        "terminal_draws": sum(
+            game["score"] == 0.5 and game["termination"] != "max_plies" for game in games
+        ),
+        "score_bounds_unknown_caps": [
+            score - capped / (2 * len(games)), score + capped / (2 * len(games))
+        ],
         "pair_scores": pairs,
         "bootstrap_pair_95": [bootstrap[249], bootstrap[9749]],
         "hoeffding_pair_95": [max(0, score - radius), min(1, score + radius)],
