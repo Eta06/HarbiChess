@@ -55,9 +55,12 @@ Kalıcı kaynak GitHub'dır. Notlar ve kararlar Git'te, büyük model/replay dos
 - [Exact packed veri sonucu](../runs/UFUK-packed-data-result-20261004.md):
   80.511 örnekte bütün104history inputleri birebir;16native state eşit. İlk hazırlama
   dahil süre191,7/527,5s ve tepeRSS oranı0,09936: altyapı geçti, güç iddiası değil.
-- [Daha çeşitli tam geçmiş protokolü](../runs/UFUK-broad-history-preregistration-20261004.md):
-  sınırlı CC0PGN kaynağı/5.120 oyun ailesi/kontrollü SF19 referansları; kök seçimi
-  sürüyor, henüz yeni teacher collection veya training başlamadı.
+- [Daha çeşitli tam geçmiş başlangıç/durma](../runs/UFUK-broad-history-start-20261004.md):
+  5.120 gerçek oyun kökü tam denetlendi; ilk toplama 1.356 trajectory/39.079 etikette
+  kök başına renk kontrolü nedeniyle eksik durdu. Hiç yeni training yapılmadı.
+- [Kök başına renk eşlemeli v4 protokolü](../runs/UFUK-broad-history-v4-preregistration-20261004.md):
+  ayrı sabit kaynakta çalışıyor; ilk dört gerçek oyun kontrolü geçti. Eski toplam
+  10.800s mutlak deadline devralındı, bütçe sıfırlanmadı. Coverage/güç sonucu henüz yok.
 - Yerel hash ve tüm üye geri-okuma doğrulaması yapılmış arşiv zinciri:
   [2.149 dosyalık parent](../runs/UFUK-artifact-archive-20261003.json),
   [143 dosyalık width/range/offline ek](../runs/UFUK-artifact-supplement-20261004.json),
