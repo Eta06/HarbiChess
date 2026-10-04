@@ -1,0 +1,29 @@
+{
+  "schema": "UFUK-fullgame-feature-cache-CUDA-proof-controls-v2",
+  "registered_epoch": 1791143483.420597,
+  "source_commit": "e36f0fa0c9bedd0d8dbb89a01fe691be1c095f65",
+  "baseline_ppo_sha256": "5e377dde7e5b6846e5e4cfc00cf97debfa752a4f02415b9ba9da627ec8d2c5b9",
+  "candidate_ppo_sha256": "e864505c3cef3c96ae07e508b329c39cac65fd1ac2072556aa8e80ee8f8611c4",
+  "helper_sha256": "b897bad135eee7e1aa00b09f570a1f1547ce708df93de3ac9f0d1a3e67d6d4cb",
+  "native0_manifest_sha256": "7101081a6ad9acc2d5d56f65850208826deee533d511b159c37a3b2ef67363b0",
+  "native1_manifest_sha256": "8abff181438af68d9f5299fe82f4e068f25029923e80cd6af9dc332a5b08e304",
+  "epoch_journal_sha256": "2014fc4ab93061de1aea22e1db46d7a00707a976aaa71a52ef06f241a6424477",
+  "reconciliation_receipt_sha256": "bb0346f0301927ca0b366e92f6b665e56424bc86e2d71485f6129007e65d6229",
+  "whole_seconds_ceiling": 900,
+  "memory_max_bytes": 68719476736,
+  "disk_min_free_bytes": 8589934592,
+  "cases": [
+    "unchanged-normal-baseline",
+    "unchanged-normal-compiled"
+  ],
+  "optional_forced_rollback_case": false,
+  "actual_expected_attempted_per_branch": 36,
+  "actual_expected_accepted_per_branch": 18,
+  "actual_expected_discarded_per_branch": 18,
+  "total_duplicate_optimizer_attempts": 72,
+  "new_selfplay_transitions": 0,
+  "required_equivalence": "Storage bits including signed zero and Adam 0d counters: all current/base/behavior weights, Adam, all Python/NumPy/TorchCPU/allCUDA RNGs, actor closedcursor/RNG, samplerseed/lastsampler. Complete metrics must equal actual epoch1 and both branches strictnative1. All immutableinputs rehashed.",
+  "clock_budget_policy": "Absolute deadline generated at owned prooflaunch and shared across both cases; original production deadlines unchanged. External supervisor terminates only own child processgroup at whole900.",
+  "candidate_eligibility": false,
+  "failure_policy": "Preserve failure; do not alter immutable actual development artifacts or rerun selfplay. Promotion only if actual CUDA proof passes."
+}
