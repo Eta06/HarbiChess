@@ -71,7 +71,7 @@ Kalıcı kaynak GitHub'dır. Notlar ve kararlar Git'te, büyük model/replay dos
   ve [121kanıt dosyası](../runs/UFUK-broad-history-training-result-evidence-20261004.json):
   79000üretimupdate, iki learning/retention PASS,84tam nativecheckpoint gerçekten
   yüklendi, dört gerçek1000→2000bitwise resume ve selectedMLXCPU parity PASS.
-  Kayıtlı480oyun güç/hız aşaması RUNNING; güç/self-learning/Stockfish seviyesi henüz kanıtlanmış değil.
+  Kayıtlı480oyun tamamlandı: doğrudan model kazanımı olumlu, Stockfish toplam güç kapısı FAILED; self-learning/Stockfish seviyesi kanıtlanmadı.
 - [İki seed ile kontrollü training ön kaydı](../runs/UFUK-broad-history-training-preregistration-20261004.md)
   ve [57kanıt dosyası](../runs/UFUK-broad-history-training-registration-evidence-20261004.json):
   667369tam104girdi birebir, ortak eski/yeni panel, tam native1000update resume,
@@ -131,3 +131,8 @@ Her aşama için `docs/runs/<keyword>-<deney>.md` kullanın. Repo kökündeki AG
 7. Karar, sonraki hipotez, Release bağlantısı ve dosya envanteri.
 
 Başarısız kayıtlar korunur. Sonuç görüldükten sonra eşik değiştirmek yeni deney gerektirir. AI katkıcılarının Space erişimi olmayabilir; bu durumda Git kaydı tamamlanmalı ve Space senkronizasyon açığı açıkça belirtilmelidir.
+
+- [Tam480oyun güç sonucu](../runs/UFUK-broad-history-strength-result-20261004.md):
+  %71,35vsinitial/%66,67vscontrol; SF512%7,29, ayarlı fark sıfırı içeriyor.
+  Toplam güç FAILED; hız/bütünlük PASS. [Yeni policy/value tanısı](../runs/UFUK-broad-policy-value-diagnostic-preregistration-20261004.md)
+  gözlenen48kök üzerinde, yeni finalholdout veya learnedoracle/self-learning değildir.
