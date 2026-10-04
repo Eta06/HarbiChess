@@ -1,0 +1,139 @@
+{
+  "schema": "promoted-cache-whole-profile-result-v1",
+  "status": "pass",
+  "scope": "Development/infrastructure timing and equivalence only; no candidate eligibility or strength.",
+  "actual_source": "76f4890dea90bdd84ed0f4874aa4c5ad2c4c814f",
+  "promoted_cache_pipeline_receipt": {
+    "sha256": "5058602e190b0fe65295d9d0b015fa7acc27ae7c1969bac5e2525f3bfd7cc6d4",
+    "bytes": 5202,
+    "data": {
+      "absolute_deadline_epoch": 1791145814.5589447,
+      "candidate_eligibility": false,
+      "finished_epoch": 1791145020.4045181,
+      "input_sha256": {
+        "/content/harbichess-fullgame-development-inputs/config.json": "e27886c70645cf1cdfb3a43fb052075bd7d8c69b4b0d7194d483de44ebcab92f",
+        "/content/harbichess-fullgame-development-inputs/protocol.json": "7da552cc826a92f0b9203843f4001af01c60b0148d23b280e584d274c6739445",
+        "/content/harbichess-fullgame-qualification-inputs/book.json": "3e8e380db5b85258131e97b44d79bae4c90e9d3128649f49e31c4105ec4ea90d",
+        "/content/harbichess-fullgame-qualification-inputs/config.json": "5a67dfbededb6f568f30976b4d37f23cda2b98e804f80c8af753b52cf42d468b",
+        "/content/harbichess-fullgame-qualification-inputs/protocol.json": "b6bf8e5cd350380d36db46317f0058b0442048b2222ef6d9f3f9362dd18edb30",
+        "/content/harbichess-inputs/book.json": "f2f3038728cce4c56987c9068f900d30ed99f996f99e03a38c41bbbc1f3c9958",
+        "/content/harbichess-inputs/initial-e8.safetensors": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03",
+        "/content/harbichess-runs/fullgame-cuda-qualification-v2-20261004/audit/result.json": "6c0d65bfb3c647c8dab7688c887723299667413c307383cc7e56c2d125f22f0a",
+        "/content/harbichess-runs/fullgame-development-shape-20261004/independent-reconciliation.json": "bb0346f0301927ca0b366e92f6b665e56424bc86e2d71485f6129007e65d6229"
+      },
+      "original_native_sha256": {
+        "/content/harbichess-runs/fullgame-development-shape-20261004/run/checkpoints/epoch-00000000/actor.json": "cf437045c379c22305ece038b561ccd6c55e4e1e6f5e3ea57c05d13523f2e0b5",
+        "/content/harbichess-runs/fullgame-development-shape-20261004/run/checkpoints/epoch-00000000/base.safetensors": "861026ac9289c2e2bc8c5811649c02d7b37ca3f7142be802ed4f98e6e14f901c",
+        "/content/harbichess-runs/fullgame-development-shape-20261004/run/checkpoints/epoch-00000000/behavior.safetensors": "861026ac9289c2e2bc8c5811649c02d7b37ca3f7142be802ed4f98e6e14f901c",
+        "/content/harbichess-runs/fullgame-development-shape-20261004/run/checkpoints/epoch-00000000/checkpoint.json": "7101081a6ad9acc2d5d56f65850208826deee533d511b159c37a3b2ef67363b0",
+        "/content/harbichess-runs/fullgame-development-shape-20261004/run/checkpoints/epoch-00000000/last-frozen-epoch.json.gz": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "/content/harbichess-runs/fullgame-development-shape-20261004/run/checkpoints/epoch-00000000/model.safetensors": "861026ac9289c2e2bc8c5811649c02d7b37ca3f7142be802ed4f98e6e14f901c",
+        "/content/harbichess-runs/fullgame-development-shape-20261004/run/checkpoints/epoch-00000000/training.pt": "d8a489acdb1b6c785db142f65390c947ec8abf8c3e9f208d3159f2571f8e95b9",
+        "/content/harbichess-runs/fullgame-development-shape-20261004/run/checkpoints/epoch-00000001/actor.json": "0287cbbbc2a9490895614343c96964b43ea85b82f7c55ba2c661fe8ee50fd91c",
+        "/content/harbichess-runs/fullgame-development-shape-20261004/run/checkpoints/epoch-00000001/base.safetensors": "a8cc3805edc1898b8d0f052d8401df83ecf0cafe6f7e0227c10979667b442409",
+        "/content/harbichess-runs/fullgame-development-shape-20261004/run/checkpoints/epoch-00000001/behavior.safetensors": "a8cc3805edc1898b8d0f052d8401df83ecf0cafe6f7e0227c10979667b442409",
+        "/content/harbichess-runs/fullgame-development-shape-20261004/run/checkpoints/epoch-00000001/checkpoint.json": "8abff181438af68d9f5299fe82f4e068f25029923e80cd6af9dc332a5b08e304",
+        "/content/harbichess-runs/fullgame-development-shape-20261004/run/checkpoints/epoch-00000001/last-frozen-epoch.json.gz": "2014fc4ab93061de1aea22e1db46d7a00707a976aaa71a52ef06f241a6424477",
+        "/content/harbichess-runs/fullgame-development-shape-20261004/run/checkpoints/epoch-00000001/model.safetensors": "7a3f34e01b415d172d9a1038f5121e896b442cbccdb00ed774e260d6d4039c7d",
+        "/content/harbichess-runs/fullgame-development-shape-20261004/run/checkpoints/epoch-00000001/training.pt": "3605abe38613d554aca37811cc3278cd6cb12ac784a2011d6bf9256e590408f3",
+        "/content/harbichess-runs/fullgame-development-shape-20261004/run/journal/epoch-00000001.json.gz": "2014fc4ab93061de1aea22e1db46d7a00707a976aaa71a52ef06f241a6424477"
+      },
+      "profile_cli_invocation": {
+        "deadline_epoch": 1791145657.8046339,
+        "finished_epoch": 1791144930.51043,
+        "owned_pid": 28050,
+        "returncode": 0,
+        "started_epoch": 1791144757.8046722,
+        "status": "pass"
+      },
+      "profile_deadline_epoch": 1791145657.8046339,
+      "profile_independent_audit_invocation": {
+        "deadline_epoch": 1791145657.8046339,
+        "finished_epoch": 1791145020.233064,
+        "owned_pid": 28894,
+        "returncode": 0,
+        "started_epoch": 1791144930.5107749,
+        "status": "pass"
+      },
+      "profile_started_epoch": 1791144757.8046339,
+      "profile_whole_elapsed_seconds": 262.59988164901733,
+      "schema": "promoted-cache-tiny-then-one-development-profile-v1",
+      "source_commit": "76f4890dea90bdd84ed0f4874aa4c5ad2c4c814f",
+      "started_epoch": 1791144734.6222997,
+      "status": "pass",
+      "tiny_invocation": {
+        "deadline_epoch": 1791144914.6222997,
+        "finished_epoch": 1791144757.8043485,
+        "owned_pid": 27896,
+        "returncode": 0,
+        "started_epoch": 1791144735.0391676,
+        "status": "pass"
+      }
+    }
+  },
+  "tiny_fresh_process_resume_receipt": {
+    "sha256": "7d43e09ba6c9ff529314559f4d6389407c54c9d6683f0d613c4e965b3c288962",
+    "bytes": 2124,
+    "data": {
+      "absolute_deadline_epoch": 1791144914.6222997,
+      "audit_optimizer_attempted_updates": 8,
+      "baseline_qualification_sha256": "6c0d65bfb3c647c8dab7688c887723299667413c307383cc7e56c2d125f22f0a",
+      "baseline_source_commit": "e36f0fa0c9bedd0d8dbb89a01fe691be1c095f65",
+      "both_final_full_native_freshprocess_strictload": true,
+      "byte_exact_artifacts": {
+        "checkpoints/epoch-00000002/actor.json": "b5dbc8fbe6970fbe05eaf9a1b698191d7f5480b1b7cd7fa543af15e46c0d2d6a",
+        "checkpoints/epoch-00000002/base.safetensors": "94f277c3312c749879f99ab9ef12c4b46787955bbe48ac5f1582431fcacc736d",
+        "checkpoints/epoch-00000002/behavior.safetensors": "722e8453e5bb93eb39f39b552d53f88567881549cbef19aa12eafae9e1c88b55",
+        "checkpoints/epoch-00000002/last-frozen-epoch.json.gz": "525d0a5693e201726fc9e2253bbd5d4b2759a3f1da7955c012b3839c1e903ac4",
+        "checkpoints/epoch-00000002/model.safetensors": "2794d2c044e6ef17228b909e74ec03a5610c677d01afecbfa58afa0d62e91472",
+        "checkpoints/epoch-00000002/training.pt": "e76866febd56615830a4041ff0a3c8e45bf6f0b34b972944f41863ac46524f08",
+        "journal/epoch-00000001.json.gz": "562f187d3dc8d6ded172c692ddb275647e2a100bd267ccce2429c71f7cc492fe",
+        "journal/epoch-00000002.json.gz": "525d0a5693e201726fc9e2253bbd5d4b2759a3f1da7955c012b3839c1e903ac4"
+      },
+      "duplicate_qualification_fresh_transitions": 64,
+      "finished_epoch": 1791144757.771662,
+      "input_sha256": {
+        "book": "3e8e380db5b85258131e97b44d79bae4c90e9d3128649f49e31c4105ec4ea90d",
+        "config": "5a67dfbededb6f568f30976b4d37f23cda2b98e804f80c8af753b52cf42d468b",
+        "protocol": "b6bf8e5cd350380d36db46317f0058b0442048b2222ef6d9f3f9362dd18edb30",
+        "weights": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03"
+      },
+      "per_run_epochs": 2,
+      "same_real_e8_fixtures_config_protocol": true,
+      "schema": "actual-CUDA-promoted-fullgame-cache-CLI-qualification-v1",
+      "scope": "Infrastructure replay qualification; excluded from production/strength claims.",
+      "source_commit": "76f4890dea90bdd84ed0f4874aa4c5ad2c4c814f",
+      "started_epoch": 1791144735.1030312,
+      "status": "pass",
+      "unique_fresh_transitions": 64
+    }
+  },
+  "whole_cli_receipt": {
+    "sha256": "f114194800c6582423b1ed66522272fa8e9db2136aac8f54c9e13089760b1509",
+    "bytes": 498,
+    "data": {
+      "absolute_deadline_epoch": 1791145657.8046339,
+      "actor_steps": 256,
+      "closed_boundary": true,
+      "epoch": 1,
+      "finished_epoch": 1791144929.5448468,
+      "optimizer_accepted_updates": 18,
+      "optimizer_attempted_updates": 36,
+      "optimizer_rejected_updates": 18,
+      "reason": "maximum epochs",
+      "sample_chain_sha256": "98a703e4cd6e0fbfd55c979a874781ae73387c9fbb6bd4160d8382a8cf639550",
+      "schema": "fullgame-ppo-invocation-v1",
+      "source_commit": "76f4890dea90bdd84ed0f4874aa4c5ad2c4c814f",
+      "status": "completed",
+      "wall_seconds": 170.09127511599945
+    }
+  },
+  "baseline_whole_cli_seconds": 308.375223688,
+  "compiled_whole_cli_seconds": 170.09127511599945,
+  "whole_cli_observed_ratio": 1.8129984825952605,
+  "profile_with_independent_native_audit_seconds": 262.59988164901733,
+  "comparison_limit": "Separate deterministic equal-work runs under different concurrent workloads; not a randomized speed benchmark. Exact tensors/native results independently checked.",
+  "production_source_commit": "2312652dc52a894e9726f48321117cf114270355",
+  "production_package_unchanged_from_actual_cuda_profile": true,
+  "src_git_tree_sha": "35f66353cec6e638112596a15c317c3b85ece2d4"
+}
