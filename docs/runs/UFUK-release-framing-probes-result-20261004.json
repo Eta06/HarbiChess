@@ -1,0 +1,48 @@
+{
+  "schema": "ufuk-release-framing-distinct-probes-result-v1",
+  "scope": "Two single public small-asset probes on existing authorized release401698693, no checkpoints/replay uploaded, no transport/security bypass.",
+  "probes": [
+    {
+      "schema": "authorized-github-public-inventory-framing-probe-v1",
+      "started_epoch": 1791146863.2976387,
+      "asset_name": "UFUK-A100-public-inventory-identity-framing-1791146863245992063.json",
+      "release_id": 401698693,
+      "body_bytes": 543,
+      "body_sha256": "a7b139423f04a18f974bcbfdbf5248800d2624e8680aa85350dfbff29d0f320c",
+      "distinct_hypothesis": "Content-Encoding identity preserves exact upload framing through mandatory protected-egress body-substitution proxy; no actual body encoding or credentials in payload.",
+      "proxy_tls": "Existing mandatory proxy and verified CA/TLS unchanged; no direct network/credential forwarding/new provider.",
+      "references": [
+        "https://github.com/anthropics/sandbox-runtime/issues/543",
+        "https://github.com/openclaw/openclaw/issues/144662"
+      ],
+      "status": 400,
+      "response_message": "Bad Content-Length",
+      "asset_id": null,
+      "asset_created": false,
+      "remote_sha256_verified": false,
+      "finished_epoch": 1791146863.534819,
+      "scope": "Small public inventory framing proof only; full checkpoint/replay backup not claimed."
+    },
+    {
+      "schema": "authorized-github-public-raw-binary-inventory-probe-v1",
+      "started_epoch": 1791147543.5339723,
+      "release_id": 401698693,
+      "asset_name": "UFUK-A100-public-inventory-raw-gzip-1791147543481942948.json.gz",
+      "body_bytes": 331,
+      "body_sha256": "52e5e1637ce5d9c654ae0feb3931c214ffc3e1e9c950831a5ea042f0a7c28f4c",
+      "uncompressed_bytes": 543,
+      "uncompressed_sha256": "a7b139423f04a18f974bcbfdbf5248800d2624e8680aa85350dfbff29d0f320c",
+      "distinct_hypothesis": "Ordinary raw gzip binary body instead of JSON/text can avoid body substitution; documented raw asset API, no Content-Encoding or request decoding assumption.",
+      "proxy_tls": "Mandatory proxy and verified CA/TLS unchanged; credential only existing GitHub upload endpoint, never forwarded or saved.",
+      "remote_sha256_verified": false,
+      "status": 400,
+      "response_message": "Bad Content-Length",
+      "asset_id": null,
+      "asset_created": false,
+      "finished_epoch": 1791147543.7093155,
+      "scope": "Public 543-byte inventory only; no full checkpoint/replay backup claim."
+    }
+  ],
+  "interpretation": "Both ordinary identity text and ordinary raw gzip binary assets returned400BadContentLength. Neither created anyasset. Protected-egress body framing cause remains a hypothesis, not proven. No verified GitHubRelease checkpoint/replay backup exists for this phase; separately SHA-verified A100\u2192CloudEnvironment mirrors retained.",
+  "next_policy": "Do not repeat identical clients or forward GitHub credentials to A100; require a genuinely supported framing fix before new upload attempt."
+}
