@@ -42,7 +42,7 @@ def validate_mc_barrier(barrier, started):
     assert {Path(row["path"]).name for row in receipts} == expected
     assert len(receipts) == len(expected)
     assert barrier["coordinator_sha256"] == (
-        "b00f2fe341c6886beac9377b3b3b17a7302b1856c1315f0f8480451b8b00581f"
+        "686265b09284d1e8c879406510910991d2d8f1a71bf60b610372eac00e76e100"
     )
     for row in receipts:
         assert sha(row["path"]) == row["sha256"]
