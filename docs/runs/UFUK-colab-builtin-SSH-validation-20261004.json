@@ -1,0 +1,39 @@
+{
+  "schema": "UFUK-existing-Colab-builtin-SSH-validation-v1",
+  "recorded_epoch": 1791143876.4481983,
+  "official_project": "https://github.com/googlecolab/google-colab-cli",
+  "version": "0.7.4",
+  "official_tag_commit": "66d7963611bcce2d272488e982ad38e519c062f0",
+  "wheel_sha256": "1435f3533a7064f27b8b81252da85370427d6cf93b94e6c34737bd1cc68ec292",
+  "authentication": "User-interactive Google OAuth; debug logging disabled before CLI imports; credential bytes not logged or committed. Config stored mode0700 and token0600 in task scratch.",
+  "assignment_selection": "Existing unique A100 server assignment adopted into local alias harbichess-a100. Client.assign explicitly disabled by wrapper. No new session allocation/stop/restart.",
+  "SSH_proof": {
+    "epoch": 1791143129.339139,
+    "returncode": 0,
+    "stdout": "{\"hostname\": \"045ceeb3ddfe\", \"boot_id\": \"b1cf1620-f1c7-4571-832f-989ee44a5aa4\"}\n",
+    "stderr": "",
+    "strict_verified_host_key_preserved": true,
+    "scope": "Existing assignment only, no runtime allocation/stop/restart/project changes"
+  },
+  "same_runtime_as_working_HarbiChess": {
+    "hostname": "045ceeb3ddfe",
+    "boot_id": "b1cf1620-f1c7-4571-832f-989ee44a5aa4"
+  },
+  "verified_host_key_fingerprint": "SHA256:vFtmfMnhUSAuQ3eT4suvioz5TPDrKMmDMo3GEfX50lY",
+  "strict_host_check": true,
+  "actual_current_gpu_validation": {
+    "hostname": "045ceeb3ddfe",
+    "boot_id": "b1cf1620-f1c7-4571-832f-989ee44a5aa4",
+    "nvidia_smi": "NVIDIA A100-SXM4-40GB, 40960 MiB, 580.82.07",
+    "torch_version": "2.11.0+cu130",
+    "torch_cuda": "13.0",
+    "cuda_available": true,
+    "actual_cuda_tensor_result": 14,
+    "epoch": 1791143830.5068388
+  },
+  "worker_transport": "Owned local health and snapshot supervisors switched to strict external OpenSSH with builtin proxy, using exclusive local connection lock. Training jobs not restarted.",
+  "keepalive_policy": "Light activity every120s and original no-allocating proxy. Provider reset cannot be guaranteed prevented. Proxy itself has no automatic WebSocket reconnect; each bounded call reconnects to same assignment.",
+  "persistence": "SHA-verified local fullnative/replay mirror resumed successfully. GitHubRelease uploads still return400BadContentLength even official gh exact-length upload; no Release asset success claimed.",
+  "training_or_project_changes_for_connection": false,
+  "self_learning_strength_gate": "UNMET"
+}
