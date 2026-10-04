@@ -22,6 +22,22 @@ def validate_policy_adapter(specification: dict | None) -> dict | None:
     return dict(specification)
 
 
+def validate_policy_context(specification: dict | None, channels: int) -> dict | None:
+    """Version-1 global policy context; no value or input-schema modification."""
+    if specification is None:
+        return None
+    if (
+        not isinstance(specification, dict)
+        or set(specification) != {"schema", "blocks", "heads"}
+        or any(type(specification[key]) is not int for key in specification)
+        or specification["schema"] != 1
+        or min(specification["blocks"], specification["heads"]) <= 0
+        or channels % specification["heads"]
+    ):
+        raise ValueError("unsupported policy context specification")
+    return dict(specification)
+
+
 @dataclass(frozen=True, slots=True)
 class NetworkConfig:
     input_channels: int = ENCODER_CHANNELS
