@@ -1,0 +1,31 @@
+{
+  "schema": "root-reviewed-formal5-helper-inventory-v1",
+  "source_commit": "4515a7c0dda3b4f9615c2fc78a47c872ab14699d",
+  "status": "prepared-unregistered-before-actualCUDA-profile",
+  "helpers": {
+    "own45_cohort.py": "803afa09d6b54b438063e46c7975f1025c213c81029c63de460fbca0ab73fb8a",
+    "own5_adapter_controls.py": "e5fb4dc3f18919885d906fffac8849607344294176cbc0fc87d7bb679ea8a7de",
+    "own5_all_gates.py": "25cba24733d2f9ae8f3d5e4acc53466f06e64af7f98280eeaab1e683a1dda18b",
+    "own5_audit_controller.py": "320268a202f8c8311e86a8570ace7a54eecd6707222470431af250f1f8b0f970",
+    "own5_audit_core.py": "10a717eb0c0db21a2f23e502154a4fb4b16011a0df51de576e245c78f67c5155",
+    "own5_audit_support.py": "17e9c1473ac22acaa38d102c6f45b4891474b122c140748b7e03a96f277eabe1",
+    "own5_baseline.py": "8a2d88446bbe7397d94161d5041941937b2618e5efce2871c916b56507170e71",
+    "own5_eligibility.py": "1a0145e20bd4f851b2aa1e970b2bb0112183b1a41a34cc18bf5bd406505dd413",
+    "own5_final_arms.py": "34fbdf1367d5039e239e8f1068c264bf7606f6c8578225b221483dfaef85ed7f",
+    "own5_formal_config_factory.py": "8209892bcd659f80aabc54ea5d4ace76ff4f752e45054828f9d1731ef8275b6a",
+    "own5_fresh_cli_replay.py": "8167d4dab719a5d2883dbac52ff38eb4149362472e87f69960f114ce6e3f40d2",
+    "own5_full_audit.py": "0885731e1d39ece44c5171b00e764edd3c1c02cac31d8fca0f4904d4bd21b404",
+    "own5_latency.py": "48516e62cc3213b55a1cdf7a6bcbadf579fa79b2a65b958f1943ab23c17d2b4f",
+    "own5_mlx_receipt_bridge.py": "fa4ba273e365eb285ecb74050d8bb1d23b5651eef2a9f933b857636fccb2473c",
+    "own5_owner_config_factory.py": "ecd2138fa74f89854cfa979e7d343bbcff623a42d2b0ddf90958bac03a81e551",
+    "own5_parity.py": "59a6e40f8e9ce5698bc46e317a0b0c314b06d11bc8ad63fc036dbb1857744272",
+    "own5_posttraining.py": "dd4cbe7b2d76b77c118f124a809f12ec49fbe91febef964f7ed77ccb3683bc01",
+    "own5_profile_e1_owned.py": "b27995a39d646a5cce936710abe8850ff814a229ef8dcf6a610584403d4e06b8",
+    "own5_qualify_e1.py": "a85a2745241e4a0d93652033fe1d4183530ba26e7abcbfcd79393f9a0e705743",
+    "own5_strength_analysis.py": "b40563592c170cde6597d9e6bf0603119a3cb151f62cae13a45ae44d3984b53a",
+    "own5_strength_config.py": "9c78ef66dd93bd84483b325478f6e46d357cb67f0c6e83c33c4d0999e0ea8591",
+    "own5_strength_runtime.py": "e3f3ebe265d725cfe3d2bce304e0265f791b75b71929b3f097f9ead777499d50",
+    "own5_training_controller.py": "171114a430b14b87c61cc242430e8ba8d6b0e033a6d492183bb183434c660175"
+  },
+  "root_import_sort_only_before_hardware_qualification": true
+}
