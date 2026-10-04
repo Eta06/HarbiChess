@@ -1,0 +1,37 @@
+{
+  "schema": 1,
+  "registered_before_first_strength_game": true,
+  "created_utc": "2026-10-04T18:15:47.238052+00:00",
+  "max_new_formal_method_attempts": 8,
+  "fixed_current_method_attempt": 1,
+  "current_method": "anchored-sampled-policy-TD0-on-A100",
+  "qualification_rule": "BOTH fixed seeds must pass ALL four lower-bound inferential gates and ALL observed effect/cap/latency/native/parity gates",
+  "one_sided_bad_component_alpha_nominal": 0.00625,
+  "stage_joint_claim_test": "intersection-union: null ANY required true directscore<=.50 or true pairedSFgain<=0; allcomponent lowerbounds must reject",
+  "global_nominal_false_joint_qualification_bound": 0.05,
+  "argument": "For each attempt jointfalsequalification implies rejection of at leastone genuinelybadcomponent, hence probability<=.00625 givenvalidconditionalcoverage. Atmost8newattempts unionbound<=8*.00625=.05. Additionalpoint/cap/integrity/gainconstraints onlyrestrictacceptance.",
+  "does_not_change_frozen_ci_or_gates": true,
+  "coverage_limitations": [
+    "Percentilebootstrap50k/48sourceblocks is approximateconditionalcoverage, not exactdistributionfree guarantee",
+    "Commonchessopeningprefixes and finiteoriginalPGN restrictgeneralization/independence",
+    "No retroactiveglobalfamilywiseclaim for historicalexperiments withoutthisledger"
+  ],
+  "rules": [
+    "Every launched formalmethod qualificationattempt consumesone slot evenif training/arena incomplete orfailed",
+    "Allnewmethodfinals fixedprospectively, bothseeds, virginseparate48+48books with fullheldout/provenance exclusion",
+    "No using arenas for checkpoint/hyperparamselection; no retry/reseed/bookswitch withinattempt",
+    "Unlimited developmentideas do not countas independentlyqualifiedstrength; onlymax8newformalattempts canclaimprojectqualification",
+    "After8attempts no further sameconfidenceformalclaim; newconfirmationdesign mustbe preregistered beforeanynewoutcomes"
+  ],
+  "attempts": [
+    {
+      "number": 1,
+      "protocol": "docs/runs/UFUK-a100-self-learning-preregistration-20261004.json",
+      "seeds": [
+        20261105,
+        20261106
+      ],
+      "status": "registered-no-strength-games-yet"
+    }
+  ]
+}
