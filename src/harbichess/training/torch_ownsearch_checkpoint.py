@@ -159,7 +159,10 @@ def save_ownsearch_checkpoint(directory: Path, learner):
 def load_ownsearch_checkpoint(directory: Path, learner):
     from harbichess.backends.torch_network import load_weights
     from harbichess.training.torch_fullgame_ppo import torch_model_digest
-    from harbichess.training.torch_ownsearch_learner import canonical
+    from harbichess.training.torch_ownsearch_learner import (
+        OWNSEARCH_BOARD_CACHE_SIZE,
+        canonical,
+    )
 
     manifest = json.loads((directory / "checkpoint.json").read_text())
     schema = CUDA_SCHEMA if learner.config.device == "cuda:0" else CPU_SCHEMA
@@ -232,6 +235,7 @@ def load_ownsearch_checkpoint(directory: Path, learner):
     )
     from harbichess.chess.encoding import BoardEncoder
 
+    learner.actors.rules.board_cache_size = OWNSEARCH_BOARD_CACHE_SIZE
     learner.encoder = BoardEncoder(learner.actors.rules)
     learner.actors.rng.setstate(training["actor_rng"])
     learner.sampler_seed_rng.setstate(training["sampler_seed_rng"])
