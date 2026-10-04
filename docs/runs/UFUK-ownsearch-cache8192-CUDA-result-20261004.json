@@ -1,0 +1,178 @@
+{
+  "absolute_deadline_epoch": 1791151233.0806403,
+  "cli_absolute_deadline_epoch": 1791151171.3739266,
+  "cli_result": {
+    "absolute_deadline_epoch": 1791151171.3739266,
+    "audit_optimizer_attempted_updates": 16,
+    "both_final_full_native_freshprocess_strictload": true,
+    "byte_exact_artifacts": {
+      "checkpoints/epoch-00000002/actor.json": "bb11774289ff41dfc60434891871d7d688b33650b55802c85b07cc59c2c3ced2",
+      "checkpoints/epoch-00000002/base.safetensors": "aeba6ecf833610423c1f28a71eb130273cd1aa7282022b5059a0270809bd9027",
+      "checkpoints/epoch-00000002/behavior.safetensors": "a703204dce575d4943ee0516ca88297a6ef248b5da7117322a6e763bdd9f67bd",
+      "checkpoints/epoch-00000002/last-frozen-epoch.json.gz": "950c2791f3f4ee14293d32ef42a814b20fc8be8e7f13f1344da9a71645c3f2d6",
+      "checkpoints/epoch-00000002/model.safetensors": "44e2df82b5fb6fb5989c7f05c10b22d655d79738e1f00348956cfcc91484f47a",
+      "checkpoints/epoch-00000002/training.pt": "175327599735d245f3e7a3b733675b7c272acb87d81d6bde12196fe2715ebb1e",
+      "journal/epoch-00000001.json.gz": "b34c1ac6613ee9380592adfd8f03e5b55d45b7b3d6a46ee2f7bd99df6b9f2f38",
+      "journal/epoch-00000002.json.gz": "950c2791f3f4ee14293d32ef42a814b20fc8be8e7f13f1344da9a71645c3f2d6"
+    },
+    "duplicate_qualification_fresh_transitions": 128,
+    "finished_epoch": 1791151020.9063811,
+    "input_sha256": {
+      "book": "9340b54b6ac01ead55b9b790ddaa13e951e278a66f59c9009efae2d26ba68b6e",
+      "config": "bb6d28d0627d9e6236318fc3f1839b59eddeb54316ea77a90f50d838dfddc007",
+      "protocol": "b16d97b7d178af3c54b93482953160b5895802ca387f968b25cdb1198a82d227",
+      "weights": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03"
+    },
+    "last_epoch_UNKNOWN_excluded_value_rows": 57,
+    "last_epoch_known_terminal_rows": 7,
+    "last_epoch_policy_target_rows": 8,
+    "per_run_epochs": 2,
+    "schema": "actual-CUDA-sparse-ownsearch-CLI-qualification-v1",
+    "scope": "Infrastructure replay qualification; excluded from production/strength claims.",
+    "source_commit": "a278bba67bce962cb9294f0d24040e02e9acf1f4",
+    "started_epoch": 1791150991.4412322,
+    "status": "pass",
+    "unique_fresh_transitions": 128
+  },
+  "cli_result_sha256": "77073d585c3a490e04d2ecd6f9dade5aed6a7a8c3102e977b57eaf902dcba261",
+  "controller_sha256": "5b75b73a9ad53142a5f418bfd9608c58338acd59cfdbe705a0123d76ab7ead4f",
+  "finished_epoch": 1791151020.9919772,
+  "helper_test_manifest_sha256": {
+    "/content/HarbiChess-ownsearch-cache-a278bba/tests/test_ownsearch_cache8192.py": "fbd92d83e2942d3883f048626f54f3917cb96a2c81723233855e7d8da6b20801",
+    "/content/HarbiChess-ownsearch-cache-a278bba/tests/test_ownsearch_stage.py": "2261bb9ca9a9bf3980bcdf429884dd317ac9af4e0ab7d117e5875f5164b03e21",
+    "/content/harbichess-fullgame-method2-inputs/ownsearch-cache8192-a278bba/cuda-qualification/cache8192-qualifier-input-manifest.json": "d4755718073fc9f1f495d5bdf4de47d81817c32ad3f7aee12bb908a3cd867120",
+    "/content/harbichess-fullgame-method2-inputs/ownsearch-cache8192-a278bba/cuda-qualification/qualify_cuda_owned.py": "a6b3fd1e9bbcb9c55c1919cbad32bda7a1a0c28d31f7e673e9b3afead9f45dc2",
+    "/content/harbichess-fullgame-method2-inputs/ownsearch-cache8192-a278bba/cuda-qualification/qualify_ownsearch_cli.py": "45e5cc935c2266ea7b5557712447222d1f56043088ce1f205d2e2ab19d619327"
+  },
+  "input_sha256": {
+    "book": "9340b54b6ac01ead55b9b790ddaa13e951e278a66f59c9009efae2d26ba68b6e",
+    "config": "bb6d28d0627d9e6236318fc3f1839b59eddeb54316ea77a90f50d838dfddc007",
+    "protocol": "b16d97b7d178af3c54b93482953160b5895802ca387f968b25cdb1198a82d227",
+    "weights": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03"
+  },
+  "phases": [
+    {
+      "absolute_deadline_epoch": 1791151053.1565325,
+      "command": [
+        "/usr/bin/python3",
+        "-c",
+        "\nimport json,torch\nfrom harbichess.training.torch_online_learner import _prepare_device\nfrom harbichess.training.torch_online_checkpoint import _runtime\nassert torch.cuda.is_available() and 'A100' in torch.cuda.get_device_name(0)\n_prepare_device('cuda:0')\nprint(json.dumps(_runtime('cuda:0'),sort_keys=True))\n"
+      ],
+      "finished_epoch": 1791150876.4867187,
+      "owned_pid": 54820,
+      "owned_process_group": 54820,
+      "phase": "runtime",
+      "returncode": 0,
+      "started_epoch": 1791150873.1716187,
+      "status": "pass",
+      "whole_seconds": 3.3150999546051025
+    },
+    {
+      "absolute_deadline_epoch": 1791151053.1565325,
+      "command": [
+        "/usr/bin/python3",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/test_ownsearch_stage.py",
+        "tests/test_ownsearch_cache8192.py",
+        "--junitxml",
+        "/content/harbichess-runs/ownsearch-cache-CUDA-readiness-a278bba-20261004/units.xml"
+      ],
+      "finished_epoch": 1791150991.3693905,
+      "owned_pid": 54840,
+      "owned_process_group": 54840,
+      "phase": "units",
+      "returncode": 0,
+      "started_epoch": 1791150876.4913394,
+      "status": "pass",
+      "whole_seconds": 114.87805104255676
+    },
+    {
+      "absolute_deadline_epoch": 1791151171.3739266,
+      "command": [
+        "/usr/bin/python3",
+        "/content/harbichess-fullgame-method2-inputs/ownsearch-cache8192-a278bba/cuda-qualification/qualify_ownsearch_cli.py",
+        "--checkout",
+        "/content/HarbiChess-ownsearch-cache-a278bba",
+        "--output",
+        "/content/harbichess-runs/ownsearch-cache-CUDA-readiness-a278bba-20261004/cli",
+        "--weights",
+        "/content/harbichess-inputs/initial-e8.safetensors",
+        "--book",
+        "/content/harbichess-fullgame-method2-inputs/ownsearch-cache8192-a278bba/cuda-qualification/cuda-qualifier-book.json",
+        "--config",
+        "/content/harbichess-fullgame-method2-inputs/ownsearch-cache8192-a278bba/cuda-qualification/cuda-qualifier-config.json",
+        "--protocol",
+        "/content/harbichess-fullgame-method2-inputs/ownsearch-cache8192-a278bba/cuda-qualification/cache8192-qualifier-protocol.json",
+        "--source-commit",
+        "a278bba67bce962cb9294f0d24040e02e9acf1f4",
+        "--deadline-epoch",
+        "1791151171.3739266",
+        "--memory-max-bytes",
+        "68719476736",
+        "--disk-min-free-bytes",
+        "8589934592"
+      ],
+      "finished_epoch": 1791151020.9691427,
+      "owned_pid": 55435,
+      "owned_process_group": 55435,
+      "phase": "cli",
+      "returncode": 0,
+      "started_epoch": 1791150991.3741546,
+      "status": "pass",
+      "whole_seconds": 29.594988107681274
+    }
+  ],
+  "runtime": {
+    "byteorder": "little",
+    "cuda": {
+      "capabilities": [
+        [
+          8,
+          0
+        ]
+      ],
+      "cudnn": 92700,
+      "cudnn_benchmark": false,
+      "cudnn_deterministic": true,
+      "cudnn_tf32": false,
+      "devices": [
+        "NVIDIA A100-SXM4-40GB"
+      ],
+      "matmul_tf32": false,
+      "version": "13.0",
+      "workspace": ":4096:8"
+    },
+    "deterministic": true,
+    "device": "cuda:0",
+    "machine": "x86_64",
+    "numpy": "2.1.3",
+    "python": "3.13.15",
+    "threads": 1,
+    "torch": "2.11.0+cu130"
+  },
+  "schema": "owned360-ownsearch-cache8192-CUDA-qualification-v2",
+  "scope": "Cache-only infrastructure; no formal/candidate/strength eligibility",
+  "source_commit": "a278bba67bce962cb9294f0d24040e02e9acf1f4",
+  "started_epoch": 1791150873.1565325,
+  "status": "pass-all14-no-skip-actualCUDA-and-e8-cleanCLI-cache-equivalence",
+  "unit_absolute_deadline_epoch": 1791151053.1565325,
+  "unit_cases": [
+    "test_schedule_before_outcomes_uses_separate_rng_and_both_parities",
+    "test_unknown_and_illegal_zero_gradient_terminal_white_black_pov",
+    "test_actual_e8_native_partial_rejection_and_unused_storage",
+    "test_real_fresh_process_two_vs_pause_one_resume_two_native_bytes[cpu]",
+    "test_real_fresh_process_two_vs_pause_one_resume_two_native_bytes[cuda:0]",
+    "test_rejected_pass_restores_model_adam_globals_and_both_sampler_rngs",
+    "test_closed_ledger_schedule_tamper_rejected",
+    "test_zero_search_selection_still_trains_fresh_known_outcomes",
+    "test_known_terminal_root_never_calls_network_both_movers[7k/6Q1/5K2/8/8/8/8/8 b - - 0 1]",
+    "test_known_terminal_root_never_calls_network_both_movers[8/8/8/8/8/5k2/6q1/7K w - - 0 1]",
+    "test_same_record_policy_CE_zero_ablation_changes_only_policy_term",
+    "test_only_ownsearch_fresh_and_resume_before_validation_use8192",
+    "test_old_and_cache_native_journals_all_rng_exact_and_fresh_resume[cpu]",
+    "test_old_and_cache_native_journals_all_rng_exact_and_fresh_resume[cuda:0]"
+  ],
+  "whole_seconds": 147.835444688797
+}
