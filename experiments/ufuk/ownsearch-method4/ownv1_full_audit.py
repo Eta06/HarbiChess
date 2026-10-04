@@ -345,9 +345,9 @@ def audit_epoch(a, config, paths, initial, index, neural):
         rng.setstate(state)
     root_by_index = {root["collection_index"]: root for root in ledger["roots"]}
     audited = neural_positions = 0
-    for index, indices in enumerate(batches):
+    for wavefront_index, indices in enumerate(batches):
         guard(a.deadline_epoch, a.run)
-        if index not in chosen:
+        if wavefront_index not in chosen:
             for i in indices:
                 row = epoch.actions[i]
                 for _ in row.legal_actions:
