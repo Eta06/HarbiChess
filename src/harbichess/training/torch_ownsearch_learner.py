@@ -44,6 +44,9 @@ from harbichess.training.torch_ownsearch_core import (
 )
 
 OWNSEARCH_LEARNER_SCHEMA = "torch-fresh-sparse-ownsearch-v1"
+OWNSEARCH_BOARD_CACHE_SIZE = (
+    8192  # Runtime-only; pinned source/protocol, not native state.
+)
 EMPTY_CHAIN = hashlib.sha256(b"").hexdigest()
 
 
@@ -141,6 +144,7 @@ class TorchOwnSearchLearner:
             config=config.actors,
             rng=random.Random(config.seed),
         )
+        self.actors.rules.board_cache_size = OWNSEARCH_BOARD_CACHE_SIZE
         self.encoder = BoardEncoder(self.actors.rules)
         self.sampler_seed_rng = random.Random(config.seed ^ 0x51A9)
         self.schedule_rng = random.Random(config.seed ^ 0x831A)
