@@ -1,0 +1,77 @@
+{
+  "schema": "harbichess-cache-source-bridge-v1",
+  "registered_utc": "2026-10-04T18:35:27.620364+00:00",
+  "qualification_attempt": 1,
+  "qualification_rule": "Pre-strength cache-only reproducible repair within existing attempt1; no candidate/outcome selection; originalinterruption explicitlyfailed/interrupted, allhyperparameters/final/gates identical. Any journal mismatch abortsrepair, never silentlyqualifies.",
+  "old_producer_source": "311cd80b82c3d46f7182dca543e25667e4d66e63",
+  "new_producer_source": "53e5593d876909bf869e67f3e5bdfca7ef87355f",
+  "runtime_source_diff_only": [
+    "src/harbichess/chess/rules.py"
+  ],
+  "original_protocol_file": "UFUK-a100-self-learning-preregistration-20261004.json",
+  "original_protocol_sha256": "7cadb2b382fe94d838590237f5920bd55fca7cbc615ae65a8192eb65eb083d1c",
+  "original_qualification_ledger_sha256": "9f32ba857ed2925148b213227d1f8109b807448d00599084addb7f0921c423a3",
+  "new_metadata_changes_only": [
+    "source_commit"
+  ],
+  "inputs_change": false,
+  "same_native_schema": "torch-online-native-cuda-v1",
+  "strict_old_native_loader_source": "311cd80b82c3d46f7182dca543e25667e4d66e63",
+  "new_native_serialization_source": "53e5593d876909bf869e67f3e5bdfca7ef87355f",
+  "new_native0_to_parent_state": "Fullstrictnative0import current/baseEMAAdam/allCPU-CUDA-python-numpy-actorRNG/activehistories/config/inputSHAs; source rebound onlyafterfullstrictload, no weights-only resume.",
+  "recovery_rules": [
+    "Refuse any live originalowner; preserveoriginalnative0/checkpoints/journals/logs/progress/metadata withoutrewrite",
+    "Verify frozencontiguousoriginaljournalinventory+hashchain1..N and everyfullregeneratedrecordexact includingloss/actions/targets/cursors/chains beforecheckpointN",
+    "Onlynewseparatefolder oneply-cache-seed-{seed}/run; newnative0+nativeN eachnewproducer53, originalparent311 preserved explicitlyin immutable source-bridge-v1.json",
+    "Sidecar links thisprospectiveprotocolSHA, originalinterruptionreceiptSHA/native0inventory/metadataSHA/journalinventory/chain/N and newnative0+Nfilehashes",
+    "Original RAM stateN was notsaved; regeneratedfullstateN is reconstructed, notdirectlycompared to lostoriginalN. ThreeupdateCUDAbyteproof andeveryfactualjournalrecordequivalence supportsource-onlydeterministicreconstruction",
+    "Allrecoveryreplays counted duplicateAUDITcost; logical uniqueproductioncountN+subsequentnewtransitions, neverdoublecount N",
+    "Complete10,000updates/currentfinal perseed; samepause1000/freshCLIresume, checkpoint500, originalfirstlaunch7200s budget includingstoppage/reconstruction; neverresetdeadlines",
+    "Original noengine/no newteacher labels, 128actors/T1/cap256/EMA.9/objective/LR/etc and all independentstrength/latency/parity/native gates unchanged",
+    "Guard originalabsolutedeadline,64GiBmemory,8GiBdisk; recoveryitself max180whole seconds perseed and withinoriginaldeadline; nohalf/mismatched recovery promoted"
+  ],
+  "scope": "Prospective repair before resumedproduction oranystrengthgame. Strength target unmet.",
+  "parents": {
+    "20261105": {
+      "original_interruption_receipt_sha256": "bb4cd7c5bf349b56f3be0ebca41da3c796758d78a39b82ab92986917108cdfe4",
+      "frozen_updates": 90,
+      "frozen_transitions": 11520,
+      "frozen_sample_chain_sha256": "c684de4f4edb79bf5b12403b5b1e90c6af30883d90d5dd7ae94321b559b49db1",
+      "original_started_epoch": 1791137602.6783178,
+      "absolute_deadline_epoch": 1791144802.6783178
+    },
+    "20261106": {
+      "original_interruption_receipt_sha256": "19e3444989f7626ca5224fafc7d36ddd2537cfb58f3c1e1e3e1b065b55b3fd0f",
+      "frozen_updates": 87,
+      "frozen_transitions": 11136,
+      "frozen_sample_chain_sha256": "e8f15ba275ea56245b11bfb37316e18f40fd1bd551e4ab95a697c6dbf0609dc1",
+      "original_started_epoch": 1791137602.6782463,
+      "absolute_deadline_epoch": 1791144802.6782463
+    }
+  },
+  "actual_equivalence_proof": {
+    "status": "pass-e8-CUDA-cache-only-native-and-factual-journal-equivalence",
+    "old_source_commit": "311cd80b82c3d46f7182dca543e25667e4d66e63",
+    "new_source_commit": "53e5593d876909bf869e67f3e5bdfca7ef87355f",
+    "three_old_new_updates_all_models_adam_allRNG_actor_bits_exact": true,
+    "three_factual_original_production_journals_matched": true,
+    "freshprocess_regenerated_new_native_matches": true,
+    "original_audit_failure": "0doptimizerstep byteview checker error; existingartifacts retained; corrected reshape(-1) bytechecker, no threshold relaxation",
+    "old_profiled_three_updates_seconds": 38.84,
+    "new_profiled_three_updates_seconds": 3.858,
+    "new_unprofiled_update_seconds_concurrent": [
+      1.2780118000000584,
+      0.4939013060002253,
+      0.4851019269999597
+    ],
+    "audit_duplicate_updates": 9,
+    "audit_duplicate_transitions": 1152,
+    "scope": "Equivalence/profile evidence under concurrentproduction; finalquiescentmodel latency/strength stillpending"
+  },
+  "limitations": [
+    "ActualCUDA3updateallstatetensorequivalence; everyrecoveredprefixjournalmustpass independently; no directoldN RAM tensorcomparison",
+    "Profiletimesconcurrent/profileroverhead, notquiescentfinalCPUlatency; no strengthgamesyet",
+    "AppleMetaluntested; portabletrainedTorchCPU/MLXCPU18history paritypassed",
+    "RemoteReleaseuploadpreviouslyfailed400BadContentLength; Colab and hashverifiedCloudEnvmirror notclaimedremoteReleasepersistence"
+  ]
+}
