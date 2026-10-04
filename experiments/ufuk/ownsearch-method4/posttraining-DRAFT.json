@@ -1,0 +1,52 @@
+{
+  "schema": "ufuk-ownv1-posttraining-DRAFT-v1",
+  "source_commit": "QUALIFIED_OWN_SOURCE",
+  "qualification_config": "ROOT_BINDINGS_JSON",
+  "qualification_config_sha256": "ROOT_BINDINGS_SHA",
+  "helpers": "ROOT_HELPER_DIR",
+  "repo": "ROOT_CLEAN_NEWOWN_CHECKOUT",
+  "python": "/usr/bin/python3",
+  "root": "ROOT_ABSENT_POSTTRAIN_DIR",
+  "whole_training_seconds": "ROOT_PROSPECTIVE_BUDGET",
+  "whole_audit_seconds": "ROOT_FROM_SAME_ORIGINAL_FIRSTCLOCK",
+  "initial": "/content/harbichess-inputs/initial-e8.safetensors",
+  "stockfish": "/content/harbichess-tools/stockfish-linux-x86-64-universal",
+  "probes": "ROOT_EXACT1089FD_PROBE",
+  "exchange_manifest": "ROOT_EXCHANGE_MODEL_MANIFEST_ABSENT",
+  "mlx_receipt": "ROOT_IMMUTABLE_ACTUAL_LOCALMLX_RECEIPT",
+  "mlx_receipt_sha256_file": "ROOT_TRANSPORT_ACTUAL_SHA",
+  "expected_A100_runtime": {
+    "hostname": "ROOT_VERIFIED",
+    "boot_id": "ROOT_VERIFIED",
+    "python_executable_sha256": "ROOT_VERIFIED",
+    "torch_version": "2.11.0+cu130"
+  },
+  "seeds": [
+    {
+      "seed": 20261425,
+      "original_training_started_epoch": "ROOT_SINGLE_REAL_CLOCK",
+      "training_result": "ROOT_TRAIN_RESULT",
+      "run": "ROOT_RUN",
+      "audit_controller_result": "ROOT_OWNER_AUDIT_RESULT",
+      "full_audit": "ROOT_ALL_NATIVE_AUDIT",
+      "audit_manifest": "ROOT_ORIGINAL_FOUR_INPUT_AUDIT_MANIFEST",
+      "book": "ROOT_NEW_VIRGIN_BOOK",
+      "baseline_root": "ROOT_PROSPECTIVE_BASELINE_RESULT",
+      "baseline_deadline_epoch": "ROOT_ORIGINAL_BASELINE_START_PLUS3600",
+      "final_root": "ROOT_ABSENT_FINAL_ARMS"
+    },
+    {
+      "seed": 20261426,
+      "original_training_started_epoch": "ROOT_SINGLE_REAL_CLOCK",
+      "training_result": "ROOT_TRAIN_RESULT",
+      "run": "ROOT_RUN",
+      "audit_controller_result": "ROOT_OWNER_AUDIT_RESULT",
+      "full_audit": "ROOT_ALL_NATIVE_AUDIT",
+      "audit_manifest": "ROOT_ORIGINAL_FOUR_INPUT_AUDIT_MANIFEST",
+      "book": "ROOT_NEW_VIRGIN_BOOK",
+      "baseline_root": "ROOT_PROSPECTIVE_BASELINE_RESULT",
+      "baseline_deadline_epoch": "ROOT_ORIGINAL_BASELINE_START_PLUS3600",
+      "final_root": "ROOT_ABSENT_FINAL_ARMS"
+    }
+  ]
+}
