@@ -7,6 +7,7 @@ import subprocess
 import sys
 import time
 from pathlib import Path
+
 from harbichess.backends.torch_network import sha256
 
 
@@ -53,9 +54,7 @@ def main():
     audit.mkdir()
     (audit / "checkpoints").mkdir()
     (audit / "journal").mkdir()
-    shutil.copytree(
-        original / "checkpoints/epoch-00000001", audit / "checkpoints/epoch-00000001"
-    )
+    shutil.copytree(original / "checkpoints/epoch-00000001", audit / "checkpoints/epoch-00000001")
     shutil.copyfile(
         original / "journal/epoch-00000001.json.gz",
         audit / "journal/epoch-00000001.json.gz",
@@ -65,7 +64,11 @@ def main():
     (audit / "metadata.json").write_text(json.dumps(auditmeta, indent=2) + "\n")
     receipt = {
         "schema": "ufuk-method2-independent-fresh-CLI-epoch1to2-v1",
-        "scope": "AUDIT ONLY: one duplicate epoch32768presentations; production input/config/source unchanged; separate audit deadline, no production budget reset",
+        "scope": (
+            "AUDIT ONLY: one duplicate epoch32768presentations; production inp"
+            "ut/config/source unchanged; separate audit deadline, no productio"
+            "n budget reset"
+        ),
         "source_commit": spec["source_commit"],
         "manifest_sha256": sha256(a.manifest),
         "script_sha256": sha256(Path(__file__)),
@@ -133,9 +136,7 @@ def main():
             f"checkpoints/epoch-00000002/{name}" for name in payloads
         ]
         for relative in compare:
-            assert (original / relative).read_bytes() == (
-                audit / relative
-            ).read_bytes(), relative
+            assert (original / relative).read_bytes() == (audit / relative).read_bytes(), relative
         for relative, digest in parenthashes.items():
             assert sha256(original / relative) == digest
         record = __import__("gzip").decompress(
@@ -144,16 +145,10 @@ def main():
         record = json.loads(record)
         receipt.update(
             status="pass-exact-freshCLI-epoch2-allnative-payloadbits",
-            compared_sha256={
-                relative: sha256(audit / relative) for relative in compare
-            },
+            compared_sha256={relative: sha256(audit / relative) for relative in compare},
             duplicate_fresh_presentations=32768,
-            duplicate_optimizer_attempts=record["training"][
-                "optimizer_steps_attempted"
-            ],
-            duplicate_optimizer_committed=record["training"][
-                "optimizer_steps_committed"
-            ],
+            duplicate_optimizer_attempts=record["training"]["optimizer_steps_attempted"],
+            duplicate_optimizer_committed=record["training"]["optimizer_steps_committed"],
         )
     except Exception as e:
         receipt.update(status="failed-preserved-audit", error=repr(e))
