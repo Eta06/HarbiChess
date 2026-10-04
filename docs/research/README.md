@@ -136,3 +136,10 @@ Başarısız kayıtlar korunur. Sonuç görüldükten sonra eşik değiştirmek 
   %71,35vsinitial/%66,67vscontrol; SF512%7,29, ayarlı fark sıfırı içeriyor.
   Toplam güç FAILED; hız/bütünlük PASS. [Yeni policy/value tanısı](../runs/UFUK-broad-policy-value-diagnostic-preregistration-20261004.md)
   gözlenen48kök üzerinde, yeni finalholdout veya learnedoracle/self-learning değildir.
+
+- [Broader policy/value/depth diagnostic](../runs/UFUK-broad-policy-value-diagnostic-result-20261004.md):
+  five adjustedqualitygatesFAILED; v1countlimitfailure retained, v2explicitimmutable
+  continuation/allquery audit complete. [Capacity protocol](../runs/UFUK-broad-capacity-preregistration-20261004.md)
+  and [measuredpreflight](../runs/UFUK-broad-capacity-training-registration-20261004.md):
+  real initialTorch/MLXCPUparity/activewidth/whole-rootcost/new48sourcegameauditPASS;
+  fouractualcontrolledproductionruns ACTIVE, no learning/strength/self-learningsuccess yet.
