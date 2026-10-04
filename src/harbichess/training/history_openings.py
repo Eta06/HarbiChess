@@ -51,11 +51,23 @@ def freeze(
     train_families: int = 4096,
     validation_families: int = 1024,
     wall_seconds: float = 600,
+    excluded_games: set[str] | None = None,
+    split_counts: dict[str, int] | None = None,
 ) -> dict:
     if output.exists():
         raise FileExistsError(output)
     if min(train_families, validation_families, wall_seconds) <= 0:
         raise ValueError("positive distinct-game split and selection budgets required")
+    counts_by_split = {"train": train_families, "validation": validation_families}
+    if split_counts is not None:
+        if (
+            not split_counts
+            or not set(split_counts) <= {"train", "validation", "arena"}
+            or any(type(count) is not int or count <= 0 for count in split_counts.values())
+        ):
+            raise ValueError("named split counts must be positive integers")
+        counts_by_split = dict(split_counts)
+    forbidden_games = frozenset(excluded_games or ())
     started = time.perf_counter()
     before = file_hash(pgn)
     candidates, seen_games = [], set()
@@ -86,6 +98,9 @@ def freeze(
                 counts["duplicate_game"] += 1
                 continue
             seen_games.add(site)
+            if site in forbidden_games:
+                counts["excluded_source_game"] += 1
+                continue
             result = headers.get("Result")
             if result not in ("1-0", "0-1", "1/2-1/2") or not record.rstrip().endswith(result):
                 counts["incomplete_result"] += 1
@@ -138,7 +153,7 @@ def freeze(
     counts["eligible_candidates_before_root_exclusions"] = len(candidates)
     random.Random(seed).shuffle(candidates)
     roots, chosen = set(excluded_keys), []
-    required = train_families + validation_families
+    required = sum(counts_by_split.values())
     for candidate in candidates:
         key = " ".join(candidate["opening"]["fen"].split()[:4])
         if key in roots:
@@ -153,11 +168,11 @@ def freeze(
     if file_hash(pgn) != before:
         raise ValueError("PGN source changed during immutable root selection")
     splits = {}
-    for split, rows in (
-        ("train", chosen[:train_families]),
-        ("validation", chosen[train_families:]),
-    ):
+    cursor = 0
+    for split, count in counts_by_split.items():
+        rows = chosen[cursor : cursor + count]
         splits[split] = [{"family": family, **row} for family, row in enumerate(rows)]
+        cursor += count
     book = {
         "schema": HISTORY_BOOK_SCHEMA,
         "seed": seed,
@@ -184,6 +199,13 @@ def freeze(
             "Last partial-source game conservatively excluded."
         ),
     }
+    if excluded_games is not None:
+        book["excluded_source_games"] = len(forbidden_games)
+        book["excluded_source_games_sha256"] = hashlib.sha256(
+            ("\n".join(sorted(forbidden_games)) + "\n").encode()
+        ).hexdigest()
+    if split_counts is not None:
+        book["requested_split_counts"] = counts_by_split
     output.parent.mkdir(parents=True, exist_ok=True)
     with output.open("x", encoding="utf8") as stream:
         stream.write(json.dumps(book, indent=2) + "\n")
