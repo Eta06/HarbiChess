@@ -10,7 +10,7 @@ ROOT = Path(__file__).parents[1]
 def production_path(filename):
     folder = 'ownsearch-method4' if filename.startswith('ownv1') else 'search-acting-method5'
     return ROOT / folder / filename
-END = 1791170400
+END = 1791180000
 
 
 def function(filename, name, namespace=None):
