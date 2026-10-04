@@ -37,6 +37,7 @@ def check_training_evidence(profile, qualification):
     assert qualification["status"] == (
         "pass-actualCUDA-E1-full-data-original-groups-raw-packets-and-targeted-mutations"
     )
+    assert qualification["audit_report"]["epoch"] == 1
     assert qualification["audit_report"]["raw_actor_replayed"] == 32768
     assert qualification["audit_report"]["optimizer_committed"] > 0
     assert qualification["audit_report"]["raw_actor_packet_roots_verified"] == 18
