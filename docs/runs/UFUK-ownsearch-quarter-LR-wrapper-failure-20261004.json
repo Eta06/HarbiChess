@@ -1,0 +1,43 @@
+{
+  "schema": "ownsearch-duplicate-LR-wrapper-error-preserved-v1",
+  "status": "failed-before-SGD-control-flow",
+  "controller_receipt": {
+    "absolute_deadline_epoch": 1791150054.2251592,
+    "error": "RuntimeError('duplicate-only-fitting returned 1')",
+    "finished_epoch": 1791149794.0400624,
+    "registration_sha256": "6d7034b535ecf24e9e7615da06897fa5f56fbecd10f05e38c8ede8ee4ffdbb57",
+    "schema": "owned300-duplicate-lr-diagnosis-v1",
+    "source_commit": "c93b79b8140b31fe1f4d0ca96adddd857991925b",
+    "started_epoch": 1791149754.2952302,
+    "status": "failed-preserved",
+    "whole_seconds": 39.744832277297974
+  },
+  "worker_receipt": {
+    "absolute_deadline_epoch": 1791150054.2251592,
+    "error": "TypeError('asdict() should be called on dataclass instances')",
+    "finished_epoch": 1791149790.851585,
+    "input_and_helper_sha256": {
+      "book": "f2f3038728cce4c56987c9068f900d30ed99f996f99e03a38c41bbbc1f3c9958",
+      "common_helper": "a6b3fd1e9bbcb9c55c1919cbad32bda7a1a0c28d31f7e673e9b3afead9f45dc2",
+      "config": "cb5d35ff364534c4e47adfacfb5e18cc29ab3f80ba68f3750bb0e589ab48f229",
+      "helper": "959cb46611e0536046a6d99a73b8b8744ff2ddfddd9e20f21266a81dcce4b287",
+      "profile_journal": "d94f7de5135e322117d03a928d12160b3bce831f7727c96bd0128b1d52ae218e",
+      "profile_result": "560b1fa8af4de03c99b0b0126480b787b89bff8ca9b0fd47e10243166bc8f288",
+      "weights": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03"
+    },
+    "new_search_roots": 0,
+    "new_selfplay_transitions": 0,
+    "registration_sha256": "6d7034b535ecf24e9e7615da06897fa5f56fbecd10f05e38c8ede8ee4ffdbb57",
+    "schema": "ownsearch-fixed-lr-duplicate-development-diagnosis-v1",
+    "scope": "Duplicate development fitting only; not formal training/resume/strength",
+    "source_commit": "c93b79b8140b31fe1f4d0ca96adddd857991925b",
+    "started_epoch": 1791149754.3720963,
+    "status": "failed-preserved",
+    "whole_seconds": 36.47948861122131
+  },
+  "controller_receipt_sha256": "dde94d53eee2039256935999a1c3eb33b0986defe80cbcedcb8f9f13d224bf26",
+  "worker_receipt_sha256": "943126f599f2d4b49ea5431e5fdcf7aa1efa9dd529158236ccc96f61c7e5632a",
+  "cause": "Helper applied dataclasses.asdict to OnlineActors.cursor(), which returns a dict. Original helper source reaches this before terminal target construction/train_search_epoch; no optimizer step attempted. All originalremote files retained.",
+  "new_training_or_search_data": 0,
+  "strength_success": false
+}
