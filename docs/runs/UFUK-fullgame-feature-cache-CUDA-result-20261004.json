@@ -1,0 +1,62 @@
+{
+  "schema": "UFUK-fullgame-feature-cache-CUDA-result-v2",
+  "actual_proof": {
+    "epoch": 1791144111.4415908,
+    "result.json": {
+      "status": "passed-actual-CUDA-native1-cache-equivalence",
+      "returncode": 0,
+      "started_epoch": 1791143575.3220851,
+      "finished_epoch": 1791144019.009306,
+      "whole_seconds": 443.68722105026245,
+      "deadline_epoch": 1791144475.3220851,
+      "error": null,
+      "scope": "No new selfplay/production checkpoints/strength claims"
+    },
+    "stderr.log": "",
+    "proof/result.json": {
+      "absolute_deadline_epoch": 1791144475.3220851,
+      "actual_development_epoch_sha256": "2014fc4ab93061de1aea22e1db46d7a00707a976aaa71a52ef06f241a6424477",
+      "baseline_ppo_sha256": "5e377dde7e5b6846e5e4cfc00cf97debfa752a4f02415b9ba9da627ec8d2c5b9",
+      "both_normal_branches_equal_actual_native1_entire_state": true,
+      "cases": {
+        "actual-recorded-four-pass-case": {
+          "accepted_passes": 1,
+          "all_models_Adam_globalCPU_allCUDA_actor_sampler_training_STORAGE_exact": true,
+          "attempted_optimizer_updates": 36,
+          "baseline_train_seconds_including_allKL": 173.193161401,
+          "committed_optimizer_updates": 18,
+          "compiled_train_seconds_including_compile_allKL": 33.32739810299972,
+          "complete_training_record_sha256": "a0c537dbb20e082d8eb81dfa3918059e84ff2c56d877ddf8b530bb6ee77aa3b3",
+          "raw_compiled_feature_bytes": 478060544,
+          "speedup": 5.196720153962793,
+          "target_rows": 17959,
+          "unique_encoded_states": 17956
+        }
+      },
+      "disk_min_free_bytes": 8589934592,
+      "duplicate_proof_optimizer_updates_attempted": 72,
+      "finished_epoch": 1791144017.2346566,
+      "independent_reconciliation_sha256": "bb0346f0301927ca0b366e92f6b665e56424bc86e2d71485f6129007e65d6229",
+      "input_sha256": {
+        "book": "f2f3038728cce4c56987c9068f900d30ed99f996f99e03a38c41bbbc1f3c9958",
+        "experiment_config": "e27886c70645cf1cdfb3a43fb052075bd7d8c69b4b0d7194d483de44ebcab92f",
+        "initial_weights": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03",
+        "protocol": "7da552cc826a92f0b9203843f4001af01c60b0148d23b280e584d274c6739445"
+      },
+      "isolated_candidate_sha256": "e864505c3cef3c96ae07e508b329c39cac65fd1ac2072556aa8e80ee8f8611c4",
+      "memory_max_bytes": 68719476736,
+      "memory_metric": "cgroup-v2-current",
+      "native0_manifest_sha256": "7101081a6ad9acc2d5d56f65850208826deee533d511b159c37a3b2ef67363b0",
+      "native1_manifest_sha256": "8abff181438af68d9f5299fe82f4e068f25029923e80cd6af9dc332a5b08e304",
+      "new_selfplay_transitions": 0,
+      "production_native_saved": false,
+      "schema": "actual-CUDA-fullgame-epoch-feature-cache-native1-proof-v2",
+      "scope": "Controlled CUDA performance/core equivalence only; excluded from production and strength.",
+      "source_commit": "e36f0fa0c9bedd0d8dbb89a01fe691be1c095f65",
+      "source_tags_rewritten": false,
+      "started_epoch": 1791143576.8525288,
+      "status": "pass"
+    }
+  },
+  "scope": "Measured core performance only; no overall-throughput or strength inference. Actual second-pass rollback reproduced, no separate forced-first-pass case executed. Production artifacts untouched;72 duplicated optimizer attempts,0newselfplay."
+}
