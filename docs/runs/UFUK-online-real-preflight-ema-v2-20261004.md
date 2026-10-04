@@ -1,0 +1,11 @@
+# UFUK — EMA frozen-parameter v2 correction and bounded preflight
+
+Original real-e8 preflight completed pause2/resume5 but FAILED independent frozen21-material invariance: current/base exact, EMA unused material weight drift2.235174e-8. Root cause was multiply/add applied even to unchanged frozen nonzero parameters. That failure and all original checkpoints/journals/scripts remain immutable. Do not loosen bitwise gate or count failure as success.
+
+V2 source5327e4b7f4bcb10b741968db8022c198c5d87609: EMA updates only used trainable parameters; active EMA arithmetic unchanged. ONLINE_LEARNER_SCHEMA=torch-fresh-one-ply-v2, old native run config is rejected by v2. Old full-v1 resume remains supported by original clean sourceca11c9eccc2133efb2044dead2c2084b3efb709d. Explicit versioned upgrade route: export/use old model.safetensors with v2 fresh CLI --weights; this is weights-only warm start with Adam/RNG/actor reset, never full training resume. Old weights/layout retained. No native-v1 to v2 full-state migration is claimed.
+
+New regression uses nonzero21 frozen parameters and checks current/base/EMA bitwise over5 actualupdates and one native-resumed update.19 learner/checkpoint tests passed8.02s/zero skip. First added regression had a fixture overwrite FileExistsError (18pass/1fail); retained originalfixture before writing replacement, then all19pass. Old completed661suite is reused, not rerun. Separately21 new multistep-target tests pass0.09s; their learner integration is NOT implemented or used here.
+
+Prospective v2 preflight retains exact same e8, book4096train/1024heldout, seed20261104, actors4/cap8/T1, objective/AdamW/EMA.9 and5unique20transitions/3replay12presentations, checkpoints0/2/4/5, strict bitwise current/base/EMA unused21, fullnative/journal/freshprocess and actualTorchCPU/MLXCPU18probe2e-5 gates. NO games or production learning. BothCLI and independent audit inherit ORIGINAL failed preflight absolute deadline1791134021.554078; original900whole budget is not reset. All prior failure/test/fix/idle is charged. If remaining budget runs out, preserve incomplete; do not extend or replace selected model.
+
+Success is infrastructure-only and never reverses originalfailure. User main strong repeatable own-experience learning goal remains unmet. New multistephelper is established actor-critic return bookkeeping, no novelty claim.
