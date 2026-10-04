@@ -28,6 +28,7 @@ from harbichess.training.online_objective import ONLINE_OBJECTIVE_SCHEMA
 from harbichess.training.online_targets import ONLINE_TARGET_SCHEMA
 
 ONLINE_CHECKPOINT_SCHEMA = "torch-online-native-v1"
+CUDA_ONLINE_CHECKPOINT_SCHEMA = "torch-online-native-cuda-v1"
 _FILES = ("model.safetensors", "base.safetensors", "ema.safetensors", "training.pt", "actor.json")
 _SCHEMAS = {
     "encoder": ENCODER_SCHEMA_VERSION,
@@ -41,20 +42,37 @@ class OnlineCheckpointIntegrityError(ValueError):
     pass
 
 
-def _runtime() -> dict:
-    return {
+def _runtime(device="cpu") -> dict:
+    runtime = {
         "python": platform.python_version(),
         "torch": torch.__version__,
         "numpy": np.__version__,
         "machine": platform.machine(),
         "byteorder": sys.byteorder,
-        "device": "cpu",
+        "device": device,
         "threads": torch.get_num_threads(),
         "deterministic": torch.are_deterministic_algorithms_enabled(),
     }
+    if device == "cuda:0":
+        runtime["cuda"] = {
+            "version": torch.version.cuda,
+            "cudnn": torch.backends.cudnn.version(),
+            "devices": [torch.cuda.get_device_name(i) for i in range(torch.cuda.device_count())],
+            "capabilities": [list(torch.cuda.get_device_capability(i))
+                             for i in range(torch.cuda.device_count())],
+            "workspace": os.environ.get("CUBLAS_WORKSPACE_CONFIG"),
+            "matmul_tf32": torch.backends.cuda.matmul.allow_tf32,
+            "cudnn_tf32": torch.backends.cudnn.allow_tf32,
+            "cudnn_benchmark": torch.backends.cudnn.benchmark,
+            "cudnn_deterministic": torch.backends.cudnn.deterministic,
+        }
+    return runtime
 
 
 def _validate_models(online, base, ema):
+    device = next(online.parameters()).device
+    if str(device) not in ("cpu", "cuda:0"):
+        raise ValueError("native online checkpoints support cpu or cuda:0")
     if online.specification != base.specification or online.specification != ema.specification:
         raise ValueError("current/base/EMA architectures must match")
     if online is base or online is ema or base is ema:
@@ -62,11 +80,13 @@ def _validate_models(online, base, ema):
     for model in (online, base, ema):
         for parameter in model.parameters():
             if (
-                parameter.device.type != "cpu"
+                parameter.device != device
                 or parameter.dtype != torch.float32
                 or not torch.isfinite(parameter).all()
             ):
-                raise ValueError("native online checkpoints require finite CPU float32 networks")
+                raise ValueError(
+                    "native online checkpoints require finite same-device float32 networks"
+                )
     if any(parameter.requires_grad for model in (base, ema) for parameter in model.parameters()):
         raise ValueError("base and EMA networks must be frozen")
     storages = [
@@ -112,7 +132,7 @@ def _validate_optimizer(optimizer, online, update):
                 step = float(value)
                 if not step.is_integer() or not 0 <= step <= update:
                     raise ValueError("online AdamW step counter differs from update cursor")
-            elif value.shape != parameter.shape or value.device.type != "cpu":
+            elif value.shape != parameter.shape or value.device != parameter.device:
                 raise ValueError("online AdamW moment shape/device differs from parameter")
 
 
@@ -141,6 +161,7 @@ def save_online_checkpoint(
     ):
         raise ValueError("invalid source commit or online update cursor")
     _validate_models(online, base, ema)
+    device = str(next(online.parameters()).device)
     _validate_optimizer(optimizer, online, update)
     trainable = [(name, p) for name, p in online.named_parameters() if p.requires_grad]
     actor_json = json.dumps(run_state, indent=2, sort_keys=True, allow_nan=False) + "\n"
@@ -169,6 +190,7 @@ def save_online_checkpoint(
                 "actor_rng": actor_rng.getstate(),
                 "python_rng": random.getstate(),
                 "torch_rng": torch.get_rng_state(),
+                **({"cuda_rng": torch.cuda.get_rng_state_all()} if device == "cuda:0" else {}),
                 "numpy_rng": {
                     "kind": numpy_state[0],
                     "keys": torch.tensor(numpy_state[1].astype(np.int64)),
@@ -181,14 +203,15 @@ def save_online_checkpoint(
         )
         (temporary / "actor.json").write_text(actor_json, encoding="utf-8")
         manifest = {
-            "schema": ONLINE_CHECKPOINT_SCHEMA,
+            "schema": CUDA_ONLINE_CHECKPOINT_SCHEMA if device == "cuda:0"
+            else ONLINE_CHECKPOINT_SCHEMA,
             "backend": "torch",
             "transfer": "full-online-training",
             "schemas": _SCHEMAS,
             "source_commit": source_commit,
             "update": update,
             "run_config": config,
-            "runtime": _runtime(),
+            "runtime": _runtime(device),
             "trainable": [name for name, _ in trainable],
             "model_modes": [model.training for model in (online, base, ema)],
             "inputs": inputs,
@@ -230,16 +253,22 @@ def load_online_checkpoint(
     expected_run_config: dict,
     expected_input_paths: dict[str, Path],
     expected_source_commit: str,
+    device: str = "cpu",
 ) -> OnlineCheckpoint:
+    if device not in ("cpu", "cuda:0"):
+        raise OnlineCheckpointIntegrityError("unsupported native online device")
+    if device == "cuda:0" and not torch.cuda.is_available():
+        raise OnlineCheckpointIntegrityError("native CUDA checkpoint requires available cuda:0")
     manifest = json.loads((directory / "checkpoint.json").read_text())
     if (
-        manifest["schema"] != ONLINE_CHECKPOINT_SCHEMA
+        manifest["schema"] != (CUDA_ONLINE_CHECKPOINT_SCHEMA if device == "cuda:0"
+                               else ONLINE_CHECKPOINT_SCHEMA)
         or manifest["backend"] != "torch"
         or manifest["transfer"] != "full-online-training"
         or manifest["schemas"] != _SCHEMAS
         or manifest["run_config"] != expected_run_config
         or manifest["source_commit"] != expected_source_commit
-        or manifest["runtime"] != _runtime()
+        or manifest["runtime"] != _runtime(device)
     ):
         raise OnlineCheckpointIntegrityError("online schema/config/source/runtime mismatch")
     if set(manifest["artifacts"]) != set(_FILES):
@@ -261,7 +290,7 @@ def load_online_checkpoint(
     state = torch.load(directory / "training.pt", map_location="cpu", weights_only=True)
     if state["update"] != manifest["update"] or run_state.get("update") != manifest["update"]:
         raise OnlineCheckpointIntegrityError("online update cursor mismatch")
-    online, base, ema = (load_weights(directory / name) for name in _FILES[:3])
+    online, base, ema = (load_weights(directory / name).to(device) for name in _FILES[:3])
     trainable = set(manifest["trainable"])
     if not trainable or not trainable <= dict(online.named_parameters()).keys():
         raise OnlineCheckpointIntegrityError("online trainable parameter names differ")
@@ -292,6 +321,19 @@ def load_online_checkpoint(
     )
     np.random.RandomState(0).set_state(numpy_state)
     torch.Generator(device="cpu").set_state(state["torch_rng"])
+    if device == "cuda:0":
+        states = state.get("cuda_rng")
+        if not isinstance(states, list) or len(states) != torch.cuda.device_count():
+            raise OnlineCheckpointIntegrityError("missing or mismatched CUDA RNG state")
+        for index, rng_state in enumerate(states):
+            if (
+                not isinstance(rng_state, torch.Tensor)
+                or rng_state.dtype != torch.uint8
+                or rng_state.device.type != "cpu"
+                or rng_state.ndim != 1
+            ):
+                raise OnlineCheckpointIntegrityError("invalid CUDA RNG tensor")
+            torch.Generator(device=f"cuda:{index}").set_state(rng_state)
     if len(manifest["model_modes"]) != 3 or any(
         type(mode) is not bool for mode in manifest["model_modes"]
     ):
@@ -301,4 +343,6 @@ def load_online_checkpoint(
     random.setstate(state["python_rng"])
     np.random.set_state(numpy_state)
     torch.set_rng_state(state["torch_rng"])
+    if device == "cuda:0":
+        torch.cuda.set_rng_state_all(state["cuda_rng"])
     return OnlineCheckpoint(online, base, ema, optimizer, actor_rng, run_state, manifest)
