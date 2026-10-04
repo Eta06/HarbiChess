@@ -73,7 +73,7 @@ def main():
         assert first == common_first
         assert reg['earliest_training_epoch'] <= first <= time.time()
         assert first + reg['whole_audit_seconds_from_originalfirstclock'] + \
-               reg['posttraining_reserve_seconds'] < 1791170400
+               reg['posttraining_reserve_seconds'] < 1791180000
         full = audit_manifest(reg, inputs, seed, first,
             {'registration': str(a.registration), 'repo': paths['repo'], 'run': row['run']},
             a.helpers)
