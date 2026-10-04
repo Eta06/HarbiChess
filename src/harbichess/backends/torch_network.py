@@ -22,12 +22,14 @@ from safetensors.torch import load_file, save_file
 from torch import nn
 
 from harbichess.backends.torch_context import PolicyContextBlock
+from harbichess.backends.torch_sparse_value import SparseValueHead
 from harbichess.chess.actions import action_destination_square
 from harbichess.chess.encoding import HISTORY_STEPS, METADATA_PLANES, PIECE_PLANES_PER_STEP
 from harbichess.core.network_config import (
     NetworkConfig,
     validate_policy_adapter,
     validate_policy_context,
+    validate_sparse_value,
 )
 
 WEIGHT_SCHEMA = 1
@@ -56,6 +58,7 @@ class TorchChessNetwork(nn.Module):
         plastic: dict[str, int] | None = None,
         policy_adapter: dict | None = None,
         policy_context: dict | None = None,
+        value_sparse: dict | None = None,
     ) -> None:
         super().__init__()
         if architecture not in ARCHITECTURES:
@@ -64,10 +67,13 @@ class TorchChessNetwork(nn.Module):
         self.architecture = architecture
         self._policy_adapter = validate_policy_adapter(policy_adapter)
         self._policy_context = validate_policy_context(policy_context, self.config.trunk_channels)
+        self._value_sparse = validate_sparse_value(value_sparse, self.config.input_channels)
         if self._policy_adapter is not None and architecture != "pairwise":
             raise ValueError("policy adapter requires pairwise architecture")
         if self._policy_context is not None and architecture != "pairwise":
             raise ValueError("policy context requires pairwise architecture")
+        if self._value_sparse is not None and architecture != "pairwise":
+            raise ValueError("sparse value requires pairwise architecture")
         self.invariant = invariant or {"channels": 16, "blocks": 2, "hidden": 32}
         self.plastic = plastic or {
             "channels": 16,
@@ -151,6 +157,10 @@ class TorchChessNetwork(nn.Module):
                 torch.tensor([[2 * (s % 8) / 7 - 1, 2 * (s // 8) / 7 - 1] for s in range(64)]),
                 persistent=False,
             )
+        if self._value_sparse is not None:
+            self.value_sparse_head = SparseValueHead(
+                self._value_sparse["channels"], self._value_sparse["hidden"]
+            )
 
     @staticmethod
     def _zero(*layers: nn.Linear) -> None:
@@ -170,6 +180,8 @@ class TorchChessNetwork(nn.Module):
             specification["policy_adapter"] = dict(self._policy_adapter)
         if self._policy_context is not None:
             specification["policy_context"] = dict(self._policy_context)
+        if self._value_sparse is not None:
+            specification["value_sparse"] = dict(self._value_sparse)
         return specification
 
     @classmethod
@@ -179,6 +191,7 @@ class TorchChessNetwork(nn.Module):
             **{k: specification[k] for k in ("architecture", "invariant", "plastic")},
             policy_adapter=specification.get("policy_adapter"),
             policy_context=specification.get("policy_context"),
+            value_sparse=specification.get("value_sparse"),
         )
 
     @staticmethod
@@ -213,6 +226,8 @@ class TorchChessNetwork(nn.Module):
             if self.architecture == "pairwise"
             else self._flatten(torch.relu(self.policy_conv(trunk)))
         )
+        if self._value_sparse is not None:
+            return policy, self.value_sparse_head(inputs)
         value = torch.relu(self.value_hidden(self._flatten(torch.relu(self.value_conv(trunk)))))
         logits = self.value_output(value)
         if self.architecture != "base":
