@@ -1,0 +1,42 @@
+{
+  "schema": "ufuk-ownsearch-readiness-CUDA-preregistration-v1",
+  "status": "frozen-before-A100-execution",
+  "source_commit": "c93b79b8140b31fe1f4d0ca96adddd857991925b",
+  "protocol": {
+    "schema": "ufuk-actual-ownsearch-CUDA-infrastructure-protocol-v1",
+    "status": "prospective-fixed-infrastructure-only",
+    "producer_source_commit": "c93b79b8140b31fe1f4d0ca96adddd857991925b",
+    "scope": "Own-model sparseGumbel policy CE plus completed own-game WDL; fresh raw actorT1. Tiny fixtures and unit rollouts are infrastructure audit cost, no production or strength candidate.",
+    "actual_hardware": "Existing authorized NVIDIA A100-SXM4-40GB, no new allocation.",
+    "source_and_inputs_immutable": true,
+    "units_whole_max_seconds": 180,
+    "cli_whole_max_seconds": 180,
+    "combined_whole_max_seconds": 360,
+    "unit_requirement": "Exactly11passed0skip including actualCUDA freshprocess native replay branch; other unit cases CPU.",
+    "cli_requirement": "Real immutablee8, whole2 vs pause1+newprocessresume2 all2journals+6nativepayloads byteexact inclAdam/global/allCUDA/actor/searchschedule/search/samplerRNG; BOTH final strictload in fresh process; positive search-policy,known terminal-value andUNKNOWNexcluded-value rows.",
+    "tiny_config_sha256": "bb6d28d0627d9e6236318fc3f1839b59eddeb54316ea77a90f50d838dfddc007",
+    "tiny_book_sha256": "9340b54b6ac01ead55b9b790ddaa13e951e278a66f59c9009efae2d26ba68b6e",
+    "test_sha256": "2261bb9ca9a9bf3980bcdf429884dd317ac9af4e0ab7d117e5875f5164b03e21",
+    "helper_sha256": "45e5cc935c2266ea7b5557712447222d1f56043088ce1f205d2e2ab19d619327",
+    "controller_sha256": "a6b3fd1e9bbcb9c55c1919cbad32bda7a1a0c28d31f7e673e9b3afead9f45dc2",
+    "initial_e8_sha256": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03",
+    "memory_max_bytes": 68719476736,
+    "disk_min_free_bytes": 8589934592,
+    "failure": "Anytimeout/skip/native/targets/source mismatch preservesfailedreceipt; no automaticretry or schema/gate weakening.",
+    "lineage": "No source,input,seed,optimizer,budget,checkpoint changes to running original2312652 MC40 jobs or confirmation3."
+  },
+  "input_manifest_sha256": "d2a33f050db6000e418fd7b4619151f1d7eabbbe54f42fa0df8755446f4bd7aa",
+  "helper_sha256": {
+    "cuda-qualifier-book.json": "9340b54b6ac01ead55b9b790ddaa13e951e278a66f59c9009efae2d26ba68b6e",
+    "cuda-qualifier-config.json": "bb6d28d0627d9e6236318fc3f1839b59eddeb54316ea77a90f50d838dfddc007",
+    "cuda-qualifier-input-manifest.json": "d2a33f050db6000e418fd7b4619151f1d7eabbbe54f42fa0df8755446f4bd7aa",
+    "cuda-qualifier-protocol.json": "4fbacaf428fecf3f89e9fa2b4babbf6485a57620190216227bd14da81b9b0725",
+    "qualify_cuda_owned.py": "a6b3fd1e9bbcb9c55c1919cbad32bda7a1a0c28d31f7e673e9b3afead9f45dc2",
+    "qualify_ownsearch_cli.py": "45e5cc935c2266ea7b5557712447222d1f56043088ce1f205d2e2ab19d619327",
+    "test_controls.py": "492020b3c0e16bff3e48d601e0fb530174461988dae8f9f77c6a8251b5b014d1"
+  },
+  "local_CPU_units_result": "10passed18.31s,1explicitCUDAunavailable skip; no CUDAclaim. ActualA100 requires0skip.",
+  "future_stage": "Only if actualCUDA+cleanCLI passes, prospectively bounded full128x256 singledevelopmentprofile plus independentnative/target audit. Production selflearning method remains unlaunched/unregistered until fixed source,count,seeds,books and unchangedstrength gates are frozen.",
+  "prior_art": "AlphaZero/ExpertIteration/Gumbel policyimprovement, not a claimed newmechanism.",
+  "hard_deadline_utc": "2026-10-05T06:00:00Z"
+}
