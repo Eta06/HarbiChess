@@ -1,0 +1,30 @@
+{
+  "schema": "ownsearch-method5-virgin-roots-prereg-v1",
+  "qualification_ledger_slot": 5,
+  "purpose": "Freeze two unused 48-root source-disjoint strength books only; no model or engine queries, games, SGD, or outcome inspection.",
+  "selection_seeds": [20261605, 20261606],
+  "training_seed_map": {
+    "20261605": 20261525,
+    "20261606": 20261526
+  },
+  "selection_order": "Freeze 20261605 first; before selecting 20261606, include its source IDs and every root/full-history position in the inherited exclusion union.",
+  "source_pin": {
+    "consumer_repo_commit": "635413e426ef5b09cb76073c0955898912247466",
+    "history_openings_source_sha256": "bea86f921dbbdc01bc007b9735d259309c83395daade2c43f4a4e7064e490c38",
+    "pgn_sha256": "5b8c29f91628ed27d468dc6355bf3eaad98a03bcdf638c32f3c3106bff162c8a"
+  },
+  "excluded_inheritance": "Capacity source/root/fullprefix evidence and keys; all historical docs/research opening-splits books; formal2 training and both strength books; confirmation3 books; all existing historical train/teacher source IDs and root/fullprefix exclusions; both method4 books and both method4 inherited source/fullprefix exclusion lists; plus first new method5 book for seed 20261606.",
+  "selection": "Use the existing history_openings.freeze over the pinned original lichess-standard-2026-09-prefix-32MiB.pgn; exactly 48 source-record-disjoint arena roots per seed.",
+  "per_seed_wall_seconds": {
+    "selection_ceiling": 600,
+    "selection_plus_independent_replay_ceiling": 900
+  },
+  "independent_audit": "Reparse each selected original PGN record; verify source record SHA, source Site, standard initial position, each Elo >= 2000, base time control >= 60, selected ply in [16,24,32,48,64,96], exact legal full prefix/FEN, valid position and nonterminal/undrawn root. Save every root, source and full-prefix exclusion hash.",
+  "prohibitions": [
+    "Do not query models or engines.",
+    "Do not run games or inspect game outcomes.",
+    "Do not train or run an optimizer.",
+    "Do not register or launch method5.",
+    "Do not modify main source or inherited exclusion artifacts."
+  ]
+}
