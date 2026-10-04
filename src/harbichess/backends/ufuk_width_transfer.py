@@ -23,7 +23,11 @@ def widen(
     with torch.random.fork_rng(devices=[]):
         torch.manual_seed(seed)
         old = load_weights(source)
-        if old.architecture != "pairwise" or old._policy_adapter is not None:
+        if (
+            old.architecture != "pairwise"
+            or old._policy_adapter is not None
+            or old._policy_context is not None
+        ):
             raise ValueError("width transfer requires plain versioned pairwise weights")
         c, v = old.config.trunk_channels, old.invariant["channels"]
         if trunk_channels <= c or value_tower_channels <= v:
