@@ -1,0 +1,13 @@
+{
+  "blob_sha1": "30720e4020cb4109790ef6b746419777d2a659b6",
+  "control_sha256": null,
+  "manifest_sha256": null,
+  "release": {
+    "id": null,
+    "initial_assets": 0,
+    "tag": "PENDING-ROOT-NEW-RELEASE",
+    "target_commitish": null
+  },
+  "schema": "fresh-selflearning-state-blob-ROOT-approval-v6",
+  "status": "PENDING-ROOT-APPROVAL"
+}
