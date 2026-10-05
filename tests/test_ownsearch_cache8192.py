@@ -30,9 +30,7 @@ SOURCE = "d" * 40  # Synthetic source marker only; clean producer/CLI qualificat
 
 
 BASELINE_C93_SHA256 = {
-    "harbichess/__init__.py": (
-        "312219889131b7bb358c69edcdff60dc816d9244a460056e010b8c611c743225"
-    ),
+    "harbichess/__init__.py": ("312219889131b7bb358c69edcdff60dc816d9244a460056e010b8c611c743225"),
     "harbichess/backends/action_value_network.py": (
         "2840f7301c77bc1007b125128271d3fc3ba1c6dfc8153441829a1ce1b8f13d02"
     ),
@@ -659,7 +657,7 @@ l=(
   config=TorchOwnSearchConfig(**c),input_paths=inputs,source_commit=source
  )
 )
-assert l.actors.rules.board_cache_size == (8192 if source=='d'*40 else 512)
+assert l.actors.rules.board_cache_size == 8192
 root.mkdir(exist_ok=True)
 while l.epoch<(1 if mode=='pause' else 2):
  l.train_epoch();(root/f'journal{l.epoch}.gz').write_bytes(l.last_epoch_gzip);l.checkpoint(root/f'native{l.epoch}')
@@ -701,6 +699,112 @@ def test_only_ownsearch_fresh_and_resume_before_validation_use8192(tmp_path, mon
     assert PythonChessRules().board_cache_size == 512
 
 
+def test_full_gumbel_e8_matches_source428_on_18_full_histories_and_draw_modes(tmp_path):
+    """The certificate treatment leaves the registered FullGumbel evaluator unchanged."""
+    import json
+    import os
+    import random
+    import subprocess
+    import sys
+
+    source428 = Path(os.environ.get("HARBICHESS_TEST_SOURCE428_SRC", str(HERE / "baseline428/src")))
+    candidate = HERE / "src"
+    assert source428.is_dir() and candidate.is_dir()
+    roots = []
+    # One exact threefold-claim root exercises the configured claim_draw branch.
+    roots.append(
+        dict(
+            root_fen=chess.STARTING_FEN,
+            moves=["g1f3", "g8f6", "f3g1", "f6g8"] * 2,
+        )
+    )
+    # Seventeen distinct, legal, nonterminal training-style full histories.
+    seen = {tuple(roots[0]["moves"])}
+    for index in range(17):
+        rng = random.Random(20261005 + index)
+        board = chess.Board()
+        moves = []
+        for _ in range(6 + index):
+            if board.outcome(claim_draw=False) is not None:
+                break
+            move = rng.choice(tuple(board.legal_moves))
+            moves.append(move.uci())
+            board.push(move)
+        assert board.outcome(claim_draw=False) is None
+        assert tuple(moves) not in seen
+        seen.add(tuple(moves))
+        roots.append(dict(root_fen=chess.STARTING_FEN, moves=moves))
+    assert len(roots) == 18
+    states_path = tmp_path / "full-history-roots.json"
+    states_path.write_text(json.dumps(roots, sort_keys=True) + "\n")
+    script = r"""
+import json, random, sys, torch
+from pathlib import Path
+from harbichess.backends.torch_network import load_weights
+from harbichess.backends.torch_backend import TorchPolicyValueBackend
+from harbichess.chess.rules import PythonChessRules
+from harbichess.core.state import ChessMove, ChessState
+from harbichess.search.evaluator import NeuralPositionEvaluator
+from harbichess.search.full_gumbel import FullGumbelConfig, FullGumbelMCTS
+torch.set_num_threads(1)
+rules=PythonChessRules()
+backend=TorchPolicyValueBackend(load_weights(Path(sys.argv[2])).eval(), device='cpu')
+class SinglePositionBackend:
+    def evaluate(self, position):
+        return backend.evaluate([position])[0]
+evaluator=NeuralPositionEvaluator(SinglePositionBackend(), rules=rules)
+roots=json.loads(Path(sys.argv[1]).read_text())
+outputs=[]
+for item in roots:
+    state=ChessState(item['root_fen'], tuple(ChessMove(move) for move in item['moves']))
+    for claim in (True, False):
+        result=FullGumbelMCTS(
+            evaluator, rules=rules,
+            config=FullGumbelConfig(16, 4, 0.0, 0.1, 50.0, claim),
+        ).search(state, rng=random.Random(8128))
+        outputs.append({
+            'root_fen': item['root_fen'], 'moves': item['moves'], 'claim_draw': claim,
+            'simulations': result.simulations, 'root_value': result.root_value,
+            'outcome': None if result.outcome is None else result.outcome.termination,
+            'selected_action': (
+                None if result.selected_action is None else result.selected_action.uci
+            ),
+            'moves_stats': [[x.move.uci, x.visits, x.prior, x.mean_value] for x in result.moves],
+            'policy': [[m.uci, p] for m, p in result.action_weights],
+        })
+print(json.dumps(outputs, sort_keys=True, separators=(',', ':')))
+"""
+    outcomes = []
+    for label, source in (("source428", source428), ("certificate", candidate)):
+        env = dict(
+            os.environ,
+            PYTHONPATH=str(source),
+            OMP_NUM_THREADS="1",
+            MKL_NUM_THREADS="1",
+            OPENBLAS_NUM_THREADS="1",
+        )
+        result = subprocess.run(
+            [
+                sys.executable,
+                "-c",
+                script,
+                str(states_path),
+                str(WEIGHTS),
+            ],
+            env=env,
+            capture_output=True,
+            text=True,
+            timeout=120,
+        )
+        assert result.returncode == 0, f"{label}: {result.stderr}"
+        outcomes.append(json.loads(result.stdout))
+    assert outcomes[0] == outcomes[1]
+    claimable = outcomes[0][0]
+    assert claimable["claim_draw"] is True and claimable["simulations"] == 0
+    unclaimed = outcomes[0][1]
+    assert unclaimed["claim_draw"] is False and unclaimed["simulations"] == 16
+
+
 @pytest.mark.parametrize(
     "device",
     [
@@ -715,37 +819,72 @@ def test_only_ownsearch_fresh_and_resume_before_validation_use8192(tmp_path, mon
     ],
 )
 def test_old_and_cache_native_journals_all_rng_exact_and_fresh_resume(tmp_path, device):
+    import gzip
+
     from harbichess.backends.torch_network import load_weights
 
     baseline_src = Path(os.environ.get("HARBICHESS_TEST_C93_SRC", str(HERE / "baseline/src")))
-    changed = {
-        "harbichess/training/torch_ownsearch_learner.py",
-        "harbichess/training/torch_ownsearch_checkpoint.py",
+    source428 = Path(os.environ.get("HARBICHESS_TEST_SOURCE428_SRC", str(HERE / "baseline428/src")))
+    # Source428 is the matched no-certificate parent. Only these explicitly
+    # versioned files may differ in the candidate treatment.
+    treatment_files = {
+        "harbichess/search/full_gumbel.py": (
+            "b90cb242cae639f66f7fe4273ddff47694069c1097b1af88a639cb07b4ccc327"
+        ),
+        "harbichess/search/ownsearch_wavefront.py": (
+            "d2c9f5e8259ae48b29249d504ca8411da0e4b9b2ac03287e14310aaf4f6a9714"
+        ),
+        "harbichess/training/ownsearch_targets.py": (
+            "c9e7273238ccaa2b4bbe336b7780c8e1c19e70af792040f2967e78689335438d"
+        ),
+        "harbichess/training/search_acting_epoch.py": (
+            "0837bc1d41840f40f35b6c0d19ff9df3300b8adc6b6e1c2f898040e01b0f33a8"
+        ),
+        "harbichess/training/torch_ownsearch_checkpoint.py": (
+            "dee14a5a4aadd1dbbff954168bcf0b3b02df47fb3144c895e877ad7ef9ce3430"
+        ),
+        "harbichess/training/torch_ownsearch_learner.py": (
+            "3f529db9f573caab26f53bf626327070c7db87b87740ad4c489c6b95bf1388a8"
+        ),
     }
+    assert source428.is_dir()
     for relative, digest in BASELINE_C93_SHA256.items():
         assert hashlib.sha256((baseline_src / relative).read_bytes()).hexdigest() == digest, (
             relative
         )
-        if relative not in changed:
-            assert hashlib.sha256((HERE / "src" / relative).read_bytes()).hexdigest() == digest, (
-                relative
-            )
+        candidate_file = HERE / "src" / relative
+        if relative in treatment_files:
+            assert (
+                hashlib.sha256(candidate_file.read_bytes()).hexdigest() == treatment_files[relative]
+            ), relative
+        else:
+            assert candidate_file.read_bytes() == (source428 / relative).read_bytes(), relative
 
     path, _ = fixture(tmp_path)
     raw = json.loads(path.read_text())
+    # No root in this deliberately short fixture has a one-ply mate. This
+    # isolates array/cache/native behavior from the certificate treatment.
+    raw["actors"]["max_additional_plies"] = 1
+    raw["epoch_steps"] = 1
+    raw["search"]["block_plies"] = 1
     raw["device"] = device
     path.write_text(json.dumps(raw) + "\n")
+    book_path = tmp_path / "book.json"
+    book = json.loads(book_path.read_text())
+    for row in book["splits"]["train"]:
+        row["opening"] = dict(root_fen=chess.STARTING_FEN, moves=[])
+    book_path.write_text(json.dumps(book, sort_keys=True) + "\n")
     for label, mode, candidate in [
-        ("old", "whole", False),
-        ("new", "whole", True),
+        ("parent428", "whole", False),
+        ("candidate", "whole", True),
         ("split", "pause", True),
         ("split", "resume", True),
-        ("old", "audit", False),
-        ("new", "audit", True),
+        ("parent428", "audit", False),
+        ("candidate", "audit", True),
         ("split", "audit", True),
     ]:
         root = tmp_path / label
-        source = SOURCE if candidate else "c" * 40
+        source = SOURCE if candidate else "8" * 40
         code = PROCESS
         if mode == "audit":
             code = code.replace("root/'native1'", "root/'native2'").replace(
@@ -753,11 +892,7 @@ def test_old_and_cache_native_journals_all_rng_exact_and_fresh_resume(tmp_path, 
             )
         env = dict(
             os.environ,
-            PYTHONPATH=str(
-                HERE / "src"
-                if candidate
-                else Path(os.environ.get("HARBICHESS_TEST_C93_SRC", str(HERE / "baseline/src")))
-            ),
+            PYTHONPATH=str(HERE / "src" if candidate else source428),
             OMP_NUM_THREADS="1",
             MKL_NUM_THREADS="1",
             OPENBLAS_NUM_THREADS="1",
@@ -780,26 +915,125 @@ def test_old_and_cache_native_journals_all_rng_exact_and_fresh_resume(tmp_path, 
             timeout=45,
         )
         assert result.returncode == 0, result.stderr
-    old = tmp_path / "old/native2"
-    new = tmp_path / "new/native2"
+    parent = tmp_path / "parent428/native2"
+    candidate_native = tmp_path / "candidate/native2"
     split = tmp_path / "split/native2"
-    # Production tags differ intentionally. Every other native value/counter/RNG stays exact.
-    for name in ("training.pt", "actor.json", "last-frozen-epoch.json.gz"):
-        assert (
-            (old / name).read_bytes() == (new / name).read_bytes() == (split / name).read_bytes()
-        ), name
+    parent_training = torch.load(parent / "training.pt", map_location="cpu", weights_only=True)
+    candidate_training = torch.load(
+        candidate_native / "training.pt", map_location="cpu", weights_only=True
+    )
+
+    def assert_tree_equal(left, right):
+        if isinstance(left, torch.Tensor):
+            assert isinstance(right, torch.Tensor) and torch.equal(left, right)
+        elif isinstance(left, dict):
+            assert isinstance(right, dict) and left.keys() == right.keys()
+            for key in left:
+                if key == "sample_chain_sha256":
+                    assert len(left[key]) == len(right[key]) == 64
+                    continue  # Each versioned record chain hashes its own format.
+                assert_tree_equal(left[key], right[key])
+        elif isinstance(left, tuple | list):
+            assert type(left) is type(right) and len(left) == len(right)
+            for a, b in zip(left, right, strict=True):
+                assert_tree_equal(a, b)
+        else:
+            assert left == right
+
+    # All trainable, optimizer, actor, sampler and global RNG state must match
+    # on this certificate-inactive trajectory, despite the versioned journal.
+    assert_tree_equal(parent_training, candidate_training)
+    assert_tree_equal(
+        candidate_training,
+        torch.load(split / "training.pt", map_location="cpu", weights_only=True),
+    )
+    parent_actor = json.loads((parent / "actor.json").read_text())
+    candidate_actor = json.loads((candidate_native / "actor.json").read_text())
+    parent_actor.pop("sample_chain_sha256", None)
+    candidate_actor.pop("sample_chain_sha256", None)
+    assert parent_actor == candidate_actor
+    parent_record = json.loads(gzip.decompress((parent / "last-frozen-epoch.json.gz").read_bytes()))
+    candidate_record = json.loads(
+        gzip.decompress((candidate_native / "last-frozen-epoch.json.gz").read_bytes())
+    )
+    split_record = json.loads(gzip.decompress((split / "last-frozen-epoch.json.gz").read_bytes()))
+    assert parent_record["own_search"]["schema"] == "ownsearch-random-block-targets-v1"
+    assert candidate_record["own_search"]["schema"] == "ownsearch-random-block-targets-v2"
+    assert parent_record["own_search"]["targets"] != candidate_record["own_search"]["targets"]
+    for record in (candidate_record, split_record):
+        assert all(root["certified_mates"] == [] for root in record["own_search"]["roots"])
+    for record in (parent_record, candidate_record, split_record):
+        record.pop("sample_chain_sha256", None)
+        record.pop("previous_sample_chain_sha256", None)
+        record["own_search"].pop("schema", None)
+        record["own_search"].pop("targets", None)
+        for root in record["own_search"]["roots"]:
+            root.pop("certified_mates", None)
+    assert parent_record == candidate_record
+    assert candidate_record == split_record
     for name in ("model.safetensors", "base.safetensors", "behavior.safetensors"):
-        one = load_weights(old / name).state_dict()
-        two = load_weights(new / name).state_dict()
+        one = load_weights(parent / name).state_dict()
+        two = load_weights(candidate_native / name).state_dict()
         assert all(tensor_bits_equal(v, two[k]) for k, v in one.items())
-        assert (new / name).read_bytes() == (split / name).read_bytes()
+        assert (candidate_native / name).read_bytes() == (split / name).read_bytes()
     for epoch in (1, 2):
-        assert (
-            (tmp_path / f"old/journal{epoch}.gz").read_bytes()
-            == (tmp_path / f"new/journal{epoch}.gz").read_bytes()
-            == (tmp_path / f"split/journal{epoch}.gz").read_bytes()
+        parent_epoch = json.loads(
+            gzip.decompress((tmp_path / f"parent428/journal{epoch}.gz").read_bytes())
         )
-    a = json.loads((old / "checkpoint.json").read_text())
-    b = json.loads((new / "checkpoint.json").read_text())
-    assert a["source_commit"] == "c" * 40 and b["source_commit"] == SOURCE
-    assert a["run_config"] == b["run_config"] and a["state"] == b["state"]
+        candidate_epoch = json.loads(
+            gzip.decompress((tmp_path / f"candidate/journal{epoch}.gz").read_bytes())
+        )
+        assert parent_epoch["own_search"]["schema"] == "ownsearch-random-block-targets-v1"
+        assert candidate_epoch["own_search"]["schema"] == "ownsearch-random-block-targets-v2"
+
+    parent_manifest = json.loads((parent / "checkpoint.json").read_text())
+    candidate_manifest = json.loads((candidate_native / "checkpoint.json").read_text())
+    assert parent_manifest["source_commit"] == "8" * 40
+    assert candidate_manifest["source_commit"] == SOURCE
+    assert parent_manifest["run_config"] == candidate_manifest["run_config"]
+    parent_state, candidate_state = parent_manifest["state"], candidate_manifest["state"]
+    parent_state.pop("sample_chain_sha256", None)
+    candidate_state.pop("sample_chain_sha256", None)
+    assert parent_state == candidate_state
+
+    # A source428 native is deliberately not a method7 continuation, even
+    # though certificate-free model/optimizer trajectories are equivalent.
+    resume_code = r"""
+import json,sys,torch
+from pathlib import Path
+from harbichess.selfplay.online_actor import OnlineActorConfig
+from harbichess.training.ownsearch_targets import OwnSearchConfig
+from harbichess.training.torch_fullgame_ppo import FullGamePPOTrainConfig
+from harbichess.training.torch_ownsearch_core import OwnSearchObjective
+from harbichess.training.torch_ownsearch_learner import TorchOwnSearchConfig,TorchOwnSearchLearner
+root,cfg,weights,source=sys.argv[1:];root=Path(root);cfg=Path(cfg)
+c=json.loads(cfg.read_text());c['actors']=OnlineActorConfig(**c['actors']);c['objective']=OwnSearchObjective(**c['objective']);c['search']=OwnSearchConfig(**c['search']);c['schedule']=FullGamePPOTrainConfig(**c['schedule'])
+inputs=dict(initial_weights=Path(weights),book=cfg.parent/'book.json',experiment_config=cfg,protocol=cfg.parent/'protocol.json')
+torch.set_num_threads(1)
+try:
+ TorchOwnSearchLearner.resume(root/'native2',config=TorchOwnSearchConfig(**c),input_paths=inputs,source_commit=source)
+except ValueError as exc:
+ assert 'source/config/runtime mismatch' in str(exc)
+ print('old-native-rejected')
+else:
+ raise AssertionError('source428 native accepted as method7 resume')
+"""
+    old_sha = hashlib.sha256((parent / "checkpoint.json").read_bytes()).hexdigest()
+    check = subprocess.run(
+        [
+            sys.executable,
+            "-c",
+            resume_code,
+            str(tmp_path / "parent428"),
+            str(path),
+            str(WEIGHTS),
+            SOURCE,
+        ],
+        env=dict(os.environ, PYTHONPATH=str(HERE / "src"), OMP_NUM_THREADS="1"),
+        capture_output=True,
+        text=True,
+        timeout=45,
+    )
+    assert check.returncode == 0, check.stderr
+    assert check.stdout.strip() == "old-native-rejected"
+    assert hashlib.sha256((parent / "checkpoint.json").read_bytes()).hexdigest() == old_sha
