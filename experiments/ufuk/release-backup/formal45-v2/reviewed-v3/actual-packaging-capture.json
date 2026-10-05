@@ -1,0 +1,37 @@
+{
+  "packaging_result_sha256": "a1e36f2afa26fdc806cce710a6fd8186519f50e9d7df5a5d6fce8084ff50e6ae",
+  "manifest_sha256": "a3874ea7f91096783e5445f0d6486beb0b75ec3a5f1f360d5f78708403a24841",
+  "package_manifests": [
+    {
+      "path": "/content/harbichess-runs/release-packages-formal45/seed-20261425-through-00000010-0a41dc60bb15/package.json",
+      "sha256": "0a41dc60bb154261d4ea622ef91357a551f21ba40bd87c023e003c525d35038a",
+      "local_exact_copy": "/workspace/work/harbichess/release/formal45-review-capture-v3/actual-package-20261425.json"
+    },
+    {
+      "path": "/content/harbichess-runs/release-packages-formal45/seed-20261426-through-00000009-8f07417de5cd/package.json",
+      "sha256": "8f07417de5cdad6e72c341b522bc5455d509545a22286d675f11432726359eb6",
+      "local_exact_copy": "/workspace/work/harbichess/release/formal45-review-capture-v3/actual-package-20261426.json"
+    },
+    {
+      "path": "/content/harbichess-runs/release-packages-formal45/seed-20261525-through-00000008-a2ec8639a97f/package.json",
+      "sha256": "a2ec8639a97f36dd5897f2360ca8383334a453a7ec83d5ca1e5a22b149f54e4c",
+      "local_exact_copy": "/workspace/work/harbichess/release/formal45-review-capture-v3/actual-package-20261525.json"
+    },
+    {
+      "path": "/content/harbichess-runs/release-packages-formal45/seed-20261526-through-00000008-874f46c76a00/package.json",
+      "sha256": "874f46c76a008ff174930d4fbe718e838eb05fff007b5f16d0ee46c329381a03",
+      "local_exact_copy": "/workspace/work/harbichess/release/formal45-review-capture-v3/actual-package-20261526.json"
+    }
+  ],
+  "observed_epoch": 1791165546.2964501,
+  "server_pid": {
+    "pid": 123814,
+    "state": "S",
+    "startticks": 2666229
+  },
+  "tunnel_pid": {
+    "pid": 121966,
+    "state": "S",
+    "startticks": 2633265
+  }
+}
