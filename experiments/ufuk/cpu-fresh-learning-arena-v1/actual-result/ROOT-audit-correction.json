@@ -1,0 +1,10 @@
+{
+  "original_auditor_sha256": "ddbd4342e6c0c4b7a0bd69c9dd0e43c6a8546f19ae62aa815d6574a591487255",
+  "corrected_auditor_sha256": "635d8c7fb419538900cf33f9b42a2ed4c2fc72e368612b5fdd55703683bda884",
+  "original_first_epoch": 1791234502.0633478,
+  "original_deadline_epoch": 1791235402.0633478,
+  "reason": "Stockfish UCI requested nodes is soft; original tournament records actual INFO_BASIC nodes. Accept exact nonnegative integers and disclose overrun count/max; all game/rule/score/gate/input hashes unchanged.",
+  "original_error": "/dev/shm/harbichess-NN224-root-audit-v1-20261005/stderr.log",
+  "GPU_used": false,
+  "strength_success_claimed": false
+}
