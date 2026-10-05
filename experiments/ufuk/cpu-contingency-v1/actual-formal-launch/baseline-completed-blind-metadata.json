@@ -1,0 +1,25 @@
+{
+  "schema": "CPU-baseline-completed-metadata-without-strength-outcomes-v1",
+  "observed_epoch": 1791172749.0004632,
+  "outcomes_unopened": true,
+  "seeds": [
+    {
+      "status": "completed-frozen-baseline-outcomes-withheld-from-training-decisions",
+      "seed": 20261925,
+      "started_epoch": 1791172201.2870579,
+      "finished_epoch": 1791172304.137394,
+      "whole_seconds": 102.85033631324768,
+      "returncode": 0,
+      "arena_sha256": "1c4a5e01dec0b5af425bd0ca2aab1bf1f5da1a4594592e9cf6dec9b7118c00cc"
+    },
+    {
+      "status": "completed-frozen-baseline-outcomes-withheld-from-training-decisions",
+      "seed": 20261926,
+      "started_epoch": 1791172201.2877853,
+      "finished_epoch": 1791172304.1703658,
+      "whole_seconds": 102.88258075714111,
+      "returncode": 0,
+      "arena_sha256": "4ebc4f3a81873383f43b29f4abc26ffc8a8ad8b2af9c4cfc680dbd188e6b44ca"
+    }
+  ]
+}
