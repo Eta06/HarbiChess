@@ -194,6 +194,9 @@ def main():
                     "passed_screen": all(gates.values()),
                 }
             )
+    expected_contrasts = {(s, a) for s in protocol["seeds"] for a in protocol["arms"]}
+    assert len(contrasts) == len(expected_contrasts)
+    assert {(c["seed"], c["arm"]) for c in contrasts} == expected_contrasts
     advance = [
         a for a in protocol["arms"] if all(c["passed_screen"] for c in contrasts if c["arm"] == a)
     ]
