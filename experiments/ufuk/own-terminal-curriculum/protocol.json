@@ -1,0 +1,16 @@
+{
+  "book_only_change": "No source/runtime/model/native schema changes; tiny resource profile only. New fullshape profile required separately before formal admission.",
+  "comparison": "whole2 vsrealpause1/freshprocessresume2; allsixpayloads/twojournals byteexact; BOTH strictfullnativerestore; real e8/newfullbook",
+  "counts_excluded_from_formal_strength": true,
+  "duplicate_transitions": 2048,
+  "helper_sha256": "605c8841232dd432aa574703557013bfef94cd3ba61078787563f89721c41a35",
+  "prior_result_usage": "provenance only; no priorresult targets",
+  "schema": "own-terminal-curriculum-native-preflight-v1",
+  "seed": 20261745,
+  "source_commit": "4515a7c0dda3b4f9615c2fc78a47c872ab14699d",
+  "status": "prospectively-frozen-infrastructure-only",
+  "tiny_config_sha256": "1ae6707dd38cf8099221d08169b403247cba62776aa81e3fcca309ffb4de6bdf",
+  "training_book_sha256": "1a5ca17664a828d669e58cf2bd5d9eeb7f980b83f20d3a4031d36e4ff0930ccb",
+  "unique_transitions": 2048,
+  "whole_ceiling_seconds": 600
+}
