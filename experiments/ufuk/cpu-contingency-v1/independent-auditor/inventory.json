@@ -1,0 +1,16 @@
+{
+  "files": {
+    "README.md": "e777724723fbcdc4ee888316b350c30e1a47b0f260729860c91a57de575aaeed",
+    "cpu_contingency_adapter_controls.py": "c7e059de4c9de5ba926e2497a36051b5771b62d7026421fa57ccc7e9ca082474",
+    "cpu_contingency_audit_core.py": "a0c9ef7601333fd85e6e548d21b6d17f4b79056f618924a1d4e92e0e534bbb8b",
+    "cpu_contingency_audit_support.py": "82f2299df3282a3e90a6c40c5600eeafeb933a0b956295a2e89e9a5dfe277f85",
+    "cpu_contingency_fresh_cli_replay.py": "aeef750e703ae5bd48c1ba8e5ef00c515abd193379940c4cdd29e3c428cddb7d",
+    "cpu_contingency_full_audit.py": "2183ce5c721e9acddbc1a73629762f883497025c1616f99bb84c2f3f41f76e38",
+    "cpu_contingency_qualify_e1.py": "fce6e68c2fa1a7a8fd9475ebbe96394ea1f7f4cc7259e63da765d2456b6a0c5c",
+    "protocol-DRAFT.json": "110f48b6024ea33f10e7d3a7d30bf651461d30aa52b9cbb3128214b17a4cf288",
+    "test_cpu_adapter.py": "3c7314d09249076ee8f2aa414f1402e9ab8b30656b7f22942f4efbeaa947b0db"
+  },
+  "schema": "cpu-contingency-independent-adapter-inventory-v1",
+  "source_commit": "3be5b87db27a0fbde83464e7ea7157f0d9a76ae4",
+  "status": "4-CPU-controls-PASS-Ruff-PASS-NOT-actual-training-qualified"
+}
