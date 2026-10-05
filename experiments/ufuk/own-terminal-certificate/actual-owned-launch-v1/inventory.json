@@ -1,0 +1,11 @@
+{
+  "status": "scratch-wrapper-ready-no-execution",
+  "tests": "4 pure PASS; Ruff PASS",
+  "file_sha256": {
+    "command-plan-TEMPLATE.json": "abc1fec9ea1e5294bbb65d17abf5ed8aad5e2f71912afe1f326c972a0d4e0899",
+    "launch_formal7_owned.py": "f3b07ab52a426ad9a680ae5aebb4bf107178ddd308c683e9999241f26d62ab77",
+    "owner-paths-TEMPLATE.json": "eaea1c8af86cbe50923d0a5417b7d83d0e5e90d8d030c3b52c75b4b889795efc",
+    "build_commands.py": "79d109d0d33e749a11ab2ec098145f1565a4469380dac712038bf665959a38de",
+    "test_launch_formal7.py": "c7b4c2e309021bbbdb4d5e2b07542b7a64fb8cf25f3c620a69b6fbf5707e5a95"
+  }
+}
