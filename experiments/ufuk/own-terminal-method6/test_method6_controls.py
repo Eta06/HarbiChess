@@ -16,7 +16,20 @@ def load(name):
     sys.path.insert(0, str(ROOT))
     spec = importlib.util.spec_from_file_location(name, ROOT / (name + ".py"))
     module = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(module)
+    if name == "own6_protect_original45_v2":
+        # Exact historical guardian needs its exact historical sibling at import time.
+        original = sys.modules.get("own6_previous_methods_barrier")
+        historical = load("own6_previous_methods_barrier_v2")
+        sys.modules["own6_previous_methods_barrier"] = historical
+        try:
+            spec.loader.exec_module(module)
+        finally:
+            if original is None:
+                sys.modules.pop("own6_previous_methods_barrier", None)
+            else:
+                sys.modules["own6_previous_methods_barrier"] = original
+    else:
+        spec.loader.exec_module(module)
     return module
 
 
@@ -81,6 +94,9 @@ def test_new_real06_deadlines_and_native_v2_schema():
         "whole_training_seconds_per_seed": 6000,
         "whole_audit_seconds_from_originalfirstclock": 9000,
         "posttraining_reserve_seconds": 10020,
+        "scheduling_version": "prospective-own6-terminal45-scheduling-v3",
+        "absolute_audit_cutoff_epoch": 1791170700,
+        "latest_latency_start_epoch": 1791172800,
     }
     train.validate_training_clock(reg, 101, 6101, 102)
     with pytest.raises(AssertionError):
@@ -130,7 +146,7 @@ def test_no_inferential_count_or_bootstrap_change():
 
 
 def test_protection_descendants_cross_groups_and_pid_reuse_isolation():
-    guard = load("own6_protect_original45")
+    guard = load("own6_protect_original45_v2")
     owners = [{"pid": 100, "startticks": 1000}]
     table = {
         100: {"pid": 100, "startticks": 1000, "ppid": 1, "pgid": 100},
@@ -150,7 +166,7 @@ def test_protection_descendants_cross_groups_and_pid_reuse_isolation():
 
 
 def test_protection_disappeared_child_does_not_interrupt_cleanup():
-    guard = load("own6_protect_original45")
+    guard = load("own6_protect_original45_v2")
     tracked = {100: {"pid": 100, "startticks": 1}, 101: {"pid": 101, "startticks": 2}}
     signals = []
 
@@ -191,7 +207,7 @@ def test_actual_final_arm_main_help(monkeypatch, capsys):
 
 
 def test_protection_prunes_foreign_owned_branch_before_tracking_or_failure_cleanup():
-    mod = load("own6_protect_original45")
+    mod = load("own6_protect_original45_v2")
     table = {
         10: {"pid": 10, "startticks": 1, "ppid": 1, "pgid": 10, "state": "S"},
         20: {"pid": 20, "startticks": 2, "ppid": 10, "pgid": 20, "state": "S"},
