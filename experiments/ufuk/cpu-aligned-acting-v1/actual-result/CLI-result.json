@@ -1,0 +1,61 @@
+{
+  "absolute_deadline_epoch": 1791208020.9406004,
+  "audit_optimizer_attempted_updates": 64,
+  "both_all_native_epochs_freshprocess_strictload": [
+    0,
+    1,
+    2
+  ],
+  "both_final_full_native_freshprocess_strictload": true,
+  "byte_exact_artifacts": {
+    "checkpoints/epoch-00000000/actor.json": "9d34bca8e6c54ae866ba3ca14b0907847c52d74cf5782b23db18eefcae74544f",
+    "checkpoints/epoch-00000000/base.safetensors": "8900853f72a86984bc07148ffc3fde429b48af5e6ae708eb67f6bf5e8753025a",
+    "checkpoints/epoch-00000000/behavior.safetensors": "8900853f72a86984bc07148ffc3fde429b48af5e6ae708eb67f6bf5e8753025a",
+    "checkpoints/epoch-00000000/last-frozen-epoch.json.gz": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "checkpoints/epoch-00000000/model.safetensors": "8900853f72a86984bc07148ffc3fde429b48af5e6ae708eb67f6bf5e8753025a",
+    "checkpoints/epoch-00000000/training.pt": "ffa1bf83f7ea734b095448c2cda31c52737b3010accaabce7dc570cf1632fa3d",
+    "checkpoints/epoch-00000001/actor.json": "c9d6a401d5d0e9b97725127f22a2417a7063ebe7aa7385cdcaaf73c007649d2b",
+    "checkpoints/epoch-00000001/base.safetensors": "06d208e8876592ee15d1af96d1482de3711d88714e7c6762ab6ddf05fac6bc9a",
+    "checkpoints/epoch-00000001/behavior.safetensors": "06d208e8876592ee15d1af96d1482de3711d88714e7c6762ab6ddf05fac6bc9a",
+    "checkpoints/epoch-00000001/last-frozen-epoch.json.gz": "92780eb1cad83e2867a1993d83e1d2b2a93154a15ef89681ed69a4493dfd7f47",
+    "checkpoints/epoch-00000001/model.safetensors": "4ff356a5e0eddd3ed4daa5d6ef831e126aff4d88d434cdb991a582ff792c1d9e",
+    "checkpoints/epoch-00000001/training.pt": "bc897df91b0405be583acf262b0fc0519ac1c28af65e3058f5446cc1688e1404",
+    "checkpoints/epoch-00000002/actor.json": "343baff42fc50f4d64424c6e5989613d9923c0995a5b23841a8e9d4ebc6dd22b",
+    "checkpoints/epoch-00000002/base.safetensors": "5ad2c8c31e9b9fc26b833c625cb1856bec1da1836846f5d17f852bcbb087f9ff",
+    "checkpoints/epoch-00000002/behavior.safetensors": "c6575cc75042ccf3cc439dc6ae927d7e4ef36e345131c610d698b84153aabe4a",
+    "checkpoints/epoch-00000002/last-frozen-epoch.json.gz": "40c6ec8e3180ee58badc13b6e6ce9d847d9d048b93f9e341c8bc172ae8a79862",
+    "checkpoints/epoch-00000002/model.safetensors": "c8833fff3fbdd37d72b45f95a3af7373a41488bd49c0f12f47e8a9bd7b6bcf33",
+    "checkpoints/epoch-00000002/training.pt": "7c6f8f98abc7745183c76f8d691feaa93da396df4c5d3eadc707e3ebf6a98f64",
+    "journal/epoch-00000001.json.gz": "92780eb1cad83e2867a1993d83e1d2b2a93154a15ef89681ed69a4493dfd7f47",
+    "journal/epoch-00000002.json.gz": "40c6ec8e3180ee58badc13b6e6ce9d847d9d048b93f9e341c8bc172ae8a79862"
+  },
+  "duplicate_qualification_fresh_transitions": 512,
+  "expected_ledger_schema": "pre-action-greedy-mixture-search-behavior-v5",
+  "finished_epoch": 1791207706.402819,
+  "input_sha256": {
+    "book": "1a5ca17664a828d669e58cf2bd5d9eeb7f980b83f20d3a4031d36e4ff0930ccb",
+    "config": "b210d2f469d890926a2d2213b00c73b3f4bb204c3fe3ea9685da685ecb348c0a",
+    "protocol": "2864d24d86662df1f60373403ac4e9d2349c3d52d30a0207e07714484671e7c2",
+    "weights": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03"
+  },
+  "last_epoch_UNKNOWN_excluded_value_rows": 241,
+  "last_epoch_known_terminal_rows": 15,
+  "last_epoch_policy_target_rows": 256,
+  "native_manifest_comparison": "exact semantic state/runtime/source/input/artifacts excluding run-relative input paths only",
+  "native_manifest_sha256": {
+    "split/epoch-00000000": "2fa38f29a1a34675022b9ea08fee85c1d3bce2bab4064fe691976a6f6d020a01",
+    "split/epoch-00000001": "edeea72b5d3d84874a2e9cb9b1656ca9494ffe60a3bcc0e3f219a81fc504650a",
+    "split/epoch-00000002": "eac6ee8f59dd60d5bf0c545d87f711df64431c9a88fe436a8ce5434568410800",
+    "whole/epoch-00000000": "2fa38f29a1a34675022b9ea08fee85c1d3bce2bab4064fe691976a6f6d020a01",
+    "whole/epoch-00000001": "edeea72b5d3d84874a2e9cb9b1656ca9494ffe60a3bcc0e3f219a81fc504650a",
+    "whole/epoch-00000002": "eac6ee8f59dd60d5bf0c545d87f711df64431c9a88fe436a8ce5434568410800"
+  },
+  "original_started_epoch": 1791207420.9406004,
+  "per_run_epochs": 2,
+  "schema": "actual-CPU-greedy-mixture-CLI-qualification-v1",
+  "scope": "NEW producer infrastructure only; old428 proof is separate ancestor, not source8 evidence. Certificate inventory semantics require independent E1 audit.",
+  "source_commit": "1e26d663b9d748e2c6afed5b74914a9dd88a21fe",
+  "started_epoch": 1791207421.0142097,
+  "status": "pass",
+  "unique_fresh_transitions": 512
+}
