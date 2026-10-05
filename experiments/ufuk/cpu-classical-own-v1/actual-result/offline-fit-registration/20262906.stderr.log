@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "/workspace/HarbiChess/experiments/ufuk/cpu-classical-own-v1/train_v3.py", line 150, in <module>
+    main()
+  File "/workspace/HarbiChess/experiments/ufuk/cpu-classical-own-v1/train_v3.py", line 99, in main
+    guard()
+  File "/workspace/HarbiChess/experiments/ufuk/cpu-classical-own-v1/train_v3.py", line 97, in guard
+    resource_guard(a.deadline, a.source_repo, a.output.parent)
+  File "/workspace/HarbiChess/experiments/ufuk/cpu-classical-own-v1/runtime.py", line 46, in guard
+    raise RuntimeError("recursive artifact16MiB ceiling")
+RuntimeError: recursive artifact16MiB ceiling
