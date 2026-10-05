@@ -1,0 +1,48 @@
+{
+  "schema": "UFUK-FRESH-E0-actual-selfplay-registration-v1",
+  "registered_before_any8192_actions": true,
+  "source_commit": "6fcc8b476d25495d1c9c413e55b2c7ba4794013e",
+  "actor_snapshot_SHA": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03",
+  "anchor_e8_SHA": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03",
+  "fixed_search": {
+    "nodes": 512,
+    "qdepth": 2,
+    "max_depth": 8,
+    "exploration": 0.05,
+    "total_ply_cap": 400
+  },
+  "rows": [
+    {
+      "seed": 20262805,
+      "manifest_path": "/workspace/work/harbichess/cpu-fresh-selfplay-v2-actual/registration/20262805-E0-manifest.json",
+      "manifest_sha256": "57be53de7238e2fbe87945805cf3755a07cece4a362edb6232fd9bdb7d6a715b",
+      "config_sha256": "b73106e21c6d8433c2132b024a2caae7527ec84541898d4f9c3db8202fccc3b5",
+      "cpu_core": 1,
+      "original_first_epoch": 1791221180.0397933,
+      "original_deadline_epoch": 1791235580.0397933,
+      "RAMstage": "/dev/shm/harbichess-fresh-E0-20262805",
+      "output": "/workspace/work/harbichess/cpu-fresh-selfplay-v2-actual/20262805-E0"
+    },
+    {
+      "seed": 20262806,
+      "manifest_path": "/workspace/work/harbichess/cpu-fresh-selfplay-v2-actual/registration/20262806-E0-manifest.json",
+      "manifest_sha256": "c932ce539318c9d14912662695d0334e2c4ae916e1ac7a956c3fe2a0ac48ae9a",
+      "config_sha256": "a3b5ac9f3933afdce858e60c0e383c9611dabd2be79e7dff128c490d6750591d",
+      "cpu_core": 2,
+      "original_first_epoch": 1791221180.0397933,
+      "original_deadline_epoch": 1791235580.0397933,
+      "RAMstage": "/dev/shm/harbichess-fresh-E0-20262806",
+      "output": "/workspace/work/harbichess/cpu-fresh-selfplay-v2-actual/20262806-E0"
+    }
+  ],
+  "actualqualification_sha256": "f8feb918315b6fbf3a52b7ef0e23dd48fd2a14b70ded859e648d8fd4a79d062f",
+  "original_first_epoch": 1791221180.0397933,
+  "original_deadline_epoch": 1791235580.0397933,
+  "max_total_actions": 16384,
+  "new_teacher_queries": 0,
+  "training_updates": 0,
+  "GPU_used": false,
+  "root_families": 1,
+  "known_development_exclusions": 8,
+  "formal_gate": "Unchanged; no strength success fromgeneration/loss/sameknownroots. Freshvirgin-source/root independentpairedproof required, oldclosedMAX8 notreset."
+}
