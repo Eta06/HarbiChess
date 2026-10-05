@@ -1,0 +1,24 @@
+{
+  "schema": "cpu-readonly-native-audit-local-review-v1",
+  "status": "synthetic-and-sealed-small-file-tests-pass-FULL-PUBLIC-RESTORE-PENDING",
+  "source_sha256": {
+    "strict_native_readonly_audit.py": "ef0ee11246091dcd8600faa66966b2c8e178d6b2876d842975de847c728686c1",
+    "test_readonly_audit.py": "293a5dd539c0ff8aadd4eae645dd4be914360ab8ad4c47bfbe5aefb510154a29",
+    "README.md": "ec775eb68eeac1768fce2da932a4e4bed583bf92baaae4f80afb20a18334461e"
+  },
+  "tests": {
+    "passed": 14,
+    "skipped": 0,
+    "elapsed_seconds": 2.19,
+    "cpu_affinity_count": 1,
+    "ruff": "pass"
+  },
+  "actual_main_HELPER_PROTOCOL_SHA_matches_original_VALUE_and_POSITION": true,
+  "full_old_journals_processed": false,
+  "old_TRAIN_clock_changed": false,
+  "optimizer_steps_model_inference_or_selfplay_executed": false,
+  "public_capsule_restore_executed": false,
+  "network_upload_dispatch_Git_or_main_mutation": false,
+  "resource_clock_scope": "separate prospective read-only audit<=900sec, operator cap1791273600; stored old TRAIN deadlines unchanged",
+  "proof_limits": "Synthetic fixtures and tiny synthetic original-helper journal tests only; actual full public restored dataset/native audit not run."
+}
