@@ -1,0 +1,70 @@
+{
+  "schema": "own-search-C18-final-four-fresh-loads-v1",
+  "status": "PASS",
+  "source_commit": "6fcc8b476d25495d1c9c413e55b2c7ba4794013e",
+  "native_sha256_by_seed": {
+    "20262905": [
+      "4355781a6e6222a77b457d8af772ed73438fb5ce2d157780f838fb8157530e14",
+      "93d6c91acb1e5250d513f1f4a9e27733290030328ae3afd6b8e753112c2cbbee"
+    ],
+    "20262906": [
+      "f32ddd188d6f9ac1ae6b3f6e2b54f0c9ba289e0ee30678aba7b87e1b6be5516a",
+      "ebf5268d9737bbb077b6d65f116636ece75ac1ff8f2d344e8eaf6d7753c0485c"
+    ]
+  },
+  "fresh_interpreter_loads": 4,
+  "rows": [
+    {
+      "status": "PASS-fresh-process-full-native-Adam-RNG-data-source-load-no-SGD",
+      "native_path": "/dev/shm/harbichess-own-q-residual18/C18-fit-v1/20262905/fresh0.native.json.gz",
+      "native_sha256": "4355781a6e6222a77b457d8af772ed73438fb5ce2d157780f838fb8157530e14",
+      "step": 0,
+      "registration_sha256": "ca6e798c9897d0d53208d43c5a392dd0ac0b38fc623e3535d4c3f019c2ed7516",
+      "state_digest": "82036aea61db7cb43d5f8ff0d268559d6aaaca41cbc7781719be617bcaf14335",
+      "first_epoch": 1791239108.4035254,
+      "deadline_epoch": 1791240908.4035254,
+      "finished_epoch": 1791239747.2756753,
+      "optimizer_steps_run": 0
+    },
+    {
+      "status": "PASS-fresh-process-full-native-Adam-RNG-data-source-load-no-SGD",
+      "native_path": "/dev/shm/harbichess-own-q-residual18/C18-fit-v1/20262905/final64.native.json.gz",
+      "native_sha256": "93d6c91acb1e5250d513f1f4a9e27733290030328ae3afd6b8e753112c2cbbee",
+      "step": 64,
+      "registration_sha256": "ca6e798c9897d0d53208d43c5a392dd0ac0b38fc623e3535d4c3f019c2ed7516",
+      "state_digest": "5b00c4c894dce221796af239ca6fb7bc50d17c1cb0f41d65abf405da3dc1f4e3",
+      "first_epoch": 1791239108.4035254,
+      "deadline_epoch": 1791240908.4035254,
+      "finished_epoch": 1791239747.375431,
+      "optimizer_steps_run": 0
+    },
+    {
+      "status": "PASS-fresh-process-full-native-Adam-RNG-data-source-load-no-SGD",
+      "native_path": "/dev/shm/harbichess-own-q-residual18/C18-fit-v1/20262906/fresh0.native.json.gz",
+      "native_sha256": "f32ddd188d6f9ac1ae6b3f6e2b54f0c9ba289e0ee30678aba7b87e1b6be5516a",
+      "step": 0,
+      "registration_sha256": "f9c495abf40b3a22b84ee8228d4b3b66d2b6f9614cfcbe3d1c8bbf14dd740e69",
+      "state_digest": "f8ae8ad5440e34c5605b944b66b390ade11c387ca0fd471c426cd92bf7965740",
+      "first_epoch": 1791239108.4035254,
+      "deadline_epoch": 1791240908.4035254,
+      "finished_epoch": 1791239747.4722521,
+      "optimizer_steps_run": 0
+    },
+    {
+      "status": "PASS-fresh-process-full-native-Adam-RNG-data-source-load-no-SGD",
+      "native_path": "/dev/shm/harbichess-own-q-residual18/C18-fit-v1/20262906/final64.native.json.gz",
+      "native_sha256": "ebf5268d9737bbb077b6d65f116636ece75ac1ff8f2d344e8eaf6d7753c0485c",
+      "step": 64,
+      "registration_sha256": "f9c495abf40b3a22b84ee8228d4b3b66d2b6f9614cfcbe3d1c8bbf14dd740e69",
+      "state_digest": "d340a2a71445d23701fe332f34b9818886ee4662581cb7bcf291a0b974f49209",
+      "first_epoch": 1791239108.4035254,
+      "deadline_epoch": 1791240908.4035254,
+      "finished_epoch": 1791239747.5717912,
+      "optimizer_steps_run": 0
+    }
+  ],
+  "finished_epoch": 1791239747.5855768,
+  "first_epoch": 1791239108.4035254,
+  "deadline_epoch": 1791240908.4035254,
+  "optimizer_steps_run": 0
+}
