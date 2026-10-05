@@ -1,0 +1,69 @@
+{
+  "CLI_original_seconds": 600,
+  "E8_SHA256": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03",
+  "TRAIN_book_SHA256": "1a5ca17664a828d669e58cf2bd5d9eeb7f980b83f20d3a4031d36e4ff0930ccb",
+  "all_model_selection": "fixedE8-only; no outcome peek or early checkpoint selection",
+  "audit_original_seconds": 6900,
+  "final_search": "unchanged16sim cachedFullGumbel4actions/T1/Gumbel0",
+  "fixed_epochs": 8,
+  "frozen_books": {
+    "20261925": "6d860c4c9a08914a50c6dfe59623f32755cd5185ccc68e3a52645f41efbd6252",
+    "20261926": "a2885098be18e8a9e45a5ac003f89a504e50877074c80fe809f01f23443aa9ff"
+  },
+  "hard_deadline_epoch": 1791180000,
+  "immutable_CPU_inputs_SHA256": {
+    "config-20261925.json": "18ecc92f92561c3da1a82c05b011ff9f702d5eee9ae86e1d2b2f924a558ec121",
+    "config-20261926.json": "6a0180492439297b9f4efdd53881b56ea3c293274d5d54a628b40070e7b50e4c",
+    "qualify_cpu_cli.py": "ddbee3963ea91e8619f00fab54d13a44032a0976a658cd5f027adbba772030f4",
+    "tiny-config.json": "1ec162669b245380e4412c5ad4c45911bd982666e2b555d2e4fab0f8067550ff"
+  },
+  "original_A100_source8_result": "INCOMPLETE-never-admitted-do-not-inherit-qualification-or-reset600",
+  "qualification_scope": "CPU-only independent qualification; not source8 A100 formal PASS. Previouslyactual93 A100tests retained with2ASTfixturefailures; trainedcandidate CUDA/AppleMetal untested untilaccessreturns. AllnewCPUqualification tests mustrunwithoutskip.",
+  "runtime": {
+    "CPU_threads_per_process": 1,
+    "cpu_quota_cores": 4,
+    "device": "cpu",
+    "disk_min_free_bytes": 134217728,
+    "memory_max_bytes": 17179869184,
+    "torch_version": "2.14.1+cpu"
+  },
+  "schema": "ufuk-primaryCPU-selflearning-prospective-contingency-v1",
+  "seeds": [
+    20261925,
+    20261926
+  ],
+  "selflearning": "fresh own preselected16sim search CE and own fully completed-game WDL; UNKNOWN excluded; fixedteacher-origin-e8 anchor, no new externalteacherlabels",
+  "source_commit": "3be5b87db27a0fbde83464e7ea7157f0d9a76ae4",
+  "status": "frozen-before-CPU-qualification-training-and-strength",
+  "strength": {
+    "BOTH_seed_IUT_required": true,
+    "Stockfish_TT_reset": true,
+    "Stockfish_hash_MiB": 16,
+    "Stockfish_nodes": 512,
+    "Stockfish_threads": 1,
+    "arms": [
+      "final-v-e8",
+      "final-v-SF512",
+      "e8-v-SF512"
+    ],
+    "bootstrap_samples": 50000,
+    "cap_fraction_at_most": 0.05,
+    "claim_draw": true,
+    "confidence": 0.9875,
+    "direct_9875CI_LCB_strictly_above": 0.5,
+    "direct_score_strictly_above": 0.6,
+    "final_absolute_SF_score_at_least": 0.25,
+    "games_per_arm": 96,
+    "max_total_plies": 400,
+    "median_latency_ratio_at_most": 1.1,
+    "no_strength_thresholds_relaxed": true,
+    "opening_pairs": 48,
+    "paired_SF_gain_9875CI_LCB_strictly_above": 0.0,
+    "paired_SF_gain_strictly_above": 0.1,
+    "same_PRIMARY_CPU_runtime_all_arms": true,
+    "source_root_and_color_pair_block_bootstrap": true,
+    "worst_case_cap_robust_same_LCB_gates": true
+  },
+  "training_original_seconds_per_seed": 6600,
+  "transitions_per_epoch": 16384
+}
