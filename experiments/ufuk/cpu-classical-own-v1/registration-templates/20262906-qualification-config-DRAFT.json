@@ -1,0 +1,41 @@
+{
+  "schema": "classical-own-actor-config-v3",
+  "nodes": 512,
+  "qdepth": 2,
+  "max_depth": 8,
+  "exploration": 0.05,
+  "total_ply_cap": 400,
+  "max_actions": 9,
+  "actors": 1,
+  "seed": 20262906,
+  "original_deadline_epoch": "PENDING_SAME_QUAL_FIRST_PLUS600_20262906",
+  "epoch_id": "classical-own-realCPU-qualification-seed-20262906",
+  "source_commit": "6fcc8b476d25495d1c9c413e55b2c7ba4794013e",
+  "model_sha256": "afbaec307e5acc4b9fcb5222115c2fb8112290065ffe64e929b35f2a935565e1",
+  "search_helper_sha256": "de53c14728a67b7772f18b396ac8ef5c35a144d4e4e616fec40099cd461a6670",
+  "value_helper_sha256": "a99cddfc397bd9221b99a70691427fdd663488b033fb239d9f48240786b2f277",
+  "producer_sha256": "851b9967adb709beb0dcf2a9e793c61add3eccf91fb21fb2a75e80da8845968b",
+  "runner_sha256": "761ee6bb8d7db27d6b2c231dbd0636648850c97079c56c0055314efd4d13baef",
+  "evaluator_identity": "classical-own-linear-value-v1",
+  "prior_target": "frozen-human-prior-scalar-mover-v1",
+  "roots": [
+    {
+      "source_id": "ordinary-initial-no-teacher",
+      "root_fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+      "prefix": []
+    }
+  ],
+  "excluded_training_position_keys": [
+    "r1bqkbnr/pppp1ppp/2n5/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R w KQkq -",
+    "rnbqkb1r/ppp1pppp/5n2/3p4/8/5NP1/PPPPPP1P/RNBQKB1R w KQkq -",
+    "rnbqkb1r/pppp1ppp/5n2/4p3/2P5/2N5/PP1PPPPP/R1BQKBNR w KQkq -",
+    "rnbqkb1r/pppppp1p/5np1/8/2PP4/8/PP2PPPP/RNBQKBNR w KQkq -",
+    "rnbqkbnr/pp2pppp/2p5/3p4/3PP3/8/PPP2PPP/RNBQKBNR w KQkq -",
+    "rnbqkbnr/pp2pppp/3p4/2p5/4P3/5N2/PPPP1PPP/RNBQKB1R w KQkq -",
+    "rnbqkbnr/ppp2ppp/4p3/3p4/2PP4/8/PP2PPPP/RNBQKBNR w KQkq -",
+    "rnbqkbnr/ppp2ppp/4p3/3p4/3PP3/8/PPP2PPP/RNBQKBNR w KQkq -"
+  ],
+  "exclusion_book_sha256": "9c36b5972c9676d19c358ca7e598b9f7f5d110b1947bed838cd660f644d845da",
+  "original_first_epoch": "PENDING_ROOT_OBSERVED_QUAL_FIRST_20262906",
+  "runtime_helper_sha256": "656a19611984f61f99f4fec8952250ee4ad8b6d836a34c6eaf6fcc65ed0af496"
+}
