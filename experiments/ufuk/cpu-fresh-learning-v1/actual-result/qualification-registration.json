@@ -1,0 +1,19 @@
+{
+  "schema": "fresh-MC-actual-native-proof-registration-v1",
+  "first_epoch": 1791223240.283365,
+  "deadline_epoch": 1791223840.283365,
+  "protocol_sha256": "0e2f88a4e9e97fa04dcdff460b8139591e90194c5c761a305a8ab035742d1540",
+  "trainer_sha256": "49445cbd5059770b3ccd433be9f21a4773786885a85d2d586005e10e2359a2c6",
+  "qualifier_sha256": "f76f1061060dfeb7a166b408a2aa20290fe476798acd9bb06e099599a006d181",
+  "actual_producer_sha256": "afb3ffa3c196b9da2ceb1b8000c67ae0c2781e7ffd65a950b59bed5b674c6079",
+  "seeds": [
+    20262805,
+    20262806
+  ],
+  "data_milestone": 2048,
+  "known_independent_readiness_receipt": "d889843f515667e7ec6e454003ecb59fea20b52ccd0b98c56c38d280eafc8e8f",
+  "workspace_floor": 268435456,
+  "RAMstage_limit_bytes": 16777216,
+  "CPUworkers": 1,
+  "GPU_used": false
+}
