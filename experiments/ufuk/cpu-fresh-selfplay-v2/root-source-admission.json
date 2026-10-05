@@ -1,0 +1,8 @@
+{
+  "status": "PASS-10-synthetic-CPU-tests-no-skip-and-Ruff-NOT-real-NN-qualified",
+  "actual_tests_seconds": 1.05,
+  "proposal_integration_bug_fixed_before_execution": "V2 converter incorrectly unpacked4 instead5 arrays and droppedanchors; now returns6 includinganchorarray+v2boundreceipt. Actualconverter legal-mate/mover/anchor/external-SHA check added. V1decode preserved adjacentbytecopy. No actualproducer state changed.",
+  "legacy_v1_proposal_tests": "14PASS synthetic previousagentreceipt",
+  "actual_selfplay_training_strength": "NOT-run",
+  "GPU_used": false
+}
