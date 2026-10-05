@@ -25,6 +25,7 @@ from harbichess.training.ownsearch_targets import (
     OwnSearchConfig,
 )
 from harbichess.training.search_acting_epoch import collect_search_acting_epoch
+from harbichess.training.search_acting_policy import GreedyOwnSearchConfig, ledger_semantics
 from harbichess.training.torch_array_encoder import TorchArrayBoardEncoder
 from harbichess.training.torch_fullgame_ppo import (
     FullGamePPOTrainConfig,
@@ -43,16 +44,12 @@ from harbichess.training.torch_ownsearch_core import (
 
 SEARCH_ACTING_LEARNER_SCHEMA = "torch-fresh-sparse-search-acting-v3"
 
-OWNSEARCH_BOARD_CACHE_SIZE = (
-    8192  # Runtime-only; pinned source/protocol, not native state.
-)
+OWNSEARCH_BOARD_CACHE_SIZE = 8192  # Runtime-only; pinned source/protocol, not native state.
 EMPTY_CHAIN = hashlib.sha256(b"").hexdigest()
 
 
 def canonical(value):
-    return json.dumps(
-        value, sort_keys=True, separators=(",", ":"), allow_nan=False
-    ).encode()
+    return json.dumps(value, sort_keys=True, separators=(",", ":"), allow_nan=False).encode()
 
 
 @dataclass(frozen=True, slots=True)
@@ -104,9 +101,7 @@ class TorchSearchActingLearner:
             or len(source_commit) != 40
             or any(c not in "0123456789abcdef" for c in source_commit)
         ):
-            raise ValueError(
-                "fullgame requires immutable inputs and exact source commit"
-            )
+            raise ValueError("fullgame requires immutable inputs and exact source commit")
         if (
             sha256(input_paths["initial_weights"])
             != "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03"
@@ -124,9 +119,7 @@ class TorchSearchActingLearner:
             dict(input_paths),
             source_commit,
         )
-        self.online = (
-            load_weights(input_paths["initial_weights"]).to(config.device).train()
-        )
+        self.online = load_weights(input_paths["initial_weights"]).to(config.device).train()
         if (
             self.online.config.input_channels != ENCODER_CHANNELS
             or self.online.config.policy_size != 4672
@@ -155,13 +148,10 @@ class TorchSearchActingLearner:
         self.sampler_seed_rng = random.Random(config.seed ^ 0x51A9)
         self.schedule_rng = random.Random(config.seed ^ 0x831A)
         self.search_rngs = [
-            random.Random((config.seed ^ 0xFA671) + slot)
-            for slot in range(config.actors.games)
+            random.Random((config.seed ^ 0xFA671) + slot) for slot in range(config.actors.games)
         ]
         self.pending_search_schedule = {}
-        self.epoch = self.optimizer_accepted_updates = (
-            self.optimizer_attempted_updates
-        ) = 0
+        self.epoch = self.optimizer_accepted_updates = self.optimizer_attempted_updates = 0
         self.optimizer_rejected_updates = 0
         self.sample_chain_sha256 = EMPTY_CHAIN
         self.last_epoch_gzip = b""
@@ -177,7 +167,7 @@ class TorchSearchActingLearner:
                 "sparse-own-Gumbel-policy-CE-plus-visited-child-exact-mate1-loss-shield-"
                 "plus-complete-own-game-mover-WDL"
             ),
-            "collection_ledger": "pre-action-masked-search-behavior-v4",
+            "collection_ledger": ledger_semantics(config.search)[0],
             "sampling": (
                 "raw-pi-archived;preselected-search-T1-mu-visited-loss-shield;"
                 "supervised-CE-no-PPO;game-balanced-known-WDL"
@@ -189,6 +179,11 @@ class TorchSearchActingLearner:
             ),
             "buffer_boundary": "closed-empty-after-immutable-epoch-archive",
         }
+        if isinstance(config.search, GreedyOwnSearchConfig):
+            self.run_config["sampling"] = (
+                "raw-pi-archived;fullsupport-selected-action-mixture-mu-T1;"
+                "separate-unchanged-search-CE-no-PPO;game-balanced-known-WDL"
+            )
         self.validate()
         return self
 
@@ -198,17 +193,12 @@ class TorchSearchActingLearner:
             _validate_optimizer,
         )
 
-        if (
-            self.pending_search_schedule
-            or len(self.search_rngs) != self.config.actors.games
-        ):
+        if self.pending_search_schedule or len(self.search_rngs) != self.config.actors.games:
             raise ValueError(
                 "ownsearch boundary must have empty pending schedule and all actor search RNGs"
             )
         if not self.closed:
-            raise ValueError(
-                "partial fullgame epoch/pass; restore complete native boundary"
-            )
+            raise ValueError("partial fullgame epoch/pass; restore complete native boundary")
         if len(self.sample_chain_sha256) != 64 or any(
             c not in "0123456789abcdef" for c in self.sample_chain_sha256
         ):
@@ -226,9 +216,7 @@ class TorchSearchActingLearner:
         ):
             raise ValueError("closed epoch must leave fresh complete opening histories")
         _validate_models(self.online, self.base, self.behavior)
-        _validate_optimizer(
-            self.optimizer, self.online, self.optimizer_accepted_updates
-        )
+        _validate_optimizer(self.optimizer, self.online, self.optimizer_accepted_updates)
         expected = {
             "lr": self.config.learning_rate,
             "weight_decay": self.config.weight_decay,
@@ -248,9 +236,7 @@ class TorchSearchActingLearner:
             for n, p in self.online.named_parameters()
         ):
             raise ValueError("fullgame trainable forward parameters changed")
-        if self.run_config["input_sha256"] != {
-            k: sha256(v) for k, v in self.input_paths.items()
-        }:
+        if self.run_config["input_sha256"] != {k: sha256(v) for k, v in self.input_paths.items()}:
             raise ValueError("immutable fullgame inputs changed")
         if torch_model_digest(self.base) != self.base_model_sha256:
             raise ValueError("immutable e8 base changed")
@@ -314,16 +300,13 @@ class TorchSearchActingLearner:
             guard=guard,
         )
         training["schema"] = "search-acting-supervised-train-v2"
-        training["behavior_kl_reference"] = (
-            "frozen-raw-network-policy-on-searched-roots"
-        )
+        training["behavior_kl_reference"] = "frozen-raw-network-policy-on-searched-roots"
         self.last_sampler_rng_state = training["sampler_rng_state"]
         self.epoch += 1
         self.optimizer_attempted_updates += training["optimizer_steps_attempted"]
         self.optimizer_accepted_updates += training["optimizer_steps_committed"]
         self.optimizer_rejected_updates += (
-            training["optimizer_steps_attempted"]
-            - training["optimizer_steps_committed"]
+            training["optimizer_steps_attempted"] - training["optimizer_steps_committed"]
         )
         record = dict(
             schema=SEARCH_ACTING_LEARNER_SCHEMA,
@@ -338,9 +321,7 @@ class TorchSearchActingLearner:
             own_search=ledger,
             training=training,
             target_counts={
-                f.name: getattr(targets, f.name)
-                for f in fields(targets)
-                if f.name != "targets"
+                f.name: getattr(targets, f.name) for f in fields(targets) if f.name != "targets"
             },
             sampler_seed=sampler_seed,
             previous_sample_chain_sha256=self.sample_chain_sha256,
@@ -369,8 +350,6 @@ class TorchSearchActingLearner:
             load_search_acting_checkpoint,
         )
 
-        self = cls.fresh(
-            config=config, input_paths=input_paths, source_commit=source_commit
-        )
+        self = cls.fresh(config=config, input_paths=input_paths, source_commit=source_commit)
         load_search_acting_checkpoint(Path(directory), self)
         return self
