@@ -1,0 +1,148 @@
+{
+  "schema": 1,
+  "qualification_ledger_slot": 3,
+  "primary_comparisons": 4,
+  "familywise_alpha": 0.05,
+  "two_sided_ci": 0.9875,
+  "replicates": 50000,
+  "quantiles": "numpy linear",
+  "analysis_seed": 20261107,
+  "seed_results": [
+    {
+      "seed": 20261205,
+      "direct": {
+        "mean": 0.5260416666666666,
+        "ci_adjusted_98_75": [
+          0.4114583333333333,
+          0.640625
+        ],
+        "ci_descriptive_95": [
+          0.4375,
+          0.6145833333333334
+        ]
+      },
+      "sf_paired_delta": {
+        "mean": 0.005208333333333333,
+        "ci_adjusted_98_75": [
+          -0.057291666666666664,
+          0.06770833333333333
+        ],
+        "ci_descriptive_95": [
+          -0.041666666666666664,
+          0.052083333333333336
+        ]
+      },
+      "final_sf_mean": 0.06770833333333333,
+      "initial_sf_mean": 0.0625,
+      "caps": {
+        "direct": 0.0,
+        "final_sf": 0.0,
+        "initial_sf": 0.0
+      },
+      "direct_adversarial_caps": {
+        "mean": 0.5260416666666666,
+        "ci_adjusted_98_75": [
+          0.4114583333333333,
+          0.640625
+        ],
+        "ci_descriptive_95": [
+          0.4375,
+          0.6145833333333334
+        ]
+      },
+      "sf_delta_adversarial_caps": {
+        "mean": 0.005208333333333333,
+        "ci_adjusted_98_75": [
+          -0.057291666666666664,
+          0.06770833333333333
+        ],
+        "ci_descriptive_95": [
+          -0.041666666666666664,
+          0.052083333333333336
+        ]
+      },
+      "gates": {
+        "direct_mean_gt_060": false,
+        "direct_adjusted_lower_gt_050": false,
+        "sf_paired_gain_gt_010": false,
+        "final_sf_absolute_at_least_025": false,
+        "sf_gain_adjusted_lower_gt_0": false,
+        "each_arm_caps_at_most_005": true,
+        "direct_adversarial_caps_adjusted_lower_gt_050": false,
+        "sf_adversarial_caps_adjusted_lower_gt_0": false
+      },
+      "strength_pass": false,
+      "block_unit": "48 distinct source-game roots; both colours jointly; not distinct ECO families"
+    },
+    {
+      "seed": 20261206,
+      "direct": {
+        "mean": 0.515625,
+        "ci_adjusted_98_75": [
+          0.4114583333333333,
+          0.6197916666666666
+        ],
+        "ci_descriptive_95": [
+          0.4322916666666667,
+          0.5989583333333334
+        ]
+      },
+      "sf_paired_delta": {
+        "mean": -0.010416666666666666,
+        "ci_adjusted_98_75": [
+          -0.06770833333333333,
+          0.052083333333333336
+        ],
+        "ci_descriptive_95": [
+          -0.052083333333333336,
+          0.036458333333333336
+        ]
+      },
+      "final_sf_mean": 0.057291666666666664,
+      "initial_sf_mean": 0.06770833333333333,
+      "caps": {
+        "direct": 0.0,
+        "final_sf": 0.0,
+        "initial_sf": 0.0
+      },
+      "direct_adversarial_caps": {
+        "mean": 0.515625,
+        "ci_adjusted_98_75": [
+          0.4114583333333333,
+          0.6197916666666666
+        ],
+        "ci_descriptive_95": [
+          0.4322916666666667,
+          0.5989583333333334
+        ]
+      },
+      "sf_delta_adversarial_caps": {
+        "mean": -0.010416666666666666,
+        "ci_adjusted_98_75": [
+          -0.06770833333333333,
+          0.052083333333333336
+        ],
+        "ci_descriptive_95": [
+          -0.052083333333333336,
+          0.036458333333333336
+        ]
+      },
+      "gates": {
+        "direct_mean_gt_060": false,
+        "direct_adjusted_lower_gt_050": false,
+        "sf_paired_gain_gt_010": false,
+        "final_sf_absolute_at_least_025": false,
+        "sf_gain_adjusted_lower_gt_0": false,
+        "each_arm_caps_at_most_005": true,
+        "direct_adversarial_caps_adjusted_lower_gt_050": false,
+        "sf_adversarial_caps_adjusted_lower_gt_0": false
+      },
+      "strength_pass": false,
+      "block_unit": "48 distinct source-game roots; both colours jointly; not distinct ECO families"
+    }
+  ],
+  "replicated_strength_pass": false,
+  "scope": "Conditional independent training seeds and disjoint source-root suites; no general Elo or Stockfish-level claim.",
+  "analysis_sha256": "aadd71938956ba7bac7e535ea2b4d8255947545ebb6e035e5c62141769a015cb",
+  "manifest_sha256": "6f957679f8c5d42c73641e298862e59d824a765470053e0c0d9815b979cdc0ca"
+}
