@@ -1,0 +1,343 @@
+{
+  "status": "PASS-fullhistory-integrity",
+  "schema": "cpu-shrink-arena-audit-v2-recovery-honest-executor",
+  "recovery_latency_scope": "partial-prefix old latency unknown; actual research timings",
+  "recovery_extra_work": [
+    {
+      "parent_progress_path": "/workspace/work/harbichess/cpu-shrunk-value-v1-actual/arena/20262605-shrunk-vs-e8.progress.jsonl",
+      "parent_progress_sha256": "5514a3f2c01689d0fe03ef4b40c579dbe40084a005dab9d176ce72e703012c95",
+      "parent_invocation_path": "/workspace/work/harbichess/cpu-shrunk-value-v1-actual/arena/20262605-shrunk-vs-e8.invocation.json",
+      "parent_invocation_sha256": "b3641a3f70d9e43ae3617e3286b425e6042af637da8d08edae7140f3f9d97e1a",
+      "old_parent_executor_sha256": "c8aa6d1ac779e1ba8863c1f400ff405839dc161c47f1a7afb619e2bbcf60f701",
+      "recovery_started_epoch": 1791218674.5869849,
+      "original_closed_games_reused": 2,
+      "duplicate_NN_moves_researched": 10,
+      "duplicate_NN_nodes": 5120,
+      "duplicate_NN_evaluations": 4745,
+      "old_partial_latency_unknown": true,
+      "SF_partial_resume_claimed": false,
+      "old_helpers_logs_artifacts_preserved": true
+    }
+  ],
+  "screen_result": "FAIL",
+  "rows": [
+    {
+      "seed": 20262605,
+      "arm": "e8",
+      "opponent": "SF512",
+      "sha256": "f0ba66ec5d7ebfbcad4432cdf4ff24671fcf50726db4c63a3763dac671019694",
+      "score": 0.0,
+      "wins": 0,
+      "draws": 0,
+      "losses": 16,
+      "unknown_caps": 0,
+      "legal_continuation_plies": 1088,
+      "actual_SF_nodes": 281271,
+      "neural_nodes": 276480,
+      "NN_evaluations": 253552,
+      "candidate_median_move_seconds": 0.5404918809945229,
+      "bootstrap_pair_95": [
+        0.0,
+        0.0
+      ],
+      "hoeffding_pair_95": [
+        0,
+        0.48016139565996035
+      ]
+    },
+    {
+      "seed": 20262606,
+      "arm": "e8",
+      "opponent": "SF512",
+      "sha256": "653880fc440b3b1562f790ef4333970697a17edaee5b6f5b4fd9d451587411cd",
+      "score": 0.0,
+      "wins": 0,
+      "draws": 0,
+      "losses": 16,
+      "unknown_caps": 0,
+      "legal_continuation_plies": 1088,
+      "actual_SF_nodes": 281271,
+      "neural_nodes": 276480,
+      "NN_evaluations": 253552,
+      "candidate_median_move_seconds": 0.5354983360157348,
+      "bootstrap_pair_95": [
+        0.0,
+        0.0
+      ],
+      "hoeffding_pair_95": [
+        0,
+        0.48016139565996035
+      ]
+    },
+    {
+      "seed": 20262605,
+      "arm": "rebased",
+      "opponent": "SF512",
+      "sha256": "f26e49b8c98dac4280f8774e7aa525868b1bb0a4b094b83fb994e40a3fe79639",
+      "score": 0.0625,
+      "wins": 0,
+      "draws": 2,
+      "losses": 14,
+      "unknown_caps": 0,
+      "legal_continuation_plies": 646,
+      "actual_SF_nodes": 167273,
+      "neural_nodes": 163840,
+      "NN_evaluations": 140879,
+      "candidate_median_move_seconds": 0.19856742801493965,
+      "bootstrap_pair_95": [
+        0.0,
+        0.15625
+      ],
+      "hoeffding_pair_95": [
+        0,
+        0.5426613956599604
+      ]
+    },
+    {
+      "seed": 20262606,
+      "arm": "rebased",
+      "opponent": "SF512",
+      "sha256": "7445e774334ed5bb6732a2e6a01050ca94d5182bd1202603840468b27268a08e",
+      "score": 0.0625,
+      "wins": 0,
+      "draws": 2,
+      "losses": 14,
+      "unknown_caps": 0,
+      "legal_continuation_plies": 646,
+      "actual_SF_nodes": 167273,
+      "neural_nodes": 163840,
+      "NN_evaluations": 140879,
+      "candidate_median_move_seconds": 0.20852626400301233,
+      "bootstrap_pair_95": [
+        0.0,
+        0.15625
+      ],
+      "hoeffding_pair_95": [
+        0,
+        0.5426613956599604
+      ]
+    },
+    {
+      "seed": 20262605,
+      "arm": "shrunk",
+      "opponent": "e8",
+      "sha256": "dedda7093e7c499ff32e962397057a8e0768bfd13d3f96e1b548f628b04862c8",
+      "score": 0.34375,
+      "wins": 3,
+      "draws": 5,
+      "losses": 8,
+      "unknown_caps": 0,
+      "legal_continuation_plies": 1515,
+      "actual_SF_nodes": 0,
+      "neural_nodes": 775223,
+      "NN_evaluations": 700280,
+      "candidate_median_move_seconds": 0.19586847702157684,
+      "bootstrap_pair_95": [
+        0.125,
+        0.53125
+      ],
+      "hoeffding_pair_95": [
+        0,
+        0.8239113956599604
+      ]
+    },
+    {
+      "seed": 20262606,
+      "arm": "shrunk",
+      "opponent": "e8",
+      "sha256": "42481e54408428df65eb4f4ae2eb49d0574564935df41fed8c7e66d86b17dd23",
+      "score": 0.125,
+      "wins": 2,
+      "draws": 0,
+      "losses": 14,
+      "unknown_caps": 0,
+      "legal_continuation_plies": 962,
+      "actual_SF_nodes": 0,
+      "neural_nodes": 492544,
+      "NN_evaluations": 451747,
+      "candidate_median_move_seconds": 0.1968583729758393,
+      "bootstrap_pair_95": [
+        0.0,
+        0.375
+      ],
+      "hoeffding_pair_95": [
+        0,
+        0.6051613956599604
+      ]
+    },
+    {
+      "seed": 20262605,
+      "arm": "shrunk",
+      "opponent": "rebased",
+      "sha256": "761104a028ff35580a7d493a3bfff1700d6b67ba877717f279287092cd951e15",
+      "score": 0.90625,
+      "wins": 13,
+      "draws": 3,
+      "losses": 0,
+      "unknown_caps": 0,
+      "legal_continuation_plies": 819,
+      "actual_SF_nodes": 0,
+      "neural_nodes": 419328,
+      "NN_evaluations": 372095,
+      "candidate_median_move_seconds": 0.18853069300530478,
+      "bootstrap_pair_95": [
+        0.78125,
+        1.0
+      ],
+      "hoeffding_pair_95": [
+        0.42608860434003965,
+        1
+      ]
+    },
+    {
+      "seed": 20262606,
+      "arm": "shrunk",
+      "opponent": "rebased",
+      "sha256": "65850df5e7a74e0b2ed8bcb4678c583c7703c656d4c4acc2e2bab7527df73342",
+      "score": 0.9375,
+      "wins": 14,
+      "draws": 2,
+      "losses": 0,
+      "unknown_caps": 0,
+      "legal_continuation_plies": 1092,
+      "actual_SF_nodes": 0,
+      "neural_nodes": 559104,
+      "NN_evaluations": 494962,
+      "candidate_median_move_seconds": 0.19400844699703157,
+      "bootstrap_pair_95": [
+        0.84375,
+        1.0
+      ],
+      "hoeffding_pair_95": [
+        0.45733860434003965,
+        1
+      ]
+    },
+    {
+      "seed": 20262605,
+      "arm": "shrunk",
+      "opponent": "SF512",
+      "sha256": "c7b59fc04256ee8544ad7502f3798a2c332ebde18b9762ab601d92f528d60dcd",
+      "score": 0.03125,
+      "wins": 0,
+      "draws": 1,
+      "losses": 15,
+      "unknown_caps": 0,
+      "legal_continuation_plies": 1119,
+      "actual_SF_nodes": 289119,
+      "neural_nodes": 284672,
+      "NN_evaluations": 259887,
+      "candidate_median_move_seconds": 0.19789374701213092,
+      "bootstrap_pair_95": [
+        0.0,
+        0.09375
+      ],
+      "hoeffding_pair_95": [
+        0,
+        0.5114113956599604
+      ]
+    },
+    {
+      "seed": 20262606,
+      "arm": "shrunk",
+      "opponent": "SF512",
+      "sha256": "2868ec23c7db943e38c9eb4b901ebd58b0b5751b829eee31372e27b03410b0a0",
+      "score": 0.0,
+      "wins": 0,
+      "draws": 0,
+      "losses": 16,
+      "unknown_caps": 0,
+      "legal_continuation_plies": 710,
+      "actual_SF_nodes": 184195,
+      "neural_nodes": 179712,
+      "NN_evaluations": 164677,
+      "candidate_median_move_seconds": 0.19826717698015273,
+      "bootstrap_pair_95": [
+        0.0,
+        0.0
+      ],
+      "hoeffding_pair_95": [
+        0,
+        0.48016139565996035
+      ]
+    }
+  ],
+  "contrasts": [
+    {
+      "seed": 20262605,
+      "arm": "shrunk",
+      "screen_gates": {
+        "direct_same_search_e8_gt_060": false,
+        "pairedSF_gain_same_search_e8_gt_010": false,
+        "finalSF_ge_025": false,
+        "trained_vs_same_search_untrained_gt_060": true,
+        "pairedSF_gain_untrained_gt_0": false,
+        "caps_le_005": true
+      },
+      "passed_screen": false,
+      "paired_SF_delta_by_game": {
+        "(0, 'white')": 0.0,
+        "(0, 'black')": 0.0,
+        "(1, 'white')": 0.0,
+        "(1, 'black')": 0.0,
+        "(2, 'white')": 0.0,
+        "(2, 'black')": 0.0,
+        "(3, 'white')": 0.5,
+        "(3, 'black')": 0.0,
+        "(4, 'white')": 0.0,
+        "(4, 'black')": 0.0,
+        "(5, 'white')": 0.0,
+        "(5, 'black')": 0.0,
+        "(6, 'white')": 0.0,
+        "(6, 'black')": 0.0,
+        "(7, 'white')": 0.0,
+        "(7, 'black')": 0.0
+      },
+      "paired_SF_gain": 0.03125
+    },
+    {
+      "seed": 20262606,
+      "arm": "shrunk",
+      "screen_gates": {
+        "direct_same_search_e8_gt_060": false,
+        "pairedSF_gain_same_search_e8_gt_010": false,
+        "finalSF_ge_025": false,
+        "trained_vs_same_search_untrained_gt_060": true,
+        "pairedSF_gain_untrained_gt_0": false,
+        "caps_le_005": true
+      },
+      "passed_screen": false,
+      "paired_SF_delta_by_game": {
+        "(0, 'white')": 0.0,
+        "(0, 'black')": 0.0,
+        "(1, 'white')": 0.0,
+        "(1, 'black')": 0.0,
+        "(2, 'white')": 0.0,
+        "(2, 'black')": 0.0,
+        "(3, 'white')": 0.0,
+        "(3, 'black')": 0.0,
+        "(4, 'white')": 0.0,
+        "(4, 'black')": 0.0,
+        "(5, 'white')": 0.0,
+        "(5, 'black')": 0.0,
+        "(6, 'white')": 0.0,
+        "(6, 'black')": 0.0,
+        "(7, 'white')": 0.0,
+        "(7, 'black')": 0.0
+      },
+      "paired_SF_gain": 0.0
+    }
+  ],
+  "games": 160,
+  "legal_continuation_plies": 9685,
+  "actual_SF_nodes": 1370402,
+  "neural_nodes": 3591223,
+  "protocol_sha256": "61fbdf04eb29ed08f5993026703839d4d841dcc42d17164def7bea82fae5bc32",
+  "helper_sha256": "979eb0d21f2368f2feb8886a2545f38239812599ad2ee7ea73149d3bf42f921b",
+  "protected_files_unchanged": true,
+  "strength_success_claimed": false,
+  "GPU_used": false,
+  "scope": "Known8development families; deterministic repeatede8/zero controls acrossseeds are not new independent families; no virgin statistical confirmation.",
+  "formal_requirement": "Development passing not success: fixed virgin root/source-exclusion, independent complete histories, unchanged stricter statistical/cap/latency gates and originalclosedMAX8 accounting; no result-driven extension/bestcheckpoint selection. Next actual ownplay round required before claiming sustained closedloop selflearning. SHRINKMC/zero-rebase olddata stage alone is not a sustainedclosedloop claim; nextactualfreshownplay/retrain round required.",
+  "uncertainty": "8 shared known opening families; descriptive paired intervals, not virgin confirmation or independent seeds-as-families. Degenerate empirical bootstrap is not population zero."
+}
