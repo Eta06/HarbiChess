@@ -2,6 +2,15 @@ name: Upload allowlisted public A100 artifacts
 
 on:
   workflow_dispatch:
+    inputs:
+      manifest_family:
+        description: Frozen public artifact manifest; original MC84 remains the default.
+        required: true
+        default: mc84
+        type: choice
+        options:
+          - mc84
+          - formal45-v2
 
 permissions: {}
 
@@ -25,4 +34,5 @@ jobs:
       - name: Fetch allowlisted public files, publish, and verify anonymous readback
         env:
           GH_TOKEN: ${{ github.token }}
+          HARBICHESS_RELEASE_MANIFEST: ${{ inputs.manifest_family }}
         run: python3 scripts/upload_allowlisted_a100_artifacts.py
