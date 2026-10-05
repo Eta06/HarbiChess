@@ -1,0 +1,10 @@
+{
+  "schema": "shrink-independent-final-proof-inventory-v1",
+  "files": {
+    "full160-rule-audit.json": "918092fa3484f828621173b658acf87fa5f13aed1ce52fc10e1a13bc21db703e",
+    "summary.json": "f1d4db411235f501029be05c73b015026508ebc3f0bf3f3aa94c34e1380fcb4e",
+    "review.py": "9b11e92d7a7787a9023dfb273a9adb49b870ac44b9b1ff696ac880cb1679b406",
+    "six-existing-packets.json": "523a207a52e256681fff4f926e243989243fa304cd2b3d1057d804c7e98f64ff",
+    "source-binding.json": "57cfb7d62dcb1dbaf8e393c3edb61b15fa78e4ed1f563421aa6d52d1cf548fe1"
+  }
+}
