@@ -88,13 +88,21 @@ class OnlineActors:
             not isinstance(row.source_id, str) or not row.source_id.strip() for row in openings
         ):
             raise ValueError("online actor book needs nonempty source-identified roots")
+        valid_roots = set()
+        valid_states = set()
         for row in openings:
-            if (
-                not self.rules.inspect(ChessState(row.state.root_fen)).is_valid()
-                or not self.rules.inspect(row.state).is_valid()
-                or self.rules.outcome(row.state, claim_draw=config.claim_draw) is not None
-            ):
-                raise ValueError("online actor opening must be valid and nonterminal")
+            root_fen = row.state.root_fen
+            if root_fen not in valid_roots:
+                if not self.rules.inspect(ChessState(root_fen)).is_valid():
+                    raise ValueError("online actor opening must be valid and nonterminal")
+                valid_roots.add(root_fen)
+            if row.state not in valid_states:
+                if (
+                    not self.rules.inspect(row.state).is_valid()
+                    or self.rules.outcome(row.state, claim_draw=config.claim_draw) is not None
+                ):
+                    raise ValueError("online actor opening must be valid and nonterminal")
+                valid_states.add(row.state)
         self.openings = openings
         serialized = [{"source_id": row.source_id, **_state_json(row.state)} for row in openings]
         self.book_sha256 = hashlib.sha256(
