@@ -118,5 +118,6 @@
     "qualification_is_not_fit": true,
     "qualification_is_not_strength": true
   },
-  "qualifier_sha256": "508eb12c484a2a659204698eb4e4ea359f6fd70f65a3ddceeb25f63a10e913f9"
+  "qualifier_sha256": "508eb12c484a2a659204698eb4e4ea359f6fd70f65a3ddceeb25f63a10e913f9",
+  "max_native_or_candidate_artifact_bytes": 2097152
 }
