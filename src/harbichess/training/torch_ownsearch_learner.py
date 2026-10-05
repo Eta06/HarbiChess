@@ -296,7 +296,11 @@ class TorchOwnSearchLearner:
             search_rng_after=[rng.getstate() for rng in self.search_rngs],
         )
         validate_search_ledger(
-            epoch, ledger, self.config.search, rules=self.actors.rules
+            epoch,
+            ledger,
+            self.config.search,
+            rules=self.actors.rules,
+            claim_draw=self.config.actors.claim_draw,
         )
         targets = build_fullgame_targets(
             self.actors.rules, epoch, claim_draw=self.config.actors.claim_draw
