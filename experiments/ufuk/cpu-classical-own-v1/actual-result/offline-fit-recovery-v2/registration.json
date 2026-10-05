@@ -1,0 +1,90 @@
+{
+  "actual_offline_proof_sha256": {
+    "20262905": "ac706844a95c2ce0f0de61de9cd824efd8a77680f5725200f637816f98203226",
+    "20262906": "eca24bd3af02e767ce94d171f0b0b8a7634d3ea057aafa042148b5833472c8f9"
+  },
+  "change": "Onlyoutputpath becomesRAM/<seed>/fit so existing16MiBguard counts correctper-seedroot. OldfailurebeforeSGD preserved. Source/model/data/optimizer/finalupdates/thresholds/originalclockunchanged. FreshAdam/theta0. No partialqualificationoptimizer reuse.",
+  "checkout": "/workspace/work/harbichess/cpu-additive-source-6fcc8b4",
+  "controller_sha256": "05e91c6d82b1ec6e75bfce425ee358c9ebde0f8feda9130ea424af8f503f34ce",
+  "input_pins": {
+    "/dev/shm/harbichess-classical-own-20262905-20261005/actions-00016384.json.gz": "11ac3cf5ed89108466ba2067c58d454518617c06f87a8dcf6b79f9ba6694b744",
+    "/dev/shm/harbichess-classical-own-20262906-20261005/actions-00016384.json.gz": "8fc609c0d705252e337d94a0eee46220b2f952f14252dab1acb5cf93ef515020",
+    "/workspace/HarbiChess/experiments/ufuk/cpu-classical-own-v1/journal_v3.py": "851b9967adb709beb0dcf2a9e793c61add3eccf91fb21fb2a75e80da8845968b",
+    "/workspace/HarbiChess/experiments/ufuk/cpu-classical-own-v1/learner.py": "2f7bc39943146b66fb2b0863938e47484378ce2597a725893d1df0edd345883e",
+    "/workspace/HarbiChess/experiments/ufuk/cpu-classical-own-v1/produce_v3.py": "761ee6bb8d7db27d6b2c231dbd0636648850c97079c56c0055314efd4d13baef",
+    "/workspace/HarbiChess/experiments/ufuk/cpu-classical-own-v1/qualify_actor_v3.py": "8c4eb4052c0b7a48d07a29d9398513ba170239365a1d32ea98a96d5af3805faa",
+    "/workspace/HarbiChess/experiments/ufuk/cpu-classical-own-v1/run_epoch_v3.py": "565d62f9451dc3eae2f9c6b85df4dcc0fddf959d6077058449057eb6f82e10f1",
+    "/workspace/HarbiChess/experiments/ufuk/cpu-classical-own-v1/runtime.py": "656a19611984f61f99f4fec8952250ee4ad8b6d836a34c6eaf6fcc65ed0af496",
+    "/workspace/HarbiChess/experiments/ufuk/cpu-classical-own-v1/train_v3.py": "d129d11682ba5f392023be53c9ed9b62d93822b778ffa483d2d0b6b50008b51c",
+    "/workspace/HarbiChess/experiments/ufuk/cpu-classical-own-v1/transfer.py": "1fb50a8d58b36cac9d781b4d29ca4e6ce65e50c838190c0355f2a3347ad6dfd8",
+    "/workspace/HarbiChess/experiments/ufuk/cpu-classical-own-v1/value.py": "a99cddfc397bd9221b99a70691427fdd663488b033fb239d9f48240786b2f277",
+    "/workspace/work/harbichess/cpu-additive-source-6fcc8b4/src/harbichess/training/cgroup_budget.py": "a53079851ab9fb63b65dd5bef0d0e8fb01d6864ebfbf2389dcdbcab39b30289c",
+    "/workspace/work/harbichess/cpu-classical-own-v1-actual/offline-fit-registration/protocol.json": "1067d6f85c7417d56f832ddcec11a8dc273a5f0038aa79cdf5f3aca7ba217905",
+    "/workspace/work/harbichess/cpu-classical-own-v1-actual/production-registration/20262905-production-config.json": "05adca4ddab663aa86dd8ff96f6a6a932f9edb001929193fe75e1462df1fdcbb",
+    "/workspace/work/harbichess/cpu-classical-own-v1-actual/production-registration/20262906-production-config.json": "6871b198da2565f6cde7417cedab84021b32c22edfaf7eee31e4ecf8063c3505"
+  },
+  "jobs": [
+    {
+      "command": [
+        "/workspace/HarbiChess/.venv/bin/python",
+        "/workspace/HarbiChess/experiments/ufuk/cpu-classical-own-v1/train_v3.py",
+        "--protocol",
+        "/workspace/work/harbichess/cpu-classical-own-v1-actual/offline-fit-registration/protocol.json",
+        "--protocol-sha256",
+        "1067d6f85c7417d56f832ddcec11a8dc273a5f0038aa79cdf5f3aca7ba217905",
+        "--config",
+        "/workspace/work/harbichess/cpu-classical-own-v1-actual/production-registration/20262905-production-config.json",
+        "--journal",
+        "/dev/shm/harbichess-classical-own-20262905-20261005/actions-00016384.json.gz",
+        "--source-repo",
+        "/workspace/work/harbichess/cpu-additive-source-6fcc8b4",
+        "--seed",
+        "20262905",
+        "--cpu-core",
+        "1",
+        "--output",
+        "/dev/shm/harbichess-classical-fit-recovery-v2-20261005/20262905/fit",
+        "--deadline",
+        "1791230782.4855845"
+      ],
+      "dataset_sha256": "ccacd17f05399cee8efefde1788207490781ffc8082630286d1655e0e7799635",
+      "expected_updates": 199,
+      "output": "/dev/shm/harbichess-classical-fit-recovery-v2-20261005/20262905/fit",
+      "seed": 20262905
+    },
+    {
+      "command": [
+        "/workspace/HarbiChess/.venv/bin/python",
+        "/workspace/HarbiChess/experiments/ufuk/cpu-classical-own-v1/train_v3.py",
+        "--protocol",
+        "/workspace/work/harbichess/cpu-classical-own-v1-actual/offline-fit-registration/protocol.json",
+        "--protocol-sha256",
+        "1067d6f85c7417d56f832ddcec11a8dc273a5f0038aa79cdf5f3aca7ba217905",
+        "--config",
+        "/workspace/work/harbichess/cpu-classical-own-v1-actual/production-registration/20262906-production-config.json",
+        "--journal",
+        "/dev/shm/harbichess-classical-own-20262906-20261005/actions-00016384.json.gz",
+        "--source-repo",
+        "/workspace/work/harbichess/cpu-additive-source-6fcc8b4",
+        "--seed",
+        "20262906",
+        "--cpu-core",
+        "2",
+        "--output",
+        "/dev/shm/harbichess-classical-fit-recovery-v2-20261005/20262906/fit",
+        "--deadline",
+        "1791230782.4855845"
+      ],
+      "dataset_sha256": "98570d7a83f53365a617c40a9a9007d767243117145bbb3111903e40b553f1a0",
+      "expected_updates": 183,
+      "output": "/dev/shm/harbichess-classical-fit-recovery-v2-20261005/20262906/fit",
+      "seed": 20262906
+    }
+  ],
+  "memory_guard_path": "/workspace/work/harbichess/cpu-additive-source-6fcc8b4/src/harbichess/training/cgroup_budget.py",
+  "original_deadline_epoch": 1791230782.4855845,
+  "original_first_epoch": 1791228982.4855845,
+  "ram_stage": "/dev/shm/harbichess-classical-fit-recovery-v2-20261005",
+  "registration_helper_sha256": "3c4f419872dca7e8691a87ee9f6099fb6c3ea2790f9c49337c5b263850075aef",
+  "schema": "root-classical-fit-output-parent-scope-recovery-v2"
+}
