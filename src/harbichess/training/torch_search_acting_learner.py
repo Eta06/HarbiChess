@@ -13,6 +13,7 @@ from pathlib import Path
 
 import numpy as np
 import torch
+
 from harbichess.backends.torch_network import load_weights, sha256
 from harbichess.chess.encoding import ENCODER_CHANNELS
 from harbichess.selfplay.online_actor import OnlineActorConfig, OnlineActors
@@ -40,7 +41,7 @@ from harbichess.training.torch_ownsearch_core import (
     train_search_epoch,
 )
 
-SEARCH_ACTING_LEARNER_SCHEMA = "torch-fresh-sparse-search-acting-v2"
+SEARCH_ACTING_LEARNER_SCHEMA = "torch-fresh-sparse-search-acting-v3"
 
 OWNSEARCH_BOARD_CACHE_SIZE = (
     8192  # Runtime-only; pinned source/protocol, not native state.
@@ -172,14 +173,20 @@ class TorchSearchActingLearner:
             "input_sha256": {k: sha256(v) for k, v in input_paths.items()},
             "actor_book_sha256": self.actors.book_sha256,
             "optimizer": {"class": "AdamW", "betas": [0.9, 0.999], "eps": 1e-8},
-            "targets": "sparse-own-Gumbel-policy-CE-plus-complete-own-game-mover-WDL",
+            "targets": (
+                "sparse-own-Gumbel-policy-CE-plus-visited-child-exact-mate1-loss-shield-"
+                "plus-complete-own-game-mover-WDL"
+            ),
+            "collection_ledger": "pre-action-masked-search-behavior-v4",
             "sampling": (
-                "raw-pi-archived;preselected-search-T1-mu;supervised-CE-no-PPO;"
-                "game-balanced-known-WDL"
+                "raw-pi-archived;preselected-search-T1-mu-visited-loss-shield;"
+                "supervised-CE-no-PPO;game-balanced-known-WDL"
             ),
             "search_schedule": "independent-before-outcome-uniform-offset-per-game-block-v1",
             "policy_sampling": "uniform-exogenously-searched-roots;UNKNOWN-policy-allowed",
-            "transfer": "original-e8-weights-only-new-Adam-not-v1-resume",
+            "transfer": (
+                "original-e8-weights-only-new-Adam;source7-v2-native-rejected-not-resumed"
+            ),
             "buffer_boundary": "closed-empty-after-immutable-epoch-archive",
         }
         self.validate()
