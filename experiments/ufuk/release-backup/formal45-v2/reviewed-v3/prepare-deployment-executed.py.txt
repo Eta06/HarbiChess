@@ -1,0 +1,112 @@
+"""Emit root-reviewed immutable staging/owner commands; never execute transport or jobs."""
+
+import base64
+import hashlib
+import json
+import shlex
+import zlib
+from pathlib import Path
+
+HERE = Path(__file__).resolve().parent
+TARGET = "/content/harbichess-fullgame-method2-inputs/formal45-release-reviewed-v3-20261005"
+PRIOR = "/content/harbichess-fullgame-method2-inputs/formal45-release-prior-manifest"
+OWNER_ROOT = "/content/harbichess-runs/formal45-public-backup-v3-20261005"
+ROOT = Path("/workspace/HarbiChess")
+
+
+def sha(path):
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def main():
+    sources = {
+        TARGET + "/formal45_release_backup.py": HERE / "formal45_release_backup.py",
+        TARGET + "/formal45_remote_backup_owner_v2.py": HERE / "formal45_remote_backup_owner_v2.py",
+        TARGET + "/spec.json": HERE / "frozen-spec-v3.json",
+        PRIOR + "/UFUK-A100-release-transport-manifest-20261004.json": (
+            ROOT / "docs/runs/UFUK-A100-release-transport-manifest-20261004.json"
+        ),
+    }
+    assert sha(sources[PRIOR + "/UFUK-A100-release-transport-manifest-20261004.json"]) == (
+        "fed25ce174eb5c5aded7363588cc4567d54ad05d898d57fa192f14c903608f9e"
+    )
+    files = [
+        {
+            "path": path,
+            "sha256": sha(local),
+            "bytes_base64": base64.b64encode(local.read_bytes()).decode(),
+        }
+        for path, local in sources.items()
+    ]
+    payload = base64.b64encode(zlib.compress(json.dumps(files).encode(), 9)).decode()
+    program = r"""
+import base64,hashlib,json,os,sys,zlib
+from pathlib import Path
+raw=zlib.decompress(base64.b64decode(sys.stdin.buffer.read()));assert len(raw)<=8*1024*1024
+rows=json.loads(raw)
+allowed={
+ '/content/harbichess-fullgame-method2-inputs/formal45-release-reviewed-v3-20261005/formal45_release_backup.py',
+ '/content/harbichess-fullgame-method2-inputs/formal45-release-reviewed-v3-20261005/formal45_remote_backup_owner_v2.py',
+ '/content/harbichess-fullgame-method2-inputs/formal45-release-reviewed-v3-20261005/spec.json',
+ '/content/harbichess-fullgame-method2-inputs/formal45-release-prior-manifest/UFUK-A100-release-transport-manifest-20261004.json'}
+assert len(rows)==4 and {row['path'] for row in rows}==allowed
+for row in rows:
+ p=Path(row['path']);data=base64.b64decode(row['bytes_base64'],validate=True)
+ assert hashlib.sha256(data).hexdigest()==row['sha256']
+ assert not p.is_symlink() and not any(parent.is_symlink() for parent in p.parents)
+ if p.exists():assert p.is_file() and hashlib.sha256(p.read_bytes()).hexdigest()==row['sha256']
+for row in rows:
+ p=Path(row['path']);p.parent.mkdir(parents=True,exist_ok=True)
+ if not p.exists():
+  data=base64.b64decode(row['bytes_base64'],validate=True)
+  with p.open('xb') as f:f.write(data);f.flush();os.fsync(f.fileno())
+ assert hashlib.sha256(p.read_bytes()).hexdigest()==row['sha256']
+print(json.dumps({'status':'exact4-immutable-files-staged-no-jobs-launched',
+ 'files':{r['path']:r['sha256'] for r in rows}}))
+"""
+    stage_command = "python3 -c " + shlex.quote(program)
+    assert len(stage_command.encode()) < 100000
+    owner = [
+        "/usr/bin/python3",
+        TARGET + "/formal45_remote_backup_owner_v2.py",
+        "--root",
+        OWNER_ROOT,
+        "--helper",
+        TARGET + "/formal45_release_backup.py",
+        "--helper-sha256",
+        sha(HERE / "formal45_release_backup.py"),
+        "--spec",
+        TARGET + "/spec.json",
+        "--spec-sha256",
+        sha(HERE / "frozen-spec-v3.json"),
+        "--packaging-seconds",
+        "1200",
+    ]
+    (HERE / "remote-stage-only-command.txt").write_text(stage_command + "\n")
+    (HERE / "remote-stage-payload.base64").write_text(payload + "\n")
+    (HERE / "owner-argv.json").write_text(json.dumps(owner, indent=2) + "\n")
+    (HERE / "owner-command-DO-NOT-AUTOEXECUTE.txt").write_text(shlex.join(owner) + "\n")
+    report = {
+        "status": "root-review-only-not-deployed-or-launched",
+        "owner_root": OWNER_ROOT,
+        "stage_path": TARGET,
+        "files": {row["path"]: row["sha256"] for row in files},
+        "stage_command_sha256": sha(HERE / "remote-stage-only-command.txt"),
+        "stage_stdin_payload_sha256": sha(HERE / "remote-stage-payload.base64"),
+        "owner_argv_sha256": sha(HERE / "owner-argv.json"),
+        "aggregate_asset_cap": 200,
+        "aggregate_byte_cap": 8 * 1024**3,
+        "old84_manifest_unchanged": True,
+        "packaging_seconds_including_barrier": 1200,
+        "actions_selector": "formal45-v2",
+        "prospective_transport_manifest_repository_path": (
+            "docs/runs/UFUK-A100-formal45-release-transport-manifest-v2-20261005.json"
+        ),
+        "release_verified_only_after_anonymous_full_byte_SHA_readback": True,
+    }
+    (HERE / "deployment-plan.json").write_text(json.dumps(report, indent=2) + "\n")
+    print(json.dumps(report))
+
+
+if __name__ == "__main__":
+    main()
