@@ -1,0 +1,34 @@
+{
+  "schema": "classical-own-main-stage-derivation-v1",
+  "status": "prospective-stage-not-actualqualification",
+  "original_proposal_inventory_sha256": "a5c663fe016ce57f0a1b1fe95c4d3d9f14e9b49de8d64d539ef1b896ce6f7413",
+  "source_core": "6fcc8b476d25495d1c9c413e55b2c7ba4794013e",
+  "old_profile_sha256": "d98da5d267734ae83cf0c98b768aadb08a7aec1b5c142be2332c8bae454d9706",
+  "new_profile_sha256": "07c3f83b8d7e495ee7896495babf758aa45fcbd1ae4bfe734ba76b0cafdc3256",
+  "new_profile_support_sha256": "dd6f55d401fd878d546f1b847be5e72c60e23e35e0fb837286ddc9c0ed1e2fc1",
+  "changes": {
+    "arena/profile.py": {
+      "original": "d98da5d267734ae83cf0c98b768aadb08a7aec1b5c142be2332c8bae454d9706",
+      "new": "07c3f83b8d7e495ee7896495babf758aa45fcbd1ae4bfe734ba76b0cafdc3256"
+    },
+    "arena/protocol-DRAFT.json": {
+      "original": "73c90c94e9035832c68f5196e1d4061345c20919910158cf165765c37c7d00ae",
+      "new": "fe4cd7f31a0d8e799b7698e1d435bfc95ad02d6410a714d62aa75ad85928047b"
+    },
+    "arena/run.py": {
+      "original": "dec7d0ac0613c853b0e9464db1a09d9698f514a489b0e38c423685c2af048665",
+      "new": "642292c50a8708cdd59722574939aac5de7dfb52d388f762f69d7e97bdd69321"
+    },
+    "verification.json": {
+      "original": "deea62fcc9d9061c9546cfc8c014d9ddc619dfae76c9d0dc32b52670b490056e",
+      "new": "c3d623336c08791c656392078104465f8b49bf61c22450b38dde0df39d377b7a"
+    }
+  },
+  "numeric_learning_or_strength_gate_changes": false,
+  "actual_job_launches": 0,
+  "tests_pass": 27,
+  "tests_skip": 0,
+  "registration_status": "clock/core/path-placeholdersunregistered;statichelper/model/seedsfixed",
+  "new_arena_run_sha256": "642292c50a8708cdd59722574939aac5de7dfb52d388f762f69d7e97bdd69321",
+  "profile_support_receipt_and_owner_binding": true
+}
