@@ -1,0 +1,54 @@
+{
+  "asset_count": 127,
+  "base_url": "https://actions-song-purposes-subsequently.trycloudflare.com",
+  "controller_sha256": "1487f044920ceccc1c7e2b385ba10d120430869e8e3a5a2a79c1432bfdc49b66",
+  "finished_epoch": 1791165507.3307807,
+  "helper_sha256": "5936b67303c178ab2b8ba97fc50742e3bf6c63274d7c2f792bdd1a4c4469a4f8",
+  "original_packaging_deadline_epoch": 1791166377.682068,
+  "package_dirs": [
+    "/content/harbichess-runs/release-packages-formal45/seed-20261425-through-00000010-0a41dc60bb15",
+    "/content/harbichess-runs/release-packages-formal45/seed-20261426-through-00000009-8f07417de5cd",
+    "/content/harbichess-runs/release-packages-formal45/seed-20261525-through-00000008-a2ec8639a97f",
+    "/content/harbichess-runs/release-packages-formal45/seed-20261526-through-00000008-874f46c76a00"
+  ],
+  "phases": [
+    {
+      "finished_epoch": 1791165272.555259,
+      "name": "pack-20261425",
+      "returncode": 0
+    },
+    {
+      "finished_epoch": 1791165354.8136485,
+      "name": "pack-20261426",
+      "returncode": 0
+    },
+    {
+      "finished_epoch": 1791165428.8686209,
+      "name": "pack-20261525",
+      "returncode": 0
+    },
+    {
+      "finished_epoch": 1791165502.31878,
+      "name": "pack-20261526",
+      "returncode": 0
+    },
+    {
+      "finished_epoch": 1791165507.3262935,
+      "name": "manifest",
+      "returncode": 0
+    }
+  ],
+  "scope": "No model promotion; claim Release backup only after verified readback.",
+  "server_expiry_epoch": 1791180000,
+  "server_pid": 123814,
+  "source_commits": [
+    "4515a7c0dda3b4f9615c2fc78a47c872ab14699d",
+    "a278bba67bce962cb9294f0d24040e02e9acf1f4"
+  ],
+  "spec_sha256": "bdbb12d3f81ac6547c023ce1dba598df0126877a79d15dbda17ebcc261c5df09",
+  "started_epoch": 1791165177.682068,
+  "status": "packaged-formal45-closed-prefixes-not-yet-Release-backup",
+  "transport_manifest": "/content/harbichess-runs/release-packages-formal45/formal45-transport-manifest-1791165177.json",
+  "transport_manifest_sha256": "a3874ea7f91096783e5445f0d6486beb0b75ec3a5f1f360d5f78708403a24841",
+  "tunnel_pid": 121966
+}
