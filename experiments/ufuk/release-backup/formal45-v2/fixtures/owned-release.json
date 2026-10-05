@@ -1,0 +1,24 @@
+{
+  "after_inventory": "/content/harbichess-fullgame-method2-inputs/method5-terminal-release-v3/owned-inventory-after.json",
+  "after_inventory_sha256": "03cd7926c8c78b49dfefc084ee78c7ae144e5dd462b54096395b0a07d6f8d607",
+  "all_registered_owned_groups_and_identities_terminated": true,
+  "before_inventory": "/content/harbichess-fullgame-method2-inputs/method5-terminal-release-v3/owned-inventory-before.json",
+  "before_inventory_sha256": "5ed11c46797c3ea22156704c0e33c9ee2e7b45e4a3f0355103dbcaea0dca6ba0",
+  "method5_ready_latency_final_receipts_fabricated": false,
+  "no_owned_process_needed_an_additional_stop": true,
+  "observed_epoch": 1791163651.296443,
+  "prior_failure_and_current_native_prefixes_preserved": true,
+  "schema": "own5-incomplete-owned-compute-terminated-witness-v1",
+  "signals_sent": [],
+  "terminal_receipt_sha256": "50876f67a21fbf0e5ef84f51fa21e9a1c2c5b9d9505ea68b4db1fc0ebb4ecac7",
+  "terminated_tracked_pid_startticks": [
+    {
+      "pid": 104294,
+      "startticks": 2286865
+    },
+    {
+      "pid": 107037,
+      "startticks": 2340856
+    }
+  ]
+}
