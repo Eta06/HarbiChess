@@ -1,0 +1,22 @@
+{
+  "status": "actual-read-only156-file-capture-pass-frozen-spec-ready-not-deployed",
+  "sha256": {
+    "remote_evidence_review.py": "09e62d7578ce036b605dd8cdd082cf628684c0e4b2bc7685ce40c93e285c59b0",
+    "request-v3.json": "9917103dfe8f17878e1c2a31bc63032f1fcccd21b3a52fb94082a391f302be47",
+    "capture/review-response.json": "fd84b589a4d9df57bb6448be57d36c325f07c9b8c5d760635ab0e3f58fbb2c1d",
+    "scope-byte-review.json": "e89cbaef0762a4436c855d792ddfb1cdc2802d6d441b2d90f974bc347bfb6776",
+    "approval-v3.json": "25c242d8414595ddebf04d8b7f7597b5d3d78a437abd839402612d9e5c82f33d",
+    "frozen-spec-v3.json": "bdbb12d3f81ac6547c023ce1dba598df0126877a79d15dbda17ebcc261c5df09",
+    "formal45_release_backup.py": "5936b67303c178ab2b8ba97fc50742e3bf6c63274d7c2f792bdd1a4c4469a4f8",
+    "formal45_remote_backup_owner_v2.py": "1487f044920ceccc1c7e2b385ba10d120430869e8e3a5a2a79c1432bfdc49b66",
+    "prepare_deployment.py": "6ab24dd54467d000602da39727cf3ad143e12ebe8d1da0b9c70f91290b1e4a57",
+    "deployment-plan.json": "9e6c4694c90540fdb39cd6be53b8a22bc49607c4108d231a960f6b12a616c1c1",
+    "remote-stage-only-command.txt": "3df8c1c70df693eadf161f25a89a5b9833185edb841848f772cfd8ae2e3f2bd8",
+    "remote-stage-payload.base64": "fab19721ffbd7be68e2fa4dcfedc823190da6307e40cfd160b7f010726dd4a57",
+    "owner-argv.json": "e8500e3c02988c4bdbf465d48f862e0a80e75f1e8913bfa094f34659522c073b",
+    "test_capture_suffixes.py": "1b7b12f3a81a3cf5fa3cbd9aadaf0a91f45f17c7ec752a115ce9ec9708df4e10",
+    "tests.log": "f299cb0ffb4580215f4b9643a2f31cdf09e6c57c46f955b1d1c6a26a088f6fb3",
+    "README.md": "c0f7fa8c2e6e50313fb01a7be52a063334efaddaf4158305195f9dd3810e6458"
+  },
+  "no_remote_writes_or_jobs": true
+}
