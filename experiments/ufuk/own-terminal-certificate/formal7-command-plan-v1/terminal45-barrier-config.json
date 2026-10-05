@@ -1,0 +1,15 @@
+{
+  "failed4_owned_release": "/content/harbichess-fullgame-method2-inputs/method5-terminal-release-v3/failed4-owned-release.json",
+  "failed4_terminal_receipt": "/content/harbichess-fullgame-method2-inputs/method5-failed4-scheduling-v2/failed4-terminal.json",
+  "failed5_owned_release": "/content/harbichess-fullgame-method2-inputs/method5-terminal-release-v3/owned-release.json",
+  "failed5_terminal_receipt": "/content/harbichess-fullgame-method2-inputs/method5-terminal-release-v3/terminal.json",
+  "original_cohort": "/content/harbichess-fullgame-method2-inputs/formal45-production/cohort.json",
+  "original_cohort_deadline_epoch": 1791170976.0081534,
+  "immutable_inputs": {
+    "/content/harbichess-fullgame-method2-inputs/method5-terminal-release-v3/failed4-owned-release.json": "dc44263be1aa56d4a9a36f16d1d8756a1d3c809061be7bc156f5698495dd2706",
+    "/content/harbichess-fullgame-method2-inputs/method5-failed4-scheduling-v2/failed4-terminal.json": "dcfac3d862c5b574be7fba30bb63a16e1802fcbfde28de0baa2881a39addc3ac",
+    "/content/harbichess-fullgame-method2-inputs/method5-terminal-release-v3/owned-release.json": "19a68076d73ff09443cb4f471ae21787fe7ea5e643309fef8033ec1ee04aaf60",
+    "/content/harbichess-fullgame-method2-inputs/method5-terminal-release-v3/terminal.json": "50876f67a21fbf0e5ef84f51fa21e9a1c2c5b9d9505ea68b4db1fc0ebb4ecac7",
+    "/content/harbichess-fullgame-method2-inputs/formal45-production/cohort.json": "85d8d34dcbdd195d49b2d847946f0d237d048a59975c4a8476f7bef95e0e51d9"
+  }
+}
