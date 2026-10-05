@@ -1,0 +1,44 @@
+"""External original600 owner, one pack subprocess group, immutable result."""
+import argparse
+import json
+import os
+import signal
+import subprocess
+import time
+from pathlib import Path
+
+p = argparse.ArgumentParser()
+p.add_argument('--stage', type=Path, required=True)
+p.add_argument('--root', type=Path, required=True)
+a = p.parse_args()
+a.root.mkdir(parents=True, exist_ok=False)
+first = time.time()
+deadline = min(first + 600, 1791180000)
+argv = ['python3', str(a.stage/'pack_source7_explicit.py'), '--inventory',
+        str(a.stage/'actual-closed-inventory.json'), '--inventory-sha256',
+        'b8e9b327487c5df3ade688c4ffbda86cd97ad267e00a5654834a8153e0d2533e',
+        '--approval', str(a.stage/'ROOT-approved-129-files.json'), '--approval-sha256',
+        '425edf6a7e55f69930ecb7868691acee10c90fae79eed98d8d7cd268daac710f',
+        '--output', str(a.root/'package'), '--deadline-epoch', str(deadline)]
+with (a.root/'pack.stdout').open('x') as out, (a.root/'pack.stderr').open('x') as err:
+    child = subprocess.Popen(argv, stdin=subprocess.DEVNULL, stdout=out, stderr=err,
+                             start_new_session=True, env={**os.environ, 'OMP_NUM_THREADS':'1'})
+    ticks = int(Path(f'/proc/{child.pid}/stat').read_text().rsplit(')',1)[1].split()[19])
+    (a.root/'launch.json').write_text(json.dumps({'first_epoch':first,'deadline_epoch':deadline,
+        'pid':child.pid,'startticks':ticks,'pgid':child.pid,'packaging_seconds':600,
+        'original_budget_reset':False},indent=2)+'\n')
+    expired = False
+    try:
+        code = child.wait(timeout=max(.01,deadline-time.time()))
+    except subprocess.TimeoutExpired:
+        expired = True
+        os.killpg(child.pid,signal.SIGTERM)
+        try:
+            code = child.wait(timeout=10)
+        except subprocess.TimeoutExpired:
+            os.killpg(child.pid,signal.SIGKILL)
+            code = child.wait(timeout=10)
+result={'schema':'source7-public-pack-owned-original600-v1','status':'pass' if code==0 and not expired else 'failed-preserved',
+        'returncode':code,'first_epoch':first,'deadline_epoch':deadline,'finished_epoch':time.time(),
+        'original_budget_reset':False,'owned_pid':child.pid,'original_packaging_seconds':600}
+(a.root/'owner-result.json').write_text(json.dumps(result,indent=2)+'\n')
