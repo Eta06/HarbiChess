@@ -1,0 +1,16 @@
+{
+  "status": "PASS-pure-synthetic-only-NOT-real-qualification",
+  "pytest_pass": 27,
+  "pytest_skip": 0,
+  "pytest_seconds": 0.8,
+  "ruff": "PASS-actual-MAIN-stage-repo-config-repo-cwd",
+  "actual_searches": 0,
+  "actual_selfplay_actions": 0,
+  "actual_training_updates": 0,
+  "NN_inferences": 0,
+  "synthetic_subprocess_restart": "actor9/4/fresh9 andoffline8/4/fresh8 fullbytes equal",
+  "microbench_scope": "1800staticcalls on18fixedboards only",
+  "additional_scope": "Pinnedactualcgroupsmallfilefixtures,recursiveartifactcap,ownedmockchildcleanup,explicit4fieldsame-seedconfigtransfer tamper rejection; noactualruntimekill/qualification",
+  "actual_production_jobs": 0,
+  "extra_scope": "2actualprofilepublication/deadlinepuretests;25originalfocusedtestsunchanged;clean6fccsourcecgroupmodulebinding exercised"
+}
