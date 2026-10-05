@@ -1,0 +1,34 @@
+{
+  "schema": "native-delta-extension-v2-local-review-v1",
+  "status": "scratch-only-ROOT-review-pending",
+  "tests": "35 passed in1.34seconds, oneCPU",
+  "ruff": "PASS",
+  "all12rawfiles_exact_local_roundtrip": true,
+  "measured_elapsed_seconds": 0.42967677116394043,
+  "packet_bytes_total": 325935,
+  "chunks_total": 8,
+  "identical_receiver_functions_except_versioned_proof_schema": [
+    "chunk_name",
+    "check_asset",
+    "public_url",
+    "publish_verified",
+    "deterministic_capsule",
+    "verify_capsule",
+    "receive_chunk",
+    "aggregate"
+  ],
+  "original_generic_codec_sha256_preserved": "878868940b5bae15c182dce55215320b5f0ba3692b9c5eac26988204832a31d6",
+  "source_manifest_files": {
+    "original-provenance-bindings.json": "c2bcf654acd6e638fa22ed91a70115df4b3decf5d2ca7a6f78ad7492f110e3d8",
+    "transport-control-PENDING.json": "e6291d3d627f6f7b6f8761aa3f22b2d73dfd0ce314880c8dc78238be3ed5a848",
+    "test_native_delta_codec_v2.py": "71780098db264d3667a0fe9afbfa66c5a33c9bde6dd064e41a6d2442ab36aa6c",
+    "test_native_delta_binding_v2.py": "8df09d3908adba6bc926ca1c4986dce549d2427d1a19913f7ac7057fadf40303",
+    "test_native_delta_receiver_v2.py": "f2848d52baf02041b4bd4adbbb66ac8581bd154d4f5a36121bc2a550bb5f5912",
+    "cpu-native-delta-release-v2.yml": "c2cde4cbaaa102171ded00b4495777b37d90e3855baae4cddb4062227e2866d0",
+    "native_delta_receiver_v2.py": "2ada24757df8e09402b0873f129ee79e12d8860777a89d4cb8e3b515feadba9c",
+    "measured-roundtrip-review.json": "57833485c2af66fd7cc0058d2106d53e4d7c497506adb3108aed89d0097a8c81",
+    "native_delta_binding_v2.py": "c18f507afeca44920fddbf4a9fcf89242f06bd35a0c0e12ed921aecf85769199",
+    "native_delta_codec.py": "878868940b5bae15c182dce55215320b5f0ba3692b9c5eac26988204832a31d6"
+  },
+  "no_network_upload_dispatch_Git_model_execution": true
+}
