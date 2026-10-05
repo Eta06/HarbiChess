@@ -1,0 +1,24 @@
+{
+  "caps": {
+    "assets": 200,
+    "encoded_bytes": 4194304,
+    "file_bytes": 2097152,
+    "ram_bytes": 16777216,
+    "raw_bytes": 8388608,
+    "release_bytes": 8589934592
+  },
+  "deadline_epoch": null,
+  "manifest_sha256": null,
+  "operator_end_epoch": 1791273600,
+  "release": {
+    "id": null,
+    "initial_assets": 0,
+    "tag": "PENDING-ROOT-NEW-RELEASE",
+    "target_commitish": null
+  },
+  "schema": "fresh-selflearning-state-blob-transport-control-v6",
+  "scope": "NEW22filebundle/NEWpublicRelease/singletemporaryunreferencedblob; old1800failureunchanged",
+  "started_epoch": null,
+  "status": "PENDING-ROOT-APPROVAL",
+  "whole_budget_seconds": 5400
+}
