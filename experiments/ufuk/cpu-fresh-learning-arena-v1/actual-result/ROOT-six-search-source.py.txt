@@ -1,0 +1,75 @@
+"""ROOT-only six actual NN search replays; default binding-only, no inference."""
+import argparse
+import hashlib
+import importlib.util
+import json
+import os
+import sys
+import time
+from pathlib import Path
+import chess
+STUDY=Path('/workspace/HarbiChess/experiments/ufuk/cpu-fresh-learning-arena-v1')
+BASE=Path('/dev/shm/harbichess-fresh-learning-arena-v1-20261005')
+CORE=Path('/workspace/work/harbichess/cpu-additive-source-6fcc8b4')
+FIRST=1791234502.0633478
+END=FIRST+900
+
+def sha(path):
+ h=hashlib.sha256()
+ with Path(path).open('rb') as f:
+  for b in iter(lambda:f.read(2**20),b''):h.update(b)
+ return h.hexdigest()
+
+def load(path,name):
+ s=importlib.util.spec_from_file_location(name,path);m=importlib.util.module_from_spec(s)
+ sys.modules[name]=m;s.loader.exec_module(m);return m
+
+def main():
+ parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('--execute',action='store_true');parser.add_argument('--output',type=Path,required=True);a=parser.parse_args()
+ p=json.loads((STUDY/'protocol.json').read_text());q=json.loads((BASE/'qualification.json').read_text())
+ fit=json.loads(Path(p['fit_provenance_path']).read_text());cohort=json.loads((BASE/'arena/cohort-result.json').read_text())
+ assert sha(p['fit_provenance_path'])==p['fit_provenance_sha256']
+ assert q['status']=='PASS-qualification-not-strength' and q['protocol_sha256']==sha(STUDY/'protocol.json')
+ assert q['helper_sha256']==sha(STUDY/'profile.py') and q['fit_provenance_sha256']==p['fit_provenance_sha256']
+ for name,v in cohort['contract']['inputs'].items():assert sha(STUDY/name)==v
+ assert p['match_seeds']==[20262805,20262806] and p['roles']==['mc','sc','full']
+ for seed in p['match_seeds']:
+  for role in p['roles']:
+   info=fit['fits'][str(seed)][role];assert sha(info['path'])==info['sha256']
+ if not a.execute:
+  print(json.dumps(dict(status='bound-six-model-comparator-no-inference',qualification_sha256=sha(BASE/'qualification.json'))));return
+ if a.output.exists():raise FileExistsError(a.output)
+ sys.path.insert(0,str(CORE/'src'));sys.path.insert(0,str(STUDY));os.chdir(CORE)
+ import torch
+ from harbichess.training.cgroup_budget import CgroupMemoryBudget
+ from harbichess.training.torch_search_acting_run import clean_source
+ clean_source(p['source_commit']);torch.set_num_threads(1)
+ os.sched_setaffinity(0,{min(os.sched_getaffinity(0))});budget=CgroupMemoryBudget(15*2**30)
+ def guard():
+  if not FIRST<=time.time()<END:raise TimeoutError('SAMEoriginal900 no replayclock reset')
+  budget.check()
+ guard();search=load(STUDY/'search.py','NNsixOriginalSearch');value=load(STUDY/'value.py','NNsixOriginalValue')
+ assert sha(p['book_path'])==p['book_sha256']
+ opening=json.loads(Path(p['book_path']).read_text())['splits']['arena'][0]['opening']['moves']
+ board=chess.Board()
+ for u in opening:board.push_uci(u)
+ rows=[]
+ for seed in p['match_seeds']:
+  for role in p['roles']:
+   guard();info=fit['fits'][str(seed)][role];before=board.fen(),tuple(board.move_stack)
+   engine=search.BudgetSearch(value.NeuralValue(Path(info['path'])),nodes=512,quiescence_plies=2,max_depth=8,guard=guard)
+   r=engine.search(board);assert before==(board.fen(),tuple(board.move_stack)) and board.is_legal(r.move)
+   old=next(row for row in q['rows'] if (row['seed'],row['role'],row['opening'])==(seed,role,0))
+   assert old['model_sha256']==info['sha256']
+   assert (r.nodes,r.evaluations,r.completed_depth,r.root_actions)==(old['nodes'],old['evaluations'],old['completed_depth'],old['root_actions'])
+   path=BASE/'arena'/f'{seed}-{role}-vs-SF512.json';actual=json.loads(path.read_text())
+   owner=next(row for row in cohort['rows'] if (row['seed'],row['arm'],row['opponent'])==(seed,role,'SF512'))
+   assert sha(path)==owner['result_sha256'] and actual['candidate_sha256']==info['sha256']
+   game=next(g for g in actual['games'] if g['opening_pair']==0 and (g['candidate_color']=='white')==board.turn)
+   packet=next(row for row in game['search_by_move'] if row['ply']==len(opening)+1)
+   assert packet['candidate'] and (r.move.uci(),r.value,r.nodes,r.evaluations,r.completed_depth,r.root_actions)==(packet['selected_move'],packet['value'],packet['nodes'],packet['evaluations'],packet['completed_depth'],packet['legal_root_actions'])
+   rows.append(dict(seed=seed,role=role,model_sha256=info['sha256'],move=r.move.uci(),value=r.value,nodes=r.nodes,evaluations=r.evaluations,depth=r.completed_depth,legal_count=r.root_actions,arena_sha256=sha(path)))
+ guard();result=dict(status='PASS-six-actualNN-fixed-search-reproductions',rows=rows,finished=time.time(),originaldeadline=END,source=p['source_commit'],protocolsha=sha(STUDY/'protocol.json'),profile_note='No move/value in old24profile; those match same-board actualarena only',new_games=0,training=0)
+ with a.output.open('x') as file:json.dump(result,file,separators=(',',':'))
+ print(json.dumps(result))
+if __name__=='__main__':main()
