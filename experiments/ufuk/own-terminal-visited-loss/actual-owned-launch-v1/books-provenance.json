@@ -1,0 +1,26 @@
+{
+  "schema": "family8-two-virgin48-root-books-provenance-v1",
+  "status": "pass-roots-only-no-games",
+  "qualification_ledger_slot": 8,
+  "all_96_records_independently_replayed": true,
+  "source_overlap": 0,
+  "root_overlap": 0,
+  "unique_source_records_across_both": 96,
+  "root_counts": {
+    "20260709": 48,
+    "20260710": 48
+  },
+  "selection_to_training_seed": {
+    "20260709": 20261825,
+    "20260710": 20261826
+  },
+  "book_sha256": {
+    "20260709": "6d860c4c9a08914a50c6dfe59623f32755cd5185ccc68e3a52645f41efbd6252",
+    "20260710": "a2885098be18e8a9e45a5ac003f89a504e50877074c80fe809f01f23443aa9ff"
+  },
+  "preregistration_sha256": "411ea71a5c2fa0c8e191df0d747bcaae4090b4e4f2cd5bad57873c14e705a5cc",
+  "independent_evidence_sha256": "1d18dc3bde063ce3b71d41df2ae1248f6a12d36cc543061f2cd5522437b98800",
+  "all80_training_exclusion_sha256": "377b31c49603072de29475afdd8e26d84a62ebd24b7fb9a88185affd45f2e3fd",
+  "model_or_engine_queries": 0,
+  "games_played": 0
+}
