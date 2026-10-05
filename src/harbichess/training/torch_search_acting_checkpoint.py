@@ -13,7 +13,6 @@ from pathlib import Path
 
 import numpy as np
 import torch
-
 from harbichess.backends.torch_network import save_weights, sha256
 from harbichess.selfplay.online_actor import OnlineActors
 from harbichess.training.fullgame_own_targets import build_fullgame_targets
@@ -233,10 +232,10 @@ def load_search_acting_checkpoint(directory: Path, learner):
         rng=random.Random(0),
         cursor=state["actors"],
     )
-    from harbichess.chess.encoding import BoardEncoder
+    from harbichess.training.torch_array_encoder import TorchArrayBoardEncoder
 
     learner.actors.rules.board_cache_size = OWNSEARCH_BOARD_CACHE_SIZE
-    learner.encoder = BoardEncoder(learner.actors.rules)
+    learner.encoder = TorchArrayBoardEncoder(learner.actors.rules)
     learner.actors.rng.setstate(training["actor_rng"])
     learner.sampler_seed_rng.setstate(training["sampler_seed_rng"])
     if (
