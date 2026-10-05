@@ -1,0 +1,13 @@
+{
+  "late_training_overlap_guard_sha256": "53edc8d240f1a896996615a12ea2dea0d7b0424c8d459003b38569cf8755feb4",
+  "late_training_overlap": {
+    "main": {
+      "path": "/content/harbichess-fullgame-method2-inputs/formal8-production/train-prefix-overlap-audit-result.json",
+      "sha256": "b56a48bc75815c5a91dc0ff3f5749c46bc683ea3046437611909ca625e4d549d"
+    },
+    "tiny": {
+      "path": "/content/harbichess-fullgame-method2-inputs/formal8-production/tiny-train-prefix-overlap-supplement.json",
+      "sha256": "1def37c9608dd938de52adef9b4327da85bd64497f54d374ea7884c55a251ef7"
+    }
+  }
+}
