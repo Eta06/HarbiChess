@@ -1,0 +1,44 @@
+{
+  "schema": "fresh-qsearch-realCPU-controller-manifest-v1",
+  "source_commit": "6fcc8b476d25495d1c9c413e55b2c7ba4794013e",
+  "checkout": "/workspace/work/harbichess/cpu-additive-source-6fcc8b4",
+  "cpu_core": 0,
+  "config": {
+    "path": "/workspace/work/harbichess/cpu-fresh-selfplay-v2-actual/registration/qualification-config.json",
+    "sha256": "3707beb618fbc183538f42fa1ac2d682545b68c354eb5663cc2dc25a933bd6ac"
+  },
+  "model": {
+    "path": "/workspace/work/harbichess/a100/restoration/local-rehearsal-content/harbichess-inputs/initial-e8.safetensors",
+    "sha256": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03"
+  },
+  "anchor_model": {
+    "path": "/workspace/work/harbichess/a100/restoration/local-rehearsal-content/harbichess-inputs/initial-e8.safetensors",
+    "sha256": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03"
+  },
+  "helpers": {
+    "journal_v1.py": {
+      "path": "/workspace/HarbiChess/experiments/ufuk/cpu-fresh-selfplay-v2/journal_v1.py",
+      "sha256": "9e798381b3d5e306829b70261b99864937e80c6096cb6654b36815941d3f83d7"
+    },
+    "journal_v2.py": {
+      "path": "/workspace/HarbiChess/experiments/ufuk/cpu-fresh-selfplay-v2/journal_v2.py",
+      "sha256": "afb3ffa3c196b9da2ceb1b8000c67ae0c2781e7ffd65a950b59bed5b674c6079"
+    },
+    "produce_v2.py": {
+      "path": "/workspace/HarbiChess/experiments/ufuk/cpu-fresh-selfplay-v2/produce_v2.py",
+      "sha256": "381861b52fca83f912672baca5066f0e3ed0e83c6c92e0703ffa119dc5ff2691"
+    },
+    "anchor_value.py": {
+      "path": "/workspace/HarbiChess/experiments/ufuk/cpu-fresh-selfplay-v2/anchor_value.py",
+      "sha256": "93f243b9c20f9d9dea3314e2db1cf22e6ccd130801374a23c47e987900afa1a2"
+    },
+    "search.py": {
+      "path": "/workspace/HarbiChess/experiments/ufuk/cpu-budget-search-v1/search.py",
+      "sha256": "de53c14728a67b7772f18b396ac8ef5c35a144d4e4e616fec40099cd461a6670"
+    },
+    "value.py": {
+      "path": "/workspace/HarbiChess/experiments/ufuk/cpu-residual-value-v1/arena/value.py",
+      "sha256": "0e0d9092db254bd88e4a49875d63edc6b1b39770d0fc53f61e03629ccba02737"
+    }
+  }
+}
