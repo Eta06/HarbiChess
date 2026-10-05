@@ -21,6 +21,7 @@ RELEASE_ID = 401698693
 RELEASE_TAG = "port-linux-preflight-20261002"
 MANIFEST = Path("docs/runs/UFUK-A100-release-transport-manifest-20261004.json")
 FORMAL45_MANIFEST = Path("docs/runs/UFUK-A100-formal45-release-transport-manifest-v2-20261005.json")
+SOURCE7_MANIFEST = Path("docs/runs/UFUK-A100-source7-release-transport-manifest-v3-20261005.json")
 API_ROOT = "https://api.github.com"
 UPLOAD_HOST = "uploads.github.com"
 USER_AGENT = "HarbiChess-allowlisted-release-transfer/1.0"
@@ -231,6 +232,8 @@ def _manifest_path() -> Path:
         return MANIFEST
     if family == "formal45-v2":
         return FORMAL45_MANIFEST
+    if family == "source7-v3":
+        return SOURCE7_MANIFEST
     raise DeliveryError("manifest-selector-not-fixed-allowlist")
 
 
