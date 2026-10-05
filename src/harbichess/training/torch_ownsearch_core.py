@@ -174,7 +174,7 @@ def train_search_epoch(
         objective = replace(objective, policy_weight=0.0)
     parameters = [p for p in network.parameters() if p.requires_grad]
     features = compile_epoch_features(
-        (*policy_rows, *value_targets.targets), encoder, guard=guard
+        (*policy_rows, *value_targets.targets), encoder, guard=guard, compact=True
     )
     rng = random.Random(seed)
     sampler = (
