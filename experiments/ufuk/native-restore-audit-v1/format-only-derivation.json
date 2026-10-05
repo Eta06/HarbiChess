@@ -1,0 +1,8 @@
+{
+  "schema": "readonly-v2-format-only-production-derivation-v1",
+  "executed_source_sha256": "4ed977b47711685dff98e2aadb40d775edf7fbb0450d20011053cb134d7370ca",
+  "formatted_source_sha256": "9c381cc9e961114a46952b8711b11b622e234aca6c2f58daaec4a96c8e09d20a",
+  "whole_module_AST_identical": true,
+  "actual_proof_bound_only_to_executed_source": true,
+  "original_clock_not_rerun": true
+}
