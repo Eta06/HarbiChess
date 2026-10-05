@@ -1,0 +1,25 @@
+{
+  "deadline_epoch": 1791235919.529188,
+  "first_epoch": 1791230519.529188,
+  "native_restore_or_strength_claimed": false,
+  "old1800failures_not_reset": true,
+  "permanent_backup_target": "NEWcommit-linkedPUBLICRelease",
+  "schema": "root-new22-file-bundle-prospective-5400-v6",
+  "source_seals": {
+    "experiments/ufuk/fresh-selflearning-state-blob-v6/README.md": "634b7ae98ea0154c04b41f107dc6abac1c0c4b83e807e934464f1d5df0b9aafd",
+    "experiments/ufuk/fresh-selflearning-state-blob-v6/blob_delivery_v6.py": "88cff916764862606c3f1f1fd363671153a0ae1a163a0618832e8b6f05e5a4d6",
+    "experiments/ufuk/fresh-selflearning-state-blob-v6/fresh_binding.py": "55f291e3e9cdd535cd9e030e477bf0d6eea09dd9827aa20d46b1be6bc8efb416",
+    "experiments/ufuk/fresh-selflearning-state-blob-v6/launcher_inputs_v6.py": "0e8bc50c25abeec5b2348e342cb01534afa791257095c3a65be4926792d41181",
+    "experiments/ufuk/fresh-selflearning-state-blob-v6/local-roundtrip.json": "3d10c16540a7d4d995c6a63e37c64e65a8a6c3c66ea6551b833cf925c25b8959",
+    "experiments/ufuk/fresh-selflearning-state-blob-v6/measure_v6.py": "5e2e179dfb845e4a281e2937c4e40c09a4702febe0a53becffb0da090c3ef1fc",
+    "experiments/ufuk/fresh-selflearning-state-blob-v6/native_delta_codec.py": "878868940b5bae15c182dce55215320b5f0ba3692b9c5eac26988204832a31d6",
+    "experiments/ufuk/fresh-selflearning-state-blob-v6/proposal-review.json": "ddc10a3871ee5af315e5a73bb6dec71ebeeafda06f8b7ba8e7346c8a4683a70a",
+    "experiments/ufuk/fresh-selflearning-state-blob-v6/receiver_v6.py": "2db6786a61b27f09c149f669ccfa634e683d86c908d3b00814d6930cb499a765",
+    "experiments/ufuk/fresh-selflearning-state-blob-v6/release_transport_v6.py": "c5f9ff97e4390fa1f502c619546ee41f60f6af59c1a2fc48bb0928e355248628",
+    "experiments/ufuk/fresh-selflearning-state-blob-v6/state_bundle.py": "ac81e656a90d4a8e453ad1db70ccbdb2c79606741fba719991fda505de10b096",
+    "experiments/ufuk/fresh-selflearning-state-blob-v6/test_blob_delivery_v6.py": "b61bac85bcec0979fc2b55eb1321a3ede2f0bc6dfaa03a28b2629c855f317872"
+  },
+  "source_target_commit": "31a18e981e27e696fcca69c7e62210e7f0e89830",
+  "temporary_blob_only_unreferenced_no_tree_commit_ref": true,
+  "workflow_sha256": "921455b6ddf4d0daeddb5c140dbaf047e124dcde1d3b740f1a81bfa6d2324314"
+}
