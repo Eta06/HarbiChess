@@ -1,0 +1,21 @@
+{
+  "schema": "shrink-arena-recovery-proposal-tests-v1",
+  "tests_passed": 4,
+  "pytest_seconds": 1.17,
+  "Ruff_runtime_and_test": "PASS",
+  "real_NN_or_game_jobs_performed": 0,
+  "test_evaluator": "tiny-fake-only",
+  "actual_parent_readonly_parse": {
+    "closed_games": 2,
+    "partial_key": [
+      1,
+      "white"
+    ],
+    "partial_neural_moves": 10,
+    "progress_sha256": "5514a3f2c01689d0fe03ef4b40c579dbe40084a005dab9d176ce72e703012c95"
+  },
+  "original_group_first": 1791217744.814687,
+  "original_group_deadline": 1791220444.814687,
+  "original_whole_first": 1791217012.4869661,
+  "original_whole_deadline": 1791224212.4869661
+}
