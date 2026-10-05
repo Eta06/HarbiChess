@@ -1,0 +1,18 @@
+{
+  "schema": "cpu-native-delta-transport-control-v1",
+  "status": "ROOT-approved-frozen-transport",
+  "operator_end_epoch": 1791273600,
+  "started_epoch": 1791217752.3840172,
+  "deadline_epoch": 1791219552.3840172,
+  "transport_seconds_max": 1800,
+  "receiver_sha256": "035821c943f0840fc02f0a2019516095bf9e43078a6843b745033456b20c7f7e",
+  "codec_sha256": "878868940b5bae15c182dce55215320b5f0ba3692b9c5eac26988204832a31d6",
+  "workflow_sha256": "8de5f95dcb43e0f4bd6da7a2f5299d8f93fd60c340eb3b9c3b8f9a330a0ab2e5",
+  "manifest_sha256": [
+    "170f4737816346e57d01f6d6fcceec48aa4e09fd8a364cccd7abcb21a4df4cf5",
+    "4fecd24fee160dc7195966b012e4d739e66f6e991bafecaef54a98ca857a6591",
+    "525ddf05b06bdcc0e77d9ceefce7609ed7442a6568b89cf2c1a100062286c4ee",
+    "c13fb58cf4c6103b25d8a30ae0012a6d3987bfba4baa55f7ba591f2035f11fa5"
+  ],
+  "note": "Authorized existingpublicRelease persistence; standardfreepublicubuntu Actions. Serialdispatch avoids pendingrun replacement. Alloldassets/native/sourceclocks preserved; exactbytesbackup is not strength or fullactorresume."
+}
