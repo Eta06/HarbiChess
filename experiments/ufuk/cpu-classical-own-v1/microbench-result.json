@@ -1,0 +1,24 @@
+{
+  "features": {
+    "evaluations": 1800,
+    "seconds": 0.09752388199558482,
+    "microseconds_per_eval": 54.17993444199156
+  },
+  "nonterminal_scalar": {
+    "evaluations": 1800,
+    "seconds": 0.10024307802086696,
+    "microseconds_per_eval": 55.690598900481646
+  },
+  "exact_terminal_checked_scalar": {
+    "evaluations": 1800,
+    "seconds": 0.3854304660053458,
+    "microseconds_per_eval": 214.12803666963657
+  },
+  "scope": "Static eval only18fixed full-history boards. No NN comparative benchmark, no search performance/strength claim.",
+  "cpu_affinity": [
+    4
+  ],
+  "helper_sha256": "a99cddfc397bd9221b99a70691427fdd663488b033fb239d9f48240786b2f277",
+  "max_static_evals_8192_actions": 4194304,
+  "max_static_evals_32768_actions": 16777216
+}
