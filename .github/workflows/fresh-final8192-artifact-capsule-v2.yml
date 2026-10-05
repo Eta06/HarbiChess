@@ -1,0 +1,53 @@
+name: Fixed final8192 exact artifact capsule
+run-name: Final8192 ${{ inputs.mode }} / ${{ inputs.manifest_prefix }} / ${{ inputs.ordinal }}
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        type: choice
+        options: [chunk, aggregate]
+        required: true
+      manifest_sha:
+        required: true
+      manifest_prefix:
+        required: true
+      ordinal:
+        default: '0'
+      payload:
+        default: ''
+      run_ids:
+        default: '[]'
+permissions:
+  contents: write
+  actions: read
+concurrency:
+  group: a100-allowlisted-release-delivery
+  cancel-in-progress: false
+jobs:
+  transport:
+    if: github.repository == 'Eta06/HarbiChess' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      MODE: ${{ inputs.mode }}
+      MANIFEST_SHA: ${{ inputs.manifest_sha }}
+      MANIFEST_PREFIX: ${{ inputs.manifest_prefix }}
+      ORDINAL: ${{ inputs.ordinal }}
+      PAYLOAD: ${{ inputs.payload }}
+      RUN_IDS: ${{ inputs.run_ids }}
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - id: receiver
+        run: python experiments/ufuk/fresh-final8192-artifact-capsule-v2/artifact_capsule.py
+      - if: inputs.mode == 'chunk'
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: ${{ steps.receiver.outputs.name }}
+          path: ${{ steps.receiver.outputs.path }}/chunk.bin
+          retention-days: 1
+          compression-level: 0
+          overwrite: false
+          if-no-files-found: error
