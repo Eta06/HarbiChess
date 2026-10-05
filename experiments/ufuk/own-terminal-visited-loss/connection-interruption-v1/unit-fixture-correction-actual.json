@@ -1,0 +1,5 @@
+{
+  "returncode": 255,
+  "stdout": "",
+  "stderr": "[colab] Endpoint not found (HTTP 404): this runtime does not expose the /colab/ssh endpoint. SSH is enabled at runtime creation, so an older or non-SSH runtime will not have it - run `colab new` for a fresh runtime with SSH.\nConnection closed by UNKNOWN port 65535\n"
+}
