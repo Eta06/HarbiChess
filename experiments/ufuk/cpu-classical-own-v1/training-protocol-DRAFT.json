@@ -1,0 +1,63 @@
+{
+  "schema": "classical-own-offline-protocol-v3",
+  "status": "DRAFT-UNREGISTERED-NOT-EXECUTED",
+  "seeds": [
+    20262905,
+    20262906
+  ],
+  "final_actions": 16384,
+  "inputs": {
+    "20262905": {
+      "journal_sha256": "PENDING_FINAL16384",
+      "config_sha256": "PENDING_ROOT"
+    },
+    "20262906": {
+      "journal_sha256": "PENDING_FINAL16384",
+      "config_sha256": "PENDING_ROOT"
+    }
+  },
+  "deadline_by_seed": {
+    "20262905": "PENDING_OBSERVED_FIRST_AND_CEILING",
+    "20262906": "PENDING_OBSERVED_FIRST_AND_CEILING"
+  },
+  "protected_position_keys": [
+    "r1bqkbnr/pppp1ppp/2n5/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R w KQkq -",
+    "rnbqkb1r/ppp1pppp/5n2/3p4/8/5NP1/PPPPPP1P/RNBQKB1R w KQkq -",
+    "rnbqkb1r/pppp1ppp/5n2/4p3/2P5/2N5/PP1PPPPP/R1BQKBNR w KQkq -",
+    "rnbqkb1r/pppppp1p/5np1/8/2PP4/8/PP2PPPP/RNBQKBNR w KQkq -",
+    "rnbqkbnr/pp2pppp/2p5/3p4/3PP3/8/PPP2PPP/RNBQKBNR w KQkq -",
+    "rnbqkbnr/pp2pppp/3p4/2p5/4P3/5N2/PPPP1PPP/RNBQKB1R w KQkq -",
+    "rnbqkbnr/ppp2ppp/4p3/3p4/2PP4/8/PP2PPPP/RNBQKBNR w KQkq -",
+    "rnbqkbnr/ppp2ppp/4p3/3p4/3PP3/8/PPP2PPP/RNBQKBNR w KQkq -"
+  ],
+  "protected_book_sha256": "9c36b5972c9676d19c358ca7e598b9f7f5d110b1947bed838cd660f644d845da",
+  "objective": {
+    "terminal_weight": 0.75,
+    "search_weight": 0.25,
+    "prior_l2": 0.01
+  },
+  "optimizer": {
+    "lr": 0.01,
+    "beta1": 0.9,
+    "beta2": 0.999,
+    "eps": 1e-08,
+    "batch": 256,
+    "slots": 4,
+    "max_updates": 1024
+  },
+  "minimum_distinct_trajectories": 16,
+  "minimum_known_rows": 1024,
+  "learning_scope": "fresh own completed terminal outcomes plus own frozen-Q512 root value; no external labels; humanprior initialization explicit",
+  "candidate_choice": "only final derived update on fixed16384 data; no validation selection",
+  "split": "sha256(realized trajectory) lastbyte mod5;validationbucket0;trajectoryonly",
+  "helper_sha256": {
+    "train_v3.py": "d129d11682ba5f392023be53c9ed9b62d93822b778ffa483d2d0b6b50008b51c",
+    "learner.py": "2f7bc39943146b66fb2b0863938e47484378ce2597a725893d1df0edd345883e",
+    "journal_v3.py": "851b9967adb709beb0dcf2a9e793c61add3eccf91fb21fb2a75e80da8845968b",
+    "value.py": "a99cddfc397bd9221b99a70691427fdd663488b033fb239d9f48240786b2f277",
+    "runtime.py": "656a19611984f61f99f4fec8952250ee4ad8b6d836a34c6eaf6fcc65ed0af496"
+  },
+  "hard_end": 1791273600.0,
+  "no_teacher_queries": true,
+  "cgroup_helper_sha256": "a53079851ab9fb63b65dd5bef0d0e8fb01d6864ebfbf2389dcdbcab39b30289c"
+}
