@@ -1,0 +1,109 @@
+{
+  "schema": "native-delta-extension-v2-local-measured-roundtrip-v1",
+  "status": "all-four-exact-byte-roundtrip-pass-PUBLIC-PENDING",
+  "rows": [
+    {
+      "label": "20262605-shrunk",
+      "native_path": "/workspace/work/harbichess/cpu-shrunk-value-v1-actual/fits/20262605-shrunk/checkpoints/step-00001024",
+      "manifest_sha256": "8d9929a1b1c9e862194c2024c6b2a391ea6bc00158b3aa7c647ee19aef3b60ec",
+      "packet_bytes": 78690,
+      "packet_sha256": "7c5b421873dca1ce53f3669519519b2db7af37440cf6146f521baa9e320b06f3",
+      "chunks": 2,
+      "raw_files": {
+        "model.safetensors": {
+          "bytes": 408040,
+          "sha256": "cdbfcb2c1893dd6d2ec63ae723c71ed7e645f4ad6a675a6fe3a60697a06bb722"
+        },
+        "training.pt": {
+          "bytes": 733349,
+          "sha256": "bcef7dd30874139d130cb1dc63615351accf6558b8f54f154f613bdcacdd60b1"
+        },
+        "checkpoint.json": {
+          "bytes": 1458,
+          "sha256": "8aaa18890e7832ced6f9c8e753b198db73491ad468751ced05a00b540462ac1d"
+        }
+      },
+      "source_commit": "4cae08522ac940746cf9127ca8ce4a6b63a47408",
+      "all3_raw_files_exact_roundtrip": true
+    },
+    {
+      "label": "20262606-shrunk",
+      "native_path": "/workspace/work/harbichess/cpu-shrunk-value-v1-actual/fits/20262606-shrunk/checkpoints/step-00001024",
+      "manifest_sha256": "10d2ad259754ec1ea1bdca5e4affb41bb5af06b259c03af26137f2d1a0b37806",
+      "packet_bytes": 78758,
+      "packet_sha256": "c083093c0688c643a8623e965476f3861a2f6d21177b3f021a64cf685ea6cd30",
+      "chunks": 2,
+      "raw_files": {
+        "model.safetensors": {
+          "bytes": 408040,
+          "sha256": "28ca14792cd630ae66450a82f08ee92fbc2a2fee668a40a669955eecf3acac0f"
+        },
+        "training.pt": {
+          "bytes": 733349,
+          "sha256": "dabeb8ddac3f53d8f428d8a9a356750722f549664c703bdca4f7e42ba48ec83a"
+        },
+        "checkpoint.json": {
+          "bytes": 1458,
+          "sha256": "ee36bf195861e00ab7f178f1878d453ef16ec2ef6819e6947a9daed758c12b3d"
+        }
+      },
+      "source_commit": "4cae08522ac940746cf9127ca8ce4a6b63a47408",
+      "all3_raw_files_exact_roundtrip": true
+    },
+    {
+      "label": "20262705-residual",
+      "native_path": "/workspace/work/harbichess/cpu-residual-value-v1-actual/fits/20262705-residual/checkpoints/step-00001024",
+      "manifest_sha256": "bbff8b5f8132ae88fbb00a40e0b943dff4ae2f446fef877909d8db295cc201f8",
+      "packet_bytes": 84222,
+      "packet_sha256": "309771ddf7ce69f26336803fccc342073749023dc6ce6000d52cb03bdb351aee",
+      "chunks": 2,
+      "raw_files": {
+        "model.safetensors": {
+          "bytes": 408080,
+          "sha256": "12e82c58f62a4afb007878da85cdda46e32afd7e1e8d07ec4a6e29a0b203c2ac"
+        },
+        "training.pt": {
+          "bytes": 747813,
+          "sha256": "fba3ca5bda3c2f3c51fc917818fc4236ae1b58fd22edac9ba19eeba289ab2111"
+        },
+        "checkpoint.json": {
+          "bytes": 1517,
+          "sha256": "f9deb84a59235db6ef18783cf9832639c4ce08455de8b54f21a8232db8a714fc"
+        }
+      },
+      "source_commit": "6fcc8b476d25495d1c9c413e55b2c7ba4794013e",
+      "all3_raw_files_exact_roundtrip": true
+    },
+    {
+      "label": "20262706-residual",
+      "native_path": "/workspace/work/harbichess/cpu-residual-value-v1-actual/fits/20262706-residual/checkpoints/step-00001024",
+      "manifest_sha256": "ce72e2112ed978c0648ac4e07459d13ebd16226ffeb0ca028b210373dc2e17d0",
+      "packet_bytes": 84265,
+      "packet_sha256": "d7e3295f8ac289ece1b2b2ff179c246504c041ae637352caa1a6e5ad97e13ef0",
+      "chunks": 2,
+      "raw_files": {
+        "model.safetensors": {
+          "bytes": 408080,
+          "sha256": "a8e40bba18612e09aff082e9c0f77cab4bec1e05fd195283861625e843d95f17"
+        },
+        "training.pt": {
+          "bytes": 747749,
+          "sha256": "86910597707fae24b56f8a523908dd9b1669baddcd2e2358085ab55edf79d02d"
+        },
+        "checkpoint.json": {
+          "bytes": 1517,
+          "sha256": "1a77a6f7e32a7f86cdabcd35a07ff49e1b5ee62c2d66aaacadf905f33e0a45dc"
+        }
+      },
+      "source_commit": "6fcc8b476d25495d1c9c413e55b2c7ba4794013e",
+      "all3_raw_files_exact_roundtrip": true
+    }
+  ],
+  "elapsed_seconds": 0.42967677116394043,
+  "generic_codec_sha256": "878868940b5bae15c182dce55215320b5f0ba3692b9c5eac26988204832a31d6",
+  "binding_adapter_sha256": "c18f507afeca44920fddbf4a9fcf89242f06bd35a0c0e12ed921aecf85769199",
+  "CPU_affinity": [
+    0
+  ],
+  "no_inference_optimizer_network": true
+}
