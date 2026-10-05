@@ -1,0 +1,185 @@
+"""ROOT-only optional actual six-search replay. Default SHA-only, no inference.
+
+Original24 profile omitted move/value. Compare its actual counters/depth/roots;
+compare move/value only against same-board first actual arena search packet.
+No new games, no training, no clock reset: original900 audit ceiling required.
+"""
+
+import argparse
+import hashlib
+import importlib.util
+import json
+import os
+import sys
+import time
+from pathlib import Path
+
+import chess
+
+STUDY = Path("/workspace/HarbiChess/experiments/ufuk/cpu-quiet-ordering-v1/arena")
+Q = Path("/dev/shm/harbichess-QUIET-strength-arena-v1-20261005/qualification.json")
+ARENA = Q.parent / "arena"
+CLOCK = Path("/dev/shm/harbichess-classical160-root-audit-v1-20261005/registration.json")
+CORE = Path("/workspace/work/harbichess/cpu-additive-source-6fcc8b4")
+
+
+def sha(path):
+    return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+
+
+def load(path, name):
+    spec = importlib.util.spec_from_file_location(name, path)
+    module = importlib.util.module_from_spec(spec)
+    sys.modules[name] = module
+    spec.loader.exec_module(module)
+    return module
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--execute", action="store_true")
+    parser.add_argument("--clock",type=Path,required=True)
+    parser.add_argument("--registration",type=Path,required=True)
+    parser.add_argument("--output", type=Path, required=True)
+    a = parser.parse_args()
+    p = json.loads((STUDY / "protocol.json").read_text())
+    q = json.loads(Q.read_text())
+    assert q["status"] == "PASS-classical-mixed-search-qualification-not-strength"
+    assert q["protocol_sha256"] == sha(STUDY / "protocol.json")
+    registration = json.loads(a.registration.read_text())
+    for file, expected in registration["input_pins"].items():
+        assert sha(file) == expected
+    assert q["helper_sha256"] == sha(STUDY / "profile.py")
+    assert q["profile_support_sha256"] == sha(STUDY / "profile_support.py")
+    assert len(q["rows"]) == 24
+    if not a.execute:
+        print(
+            json.dumps(
+                dict(status="bound-six-search-comparator-no-inference", qualification_sha256=sha(Q))
+            )
+        )
+        return
+    if a.output.exists():
+        raise FileExistsError(a.output)
+    clock=json.loads(a.clock.read_text())
+    assert clock["deadline_epoch"]==clock["first_epoch"]+900
+    deadline = clock["deadline_epoch"]
+    sys.path.insert(0, str(CORE / "src"))
+    sys.path.insert(0, str(STUDY))
+    import torch
+
+    from harbichess.training.cgroup_budget import CgroupMemoryBudget
+    from harbichess.training.torch_search_acting_run import clean_source
+
+    os.chdir(CORE)
+    clean_source(p["source_commit"])
+    torch.set_num_threads(1)
+    os.sched_setaffinity(0, {min(os.sched_getaffinity(0))})
+    memory = CgroupMemoryBudget(p["memory_max_bytes"])
+
+    def guard():
+        if time.time() >= deadline:
+            raise TimeoutError("SAME original900 deadline exhausted; no replay clock reset")
+        memory.check()
+
+    guard()
+    assert p["match_seeds"]==[20262905,20262906]
+    assert (p["search_nodes"],p["quiescence_plies"],p["max_depth"])==(512,2,8)
+    cohort=json.loads((ARENA/"cohort-result.json").read_text())
+    search = load(STUDY / "search.py", "classic_six_search_exact")
+    value = load(STUDY / "value.py", "classic_six_value_exact")
+    book = json.loads(Path(p["book_path"]).read_text())["splits"]["arena"]
+    assert sha(p["book_path"]) == p["book_sha256"]
+    board = chess.Board()
+    for text in book[0]["opening"]["moves"]:
+        board.push_uci(text)
+    rows = []
+    for seed in p["match_seeds"]:
+        for role in ["e8", "prior", "learned"]:
+            guard()
+            model = p["models"][str(seed)][role]
+            assert sha(model["path"]) == model["sha256"]
+            if role == "learned":
+                learned = json.loads(Path(model["path"]).read_text())
+                initial = json.loads(Path(p["models"][str(seed)]["prior"]["path"]).read_text())
+                assert learned["schema"]=="classical-own-quiet-ordering-model-v1" and any(learned["weights"])
+                assert initial["schema"]=="classical-own-linear-value-v1" and not any(initial["theta"])
+            evaluator = value.MixedValue(Path(model["path"]), p)
+            before=board.fen(),tuple(board.move_stack)
+            result = search.BudgetSearch(
+                evaluator, nodes=512, quiescence_plies=2, max_depth=8, guard=guard
+            ).search(board)
+            assert before==(board.fen(),tuple(board.move_stack)) and board.is_legal(result.move)
+            recorded = next(
+                r for r in q["rows"] if (r["seed"], r["role"], r["opening"]) == (seed, role, 0)
+            )
+            assert (
+                result.nodes,
+                result.evaluations,
+                result.completed_depth,
+                result.root_actions,
+            ) == (
+                recorded["nodes"],
+                recorded["static_evaluations"],
+                recorded["completed_depth"],
+                recorded["root_actions"],
+            )
+            assert model["sha256"] == recorded["model_sha256"]
+            group_path=ARENA / f"{seed}-{role}-vs-SF512.json"
+            owner=next(r for r in cohort["rows"] if (r["seed"],r["arm"],r["opponent"])==(seed,role,"SF512"))
+            assert sha(group_path)==owner["result_sha256"]
+            group = json.loads(group_path.read_text())
+            assert group["candidate_sha256"]==model["sha256"]
+            game = next(
+                g
+                for g in group["games"]
+                if g["opening_pair"] == 0 and (g["candidate_color"] == "white") == board.turn
+            )
+            packet = next(
+                r for r in game["search_by_move"] if r["ply"] == len(board.move_stack) + 1
+            )
+            assert packet["candidate"] and packet["selected_move"] == result.move.uci()
+            assert (
+                packet["value"],
+                packet["nodes"],
+                packet["evaluations"],
+                packet["completed_depth"],
+                packet["root_actions"],
+            ) == (
+                result.value,
+                result.nodes,
+                result.evaluations,
+                result.completed_depth,
+                result.root_actions,
+            )
+            rows.append(
+                dict(
+                    seed=seed,
+                    role=role,
+                    model_sha256=model["sha256"],
+                    move=result.move.uci(),
+                    value=result.value,
+                    nodes=result.nodes,
+                    evaluations=result.evaluations,
+                    depth=result.completed_depth,
+                    roots=result.root_actions,
+                    original_arena_sha256=sha(ARENA / f"{seed}-{role}-vs-SF512.json"),
+                )
+            )
+    guard()
+    output = dict(
+        status="PASS-six-actual-search-counter-and-arena-packet-replays",
+        rows=rows,
+        original_deadline=deadline,
+        finished=time.time(),
+        qualification_sha256=sha(Q),
+        uncertainty="profile had no move/value; those matched same-board arena only",
+        training_or_new_games=0,
+    )
+    with a.output.open("x") as f:
+        json.dump(output, f, indent=2)
+    print(json.dumps(output))
+
+
+if __name__ == "__main__":
+    main()
