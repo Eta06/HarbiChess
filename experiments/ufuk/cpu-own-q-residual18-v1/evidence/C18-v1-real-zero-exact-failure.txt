@@ -1,0 +1,12 @@
+Traceback (most recent call last):
+  File "/workspace/work/harbichess/continuation-20261005/C18-strength-v1-registration/trained24_forward_parity.py", line 20, in <module>
+    a=fast.nonterminal(board);b=ref.nonterminal(board);assert abs(a-b)<=1e-12;prior=math.tanh(sum(w*x for w,x in zip(v.PRIOR,v.features(board),strict=True))/v.SCALE);assert zero.nonterminal(board).hex()==prior.hex();rows.append(dict(seed=seed,ordinal=row["ordinal"],history_sha256=row["history_sha256"],compiled_hex=a.hex(),numpy_hex=b.hex(),absolute_error=abs(a-b),zero_prior_exact=True))
+                                                                                                                                                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError
+Traceback (most recent call last):
+  File "/workspace/work/harbichess/continuation-20261005/C18-strength-v1-registration/run_parity_and_profile.py", line 3, in <module>
+    r=json.loads(Path(sys.argv[1]).read_text());subprocess.run([sys.executable,r["parity_script"],sys.argv[1]],check=True,timeout=max(.1,r["deadline_epoch"]-time.time()));subprocess.run([sys.executable,r["profile_script"],"--protocol",r["protocol"],"--output",r["profile_result_path"],"--first-epoch",str(r["first_epoch"])],check=True,timeout=max(.1,r["deadline_epoch"]-time.time()))
+                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['/workspace/HarbiChess/.venv/bin/python', '/workspace/work/harbichess/continuation-20261005/C18-strength-v1-registration/trained24_forward_parity.py', '/workspace/work/harbichess/continuation-20261005/C18-strength-v1-registration/profile-controller-registration.json']' returned non-zero exit status 1.
