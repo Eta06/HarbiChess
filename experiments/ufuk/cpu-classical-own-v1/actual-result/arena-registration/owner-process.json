@@ -1,0 +1,10 @@
+{
+  "pid": 1013394,
+  "start_ticks": 19412251,
+  "started_epoch": 1791229723.1220245,
+  "original_first_epoch": 1791229723.0130045,
+  "original_deadline_epoch": 1791236923.0130045,
+  "controller_sha256": "bbb65c55a3a19fc29ab02b2a8285045c71f6fd8426c5d6058784a044c4bfc9ed",
+  "registration_sha256": "1a3184787dc58e78c0405cd20ccd6958dac8493725ea09f7117f41fc6a3b9908",
+  "GPU_used": false
+}
