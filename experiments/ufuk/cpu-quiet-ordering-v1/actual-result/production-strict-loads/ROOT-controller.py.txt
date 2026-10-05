@@ -1,0 +1,33 @@
+import hashlib, importlib.util, json, os, subprocess, sys, time
+from pathlib import Path
+BASE=Path('/dev/shm/harbichess-quiet-fit-v1-20261005')
+OUT=Path('/dev/shm/harbichess-quiet-production-strict-loads-v1-20261005')
+CORE=Path('/workspace/work/harbichess/cpu-additive-source-6fcc8b4')
+STAGE=Path('/workspace/work/harbichess/cpu-quiet-ordering-proposal')
+OLD=Path('/workspace/HarbiChess/experiments/ufuk/cpu-classical-own-v1')
+END=1791235260.854917
+sha=lambda p:hashlib.sha256(Path(p).read_bytes()).hexdigest()
+OUT.mkdir(exist_ok=False)
+sys.path.insert(0,str(OLD))
+from runtime import guard
+from qualify_actor_v3 import run_owned
+q=json.loads((BASE/'protocol.json').read_text()); r=json.loads((BASE/'result.json').read_text())
+assert r['first']==1791233460.854917 and r['deadline']==END and r['status']=='PASS-both-fixed-final-quiet-fits-not-strength'
+assert sha(BASE/'protocol.json')=='853698b8ac3f6b645efb9b965cde6a31191d5d28803b33e79a9df337feb517aa'
+def budget():
+ guard(END,CORE,OUT)
+ for name,h in q['ordering_helper_sha256'].items(): assert sha(STAGE/name)==h
+rows=[]
+for seed, final in [(20262905,136),(20262906,124)]:
+ b=r['inputs'][str(seed)]
+ for step in (0,final):
+  native=BASE/str(seed)/f'step-{step:08d}.json'; h=sha(native)
+  cmd=[sys.executable,str(STAGE/'train.py'),'--protocol',str(BASE/'protocol.json'),'--protocol-sha256',sha(BASE/'protocol.json'),'--config',b['config'],'--journal',b['journal'],'--source-repo',str(CORE),'--output',str(BASE/str(seed)),'--seed',str(seed),'--cpu-core','0','--deadline',str(END),'--resume',str(native),'--resume-sha256',h,'--audit-only']
+  run_owned(cmd,END,OUT,f'fresh-load-{seed}-{step}',budget)
+  check='import json,sys;from pathlib import Path;sys.path.insert(0,sys.argv[1]);from ordering_learner import Learner;s=json.loads(Path(sys.argv[2]).read_text());l=Learner(int(sys.argv[3]),s["contract"],s);assert json.loads(json.dumps(l.native()))==s;print("exact-full-native-round-trip-PASS")'
+  run_owned([sys.executable,'-c',check,str(STAGE),str(native),str(seed)],END,OUT,f'exact-roundtrip-{seed}-{step}',budget)
+  rows.append(dict(seed=seed,step=step,native=str(native),sha256=h,status='PASS-fresh-strict-load-and-full-native-roundtrip'))
+budget()
+result=dict(status='PASS-four-production-native-fresh-strict-loads-not-strength',original_first_epoch=r['first'],original_deadline_epoch=END,finished_epoch=time.time(),rows=rows,protocol_sha256=sha(BASE/'protocol.json'),controller_sha256=sha(__file__))
+(OUT/'result.json').write_text(json.dumps(result,indent=2)+'\n')
+print(json.dumps(result),flush=True)
