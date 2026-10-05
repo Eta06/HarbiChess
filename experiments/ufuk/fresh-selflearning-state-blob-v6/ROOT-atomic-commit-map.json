@@ -1,0 +1,122 @@
+[
+  {
+    "commit": "5cc96deb8fec82c28a83e17fc86b6053bf1e0a8f",
+    "file": "experiments/ufuk/fresh-selflearning-state-blob-v6/README.md"
+  },
+  {
+    "commit": "cc508bc390445ab17595de77109a2dd82dd51f76",
+    "file": "experiments/ufuk/fresh-selflearning-state-blob-v6/ROOT-anonymous-blob-full-body-and-22-proof.json"
+  },
+  {
+    "commit": "29b03c2ba7b2e25d12579297d06e3ad96f56eef1",
+    "file": "experiments/ufuk/fresh-selflearning-state-blob-v6/ROOT-approval-PENDING.json"
+  },
+  {
+    "commit": "2ccbbe7ab6019005a6b50db27f780f91b2f4f0bd",
+    "file": "experiments/ufuk/fresh-selflearning-state-blob-v6/ROOT-approval-PENDING.json.before-ROOT.json.txt"
+  },
+  {
+    "commit": "713bab5817e0afb93605e4e97cdc0f82e0809ab8",
+    "file": "experiments/ufuk/fresh-selflearning-state-blob-v6/ROOT-blob-single-post-receipt.json"
+  },
+  {
+    "commit": "11f6293a83fbce04c1ea07d105e76ee32d5ab83b",
+    "file": "experiments/ufuk/fresh-selflearning-state-blob-v6/ROOT-json-layout-failure-and-correction.json"
+  },
+  {
+    "commit": "6f192d48a917e2b51223b78a993fe65be99004c4",
+    "file": "experiments/ufuk/fresh-selflearning-state-blob-v6/ROOT-local-persistent-byte-backup.json"
+  },
+  {
+    "commit": "d2c92f0d1acebb45bd1026a0140ac3c6687c753c",
+    "file": "experiments/ufuk/fresh-selflearning-state-blob-v6/ROOT-new-release-single-create-response.json"
+  },
+  {
+    "commit": "84783abc074c05dfb561074920de4c3291e4986e",
+    "file": "experiments/ufuk/fresh-selflearning-state-blob-v6/ROOT-prospective-root-clock.json"
+  },
+  {
+    "commit": "3a67d1b764ccdcec5f5986e7f9ac042245e447ec",
+    "file": "experiments/ufuk/fresh-selflearning-state-blob-v6/allowlist-PENDING.json"
+  },
+  {
+    "commit": "2f766b11b059911973e787d93d5a86d407aa6007",
+    "file": "experiments/ufuk/fresh-selflearning-state-blob-v6/allowlist-PENDING.json.before-ROOT.json.txt"
+  },
+  {
+    "commit": "73e2fb29baf8f4ad4ce4ae2eb17ce5a6075f4721",
+    "file": "experiments/ufuk/fresh-selflearning-state-blob-v6/blob_delivery_v6-before-json-layout-fix.py.txt"
+  },
+  {
+    "commit": "36040656cdd7265db977c62777e6d2fa66b3cd6a",
+    "file": "experiments/ufuk/fresh-selflearning-state-blob-v6/blob_delivery_v6.py"
+  },
+  {
+    "commit": "28a0d9d6186ea5cd2979f1ae5488137ea654af12",
+    "file": "experiments/ufuk/fresh-selflearning-state-blob-v6/fresh_binding.py"
+  },
+  {
+    "commit": "f1dd6f034150423720363ae8239dcd0ee7fe1f3f",
+    "file": "experiments/ufuk/fresh-selflearning-state-blob-v6/json-layout-v2-README.md"
+  },
+  {
+    "commit": "2c90ee0190c1a81b3f62adc16871a00f39b0cf61",
+    "file": "experiments/ufuk/fresh-selflearning-state-blob-v6/json-layout-v2-review.json"
+  },
+  {
+    "commit": "702f87caf2bc08a899ae242457563fa91ff94794",
+    "file": "experiments/ufuk/fresh-selflearning-state-blob-v6/launcher_inputs_v6.py"
+  },
+  {
+    "commit": "64ffcd1ffb6ef1a92ba90b3902f0af8415dbc98f",
+    "file": "experiments/ufuk/fresh-selflearning-state-blob-v6/local-roundtrip.json"
+  },
+  {
+    "commit": "526ea07f819dc52707de28b8c6c7015e87e59a9a",
+    "file": "experiments/ufuk/fresh-selflearning-state-blob-v6/manifest-DRAFT.json"
+  },
+  {
+    "commit": "e970feae5c790b2d6b21f2704ce2ddf8de8df191",
+    "file": "experiments/ufuk/fresh-selflearning-state-blob-v6/manifest-DRAFT.json.before-ROOT.json.txt"
+  },
+  {
+    "commit": "6168d350de43a2c4769a61b2aef5c718d11f45c8",
+    "file": "experiments/ufuk/fresh-selflearning-state-blob-v6/measure_v6.py"
+  },
+  {
+    "commit": "43339ee228185c911130f4ac32c348d1d652470c",
+    "file": "experiments/ufuk/fresh-selflearning-state-blob-v6/native_delta_codec.py"
+  },
+  {
+    "commit": "44575c608f9f5371b0a7109bdff7a4e84d7878ce",
+    "file": "experiments/ufuk/fresh-selflearning-state-blob-v6/proposal-review.json"
+  },
+  {
+    "commit": "3b8405f83fea912df578d9b53dc56a3cfaeae792",
+    "file": "experiments/ufuk/fresh-selflearning-state-blob-v6/receiver_v6.py"
+  },
+  {
+    "commit": "e74aa316e5448f344a58c5c17703fad08d42dd48",
+    "file": "experiments/ufuk/fresh-selflearning-state-blob-v6/release_transport_v6.py"
+  },
+  {
+    "commit": "7da440cbda235a1357242bea8beaf804e35a063b",
+    "file": "experiments/ufuk/fresh-selflearning-state-blob-v6/state_bundle.py"
+  },
+  {
+    "commit": "8cd5066a9c23627158c41b3c2a67500363e06a07",
+    "file": "experiments/ufuk/fresh-selflearning-state-blob-v6/test_blob_delivery_v6.py"
+  },
+  {
+    "commit": "aa63f39b2c3d5664e9075cdfc937bd94d99122e5",
+    "file": "experiments/ufuk/fresh-selflearning-state-blob-v6/transport-control-PENDING.json"
+  },
+  {
+    "commit": "f5b9a7d8fdfb019d1cab6e71602fff2b8bc1f77d",
+    "file": "experiments/ufuk/fresh-selflearning-state-blob-v6/transport-control-PENDING.json.before-ROOT.json.txt"
+  },
+  {
+    "commit": "66e31aa0544b537efe8f630ec8aeab648644a444",
+    "file": ".github/workflows/fresh-selflearning-state-blob-v6.yml"
+  }
+]
