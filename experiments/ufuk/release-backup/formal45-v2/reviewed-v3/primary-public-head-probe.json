@@ -1,0 +1,18 @@
+{
+  "status": 403,
+  "headers": {
+    "date": "Mon, 05 Oct 2026 02:00:14 GMT",
+    "content-type": "text/plain",
+    "content-length": "25",
+    "cache-control": "private, max-age=0, no-store, no-cache, must-revalidate, post-check=0, pre-check=0",
+    "expires": "Thu, 01 Jan 1970 00:00:01 GMT",
+    "referrer-policy": "same-origin",
+    "x-frame-options": "SAMEORIGIN",
+    "x-robots-tag": "none",
+    "server": "envoy",
+    "cf-ray": "a458d4e32a5a45f5-ORD",
+    "x-envoy-upstream-service-time": "43",
+    "connection": "close"
+  },
+  "body_prefix": ""
+}
