@@ -1,0 +1,168 @@
+{
+  "schema": "cpu-own-outcome-additive-residual-protocol-v1",
+  "stage": "UFUK-RESIDUAL",
+  "source_commit": "6fcc8b476d25495d1c9c413e55b2c7ba4794013e",
+  "hypothesis": "Zero-rebase may discard useful e8 value. Test fixed e8 WDL-logit plus effective2520 sparse additive residual using same old own-MC labels/regularization, beta1 frozen-e8 forwardKL. Separate capacitycontrol SHRINK tests replacement; beta chosenprospectively, noTD ornewteacherquery.",
+  "initial_e8_sha256": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03",
+  "journals": [
+    {
+      "path": "/workspace/HarbiChess/artifacts/ufuk-a100-mirror-20261004/harbichess-runs/fullgame-method2-seed-20261205/run/journal/epoch-00000001.json.gz",
+      "sha256": "32d203b68ed29e9fd1a0845fca69f32f0faa3aa4cc1ad9e0e040b6af5027fb55",
+      "bytes": 24149725,
+      "source_seed": 20261205,
+      "epoch": 1
+    },
+    {
+      "path": "/workspace/HarbiChess/artifacts/ufuk-a100-mirror-20261004/harbichess-runs/fullgame-method2-seed-20261205/run/journal/epoch-00000008.json.gz",
+      "sha256": "f8503b5abe08687526b6a22d98df2a246dde1da96cfd41c3ab4109ea30ae7af9",
+      "bytes": 31062706,
+      "source_seed": 20261205,
+      "epoch": 8
+    },
+    {
+      "path": "/workspace/HarbiChess/artifacts/ufuk-a100-mirror-20261004/harbichess-runs/fullgame-method2-seed-20261205/run/journal/epoch-00000016.json.gz",
+      "sha256": "44e1487e496ce7733b18134385fa2f378ea21d3c30a5fb74174687a85e9d4a08",
+      "bytes": 31227317,
+      "source_seed": 20261205,
+      "epoch": 16
+    },
+    {
+      "path": "/workspace/HarbiChess/artifacts/ufuk-a100-mirror-20261004/harbichess-runs/fullgame-method2-seed-20261205/run/journal/epoch-00000032.json.gz",
+      "sha256": "21c055b78b5c28da11092bcd6952989ef2a7f1d223a46fa27817fabce7815eff",
+      "bytes": 30998257,
+      "source_seed": 20261205,
+      "epoch": 32
+    },
+    {
+      "path": "/workspace/HarbiChess/artifacts/ufuk-a100-mirror-20261004/harbichess-runs/fullgame-method2-seed-20261206/run/journal/epoch-00000001.json.gz",
+      "sha256": "29326d93118de97a851d12f1d6125633abc32ae40c81004c7d7ba2838c5c78cf",
+      "bytes": 23832074,
+      "source_seed": 20261206,
+      "epoch": 1
+    },
+    {
+      "path": "/workspace/HarbiChess/artifacts/ufuk-a100-mirror-20261004/harbichess-runs/fullgame-method2-seed-20261206/run/journal/epoch-00000008.json.gz",
+      "sha256": "b5bad76687a466a18735eafe3e65980242b6415b52b428bbb7c7ef80f5996602",
+      "bytes": 31109518,
+      "source_seed": 20261206,
+      "epoch": 8
+    },
+    {
+      "path": "/workspace/HarbiChess/artifacts/ufuk-a100-mirror-20261004/harbichess-runs/fullgame-method2-seed-20261206/run/journal/epoch-00000016.json.gz",
+      "sha256": "2a6e3e7748532de3c4bf862074754801a859faacefb2955446783c21dd43cfc6",
+      "bytes": 31448063,
+      "source_seed": 20261206,
+      "epoch": 16
+    },
+    {
+      "path": "/workspace/HarbiChess/artifacts/ufuk-a100-mirror-20261004/harbichess-runs/fullgame-method2-seed-20261206/run/journal/epoch-00000032.json.gz",
+      "sha256": "e688663ee19d295e6b6f7569d7fd9cb6b2f559a87ef89cf7ab8768bc42eddf35",
+      "bytes": 31692618,
+      "source_seed": 20261206,
+      "epoch": 32
+    }
+  ],
+  "parent_metadata": [
+    {
+      "source_seed": 20261205,
+      "parent_metadata_sha256": "d6e5a79b329b58a21d514d46b99947e1e5a1efa34f56b76f5e1116b2d1cbaebe",
+      "original_source_commit": "2312652dc52a894e9726f48321117cf114270355",
+      "original_schema": "fullgame-ppo-run-v1"
+    },
+    {
+      "source_seed": 20261206,
+      "parent_metadata_sha256": "a5059f13e7df76718ddba6db9d3088c044796912ccb0a9a600756f2120cf632c",
+      "original_source_commit": "2312652dc52a894e9726f48321117cf114270355",
+      "original_schema": "fullgame-ppo-run-v1"
+    }
+  ],
+  "seeds": [
+    20262705,
+    20262706
+  ],
+  "pairing": {
+    "20262705": 20261205,
+    "20262706": 20261206
+  },
+  "steps": 1024,
+  "optimizer": {
+    "class": "AdamW",
+    "learning_rate": 2e-05,
+    "weight_decay": 0.0,
+    "foreach": false,
+    "batch_size": 256,
+    "clip_gradient_norm": 5.0
+  },
+  "trainable": "26912 requires_grad storage coordinates but only first3rows of832feature+bias+metadata exceptabsolute-color column can change; effective2520. Other29rows verified zero everyupdate/fullnative load. Fixedidentityhidden and256scaledfirst3output projection; inactive inherited e8valueheads unused/frozen.",
+  "rebase": "Version2/additive-v1 newzeroresidual/freshAdam; ALL inheritede8 critic andpolicy parameters retained/frozen. Weights-only adaptation, no oldoptimizerresume. Nativev3 exactofflinefullresume thereafter, notactorresume.",
+  "sampling": "equal completedgame thenuniformposition. All oldOwnfullhistories replay legality/outcome/mover. Unknowncaps/tails excluded. Entireoriginalsourcegame partitionSHAmod5==0internalvalidation; notheldoutstrength or optimalplay labels. Source groups may share board features, not state-disjoint",
+  "view_provenance": "Reuse4closed oldepochs perseed,131072oldtransitions/seed. NOT newselfplay/transitions; oldMain40FAIL remainsFAIL. HumanCC0prefixes are initialstates, onlystoredowncontinuations/terminaloutcomes used fortraining. TeacheroriginE8 frozenpolicy bootstrap, no newteacherquery",
+  "feature_tests": "6PASS0SKIP2.48s residualfeature/oldownlabels+baseWDLatomicchecksum/actuale8 policyandzerocriticidentity/portableproductionWDLparity+4realAdamstepsfrozenstorage; core15PASS0SKIP3.09sTorch+MLXCPUadditiveparity/gradients. Apple/CUDAhardwareuntested.",
+  "qualification": {
+    "seed": 20262755,
+    "journal_sha256": "32d203b68ed29e9fd1a0845fca69f32f0faa3aa4cc1ad9e0e040b6af5027fb55",
+    "steps": 8,
+    "pause_at": 4,
+    "original_seconds": 600,
+    "scope": "actual whole8/pause4/freshresume8 payload equality and all6 fresh native loads on original600s"
+  },
+  "max_concurrent_fit_jobs": 1,
+  "per_fit_seconds": 3600,
+  "whole_fit_seconds": 10800,
+  "checkpoint_interval": 512,
+  "memory_max_bytes": 16106127360,
+  "memory_policy": "inactive-file-v1 withphysical/OOM/shmem/activecacheguards retained",
+  "disk_min_free_bytes": 268435456,
+  "resource_admission": "Sequential12MiB fit reserve x1.5 above256MiBfloor; measured existingidentical-shape SHRINK sixnativeoutput <12MiB, originaldatasets RAMonly; nooldfiledeletion.",
+  "development_games": {
+    "scope": "same8knownrootcolorpairs, developmentonlynotvirginconfirmation",
+    "source_arena_book": "/workspace/work/harbichess/cpu-own-replay-v1-actual/development/book.json",
+    "source_arena_book_sha256": "9c36b5972c9676d19c358ca7e598b9f7f5d110b1947bed838cd660f644d845da",
+    "games_per_seed": 80,
+    "total": 160,
+    "tasks": [
+      "originalE8-vsSF512",
+      "zeroResidualE8-vsSF512",
+      "trainedResidual-vsE8",
+      "trainedResidual-vsZeroResidual",
+      "trainedResidual-vsSF512"
+    ],
+    "simulations": null,
+    "max_root_actions": null,
+    "G": null,
+    "threads": 1,
+    "max_plies": 400,
+    "stockfish_nodes": 512,
+    "stockfish_threads": 1,
+    "stockfish_hash_MiB": 16,
+    "stockfish_sha256": "0f83d24cc46d2c66c60f16001af5444873bc112b7d028594513426894c12da19",
+    "endpoint": "fixed1024steps; no existing checkpoint selection",
+    "search": "QSEARCH512/q2 unchanged for ALLarms, additivehead requires fullbaseWDLadapter; prospective detailedarena beforegames."
+  },
+  "unchanged_screen": {
+    "both_seeds": true,
+    "candidate_direct_E8_score_gt": 0.6,
+    "candidate_pairedSF_gain_over_originalE8_gt": 0.1,
+    "candidate_finalSF_score_ge": 0.25,
+    "caps_fraction_le": 0.05,
+    "additional_learning_control": "trainedvsuntrainedRebased directscore>.60 andpairedSFgain>0; reinitializationalone notselflearning"
+  },
+  "formal_gate": "AnydevelopmentPASS stillnotpromotion; prospectivevirginroot/source exclusions andindependentstatistical/latencyconfirmation withunchanged originalstrictergates, allhistoricalclosedMAX8 accountingretained; do notrelax orreuseoldheldouts. Additionaluntrainedcontrol also required",
+  "failure": "No relaxed strength/cap/latency/statistical thresholds oroldMAX8 reset. All failures kept. GPU revoked.",
+  "new_teacher_labels": false,
+  "GPU_used": false,
+  "regularization": "Effective coeffs=256*raw weights. .05 summed squared piece-square deviations fromperpiece squaremean + .001 summed squared materialmean + .05 EPweights squared + .01 metadataexcludingabsolute-color squared. Gradient colorcolumn0 masked, otherinactive rows must remainzero. SoftmaxWDL preservesmeaning, affinehiddenclamps boundlogits; not universallyunclippedlinearity claim.",
+  "operator_hard_deadline_utc": "2026-10-06T08:00:00Z",
+  "operator_hard_deadline_epoch": 1791273600.0,
+  "anchor_kl_beta": 1.0,
+  "anchor": "KL(e8WDL||candidate), detachedimmutablebase_wdl inoldjournal validatedagainstactualfullhistorye8; logp differsfromrawbaselogits by rowconstant, sameWDL semantics. Stored p clampedmin1e-30 onlyforlog. Neither newteacherlabel nor optimalvalue.",
+  "native_schema": "cpu-own-outcome-residual-training-native-v3",
+  "anchor_admission": {
+    "seed": 20262765,
+    "per_journal_positions": 8,
+    "total": 64,
+    "max_probability_abs_error": 3e-05,
+    "seconds": 900,
+    "scope": "Prospective independentfullhistorye8 versus storedbaseWDL acrossall8oldjournals; not exhaustive"
+  }
+}
