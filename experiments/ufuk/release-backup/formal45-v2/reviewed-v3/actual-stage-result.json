@@ -1,0 +1,6 @@
+{
+  "returncode": 0,
+  "stdout": "{\"status\": \"exact4-immutable-files-staged-no-jobs-launched\", \"files\": {\"/content/harbichess-fullgame-method2-inputs/formal45-release-reviewed-v3-20261005/formal45_release_backup.py\": \"5936b67303c178ab2b8ba97fc50742e3bf6c63274d7c2f792bdd1a4c4469a4f8\", \"/content/harbichess-fullgame-method2-inputs/formal45-release-reviewed-v3-20261005/formal45_remote_backup_owner_v2.py\": \"1487f044920ceccc1c7e2b385ba10d120430869e8e3a5a2a79c1432bfdc49b66\", \"/content/harbichess-fullgame-method2-inputs/formal45-release-reviewed-v3-20261005/spec.json\": \"bdbb12d3f81ac6547c023ce1dba598df0126877a79d15dbda17ebcc261c5df09\", \"/content/harbichess-fullgame-method2-inputs/formal45-release-prior-manifest/UFUK-A100-release-transport-manifest-20261004.json\": \"fed25ce174eb5c5aded7363588cc4567d54ad05d898d57fa192f14c903608f9e\"}}\n",
+  "stderr_suppressed_bytes": 0,
+  "completed_epoch": 1791165156.5240304
+}
