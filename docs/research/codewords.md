@@ -1351,3 +1351,8 @@ borcudur; mevcut MLX yolu korunur. Prefix başarı veya promotion anlamına gelm
 ## UFUK-PST1 / UFUK-QUIET1 / UFUK-VAULT6 / UFUK-OWNQ1
 
 5–6October CPU continuation: PST1 tests242-feature value learning with exact native resume; QUIET1 tests learned own-search quiet ordering with an unchanged scalar evaluator. OWNQ1 preregisters1024 balanced training roots/seed at8192 own-search nodes for nonlinear residual targets; no external teacher query. VAULT6 preserves22 raw files publicly, VAULT7 prospectively preserves CLASSIC/PST/QUIET rawstates and closedCLASSIC160 evidence. These are phase labels, not success. CLASSIC160 and FRESH224 independently failed unchanged gates; old failed experiments/MAX8 ledger remain closed. Full-state proof/backup does not imply strength. Reports/protocols preserve exact source/data/model hashes and phase clocks.
+
+
+## UFUK-OWNQ-C18 / UFUK-ACTION / UFUK-SELECTIVEQ
+
+5October CPU continuation: own8192-Q residual distillation, own8192-bestmove root ordering, and learned optional quiescence effort are separate teacher-free hypotheses under SAMEinitializer controls and unchanged strength gates. C18v1 real zero-prior summation failure is retained; v2 reader corrects Python3.12 sum without changing native training state or claiming fullresume migration. Proof/speed/data admission are not strength; formal global exposure closure remains incomplete. Established ExIt/selective-search/PSQT mechanisms, no originality claim.
