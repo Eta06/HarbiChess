@@ -42,7 +42,8 @@ def main():
         spec["original_training_deadline_epoch"]
         == first + spec["whole_training_seconds"]
     )
-    assert a.deadline_epoch == min(first + spec["whole_audit_seconds"], 1791180000)
+    assert spec["absolute_audit_cutoff_epoch"] == 1791170700
+    assert a.deadline_epoch == min(first + spec["whole_audit_seconds"], 1791170700)
     assert first <= time.time() < a.deadline_epoch
     selected_epochs = spec["neural_audit_epochs"]
     assert len(set(selected_epochs)) == len(selected_epochs) == 6
