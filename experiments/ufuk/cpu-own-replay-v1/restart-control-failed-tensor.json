@@ -1,0 +1,10 @@
+{
+  "schema": "cpu-own-replay-restart-proof-v1",
+  "original_first_epoch": 1791202269.7776444,
+  "original_deadline_epoch": 1791202869.7776444,
+  "source_commit": "4cae08522ac940746cf9127ca8ce4a6b63a47408",
+  "scope": "training-only checkpoint/optimizer/RNG/replay proof; no online actor or strength claim",
+  "status": "failed-preserved",
+  "error": "CalledProcessError(1, ['/workspace/HarbiChess/.venv/bin/python', '/workspace/HarbiChess/experiments/ufuk/cpu-own-replay-v1/train.py', '--weights', '/workspace/work/harbichess/a100/restoration/local-rehearsal-content/harbichess-inputs/initial-e8.safetensors', '--journal', '/workspace/work/harbichess/cpu-contingency-formal-seed-20261925-v1/run/journal/epoch-00000001.json.gz', '--protocol', '/workspace/HarbiChess/experiments/ufuk/cpu-own-replay-v1/protocol.json', '--source-commit', '4cae08522ac940746cf9127ca8ce4a6b63a47408', '--arm', 'value-only', '--seed', '20262055', '--steps', '8', '--deadline-epoch', '1791202869.7776444', '--output', '/workspace/work/harbichess/cpu-own-replay-v1-actual/qualification-schema-fixed/whole'])",
+  "finished_epoch": 1791202390.5740502
+}
