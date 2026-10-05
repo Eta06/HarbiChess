@@ -1,0 +1,14 @@
+{
+  "status": "PASS-5-actual-CPU-tests-no-skip-and-Ruff",
+  "source_commit": "6fcc8b476d25495d1c9c413e55b2c7ba4794013e",
+  "actual_tests_seconds": 1.08,
+  "first_root_fixture_failure": {
+    "passed": 4,
+    "failed": 1,
+    "reason": "Root copying omitted protocol-TEMPLATE.json used by contract test; supplied exact unchanged template then all5passed. No matches/qualification run before repair."
+  },
+  "schema2_adapter": "full core masked_policy_value; no duplicate base addition",
+  "search_sha_unchanged": true,
+  "Apple_GPU_hardware_tested": false,
+  "GPU_used": false
+}
