@@ -16,6 +16,7 @@ from harbichess.search.full_gumbel import (
     _Node,
     considered_visit_sequence,
 )
+from harbichess.search.mate_certificates import certified_policy, immediate_mating_moves
 from harbichess.search.mcts import MoveStatistics
 
 
@@ -70,6 +71,8 @@ class Root:
     gumbels: dict
     schedule: tuple
     priors: tuple
+    certified_mates: tuple
+    solved_action: object | None
 
 
 class WavefrontGumbel:
@@ -111,22 +114,39 @@ class WavefrontGumbel:
                     self.config.simulations,
                 ),
                 tuple(evaluation.priors),
+                immediate_mating_moves(
+                    self.rules, states[i], claim_draw=self.config.claim_draw
+                ),
+                None,
             )
+            root = roots[i]
+            if root.certified_mates:
+                scores = {m: root.logits[m] + root.gumbels[m] for m in root.certified_mates}
+                root.solved_action = min(
+                    root.certified_mates,
+                    key=lambda m: (-scores[m], m.uci),
+                )
         for simulation in range(self.config.simulations):
             guard()
             pending = []
             for i in active:
                 root = roots[i]
                 node, state, path = root.node, root.state, [root.node]
-                while node.expanded:
-                    if node is root.node:
-                        move, node = self.core._select_root_child(
-                            node, root.logits, root.gumbels, root.schedule[simulation]
-                        )
-                    else:
-                        move, node = self.core._select_interior_child(node)
+                if root.solved_action is not None:
+                    move = root.solved_action
+                    node = root.node.children[move]
                     state = self.rules.apply(state, move)
                     path.append(node)
+                else:
+                    while node.expanded:
+                        if node is root.node:
+                            move, node = self.core._select_root_child(
+                                node, root.logits, root.gumbels, root.schedule[simulation]
+                            )
+                        else:
+                            move, node = self.core._select_interior_child(node)
+                        state = self.rules.apply(state, move)
+                        path.append(node)
                 outcome = self.rules.outcome(state, claim_draw=self.config.claim_draw)
                 if outcome is None:
                     pending.append((node, state, path))
@@ -159,25 +179,34 @@ class WavefrontGumbel:
                 continue
             root = roots[i]
             completed = self.core._completed_q(root.node)
-            max_visits = max(child.visit_count for child in root.node.children.values())
-            finalists = [
-                m for m in root.moves if root.node.children[m].visit_count == max_visits
-            ]
-            selected = min(
-                finalists,
-                key=lambda m: (
-                    -(root.gumbels[m] + root.logits[m] + completed[m]),
-                    m.uci,
-                ),
-            )
-            probabilities = _softmax(
-                tuple(root.logits[m] + completed[m] for m in root.moves)
-            )
+            if root.solved_action is not None:
+                selected = root.solved_action
+                probabilities, _ = certified_policy(
+                    root.moves,
+                    root.certified_mates,
+                    {m: root.gumbels[m] + root.logits[m] for m in root.certified_mates},
+                )
+            else:
+                max_visits = max(child.visit_count for child in root.node.children.values())
+                finalists = [
+                    m for m in root.moves if root.node.children[m].visit_count == max_visits
+                ]
+                selected = min(
+                    finalists,
+                    key=lambda m: (
+                        -(root.gumbels[m] + root.logits[m] + completed[m]),
+                        m.uci,
+                    ),
+                )
+                probabilities = _softmax(
+                    tuple(root.logits[m] + completed[m] for m in root.moves)
+                )
             moves = tuple(
                 sorted(
                     (
                         MoveStatistics(
                             m, child.visit_count, child.prior, -child.mean_value
+                            if m not in root.certified_mates else 1.0
                         )
                         for m, child in root.node.children.items()
                     ),
@@ -192,6 +221,7 @@ class WavefrontGumbel:
                     network_priors=root.priors,
                     selected_action=selected,
                     action_weights=tuple(zip(root.moves, probabilities, strict=True)),
+                    certified_mates=root.certified_mates,
                 )
             )
         return tuple(results)
