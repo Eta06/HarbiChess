@@ -1,0 +1,193 @@
+{
+  "schema": "cpu-own-replay-diagnostic-summary-v1",
+  "rows": [
+    {
+      "seed": 20262005,
+      "arm": "value-only",
+      "accepted_updates": 80,
+      "attempted_updates": 80,
+      "reason": "fixed-step-boundary",
+      "before_internal_NLL": 2.9808354021295673,
+      "after_internal_NLL": 1.298583626578994,
+      "dataset_receipts": [
+        {
+          "complete_games": 123,
+          "journal_sha256": "6c32d22338ae6b8e4472f47bd39f11a2a29e7c071453034f8b176ba210d6f756",
+          "known_rows": 10965,
+          "search_rows": 2059
+        }
+      ],
+      "contract": {
+        "arm": "value-only",
+        "batch_size": 128,
+        "device": "cpu",
+        "helper_sha256": "e34257ed7b107da8f9d6a4f44104a301bdb32c999594815f415591c2a816b3fa",
+        "initial_weights_sha256": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03",
+        "joint_value_weight": 0.2,
+        "journal_sha256": [
+          "6c32d22338ae6b8e4472f47bd39f11a2a29e7c071453034f8b176ba210d6f756"
+        ],
+        "learning_rate": 0.0005,
+        "max_steps": 80,
+        "native_schema": "cpu-own-replay-training-native-v1",
+        "new_teacher_labels": false,
+        "original_deadline_epoch": 1791204370.5617661,
+        "policy_anchor_weight": 0.03,
+        "policy_kl_stop": 0.02,
+        "protocol_sha256": "7a7893af728a727a1c3d7dfe47ccf932f4b111639c85b43b64ba3f7185ed7d98",
+        "seed": 20262005,
+        "source_commit": "4cae08522ac940746cf9127ca8ce4a6b63a47408",
+        "torch_version": "2.14.1+cpu",
+        "value_anchor_weight": 0.02
+      },
+      "final_checkpoint": "/workspace/work/harbichess/cpu-own-replay-v1-actual/20262005-value-only/final-attempt-00000080",
+      "artifacts": {
+        "model.safetensors": "23ede075c838aae8bacfceb10c2b2468f19a4fd87222aac586279eedfe6ee1f1",
+        "training.pt": "8f192a9f6caa1dab34e4178df04e1ec0a4b061aa9e2ae511d7f2e1965ccd1aa3"
+      },
+      "frozen_parameter_storage_identical": true
+    },
+    {
+      "seed": 20262005,
+      "arm": "joint",
+      "accepted_updates": 0,
+      "attempted_updates": 1,
+      "reason": "registered-policy-KL-stop-rejected-step-preserved",
+      "before_internal_NLL": 2.9808354021295673,
+      "after_internal_NLL": 2.9808354021295673,
+      "dataset_receipts": [
+        {
+          "complete_games": 123,
+          "journal_sha256": "6c32d22338ae6b8e4472f47bd39f11a2a29e7c071453034f8b176ba210d6f756",
+          "known_rows": 10965,
+          "search_rows": 2059
+        }
+      ],
+      "contract": {
+        "arm": "joint",
+        "batch_size": 128,
+        "device": "cpu",
+        "helper_sha256": "e34257ed7b107da8f9d6a4f44104a301bdb32c999594815f415591c2a816b3fa",
+        "initial_weights_sha256": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03",
+        "joint_value_weight": 0.2,
+        "journal_sha256": [
+          "6c32d22338ae6b8e4472f47bd39f11a2a29e7c071453034f8b176ba210d6f756"
+        ],
+        "learning_rate": 0.0005,
+        "max_steps": 80,
+        "native_schema": "cpu-own-replay-training-native-v1",
+        "new_teacher_labels": false,
+        "original_deadline_epoch": 1791204424.4152057,
+        "policy_anchor_weight": 0.03,
+        "policy_kl_stop": 0.02,
+        "protocol_sha256": "7a7893af728a727a1c3d7dfe47ccf932f4b111639c85b43b64ba3f7185ed7d98",
+        "seed": 20262005,
+        "source_commit": "4cae08522ac940746cf9127ca8ce4a6b63a47408",
+        "torch_version": "2.14.1+cpu",
+        "value_anchor_weight": 0.02
+      },
+      "final_checkpoint": "/workspace/work/harbichess/cpu-own-replay-v1-actual/20262005-joint/final-attempt-00000001",
+      "artifacts": {
+        "model.safetensors": "c0fcd6e135e298a0980882e56628852e4ae6d7c9558452b31db484c4d15598b9",
+        "training.pt": "ab03bee17ef3d1312c219b8d8ccd3371fdcba9e43158c743f25ec5a9bfcb817e"
+      },
+      "frozen_parameter_storage_identical": true
+    },
+    {
+      "seed": 20262006,
+      "arm": "value-only",
+      "accepted_updates": 80,
+      "attempted_updates": 80,
+      "reason": "fixed-step-boundary",
+      "before_internal_NLL": 2.2530860921599696,
+      "after_internal_NLL": 0.8712339322247109,
+      "dataset_receipts": [
+        {
+          "complete_games": 129,
+          "journal_sha256": "5780c0b7352ecc58754a31daf5bc4ebee3e447f5940dc19c9693bec72c5d8a32",
+          "known_rows": 11352,
+          "search_rows": 2069
+        }
+      ],
+      "contract": {
+        "arm": "value-only",
+        "batch_size": 128,
+        "device": "cpu",
+        "helper_sha256": "e34257ed7b107da8f9d6a4f44104a301bdb32c999594815f415591c2a816b3fa",
+        "initial_weights_sha256": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03",
+        "joint_value_weight": 0.2,
+        "journal_sha256": [
+          "5780c0b7352ecc58754a31daf5bc4ebee3e447f5940dc19c9693bec72c5d8a32"
+        ],
+        "learning_rate": 0.0005,
+        "max_steps": 80,
+        "native_schema": "cpu-own-replay-training-native-v1",
+        "new_teacher_labels": false,
+        "original_deadline_epoch": 1791204370.5620854,
+        "policy_anchor_weight": 0.03,
+        "policy_kl_stop": 0.02,
+        "protocol_sha256": "7a7893af728a727a1c3d7dfe47ccf932f4b111639c85b43b64ba3f7185ed7d98",
+        "seed": 20262006,
+        "source_commit": "4cae08522ac940746cf9127ca8ce4a6b63a47408",
+        "torch_version": "2.14.1+cpu",
+        "value_anchor_weight": 0.02
+      },
+      "final_checkpoint": "/workspace/work/harbichess/cpu-own-replay-v1-actual/20262006-value-only/final-attempt-00000080",
+      "artifacts": {
+        "model.safetensors": "aa0267df3bc74716f543f04f2fe4b72f22fe73146d4167a194c45ff50066ec05",
+        "training.pt": "725bc1c1d9effb0805dc19de27ecee085742121caf10c416cdb094ecd52d5865"
+      },
+      "frozen_parameter_storage_identical": true
+    },
+    {
+      "seed": 20262006,
+      "arm": "joint",
+      "accepted_updates": 0,
+      "attempted_updates": 1,
+      "reason": "registered-policy-KL-stop-rejected-step-preserved",
+      "before_internal_NLL": 2.2530860921599696,
+      "after_internal_NLL": 2.2530860921599696,
+      "dataset_receipts": [
+        {
+          "complete_games": 129,
+          "journal_sha256": "5780c0b7352ecc58754a31daf5bc4ebee3e447f5940dc19c9693bec72c5d8a32",
+          "known_rows": 11352,
+          "search_rows": 2069
+        }
+      ],
+      "contract": {
+        "arm": "joint",
+        "batch_size": 128,
+        "device": "cpu",
+        "helper_sha256": "e34257ed7b107da8f9d6a4f44104a301bdb32c999594815f415591c2a816b3fa",
+        "initial_weights_sha256": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03",
+        "joint_value_weight": 0.2,
+        "journal_sha256": [
+          "5780c0b7352ecc58754a31daf5bc4ebee3e447f5940dc19c9693bec72c5d8a32"
+        ],
+        "learning_rate": 0.0005,
+        "max_steps": 80,
+        "native_schema": "cpu-own-replay-training-native-v1",
+        "new_teacher_labels": false,
+        "original_deadline_epoch": 1791204425.6204736,
+        "policy_anchor_weight": 0.03,
+        "policy_kl_stop": 0.02,
+        "protocol_sha256": "7a7893af728a727a1c3d7dfe47ccf932f4b111639c85b43b64ba3f7185ed7d98",
+        "seed": 20262006,
+        "source_commit": "4cae08522ac940746cf9127ca8ce4a6b63a47408",
+        "torch_version": "2.14.1+cpu",
+        "value_anchor_weight": 0.02
+      },
+      "final_checkpoint": "/workspace/work/harbichess/cpu-own-replay-v1-actual/20262006-joint/final-attempt-00000001",
+      "artifacts": {
+        "model.safetensors": "c0fcd6e135e298a0980882e56628852e4ae6d7c9558452b31db484c4d15598b9",
+        "training.pt": "cdf86f7b6adc13dec8224a4b01d4d254eaf064ffe6472d261b53af9cde567c05"
+      },
+      "frozen_parameter_storage_identical": true
+    }
+  ],
+  "joint_failure": "both seeds zero retained updates; exact initial e8 restored. No learning model eligible",
+  "value_scope": "both80 accepted, internal NLL decreases; not independent strength",
+  "development_planned160_actual96_deviation": "joint zero-update endpoints fail predeclared min1-update feasibility; exact full model identity checked fresh-process instead of spending64games on duplicate E8. This reduction is a futility deviation, not passing a skipped gate",
+  "CPU_public_checkpoint_persistence": "pending; local full native exists, Git receipts are not public model backup"
+}
