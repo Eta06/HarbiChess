@@ -35,23 +35,87 @@ def publish(path, data):
         temporary.unlink()
 
 
-def memory_used():
-    path = Path("/sys/fs/cgroup/memory.current")
-    if path.exists():
-        return int(path.read_text())
+def parse_cgroup_memory(current_text, stat_text, max_text):
+    """Estimate nonreclaimable charge; file cache is not private resident memory.
+
+    File-minus-shmem and slab_reclaimable are distinct reclaimable charges.
+    This is a cgroup-accounting estimate, not RSS or Linux's working-set metric.
+    """
+    current = int(current_text.strip())
+    stats = {}
+    for line in stat_text.splitlines():
+        key, value = line.split()
+        if key in stats:
+            raise ValueError("duplicate cgroup memory.stat key")
+        stats[key] = int(value)
+    assert current >= 0 and all(value >= 0 for value in stats.values())
+    assert {"file", "shmem", "slab_reclaimable", "inactive_file"} <= stats.keys()
+    assert stats["shmem"] <= stats["file"]
+    maximum = None if max_text.strip() == "max" else int(max_text.strip())
+    assert maximum is None or maximum > 0
+    reclaimable = stats["file"] - stats["shmem"] + stats["slab_reclaimable"]
+    return {
+        "metric": "estimated-nonreclaimable-cgroup-charge",
+        "current_bytes": current,
+        "configured_cgroup_max_bytes": maximum,
+        "file_bytes": stats["file"],
+        "shmem_bytes": stats["shmem"],
+        "slab_reclaimable_bytes": stats["slab_reclaimable"],
+        "inactive_file_bytes": stats["inactive_file"],
+        "working_set_current_minus_inactive_file_bytes": max(0, current - stats["inactive_file"]),
+        "estimated_nonreclaimable_bytes": max(0, current - reclaimable),
+        "nonreclaimable_ceiling_bytes": MEMORY,
+        "total_charge_ceiling_bytes": 16 * 1024**3,
+    }
+
+
+def memory_snapshot():
+    root = Path("/sys/fs/cgroup")
+    if (root / "memory.current").exists():
+        return parse_cgroup_memory(
+            (root / "memory.current").read_text(),
+            (root / "memory.stat").read_text(),
+            (root / "memory.max").read_text(),
+        )
     fields = {
         line.split(":")[0]: int(line.split(":")[1].strip().split()[0]) * 1024
         for line in Path("/proc/meminfo").read_text().splitlines()
         if ":" in line
     }
-    return fields["MemTotal"] - fields["MemAvailable"]
+    return {
+        "metric": "system-MemTotal-minus-MemAvailable-no-cgroup",
+        "current_bytes": fields["MemTotal"] - fields["MemAvailable"],
+        "configured_cgroup_max_bytes": None,
+        "estimated_nonreclaimable_bytes": fields["MemTotal"] - fields["MemAvailable"],
+        "nonreclaimable_ceiling_bytes": MEMORY,
+        "total_charge_ceiling_bytes": 16 * 1024**3,
+    }
+
+
+def memory_used():
+    return memory_snapshot()["estimated_nonreclaimable_bytes"]
 
 
 def guard(deadline, output):
-    if time.time() >= deadline:
-        raise TimeoutError("original wholedeadline exhausted")
-    if memory_used() > MEMORY or shutil.disk_usage(output).free < DISK:
-        raise RuntimeError("registered15GiB/256MiB resource ceiling")
+    snapshot = memory_snapshot()
+    snapshot.update(
+        observed_epoch=time.time(),
+        deadline_epoch=deadline,
+        disk_free_bytes=shutil.disk_usage(output).free,
+        disk_min_bytes=DISK,
+    )
+    violations = []
+    if snapshot["observed_epoch"] >= deadline:
+        violations.append("original-wholedeadline-exhausted")
+    if snapshot["estimated_nonreclaimable_bytes"] > MEMORY:
+        violations.append("nonreclaimable-charge-above15GiB")
+    if snapshot["current_bytes"] > 16 * 1024**3:
+        violations.append("total-cgroup-charge-above16GiB")
+    if snapshot["disk_free_bytes"] < DISK:
+        violations.append("free-disk-below256MiB")
+    if violations:
+        snapshot["violations"] = violations
+        raise RuntimeError(json.dumps(snapshot, sort_keys=True))
 
 
 def kill_group(child):
