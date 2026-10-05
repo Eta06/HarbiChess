@@ -3,6 +3,7 @@
 import argparse
 import importlib
 import json
+import os
 import subprocess
 import sys
 import threading
@@ -41,6 +42,42 @@ def rewrite_argv(argv, supplement):
     return argv
 
 
+def extra_compute_busy(process_commands, current_pid):
+    patterns = tuple(
+        f"own{slot}_{name}"
+        for slot in (6, 7)
+        for name in (
+            "training_controller",
+            "audit_controller",
+            "baseline",
+            "full_audit",
+            "fresh_cli_replay",
+            "parity",
+            "final_arms",
+            "latency",
+            "profile_e1_owned",
+            "qualify_e1",
+        )
+    )
+    return sorted(
+        pid
+        for pid, command in process_commands.items()
+        if pid != current_pid and any(word in command for word in patterns)
+    )
+
+
+def process_commands():
+    commands = {}
+    for path in Path("/proc").glob("[0-9]*/cmdline"):
+        try:
+            commands[int(path.parent.name)] = (
+                path.read_bytes().replace(b"\0", b" ").decode(errors="replace")
+            )
+        except (FileNotFoundError, PermissionError, ProcessLookupError):
+            continue
+    return commands
+
+
 def main():
     if not __debug__:
         raise RuntimeError("Required assertions disabled")
@@ -55,14 +92,8 @@ def main():
     original = importlib.import_module("own5_posttraining")
     cohort_module = importlib.import_module("own45_cohort")
     sha = original.sha
-    assert (
-        Path(original.__file__).resolve()
-        == (helpers / "own5_posttraining.py").resolve()
-    )
-    assert (
-        Path(cohort_module.__file__).resolve()
-        == (helpers / "own45_cohort.py").resolve()
-    )
+    assert Path(original.__file__).resolve() == (helpers / "own5_posttraining.py").resolve()
+    assert Path(cohort_module.__file__).resolve() == (helpers / "own45_cohort.py").resolve()
     assert sha(args.supplement) == args.supplement_sha256
     assert s["schema"] == "own5-failed4-dependency-analysis-v3-control-supplement-v1"
     assert s["status"] == "registered-before-method5-final-outcomes"
@@ -80,9 +111,7 @@ def main():
     }
     assert old["root"] != new["root"] and not Path(new["root"]).exists()
     assert sha(new["qualification_config"]) == new["qualification_config_sha256"]
-    assert (
-        new["qualification_config_sha256"] == s["original_qualification_config_sha256"]
-    )
+    assert new["qualification_config_sha256"] == s["original_qualification_config_sha256"]
     assert sha(s["original_registration"]) == s["original_registration_sha256"]
     for filename, digest in s["analysis_v3_helper_sha256"].items():
         assert sha(Path(s["analysis_v3_directory"]) / filename) == digest
@@ -90,9 +119,7 @@ def main():
     assert sha(s["analysis_v2_supplement"]) == s["analysis_v2_supplement_sha256"]
     assert not identity_live(s["stopped_original5_post_identity"], proc_table())
     assert {p.name for p in Path(old["root"]).iterdir()} <= {"failure.json"}
-    original_cohort = cohort_module.bind(
-        old, 5, sha(helpers / "own5_posttraining.py"), sha
-    )
+    original_cohort = cohort_module.bind(old, 5, sha(helpers / "own5_posttraining.py"), sha)
     assert original_cohort is not None
     deadline = original_cohort["completion_deadline_epoch"]
     assert time.time() < deadline
@@ -101,9 +128,7 @@ def main():
             json.dumps(
                 {
                     "status": "validated-control-plan-only-no-jobs",
-                    "original_qualification_config_sha256": new[
-                        "qualification_config_sha256"
-                    ],
+                    "original_qualification_config_sha256": new["qualification_config_sha256"],
                 }
             )
         )
@@ -118,15 +143,10 @@ def main():
     def monitor_failed4():
         try:
             while not monitoring_stop.is_set():
-                assert (
-                    sha(s["failed4_terminal_receipt"])
-                    == s["failed4_terminal_receipt_sha256"]
-                )
+                assert sha(s["failed4_terminal_receipt"]) == s["failed4_terminal_receipt_sha256"]
                 track_descendants(terminal, proc_table(), tracked)
                 if time.time() >= deadline:
-                    raise TimeoutError(
-                        "Original cohort deadline reached while tracking4"
-                    )
+                    raise TimeoutError("Original cohort deadline reached while tracking4")
                 monitoring_stop.wait(0.5)
         except BaseException as error:
             monitoring_errors.append(error)
@@ -139,6 +159,7 @@ def main():
     after_before = cohort_module.after_latency
     popen_before = subprocess.Popen
     publish_before = original.publish
+    quiescent_before = original.quiescent
 
     def bind(config, slot, coordinator_sha, sha_fn):
         assert slot == 5 and config == new
@@ -175,10 +196,7 @@ def main():
     def after_latency(cohort, slot, root, wait_json, sha_fn, publish):
         assert slot == 5
         result = wait_json(Path(root) / "latency-process-result.json", deadline)
-        assert (
-            result["returncode"] == 0
-            and result["finished_epoch"] <= result["deadline_epoch"]
-        )
+        assert result["returncode"] == 0 and result["finished_epoch"] <= result["deadline_epoch"]
         owner = cohort_module.member(cohort, 5)
         publish(
             Path(root) / "cohort-latency-complete.json",
@@ -205,6 +223,19 @@ def main():
     def popen(argv, *positional, **kwargs):
         return popen_before(rewrite_argv(argv, s), *positional, **kwargs)
 
+    def quiescent(deadline):
+        # Same original60s absolute ceiling. Additional registered/future compute
+        # owners close gaps between child GPU/arena processes; waiting coordinators
+        # and read-only guardians are excluded.
+        while True:
+            quiescent_before(deadline)
+            if time.time() >= deadline:
+                raise TimeoutError("Original60s quiescence ceiling exhausted")
+            if not extra_compute_busy(process_commands(), os.getpid()):
+                return
+            time.sleep(0.5)
+
+    original.quiescent = quiescent
     cohort_module.bind = bind
     cohort_module.before_latency = before_latency
     cohort_module.after_latency = after_latency
@@ -244,6 +275,7 @@ def main():
         cohort_module.after_latency = after_before
         subprocess.Popen = popen_before
         original.publish = publish_before
+        original.quiescent = quiescent_before
 
 
 if __name__ == "__main__":
