@@ -1,0 +1,14 @@
+{
+  "status": "pass-frozen-own-TRAIN-prefix-mixture-no-prior-labels",
+  "book_sha256": "1a5ca17664a828d669e58cf2bd5d9eeb7f980b83f20d3a4031d36e4ff0930ccb",
+  "source_manifest_sha256": "e5c893c7c574387362de2a97175f7d67ba10331b2f63bd7cb83ffaf23b218ec6",
+  "rows": 16384,
+  "kinds": {
+    "original": 12288,
+    "own-completed-prefix": 4096
+  },
+  "eligible_completed_games": 149,
+  "runtime_curriculum_probability": 0.25,
+  "curriculum_sampling": "uniform factory draws; empirical frozen runtime pool",
+  "fullhistory_prefixes_independently_replayed": 4096
+}
