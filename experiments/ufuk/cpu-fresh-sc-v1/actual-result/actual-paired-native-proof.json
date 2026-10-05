@@ -1,0 +1,64 @@
+{
+  "status": "PASS-both-SC-native-proofs-not-strength",
+  "rows": [
+    {
+      "tag": "sc-20262805",
+      "code": 0,
+      "passed": true,
+      "result": {
+        "accepted_updates": 8,
+        "actor_config_sha256": "b73106e21c6d8433c2132b024a2caae7527ec84541898d4f9c3db8202fccc3b5",
+        "all6_full_native_fresh_process_loads": true,
+        "dataset_contract_sha256": "15a630d0e6b9104a15cfdb91a3734412d32c11e997eca931ff0d44940be09e37",
+        "exact_whole_vs_split_native_payload": true,
+        "finished_epoch": 1791225027.9538605,
+        "first_epoch": 1791224926.6862378,
+        "journal_sha256": "8109c074a9e084f33ec8d9a6c4b062eb3c57e8b6e8d897e03bd39dc8261dea8f",
+        "original_deadline_epoch": 1791225526.6862378,
+        "parent_mc_trainer_sha256": "49445cbd5059770b3ccd433be9f21a4773786885a85d2d586005e10e2359a2c6",
+        "sc_helper_sha256": "62d9ce283d24a2026f817cb618cac2e5c372922d3b6c453f2d7903b41652a3d0",
+        "schema": "fresh-qsearch-additive-SC-native-restart-proof-v1",
+        "scope": "8-update whole/pause/resume and strict fresh-process native-load proof; no strength claim",
+        "seed": 20262805,
+        "source_commit": "6fcc8b476d25495d1c9c413e55b2c7ba4794013e",
+        "status": "PASS-native-restart-not-strength"
+      },
+      "result_sha256": "de81efd9aa70946ff03f2c9c8f374ca6a3b8e610c83d2a284dffc04111580764",
+      "started_epoch": 1791224965.3200133,
+      "finished_epoch": 1791225028.429016
+    },
+    {
+      "tag": "sc-20262806",
+      "code": 0,
+      "passed": true,
+      "result": {
+        "accepted_updates": 8,
+        "actor_config_sha256": "a3b5ac9f3933afdce858e60c0e383c9611dabd2be79e7dff128c490d6750591d",
+        "all6_full_native_fresh_process_loads": true,
+        "dataset_contract_sha256": "a425e2218f7bc2b3019686e60f987825f0320bc5fec1c65fac2f73c57d45db66",
+        "exact_whole_vs_split_native_payload": true,
+        "finished_epoch": 1791225094.1064982,
+        "first_epoch": 1791224926.6862378,
+        "journal_sha256": "df515e393e97065cd4828ceacccc7628ea04091643c16296009f48f1b9e01645",
+        "original_deadline_epoch": 1791225526.6862378,
+        "parent_mc_trainer_sha256": "49445cbd5059770b3ccd433be9f21a4773786885a85d2d586005e10e2359a2c6",
+        "sc_helper_sha256": "62d9ce283d24a2026f817cb618cac2e5c372922d3b6c453f2d7903b41652a3d0",
+        "schema": "fresh-qsearch-additive-SC-native-restart-proof-v1",
+        "scope": "8-update whole/pause/resume and strict fresh-process native-load proof; no strength claim",
+        "seed": 20262806,
+        "source_commit": "6fcc8b476d25495d1c9c413e55b2c7ba4794013e",
+        "status": "PASS-native-restart-not-strength"
+      },
+      "result_sha256": "7ff1fd287dc202e89b2d7c6c59f7b305b9a12fb4aab15157e474a45576522ac6",
+      "started_epoch": 1791225028.4294288,
+      "finished_epoch": 1791225094.621117
+    }
+  ],
+  "original_first_epoch": 1791224926.6862378,
+  "original_deadline_epoch": 1791225526.6862378,
+  "finished_epoch": 1791225100.647268,
+  "GPU_used": false,
+  "strength_success": false,
+  "registration_sha256": "b3890fba4cde1199b1048fec49cb14e6c42a9b99228b915f8c2d067781169c2c",
+  "controller_sha256": "d7b93256430f66a0ecdb813718bb8b63c6b7735ca4c6b49683971832ac84ba98"
+}
