@@ -1,0 +1,139 @@
+{
+  "GPU_used": false,
+  "actual_at_epoch": 1791216554.6531215,
+  "helper_sha256": {
+    "search.py": "de53c14728a67b7772f18b396ac8ef5c35a144d4e4e616fec40099cd461a6670",
+    "value.py": "d3bb6dfe33127e1bea48ee63c10692f3eba6cb1b2f6b48ea7c898dce389620a9"
+  },
+  "matched_packets": 6,
+  "new_games": 0,
+  "new_training_updates": 0,
+  "read_only_models": true,
+  "rows": [
+    {
+      "actual_packet": {
+        "completed_depth": 2,
+        "evaluations": 472,
+        "nodes": 512,
+        "root_actions": 27,
+        "selected_move": "f1c4",
+        "value": 0.14564191895780934
+      },
+      "candidate_color": "white",
+      "fullhistory_plies": 4,
+      "model_sha256": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03",
+      "mover": "white",
+      "opening_pair": 0,
+      "ply": 5,
+      "recorded_equals_reproduced": true,
+      "role": "e8",
+      "seed": 20262505,
+      "wall_seconds": 0.6297789230011404
+    },
+    {
+      "actual_packet": {
+        "completed_depth": 2,
+        "evaluations": 473,
+        "nodes": 512,
+        "root_actions": 33,
+        "selected_move": "d2d4",
+        "value": 0.16169391736466054
+      },
+      "candidate_color": "white",
+      "fullhistory_plies": 6,
+      "model_sha256": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03",
+      "mover": "white",
+      "opening_pair": 0,
+      "ply": 7,
+      "recorded_equals_reproduced": true,
+      "role": "e8",
+      "seed": 20262505,
+      "wall_seconds": 0.5520114569808356
+    },
+    {
+      "actual_packet": {
+        "completed_depth": 2,
+        "evaluations": 438,
+        "nodes": 512,
+        "root_actions": 27,
+        "selected_move": "a2a3",
+        "value": 0.0
+      },
+      "candidate_color": "white",
+      "fullhistory_plies": 4,
+      "model_sha256": "8c913046098ade2ae5a48965fbcb505feb16b98fde82ba894723ddf967c7d2b6",
+      "mover": "white",
+      "opening_pair": 0,
+      "ply": 5,
+      "recorded_equals_reproduced": true,
+      "role": "rebased",
+      "seed": 20262505,
+      "wall_seconds": 0.16935485100839287
+    },
+    {
+      "actual_packet": {
+        "completed_depth": 2,
+        "evaluations": 441,
+        "nodes": 512,
+        "root_actions": 26,
+        "selected_move": "a1a2",
+        "value": 0.0
+      },
+      "candidate_color": "white",
+      "fullhistory_plies": 6,
+      "model_sha256": "8c913046098ade2ae5a48965fbcb505feb16b98fde82ba894723ddf967c7d2b6",
+      "mover": "white",
+      "opening_pair": 0,
+      "ply": 7,
+      "recorded_equals_reproduced": true,
+      "role": "rebased",
+      "seed": 20262505,
+      "wall_seconds": 0.19308188199647702
+    },
+    {
+      "actual_packet": {
+        "completed_depth": 2,
+        "evaluations": 482,
+        "nodes": 512,
+        "root_actions": 27,
+        "selected_move": "f3e5",
+        "value": 0.005757880482123223
+      },
+      "candidate_color": "white",
+      "fullhistory_plies": 4,
+      "model_sha256": "0ded026c2671e4cc5709b78d861aba7f24fbebdf1bce142fbc84f362c3d213a1",
+      "mover": "white",
+      "opening_pair": 0,
+      "ply": 5,
+      "recorded_equals_reproduced": true,
+      "role": "linear",
+      "seed": 20262505,
+      "wall_seconds": 0.1818694839894306
+    },
+    {
+      "actual_packet": {
+        "completed_depth": 2,
+        "evaluations": 480,
+        "nodes": 512,
+        "root_actions": 27,
+        "selected_move": "d1h5",
+        "value": -0.04054734413592426
+      },
+      "candidate_color": "white",
+      "fullhistory_plies": 6,
+      "model_sha256": "0ded026c2671e4cc5709b78d861aba7f24fbebdf1bce142fbc84f362c3d213a1",
+      "mover": "white",
+      "opening_pair": 0,
+      "ply": 7,
+      "recorded_equals_reproduced": true,
+      "role": "linear",
+      "seed": 20262505,
+      "wall_seconds": 0.18066724899108522
+    }
+  ],
+  "schema": "qsearch-six-existing-neural-packet-reproduction-v1",
+  "source_commit": "4cae08522ac940746cf9127ca8ce4a6b63a47408",
+  "status": "PASS-six-exact-packets-NOT-new-games",
+  "threads": 1,
+  "torch_version": "2.14.1+cpu"
+}
