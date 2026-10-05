@@ -402,7 +402,7 @@ def main():
             canonical({"train": train_rows, "validation": validation_rows})
         ).hexdigest(),
         "trajectory_ids_sha256": hashlib.sha256(canonical(trajectory_ids)).hexdigest(),
-        "trainable_names": trainable_names,
+        "trainable_names": list(trainable_names),
         "trainable_parameter_count": actual_count,
         "model_specification": model.specification,
         "seed": args.seed,
@@ -533,6 +533,9 @@ def main():
         if candidate_path.stat().st_size > MAX_ARTIFACT_BYTES:
             candidate_path.unlink()
             raise RuntimeError("full-critic candidate exceeds 2 MiB file ceiling")
+    if time.time() >= args.deadline_epoch:
+        raise TimeoutError("original full-critic CPU deadline exhausted before result publication")
+    budget.check()
     result_path = args.output / f"result-step-{accepted:08d}-invocation-{time.time_ns()}.json"
     result_path.write_bytes(canonical(result) + b"\n")
     print(
@@ -544,7 +547,7 @@ def main():
 def _hash_frozen(model, trainable_names):
     digest = hashlib.sha256()
     trainable = set(trainable_names)
-    for name, parameter in model.named_parameters():
+    for name, parameter in sorted(model.named_parameters()):
         if name not in trainable:
             digest.update(name.encode() + b"\0")
             digest.update(parameter.detach().cpu().contiguous().view(torch.uint8).numpy().tobytes())
