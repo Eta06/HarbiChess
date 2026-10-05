@@ -1,0 +1,194 @@
+{
+  "contract": {
+    "scope": "Read-only retrospective diagnostics on four already closed TRAIN journals; no fitting, engine/teacher queries, heldout-game access, checkpoint mutation or new selfplay",
+    "hypotheses": [
+      "Weak leaf values and small sparse searches may fail to improve policy targets",
+      "Outcome censoring and short noisy trajectories may limit terminal-value learning",
+      "Trust-region rollback may limit accepted optimization",
+      "Shared cgroup charge includes file cache and concurrent jobs; memory failure is operational, not proof of model size failure"
+    ],
+    "success_claim": false,
+    "seconds_ceiling": 300,
+    "created_epoch": 1791193342.990899
+  },
+  "finished_epoch": 1791193347.984283,
+  "status": "completed-read-only-diagnostic-no-strength-claim",
+  "journals": [
+    {
+      "seed": 20261925,
+      "epoch": 1,
+      "journal_sha256": "6c32d22338ae6b8e4472f47bd39f11a2a29e7c071453034f8b176ba210d6f756",
+      "rows": 16384,
+      "target_counts": {
+        "complete_games": 123,
+        "draw_games": 68,
+        "epoch_truncated_games": 59,
+        "excluded_actions": 5419,
+        "loss_games": 27,
+        "normal_cap_games": 4,
+        "schema": "completed-own-game-terminal-wdl-v1",
+        "win_games": 28
+      },
+      "known_value_fraction": 0.66925048828125,
+      "search_target_fraction": 0.12567138671875,
+      "training": {
+        "optimizer_steps_attempted": 12,
+        "optimizer_steps_committed": 12,
+        "optimizer_steps_discarded": 0,
+        "accepted_passes": 4,
+        "rejected_passes": 0,
+        "trained_transitions": 10965,
+        "policy_target_rows": 2059,
+        "behavior_kl_after_last_attempt": 0.01897062635751162,
+        "last_minibatch_losses": {
+          "policy": 2.024013042449951,
+          "policy_anchor": 0.014543477445840836,
+          "value": 2.9653143882751465,
+          "value_anchor": 0.0033495291136205196
+        }
+      },
+      "pre_collection_frozen_value_on_own_outcomes": {
+        "known_rows": 10965,
+        "stored_terminal_labels_game_count": 123,
+        "row_mean_nll": 3.300481351995721,
+        "game_equal_nll": 3.0308814448545407,
+        "row_argmax_accuracy": 0.3149110807113543,
+        "row_mean_brier": 1.1543053052279704,
+        "uniform_three_class_nll": 1.0986122886681098
+      },
+      "limitations": "Same-policy own terminal outcomes, stored labels; descriptive TRAIN-only calibration, not optimal-play value or strength. No independent full-history requalification of epoch2. Training last-minibatch losses are not corpus validation and last attempted KL can belong to a rolled-back pass."
+    },
+    {
+      "seed": 20261925,
+      "epoch": 2,
+      "journal_sha256": "993049f545315f2d3e84dd2afb84b1691bb74a1847641372aeb2bd5ea9e68219",
+      "rows": 16384,
+      "target_counts": {
+        "complete_games": 141,
+        "draw_games": 72,
+        "epoch_truncated_games": 61,
+        "excluded_actions": 5210,
+        "loss_games": 46,
+        "normal_cap_games": 1,
+        "schema": "completed-own-game-terminal-wdl-v1",
+        "win_games": 23
+      },
+      "known_value_fraction": 0.6820068359375,
+      "search_target_fraction": 0.12615966796875,
+      "training": {
+        "optimizer_steps_attempted": 12,
+        "optimizer_steps_committed": 12,
+        "optimizer_steps_discarded": 0,
+        "accepted_passes": 4,
+        "rejected_passes": 0,
+        "trained_transitions": 11174,
+        "policy_target_rows": 2067,
+        "behavior_kl_after_last_attempt": 0.014752079567329018,
+        "last_minibatch_losses": {
+          "policy": 1.9761148691177368,
+          "policy_anchor": 0.04908702149987221,
+          "value": 2.8234455585479736,
+          "value_anchor": 0.013100236654281616
+        }
+      },
+      "pre_collection_frozen_value_on_own_outcomes": {
+        "known_rows": 11174,
+        "stored_terminal_labels_game_count": 141,
+        "row_mean_nll": 3.260126771359975,
+        "game_equal_nll": 2.914674659674508,
+        "row_argmax_accuracy": 0.3192231967066404,
+        "row_mean_brier": 1.1510369161919207,
+        "uniform_three_class_nll": 1.0986122886681098
+      },
+      "limitations": "Same-policy own terminal outcomes, stored labels; descriptive TRAIN-only calibration, not optimal-play value or strength. No independent full-history requalification of epoch2. Training last-minibatch losses are not corpus validation and last attempted KL can belong to a rolled-back pass."
+    },
+    {
+      "seed": 20261926,
+      "epoch": 1,
+      "journal_sha256": "5780c0b7352ecc58754a31daf5bc4ebee3e447f5940dc19c9693bec72c5d8a32",
+      "rows": 16384,
+      "target_counts": {
+        "complete_games": 129,
+        "draw_games": 60,
+        "epoch_truncated_games": 62,
+        "excluded_actions": 5032,
+        "loss_games": 35,
+        "normal_cap_games": 2,
+        "schema": "completed-own-game-terminal-wdl-v1",
+        "win_games": 34
+      },
+      "known_value_fraction": 0.69287109375,
+      "search_target_fraction": 0.12628173828125,
+      "training": {
+        "optimizer_steps_attempted": 12,
+        "optimizer_steps_committed": 9,
+        "optimizer_steps_discarded": 3,
+        "accepted_passes": 3,
+        "rejected_passes": 1,
+        "trained_transitions": 11352,
+        "policy_target_rows": 2069,
+        "behavior_kl_after_last_attempt": 0.020390790344786427,
+        "last_minibatch_losses": {
+          "policy": 2.0666606426239014,
+          "policy_anchor": 0.015067150816321373,
+          "value": 2.877434253692627,
+          "value_anchor": 0.0028961480129510164
+        }
+      },
+      "pre_collection_frozen_value_on_own_outcomes": {
+        "known_rows": 11352,
+        "stored_terminal_labels_game_count": 129,
+        "row_mean_nll": 2.864762797788449,
+        "game_equal_nll": 3.0241583820246754,
+        "row_argmax_accuracy": 0.4294397463002114,
+        "row_mean_brier": 0.973818057407431,
+        "uniform_three_class_nll": 1.0986122886681098
+      },
+      "limitations": "Same-policy own terminal outcomes, stored labels; descriptive TRAIN-only calibration, not optimal-play value or strength. No independent full-history requalification of epoch2. Training last-minibatch losses are not corpus validation and last attempted KL can belong to a rolled-back pass."
+    },
+    {
+      "seed": 20261926,
+      "epoch": 2,
+      "journal_sha256": "76a8d2be2f09e8aaa3cfad09255daa52ff17ed91ba75d9b4306a4d358156bc34",
+      "rows": 16384,
+      "target_counts": {
+        "complete_games": 132,
+        "draw_games": 54,
+        "epoch_truncated_games": 60,
+        "excluded_actions": 5677,
+        "loss_games": 44,
+        "normal_cap_games": 4,
+        "schema": "completed-own-game-terminal-wdl-v1",
+        "win_games": 34
+      },
+      "known_value_fraction": 0.65350341796875,
+      "search_target_fraction": 0.126220703125,
+      "training": {
+        "optimizer_steps_attempted": 12,
+        "optimizer_steps_committed": 12,
+        "optimizer_steps_discarded": 0,
+        "accepted_passes": 4,
+        "rejected_passes": 0,
+        "trained_transitions": 10707,
+        "policy_target_rows": 2068,
+        "behavior_kl_after_last_attempt": 0.01789046713084348,
+        "last_minibatch_losses": {
+          "policy": 1.943511724472046,
+          "policy_anchor": 0.04182331636548042,
+          "value": 2.33454966545105,
+          "value_anchor": 0.006754503585398197
+        }
+      },
+      "pre_collection_frozen_value_on_own_outcomes": {
+        "known_rows": 10707,
+        "stored_terminal_labels_game_count": 132,
+        "row_mean_nll": 2.8147847390828944,
+        "game_equal_nll": 2.5249889168694404,
+        "row_argmax_accuracy": 0.448118053609788,
+        "row_mean_brier": 0.9385003742510476,
+        "uniform_three_class_nll": 1.0986122886681098
+      },
+      "limitations": "Same-policy own terminal outcomes, stored labels; descriptive TRAIN-only calibration, not optimal-play value or strength. No independent full-history requalification of epoch2. Training last-minibatch losses are not corpus validation and last attempted KL can belong to a rolled-back pass."
+    }
+  ]
+}
