@@ -264,7 +264,7 @@ class FullGamePPOTrainConfig:
             raise ValueError("invalid full-game PPO training schedule")
 
 
-def compile_epoch_features(targets, encoder, *, guard=None):
+def compile_epoch_features(targets, encoder, *, guard=None, compact=False):
     """Readonly features owned by ONE completed epoch; no global cache or RNG."""
     features = {}
     for index, row in enumerate(targets):
@@ -276,7 +276,16 @@ def compile_epoch_features(targets, encoder, *, guard=None):
                 raise ValueError("same full-history state has conflicting legal support")
             continue
         values = np.array(encoder.encode(state).values, dtype=np.float32)
-        values.setflags(write=False)
+        if compact:
+            from harbichess.training.packed_epoch_features import PackedEpochFeatures
+
+            packed = PackedEpochFeatures.encode(values)
+            if packed.nbytes < values.nbytes:
+                values = packed
+            else:
+                values.setflags(write=False)
+        else:
+            values.setflags(write=False)
         features[state] = (values, row.legal_actions)
     return features
 
@@ -287,7 +296,9 @@ def _tensor_batch(network, encoder, rules, rows, device, features=None):
     input_array = np.array(
         [
             encoder.encode(row.transition.pre).values if features is None
-            else features[row.transition.pre][0] for row in rows
+            else (features[row.transition.pre][0].decode()
+                  if hasattr(features[row.transition.pre][0], 'decode')
+                  else features[row.transition.pre][0]) for row in rows
         ], dtype=np.float32
     ).reshape(size, 8, 8, network.config.input_channels)
     indices = np.zeros((size, width), dtype=np.int64)
