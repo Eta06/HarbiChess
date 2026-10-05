@@ -1,0 +1,41 @@
+{
+  "status": "7-CPU-tests-PASS-0skip-RuffPASS",
+  "rows": [
+    {
+      "file": "core.py",
+      "proposal_sha256": "fa445d5f06482489f04b0571285830e0904b1ae98efa5ce16375b285cec74d3e",
+      "production_sha256": "ba310f34b7a9f098f3dea8db51761ea06f0f9911e993d655b2c436ce7b71ad9e",
+      "function_AST_unchanged": true
+    },
+    {
+      "file": "native.py",
+      "proposal_sha256": "83c60cebae6b43e97c9ec4b8847d171f2ca82b80d25764ec3c460b59067d14a8",
+      "production_sha256": "8f59bdfe9eef16f41e03234145134018d9c2d7df7aa0e8a3597a116e2e4fd974",
+      "function_AST_unchanged": true
+    },
+    {
+      "file": "train.py",
+      "proposal_sha256": "067208b394fc9b711326d5d630d20525f1e107d53d92d5e8cdbc617827137f3f",
+      "production_sha256": "4f9f631bfb2b973da76ba18701bfaa60682fd53eece5824abb450999cc09cc96",
+      "function_AST_unchanged": true
+    },
+    {
+      "file": "qualify.py",
+      "proposal_sha256": "508eb12c484a2a659204698eb4e4ea359f6fd70f65a3ddceeb25f63a10e913f9",
+      "production_sha256": "261ce9db712566b82612289d1e649b36af6277fef621f4c7db522e9735248b96",
+      "function_AST_unchanged": true
+    },
+    {
+      "file": "smoke_actual_2048.py",
+      "proposal_sha256": "ddd62fbb31d8fc3695fa6adaa329c96a7e2ad5eb423467fc8d6a43f8af2cc399",
+      "production_sha256": "3301cb7dd0522114a071bcebecd57d0b25b722f0fb9e732340a46733db27c1b2",
+      "function_AST_unchanged": true
+    }
+  ],
+  "initial_root_lint_errors": 28,
+  "initial_cli_test_failure": "root test invoked PYTHONPATHpinned6fcc though positivefixtureexplicitlyexpectsMAIN; retained no sourcevalidatorchange, correctMAINfixture3PASS; actualqualifier pinscheckout6fcc",
+  "actualproposal_smoke": "both2048actualmain conversionPASS, originalexecutedSHAs retained, no newproofforformattedhelperclaimed",
+  "core_tests": 4,
+  "cli_binding_tests": 3,
+  "actual_fit": false
+}
