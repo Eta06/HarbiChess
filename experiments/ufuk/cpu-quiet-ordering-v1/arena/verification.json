@@ -1,0 +1,9 @@
+{
+  "status": "PASS-static-and-storage-only-NOT-search-qualification",
+  "tests": 3,
+  "seconds": 0.11,
+  "ruff": "PASS-repository-config",
+  "actual_search": 0,
+  "actual_SGD": 0,
+  "actual_matches": 0
+}
