@@ -1,0 +1,235 @@
+"""Scratch full value-head own-search learning proposal; no fit or actor code."""
+
+from __future__ import annotations
+
+import math
+
+import numpy as np
+import torch
+import torch.nn.functional as F
+
+from harbichess.backends.torch_network import TorchChessNetwork
+
+SCHEMA = "fresh-qsearch-full-critic-own-search-native-v1"
+OBJECTIVE_SCHEMA = "fresh-full-value-own-mc-search-mixed-objective-v1"
+TRAINABLE_PREFIXES = (
+    "value_conv.",
+    "value_hidden.",
+    "value_output.",
+    "invariant_value_linear.",
+    "value_tower_",
+    "global_value_",
+)
+
+
+def freeze_shared_and_policy(model: TorchChessNetwork) -> tuple[str, ...]:
+    """Freeze all storage, then enable only active existing value modules."""
+    if model.architecture != "pairwise" or model._value_sparse is not None:
+        raise ValueError("requires the original pairwise e8 model without a sparse head")
+    model.requires_grad_(False)
+    names = []
+    for name, parameter in model.named_parameters():
+        if name.startswith(TRAINABLE_PREFIXES):
+            parameter.requires_grad_(True)
+            names.append(name)
+    required = {
+        "value_conv.weight",
+        "value_hidden.weight",
+        "value_output.weight",
+        "invariant_value_linear.weight",
+        "value_tower_stem.weight",
+        "value_tower_hidden.weight",
+        "value_tower_output.weight",
+        "global_value_hidden.weight",
+        "global_value_output.weight",
+    }
+    if not required.issubset(names) or not names:
+        raise ValueError("active pairwise value module set is incomplete")
+    if any(
+        parameter.requires_grad and not name.startswith(TRAINABLE_PREFIXES)
+        for name, parameter in model.named_parameters()
+    ):
+        raise AssertionError("policy/shared storage unexpectedly trainable")
+    return tuple(names)
+
+
+def frozen_bits(model: TorchChessNetwork, trainable_names: tuple[str, ...]) -> dict[str, bytes]:
+    selected = set(trainable_names)
+    return {
+        name: parameter.detach().cpu().contiguous().view(torch.uint8).numpy().tobytes()
+        for name, parameter in model.named_parameters()
+        if name not in selected
+    }
+
+
+def assert_frozen_bits(model: TorchChessNetwork, expected: dict[str, bytes]) -> None:
+    actual = frozen_bits(model, tuple(name for name, p in model.named_parameters() if p.requires_grad))
+    if actual != expected:
+        raise ValueError("shared trunk or policy storage changed")
+
+
+def extract_full_history_rows(
+    state, config, journal, encoder, feature_function, expected_known_rows: int
+):
+    """Encode each verified own-play pre-action history row in converter order."""
+    packets = journal.replay(state, config)
+    dense, sparse_features, labels, anchors = [], [], [], []
+    raw_scores, normalized_scores, ledger = [], [], []
+    for source, game_index, positions, result in packets:
+        if result == "UNKNOWN":
+            raise ValueError("UNKNOWN games must not produce value/search targets")
+        if not 0 <= game_index < len(state["games"]):
+            raise ValueError("known packet does not reference a closed game")
+        game = state["games"][game_index]
+        root = config["roots"][game["root_index"]]
+        if game["game_index"] != game_index or root["source_id"] != source:
+            raise ValueError("game/root provenance differs")
+        if len(positions) != len(game["moves"]):
+            raise ValueError("full-history/search row cardinality differs")
+        for row_index, ((board, mover, anchor), journal_row) in enumerate(
+            zip(positions, game["moves"], strict=True)
+        ):
+            if journal_row["pre_ply"] != board.ply() or journal_row["mover"] != mover:
+                raise ValueError("full-history mover or pre-action alignment differs")
+            score = journal_row["search_value"]
+            if type(score) not in (int, float) or not math.isfinite(score):
+                raise ValueError("nonfinite root-mover search score")
+            encoded = encoder.encode_board(board)
+            values = np.asarray(encoded.values, dtype=np.float32)
+            if values.size == 8 * 8 * 104:
+                values = values.reshape(8, 8, 104)
+            if values.shape != (8, 8, 104) or not np.isfinite(values).all():
+                raise ValueError("unexpected complete-history encoder output")
+            dense.append(values)
+            sparse_features.append(np.asarray(feature_function(board), dtype=np.float32))
+            won = (result == "1-0" and mover == "white") or (result == "0-1" and mover == "black")
+            labels.append(1 if result == "1/2-1/2" else 0 if won else 2)
+            anchors.append(anchor)
+            raw_scores.append(float(score))
+            normalized_scores.append(min(1.0, max(-1.0, float(score))))
+            ledger.append(
+                {
+                    "row_index": len(ledger),
+                    "game_index": game_index,
+                    "row_in_game": row_index,
+                    "source_id": source,
+                    "mover": mover,
+                    "search_target_action": journal_row["selected"],
+                    "played_action": journal_row["action"],
+                    "explored": bool(journal_row["explored"]),
+                    "root_search_score": float(score),
+                    "score_perspective": "pre-action-root-mover",
+                    "full_history_ply": board.ply(),
+                    "anchor_wdl": tuple(float(v) for v in anchor),
+                    "own_terminal_result": result,
+                }
+            )
+    x104 = np.asarray(dense, dtype=np.float32)
+    x840 = np.asarray(sparse_features, dtype=np.float32)
+    if (
+        len(dense) != expected_known_rows
+        or x104.shape != (expected_known_rows, 8, 8, 104)
+        or x840.shape != (expected_known_rows, 840)
+    ):
+        raise ValueError("full-history features do not align to common known rows")
+    return {
+        "x104": x104,
+        "x840": x840,
+        "labels": np.asarray(labels, dtype=np.int64),
+        "anchors": np.asarray(anchors, dtype=np.float32),
+        "raw_search": np.asarray(raw_scores, dtype=np.float32),
+        "normalized_search": np.asarray(normalized_scores, dtype=np.float32),
+        "ledger": ledger,
+    }
+
+
+def objective(base_wdl, full_value_logits, labels, normalized_search):
+    """Fixed mixed own-MC / own-root-search / e8-anchor loss; no sparse penalty."""
+    if (
+        base_wdl.shape != full_value_logits.shape
+        or base_wdl.ndim != 2
+        or base_wdl.shape != (len(labels), 3)
+        or normalized_search.shape != (len(labels),)
+        or not len(labels)
+    ):
+        raise ValueError("full-critic MC/search/anchor rows must align")
+    if (
+        not torch.isfinite(base_wdl).all()
+        or not torch.isfinite(full_value_logits).all()
+        or not torch.isfinite(normalized_search).all()
+        or torch.any(base_wdl < 0)
+        or not torch.allclose(base_wdl.sum(1), torch.ones_like(base_wdl[:, 0]), atol=2e-6, rtol=0)
+        or torch.any(normalized_search.abs() > 1)
+        or labels.dtype != torch.long
+        or torch.any((labels < 0) | (labels > 2))
+    ):
+        raise ValueError("invalid finite WDL/search/anchor data")
+    anchor = base_wdl.detach().clamp_min(1e-30)
+    log_prediction = F.log_softmax(full_value_logits, dim=1)
+    probs = log_prediction.exp()
+    expected_score = probs[:, 0] - probs[:, 2]
+    ce = F.nll_loss(log_prediction, labels)
+    mse = F.mse_loss(expected_score, normalized_search.detach())
+    kl = (anchor * (anchor.log() - log_prediction)).sum(1).mean()
+    loss = 0.5 * ce + 0.5 * mse + kl
+    return {
+        "loss": loss,
+        "own_terminal_ce": ce,
+        "own_search_score_mse": mse,
+        "fixed_e8_kl": kl,
+        "expected_score": expected_score,
+    }
+
+
+def bind_common_rows(common_data, dense_data, search_data):
+    """Assert reuse of the frozen sparse trainer's 12-field row/group contract."""
+    if len(common_data) != 12:
+        raise ValueError("pinned common own-MC dataset API required")
+    x, y, anchors, groups, trajectories, train_g, val_g, train_i, val_i, _, data_sha, _ = common_data
+    if dense_data["x104"].shape != (len(y), 8, 8, 104):
+        raise ValueError("dense features are not row-aligned with frozen own-MC labels")
+    if (
+        dense_data["x840"].dtype != x.numpy().dtype
+        or dense_data["x840"].shape != tuple(x.shape)
+        or dense_data["x840"].tobytes() != x.numpy().tobytes()
+        or dense_data["labels"].dtype != y.numpy().dtype
+        or dense_data["labels"].tobytes() != y.numpy().tobytes()
+        or dense_data["anchors"].dtype != anchors.numpy().dtype
+        or dense_data["anchors"].tobytes() != anchors.numpy().tobytes()
+    ):
+        raise ValueError("full-history encoder, mover labels or anchors differ from common rows")
+    if (
+        search_data["normalized_search"].shape != (len(y),)
+        or search_data["normalized_search"].dtype != dense_data["normalized_search"].dtype
+        or search_data["normalized_search"].tobytes() != dense_data["normalized_search"].tobytes()
+    ):
+        raise ValueError("own-search targets are not byte-aligned with common labels")
+    if (
+        search_data["common_data_sha256"] != data_sha
+        or search_data["common_groups"] != groups
+        or search_data["common_train_indices"] != tuple(train_i)
+        or search_data["common_validation_indices"] != tuple(val_i)
+    ):
+        raise ValueError("own-search target adapter changed the common dataset contract")
+    if len(groups) != len(trajectories) or len(set(trajectories)) != len(trajectories):
+        raise ValueError("trajectory deduplication differs from common trainer")
+    if tuple(i for gi in train_g for i in groups[gi]) != tuple(train_i):
+        raise ValueError("training row indices differ from frozen trajectory split")
+    if tuple(i for gi in val_g for i in groups[gi]) != tuple(val_i):
+        raise ValueError("validation row indices differ from frozen trajectory split")
+    if set(train_i) & set(val_i) or any(i < 0 or i >= len(y) for i in (*train_i, *val_i)):
+        raise ValueError("train/validation row index leakage or out-of-range row")
+    return {
+        "common_dataset_sha256": data_sha,
+        "trajectory_groups": groups,
+        "train_indices": tuple(train_i),
+        "validation_indices": tuple(val_i),
+        "search_rows_sha256": __import__("hashlib").sha256(
+            dense_data["normalized_search"].tobytes()
+            + dense_data["x104"].tobytes()
+            + __import__("json").dumps(
+                dense_data["ledger"], sort_keys=True, separators=(",", ":"), allow_nan=False
+            ).encode()
+        ).hexdigest(),
+        "same_common_sampler_and_split": True,
+    }
