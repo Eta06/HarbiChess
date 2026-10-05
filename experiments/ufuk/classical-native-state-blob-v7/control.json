@@ -1,0 +1,30 @@
+{
+  "schema": "classical-raw-blob-release-control-v7",
+  "approval": "ROOT-approved",
+  "manifest_sha256": "96cbd9e6f9e863b5e9b25addaacc4e10fa891308abd200255cc77f0f14774033",
+  "release_id": 404068972,
+  "release_tag": "ufuk-cpu-ownplay-state-20261005",
+  "protected_assets": [
+    "freshstatev6-sha256-66ef6b4f05a9ff3d404debb424d477860b2a7439c7ce51fe91c4c6d3399409ff.bundle.zlib"
+  ],
+  "asset_name": "classical-state-v7-sha256-06104b5fb2332a94176f7b4dbeb121acf8912cc8a9cbfb69b2a15d8f954e2ef6.bundle.zlib",
+  "capsule_sha256": "06104b5fb2332a94176f7b4dbeb121acf8912cc8a9cbfb69b2a15d8f954e2ef6",
+  "capsule_bytes": 2643352,
+  "blob_sha1": "441b8a9e5c0ec1aaa2c51cc29318712cf2480bc5",
+  "first": 1791235746.020892,
+  "deadline": 1791241146.020892,
+  "source_commit": "6fcc8b476d25495d1c9c413e55b2c7ba4794013e",
+  "helper_sha256": {
+    "raw_capsule_v7.py": "6597d74f7110ddf8ebae3fea1f75d842e4347763061125527ab66b58f61623db",
+    "receiver_v7.py": "d4b25c519543858284eb6b7781286ea38f72da8d91b43f168c3ace6db4a9df13",
+    "release_transport_v7.py": "d5597ffae967d229551cd7db184f9be8cfd9b56e39a90b7bb14c1f46a2079052"
+  },
+  "workflow_sha256": "674b9586d19ebb75bcc8bb8eb2e587f99ae963d2166bbbac0f64d5900b7e1591",
+  "clock": {
+    "schema": "classical-raw-blob-release-clock-v7",
+    "status": "ROOT-approved-frozen-transport",
+    "operator_end_epoch": 1791273600,
+    "started_epoch": 1791235746.020892,
+    "deadline_epoch": 1791241146.020892
+  }
+}
