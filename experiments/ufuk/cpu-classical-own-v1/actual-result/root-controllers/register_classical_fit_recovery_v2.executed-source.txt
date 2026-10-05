@@ -1,0 +1,109 @@
+import hashlib
+import importlib.util
+import json
+import shutil
+import subprocess
+import sys
+import time
+from pathlib import Path
+
+root = Path("/workspace/HarbiChess")
+actual = Path("/workspace/work/harbichess/cpu-classical-own-v1-actual")
+old = actual / "offline-fit-registration"
+base = actual / "offline-fit-recovery-v2"
+assert base.exists() and not list(base.iterdir())
+sha = lambda p: hashlib.sha256(Path(p).read_bytes()).hexdigest()
+loader = Path(
+    "/workspace/work/harbichess/classical-production-freeze-proposal/offline_freeze_launch.py"
+)
+spec = importlib.util.spec_from_file_location("offline", loader)
+m = importlib.util.module_from_spec(spec)
+sys.path.insert(0, str(loader.parent))
+spec.loader.exec_module(m)
+rows, helpers = m.immutable_final_data()
+proofs = m.verify_offline_proofs(rows, helpers)
+clock = json.loads((old / "common-original-clock.json").read_text())
+assert clock["first"] <= time.time() < clock["deadline"]
+ram = Path("/dev/shm/harbichess-classical-fit-recovery-v2-20261005")
+controller = Path(
+    "/workspace/work/harbichess/continuation-20261005/run_classical_fit_recovery_v2.py"
+)
+guard = Path(
+    "/workspace/work/harbichess/cpu-additive-source-6fcc8b4/src/harbichess/training/cgroup_budget.py"
+)
+pins = {str(m.H / name): digest for name, digest in helpers.items()}
+pins[str(old / "protocol.json")] = sha(old / "protocol.json")
+pins[str(guard)] = sha(guard)
+jobs = []
+for seed in m.SEEDS:
+    owner = json.loads((old / f"{seed}-owner-process.json").read_text())
+    stat = Path(f"/proc/{owner['pid']}/stat").read_text().rsplit(")", 1)[1].split()
+    assert stat[0] == "Z" and int(stat[19]) == owner["start_ticks"]
+    assert "recursive artifact16MiB ceiling" in (old / f"{seed}.stderr.log").read_text()
+    assert not Path(f"/dev/shm/harbichess-classical-fit-{seed}-20261005/candidate.json").exists()
+    for key in ("journal_path", "config_path"):
+        pins[str(rows[seed][key])] = sha(rows[seed][key])
+    cmd = owner["command"][:]
+    i = cmd.index("--output") + 1
+    output = ram / str(seed) / "fit"
+    cmd[i] = str(output)
+    jobs.append(
+        {
+            "seed": seed,
+            "command": cmd,
+            "output": str(output),
+            "expected_updates": rows[seed]["derived_updates"],
+            "dataset_sha256": rows[seed]["dataset_sha256"],
+        }
+    )
+    shutil.copyfile(old / f"{seed}.stderr.log", base / f"{seed}-original-failed.stderr.log")
+    shutil.copyfile(
+        old / f"{seed}-owner-process.json", base / f"{seed}-original-owner-process.json"
+    )
+reg = {
+    "schema": "root-classical-fit-output-parent-scope-recovery-v2",
+    "original_first_epoch": clock["first"],
+    "original_deadline_epoch": clock["deadline"],
+    "controller_sha256": sha(controller),
+    "input_pins": pins,
+    "memory_guard_path": str(guard),
+    "checkout": str(m.CORE),
+    "ram_stage": str(ram),
+    "jobs": jobs,
+    "change": "Onlyoutputpath becomesRAM/<seed>/fit so existing16MiBguard counts correctper-seedroot. OldfailurebeforeSGD preserved. Source/model/data/optimizer/finalupdates/thresholds/originalclockunchanged. FreshAdam/theta0. No partialqualificationoptimizer reuse.",
+    "actual_offline_proof_sha256": {str(s): proofs[s]["sha256"] for s in m.SEEDS},
+    "registration_helper_sha256": sha(__file__),
+}
+regpath = base / "registration.json"
+regpath.write_text(json.dumps(reg, indent=2, sort_keys=True) + "\n")
+out = (base / "controller.stdout.log").open("x")
+err = (base / "controller.stderr.log").open("x")
+p = subprocess.Popen(
+    [str(root / ".venv/bin/python"), str(controller)],
+    cwd=m.CORE,
+    stdout=out,
+    stderr=err,
+    start_new_session=True,
+)
+out.close()
+err.close()
+start = int(Path(f"/proc/{p.pid}/stat").read_text().rsplit(")", 1)[1].split()[19])
+receipt = {
+    "pid": p.pid,
+    "start_ticks": start,
+    "started_epoch": time.time(),
+    "original_first_epoch": clock["first"],
+    "original_deadline_epoch": clock["deadline"],
+    "controller_sha256": sha(controller),
+    "registration_sha256": sha(regpath),
+    "GPU_used": False,
+}
+owner = base / "owner-process.json"
+owner.write_text(json.dumps(receipt, indent=2) + "\n")
+cat = Path("/workspace/work/harbichess/continuation-20261005/operator-catalog.json")
+v = json.loads(cat.read_text())
+v["owner_receipts"].append(str(owner))
+tmp = cat.with_name("catalog-classical-fit-recovery.tmp")
+tmp.write_text(json.dumps(v, indent=2) + "\n")
+tmp.replace(cat)
+print(receipt)
