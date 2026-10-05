@@ -1,0 +1,56 @@
+{
+  "status": "failed-preserved",
+  "rows": [
+    {
+      "tag": "fullcritic-20262805",
+      "code": 1,
+      "passed": false,
+      "result": {
+        "actor_config_sha256": "b73106e21c6d8433c2132b024a2caae7527ec84541898d4f9c3db8202fccc3b5",
+        "error": "CalledProcessError(1, ['/workspace/HarbiChess/.venv/bin/python', '/workspace/HarbiChess/experiments/ufuk/cpu-fresh-fullcritic-v1/train.py', '--weights', '/workspace/work/harbichess/a100/restoration/local-rehearsal-content/harbichess-inputs/initial-e8.safetensors', '--protocol', '/workspace/work/harbichess/cpu-fresh-full-native-proof-recovery-v2/fullcritic-qualification-protocol-v2.json', '--journal', '/dev/shm/harbichess-fresh-E0-20262805/actions-00002048.json.gz', '--actor-config', '/workspace/work/harbichess/cpu-fresh-selfplay-v2-actual/registration/20262805-E0-actor-config.json', '--journal-helper', '/workspace/HarbiChess/experiments/ufuk/cpu-fresh-selfplay-v2/journal_v2.py', '--feature-helper', '/workspace/HarbiChess/experiments/ufuk/cpu-fresh-learning-v1/features.py', '--common-trainer', '/workspace/HarbiChess/experiments/ufuk/cpu-fresh-learning-v1/train.py', '--search-helper', '/workspace/HarbiChess/experiments/ufuk/cpu-fresh-sc-v1/own_search_consistency.py', '--array-encoder', '/workspace/work/harbichess/cpu-additive-source-6fcc8b4/src/harbichess/training/torch_array_encoder.py', '--source-commit', '6fcc8b476d25495d1c9c413e55b2c7ba4794013e', '--seed', '20262805', '--deadline-epoch', '1791225526.6862378', '--output', '/dev/shm/harbichess-full-native-proof-recovery-v2-20261005/fullcritic-20262805/whole', '--stop-at', '8'])",
+        "finished_epoch": 1791225246.430556,
+        "first_epoch": 1791224926.6862378,
+        "journal_sha256": "8109c074a9e084f33ec8d9a6c4b062eb3c57e8b6e8d897e03bd39dc8261dea8f",
+        "original_deadline_epoch": 1791225526.6862378,
+        "schema": "fresh-qsearch-full-critic-native-restart-proof-v1",
+        "scope": "whole8 vs pause4/resume8 exact full-native CPU proof; no real fit or strength claim",
+        "seed": 20262805,
+        "source_commit": "6fcc8b476d25495d1c9c413e55b2c7ba4794013e",
+        "status": "failed-preserved",
+        "trainer_sha256": "4f9f631bfb2b973da76ba18701bfaa60682fd53eece5824abb450999cc09cc96"
+      },
+      "result_sha256": "214e6f0fa8fb17e8ff4eab4b9d76dae2463596e92de308c6d3d429353b0d7e1f",
+      "started_epoch": 1791225237.109788,
+      "finished_epoch": 1791225247.1232536
+    },
+    {
+      "tag": "fullcritic-20262806",
+      "code": 1,
+      "passed": false,
+      "result": {
+        "actor_config_sha256": "a3b5ac9f3933afdce858e60c0e383c9611dabd2be79e7dff128c490d6750591d",
+        "error": "CalledProcessError(1, ['/workspace/HarbiChess/.venv/bin/python', '/workspace/HarbiChess/experiments/ufuk/cpu-fresh-fullcritic-v1/train.py', '--weights', '/workspace/work/harbichess/a100/restoration/local-rehearsal-content/harbichess-inputs/initial-e8.safetensors', '--protocol', '/workspace/work/harbichess/cpu-fresh-full-native-proof-recovery-v2/fullcritic-qualification-protocol-v2.json', '--journal', '/dev/shm/harbichess-fresh-E0-20262806/actions-00002048.json.gz', '--actor-config', '/workspace/work/harbichess/cpu-fresh-selfplay-v2-actual/registration/20262806-E0-actor-config.json', '--journal-helper', '/workspace/HarbiChess/experiments/ufuk/cpu-fresh-selfplay-v2/journal_v2.py', '--feature-helper', '/workspace/HarbiChess/experiments/ufuk/cpu-fresh-learning-v1/features.py', '--common-trainer', '/workspace/HarbiChess/experiments/ufuk/cpu-fresh-learning-v1/train.py', '--search-helper', '/workspace/HarbiChess/experiments/ufuk/cpu-fresh-sc-v1/own_search_consistency.py', '--array-encoder', '/workspace/work/harbichess/cpu-additive-source-6fcc8b4/src/harbichess/training/torch_array_encoder.py', '--source-commit', '6fcc8b476d25495d1c9c413e55b2c7ba4794013e', '--seed', '20262806', '--deadline-epoch', '1791225526.6862378', '--output', '/dev/shm/harbichess-full-native-proof-recovery-v2-20261005/fullcritic-20262806/whole', '--stop-at', '8'])",
+        "finished_epoch": 1791225257.1540737,
+        "first_epoch": 1791224926.6862378,
+        "journal_sha256": "df515e393e97065cd4828ceacccc7628ea04091643c16296009f48f1b9e01645",
+        "original_deadline_epoch": 1791225526.6862378,
+        "schema": "fresh-qsearch-full-critic-native-restart-proof-v1",
+        "scope": "whole8 vs pause4/resume8 exact full-native CPU proof; no real fit or strength claim",
+        "seed": 20262806,
+        "source_commit": "6fcc8b476d25495d1c9c413e55b2c7ba4794013e",
+        "status": "failed-preserved",
+        "trainer_sha256": "4f9f631bfb2b973da76ba18701bfaa60682fd53eece5824abb450999cc09cc96"
+      },
+      "result_sha256": "419b64d2ed9c9c2f8ec1aa76d77a48d4d533eb5920e9d405365e148314895470",
+      "started_epoch": 1791225247.1235993,
+      "finished_epoch": 1791225257.638631
+    }
+  ],
+  "original_first_epoch": 1791224926.6862378,
+  "original_deadline_epoch": 1791225526.6862378,
+  "finished_epoch": 1791225257.6386635,
+  "GPU_used": false,
+  "strength_success": false,
+  "registration_sha256": "9ed6f676741867d8b2fed1dd8525a17a25e8f433439cd44aa9a997cb75a5e7c2",
+  "controller_sha256": "3e04f2f89f0ce4eff1353b57322eb78020eec450241bd9245ca0075c74aa1ba3"
+}
