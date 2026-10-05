@@ -1,0 +1,41 @@
+{
+  "group_scope": "Only PGIDs actually recorded in original owner receipt; no outer PGID invented. All six outer/inner owner PID-starttick identities independently absent.",
+  "observed_epoch": 1791165030.3794253,
+  "original_owner_failure_sha256": "d09e697dad635f1792e9348c3e500333d937ccab649bd3d0ca44625b318fcf5d",
+  "original_raw_inventory": "/content/harbichess-fullgame-method2-inputs/formal7-production/cohort67/actual-owned-inventory-before.json",
+  "original_raw_inventory_sha256": "c9db2881f83d445794e8943e8916512cde3d7a065d7748fc3f0ff43831dded2a",
+  "owned_process_group_ids": [
+    116856,
+    116861,
+    119011
+  ],
+  "schema": "own67-derived-actual-source6-owned-inventory-v1",
+  "slot": 6,
+  "source_commit": "428a30f5e1658f3cf159844db547ff0147ade5a9",
+  "tracked_owned_pid_startticks": [
+    {
+      "pid": 116856,
+      "startticks": 2536373
+    },
+    {
+      "pid": 116861,
+      "startticks": 2536399
+    },
+    {
+      "pid": 119011,
+      "startticks": 2578435
+    },
+    {
+      "pid": 116854,
+      "startticks": 2536354
+    },
+    {
+      "pid": 115503,
+      "startticks": 2510241
+    },
+    {
+      "pid": 115504,
+      "startticks": 2510260
+    }
+  ]
+}
