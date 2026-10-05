@@ -1,0 +1,23 @@
+{
+  "schema": "formal45-exact-public-scope-byte-review-v1",
+  "status": "pass-explicit-known-provenance-and21-original-failed-partial-files",
+  "file_count": 156,
+  "actual_partial_inventory_file_count": 21,
+  "total_original_bytes": 64945375,
+  "records_have_no_missing_files": true,
+  "all_prior_recorded_digest_matches": true,
+  "terminal_owned_release_validated": {
+    "status": "pass-explicit-failed5-terminal-owned-release-no-promotion",
+    "source_commit": "4515a7c0dda3b4f9615c2fc78a47c872ab14699d",
+    "fixed_epochs": 8,
+    "terminal_sha256": "50876f67a21fbf0e5ef84f51fa21e9a1c2c5b9d9505ea68b4db1fc0ebb4ecac7",
+    "release_sha256": "19a68076d73ff09443cb4f471ae21787fe7ea5e643309fef8033ec1ee04aaf60",
+    "finished_epoch": 1791163651.296443,
+    "genuine_latency_claim": false
+  },
+  "sensitive_string_scan_captured_public_metadata": "pass-no-private-key-or-credential-token-pattern",
+  "log_jsonl_content_not_returned_or_interpreted": true,
+  "heldout_outcomes_not_inspected_or_used": true,
+  "model_or_engine_queries": 0,
+  "remote_mutations": 0
+}
