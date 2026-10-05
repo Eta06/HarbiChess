@@ -1,0 +1,1017 @@
+{
+  "files": [
+    {
+      "bytes": 0,
+      "path": "/content/harbichess-runs/certificate-source7-clean-CLI600-20261005/final-native-audit.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 71,
+      "path": "/content/harbichess-runs/certificate-source7-clean-CLI600-20261005/final-native-audit.stdout.log",
+      "sha256": "e514a6d25c1749f6424d6cdb6c8ce56063f0cc8998675149b1ce16c9216a726c"
+    },
+    {
+      "bytes": 0,
+      "path": "/content/harbichess-runs/certificate-source7-clean-CLI600-20261005/pause1.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 546,
+      "path": "/content/harbichess-runs/certificate-source7-clean-CLI600-20261005/pause1.stdout.log",
+      "sha256": "f136b76cc964f95febb9c0d5fdafe24a0ef8235b205ba8a05b7b38200fb93adc"
+    },
+    {
+      "bytes": 4468,
+      "path": "/content/harbichess-runs/certificate-source7-clean-CLI600-20261005/result.json",
+      "sha256": "2bdce9f72238815a008ac4fe1a014cbc512e31825ed66731e855c4a2b977b7b6"
+    },
+    {
+      "bytes": 0,
+      "path": "/content/harbichess-runs/certificate-source7-clean-CLI600-20261005/resume2.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 532,
+      "path": "/content/harbichess-runs/certificate-source7-clean-CLI600-20261005/resume2.stdout.log",
+      "sha256": "f690db080553402afc6ad92650ab8ff4f5cce32ececa30999218764618a0f5e1"
+    },
+    {
+      "bytes": 443165,
+      "path": "/content/harbichess-runs/certificate-source7-clean-CLI600-20261005/split/checkpoints/epoch-00000000/actor.json",
+      "sha256": "a6d6850330c75203d64938856d9cc283091213c60f07cdaeca53f5c20a208a51"
+    },
+    {
+      "bytes": 294764,
+      "path": "/content/harbichess-runs/certificate-source7-clean-CLI600-20261005/split/checkpoints/epoch-00000000/base.safetensors",
+      "sha256": "3092fb8ce20b1335cec44f949f1878739cb8c61b91b5579976ebd42fe6473a55"
+    },
+    {
+      "bytes": 294764,
+      "path": "/content/harbichess-runs/certificate-source7-clean-CLI600-20261005/split/checkpoints/epoch-00000000/behavior.safetensors",
+      "sha256": "3092fb8ce20b1335cec44f949f1878739cb8c61b91b5579976ebd42fe6473a55"
+    },
+    {
+      "bytes": 494807,
+      "path": "/content/harbichess-runs/certificate-source7-clean-CLI600-20261005/split/checkpoints/epoch-00000000/checkpoint.json",
+      "sha256": "570af9debd035f6189ff846e0b8f037fa75b175f792e5748c40949384444027b"
+    },
+    {
+      "bytes": 0,
+      "path": "/content/harbichess-runs/certificate-source7-clean-CLI600-20261005/split/checkpoints/epoch-00000000/last-frozen-epoch.json.gz",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 294764,
+      "path": "/content/harbichess-runs/certificate-source7-clean-CLI600-20261005/split/checkpoints/epoch-00000000/model.safetensors",
+      "sha256": "3092fb8ce20b1335cec44f949f1878739cb8c61b91b5579976ebd42fe6473a55"
+    },
+    {
+      "bytes": 1209906,
+      "path": "/content/harbichess-runs/certificate-source7-clean-CLI600-20261005/split/checkpoints/epoch-00000000/training.pt",
+      "sha256": "a2fee8b7b9d107fe457ff4f8381b132e265db129db117f240cd523e687a52e45"
+    },
+    {
+      "bytes": 471167,
+      "path": "/content/harbichess-runs/certificate-source7-clean-CLI600-20261005/split/checkpoints/epoch-00000001/actor.json",
+      "sha256": "4dbb79a7f59fa3446e4fdb03014604eacbb88f756ec1d4892a3743a180dff10a"
+    },
+    {
+      "bytes": 294764,
+      "path": "/content/harbichess-runs/certificate-source7-clean-CLI600-20261005/split/checkpoints/epoch-00000001/base.safetensors",
+      "sha256": "b323d070b59e1c1996f8e5e6598995bdee061084a3a61826575ebd0793126fb3"
+    },
+    {
+      "bytes": 294764,
+      "path": "/content/harbichess-runs/certificate-source7-clean-CLI600-20261005/split/checkpoints/epoch-00000001/behavior.safetensors",
+      "sha256": "b323d070b59e1c1996f8e5e6598995bdee061084a3a61826575ebd0793126fb3"
+    },
+    {
+      "bytes": 525683,
+      "path": "/content/harbichess-runs/certificate-source7-clean-CLI600-20261005/split/checkpoints/epoch-00000001/checkpoint.json",
+      "sha256": "e18c9f1ff2636a1618764dc1f4a099cf0136c499abd69ff2934a9d1384e41201"
+    },
+    {
+      "bytes": 1105541,
+      "path": "/content/harbichess-runs/certificate-source7-clean-CLI600-20261005/split/checkpoints/epoch-00000001/last-frozen-epoch.json.gz",
+      "sha256": "5f3b63538cb67e6d4fcdcc9e204d0993039e0d62fe7498ace14421c4ace03bc3"
+    },
+    {
+      "bytes": 294764,
+      "path": "/content/harbichess-runs/certificate-source7-clean-CLI600-20261005/split/checkpoints/epoch-00000001/model.safetensors",
+      "sha256": "8f52b2c1e89d966ab4839ce7852d544f4f247999286786caa8e2c722fdf9fe7b"
+    },
+    {
+      "bytes": 1836520,
+      "path": "/content/harbichess-runs/certificate-source7-clean-CLI600-20261005/split/checkpoints/epoch-00000001/training.pt",
+      "sha256": "7f689fa85cffebd1ad8979cd874a43cc62f71256859cc9806d898bf2c3e9d0fe"
+    },
+    {
+      "bytes": 480142,
+      "path": "/content/harbichess-runs/certificate-source7-clean-CLI600-20261005/split/checkpoints/epoch-00000002/actor.json",
+      "sha256": "982481af688e604b68abb745b6a54ba2e5002afedd8b49918b0dc6342bbc56c2"
+    },
+    {
+      "bytes": 294764,
+      "path": "/content/harbichess-runs/certificate-source7-clean-CLI600-20261005/split/checkpoints/epoch-00000002/base.safetensors",
+      "sha256": "cbe75d67d2e0134f1a9d63f0659ba9c343c4f89d5ded3016c7c9f194882664b3"
+    },
+    {
+      "bytes": 294764,
+      "path": "/content/harbichess-runs/certificate-source7-clean-CLI600-20261005/split/checkpoints/epoch-00000002/behavior.safetensors",
+      "sha256": "fe592a800406013a754575a892b57f4ad228f3b43e4da71d4bd99a337fdaaeb2"
+    },
+    {
+      "bytes": 535646,
+      "path": "/content/harbichess-runs/certificate-source7-clean-CLI600-20261005/split/checkpoints/epoch-00000002/checkpoint.json",
+      "sha256": "2667b1a68232097ebf7af2aef88cbc97d65692db360782aa2edfa7260430de01"
+    },
+    {
+      "bytes": 1421920,
+      "path": "/content/harbichess-runs/certificate-source7-clean-CLI600-20261005/split/checkpoints/epoch-00000002/last-frozen-epoch.json.gz",
+      "sha256": "097e31cf396e0133d0e51ada7b7d27213a4b8dc85a082a62a7cd13ed9e55df59"
+    },
+    {
+      "bytes": 294764,
+      "path": "/content/harbichess-runs/certificate-source7-clean-CLI600-20261005/split/checkpoints/epoch-00000002/model.safetensors",
+      "sha256": "811736a155dded86e2f9040c9c30cdd36f08ffe6a815b38894bd805a0cfd80f6"
+    },
+    {
+      "bytes": 1843944,
+      "path": "/content/harbichess-runs/certificate-source7-clean-CLI600-20261005/split/checkpoints/epoch-00000002/training.pt",
+      "sha256": "1cfd5f96e27b9c9d0e91ce378d528985a57759aeaf43e0ad5d2f3883a7d54cb3"
+    },
+    {
+      "bytes": 166,
+      "path": "/content/harbichess-runs/certificate-source7-clean-CLI600-20261005/split/invocation-1791165502472079452-command.json",
+      "sha256": "c7a1f9434e9726ca3f292b903fc5b851ced6ae8548655b9dc9500589980e1db9"
+    },
+    {
+      "bytes": 519,
+      "path": "/content/harbichess-runs/certificate-source7-clean-CLI600-20261005/split/invocation-1791165502472079452-result.json",
+      "sha256": "7e5be2da206351166518a84d29159aab94b23b5802fc1f32735a8ae65bcd2d0d"
+    },
+    {
+      "bytes": 265,
+      "path": "/content/harbichess-runs/certificate-source7-clean-CLI600-20261005/split/invocation-1791165545680694080-command.json",
+      "sha256": "3e7a74b335be4039b19f4f11906fee26cf0e82f5fc88e4dfb53e4c2bba07daf6"
+    },
+    {
+      "bytes": 505,
+      "path": "/content/harbichess-runs/certificate-source7-clean-CLI600-20261005/split/invocation-1791165545680694080-result.json",
+      "sha256": "930b0f1b2f204725a84d4481b8a53636752517241e0219e2b7073d31abd09c64"
+    },
+    {
+      "bytes": 1105541,
+      "path": "/content/harbichess-runs/certificate-source7-clean-CLI600-20261005/split/journal/epoch-00000001.json.gz",
+      "sha256": "5f3b63538cb67e6d4fcdcc9e204d0993039e0d62fe7498ace14421c4ace03bc3"
+    },
+    {
+      "bytes": 1421920,
+      "path": "/content/harbichess-runs/certificate-source7-clean-CLI600-20261005/split/journal/epoch-00000002.json.gz",
+      "sha256": "097e31cf396e0133d0e51ada7b7d27213a4b8dc85a082a62a7cd13ed9e55df59"
+    },
+    {
+      "bytes": 1701,
+      "path": "/content/harbichess-runs/certificate-source7-clean-CLI600-20261005/split/metadata.json",
+      "sha256": "b8915b5e145b5ca060d6f5e842027a571e21e7b7620e16e2307a116f4aae3798"
+    },
+    {
+      "bytes": 505,
+      "path": "/content/harbichess-runs/certificate-source7-clean-CLI600-20261005/split/progress.json",
+      "sha256": "930b0f1b2f204725a84d4481b8a53636752517241e0219e2b7073d31abd09c64"
+    },
+    {
+      "bytes": 443165,
+      "path": "/content/harbichess-runs/certificate-source7-clean-CLI600-20261005/whole/checkpoints/epoch-00000000/actor.json",
+      "sha256": "a6d6850330c75203d64938856d9cc283091213c60f07cdaeca53f5c20a208a51"
+    },
+    {
+      "bytes": 294764,
+      "path": "/content/harbichess-runs/certificate-source7-clean-CLI600-20261005/whole/checkpoints/epoch-00000000/base.safetensors",
+      "sha256": "3092fb8ce20b1335cec44f949f1878739cb8c61b91b5579976ebd42fe6473a55"
+    },
+    {
+      "bytes": 294764,
+      "path": "/content/harbichess-runs/certificate-source7-clean-CLI600-20261005/whole/checkpoints/epoch-00000000/behavior.safetensors",
+      "sha256": "3092fb8ce20b1335cec44f949f1878739cb8c61b91b5579976ebd42fe6473a55"
+    },
+    {
+      "bytes": 494807,
+      "path": "/content/harbichess-runs/certificate-source7-clean-CLI600-20261005/whole/checkpoints/epoch-00000000/checkpoint.json",
+      "sha256": "570af9debd035f6189ff846e0b8f037fa75b175f792e5748c40949384444027b"
+    },
+    {
+      "bytes": 0,
+      "path": "/content/harbichess-runs/certificate-source7-clean-CLI600-20261005/whole/checkpoints/epoch-00000000/last-frozen-epoch.json.gz",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 294764,
+      "path": "/content/harbichess-runs/certificate-source7-clean-CLI600-20261005/whole/checkpoints/epoch-00000000/model.safetensors",
+      "sha256": "3092fb8ce20b1335cec44f949f1878739cb8c61b91b5579976ebd42fe6473a55"
+    },
+    {
+      "bytes": 1209906,
+      "path": "/content/harbichess-runs/certificate-source7-clean-CLI600-20261005/whole/checkpoints/epoch-00000000/training.pt",
+      "sha256": "a2fee8b7b9d107fe457ff4f8381b132e265db129db117f240cd523e687a52e45"
+    },
+    {
+      "bytes": 471167,
+      "path": "/content/harbichess-runs/certificate-source7-clean-CLI600-20261005/whole/checkpoints/epoch-00000001/actor.json",
+      "sha256": "4dbb79a7f59fa3446e4fdb03014604eacbb88f756ec1d4892a3743a180dff10a"
+    },
+    {
+      "bytes": 294764,
+      "path": "/content/harbichess-runs/certificate-source7-clean-CLI600-20261005/whole/checkpoints/epoch-00000001/base.safetensors",
+      "sha256": "b323d070b59e1c1996f8e5e6598995bdee061084a3a61826575ebd0793126fb3"
+    },
+    {
+      "bytes": 294764,
+      "path": "/content/harbichess-runs/certificate-source7-clean-CLI600-20261005/whole/checkpoints/epoch-00000001/behavior.safetensors",
+      "sha256": "b323d070b59e1c1996f8e5e6598995bdee061084a3a61826575ebd0793126fb3"
+    },
+    {
+      "bytes": 525683,
+      "path": "/content/harbichess-runs/certificate-source7-clean-CLI600-20261005/whole/checkpoints/epoch-00000001/checkpoint.json",
+      "sha256": "e18c9f1ff2636a1618764dc1f4a099cf0136c499abd69ff2934a9d1384e41201"
+    },
+    {
+      "bytes": 1105541,
+      "path": "/content/harbichess-runs/certificate-source7-clean-CLI600-20261005/whole/checkpoints/epoch-00000001/last-frozen-epoch.json.gz",
+      "sha256": "5f3b63538cb67e6d4fcdcc9e204d0993039e0d62fe7498ace14421c4ace03bc3"
+    },
+    {
+      "bytes": 294764,
+      "path": "/content/harbichess-runs/certificate-source7-clean-CLI600-20261005/whole/checkpoints/epoch-00000001/model.safetensors",
+      "sha256": "8f52b2c1e89d966ab4839ce7852d544f4f247999286786caa8e2c722fdf9fe7b"
+    },
+    {
+      "bytes": 1836520,
+      "path": "/content/harbichess-runs/certificate-source7-clean-CLI600-20261005/whole/checkpoints/epoch-00000001/training.pt",
+      "sha256": "7f689fa85cffebd1ad8979cd874a43cc62f71256859cc9806d898bf2c3e9d0fe"
+    },
+    {
+      "bytes": 480142,
+      "path": "/content/harbichess-runs/certificate-source7-clean-CLI600-20261005/whole/checkpoints/epoch-00000002/actor.json",
+      "sha256": "982481af688e604b68abb745b6a54ba2e5002afedd8b49918b0dc6342bbc56c2"
+    },
+    {
+      "bytes": 294764,
+      "path": "/content/harbichess-runs/certificate-source7-clean-CLI600-20261005/whole/checkpoints/epoch-00000002/base.safetensors",
+      "sha256": "cbe75d67d2e0134f1a9d63f0659ba9c343c4f89d5ded3016c7c9f194882664b3"
+    },
+    {
+      "bytes": 294764,
+      "path": "/content/harbichess-runs/certificate-source7-clean-CLI600-20261005/whole/checkpoints/epoch-00000002/behavior.safetensors",
+      "sha256": "fe592a800406013a754575a892b57f4ad228f3b43e4da71d4bd99a337fdaaeb2"
+    },
+    {
+      "bytes": 535646,
+      "path": "/content/harbichess-runs/certificate-source7-clean-CLI600-20261005/whole/checkpoints/epoch-00000002/checkpoint.json",
+      "sha256": "2667b1a68232097ebf7af2aef88cbc97d65692db360782aa2edfa7260430de01"
+    },
+    {
+      "bytes": 1421920,
+      "path": "/content/harbichess-runs/certificate-source7-clean-CLI600-20261005/whole/checkpoints/epoch-00000002/last-frozen-epoch.json.gz",
+      "sha256": "097e31cf396e0133d0e51ada7b7d27213a4b8dc85a082a62a7cd13ed9e55df59"
+    },
+    {
+      "bytes": 294764,
+      "path": "/content/harbichess-runs/certificate-source7-clean-CLI600-20261005/whole/checkpoints/epoch-00000002/model.safetensors",
+      "sha256": "811736a155dded86e2f9040c9c30cdd36f08ffe6a815b38894bd805a0cfd80f6"
+    },
+    {
+      "bytes": 1843944,
+      "path": "/content/harbichess-runs/certificate-source7-clean-CLI600-20261005/whole/checkpoints/epoch-00000002/training.pt",
+      "sha256": "1cfd5f96e27b9c9d0e91ce378d528985a57759aeaf43e0ad5d2f3883a7d54cb3"
+    },
+    {
+      "bytes": 168,
+      "path": "/content/harbichess-runs/certificate-source7-clean-CLI600-20261005/whole/invocation-1791165438614206801-command.json",
+      "sha256": "918d546a10261ef6d1b4a6d536655de28151edd02dfce570dc9758c7b8d7bb88"
+    },
+    {
+      "bytes": 506,
+      "path": "/content/harbichess-runs/certificate-source7-clean-CLI600-20261005/whole/invocation-1791165438614206801-result.json",
+      "sha256": "a8cd87cc4112c36ce4e5a03c438ff471dd1822c6dc540d1c95bf08ef93c02cbc"
+    },
+    {
+      "bytes": 1105541,
+      "path": "/content/harbichess-runs/certificate-source7-clean-CLI600-20261005/whole/journal/epoch-00000001.json.gz",
+      "sha256": "5f3b63538cb67e6d4fcdcc9e204d0993039e0d62fe7498ace14421c4ace03bc3"
+    },
+    {
+      "bytes": 1421920,
+      "path": "/content/harbichess-runs/certificate-source7-clean-CLI600-20261005/whole/journal/epoch-00000002.json.gz",
+      "sha256": "097e31cf396e0133d0e51ada7b7d27213a4b8dc85a082a62a7cd13ed9e55df59"
+    },
+    {
+      "bytes": 1701,
+      "path": "/content/harbichess-runs/certificate-source7-clean-CLI600-20261005/whole/metadata.json",
+      "sha256": "b8915b5e145b5ca060d6f5e842027a571e21e7b7620e16e2307a116f4aae3798"
+    },
+    {
+      "bytes": 506,
+      "path": "/content/harbichess-runs/certificate-source7-clean-CLI600-20261005/whole/progress.json",
+      "sha256": "a8cd87cc4112c36ce4e5a03c438ff471dd1822c6dc540d1c95bf08ef93c02cbc"
+    },
+    {
+      "bytes": 0,
+      "path": "/content/harbichess-runs/certificate-source7-clean-CLI600-20261005/whole2.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 533,
+      "path": "/content/harbichess-runs/certificate-source7-clean-CLI600-20261005/whole2.stdout.log",
+      "sha256": "7388cfb1908a2d7def30bb000e3ea5988849ed9cc90fccd8086d2d57b9bd674e"
+    },
+    {
+      "bytes": 2509,
+      "path": "/content/harbichess-runs/certificate-source7-fullshape900-20261005/independent-audit-manifest.json",
+      "sha256": "c8a0520ef97b91160ca4896d963424fd1ed4fbe76b259277e85e0ddb8311a3c8"
+    },
+    {
+      "bytes": 919,
+      "path": "/content/harbichess-runs/certificate-source7-fullshape900-20261005/independent-chronological-audit.invocation.json",
+      "sha256": "5b6fddf9a5e5f8ba0de1507817b6b6e7930ccce5c9c44fbf9115ec953516e35d"
+    },
+    {
+      "bytes": 93,
+      "path": "/content/harbichess-runs/certificate-source7-fullshape900-20261005/independent-chronological-audit.owner.json",
+      "sha256": "a7a90674f2923b02ce8959023af018ff39204699941999d1a2e94c6acf69500b"
+    },
+    {
+      "bytes": 686,
+      "path": "/content/harbichess-runs/certificate-source7-fullshape900-20261005/independent-chronological-audit.stderr.log",
+      "sha256": "c9851054f652ec95cc852185025c8fdf7f5bf672392f9a7275c185c636bb763a"
+    },
+    {
+      "bytes": 0,
+      "path": "/content/harbichess-runs/certificate-source7-fullshape900-20261005/independent-chronological-audit.stdout.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 1188,
+      "path": "/content/harbichess-runs/certificate-source7-fullshape900-20261005/one-epoch-CLI.invocation.json",
+      "sha256": "f6f1a4da5766160f3ea2f1b680526f0e55b5ab00f88d1b605ffd51aa414b8e6d"
+    },
+    {
+      "bytes": 93,
+      "path": "/content/harbichess-runs/certificate-source7-fullshape900-20261005/one-epoch-CLI.owner.json",
+      "sha256": "c70c2938e8482cc492345874c6373271752d9e7d169e8fb214ac5a35a4f2ace1"
+    },
+    {
+      "bytes": 0,
+      "path": "/content/harbichess-runs/certificate-source7-fullshape900-20261005/one-epoch-CLI.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 535,
+      "path": "/content/harbichess-runs/certificate-source7-fullshape900-20261005/one-epoch-CLI.stdout.log",
+      "sha256": "57272ae89f2444968c6bd3e6ec39c6f9d257cc615afc38ad77c42ac3aae67d35"
+    },
+    {
+      "bytes": 4812,
+      "path": "/content/harbichess-runs/certificate-source7-fullshape900-20261005/result.json",
+      "sha256": "7282af0b37f2da04d2686e52ef4aef10287ec1562a37db5bc5252ba853a196a2"
+    },
+    {
+      "bytes": 1762101,
+      "path": "/content/harbichess-runs/certificate-source7-fullshape900-20261005/run/checkpoints/epoch-00000000/actor.json",
+      "sha256": "4f6f320629d8ccf855d97cec8bc785b31ef2054743e626be8926c8938cc97f4a"
+    },
+    {
+      "bytes": 294764,
+      "path": "/content/harbichess-runs/certificate-source7-fullshape900-20261005/run/checkpoints/epoch-00000000/base.safetensors",
+      "sha256": "3092fb8ce20b1335cec44f949f1878739cb8c61b91b5579976ebd42fe6473a55"
+    },
+    {
+      "bytes": 294764,
+      "path": "/content/harbichess-runs/certificate-source7-fullshape900-20261005/run/checkpoints/epoch-00000000/behavior.safetensors",
+      "sha256": "3092fb8ce20b1335cec44f949f1878739cb8c61b91b5579976ebd42fe6473a55"
+    },
+    {
+      "bytes": 1948756,
+      "path": "/content/harbichess-runs/certificate-source7-fullshape900-20261005/run/checkpoints/epoch-00000000/checkpoint.json",
+      "sha256": "62aede3791121afa3d8d6680db53080b329435c1ab74b35aa110985b5fb43f9c"
+    },
+    {
+      "bytes": 0,
+      "path": "/content/harbichess-runs/certificate-source7-fullshape900-20261005/run/checkpoints/epoch-00000000/last-frozen-epoch.json.gz",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 294764,
+      "path": "/content/harbichess-runs/certificate-source7-fullshape900-20261005/run/checkpoints/epoch-00000000/model.safetensors",
+      "sha256": "3092fb8ce20b1335cec44f949f1878739cb8c61b91b5579976ebd42fe6473a55"
+    },
+    {
+      "bytes": 2026610,
+      "path": "/content/harbichess-runs/certificate-source7-fullshape900-20261005/run/checkpoints/epoch-00000000/training.pt",
+      "sha256": "7807717dd1bb7492d7972ac0a72a0bd851fb19e694f53d392c58e5550fe7291f"
+    },
+    {
+      "bytes": 1804386,
+      "path": "/content/harbichess-runs/certificate-source7-fullshape900-20261005/run/checkpoints/epoch-00000001/actor.json",
+      "sha256": "806489383d2866e5afb906fc3831a0f7ed55a7b58872db621599fd1739915a8f"
+    },
+    {
+      "bytes": 294764,
+      "path": "/content/harbichess-runs/certificate-source7-fullshape900-20261005/run/checkpoints/epoch-00000001/base.safetensors",
+      "sha256": "b323d070b59e1c1996f8e5e6598995bdee061084a3a61826575ebd0793126fb3"
+    },
+    {
+      "bytes": 294764,
+      "path": "/content/harbichess-runs/certificate-source7-fullshape900-20261005/run/checkpoints/epoch-00000001/behavior.safetensors",
+      "sha256": "b323d070b59e1c1996f8e5e6598995bdee061084a3a61826575ebd0793126fb3"
+    },
+    {
+      "bytes": 1995505,
+      "path": "/content/harbichess-runs/certificate-source7-fullshape900-20261005/run/checkpoints/epoch-00000001/checkpoint.json",
+      "sha256": "4fd53d289b550791299ef21e193f6a50db21ba1a8ec68182839b32ca75569a42"
+    },
+    {
+      "bytes": 27465898,
+      "path": "/content/harbichess-runs/certificate-source7-fullshape900-20261005/run/checkpoints/epoch-00000001/last-frozen-epoch.json.gz",
+      "sha256": "b4c427475aa1a3a6db68bf4fd83d44aaf6ffba5bd623e5580c7be6e46ef559ec"
+    },
+    {
+      "bytes": 294764,
+      "path": "/content/harbichess-runs/certificate-source7-fullshape900-20261005/run/checkpoints/epoch-00000001/model.safetensors",
+      "sha256": "f56b47560ef42d7a5b06d960d76477dd7d193d4ab64864b18b47471aaabcd291"
+    },
+    {
+      "bytes": 2664104,
+      "path": "/content/harbichess-runs/certificate-source7-fullshape900-20261005/run/checkpoints/epoch-00000001/training.pt",
+      "sha256": "9b81bffbff5cdcf3edb834a57da79d50ac0bc17bcc53506577ce8ad73294777c"
+    },
+    {
+      "bytes": 170,
+      "path": "/content/harbichess-runs/certificate-source7-fullshape900-20261005/run/invocation-1791165915464782387-command.json",
+      "sha256": "4b26bf40af79f47b1be9d8bfa86e29f4c808416b68822f340057dec24e482a8c"
+    },
+    {
+      "bytes": 508,
+      "path": "/content/harbichess-runs/certificate-source7-fullshape900-20261005/run/invocation-1791165915464782387-result.json",
+      "sha256": "20e274dc1c66ece1f8e377125a0d1d3c8feac9b452c9da71c092e49ca07d9caa"
+    },
+    {
+      "bytes": 27465898,
+      "path": "/content/harbichess-runs/certificate-source7-fullshape900-20261005/run/journal/epoch-00000001.json.gz",
+      "sha256": "b4c427475aa1a3a6db68bf4fd83d44aaf6ffba5bd623e5580c7be6e46ef559ec"
+    },
+    {
+      "bytes": 1707,
+      "path": "/content/harbichess-runs/certificate-source7-fullshape900-20261005/run/metadata.json",
+      "sha256": "4a3db8940ecb6f4e6441039f0ac4739295931e7efdc8fb4eae6be42078b8af95"
+    },
+    {
+      "bytes": 508,
+      "path": "/content/harbichess-runs/certificate-source7-fullshape900-20261005/run/progress.json",
+      "sha256": "20e274dc1c66ece1f8e377125a0d1d3c8feac9b452c9da71c092e49ca07d9caa"
+    },
+    {
+      "bytes": 8765,
+      "path": "/content/harbichess-runs/certificate-source7-unit-CUDA59-owner-20261005/cases.xml",
+      "sha256": "87dd6135cfc25efb5ab1f8d4adbdae0d231e1cec96d5701b5180e664d14340a1"
+    },
+    {
+      "bytes": 697,
+      "path": "/content/harbichess-runs/certificate-source7-unit-CUDA59-owner-20261005/child-owner.json",
+      "sha256": "85160623b77acadef869b05536edfeefe74074b14bafaf330e9023e7520b1902"
+    },
+    {
+      "bytes": 39515,
+      "path": "/content/harbichess-runs/certificate-source7-unit-CUDA59-owner-20261005/original-owner.json",
+      "sha256": "b29ca4cad5c7966e25db17d7ab5b94e971876b6352fbb868cb8f886e450351fd"
+    },
+    {
+      "bytes": 41440,
+      "path": "/content/harbichess-runs/certificate-source7-unit-CUDA59-owner-20261005/result-metadata-correction-v2.json",
+      "sha256": "bbdc45ad38ca372c883cc5a96de5dcfcdc7a18cb6756b545d40d20bd2a32c4ac"
+    },
+    {
+      "bytes": 52817,
+      "path": "/content/harbichess-runs/certificate-source7-unit-CUDA59-owner-20261005/result.json",
+      "sha256": "aa1d76d3d3b5b74f4442ec7c464159903170991d1223fafc35b8ca54487c06ae"
+    },
+    {
+      "bytes": 0,
+      "path": "/content/harbichess-runs/certificate-source7-unit-CUDA59-owner-20261005/stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 217,
+      "path": "/content/harbichess-runs/certificate-source7-unit-CUDA59-owner-20261005/stdout.log",
+      "sha256": "e028f8156e68b8b20097bff403b1d558e3413932244d55b6c2070de37574d978"
+    },
+    {
+      "bytes": 1736,
+      "path": "/content/harbichess-fullgame-method2-inputs/source7-c022-actual-qualification-v1/CLI-launch-owner.json",
+      "sha256": "d8c42d804e94ef709632ae09f50a25afcff67ace357d9b3187a89dd24e174a49"
+    },
+    {
+      "bytes": 0,
+      "path": "/content/harbichess-fullgame-method2-inputs/source7-c022-actual-qualification-v1/CLI-owner.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 4274,
+      "path": "/content/harbichess-fullgame-method2-inputs/source7-c022-actual-qualification-v1/CLI-owner.stdout",
+      "sha256": "c18f0319175d77d06781205087a4785375ee65e1b5ae81276a9ce217f3a3f4a9"
+    },
+    {
+      "bytes": 6163,
+      "path": "/content/harbichess-fullgame-method2-inputs/source7-c022-actual-qualification-v1/actual-source7-collection.log",
+      "sha256": "3892edb5455512c8c149b39454217ff9ca69d17cd85ee249f94b2ecabe6f034a"
+    },
+    {
+      "bytes": 3950,
+      "path": "/content/harbichess-fullgame-method2-inputs/source7-c022-actual-qualification-v1/correct_junit_identity_v2.py",
+      "sha256": "feef85a301aeab1664e6410ce5004e262b2adedac0a932671d4f08bcb0ddb0f2"
+    },
+    {
+      "bytes": 674,
+      "path": "/content/harbichess-fullgame-method2-inputs/source7-c022-actual-qualification-v1/full-config.json",
+      "sha256": "fd151c360893e9404a7bf4b0c9202dc76c31af22bace3af8770422a1344b5c31"
+    },
+    {
+      "bytes": 324,
+      "path": "/content/harbichess-fullgame-method2-inputs/source7-c022-actual-qualification-v1/full-input-manifest.json",
+      "sha256": "03841dc442159e40c0e747573941ed6ca1c70bfe0939e3e5c7503d218ec78431"
+    },
+    {
+      "bytes": 3459,
+      "path": "/content/harbichess-fullgame-method2-inputs/source7-c022-actual-qualification-v1/fullprofile-launch-owner.json",
+      "sha256": "68ef278efe0dca3fe6eb8a712f40f72042bf81f87592888e2ef303a663bc075a"
+    },
+    {
+      "bytes": 802,
+      "path": "/content/harbichess-fullgame-method2-inputs/source7-c022-actual-qualification-v1/fullprofile-owner.stderr",
+      "sha256": "a72dc6644096d97e6cef03ce545d3dca96c31cee3c71bdf0ed2f094f843d313b"
+    },
+    {
+      "bytes": 0,
+      "path": "/content/harbichess-fullgame-method2-inputs/source7-c022-actual-qualification-v1/fullprofile-owner.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 4276,
+      "path": "/content/harbichess-fullgame-method2-inputs/source7-c022-actual-qualification-v1/own7_adapter_controls.py",
+      "sha256": "178f82422f84b915a1ee67f2e66cd3c45c5c4d4bd5a1cf4fd6c9831a4bd59621"
+    },
+    {
+      "bytes": 27140,
+      "path": "/content/harbichess-fullgame-method2-inputs/source7-c022-actual-qualification-v1/own7_audit_core.py",
+      "sha256": "14cbc0b75cf333bf3faa72068d09b46b597fbab5f8b790aa6da828a0c0ac0e46"
+    },
+    {
+      "bytes": 3912,
+      "path": "/content/harbichess-fullgame-method2-inputs/source7-c022-actual-qualification-v1/own7_audit_support.py",
+      "sha256": "e528e65f8182c0075626ba5007f59a7a204723a297eb9228895c4bc85f6a7adb"
+    },
+    {
+      "bytes": 2148,
+      "path": "/content/harbichess-fullgame-method2-inputs/source7-c022-actual-qualification-v1/own7_infrastructure_evidence.py",
+      "sha256": "a0686cf523d07172eebf289846b1e669cd03ebfead146b907d66179c169d4f7d"
+    },
+    {
+      "bytes": 9701,
+      "path": "/content/harbichess-fullgame-method2-inputs/source7-c022-actual-qualification-v1/own7_profile_e1_owned.py",
+      "sha256": "f886a637fed6abb17ca2ff191cebc9c4ce35a622a9567d687a3b9f7a884ef9a0"
+    },
+    {
+      "bytes": 12075,
+      "path": "/content/harbichess-fullgame-method2-inputs/source7-c022-actual-qualification-v1/own7_qualify_e1.py",
+      "sha256": "4f32900511bbcb2e1319317b62cc9c834a030ef2f29437823ad1f7434428871f"
+    },
+    {
+      "bytes": 2241,
+      "path": "/content/harbichess-fullgame-method2-inputs/source7-c022-actual-qualification-v1/protocol.json",
+      "sha256": "e9d4a6acbbdda903b618ebb350b2c6c39166e71c9e53a8b59973992c9e637af0"
+    },
+    {
+      "bytes": 15063,
+      "path": "/content/harbichess-fullgame-method2-inputs/source7-c022-actual-qualification-v1/qualify_source_cli.py",
+      "sha256": "ad92e128fe07d811e49656588bd1721c2ea28f4f7a7cd02bb22640b124c24be7"
+    },
+    {
+      "bytes": 6926,
+      "path": "/content/harbichess-fullgame-method2-inputs/source7-c022-actual-qualification-v1/test_method7_certified_audit.py",
+      "sha256": "ef778eb284ddbcce70d53d984d2e70400a9c6f4b1a48e135aed53c813a6d104a"
+    },
+    {
+      "bytes": 669,
+      "path": "/content/harbichess-fullgame-method2-inputs/source7-c022-actual-qualification-v1/tiny-config.json",
+      "sha256": "25243adad627daace9a63fb703eaf4d0cbf0d055c2575a5aa7cf3db618dc4843"
+    },
+    {
+      "bytes": 6226,
+      "path": "/content/harbichess-fullgame-method2-inputs/source7-c022-actual-qualification-v1/unit-case-inventory.json",
+      "sha256": "21eb801fcb3723631ce7844a9bafdab3095f809b577c5132a533c40612f8e3e5"
+    },
+    {
+      "bytes": 40531,
+      "path": "/content/harbichess-fullgame-method2-inputs/source7-c022-actual-qualification-v1/unit-config.json",
+      "sha256": "67e5fe4ad4ce5bc2977a1039498d39edb8a7f3eaf07777edc15fa7d48aced436"
+    },
+    {
+      "bytes": 827,
+      "path": "/content/harbichess-fullgame-method2-inputs/source7-c022-actual-qualification-v1/unit-launch-owner.json",
+      "sha256": "28272b468dd0495da90a8882bdc2753638579436205facca2d820e19d9411016"
+    },
+    {
+      "bytes": 0,
+      "path": "/content/harbichess-fullgame-method2-inputs/source7-c022-actual-qualification-v1/unit-owner.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 51637,
+      "path": "/content/harbichess-fullgame-method2-inputs/source7-c022-actual-qualification-v1/unit-owner.stdout",
+      "sha256": "0811d4a98c66684234ba7405d9d1e3977800c4f328e9f5130516f7f7967a1f05"
+    },
+    {
+      "bytes": 5341,
+      "path": "/content/harbichess-fullgame-method2-inputs/source7-c022-actual-qualification-v1/unit_owner.py",
+      "sha256": "cac5ebde9653afae8a3b09675353671f616858752bebbd749a88be92608667e1"
+    },
+    {
+      "bytes": 34025796,
+      "path": "/content/harbichess-fullgame-method2-inputs/own-terminal-curriculum-preflight-20261005/book.json",
+      "sha256": "1a5ca17664a828d669e58cf2bd5d9eeb7f980b83f20d3a4031d36e4ff0930ccb"
+    },
+    {
+      "bytes": 294764,
+      "path": "/content/harbichess-inputs/initial-e8.safetensors",
+      "sha256": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03"
+    }
+  ],
+  "natives": [
+    {
+      "artifacts": {
+        "actor.json": "a6d6850330c75203d64938856d9cc283091213c60f07cdaeca53f5c20a208a51",
+        "base.safetensors": "3092fb8ce20b1335cec44f949f1878739cb8c61b91b5579976ebd42fe6473a55",
+        "behavior.safetensors": "3092fb8ce20b1335cec44f949f1878739cb8c61b91b5579976ebd42fe6473a55",
+        "last-frozen-epoch.json.gz": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "model.safetensors": "3092fb8ce20b1335cec44f949f1878739cb8c61b91b5579976ebd42fe6473a55",
+        "training.pt": "a2fee8b7b9d107fe457ff4f8381b132e265db129db117f240cd523e687a52e45"
+      },
+      "inputs": {
+        "book": {
+          "relative_path": "../../../../../harbichess-fullgame-method2-inputs/own-terminal-curriculum-preflight-20261005/book.json",
+          "sha256": "1a5ca17664a828d669e58cf2bd5d9eeb7f980b83f20d3a4031d36e4ff0930ccb"
+        },
+        "experiment_config": {
+          "relative_path": "../../../../../harbichess-fullgame-method2-inputs/source7-c022-actual-qualification-v1/tiny-config.json",
+          "sha256": "25243adad627daace9a63fb703eaf4d0cbf0d055c2575a5aa7cf3db618dc4843"
+        },
+        "initial_weights": {
+          "relative_path": "../../../../../harbichess-inputs/initial-e8.safetensors",
+          "sha256": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03"
+        },
+        "protocol": {
+          "relative_path": "../../../../../harbichess-fullgame-method2-inputs/source7-c022-actual-qualification-v1/protocol.json",
+          "sha256": "e9d4a6acbbdda903b618ebb350b2c6c39166e71c9e53a8b59973992c9e637af0"
+        }
+      },
+      "path": "/content/harbichess-runs/certificate-source7-clean-CLI600-20261005/split/checkpoints/epoch-00000000/checkpoint.json",
+      "run_config": {
+        "input_sha256": {
+          "book": "1a5ca17664a828d669e58cf2bd5d9eeb7f980b83f20d3a4031d36e4ff0930ccb",
+          "experiment_config": "25243adad627daace9a63fb703eaf4d0cbf0d055c2575a5aa7cf3db618dc4843",
+          "initial_weights": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03",
+          "protocol": "e9d4a6acbbdda903b618ebb350b2c6c39166e71c9e53a8b59973992c9e637af0"
+        }
+      },
+      "schema": "torch-search-acting-native-cuda-v2",
+      "state": {
+        "epoch": 0,
+        "pending_search_schedule": "closed-empty",
+        "replay_buffer": "closed-empty",
+        "training_pass": "closed"
+      }
+    },
+    {
+      "artifacts": {
+        "actor.json": "4dbb79a7f59fa3446e4fdb03014604eacbb88f756ec1d4892a3743a180dff10a",
+        "base.safetensors": "b323d070b59e1c1996f8e5e6598995bdee061084a3a61826575ebd0793126fb3",
+        "behavior.safetensors": "b323d070b59e1c1996f8e5e6598995bdee061084a3a61826575ebd0793126fb3",
+        "last-frozen-epoch.json.gz": "5f3b63538cb67e6d4fcdcc9e204d0993039e0d62fe7498ace14421c4ace03bc3",
+        "model.safetensors": "8f52b2c1e89d966ab4839ce7852d544f4f247999286786caa8e2c722fdf9fe7b",
+        "training.pt": "7f689fa85cffebd1ad8979cd874a43cc62f71256859cc9806d898bf2c3e9d0fe"
+      },
+      "inputs": {
+        "book": {
+          "relative_path": "../../../../../harbichess-fullgame-method2-inputs/own-terminal-curriculum-preflight-20261005/book.json",
+          "sha256": "1a5ca17664a828d669e58cf2bd5d9eeb7f980b83f20d3a4031d36e4ff0930ccb"
+        },
+        "experiment_config": {
+          "relative_path": "../../../../../harbichess-fullgame-method2-inputs/source7-c022-actual-qualification-v1/tiny-config.json",
+          "sha256": "25243adad627daace9a63fb703eaf4d0cbf0d055c2575a5aa7cf3db618dc4843"
+        },
+        "initial_weights": {
+          "relative_path": "../../../../../harbichess-inputs/initial-e8.safetensors",
+          "sha256": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03"
+        },
+        "protocol": {
+          "relative_path": "../../../../../harbichess-fullgame-method2-inputs/source7-c022-actual-qualification-v1/protocol.json",
+          "sha256": "e9d4a6acbbdda903b618ebb350b2c6c39166e71c9e53a8b59973992c9e637af0"
+        }
+      },
+      "path": "/content/harbichess-runs/certificate-source7-clean-CLI600-20261005/split/checkpoints/epoch-00000001/checkpoint.json",
+      "run_config": {
+        "input_sha256": {
+          "book": "1a5ca17664a828d669e58cf2bd5d9eeb7f980b83f20d3a4031d36e4ff0930ccb",
+          "experiment_config": "25243adad627daace9a63fb703eaf4d0cbf0d055c2575a5aa7cf3db618dc4843",
+          "initial_weights": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03",
+          "protocol": "e9d4a6acbbdda903b618ebb350b2c6c39166e71c9e53a8b59973992c9e637af0"
+        }
+      },
+      "schema": "torch-search-acting-native-cuda-v2",
+      "state": {
+        "epoch": 1,
+        "pending_search_schedule": "closed-empty",
+        "replay_buffer": "closed-empty",
+        "training_pass": "closed"
+      }
+    },
+    {
+      "artifacts": {
+        "actor.json": "982481af688e604b68abb745b6a54ba2e5002afedd8b49918b0dc6342bbc56c2",
+        "base.safetensors": "cbe75d67d2e0134f1a9d63f0659ba9c343c4f89d5ded3016c7c9f194882664b3",
+        "behavior.safetensors": "fe592a800406013a754575a892b57f4ad228f3b43e4da71d4bd99a337fdaaeb2",
+        "last-frozen-epoch.json.gz": "097e31cf396e0133d0e51ada7b7d27213a4b8dc85a082a62a7cd13ed9e55df59",
+        "model.safetensors": "811736a155dded86e2f9040c9c30cdd36f08ffe6a815b38894bd805a0cfd80f6",
+        "training.pt": "1cfd5f96e27b9c9d0e91ce378d528985a57759aeaf43e0ad5d2f3883a7d54cb3"
+      },
+      "inputs": {
+        "book": {
+          "relative_path": "../../../../../harbichess-fullgame-method2-inputs/own-terminal-curriculum-preflight-20261005/book.json",
+          "sha256": "1a5ca17664a828d669e58cf2bd5d9eeb7f980b83f20d3a4031d36e4ff0930ccb"
+        },
+        "experiment_config": {
+          "relative_path": "../../../../../harbichess-fullgame-method2-inputs/source7-c022-actual-qualification-v1/tiny-config.json",
+          "sha256": "25243adad627daace9a63fb703eaf4d0cbf0d055c2575a5aa7cf3db618dc4843"
+        },
+        "initial_weights": {
+          "relative_path": "../../../../../harbichess-inputs/initial-e8.safetensors",
+          "sha256": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03"
+        },
+        "protocol": {
+          "relative_path": "../../../../../harbichess-fullgame-method2-inputs/source7-c022-actual-qualification-v1/protocol.json",
+          "sha256": "e9d4a6acbbdda903b618ebb350b2c6c39166e71c9e53a8b59973992c9e637af0"
+        }
+      },
+      "path": "/content/harbichess-runs/certificate-source7-clean-CLI600-20261005/split/checkpoints/epoch-00000002/checkpoint.json",
+      "run_config": {
+        "input_sha256": {
+          "book": "1a5ca17664a828d669e58cf2bd5d9eeb7f980b83f20d3a4031d36e4ff0930ccb",
+          "experiment_config": "25243adad627daace9a63fb703eaf4d0cbf0d055c2575a5aa7cf3db618dc4843",
+          "initial_weights": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03",
+          "protocol": "e9d4a6acbbdda903b618ebb350b2c6c39166e71c9e53a8b59973992c9e637af0"
+        }
+      },
+      "schema": "torch-search-acting-native-cuda-v2",
+      "state": {
+        "epoch": 2,
+        "pending_search_schedule": "closed-empty",
+        "replay_buffer": "closed-empty",
+        "training_pass": "closed"
+      }
+    },
+    {
+      "artifacts": {
+        "actor.json": "a6d6850330c75203d64938856d9cc283091213c60f07cdaeca53f5c20a208a51",
+        "base.safetensors": "3092fb8ce20b1335cec44f949f1878739cb8c61b91b5579976ebd42fe6473a55",
+        "behavior.safetensors": "3092fb8ce20b1335cec44f949f1878739cb8c61b91b5579976ebd42fe6473a55",
+        "last-frozen-epoch.json.gz": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "model.safetensors": "3092fb8ce20b1335cec44f949f1878739cb8c61b91b5579976ebd42fe6473a55",
+        "training.pt": "a2fee8b7b9d107fe457ff4f8381b132e265db129db117f240cd523e687a52e45"
+      },
+      "inputs": {
+        "book": {
+          "relative_path": "../../../../../harbichess-fullgame-method2-inputs/own-terminal-curriculum-preflight-20261005/book.json",
+          "sha256": "1a5ca17664a828d669e58cf2bd5d9eeb7f980b83f20d3a4031d36e4ff0930ccb"
+        },
+        "experiment_config": {
+          "relative_path": "../../../../../harbichess-fullgame-method2-inputs/source7-c022-actual-qualification-v1/tiny-config.json",
+          "sha256": "25243adad627daace9a63fb703eaf4d0cbf0d055c2575a5aa7cf3db618dc4843"
+        },
+        "initial_weights": {
+          "relative_path": "../../../../../harbichess-inputs/initial-e8.safetensors",
+          "sha256": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03"
+        },
+        "protocol": {
+          "relative_path": "../../../../../harbichess-fullgame-method2-inputs/source7-c022-actual-qualification-v1/protocol.json",
+          "sha256": "e9d4a6acbbdda903b618ebb350b2c6c39166e71c9e53a8b59973992c9e637af0"
+        }
+      },
+      "path": "/content/harbichess-runs/certificate-source7-clean-CLI600-20261005/whole/checkpoints/epoch-00000000/checkpoint.json",
+      "run_config": {
+        "input_sha256": {
+          "book": "1a5ca17664a828d669e58cf2bd5d9eeb7f980b83f20d3a4031d36e4ff0930ccb",
+          "experiment_config": "25243adad627daace9a63fb703eaf4d0cbf0d055c2575a5aa7cf3db618dc4843",
+          "initial_weights": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03",
+          "protocol": "e9d4a6acbbdda903b618ebb350b2c6c39166e71c9e53a8b59973992c9e637af0"
+        }
+      },
+      "schema": "torch-search-acting-native-cuda-v2",
+      "state": {
+        "epoch": 0,
+        "pending_search_schedule": "closed-empty",
+        "replay_buffer": "closed-empty",
+        "training_pass": "closed"
+      }
+    },
+    {
+      "artifacts": {
+        "actor.json": "4dbb79a7f59fa3446e4fdb03014604eacbb88f756ec1d4892a3743a180dff10a",
+        "base.safetensors": "b323d070b59e1c1996f8e5e6598995bdee061084a3a61826575ebd0793126fb3",
+        "behavior.safetensors": "b323d070b59e1c1996f8e5e6598995bdee061084a3a61826575ebd0793126fb3",
+        "last-frozen-epoch.json.gz": "5f3b63538cb67e6d4fcdcc9e204d0993039e0d62fe7498ace14421c4ace03bc3",
+        "model.safetensors": "8f52b2c1e89d966ab4839ce7852d544f4f247999286786caa8e2c722fdf9fe7b",
+        "training.pt": "7f689fa85cffebd1ad8979cd874a43cc62f71256859cc9806d898bf2c3e9d0fe"
+      },
+      "inputs": {
+        "book": {
+          "relative_path": "../../../../../harbichess-fullgame-method2-inputs/own-terminal-curriculum-preflight-20261005/book.json",
+          "sha256": "1a5ca17664a828d669e58cf2bd5d9eeb7f980b83f20d3a4031d36e4ff0930ccb"
+        },
+        "experiment_config": {
+          "relative_path": "../../../../../harbichess-fullgame-method2-inputs/source7-c022-actual-qualification-v1/tiny-config.json",
+          "sha256": "25243adad627daace9a63fb703eaf4d0cbf0d055c2575a5aa7cf3db618dc4843"
+        },
+        "initial_weights": {
+          "relative_path": "../../../../../harbichess-inputs/initial-e8.safetensors",
+          "sha256": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03"
+        },
+        "protocol": {
+          "relative_path": "../../../../../harbichess-fullgame-method2-inputs/source7-c022-actual-qualification-v1/protocol.json",
+          "sha256": "e9d4a6acbbdda903b618ebb350b2c6c39166e71c9e53a8b59973992c9e637af0"
+        }
+      },
+      "path": "/content/harbichess-runs/certificate-source7-clean-CLI600-20261005/whole/checkpoints/epoch-00000001/checkpoint.json",
+      "run_config": {
+        "input_sha256": {
+          "book": "1a5ca17664a828d669e58cf2bd5d9eeb7f980b83f20d3a4031d36e4ff0930ccb",
+          "experiment_config": "25243adad627daace9a63fb703eaf4d0cbf0d055c2575a5aa7cf3db618dc4843",
+          "initial_weights": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03",
+          "protocol": "e9d4a6acbbdda903b618ebb350b2c6c39166e71c9e53a8b59973992c9e637af0"
+        }
+      },
+      "schema": "torch-search-acting-native-cuda-v2",
+      "state": {
+        "epoch": 1,
+        "pending_search_schedule": "closed-empty",
+        "replay_buffer": "closed-empty",
+        "training_pass": "closed"
+      }
+    },
+    {
+      "artifacts": {
+        "actor.json": "982481af688e604b68abb745b6a54ba2e5002afedd8b49918b0dc6342bbc56c2",
+        "base.safetensors": "cbe75d67d2e0134f1a9d63f0659ba9c343c4f89d5ded3016c7c9f194882664b3",
+        "behavior.safetensors": "fe592a800406013a754575a892b57f4ad228f3b43e4da71d4bd99a337fdaaeb2",
+        "last-frozen-epoch.json.gz": "097e31cf396e0133d0e51ada7b7d27213a4b8dc85a082a62a7cd13ed9e55df59",
+        "model.safetensors": "811736a155dded86e2f9040c9c30cdd36f08ffe6a815b38894bd805a0cfd80f6",
+        "training.pt": "1cfd5f96e27b9c9d0e91ce378d528985a57759aeaf43e0ad5d2f3883a7d54cb3"
+      },
+      "inputs": {
+        "book": {
+          "relative_path": "../../../../../harbichess-fullgame-method2-inputs/own-terminal-curriculum-preflight-20261005/book.json",
+          "sha256": "1a5ca17664a828d669e58cf2bd5d9eeb7f980b83f20d3a4031d36e4ff0930ccb"
+        },
+        "experiment_config": {
+          "relative_path": "../../../../../harbichess-fullgame-method2-inputs/source7-c022-actual-qualification-v1/tiny-config.json",
+          "sha256": "25243adad627daace9a63fb703eaf4d0cbf0d055c2575a5aa7cf3db618dc4843"
+        },
+        "initial_weights": {
+          "relative_path": "../../../../../harbichess-inputs/initial-e8.safetensors",
+          "sha256": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03"
+        },
+        "protocol": {
+          "relative_path": "../../../../../harbichess-fullgame-method2-inputs/source7-c022-actual-qualification-v1/protocol.json",
+          "sha256": "e9d4a6acbbdda903b618ebb350b2c6c39166e71c9e53a8b59973992c9e637af0"
+        }
+      },
+      "path": "/content/harbichess-runs/certificate-source7-clean-CLI600-20261005/whole/checkpoints/epoch-00000002/checkpoint.json",
+      "run_config": {
+        "input_sha256": {
+          "book": "1a5ca17664a828d669e58cf2bd5d9eeb7f980b83f20d3a4031d36e4ff0930ccb",
+          "experiment_config": "25243adad627daace9a63fb703eaf4d0cbf0d055c2575a5aa7cf3db618dc4843",
+          "initial_weights": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03",
+          "protocol": "e9d4a6acbbdda903b618ebb350b2c6c39166e71c9e53a8b59973992c9e637af0"
+        }
+      },
+      "schema": "torch-search-acting-native-cuda-v2",
+      "state": {
+        "epoch": 2,
+        "pending_search_schedule": "closed-empty",
+        "replay_buffer": "closed-empty",
+        "training_pass": "closed"
+      }
+    },
+    {
+      "artifacts": {
+        "actor.json": "4f6f320629d8ccf855d97cec8bc785b31ef2054743e626be8926c8938cc97f4a",
+        "base.safetensors": "3092fb8ce20b1335cec44f949f1878739cb8c61b91b5579976ebd42fe6473a55",
+        "behavior.safetensors": "3092fb8ce20b1335cec44f949f1878739cb8c61b91b5579976ebd42fe6473a55",
+        "last-frozen-epoch.json.gz": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "model.safetensors": "3092fb8ce20b1335cec44f949f1878739cb8c61b91b5579976ebd42fe6473a55",
+        "training.pt": "7807717dd1bb7492d7972ac0a72a0bd851fb19e694f53d392c58e5550fe7291f"
+      },
+      "inputs": {
+        "book": {
+          "relative_path": "../../../../../harbichess-fullgame-method2-inputs/own-terminal-curriculum-preflight-20261005/book.json",
+          "sha256": "1a5ca17664a828d669e58cf2bd5d9eeb7f980b83f20d3a4031d36e4ff0930ccb"
+        },
+        "experiment_config": {
+          "relative_path": "../../../../../harbichess-fullgame-method2-inputs/source7-c022-actual-qualification-v1/full-config.json",
+          "sha256": "fd151c360893e9404a7bf4b0c9202dc76c31af22bace3af8770422a1344b5c31"
+        },
+        "initial_weights": {
+          "relative_path": "../../../../../harbichess-inputs/initial-e8.safetensors",
+          "sha256": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03"
+        },
+        "protocol": {
+          "relative_path": "../../../../../harbichess-fullgame-method2-inputs/source7-c022-actual-qualification-v1/protocol.json",
+          "sha256": "e9d4a6acbbdda903b618ebb350b2c6c39166e71c9e53a8b59973992c9e637af0"
+        }
+      },
+      "path": "/content/harbichess-runs/certificate-source7-fullshape900-20261005/run/checkpoints/epoch-00000000/checkpoint.json",
+      "run_config": {
+        "input_sha256": {
+          "book": "1a5ca17664a828d669e58cf2bd5d9eeb7f980b83f20d3a4031d36e4ff0930ccb",
+          "experiment_config": "fd151c360893e9404a7bf4b0c9202dc76c31af22bace3af8770422a1344b5c31",
+          "initial_weights": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03",
+          "protocol": "e9d4a6acbbdda903b618ebb350b2c6c39166e71c9e53a8b59973992c9e637af0"
+        }
+      },
+      "schema": "torch-search-acting-native-cuda-v2",
+      "state": {
+        "epoch": 0,
+        "pending_search_schedule": "closed-empty",
+        "replay_buffer": "closed-empty",
+        "training_pass": "closed"
+      }
+    },
+    {
+      "artifacts": {
+        "actor.json": "806489383d2866e5afb906fc3831a0f7ed55a7b58872db621599fd1739915a8f",
+        "base.safetensors": "b323d070b59e1c1996f8e5e6598995bdee061084a3a61826575ebd0793126fb3",
+        "behavior.safetensors": "b323d070b59e1c1996f8e5e6598995bdee061084a3a61826575ebd0793126fb3",
+        "last-frozen-epoch.json.gz": "b4c427475aa1a3a6db68bf4fd83d44aaf6ffba5bd623e5580c7be6e46ef559ec",
+        "model.safetensors": "f56b47560ef42d7a5b06d960d76477dd7d193d4ab64864b18b47471aaabcd291",
+        "training.pt": "9b81bffbff5cdcf3edb834a57da79d50ac0bc17bcc53506577ce8ad73294777c"
+      },
+      "inputs": {
+        "book": {
+          "relative_path": "../../../../../harbichess-fullgame-method2-inputs/own-terminal-curriculum-preflight-20261005/book.json",
+          "sha256": "1a5ca17664a828d669e58cf2bd5d9eeb7f980b83f20d3a4031d36e4ff0930ccb"
+        },
+        "experiment_config": {
+          "relative_path": "../../../../../harbichess-fullgame-method2-inputs/source7-c022-actual-qualification-v1/full-config.json",
+          "sha256": "fd151c360893e9404a7bf4b0c9202dc76c31af22bace3af8770422a1344b5c31"
+        },
+        "initial_weights": {
+          "relative_path": "../../../../../harbichess-inputs/initial-e8.safetensors",
+          "sha256": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03"
+        },
+        "protocol": {
+          "relative_path": "../../../../../harbichess-fullgame-method2-inputs/source7-c022-actual-qualification-v1/protocol.json",
+          "sha256": "e9d4a6acbbdda903b618ebb350b2c6c39166e71c9e53a8b59973992c9e637af0"
+        }
+      },
+      "path": "/content/harbichess-runs/certificate-source7-fullshape900-20261005/run/checkpoints/epoch-00000001/checkpoint.json",
+      "run_config": {
+        "input_sha256": {
+          "book": "1a5ca17664a828d669e58cf2bd5d9eeb7f980b83f20d3a4031d36e4ff0930ccb",
+          "experiment_config": "fd151c360893e9404a7bf4b0c9202dc76c31af22bace3af8770422a1344b5c31",
+          "initial_weights": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03",
+          "protocol": "e9d4a6acbbdda903b618ebb350b2c6c39166e71c9e53a8b59973992c9e637af0"
+        }
+      },
+      "schema": "torch-search-acting-native-cuda-v2",
+      "state": {
+        "epoch": 1,
+        "pending_search_schedule": "closed-empty",
+        "replay_buffer": "closed-empty",
+        "training_pass": "closed"
+      }
+    }
+  ],
+  "no_packaging_or_training_started": true,
+  "observed_epoch": 1791166873.363419,
+  "original_full_inventory_sha256": "b8e9b327487c5df3ade688c4ffbda86cd97ad267e00a5654834a8153e0d2533e",
+  "roots": [
+    "/content/harbichess-runs/certificate-source7-clean-CLI600-20261005",
+    "/content/harbichess-runs/certificate-source7-fullshape900-20261005",
+    "/content/harbichess-runs/certificate-source7-unit-CUDA59-owner-20261005",
+    "/content/harbichess-fullgame-method2-inputs/source7-c022-actual-qualification-v1"
+  ],
+  "schema": "source7-closed-qualification-explicit-inventory-v1",
+  "scope": "Compactreview/fixture only; complete native state remains in original inventory and public archive.",
+  "source_commit": "c022bc1605b44c3089439da5c6efb7bd4db4ff81",
+  "source_repo": "/content/HarbiChess-certificate-c022bc1",
+  "status": "read-only-inventory"
+}
