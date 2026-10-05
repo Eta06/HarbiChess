@@ -17,7 +17,7 @@ from pathlib import Path
 
 from harbichess.backends.torch_network import sha256
 from harbichess.selfplay.online_actor import OnlineActorConfig
-from harbichess.training.ownsearch_targets import OwnSearchConfig
+from harbichess.training.search_acting_policy import search_config_from_dict
 from harbichess.training.torch_fullgame_ppo import FullGamePPOTrainConfig
 from harbichess.training.torch_online_run import (
     _acquire_lock,
@@ -307,7 +307,7 @@ def main():
     config["actors"] = OnlineActorConfig(**config["actors"])
     config["objective"] = OwnSearchObjective(**config["objective"])
     config["schedule"] = FullGamePPOTrainConfig(**config["schedule"])
-    config["search"] = OwnSearchConfig(**config["search"])
+    config["search"] = search_config_from_dict(config["search"])
     run_search_acting(
         args.directory,
         config=TorchSearchActingConfig(**config),
