@@ -1,0 +1,25 @@
+{
+  "schema": "derived-family7-book-factory-provenance-v1",
+  "status": "pass-roots-only-no-games",
+  "qualification_ledger_slot": 7,
+  "all_96_records_independently_replayed": true,
+  "root_overlap": 0,
+  "source_overlap": 0,
+  "unique_source_records_across_both": 96,
+  "selection_to_training_seed": {
+    "20260707": 20261725,
+    "20260708": 20261726
+  },
+  "book_sha256": {
+    "20260707": "cf3455abea53dd1146aaae4a55593e51ca42981cfdacf80cc2a5e9704df48ef8",
+    "20260708": "13f4722d04a15b512f770c78c65145f96946d7d58ad30db7a20fa9eeef4bd0b7"
+  },
+  "root_counts": {
+    "20260707": 48,
+    "20260708": 48
+  },
+  "original_delivery_receipt_sha256": "3ae67d15b0fa976eab82b26b9ec83e6ed2bf670bfa878bfc5816e324257c3970",
+  "independent_replay_evidence_sha256": "fe6e0fa277dfedabb123eda65ae6c4fc989e4ad1415b75a4be7d461e35e063c5",
+  "preregistration_sha256": "3ae021ba0588302edac55e09ff6ebbb71172228e32e15e90827ef18d228722f9",
+  "queries_or_games_performed_for_conversion": 0
+}
