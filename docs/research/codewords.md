@@ -1323,3 +1323,5 @@ borcudur; mevcut MLX yolu korunur. Prefix başarı veya promotion anlamına gelm
 - **UFUK-ALIGN** (2026-10-05, CPU-only): fullsupport selected-action/search-policy mixture, rawpi/searchsupervision/actualmu ayrı v5ledger, eski auditedall16kontrolü. Hipotez/deney; strength veya özgünlük iddiası değil. Eski FAIL/INCOMPLETE/MAX8 korunur.
 
 - **UFUK-VALUE** (2026-10-05, CPU-only): eski ownterminalreplay’den63parametreli20invariantcritic; policy/trunk sabit, yenidenbaşlatılmış/eğitimsizheadkontrolüyle learningiayır. Hipotez/kontrol, başarı/özgünlükvarsayımı yok; yeniownmoves sayılmaz, eskiMain40FAIL korunur.
+
+- **UFUK-POSITION** (2026-10-05, CPU-only): mevcut sparse-value-v1 32x32 konumsal critic; eski kendi oyunlarının sonuçları, sabit e8 policy/gövde, eğitimsiz aynı-mimari kontrolü. Ağırlık aktarımı fresh Adam ile açıkça ayrılır; sonraki native v2 tam offline resume. Standart piece-square MLP, özgünlük/strength varsayımı yok.
