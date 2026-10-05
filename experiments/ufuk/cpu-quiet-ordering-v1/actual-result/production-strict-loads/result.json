@@ -1,0 +1,38 @@
+{
+  "status": "PASS-four-production-native-fresh-strict-loads-not-strength",
+  "original_first_epoch": 1791233460.854917,
+  "original_deadline_epoch": 1791235260.854917,
+  "finished_epoch": 1791234441.5753512,
+  "rows": [
+    {
+      "seed": 20262905,
+      "step": 0,
+      "native": "/dev/shm/harbichess-quiet-fit-v1-20261005/20262905/step-00000000.json",
+      "sha256": "0ee7ba9ce59f866f985bc878c64b4c985f863342404ce654abc99d5fbca61043",
+      "status": "PASS-fresh-strict-load-and-full-native-roundtrip"
+    },
+    {
+      "seed": 20262905,
+      "step": 136,
+      "native": "/dev/shm/harbichess-quiet-fit-v1-20261005/20262905/step-00000136.json",
+      "sha256": "4966f4944ff25cddfddcb3cc20ab753901c63866cb5c9f3ec1ecd0edafeb9817",
+      "status": "PASS-fresh-strict-load-and-full-native-roundtrip"
+    },
+    {
+      "seed": 20262906,
+      "step": 0,
+      "native": "/dev/shm/harbichess-quiet-fit-v1-20261005/20262906/step-00000000.json",
+      "sha256": "7c8d2d0f51db44f133f06398560f45b8058e3c0147073da12e1c070dbd3a26e7",
+      "status": "PASS-fresh-strict-load-and-full-native-roundtrip"
+    },
+    {
+      "seed": 20262906,
+      "step": 124,
+      "native": "/dev/shm/harbichess-quiet-fit-v1-20261005/20262906/step-00000124.json",
+      "sha256": "882bca3f7e35ef4b324beb86185c4b434140eb6e66d0ae73c195acc9baf22430",
+      "status": "PASS-fresh-strict-load-and-full-native-roundtrip"
+    }
+  ],
+  "protocol_sha256": "853698b8ac3f6b645efb9b965cde6a31191d5d28803b33e79a9df337feb517aa",
+  "controller_sha256": "d1e389ac224f51cbf90e16c1e09859fc9c0b815046e78212e5c49cf2034faeeb"
+}
