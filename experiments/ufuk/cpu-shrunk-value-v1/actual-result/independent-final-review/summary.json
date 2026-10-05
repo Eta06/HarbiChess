@@ -1,0 +1,84 @@
+{
+  "schema": "shrink-independent-final-summary-v1",
+  "status": "PASS-integrity-FAIL-development-strength-screen",
+  "games": 160,
+  "legal_continuation_plies": 9685,
+  "actual_SF_nodes": 1370402,
+  "NN_nodes": 3591223,
+  "SF_moves_over_requested512": 764,
+  "maximum_actual_SF_nodes_per_move": 560,
+  "NN_evaluations": 3232510,
+  "caps": 0,
+  "six_fixed_packets_exact": 6,
+  "selected_roles": [
+    "e8",
+    "rebased",
+    "shrunk"
+  ],
+  "selected_seed": 20262605,
+  "selected_pair": 0,
+  "selected_color": "white",
+  "selected_candidate_plies": [
+    5,
+    7,
+    5,
+    7,
+    5,
+    7
+  ],
+  "new_audit_original_first_epoch": 1791221408.8888361,
+  "new_audit_original_deadline_epoch": 1791222008.8888361,
+  "original_arena_clocks_unchanged": true,
+  "screens": [
+    {
+      "direct_e8_score": 0.34375,
+      "e8SF_score": 0.0,
+      "finalSF_score": 0.03125,
+      "gates": {
+        "caps_le_005": true,
+        "direct_same_search_e8_gt_060": false,
+        "finalSF_ge_025": false,
+        "pairedSF_gain_over_e8_gt_010": false,
+        "pairedSF_gain_over_untrained_gt_0": false,
+        "trained_vs_untrained_gt_060": true
+      },
+      "passed_screen": false,
+      "seed": 20262605,
+      "trained_vs_zero_score": 0.90625,
+      "zeroSF_score": 0.0625
+    },
+    {
+      "direct_e8_score": 0.125,
+      "e8SF_score": 0.0,
+      "finalSF_score": 0.0,
+      "gates": {
+        "caps_le_005": true,
+        "direct_same_search_e8_gt_060": false,
+        "finalSF_ge_025": false,
+        "pairedSF_gain_over_e8_gt_010": false,
+        "pairedSF_gain_over_untrained_gt_0": false,
+        "trained_vs_untrained_gt_060": true
+      },
+      "passed_screen": false,
+      "seed": 20262606,
+      "trained_vs_zero_score": 0.9375,
+      "zeroSF_score": 0.0625
+    }
+  ],
+  "original_two_closed_games_exact": true,
+  "prior_ten_recovery_prefix_moves_bound": true,
+  "recorded_duplicate_prefix_NN_nodes": 5120,
+  "recorded_duplicate_prefix_NN_evaluations": 4745,
+  "six_model_comparison_NN_reproductions_distinct_from_ten_recovery_prefix_research": true,
+  "independent_recomputed_NN_searches": 6,
+  "new_games": 0,
+  "training_updates": 0,
+  "GPU_used": false,
+  "limitations": [
+    "764 SF turns exceeded requested512 nodes (max560); no equal-node/equal-compute claim.",
+    "Only six prescribed white initial-family NN packets independently recomputed, not all NN searches or black-root/long-repetition NN behavior. Full rule replay covers both movers.",
+    "Known8 development families and repeated deterministic e8/zero controls are not independent virgin strength confirmation.",
+    "Recovery prefix packets retain actual research timing; previous partial wall/counters unknown.",
+    "No success/promotion or relaxed gate claim."
+  ]
+}
