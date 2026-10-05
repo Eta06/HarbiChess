@@ -1,0 +1,10 @@
+{
+  "status": "failed-preserved",
+  "error": "RuntimeError('readonly-auditor exit 1')",
+  "first_epoch": 1791234502.0633478,
+  "deadline_epoch": 1791235402.0633478,
+  "finished_epoch": 1791234502.5925212,
+  "registration_sha256": "5344c0d9502ac0d0bd9aaa2c18e202e63025ac8607b58d7c423e7b6fc3cf0d14",
+  "controller_sha256": "7ea6241e57de4ab83259803ac4a4f42d0fb50701c305a3695a937a19e9ee7150",
+  "strength_success_claimed": false
+}
