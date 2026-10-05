@@ -1,0 +1,16 @@
+{
+  "schema": "root-blob-json-layout-failure-preserved-v6",
+  "observed_failure": "blob-json-size-bound",
+  "post": "SINGLE successful POST known object; NO repeated POST",
+  "blob_sha1": "30720e4020cb4109790ef6b746419777d2a659b6",
+  "capsule_sha256": "66ef6b4f05a9ff3d404debb424d477860b2a7439c7ce51fe91c4c6d3399409ff",
+  "started_epoch": 1791230519.529188,
+  "deadline_epoch": 1791235919.529188,
+  "failure_recorded_epoch": 1791231103.9597778,
+  "old_helper_sha256": "88cff916764862606c3f1f1fd363671153a0ae1a163a0618832e8b6f05e5a4d6",
+  "new_helper_sha256": "15252db8191d1704ea64c548795a0c804f4f99cae40e659e02ce5e77b715e68a",
+  "clock_reset": false,
+  "decoded_checks_changed": false,
+  "scope": "JSON escaped line wrapping byte overhead only; pre-server-dispatch correction; no raw native changes",
+  "public_backup_pass": false
+}
