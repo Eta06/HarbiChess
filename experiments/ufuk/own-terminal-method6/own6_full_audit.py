@@ -64,9 +64,10 @@ def main():
         paths[name]
         for name in ("initial_weights", "book", "experiment_config", "protocol")
     )
+    import torch
+
     import harbichess.training.torch_search_acting_checkpoint as cm
     import harbichess.training.torch_search_acting_learner as lm
-    import torch
     from harbichess.backends.torch_network import load_weights
     from harbichess.selfplay.online_actor import OnlineActorConfig
     from harbichess.training.ownsearch_targets import OwnSearchConfig
