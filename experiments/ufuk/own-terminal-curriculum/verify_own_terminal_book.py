@@ -5,9 +5,9 @@ from collections import Counter
 from pathlib import Path
 
 import chess
-from harbichess.training.torch_online_learner import read_online_train_book
-
 from own_terminal_book import DISTANCES, build, sha
+
+from harbichess.training.torch_online_learner import read_online_train_book
 
 
 def verify(manifest, book):
