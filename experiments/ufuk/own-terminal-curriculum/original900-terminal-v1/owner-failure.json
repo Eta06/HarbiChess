@@ -1,0 +1,38 @@
+{
+  "error": "TimeoutError('Original900 source428 profile whole ceiling exhausted')",
+  "finished_epoch": 1791164848.0333476,
+  "original900_budget_reset": false,
+  "owned_cleanup": {
+    "SIGKILL_pid": [],
+    "SIGTERM_pid": [
+      116856
+    ],
+    "tracked_owned_pid_startticks": [
+      {
+        "pgid": 116856,
+        "pid": 116856,
+        "ppid": 116854,
+        "startticks": 2536373,
+        "state": "S"
+      },
+      {
+        "pgid": 116861,
+        "pid": 116861,
+        "ppid": 116856,
+        "startticks": 2536399,
+        "state": "Z"
+      },
+      {
+        "pgid": 119011,
+        "pid": 119011,
+        "ppid": 116856,
+        "startticks": 2578435,
+        "state": "Z"
+      }
+    ]
+  },
+  "owner_config_sha256": "06fda54bf3bbc81b5c80d05ed91ff679d5f8c3d782c5312e681c108e0bd1fa9a",
+  "schema": "source428-profile-originalclock-bindingrepair-owner-v1",
+  "status": "failed-preserved",
+  "waiting_started_epoch": 1791164208.6351347
+}
