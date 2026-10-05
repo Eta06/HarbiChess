@@ -1,0 +1,57 @@
+{
+  "PST_helper_sha256": {
+    "prepare_pst.py": "acb7d954959bc2007b0a007751f33d420d6a7f95db9bc89f4551292d1e9bee9c",
+    "pst_features.py": "7d8c07ddeeed8bb6da4069c4487e1a5015798595f3bddf00282cb06d9dfd6841",
+    "pst_learner.py": "8a9de21f278f5133cf277e852b37bb36c9d67873109d0c3628e4e4fa02134e7c",
+    "pst_value.py": "4c969a6102e59d5f5a9f8bda8370953ba812dd813c83c11d163905a852a1049c"
+  },
+  "SGD": false,
+  "finished_epoch": 1791229428.245068,
+  "frozen_reference_helper_sha256": {
+    "journal_v3.py": "38447a4390358e858edcf7e4bfb58a10a8a6a81eccdbd9b5f775b269456e5d14",
+    "learner.py": "e974b8496c12f31e2c71c6ddeb0c74b82767a0824285ff564ab25a33d6c0b51f",
+    "value.py": "15255c8de2196ff90560259c8fe5ad7d29c1ece5f6dd02c964d345be692978f0"
+  },
+  "games": 0,
+  "schema": "classical-own-pst-dataset-preflight-v1",
+  "searches": 0,
+  "seeds": {
+    "20262905": {
+      "PST_columns": 224,
+      "PST_dataset_sha256": "173325991189bc1610fb016236d40f04e280a6347093e01575b1ce63e242118e",
+      "actions": 16384,
+      "classical18_dataset_sha256": "ccacd17f05399cee8efefde1788207490781ffc8082630286d1655e0e7799635",
+      "config_path": "/workspace/work/harbichess/cpu-classical-own-v1-actual/production-registration/20262905-production-config.json",
+      "config_sha256": "05adca4ddab663aa86dd8ff96f6a6a932f9edb001929193fe75e1462df1fdcbb",
+      "eligible_rows": 15446,
+      "eligible_trajectories": 177,
+      "journal_path": "/dev/shm/harbichess-classical-own-20262905-20261005/actions-00016384.json.gz",
+      "journal_sha256": "11ac3cf5ed89108466ba2067c58d454518617c06f87a8dcf6b79f9ba6694b744",
+      "target_split_alignment": "PASS-exact-classical18-groups-features-and-targets",
+      "training_rows": 12773,
+      "updates": 199,
+      "validation_rows": 2673
+    },
+    "20262906": {
+      "PST_columns": 224,
+      "PST_dataset_sha256": "fbfa1956b0e7c2d2832feb872adb10f638c78b47ca8dea73c0fc0e51fccf5e41",
+      "actions": 16384,
+      "classical18_dataset_sha256": "98570d7a83f53365a617c40a9a9007d767243117145bbb3111903e40b553f1a0",
+      "config_path": "/workspace/work/harbichess/cpu-classical-own-v1-actual/production-registration/20262906-production-config.json",
+      "config_sha256": "6871b198da2565f6cde7417cedab84021b32c22edfaf7eee31e4ecf8063c3505",
+      "eligible_rows": 15405,
+      "eligible_trajectories": 175,
+      "journal_path": "/dev/shm/harbichess-classical-own-20262906-20261005/actions-00016384.json.gz",
+      "journal_sha256": "8fc609c0d705252e337d94a0eee46220b2f952f14252dab1acb5cf93ef515020",
+      "target_split_alignment": "PASS-exact-classical18-groups-features-and-targets",
+      "training_rows": 11744,
+      "updates": 183,
+      "validation_rows": 3661
+    }
+  },
+  "source_protocol_path": "protocol-TEMPLATE.json",
+  "source_protocol_sha256": "503131329583877e746c1fe515e260db61a8f08dddce3e90d707c128d3727586",
+  "started_epoch": 1791229397.4588187,
+  "status": "PASS-read-only-frozen-data-alignment-not-fit",
+  "strength_claimed": false
+}
