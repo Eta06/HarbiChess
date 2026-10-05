@@ -1,0 +1,526 @@
+"""Fail-closed two-phase launcher for the scratch PST proposal.
+
+This script is preparation only until ROOT freezes the protocol clocks and
+registered status. It never retries, cleans old outputs, or changes the source.
+"""
+
+import argparse
+import hashlib
+import json
+import os
+import subprocess
+import sys
+import time
+from pathlib import Path
+
+from pst_native import canonical, decode, digest
+from train_pst import load_frozen_runtime, sha, verify_helpers
+
+HARD_END = 1791273600.0
+TOTAL_ARTIFACT_BYTES = 32 * 1024**2
+SEEDS = (20262905, 20262906)
+
+
+def read_json(path):
+    return json.loads(Path(path).read_text())
+
+
+def atomic_json(path, value):
+    path = Path(path)
+    payload = json.dumps(value, sort_keys=True, indent=2, allow_nan=False).encode() + b"\n"
+    temp = path.with_name(path.name + ".tmp")
+    with temp.open("xb") as stream:
+        stream.write(payload)
+        stream.flush()
+        os.fsync(stream.fileno())
+    try:
+        os.link(temp, path)
+    finally:
+        temp.unlink()
+
+
+def artifact_bytes(path):
+    path = Path(path)
+    if not path.exists():
+        return 0
+    return sum(item.stat().st_size for item in path.rglob("*") if item.is_file())
+
+
+def proc_start_ticks(pid):
+    raw = Path(f"/proc/{pid}/stat").read_text()
+    fields_after_comm = raw[raw.rfind(")") + 2 :].split()
+    return int(fields_after_comm[19])
+
+
+def validate_clock(protocol, phase, now):
+    clock = protocol.get("phase_clocks", {}).get(phase, {})
+    first = clock.get("first_epoch")
+    deadline = clock.get("deadline_epoch")
+    if (
+        type(first) not in (float, int)
+        or type(deadline) not in (float, int)
+        or not first < deadline <= HARD_END
+        or not first <= now < deadline
+    ):
+        raise TimeoutError(f"{phase}: registered original phase clock is invalid/expired")
+    expected_seconds = 600.0 if phase == "proof" else 1800.0
+    if abs((deadline - first) - expected_seconds) > 1e-6:
+        raise ValueError(f"{phase}: the predeclared {expected_seconds:g}s window differs")
+    if phase == "fit":
+        proof_clock = protocol.get("phase_clocks", {}).get("proof", {})
+        if set(protocol.get("deadline_by_seed", {})) != {str(s) for s in SEEDS}:
+            raise ValueError("fit protocol must bind both seed deadlines")
+        if first < proof_clock.get("deadline_epoch", float("inf")):
+            raise ValueError("fit clock must start after the original proof clock closes")
+        if any(protocol["deadline_by_seed"][str(s)] != deadline for s in SEEDS):
+            raise ValueError("fit phase clock must equal both registered seed deadlines")
+    return float(first), float(deadline)
+
+
+def validate_protocol(args, now):
+    if sha(args.protocol) != args.protocol_sha256:
+        raise ValueError("PST protocol SHA differs")
+    protocol = read_json(args.protocol)
+    if (
+        protocol.get("schema") != "classical-own-pst-offline-protocol-v1"
+        or protocol.get("status") != "registered-pst-proposal-fit-not-strength"
+        or tuple(protocol.get("seeds", ())) != SEEDS
+        or protocol.get("cpu_core") != args.cpu_core
+        or Path(sys.executable).resolve()
+        != Path(protocol.get("python_executable", "")).resolve()
+        or protocol.get("strength_success_claimed") is not False
+        or protocol.get("final_actions") != 16384
+        or protocol.get("hard_end_epoch") != HARD_END
+        or protocol.get("resource_limits")
+        != {
+            "per_seed_artifacts_bytes": 16 * 1024**2,
+            "all_seed_artifacts_bytes": TOTAL_ARTIFACT_BYTES,
+            "workspace_disk_floor_bytes": 256 * 1024**2,
+            "cgroup_memory_budget_bytes": 15 * 1024**3,
+        }
+    ):
+        raise ValueError("registered frozen two-seed PST protocol required")
+    verify_helpers(protocol)
+    first, deadline = validate_clock(protocol, args.phase, now)
+    if (
+        subprocess.check_output(
+            ["git", "rev-parse", "HEAD"], cwd=args.source_repo, text=True
+        ).strip()
+        != protocol["source_commit"]
+        or subprocess.check_output(
+            ["git", "status", "--porcelain"], cwd=args.source_repo, text=True
+        ).strip()
+    ):
+        raise ValueError("producer checkout must be exact and clean before any output")
+    if sha(protocol["prior_model_path"]) != protocol["prior_model_sha256"]:
+        raise ValueError("frozen prior model bytes differ")
+    for seed in SEEDS:
+        key = str(seed)
+        pair = protocol["inputs"][key]
+        config_path = Path(protocol["config_paths"][key])
+        journal_path = Path(protocol["journal_paths"][key])
+        config = read_json(config_path)
+        if (
+            sha(config_path) != pair["config_sha256"]
+            or sha(journal_path) != pair["journal_sha256"]
+            or config.get("seed") != seed
+            or config.get("max_actions") != protocol["final_actions"]
+            or config.get("source_commit") != protocol["source_commit"]
+            or config.get("model_sha256") != protocol["prior_model_sha256"]
+            or config.get("excluded_training_position_keys")
+            != protocol["protected_position_keys"]
+        ):
+            raise ValueError(f"{seed}: frozen journal/config/prior binding differs")
+    return protocol, first, deadline
+
+
+def validate_ram_root(root):
+    root = Path(root).resolve()
+    shm = Path("/dev/shm").resolve()
+    if root == shm or not root.is_relative_to(shm) or root.exists():
+        raise ValueError("use a new exclusive RAM root beneath /dev/shm")
+    return root
+
+
+def validate_proof_receipt(path, expected_sha, protocol, protocol_sha, now):
+    path = Path(path)
+    if sha(path) != expected_sha:
+        raise ValueError("proof receipt SHA differs")
+    receipt = read_json(path)
+    proof_deadline = protocol["phase_clocks"]["proof"]["deadline_epoch"]
+    proof_first = protocol["phase_clocks"]["proof"]["first_epoch"]
+    if abs(proof_deadline - proof_first - 600.0) > 1e-6:
+        raise ValueError("proof receipt must bind the frozen 600-second phase")
+    if (
+        receipt.get("schema") != "classical-own-pst-proof-result-v1"
+        or receipt.get("status") != "PASS-two-seed-pause-resume-and-strict-loads"
+        or receipt.get("protocol_sha256") != protocol_sha
+        or receipt.get("strict_native_loads") != 6
+        or receipt.get("phase_first_epoch") != proof_first
+        or receipt.get("phase_deadline_epoch") != proof_deadline
+        or receipt.get("finished_epoch", proof_deadline + 1) > proof_deadline
+        or receipt.get("started_epoch", proof_first - 1) < proof_first
+        or receipt.get("finished_epoch", 0) < receipt.get("started_epoch", 0)
+        or receipt.get("finished_epoch", now + 1) > now
+        or set(receipt.get("seeds", {})) != {str(s) for s in SEEDS}
+        or any(
+            not row.get("whole_equals_pause_resume")
+            or row.get("strict_loaded_steps") != [0, 4, 8]
+            or set(row.get("state_sha256_by_step", {})) != {"0", "4", "8"}
+            for row in receipt["seeds"].values()
+        )
+    ):
+        raise ValueError("proof receipt is incomplete, late, or not a full pass")
+    proof_root = path.parent
+    owner = read_json(proof_root / "owner-process.json")
+    if (
+        owner.get("phase") != "proof"
+        or owner.get("protocol_sha256") != protocol_sha
+        or owner.get("original_deadline_epoch") != proof_deadline
+        or owner.get("started_epoch", proof_first - 1) < proof_first
+        or owner.get("started_epoch", proof_deadline) >= proof_deadline
+        or owner.get("launcher_sha256") != sha(__file__)
+        or receipt.get("started_epoch") != owner.get("started_epoch")
+    ):
+        raise ValueError("proof owner receipt does not match the registered phase")
+    for seed in SEEDS:
+        key = str(seed)
+        seed_root = proof_root / key
+        whole, split = seed_root / "whole", seed_root / "split"
+        contract = read_json(split / "fit-contract.json")
+        if read_json(whole / "fit-contract.json") != contract:
+            raise ValueError(f"{seed}: proof branch contracts differ")
+        actual = {}
+        for step in (0, 4, 8):
+            actual[str(step)] = digest(read_state(split, step, contract))
+        if actual != receipt["seeds"][key]["state_sha256_by_step"]:
+            raise ValueError(f"{seed}: proof native bytes/state differ from receipt")
+        if digest(read_state(whole, 8, contract)) != actual["8"]:
+            raise ValueError(f"{seed}: whole8 and resumed8 native states differ")
+    return receipt
+
+
+def make_command(args, protocol, seed, deadline, *, output, stop=None, resume=None,
+                 audit=False, contract_file=None):
+    key = str(seed)
+    cmd = [
+        sys.executable,
+        str(Path(__file__).with_name("train_pst.py")),
+        "--protocol", str(args.protocol.resolve()),
+        "--protocol-sha256", args.protocol_sha256,
+        "--config", protocol["config_paths"][key],
+        "--journal", protocol["journal_paths"][key],
+        "--source-repo", str(args.source_repo.resolve()),
+        "--seed", str(seed),
+        "--cpu-core", str(args.cpu_core),
+        "--phase", args.phase,
+        "--deadline", repr(float(deadline)),
+        "--output", str(Path(output)),
+    ]
+    if stop is not None:
+        cmd += ["--stop-at", str(stop)]
+    if resume is not None:
+        resume_path, resume_sha = resume
+        cmd += ["--resume", str(resume_path), "--resume-sha256", resume_sha]
+    if audit:
+        cmd.append("--audit-only")
+        if contract_file is None:
+            raise ValueError("audit requires the frozen fit contract file")
+        cmd += ["--contract-file", str(contract_file), "--contract-sha256", sha(contract_file)]
+        if resume is None:
+            raise ValueError("audit requires a native checkpoint")
+    return cmd
+
+
+def check_parent_guard(runtime, deadline, source_repo, ram_root, seed_root):
+    runtime.guard(deadline, source_repo, seed_root)
+    if artifact_bytes(ram_root) >= TOTAL_ARTIFACT_BYTES:
+        raise RuntimeError("whole RAM stage reached 32MiB aggregate ceiling")
+
+
+def invoke(args, protocol, runtime, ram_root, seed_root, seed, deadline, label,
+           *, output, stop=None, resume=None, audit=False, contract_file=None):
+    check_parent_guard(runtime, deadline, args.source_repo, ram_root, seed_root)
+    cmd = make_command(
+        args, protocol, seed, deadline, output=output, stop=stop, resume=resume,
+        audit=audit, contract_file=contract_file,
+    )
+    remaining = deadline - time.time()
+    if remaining <= 0:
+        raise TimeoutError("phase original deadline elapsed before subprocess")
+    result = subprocess.run(
+        cmd, cwd=args.source_repo, capture_output=True, text=True,
+        timeout=remaining, check=False,
+    )
+    stdout_path = seed_root / f"{label}.stdout.log"
+    stderr_path = seed_root / f"{label}.stderr.log"
+    stdout_bytes = result.stdout.encode()
+    stderr_bytes = result.stderr.encode()
+    for path, content in ((stdout_path, stdout_bytes), (stderr_path, stderr_bytes)):
+        with path.open("xb") as stream:
+            stream.write(content)
+            stream.flush()
+            os.fsync(stream.fileno())
+    check_parent_guard(runtime, deadline, args.source_repo, ram_root, seed_root)
+    if result.returncode != 0:
+        raise RuntimeError(f"{label}: train_pst exited {result.returncode}")
+    lines = [line for line in result.stdout.splitlines() if line.strip()]
+    try:
+        payload = json.loads(lines[-1])
+    except (IndexError, json.JSONDecodeError) as exc:
+        raise ValueError(f"{label}: missing machine-readable child receipt") from exc
+    return {
+        "label": label,
+        "argv": cmd,
+        "returncode": result.returncode,
+        "stdout_sha256": hashlib.sha256(stdout_bytes).hexdigest(),
+        "stderr_sha256": hashlib.sha256(stderr_bytes).hexdigest(),
+        "child": payload,
+    }
+
+
+def checkpoint(branch, step):
+    path = Path(branch) / f"step-{step:08d}.native.gz"
+    if not path.is_file():
+        raise FileNotFoundError(path)
+    return path, sha(path)
+
+
+def read_state(branch, step, contract):
+    path, _ = checkpoint(branch, step)
+    return decode(path.read_bytes(), contract)
+
+
+def run_proof(args, protocol, protocol_sha, first, deadline, ram_root):
+    runtime = load_frozen_runtime()
+    runtime.affinity(args.cpu_core)
+    commands, seeds = [], {}
+    for seed in SEEDS:
+        seed_root = ram_root / str(seed)
+        seed_root.mkdir()
+        whole = seed_root / "whole"
+        split = seed_root / "split"
+        # Independent deterministic first-8 update trajectory.
+        whole_result = invoke(
+            args, protocol, runtime, ram_root, seed_root, seed, deadline,
+            f"proof-{seed}-whole8", output=whole, stop=8,
+        )
+        commands.append(whole_result)
+        if whole_result["child"].get("step") != 8 or whole_result["child"].get(
+            "status"
+        ) != "pst-native-paused-not-candidate":
+            raise ValueError("whole proof branch did not stop exactly at update 8")
+        # Separate process at 4, then a fresh process resumes that full native to 8.
+        pause_result = invoke(args, protocol, runtime, ram_root, seed_root, seed,
+                              deadline, f"proof-{seed}-pause4", output=split, stop=4)
+        commands.append(pause_result)
+        if pause_result["child"].get("step") != 4 or pause_result["child"].get(
+            "status"
+        ) != "pst-native-paused-not-candidate":
+            raise ValueError("proof pause did not stop exactly at update 4")
+        step4, step4_sha = checkpoint(split, 4)
+        resume_result = invoke(
+            args, protocol, runtime, ram_root, seed_root, seed, deadline,
+            f"proof-{seed}-resume4to8", output=split, stop=8,
+            resume=(step4, step4_sha),
+        )
+        commands.append(resume_result)
+        if resume_result["child"].get("step") != 8 or resume_result["child"].get(
+            "status"
+        ) != "pst-native-paused-not-candidate":
+            raise ValueError("fresh proof resume did not stop exactly at update 8")
+        contract_path = split / "fit-contract.json"
+        contract = read_json(contract_path)
+        if contract.get("protocol_sha256") != protocol_sha:
+            raise ValueError("proof native contract does not bind frozen protocol")
+        if read_json(whole / "fit-contract.json") != contract:
+            raise ValueError("whole and pause branches have different fit contracts")
+        whole_state = read_state(whole, 8, contract)
+        resumed_state = read_state(split, 8, contract)
+        if whole_state != resumed_state:
+            raise ValueError("whole8 state differs from fresh pause4/resume8 state")
+        state_digests = {}
+        for step in (0, 4, 8):
+            native, native_sha = checkpoint(split, step)
+            audit_result = invoke(
+                args, protocol, runtime, ram_root, seed_root, seed, deadline,
+                f"proof-{seed}-strict-load-{step}", output=split,
+                resume=(native, native_sha), audit=True, contract_file=contract_path,
+            )
+            if audit_result["child"].get("status") != "strict-pst-native-load-PASS" \
+                    or audit_result["child"].get("step") != step:
+                raise ValueError("strict proof native load did not report expected step")
+            commands.append(audit_result)
+            state_digests[str(step)] = digest(read_state(split, step, contract))
+        seeds[str(seed)] = {
+            "whole_equals_pause_resume": True,
+            "whole_step8_state_sha256": digest(whole_state),
+            "resumed_step8_state_sha256": digest(resumed_state),
+            "strict_loaded_steps": [0, 4, 8],
+            "state_sha256_by_step": state_digests,
+            "fit_contract_sha256": sha(contract_path),
+        }
+    finished = time.time()
+    if finished > deadline:
+        raise TimeoutError("proof completed after its original common clock")
+    receipt = {
+        "schema": "classical-own-pst-proof-result-v1",
+        "status": "PASS-two-seed-pause-resume-and-strict-loads",
+        "protocol_sha256": protocol_sha,
+        "phase_first_epoch": first,
+        "phase_deadline_epoch": deadline,
+        "finished_epoch": finished,
+        "started_epoch": read_json(ram_root / "owner-process.json")["started_epoch"],
+        "strict_native_loads": 6,
+        "commands": commands,
+        "seeds": seeds,
+        "training_claimed": False,
+        "strength_claimed": False,
+    }
+    if artifact_bytes(ram_root) >= TOTAL_ARTIFACT_BYTES:
+        raise RuntimeError("proof RAM stage exceeds aggregate ceiling")
+    atomic_json(ram_root / "proof-result.json", receipt)
+    return receipt
+
+
+def run_fit(args, protocol, protocol_sha, first, deadline, ram_root, proof_path, proof_sha):
+    proof = validate_proof_receipt(proof_path, proof_sha, protocol, protocol_sha, time.time())
+    runtime = load_frozen_runtime()
+    runtime.affinity(args.cpu_core)
+    commands, seeds = [], {}
+    for seed in SEEDS:
+        seed_root = ram_root / str(seed)
+        seed_root.mkdir()
+        fit = seed_root / "fit"
+        result = invoke(args, protocol, runtime, ram_root, seed_root, seed,
+                        deadline, f"fit-{seed}-complete", output=fit)
+        commands.append(result)
+        if result["child"].get("status") != "completed-pst-fit-not-strength":
+            raise ValueError("full fit stopped without its fixed final update")
+        updates = int(result["child"]["total_updates"])
+        if result["child"].get("step") != updates:
+            raise ValueError("full fit did not reach its exact prescribed update count")
+        contract_path = fit / "fit-contract.json"
+        contract = read_json(contract_path)
+        if contract.get("protocol_sha256") != protocol_sha:
+            raise ValueError("fit native contract protocol SHA differs")
+        final_path, final_sha = checkpoint(fit, updates)
+        final_state = decode(final_path.read_bytes(), contract)
+        candidate_path = fit / "candidate.json"
+        if (
+            not candidate_path.is_file()
+            or candidate_path.read_bytes() != canonical(final_state["candidate"])
+        ):
+            raise ValueError("external PST candidate differs from final native state")
+        strict = {}
+        for step in (0, updates):
+            native, native_sha = checkpoint(fit, step)
+            loaded = invoke(args, protocol, runtime, ram_root, seed_root, seed,
+                            deadline, f"fit-{seed}-strict-load-{step}", output=fit,
+                            resume=(native, native_sha), audit=True,
+                            contract_file=contract_path)
+            if loaded["child"].get("status") != "strict-pst-native-load-PASS" \
+                    or loaded["child"].get("step") != step:
+                raise ValueError("strict completed-fit native load failed")
+            commands.append(loaded)
+            strict[str(step)] = True
+        seeds[str(seed)] = {
+            "updates": updates,
+            "final_native_sha256": final_sha,
+            "candidate_sha256": sha(candidate_path),
+            "fit_contract_sha256": sha(contract_path),
+            "strict_native_loads": strict,
+            "training_rows": result["child"]["training_rows"],
+            "validation_rows": result["child"]["validation_rows"],
+            "validation_used_for_selection": False,
+        }
+    finished = time.time()
+    if finished > deadline:
+        raise TimeoutError("fit phase finished after original clock")
+    receipt = {
+        "schema": "classical-own-pst-fit-result-v1",
+        "status": "PASS-fixed-updates-and-strict-native-loads-not-strength",
+        "protocol_sha256": protocol_sha,
+        "proof_receipt_sha256": proof_sha,
+        "proof_finished_epoch": proof["finished_epoch"],
+        "phase_first_epoch": first,
+        "phase_deadline_epoch": deadline,
+        "started_epoch": read_json(ram_root / "owner-process.json")["started_epoch"],
+        "finished_epoch": finished,
+        "commands": commands,
+        "seeds": seeds,
+        "strength_claimed": False,
+    }
+    if artifact_bytes(ram_root) >= TOTAL_ARTIFACT_BYTES:
+        raise RuntimeError("fit RAM stage exceeds aggregate ceiling")
+    atomic_json(ram_root / "fit-result.json", receipt)
+    return receipt
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--phase", choices=("proof", "fit"), required=True)
+    parser.add_argument("--protocol", type=Path, required=True)
+    parser.add_argument("--protocol-sha256", required=True)
+    parser.add_argument("--source-repo", type=Path, required=True)
+    parser.add_argument("--ram-root", type=Path, required=True)
+    parser.add_argument("--cpu-core", type=int, required=True)
+    parser.add_argument("--proof-receipt", type=Path)
+    parser.add_argument("--proof-receipt-sha256")
+    args = parser.parse_args()
+    args.source_repo = args.source_repo.resolve()
+    now = time.time()
+    protocol, first, deadline = validate_protocol(args, now)
+    ram_root = validate_ram_root(args.ram_root)
+    if args.phase == "proof":
+        if args.proof_receipt or args.proof_receipt_sha256:
+            raise ValueError("proof phase cannot take a prior proof receipt")
+    else:
+        if not args.proof_receipt or not args.proof_receipt_sha256:
+            raise ValueError("fit phase requires the completed proof receipt and SHA")
+        validate_proof_receipt(
+            args.proof_receipt, args.proof_receipt_sha256, protocol,
+            args.protocol_sha256, now,
+        )
+        if time.time() >= deadline:
+            raise TimeoutError("fresh PST fit clock is not open")
+    # All source, protocol, clock, proof and RAM-path checks precede the first write.
+    runtime = load_frozen_runtime()
+    runtime.affinity(args.cpu_core)
+    runtime.guard(deadline, args.source_repo, ram_root)
+    start_before_write = time.time()
+    if not first <= start_before_write < deadline:
+        raise TimeoutError("phase clock closed before the first output write")
+    ram_root.mkdir(parents=True, exist_ok=False)
+    owner = {
+        "schema": "classical-own-pst-launch-owner-v1",
+        "phase": args.phase,
+        "protocol_sha256": args.protocol_sha256,
+        "pid": os.getpid(),
+        "pgid": os.getpgrp(),
+        "start_ticks": proc_start_ticks(os.getpid()),
+        "started_epoch": time.time(),
+        "original_first_epoch": first,
+        "original_deadline_epoch": deadline,
+        "hard_end": HARD_END,
+        "cpu_core": args.cpu_core,
+        "source_repo": str(args.source_repo),
+        "ram_root": str(ram_root),
+        "proof_receipt_sha256": args.proof_receipt_sha256,
+        "launcher_sha256": sha(__file__),
+    }
+    if not first <= owner["started_epoch"] < deadline:
+        raise TimeoutError("original phase clock elapsed before owner receipt")
+    atomic_json(ram_root / "owner-process.json", owner)
+    if args.phase == "proof":
+        result = run_proof(args, protocol, args.protocol_sha256, first, deadline, ram_root)
+    else:
+        result = run_fit(
+            args, protocol, args.protocol_sha256, first, deadline, ram_root,
+            args.proof_receipt, args.proof_receipt_sha256,
+        )
+    print(json.dumps({"status": result["status"], "ram_root": str(ram_root)}))
+
+
+if __name__ == "__main__":
+    main()
