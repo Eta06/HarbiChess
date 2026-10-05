@@ -1,0 +1,14 @@
+{
+  "capsule_schema": "fresh8192-exact-capsule-v2",
+  "deadline_epoch": null,
+  "manifest_sha256": [
+    "3001009247e0ca26bdf7d41dc3cb0ca471311225223f9d3734d394063b4099e9"
+  ],
+  "operator_end_epoch": 1791273600,
+  "receiver_sha256": "8f502fd0ff13b2fe682817b8ef4c59d72ccd1c80f5bb84a65dd25bed0caedffc",
+  "schema": "cpu-native-delta-transport-control-v1",
+  "started_epoch": null,
+  "status": "PENDING-ROOT-PROSPECTIVE-CLOCK-APPROVAL",
+  "transport_seconds_max": 1800,
+  "workflow_sha256": "488ed15660e7d09b5c3b9f225ac9ef585ce375f80cbd32a6a37c6d1a6d776ff5"
+}
