@@ -1,0 +1,112 @@
+{
+  "candidate_books": [
+    {
+      "path": "/workspace/work/harbichess/family8-strength-books/20260709/opening-splits.json",
+      "sha256": "6d860c4c9a08914a50c6dfe59623f32755cd5185ccc68e3a52645f41efbd6252"
+    },
+    {
+      "path": "/workspace/work/harbichess/family8-strength-books/20260710/opening-splits.json",
+      "sha256": "a2885098be18e8a9e45a5ac003f89a504e50877074c80fe809f01f23443aa9ff"
+    }
+  ],
+  "candidate_root_set_sha256": "ca58a6624422bf3158ef2798235de43054d8f219f5753b714e9e3f4b6129e51b",
+  "candidate_roots": 96,
+  "elapsed_seconds": 1.4013404670004093,
+  "fresh_fullhistory_game_prefixes_replayed": 274,
+  "fullhistory_prepost_position_keys_examined": 8192,
+  "journals": [
+    {
+      "bytes": 1105541,
+      "checkpoint_sha256": "e18c9f1ff2636a1618764dc1f4a099cf0136c499abd69ff2934a9d1384e41201",
+      "epoch": 1,
+      "frozen_epoch_byte_identical_to_journal": true,
+      "known_terminal_rows": 5,
+      "metadata_sha256": "b8915b5e145b5ca060d6f5e842027a571e21e7b7620e16e2307a116f4aae3798",
+      "native_payload_count": 6,
+      "path": "/content/harbichess-runs/certificate-source7-clean-CLI600-20261005/whole/journal/epoch-00000001.json.gz",
+      "prepost_keys": 2048,
+      "rows": 1024,
+      "run": "source7-cli-whole",
+      "schema": "torch-fresh-sparse-search-acting-v2",
+      "sha256": "5f3b63538cb67e6d4fcdcc9e204d0993039e0d62fe7498ace14421c4ace03bc3",
+      "split_path": "/content/harbichess-runs/certificate-source7-clean-CLI600-20261005/split/journal/epoch-00000001.json.gz",
+      "split_sha256": "5f3b63538cb67e6d4fcdcc9e204d0993039e0d62fe7498ace14421c4ace03bc3",
+      "unknown_rows": 1019,
+      "whole_split_byte_identical": true
+    },
+    {
+      "bytes": 1421920,
+      "checkpoint_sha256": "2667b1a68232097ebf7af2aef88cbc97d65692db360782aa2edfa7260430de01",
+      "epoch": 2,
+      "frozen_epoch_byte_identical_to_journal": true,
+      "known_terminal_rows": 7,
+      "metadata_sha256": "b8915b5e145b5ca060d6f5e842027a571e21e7b7620e16e2307a116f4aae3798",
+      "native_payload_count": 6,
+      "path": "/content/harbichess-runs/certificate-source7-clean-CLI600-20261005/whole/journal/epoch-00000002.json.gz",
+      "prepost_keys": 2048,
+      "rows": 1024,
+      "run": "source7-cli-whole",
+      "schema": "torch-fresh-sparse-search-acting-v2",
+      "sha256": "097e31cf396e0133d0e51ada7b7d27213a4b8dc85a082a62a7cd13ed9e55df59",
+      "split_path": "/content/harbichess-runs/certificate-source7-clean-CLI600-20261005/split/journal/epoch-00000002.json.gz",
+      "split_sha256": "097e31cf396e0133d0e51ada7b7d27213a4b8dc85a082a62a7cd13ed9e55df59",
+      "unknown_rows": 1017,
+      "whole_split_byte_identical": true
+    },
+    {
+      "bytes": 1133194,
+      "checkpoint_sha256": "db55ddda4f5e5c34947b996c3fcfc78204e8292dded53b8e0c24bae318f48503",
+      "epoch": 1,
+      "frozen_epoch_byte_identical_to_journal": true,
+      "known_terminal_rows": 4,
+      "metadata_sha256": "9a1c77f3a110bfc38d290ac6ec8f7a0c567d2209704e13833e73a272e07bb66b",
+      "native_payload_count": 6,
+      "path": "/content/harbichess-runs/visited-loss-source8-clean-CLI600-20261005/whole/journal/epoch-00000001.json.gz",
+      "prepost_keys": 2048,
+      "rows": 1024,
+      "run": "source8-clean-cli-whole",
+      "schema": "torch-fresh-sparse-search-acting-v3",
+      "sha256": "3d97c7b780f3a918b3fe6fe89825b2f0806e7db19e00de6ee912f1fa015ae159",
+      "split_duplicate_byte_identical": true,
+      "split_duplicate_sha256": "3d97c7b780f3a918b3fe6fe89825b2f0806e7db19e00de6ee912f1fa015ae159",
+      "unknown_rows": 1020
+    },
+    {
+      "bytes": 1432645,
+      "checkpoint_sha256": "473199e94bf1ee384f42c1cc15f6866a44545a550319c2397521ad6af10cd6b3",
+      "epoch": 2,
+      "frozen_epoch_byte_identical_to_journal": true,
+      "known_terminal_rows": 5,
+      "metadata_sha256": "9a1c77f3a110bfc38d290ac6ec8f7a0c567d2209704e13833e73a272e07bb66b",
+      "native_payload_count": 6,
+      "path": "/content/harbichess-runs/visited-loss-source8-clean-CLI600-20261005/whole/journal/epoch-00000002.json.gz",
+      "prepost_keys": 2048,
+      "rows": 1024,
+      "run": "source8-clean-cli-whole",
+      "schema": "torch-fresh-sparse-search-acting-v3",
+      "sha256": "a869556aa574205cf152791989e41ecb8d999c783a57a2d4514592d76726c483",
+      "split_duplicate_byte_identical": true,
+      "split_duplicate_sha256": "a869556aa574205cf152791989e41ecb8d999c783a57a2d4514592d76726c483",
+      "unknown_rows": 1019
+    }
+  ],
+  "known_terminal_rows": 21,
+  "main_overlap_receipt_sha256": "b56a48bc75815c5a91dc0ff3f5749c46bc683ea3046437611909ca625e4d549d",
+  "matched_root_keys": [],
+  "matched_roots_count": 0,
+  "remote_script_sha256": "8614ee561c10e9512ee5b10dc25178aaac5d8592979c94486defbef9bda09013",
+  "schema": "family8-tiny-source7-source8-train-prefix-overlap-supplement-v1",
+  "scope": "read-only own TRAIN/qualification journals; no source edits, book mutation, models, engine, optimizer, or quality/outcome queries",
+  "source7_original_cli_proof": {
+    "path": "/workspace/HarbiChess/docs/runs/UFUK-source7-actual-preflight-terminal-result-20261005.json",
+    "sha256": "38fa37326153e0357a05671b9c33f5a168fe52ee63d8fa6874d04e437a9ff742"
+  },
+  "source7_unique_rows_legally_replayed": 2048,
+  "source8_closed_epochs": [
+    1,
+    2
+  ],
+  "status": "pass-zero-overlap",
+  "total_unique_rows_legally_replayed": 4096,
+  "unknown_rows": 4075
+}
