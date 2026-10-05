@@ -1,0 +1,69 @@
+{
+  "active_control_supplement": "/content/harbichess-fullgame-method2-inputs/method5-failed4-scheduling-v2/supplement.json",
+  "active_control_supplement_sha256": "82a704fffe5c6e1b0aaa79fae0deb4e1a12d27793877f2d0dd00ea2eee685615",
+  "actualCUDA_training_and_allnative_audits_completed_but_replay_gate_INCOMPLETE": true,
+  "expired_replay_deadline_epoch": 1791162851.50993,
+  "failed_replay_seed": 20261525,
+  "failure": "/content/harbichess-runs/search-acting-method5-posttraining-scheduling-v2/failure.json",
+  "failure_sha256": "9389efbb5346066956ba4dc1cd1bc9c10abf68d3988be2a0ea998a39bfd82767",
+  "fixed_epochs": 8,
+  "immutable_source_and_native_inputs_untouched": true,
+  "method5_replay_retry_or_budget_reset": false,
+  "no_strength_qualification_or_model_promotion": true,
+  "observed_epoch": 1791163651.2914755,
+  "original_qualification_config_sha256": "5fa34fdc69a49b78fecae17ee9ade86da994c548bbda81473d86c454c6cc733a",
+  "original_training_started_epoch": 1791156456.0081534,
+  "owner_identities": [
+    {
+      "role": "train-20261525",
+      "terminated_owner_receipt": "/content/harbichess-fullgame-method2-inputs/formal45-recovery-control-v2/train-20261525-process-result.json",
+      "terminated_owner_receipt_sha256": "a84529305e9edb9fb8fab33d974af224502b6922246856a20965d5b6d3658882"
+    },
+    {
+      "role": "train-20261526",
+      "terminated_owner_receipt": "/content/harbichess-fullgame-method2-inputs/formal45-recovery-control-v2/train-20261526-process-result.json",
+      "terminated_owner_receipt_sha256": "0e18418d4c81b39e556b2cbe6cb9cd25cec953154a391556fb7f2f77da514f03"
+    },
+    {
+      "role": "audit-20261525",
+      "terminated_owner_receipt": "/content/harbichess-fullgame-method2-inputs/formal45-recovery-control-v2/audit-20261525-process-result.json",
+      "terminated_owner_receipt_sha256": "f7536b477d2a524ba25b3cff32af10933e6ad0f3b206118301cc68176bb078e8"
+    },
+    {
+      "role": "audit-20261526",
+      "terminated_owner_receipt": "/content/harbichess-fullgame-method2-inputs/formal45-recovery-control-v2/audit-20261526-process-result.json",
+      "terminated_owner_receipt_sha256": "7e600089b614181f05748bb344c61467bbf4b163895fd56d56a42318769cf6fd"
+    },
+    {
+      "role": "baseline-20261525",
+      "terminated_owner_receipt": "/content/harbichess-runs/search-acting-method5-baseline-seed-20261525/result.json",
+      "terminated_owner_receipt_sha256": "fbdf0979c6de1ae8981575c6c838db028cf9c036104ed9c728134b402822763b"
+    },
+    {
+      "role": "baseline-20261526",
+      "terminated_owner_receipt": "/content/harbichess-runs/search-acting-method5-baseline-seed-20261526/result.json",
+      "terminated_owner_receipt_sha256": "413141efd146f5641fd9ab52718e439426065639e8395e2a359228685f86d860"
+    },
+    {
+      "pid": 104294,
+      "role": "post-5",
+      "startticks": 2286865
+    },
+    {
+      "original_marker": "/content/harbichess-runs/search-acting-method5-seed-20261525/own5-independent-replay/.online-active.json",
+      "original_marker_sha256": "468445c31361a2dbe11db5917641c69a4fbdcb889812fc7002678733f4f968b3",
+      "pid": 107037,
+      "role": "replay25-freshCLI",
+      "startticks": 2340856
+    }
+  ],
+  "post_config": "/content/harbichess-fullgame-method2-inputs/method5-failed4-scheduling-v2/new-posttraining-config.json",
+  "post_config_sha256": "7c625247b137f54b1c200b35b79b39132a364c33737fb17752f744f032565331",
+  "post_root": "/content/harbichess-runs/search-acting-method5-posttraining-scheduling-v2",
+  "qualification_ledger_slot": 5,
+  "replay_command": "/content/harbichess-runs/search-acting-method5-posttraining-scheduling-v2/replay-20261525-command.json",
+  "replay_command_sha256": "5804936a7d6810e43c93c24222ce9434e6a457ea8005d6132ce607d96c756dc8",
+  "schema": "own5-incomplete-original-freshCLI600-terminal-v1",
+  "source_commit": "4515a7c0dda3b4f9615c2fc78a47c872ab14699d",
+  "status": "INCOMPLETE-original-freshCLI-replay-deadline-exhausted"
+}
