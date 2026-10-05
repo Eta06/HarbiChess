@@ -1,0 +1,24 @@
+{
+  "schema": "official-cli-terminal-cleanup-offline-code-review-v1",
+  "status": "local-only-prune-confirmed",
+  "execution_terminal_errors": [
+    404,
+    401
+  ],
+  "call_chain": [
+    "commands/execution.py:state.prune_session(name)",
+    "common.py:prune_session -> store.remove(name),localdict removal,history.log_event",
+    "state.py:remove -> local JSON store write"
+  ],
+  "remote_unassign_called_by_cleanup": false,
+  "remote_unassign_separate_function": "client.py:unassign GET token then POST /tun/m/unassign/{endpoint}",
+  "active_assignment_readonly_route": "GET /tun/m/assignments?authuser=0",
+  "ordinary_sessions_command_can_mutate_local_registry": true,
+  "readonly_proposal": "list_existing_assignments_REVIEW_ONLY.py uses valid existing cached token with no refresh/auth, one fixed GET, no redirect, no local registry writes; not executed",
+  "source_file_sha256": {
+    "commands/execution.py": "ad82ab0798ca28b598c807d0490043d80751a25a61f0260ee5291575f2fee759",
+    "common.py": "56cc48f56a8dbe223b04728d075b8c8382c801925ad6a508e8eaa2870b887276",
+    "state.py": "563232b3b0bc201245e9c35a79df052ead53b6b8c90348aebe3fe8d1d23c83d3",
+    "client.py": "af6cb28c96ac9dc3d1d1a0a7587ad87acc8e0eed36b63de301ce4b9f026755b1"
+  }
+}
