@@ -47,14 +47,14 @@ procedure stay frozen. `objective.py` implements that composition and the
 tests verify that a zero residual reproduces exactly the base probabilities.
 Targets are mover-perspective terminal returns; search scores are not labels.
 
-Suggested data cap is 1,024 optimizer updates of batch size 256, with no row
-sampled more than four times. Thus actual updates are further limited to
-`min(1024, floor(4 * known_rows / 256))`. Do not run unless the terminal-data
-count and source-disjoint validation split meet a preregistered minimum; a
+The fixed presentation budget is four batch slots per eligible training row,
+with `min(1024, floor(4 * training_rows / 256))` updates of batch size256.
+Game-uniform sampling does not cap an individual row at four draws. Do not run unless the terminal-data
+count and generated-trajectory-disjoint internal validation split meet a preregistered minimum; a
 tiny dataset should lead to no fit, not repeated presentations. Root still
 chooses/fixes the exact minimum, optimizer settings, anchor KL weight, and
 candidate initialization before production. Two proposed seeds are
-20262805/20262806, with fresh source-disjoint roots and any reserved proof
+20262805/20262806, with ordinary initial-position roots and any reserved proof
 roots excluded from training.
 
 The new data generation requires an explicit native v2 contract binding all
