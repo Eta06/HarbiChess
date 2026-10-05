@@ -1,0 +1,26 @@
+{
+  "schema": "readonly-native-v2-local-verification-v1",
+  "checked_epoch": 1791219958.7376676,
+  "auditor_sha256": "4ed977b47711685dff98e2aadb40d775edf7fbb0450d20011053cb134d7370ca",
+  "test_sha256": "402000d7f2c44ec5f0c2b4bd8fca18766cc3aab0a090e3bc3e9db60c9bbe5ef1",
+  "test_result": "16 passed in4.54seconds",
+  "validator_AST_identical_functions": [
+    "tensor_bits_equal",
+    "equal_tree",
+    "validate_contract",
+    "validate_loaded_state",
+    "import_file",
+    "check_sealed_files"
+  ],
+  "v1_auditor_sha256_preserved": "ef0ee11246091dcd8600faa66966b2c8e178d6b2876d842975de847c728686c1",
+  "lint_status": "three-E501-style-errors-preserved-no-mid-proof-source-edit",
+  "lint_locations": [
+    "strict_native_readonly_audit_v2.py:427",
+    "test_readonly_audit_v2.py:282",
+    "test_readonly_audit_v2.py:290"
+  ],
+  "resource_authorization": "Parent routineCPUcapacity correction; RSS3GiB and originalsource15GiB inactive-file-v1 aggregate guards",
+  "original_overall_start": 1791219441.245795,
+  "original_overall_end": 1791220341.245795,
+  "no_optimizer_inference_network": true
+}
