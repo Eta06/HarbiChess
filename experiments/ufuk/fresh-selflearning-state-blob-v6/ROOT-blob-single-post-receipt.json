@@ -1,0 +1,16 @@
+{
+  "POST_attempts": 1,
+  "actual_started_epoch": 1791230548.8771303,
+  "exit_code": 0,
+  "finished_epoch": 1791230550.4684658,
+  "known_capsule_sha256": "66ef6b4f05a9ff3d404debb424d477860b2a7439c7ce51fe91c4c6d3399409ff",
+  "known_git_sha1": "30720e4020cb4109790ef6b746419777d2a659b6",
+  "original_deadline_epoch": 1791235919.529188,
+  "original_first_epoch": 1791230519.529188,
+  "payload_or_credentials_logged": false,
+  "schema": "root-single-unreferenced-fixed-blob-POST-v6",
+  "sha": "30720e4020cb4109790ef6b746419777d2a659b6",
+  "status": "PASS-fixed-unreferenced-object-created-awaiting-full-body-readback",
+  "tree_or_commit_or_ref_created": false,
+  "url": "https://api.github.com/repos/Eta06/HarbiChess/git/blobs/30720e4020cb4109790ef6b746419777d2a659b6"
+}
