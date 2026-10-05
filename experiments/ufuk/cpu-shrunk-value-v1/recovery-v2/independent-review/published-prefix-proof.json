@@ -1,0 +1,70 @@
+{
+  "schema": "independent-shrink-recovery-published-prefix-review-v1",
+  "status": "PASS-observed-prefix-binding-and-fullhistory",
+  "observed_epoch": 1791219232.755083,
+  "old_progress_sha256": "5514a3f2c01689d0fe03ef4b40c579dbe40084a005dab9d176ce72e703012c95",
+  "live_snapshot_complete_bytes": 527811,
+  "live_snapshot_sha256": "a68e37f979e598d330535765a89e6460f06549406fb7199ef7e0b8868670cc23",
+  "raw_game_end_lines_exact": 2,
+  "original_partial_key": [
+    1,
+    "white"
+  ],
+  "original_partial_moves": [
+    [
+      5,
+      "h2h3"
+    ],
+    [
+      6,
+      "d6d5"
+    ],
+    [
+      7,
+      "e4d5"
+    ],
+    [
+      8,
+      "d8d5"
+    ],
+    [
+      9,
+      "a2a4"
+    ],
+    [
+      10,
+      "d5e4"
+    ],
+    [
+      11,
+      "f1e2"
+    ],
+    [
+      12,
+      "e8d8"
+    ],
+    [
+      13,
+      "b1c3"
+    ],
+    [
+      14,
+      "e4f5"
+    ]
+  ],
+  "matched_recovered_prefix_moves": 10,
+  "recovered_legal_continuation_moves_observed": 18,
+  "beyond_original_prefix": 8,
+  "original_group_first": 1791217744.814687,
+  "original_group_deadline": 1791220444.814687,
+  "original_whole_first": 1791217012.4869661,
+  "original_whole_deadline": 1791224212.4869661,
+  "actual_executor_sha256": "8ec9655dadb24385a88d6c80a78a2eaf020ee393787dbb73a71446cb568428fc",
+  "old_parent_executor_sha256": "c8aa6d1ac779e1ba8863c1f400ff405839dc161c47f1a7afb619e2bbcf60f701",
+  "no_independent_NN_recompute": true,
+  "limitations": [
+    "Published move events do not include individual chronological-match search counters. Matching is code-enforced before publication; this review verifies moves and code binding only.",
+    "Active game is not yet a completed group. Final duplicate NN nodes/evaluations and recovery latency metadata require final result audit.",
+    "Old partial wall/counters unavailable; no original latency reconstruction claimed."
+  ]
+}
