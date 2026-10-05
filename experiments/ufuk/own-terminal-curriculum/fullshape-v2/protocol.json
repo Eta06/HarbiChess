@@ -1,0 +1,27 @@
+{
+  "actualCLI600_receipt_sha256": "0e27edefaf8411285bf01dbc887712f279cbeef40afe09db1e3d4fff19c3834d",
+  "actualCUDA34_receipt_sha256": "69b0cf0ec111053173b978cf5eff5c4467cb223ad02a7b4c824462e1dc24b04e",
+  "book_sha256": "1a5ca17664a828d669e58cf2bd5d9eeb7f980b83f20d3a4031d36e4ff0930ccb",
+  "compute": "Existing A100/Torch2.11cu130/FP32/deterministic/T1/memory64GiB/disk8GiB; wait for original5 successful genuine latency ownership receipt before first profile compute; primarystrength arenas then record contention.",
+  "config_sha256": "24ea94ba11493a4313bdaa9e8cc3cf03cd79af9c431d73fd9752208da616a8e1",
+  "control": "Prior451 newbook shared900 fail remains failed. Source428 actualCUDA34 and realCLI600 passed separately; no oldproducer/native relabel. New seed61765 is development-only; samefixedshape/math, no heldout/model selection.",
+  "failure": "Preserveoriginalclock/output/currentnative/partialaudit; no extended900 retry; no formal6admit if anygatefails.",
+  "frozen_helper_sha256": {
+    "own6_adapter_controls.py": "4afc60a0e6b04f2886f2cdad23044b6a6f0406178fcf6c98d9f2c013ccae9739",
+    "own6_audit_core.py": "ac97b66333969c49bf1e436a7dbb41dbe67d41df496d3c56a4aef8918944b4a9",
+    "own6_audit_support.py": "17e9c1473ac22acaa38d102c6f45b4891474b122c140748b7e03a96f277eabe1",
+    "own6_infrastructure_evidence.py": "dca3d7d484417891c817c51b2127b13cd0768271bddfddfe60df51b2d239fc7d",
+    "own6_profile_e1_owned.py": "6a16bff0b654b51fa3f896cca2d874151c2cb9204be47287a8e6994dd19e2676",
+    "own6_qualify_e1.py": "afded0deefa32715208c230dbb462a7900a3639caa5f0982692c0ffaadbef37f"
+  },
+  "hypothesis": "Private identical104array pack and exact fullhistory startup dedup retain same learner/search objectives, while new25percent ownterminal START mixture raises fresh true terminal target coverage. Qualify real128x256 CLI plus unchanged chronological checks before any formal6 training.",
+  "initial_e8_sha256": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03",
+  "latest_profile_start_epoch": 1791164700,
+  "original5_control_supplement_sha256": "82a704fffe5c6e1b0aaa79fae0deb4e1a12d27793877f2d0dd00ea2eee685615",
+  "schema": "ufuk-own-terminal-source428-fullshape-development-v2",
+  "scope": "Infrastructure qualification and E1development, excludedfrom formalstrength/candidate/teacher/selflearning success.",
+  "source_commit": "428a30f5e1658f3cf159844db547ff0147ade5a9",
+  "status": "prospective-fixed-development-only",
+  "success": "Exactlyone128x256 CLI plus sameproductioncore ALL32768 legal RNG/raw18 packets/FIRST8-LAST8 chronological neural witnesses/allAdam/RNG/model frozen21/schedules/mutations completewithin900; formal factory separately requires retainedupdates and actual changed tensors.",
+  "whole_profile_max_seconds": 900
+}
