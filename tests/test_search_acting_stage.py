@@ -339,9 +339,9 @@ def test_real_fresh_process_two_vs_pause_one_resume_two_native_bytes(tmp_path, d
     assert (
         native["schema"]
         == (
-            "torch-search-acting-native-cuda-v2"
+            "torch-search-acting-native-cuda-v3"
             if device == "cuda:0"
-            else "torch-search-acting-native-cpu-v2"
+            else "torch-search-acting-native-cpu-v3"
         )
         and native["state"]["pending_search_schedule"] == "closed-empty"
     )
