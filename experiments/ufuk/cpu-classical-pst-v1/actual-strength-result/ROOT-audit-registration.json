@@ -1,0 +1,25 @@
+{
+  "output": "/dev/shm/harbichess-PST160-root-audit-v1-20261005",
+  "first_epoch": 1791236545.4699404,
+  "deadline_epoch": 1791237445.4699404,
+  "cpu_core": 2,
+  "checkout": "/workspace/work/harbichess/cpu-additive-source-6fcc8b4",
+  "controller_sha256": "7ea6241e57de4ab83259803ac4a4f42d0fb50701c305a3695a937a19e9ee7150",
+  "memory_guard_path": "/workspace/work/harbichess/cpu-additive-source-6fcc8b4/src/harbichess/training/cgroup_budget.py",
+  "input_pins": {
+    "/workspace/work/harbichess/continuation-20261005/run_registered_readonly_audit_v1.py": "7ea6241e57de4ab83259803ac4a4f42d0fb50701c305a3695a937a19e9ee7150",
+    "/workspace/HarbiChess/experiments/ufuk/cpu-classical-pst-v1/arena/audit_arena_v2.py": "a669f380226817207501db052c69202434cc60428862922107294390344fb417",
+    "/workspace/HarbiChess/experiments/ufuk/cpu-classical-pst-v1/arena/native_admission.py": "5389dac52124ccd67e99eb493c25b753142ced531d9a78352d70c2670617f055",
+    "/workspace/HarbiChess/experiments/ufuk/cpu-classical-pst-v1/arena/protocol.json": "b2bfc9e485b22992f5d5814ceb223c0604db74f8b7d06f4b9a39b65bce4a0fde"
+  },
+  "command": [
+    "/workspace/HarbiChess/.venv/bin/python",
+    "/workspace/HarbiChess/experiments/ufuk/cpu-classical-pst-v1/arena/audit_arena_v2.py",
+    "--protocol",
+    "/workspace/HarbiChess/experiments/ufuk/cpu-classical-pst-v1/arena/protocol.json",
+    "--arena",
+    "/dev/shm/harbichess-PST-strength-arena-v1-20261005/arena",
+    "--output",
+    "/dev/shm/harbichess-PST160-root-audit-v1-20261005/result.json"
+  ]
+}
