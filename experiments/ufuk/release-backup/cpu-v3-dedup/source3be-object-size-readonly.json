@@ -1,0 +1,12 @@
+{
+  "schema": "source3be-reachable-objects-readonly-size-estimate-v1",
+  "observed_epoch": 1791172383.8837798,
+  "source_commit": "3be5b87db27a0fbde83464e7ea7157f0d9a76ae4",
+  "object_count": 11005,
+  "reachable_uncompressed_bytes": 268361198,
+  "sum_stored_object_bytes": 33725601,
+  "full_pack_upper_bound_bytes": 283532153,
+  "pack_generated": false,
+  "existing_ancestor_bundle_bytes": 34076740,
+  "existing_ancestor_bundle_is_exact_source3be": false
+}
