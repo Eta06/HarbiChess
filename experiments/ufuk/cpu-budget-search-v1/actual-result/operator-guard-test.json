@@ -1,0 +1,8 @@
+{
+  "status": "PASS",
+  "wrong_startticks_no_signal": true,
+  "registered_parent_and_child_stopped": true,
+  "unregistered_sibling_alive": true,
+  "tests_use_only_dummy_sleep_processes": true,
+  "GPU_used": false
+}
