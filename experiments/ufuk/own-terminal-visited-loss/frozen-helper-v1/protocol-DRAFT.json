@@ -1,0 +1,254 @@
+{
+  "MAX8_rule": "50000 paired source-root-block bootstrap resamples preserving both colours and shared SF-arm matching; fixed NumPy PCG64 seed20261107+trainingseed; linear98.75% two-sided quantiles .00625/.99375 for4primary comparisons. All4 inferential bounds and bothseeds required. MAX8 prospectively preregistered method families => IUT/unionbound nominalglobalalpha<=.05 assuming bootstrap marginal coverage, not an exact guarantee. No optional stopping, changed books or postoutcome threshold relaxation.",
+  "absolute_audit_cutoff_epoch": 1791173700,
+  "audit_spec": {
+    "all_data": "32768*E rawactorlegal/fullhistory/moverterminalWDL/unknownexcluded; all own_search exogenousoffset schedule/selectedroots/legal targetnormalization/sourcehistories/visitreceipts/search RNG accounting; exact lastfullarchive",
+    "all_native": "E+1 exactSEARCH_ACTINGv2 strictloads; allcurrent/base/behavior/Adam/allPythonNumPyTorchCPUallCUDA plus actor/sampler/schedule/all128search RNG/counters/chains/pendingclosed/21unusedactuale8bytes",
+    "budget": "Fixedoneoriginalfirstclock+registeredceiling, includingwaiting; no audit resets/no uncheckedtail/nonoptimizeraudits",
+    "certificate_inventory": "Every searched root: exact ALL legal checking moves independently replayed against full-history claim_draw=True decisive mate mover-WDL. ActualE1 >=1certified root +actualinventorymutation rejection. Chosen search action certified, all16visits, legalpositive fullsupport; nonmate mass<=1e-9. ActualrawNN/actingmu/actionRNG separate. FixedFIRST8/LAST8/K8/18/32768 untouched.",
+    "fresh_replay": "ONE600whole freshCLI1->2 perseed same4inputs/originalsource/config; sixpayload bytes+journal2 ledger exact; duplicate65536presentations total counts separate; ownschema fullglobal/schedule/search/sampler state",
+    "neural_roots": 108,
+    "raw_neural_packets": "108 designated rawpi/basepi/WDL packets exact original128actorstep bothmodel inference; actualmu independently reconstructed mixed-search/raw T1 and actor-RNG replay, never falselyrequire rawpi==actualmu; count fullbatch+selectedsim costs.",
+    "selected_epochs": "Freeze six distinct epochs [1,2,max(3,round(E/4)),round(E/2),round(3E/4),E]. FIRST8/LAST8 chronological actorsteps exact full128 originalroot batch and original selectedsimulation mask; fixed K8, 18dedup witnesses9eachmover; fail insufficientcoverage without changing K."
+  },
+  "book_selection_seeds": [
+    20260709,
+    20260710
+  ],
+  "books_provenance_sha256": "3cb9f69f7627a010cbfdaa195858e935e127cb998776199f3bbcf6e5dc985379",
+  "compute_admission": "Require actual c022 CUDA59/six-native20bytes CLI600/E1 fullshape900 certified-root proof; ancestor428 separate. Prior45 actual INCOMPLETE owned release. Fixed fresh formal first; max6000/9000, audit cutoff03:50, lat latest04:20, all phases hard06 capped; incomplete if unavailable. No promise maxima fit.",
+  "configs": {
+    "20261825": {
+      "actors": {
+        "claim_draw": true,
+        "games": 128,
+        "max_additional_plies": 256,
+        "temperature": 1.0
+      },
+      "device": "cuda:0",
+      "epoch_steps": 256,
+      "learning_rate": 2.5e-05,
+      "objective": {
+        "behavior_kl_stop": 0.02,
+        "policy_anchor_weight": 0.03,
+        "policy_weight": 1.0,
+        "value_anchor_weight": 0.02,
+        "value_weight": 0.2
+      },
+      "schedule": {
+        "max_gradient_norm": 5.0,
+        "minibatch_size": 1024,
+        "passes": 4
+      },
+      "search": {
+        "block_plies": 8,
+        "gumbel_scale": 0.0,
+        "max_considered_actions": 4,
+        "maxvisit_init": 50.0,
+        "simulations": 16,
+        "value_scale": 0.1
+      },
+      "seed": 20261825,
+      "weight_decay": 0.0001
+    },
+    "20261826": {
+      "actors": {
+        "claim_draw": true,
+        "games": 128,
+        "max_additional_plies": 256,
+        "temperature": 1.0
+      },
+      "device": "cuda:0",
+      "epoch_steps": 256,
+      "learning_rate": 2.5e-05,
+      "objective": {
+        "behavior_kl_stop": 0.02,
+        "policy_anchor_weight": 0.03,
+        "policy_weight": 1.0,
+        "value_anchor_weight": 0.02,
+        "value_weight": 0.2
+      },
+      "schedule": {
+        "max_gradient_norm": 5.0,
+        "minibatch_size": 1024,
+        "passes": 4
+      },
+      "search": {
+        "block_plies": 8,
+        "gumbel_scale": 0.0,
+        "max_considered_actions": 4,
+        "maxvisit_init": 50.0,
+        "simulations": 16,
+        "value_scale": 0.1
+      },
+      "seed": 20261826,
+      "weight_decay": 0.0001
+    }
+  },
+  "curriculum": "25%frozen-own-terminal-prefix-empirical-pool;75%original;uniform16384aliases;noextraresultlabels",
+  "development_model_sha256": {
+    "0": "57e2af202167dc35a2ec68355f02a1a5aae343dc2181a7620baa5684edf6d43c",
+    "1": "a1596bfd6d266e0b792f9ee6edcd760b57b70216ed505539f2578bdb8e1c1392"
+  },
+  "development_model_storage_changed_tensor_names": [
+    "blocks.0.conv1.bias",
+    "blocks.0.conv1.weight",
+    "blocks.0.conv2.bias",
+    "blocks.0.conv2.weight",
+    "blocks.1.conv1.bias",
+    "blocks.1.conv1.weight",
+    "blocks.1.conv2.bias",
+    "blocks.1.conv2.weight",
+    "global_value_hidden.bias",
+    "global_value_hidden.weight",
+    "global_value_output.bias",
+    "global_value_output.weight",
+    "invariant_value_linear.bias",
+    "invariant_value_linear.weight",
+    "pair_destination_planes.bias",
+    "pair_destination_planes.weight",
+    "pair_hidden.bias",
+    "pair_hidden.weight",
+    "pair_key.bias",
+    "pair_key.weight",
+    "pair_origin_planes.bias",
+    "pair_origin_planes.weight",
+    "pair_query.bias",
+    "pair_query.weight",
+    "stem.bias",
+    "stem.weight",
+    "value_conv.bias",
+    "value_conv.weight",
+    "value_hidden.bias",
+    "value_hidden.weight",
+    "value_output.bias",
+    "value_output.weight",
+    "value_tower_blocks.0.conv1.bias",
+    "value_tower_blocks.0.conv1.weight",
+    "value_tower_blocks.0.conv2.bias",
+    "value_tower_blocks.0.conv2.weight",
+    "value_tower_blocks.1.conv1.bias",
+    "value_tower_blocks.1.conv1.weight",
+    "value_tower_blocks.1.conv2.bias",
+    "value_tower_blocks.1.conv2.weight",
+    "value_tower_hidden.bias",
+    "value_tower_hidden.weight",
+    "value_tower_output.bias",
+    "value_tower_output.weight",
+    "value_tower_stem.bias",
+    "value_tower_stem.weight"
+  ],
+  "earliest_training_epoch": 1791155700.0,
+  "factory_template_sha256": "affbcc9c70d2a0b690ba980879f34a56e24f2c8ae22cccea4f44b4c322d6d7c7",
+  "fixed_epochs": 8,
+  "infrastructure_profile_pass": true,
+  "latest_latency_start_epoch": 1791175200,
+  "learner_schema": "torch-fresh-sparse-search-acting-v3",
+  "mc_completion_barrier": {
+    "coordinator_sha256": "686265b09284d1e8c879406510910991d2d8f1a71bf60b610372eac00e76e100",
+    "latency_receipt": {
+      "path": "/content/harbichess-runs/fullgame-confirmation3-posttraining-recovery-v2/latency.json",
+      "sha256": "e605b2f573f73b6f0859e7fffceb52455401e7d8561479f83bce798e5ae2d5bb"
+    },
+    "process_receipts": [
+      {
+        "path": "/content/harbichess-runs/fullgame-confirmation3-posttraining-recovery-v2/replay-20261205-process-result.json",
+        "sha256": "e15944a1708aa83e5d8f134e908eeca512cc925365639f00cd9e0094db8e626e"
+      },
+      {
+        "path": "/content/harbichess-runs/fullgame-confirmation3-posttraining-recovery-v2/replay-20261206-process-result.json",
+        "sha256": "a019cb17a7f115681798481c613c447e286bffab60df39d4a6a373d4434a5ce5"
+      },
+      {
+        "path": "/content/harbichess-runs/fullgame-confirmation3-posttraining-recovery-v2/eligibility-process-result.json",
+        "sha256": "bc418686025f594984e8b2521e4da2124b0e375546f4989227562414d52ab528"
+      },
+      {
+        "path": "/content/harbichess-runs/fullgame-confirmation3-posttraining-recovery-v2/cuda-parity-process-result.json",
+        "sha256": "7a0a5c142f0eca6c4d84a61848bc120f07abd38639398926da555a47cbec078e"
+      },
+      {
+        "path": "/content/harbichess-runs/fullgame-confirmation3-posttraining-recovery-v2/latency-process-result.json",
+        "sha256": "7c9a6f7c6936d012e00567edef7e21c5ae9c0a5f80a8591f10012ca2535a7b50"
+      }
+    ]
+  },
+  "native_schema": "torch-search-acting-native-cuda-v3",
+  "neural_audit_epochs": [
+    1,
+    2,
+    3,
+    4,
+    6,
+    8
+  ],
+  "no_external_teacher_or_engine_training_labels": true,
+  "own_search_ledger_schema": "pre-action-masked-search-behavior-v4",
+  "ownsearch_scope": "At exogenously chosen one offset/8ply selected roots, own frozenmodel16sim/max4 search policy acts BEFORE move; other roots use rawNN T1 policy. Honest actualmu and separate rawpi archived. Policy CE on own selected searchtargets, terminal WDL on completedgames only; UNKNOWN caps/tails excluded from value. Policy-root-uniform/value-gameuniform; behavior KL reference archived frozen RAWNNpi on searched roots, threshold.02 unchanged. No PPO/fulltrajectory-unbiasedclaim. Complete schedule/search/actor/global/sampler RNG recovery.",
+  "posttraining_reserve_seconds": 13620,
+  "prior_methods": "OriginalMC/confirmation3 continues independently; no results used to decide params/E/launch method4. Can launch ONLY conditionalthroughputfeasible and before finalMCoutcomes are viewed.",
+  "prospective_evidence_sha256": {
+    "auditor_receipt": "525713e4311a218b1aac48ef6a5dd255441229e3c9a3a68567ff0dbba30e9929",
+    "mc_completion_barrier": "299e6e4455f8b94131dc7e02cd5fef10783b13f0171ea869a9018dc219c3ce47",
+    "profile_receipt": "9cdb4b8d4d1314b55ec593c012f977f48294c799d7923afd9a4cdc6f2ac795c4"
+  },
+  "qualification_ledger_slot": 8,
+  "runtime_tests_expected": "Actualsourcec02259focusedcases zero-skips +newcleanCLI600 all20bytes/sixstrictnative +newfullshape900 chronologicalcore. Old428 actualproofseparateancestor only.",
+  "scheduling_status": "UNFROZEN-standalone8-after-genuine45-and-unadmitted67-release",
+  "schema": "ufuk-certificate-search-method8-prospective-DRAFT-v1",
+  "seeds": [
+    20261825,
+    20261826
+  ],
+  "selection": "BOTHfixedCURRENT_E only; no MCschema relabel/checkpoint/seed/budget/outcome-dependentselection",
+  "source_commit": "3be5b87db27a0fbde83464e7ea7157f0d9a76ae4",
+  "status": "UNFROZEN-prospective-draft-not-CUDA-qualified",
+  "strength": {
+    "arm_whole_seconds": 3600,
+    "arms_per_seed": [
+      "fixedCURRENT_E vs e8",
+      "fixedCURRENT_E vs SF512",
+      "e8 vs SF512"
+    ],
+    "batch_and_latency_settings": "same frozen max4 root actions/batching/search for both neural arms; CPU float32 one thread; exact unchanged latency probe",
+    "books": "NEW virgin48+48 excluding all teacher/training/historical/formal2/confirmation3/formal4 source/root/fullprefix and betweenbothbooks; independent provenance crossaudit mustPASSbeforefreeze.",
+    "claim_scope": "Replicated gains on these disjoint frozen source-root suites at fixed search budget only; no general Elo/Stockfish-level claim",
+    "frozen_books": {},
+    "games_per_arm": 96,
+    "neural_simulations": 16,
+    "per_seed_required": {
+      "adversarial_cap_lower_gates": "same direct>.5 and SF delta>0 with final caps losses/reference caps wins",
+      "caps_every_arm_at_most": 0.05,
+      "direct_adjusted_lower_strict_gt": 0.5,
+      "direct_point_score_strict_gt": 0.6,
+      "final_absolute_SF_score_at_least": 0.25,
+      "median_latency_final_over_initial_at_most": 1.1,
+      "paired_SF_gain_adjusted_lower_strict_gt": 0,
+      "paired_final_minus_initial_SF_point_gain_strict_gt": 0.1
+    },
+    "resources": {
+      "disk_min_free_bytes": 8589934592,
+      "memory_max_bytes": 68719476736,
+      "scope": "Prospective slot5 A100CPU64GiB/8GiB; all6arms3600 unchanged. No originalMC reset."
+    },
+    "root_actions": 4,
+    "runtime": "ALL6arms SAMEactualA100CPU/Torch2.11+cu130, one thread FP32, SAMEactualqualifiedSEARCH_ACTINGv2 producer source pin (not original MC231); verified SF512 binary unchanged",
+    "stockfish_hash_mib": 16,
+    "stockfish_nodes": 512,
+    "stockfish_sha256": "0f83d24cc46d2c66c60f16001af5444873bc112b7d028594513426894c12da19",
+    "stockfish_threads": 1,
+    "total_games": 576,
+    "total_history_ply_cap": 400,
+    "uncertainty": "50000 paired source-root-block bootstrap resamples preserving both colours and shared SF-arm matching; fixed NumPy PCG64 seed20261107+trainingseed; linear98.75% two-sided quantiles .00625/.99375 for4primary comparisons. All4 inferential bounds and bothseeds required. MAX8 prospectively preregistered method families => IUT/unionbound nominalglobalalpha<=.05 assuming bootstrap marginal coverage, not an exact guarantee. No optional stopping, changed books or postoutcome threshold relaxation."
+  },
+  "training_curriculum_book_sha256": "1a5ca17664a828d669e58cf2bd5d9eeb7f980b83f20d3a4031d36e4ff0930ccb",
+  "training_only_development_evidence": {
+    "decision": "Draft proposes quarterLR from TRAIN-only evidence; actual fullshape native/source qualification, fixed E/budgets/root registration still required",
+    "original_fullshape_profile": "PASS734.1927whole; CLI487.5405/audit243.9038;4attempted0committed; unchangedmodel not learning",
+    "quarter_LR_diagnosis": "Root-reported before original300s deadline: LR.000025;16attempted12committed4discarded;3acceptedpasses1rejected;changedmodel;0newraw/0newsearch; original4095search+18264terminal;32768duplicate minibatch presentations; no nativecandidate"
+  },
+  "whole_audit_seconds_from_originalfirstclock": 9000,
+  "whole_training_seconds_per_seed": 6000,
+  "admission_deadline_epoch": 1791169800,
+  "prelatency_deadline_epoch": 1791174900
+}
