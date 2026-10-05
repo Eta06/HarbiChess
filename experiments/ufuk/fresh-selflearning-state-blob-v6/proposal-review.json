@@ -1,0 +1,90 @@
+{
+  "actual_api_calls": 0,
+  "applicable_AGENTS_sha256": "39d33fc1c2f1ab910594f77c5c35945cbe66e4cb82e9c6ad8354d5fdc1f947ed",
+  "files": {
+    "README.md": {
+      "bytes": 6910,
+      "sha256": "634b7ae98ea0154c04b41f107dc6abac1c0c4b83e807e934464f1d5df0b9aafd"
+    },
+    "ROOT-approval-PENDING.json": {
+      "bytes": 343,
+      "sha256": "75d734e4a2b28879cb3c14223dc1f191c63358cd9857dfffd7fdc362dbed0969"
+    },
+    "allowlist-PENDING.json": {
+      "bytes": 3,
+      "sha256": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356"
+    },
+    "blob_delivery_v6.py": {
+      "bytes": 4316,
+      "sha256": "88cff916764862606c3f1f1fd363671153a0ae1a163a0618832e8b6f05e5a4d6"
+    },
+    "fresh-selflearning-state-blob-v6.yml": {
+      "bytes": 897,
+      "sha256": "921455b6ddf4d0daeddb5c140dbaf047e124dcde1d3b740f1a81bfa6d2324314"
+    },
+    "fresh_binding.py": {
+      "bytes": 2391,
+      "sha256": "55f291e3e9cdd535cd9e030e477bf0d6eea09dd9827aa20d46b1be6bc8efb416"
+    },
+    "launcher_inputs_v6.py": {
+      "bytes": 2132,
+      "sha256": "0e8bc50c25abeec5b2348e342cb01534afa791257095c3a65be4926792d41181"
+    },
+    "local-roundtrip.json": {
+      "bytes": 561,
+      "sha256": "3d10c16540a7d4d995c6a63e37c64e65a8a6c3c66ea6551b833cf925c25b8959"
+    },
+    "manifest-DRAFT.json": {
+      "bytes": 30769,
+      "sha256": "6c7ab7b8e5842263f49942f228fcac5b6aca1ca8a35f313a80690a596648024a"
+    },
+    "measure_v6.py": {
+      "bytes": 3629,
+      "sha256": "5e2e179dfb845e4a281e2937c4e40c09a4702febe0a53becffb0da090c3ef1fc"
+    },
+    "native_delta_codec.py": {
+      "bytes": 17038,
+      "sha256": "878868940b5bae15c182dce55215320b5f0ba3692b9c5eac26988204832a31d6"
+    },
+    "receiver_v6.py": {
+      "bytes": 4687,
+      "sha256": "2db6786a61b27f09c149f669ccfa634e683d86c908d3b00814d6930cb499a765"
+    },
+    "release_transport_v6.py": {
+      "bytes": 12459,
+      "sha256": "c5f9ff97e4390fa1f502c619546ee41f60f6af59c1a2fc48bb0928e355248628"
+    },
+    "state_bundle.py": {
+      "bytes": 7722,
+      "sha256": "ac81e656a90d4a8e453ad1db70ccbdb2c79606741fba719991fda505de10b096"
+    },
+    "test_blob_delivery_v6.py": {
+      "bytes": 6515,
+      "sha256": "b61bac85bcec0979fc2b55eb1321a3ede2f0bc6dfaa03a28b2629c855f317872"
+    },
+    "transport-control-PENDING.json": {
+      "bytes": 663,
+      "sha256": "4cf7e115478aebedc2105320d816d5a5aa478b0814f55b238e8179040c8922cb"
+    }
+  },
+  "git_mutations": 0,
+  "new_scope_budget_seconds": 5400,
+  "opaque_disk_writes": 0,
+  "operator_end_epoch": 1791273600,
+  "prospective_assets": 1,
+  "schema": "fresh-selflearning-state-blob-v6-proposal-review-v1",
+  "status": "ready-for-ROOT-review-not-approved",
+  "tests": {
+    "passed": 15,
+    "ruff": "pass",
+    "seconds": 0.09,
+    "skipped": 0,
+    "syntax": "all-python-AST-pass"
+  },
+  "transport_v5_AST_equal_except_controlschema_useragent": true,
+  "unchanged_v5_files": {
+    "fresh_binding.py": true,
+    "native_delta_codec.py": true,
+    "state_bundle.py": true
+  }
+}
