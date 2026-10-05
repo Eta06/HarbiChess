@@ -1,0 +1,25 @@
+{
+  "schema": "own45-analysis-only-empty-engine-repair-v2",
+  "status": "registered-before-any-method4-or5-heldout-outcomes",
+  "qualification_ledger_slot": 5,
+  "source_commit": "4515a7c0dda3b4f9615c2fc78a47c872ab14699d",
+  "fixed_epochs": 8,
+  "seeds": [
+    20261525,
+    20261526
+  ],
+  "original_qualification_config_sha256": "5fa34fdc69a49b78fecae17ee9ade86da994c548bbda81473d86c454c6cc733a",
+  "original_registration_sha256": "a9ae975e6ecb486f964ee0514d98fb4bc9d50d3b949ecabd0cf1e441bd75d271",
+  "original_helper_sha256": {
+    "own5_strength_analysis.py": "b40563592c170cde6597d9e6bf0603119a3cb151f62cae13a45ae44d3984b53a",
+    "own5_all_gates.py": "25cba24733d2f9ae8f3d5e4acc53466f06e64af7f98280eeaab1e683a1dda18b",
+    "own5_strength_config.py": "9c78ef66dd93bd84483b325478f6e46d357cb67f0c6e83c33c4d0999e0ea8591"
+  },
+  "repair_helper_sha256": {
+    "own5_strength_analysis.py": "4fa6d33caf429a65f72f89684ce705a4236714ea7db439604b57491836d9645c",
+    "own5_all_gates.py": "22cdfd2837edae039bec0d17e37ed3d7bce5929eae5f85b845359acbc95b0f4b",
+    "own5_strength_config.py": "9c78ef66dd93bd84483b325478f6e46d357cb67f0c6e83c33c4d0999e0ea8591",
+    "analysis_repair_binding.py": "204ce37c83180d3aed3d725cc8c1708b68396890af90781813b346d90741b5d8"
+  },
+  "repair_scope": "Only accept engine receipt list when it exactly covers every opponent ply after frozen opening; empty list only for zero actual opponent moves. Preserve all numeric gates, bootstrap, models, books, native/trajectory audits, clocks and games. New analysis/allgate receipts explicitly bind this supplement and unchanged original Q."
+}
