@@ -1,0 +1,10 @@
+{
+  "files": {
+    "README.md": "42c7cb19bfb9533ce2f9a52ff6d11258dc30705f25d5d4dab665a40621bb83dd",
+    "config-TEMPLATE.json": "46fe17c4b619b2c21315f388568692badd6273f2d47bac1342c42a891b056527",
+    "launch_cpu_formal.py": "e0945d48a1fdafd7405892117a9f68c7f3f9189d36b914802ad62ed6eaa411d6",
+    "test_launcher.py": "81b8d7b536982eb57f8a3f115e9d730fab1e32c2b219b57e26fdcee53d396029"
+  },
+  "schema": "cpu-owned-launch-v1-helper-inventory",
+  "status": "5-CPU-controls-and-Ruff-PASS-NOT-executed"
+}
