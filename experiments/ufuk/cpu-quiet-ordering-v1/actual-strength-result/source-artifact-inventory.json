@@ -1,0 +1,600 @@
+{
+  "schema": "known8-development-full160-three-audit-preservation-v1",
+  "method": "QUIET",
+  "integrity": "PASS",
+  "strength_screen": "FAIL-both-seeds",
+  "formal_confirmation": false,
+  "novelty_claim": false,
+  "protocol": {
+    "path": "/workspace/HarbiChess/experiments/ufuk/cpu-quiet-ordering-v1/arena/protocol.json",
+    "bytes": 5720,
+    "sha256": "509744da0f0d7f1bbbc4b17049ba73cffc5ec6c6cba96fb0adf639d4939b1b9d"
+  },
+  "ROOT_result": {
+    "path": "/dev/shm/harbichess-QUIET160-root-audit-v1-20261005/result.json",
+    "bytes": 8966,
+    "sha256": "5bd24063e888af53653e52d2a65862f0e508ba64ee08f2a2aeaf4500a64dac2f"
+  },
+  "independent_result": {
+    "path": "/dev/shm/harbichess-QUIET-independent-review-20261005/independent-result.json",
+    "bytes": 5418,
+    "sha256": "2e1e2df3749d3331eec92d5e0af4c56990aad8bf66718a2f6d5ff3db2a63d276"
+  },
+  "six_actual_replays": {
+    "path": "/dev/shm/harbichess-QUIET160-root-audit-v1-20261005/six-result.json",
+    "bytes": 2712,
+    "sha256": "fc766668df9ea021c100e4200e2ba5f10eb5bbd10bd28e08dd8e4f450570169a"
+  },
+  "totals": {
+    "model_nodes": 4661799,
+    "evaluations": 4229187,
+    "model_calls": 9108,
+    "plies": 12852,
+    "SF_nodes": 1921266,
+    "SF_calls": 3744,
+    "SF_overruns": 1063,
+    "SF_max_nodes": 557
+  },
+  "rows": [
+    {
+      "seed": 20262905,
+      "arm": "learned",
+      "opponent": "SF512",
+      "score": 0.0625,
+      "wins": 0,
+      "draws": 2,
+      "losses": 14,
+      "model_nodes": 309258,
+      "evaluations": 283232,
+      "model_calls": 605,
+      "plies": 1216,
+      "SF_nodes": 313531,
+      "SF_calls": 611,
+      "SF_overruns": 175,
+      "SF_max_nodes": 539
+    },
+    {
+      "seed": 20262906,
+      "arm": "learned",
+      "opponent": "SF512",
+      "score": 0.09375,
+      "wins": 0,
+      "draws": 3,
+      "losses": 13,
+      "model_nodes": 342538,
+      "evaluations": 312987,
+      "model_calls": 670,
+      "plies": 1345,
+      "SF_nodes": 346333,
+      "SF_calls": 675,
+      "SF_overruns": 188,
+      "SF_max_nodes": 544
+    },
+    {
+      "seed": 20262905,
+      "arm": "prior",
+      "opponent": "SF512",
+      "score": 0.125,
+      "wins": 0,
+      "draws": 4,
+      "losses": 12,
+      "model_nodes": 346624,
+      "evaluations": 316157,
+      "model_calls": 677,
+      "plies": 1358,
+      "SF_nodes": 349430,
+      "SF_calls": 681,
+      "SF_overruns": 194,
+      "SF_max_nodes": 544
+    },
+    {
+      "seed": 20262906,
+      "arm": "prior",
+      "opponent": "SF512",
+      "score": 0.125,
+      "wins": 0,
+      "draws": 4,
+      "losses": 12,
+      "model_nodes": 346624,
+      "evaluations": 316157,
+      "model_calls": 677,
+      "plies": 1358,
+      "SF_nodes": 349430,
+      "SF_calls": 681,
+      "SF_overruns": 194,
+      "SF_max_nodes": 544
+    },
+    {
+      "seed": 20262905,
+      "arm": "e8",
+      "opponent": "SF512",
+      "score": 0.0,
+      "wins": 0,
+      "draws": 0,
+      "losses": 16,
+      "model_nodes": 276480,
+      "evaluations": 253552,
+      "model_calls": 540,
+      "plies": 1088,
+      "SF_nodes": 281271,
+      "SF_calls": 548,
+      "SF_overruns": 156,
+      "SF_max_nodes": 557
+    },
+    {
+      "seed": 20262906,
+      "arm": "e8",
+      "opponent": "SF512",
+      "score": 0.0,
+      "wins": 0,
+      "draws": 0,
+      "losses": 16,
+      "model_nodes": 276480,
+      "evaluations": 253552,
+      "model_calls": 540,
+      "plies": 1088,
+      "SF_nodes": 281271,
+      "SF_calls": 548,
+      "SF_overruns": 156,
+      "SF_max_nodes": 557
+    },
+    {
+      "seed": 20262905,
+      "arm": "learned",
+      "opponent": "e8",
+      "score": 0.78125,
+      "wins": 12,
+      "draws": 1,
+      "losses": 3,
+      "model_nodes": 654336,
+      "evaluations": 587612,
+      "model_calls": 1278,
+      "plies": 1278
+    },
+    {
+      "seed": 20262906,
+      "arm": "learned",
+      "opponent": "e8",
+      "score": 0.75,
+      "wins": 11,
+      "draws": 2,
+      "losses": 3,
+      "model_nodes": 559616,
+      "evaluations": 505843,
+      "model_calls": 1093,
+      "plies": 1093
+    },
+    {
+      "seed": 20262905,
+      "arm": "learned",
+      "opponent": "prior",
+      "score": 0.625,
+      "wins": 9,
+      "draws": 2,
+      "losses": 5,
+      "model_nodes": 777747,
+      "evaluations": 702801,
+      "model_calls": 1520,
+      "plies": 1520
+    },
+    {
+      "seed": 20262906,
+      "arm": "learned",
+      "opponent": "prior",
+      "score": 0.59375,
+      "wins": 9,
+      "draws": 1,
+      "losses": 6,
+      "model_nodes": 772096,
+      "evaluations": 697294,
+      "model_calls": 1508,
+      "plies": 1508
+    }
+  ],
+  "gates": [
+    {
+      "seed": 20262905,
+      "gates": {
+        "direct_e8_gt060": true,
+        "SFgain_e8_gt010": false,
+        "finalSF_ge025": false,
+        "learning_sameprior_gt060": true,
+        "SFgain_prior_gt0": false,
+        "caps_le005": true
+      },
+      "passed": false
+    },
+    {
+      "seed": 20262906,
+      "gates": {
+        "direct_e8_gt060": true,
+        "SFgain_e8_gt010": false,
+        "finalSF_ge025": false,
+        "learning_sameprior_gt060": false,
+        "SFgain_prior_gt0": false,
+        "caps_le005": true
+      },
+      "passed": false
+    }
+  ],
+  "six_finished_epoch": 1791237450.7613897,
+  "six_original_deadline": 1791238278.601052,
+  "scope": "known8 development; exact rules/counters/storage checks; six search reproductions do not reproduce all searches; no virgin family or generalElo claim",
+  "files": [
+    {
+      "path": "/workspace/HarbiChess/experiments/ufuk/cpu-quiet-ordering-v1/arena/protocol.json",
+      "bytes": 5720,
+      "sha256": "509744da0f0d7f1bbbc4b17049ba73cffc5ec6c6cba96fb0adf639d4939b1b9d"
+    },
+    {
+      "path": "/dev/shm/harbichess-QUIET-strength-arena-v1-20261005/arena/cohort-result.json",
+      "bytes": 15106,
+      "sha256": "284ef98c1ff31fdab7327a3788047f29aea9ecf7b1f3083492682f8dad84ac2f"
+    },
+    {
+      "path": "/dev/shm/harbichess-QUIET-strength-arena-v1-20261005/qualification.json",
+      "bytes": 8242,
+      "sha256": "4b8cd4a714ad52a3cd7a27ffdc52ed0f2cb78a448ad49caafe0afc5c8f114010"
+    },
+    {
+      "path": "/dev/shm/harbichess-QUIET160-root-audit-v1-20261005/result.json",
+      "bytes": 8966,
+      "sha256": "5bd24063e888af53653e52d2a65862f0e508ba64ee08f2a2aeaf4500a64dac2f"
+    },
+    {
+      "path": "/dev/shm/harbichess-QUIET160-root-audit-v1-20261005/six-result.json",
+      "bytes": 2712,
+      "sha256": "fc766668df9ea021c100e4200e2ba5f10eb5bbd10bd28e08dd8e4f450570169a"
+    },
+    {
+      "path": "/dev/shm/harbichess-QUIET160-root-audit-v1-20261005/finished.json",
+      "bytes": 412,
+      "sha256": "80bb622569f83cd466f1b4cb0ad4f889741cb6ee3e6b010baa8e411a55097f8f"
+    },
+    {
+      "path": "/dev/shm/harbichess-QUIET160-root-audit-v1-20261005/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/dev/shm/harbichess-QUIET160-root-audit-v1-20261005/stdout.log",
+      "bytes": 80,
+      "sha256": "6a2ba13cd529f1193a855b5d67797deb2fbf15b330720cf998bbdd4edc496180"
+    },
+    {
+      "path": "/dev/shm/harbichess-QUIET-independent-review-20261005/independent-result.json",
+      "bytes": 5418,
+      "sha256": "2e1e2df3749d3331eec92d5e0af4c56990aad8bf66718a2f6d5ff3db2a63d276"
+    },
+    {
+      "path": "/dev/shm/harbichess-QUIET-independent-review-20261005/replay160.py",
+      "bytes": 14271,
+      "sha256": "c7d2e9904874e8722430bf378d856c6aa0ededea833fd0aae6e7e59169b4fac9"
+    },
+    {
+      "path": "/dev/shm/harbichess-QUIET-independent-review-20261005/compare_six_searches.py",
+      "bytes": 7397,
+      "sha256": "ac179e8f518c850c0c6a20db9490b11c8391b8fa503cfc549c43b4c32195c013"
+    },
+    {
+      "path": "/dev/shm/harbichess-QUIET-strength-arena-v1-20261005/arena/20262905-e8-vs-SF512.invocation.json",
+      "bytes": 1080,
+      "sha256": "c58f6f6e8f674e3dd1886f8eb9b7425c87ca183b8bedcd551f7577407a603099"
+    },
+    {
+      "path": "/dev/shm/harbichess-QUIET-strength-arena-v1-20261005/arena/20262905-e8-vs-SF512.json",
+      "bytes": 305997,
+      "sha256": "833b8936af10380e294740d977d83c84eedcc80a9240ce0f7d73a29858dadd1a"
+    },
+    {
+      "path": "/dev/shm/harbichess-QUIET-strength-arena-v1-20261005/arena/20262905-e8-vs-SF512.owner-result.json",
+      "bytes": 1264,
+      "sha256": "48468edc8681049474be61d23124c55da9d1fcac830fcc22c886899a0c328129"
+    },
+    {
+      "path": "/dev/shm/harbichess-QUIET-strength-arena-v1-20261005/arena/20262905-learned-vs-SF512.invocation.json",
+      "bytes": 1052,
+      "sha256": "e949165c84f3515c165e05a23bb0ce794a2ae0a9a5b9cdd2eee2dfc117e9890a"
+    },
+    {
+      "path": "/dev/shm/harbichess-QUIET-strength-arena-v1-20261005/arena/20262905-learned-vs-SF512.json",
+      "bytes": 342314,
+      "sha256": "0076701a22f945b22a57a37ded997d25d6585f66e29e76c29bdbe9461cfb6c8e"
+    },
+    {
+      "path": "/dev/shm/harbichess-QUIET-strength-arena-v1-20261005/arena/20262905-learned-vs-SF512.owner-result.json",
+      "bytes": 1237,
+      "sha256": "be72840a05535b5b339c0be52aec7d46a9e800bfb20b4cc29c0243b4f7318265"
+    },
+    {
+      "path": "/dev/shm/harbichess-QUIET-strength-arena-v1-20261005/arena/20262905-learned-vs-e8.invocation.json",
+      "bytes": 1146,
+      "sha256": "feb891d01a6de348ede0a419cb84a37bddccceca76d3bd7a7eae4c15a0b1eabc"
+    },
+    {
+      "path": "/dev/shm/harbichess-QUIET-strength-arena-v1-20261005/arena/20262905-learned-vs-e8.json",
+      "bytes": 504520,
+      "sha256": "4cd4a91ee588d4ddfa6f8fb885136542388a48d4144747a06d8703e071e387c2"
+    },
+    {
+      "path": "/dev/shm/harbichess-QUIET-strength-arena-v1-20261005/arena/20262905-learned-vs-e8.owner-result.json",
+      "bytes": 1330,
+      "sha256": "78250207d473c44ea2dd1627c812bfa4adafd9b22f57f2d947e4aec96df8e622"
+    },
+    {
+      "path": "/dev/shm/harbichess-QUIET-strength-arena-v1-20261005/arena/20262905-learned-vs-prior.invocation.json",
+      "bytes": 1114,
+      "sha256": "049e7f0a6cd4eb7c8b62acf6109914f3c8e14646a62d5314ace2b0677661e1f6"
+    },
+    {
+      "path": "/dev/shm/harbichess-QUIET-strength-arena-v1-20261005/arena/20262905-learned-vs-prior.json",
+      "bytes": 599806,
+      "sha256": "e6aaa1ddb02ddc4f3f2002eec4afeecaddbcf387fdc088224c427b642d87172e"
+    },
+    {
+      "path": "/dev/shm/harbichess-QUIET-strength-arena-v1-20261005/arena/20262905-learned-vs-prior.owner-result.json",
+      "bytes": 1299,
+      "sha256": "1ac9620a1dedd0e92098c508b8f9b509eb6846a6178422849cee86bb095f5265"
+    },
+    {
+      "path": "/dev/shm/harbichess-QUIET-strength-arena-v1-20261005/arena/20262905-prior-vs-SF512.invocation.json",
+      "bytes": 1051,
+      "sha256": "5bb94241a6ef20d6efc86a319738c18b293f22620d360d125cc952b5aa700303"
+    },
+    {
+      "path": "/dev/shm/harbichess-QUIET-strength-arena-v1-20261005/arena/20262905-prior-vs-SF512.json",
+      "bytes": 381635,
+      "sha256": "a579552feda7e3cf9271f1c3c68c5d0f72c38346ef04abf564ce7888f8aa1396"
+    },
+    {
+      "path": "/dev/shm/harbichess-QUIET-strength-arena-v1-20261005/arena/20262905-prior-vs-SF512.owner-result.json",
+      "bytes": 1236,
+      "sha256": "888741e9bc415972f02cf6526e6318fcec064d815f42b01cc641ab0daba01edc"
+    },
+    {
+      "path": "/dev/shm/harbichess-QUIET-strength-arena-v1-20261005/arena/20262906-e8-vs-SF512.invocation.json",
+      "bytes": 1080,
+      "sha256": "b05e800e600de3022cb4265462d5ec13917760e179e9d4a8d767c4ab8b70f16b"
+    },
+    {
+      "path": "/dev/shm/harbichess-QUIET-strength-arena-v1-20261005/arena/20262906-e8-vs-SF512.json",
+      "bytes": 306014,
+      "sha256": "b3509dc2e83b7d1c3848bc264ef7871330f0485aaf52d5a59eb39c4d61ba3121"
+    },
+    {
+      "path": "/dev/shm/harbichess-QUIET-strength-arena-v1-20261005/arena/20262906-e8-vs-SF512.owner-result.json",
+      "bytes": 1265,
+      "sha256": "070a1f43fa9888f45a0b852f96d7f166c7011f8516b4cf32594d97303967c606"
+    },
+    {
+      "path": "/dev/shm/harbichess-QUIET-strength-arena-v1-20261005/arena/20262906-learned-vs-SF512.invocation.json",
+      "bytes": 1052,
+      "sha256": "d497a6ef587cd1cb59593c45b1d0595a90941d1584656c267b2d2f3be487ff5b"
+    },
+    {
+      "path": "/dev/shm/harbichess-QUIET-strength-arena-v1-20261005/arena/20262906-learned-vs-SF512.json",
+      "bytes": 377905,
+      "sha256": "3d78bc019c9499ce37170e89f4cfd5496b5c03e1231bfd2a3c656028c1c20ef9"
+    },
+    {
+      "path": "/dev/shm/harbichess-QUIET-strength-arena-v1-20261005/arena/20262906-learned-vs-SF512.owner-result.json",
+      "bytes": 1237,
+      "sha256": "9455560f3b442fbdbcf0485469619dcc11325ec71638557c618def80591bf85c"
+    },
+    {
+      "path": "/dev/shm/harbichess-QUIET-strength-arena-v1-20261005/arena/20262906-learned-vs-e8.invocation.json",
+      "bytes": 1146,
+      "sha256": "f6f9f34279097cc9b8b116b4f481a5cf2b1ba3fd88a89bf17c477cc1bf50a3e4"
+    },
+    {
+      "path": "/dev/shm/harbichess-QUIET-strength-arena-v1-20261005/arena/20262906-learned-vs-e8.json",
+      "bytes": 432800,
+      "sha256": "eb6d9f5c39fd28c0554eaadbc7891fe111193d5d36832370f513731392114b84"
+    },
+    {
+      "path": "/dev/shm/harbichess-QUIET-strength-arena-v1-20261005/arena/20262906-learned-vs-e8.owner-result.json",
+      "bytes": 1330,
+      "sha256": "6f967373dfb0de92373105173a4280edab2850a2091d3da271f695684f906934"
+    },
+    {
+      "path": "/dev/shm/harbichess-QUIET-strength-arena-v1-20261005/arena/20262906-learned-vs-prior.invocation.json",
+      "bytes": 1117,
+      "sha256": "8869d4dbd367a393939c3b7abf64993ca8224d4272a5fde2d884aef89bb45e90"
+    },
+    {
+      "path": "/dev/shm/harbichess-QUIET-strength-arena-v1-20261005/arena/20262906-learned-vs-prior.json",
+      "bytes": 595278,
+      "sha256": "5e6e24282cdc0728c9ad7da831fb061cfac4eb6f8be04772e76729ea40f9db4e"
+    },
+    {
+      "path": "/dev/shm/harbichess-QUIET-strength-arena-v1-20261005/arena/20262906-learned-vs-prior.owner-result.json",
+      "bytes": 1302,
+      "sha256": "57c134e46fd783669acdaf700e0cdfc05f7f8b0f63f1d8e9e61460d21bd61f23"
+    },
+    {
+      "path": "/dev/shm/harbichess-QUIET-strength-arena-v1-20261005/arena/20262906-prior-vs-SF512.invocation.json",
+      "bytes": 1045,
+      "sha256": "f15779a9814c5626754e2cc1281a5396c5e393a7c4acf63cccdef1af9cbbae2d"
+    },
+    {
+      "path": "/dev/shm/harbichess-QUIET-strength-arena-v1-20261005/arena/20262906-prior-vs-SF512.json",
+      "bytes": 381626,
+      "sha256": "8d37757978deeaf828ed0664ce467b3185c2413a8d7ec205df82fb76b176c85b"
+    },
+    {
+      "path": "/dev/shm/harbichess-QUIET-strength-arena-v1-20261005/arena/20262906-prior-vs-SF512.owner-result.json",
+      "bytes": 1230,
+      "sha256": "b4ce52f1b6813255381a6b1237b7249670bb15aed6a5e8bee1bcb96435b2c80e"
+    },
+    {
+      "path": "/dev/shm/harbichess-QUIET-strength-arena-v1-20261005/arena/owner-contract.json",
+      "bytes": 937,
+      "sha256": "4443991dc79365095dfc9bb9b221cab0ac70b18540c7038941b8574ad0270891"
+    },
+    {
+      "path": "/dev/shm/harbichess-QUIET-strength-arena-v1-20261005/arena/resource-admission.json",
+      "bytes": 84,
+      "sha256": "3fdef08f6e0f460fb1359264cf294a7ba707c6af9e53c2c9dd212ef29779d193"
+    },
+    {
+      "path": "/dev/shm/harbichess-QUIET-strength-arena-v1-20261005/arena/20262905-e8-vs-SF512.progress.jsonl",
+      "bytes": 241768,
+      "sha256": "1d57ca469c8941901b1015915f0758b2b8e13c7789076447d40b22428f476767"
+    },
+    {
+      "path": "/dev/shm/harbichess-QUIET-strength-arena-v1-20261005/arena/20262905-learned-vs-SF512.progress.jsonl",
+      "bytes": 270791,
+      "sha256": "e1fdae30fd95b8a9ed3b054f9b814b3e5072bd4f8aa3a7308a380a66c10c59b5"
+    },
+    {
+      "path": "/dev/shm/harbichess-QUIET-strength-arena-v1-20261005/arena/20262905-learned-vs-e8.progress.jsonl",
+      "bytes": 384830,
+      "sha256": "90efe1a4820a8e989772e8ab153fe7cd6f91c36eae90e050d839ce8f623ad69e"
+    },
+    {
+      "path": "/dev/shm/harbichess-QUIET-strength-arena-v1-20261005/arena/20262905-learned-vs-prior.progress.jsonl",
+      "bytes": 458208,
+      "sha256": "c1f775c4dbfc0a3090e3b51d4fd0f11bd7fc36422017b5591921e44bd53c1df6"
+    },
+    {
+      "path": "/dev/shm/harbichess-QUIET-strength-arena-v1-20261005/arena/20262905-prior-vs-SF512.progress.jsonl",
+      "bytes": 302259,
+      "sha256": "c23e819aa3cf6f11fd958455f442cdd7a4dcc62a20c0ca9ea255d34f3910aa54"
+    },
+    {
+      "path": "/dev/shm/harbichess-QUIET-strength-arena-v1-20261005/arena/20262906-e8-vs-SF512.progress.jsonl",
+      "bytes": 241785,
+      "sha256": "861158e984081427a1fe3651999d561d1bca3465d813c4dd95691c76d2b535ab"
+    },
+    {
+      "path": "/dev/shm/harbichess-QUIET-strength-arena-v1-20261005/arena/20262906-learned-vs-SF512.progress.jsonl",
+      "bytes": 299165,
+      "sha256": "74e4ef713e08b21e2e214b9d1b75ea42f485eb0c80a07b8446d6fc840387c4df"
+    },
+    {
+      "path": "/dev/shm/harbichess-QUIET-strength-arena-v1-20261005/arena/20262906-learned-vs-e8.progress.jsonl",
+      "bytes": 329835,
+      "sha256": "fedc2d6955e3b40e135aaa3c75eeb49892d62e9d38ec2d4b60e79abd1362c328"
+    },
+    {
+      "path": "/dev/shm/harbichess-QUIET-strength-arena-v1-20261005/arena/20262906-learned-vs-prior.progress.jsonl",
+      "bytes": 454746,
+      "sha256": "0c2e87c8d5d407c495a07690332ff57cab46082a1058bd022f0230ec9c205f92"
+    },
+    {
+      "path": "/dev/shm/harbichess-QUIET-strength-arena-v1-20261005/arena/20262906-prior-vs-SF512.progress.jsonl",
+      "bytes": 302252,
+      "sha256": "9bc6fcf930ac4b7bad4530b9b33b232327774cac145fc68f7164c877157a7dca"
+    },
+    {
+      "path": "/workspace/HarbiChess/experiments/ufuk/cpu-quiet-ordering-v1/arena/audit_arena_v2.py",
+      "bytes": 10921,
+      "sha256": "9c93e5489877f301675b788a994162ebf331648e49928420dd48b32130b6a587"
+    },
+    {
+      "path": "/workspace/HarbiChess/experiments/ufuk/cpu-quiet-ordering-v1/arena/native_admission.py",
+      "bytes": 3748,
+      "sha256": "9e919f607b4d42afc5dc55dc2bc67983c6af0f4823a4d2e3e8818dd1817803e5"
+    },
+    {
+      "path": "/workspace/HarbiChess/experiments/ufuk/cpu-quiet-ordering-v1/arena/profile.py",
+      "bytes": 4191,
+      "sha256": "07c3f83b8d7e495ee7896495babf758aa45fcbd1ae4bfe734ba76b0cafdc3256"
+    },
+    {
+      "path": "/workspace/HarbiChess/experiments/ufuk/cpu-quiet-ordering-v1/arena/profile_support.py",
+      "bytes": 973,
+      "sha256": "dd6f55d401fd878d546f1b847be5e72c60e23e35e0fb837286ddc9c0ed1e2fc1"
+    },
+    {
+      "path": "/workspace/HarbiChess/experiments/ufuk/cpu-quiet-ordering-v1/arena/run.py",
+      "bytes": 6299,
+      "sha256": "5e26371918d96b3a0ca8d268afc3dfdb88b814b850eddfa7e634a2391d7e1190"
+    },
+    {
+      "path": "/workspace/HarbiChess/experiments/ufuk/cpu-quiet-ordering-v1/arena/search.py",
+      "bytes": 1545,
+      "sha256": "1abd12c2237136317cddb503ad34fd5d256f3eb98e005740faa7fd17eb059bc6"
+    },
+    {
+      "path": "/workspace/HarbiChess/experiments/ufuk/cpu-quiet-ordering-v1/arena/search_base.py",
+      "bytes": 5944,
+      "sha256": "de53c14728a67b7772f18b396ac8ef5c35a144d4e4e616fec40099cd461a6670"
+    },
+    {
+      "path": "/workspace/HarbiChess/experiments/ufuk/cpu-quiet-ordering-v1/arena/test_dispatch.py",
+      "bytes": 2638,
+      "sha256": "1814e28f762913b3939ff14bbbbbd6dff0b2d9e79bcdad617c718d0c494566fb"
+    },
+    {
+      "path": "/workspace/HarbiChess/experiments/ufuk/cpu-quiet-ordering-v1/arena/tournament.py",
+      "bytes": 9052,
+      "sha256": "7081128a96f575d01ebaf40f1c7de725274b4316ac3836802b539b3ce7395cb8"
+    },
+    {
+      "path": "/workspace/HarbiChess/experiments/ufuk/cpu-quiet-ordering-v1/arena/value.py",
+      "bytes": 2894,
+      "sha256": "64a09ad18b227e351c49d8b72a810ceefef71b00c39990f308ba3a30da209155"
+    },
+    {
+      "path": "/workspace/work/harbichess/a100/restoration/local-rehearsal-content/harbichess-inputs/initial-e8.safetensors",
+      "bytes": 294764,
+      "sha256": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03"
+    },
+    {
+      "path": "/dev/shm/harbichess-quiet-fit-v1-20261005/20262905/candidate.json",
+      "bytes": 5414,
+      "sha256": "70824e048b648559eac5792255c1e53ce37fa63e0df3ce68b3bd603172de0404"
+    },
+    {
+      "path": "/dev/shm/harbichess-quiet-fit-v1-20261005/20262905/step-00000136.json",
+      "bytes": 38875,
+      "sha256": "4966f4944ff25cddfddcb3cc20ab753901c63866cb5c9f3ec1ecd0edafeb9817"
+    },
+    {
+      "path": "/dev/shm/harbichess-quiet-fit-v1-20261005/20262905/step-00000000.json",
+      "bytes": 21193,
+      "sha256": "0ee7ba9ce59f866f985bc878c64b4c985f863342404ce654abc99d5fbca61043"
+    },
+    {
+      "path": "/workspace/HarbiChess/experiments/ufuk/cpu-classical-own-v1/prior.json",
+      "bytes": 622,
+      "sha256": "afbaec307e5acc4b9fcb5222115c2fb8112290065ffe64e929b35f2a935565e1"
+    },
+    {
+      "path": "/dev/shm/harbichess-quiet-fit-v1-20261005/20262906/candidate.json",
+      "bytes": 5397,
+      "sha256": "1b3d824d188cbb4fd4a55379b4b83b3b04d8f2e7d91369619ea99af61c6a3e72"
+    },
+    {
+      "path": "/dev/shm/harbichess-quiet-fit-v1-20261005/20262906/step-00000124.json",
+      "bytes": 39062,
+      "sha256": "882bca3f7e35ef4b324beb86185c4b434140eb6e66d0ae73c195acc9baf22430"
+    },
+    {
+      "path": "/dev/shm/harbichess-quiet-fit-v1-20261005/20262906/step-00000000.json",
+      "bytes": 21423,
+      "sha256": "7c8d2d0f51db44f133f06398560f45b8058e3c0147073da12e1c070dbd3a26e7"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261005/QUIET160-root-audit-v1-registration.json",
+      "bytes": 6624,
+      "sha256": "0293367f8df54e579b6ed7ab6d337c4847f43b5d4c1c3a32035862a238f52ea7"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261005/QUIET160-root-audit-v1-owner-process.json",
+      "bytes": 234,
+      "sha256": "bb476b2670ef7d8d8c7eb4fed89963cca601e8b08b65cbc051589eff9aa204b9"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261005/QUIET160-root-six-v1-registration.json",
+      "bytes": 6833,
+      "sha256": "01275e381b21f48397d9e593d2674d3011777edeb98c6b7aced2c779c5010ed0"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261005/QUIET160-root-six-v1-owner-process.json",
+      "bytes": 157,
+      "sha256": "f7481f588c43a3e343fc6f4edd490d16f65ed73db5af7baed6ca79572faa50c1"
+    }
+  ]
+}
