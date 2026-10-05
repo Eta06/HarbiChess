@@ -1,0 +1,605 @@
+{
+  "schema": "known8-development-full160-three-audit-preservation-v1",
+  "method": "PST",
+  "integrity": "PASS",
+  "strength_screen": "FAIL-both-seeds",
+  "formal_confirmation": false,
+  "novelty_claim": false,
+  "protocol": {
+    "path": "/workspace/HarbiChess/experiments/ufuk/cpu-classical-pst-v1/arena/protocol.json",
+    "bytes": 5728,
+    "sha256": "b2bfc9e485b22992f5d5814ceb223c0604db74f8b7d06f4b9a39b65bce4a0fde"
+  },
+  "ROOT_result": {
+    "path": "/dev/shm/harbichess-PST160-root-audit-v1-20261005/result.json",
+    "bytes": 8941,
+    "sha256": "61b51b192e3506f9db042b61555c4b21ae66a019837e211dff1ec9f1f04e0068"
+  },
+  "independent_result": {
+    "path": "/dev/shm/harbichess-PST-independent-review-20261005/independent-result.json",
+    "bytes": 5416,
+    "sha256": "7604548594b7e412318e839a2f9e89d47b5dd9e48d14d0d13764d5d5c12bb4c9"
+  },
+  "six_actual_replays": {
+    "path": "/dev/shm/harbichess-PST160-root-audit-v1-20261005/six-result.json",
+    "bytes": 2708,
+    "sha256": "134658ad06223fd40f4ea8066643821e8c5abb7dff135714bc856831f9db605f"
+  },
+  "totals": {
+    "model_nodes": 4303820,
+    "evaluations": 3947025,
+    "model_calls": 8407,
+    "plies": 11854,
+    "SF_nodes": 1769315,
+    "SF_calls": 3447,
+    "SF_overruns": 1001,
+    "SF_max_nodes": 566
+  },
+  "rows": [
+    {
+      "seed": 20262905,
+      "arm": "learned",
+      "opponent": "SF512",
+      "score": 0.0,
+      "wins": 0,
+      "draws": 0,
+      "losses": 16,
+      "model_nodes": 210432,
+      "evaluations": 198061,
+      "model_calls": 411,
+      "plies": 830,
+      "SF_nodes": 215200,
+      "SF_calls": 419,
+      "SF_overruns": 129,
+      "SF_max_nodes": 566
+    },
+    {
+      "seed": 20262906,
+      "arm": "learned",
+      "opponent": "SF512",
+      "score": 0.03125,
+      "wins": 0,
+      "draws": 1,
+      "losses": 15,
+      "model_nodes": 288256,
+      "evaluations": 271451,
+      "model_calls": 563,
+      "plies": 1133,
+      "SF_nodes": 292713,
+      "SF_calls": 570,
+      "SF_overruns": 172,
+      "SF_max_nodes": 560
+    },
+    {
+      "seed": 20262905,
+      "arm": "prior",
+      "opponent": "SF512",
+      "score": 0.125,
+      "wins": 0,
+      "draws": 4,
+      "losses": 12,
+      "model_nodes": 346624,
+      "evaluations": 316157,
+      "model_calls": 677,
+      "plies": 1358,
+      "SF_nodes": 349430,
+      "SF_calls": 681,
+      "SF_overruns": 194,
+      "SF_max_nodes": 544
+    },
+    {
+      "seed": 20262906,
+      "arm": "prior",
+      "opponent": "SF512",
+      "score": 0.125,
+      "wins": 0,
+      "draws": 4,
+      "losses": 12,
+      "model_nodes": 346624,
+      "evaluations": 316157,
+      "model_calls": 677,
+      "plies": 1358,
+      "SF_nodes": 349430,
+      "SF_calls": 681,
+      "SF_overruns": 194,
+      "SF_max_nodes": 544
+    },
+    {
+      "seed": 20262905,
+      "arm": "e8",
+      "opponent": "SF512",
+      "score": 0.0,
+      "wins": 0,
+      "draws": 0,
+      "losses": 16,
+      "model_nodes": 276480,
+      "evaluations": 253552,
+      "model_calls": 540,
+      "plies": 1088,
+      "SF_nodes": 281271,
+      "SF_calls": 548,
+      "SF_overruns": 156,
+      "SF_max_nodes": 557
+    },
+    {
+      "seed": 20262906,
+      "arm": "e8",
+      "opponent": "SF512",
+      "score": 0.0,
+      "wins": 0,
+      "draws": 0,
+      "losses": 16,
+      "model_nodes": 276480,
+      "evaluations": 253552,
+      "model_calls": 540,
+      "plies": 1088,
+      "SF_nodes": 281271,
+      "SF_calls": 548,
+      "SF_overruns": 156,
+      "SF_max_nodes": 557
+    },
+    {
+      "seed": 20262905,
+      "arm": "learned",
+      "opponent": "e8",
+      "score": 0.125,
+      "wins": 1,
+      "draws": 2,
+      "losses": 13,
+      "model_nodes": 769996,
+      "evaluations": 702191,
+      "model_calls": 1505,
+      "plies": 1505
+    },
+    {
+      "seed": 20262906,
+      "arm": "learned",
+      "opponent": "e8",
+      "score": 0.0,
+      "wins": 0,
+      "draws": 0,
+      "losses": 16,
+      "model_nodes": 684032,
+      "evaluations": 621793,
+      "model_calls": 1336,
+      "plies": 1336
+    },
+    {
+      "seed": 20262905,
+      "arm": "learned",
+      "opponent": "prior",
+      "score": 0.21875,
+      "wins": 2,
+      "draws": 3,
+      "losses": 11,
+      "model_nodes": 457216,
+      "evaluations": 419894,
+      "model_calls": 893,
+      "plies": 893
+    },
+    {
+      "seed": 20262906,
+      "arm": "learned",
+      "opponent": "prior",
+      "score": 0.03125,
+      "wins": 0,
+      "draws": 1,
+      "losses": 15,
+      "model_nodes": 647680,
+      "evaluations": 594217,
+      "model_calls": 1265,
+      "plies": 1265
+    }
+  ],
+  "gates": [
+    {
+      "seed": 20262905,
+      "gates": {
+        "direct_e8_gt060": false,
+        "SFgain_e8_gt010": false,
+        "finalSF_ge025": false,
+        "learning_sameprior_gt060": false,
+        "SFgain_prior_gt0": false,
+        "caps_le005": true
+      },
+      "passed": false
+    },
+    {
+      "seed": 20262906,
+      "gates": {
+        "direct_e8_gt060": false,
+        "SFgain_e8_gt010": false,
+        "finalSF_ge025": false,
+        "learning_sameprior_gt060": false,
+        "SFgain_prior_gt0": false,
+        "caps_le005": true
+      },
+      "passed": false
+    }
+  ],
+  "six_finished_epoch": 1791237331.7291455,
+  "six_original_deadline": 1791237445.4699404,
+  "scope": "known8 development; exact rules/counters/storage checks; six search reproductions do not reproduce all searches; no virgin family or generalElo claim",
+  "files": [
+    {
+      "path": "/workspace/HarbiChess/experiments/ufuk/cpu-classical-pst-v1/arena/protocol.json",
+      "bytes": 5728,
+      "sha256": "b2bfc9e485b22992f5d5814ceb223c0604db74f8b7d06f4b9a39b65bce4a0fde"
+    },
+    {
+      "path": "/dev/shm/harbichess-PST-strength-arena-v1-20261005/arena/cohort-result.json",
+      "bytes": 14970,
+      "sha256": "ce179fe56b1d71eaebe4a98a5e9d0012daea1265aa675960927e5349f1282bc0"
+    },
+    {
+      "path": "/dev/shm/harbichess-PST-strength-arena-v1-20261005/qualification.json",
+      "bytes": 8245,
+      "sha256": "6f00a71751b317e5249078631bcaef0b4ef7b531f9ab4039509c543d2b14b0ed"
+    },
+    {
+      "path": "/dev/shm/harbichess-PST160-root-audit-v1-20261005/result.json",
+      "bytes": 8941,
+      "sha256": "61b51b192e3506f9db042b61555c4b21ae66a019837e211dff1ec9f1f04e0068"
+    },
+    {
+      "path": "/dev/shm/harbichess-PST160-root-audit-v1-20261005/six-result.json",
+      "bytes": 2708,
+      "sha256": "134658ad06223fd40f4ea8066643821e8c5abb7dff135714bc856831f9db605f"
+    },
+    {
+      "path": "/dev/shm/harbichess-PST160-root-audit-v1-20261005/finished.json",
+      "bytes": 415,
+      "sha256": "2dbd0ea23ff7684f2144083334b4aa06f0b90dfb0f18e975f7b182e8a462053c"
+    },
+    {
+      "path": "/dev/shm/harbichess-PST160-root-audit-v1-20261005/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/dev/shm/harbichess-PST160-root-audit-v1-20261005/stdout.log",
+      "bytes": 80,
+      "sha256": "6a2ba13cd529f1193a855b5d67797deb2fbf15b330720cf998bbdd4edc496180"
+    },
+    {
+      "path": "/dev/shm/harbichess-PST-independent-review-20261005/independent-result.json",
+      "bytes": 5416,
+      "sha256": "7604548594b7e412318e839a2f9e89d47b5dd9e48d14d0d13764d5d5c12bb4c9"
+    },
+    {
+      "path": "/dev/shm/harbichess-PST-independent-review-20261005/replay160.py",
+      "bytes": 14831,
+      "sha256": "8051976c20c90bd02c2a1c3c72f2fc7bfc9c50b8115dd58bab974b7d8ba7874a"
+    },
+    {
+      "path": "/dev/shm/harbichess-PST-independent-review-20261005/compare_six_searches.py",
+      "bytes": 7186,
+      "sha256": "b0dde7b1ca25cacf2b5a7307cb14ec95fe8835f946d50d3f7867ba90eb5f1045"
+    },
+    {
+      "path": "/dev/shm/harbichess-PST-strength-arena-v1-20261005/arena/20262905-e8-vs-SF512.invocation.json",
+      "bytes": 1071,
+      "sha256": "357e14dd53fbb6b68fd7162b7b348b1a5887a3583af435e612ad44af1f9e8ecb"
+    },
+    {
+      "path": "/dev/shm/harbichess-PST-strength-arena-v1-20261005/arena/20262905-e8-vs-SF512.json",
+      "bytes": 305997,
+      "sha256": "c4d85d6ac15fa0fee7f5a7ee2f5e04bae4fd0a9b5a4952144dfabb980ca899fc"
+    },
+    {
+      "path": "/dev/shm/harbichess-PST-strength-arena-v1-20261005/arena/20262905-e8-vs-SF512.owner-result.json",
+      "bytes": 1256,
+      "sha256": "5f8b32c8ecedd692ae48855016b03c5d954cc14d97705fa0d15f9b5e55034be5"
+    },
+    {
+      "path": "/dev/shm/harbichess-PST-strength-arena-v1-20261005/arena/20262905-learned-vs-SF512.invocation.json",
+      "bytes": 1048,
+      "sha256": "2bbb8f2baf82c8556cd8b5f5598eb623928de524b5e38158b523ced1a438b962"
+    },
+    {
+      "path": "/dev/shm/harbichess-PST-strength-arena-v1-20261005/arena/20262905-learned-vs-SF512.json",
+      "bytes": 235850,
+      "sha256": "c847b2351ce0e4b83c2261fa587e18f1d325a9739c2b99c885b06a646e6daa98"
+    },
+    {
+      "path": "/dev/shm/harbichess-PST-strength-arena-v1-20261005/arena/20262905-learned-vs-SF512.owner-result.json",
+      "bytes": 1233,
+      "sha256": "6bc276874e1f63fa52d8bd60cf662728e307ef023849e21d0426eaf0ca4c1741"
+    },
+    {
+      "path": "/dev/shm/harbichess-PST-strength-arena-v1-20261005/arena/20262905-learned-vs-e8.invocation.json",
+      "bytes": 1139,
+      "sha256": "2b7a7914f490202fbf8b964fa097ea2cbdee2ddd8a7853239b26e9f729970007"
+    },
+    {
+      "path": "/dev/shm/harbichess-PST-strength-arena-v1-20261005/arena/20262905-learned-vs-e8.json",
+      "bytes": 591727,
+      "sha256": "557ef637fe21193304e41dceff646abcc71831dfbf35fd7938e9354e25bddc6a"
+    },
+    {
+      "path": "/dev/shm/harbichess-PST-strength-arena-v1-20261005/arena/20262905-learned-vs-e8.owner-result.json",
+      "bytes": 1322,
+      "sha256": "916864e77cf262a4e5d066e95dced81bbcf3f3c25d5040487a35c25ddba27551"
+    },
+    {
+      "path": "/dev/shm/harbichess-PST-strength-arena-v1-20261005/arena/20262905-learned-vs-prior.invocation.json",
+      "bytes": 1113,
+      "sha256": "416729caf9d59d6e37dc9ba4adc3c9dbec0da19b42e27b228fd958c0a0b1e28d"
+    },
+    {
+      "path": "/dev/shm/harbichess-PST-strength-arena-v1-20261005/arena/20262905-learned-vs-prior.json",
+      "bytes": 355771,
+      "sha256": "ca425f18f980ffc0ed99fe3b1717e5e144f06198a8ca3056319a87022fe27851"
+    },
+    {
+      "path": "/dev/shm/harbichess-PST-strength-arena-v1-20261005/arena/20262905-learned-vs-prior.owner-result.json",
+      "bytes": 1298,
+      "sha256": "d21c17226497ec56627019aac89db966626e1cc0293165c78f4146a42654755e"
+    },
+    {
+      "path": "/dev/shm/harbichess-PST-strength-arena-v1-20261005/arena/20262905-prior-vs-SF512.invocation.json",
+      "bytes": 1045,
+      "sha256": "d4e16ea7e7fe78c6147a6282c9be8dd06b89731ec2ace996b097978ed5a1e09a"
+    },
+    {
+      "path": "/dev/shm/harbichess-PST-strength-arena-v1-20261005/arena/20262905-prior-vs-SF512.json",
+      "bytes": 381598,
+      "sha256": "a18dac20e1a66060bcf1885a6ea358388774f7f1be62146b7fac5d27fca46c3a"
+    },
+    {
+      "path": "/dev/shm/harbichess-PST-strength-arena-v1-20261005/arena/20262905-prior-vs-SF512.owner-result.json",
+      "bytes": 1230,
+      "sha256": "6a7962e35a6d9b25a48fa62c717405ce5d9e36c518bd8c422ec1294ef5301509"
+    },
+    {
+      "path": "/dev/shm/harbichess-PST-strength-arena-v1-20261005/arena/20262906-e8-vs-SF512.invocation.json",
+      "bytes": 1074,
+      "sha256": "3b8423b5efb335084de6a1bedd44f17c788f874265d16c21a4067cfec2a5101f"
+    },
+    {
+      "path": "/dev/shm/harbichess-PST-strength-arena-v1-20261005/arena/20262906-e8-vs-SF512.json",
+      "bytes": 305973,
+      "sha256": "dfab29d5d50dc58bb4924396321e7f99a108330de095e614d814eebe4b1fafb4"
+    },
+    {
+      "path": "/dev/shm/harbichess-PST-strength-arena-v1-20261005/arena/20262906-e8-vs-SF512.owner-result.json",
+      "bytes": 1258,
+      "sha256": "99d8c1e957c67f79cde322389beb941bea84cc761fd4f34bec88541587a3e6f6"
+    },
+    {
+      "path": "/dev/shm/harbichess-PST-strength-arena-v1-20261005/arena/20262906-learned-vs-SF512.invocation.json",
+      "bytes": 1048,
+      "sha256": "6931ebf226b14b9b09334ffc51e0dedcd8559a7c3022081edee520d90bab691c"
+    },
+    {
+      "path": "/dev/shm/harbichess-PST-strength-arena-v1-20261005/arena/20262906-learned-vs-SF512.json",
+      "bytes": 318970,
+      "sha256": "a79b07a6791e08ce54f937b8b8fbf3aecd5de3072a17dfa56d75ae94fb6fcbd3"
+    },
+    {
+      "path": "/dev/shm/harbichess-PST-strength-arena-v1-20261005/arena/20262906-learned-vs-SF512.owner-result.json",
+      "bytes": 1233,
+      "sha256": "3e5aa653953231fa990d6dffa6a6e2357aaa0846f15d597bd209735bb3b919ff"
+    },
+    {
+      "path": "/dev/shm/harbichess-PST-strength-arena-v1-20261005/arena/20262906-learned-vs-e8.invocation.json",
+      "bytes": 1142,
+      "sha256": "1383869646c395a8c3d71e433b31261105708799460a8d4887f3220ccdfe5a4a"
+    },
+    {
+      "path": "/dev/shm/harbichess-PST-strength-arena-v1-20261005/arena/20262906-learned-vs-e8.json",
+      "bytes": 526374,
+      "sha256": "221ed609a6a41bc230560d76feb4cfa2030fa62c0dbc0576086b53ea7022d270"
+    },
+    {
+      "path": "/dev/shm/harbichess-PST-strength-arena-v1-20261005/arena/20262906-learned-vs-e8.owner-result.json",
+      "bytes": 1327,
+      "sha256": "bb8a653e8435c9885db6017d5aae405db20f2456d456795bcb5b721e97b80342"
+    },
+    {
+      "path": "/dev/shm/harbichess-PST-strength-arena-v1-20261005/arena/20262906-learned-vs-prior.invocation.json",
+      "bytes": 1113,
+      "sha256": "7bd02aff78ea526002583b6db948c98f6c2aaae20185657fac0cbe2361b70b00"
+    },
+    {
+      "path": "/dev/shm/harbichess-PST-strength-arena-v1-20261005/arena/20262906-learned-vs-prior.json",
+      "bytes": 499971,
+      "sha256": "5d75d5fe652738b318c7ef64442f537c49d637839f382316727277d101484d28"
+    },
+    {
+      "path": "/dev/shm/harbichess-PST-strength-arena-v1-20261005/arena/20262906-learned-vs-prior.owner-result.json",
+      "bytes": 1298,
+      "sha256": "60b7d262be40727f744af8a0a394024a71fb290302d7dfc7f5eaca00238b3cef"
+    },
+    {
+      "path": "/dev/shm/harbichess-PST-strength-arena-v1-20261005/arena/20262906-prior-vs-SF512.invocation.json",
+      "bytes": 1045,
+      "sha256": "176b6149ad4bb9143492da01c963aaa0f952ef5c23418f30d06d25017e6fbf0e"
+    },
+    {
+      "path": "/dev/shm/harbichess-PST-strength-arena-v1-20261005/arena/20262906-prior-vs-SF512.json",
+      "bytes": 381645,
+      "sha256": "c6ba1e07a02e9f5d9630f6f96c25c344db95f4b960239577dc263f8a41944983"
+    },
+    {
+      "path": "/dev/shm/harbichess-PST-strength-arena-v1-20261005/arena/20262906-prior-vs-SF512.owner-result.json",
+      "bytes": 1229,
+      "sha256": "326f69a49a739ffff59b963377ae5ce99880e6bb68d02da085718b714b9a2c00"
+    },
+    {
+      "path": "/dev/shm/harbichess-PST-strength-arena-v1-20261005/arena/owner-contract.json",
+      "bytes": 849,
+      "sha256": "2cc50d050043bfdfdbc40a16ddd35d49538d6f3ea148141590cbac8e3cc15b84"
+    },
+    {
+      "path": "/dev/shm/harbichess-PST-strength-arena-v1-20261005/arena/resource-admission.json",
+      "bytes": 84,
+      "sha256": "161024f510c2cf58cf738593977697b47a839bebbf6da4084ef143f1e976ddab"
+    },
+    {
+      "path": "/dev/shm/harbichess-PST-strength-arena-v1-20261005/arena/20262905-e8-vs-SF512.progress.jsonl",
+      "bytes": 241769,
+      "sha256": "b4e250efd03eba152f48e051b1de5033dc6166101e14efc33c7ff65d1331d6ae"
+    },
+    {
+      "path": "/dev/shm/harbichess-PST-strength-arena-v1-20261005/arena/20262905-learned-vs-SF512.progress.jsonl",
+      "bytes": 185955,
+      "sha256": "018b5baabd2ca5f075f9f90b2da607c1ea29c7c1b8d8832ee10f5bbab7bf6bda"
+    },
+    {
+      "path": "/dev/shm/harbichess-PST-strength-arena-v1-20261005/arena/20262905-learned-vs-e8.progress.jsonl",
+      "bytes": 451429,
+      "sha256": "01bfef4149e731f98dd97bf5dd8bf2e675b3cb938627bdb73bb9fe5758a5862f"
+    },
+    {
+      "path": "/dev/shm/harbichess-PST-strength-arena-v1-20261005/arena/20262905-learned-vs-prior.progress.jsonl",
+      "bytes": 270996,
+      "sha256": "645d7384fba5bc607ddf598867ca280a3db521ade65b0a72bcb911ee29053211"
+    },
+    {
+      "path": "/dev/shm/harbichess-PST-strength-arena-v1-20261005/arena/20262905-prior-vs-SF512.progress.jsonl",
+      "bytes": 302222,
+      "sha256": "e58fb819c9c2915ce5bbd518d25cc5432f17cc2ad34a003263344e12f45c8816"
+    },
+    {
+      "path": "/dev/shm/harbichess-PST-strength-arena-v1-20261005/arena/20262906-e8-vs-SF512.progress.jsonl",
+      "bytes": 241744,
+      "sha256": "ccc1f606d647a5c746fef2e4b62095780952c400469b1af3dcfc69af7ff15c62"
+    },
+    {
+      "path": "/dev/shm/harbichess-PST-strength-arena-v1-20261005/arena/20262906-learned-vs-SF512.progress.jsonl",
+      "bytes": 252115,
+      "sha256": "ba18b83e93e800ec5f28cc5c2d58aa6eecee683b4d6c5d1628a984f17bbb217a"
+    },
+    {
+      "path": "/dev/shm/harbichess-PST-strength-arena-v1-20261005/arena/20262906-learned-vs-e8.progress.jsonl",
+      "bytes": 401459,
+      "sha256": "35b9c066bb6389fa75ea624e081f4ea552b39358a65575f82336747fd97174bf"
+    },
+    {
+      "path": "/dev/shm/harbichess-PST-strength-arena-v1-20261005/arena/20262906-learned-vs-prior.progress.jsonl",
+      "bytes": 381359,
+      "sha256": "e5232cec609c0e891e5166f5c714a67941afac8c9a6488bb2528bc02e8d8078c"
+    },
+    {
+      "path": "/dev/shm/harbichess-PST-strength-arena-v1-20261005/arena/20262906-prior-vs-SF512.progress.jsonl",
+      "bytes": 302270,
+      "sha256": "17dfe51c9218dc8a7fe66c6e12f4dba2866d3198b11477048426307a08180d3a"
+    },
+    {
+      "path": "/workspace/HarbiChess/experiments/ufuk/cpu-classical-pst-v1/arena/audit_arena_v2.py",
+      "bytes": 10905,
+      "sha256": "a669f380226817207501db052c69202434cc60428862922107294390344fb417"
+    },
+    {
+      "path": "/workspace/HarbiChess/experiments/ufuk/cpu-classical-pst-v1/arena/native_admission.py",
+      "bytes": 3995,
+      "sha256": "5389dac52124ccd67e99eb493c25b753142ced531d9a78352d70c2670617f055"
+    },
+    {
+      "path": "/workspace/HarbiChess/experiments/ufuk/cpu-classical-pst-v1/arena/profile.py",
+      "bytes": 4191,
+      "sha256": "07c3f83b8d7e495ee7896495babf758aa45fcbd1ae4bfe734ba76b0cafdc3256"
+    },
+    {
+      "path": "/workspace/HarbiChess/experiments/ufuk/cpu-classical-pst-v1/arena/profile_support.py",
+      "bytes": 973,
+      "sha256": "dd6f55d401fd878d546f1b847be5e72c60e23e35e0fb837286ddc9c0ed1e2fc1"
+    },
+    {
+      "path": "/workspace/HarbiChess/experiments/ufuk/cpu-classical-pst-v1/arena/run.py",
+      "bytes": 6354,
+      "sha256": "52de45c055f169b12239580b07157d59fddd11b2c27f1a7d8d52d5f5dbdb95b0"
+    },
+    {
+      "path": "/workspace/HarbiChess/experiments/ufuk/cpu-classical-pst-v1/arena/search.py",
+      "bytes": 5944,
+      "sha256": "de53c14728a67b7772f18b396ac8ef5c35a144d4e4e616fec40099cd461a6670"
+    },
+    {
+      "path": "/workspace/HarbiChess/experiments/ufuk/cpu-classical-pst-v1/arena/test_static_parity.py",
+      "bytes": 3201,
+      "sha256": "0da22de30939b1cdcda42c0ffcf099dd2efce71d932c0d6849fc539f499b96a5"
+    },
+    {
+      "path": "/workspace/HarbiChess/experiments/ufuk/cpu-classical-pst-v1/arena/tournament.py",
+      "bytes": 9052,
+      "sha256": "7081128a96f575d01ebaf40f1c7de725274b4316ac3836802b539b3ce7395cb8"
+    },
+    {
+      "path": "/workspace/HarbiChess/experiments/ufuk/cpu-classical-pst-v1/arena/value.py",
+      "bytes": 4038,
+      "sha256": "8e90a1d7b60006f6849341b77b8f5bad76a24af89e98cf1045b55e6e4b34bf3e"
+    },
+    {
+      "path": "/workspace/work/harbichess/a100/restoration/local-rehearsal-content/harbichess-inputs/initial-e8.safetensors",
+      "bytes": 294764,
+      "sha256": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03"
+    },
+    {
+      "path": "/dev/shm/harbichess-pst-fit-v1-20261005/20262905/fit/candidate.json",
+      "bytes": 5806,
+      "sha256": "6160aed746ab0549cf6b60a672da179b2ecbca0a8b4969ea00a34945c8faaebd"
+    },
+    {
+      "path": "/dev/shm/harbichess-pst-fit-v1-20261005/20262905/fit/step-00000199.native.gz",
+      "bytes": 17028,
+      "sha256": "5b237ad3c7d647de9e77704b80e589ff34b02b0295bcdde6d6a48bc8b6821095"
+    },
+    {
+      "path": "/dev/shm/harbichess-pst-fit-v1-20261005/20262905/fit/step-00000000.native.gz",
+      "bytes": 9309,
+      "sha256": "62d223c6177f3e1632fc1729ef733101fb05b88a758250006468e76e8717190d"
+    },
+    {
+      "path": "/dev/shm/harbichess-pst-fit-v1-20261005/20262905/fit/fit-contract.json",
+      "bytes": 3346,
+      "sha256": "7b042c1e1d353ac2214b6dbfbae5fcaa5b06a218bc5de6e017db0fd6b5c6bb1f"
+    },
+    {
+      "path": "/workspace/HarbiChess/experiments/ufuk/cpu-classical-own-v1/prior.json",
+      "bytes": 622,
+      "sha256": "afbaec307e5acc4b9fcb5222115c2fb8112290065ffe64e929b35f2a935565e1"
+    },
+    {
+      "path": "/dev/shm/harbichess-pst-fit-v1-20261005/20262906/fit/candidate.json",
+      "bytes": 5757,
+      "sha256": "9270a3bb77d2bf467999cfe6c6287573c3ceba91a819bab2fd2f92d72aa2c2d1"
+    },
+    {
+      "path": "/dev/shm/harbichess-pst-fit-v1-20261005/20262906/fit/step-00000183.native.gz",
+      "bytes": 17068,
+      "sha256": "9ba9bd4bfe7f86d80381cb321a843b2de2a0b95e399e9547e4e9dc6fe0396aee"
+    },
+    {
+      "path": "/dev/shm/harbichess-pst-fit-v1-20261005/20262906/fit/step-00000000.native.gz",
+      "bytes": 9391,
+      "sha256": "c20ca438de46c6763cf281b07f3deaaf8ec2bbc56994f9398d68a767883f3e8d"
+    },
+    {
+      "path": "/dev/shm/harbichess-pst-fit-v1-20261005/20262906/fit/fit-contract.json",
+      "bytes": 3587,
+      "sha256": "db5ede3362e088358c5813f215868d65d74bce7bd88cf0ce6106d7562dfafc23"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261005/PST160-root-audit-v1-registration.json",
+      "bytes": 1529,
+      "sha256": "402796bda5a14ddffb7390be3bc226e188392156a7fc0c1f0aa21120b9531035"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261005/PST160-root-audit-v1-owner-process.json",
+      "bytes": 218,
+      "sha256": "58e6cb37adf61471925d9283115400f0a4d8963573ff491406dbbeb3a32bc30e"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261005/PST160-root-six-v1-registration.json",
+      "bytes": 1507,
+      "sha256": "0f95950f95ea83d5bf27c6296496cd4a6e0ee8ebcc1b175066a8f68ff95545b1"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261005/PST160-root-six-v1-owner-process.json",
+      "bytes": 232,
+      "sha256": "8ff2d516f392daef39ac9ebea0ef9433941986323003c6e0e78a5b5b71f326ee"
+    }
+  ]
+}
