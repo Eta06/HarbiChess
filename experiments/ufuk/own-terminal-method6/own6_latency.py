@@ -8,10 +8,11 @@ from pathlib import Path
 
 import chess
 import torch
+from own6_strength_config import bind_cli, validate_binding
+
 from harbichess.backends.torch_network import load_weights, sha256
 from harbichess.chess.actions import legal_action_indices
 from harbichess.chess.encoding import BoardEncoder
-from own6_strength_config import bind_cli, validate_binding
 
 Q = {}
 
