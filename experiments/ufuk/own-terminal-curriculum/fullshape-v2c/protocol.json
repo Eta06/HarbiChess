@@ -1,0 +1,62 @@
+{
+  "actualCLI600_receipt_sha256": "0e27edefaf8411285bf01dbc887712f279cbeef40afe09db1e3d4fff19c3834d",
+  "actualCUDA34_receipt_sha256": "69b0cf0ec111053173b978cf5eff5c4467cb223ad02a7b4c824462e1dc24b04e",
+  "actual_failed4_owned_release_sha256": "dc44263be1aa56d4a9a36f16d1d8756a1d3c809061be7bc156f5698495dd2706",
+  "actual_failed5_owned_release_sha256": "19a68076d73ff09443cb4f471ae21787fe7ea5e643309fef8033ec1ee04aaf60",
+  "actual_failed5_terminal_sha256": "50876f67a21fbf0e5ef84f51fa21e9a1c2c5b9d9505ea68b4db1fc0ebb4ecac7",
+  "book_sha256": "1a5ca17664a828d669e58cf2bd5d9eeb7f980b83f20d3a4031d36e4ff0930ccb",
+  "compute": "Existing same A100/Torch2.11cu130/FP32/deterministic/T1/memory64GiB/disk8GiB; actual prior45 terminal failures and ended owned compute permit newONE900 same61765 profile. Original5 latency/finals not substituted.",
+  "config_sha256": "24ea94ba11493a4313bdaa9e8cc3cf03cd79af9c431d73fd9752208da616a8e1",
+  "control": "Prior451 newbook shared900 fail remains failed. Source428 actualCUDA34 and realCLI600 passed separately; no oldproducer/native relabel. New seed61765 is development-only; samefixedshape/math, no heldout/model selection.",
+  "failure": "Preserveoriginalclock/output/currentnative/partialaudit; no extended900 retry; no formal6admit if anygatefails.",
+  "frozen_helper_sha256": {
+    "own6_adapter_controls.py": "4afc60a0e6b04f2886f2cdad23044b6a6f0406178fcf6c98d9f2c013ccae9739",
+    "own6_audit_core.py": "3c3b6e2c23730529a1c534472cc8ad330fe05fe0f0d48436e1849ce733382882",
+    "own6_audit_support.py": "17e9c1473ac22acaa38d102c6f45b4891474b122c140748b7e03a96f277eabe1",
+    "own6_infrastructure_evidence.py": "dca3d7d484417891c817c51b2127b13cd0768271bddfddfe60df51b2d239fc7d",
+    "own6_profile_e1_owned.py": "6a16bff0b654b51fa3f896cca2d874151c2cb9204be47287a8e6994dd19e2676",
+    "own6_qualify_e1.py": "dab2ea2f98868126d907fc7c9a297f8fead5bbc8cedecfb4689db5f6000b499a"
+  },
+  "hypothesis": "Private identical104array pack and exact fullhistory startup dedup retain same learner/search objectives, while new25percent ownterminal START mixture raises fresh true terminal target coverage. Qualify real128x256 CLI plus unchanged chronological checks before any formal6 training.",
+  "initial_e8_sha256": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03",
+  "latest_profile_start_epoch": 1791164700,
+  "no_previous_actual900_profile_started": true,
+  "original5_control_supplement_sha256": "82a704fffe5c6e1b0aaa79fae0deb4e1a12d27793877f2d0dd00ea2eee685615",
+  "prior_v2b_waiter_result_sha256": "d087dbdd3552f29a1d65e5c1989b3534d52cf882fa0d3b9aa21b3554a2eec4d5",
+  "prior_v2b_waiter_status": "failed before ANY profile compute because original5 real freshCLI600 exhausted; no profile clock or checkpoint existed; preserve unchanged",
+  "prior_waiting_control_stop": {
+    "epoch": 1791162507.125693,
+    "original_owner": {
+      "pid": 107441,
+      "startticks": 2348483
+    },
+    "reason": "Canonical repo working-directory import classification differed; preservefrozenv2 and restageonlyimport-order/source-control bytebindings under prospectivev2b,same source428/61765/900/latest01:45. No actualprofile firstclock was started.",
+    "result": {
+      "error": "KeyboardInterrupt('Owned profile launcher interruption 15')",
+      "finished_epoch": 1791162507.0283468,
+      "owned_cleanup": {
+        "SIGKILL_pid": [],
+        "SIGTERM_pid": [],
+        "tracked_owned_pid_startticks": []
+      },
+      "owner_config_sha256": "14e82282ebd9b2892f59535152c6c4c9b99045d9efffdee9bc6763692536c56d",
+      "schema": "source428-profile-after5-latency-v1",
+      "status": "failed-preserved",
+      "waiting_started_epoch": 1791162329.9258137
+    },
+    "result_sha256": "977ece8e7eb7ec2b8889af061ab4083239f2ff2b758567adbfb01bf314077063",
+    "status": "only-waiting-profile-control-stopped-before-any-compute"
+  },
+  "registration_variant": "v2c-real-failed45-terminal-owned-release-before-any-profile-compute",
+  "scheduling_helper_sha256": {
+    "failed4_dependency.py": "621d65eba2f3cea5bc0c4a382821d3137a6d10935faf97a56798d84ed7fca547",
+    "failed5_terminal_barrier.py": "0381d783d0e0e5d9a70a9386d4fac8b860a0777e20d798ba10346cba8e9d90b2",
+    "launch_after45_terminal.py": "9f89fed2c56457b81ba9e36c60c0b50d42d84e055a14d450027490c7bdfd70ae"
+  },
+  "schema": "ufuk-own-terminal-source428-fullshape-development-v2c",
+  "scope": "Infrastructure qualification and E1development, excludedfrom formalstrength/candidate/teacher/selflearning success.",
+  "source_commit": "428a30f5e1658f3cf159844db547ff0147ade5a9",
+  "status": "prospective-fixed-development-only",
+  "success": "Exactlyone128x256 CLI plus sameproductioncore ALL32768 legal RNG/raw18 packets/FIRST8-LAST8 chronological neural witnesses/allAdam/RNG/model frozen21/schedules/mutations completewithin900; formal factory separately requires retainedupdates and actual changed tensors.",
+  "whole_profile_max_seconds": 900
+}
