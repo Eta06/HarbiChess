@@ -13,6 +13,7 @@ from pathlib import Path
 
 import numpy as np
 import torch
+
 from harbichess.backends.torch_network import save_weights, sha256
 from harbichess.selfplay.online_actor import OnlineActors
 from harbichess.training.fullgame_own_targets import build_fullgame_targets
@@ -20,8 +21,8 @@ from harbichess.training.search_acting_epoch import deserialize_search_acting_ep
 from harbichess.training.torch_online_checkpoint import _runtime
 from harbichess.training.torch_online_learner import read_online_train_book
 
-CPU_SCHEMA = "torch-search-acting-native-cpu-v2"
-CUDA_SCHEMA = "torch-search-acting-native-cuda-v2"
+CPU_SCHEMA = "torch-search-acting-native-cpu-v3"
+CUDA_SCHEMA = "torch-search-acting-native-cuda-v3"
 FILES = (
     "model.safetensors",
     "base.safetensors",
