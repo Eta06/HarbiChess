@@ -26,7 +26,13 @@ for item in request['known']+request['unresolved']:
  resolved=p.resolve(strict=True)
  if not any(resolved.is_relative_to(root) for root in roots):
   raise ValueError('outside public evidence roots')
- if p.suffix not in ('.json','.py','.gz','.safetensors','.pt','.bundle'):
+ if p.suffix in ('.jsonl','.log','.stdout','.stderr'):
+  if (not item.get('expected_sha256') or
+      not resolved.is_relative_to(roots[1]) or
+      any(word in p.name.lower() for word in ('ssh','auth','token','secret','password','key'))):
+   raise ValueError('not an exact public HarbiChess run log binding')
+ if p.suffix not in ('.json','.py','.gz','.safetensors','.pt','.bundle',
+                      '.jsonl','.log','.stdout','.stderr'):
   raise ValueError('unreviewed evidence suffix')
  before=p.stat()
  if not stat.S_ISREG(before.st_mode):raise ValueError('not regular')
@@ -60,7 +66,13 @@ def sha(path):
 
 
 def command_for(request):
-    body = base64.b64encode(json.dumps(request).encode()).decode()
+    minimal = {
+        kind: [
+            {k: row[k] for k in ("path", "expected_sha256") if k in row} for row in request[kind]
+        ]
+        for kind in ("known", "unresolved")
+    }
+    body = base64.b64encode(json.dumps(minimal, separators=(",", ":")).encode()).decode()
     return "python3 -c " + shlex.quote(REMOTE_PROGRAM) + " " + shlex.quote(body)
 
 
