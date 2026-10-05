@@ -1,0 +1,130 @@
+"""Independent rules/PGN witness for already frozen family8 roots; no selection or model."""
+
+import hashlib
+import io
+import json
+from pathlib import Path
+
+import chess
+import chess.pgn
+from harbichess.training.history_openings import complete_records
+
+WORK = Path("/workspace/work/harbichess/family8-strength-books")
+PGN = Path("/workspace/HarbiChess/artifacts/ufuk-broad-history-input-20261004") / (
+    "lichess-standard-2026-09-prefix-32MiB.pgn"
+)
+
+
+def sha(path):
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def main():
+    import time
+
+    started = time.monotonic()
+    prereg = json.loads((WORK / "PREREGISTRATION.json").read_bytes())
+    assert sha(PGN) == prereg["source_pin"]["pgn_sha256"]
+    selected = {}
+    forbidden6 = set()
+    for item in prereg["both_family6_strength_books"]:
+        path = Path(item["path"])
+        assert sha(path) == item["sha256"]
+        book = json.loads(path.read_bytes())
+        forbidden6.update(row["source_game"] for row in book["splits"]["arena"])
+    original_keys = set(
+        json.loads(Path(prereg["inherited_union"]["position_keys_path"]).read_bytes())
+    )
+    original_games = set(
+        json.loads(Path(prereg["inherited_union"]["source_ids_path"]).read_bytes())
+    )
+    audits = {}
+    for selection in prereg["selection_seeds"]:
+        directory = WORK / str(selection)
+        book = json.loads((directory / "opening-splits.json").read_bytes())
+        composed = json.loads((directory / "exclusion-composition.json").read_bytes())
+        assert (
+            sha(Path(composed["inherited_position_keys"]["path"]))
+            == (composed["inherited_position_keys"]["sha256"])
+        )
+        assert (
+            sha(Path(composed["inherited_source_ids"]["path"]))
+            == (composed["inherited_source_ids"]["sha256"])
+        )
+        excluded_keys = original_keys | set(composed["added_fullprefix_position_keys"])
+        excluded_games = original_games | set(composed["added_source_ids"])
+        assert len(book["splits"]["arena"]) == 48
+        audits[selection] = {"roots": [], "book_sha256": sha(directory / "opening-splits.json")}
+        for row in book["splits"]["arena"]:
+            assert row["source_record"] not in selected, "source PGN records must be disjoint"
+            assert row["source_game"] not in excluded_games | forbidden6
+            key = " ".join(row["opening"]["fen"].split()[:4])
+            assert key not in excluded_keys
+            selected[row["source_record"]] = (selection, row)
+    seen = set()
+    with PGN.open(encoding="utf8") as stream:
+        for ordinal, record in enumerate(complete_records(stream)):
+            assert time.monotonic() - started < 900
+            if ordinal not in selected:
+                continue
+            selection, row = selected[ordinal]
+            assert hashlib.sha256(record.encode()).hexdigest() == row["source_record_sha256"]
+            game = chess.pgn.read_game(io.StringIO(record))
+            assert game is not None and not game.errors
+            assert game.headers["Site"] == row["source_game"]
+            assert row["source_game"] not in seen
+            seen.add(row["source_game"])
+            assert (
+                "FEN" not in game.headers and game.headers.get("Variant", "Standard") == "Standard"
+            )
+            assert min(int(game.headers["WhiteElo"]), int(game.headers["BlackElo"])) >= 2000
+            assert int(game.headers["TimeControl"].split("+")[0]) >= 60
+            moves = list(game.mainline_moves())
+            assert row["root_ply"] in (16, 24, 32, 48, 64, 96)
+            assert row["root_ply"] <= len(moves) - 8
+            assert [move.uci() for move in moves[: row["root_ply"]]] == row["opening"]["moves"]
+            board = chess.Board()
+            for move in moves[: row["root_ply"]]:
+                assert move in board.legal_moves
+                board.push(move)
+            assert board.is_valid() and board.fen() == row["opening"]["fen"]
+            assert board.outcome(claim_draw=True) is None
+            audits[selection]["roots"].append(
+                {
+                    "source_game": row["source_game"],
+                    "record_sha256": row["source_record_sha256"],
+                    "history_sha256": hashlib.sha256(
+                        "\n".join(row["opening"]["moves"]).encode()
+                    ).hexdigest(),
+                    "full_fen": board.fen(),
+                    "turn": "white" if board.turn else "black",
+                    "legal_actions": sorted(move.uci() for move in board.legal_moves),
+                }
+            )
+    assert len(seen) == 96 and not seen & forbidden6
+    for audit in audits.values():
+        assert len(audit["roots"]) == 48
+        audit["side_to_move_counts"] = {
+            side: sum(row["turn"] == side for row in audit["roots"])
+            for side in ("white", "black")
+        }
+    report = {
+        "schema": "family8-independent96-PGN-exact-rules-witness-v1",
+        "status": "pass96-legal-nonterminal-history-source-and-family6-disjoint",
+        "books": audits,
+        "preregistration_sha256": sha(WORK / "PREREGISTRATION.json"),
+        "verifier_sha256": sha(Path(__file__)),
+        "pgn_sha256": sha(PGN),
+        "source_ids_disjoint": True,
+        "completed_roots": 96,
+        "model_or_engine_queries": 0,
+        "games_played": 0,
+        "elapsed_seconds": time.monotonic() - started,
+    }
+    with (WORK / "independent-evidence.json").open("x") as output:
+        output.write(json.dumps(report, indent=2) + "\n")
+    print(json.dumps({k: v for k, v in report.items() if k != "books"}))
+
+
+if __name__ == "__main__":
+    main()
