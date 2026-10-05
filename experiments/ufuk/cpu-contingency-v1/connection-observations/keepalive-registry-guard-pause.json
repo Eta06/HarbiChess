@@ -1,0 +1,8 @@
+{
+  "schema": "readonly-keepalive-local-guard-pause-v1",
+  "epoch": 1791171715.9126282,
+  "pid": 889352,
+  "start_ticks": "12016074",
+  "reason": "registry-pruned; prevent possible CLI new-session fallback",
+  "remote_runtime_or_training_signaled": false
+}
