@@ -1,0 +1,41 @@
+{
+  "manifest_sha256": "a14fc6d68f159e160b2c685fe72b0d7385c499822856a7925609a756fd7b5812",
+  "producer_bindings": [
+    {
+      "actions": 8192,
+      "actor_config_sha256": "b73106e21c6d8433c2132b024a2caae7527ec84541898d4f9c3db8202fccc3b5",
+      "anchor_helper_sha256": "93f243b9c20f9d9dea3314e2db1cf22e6ccd130801374a23c47e987900afa1a2",
+      "anchor_model_sha256": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03",
+      "embedded_config_sha256": "562c8e998ba99c3eec4becfec3c79964ae01a1e6c3f628b95015c4c76eec5805",
+      "journal_schema": "fresh-qsearch-selfplay-journal-v2",
+      "model_sha256": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03",
+      "original_deadline_epoch": 1791235580.0397933,
+      "phase": "epoch-action-ceiling",
+      "seed": 20262805,
+      "source_commit": "6fcc8b476d25495d1c9c413e55b2c7ba4794013e"
+    },
+    {
+      "actions": 8192,
+      "actor_config_sha256": "a3b5ac9f3933afdce858e60c0e383c9611dabd2be79e7dff128c490d6750591d",
+      "anchor_helper_sha256": "93f243b9c20f9d9dea3314e2db1cf22e6ccd130801374a23c47e987900afa1a2",
+      "anchor_model_sha256": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03",
+      "embedded_config_sha256": "d6a7c343ab28014706cdab976c6040df6c5e42756d4eebd4641e38398204c695",
+      "journal_schema": "fresh-qsearch-selfplay-journal-v2",
+      "model_sha256": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03",
+      "original_deadline_epoch": 1791235580.0397933,
+      "phase": "epoch-action-ceiling",
+      "seed": 20262806,
+      "source_commit": "6fcc8b476d25495d1c9c413e55b2c7ba4794013e"
+    }
+  ],
+  "reviewed_epoch": 1791228272.4364438,
+  "root_review_note": "Exactsamefourimmutableoriginalfiles/capsule/21chunkSHAs. Correct priorfailedv2 binding is actuallydispatched57a288... not originalunapprovedDRAFT300100...; latter preserved. NewPUBLICRelease route withinold1800clock, asset188of200/nooverwrite. No blockedAzure retrieval or proxybypass. Newapproval separatefromv2.",
+  "schema": "fresh8192-root-manifest-approval-v3",
+  "source_seals": {
+    ".github/workflows/fresh-final8192-release-capsule-v3.yml": "3f194a7ec459b3f9deaef262dd8f7fccf5bf2ebea16ee8beddef6651f53257c3",
+    "experiments/ufuk/fresh-final8192-release-capsule-v3/artifact_capsule.py": "44078a3aeea3a8bb1fecf387d5b3003efa0a7e85038b48ee145a2029f7ba15c5",
+    "experiments/ufuk/fresh-final8192-release-capsule-v3/native_delta_codec.py": "878868940b5bae15c182dce55215320b5f0ba3692b9c5eac26988204832a31d6",
+    "experiments/ufuk/fresh-final8192-release-capsule-v3/release_transport_frozen.py": "035821c943f0840fc02f0a2019516095bf9e43078a6843b745033456b20c7f7e"
+  },
+  "status": "ROOT-reviewed-prospectively-approved"
+}
