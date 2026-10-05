@@ -1,0 +1,12 @@
+{
+  "admitted": true,
+  "free_bytes": 551354368,
+  "full_actions": 2048,
+  "max_observed_tiny_journal_bytes": 557175,
+  "projected_output_bytes": 157309248.0,
+  "qualification_result_sha256": "3f0dd41866e5630d390aafdc9bbd2720e34ae751de8a2b4c06570f80c7d43158",
+  "required_bytes": 504399328.0,
+  "reserved_extra_native_bytes_per_job": 8388608,
+  "safety_factor": 1.5,
+  "tiny_actions": 256
+}
