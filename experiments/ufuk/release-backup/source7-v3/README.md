@@ -1,0 +1,7 @@
+# Source7 qualification public persistence v3
+
+Original sourcec022 fullshape900 FAILED; formal7 was not admitted. Positive59 CUDA units and tiny20-payload/journal replay checks remain separate infrastructure evidence. This stage preserves all8 closed native checkpoints (tinywhole/split0..2 and full0..1), journals, allfouroriginalinputs including33MiB curriculum and e8, helpers, and rawfailuremetadata.
+
+The approved129-file inventory was packaged once under its original600 ceiling:7.332 seconds,127,167,165 bytes, archiveSHA846446f3e64d7fde206c595dc50dcb8fce96fc6b2501af31fbb5186b599d64ee. All131regularmembers and originals-after-pack were hashchecked. Sourcec022 bundleSHA31bce444e0f046fdc1be5d49fd4df8f6846f3b414fa0476ff01ad3cc2a52317f is included. See actual-packaging-proof.json and approval. Compactfixture links originalfullinventoryb8e9; fullnative states remain in artifactfiles/publicarchive, not duplicated inGit. Executedowner raw2e4884 is preserved byteexact.
+
+Fixedsource7-v3 selects NEW128-asset manifest; old127/84 manifests and defaults remain unchanged. Aggregate200assets/8GiB caps remain. Newreadonly18089 owner expires06UTC. Public persistence is PENDING until every128asset passes fullanonymoussize/SHA Actionreadback. CUDA publicrestore helper remains UNEXECUTED; it performs restoredstrictnative load/save only, no training/nextupdate. No strength, eligibility, novelty or model-promotion claim.
