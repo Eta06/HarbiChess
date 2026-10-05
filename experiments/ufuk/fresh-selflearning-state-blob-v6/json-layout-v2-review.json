@@ -1,0 +1,36 @@
+{
+  "blob_sha1": "30720e4020cb4109790ef6b746419777d2a659b6",
+  "capsule_sha256": "66ef6b4f05a9ff3d404debb424d477860b2a7439c7ce51fe91c4c6d3399409ff",
+  "deadline_epoch": 1791235919.529188,
+  "files": {
+    "README.md": {
+      "bytes": 2494,
+      "sha256": "5525a7e596ae6df5170642c46d7ba20a851ea8293fc9ede8737bc0f8043b936e"
+    },
+    "blob_delivery_v6_v2.py": {
+      "bytes": 4300,
+      "sha256": "15252db8191d1704ea64c548795a0c804f4f99cae40e659e02ce5e77b715e68a"
+    },
+    "frozen-v1-executed.py.txt": {
+      "bytes": 4316,
+      "sha256": "88cff916764862606c3f1f1fd363671153a0ae1a163a0618832e8b6f05e5a4d6"
+    },
+    "test_json_layout_v2.py": {
+      "bytes": 5273,
+      "sha256": "ba0cf7a18df06bad1a5909e9d8c754356d51382617ab9c68576103c135d5e1d4"
+    }
+  },
+  "git_mutations": 0,
+  "network_requests": 0,
+  "new_max_json_bytes": 2723484,
+  "posts": 0,
+  "schema": "fresh-state-blob-json-layout-v2-review",
+  "started_epoch": 1791230519.529188,
+  "status": "ready-for-ROOT-copy-not-executed",
+  "tests": {
+    "AST_diff": "only_two_limit_assignments",
+    "passed": 13,
+    "ruff": "pass",
+    "skipped": 0
+  }
+}
