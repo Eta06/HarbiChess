@@ -1,0 +1,38 @@
+{
+  "approval_sha256": "425edf6a7e55f69930ecb7868691acee10c90fae79eed98d8d7cd268daac710f",
+  "executed_owner_sha256": "2e4884bf0beaf4de2170f9099dcdbe317fb0dc34ae35826db6431fdacc2bee5f",
+  "helper_sha256": "12fd782ff5bd4e3c1957980b3202f861e7cc97229daa825304208f3c7e8132e8",
+  "inventory_sha256": "b8e9b327487c5df3ade688c4ffbda86cd97ad267e00a5654834a8153e0d2533e",
+  "one_thread_gzip_and_git_pack": true,
+  "original600budget_reset": false,
+  "original_files_verified_after_pack": true,
+  "owner_result": {
+    "deadline_epoch": 1791167846.3326154,
+    "finished_epoch": 1791167253.66433,
+    "first_epoch": 1791167246.3326154,
+    "original_budget_reset": false,
+    "original_packaging_seconds": 600,
+    "owned_pid": 132798,
+    "returncode": 0,
+    "schema": "source7-public-pack-owned-original600-v1",
+    "status": "pass"
+  },
+  "owner_result_sha256": "01a5472eb3f31660b31dd58f59c5c2c6f40d3bdfc90b8a45f79bbd13648c34bf",
+  "pack_result": {
+    "archive": "/content/harbichess-runs/source7-public-backup-owned600-v3-20261005/package/sha256-846446f3e64d7fde206c595dc50dcb8fce96fc6b2501af31fbb5186b599d64ee.tar.gz",
+    "bytes": 127167165,
+    "finished_epoch": 1791167253.6404254,
+    "full_public_readback_verified": false,
+    "inventory_sha256": "b8e9b327487c5df3ade688c4ffbda86cd97ad267e00a5654834a8153e0d2533e",
+    "member_count": 131,
+    "original_deadline_epoch": 1791167846.3326154,
+    "sha256": "846446f3e64d7fde206c595dc50dcb8fce96fc6b2501af31fbb5186b599d64ee",
+    "source_commit": "c022bc1605b44c3089439da5c6efb7bd4db4ff81",
+    "status": "closed-source7-explicit-archive-pack-pass"
+  },
+  "pack_result_sha256": "e8ad937e5337f85cf3a3315a0a8a82cf639d73a921ee16edf8a1930c11358dc7",
+  "schema": "source7-explicit-qualified-and-failed-archive-local-proof-v1",
+  "scope": "Bytepackonly; source7full900failed, noformal7admission/strength/CUDArestoreclaim",
+  "source7_fullshape_failed_result_sha256": "7282af0b37f2da04d2686e52ef4aef10287ec1562a37db5bc5252ba853a196a2",
+  "status": "packaging-pass-public-readback-pending"
+}
