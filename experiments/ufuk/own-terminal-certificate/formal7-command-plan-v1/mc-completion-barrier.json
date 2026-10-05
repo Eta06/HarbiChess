@@ -1,0 +1,29 @@
+{
+  "coordinator_sha256": "686265b09284d1e8c879406510910991d2d8f1a71bf60b610372eac00e76e100",
+  "latency_receipt": {
+    "path": "/content/harbichess-runs/fullgame-confirmation3-posttraining-recovery-v2/latency.json",
+    "sha256": "e605b2f573f73b6f0859e7fffceb52455401e7d8561479f83bce798e5ae2d5bb"
+  },
+  "process_receipts": [
+    {
+      "path": "/content/harbichess-runs/fullgame-confirmation3-posttraining-recovery-v2/replay-20261205-process-result.json",
+      "sha256": "e15944a1708aa83e5d8f134e908eeca512cc925365639f00cd9e0094db8e626e"
+    },
+    {
+      "path": "/content/harbichess-runs/fullgame-confirmation3-posttraining-recovery-v2/replay-20261206-process-result.json",
+      "sha256": "a019cb17a7f115681798481c613c447e286bffab60df39d4a6a373d4434a5ce5"
+    },
+    {
+      "path": "/content/harbichess-runs/fullgame-confirmation3-posttraining-recovery-v2/eligibility-process-result.json",
+      "sha256": "bc418686025f594984e8b2521e4da2124b0e375546f4989227562414d52ab528"
+    },
+    {
+      "path": "/content/harbichess-runs/fullgame-confirmation3-posttraining-recovery-v2/cuda-parity-process-result.json",
+      "sha256": "7a0a5c142f0eca6c4d84a61848bc120f07abd38639398926da555a47cbec078e"
+    },
+    {
+      "path": "/content/harbichess-runs/fullgame-confirmation3-posttraining-recovery-v2/latency-process-result.json",
+      "sha256": "7c9a6f7c6936d012e00567edef7e21c5ae9c0a5f80a8591f10012ca2535a7b50"
+    }
+  ]
+}
