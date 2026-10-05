@@ -1,0 +1,125 @@
+{
+  "schema": "cpu-aligned-acting-development-v1",
+  "stage": "UFUK-ALIGN",
+  "scope": "fresh own-search/selfplay learning diagnostic; no original closedMAX8 reset, no strength success or originality assumption",
+  "source_commit": "1e26d663b9d748e2c6afed5b74914a9dd88a21fe",
+  "hypothesis": "With same e8/source semantics/book/budgets/objective, actor_mu=.9selectedpointmass+.1shieldedsearchpolicy is closer to deterministicfinalS16selection; may make ownterminaltargets more useful. Causal strength benefit unproven; no newteacherqueries or noveltyclaim",
+  "hypothesis64": "No64simnewarm; all16oldtwo-seedcontrols reused as frozen known-development controls",
+  "control": "Reuse closed/audited oldall16 final3 fromsource4cae with exactsameinitiale8/book/seed/actors/2048actions\u00d73/optimizer. Legacyzero-mixture actualunittrace/modelbyteidentical; sourceSHA differs and no fulloldCLIreproducer rerunclaimed. Known screenresults alreadyseen; this is prospective development, not virgin blinded formalconfirmation. No duplicatedcontroltraining countedasnewmoves",
+  "known_complications": "dense targets cause more optimizer minibatches at fixed passes, so density includes supervision/update amount, not compute-matched pure causal effect; every wall-time/updates/search nodes recorded. Epoch-tail/caps stayUNKNOWN; stochastic actor sampling still differs from deterministic evaluation",
+  "literature": "standard AlphaZero/Gumbel expert iteration search-at-every-move design; no novelty or learned rule/world-model claim. Earlier published research notes remain source references",
+  "initial_e8_sha256": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03",
+  "book": {
+    "path": "/workspace/work/harbichess/own-terminal-curriculum-stage/own-terminal-book-final.json",
+    "sha256": "1a5ca17664a828d669e58cf2bd5d9eeb7f980b83f20d3a4031d36e4ff0930ccb",
+    "origin": "previous own-terminal curriculum plus ordinary TRAIN openings, unchanged; external human opening histories are starts, not newly queried teacher continuation labels"
+  },
+  "configs": {
+    "20262105-greedy90": {
+      "actors": {
+        "games": 8,
+        "temperature": 1.0,
+        "max_additional_plies": 256,
+        "claim_draw": true
+      },
+      "device": "cpu",
+      "epoch_steps": 256,
+      "learning_rate": 2.5e-05,
+      "objective": {
+        "behavior_kl_stop": 0.02,
+        "policy_anchor_weight": 0.03,
+        "policy_weight": 1.0,
+        "value_anchor_weight": 0.02,
+        "value_weight": 0.2
+      },
+      "schedule": {
+        "max_gradient_norm": 5.0,
+        "minibatch_size": 128,
+        "passes": 4
+      },
+      "search": {
+        "block_plies": 1,
+        "gumbel_scale": 0.0,
+        "max_considered_actions": 4,
+        "maxvisit_init": 50.0,
+        "simulations": 16,
+        "value_scale": 0.1,
+        "greedy_fraction": 0.9
+      },
+      "seed": 20262105,
+      "weight_decay": 0.0001
+    },
+    "20262106-greedy90": {
+      "actors": {
+        "games": 8,
+        "temperature": 1.0,
+        "max_additional_plies": 256,
+        "claim_draw": true
+      },
+      "device": "cpu",
+      "epoch_steps": 256,
+      "learning_rate": 2.5e-05,
+      "objective": {
+        "behavior_kl_stop": 0.02,
+        "policy_anchor_weight": 0.03,
+        "policy_weight": 1.0,
+        "value_anchor_weight": 0.02,
+        "value_weight": 0.2
+      },
+      "schedule": {
+        "max_gradient_norm": 5.0,
+        "minibatch_size": 128,
+        "passes": 4
+      },
+      "search": {
+        "block_plies": 1,
+        "gumbel_scale": 0.0,
+        "max_considered_actions": 4,
+        "maxvisit_init": 50.0,
+        "simulations": 16,
+        "value_scale": 0.1,
+        "greedy_fraction": 0.9
+      },
+      "seed": 20262106,
+      "weight_decay": 0.0001
+    }
+  },
+  "epochs": 3,
+  "fresh_transitions_per_seed_arm": 6144,
+  "checkpoint_interval": 3,
+  "qualification": "actualCLIwhole2/pause1/freshresume2 allsearch16greedy90 with20byteartifacts/all6strictnativeopens inoriginal600s. Version5mu receipts separatefromsearchtargets; notoldtimerreset",
+  "qualification_config_sha256": "b210d2f469d890926a2d2213b00c73b3f4bb204c3fe3ea9685da685ecb348c0a",
+  "fit_original_seconds_per_job": 5400,
+  "fit_whole_seconds": 18000,
+  "max_concurrent_jobs": 2,
+  "threads": 1,
+  "memory_policy": "inactive-file-v1",
+  "memory_max_bytes": 16106127360,
+  "disk_min_free_bytes": 268435456,
+  "resource_admission": "after tiny control use measured compressedjournal/native sizes to estimate6\u00d73epoch disk; requirefree disk>=1.5\u00d7projected output+256MiB, else do not admit all6. Preserve every old file; no deleting/checkpoint corruption or silently smallerfixedruns",
+  "data_audit": "Freshstrictnative0/3/alljournals/sourcechain/schedule/actualsampledmu/alllegalityterminalmoverUNKNOWN/certificates. Sharedvalidator notindependentNNsearchrerun; originalformalrequirementretained",
+  "learning_feasibility": "nonzero acceptedupdates and model storage changed for bothseeds; caps/tails excluded. Fitloss alone cannot advance claim",
+  "development_arena": "Freshinitiale8SF baseline perseed then fixedfinal3greedy90 versusinitiale8 andSF512, sameknown8rootcolorpairs:96games total; originalfrozen screenunchanged, beforeoutcomes registerfullarenaprotocol. Oldall16 comparative scores retained separately, nobestmodel selection",
+  "diagnostic_gate": "bothseeds direct score>0.60, SFpairedgain>0.10, finalSFscore>=0.25, caps<=0.05. Failure staysfailure; passing diagnostic still requires fresh independent unchanged stricter statistical/latency gates",
+  "no_new_teacher_labels": true,
+  "GPU_used": false,
+  "failure": "preserve logs/checkpoints/original clocks; a methodfails, not relabelresults or relaxthresholds; no expensive duplicate arena if exact0-update e8 restored, disclosefutilitydeviation",
+  "versioning": "SixfieldlegacyOwnSearchConfig unchanged; explicitnewgreedy_fraction usesGreedyOwnSearchConfig and v5actingledger. NativeCPUv3 remains fullmodel/Adam/RNG/replay with exactsource/config/ledgerbinding; nooldcheckpointrewritten. Oldfullresume throughimmutable4cae source, portableweights-only is notfullresume. MLXnetwork/encoder/searchunchanged; Applehardwareuntested",
+  "greedy_fraction": 0.9,
+  "frozen_controls": [
+    {
+      "seed": 20262105,
+      "run": "/workspace/work/harbichess/cpu-search-density-v1-actual/fits/20262105-all16",
+      "source_commit": "4cae08522ac940746cf9127ca8ce4a6b63a47408",
+      "final_model_sha256": "18c674f83238c8128199ec0b1e6e30bfdca64013284e1da5158817ff56fb70ba",
+      "audit_sha256": "4b2192445301f8c62596c5a681de3cd40e1e9b5e0b2946e5ab8490879009939d"
+    },
+    {
+      "seed": 20262106,
+      "run": "/workspace/work/harbichess/cpu-search-density-v1-actual/fits/20262106-all16",
+      "source_commit": "4cae08522ac940746cf9127ca8ce4a6b63a47408",
+      "final_model_sha256": "0833fa276185147057df0fff32f339aa69797d4ef9b2f0bdfe9b7d241ac24e4c",
+      "audit_sha256": "31b503a27e3f1148bfed678db75dbabf7d0ffa578e7bdf1dc50878219405b9f5"
+    }
+  ]
+}
