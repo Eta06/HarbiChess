@@ -1,0 +1,66 @@
+{
+  "schema": "fresh-additive-independent-2048-readiness-v1",
+  "trainer_sha256": "1df7a208a0708e8f8584eb4a696aa3013381c1b54ccaafea3eb832e625ef7c2e",
+  "journal_helper_sha256": "afb3ffa3c196b9da2ceb1b8000c67ae0c2781e7ffd65a950b59bed5b674c6079",
+  "scope": "Read-only all2048 legal/mover/outcome/actorRNG; no NN packet recomputation, fit, inference, or matches. Validation trajectory-disjoint only; common initial root and state overlaps remain.",
+  "seeds": [
+    {
+      "seed": 20262805,
+      "journal": "/dev/shm/harbichess-fresh-E0-20262805/actions-00002048.json.gz",
+      "journal_sha256": "8109c074a9e084f33ec8d9a6c4b062eb3c57e8b6e8d897e03bd39dc8261dea8f",
+      "actor_config_sha256": "b73106e21c6d8433c2132b024a2caae7527ec84541898d4f9c3db8202fccc3b5",
+      "actions": 2048,
+      "completed_games": 24,
+      "known_completed_games": 24,
+      "unknown_completed_games": 0,
+      "active_rows": 37,
+      "excluded_games": [],
+      "duplicate_aliases": 0,
+      "eligible_distinct_trajectories": 24,
+      "eligible_known_rows": 2011,
+      "training_trajectories": 20,
+      "training_rows": 1740,
+      "validation_trajectories": 4,
+      "validation_rows": 271,
+      "derived_updates": 27,
+      "mover_label_counts": {
+        "0": 829,
+        "1": 364,
+        "2": 818
+      },
+      "eligible": true,
+      "whole8_proof_possible": true,
+      "legal_and_actor_rng_replay": "PASS",
+      "neural_packets_recomputed": false
+    },
+    {
+      "seed": 20262806,
+      "journal": "/dev/shm/harbichess-fresh-E0-20262806/actions-00002048.json.gz",
+      "journal_sha256": "df515e393e97065cd4828ceacccc7628ea04091643c16296009f48f1b9e01645",
+      "actor_config_sha256": "a3b5ac9f3933afdce858e60c0e383c9611dabd2be79e7dff128c490d6750591d",
+      "actions": 2048,
+      "completed_games": 16,
+      "known_completed_games": 16,
+      "unknown_completed_games": 0,
+      "active_rows": 46,
+      "excluded_games": [],
+      "duplicate_aliases": 0,
+      "eligible_distinct_trajectories": 16,
+      "eligible_known_rows": 2002,
+      "training_trajectories": 13,
+      "training_rows": 1493,
+      "validation_trajectories": 3,
+      "validation_rows": 509,
+      "derived_updates": 23,
+      "mover_label_counts": {
+        "0": 399,
+        "1": 1210,
+        "2": 393
+      },
+      "eligible": true,
+      "whole8_proof_possible": true,
+      "legal_and_actor_rng_replay": "PASS",
+      "neural_packets_recomputed": false
+    }
+  ]
+}
