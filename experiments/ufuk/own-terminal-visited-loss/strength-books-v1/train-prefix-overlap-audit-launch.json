@@ -1,0 +1,14 @@
+{
+  "status": "running-read-only-audit",
+  "remote_pid": "137134",
+  "remote_scratch": "/tmp/own8-overlap-1791168087",
+  "candidate_root_count": 96,
+  "book_sha256": [
+    "6d860c4c9a08914a50c6dfe59623f32755cd5185ccc68e3a52645f41efbd6252",
+    "a2885098be18e8a9e45a5ac003f89a504e50877074c80fe809f01f23443aa9ff"
+  ],
+  "launched_epoch": 1791168089.906102,
+  "absolute_local_audit_deadline_epoch": 1791168689.906102,
+  "remote_script_sha256": "692af8c6e6f206c1c23f2433c0f65f0ecb91e8404bb7793b7f1354cdbd7e97c0",
+  "no_jobs_models_or_engines": true
+}
