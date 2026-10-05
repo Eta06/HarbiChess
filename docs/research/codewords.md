@@ -1337,3 +1337,7 @@ borcudur; mevcut MLX yolu korunur. Prefix başarı veya promotion anlamına gelm
 ## UFUK-BACKUP
 
 5October2026 byteexact offlineCPU native3filecapsules via22serial sealedpublicActions inputs to existingRelease. Parent/model tensorcontentcopies plusliteralremainingbytes; originalAdam/RNG/dataset/native/source retained. Publicationnotpromotion orfullactorresume. IndependentanonymousSHAreadback and strictreadonlyrestore receipts required.
+
+## UFUK-FRESH
+
+- **UFUK-FRESH** (2026-10-05, CPU-only): fixed fresh Q512/q2 ownplay under frozenE8, v2 anchors/actualbehavior search separate, UNKNOWN excluded, protected whole-game exclusions and exact realizedtrajectory-dedup/internal split. Native v2 selfplay is actor/RNG/unfinishedgame complete; trainingnative is separate offline head/Adam/global+samplerRNG/input-bound resume. Baseline is teacher-origin E8, no newteacherqueries. MC, own-search-consistency and fullcritic alternatives use fixedfinal8192 data and unchanged independent strengthgate; standardmechanisms/no noveltyclaim. Actualtwo-seed whole8/pause4/freshresume8/all6native each passed149.081s onoriginal600clock, infrastructureonly.
