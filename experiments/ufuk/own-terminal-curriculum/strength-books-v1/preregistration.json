@@ -1,0 +1,81 @@
+{
+  "schema": "ownterminal-family6-virgin-roots-prereg-v2",
+  "qualification_ledger_slot": 6,
+  "status": "roots-only-no-games-no-model-queries",
+  "selection_seeds": [
+    20261705,
+    20261706
+  ],
+  "training_seed_map": {
+    "20261705": 20261625,
+    "20261706": 20261626
+  },
+  "source_pin": {
+    "consumer_repo_commit": "635413e426ef5b09cb76073c0955898912247466",
+    "pgn_sha256": "5b8c29f91628ed27d468dc6355bf3eaad98a03bcdf638c32f3c3106bff162c8a"
+  },
+  "train_candidate_book_sha256": "1a5ca17664a828d669e58cf2bd5d9eeb7f980b83f20d3a4031d36e4ff0930ccb",
+  "curriculum_training_exclusions_sha256": "066d060f037fd6eb188df0c2ad0d1071a80043371a237d516698453b14a9e4a1",
+  "prior_exclusion_union": "Allmethod5 inheritedexclusions, bothmethod4/5 books and fullprefixes, allhistoricalteacher/TRAIN/arena sourceIDs and root/fullprefixes, source231TRAIN32 allpre/postkeys INCLUDING UNKNOWN; real origin sourceIDs retained (virtualaliases cannot bypass exclusions). Newsecondbook alsoexcludesfirstfamily6 source/fullprefixes. Plus complete main40-exclusions-v2 union: ALL80 journals across both20261205/06 epochs1..40;2,621,440 fresh transitions includingUNKNOWN,2,581,543 unique pre/post keys and4096 underlying originalTRAIN source IDs. This amendment is frozen BEFORE either seed selection.",
+  "per_seed_selection_ceiling_seconds": 600,
+  "per_seed_total_with_independent_replay_ceiling_seconds": 900,
+  "prospective_gate": "exact48distinctsource-record roots/colors perseed; alloriginalPGNhash/rules/Elo2000/TC60/selectedply16,24,32,48,64,96/nonterminal invariants",
+  "no_training_admission_or_outcome_claim": true,
+  "all_main40_train_exclusions": {
+    "path": "/workspace/work/harbichess/family6-strength-books/main40-exclusions-v2/exclusions.json",
+    "sha256": "377b31c49603072de29475afdd8e26d84a62ebd24b7fb9a88185affd45f2e3fd",
+    "status": "pass-all80-exact-TRAIN-fullhistory-journals",
+    "journal_count": 80,
+    "source_training_seeds": [
+      20261205,
+      20261206
+    ],
+    "epochs_per_seed": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39,
+      40
+    ],
+    "fresh_transitions_examined": 2621440,
+    "unique_pre_post_position_keys": 2581543,
+    "underlying_original_TRAIN_source_ids": 4096,
+    "includes_unknown": true,
+    "exclusion_policy": "ALL observed pre/post fullhistory position keys and real original TRAIN source IDs, no outcome filtering"
+  }
+}
