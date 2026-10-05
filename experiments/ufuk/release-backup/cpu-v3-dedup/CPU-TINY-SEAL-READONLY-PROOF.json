@@ -1,0 +1,200 @@
+{
+  "archive_compressed_conservative_upper_bound_bytes": 368389118,
+  "bundle_archive_reserve_required_bytes": 786138999,
+  "byte_exact_receipt_entries_verified": 20,
+  "conservative_disk_headroom_check": true,
+  "estimated_stored_source_object_bytes": 33725601,
+  "files": 106,
+  "free_bytes_observed": 1169776640,
+  "full_source_bundle_generated": false,
+  "native_input_geometry_checks": [
+    {
+      "input": "book",
+      "manifest": "/workspace/work/harbichess/cpu-contingency-actual-cli-0343/whole/checkpoints/epoch-00000000/checkpoint.json",
+      "original_target": "/workspace/work/harbichess/own-terminal-curriculum-stage/own-terminal-book-final.json",
+      "restored_target": "/restore-root/workspace/work/harbichess/own-terminal-curriculum-stage/own-terminal-book-final.json",
+      "sha256": "1a5ca17664a828d669e58cf2bd5d9eeb7f980b83f20d3a4031d36e4ff0930ccb"
+    },
+    {
+      "input": "experiment_config",
+      "manifest": "/workspace/work/harbichess/cpu-contingency-actual-cli-0343/whole/checkpoints/epoch-00000000/checkpoint.json",
+      "original_target": "/workspace/HarbiChess/experiments/ufuk/cpu-contingency-v1/tiny-config.json",
+      "restored_target": "/restore-root/workspace/HarbiChess/experiments/ufuk/cpu-contingency-v1/tiny-config.json",
+      "sha256": "1ec162669b245380e4412c5ad4c45911bd982666e2b555d2e4fab0f8067550ff"
+    },
+    {
+      "input": "initial_weights",
+      "manifest": "/workspace/work/harbichess/cpu-contingency-actual-cli-0343/whole/checkpoints/epoch-00000000/checkpoint.json",
+      "original_target": "/workspace/work/harbichess/a100/restoration/local-rehearsal-content/harbichess-inputs/initial-e8.safetensors",
+      "restored_target": "/restore-root/workspace/work/harbichess/a100/restoration/local-rehearsal-content/harbichess-inputs/initial-e8.safetensors",
+      "sha256": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03"
+    },
+    {
+      "input": "protocol",
+      "manifest": "/workspace/work/harbichess/cpu-contingency-actual-cli-0343/whole/checkpoints/epoch-00000000/checkpoint.json",
+      "original_target": "/workspace/HarbiChess/experiments/ufuk/cpu-contingency-v1/protocol.json",
+      "restored_target": "/restore-root/workspace/HarbiChess/experiments/ufuk/cpu-contingency-v1/protocol.json",
+      "sha256": "b557d57940babdfd73be6aef565e986eead769ecf7560cd49ae361f33420ef84"
+    },
+    {
+      "input": "book",
+      "manifest": "/workspace/work/harbichess/cpu-contingency-actual-cli-0343/whole/checkpoints/epoch-00000001/checkpoint.json",
+      "original_target": "/workspace/work/harbichess/own-terminal-curriculum-stage/own-terminal-book-final.json",
+      "restored_target": "/restore-root/workspace/work/harbichess/own-terminal-curriculum-stage/own-terminal-book-final.json",
+      "sha256": "1a5ca17664a828d669e58cf2bd5d9eeb7f980b83f20d3a4031d36e4ff0930ccb"
+    },
+    {
+      "input": "experiment_config",
+      "manifest": "/workspace/work/harbichess/cpu-contingency-actual-cli-0343/whole/checkpoints/epoch-00000001/checkpoint.json",
+      "original_target": "/workspace/HarbiChess/experiments/ufuk/cpu-contingency-v1/tiny-config.json",
+      "restored_target": "/restore-root/workspace/HarbiChess/experiments/ufuk/cpu-contingency-v1/tiny-config.json",
+      "sha256": "1ec162669b245380e4412c5ad4c45911bd982666e2b555d2e4fab0f8067550ff"
+    },
+    {
+      "input": "initial_weights",
+      "manifest": "/workspace/work/harbichess/cpu-contingency-actual-cli-0343/whole/checkpoints/epoch-00000001/checkpoint.json",
+      "original_target": "/workspace/work/harbichess/a100/restoration/local-rehearsal-content/harbichess-inputs/initial-e8.safetensors",
+      "restored_target": "/restore-root/workspace/work/harbichess/a100/restoration/local-rehearsal-content/harbichess-inputs/initial-e8.safetensors",
+      "sha256": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03"
+    },
+    {
+      "input": "protocol",
+      "manifest": "/workspace/work/harbichess/cpu-contingency-actual-cli-0343/whole/checkpoints/epoch-00000001/checkpoint.json",
+      "original_target": "/workspace/HarbiChess/experiments/ufuk/cpu-contingency-v1/protocol.json",
+      "restored_target": "/restore-root/workspace/HarbiChess/experiments/ufuk/cpu-contingency-v1/protocol.json",
+      "sha256": "b557d57940babdfd73be6aef565e986eead769ecf7560cd49ae361f33420ef84"
+    },
+    {
+      "input": "book",
+      "manifest": "/workspace/work/harbichess/cpu-contingency-actual-cli-0343/whole/checkpoints/epoch-00000002/checkpoint.json",
+      "original_target": "/workspace/work/harbichess/own-terminal-curriculum-stage/own-terminal-book-final.json",
+      "restored_target": "/restore-root/workspace/work/harbichess/own-terminal-curriculum-stage/own-terminal-book-final.json",
+      "sha256": "1a5ca17664a828d669e58cf2bd5d9eeb7f980b83f20d3a4031d36e4ff0930ccb"
+    },
+    {
+      "input": "experiment_config",
+      "manifest": "/workspace/work/harbichess/cpu-contingency-actual-cli-0343/whole/checkpoints/epoch-00000002/checkpoint.json",
+      "original_target": "/workspace/HarbiChess/experiments/ufuk/cpu-contingency-v1/tiny-config.json",
+      "restored_target": "/restore-root/workspace/HarbiChess/experiments/ufuk/cpu-contingency-v1/tiny-config.json",
+      "sha256": "1ec162669b245380e4412c5ad4c45911bd982666e2b555d2e4fab0f8067550ff"
+    },
+    {
+      "input": "initial_weights",
+      "manifest": "/workspace/work/harbichess/cpu-contingency-actual-cli-0343/whole/checkpoints/epoch-00000002/checkpoint.json",
+      "original_target": "/workspace/work/harbichess/a100/restoration/local-rehearsal-content/harbichess-inputs/initial-e8.safetensors",
+      "restored_target": "/restore-root/workspace/work/harbichess/a100/restoration/local-rehearsal-content/harbichess-inputs/initial-e8.safetensors",
+      "sha256": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03"
+    },
+    {
+      "input": "protocol",
+      "manifest": "/workspace/work/harbichess/cpu-contingency-actual-cli-0343/whole/checkpoints/epoch-00000002/checkpoint.json",
+      "original_target": "/workspace/HarbiChess/experiments/ufuk/cpu-contingency-v1/protocol.json",
+      "restored_target": "/restore-root/workspace/HarbiChess/experiments/ufuk/cpu-contingency-v1/protocol.json",
+      "sha256": "b557d57940babdfd73be6aef565e986eead769ecf7560cd49ae361f33420ef84"
+    },
+    {
+      "input": "book",
+      "manifest": "/workspace/work/harbichess/cpu-contingency-actual-cli-0343/split/checkpoints/epoch-00000000/checkpoint.json",
+      "original_target": "/workspace/work/harbichess/own-terminal-curriculum-stage/own-terminal-book-final.json",
+      "restored_target": "/restore-root/workspace/work/harbichess/own-terminal-curriculum-stage/own-terminal-book-final.json",
+      "sha256": "1a5ca17664a828d669e58cf2bd5d9eeb7f980b83f20d3a4031d36e4ff0930ccb"
+    },
+    {
+      "input": "experiment_config",
+      "manifest": "/workspace/work/harbichess/cpu-contingency-actual-cli-0343/split/checkpoints/epoch-00000000/checkpoint.json",
+      "original_target": "/workspace/HarbiChess/experiments/ufuk/cpu-contingency-v1/tiny-config.json",
+      "restored_target": "/restore-root/workspace/HarbiChess/experiments/ufuk/cpu-contingency-v1/tiny-config.json",
+      "sha256": "1ec162669b245380e4412c5ad4c45911bd982666e2b555d2e4fab0f8067550ff"
+    },
+    {
+      "input": "initial_weights",
+      "manifest": "/workspace/work/harbichess/cpu-contingency-actual-cli-0343/split/checkpoints/epoch-00000000/checkpoint.json",
+      "original_target": "/workspace/work/harbichess/a100/restoration/local-rehearsal-content/harbichess-inputs/initial-e8.safetensors",
+      "restored_target": "/restore-root/workspace/work/harbichess/a100/restoration/local-rehearsal-content/harbichess-inputs/initial-e8.safetensors",
+      "sha256": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03"
+    },
+    {
+      "input": "protocol",
+      "manifest": "/workspace/work/harbichess/cpu-contingency-actual-cli-0343/split/checkpoints/epoch-00000000/checkpoint.json",
+      "original_target": "/workspace/HarbiChess/experiments/ufuk/cpu-contingency-v1/protocol.json",
+      "restored_target": "/restore-root/workspace/HarbiChess/experiments/ufuk/cpu-contingency-v1/protocol.json",
+      "sha256": "b557d57940babdfd73be6aef565e986eead769ecf7560cd49ae361f33420ef84"
+    },
+    {
+      "input": "book",
+      "manifest": "/workspace/work/harbichess/cpu-contingency-actual-cli-0343/split/checkpoints/epoch-00000001/checkpoint.json",
+      "original_target": "/workspace/work/harbichess/own-terminal-curriculum-stage/own-terminal-book-final.json",
+      "restored_target": "/restore-root/workspace/work/harbichess/own-terminal-curriculum-stage/own-terminal-book-final.json",
+      "sha256": "1a5ca17664a828d669e58cf2bd5d9eeb7f980b83f20d3a4031d36e4ff0930ccb"
+    },
+    {
+      "input": "experiment_config",
+      "manifest": "/workspace/work/harbichess/cpu-contingency-actual-cli-0343/split/checkpoints/epoch-00000001/checkpoint.json",
+      "original_target": "/workspace/HarbiChess/experiments/ufuk/cpu-contingency-v1/tiny-config.json",
+      "restored_target": "/restore-root/workspace/HarbiChess/experiments/ufuk/cpu-contingency-v1/tiny-config.json",
+      "sha256": "1ec162669b245380e4412c5ad4c45911bd982666e2b555d2e4fab0f8067550ff"
+    },
+    {
+      "input": "initial_weights",
+      "manifest": "/workspace/work/harbichess/cpu-contingency-actual-cli-0343/split/checkpoints/epoch-00000001/checkpoint.json",
+      "original_target": "/workspace/work/harbichess/a100/restoration/local-rehearsal-content/harbichess-inputs/initial-e8.safetensors",
+      "restored_target": "/restore-root/workspace/work/harbichess/a100/restoration/local-rehearsal-content/harbichess-inputs/initial-e8.safetensors",
+      "sha256": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03"
+    },
+    {
+      "input": "protocol",
+      "manifest": "/workspace/work/harbichess/cpu-contingency-actual-cli-0343/split/checkpoints/epoch-00000001/checkpoint.json",
+      "original_target": "/workspace/HarbiChess/experiments/ufuk/cpu-contingency-v1/protocol.json",
+      "restored_target": "/restore-root/workspace/HarbiChess/experiments/ufuk/cpu-contingency-v1/protocol.json",
+      "sha256": "b557d57940babdfd73be6aef565e986eead769ecf7560cd49ae361f33420ef84"
+    },
+    {
+      "input": "book",
+      "manifest": "/workspace/work/harbichess/cpu-contingency-actual-cli-0343/split/checkpoints/epoch-00000002/checkpoint.json",
+      "original_target": "/workspace/work/harbichess/own-terminal-curriculum-stage/own-terminal-book-final.json",
+      "restored_target": "/restore-root/workspace/work/harbichess/own-terminal-curriculum-stage/own-terminal-book-final.json",
+      "sha256": "1a5ca17664a828d669e58cf2bd5d9eeb7f980b83f20d3a4031d36e4ff0930ccb"
+    },
+    {
+      "input": "experiment_config",
+      "manifest": "/workspace/work/harbichess/cpu-contingency-actual-cli-0343/split/checkpoints/epoch-00000002/checkpoint.json",
+      "original_target": "/workspace/HarbiChess/experiments/ufuk/cpu-contingency-v1/tiny-config.json",
+      "restored_target": "/restore-root/workspace/HarbiChess/experiments/ufuk/cpu-contingency-v1/tiny-config.json",
+      "sha256": "1ec162669b245380e4412c5ad4c45911bd982666e2b555d2e4fab0f8067550ff"
+    },
+    {
+      "input": "initial_weights",
+      "manifest": "/workspace/work/harbichess/cpu-contingency-actual-cli-0343/split/checkpoints/epoch-00000002/checkpoint.json",
+      "original_target": "/workspace/work/harbichess/a100/restoration/local-rehearsal-content/harbichess-inputs/initial-e8.safetensors",
+      "restored_target": "/restore-root/workspace/work/harbichess/a100/restoration/local-rehearsal-content/harbichess-inputs/initial-e8.safetensors",
+      "sha256": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03"
+    },
+    {
+      "input": "protocol",
+      "manifest": "/workspace/work/harbichess/cpu-contingency-actual-cli-0343/split/checkpoints/epoch-00000002/checkpoint.json",
+      "original_target": "/workspace/HarbiChess/experiments/ufuk/cpu-contingency-v1/protocol.json",
+      "restored_target": "/restore-root/workspace/HarbiChess/experiments/ufuk/cpu-contingency-v1/protocol.json",
+      "sha256": "b557d57940babdfd73be6aef565e986eead769ecf7560cd49ae361f33420ef84"
+    }
+  ],
+  "native_manifests_validated": 6,
+  "native_prefixes": {
+    "split": [
+      0,
+      1,
+      2
+    ],
+    "whole": [
+      0,
+      1,
+      2
+    ]
+  },
+  "network_requests": false,
+  "original_file_bytes": 66048962,
+  "pack_executed": false,
+  "runmetadata_input_geometry_checks": 8,
+  "schema": "cpu-tiny-explicit-seal-draft-review-v1",
+  "source_bundle_upper_bound_bytes": 283532153,
+  "status": "read-only-checks-pass-PENDING-ROOT-APPROVAL"
+}
