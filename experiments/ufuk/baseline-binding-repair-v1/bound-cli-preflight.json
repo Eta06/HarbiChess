@@ -1,0 +1,40 @@
+{
+  "observed_epoch": 1791159699.2522626,
+  "adapter_sha256": "2ce42f3c7aff189537ecf17f44cb7aceb4a27aae73e404f411ce6208d5c76c21",
+  "tests": [
+    {
+      "seed": 20261425,
+      "returncode": 0,
+      "stderr": "",
+      "help_present": true,
+      "original_controller_sha256": "753af419289206326e23a4f24e77f9514dd3ef812a6edcd06fe2c2ffdb224a7f",
+      "q_sha256": "3936d64fea439f5b733f8b1a2f548136e685b09e69d0a9274c0406e70d38173c"
+    },
+    {
+      "seed": 20261426,
+      "returncode": 0,
+      "stderr": "",
+      "help_present": true,
+      "original_controller_sha256": "753af419289206326e23a4f24e77f9514dd3ef812a6edcd06fe2c2ffdb224a7f",
+      "q_sha256": "3936d64fea439f5b733f8b1a2f548136e685b09e69d0a9274c0406e70d38173c"
+    },
+    {
+      "seed": 20261525,
+      "returncode": 0,
+      "stderr": "",
+      "help_present": true,
+      "original_controller_sha256": "8a2d88446bbe7397d94161d5041941937b2618e5efce2871c916b56507170e71",
+      "q_sha256": "5fa34fdc69a49b78fecae17ee9ade86da994c548bbda81473d86c454c6cc733a"
+    },
+    {
+      "seed": 20261526,
+      "returncode": 0,
+      "stderr": "",
+      "help_present": true,
+      "original_controller_sha256": "8a2d88446bbe7397d94161d5041941937b2618e5efce2871c916b56507170e71",
+      "q_sha256": "5fa34fdc69a49b78fecae17ee9ade86da994c548bbda81473d86c454c6cc733a"
+    }
+  ],
+  "status": "pass-four-original-bound-cli-help",
+  "scope": "Control-only missing seed export. Frozen controller/helper/Q bytes unchanged; all four original baseline clocks and arenas unchanged. No candidate, strength threshold or training mutation."
+}
