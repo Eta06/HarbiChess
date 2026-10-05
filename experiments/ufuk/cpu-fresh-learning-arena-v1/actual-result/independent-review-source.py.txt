@@ -1,0 +1,127 @@
+"""Separate224 exact-rules/count/gate replay; no model/search/engine queries."""
+import collections
+import hashlib
+import json
+import math
+import os
+import sys
+import time
+from pathlib import Path
+import chess
+STUDY=Path('/workspace/HarbiChess/experiments/ufuk/cpu-fresh-learning-arena-v1')
+ARENA=Path('/dev/shm/harbichess-fresh-learning-arena-v1-20261005/arena')
+FIRST=1791234502.0633478
+END=FIRST+900
+
+def sha(path):
+ h=hashlib.sha256()
+ with Path(path).open('rb') as f:
+  for b in iter(lambda:f.read(2**20),b''):h.update(b)
+ return h.hexdigest()
+
+def main():
+ os.sched_setaffinity(0,{min(os.sched_getaffinity(0))})
+ sys.path.insert(0,'/workspace/work/harbichess/cpu-additive-source-6fcc8b4/src')
+ from harbichess.training.cgroup_budget import CgroupMemoryBudget
+ budget=CgroupMemoryBudget(15*2**30)
+ def guard():
+  if not FIRST<=time.time()<END:raise TimeoutError('original900 auditclock')
+  budget.check()
+ guard()
+ p=json.loads((STUDY/'protocol.json').read_text());protocolsha=sha(STUDY/'protocol.json')
+ f=json.loads(Path(p['fit_provenance_path']).read_text());assert sha(p['fit_provenance_path'])==p['fit_provenance_sha256']
+ assert p['source_commit']=='6fcc8b476d25495d1c9c413e55b2c7ba4794013e'
+ assert p['screen']==dict(evaluate_both_seeds_and_all_three_arms=True,direct_same_search_e8_score_strictly_above=.6,paired_sf_gain_over_e8_strictly_above=.1,final_sf_score_at_least=.25,caps_at_most=.05)
+ assert p['match_seeds']==[20262805,20262806] and p['roles']==['mc','sc','full']
+ watched={str(STUDY/'protocol.json'):protocolsha,p['fit_provenance_path']:p['fit_provenance_sha256']}
+ for item in f['fit_cohorts'].values():
+  assert sha(item['path'])==item['sha256'];watched[item['path']]=item['sha256']
+  assert json.loads(Path(item['path']).read_text())['status']=='PASS-all-registered-fits-and-native-audits-not-strength'
+ inventory=[]
+ for seed in p['match_seeds']:
+  for role in p['roles']:
+   r=f['fits'][str(seed)][role];assert sha(r['path'])==r['sha256'];watched[r['path']]=r['sha256']
+   assert sha(r['fit_receipt_path'])==r['fit_receipt_sha256'];watched[r['fit_receipt_path']]=r['fit_receipt_sha256']
+   fit=json.loads(Path(r['fit_receipt_path']).read_text());assert fit['contract']==r['fit_contract'] and fit['status']=='completed-fit-not-strength'
+   assert fit.get('teacher_labels',fit.get('new_teacher_labels')) is False
+   assert r['fit_contract']['source_commit']==p['source_commit'] and r['fit_contract']['seed']==seed
+   for label in ['initial','final']:
+    n=r['native'][label];d=Path(n['checkpoint_path'])
+    for name,key in [('checkpoint.json','manifest_sha256'),('training.pt','training_pt_sha256')]:
+     assert sha(d/name)==n[key];watched[str(d/name)]=n[key]
+    header=json.loads((d/'checkpoint.json').read_text())
+    assert header['contract']==r['fit_contract'] and header['accepted']==n['accepted_updates']
+    inventory.append(dict(seed=seed,role=role,label=label,step=header['accepted'],schema=header['schema']))
+ guard()
+ e8=f['e8'];assert sha(e8['path'])==e8['sha256'];watched[e8['path']]=e8['sha256']
+ def model(seed,role):return e8 if role=='e8' else f['fits'][str(seed)][role]
+ c=json.loads((ARENA/'cohort-result.json').read_text());assert c['status']=='completed-games-not-strength'
+ expected={(s,a,o) for s in p['match_seeds'] for a,o in p['tasks']}
+ assert len(c['rows'])==len(expected)==14 and {(r['seed'],r['arm'],r['opponent']) for r in c['rows']}==expected
+ assert c['contract']['inputs']['protocol.json']==protocolsha and c['contract']['fit_manifest_sha256']==p['fit_provenance_sha256']
+ for name,v in c['contract']['inputs'].items():assert sha(STUDY/name)==v
+ book=json.loads(Path(p['book_path']).read_text())['splits']['arena'];assert sha(p['book_path'])==p['book_sha256']
+ assert sha(p['stockfish_path'])==p['stockfish_sha256']
+ rows=[];cells={};totals=collections.Counter()
+ for owner in c['rows']:
+  guard();seed,arm,opp=owner['seed'],owner['arm'],owner['opponent'];path=ARENA/f'{seed}-{arm}-vs-{opp}.json'
+  assert sha(path)==owner['result_sha256'];watched[str(path)]=sha(path)
+  x=json.loads(path.read_text());assert x['source_commit']==p['source_commit'] and x['protocol_sha256']==protocolsha and x['seed']==seed
+  assert not x['GPU_used'] and not x['promotion_ready'] and owner['status']=='completed-games-awaiting-independent-audit'
+  assert x['finished_epoch']<=x['original_deadline_epoch']==owner['original_deadline_epoch'] and owner['finished_epoch']<=owner['original_deadline_epoch']<=p['original_deadline_epoch']
+  assert (x['search_nodes_per_move'],x['quiescence_plies'],x['max_plies'],x['opening_source_sha256'])==(512,2,400,p['book_sha256'])
+  for field,name in [('helper_sha256','tournament.py'),('search_helper_sha256','search.py'),('value_helper_sha256','value.py')]:assert x[field]==c['contract']['inputs'][name]
+  assert x['candidate_sha256']==model(seed,arm)['sha256']
+  if opp!='SF512':assert x['opponent_sha256']==model(seed,opp)['sha256']
+  else:assert (x['stockfish_sha256'],x['stockfish_nodes'],x['stockfish_threads'],x['stockfish_hash_mib'])==(p['stockfish_sha256'],512,1,16)
+  assert len(x['games'])==16;pair={};count=collections.Counter()
+  for g in x['games']:
+   key=g['opening_pair'],g['candidate_color'];assert key not in pair and key[1] in ['white','black'] and 0<=key[0]<8
+   prefix=book[key[0]]['opening']['moves'];assert g['opening']==prefix and g['moves'][:len(prefix)]==prefix
+   nn={r['ply']:r for r in g['search_by_move']};sf={r['ply']:r for r in g['stockfish_nodes_by_move']}
+   assert len(nn)==len(g['search_by_move']) and len(sf)==len(g['stockfish_nodes_by_move'])
+   b=chess.Board();usednn=set();usedsf=set()
+   for i,text in enumerate(g['moves']):
+    if i>=len(prefix):
+     assert b.outcome(claim_draw=True) is None
+     ply=i+1;candidate=b.turn==(key[1]=='white')
+     if candidate or opp!='SF512':
+      r=nn[ply];usednn.add(ply);assert r['selected_move']==text and r['candidate']==candidate
+      assert r['root_actions']==r['legal_root_actions']==b.legal_moves.count()
+      assert r['root_actions']+1<=r['nodes']<=512 and 0<=r['evaluations']<=r['nodes'] and 1<=r['completed_depth']<=8
+      assert math.isfinite(r['value']) and -2<=r['value']<=2
+      count['NN_nodes']+=r['nodes'];count['evaluations']+=r['evaluations'];count['NN_calls']+=1
+     else:
+      r=sf[ply];usedsf.add(ply);assert type(r['nodes']) is int and r['nodes']>=0
+      count['SF_nodes']+=r['nodes'];count['SF_calls']+=1;count['SF_overruns']+=int(r['nodes']>512)
+      count['SF_max']=max(count['SF_max'],r['nodes'])
+     assert math.isfinite(r['wall_seconds']) and r['wall_seconds']>=0;count['plies']+=1
+    move=chess.Move.from_uci(text);assert move in b.legal_moves;b.push(move)
+   assert set(nn)==usednn and set(sf)==usedsf and b.ply()==g['plies']<=400
+   assert len(g['move_wall_seconds'])==len(g['moves'])-len(prefix) and all(math.isfinite(t) and t>=0 for t in g['move_wall_seconds'])
+   outcome=b.outcome(claim_draw=True)
+   if outcome is None:
+    assert b.ply()==400 and g['termination']=='max_plies';score=.5;count['caps']+=1
+   else:
+    assert outcome.termination.name.lower()==g['termination'];score=.5 if outcome.winner is None else float(outcome.winner==(key[1]=='white'))
+   assert score==g['score'];pair[key]=score
+  assert set(pair)=={(i,color) for i in range(8) for color in ['white','black']}
+  win=sum(v==1 for v in pair.values());draw=sum(v==.5 for v in pair.values());mean=sum(pair.values())/16
+  assert (win,draw,16-win-draw,mean,count['caps'])==tuple(x['summary'][k] for k in ['wins','draws','losses','score','capped_games'])
+  cells[seed,arm,opp]=pair;rows.append(dict(seed=seed,arm=arm,opp=opp,score=mean,**count))
+  maximum=max(totals['SF_max'],count['SF_max']);totals.update(count);totals['SF_max']=maximum
+ contrasts=[]
+ for seed in p['match_seeds']:
+  for arm in p['roles']:
+   direct=sum(cells[seed,arm,'e8'].values())/16;final=sum(cells[seed,arm,'SF512'].values())/16
+   delta={str(k):v-cells[seed,'e8','SF512'][k] for k,v in cells[seed,arm,'SF512'].items()};gain=sum(delta.values())/16
+   caps=all(r.get('caps',0)/16<=.05 for r in rows if r['seed']==seed and (r['arm']==arm or r['arm']=='e8'))
+   gates=dict(direct_gt060=direct>.6,SFgain_gt010=gain>.1,finalSF_ge025=final>=.25,caps_le005=caps)
+   contrasts.append(dict(seed=seed,arm=arm,direct=direct,finalSF=final,SFgain=gain,gates=gates,pass_screen=all(gates.values())))
+ eligible=[a for a in p['roles'] if all(r['pass_screen'] for r in contrasts if r['arm']==a)]
+ assert all(sha(path)==v for path,v in watched.items());guard()
+ result=dict(status='PASS-independent224-integrity',screen='PASS-development-only' if eligible else 'FAIL',eligible=eligible,games=224,rows=rows,totals=dict(totals),contrasts=contrasts,native_inventory=inventory,protocol_sha256=protocolsha,fit_manifest_sha256=p['fit_provenance_sha256'],finished=time.time(),original_audit_deadline=END,no_search_no_model_queries=True,native_scope='allSHA/header/contracts verified; no training.pt deserialization or fresh native load here',uncertainty='known8root development; SFactual overrun not equalnodes; no virgin confirmation')
+ out=Path(__file__).with_name('result.json')
+ with out.open('x') as file:json.dump(result,file,separators=(',',':'))
+ print(json.dumps(result))
+if __name__=='__main__':main()
