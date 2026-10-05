@@ -1,0 +1,19 @@
+{
+  "all_owned_profile_identities_absent": true,
+  "file_sha256": {
+    "actual-owned-inventory-before.json": "c9db2881f83d445794e8943e8916512cde3d7a065d7748fc3f0ff43831dded2a",
+    "after-observer.stderr.raw.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "after-observer.stdout.raw.json": "5b49500b01008b5ced447f4a390c629f784882103752fc5eafceb6615e9d2444",
+    "canonical-after.json": "5b0f98d3ea0b705ce878ef1b5a7edc83a569bc48eb88aa9551d921cb74505f1c",
+    "canonical-before.json": "be18b65a36a0ca5124e292508d5d0d201ff4af791063a370de3c19dd445bc0bb",
+    "cohort67.json": "2b39329c354506a3074307f66e60bc97d1040feaf14ff39583f0e9574689673a",
+    "development-failure.json": "508c8b7a050b91878eb03d75023f638dd59b37868a5a3055450430d42d4ca5f5",
+    "owner-failure.json": "d09e697dad635f1792e9348c3e500333d937ccab649bd3d0ca44625b318fcf5d",
+    "terminal-6.json": "5290964aea5366cf233f60ada032919c1c37e07f377fdbe704f959844298205b",
+    "transport-receipt.json": "d7fb79874512cf8071b146bf0481fe93fb2ca7f0ca8c415bf9cf682ff141b0ba"
+  },
+  "processes_signalled": 0,
+  "remote_root": "/content/harbichess-fullgame-method2-inputs/formal7-production/cohort67",
+  "remote_writes": 0,
+  "status": "read-only-actual-source6-owned-release-and-prospective7-cohort-inputs"
+}
