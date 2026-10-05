@@ -1,0 +1,18 @@
+{
+  "schema": "shrink-arena-recovery-runtime-inventory-v2",
+  "files": {
+    "resume_run.py": "da76db97451c31cbd8deaf1f9092c461827dd55564039561d3d168d64e44dd23",
+    "resume_tournament.py": "8ec9655dadb24385a88d6c80a78a2eaf020ee393787dbb73a71446cb568428fc",
+    "recovery_support.py": "dc2045f78c06d152abe2380663614d9391f7ea9abbf3574e910f82a722ad5ad2",
+    "audit_v2.py": "979eb0d21f2368f2feb8886a2545f38239812599ad2ee7ea73149d3bf42f921b",
+    "search.py": "de53c14728a67b7772f18b396ac8ef5c35a144d4e4e616fec40099cd461a6670",
+    "value.py": "d3bb6dfe33127e1bea48ee63c10692f3eba6cb1b2f6b48ea7c898dce389620a9",
+    "test_recovery.py": "b867e97d83e74e273af0727ac1ef5043a848fd29ff8dd464d278f3f717de7678",
+    "README.md": "55dbcd37330a7c4780ed15a4d7f3062f0b5210a47f9ec8ebd7f856c1e72cc64b",
+    "verification.json": "15a3a428a45f13042e267445504c6a62a47a9751b05d5cc628f16bc835b70f57"
+  },
+  "excluded_not_deploy": [
+    "build.py",
+    "__pycache__"
+  ]
+}
