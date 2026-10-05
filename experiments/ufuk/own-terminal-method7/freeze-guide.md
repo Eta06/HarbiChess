@@ -1,0 +1,11 @@
+These templates are deliberately NOT frozen and contain unresolved placeholders. No compute was launched by this bundle.
+
+Use the frozen descriptor with BOTH slots and actual books/post hashes. Slot6 remains genuinely unadmitted after its original900 qualification failure. Its admission file stays absent; publish its true terminal owned-release only after hashing the original failure and genuine before/after inventories. Before inventory must have slot6/source428, tracked_owned_pid_startticks (including all original profile owners and children), and owned_process_group_ids; after inventory must have slot6/source428 and remaining_owned_pid_startticks: []. No process-name termination is performed by the cohort helper; it independently rereads live /proc PID/startticks/groups.
+
+Factory7 requires --cohort67 PATH --cohort67-sha256 SHA. Its descriptor is immutable before any family7 formal training/games. Owner factory7 inherits that binding and publishes admission once after its actual source7 proof-bound registration is frozen, before compute, by 02:25UTC. Do not publish any slot6 admission/readiness/latency/final receipt.
+
+The original failed428 development receipt is ancestry only: --ancestor-auditor-receipt points to the actual failed development JSON; --qualified-ancestor-helpers points to its frozen helper folder (core3c3b.../guard4afc...). Factory records ancestor_profile_qualified:false and preserves first1791163947.632503/deadline1791164847.632503. Unit59, clean CLI600, actual32768-row900 proof/cert-positive/five-mutation/model-change source7 remain required.
+
+Shared all-ready ceiling04:11, latest latency start04:20, hard06:00. When slot6 is permanently incomplete with actual owned-release, only genuine slot7 prelatency proofs are required. General two-active case has both expensive artifact-validation ACKs before slot6 latency, then slot7 latency, and both final arms wait both real latencies. No root hashes are recomputed during peer latency.
+
+Canonical checks: run from /workspace/HarbiChess: .venv/bin/ruff check /workspace/work/harbichess/own7-cohort67-promotable/*.py; .venv/bin/pytest -q /workspace/work/harbichess/own7-cohort67-promotable/test*.py. Actual CUDA remains pending; 24 pure tests are not CUDA evidence.
