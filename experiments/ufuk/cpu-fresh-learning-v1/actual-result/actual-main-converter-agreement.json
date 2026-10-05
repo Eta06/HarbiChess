@@ -1,0 +1,90 @@
+[
+  {
+    "seed": 20262805,
+    "status": "PASS-frozen-trainer-converter-independent-count-agreement",
+    "dataset_sha256": "8f1775c2d3d1da7cfebd55073f4d873439d1ad153af1d94d40bac07246a58ec3",
+    "receipts": [
+      {
+        "schema": "fresh-qsearch-to-shrink840-handoff-v2",
+        "source_journal_sha256": "8109c074a9e084f33ec8d9a6c4b062eb3c57e8b6e8d897e03bd39dc8261dea8f",
+        "source_config_sha256": "562c8e998ba99c3eec4becfec3c79964ae01a1e6c3f628b95015c4c76eec5805",
+        "feature_helper_sha256": "2fe5556e7564b2a91fc948fcd77a9214289933b7ae44a7a47bec5f00ea00c645",
+        "source_commit": "6fcc8b476d25495d1c9c413e55b2c7ba4794013e",
+        "frozen_model_sha256": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03",
+        "anchor_model_sha256": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03",
+        "anchor_helper_sha256": "93f243b9c20f9d9dea3314e2db1cf22e6ccd130801374a23c47e987900afa1a2",
+        "anchor_target": "frozen-e8-wdl-probabilities-mover-perspective-v1",
+        "actions_replayed": 2048,
+        "known_rows": 2011,
+        "complete_game_groups": 24,
+        "excluded_UNKNOWN_or_tail_rows": 37,
+        "sampler": "uniform-complete-game-then-uniform-position",
+        "sampling_bias": "conditional-on-completion;no-full-trajectory-correction",
+        "old_online_native_resume_claimed": false
+      },
+      {
+        "schema": "fresh-additive-trajectory-split-v1",
+        "split": "last 2 hex digits of sha256(full root FEN + prefix + realized played moves) mod 5; bucket 0 validation",
+        "independence_scope": "generated-trajectory-disjoint internal validation; not root/source-family/state-disjoint",
+        "protected_position_keys_sha256": "f14ebb7ac07e2ba7e57efeb7a90a846764a9cc8da26e2b7ee2883419b50d5806",
+        "protected_position_book_sha256": "9c36b5972c9676d19c358ca7e598b9f7f5d110b1947bed838cd660f644d845da",
+        "protected_position_key_count": 8,
+        "excluded_complete_games_touching_protected_positions": 0,
+        "protected_exclusion_ledger_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "deduplicated_identical_trajectory_aliases": 0,
+        "duplicate_known_rows_removed": 0,
+        "protected_known_rows_removed": 0,
+        "eligible_known_rows": 2011,
+        "eligible_distinct_trajectories": 24,
+        "source_ids_are_not_split_keys": true,
+        "split_hash_slice": "last-2-hex-digits"
+      }
+    ],
+    "neural_inference_performed": false,
+    "optimizer_updates": 0
+  },
+  {
+    "seed": 20262806,
+    "status": "PASS-frozen-trainer-converter-independent-count-agreement",
+    "dataset_sha256": "97b16dc10e9b1cdff032710e724cd7ae482ea56b7282befcde208e3cc48339d5",
+    "receipts": [
+      {
+        "schema": "fresh-qsearch-to-shrink840-handoff-v2",
+        "source_journal_sha256": "df515e393e97065cd4828ceacccc7628ea04091643c16296009f48f1b9e01645",
+        "source_config_sha256": "d6a7c343ab28014706cdab976c6040df6c5e42756d4eebd4641e38398204c695",
+        "feature_helper_sha256": "2fe5556e7564b2a91fc948fcd77a9214289933b7ae44a7a47bec5f00ea00c645",
+        "source_commit": "6fcc8b476d25495d1c9c413e55b2c7ba4794013e",
+        "frozen_model_sha256": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03",
+        "anchor_model_sha256": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03",
+        "anchor_helper_sha256": "93f243b9c20f9d9dea3314e2db1cf22e6ccd130801374a23c47e987900afa1a2",
+        "anchor_target": "frozen-e8-wdl-probabilities-mover-perspective-v1",
+        "actions_replayed": 2048,
+        "known_rows": 2002,
+        "complete_game_groups": 16,
+        "excluded_UNKNOWN_or_tail_rows": 46,
+        "sampler": "uniform-complete-game-then-uniform-position",
+        "sampling_bias": "conditional-on-completion;no-full-trajectory-correction",
+        "old_online_native_resume_claimed": false
+      },
+      {
+        "schema": "fresh-additive-trajectory-split-v1",
+        "split": "last 2 hex digits of sha256(full root FEN + prefix + realized played moves) mod 5; bucket 0 validation",
+        "independence_scope": "generated-trajectory-disjoint internal validation; not root/source-family/state-disjoint",
+        "protected_position_keys_sha256": "f14ebb7ac07e2ba7e57efeb7a90a846764a9cc8da26e2b7ee2883419b50d5806",
+        "protected_position_book_sha256": "9c36b5972c9676d19c358ca7e598b9f7f5d110b1947bed838cd660f644d845da",
+        "protected_position_key_count": 8,
+        "excluded_complete_games_touching_protected_positions": 0,
+        "protected_exclusion_ledger_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "deduplicated_identical_trajectory_aliases": 0,
+        "duplicate_known_rows_removed": 0,
+        "protected_known_rows_removed": 0,
+        "eligible_known_rows": 2002,
+        "eligible_distinct_trajectories": 16,
+        "source_ids_are_not_split_keys": true,
+        "split_hash_slice": "last-2-hex-digits"
+      }
+    ],
+    "neural_inference_performed": false,
+    "optimizer_updates": 0
+  }
+]
