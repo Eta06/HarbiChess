@@ -1,0 +1,116 @@
+"""Fixed SHA1 Git object used only as temporary transport, never a tree/ref/commit."""
+
+import base64
+import hashlib
+import json
+import re
+
+import release_transport_v6 as release
+import state_bundle as bundle
+
+CAPSULE_SHA = "66ef6b4f05a9ff3d404debb424d477860b2a7439c7ce51fe91c4c6d3399409ff"
+CAPSULE_BYTES = 1845748
+BLOB_SHA1 = "30720e4020cb4109790ef6b746419777d2a659b6"
+BLOB_API = f"/repos/{release.REPO}/git/blobs"
+TRANSPORT_SCHEMA = "fresh-selflearning-state-unreferenced-blob-delivery-v6"
+
+
+def git_blob_sha(raw):
+    return hashlib.sha1(b"blob " + str(len(raw)).encode() + b"\0" + raw).hexdigest()
+
+
+def validate_blob_binding(manifest):
+    bundle.require(manifest["transport_schema"] == TRANSPORT_SCHEMA, "new-blob-transport-schema")
+    row = manifest["blob"]
+    bundle.require(
+        set(row) == {"sha1", "bytes", "sha256", "repository", "status"}
+        and row["repository"] == release.REPO
+        and row["bytes"] == CAPSULE_BYTES
+        and row["sha256"] == CAPSULE_SHA
+        and manifest["capsule_bytes"] == CAPSULE_BYTES
+        and manifest["capsule_sha256"] == CAPSULE_SHA,
+        "only-fixed-approved22-capsule",
+    )
+    bundle.require(
+        row["sha1"] == BLOB_SHA1
+        and isinstance(row["sha1"], str)
+        and len(row["sha1"]) == 40
+        and all(c in "0123456789abcdef" for c in row["sha1"]),
+        "blob-sha1-format",
+    )
+    bundle.require(
+        row["status"] == "ROOT-verified-unreferenced-transient-blob", "blob-not-verified"
+    )
+    return row
+
+
+def create_blob_request(capsule, manifest):
+    # PURE request preparation only. ROOT alone may authorize/POST this JSON once.
+    bundle.require(
+        len(capsule) == CAPSULE_BYTES and bundle.sha(capsule) == CAPSULE_SHA,
+        "fixed22-local-capsule-sha-size",
+    )
+    bundle.require(
+        manifest["capsule_sha256"] == CAPSULE_SHA
+        and manifest["blob"]["sha1"] == git_blob_sha(capsule),
+        "prospective-git-object-sha",
+    )
+    body = json.dumps(
+        {"encoding": "base64", "content": base64.b64encode(capsule).decode()}, separators=(",", ":")
+    ).encode()
+    bundle.require(len(body) <= 6 * 1024**2, "git-blob-json6MiB")
+    return BLOB_API, body
+
+
+def verify_create_response(response, manifest):
+    # SHA1 is known before POST. After an ambiguous POST, ROOT may GET this exact ID;
+    # never automatically POST again and never create any tree/ref/commit.
+    sha1 = manifest["blob"]["sha1"]
+    bundle.require(
+        response.get("sha") == sha1 and response.get("url") == release.API + BLOB_API + "/" + sha1,
+        "fixed-repository-created-blob-identity",
+    )
+    return sha1
+
+
+def decode_blob_response(raw_json, manifest):
+    row = validate_blob_binding(manifest)
+    max_base64 = 4 * ((row["bytes"] + 2) // 3)
+    limit = max_base64 + max_base64 // 40 + 16 * 1024
+    bundle.require(len(raw_json) <= limit, "blob-json-size-bound")
+    value = json.loads(raw_json)
+    bundle.require(
+        value.get("sha") == row["sha1"]
+        and value.get("size") == row["bytes"]
+        and value.get("encoding") == "base64"
+        and value.get("url") == release.API + BLOB_API + "/" + row["sha1"],
+        "blob-response-fixed-repository-id-size-encoding",
+    )
+    content = value.get("content")
+    bundle.require(
+        isinstance(content, str)
+        and len(content) <= limit
+        and re.fullmatch(r"[A-Za-z0-9+/=\r\n]*", content) is not None,
+        "blob-base64-characters-size",
+    )
+    clean = content.replace("\r", "").replace("\n", "")
+    bundle.require(len(clean) == max_base64, "blob-base64-exact-length")
+    capsule = base64.b64decode(clean, validate=True)
+    bundle.require(
+        len(capsule) == row["bytes"]
+        and bundle.sha(capsule) == row["sha256"]
+        and git_blob_sha(capsule) == row["sha1"],
+        "blob-full-sha256-git-sha1",
+    )
+    return capsule
+
+
+def fetch_verified_blob(transport, manifest):
+    row = validate_blob_binding(manifest)
+    max_base64 = 4 * ((row["bytes"] + 2) // 3)
+    limit = max_base64 + max_base64 // 40 + 16 * 1024
+    # Fixed repository/SHA endpoint; NoRedirect means authenticated tokens cannot be forwarded.
+    url = release.API + BLOB_API + "/" + row["sha1"]
+    with transport.request(url) as response:
+        raw = response.read(limit + 1)
+    return decode_blob_response(raw, manifest)
