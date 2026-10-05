@@ -55,7 +55,9 @@ def main():
     assert sha256(paths["book"]) == protocol["book"]["sha256"]
     assert sha256(args.weights) == protocol["initial_e8_sha256"]
     checkpoint = args.run / f"checkpoints/epoch-{protocol['epochs']:08d}"
+    initial_checkpoint = args.run / "checkpoints/epoch-00000000"
     protected = [p for p in checkpoint.iterdir() if p.is_file()]
+    protected += [p for p in initial_checkpoint.iterdir() if p.is_file()]
     protected += sorted((args.run / "journal").glob("*.json.gz"))
     before = {str(p): sha256(p) for p in protected}
     learner = TorchSearchActingLearner.resume(
@@ -73,7 +75,19 @@ def main():
     rows = []
     chain = hashlib.sha256(b"").hexdigest()
     accepted = attempted = 0
-    previous_cursor = previous_actor_rng = previous_schedule_rng = previous_search_rng = None
+    initial_native = json.loads((initial_checkpoint / "checkpoint.json").read_text())
+    assert initial_native["source_commit"] == protocol["source_commit"]
+    assert initial_native["state"]["epoch"] == 0
+    for name, digest in initial_native["artifacts"].items():
+        assert sha256(initial_checkpoint / name) == digest
+    initial_payload = torch.load(
+        initial_checkpoint / "training.pt", map_location="cpu", weights_only=False
+    )
+    assert all(tensor_bits_equal(initial[n], p) for n, p in initial_payload["online"].items())
+    previous_cursor = initial_native["state"]["actors"]
+    previous_actor_rng = json.loads(canonical(initial_payload["actor_rng"]))
+    previous_schedule_rng = initial_native["state"]["schedule_rng"]
+    previous_search_rng = initial_native["state"]["search_rngs"]
     for i in range(1, protocol["epochs"] + 1):
         path = args.run / f"journal/epoch-{i:08d}.json.gz"
         record = json.loads(gzip.decompress(path.read_bytes()))
