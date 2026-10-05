@@ -1,0 +1,81 @@
+name: Publish sealed CPU native byte capsules
+run-name: CPU native ${{ inputs.mode }} ${{ inputs.packet_sha256 }} / ${{ inputs.ordinal }}
+
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: Fixed chunk receiver or full capsule aggregator.
+        required: true
+        default: chunk
+        type: choice
+        options: [chunk, aggregate]
+      manifest_sha256:
+        description: One of four frozen local manifest SHAs.
+        required: true
+        type: string
+      packet_sha256:
+        description: Exact frozen compressed packet SHA.
+        required: true
+        type: string
+      ordinal:
+        description: Chunk index; empty for aggregate.
+        required: false
+        default: ''
+        type: string
+      count:
+        description: Exact chunk count; empty for aggregate.
+        required: false
+        default: ''
+        type: string
+      chunk_sha256:
+        description: SHA of ASCII base64 chunk; empty for aggregate.
+        required: false
+        default: ''
+        type: string
+      payload_base64:
+        description: At most58000 ASCII base64 characters; empty for aggregate.
+        required: false
+        default: ''
+        type: string
+
+permissions: {}
+
+# Same lock as the existing uploader. Dispatch serially: GitHub keeps only one pending run.
+concurrency:
+  group: a100-allowlisted-release-delivery
+  cancel-in-progress: false
+
+jobs:
+  sealed-native-byte-persistence:
+    if: github.repository == 'Eta06/HarbiChess' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: write
+    steps:
+      - name: Check out exact dispatched source without persistent credentials
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - name: Receive sealed chunk or reconstruct and verify full native capsule
+        env:
+          GH_TOKEN: ${{ github.token }}
+          CPU_MODE: ${{ inputs.mode }}
+          CPU_MANIFEST_SHA256: ${{ inputs.manifest_sha256 }}
+          CPU_PACKET_SHA256: ${{ inputs.packet_sha256 }}
+          CPU_ORDINAL: ${{ inputs.ordinal }}
+          CPU_COUNT: ${{ inputs.count }}
+          CPU_CHUNK_SHA256: ${{ inputs.chunk_sha256 }}
+          CPU_PAYLOAD_BASE64: ${{ inputs.payload_base64 }}
+        run: |
+          python3 - <<'PY'
+          import os
+          import runpy
+          import sys
+          from pathlib import Path
+          os.sched_setaffinity(0, {min(os.sched_getaffinity(0))})
+          root = Path('experiments/ufuk/native-delta-backup-v1').resolve()
+          sys.path.insert(0, str(root))
+          runpy.run_path(str(root / 'native_delta_receiver.py'), run_name='__main__')
+          PY
