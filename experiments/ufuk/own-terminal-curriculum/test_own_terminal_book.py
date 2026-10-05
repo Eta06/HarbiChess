@@ -4,9 +4,9 @@ import random
 
 import chess
 import pytest
-from harbichess.training.torch_online_learner import read_online_train_book
-
 from own_terminal_book import DISTANCES, build, completed_games
+
+from harbichess.training.torch_online_learner import read_online_train_book
 
 
 def fixture(tmp_path):
