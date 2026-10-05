@@ -1,0 +1,133 @@
+{
+  "GPU_used": false,
+  "matched_packets": 6,
+  "new_games": 0,
+  "new_training_updates": 0,
+  "rows": [
+    {
+      "actual_packet": {
+        "completed_depth": 2,
+        "evaluations": 472,
+        "nodes": 512,
+        "root_actions": 27,
+        "selected_move": "f1c4",
+        "value": 0.14564191895780934
+      },
+      "candidate_color": "white",
+      "fullhistory_plies": 4,
+      "model_sha256": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03",
+      "mover": "white",
+      "opening_pair": 0,
+      "ply": 5,
+      "recorded_equals_reproduced": true,
+      "role": "e8",
+      "seed": 20262705,
+      "wall_seconds": 0.5393618580128532
+    },
+    {
+      "actual_packet": {
+        "completed_depth": 2,
+        "evaluations": 473,
+        "nodes": 512,
+        "root_actions": 33,
+        "selected_move": "d2d4",
+        "value": 0.16169391736466054
+      },
+      "candidate_color": "white",
+      "fullhistory_plies": 6,
+      "model_sha256": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03",
+      "mover": "white",
+      "opening_pair": 0,
+      "ply": 7,
+      "recorded_equals_reproduced": true,
+      "role": "e8",
+      "seed": 20262705,
+      "wall_seconds": 0.7710344200022519
+    },
+    {
+      "actual_packet": {
+        "completed_depth": 2,
+        "evaluations": 472,
+        "nodes": 512,
+        "root_actions": 27,
+        "selected_move": "f1c4",
+        "value": 0.14564191895780934
+      },
+      "candidate_color": "white",
+      "fullhistory_plies": 4,
+      "model_sha256": "1aeee28fec5ff32f682801926a6b3adb057d0186a57b0ffedf6d3b87135f5b32",
+      "mover": "white",
+      "opening_pair": 0,
+      "ply": 5,
+      "recorded_equals_reproduced": true,
+      "role": "rebased",
+      "seed": 20262705,
+      "wall_seconds": 0.7624685009941459
+    },
+    {
+      "actual_packet": {
+        "completed_depth": 2,
+        "evaluations": 473,
+        "nodes": 512,
+        "root_actions": 33,
+        "selected_move": "d2d4",
+        "value": 0.16169391736466054
+      },
+      "candidate_color": "white",
+      "fullhistory_plies": 6,
+      "model_sha256": "1aeee28fec5ff32f682801926a6b3adb057d0186a57b0ffedf6d3b87135f5b32",
+      "mover": "white",
+      "opening_pair": 0,
+      "ply": 7,
+      "recorded_equals_reproduced": true,
+      "role": "rebased",
+      "seed": 20262705,
+      "wall_seconds": 0.5968810910126194
+    },
+    {
+      "actual_packet": {
+        "completed_depth": 2,
+        "evaluations": 472,
+        "nodes": 512,
+        "root_actions": 27,
+        "selected_move": "f1c4",
+        "value": 0.2406481068700099
+      },
+      "candidate_color": "white",
+      "fullhistory_plies": 4,
+      "model_sha256": "12e82c58f62a4afb007878da85cdda46e32afd7e1e8d07ec4a6e29a0b203c2ac",
+      "mover": "white",
+      "opening_pair": 0,
+      "ply": 5,
+      "recorded_equals_reproduced": true,
+      "role": "residual",
+      "seed": 20262705,
+      "wall_seconds": 0.5786006469861604
+    },
+    {
+      "actual_packet": {
+        "completed_depth": 2,
+        "evaluations": 475,
+        "nodes": 512,
+        "root_actions": 33,
+        "selected_move": "d2d4",
+        "value": 0.2263616831466874
+      },
+      "candidate_color": "white",
+      "fullhistory_plies": 6,
+      "model_sha256": "12e82c58f62a4afb007878da85cdda46e32afd7e1e8d07ec4a6e29a0b203c2ac",
+      "mover": "white",
+      "opening_pair": 0,
+      "ply": 7,
+      "recorded_equals_reproduced": true,
+      "role": "residual",
+      "seed": 20262705,
+      "wall_seconds": 0.5750753320171498
+    }
+  ],
+  "schema": "residual-six-fixed-neural-packet-reproduction-v1",
+  "source_commit": "6fcc8b476d25495d1c9c413e55b2c7ba4794013e",
+  "status": "PASS-six-exact-packets-NOT-new-games",
+  "threads": 1,
+  "torch_version": "2.14.1+cpu"
+}
