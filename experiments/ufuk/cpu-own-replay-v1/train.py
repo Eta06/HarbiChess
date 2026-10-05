@@ -23,9 +23,9 @@ import torch.nn.functional as F
 
 from harbichess.backends.torch_network import load_weights, save_weights, sha256
 from harbichess.chess.rules import PythonChessRules
-from harbichess.selfplay.online_epoch import deserialize_policy_epoch
 from harbichess.training.cgroup_budget import CgroupMemoryBudget
 from harbichess.training.fullgame_own_targets import GameBalancedSampler, build_fullgame_targets
+from harbichess.training.search_acting_epoch import deserialize_search_acting_epoch
 from harbichess.training.torch_array_encoder import TorchArrayBoardEncoder
 from harbichess.training.torch_fullgame_ppo import _tensor_batch, compile_epoch_features
 from harbichess.training.torch_ownsearch_core import search_train_rows
@@ -50,7 +50,7 @@ def prepare(journals, guard):
     for path in journals:
         guard()
         record = json.loads(gzip.decompress(path.read_bytes()))
-        epoch = deserialize_policy_epoch(canonical(record["collection"]))
+        epoch = deserialize_search_acting_epoch(canonical(record["collection"]))
         own = build_fullgame_targets(rules, epoch, claim_draw=True)
         if len(own.targets) != len(epoch.actions) - record["target_counts"]["excluded_actions"]:
             raise ValueError("own replay known/unknown target counts disagree")
