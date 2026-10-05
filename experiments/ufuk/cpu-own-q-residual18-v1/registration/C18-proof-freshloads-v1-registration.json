@@ -1,0 +1,21 @@
+{
+  "output": "/dev/shm/harbichess-C18-proof-freshloads-v1",
+  "first_epoch": 1791239108.4035254,
+  "deadline_epoch": 1791239708.4035254,
+  "cpu_core": 2,
+  "checkout": "/workspace/work/harbichess/cpu-additive-source-6fcc8b4",
+  "controller_sha256": "7ea6241e57de4ab83259803ac4a4f42d0fb50701c305a3695a937a19e9ee7150",
+  "memory_guard_path": "/workspace/work/harbichess/cpu-additive-source-6fcc8b4/src/harbichess/training/cgroup_budget.py",
+  "input_pins": {
+    "/workspace/work/harbichess/continuation-20261005/run_C18_twelve_fresh_native_loads_v1.py": "8f041b4b9dec699f4445e618b55a549412b9940ada08d427065fe35a9d4d7903",
+    "/workspace/work/harbichess/continuation-20261005/strict_native18_readonly_load_v1.py": "5f6e8e42e92d70b1677782d8917aeb3f410a7bb64d3220bb07efc1531663de56",
+    "/workspace/work/harbichess/continuation-20261005/ownq-C18-training-v1-registration/cohort-registration.json": "4847d911644b62d67499345d4daa15a695572963388735c1f3573f4ee07175b0",
+    "/workspace/work/harbichess/continuation-20261005/ownq-C18-training-v1-registration/proofs-finished.json": "7360a26a2a8b98d4138de7cd9e7d7dd50a87a4e43487696123fb7a94c2d1bbe8"
+  },
+  "command": [
+    "/workspace/HarbiChess/.venv/bin/python",
+    "/workspace/work/harbichess/continuation-20261005/run_C18_twelve_fresh_native_loads_v1.py",
+    "/workspace/work/harbichess/continuation-20261005/C18-proof-freshloads-v1-registration.json"
+  ],
+  "result_path": "/dev/shm/harbichess-C18-proof-freshloads-v1/result.json"
+}
