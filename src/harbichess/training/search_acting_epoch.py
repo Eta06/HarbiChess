@@ -30,6 +30,11 @@ from harbichess.selfplay.online_epoch import (
     _tuplify,
 )
 from harbichess.training.ownsearch_targets import SearchSchedule, validate_search_ledger
+from harbichess.training.search_acting_policy import (
+    GreedyOwnSearchConfig,
+    ledger_semantics,
+    mixture_policy,
+)
 
 LEDGER_SCHEMA = "pre-action-masked-search-behavior-v4"
 LOSS_SHIELD_EPSILON = 1e-12
@@ -72,12 +77,8 @@ class MaskedRootEvaluator:
     def __init__(self, evaluator, states, mask):
         self.evaluator = evaluator
         evaluations = evaluator.evaluate_many(states)
-        self.states = tuple(
-            s for s, selected in zip(states, mask, strict=True) if selected
-        )
-        self.outputs = tuple(
-            e for e, selected in zip(evaluations, mask, strict=True) if selected
-        )
+        self.states = tuple(s for s, selected in zip(states, mask, strict=True) if selected)
+        self.outputs = tuple(e for e, selected in zip(evaluations, mask, strict=True) if selected)
         self.first = True
 
     def evaluate_many(self, states):
@@ -126,9 +127,7 @@ def collect_search_acting_epoch(
     for _ in range(steps):
         guard()
         states = actors.states
-        legal = tuple(
-            tuple(legal_action_indices(actors.rules.inspect(s))) for s in states
-        )
+        legal = tuple(tuple(legal_action_indices(actors.rules.inspect(s))) for s in states)
         previous_selected = len(schedule.selected)
         schedule.before_actor_step(actors)  # Before network, search and actor outcomes.
         selected = schedule.selected[previous_selected:]
@@ -176,9 +175,7 @@ def collect_search_acting_epoch(
                     move_to_action(board, chess.Move.from_uci(m.uci)): p
                     for m, p in result.action_weights
                 }
-                raw_policy = normalized(
-                    tuple(raw_by_action[a] for a in legal[slot])
-                )
+                raw_policy = normalized(tuple(raw_by_action[a] for a in legal[slot]))
                 visited_moves = tuple(row.move for row in result.moves if row.visits > 0)
                 checked_moves = () if result.certified_mates else visited_moves
                 losses = (
@@ -207,7 +204,17 @@ def collect_search_acting_epoch(
                     for move, p in zip(root_moves, shielded, strict=True)
                 }
                 policy = normalized(tuple(by_action[a] for a in legal[slot]))
-                actor_policies[slot] = policy
+                actor_policies[slot] = (
+                    mixture_policy(
+                        policy,
+                        legal[slot].index(
+                            move_to_action(board, chess.Move.from_uci(selected_move.uci))
+                        ),
+                        config.greedy_fraction,
+                    )
+                    if isinstance(config, GreedyOwnSearchConfig)
+                    else policy
+                )
                 loss_moves = {move for move, _ in losses}
                 if selected_move == result.selected_action:
                     selected_reason = (
@@ -225,6 +232,11 @@ def collect_search_acting_epoch(
                         legal_actions=list(legal[slot]),
                         raw_search_policy=list(raw_policy),
                         search_policy=list(policy),
+                        **(
+                            {"acting_policy": list(actor_policies[slot])}
+                            if isinstance(config, GreedyOwnSearchConfig)
+                            else {}
+                        ),
                         raw_selected_action=result.selected_action.uci,
                         selected_action=selected_move.uci,
                         selected_action_reason=selected_reason,
@@ -240,9 +252,7 @@ def collect_search_acting_epoch(
                         ],
                         simulations=result.simulations,
                         certified_mates=[m.uci for m in result.certified_mates],
-                        visited_loss_checked_actions=sorted(
-                            m.uci for m in checked_moves
-                        ),
+                        visited_loss_checked_actions=sorted(m.uci for m in checked_moves),
                         certified_losing_actions=[
                             {
                                 "move": move.uci,
@@ -261,9 +271,7 @@ def collect_search_acting_epoch(
         transitions = actors.step(tuple(actor_policies))
         for slot, tr in enumerate(transitions):
             board = actors.rules.inspect(tr.pre)
-            action_index = legal[slot].index(
-                move_to_action(board, board.parse_uci(tr.action.uci))
-            )
+            action_index = legal[slot].index(move_to_action(board, board.parse_uci(tr.action.uci)))
             mu = actor_mu(actor_policies[slot])
             if not math.isclose(
                 mu[action_index], tr.behavior_probability, abs_tol=1e-12, rel_tol=0
@@ -303,7 +311,7 @@ def collect_search_acting_epoch(
         key = str(r["root_ply"])
         plies[key] = plies.get(key, 0) + 1
     ledger = dict(
-        schema=LEDGER_SCHEMA,
+        schema=ledger_semantics(config)[0],
         realized_target_rows=len(receipts),
         mover_counts=movers,
         root_ply_counts=plies,
@@ -313,12 +321,8 @@ def collect_search_acting_epoch(
         roots=receipts,
         neural_batch_sizes=evaluator.batch_sizes,
         neural_positions=sum(evaluator.batch_sizes),
-        behavior=(
-            "raw-T1-except-preselected-search-policy-with-visited-mate1-loss-shield-T1;no-PPO"
-        ),
-        targets=(
-            "all-legal-Gumbel-plus-exact-one-ply-mate-win-and-visited-child-mate-loss-shield"
-        ),
+        behavior=ledger_semantics(config)[1],
+        targets=("all-legal-Gumbel-plus-exact-one-ply-mate-win-and-visited-child-mate-loss-shield"),
         groups=groups,
         schedule_rng_before=schedule_before,
         schedule_rng_after=schedule_rng.getstate(),
@@ -327,17 +331,20 @@ def collect_search_acting_epoch(
         actor_cursor_before=cursor_before,
         actor_rng_before=actor_before,
     )
+    if isinstance(config, GreedyOwnSearchConfig):
+        ledger["greedy_fraction"] = config.greedy_fraction
     validate_search_acting(epoch, ledger, config, actors=actors)
     return epoch, ledger
 
 
 def validate_search_acting(epoch, ledger, config, *, actors):
-    if (
-        ledger["schema"] != LEDGER_SCHEMA
-        or ledger["behavior"]
-        != "raw-T1-except-preselected-search-policy-with-visited-mate1-loss-shield-T1;no-PPO"
-    ):
+    if (ledger["schema"], ledger["behavior"]) != ledger_semantics(config):
         raise ValueError("search acting ledger semantics differ")
+    if isinstance(config, GreedyOwnSearchConfig):
+        if ledger.get("greedy_fraction") != config.greedy_fraction:
+            raise ValueError("greedy acting mixture config/ledger differs")
+    elif "greedy_fraction" in ledger:
+        raise ValueError("legacy ledger cannot imply greedy acting")
     legacy = dict(ledger, schema="ownsearch-random-block-targets-v2")
     validate_search_ledger(
         epoch,
@@ -355,8 +362,7 @@ def validate_search_acting(epoch, ledger, config, *, actors):
             for item in receipt["moves"]
         }
         legal_moves = tuple(
-            ChessMove(moves_by_action[action]["move"])
-            for action in row.legal_actions
+            ChessMove(moves_by_action[action]["move"]) for action in row.legal_actions
         )
         raw_policy = tuple(receipt["raw_search_policy"])
         if (
@@ -371,11 +377,7 @@ def validate_search_acting(epoch, ledger, config, *, actors):
         )
         if wins != expected_wins:
             raise ValueError("source8 immediate-win certificate inventory differs")
-        visited = tuple(
-            ChessMove(item["move"])
-            for item in receipt["moves"]
-            if item["visits"] > 0
-        )
+        visited = tuple(ChessMove(item["move"]) for item in receipt["moves"] if item["visits"] > 0)
         checked = () if wins else visited
         if receipt["visited_loss_checked_actions"] != sorted(m.uci for m in checked):
             raise ValueError("source8 visited-only loss-check inventory differs")
@@ -420,23 +422,32 @@ def validate_search_acting(epoch, ledger, config, *, actors):
             or len(receipt["search_policy"]) != len(expected_policy)
             or any(
                 not math.isclose(actual, expected, abs_tol=1e-15, rel_tol=0)
-                for actual, expected in zip(
-                    receipt["search_policy"], expected_policy, strict=True
-                )
+                for actual, expected in zip(receipt["search_policy"], expected_policy, strict=True)
             )
         ):
             raise ValueError("source8 loss shield policy/action/status differs")
         if receipt["selected_action"] == receipt["raw_selected_action"]:
             expected_reason = (
                 "original-certified-losing-action-no-safe-alternative"
-                if ChessMove(receipt["selected_action"])
-                in {move for move, _ in expected_losses}
+                if ChessMove(receipt["selected_action"]) in {move for move, _ in expected_losses}
                 else "raw-search-selection"
             )
         elif ChessMove(receipt["selected_action"]) in visited:
             expected_reason = "fallback-visited-nonloss"
         else:
             expected_reason = "fallback-unvisited-unknown"
+        if isinstance(config, GreedyOwnSearchConfig):
+            expected_acting = mixture_policy(
+                tuple(receipt["search_policy"]),
+                row.legal_actions.index(
+                    move_to_action(board, chess.Move.from_uci(expected_selected.uci))
+                ),
+                config.greedy_fraction,
+            )
+            if tuple(receipt.get("acting_policy", ())) != expected_acting:
+                raise ValueError("greedy actual acting policy differs from search target mixture")
+        elif "acting_policy" in receipt:
+            raise ValueError("legacy ledger cannot supply a separate acting mixture")
         if receipt["selected_action_reason"] != expected_reason:
             raise ValueError("source8 deterministic fallback reason differs")
     replay = OnlineActors(
@@ -461,7 +472,13 @@ def validate_search_acting(epoch, ledger, config, *, actors):
                 )
             )
         policies = tuple(
-            tuple(selected[start + s]["search_policy"])
+            tuple(
+                selected[start + s][
+                    "acting_policy"
+                    if isinstance(config, GreedyOwnSearchConfig)
+                    else "search_policy"
+                ]
+            )
             if start + s in selected
             else row.policy
             for s, row in enumerate(rows)
