@@ -1,0 +1,19 @@
+{
+  "schema": "own67-permanent-INCOMPLETE-owned-release-v1",
+  "status": "INCOMPLETE-no-qualification-or-early-candidate-selection",
+  "slot": 6,
+  "source_commit": "428a30f5e1658f3cf159844db547ff0147ade5a9",
+  "coordinator_sha256": "ROOT_FILL_SAME_DESCRIPTOR_6_POST_SHA",
+  "all_registered_owned_compute_terminated": true,
+  "ready_latency_final_receipts_fabricated": false,
+  "original_clocks_or_budgets_reset": false,
+  "observed_epoch": "ROOT_FILL_ACTUAL_AFTER_INVENTORY_TIME",
+  "reason": "actual-infrastructure-qualification-failure",
+  "actual_failure": "ROOT_FILL_ORIGINAL_428_DEVELOPMENT_FAILURE_PATH",
+  "actual_failure_sha256": "508c8b7a050b91878eb03d75023f638dd59b37868a5a3055450430d42d4ca5f5",
+  "before_inventory": "ROOT_FILL_SHA_BOUND_BEFORE_INVENTORY",
+  "before_inventory_sha256": "ROOT_FILL_SHA",
+  "after_inventory": "ROOT_FILL_SHA_BOUND_AFTER_INVENTORY",
+  "after_inventory_sha256": "ROOT_FILL_SHA",
+  "terminated_tracked_pid_startticks": "ROOT_FILL_EXACT_BEFORE_TRACKED_ARRAY"
+}
