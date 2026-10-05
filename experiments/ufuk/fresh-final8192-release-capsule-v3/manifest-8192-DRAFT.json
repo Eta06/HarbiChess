@@ -1,0 +1,192 @@
+{
+  "action_pins": {
+    "checkout": "11bd71901bbe5b1630ceea73d27597364c9af683"
+  },
+  "capsule_bytes": 882330,
+  "capsule_sha256": "3f6fef499cb166bbad466d4983954350df71b7337be4ceeff2d53ca2a2fb1271",
+  "chunks": [
+    {
+      "bytes": 43500,
+      "ordinal": 0,
+      "sha256": "b3b54ac21edb5f399499fb689873e558959f176b0a95f7823810688187918a00"
+    },
+    {
+      "bytes": 43500,
+      "ordinal": 1,
+      "sha256": "38b8f97113bba7a86ac3f92b5cd16358402a1899303112f07f3024a0e70e59c6"
+    },
+    {
+      "bytes": 43500,
+      "ordinal": 2,
+      "sha256": "3620e828c138e5df18f63a19ffb87b3465327f3b33d8599615c78ce2b1deb173"
+    },
+    {
+      "bytes": 43500,
+      "ordinal": 3,
+      "sha256": "1cb1d790b9ed73ffbb6104597f17944d56192176db4c79dc52d8f19433e20f53"
+    },
+    {
+      "bytes": 43500,
+      "ordinal": 4,
+      "sha256": "7dc22d95cda2ad51ea73270111af181d44ba395db417d20aa83858a9e4ff88d3"
+    },
+    {
+      "bytes": 43500,
+      "ordinal": 5,
+      "sha256": "b5a4118eb2db334fc181dca3a3cc3afd24877fb68906caa8eac07b24866634af"
+    },
+    {
+      "bytes": 43500,
+      "ordinal": 6,
+      "sha256": "9a638cf1c9dce355b34a56c780b8018ee00acecb409a0e142ba51eb3447ad155"
+    },
+    {
+      "bytes": 43500,
+      "ordinal": 7,
+      "sha256": "a3df17f7acfcac41d402b207b1cd22e314193b5f6d5465de85ca25531c9662c6"
+    },
+    {
+      "bytes": 43500,
+      "ordinal": 8,
+      "sha256": "9df3ab486668c8d6d2543b4204096fef8d6a4ca9287524494de851fe1bbe4ad9"
+    },
+    {
+      "bytes": 43500,
+      "ordinal": 9,
+      "sha256": "1691cb0903fa618aa5e295359fdc7bbf95beb94f1a1c54b4aaa571357cfce32a"
+    },
+    {
+      "bytes": 43500,
+      "ordinal": 10,
+      "sha256": "7707d9871fdfa1a057e3abad4877a1dee016e7f70bf207d4efdb676e622781c1"
+    },
+    {
+      "bytes": 43500,
+      "ordinal": 11,
+      "sha256": "9b2dd239aef3694ee6613c50fda5d0ff30646a0c9890c24500205ae4072aedbe"
+    },
+    {
+      "bytes": 43500,
+      "ordinal": 12,
+      "sha256": "decf93d4976b525a339b533c6a8b1078e123d9351469a00705be28a34a43f3dd"
+    },
+    {
+      "bytes": 43500,
+      "ordinal": 13,
+      "sha256": "0d3ca22a237ac1fc3b19686ff59b6f602dd62a5ed956b1c52be1f9cb27305aa4"
+    },
+    {
+      "bytes": 43500,
+      "ordinal": 14,
+      "sha256": "26d8075c2d7ae9d6cc1d79f4340f165fed1ba4f1a7306c422df94052a6b6ec75"
+    },
+    {
+      "bytes": 43500,
+      "ordinal": 15,
+      "sha256": "9ffe793ac904b845d8e7552babf91c88cf79dc855068359fa39403ef5d34bbb8"
+    },
+    {
+      "bytes": 43500,
+      "ordinal": 16,
+      "sha256": "ff7596b9559a8ebe4f133ee22e09c6e4d01d5001e38019a04153f1c999eef6e8"
+    },
+    {
+      "bytes": 43500,
+      "ordinal": 17,
+      "sha256": "076f0f41db4627c43606c2308671807c3beff7fb0c900f42596edb8360ed0271"
+    },
+    {
+      "bytes": 43500,
+      "ordinal": 18,
+      "sha256": "52feb61fd5ab254b7f0d8d6583fbfabb059e4d1bda1d8dd7c6e2830213f5f663"
+    },
+    {
+      "bytes": 43500,
+      "ordinal": 19,
+      "sha256": "86af796c241cda09b5c04176d6617b9a34d7b6edbd7bdb53d041807b0033d177"
+    },
+    {
+      "bytes": 12330,
+      "ordinal": 20,
+      "sha256": "aed87ce7e43a4ec6c40fcf462d127452da91cd73f67539f44c05d94250c41cbb"
+    }
+  ],
+  "files": [
+    {
+      "bytes": 440432,
+      "original_path": "/dev/shm/harbichess-fresh-E0-20262805/actions-00008192.json.gz",
+      "path": "20262805/actions-00008192.json.gz",
+      "sha256": "94f193481ee71f0d21f55d8addb6e15a46ede4522aaeebf8c2557cc689c9899d"
+    },
+    {
+      "bytes": 2552,
+      "original_path": "/workspace/work/harbichess/cpu-fresh-selfplay-v2-actual/registration/20262805-E0-actor-config.json",
+      "path": "20262805/actor-config.json",
+      "sha256": "b73106e21c6d8433c2132b024a2caae7527ec84541898d4f9c3db8202fccc3b5"
+    },
+    {
+      "bytes": 440422,
+      "original_path": "/dev/shm/harbichess-fresh-E0-20262806/actions-00008192.json.gz",
+      "path": "20262806/actions-00008192.json.gz",
+      "sha256": "a7b135ea5b835fe7a397fd639147f2a58bad9f2e02c76cae8feb9895a71b1352"
+    },
+    {
+      "bytes": 2552,
+      "original_path": "/workspace/work/harbichess/cpu-fresh-selfplay-v2-actual/registration/20262806-E0-actor-config.json",
+      "path": "20262806/actor-config.json",
+      "sha256": "a3b5ac9f3933afdce858e60c0e383c9611dabd2be79e7dff128c490d6750591d"
+    }
+  ],
+  "final": true,
+  "milestone_actions": 8192,
+  "prior_v2_artifact_id": 11365929280,
+  "prior_v2_failed_run_id": 37360596243,
+  "prior_v2_manifest_sha256": "57a288d5fd013dd0c38980ca3ec8c0b554a38bc3431ec9188ba3a8606b2e7dd4",
+  "producer_bindings": [
+    {
+      "actions": 8192,
+      "actor_config_sha256": "b73106e21c6d8433c2132b024a2caae7527ec84541898d4f9c3db8202fccc3b5",
+      "anchor_helper_sha256": "93f243b9c20f9d9dea3314e2db1cf22e6ccd130801374a23c47e987900afa1a2",
+      "anchor_model_sha256": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03",
+      "embedded_config_sha256": "562c8e998ba99c3eec4becfec3c79964ae01a1e6c3f628b95015c4c76eec5805",
+      "journal_schema": "fresh-qsearch-selfplay-journal-v2",
+      "model_sha256": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03",
+      "original_deadline_epoch": 1791235580.0397933,
+      "phase": "epoch-action-ceiling",
+      "seed": 20262805,
+      "source_commit": "6fcc8b476d25495d1c9c413e55b2c7ba4794013e"
+    },
+    {
+      "actions": 8192,
+      "actor_config_sha256": "a3b5ac9f3933afdce858e60c0e383c9611dabd2be79e7dff128c490d6750591d",
+      "anchor_helper_sha256": "93f243b9c20f9d9dea3314e2db1cf22e6ccd130801374a23c47e987900afa1a2",
+      "anchor_model_sha256": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03",
+      "embedded_config_sha256": "d6a7c343ab28014706cdab976c6040df6c5e42756d4eebd4641e38398204c695",
+      "journal_schema": "fresh-qsearch-selfplay-journal-v2",
+      "model_sha256": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03",
+      "original_deadline_epoch": 1791235580.0397933,
+      "phase": "epoch-action-ceiling",
+      "seed": 20262806,
+      "source_commit": "6fcc8b476d25495d1c9c413e55b2c7ba4794013e"
+    }
+  ],
+  "readiness_original_path": "/workspace/work/harbichess/fresh-final8192-independent-review/result.json",
+  "readiness_sha256": "90162446656105007ca713c17b01f4e0a762d694a179a5be815e0ba6174bae51",
+  "receiver_sha256": "44078a3aeea3a8bb1fecf387d5b3003efa0a7e85038b48ee145a2029f7ba15c5",
+  "recovery_clock": {
+    "deadline_epoch": 1791228774.7925532,
+    "reset": false,
+    "started_epoch": 1791226974.7925532
+  },
+  "route": "LOCAL-originalbytes\u2192workflowdispatch\u2192PUBLIC-GitHubRelease-chunks\u2192PUBLIC-GitHubRelease-capsule;NO-Azure-retrieval",
+  "schema": "fresh8192-exact-release-capsule-v3",
+  "source_bindings": {
+    "native_delta_codec.py": "878868940b5bae15c182dce55215320b5f0ba3692b9c5eac26988204832a31d6",
+    "release_transport_frozen.py": "035821c943f0840fc02f0a2019516095bf9e43078a6843b745033456b20c7f7e"
+  },
+  "source_commit": "6fcc8b476d25495d1c9c413e55b2c7ba4794013e",
+  "status": "ROOT-approved-frozen-transport",
+  "upstream_commit": "3e1c7c8ff3652488a1ab7b9376fbd26d24290346",
+  "workflow_path": ".github/workflows/fresh-final8192-release-capsule-v3.yml",
+  "workflow_sha256": "3f194a7ec459b3f9deaef262dd8f7fccf5bf2ebea16ee8beddef6651f53257c3"
+}
