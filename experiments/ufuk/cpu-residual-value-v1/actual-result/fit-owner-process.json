@@ -1,0 +1,24 @@
+{
+  "pid": 994239,
+  "start_ticks": "18354815",
+  "command": [
+    "/workspace/HarbiChess/.venv/bin/python",
+    "/workspace/HarbiChess/experiments/ufuk/cpu-residual-value-v1/run.py",
+    "--checkout",
+    "/workspace/work/harbichess/cpu-additive-source-6fcc8b4",
+    "--study",
+    "/workspace/HarbiChess/experiments/ufuk/cpu-residual-value-v1",
+    "--weights",
+    "/workspace/work/harbichess/a100/restoration/local-rehearsal-content/harbichess-inputs/initial-e8.safetensors",
+    "--qualification",
+    "/workspace/work/harbichess/cpu-residual-value-v1-actual/qualification",
+    "--output",
+    "/workspace/work/harbichess/cpu-residual-value-v1-actual/fits",
+    "--first-epoch",
+    "1791218673.3731527"
+  ],
+  "original_first_epoch": 1791218673.3731527,
+  "original_deadline_epoch": 1791229473.3731527,
+  "observed_launch_epoch": 1791219148.7588956,
+  "GPU_used": false
+}
