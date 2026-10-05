@@ -1,0 +1,44 @@
+{
+  "actual_failure": "/content/harbichess-fullgame-method2-inputs/formal7-production/cohort67/development-failure.json",
+  "actual_failure_sha256": "508c8b7a050b91878eb03d75023f638dd59b37868a5a3055450430d42d4ca5f5",
+  "after_inventory": "/content/harbichess-fullgame-method2-inputs/formal7-production/cohort67/canonical-after.json",
+  "after_inventory_sha256": "5b0f98d3ea0b705ce878ef1b5a7edc83a569bc48eb88aa9551d921cb74505f1c",
+  "all_registered_owned_compute_terminated": true,
+  "before_inventory": "/content/harbichess-fullgame-method2-inputs/formal7-production/cohort67/canonical-before.json",
+  "before_inventory_sha256": "be18b65a36a0ca5124e292508d5d0d201ff4af791063a370de3c19dd445bc0bb",
+  "coordinator_sha256": "212cb22de7a4afcd2d3750e279eafeaa5698a1f39a172ed44f087482424c0290",
+  "observed_epoch": 1791165301.6631045,
+  "original_clocks_or_budgets_reset": false,
+  "ready_latency_final_receipts_fabricated": false,
+  "reason": "actual-infrastructure-qualification-failure",
+  "schema": "own67-permanent-INCOMPLETE-owned-release-v1",
+  "slot": 6,
+  "source_commit": "428a30f5e1658f3cf159844db547ff0147ade5a9",
+  "status": "INCOMPLETE-no-qualification-or-early-candidate-selection",
+  "terminated_tracked_pid_startticks": [
+    {
+      "pid": 116856,
+      "startticks": 2536373
+    },
+    {
+      "pid": 116861,
+      "startticks": 2536399
+    },
+    {
+      "pid": 119011,
+      "startticks": 2578435
+    },
+    {
+      "pid": 116854,
+      "startticks": 2536354
+    },
+    {
+      "pid": 115503,
+      "startticks": 2510241
+    },
+    {
+      "pid": 115504,
+      "startticks": 2510260
+    }
+  ]
+}
