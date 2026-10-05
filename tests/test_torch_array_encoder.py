@@ -240,17 +240,36 @@ def test_private_array_learner_counterfactual_and_fresh_resume_all_payloads(tmp_
             gzip.decompress((tmp_path / f"split/journal{epoch}.gz").read_bytes())
         )
         assert parent_record["own_search"]["schema"] == "pre-action-masked-search-behavior-v2"
-        assert candidate_record["own_search"]["schema"] == "pre-action-masked-search-behavior-v3"
+        assert candidate_record["own_search"]["schema"] == "pre-action-masked-search-behavior-v4"
         assert parent_record["own_search"]["targets"] != candidate_record["own_search"]["targets"]
         for record in (candidate_record, split_record):
             assert all(root["certified_mates"] == [] for root in record["own_search"]["roots"])
+            for root in record["own_search"]["roots"]:
+                assert root["certified_losing_actions"] == []
+                assert root["search_policy"] == root["raw_search_policy"]
+                assert root["selected_action"] == root["raw_selected_action"]
+                assert root["selected_action_reason"] == "raw-search-selection"
+                assert root["loss_shield_status"] == "no-visited-loss-certificate"
+                assert root["loss_shield_epsilon"] == 1e-12
         for record in (parent_record, candidate_record, split_record):
             record.pop("sample_chain_sha256", None)
             record.pop("previous_sample_chain_sha256", None)
+            record.pop("schema", None)
             record["own_search"].pop("schema", None)
             record["own_search"].pop("targets", None)
+            record["own_search"].pop("behavior", None)
             for root in record["own_search"]["roots"]:
                 root.pop("certified_mates", None)
+                for v4_field in (
+                    "raw_search_policy",
+                    "raw_selected_action",
+                    "selected_action_reason",
+                    "visited_loss_checked_actions",
+                    "certified_losing_actions",
+                    "loss_shield_status",
+                    "loss_shield_epsilon",
+                ):
+                    root.pop(v4_field, None)
         assert parent_record == candidate_record == split_record
 
     # The candidate must refuse a source428 native rather than silently resume
