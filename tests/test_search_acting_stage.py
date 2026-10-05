@@ -30,15 +30,10 @@ HERE = Path(__file__).resolve().parent.parent
 WEIGHTS = Path(
     os.environ.get(
         "HARBICHESS_TEST_E8",
-        str(
-            HERE
-            / "artifacts/ufuk-a100-mirror-20261004/harbichess-inputs/initial-e8.safetensors"
-        ),
+        str(HERE / "artifacts/ufuk-a100-mirror-20261004/harbichess-inputs/initial-e8.safetensors"),
     )
 )
-SOURCE = (
-    "a" * 40
-)  # Synthetic unit-native marker; clean CLI requires a real new producer pin.
+SOURCE = "a" * 40  # Synthetic unit-native marker; clean CLI requires a real new producer pin.
 
 
 def fixture(tmp_path):
@@ -78,16 +73,12 @@ def fixture(tmp_path):
                         dict(
                             source_game="white",
                             root_ply=0,
-                            opening=dict(
-                                root_fen="7k/5Q2/6K1/8/8/8/8/8 w - - 0 1", moves=[]
-                            ),
+                            opening=dict(root_fen="7k/5Q2/6K1/8/8/8/8/8 w - - 0 1", moves=[]),
                         ),
                         dict(
                             source_game="black",
                             root_ply=0,
-                            opening=dict(
-                                root_fen="8/8/8/8/8/6k1/5q2/7K b - - 0 1", moves=[]
-                            ),
+                            opening=dict(root_fen="8/8/8/8/8/6k1/5q2/7K b - - 0 1", moves=[]),
                         ),
                         dict(
                             source_game="broad",
@@ -100,9 +91,7 @@ def fixture(tmp_path):
         )
     )
     protocol = tmp_path / "protocol.json"
-    protocol.write_text(
-        '{"scope":"local CPU unit infrastructure only, not production"}\n'
-    )
+    protocol.write_text('{"scope":"local CPU unit infrastructure only, not production"}\n')
     return config_path, dict(
         initial_weights=WEIGHTS,
         book=book,
@@ -422,8 +411,7 @@ def test_rejected_pass_restores_model_adam_globals_and_both_sampler_rngs(
                 else value == actual_value
             )
     assert all(
-        tensor_bits_equal(value, learner.online.state_dict()[name])
-        for name, value in model.items()
+        tensor_bits_equal(value, learner.online.state_dict()[name]) for name, value in model.items()
     )
     assert random.getstate() == globals_before[0]
     actual = np.random.get_state()
@@ -457,13 +445,9 @@ def test_closed_ledger_schedule_tamper_rejected(tmp_path):
     record = learner.train_epoch()
     epoch = deserialize_policy_epoch(json.dumps(record["collection"]).encode())
     changed = copy.deepcopy(record["own_search"])
-    changed["offsets"][0]["chosen_offset"] = (
-        changed["offsets"][0]["chosen_offset"] + 1
-    ) % 8
+    changed["offsets"][0]["chosen_offset"] = (changed["offsets"][0]["chosen_offset"] + 1) % 8
     with pytest.raises(ValueError, match="schedule"):
-        validate_search_acting(
-            epoch, changed, learner.config.search, actors=learner.actors
-        )
+        validate_search_acting(epoch, changed, learner.config.search, actors=learner.actors)
 
 
 def test_zero_search_selection_still_trains_fresh_known_outcomes(tmp_path):
@@ -510,11 +494,7 @@ def test_known_terminal_root_never_calls_network_both_movers(fen):
         PythonChessRules(),
         FullGumbelConfig(simulations=16, max_considered_actions=4),
     ).search_many([ChessState(fen)], [random.Random(7)])[0]
-    assert (
-        result.root_value == -1.0
-        and result.simulations == 0
-        and not result.action_weights
-    )
+    assert result.root_value == -1.0 and result.simulations == 0 and not result.action_weights
 
 
 def test_same_record_policy_CE_zero_ablation_changes_only_policy_term():
@@ -577,9 +557,7 @@ def test_preaction_masked_search_and_actual_mu_raw_pi_archive(tmp_path, monkeypa
         for i, row in enumerate(record["collection"]["actions"])
         if i in selected
     )
-    epoch = collector.deserialize_search_acting_epoch(
-        json.dumps(record["collection"]).encode()
-    )
+    epoch = collector.deserialize_search_acting_epoch(json.dumps(record["collection"]).encode())
     for field in ("actor_rng_before", "groups", "behavior"):
         changed = copy.deepcopy(record["own_search"])
         if field == "actor_rng_before":
@@ -623,9 +601,7 @@ def test_v1_native_and_non_e8_fresh_rejected(tmp_path):
         )
     inputs = dict(inputs, initial_weights=tmp_path / "old-v1/model.safetensors")
     with pytest.raises(ValueError, match="immutable e8"):
-        TorchSearchActingLearner.fresh(
-            config=settings, input_paths=inputs, source_commit=SOURCE
-        )
+        TorchSearchActingLearner.fresh(config=settings, input_paths=inputs, source_commit=SOURCE)
 
 
 def test_completed_own_outcomes_and_caps_use_rules_not_search_value(tmp_path):
@@ -646,8 +622,7 @@ def test_completed_own_outcomes_and_caps_use_rules_not_search_value(tmp_path):
     selected = {r["collection_index"] for r in record["own_search"]["roots"]}
     assert selected  # Caps may carry CE, while their entire episode has no WDL label.
     endings = {
-        (r.transition.source_id, r.transition.game_index): r.transition.post
-        for r in epoch.actions
+        (r.transition.source_id, r.transition.game_index): r.transition.post for r in epoch.actions
     }
     movers = set()
     for target in targets.targets:
@@ -698,9 +673,7 @@ def test_real_e8_raw_reference_kl_zero_despite_search_mu_at_same_point02_gate(
         for row, receipt in zip(policy_rows, ledger["roots"], strict=True):
             actor_row = epoch.actions[receipt["collection_index"]]
             assert row.behavior_policy == actor_row.policy  # RAW frozen NN pi.
-            actual_mu_rows.append(
-                replace(row, behavior_policy=actor_row.behavior_policy)
-            )
+            actual_mu_rows.append(replace(row, behavior_policy=actor_row.behavior_policy))
         raw_kl, _ = _whole_dataset_kls(
             network, learner.encoder, learner.actors.rules, policy_rows, device="cpu"
         )
@@ -725,3 +698,115 @@ def test_real_e8_raw_reference_kl_zero_despite_search_mu_at_same_point02_gate(
     ):
         assert list(row.behavior_policy) == archived["behavior_policy"]
         assert list(row.policy) == archived["policy"]
+
+
+def test_greedy_mixture_keeps_support_and_rejects_invalid_semantics():
+    from dataclasses import asdict
+
+    from harbichess.training.search_acting_policy import (
+        GreedyOwnSearchConfig,
+        mixture_policy,
+        search_config_from_dict,
+    )
+
+    old = OwnSearchConfig(16, 4, 0.0, 0.1, 50.0, 1)
+    assert type(search_config_from_dict(asdict(old))) is OwnSearchConfig
+    policy = (0.2, 0.3, 0.5)
+    assert mixture_policy(policy, 1, 0) == policy
+    mixed = mixture_policy(policy, 1, 0.9)
+    assert mixed[1] == pytest.approx(0.93)
+    assert all(p > 0 for p in mixed) and sum(mixed) == pytest.approx(1.0)
+    for invalid in (-0.1, 1.0, float("nan"), float("inf"), True):
+        with pytest.raises(ValueError, match="greedy acting fraction"):
+            GreedyOwnSearchConfig(**asdict(old), greedy_fraction=invalid)
+    with pytest.raises(ValueError):
+        mixture_policy(policy, 3, 0.9)
+
+
+def test_actual_greedy_mixture_raw_search_mu_and_strict_native(tmp_path):
+    from dataclasses import asdict, replace
+
+    from harbichess.chess.actions import move_to_action
+    from harbichess.training.search_acting_epoch import (
+        actor_mu,
+        deserialize_search_acting_epoch,
+        validate_search_acting,
+    )
+    from harbichess.training.search_acting_policy import GREEDY_LEDGER, GreedyOwnSearchConfig
+    from harbichess.training.torch_search_acting_learner import canonical
+
+    torch.set_num_threads(1)
+    path, inputs = fixture(tmp_path)
+    c = config(path)
+    c = replace(
+        c,
+        search=GreedyOwnSearchConfig(**{**asdict(c.search), "block_plies": 1}, greedy_fraction=0.9),
+    )
+    path.write_text(json.dumps(asdict(c)) + "\n")
+    learner = TorchSearchActingLearner.fresh(config=c, input_paths=inputs, source_commit=SOURCE)
+    record = learner.train_epoch()
+    ledger = record["own_search"]
+    epoch = deserialize_search_acting_epoch(canonical(record["collection"]))
+    assert ledger["schema"] == GREEDY_LEDGER and ledger["greedy_fraction"] == 0.9
+    assert len(ledger["roots"]) == len(epoch.actions)
+    assert learner.run_config["collection_ledger"] == GREEDY_LEDGER
+    assert any(r["acting_policy"] != r["search_policy"] for r in ledger["roots"])
+    for root, row in zip(ledger["roots"], epoch.actions, strict=True):
+        board = learner.actors.rules.inspect(row.transition.pre)
+        selected = row.legal_actions.index(
+            move_to_action(board, chess.Move.from_uci(root["selected_action"]))
+        )
+        assert root["acting_policy"][selected] >= 0.9
+        assert row.behavior_policy == actor_mu(tuple(root["acting_policy"]))
+    bad = copy.deepcopy(ledger)
+    bad["roots"][0]["acting_policy"] = bad["roots"][0]["search_policy"]
+    # Choose a root whose mixture is genuinely different, including terminal certificates.
+    i = next(i for i, r in enumerate(ledger["roots"]) if r["acting_policy"] != r["search_policy"])
+    bad["roots"][i]["acting_policy"] = bad["roots"][i]["search_policy"]
+    with pytest.raises(ValueError, match="actual acting policy"):
+        validate_search_acting(epoch, bad, c.search, actors=learner.actors)
+    wrong = copy.deepcopy(ledger)
+    wrong["greedy_fraction"] = 0.8
+    with pytest.raises(ValueError, match="config/ledger"):
+        validate_search_acting(epoch, wrong, c.search, actors=learner.actors)
+    native = tmp_path / "native"
+    learner.checkpoint(native)
+    loaded = TorchSearchActingLearner.resume(
+        native, config=c, input_paths=inputs, source_commit=SOURCE
+    )
+    assert (
+        loaded.epoch == 1
+        and loaded.optimizer_accepted_updates == learner.optimizer_accepted_updates
+    )
+    assert all(
+        tensor_bits_equal(p, loaded.online.state_dict()[n])
+        for n, p in learner.online.state_dict().items()
+    )
+    loaded_next = loaded.train_epoch()
+    uninterrupted_next = learner.train_epoch()
+    assert loaded_next == uninterrupted_next
+
+
+def test_zero_greedy_fraction_retains_exact_legacy_collection_and_training(tmp_path):
+    from dataclasses import asdict, replace
+
+    from harbichess.training.search_acting_policy import GreedyOwnSearchConfig
+
+    torch.set_num_threads(1)
+    path, inputs = fixture(tmp_path)
+    legacy = config(path)
+    a = TorchSearchActingLearner.fresh(config=legacy, input_paths=inputs, source_commit=SOURCE)
+    zero = replace(legacy, search=GreedyOwnSearchConfig(**asdict(legacy.search), greedy_fraction=0))
+    b = TorchSearchActingLearner.fresh(config=zero, input_paths=inputs, source_commit=SOURCE)
+    x, y = a.train_epoch(), b.train_epoch()
+    assert x["collection"] == y["collection"]
+    assert x["training"] == y["training"] and x["target_counts"] == y["target_counts"]
+    for r in y["own_search"]["roots"]:
+        assert r.pop("acting_policy") == r["search_policy"]
+    y["own_search"].pop("greedy_fraction")
+    y["own_search"]["schema"] = x["own_search"]["schema"]
+    y["own_search"]["behavior"] = x["own_search"]["behavior"]
+    assert x["own_search"] == y["own_search"]
+    assert all(
+        tensor_bits_equal(p, b.online.state_dict()[n]) for n, p in a.online.state_dict().items()
+    )
