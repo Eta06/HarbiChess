@@ -1,0 +1,52 @@
+{
+  "status": "PASS-both-realdata-whole8-pause4-freshresume8-all6native-perseed-NOT-strength",
+  "rows": [
+    {
+      "seed": 20262805,
+      "result_sha256": "3cc3322a1d088543c049db1f18d6d9cd6173cf90bc045d5a61df0491b96477b9",
+      "result": {
+        "accepted_updates": 8,
+        "actor_config_sha256": "b73106e21c6d8433c2132b024a2caae7527ec84541898d4f9c3db8202fccc3b5",
+        "all6_full_native_fresh_process_loads": true,
+        "dataset_contract_sha256": "8f1775c2d3d1da7cfebd55073f4d873439d1ad153af1d94d40bac07246a58ec3",
+        "exact_whole_vs_split_native_payload": true,
+        "finished_epoch": 1791223342.2141397,
+        "first_epoch": 1791223240.283365,
+        "journal_sha256": "8109c074a9e084f33ec8d9a6c4b062eb3c57e8b6e8d897e03bd39dc8261dea8f",
+        "original_deadline_epoch": 1791223840.283365,
+        "schema": "fresh-qsearch-additive-native-restart-proof-v2",
+        "scope": "8-update whole/pause/resume and strict fresh-process native-load proof; no strength claim",
+        "seed": 20262805,
+        "source_commit": "6fcc8b476d25495d1c9c413e55b2c7ba4794013e",
+        "status": "PASS-native-restart-not-strength"
+      }
+    },
+    {
+      "seed": 20262806,
+      "result_sha256": "0970f590d5c48168292b3b34eb6e70b79caa45e3750e86b21f26378154e2d7b3",
+      "result": {
+        "accepted_updates": 8,
+        "actor_config_sha256": "a3b5ac9f3933afdce858e60c0e383c9611dabd2be79e7dff128c490d6750591d",
+        "all6_full_native_fresh_process_loads": true,
+        "dataset_contract_sha256": "97b16dc10e9b1cdff032710e724cd7ae482ea56b7282befcde208e3cc48339d5",
+        "exact_whole_vs_split_native_payload": true,
+        "finished_epoch": 1791223388.5645149,
+        "first_epoch": 1791223240.283365,
+        "journal_sha256": "df515e393e97065cd4828ceacccc7628ea04091643c16296009f48f1b9e01645",
+        "original_deadline_epoch": 1791223840.283365,
+        "schema": "fresh-qsearch-additive-native-restart-proof-v2",
+        "scope": "8-update whole/pause/resume and strict fresh-process native-load proof; no strength claim",
+        "seed": 20262806,
+        "source_commit": "6fcc8b476d25495d1c9c413e55b2c7ba4794013e",
+        "status": "PASS-native-restart-not-strength"
+      }
+    }
+  ],
+  "original_first_epoch": 1791223240.283365,
+  "original_deadline_epoch": 1791223840.283365,
+  "finished_epoch": 1791223389.3643467,
+  "GPU_used": false,
+  "strength_success": false,
+  "RAMstage": "/dev/shm/harbichess-fresh-MC-native-proof-20261005",
+  "controller_sha256": "c2b2a32f173aaaf535f85760610feeff2d40d272cb20ab9265762e471ee572c1"
+}
