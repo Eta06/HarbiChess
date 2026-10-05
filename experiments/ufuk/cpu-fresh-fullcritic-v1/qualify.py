@@ -208,6 +208,8 @@ def main():
                     (args.output / f"strict-{name}-{step}.stderr.log").open("xb") as err,
                 ):
                     run_owned(command, args.deadline_epoch, out, err, args.checkout, env)
+        if time.time() >= args.deadline_epoch:
+            raise TimeoutError("original fixed qualification deadline exhausted before publication")
         result.update(
             status="PASS-native-restart-not-fit",
             exact_whole_vs_pause_resume_native_payload=True,
