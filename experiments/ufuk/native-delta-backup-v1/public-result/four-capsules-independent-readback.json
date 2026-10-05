@@ -1,0 +1,112 @@
+{
+  "schema": "cpu-native-root-independent-public-readback-v1",
+  "status": "PASS-four-capsules-12-original-files-byteexact-NOT-runtime-proof",
+  "rows": [
+    {
+      "tag": "20262305-linear",
+      "manifest_sha256": "170f4737816346e57d01f6d6fcceec48aa4e09fd8a364cccd7abcb21a4df4cf5",
+      "asset_id": 613099885,
+      "url": "https://github.com/Eta06/HarbiChess/releases/download/port-linux-preflight-20261002/cpu-native-exact-0c263000761ae8d55721db7de2bd380be9b640ba8b13151f4e344b70ead2e2e4-82b04873f0e98160b90d9d79af50972e2ddcf9147c19de6a3f9a650bb8e6b523.tar.gz",
+      "capsule_sha256": "82b04873f0e98160b90d9d79af50972e2ddcf9147c19de6a3f9a650bb8e6b523",
+      "capsule_bytes": 585769,
+      "exact_native_files": {
+        "model.safetensors": {
+          "bytes": 295012,
+          "sha256": "0ded026c2671e4cc5709b78d861aba7f24fbebdf1bce142fbc84f362c3d213a1"
+        },
+        "training.pt": {
+          "bytes": 419193,
+          "sha256": "3704f90cb8cbdb32dd78eee302dfaf48c252014185938b607fa95958bdd14870"
+        },
+        "checkpoint.json": {
+          "bytes": 1418,
+          "sha256": "97c6f858bb1a000c2d26cc35e485cddce8a1cabd2bd30f918e39151a55709118"
+        }
+      },
+      "restored_path": "/dev/shm/harbichess-public-native-20261005/20262305-linear",
+      "anonymous_complete_body_verified": true,
+      "strict_runtime_load": "PENDING-separate-readonly-audit"
+    },
+    {
+      "tag": "20262306-linear",
+      "manifest_sha256": "525ddf05b06bdcc0e77d9ceefce7609ed7442a6568b89cf2c1a100062286c4ee",
+      "asset_id": 613102268,
+      "url": "https://github.com/Eta06/HarbiChess/releases/download/port-linux-preflight-20261002/cpu-native-exact-8baee246a4b65e0c54de24d70814be037248a45f8452fbb4940de448d5413b64-c394a7697f32642f5985c89a13c47f4f4266c8dbb2bf1467d1f01c4b561fff3f.tar.gz",
+      "capsule_sha256": "c394a7697f32642f5985c89a13c47f4f4266c8dbb2bf1467d1f01c4b561fff3f",
+      "capsule_bytes": 585769,
+      "exact_native_files": {
+        "model.safetensors": {
+          "bytes": 295012,
+          "sha256": "1f2ccc2b71af67a4e99eea34a0c69d36a358513c96eb88794c13137ccf6bc4df"
+        },
+        "training.pt": {
+          "bytes": 419257,
+          "sha256": "768717a919a416859f61e6fe19f2cb78e62dd61a9193924d42f875d60365111f"
+        },
+        "checkpoint.json": {
+          "bytes": 1418,
+          "sha256": "adf2180231f20a1f7b4fb725ff8f108aa773aac27427e3541d54b52dbb8691ec"
+        }
+      },
+      "restored_path": "/dev/shm/harbichess-public-native-20261005/20262306-linear",
+      "anonymous_complete_body_verified": true,
+      "strict_runtime_load": "PENDING-separate-readonly-audit"
+    },
+    {
+      "tag": "20262405-positional",
+      "manifest_sha256": "4fecd24fee160dc7195966b012e4d739e66f6e991bafecaef54a98ca857a6591",
+      "asset_id": 613110374,
+      "url": "https://github.com/Eta06/HarbiChess/releases/download/port-linux-preflight-20261002/cpu-native-exact-b2e5fe08e0eb6e3fcbc896cb873686984bb15bda9cebedb58f6bbb72abdf3465-bf6dccf01d5cf8a0ed8f307e7fa7a36bf80e48bcc1f17687a5f4ac216675fb91.tar.gz",
+      "capsule_sha256": "bf6dccf01d5cf8a0ed8f307e7fa7a36bf80e48bcc1f17687a5f4ac216675fb91",
+      "capsule_bytes": 1027927,
+      "exact_native_files": {
+        "model.safetensors": {
+          "bytes": 408040,
+          "sha256": "dcfefe0373d8879c38229b7ba487ec4d6d2ae482ac5f8aa598bf26731310dc1c"
+        },
+        "training.pt": {
+          "bytes": 852365,
+          "sha256": "a495bc4549a096401703e6eb300381f03f62716b966b8881b35fda1e47b72a30"
+        },
+        "checkpoint.json": {
+          "bytes": 1601,
+          "sha256": "6e5343370e32658ac3df65eae6b95c60558819b05ac0d502c4eb847279e19698"
+        }
+      },
+      "restored_path": "/dev/shm/harbichess-public-native-20261005/20262405-positional",
+      "anonymous_complete_body_verified": true,
+      "strict_runtime_load": "PENDING-separate-readonly-audit"
+    },
+    {
+      "tag": "20262406-positional",
+      "manifest_sha256": "c13fb58cf4c6103b25d8a30ae0012a6d3987bfba4baa55f7ba591f2035f11fa5",
+      "asset_id": 613118756,
+      "url": "https://github.com/Eta06/HarbiChess/releases/download/port-linux-preflight-20261002/cpu-native-exact-5e0e9a55b55cd1327f08468287d89898b6819adfe80dc8727621d33a82264bea-c4cb03c454c5ec8de9aa3166048909ebf9797a2492a8d5c61d54d2e8cd11883c.tar.gz",
+      "capsule_sha256": "c4cb03c454c5ec8de9aa3166048909ebf9797a2492a8d5c61d54d2e8cd11883c",
+      "capsule_bytes": 1028068,
+      "exact_native_files": {
+        "model.safetensors": {
+          "bytes": 408040,
+          "sha256": "aa8e84031bbb6df56e1c9372be95d691b12fdb64df53d3d2840c184c9ec6e500"
+        },
+        "training.pt": {
+          "bytes": 852365,
+          "sha256": "50302a51f2e5b9c1149e68bc1adf3d5dc7a2ace24caaf49fb4e58c07904d1743"
+        },
+        "checkpoint.json": {
+          "bytes": 1600,
+          "sha256": "3dec32ddc142ee00061855b5a5e8b7c80c600b8bc95a7b61bbfdfdd7a867a170"
+        }
+      },
+      "restored_path": "/dev/shm/harbichess-public-native-20261005/20262406-positional",
+      "anonymous_complete_body_verified": true,
+      "strict_runtime_load": "PENDING-separate-readonly-audit"
+    }
+  ],
+  "started_epoch": 1791219292.7868116,
+  "original_deadline_epoch": 1791219892.7868116,
+  "finished_epoch": 1791219294.8677995,
+  "old_assets_mutated": false,
+  "GPU_used": false,
+  "temporary_ram_bytes": 3955321
+}
