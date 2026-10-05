@@ -1,0 +1,78 @@
+{
+  "GPU_used": false,
+  "contract": {
+    "GPU_used": false,
+    "helper_sha256": "e34257ed7b107da8f9d6a4f44104a301bdb32c999594815f415591c2a816b3fa",
+    "protocol_sha256": "7a7893af728a727a1c3d7dfe47ccf932f4b111639c85b43b64ba3f7185ed7d98",
+    "source": "4cae08522ac940746cf9127ca8ce4a6b63a47408"
+  },
+  "finished_epoch": 1791202667.0562747,
+  "original_deadline_epoch": 1791206770.5573113,
+  "rows": [
+    {
+      "accepted": 80,
+      "after": 1.298583626578994,
+      "arm": "value-only",
+      "attempted": 80,
+      "before": 2.9808354021295673,
+      "finished_epoch": 1791202625.61868,
+      "finite_frozen": true,
+      "first_epoch": 1791202570.5617661,
+      "original_deadline_epoch": 1791204370.5617661,
+      "result_path": "/workspace/work/harbichess/cpu-own-replay-v1-actual/20262005-value-only/result-attempt-00000080.json",
+      "result_sha256": "7f96def1fa89d48585c4d819c430fa5928755e12e2564ed78a0217c14e7bb1f9",
+      "scope": "own-replay TRAIN pilot; not strength",
+      "seed": 20262005,
+      "status": "completed-awaiting-development-games"
+    },
+    {
+      "accepted": 80,
+      "after": 0.8712339322247109,
+      "arm": "value-only",
+      "attempted": 80,
+      "before": 2.2530860921599696,
+      "finished_epoch": 1791202624.4139152,
+      "finite_frozen": true,
+      "first_epoch": 1791202570.5620854,
+      "original_deadline_epoch": 1791204370.5620854,
+      "result_path": "/workspace/work/harbichess/cpu-own-replay-v1-actual/20262006-value-only/result-attempt-00000080.json",
+      "result_sha256": "1b7f77800fdd7705e386cc243ac59ac508f5b9af9f3bff76edc4c43ac9ea6374",
+      "scope": "own-replay TRAIN pilot; not strength",
+      "seed": 20262006,
+      "status": "completed-awaiting-development-games"
+    },
+    {
+      "accepted": 0,
+      "after": 2.9808354021295673,
+      "arm": "joint",
+      "attempted": 1,
+      "before": 2.9808354021295673,
+      "finished_epoch": 1791202667.0525534,
+      "finite_frozen": true,
+      "first_epoch": 1791202624.4152057,
+      "original_deadline_epoch": 1791204424.4152057,
+      "result_path": "/workspace/work/harbichess/cpu-own-replay-v1-actual/20262005-joint/result-attempt-00000001.json",
+      "result_sha256": "b9f596a0d2ea886df3781795a3f077583cfb5067881998875cf86c0a6d489ab2",
+      "scope": "own-replay TRAIN pilot; not strength",
+      "seed": 20262005,
+      "status": "completed-awaiting-development-games"
+    },
+    {
+      "accepted": 0,
+      "after": 2.2530860921599696,
+      "arm": "joint",
+      "attempted": 1,
+      "before": 2.2530860921599696,
+      "finished_epoch": 1791202665.0553694,
+      "finite_frozen": true,
+      "first_epoch": 1791202625.6204736,
+      "original_deadline_epoch": 1791204425.6204736,
+      "result_path": "/workspace/work/harbichess/cpu-own-replay-v1-actual/20262006-joint/result-attempt-00000001.json",
+      "result_sha256": "4de27b6e4cf7195ac60048610abdc91c8805815779cba53c7c263f7fb17cc8d3",
+      "scope": "own-replay TRAIN pilot; not strength",
+      "seed": 20262006,
+      "status": "completed-awaiting-development-games"
+    }
+  ],
+  "status": "completed-diagnostic-not-strength"
+}
