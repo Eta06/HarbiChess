@@ -1,0 +1,7 @@
+Traceback (most recent call last):
+  File "/workspace/HarbiChess/experiments/ufuk/cpu-classical-own-v1/arena/audit_arena.py", line 244, in <module>
+    main()
+  File "/workspace/HarbiChess/experiments/ufuk/cpu-classical-own-v1/arena/audit_arena.py", line 228, in main
+    "formal_requirement": p["formal"],
+                          ~^^^^^^^^^^
+KeyError: 'formal'
