@@ -1,0 +1,25 @@
+{
+  "already_ended_naturally_under_original_guards": true,
+  "observed_epoch": 1791163651.2962956,
+  "owned_process_group_ids": [
+    104294,
+    107037
+  ],
+  "qualification_ledger_slot": 5,
+  "remaining_live_known_method5_compute_commands": [],
+  "remaining_owned_pid_startticks": [],
+  "schema": "own5-terminal-owned-process-inventory-v1",
+  "signals_sent": [],
+  "source_commit": "4515a7c0dda3b4f9615c2fc78a47c872ab14699d",
+  "terminal_receipt_sha256": "50876f67a21fbf0e5ef84f51fa21e9a1c2c5b9d9505ea68b4db1fc0ebb4ecac7",
+  "tracked_owned_pid_startticks": [
+    {
+      "pid": 104294,
+      "startticks": 2286865
+    },
+    {
+      "pid": 107037,
+      "startticks": 2340856
+    }
+  ]
+}
