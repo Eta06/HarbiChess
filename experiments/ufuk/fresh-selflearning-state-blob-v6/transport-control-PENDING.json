@@ -1,0 +1,24 @@
+{
+  "caps": {
+    "assets": 200,
+    "encoded_bytes": 4194304,
+    "file_bytes": 2097152,
+    "ram_bytes": 16777216,
+    "raw_bytes": 8388608,
+    "release_bytes": 8589934592
+  },
+  "deadline_epoch": 1791235919.529188,
+  "manifest_sha256": "df5671d13e3da60f5337096b289c041fe2a730290fbc2a546f5b127c7bf729b7",
+  "operator_end_epoch": 1791273600,
+  "release": {
+    "id": 404068972,
+    "initial_assets": 0,
+    "tag": "ufuk-cpu-ownplay-state-20261005",
+    "target_commitish": "31a18e981e27e696fcca69c7e62210e7f0e89830"
+  },
+  "schema": "fresh-selflearning-state-blob-transport-control-v6",
+  "scope": "NEW22filebundle/NEWpublicRelease/singletemporaryunreferencedblob; old1800failureunchanged",
+  "started_epoch": 1791230519.529188,
+  "status": "ROOT-approved-frozen-transport",
+  "whole_budget_seconds": 5400
+}
