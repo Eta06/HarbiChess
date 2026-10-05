@@ -101,6 +101,7 @@ def choose_chronological_groups(groups, steps):
 
 def audit_epoch(a, config, paths, initial, index, neural):
     import torch
+
     from harbichess.chess.actions import legal_action_indices
     from harbichess.selfplay.online_epoch import _tuplify
     from harbichess.training.fullgame_own_targets import (
@@ -394,6 +395,7 @@ def audit_epoch(a, config, paths, initial, index, neural):
             ).hexdigest()
     assert material_elements == 21
     import chess
+
     from harbichess.backends.torch_backend import TorchPolicyValueBackend
     from harbichess.chess.actions import move_to_action
     from harbichess.search.full_gumbel import FullGumbelConfig
