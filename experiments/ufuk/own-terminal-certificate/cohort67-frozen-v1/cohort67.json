@@ -1,0 +1,54 @@
+{
+  "admission7_deadline_epoch": 1791167100,
+  "conditional_release": "terminal-INCOMPLETE-plus-all-owned-compute-ended;no-fabricated-ready-latency-finals",
+  "hard_deadline_epoch": 1791180000,
+  "helper_sha256": "a37ddf04c5a052758849e9e55f262aad9b3e86b785b27b1df3fb2f3a54288e8e",
+  "latency_order": [
+    6,
+    7
+  ],
+  "latest_latency_start_epoch": 1791174000,
+  "members": [
+    {
+      "admission_binding": "/content/harbichess-fullgame-method2-inputs/formal7-production/cohort67/admission-6.json",
+      "books_sha256": {
+        "20261625": "251b4d49420a381e8314b36f68769ffe57cdcca2aecfeab89c6ed2181ab3a4d8",
+        "20261626": "26382c11c0237d61b498f77614dcdf8c7795bbe65434b53dd230391731ed6d0d"
+      },
+      "coordinator_sha256": "212cb22de7a4afcd2d3750e279eafeaa5698a1f39a172ed44f087482424c0290",
+      "fixed_epochs": 8,
+      "root": "/content/harbichess-runs/own-terminal-method6-posttraining-20261005",
+      "seeds": [
+        20261625,
+        20261626
+      ],
+      "slot": 6,
+      "source_commit": "428a30f5e1658f3cf159844db547ff0147ade5a9",
+      "terminal_owned_release": "/content/harbichess-fullgame-method2-inputs/formal7-production/cohort67/terminal-6.json"
+    },
+    {
+      "admission_binding": "/content/harbichess-fullgame-method2-inputs/formal7-production/cohort67/admission-7.json",
+      "books_sha256": {
+        "20261725": "cf3455abea53dd1146aaae4a55593e51ca42981cfdacf80cc2a5e9704df48ef8",
+        "20261726": "13f4722d04a15b512f770c78c65145f96946d7d58ad30db7a20fa9eeef4bd0b7"
+      },
+      "coordinator_sha256": "220bfdf3df8dacf73e3d39f19f3d837dc00372fbaa1e9d48321d7556e48e1426",
+      "fixed_epochs": 8,
+      "root": "/content/harbichess-runs/certificate-method7-posttraining-20261005",
+      "seeds": [
+        20261725,
+        20261726
+      ],
+      "slot": 7,
+      "source_commit": "c022bc1605b44c3089439da5c6efb7bd4db4ff81",
+      "terminal_owned_release": "/content/harbichess-fullgame-method2-inputs/formal7-production/cohort67/terminal-7.json"
+    }
+  ],
+  "prelatency_deadline_epoch": 1791173460,
+  "schema": "prospective-own67-latency-final-cohort-v1",
+  "slots": [
+    6,
+    7
+  ],
+  "status": "frozen-before-any-cohort-training-or-games"
+}
