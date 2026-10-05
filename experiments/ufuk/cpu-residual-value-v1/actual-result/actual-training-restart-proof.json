@@ -1,0 +1,16 @@
+{
+  "schema": "cpu-own-outcome-residual-restart-proof-v2",
+  "original_first_epoch": 1791218673.3731527,
+  "original_deadline_epoch": 1791219273.3731527,
+  "source_commit": "6fcc8b476d25495d1c9c413e55b2c7ba4794013e",
+  "scope": "training-only checkpoint/optimizer/RNG/replay proof; no online actor or strength claim",
+  "status": "pass",
+  "all6full_native_freshprocess_strictload": true,
+  "all_training_payload_fields_bit_identical": true,
+  "accepted_updates": 8,
+  "full_optimizer_rng_replay_contract_resume": true,
+  "native_inputs_sha256": [
+    "32d203b68ed29e9fd1a0845fca69f32f0faa3aa4cc1ad9e0e040b6af5027fb55"
+  ],
+  "finished_epoch": 1791218808.2520456
+}
