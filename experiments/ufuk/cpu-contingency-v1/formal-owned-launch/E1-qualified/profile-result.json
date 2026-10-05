@@ -1,0 +1,12 @@
+{
+  "absolute_deadline_epoch": 1791173081.6027434,
+  "audit_sha256": "ac8d357337f0bb21bdf3acdeea86678216a628f62a38f8122bc1a4e07e9aa911",
+  "finished_epoch": 1791172548.662326,
+  "manifest_sha256": "faa60f85084bba295b149c552ff96dc4d2fefc79698cd389fe789aa7508990f8",
+  "original_started_epoch": 1791172181.6027434,
+  "schema": "actual-cpu-fullshape-original900-profile-v1",
+  "script_sha256": "fa0cea5492d1f0a098b4c9e4045cf5cb773c15c5ae1fe480f33acc24bc8f4644",
+  "source_commit": "3be5b87db27a0fbde83464e7ea7157f0d9a76ae4",
+  "status": "pass-actual-CPU-E1-qualified",
+  "whole_seconds": 367.0595827102661
+}
