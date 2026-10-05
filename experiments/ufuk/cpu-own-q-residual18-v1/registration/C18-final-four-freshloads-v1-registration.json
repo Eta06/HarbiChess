@@ -1,0 +1,20 @@
+{
+  "output": "/dev/shm/harbichess-C18-final-four-freshloads-v1",
+  "first_epoch": 1791239108.4035254,
+  "deadline_epoch": 1791240908.4035254,
+  "cpu_core": 2,
+  "checkout": "/workspace/work/harbichess/cpu-additive-source-6fcc8b4",
+  "controller_sha256": "7ea6241e57de4ab83259803ac4a4f42d0fb50701c305a3695a937a19e9ee7150",
+  "memory_guard_path": "/workspace/work/harbichess/cpu-additive-source-6fcc8b4/src/harbichess/training/cgroup_budget.py",
+  "input_pins": {
+    "/workspace/work/harbichess/continuation-20261005/run_C18_final_four_fresh_native_loads_v1.py": "977ef4c964646ed784be18379f57ec56bd7d523ee5a019eb3d76f503a7bb67fe",
+    "/workspace/work/harbichess/continuation-20261005/strict_native18_readonly_load_v1.py": "5f6e8e42e92d70b1677782d8917aeb3f410a7bb64d3220bb07efc1531663de56",
+    "/workspace/work/harbichess/continuation-20261005/ownq-C18-training-v1-registration/fits-finished.json": "b85d1eff17311e839b958b1b57c94e6abed899236a3f7d9263b5fa7734fcc34a"
+  },
+  "command": [
+    "/workspace/HarbiChess/.venv/bin/python",
+    "/workspace/work/harbichess/continuation-20261005/run_C18_final_four_fresh_native_loads_v1.py",
+    "/workspace/work/harbichess/continuation-20261005/C18-final-four-freshloads-v1-registration.json"
+  ],
+  "result_path": "/dev/shm/harbichess-C18-final-four-freshloads-v1/result.json"
+}
