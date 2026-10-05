@@ -1,0 +1,136 @@
+{
+  "schema": "cpu-residual-own-value-all-root-qsearch-protocol-v1",
+  "stage": "UFUK-RESIDUAL",
+  "source_commit": "6fcc8b476d25495d1c9c413e55b2c7ba4794013e",
+  "hypothesis": "Fixed own-outcome1024 residual logits on preserved full e8 WDL may improve own-experience value while retaining original calibration. Standard additive residual critic, no novelty or strength assumption.",
+  "selection": "Fixed prospective residual1024 both endpoints, no outcome checkpoint choice; previous own journals only, no fresh selfplay yet or new teacher labels.",
+  "match_seeds": [
+    20262705,
+    20262706
+  ],
+  "models": {
+    "20262705": {
+      "e8": {
+        "path": "/workspace/work/harbichess/a100/restoration/local-rehearsal-content/harbichess-inputs/initial-e8.safetensors",
+        "sha256": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03",
+        "train_seed": null,
+        "accepted_updates": null
+      },
+      "rebased": {
+        "path": "/workspace/work/harbichess/cpu-residual-value-v1-actual/fits/20262705-residual/checkpoints/step-00000000/model.safetensors",
+        "sha256": "ROOT_FILL_AFTER_FIXED_NATIVE_STRICT_LOAD",
+        "native_manifest_sha256": "ROOT_FILL_IMMUTABLE_MANIFEST_SHA",
+        "train_seed": 20262705,
+        "accepted_updates": 0,
+        "native_schema": "cpu-own-outcome-residual-training-native-v3"
+      },
+      "residual": {
+        "path": "/workspace/work/harbichess/cpu-residual-value-v1-actual/fits/20262705-residual/checkpoints/step-00001024/model.safetensors",
+        "sha256": "ROOT_FILL_AFTER_FIXED_NATIVE_STRICT_LOAD",
+        "native_manifest_sha256": "ROOT_FILL_IMMUTABLE_MANIFEST_SHA",
+        "train_seed": 20262705,
+        "accepted_updates": 1024,
+        "native_schema": "cpu-own-outcome-residual-training-native-v3"
+      }
+    },
+    "20262706": {
+      "e8": {
+        "path": "/workspace/work/harbichess/a100/restoration/local-rehearsal-content/harbichess-inputs/initial-e8.safetensors",
+        "sha256": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03",
+        "train_seed": null,
+        "accepted_updates": null
+      },
+      "rebased": {
+        "path": "/workspace/work/harbichess/cpu-residual-value-v1-actual/fits/20262706-residual/checkpoints/step-00000000/model.safetensors",
+        "sha256": "ROOT_FILL_AFTER_FIXED_NATIVE_STRICT_LOAD",
+        "native_manifest_sha256": "ROOT_FILL_IMMUTABLE_MANIFEST_SHA",
+        "train_seed": 20262706,
+        "accepted_updates": 0,
+        "native_schema": "cpu-own-outcome-residual-training-native-v3"
+      },
+      "residual": {
+        "path": "/workspace/work/harbichess/cpu-residual-value-v1-actual/fits/20262706-residual/checkpoints/step-00001024/model.safetensors",
+        "sha256": "ROOT_FILL_AFTER_FIXED_NATIVE_STRICT_LOAD",
+        "native_manifest_sha256": "ROOT_FILL_IMMUTABLE_MANIFEST_SHA",
+        "train_seed": 20262706,
+        "accepted_updates": 1024,
+        "native_schema": "cpu-own-outcome-residual-training-native-v3"
+      }
+    }
+  },
+  "arms": [
+    "residual"
+  ],
+  "tasks": [
+    [
+      "e8",
+      "SF512"
+    ],
+    [
+      "rebased",
+      "SF512"
+    ],
+    [
+      "residual",
+      "e8"
+    ],
+    [
+      "residual",
+      "rebased"
+    ],
+    [
+      "residual",
+      "SF512"
+    ]
+  ],
+  "book_path": "/workspace/work/harbichess/cpu-own-replay-v1-actual/development/book.json",
+  "book_sha256": "9c36b5972c9676d19c358ca7e598b9f7f5d110b1947bed838cd660f644d845da",
+  "opening_pairs": 8,
+  "games_per_tournament": 16,
+  "total_games": 160,
+  "search_nodes": 512,
+  "quiescence_plies": 2,
+  "max_depth": 8,
+  "semantics": "Static mover W-L from existing production WDL softmax; exact terminal +/- (2-ply*1e-5), draw0 claim_draw=True. Each recursive node counted including terminal/quiescence; reserve every legal root child initial static pass. Subsequent incomplete root passes discarded, only fully completed pass selects. At q-depth0 static used even if in check; no exhaustive tactics guarantee. No TT/history truncation.",
+  "ordering": "standard MVV-LVA only orders; no handcrafted material static evaluation, no teacher query or labels. Frozen policy not used in new inference search. Existing encoder/action/rules/backend weights preserved.",
+  "qualification": {
+    "states": "first4 fixed known histories x e8/rebased/residual x BOTH seeds, 24 actual512/q2 searches root-owned only",
+    "seconds": 600,
+    "required_unit_tests": "ROOT_FILL_ACTUAL_SOURCE_AND_ADAPTER_TEST_RECEIPTS; ancestor tests do not qualify new adapter"
+  },
+  "stockfish_nodes": 512,
+  "stockfish_threads": 1,
+  "stockfish_hash_MiB": 16,
+  "stockfish_sha256": "0f83d24cc46d2c66c60f16001af5444873bc112b7d028594513426894c12da19",
+  "budget_comparability": "NN recursive nodes and Stockfish actualnodes separately; not equal compute or node throughput. All neural arms identical node/q rules; CPUwall latency measured.",
+  "max_plies": 400,
+  "threads": 1,
+  "max_arena_workers": 1,
+  "per_tournament_seconds": 2700,
+  "whole_seconds": 7200,
+  "memory_max_bytes": 16106127360,
+  "disk_min_free_bytes": 268435456,
+  "reserved_output_bytes": 8388608,
+  "screen": {
+    "both_seeds": true,
+    "direct_same_search_e8_gt": 0.6,
+    "pairedSF_gain_over_same_search_e8_gt": 0.1,
+    "finalSF_ge": 0.25,
+    "caps_le": 0.05,
+    "trained_vs_same_search_rebased_gt": 0.6,
+    "pairedSFgain_over_rebased_gt": 0
+  },
+  "formal": "Development passing not success: fixed virgin root/source-exclusion, independent complete histories, unchanged stricter statistical/cap/latency gates and originalclosedMAX8 accounting; no result-driven extension/bestcheckpoint selection. Next actual ownplay round required before claiming sustained closedloop selflearning. RESIDUALMC/zero-residual olddata stage alone is not a sustainedclosedloop claim; nextactualfreshownplay/retrain round required.",
+  "new_training_steps": 2048,
+  "new_teacher_labels": false,
+  "GPU_used": false,
+  "scope": "Known8 development families; duplicate e8/zero-residual functions across seeds are not new independent families; no virgin confirmation.",
+  "failure": "preserve first errors/all checkpoints/data/originalclocks. If FAIL, diagnose and use another controlled method.",
+  "operator_hard_deadline_epoch": 1791273600.0,
+  "training_protocol_sha256": "ROOT_FILL_IMMUTABLE_RESIDUAL_TRAINING_PROTOCOL_SHA",
+  "status": "TEMPLATE-NOT-REGISTERED-NO-ARENA-STARTED",
+  "value_adapter": "schema1 sparse-only remains legacy; schema2 composition additive-v1 MUST full core masked_policy_value; core already adds full e8 logits plus residual, no external second addition.",
+  "untrained_control": "rebased is exactly e8 policy+fullWDL with zero residual; repeated e8 and rebased controls are deterministic duplicate baseline functions, not independent families.",
+  "original_first_epoch": "ROOT_REGISTER_ACTUAL_FIRST_BEFORE_LAUNCH",
+  "original_deadline_epoch": "ROOT_BIND_FIRST_PLUS7200_AND_OPERATOR_CEILING"
+}
