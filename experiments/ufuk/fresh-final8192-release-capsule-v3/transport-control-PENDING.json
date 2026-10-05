@@ -9,7 +9,7 @@
   "receiver_sha256": "44078a3aeea3a8bb1fecf387d5b3003efa0a7e85038b48ee145a2029f7ba15c5",
   "schema": "cpu-native-delta-transport-control-v1",
   "started_epoch": 1791226974.7925532,
-  "status": "ROOT-reviewed-prospectively-approved",
+  "status": "ROOT-approved-frozen-transport",
   "transport_seconds_max": 1800,
   "workflow_sha256": "3f194a7ec459b3f9deaef262dd8f7fccf5bf2ebea16ee8beddef6651f53257c3"
 }
