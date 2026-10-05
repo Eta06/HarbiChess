@@ -1,0 +1,106 @@
+{
+  "arena": "unchanged Q512/qdepth2/maxdepth8 and all pre-registered per-seed/direct/SF/cap/virgin gates",
+  "comparison": "same fixed final16384 journals, same admitted rows/targets/split/order/update count/Adam and terminal+ownQ objective; added spatial residual and explicit PST regularizers mean this is not a pure capacity-only ablation",
+  "config_paths": {
+    "20262905": "/workspace/work/harbichess/cpu-classical-own-v1-actual/production-registration/20262905-production-config.json",
+    "20262906": "/workspace/work/harbichess/cpu-classical-own-v1-actual/production-registration/20262906-production-config.json"
+  },
+  "cpu_core": 1,
+  "deadline_by_seed": {
+    "20262905": 1791233938.4527915,
+    "20262906": 1791233938.4527915
+  },
+  "final_actions": 16384,
+  "hard_end_epoch": 1791273600.0,
+  "helper_sha256": {
+    "launch_pst.py": "451c175b0b3e4e084b321dbae00a0d62a9c60a3ec9052ecaf484baa7dcfb07d2",
+    "prepare_pst.py": "acb7d954959bc2007b0a007751f33d420d6a7f95db9bc89f4551292d1e9bee9c",
+    "pst_features.py": "7d8c07ddeeed8bb6da4069c4487e1a5015798595f3bddf00282cb06d9dfd6841",
+    "pst_learner.py": "9e9e209092a23225768cb4c48f8156e66c4002209d92b74c4f847a36a0e59992",
+    "pst_native.py": "e087c2289361730c4c7e415883195e9677ac58483351e91294e3965f7c42c9bd",
+    "pst_value.py": "4c969a6102e59d5f5a9f8bda8370953ba812dd813c83c11d163905a852a1049c",
+    "reference_journal.py": "851b9967adb709beb0dcf2a9e793c61add3eccf91fb21fb2a75e80da8845968b",
+    "reference_learner.py": "2f7bc39943146b66fb2b0863938e47484378ce2597a725893d1df0edd345883e",
+    "reference_runtime.py": "656a19611984f61f99f4fec8952250ee4ad8b6d836a34c6eaf6fcc65ed0af496",
+    "reference_value.py": "a99cddfc397bd9221b99a70691427fdd663488b033fb239d9f48240786b2f277",
+    "train_pst.py": "64ac713cc9ea500a001846dd4ff0a6750bd3a12ce8679f5cbd39b85411f217df"
+  },
+  "inputs": {
+    "20262905": {
+      "PST_dataset_sha256": "173325991189bc1610fb016236d40f04e280a6347093e01575b1ce63e242118e",
+      "classical18_dataset_sha256": "ccacd17f05399cee8efefde1788207490781ffc8082630286d1655e0e7799635",
+      "config_sha256": "05adca4ddab663aa86dd8ff96f6a6a932f9edb001929193fe75e1462df1fdcbb",
+      "journal_sha256": "11ac3cf5ed89108466ba2067c58d454518617c06f87a8dcf6b79f9ba6694b744"
+    },
+    "20262906": {
+      "PST_dataset_sha256": "fbfa1956b0e7c2d2832feb872adb10f638c78b47ca8dea73c0fc0e51fccf5e41",
+      "classical18_dataset_sha256": "98570d7a83f53365a617c40a9a9007d767243117145bbb3111903e40b553f1a0",
+      "config_sha256": "6871b198da2565f6cde7417cedab84021b32c22edfaf7eee31e4ecf8063c3505",
+      "journal_sha256": "8fc609c0d705252e337d94a0eee46220b2f952f14252dab1acb5cf93ef515020"
+    }
+  },
+  "journal_paths": {
+    "20262905": "/dev/shm/harbichess-classical-own-20262905-20261005/actions-00016384.json.gz",
+    "20262906": "/dev/shm/harbichess-classical-own-20262906-20261005/actions-00016384.json.gz"
+  },
+  "objective": {
+    "linear_prior_l2": 0.01,
+    "pst_l2": 0.02,
+    "pst_neighbor_smoothness": 0.01,
+    "search_weight": 0.25,
+    "terminal_weight": 0.75
+  },
+  "optimizer": {
+    "batch": 256,
+    "beta1": 0.9,
+    "beta2": 0.999,
+    "eps": 1e-08,
+    "lr": 0.01,
+    "max_updates": 1024,
+    "slots": 4
+  },
+  "phase_clocks": {
+    "fit": {
+      "deadline_epoch": 1791233938.4527915,
+      "first_epoch": 1791232138.4527915
+    },
+    "proof": {
+      "deadline_epoch": 1791232138.4527915,
+      "first_epoch": 1791231538.4527915
+    }
+  },
+  "prior_model_path": "/workspace/HarbiChess/experiments/ufuk/cpu-classical-own-v1/prior.json",
+  "prior_model_sha256": "afbaec307e5acc4b9fcb5222115c2fb8112290065ffe64e929b35f2a935565e1",
+  "protected_position_keys": [
+    "r1bqkbnr/pppp1ppp/2n5/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R w KQkq -",
+    "rnbqkb1r/ppp1pppp/5n2/3p4/8/5NP1/PPPPPP1P/RNBQKB1R w KQkq -",
+    "rnbqkb1r/pppp1ppp/5n2/4p3/2P5/2N5/PP1PPPPP/R1BQKBNR w KQkq -",
+    "rnbqkb1r/pppppp1p/5np1/8/2PP4/8/PP2PPPP/RNBQKBNR w KQkq -",
+    "rnbqkbnr/pp2pppp/2p5/3p4/3PP3/8/PPP2PPP/RNBQKBNR w KQkq -",
+    "rnbqkbnr/pp2pppp/3p4/2p5/4P3/5N2/PPPP1PPP/RNBQKB1R w KQkq -",
+    "rnbqkbnr/ppp2ppp/4p3/3p4/2PP4/8/PP2PPPP/RNBQKBNR w KQkq -",
+    "rnbqkbnr/ppp2ppp/4p3/3p4/3PP3/8/PPP2PPP/RNBQKBNR w KQkq -"
+  ],
+  "python_executable": "/workspace/HarbiChess/.venv/bin/python",
+  "regularization_interpretation": {
+    "linear_prior_l2": "mean(theta18^2), unchanged from classical18",
+    "pst_l2": "mean(theta224^2)",
+    "pst_neighbor_smoothness": "mean squared coefficient difference over fixed 364 rank/file adjacency edges"
+  },
+  "resource_limits": {
+    "all_seed_artifacts_bytes": 33554432,
+    "cgroup_memory_budget_bytes": 16106127360,
+    "per_seed_artifacts_bytes": 16777216,
+    "workspace_disk_floor_bytes": 268435456
+  },
+  "schema": "classical-own-pst-offline-protocol-v1",
+  "seeds": [
+    20262905,
+    20262906
+  ],
+  "source_commit": "6fcc8b476d25495d1c9c413e55b2c7ba4794013e",
+  "split": "exact classical18 hash(realized trajectory) lastbyte mod5 split; validation bucket 0",
+  "status": "registered-pst-proposal-fit-not-strength",
+  "strength_success_claimed": false,
+  "update_rule": "min(1024, floor(4 * training_rows / 256))"
+}
