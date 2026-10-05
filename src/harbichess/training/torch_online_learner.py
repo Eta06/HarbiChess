@@ -19,7 +19,6 @@ from pathlib import Path
 import chess
 import numpy as np
 import torch
-
 from harbichess.backends.torch_network import load_weights, sha256
 from harbichess.chess.actions import legal_action_indices, move_to_action
 from harbichess.chess.encoding import ENCODER_CHANNELS, BoardEncoder
@@ -45,6 +44,7 @@ def read_online_train_book(path: Path) -> tuple[ActorOpening, ...]:
         raise ValueError("online training requires a nonempty version1 train opening split")
     rules = PythonChessRules()
     openings = []
+    replayed_fens = {}
     for row in book["splits"]["train"]:
         opening = row["opening"]
         state = ChessState(
@@ -53,8 +53,11 @@ def read_online_train_book(path: Path) -> tuple[ActorOpening, ...]:
         )
         if row.get("root_ply", state.ply) != state.ply:
             raise ValueError("online source root ply differs from complete history")
-        if "fen" in opening and rules.view(state).fen != opening["fen"]:
-            raise ValueError("online source FEN differs from replayed history")
+        if "fen" in opening:
+            if state not in replayed_fens:
+                replayed_fens[state] = rules.view(state).fen
+            if replayed_fens[state] != opening["fen"]:
+                raise ValueError("online source FEN differs from replayed history")
         openings.append(ActorOpening(row["source_game"], state))
     ids = [row.source_id for row in openings]
     if len(set(ids)) != len(ids):
