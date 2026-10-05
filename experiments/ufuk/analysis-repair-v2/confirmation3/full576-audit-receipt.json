@@ -1,0 +1,76 @@
+{
+  "status": "all576-complete-legal-fullhistory-terminal-and-node-coverage-pass",
+  "games": 576,
+  "recorded_fullhistory_moves_replayed": 56835,
+  "stockfish_game_count": 384,
+  "actual_stockfish_move_receipts": 9934,
+  "actual_stockfish_nodes_sum": 5098611,
+  "empty_engine_games": [
+    {
+      "seed": 20261205,
+      "arm": "final_sf",
+      "opening_pair": 9,
+      "candidate_color": "white",
+      "opening_plies": 64,
+      "final_plies": 65,
+      "termination": "threefold_repetition",
+      "score": 0.5,
+      "verified_opponent_moves_after_opening": 0
+    }
+  ],
+  "rows": [
+    {
+      "seed": 20261205,
+      "arm": "direct",
+      "games": 96,
+      "fullhistory_legal_terminal_POV_audit": "pass",
+      "exact_opponent_ply_node_receipts": "not-engine-arm",
+      "actual_nodes_sum": 0
+    },
+    {
+      "seed": 20261205,
+      "arm": "final_sf",
+      "games": 96,
+      "fullhistory_legal_terminal_POV_audit": "pass",
+      "exact_opponent_ply_node_receipts": 2536,
+      "actual_nodes_sum": 1301463
+    },
+    {
+      "seed": 20261205,
+      "arm": "initial_sf",
+      "games": 96,
+      "fullhistory_legal_terminal_POV_audit": "pass",
+      "exact_opponent_ply_node_receipts": 2469,
+      "actual_nodes_sum": 1267165
+    },
+    {
+      "seed": 20261206,
+      "arm": "direct",
+      "games": 96,
+      "fullhistory_legal_terminal_POV_audit": "pass",
+      "exact_opponent_ply_node_receipts": "not-engine-arm",
+      "actual_nodes_sum": 0
+    },
+    {
+      "seed": 20261206,
+      "arm": "final_sf",
+      "games": 96,
+      "fullhistory_legal_terminal_POV_audit": "pass",
+      "exact_opponent_ply_node_receipts": 2541,
+      "actual_nodes_sum": 1304439
+    },
+    {
+      "seed": 20261206,
+      "arm": "initial_sf",
+      "games": 96,
+      "fullhistory_legal_terminal_POV_audit": "pass",
+      "exact_opponent_ply_node_receipts": 2388,
+      "actual_nodes_sum": 1225544
+    }
+  ],
+  "regression_tests": "9PASS including exactAST equality of every unchanged statistical/trajectory/main function and frozenconstants",
+  "raw_bundle_sha256": "66fc19c1f4eceafb76b9c7be598f1b8582d635ccabc6b50bb38dc2f46368e4d3",
+  "remote_payload_SHA_scope": "Bundle records parent-reported original remote SHA; local JSON snapshots are reserialized and have different honest local SHA. No original-byte SHA assertion is made.",
+  "original_analysis_sha256": "04756cdd5d1e84f6b750726716e39f7e08bb168ed9b772b79f60b3c6a929785b",
+  "repaired_analysis_sha256": "aadd71938956ba7bac7e535ea2b4d8255947545ebb6e035e5c62141769a015cb"
+}
