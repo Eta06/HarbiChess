@@ -304,6 +304,7 @@ def load_ownsearch_checkpoint(directory: Path, learner):
             record["own_search"],
             learner.config.search,
             rules=learner.actors.rules,
+            claim_draw=learner.config.actors.claim_draw,
         )
         if (
             _tuplify(record["own_search"]["schedule_rng_after"])
