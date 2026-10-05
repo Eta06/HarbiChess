@@ -26,12 +26,8 @@ def test_process_groups_include_reparented_children_and_ignore_zombies():
 
 
 def test_pid_reuse_does_not_claim_terminated_original_owner_alive():
-    assert not identity_live(
-        {"pid": 42, "startticks": 1}, {42: {"startticks": 2, "state": "S"}}
-    )
-    assert identity_live(
-        {"pid": 42, "startticks": 1}, {42: {"startticks": 1, "state": "S"}}
-    )
+    assert not identity_live({"pid": 42, "startticks": 1}, {42: {"startticks": 2, "state": "S"}})
+    assert identity_live({"pid": 42, "startticks": 1}, {42: {"startticks": 1, "state": "S"}})
 
 
 def test_only_analysis_and_gate_commands_change_with_truthful_explicit_binding():
@@ -73,23 +69,17 @@ def test_original_coordinator_launch_calls_bind_actual_function_signature():
     if not repo.is_dir():
         repo = next(p for p in HERE.parents if (p / "pyproject.toml").exists())
     module = ast.parse(
-        (
-            repo / "experiments/ufuk/search-acting-method5/own5_posttraining.py"
-        ).read_text()
+        (repo / "experiments/ufuk/search-acting-method5/own5_posttraining.py").read_text()
     )
     launch = next(
-        n
-        for n in ast.walk(module)
-        if isinstance(n, ast.FunctionDef) and n.name == "launch"
+        n for n in ast.walk(module) if isinstance(n, ast.FunctionDef) and n.name == "launch"
     )
     positional = len(launch.args.args)
     required = positional - len(launch.args.defaults)
     calls = [
         n
         for n in ast.walk(module)
-        if isinstance(n, ast.Call)
-        and isinstance(n.func, ast.Name)
-        and n.func.id == "launch"
+        if isinstance(n, ast.Call) and isinstance(n.func, ast.Name) and n.func.id == "launch"
     ]
     assert len(calls) == 7
     for call in calls:
@@ -250,11 +240,26 @@ def test_distinct_original_baseline_clock_preserved_and_training_clock_substitut
     import pytest
 
     receipt, cohort, sha = terminal_fixture(tmp_path)
-    assert (
-        receipt["expired_baseline_deadline_epoch"]
-        != receipt["original_firstclock"] + 3600
-    )
+    assert receipt["expired_baseline_deadline_epoch"] != receipt["original_firstclock"] + 3600
     dep.validate_terminal(receipt, cohort, sha)
     receipt["expired_baseline_deadline_epoch"] = receipt["original_firstclock"] + 3600
     with pytest.raises(AssertionError):
         dep.validate_terminal(receipt, cohort, sha)
+
+
+def test_strict6_and7_compute_owners_block_but_waiting_coordinators_do_not():
+    mod = importlib.import_module("post5_scheduling_v2")
+    commands = {
+        1: "own6_training_controller.py",
+        2: "own7_audit_controller.py",
+        3: "own6_posttraining.py",
+        4: "own6_protect_original45.py",
+        5: "own7_parity.py",
+        6: "own5_posttraining.py",
+    }
+    assert mod.extra_compute_busy(commands, 6) == [1, 2, 5]
+    assert mod.extra_compute_busy({1: "own6_fresh_cli_replay.py"}, 1) == []
+    assert mod.extra_compute_busy({7: "own6_profile_e1_owned.py", 8: "own7_qualify_e1.py"}, 6) == [
+        7,
+        8,
+    ]
