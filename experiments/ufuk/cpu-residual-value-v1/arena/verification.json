@@ -1,0 +1,34 @@
+{
+  "schema": "cpu-residual-arena-proposal-verification-v1",
+  "tests_passed": 5,
+  "pytest_seconds": 1.2,
+  "ruff_repo_cwd": "PASS",
+  "actual_source_commit": "6fcc8b476d25495d1c9c413e55b2c7ba4794013e",
+  "actual_runtime": "Torch2.14.1+cpu CPUaffinity1/Torchthreads1",
+  "unique_inference_histories": 3,
+  "histories": [
+    "initial-white",
+    "e2e4-black",
+    "g1f3,g8f6,f3g1,f6g8-twofold-white"
+  ],
+  "actual_model_sha256": {
+    "e8": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03",
+    "actual_seed05_zero": "1aeee28fec5ff32f682801926a6b3adb057d0186a57b0ffedf6d3b87135f5b32",
+    "actual_seed05_final1024": "12e82c58f62a4afb007878da85cdda46e32afd7e1e8d07ec4a6e29a0b203c2ac",
+    "legacy_zero_linear": "8c913046098ade2ae5a48965fbcb505feb16b98fde82ba894723ddf967c7d2b6",
+    "legacy_zero_sparse_v1": "850d483af0eb9767fca296fe7e6dcb02db9983ba28e02f6c9166c5325d028cf0"
+  },
+  "unit_claims": [
+    "zero-residual actual e8 full policy/WDL identity",
+    "actual final1024 policy preserved, full(base+delta) bit-exact with adapter and no double-add",
+    "mover softmax W-L sign",
+    "legacyzero linear/schema1 sparse fastpath bit-exact",
+    "unknown composition failclosed",
+    "audit AST unchanged after role string normalization",
+    "original search exact bytes"
+  ],
+  "NN_search_moves_performed": 0,
+  "fullgames_or_training_launched": 0,
+  "qualification24_search_moves": "NOT_RUN_root_owned_future",
+  "strength_claim": false
+}
