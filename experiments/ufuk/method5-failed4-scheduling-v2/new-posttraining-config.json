@@ -1,0 +1,54 @@
+{
+  "cohort": {
+    "helper_sha256": "57473769d392ad820938edacba8ce113129145c3e510c68d18b23868ad5641b8",
+    "manifest": "/content/harbichess-fullgame-method2-inputs/formal45-production/cohort.json",
+    "manifest_sha256": "85d8d34dcbdd195d49b2d847946f0d237d048a59975c4a8476f7bef95e0e51d9"
+  },
+  "exchange_manifest": "/content/harbichess-fullgame-method2-inputs/method5-portable-model-manifest.json",
+  "expected_A100_runtime": {
+    "boot_id": "b1cf1620-f1c7-4571-832f-989ee44a5aa4",
+    "hostname": "045ceeb3ddfe",
+    "python_executable_sha256": "bac00abc4dfc76da8fd1a09023b9454e4d34f591172af79bbfa7ee43091165d6",
+    "torch_version": "2.11.0+cu130"
+  },
+  "helpers": "/content/harbichess-fullgame-method2-inputs/formal45-production/helpers5",
+  "initial": "/content/harbichess-inputs/initial-e8.safetensors",
+  "mlx_receipt": "/content/harbichess-fullgame-method2-inputs/method5-final-mlx-cpu-parity.json",
+  "mlx_receipt_sha256_file": "/content/harbichess-fullgame-method2-inputs/method5-final-mlx-cpu-parity.json.sha256",
+  "probes": "/content/harbichess-fullgame-method2-inputs/UFUK-width-latency-probes-20261004.json",
+  "python": "/usr/bin/python3",
+  "qualification_config": "/content/harbichess-fullgame-method2-inputs/formal45-production/registration-5/strength-bindings.json",
+  "qualification_config_sha256": "5fa34fdc69a49b78fecae17ee9ade86da994c548bbda81473d86c454c6cc733a",
+  "repo": "/content/HarbiChess-search-acting-v2-4515a7c",
+  "root": "/content/harbichess-runs/search-acting-method5-posttraining-scheduling-v2",
+  "seeds": [
+    {
+      "audit_controller_result": "/content/harbichess-runs/search-acting-method5-audit-seed-20261525/result.json",
+      "audit_manifest": "/content/harbichess-fullgame-method2-inputs/formal45-recovery-control-v2/owners-5/audit-manifest-20261525.json",
+      "baseline_deadline_epoch": 1791160056.1962862,
+      "baseline_root": "/content/harbichess-runs/search-acting-method5-baseline-seed-20261525",
+      "book": "/content/harbichess-fullgame-method2-inputs/formal45-production/books5/book-20261525.json",
+      "full_audit": "/content/harbichess-runs/search-acting-method5-audit-seed-20261525/full-audit-result.json",
+      "original_training_started_epoch": 1791156456.0081534,
+      "run": "/content/harbichess-runs/search-acting-method5-seed-20261525/run",
+      "seed": 20261525,
+      "training_result": "/content/harbichess-runs/search-acting-method5-seed-20261525/result.json"
+    },
+    {
+      "audit_controller_result": "/content/harbichess-runs/search-acting-method5-audit-seed-20261526/result.json",
+      "audit_manifest": "/content/harbichess-fullgame-method2-inputs/formal45-recovery-control-v2/owners-5/audit-manifest-20261526.json",
+      "baseline_deadline_epoch": 1791160056.1962862,
+      "baseline_root": "/content/harbichess-runs/search-acting-method5-baseline-seed-20261526",
+      "book": "/content/harbichess-fullgame-method2-inputs/formal45-production/books5/book-20261526.json",
+      "full_audit": "/content/harbichess-runs/search-acting-method5-audit-seed-20261526/full-audit-result.json",
+      "original_training_started_epoch": 1791156456.0081534,
+      "run": "/content/harbichess-runs/search-acting-method5-seed-20261526/run",
+      "seed": 20261526,
+      "training_result": "/content/harbichess-runs/search-acting-method5-seed-20261526/result.json"
+    }
+  ],
+  "source_commit": "4515a7c0dda3b4f9615c2fc78a47c872ab14699d",
+  "stockfish": "/content/harbichess-tools/stockfish-linux-x86-64-universal",
+  "whole_audit_seconds": 9000,
+  "whole_training_seconds": 6000
+}
