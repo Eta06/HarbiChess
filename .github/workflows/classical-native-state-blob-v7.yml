@@ -1,0 +1,30 @@
+name: Classical native raw state exact blob delivery v7
+run-name: Classical v7 capsule / ${{ inputs.manifest_prefix }}
+on:
+  workflow_dispatch:
+    inputs:
+      manifest_sha:
+        required: true
+      manifest_prefix:
+        required: true
+permissions: {}
+concurrency:
+  group: a100-allowlisted-release-delivery
+  cancel-in-progress: false
+jobs:
+  backup:
+    if: github.repository == 'Eta06/HarbiChess' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    permissions:
+      contents: write
+    env:
+      MANIFEST_SHA: ${{ inputs.manifest_sha }}
+      MANIFEST_PREFIX: ${{ inputs.manifest_prefix }}
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+          ref: ${{ github.sha }}
+      - run: python experiments/ufuk/classical-native-state-blob-v7/workflow_receiver_v7.py
