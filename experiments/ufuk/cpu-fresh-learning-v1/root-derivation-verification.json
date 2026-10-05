@@ -1,0 +1,28 @@
+{
+  "proposal_trainer_sha256": "1df7a208a0708e8f8584eb4a696aa3013381c1b54ccaafea3eb832e625ef7c2e",
+  "production_trainer_sha256": "49445cbd5059770b3ccd433be9f21a4773786885a85d2d586005e10e2359a2c6",
+  "function_AST_changes": [
+    "prepare_fresh"
+  ],
+  "reason": "consumer requires immutable actualMAIN afb3 v2 handoff schema/anchor_model key rather than unexecuted scratch-only decoder fields; array rows/known_rows/anchor_model/helper/target validated; no activeproducer edit",
+  "unchanged_all_other_functions": true,
+  "original_root_test_failures": [
+    {
+      "tests_passed": 3,
+      "ruff_errors": 22
+    },
+    {
+      "tests_passed": 2,
+      "failed": 1,
+      "error": "KeyError:anchor_rows on actual immutableMAIN converter"
+    }
+  ],
+  "corrected_tests": {
+    "passed": 3,
+    "skipped": 0,
+    "ruff": "PASS"
+  },
+  "actual_training_started": false,
+  "template_fix": "top-level learning_rate2e-5 matching frozen consumer",
+  "test_paths": "repo-relative actualMAIN producer and colocated feature helper"
+}
