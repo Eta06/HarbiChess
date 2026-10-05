@@ -1,0 +1,7 @@
+{
+  "original_v2_sha256": "635d8c7fb419538900cf33f9b42a2ed4c2fc72e368612b5fdd55703683bda884",
+  "v3_sha256": "a0f9b66829961de12d3dcbc26c6f94c7b703cc956a63205dc63ed736fbee0d6c",
+  "reason": "Make finished<=registereddeadline and deadline==ownerdeadline independent required predicates. Independent224 reviewer already checked all actual deadlines. No game/source/score/gate change.",
+  "first_epoch": 1791234502.0633478,
+  "deadline_epoch": 1791235402.0633478
+}
