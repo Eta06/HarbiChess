@@ -1,0 +1,15 @@
+{
+  "schema": "fresh-qsearch-controller-proposal-verification-v1",
+  "pure_tests_passed": 6,
+  "pytest_seconds": 0.08,
+  "ruff_repo_cwd": "PASS",
+  "qualify_and_run_help": "PASS",
+  "actual_actor_or_NN_jobs_performed": 0,
+  "qualification_status": "UNEXECUTED-root-only",
+  "tests_scope": "synthetic command/parent/config/clock and mocked child-cleanup objects only",
+  "source_required": "6fcc8b476d25495d1c9c413e55b2c7ba4794013e",
+  "CPU_affinity": "explicit manifest cpu_core required; root chooses distinct allowed cores for concurrent actors",
+  "new_checkpoint_schema": "fresh-qsearch-selfplay-journal-v2",
+  "MAIN_convert_outputs": 6,
+  "old_training_resume_claimed": false
+}
