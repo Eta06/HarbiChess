@@ -1,0 +1,16 @@
+{
+  "schema": "formal45-packaging-and-public-transport-admission-v1",
+  "status": "closed-prefix-packaging-pass-primary-HEAD403-preserved-pending-Actions-full-readback",
+  "manifest_sha256": "a3874ea7f91096783e5445f0d6486beb0b75ec3a5f1f360d5f78708403a24841",
+  "prior84_manifest_sha256": "fed25ce174eb5c5aded7363588cc4567d54ad05d898d57fa192f14c903608f9e",
+  "prior_assets_exactly_preserved": 84,
+  "new_archive_count": 43,
+  "aggregate_asset_count": 127,
+  "aggregate_bytes": 4364882864,
+  "primary_HEAD_status": 403,
+  "parent_confirmed_mandatory_proxy_route_same_as_prior84": true,
+  "observed_epoch": 1791165644.2977614,
+  "CUDA_restoration_claim": false,
+  "public_persistence_claim": false,
+  "strength_or_model_promotion_claim": false
+}
