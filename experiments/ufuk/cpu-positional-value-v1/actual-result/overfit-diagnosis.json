@@ -1,0 +1,1363 @@
+{
+  "status": "completed-diagnostic-not-strength",
+  "rows": [
+    {
+      "seed": 20262405,
+      "step": 0,
+      "model_sha256": "7be83cf959469c0d73004e0ee27defb4eb40cba2899029b480e56eca2cbdc903",
+      "dataset_sha256": "53d5ad45242f76229f93614d1d2c65f4060604e9162befcac1efa192afdd50eb",
+      "journal_receipts": [
+        {
+          "journal_sha256": "32d203b68ed29e9fd1a0845fca69f32f0faa3aa4cc1ad9e0e040b6af5027fb55",
+          "epoch": 1,
+          "legal_plies": 32768,
+          "known_rows": 17982,
+          "complete_games": 138,
+          "normal_cap_games": 22,
+          "epoch_truncated_games": 105,
+          "excluded_actions": 14786,
+          "win_games": 29,
+          "draw_games": 80,
+          "loss_games": 29
+        },
+        {
+          "journal_sha256": "f8503b5abe08687526b6a22d98df2a246dde1da96cfd41c3ab4109ea30ae7af9",
+          "epoch": 8,
+          "legal_plies": 32768,
+          "known_rows": 21748,
+          "complete_games": 184,
+          "normal_cap_games": 4,
+          "epoch_truncated_games": 123,
+          "excluded_actions": 11020,
+          "win_games": 36,
+          "draw_games": 123,
+          "loss_games": 25
+        },
+        {
+          "journal_sha256": "44e1487e496ce7733b18134385fa2f378ea21d3c30a5fb74174687a85e9d4a08",
+          "epoch": 16,
+          "legal_plies": 32768,
+          "known_rows": 19406,
+          "complete_games": 171,
+          "normal_cap_games": 13,
+          "epoch_truncated_games": 114,
+          "excluded_actions": 13362,
+          "win_games": 34,
+          "draw_games": 100,
+          "loss_games": 37
+        },
+        {
+          "journal_sha256": "21c055b78b5c28da11092bcd6952989ef2a7f1d223a46fa27817fabce7815eff",
+          "epoch": 32,
+          "legal_plies": 32768,
+          "known_rows": 19868,
+          "complete_games": 156,
+          "normal_cap_games": 11,
+          "epoch_truncated_games": 117,
+          "excluded_actions": 12900,
+          "win_games": 28,
+          "draw_games": 105,
+          "loss_games": 23
+        }
+      ],
+      "train": {
+        "complete_games": 527,
+        "rows": 62695,
+        "game_equal_nll": 1.0986121892929077,
+        "game_equal_accuracy": 0.18994881212711334,
+        "scope": "source-disjoint TRAIN internal realized own-policy outcomes; not independent strength"
+      },
+      "validation": {
+        "complete_games": 122,
+        "rows": 16309,
+        "game_equal_nll": 1.0986124277114868,
+        "game_equal_accuracy": 0.17747525870800018,
+        "scope": "source-disjoint TRAIN internal realized own-policy outcomes; not independent strength"
+      },
+      "finished_epoch": 1791214476.805614
+    },
+    {
+      "seed": 20262405,
+      "step": 512,
+      "model_sha256": "839fac5a6c3ee7756169571383ef226e0729c4da164ce8082c6d92f5b0069085",
+      "dataset_sha256": "53d5ad45242f76229f93614d1d2c65f4060604e9162befcac1efa192afdd50eb",
+      "journal_receipts": [
+        {
+          "journal_sha256": "32d203b68ed29e9fd1a0845fca69f32f0faa3aa4cc1ad9e0e040b6af5027fb55",
+          "epoch": 1,
+          "legal_plies": 32768,
+          "known_rows": 17982,
+          "complete_games": 138,
+          "normal_cap_games": 22,
+          "epoch_truncated_games": 105,
+          "excluded_actions": 14786,
+          "win_games": 29,
+          "draw_games": 80,
+          "loss_games": 29
+        },
+        {
+          "journal_sha256": "f8503b5abe08687526b6a22d98df2a246dde1da96cfd41c3ab4109ea30ae7af9",
+          "epoch": 8,
+          "legal_plies": 32768,
+          "known_rows": 21748,
+          "complete_games": 184,
+          "normal_cap_games": 4,
+          "epoch_truncated_games": 123,
+          "excluded_actions": 11020,
+          "win_games": 36,
+          "draw_games": 123,
+          "loss_games": 25
+        },
+        {
+          "journal_sha256": "44e1487e496ce7733b18134385fa2f378ea21d3c30a5fb74174687a85e9d4a08",
+          "epoch": 16,
+          "legal_plies": 32768,
+          "known_rows": 19406,
+          "complete_games": 171,
+          "normal_cap_games": 13,
+          "epoch_truncated_games": 114,
+          "excluded_actions": 13362,
+          "win_games": 34,
+          "draw_games": 100,
+          "loss_games": 37
+        },
+        {
+          "journal_sha256": "21c055b78b5c28da11092bcd6952989ef2a7f1d223a46fa27817fabce7815eff",
+          "epoch": 32,
+          "legal_plies": 32768,
+          "known_rows": 19868,
+          "complete_games": 156,
+          "normal_cap_games": 11,
+          "epoch_truncated_games": 117,
+          "excluded_actions": 12900,
+          "win_games": 28,
+          "draw_games": 105,
+          "loss_games": 23
+        }
+      ],
+      "train": {
+        "complete_games": 527,
+        "rows": 62695,
+        "game_equal_nll": 0.19989478588104248,
+        "game_equal_accuracy": 0.9325749278068542,
+        "scope": "source-disjoint TRAIN internal realized own-policy outcomes; not independent strength"
+      },
+      "validation": {
+        "complete_games": 122,
+        "rows": 16309,
+        "game_equal_nll": 1.3992050886154175,
+        "game_equal_accuracy": 0.6137978434562683,
+        "scope": "source-disjoint TRAIN internal realized own-policy outcomes; not independent strength"
+      },
+      "finished_epoch": 1791214477.0368423
+    },
+    {
+      "seed": 20262405,
+      "step": 1024,
+      "model_sha256": "1687141176106979e4b32ab0ed4cba7209da048ef4fae83ac9f9ac7d7d0336f4",
+      "dataset_sha256": "53d5ad45242f76229f93614d1d2c65f4060604e9162befcac1efa192afdd50eb",
+      "journal_receipts": [
+        {
+          "journal_sha256": "32d203b68ed29e9fd1a0845fca69f32f0faa3aa4cc1ad9e0e040b6af5027fb55",
+          "epoch": 1,
+          "legal_plies": 32768,
+          "known_rows": 17982,
+          "complete_games": 138,
+          "normal_cap_games": 22,
+          "epoch_truncated_games": 105,
+          "excluded_actions": 14786,
+          "win_games": 29,
+          "draw_games": 80,
+          "loss_games": 29
+        },
+        {
+          "journal_sha256": "f8503b5abe08687526b6a22d98df2a246dde1da96cfd41c3ab4109ea30ae7af9",
+          "epoch": 8,
+          "legal_plies": 32768,
+          "known_rows": 21748,
+          "complete_games": 184,
+          "normal_cap_games": 4,
+          "epoch_truncated_games": 123,
+          "excluded_actions": 11020,
+          "win_games": 36,
+          "draw_games": 123,
+          "loss_games": 25
+        },
+        {
+          "journal_sha256": "44e1487e496ce7733b18134385fa2f378ea21d3c30a5fb74174687a85e9d4a08",
+          "epoch": 16,
+          "legal_plies": 32768,
+          "known_rows": 19406,
+          "complete_games": 171,
+          "normal_cap_games": 13,
+          "epoch_truncated_games": 114,
+          "excluded_actions": 13362,
+          "win_games": 34,
+          "draw_games": 100,
+          "loss_games": 37
+        },
+        {
+          "journal_sha256": "21c055b78b5c28da11092bcd6952989ef2a7f1d223a46fa27817fabce7815eff",
+          "epoch": 32,
+          "legal_plies": 32768,
+          "known_rows": 19868,
+          "complete_games": 156,
+          "normal_cap_games": 11,
+          "epoch_truncated_games": 117,
+          "excluded_actions": 12900,
+          "win_games": 28,
+          "draw_games": 105,
+          "loss_games": 23
+        }
+      ],
+      "train": {
+        "complete_games": 527,
+        "rows": 62695,
+        "game_equal_nll": 0.08846892416477203,
+        "game_equal_accuracy": 0.9724623560905457,
+        "scope": "source-disjoint TRAIN internal realized own-policy outcomes; not independent strength"
+      },
+      "validation": {
+        "complete_games": 122,
+        "rows": 16309,
+        "game_equal_nll": 1.908234715461731,
+        "game_equal_accuracy": 0.5979998111724854,
+        "scope": "source-disjoint TRAIN internal realized own-policy outcomes; not independent strength"
+      },
+      "finished_epoch": 1791214477.267641
+    },
+    {
+      "seed": 20262405,
+      "step": 1536,
+      "model_sha256": "d497a18080f2ff0b0e8f5382917ea2693d945d48bbcb356f3113e1099765c900",
+      "dataset_sha256": "53d5ad45242f76229f93614d1d2c65f4060604e9162befcac1efa192afdd50eb",
+      "journal_receipts": [
+        {
+          "journal_sha256": "32d203b68ed29e9fd1a0845fca69f32f0faa3aa4cc1ad9e0e040b6af5027fb55",
+          "epoch": 1,
+          "legal_plies": 32768,
+          "known_rows": 17982,
+          "complete_games": 138,
+          "normal_cap_games": 22,
+          "epoch_truncated_games": 105,
+          "excluded_actions": 14786,
+          "win_games": 29,
+          "draw_games": 80,
+          "loss_games": 29
+        },
+        {
+          "journal_sha256": "f8503b5abe08687526b6a22d98df2a246dde1da96cfd41c3ab4109ea30ae7af9",
+          "epoch": 8,
+          "legal_plies": 32768,
+          "known_rows": 21748,
+          "complete_games": 184,
+          "normal_cap_games": 4,
+          "epoch_truncated_games": 123,
+          "excluded_actions": 11020,
+          "win_games": 36,
+          "draw_games": 123,
+          "loss_games": 25
+        },
+        {
+          "journal_sha256": "44e1487e496ce7733b18134385fa2f378ea21d3c30a5fb74174687a85e9d4a08",
+          "epoch": 16,
+          "legal_plies": 32768,
+          "known_rows": 19406,
+          "complete_games": 171,
+          "normal_cap_games": 13,
+          "epoch_truncated_games": 114,
+          "excluded_actions": 13362,
+          "win_games": 34,
+          "draw_games": 100,
+          "loss_games": 37
+        },
+        {
+          "journal_sha256": "21c055b78b5c28da11092bcd6952989ef2a7f1d223a46fa27817fabce7815eff",
+          "epoch": 32,
+          "legal_plies": 32768,
+          "known_rows": 19868,
+          "complete_games": 156,
+          "normal_cap_games": 11,
+          "epoch_truncated_games": 117,
+          "excluded_actions": 12900,
+          "win_games": 28,
+          "draw_games": 105,
+          "loss_games": 23
+        }
+      ],
+      "train": {
+        "complete_games": 527,
+        "rows": 62695,
+        "game_equal_nll": 0.05532323196530342,
+        "game_equal_accuracy": 0.9832488894462585,
+        "scope": "source-disjoint TRAIN internal realized own-policy outcomes; not independent strength"
+      },
+      "validation": {
+        "complete_games": 122,
+        "rows": 16309,
+        "game_equal_nll": 2.3380839824676514,
+        "game_equal_accuracy": 0.5987205505371094,
+        "scope": "source-disjoint TRAIN internal realized own-policy outcomes; not independent strength"
+      },
+      "finished_epoch": 1791214477.4971328
+    },
+    {
+      "seed": 20262405,
+      "step": 2048,
+      "model_sha256": "12b075dd2560a41282bfee726260da9a49ffdba92987dcd5507d82d5f71d9a63",
+      "dataset_sha256": "53d5ad45242f76229f93614d1d2c65f4060604e9162befcac1efa192afdd50eb",
+      "journal_receipts": [
+        {
+          "journal_sha256": "32d203b68ed29e9fd1a0845fca69f32f0faa3aa4cc1ad9e0e040b6af5027fb55",
+          "epoch": 1,
+          "legal_plies": 32768,
+          "known_rows": 17982,
+          "complete_games": 138,
+          "normal_cap_games": 22,
+          "epoch_truncated_games": 105,
+          "excluded_actions": 14786,
+          "win_games": 29,
+          "draw_games": 80,
+          "loss_games": 29
+        },
+        {
+          "journal_sha256": "f8503b5abe08687526b6a22d98df2a246dde1da96cfd41c3ab4109ea30ae7af9",
+          "epoch": 8,
+          "legal_plies": 32768,
+          "known_rows": 21748,
+          "complete_games": 184,
+          "normal_cap_games": 4,
+          "epoch_truncated_games": 123,
+          "excluded_actions": 11020,
+          "win_games": 36,
+          "draw_games": 123,
+          "loss_games": 25
+        },
+        {
+          "journal_sha256": "44e1487e496ce7733b18134385fa2f378ea21d3c30a5fb74174687a85e9d4a08",
+          "epoch": 16,
+          "legal_plies": 32768,
+          "known_rows": 19406,
+          "complete_games": 171,
+          "normal_cap_games": 13,
+          "epoch_truncated_games": 114,
+          "excluded_actions": 13362,
+          "win_games": 34,
+          "draw_games": 100,
+          "loss_games": 37
+        },
+        {
+          "journal_sha256": "21c055b78b5c28da11092bcd6952989ef2a7f1d223a46fa27817fabce7815eff",
+          "epoch": 32,
+          "legal_plies": 32768,
+          "known_rows": 19868,
+          "complete_games": 156,
+          "normal_cap_games": 11,
+          "epoch_truncated_games": 117,
+          "excluded_actions": 12900,
+          "win_games": 28,
+          "draw_games": 105,
+          "loss_games": 23
+        }
+      ],
+      "train": {
+        "complete_games": 527,
+        "rows": 62695,
+        "game_equal_nll": 0.03917131572961807,
+        "game_equal_accuracy": 0.9883725047111511,
+        "scope": "source-disjoint TRAIN internal realized own-policy outcomes; not independent strength"
+      },
+      "validation": {
+        "complete_games": 122,
+        "rows": 16309,
+        "game_equal_nll": 2.5961995124816895,
+        "game_equal_accuracy": 0.5992375612258911,
+        "scope": "source-disjoint TRAIN internal realized own-policy outcomes; not independent strength"
+      },
+      "finished_epoch": 1791214477.731949
+    },
+    {
+      "seed": 20262405,
+      "step": 2560,
+      "model_sha256": "fb5d0ac04bc7fa597e70762027e2ffe94988c1ca7bfea5a521d7bf5cf5879b69",
+      "dataset_sha256": "53d5ad45242f76229f93614d1d2c65f4060604e9162befcac1efa192afdd50eb",
+      "journal_receipts": [
+        {
+          "journal_sha256": "32d203b68ed29e9fd1a0845fca69f32f0faa3aa4cc1ad9e0e040b6af5027fb55",
+          "epoch": 1,
+          "legal_plies": 32768,
+          "known_rows": 17982,
+          "complete_games": 138,
+          "normal_cap_games": 22,
+          "epoch_truncated_games": 105,
+          "excluded_actions": 14786,
+          "win_games": 29,
+          "draw_games": 80,
+          "loss_games": 29
+        },
+        {
+          "journal_sha256": "f8503b5abe08687526b6a22d98df2a246dde1da96cfd41c3ab4109ea30ae7af9",
+          "epoch": 8,
+          "legal_plies": 32768,
+          "known_rows": 21748,
+          "complete_games": 184,
+          "normal_cap_games": 4,
+          "epoch_truncated_games": 123,
+          "excluded_actions": 11020,
+          "win_games": 36,
+          "draw_games": 123,
+          "loss_games": 25
+        },
+        {
+          "journal_sha256": "44e1487e496ce7733b18134385fa2f378ea21d3c30a5fb74174687a85e9d4a08",
+          "epoch": 16,
+          "legal_plies": 32768,
+          "known_rows": 19406,
+          "complete_games": 171,
+          "normal_cap_games": 13,
+          "epoch_truncated_games": 114,
+          "excluded_actions": 13362,
+          "win_games": 34,
+          "draw_games": 100,
+          "loss_games": 37
+        },
+        {
+          "journal_sha256": "21c055b78b5c28da11092bcd6952989ef2a7f1d223a46fa27817fabce7815eff",
+          "epoch": 32,
+          "legal_plies": 32768,
+          "known_rows": 19868,
+          "complete_games": 156,
+          "normal_cap_games": 11,
+          "epoch_truncated_games": 117,
+          "excluded_actions": 12900,
+          "win_games": 28,
+          "draw_games": 105,
+          "loss_games": 23
+        }
+      ],
+      "train": {
+        "complete_games": 527,
+        "rows": 62695,
+        "game_equal_nll": 0.03320573642849922,
+        "game_equal_accuracy": 0.9898448586463928,
+        "scope": "source-disjoint TRAIN internal realized own-policy outcomes; not independent strength"
+      },
+      "validation": {
+        "complete_games": 122,
+        "rows": 16309,
+        "game_equal_nll": 2.7930736541748047,
+        "game_equal_accuracy": 0.598673939704895,
+        "scope": "source-disjoint TRAIN internal realized own-policy outcomes; not independent strength"
+      },
+      "finished_epoch": 1791214477.9686308
+    },
+    {
+      "seed": 20262405,
+      "step": 3072,
+      "model_sha256": "127109468d4f464be95d7b94531f03e1bb3d7d12cb6fadde958d7fe62381623a",
+      "dataset_sha256": "53d5ad45242f76229f93614d1d2c65f4060604e9162befcac1efa192afdd50eb",
+      "journal_receipts": [
+        {
+          "journal_sha256": "32d203b68ed29e9fd1a0845fca69f32f0faa3aa4cc1ad9e0e040b6af5027fb55",
+          "epoch": 1,
+          "legal_plies": 32768,
+          "known_rows": 17982,
+          "complete_games": 138,
+          "normal_cap_games": 22,
+          "epoch_truncated_games": 105,
+          "excluded_actions": 14786,
+          "win_games": 29,
+          "draw_games": 80,
+          "loss_games": 29
+        },
+        {
+          "journal_sha256": "f8503b5abe08687526b6a22d98df2a246dde1da96cfd41c3ab4109ea30ae7af9",
+          "epoch": 8,
+          "legal_plies": 32768,
+          "known_rows": 21748,
+          "complete_games": 184,
+          "normal_cap_games": 4,
+          "epoch_truncated_games": 123,
+          "excluded_actions": 11020,
+          "win_games": 36,
+          "draw_games": 123,
+          "loss_games": 25
+        },
+        {
+          "journal_sha256": "44e1487e496ce7733b18134385fa2f378ea21d3c30a5fb74174687a85e9d4a08",
+          "epoch": 16,
+          "legal_plies": 32768,
+          "known_rows": 19406,
+          "complete_games": 171,
+          "normal_cap_games": 13,
+          "epoch_truncated_games": 114,
+          "excluded_actions": 13362,
+          "win_games": 34,
+          "draw_games": 100,
+          "loss_games": 37
+        },
+        {
+          "journal_sha256": "21c055b78b5c28da11092bcd6952989ef2a7f1d223a46fa27817fabce7815eff",
+          "epoch": 32,
+          "legal_plies": 32768,
+          "known_rows": 19868,
+          "complete_games": 156,
+          "normal_cap_games": 11,
+          "epoch_truncated_games": 117,
+          "excluded_actions": 12900,
+          "win_games": 28,
+          "draw_games": 105,
+          "loss_games": 23
+        }
+      ],
+      "train": {
+        "complete_games": 527,
+        "rows": 62695,
+        "game_equal_nll": 0.02706468291580677,
+        "game_equal_accuracy": 0.9914690852165222,
+        "scope": "source-disjoint TRAIN internal realized own-policy outcomes; not independent strength"
+      },
+      "validation": {
+        "complete_games": 122,
+        "rows": 16309,
+        "game_equal_nll": 3.0534756183624268,
+        "game_equal_accuracy": 0.5919139981269836,
+        "scope": "source-disjoint TRAIN internal realized own-policy outcomes; not independent strength"
+      },
+      "finished_epoch": 1791214478.2207263
+    },
+    {
+      "seed": 20262405,
+      "step": 3584,
+      "model_sha256": "68b53891850752f6fe6aa9983c5a6c5f9b7e90491779bd087363f3431ccdc525",
+      "dataset_sha256": "53d5ad45242f76229f93614d1d2c65f4060604e9162befcac1efa192afdd50eb",
+      "journal_receipts": [
+        {
+          "journal_sha256": "32d203b68ed29e9fd1a0845fca69f32f0faa3aa4cc1ad9e0e040b6af5027fb55",
+          "epoch": 1,
+          "legal_plies": 32768,
+          "known_rows": 17982,
+          "complete_games": 138,
+          "normal_cap_games": 22,
+          "epoch_truncated_games": 105,
+          "excluded_actions": 14786,
+          "win_games": 29,
+          "draw_games": 80,
+          "loss_games": 29
+        },
+        {
+          "journal_sha256": "f8503b5abe08687526b6a22d98df2a246dde1da96cfd41c3ab4109ea30ae7af9",
+          "epoch": 8,
+          "legal_plies": 32768,
+          "known_rows": 21748,
+          "complete_games": 184,
+          "normal_cap_games": 4,
+          "epoch_truncated_games": 123,
+          "excluded_actions": 11020,
+          "win_games": 36,
+          "draw_games": 123,
+          "loss_games": 25
+        },
+        {
+          "journal_sha256": "44e1487e496ce7733b18134385fa2f378ea21d3c30a5fb74174687a85e9d4a08",
+          "epoch": 16,
+          "legal_plies": 32768,
+          "known_rows": 19406,
+          "complete_games": 171,
+          "normal_cap_games": 13,
+          "epoch_truncated_games": 114,
+          "excluded_actions": 13362,
+          "win_games": 34,
+          "draw_games": 100,
+          "loss_games": 37
+        },
+        {
+          "journal_sha256": "21c055b78b5c28da11092bcd6952989ef2a7f1d223a46fa27817fabce7815eff",
+          "epoch": 32,
+          "legal_plies": 32768,
+          "known_rows": 19868,
+          "complete_games": 156,
+          "normal_cap_games": 11,
+          "epoch_truncated_games": 117,
+          "excluded_actions": 12900,
+          "win_games": 28,
+          "draw_games": 105,
+          "loss_games": 23
+        }
+      ],
+      "train": {
+        "complete_games": 527,
+        "rows": 62695,
+        "game_equal_nll": 0.02260206639766693,
+        "game_equal_accuracy": 0.9930957555770874,
+        "scope": "source-disjoint TRAIN internal realized own-policy outcomes; not independent strength"
+      },
+      "validation": {
+        "complete_games": 122,
+        "rows": 16309,
+        "game_equal_nll": 3.1785881519317627,
+        "game_equal_accuracy": 0.596636950969696,
+        "scope": "source-disjoint TRAIN internal realized own-policy outcomes; not independent strength"
+      },
+      "finished_epoch": 1791214478.463847
+    },
+    {
+      "seed": 20262405,
+      "step": 4096,
+      "model_sha256": "dcfefe0373d8879c38229b7ba487ec4d6d2ae482ac5f8aa598bf26731310dc1c",
+      "dataset_sha256": "53d5ad45242f76229f93614d1d2c65f4060604e9162befcac1efa192afdd50eb",
+      "journal_receipts": [
+        {
+          "journal_sha256": "32d203b68ed29e9fd1a0845fca69f32f0faa3aa4cc1ad9e0e040b6af5027fb55",
+          "epoch": 1,
+          "legal_plies": 32768,
+          "known_rows": 17982,
+          "complete_games": 138,
+          "normal_cap_games": 22,
+          "epoch_truncated_games": 105,
+          "excluded_actions": 14786,
+          "win_games": 29,
+          "draw_games": 80,
+          "loss_games": 29
+        },
+        {
+          "journal_sha256": "f8503b5abe08687526b6a22d98df2a246dde1da96cfd41c3ab4109ea30ae7af9",
+          "epoch": 8,
+          "legal_plies": 32768,
+          "known_rows": 21748,
+          "complete_games": 184,
+          "normal_cap_games": 4,
+          "epoch_truncated_games": 123,
+          "excluded_actions": 11020,
+          "win_games": 36,
+          "draw_games": 123,
+          "loss_games": 25
+        },
+        {
+          "journal_sha256": "44e1487e496ce7733b18134385fa2f378ea21d3c30a5fb74174687a85e9d4a08",
+          "epoch": 16,
+          "legal_plies": 32768,
+          "known_rows": 19406,
+          "complete_games": 171,
+          "normal_cap_games": 13,
+          "epoch_truncated_games": 114,
+          "excluded_actions": 13362,
+          "win_games": 34,
+          "draw_games": 100,
+          "loss_games": 37
+        },
+        {
+          "journal_sha256": "21c055b78b5c28da11092bcd6952989ef2a7f1d223a46fa27817fabce7815eff",
+          "epoch": 32,
+          "legal_plies": 32768,
+          "known_rows": 19868,
+          "complete_games": 156,
+          "normal_cap_games": 11,
+          "epoch_truncated_games": 117,
+          "excluded_actions": 12900,
+          "win_games": 28,
+          "draw_games": 105,
+          "loss_games": 23
+        }
+      ],
+      "train": {
+        "complete_games": 527,
+        "rows": 62695,
+        "game_equal_nll": 0.02133760042488575,
+        "game_equal_accuracy": 0.9931015372276306,
+        "scope": "source-disjoint TRAIN internal realized own-policy outcomes; not independent strength"
+      },
+      "validation": {
+        "complete_games": 122,
+        "rows": 16309,
+        "game_equal_nll": 3.357553005218506,
+        "game_equal_accuracy": 0.596649169921875,
+        "scope": "source-disjoint TRAIN internal realized own-policy outcomes; not independent strength"
+      },
+      "finished_epoch": 1791214478.6988492
+    },
+    {
+      "seed": 20262406,
+      "step": 0,
+      "model_sha256": "522bcb2d705180dacec40f60d1e37871c3a3eef1ccf46aefd3351869463a9cc9",
+      "dataset_sha256": "1e1d741895bbd509f4eb5850c5f2f6005d98abd40f80ca5bacb28221d010dfab",
+      "journal_receipts": [
+        {
+          "journal_sha256": "29326d93118de97a851d12f1d6125633abc32ae40c81004c7d7ba2838c5c78cf",
+          "epoch": 1,
+          "legal_plies": 32768,
+          "known_rows": 17513,
+          "complete_games": 132,
+          "normal_cap_games": 29,
+          "epoch_truncated_games": 99,
+          "excluded_actions": 15255,
+          "win_games": 23,
+          "draw_games": 89,
+          "loss_games": 20
+        },
+        {
+          "journal_sha256": "b5bad76687a466a18735eafe3e65980242b6415b52b428bbb7c7ef80f5996602",
+          "epoch": 8,
+          "legal_plies": 32768,
+          "known_rows": 18570,
+          "complete_games": 162,
+          "normal_cap_games": 17,
+          "epoch_truncated_games": 110,
+          "excluded_actions": 14198,
+          "win_games": 34,
+          "draw_games": 105,
+          "loss_games": 23
+        },
+        {
+          "journal_sha256": "2a6e3e7748532de3c4bf862074754801a859faacefb2955446783c21dd43cfc6",
+          "epoch": 16,
+          "legal_plies": 32768,
+          "known_rows": 19819,
+          "complete_games": 160,
+          "normal_cap_games": 18,
+          "epoch_truncated_games": 109,
+          "excluded_actions": 12949,
+          "win_games": 33,
+          "draw_games": 99,
+          "loss_games": 28
+        },
+        {
+          "journal_sha256": "e688663ee19d295e6b6f7569d7fd9cb6b2f559a87ef89cf7ab8768bc42eddf35",
+          "epoch": 32,
+          "legal_plies": 32768,
+          "known_rows": 20380,
+          "complete_games": 157,
+          "normal_cap_games": 16,
+          "epoch_truncated_games": 111,
+          "excluded_actions": 12388,
+          "win_games": 30,
+          "draw_games": 97,
+          "loss_games": 30
+        }
+      ],
+      "train": {
+        "complete_games": 474,
+        "rows": 59987,
+        "game_equal_nll": 1.0986121892929077,
+        "game_equal_accuracy": 0.18167200684547424,
+        "scope": "source-disjoint TRAIN internal realized own-policy outcomes; not independent strength"
+      },
+      "validation": {
+        "complete_games": 137,
+        "rows": 16295,
+        "game_equal_nll": 1.0986121892929077,
+        "game_equal_accuracy": 0.18842045962810516,
+        "scope": "source-disjoint TRAIN internal realized own-policy outcomes; not independent strength"
+      },
+      "finished_epoch": 1791214524.2740111
+    },
+    {
+      "seed": 20262406,
+      "step": 512,
+      "model_sha256": "110d06eb778aee374f1babef8beb0d3538c756497009b06b6f56111522d0c7d3",
+      "dataset_sha256": "1e1d741895bbd509f4eb5850c5f2f6005d98abd40f80ca5bacb28221d010dfab",
+      "journal_receipts": [
+        {
+          "journal_sha256": "29326d93118de97a851d12f1d6125633abc32ae40c81004c7d7ba2838c5c78cf",
+          "epoch": 1,
+          "legal_plies": 32768,
+          "known_rows": 17513,
+          "complete_games": 132,
+          "normal_cap_games": 29,
+          "epoch_truncated_games": 99,
+          "excluded_actions": 15255,
+          "win_games": 23,
+          "draw_games": 89,
+          "loss_games": 20
+        },
+        {
+          "journal_sha256": "b5bad76687a466a18735eafe3e65980242b6415b52b428bbb7c7ef80f5996602",
+          "epoch": 8,
+          "legal_plies": 32768,
+          "known_rows": 18570,
+          "complete_games": 162,
+          "normal_cap_games": 17,
+          "epoch_truncated_games": 110,
+          "excluded_actions": 14198,
+          "win_games": 34,
+          "draw_games": 105,
+          "loss_games": 23
+        },
+        {
+          "journal_sha256": "2a6e3e7748532de3c4bf862074754801a859faacefb2955446783c21dd43cfc6",
+          "epoch": 16,
+          "legal_plies": 32768,
+          "known_rows": 19819,
+          "complete_games": 160,
+          "normal_cap_games": 18,
+          "epoch_truncated_games": 109,
+          "excluded_actions": 12949,
+          "win_games": 33,
+          "draw_games": 99,
+          "loss_games": 28
+        },
+        {
+          "journal_sha256": "e688663ee19d295e6b6f7569d7fd9cb6b2f559a87ef89cf7ab8768bc42eddf35",
+          "epoch": 32,
+          "legal_plies": 32768,
+          "known_rows": 20380,
+          "complete_games": 157,
+          "normal_cap_games": 16,
+          "epoch_truncated_games": 111,
+          "excluded_actions": 12388,
+          "win_games": 30,
+          "draw_games": 97,
+          "loss_games": 30
+        }
+      ],
+      "train": {
+        "complete_games": 474,
+        "rows": 59987,
+        "game_equal_nll": 0.198593869805336,
+        "game_equal_accuracy": 0.9308923482894897,
+        "scope": "source-disjoint TRAIN internal realized own-policy outcomes; not independent strength"
+      },
+      "validation": {
+        "complete_games": 137,
+        "rows": 16295,
+        "game_equal_nll": 1.4256889820098877,
+        "game_equal_accuracy": 0.5821899175643921,
+        "scope": "source-disjoint TRAIN internal realized own-policy outcomes; not independent strength"
+      },
+      "finished_epoch": 1791214524.5196953
+    },
+    {
+      "seed": 20262406,
+      "step": 1024,
+      "model_sha256": "9c2b5d4b3cceb8ac79408a2eb0e678baf994630a7aa81b34dc2aaaf2916fdc49",
+      "dataset_sha256": "1e1d741895bbd509f4eb5850c5f2f6005d98abd40f80ca5bacb28221d010dfab",
+      "journal_receipts": [
+        {
+          "journal_sha256": "29326d93118de97a851d12f1d6125633abc32ae40c81004c7d7ba2838c5c78cf",
+          "epoch": 1,
+          "legal_plies": 32768,
+          "known_rows": 17513,
+          "complete_games": 132,
+          "normal_cap_games": 29,
+          "epoch_truncated_games": 99,
+          "excluded_actions": 15255,
+          "win_games": 23,
+          "draw_games": 89,
+          "loss_games": 20
+        },
+        {
+          "journal_sha256": "b5bad76687a466a18735eafe3e65980242b6415b52b428bbb7c7ef80f5996602",
+          "epoch": 8,
+          "legal_plies": 32768,
+          "known_rows": 18570,
+          "complete_games": 162,
+          "normal_cap_games": 17,
+          "epoch_truncated_games": 110,
+          "excluded_actions": 14198,
+          "win_games": 34,
+          "draw_games": 105,
+          "loss_games": 23
+        },
+        {
+          "journal_sha256": "2a6e3e7748532de3c4bf862074754801a859faacefb2955446783c21dd43cfc6",
+          "epoch": 16,
+          "legal_plies": 32768,
+          "known_rows": 19819,
+          "complete_games": 160,
+          "normal_cap_games": 18,
+          "epoch_truncated_games": 109,
+          "excluded_actions": 12949,
+          "win_games": 33,
+          "draw_games": 99,
+          "loss_games": 28
+        },
+        {
+          "journal_sha256": "e688663ee19d295e6b6f7569d7fd9cb6b2f559a87ef89cf7ab8768bc42eddf35",
+          "epoch": 32,
+          "legal_plies": 32768,
+          "known_rows": 20380,
+          "complete_games": 157,
+          "normal_cap_games": 16,
+          "epoch_truncated_games": 111,
+          "excluded_actions": 12388,
+          "win_games": 30,
+          "draw_games": 97,
+          "loss_games": 30
+        }
+      ],
+      "train": {
+        "complete_games": 474,
+        "rows": 59987,
+        "game_equal_nll": 0.08830124139785767,
+        "game_equal_accuracy": 0.9711468815803528,
+        "scope": "source-disjoint TRAIN internal realized own-policy outcomes; not independent strength"
+      },
+      "validation": {
+        "complete_games": 137,
+        "rows": 16295,
+        "game_equal_nll": 2.0931875705718994,
+        "game_equal_accuracy": 0.5820461511611938,
+        "scope": "source-disjoint TRAIN internal realized own-policy outcomes; not independent strength"
+      },
+      "finished_epoch": 1791214524.7716897
+    },
+    {
+      "seed": 20262406,
+      "step": 1536,
+      "model_sha256": "56c7755b883a7b18e656522ce390ee415e4c7898bd1343523658180dcb1fee7f",
+      "dataset_sha256": "1e1d741895bbd509f4eb5850c5f2f6005d98abd40f80ca5bacb28221d010dfab",
+      "journal_receipts": [
+        {
+          "journal_sha256": "29326d93118de97a851d12f1d6125633abc32ae40c81004c7d7ba2838c5c78cf",
+          "epoch": 1,
+          "legal_plies": 32768,
+          "known_rows": 17513,
+          "complete_games": 132,
+          "normal_cap_games": 29,
+          "epoch_truncated_games": 99,
+          "excluded_actions": 15255,
+          "win_games": 23,
+          "draw_games": 89,
+          "loss_games": 20
+        },
+        {
+          "journal_sha256": "b5bad76687a466a18735eafe3e65980242b6415b52b428bbb7c7ef80f5996602",
+          "epoch": 8,
+          "legal_plies": 32768,
+          "known_rows": 18570,
+          "complete_games": 162,
+          "normal_cap_games": 17,
+          "epoch_truncated_games": 110,
+          "excluded_actions": 14198,
+          "win_games": 34,
+          "draw_games": 105,
+          "loss_games": 23
+        },
+        {
+          "journal_sha256": "2a6e3e7748532de3c4bf862074754801a859faacefb2955446783c21dd43cfc6",
+          "epoch": 16,
+          "legal_plies": 32768,
+          "known_rows": 19819,
+          "complete_games": 160,
+          "normal_cap_games": 18,
+          "epoch_truncated_games": 109,
+          "excluded_actions": 12949,
+          "win_games": 33,
+          "draw_games": 99,
+          "loss_games": 28
+        },
+        {
+          "journal_sha256": "e688663ee19d295e6b6f7569d7fd9cb6b2f559a87ef89cf7ab8768bc42eddf35",
+          "epoch": 32,
+          "legal_plies": 32768,
+          "known_rows": 20380,
+          "complete_games": 157,
+          "normal_cap_games": 16,
+          "epoch_truncated_games": 111,
+          "excluded_actions": 12388,
+          "win_games": 30,
+          "draw_games": 97,
+          "loss_games": 30
+        }
+      ],
+      "train": {
+        "complete_games": 474,
+        "rows": 59987,
+        "game_equal_nll": 0.05226941779255867,
+        "game_equal_accuracy": 0.9831525087356567,
+        "scope": "source-disjoint TRAIN internal realized own-policy outcomes; not independent strength"
+      },
+      "validation": {
+        "complete_games": 137,
+        "rows": 16295,
+        "game_equal_nll": 2.51177716255188,
+        "game_equal_accuracy": 0.5725805163383484,
+        "scope": "source-disjoint TRAIN internal realized own-policy outcomes; not independent strength"
+      },
+      "finished_epoch": 1791214525.0231445
+    },
+    {
+      "seed": 20262406,
+      "step": 2048,
+      "model_sha256": "e13a6276db8c8182e530a864f4c698a0dfc0d58c7253534d905cf6a4a9a86b32",
+      "dataset_sha256": "1e1d741895bbd509f4eb5850c5f2f6005d98abd40f80ca5bacb28221d010dfab",
+      "journal_receipts": [
+        {
+          "journal_sha256": "29326d93118de97a851d12f1d6125633abc32ae40c81004c7d7ba2838c5c78cf",
+          "epoch": 1,
+          "legal_plies": 32768,
+          "known_rows": 17513,
+          "complete_games": 132,
+          "normal_cap_games": 29,
+          "epoch_truncated_games": 99,
+          "excluded_actions": 15255,
+          "win_games": 23,
+          "draw_games": 89,
+          "loss_games": 20
+        },
+        {
+          "journal_sha256": "b5bad76687a466a18735eafe3e65980242b6415b52b428bbb7c7ef80f5996602",
+          "epoch": 8,
+          "legal_plies": 32768,
+          "known_rows": 18570,
+          "complete_games": 162,
+          "normal_cap_games": 17,
+          "epoch_truncated_games": 110,
+          "excluded_actions": 14198,
+          "win_games": 34,
+          "draw_games": 105,
+          "loss_games": 23
+        },
+        {
+          "journal_sha256": "2a6e3e7748532de3c4bf862074754801a859faacefb2955446783c21dd43cfc6",
+          "epoch": 16,
+          "legal_plies": 32768,
+          "known_rows": 19819,
+          "complete_games": 160,
+          "normal_cap_games": 18,
+          "epoch_truncated_games": 109,
+          "excluded_actions": 12949,
+          "win_games": 33,
+          "draw_games": 99,
+          "loss_games": 28
+        },
+        {
+          "journal_sha256": "e688663ee19d295e6b6f7569d7fd9cb6b2f559a87ef89cf7ab8768bc42eddf35",
+          "epoch": 32,
+          "legal_plies": 32768,
+          "known_rows": 20380,
+          "complete_games": 157,
+          "normal_cap_games": 16,
+          "epoch_truncated_games": 111,
+          "excluded_actions": 12388,
+          "win_games": 30,
+          "draw_games": 97,
+          "loss_games": 30
+        }
+      ],
+      "train": {
+        "complete_games": 474,
+        "rows": 59987,
+        "game_equal_nll": 0.039464034140110016,
+        "game_equal_accuracy": 0.9873166680335999,
+        "scope": "source-disjoint TRAIN internal realized own-policy outcomes; not independent strength"
+      },
+      "validation": {
+        "complete_games": 137,
+        "rows": 16295,
+        "game_equal_nll": 2.955641269683838,
+        "game_equal_accuracy": 0.5752653479576111,
+        "scope": "source-disjoint TRAIN internal realized own-policy outcomes; not independent strength"
+      },
+      "finished_epoch": 1791214525.2765186
+    },
+    {
+      "seed": 20262406,
+      "step": 2560,
+      "model_sha256": "8b29ce39ec11dd53ca8ae1dcedb11aa62eeee232c8b1be411e1c44f0a00487d9",
+      "dataset_sha256": "1e1d741895bbd509f4eb5850c5f2f6005d98abd40f80ca5bacb28221d010dfab",
+      "journal_receipts": [
+        {
+          "journal_sha256": "29326d93118de97a851d12f1d6125633abc32ae40c81004c7d7ba2838c5c78cf",
+          "epoch": 1,
+          "legal_plies": 32768,
+          "known_rows": 17513,
+          "complete_games": 132,
+          "normal_cap_games": 29,
+          "epoch_truncated_games": 99,
+          "excluded_actions": 15255,
+          "win_games": 23,
+          "draw_games": 89,
+          "loss_games": 20
+        },
+        {
+          "journal_sha256": "b5bad76687a466a18735eafe3e65980242b6415b52b428bbb7c7ef80f5996602",
+          "epoch": 8,
+          "legal_plies": 32768,
+          "known_rows": 18570,
+          "complete_games": 162,
+          "normal_cap_games": 17,
+          "epoch_truncated_games": 110,
+          "excluded_actions": 14198,
+          "win_games": 34,
+          "draw_games": 105,
+          "loss_games": 23
+        },
+        {
+          "journal_sha256": "2a6e3e7748532de3c4bf862074754801a859faacefb2955446783c21dd43cfc6",
+          "epoch": 16,
+          "legal_plies": 32768,
+          "known_rows": 19819,
+          "complete_games": 160,
+          "normal_cap_games": 18,
+          "epoch_truncated_games": 109,
+          "excluded_actions": 12949,
+          "win_games": 33,
+          "draw_games": 99,
+          "loss_games": 28
+        },
+        {
+          "journal_sha256": "e688663ee19d295e6b6f7569d7fd9cb6b2f559a87ef89cf7ab8768bc42eddf35",
+          "epoch": 32,
+          "legal_plies": 32768,
+          "known_rows": 20380,
+          "complete_games": 157,
+          "normal_cap_games": 16,
+          "epoch_truncated_games": 111,
+          "excluded_actions": 12388,
+          "win_games": 30,
+          "draw_games": 97,
+          "loss_games": 30
+        }
+      ],
+      "train": {
+        "complete_games": 474,
+        "rows": 59987,
+        "game_equal_nll": 0.03340370953083038,
+        "game_equal_accuracy": 0.9887751936912537,
+        "scope": "source-disjoint TRAIN internal realized own-policy outcomes; not independent strength"
+      },
+      "validation": {
+        "complete_games": 137,
+        "rows": 16295,
+        "game_equal_nll": 3.1346895694732666,
+        "game_equal_accuracy": 0.580933690071106,
+        "scope": "source-disjoint TRAIN internal realized own-policy outcomes; not independent strength"
+      },
+      "finished_epoch": 1791214525.5233822
+    },
+    {
+      "seed": 20262406,
+      "step": 3072,
+      "model_sha256": "1b8ec79cf2c2ed84aa5c58af110ef7806b8aa4742df6e7b952537e94565dc9f5",
+      "dataset_sha256": "1e1d741895bbd509f4eb5850c5f2f6005d98abd40f80ca5bacb28221d010dfab",
+      "journal_receipts": [
+        {
+          "journal_sha256": "29326d93118de97a851d12f1d6125633abc32ae40c81004c7d7ba2838c5c78cf",
+          "epoch": 1,
+          "legal_plies": 32768,
+          "known_rows": 17513,
+          "complete_games": 132,
+          "normal_cap_games": 29,
+          "epoch_truncated_games": 99,
+          "excluded_actions": 15255,
+          "win_games": 23,
+          "draw_games": 89,
+          "loss_games": 20
+        },
+        {
+          "journal_sha256": "b5bad76687a466a18735eafe3e65980242b6415b52b428bbb7c7ef80f5996602",
+          "epoch": 8,
+          "legal_plies": 32768,
+          "known_rows": 18570,
+          "complete_games": 162,
+          "normal_cap_games": 17,
+          "epoch_truncated_games": 110,
+          "excluded_actions": 14198,
+          "win_games": 34,
+          "draw_games": 105,
+          "loss_games": 23
+        },
+        {
+          "journal_sha256": "2a6e3e7748532de3c4bf862074754801a859faacefb2955446783c21dd43cfc6",
+          "epoch": 16,
+          "legal_plies": 32768,
+          "known_rows": 19819,
+          "complete_games": 160,
+          "normal_cap_games": 18,
+          "epoch_truncated_games": 109,
+          "excluded_actions": 12949,
+          "win_games": 33,
+          "draw_games": 99,
+          "loss_games": 28
+        },
+        {
+          "journal_sha256": "e688663ee19d295e6b6f7569d7fd9cb6b2f559a87ef89cf7ab8768bc42eddf35",
+          "epoch": 32,
+          "legal_plies": 32768,
+          "known_rows": 20380,
+          "complete_games": 157,
+          "normal_cap_games": 16,
+          "epoch_truncated_games": 111,
+          "excluded_actions": 12388,
+          "win_games": 30,
+          "draw_games": 97,
+          "loss_games": 30
+        }
+      ],
+      "train": {
+        "complete_games": 474,
+        "rows": 59987,
+        "game_equal_nll": 0.02475247159600258,
+        "game_equal_accuracy": 0.9925870895385742,
+        "scope": "source-disjoint TRAIN internal realized own-policy outcomes; not independent strength"
+      },
+      "validation": {
+        "complete_games": 137,
+        "rows": 16295,
+        "game_equal_nll": 3.316598415374756,
+        "game_equal_accuracy": 0.5783007740974426,
+        "scope": "source-disjoint TRAIN internal realized own-policy outcomes; not independent strength"
+      },
+      "finished_epoch": 1791214525.7721832
+    },
+    {
+      "seed": 20262406,
+      "step": 3584,
+      "model_sha256": "09918b730809e6a151061f5cd734d19a575f7b16902a30b46fdff8561f71a4f1",
+      "dataset_sha256": "1e1d741895bbd509f4eb5850c5f2f6005d98abd40f80ca5bacb28221d010dfab",
+      "journal_receipts": [
+        {
+          "journal_sha256": "29326d93118de97a851d12f1d6125633abc32ae40c81004c7d7ba2838c5c78cf",
+          "epoch": 1,
+          "legal_plies": 32768,
+          "known_rows": 17513,
+          "complete_games": 132,
+          "normal_cap_games": 29,
+          "epoch_truncated_games": 99,
+          "excluded_actions": 15255,
+          "win_games": 23,
+          "draw_games": 89,
+          "loss_games": 20
+        },
+        {
+          "journal_sha256": "b5bad76687a466a18735eafe3e65980242b6415b52b428bbb7c7ef80f5996602",
+          "epoch": 8,
+          "legal_plies": 32768,
+          "known_rows": 18570,
+          "complete_games": 162,
+          "normal_cap_games": 17,
+          "epoch_truncated_games": 110,
+          "excluded_actions": 14198,
+          "win_games": 34,
+          "draw_games": 105,
+          "loss_games": 23
+        },
+        {
+          "journal_sha256": "2a6e3e7748532de3c4bf862074754801a859faacefb2955446783c21dd43cfc6",
+          "epoch": 16,
+          "legal_plies": 32768,
+          "known_rows": 19819,
+          "complete_games": 160,
+          "normal_cap_games": 18,
+          "epoch_truncated_games": 109,
+          "excluded_actions": 12949,
+          "win_games": 33,
+          "draw_games": 99,
+          "loss_games": 28
+        },
+        {
+          "journal_sha256": "e688663ee19d295e6b6f7569d7fd9cb6b2f559a87ef89cf7ab8768bc42eddf35",
+          "epoch": 32,
+          "legal_plies": 32768,
+          "known_rows": 20380,
+          "complete_games": 157,
+          "normal_cap_games": 16,
+          "epoch_truncated_games": 111,
+          "excluded_actions": 12388,
+          "win_games": 30,
+          "draw_games": 97,
+          "loss_games": 30
+        }
+      ],
+      "train": {
+        "complete_games": 474,
+        "rows": 59987,
+        "game_equal_nll": 0.022451985627412796,
+        "game_equal_accuracy": 0.9924992918968201,
+        "scope": "source-disjoint TRAIN internal realized own-policy outcomes; not independent strength"
+      },
+      "validation": {
+        "complete_games": 137,
+        "rows": 16295,
+        "game_equal_nll": 3.5636072158813477,
+        "game_equal_accuracy": 0.5753065347671509,
+        "scope": "source-disjoint TRAIN internal realized own-policy outcomes; not independent strength"
+      },
+      "finished_epoch": 1791214526.017622
+    },
+    {
+      "seed": 20262406,
+      "step": 4096,
+      "model_sha256": "aa8e84031bbb6df56e1c9372be95d691b12fdb64df53d3d2840c184c9ec6e500",
+      "dataset_sha256": "1e1d741895bbd509f4eb5850c5f2f6005d98abd40f80ca5bacb28221d010dfab",
+      "journal_receipts": [
+        {
+          "journal_sha256": "29326d93118de97a851d12f1d6125633abc32ae40c81004c7d7ba2838c5c78cf",
+          "epoch": 1,
+          "legal_plies": 32768,
+          "known_rows": 17513,
+          "complete_games": 132,
+          "normal_cap_games": 29,
+          "epoch_truncated_games": 99,
+          "excluded_actions": 15255,
+          "win_games": 23,
+          "draw_games": 89,
+          "loss_games": 20
+        },
+        {
+          "journal_sha256": "b5bad76687a466a18735eafe3e65980242b6415b52b428bbb7c7ef80f5996602",
+          "epoch": 8,
+          "legal_plies": 32768,
+          "known_rows": 18570,
+          "complete_games": 162,
+          "normal_cap_games": 17,
+          "epoch_truncated_games": 110,
+          "excluded_actions": 14198,
+          "win_games": 34,
+          "draw_games": 105,
+          "loss_games": 23
+        },
+        {
+          "journal_sha256": "2a6e3e7748532de3c4bf862074754801a859faacefb2955446783c21dd43cfc6",
+          "epoch": 16,
+          "legal_plies": 32768,
+          "known_rows": 19819,
+          "complete_games": 160,
+          "normal_cap_games": 18,
+          "epoch_truncated_games": 109,
+          "excluded_actions": 12949,
+          "win_games": 33,
+          "draw_games": 99,
+          "loss_games": 28
+        },
+        {
+          "journal_sha256": "e688663ee19d295e6b6f7569d7fd9cb6b2f559a87ef89cf7ab8768bc42eddf35",
+          "epoch": 32,
+          "legal_plies": 32768,
+          "known_rows": 20380,
+          "complete_games": 157,
+          "normal_cap_games": 16,
+          "epoch_truncated_games": 111,
+          "excluded_actions": 12388,
+          "win_games": 30,
+          "draw_games": 97,
+          "loss_games": 30
+        }
+      ],
+      "train": {
+        "complete_games": 474,
+        "rows": 59987,
+        "game_equal_nll": 0.019971435889601707,
+        "game_equal_accuracy": 0.9936290979385376,
+        "scope": "source-disjoint TRAIN internal realized own-policy outcomes; not independent strength"
+      },
+      "validation": {
+        "complete_games": 137,
+        "rows": 16295,
+        "game_equal_nll": 3.6873533725738525,
+        "game_equal_accuracy": 0.584791362285614,
+        "scope": "source-disjoint TRAIN internal realized own-policy outcomes; not independent strength"
+      },
+      "finished_epoch": 1791214526.2611709
+    }
+  ],
+  "protocol_sha256": "8410d798dbbd966c24ebc1ac7c20679e992443597f8a24b9ae3a967b8ecb9d01",
+  "helper_sha256": "21463d4f91ace0c21c22676becddd40ae29cd5901c401bc8f4cfdf0cf589ed91",
+  "original_first_epoch": 1791214430.623925,
+  "original_deadline_epoch": 1791215630.623925,
+  "finished_epoch": 1791214526.263822,
+  "GPU_used": false,
+  "strength_success_claimed": false,
+  "endpoint_selected": false
+}
