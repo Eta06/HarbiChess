@@ -1,0 +1,53 @@
+{
+  "schema": "cpu-density-closed-E1-acting-diagnostic-v1",
+  "rows": [
+    {
+      "run": "20262105-sparse16",
+      "journal_sha256": "9a543b56cad328a758cd37d427760a2843cca82fae9f214419af5d1fa622ba3b",
+      "rows": 2048,
+      "roots": 259,
+      "actual_move_equals_search_selected_action": 167,
+      "fraction": 0.6447876447876448,
+      "complete_games": 14,
+      "UNKNOWN_rows": 909,
+      "scope": "alreadyclosed TRAIN E1 only; no strength or extra game/model query"
+    },
+    {
+      "run": "20262106-sparse16",
+      "journal_sha256": "57df404dcced33d38c4de74a1ab5caca431f4a8144fbe224ce8ba66d37363d72",
+      "rows": 2048,
+      "roots": 256,
+      "actual_move_equals_search_selected_action": 159,
+      "fraction": 0.62109375,
+      "complete_games": 16,
+      "UNKNOWN_rows": 428,
+      "scope": "alreadyclosed TRAIN E1 only; no strength or extra game/model query"
+    },
+    {
+      "run": "20262105-all16",
+      "journal_sha256": "9a23d5702941bd72d5c9866a5d47f29623db35225be90afbe51fc4458de5c769",
+      "rows": 2048,
+      "roots": 2048,
+      "actual_move_equals_search_selected_action": 1243,
+      "fraction": 0.60693359375,
+      "complete_games": 30,
+      "UNKNOWN_rows": 526,
+      "scope": "alreadyclosed TRAIN E1 only; no strength or extra game/model query"
+    },
+    {
+      "run": "20262106-all16",
+      "journal_sha256": "350c98b94f4b490b7891c0e5a1fb2df84b06fafd69adbbcb8453f3c8bbefd9e1",
+      "rows": 2048,
+      "roots": 2048,
+      "actual_move_equals_search_selected_action": 1259,
+      "fraction": 0.61474609375,
+      "complete_games": 25,
+      "UNKNOWN_rows": 321,
+      "scope": "alreadyclosed TRAIN E1 only; no strength or extra game/model query"
+    }
+  ],
+  "interpretation": "all16 actual sampled action equals deterministic search selection only60.7/61.5%, so even all-search T1 may give value targets for a different policy than final G0 deterministic selection. This is observed action mismatch, not proof that greedier play or density fixes strength",
+  "new_unique_transitions": 0,
+  "new_teacher_labels": 0,
+  "strength_success_claimed": false
+}
