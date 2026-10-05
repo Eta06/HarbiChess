@@ -1,0 +1,61 @@
+{
+  "absolute_deadline_epoch": 1791203902.471879,
+  "audit_optimizer_attempted_updates": 64,
+  "both_all_native_epochs_freshprocess_strictload": [
+    0,
+    1,
+    2
+  ],
+  "both_final_full_native_freshprocess_strictload": true,
+  "byte_exact_artifacts": {
+    "checkpoints/epoch-00000000/actor.json": "c1bdcbe4032209c0608f26330b722f54c21d9237a530d159c9e07b66ea4fc0e2",
+    "checkpoints/epoch-00000000/base.safetensors": "14f2b4b30f8443af4dd4656fda960e5bd5bf132fbe453cf4c2df164d41a7c900",
+    "checkpoints/epoch-00000000/behavior.safetensors": "14f2b4b30f8443af4dd4656fda960e5bd5bf132fbe453cf4c2df164d41a7c900",
+    "checkpoints/epoch-00000000/last-frozen-epoch.json.gz": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "checkpoints/epoch-00000000/model.safetensors": "14f2b4b30f8443af4dd4656fda960e5bd5bf132fbe453cf4c2df164d41a7c900",
+    "checkpoints/epoch-00000000/training.pt": "b80cbc8b32c3f533afe0d2dcf063814e2d2b27bee3849d478a4b41df362df84d",
+    "checkpoints/epoch-00000001/actor.json": "f011378d8a0b9b19b898cae0e4244fc407565041f3c2262f23c2b10018ba0e39",
+    "checkpoints/epoch-00000001/base.safetensors": "1cea8f4b50116e4b69f57f3f08a698ab5e4c6a74f6e838d03ae8505ee87f31d7",
+    "checkpoints/epoch-00000001/behavior.safetensors": "1cea8f4b50116e4b69f57f3f08a698ab5e4c6a74f6e838d03ae8505ee87f31d7",
+    "checkpoints/epoch-00000001/last-frozen-epoch.json.gz": "a80cd95de292059966d862a61bf3e65b6c93ac5cac98aad52134687ef1670c8c",
+    "checkpoints/epoch-00000001/model.safetensors": "9056d436e3f19f3c4885803d6874415d527757b638ebed525799ef18cda19942",
+    "checkpoints/epoch-00000001/training.pt": "14dbd9668926e6cb0744024f96dfc15f9344775e66834bb84cf02c2feea1ddc5",
+    "checkpoints/epoch-00000002/actor.json": "77acf7efb838b00a667973390d75d89af72ee881e222faa9857f6991e1005121",
+    "checkpoints/epoch-00000002/base.safetensors": "d1fd940d06eb1a754111431a3e8ffe6d7e583a278a800dd55978cc5e2422d123",
+    "checkpoints/epoch-00000002/behavior.safetensors": "c31366c15beb64970cc9eb27443087b7ae1d2be370e98d7fa228e881703cf278",
+    "checkpoints/epoch-00000002/last-frozen-epoch.json.gz": "ca8f0d9a5767d41d1f6996ba0f9c6fee4e3a35395d1e5d80cd48909277e304f9",
+    "checkpoints/epoch-00000002/model.safetensors": "07726ddfc9302a9bbda2a9abdc34592b45f314071a93c28edee4a9042aaa0b22",
+    "checkpoints/epoch-00000002/training.pt": "857be640b3cc962bde2da5d90d6909dba05292e139bc0e24ee7489a26aa16881",
+    "journal/epoch-00000001.json.gz": "a80cd95de292059966d862a61bf3e65b6c93ac5cac98aad52134687ef1670c8c",
+    "journal/epoch-00000002.json.gz": "ca8f0d9a5767d41d1f6996ba0f9c6fee4e3a35395d1e5d80cd48909277e304f9"
+  },
+  "duplicate_qualification_fresh_transitions": 512,
+  "expected_ledger_schema": "pre-action-masked-search-behavior-v4",
+  "finished_epoch": 1791203681.2218776,
+  "input_sha256": {
+    "book": "1a5ca17664a828d669e58cf2bd5d9eeb7f980b83f20d3a4031d36e4ff0930ccb",
+    "config": "62a303b5dc2f68546d789a6eeae39ab6da48e0c504de6a74b67cc61bd6f2bffa",
+    "protocol": "9be599e89c7ffcf386cc0b16204fcb9a43b2a9cb000c001957c55b2572c60769",
+    "weights": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03"
+  },
+  "last_epoch_UNKNOWN_excluded_value_rows": 233,
+  "last_epoch_known_terminal_rows": 23,
+  "last_epoch_policy_target_rows": 256,
+  "native_manifest_comparison": "exact semantic state/runtime/source/input/artifacts excluding run-relative input paths only",
+  "native_manifest_sha256": {
+    "split/epoch-00000000": "5c7ce58729a1359c7d0eed813c4f4f6e7f7a8f08bd2223221746c0f019dc2f3c",
+    "split/epoch-00000001": "9fcfe03060a09b3d5d51cab5b2144df40080fc144532ec7e96cfbe0032dd05fe",
+    "split/epoch-00000002": "bd717bbb2842d2ca2abb361c098c3f79071566dcda130e2a6928a3e7cb11fd7b",
+    "whole/epoch-00000000": "5c7ce58729a1359c7d0eed813c4f4f6e7f7a8f08bd2223221746c0f019dc2f3c",
+    "whole/epoch-00000001": "9fcfe03060a09b3d5d51cab5b2144df40080fc144532ec7e96cfbe0032dd05fe",
+    "whole/epoch-00000002": "bd717bbb2842d2ca2abb361c098c3f79071566dcda130e2a6928a3e7cb11fd7b"
+  },
+  "original_started_epoch": 1791203302.471879,
+  "per_run_epochs": 2,
+  "schema": "actual-CPU-certificate-ledger-CLI-qualification-v1",
+  "scope": "NEW producer infrastructure only; old428 proof is separate ancestor, not source8 evidence. Certificate inventory semantics require independent E1 audit.",
+  "source_commit": "4cae08522ac940746cf9127ca8ce4a6b63a47408",
+  "started_epoch": 1791203302.549203,
+  "status": "pass",
+  "unique_fresh_transitions": 512
+}
