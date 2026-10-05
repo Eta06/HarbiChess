@@ -1,0 +1,54 @@
+{
+  "schema": "prospective-own67-latency-final-cohort-v1",
+  "status": "NOT_FROZEN_DO_NOT_EXECUTE",
+  "slots": [
+    6,
+    7
+  ],
+  "latency_order": [
+    6,
+    7
+  ],
+  "admission7_deadline_epoch": 1791167100,
+  "prelatency_deadline_epoch": 1791173460,
+  "latest_latency_start_epoch": 1791174000,
+  "hard_deadline_epoch": 1791180000,
+  "conditional_release": "terminal-INCOMPLETE-plus-all-owned-compute-ended;no-fabricated-ready-latency-finals",
+  "helper_sha256": "a37ddf04c5a052758849e9e55f262aad9b3e86b785b27b1df3fb2f3a54288e8e",
+  "members": [
+    {
+      "slot": 6,
+      "source_commit": "428a30f5e1658f3cf159844db547ff0147ade5a9",
+      "seeds": [
+        20261625,
+        20261626
+      ],
+      "fixed_epochs": 8,
+      "coordinator_sha256": "ROOT_FILL_UNEXECUTED6_PROSPECTIVE_POST_SHA",
+      "root": "ROOT_FILL_ABSOLUTE_POSTROOT_6",
+      "books_sha256": {
+        "20261625": "ROOT_FILL_VIRGIN_BOOK_SHA",
+        "20261626": "ROOT_FILL_VIRGIN_BOOK_SHA"
+      },
+      "admission_binding": "ROOT_FILL_ABSOLUTE_ADMISSION_BINDING_6",
+      "terminal_owned_release": "ROOT_FILL_ABSOLUTE_TERMINAL_PROOF_6"
+    },
+    {
+      "slot": 7,
+      "source_commit": "c022bc1605b44c3089439da5c6efb7bd4db4ff81",
+      "seeds": [
+        20261725,
+        20261726
+      ],
+      "fixed_epochs": 8,
+      "coordinator_sha256": "220bfdf3df8dacf73e3d39f19f3d837dc00372fbaa1e9d48321d7556e48e1426",
+      "root": "ROOT_FILL_ABSOLUTE_POSTROOT_7",
+      "books_sha256": {
+        "20261725": "ROOT_FILL_VIRGIN_BOOK_SHA",
+        "20261726": "ROOT_FILL_VIRGIN_BOOK_SHA"
+      },
+      "admission_binding": "ROOT_FILL_ABSOLUTE_ADMISSION_BINDING_7",
+      "terminal_owned_release": "ROOT_FILL_ABSOLUTE_TERMINAL_PROOF_7"
+    }
+  ]
+}
