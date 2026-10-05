@@ -4,9 +4,9 @@ import hashlib
 import json
 from pathlib import Path
 
-from harbichess.chess.rules import PythonChessRules
-
 from own_terminal_book import actions, sha, state
+
+from harbichess.chess.rules import PythonChessRules
 
 
 def export(manifest, output):
