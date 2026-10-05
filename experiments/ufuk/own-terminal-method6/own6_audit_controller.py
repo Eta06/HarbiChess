@@ -29,7 +29,14 @@ def main():
         spec["original_training_deadline_epoch"]
         == first + spec["whole_training_seconds"]
     )
-    deadline = min(first + spec["whole_audit_seconds"], END)
+    assert set(spec["scheduling_helper_sha256"]) == {"own6_schedule_v3.py"}
+    assert (
+        sha(Path(__file__).with_name("own6_schedule_v3.py"))
+        == spec["scheduling_helper_sha256"]["own6_schedule_v3.py"]
+    )
+    from own6_schedule_v3 import audit_deadline
+
+    deadline = audit_deadline(first, spec["whole_audit_seconds"])
     assert first <= time.time() < deadline
     assert Path(spec["producer_checkout"]).resolve() == args.repo.resolve()
     check_source(args.repo, spec["source_commit"])
