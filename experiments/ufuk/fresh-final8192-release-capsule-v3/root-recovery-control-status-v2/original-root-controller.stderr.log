@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/workspace/HarbiChess/experiments/ufuk/fresh-final8192-release-capsule-v3/root_dispatch_v3.py", line 263, in <module>
+    main()
+  File "/workspace/HarbiChess/experiments/ufuk/fresh-final8192-release-capsule-v3/root_dispatch_v3.py", line 74, in main
+    receiver.release.check_clock(control)
+  File "/workspace/HarbiChess/experiments/ufuk/fresh-final8192-release-capsule-v3/release_transport_frozen.py", line 63, in check_clock
+    raise Failure("transport-not-approved")
+release_transport_frozen.Failure: transport-not-approved
