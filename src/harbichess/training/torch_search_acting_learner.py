@@ -13,9 +13,8 @@ from pathlib import Path
 
 import numpy as np
 import torch
-
 from harbichess.backends.torch_network import load_weights, sha256
-from harbichess.chess.encoding import ENCODER_CHANNELS, BoardEncoder
+from harbichess.chess.encoding import ENCODER_CHANNELS
 from harbichess.selfplay.online_actor import OnlineActorConfig, OnlineActors
 from harbichess.selfplay.online_epoch import (
     serialize_policy_epoch,
@@ -25,6 +24,7 @@ from harbichess.training.ownsearch_targets import (
     OwnSearchConfig,
 )
 from harbichess.training.search_acting_epoch import collect_search_acting_epoch
+from harbichess.training.torch_array_encoder import TorchArrayBoardEncoder
 from harbichess.training.torch_fullgame_ppo import (
     FullGamePPOTrainConfig,
     make_torch_epoch_inference,
@@ -150,7 +150,7 @@ class TorchSearchActingLearner:
             rng=random.Random(config.seed),
         )
         self.actors.rules.board_cache_size = OWNSEARCH_BOARD_CACHE_SIZE
-        self.encoder = BoardEncoder(self.actors.rules)
+        self.encoder = TorchArrayBoardEncoder(self.actors.rules)
         self.sampler_seed_rng = random.Random(config.seed ^ 0x51A9)
         self.schedule_rng = random.Random(config.seed ^ 0x831A)
         self.search_rngs = [
