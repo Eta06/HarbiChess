@@ -1,0 +1,15 @@
+{
+  "GPU_used": false,
+  "candidate_path": "/dev/shm/harbichess-classical-fit-recovery-v2-20261005/20262906/fit/candidate.json",
+  "candidate_sha256": "c5cc3b003d1eb8d2b9bc8e0e3102f0321d61ebb9296eae49a38770d2594f963d",
+  "dataset_sha256": "98570d7a83f53365a617c40a9a9007d767243117145bbb3111903e40b553f1a0",
+  "final_native_path": "/dev/shm/harbichess-classical-fit-recovery-v2-20261005/20262906/fit/step-00000183.json",
+  "final_native_sha256": "c4a39b8e6388b5812af53f3e997f86102454de447f7d7d1ae663d4c602c46927",
+  "finished_observed_epoch": 1791229342.9300654,
+  "initial_native_path": "/dev/shm/harbichess-classical-fit-recovery-v2-20261005/20262906/fit/step-00000000.json",
+  "initial_native_sha256": "26728dad3f6a16e4818d8a1e44aa3a1ed556f9d1a3600dd4fa3c249a006b295d",
+  "seed": 20262906,
+  "status": "PASS-fixed-final-fit-and-two-fresh-native-loads-not-strength",
+  "teacher_labels": false,
+  "updates": 183
+}
