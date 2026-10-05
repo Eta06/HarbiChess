@@ -1,0 +1,243 @@
+{
+  "activation": {
+    "owner": {
+      "argv": [
+        "/usr/bin/python3",
+        "/content/harbichess-fullgame-method2-inputs/method5-failed4-scheduling-v2/post5_scheduling_v2.py",
+        "--supplement",
+        "/content/harbichess-fullgame-method2-inputs/method5-failed4-scheduling-v2/supplement.json",
+        "--supplement-sha256",
+        "82a704fffe5c6e1b0aaa79fae0deb4e1a12d27793877f2d0dd00ea2eee685615",
+        "--execute"
+      ],
+      "epoch": 1791161713.6843348,
+      "pid": 104294,
+      "startticks": 2286865,
+      "status": "supplemental5-control-launched",
+      "stop4_result_sha256": "aa6fe404c52f9a6d57c4a0951fa0b2f8d450f4877c0b24f77df6398b3d25361c",
+      "supplement_sha256": "82a704fffe5c6e1b0aaa79fae0deb4e1a12d27793877f2d0dd00ea2eee685615"
+    },
+    "plan": {
+      "argv": [
+        "/usr/bin/python3",
+        "/content/harbichess-fullgame-method2-inputs/method5-failed4-scheduling-v2/post5_scheduling_v2.py",
+        "--supplement",
+        "/content/harbichess-fullgame-method2-inputs/method5-failed4-scheduling-v2/supplement.json",
+        "--supplement-sha256",
+        "82a704fffe5c6e1b0aaa79fae0deb4e1a12d27793877f2d0dd00ea2eee685615"
+      ],
+      "observed_epoch": 1791161713.681758,
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "{\"status\": \"validated-control-plan-only-no-jobs\", \"original_qualification_config_sha256\": \"5fa34fdc69a49b78fecae17ee9ade86da994c548bbda81473d86c454c6cc733a\"}\n"
+    },
+    "stop4": {
+      "SIGKILL_fallback_targets": [],
+      "all_registered_and_tracked4_terminated": true,
+      "durable_prefix_inventory": {
+        "20261425": {
+          "last_native_files": {
+            "actor.json": {
+              "bytes": 1715538,
+              "sha256": "bda161fbdf5e81218a6c721cbc4a0aac137a412bdcb88684731890e8f287292c"
+            },
+            "base.safetensors": {
+              "bytes": 294764,
+              "sha256": "ee907dcca32c0fd3d8e032d66ace4c5496378a39cc0599d08b306dda3bae03eb"
+            },
+            "behavior.safetensors": {
+              "bytes": 294764,
+              "sha256": "3a0b146b51fe0ad27204cb89176c63ae7104e46cf0f01f002c79182fb5b03ca3"
+            },
+            "checkpoint.json": {
+              "bytes": 1896704,
+              "sha256": "70981cdda4e222604493056e1f1c8ff2565ad43895f8832a72aca748398b8c99"
+            },
+            "last-frozen-epoch.json.gz": {
+              "bytes": 34377062,
+              "sha256": "19bd4974f9ac90bf3d1952761d765cbb32ec83788aab7d538b68ae34a11cbb51"
+            },
+            "model.safetensors": {
+              "bytes": 294764,
+              "sha256": "aebc159bb58c76a182c497d86694d36456f44da729d2de69faa736560c82dd21"
+            },
+            "training.pt": {
+              "bytes": 2593128,
+              "sha256": "54d06a406504c9d5af420a75f54cff149d705b1dda5a2b9fc02bd8f7bb218b29"
+            }
+          },
+          "native_epochs": [
+            "epoch-00000000",
+            "epoch-00000001",
+            "epoch-00000002",
+            "epoch-00000003",
+            "epoch-00000004",
+            "epoch-00000005",
+            "epoch-00000006",
+            "epoch-00000007",
+            "epoch-00000008",
+            "epoch-00000009",
+            "epoch-00000010"
+          ]
+        },
+        "20261426": {
+          "last_native_files": {
+            "actor.json": {
+              "bytes": 1725364,
+              "sha256": "02c8afd4805497cb832a91e8474c15f3ad94aafba66b03d63f5d7e9e37350ec7"
+            },
+            "base.safetensors": {
+              "bytes": 294764,
+              "sha256": "9b479f518482090b9e2684c4b62f80d459e2d33d1908ce6d613b85ef0a1f3718"
+            },
+            "behavior.safetensors": {
+              "bytes": 294764,
+              "sha256": "d9663820715c2a25a4156c666f2141e0f88104589eeab7cad5106100e02d4244"
+            },
+            "checkpoint.json": {
+              "bytes": 1907618,
+              "sha256": "c3c9f72b9dcdc8f4524cc49c243dbe565810f69892edcf5295fa944167037dc4"
+            },
+            "last-frozen-epoch.json.gz": {
+              "bytes": 34325847,
+              "sha256": "8eb1a621a00d4f460e8c17603f3ed40dc1bb1bd24f93a8b1835a94168aecd661"
+            },
+            "model.safetensors": {
+              "bytes": 294764,
+              "sha256": "bfc38a6b8f9244557d9bb163fac6359e1875b3035cba664f485fcedd8e330980"
+            },
+            "training.pt": {
+              "bytes": 2599592,
+              "sha256": "f21141ef07845d82a0b1f66724f3cae143003fec32d138e5da2aef5378fce43a"
+            }
+          },
+          "native_epochs": [
+            "epoch-00000000",
+            "epoch-00000001",
+            "epoch-00000002",
+            "epoch-00000003",
+            "epoch-00000004",
+            "epoch-00000005",
+            "epoch-00000006",
+            "epoch-00000007",
+            "epoch-00000008",
+            "epoch-00000009"
+          ]
+        }
+      },
+      "finished_epoch": 1791161713.593665,
+      "no_checkpoint_selected_or_promoted": true,
+      "observed_epoch": 1791161712.721105,
+      "previous_post_root_preserved": "/content/harbichess-runs/search-acting-method5-posttraining",
+      "registered_targets": [
+        {
+          "cmd": "/usr/bin/python3 /content/harbichess-fullgame-method2-inputs/formal45-production/helpers4/ownv1_training_controller.py --repo /content/HarbiChess-ownsearch-cache-a278bba --python /usr/bin/python3 --registration /content/harbichess-fullgame-method2-inputs/formal45-production/registration-4/registration.json --registration-sha256 df8f7459aa36fcea89fadd8685ecfed55eb361a3eb7333977440e45af4c5ae3e --input-manifest /content/harbichess-fullgame-method2-inputs/formal45-production/registration-4/three-input-manifest.json --root /content/harbichess-runs/ownsearch-method4-seed-20261425 --seed 20261425 --started-epoch 1791156456.0081534 --deadline-epoch 1791167256.0081534 ",
+          "pid": 82368,
+          "startticks": 1842104
+        },
+        {
+          "cmd": "/usr/bin/python3 /content/harbichess-fullgame-method2-inputs/formal45-production/helpers4/ownv1_training_controller.py --repo /content/HarbiChess-ownsearch-cache-a278bba --python /usr/bin/python3 --registration /content/harbichess-fullgame-method2-inputs/formal45-production/registration-4/registration.json --registration-sha256 df8f7459aa36fcea89fadd8685ecfed55eb361a3eb7333977440e45af4c5ae3e --input-manifest /content/harbichess-fullgame-method2-inputs/formal45-production/registration-4/three-input-manifest.json --root /content/harbichess-runs/ownsearch-method4-seed-20261426 --seed 20261426 --started-epoch 1791156456.0081534 --deadline-epoch 1791167256.0081534 ",
+          "pid": 82371,
+          "startticks": 1842105
+        },
+        {
+          "cmd": "/usr/bin/python3 /content/harbichess-fullgame-method2-inputs/formal45-production/helpers4/ownv1_audit_controller.py --manifest /content/harbichess-fullgame-method2-inputs/formal45-recovery-control-v2/owners-4/audit-manifest-20261425.json --manifest-sha256 69a8f17d8d1c4211433bbdf370b924f0952f3d2160713745321799d95a43b46d --repo /content/HarbiChess-ownsearch-cache-a278bba --python /usr/bin/python3 --audit-script /content/harbichess-fullgame-method2-inputs/formal45-production/helpers4/ownv1_full_audit.py --audit-script-sha256 e0ae056937a39faf04c05958725c80240c9fabdfcfdebe10dedc4221aa5bf2a7 --root /content/harbichess-runs/ownsearch-method4-audit-seed-20261425 ",
+          "pid": 82369,
+          "startticks": 1842105
+        },
+        {
+          "cmd": "/usr/bin/python3 /content/harbichess-fullgame-method2-inputs/formal45-production/helpers4/ownv1_audit_controller.py --manifest /content/harbichess-fullgame-method2-inputs/formal45-recovery-control-v2/owners-4/audit-manifest-20261426.json --manifest-sha256 fd21cb49fb32abd67b07adb82caf8f17c920540551eaa8015b2d6f2a530bee9d --repo /content/HarbiChess-ownsearch-cache-a278bba --python /usr/bin/python3 --audit-script /content/harbichess-fullgame-method2-inputs/formal45-production/helpers4/ownv1_full_audit.py --audit-script-sha256 e0ae056937a39faf04c05958725c80240c9fabdfcfdebe10dedc4221aa5bf2a7 --root /content/harbichess-runs/ownsearch-method4-audit-seed-20261426 ",
+          "pid": 82372,
+          "startticks": 1842106
+        },
+        {
+          "cmd": "/usr/bin/python3 /content/harbichess-fullgame-method2-inputs/formal45-production/helpers4/ownv1_posttraining.py --config /content/harbichess-fullgame-method2-inputs/formal45-recovery-control-v2/owners-4/posttraining-config.json --config-sha256 51f3c8a0167e4897972c297f78db84e22cacddc6d1df4ddab6cecb898019851b --execute ",
+          "pid": 82374,
+          "startticks": 1842107
+        },
+        {
+          "cmd": "/usr/bin/python3 /content/harbichess-fullgame-method2-inputs/formal45-production/helpers4/ownv1_full_audit.py --manifest /content/harbichess-fullgame-method2-inputs/formal45-recovery-control-v2/owners-4/audit-manifest-20261426.json --run /content/harbichess-runs/ownsearch-method4-seed-20261426/run --output /content/harbichess-runs/ownsearch-method4-audit-seed-20261426/full-audit-result.json --deadline-epoch 1791169056.0081534 ",
+          "pid": 82401,
+          "startticks": 1842118
+        },
+        {
+          "cmd": "/usr/bin/python3 -m harbichess.training.torch_ownsearch_run /content/harbichess-runs/ownsearch-method4-seed-20261426/run --weights /content/harbichess-inputs/initial-e8.safetensors --book /content/harbichess-inputs/book.json --config /content/harbichess-fullgame-method2-inputs/own45-formal-deadline-v2-20261004/method4/frozen/config-20261426.json --protocol /content/harbichess-fullgame-method2-inputs/formal45-production/registration-4/registration.json --source-commit a278bba67bce962cb9294f0d24040e02e9acf1f4 --max-epochs 24 --checkpoint-interval 1 --deadline-epoch 1791167256.0081534 --memory-max-bytes 68719476736 --disk-min-free-bytes 8589934592 --resume /content/harbichess-runs/ownsearch-method4-seed-20261426/run/checkpoints/epoch-00000001 ",
+          "pid": 84069,
+          "startticks": 1880448
+        },
+        {
+          "cmd": "/usr/bin/python3 /content/harbichess-fullgame-method2-inputs/formal45-production/helpers4/ownv1_full_audit.py --manifest /content/harbichess-fullgame-method2-inputs/formal45-recovery-control-v2/owners-4/audit-manifest-20261425.json --run /content/harbichess-runs/ownsearch-method4-seed-20261425/run --output /content/harbichess-runs/ownsearch-method4-audit-seed-20261425/full-audit-result.json --deadline-epoch 1791169056.0081534 ",
+          "pid": 82388,
+          "startticks": 1842115
+        },
+        {
+          "cmd": "/usr/bin/python3 -m harbichess.training.torch_ownsearch_run /content/harbichess-runs/ownsearch-method4-seed-20261425/run --weights /content/harbichess-inputs/initial-e8.safetensors --book /content/harbichess-inputs/book.json --config /content/harbichess-fullgame-method2-inputs/own45-formal-deadline-v2-20261004/method4/frozen/config-20261425.json --protocol /content/harbichess-fullgame-method2-inputs/formal45-production/registration-4/registration.json --source-commit a278bba67bce962cb9294f0d24040e02e9acf1f4 --max-epochs 24 --checkpoint-interval 1 --deadline-epoch 1791167256.0081534 --memory-max-bytes 68719476736 --disk-min-free-bytes 8589934592 --resume /content/harbichess-runs/ownsearch-method4-seed-20261425/run/checkpoints/epoch-00000001 ",
+          "pid": 84086,
+          "startticks": 1880754
+        }
+      ],
+      "schema": "own4-permanently-ineligible-compute-stop-v1",
+      "status": "completed-owned4-only-compute-stop-no-promotion",
+      "stopped_original5_waiter": {
+        "pid": 82381,
+        "startticks": 1842111
+      },
+      "terminal_receipt_sha256": "dcfac3d862c5b574be7fba30bb63a16e1802fcbfde28de0baa2881a39addc3ac"
+    }
+  },
+  "formal4": "INCOMPLETE-original-baseline-deadline-expired; subsequent compute stopped after immutable durable-prefix inventory; no earlier checkpoint selected/promoted",
+  "formal5": "Both original baseline96games completed within original3600. Finalstrength scores remain unopened. OriginalE8/train6000/audit9000 and originalfinalarms/gates unchanged, originalroot/ownerlogs preserved; replacementroot only control dependency and versionedanalysis route.",
+  "registration_commits": [
+    {
+      "commit": "077ea6d496101be5dd4f39a8901e3a2540e317e6",
+      "file": "experiments/ufuk/method5-failed4-scheduling-v2/new-posttraining-config.json",
+      "sha256": "7c625247b137f54b1c200b35b79b39132a364c33737fb17752f744f032565331"
+    },
+    {
+      "commit": "84b726a77171e5d5eabcfd5abd2fa785776d19e4",
+      "file": "experiments/ufuk/method5-failed4-scheduling-v2/failed4-terminal.json",
+      "sha256": "dcfac3d862c5b574be7fba30bb63a16e1802fcbfde28de0baa2881a39addc3ac"
+    },
+    {
+      "commit": "a119eb04e2bc4ab00da84257d5ab409189fba786",
+      "file": "experiments/ufuk/method5-failed4-scheduling-v2/supplement.json",
+      "sha256": "82a704fffe5c6e1b0aaa79fae0deb4e1a12d27793877f2d0dd00ea2eee685615"
+    }
+  ],
+  "runtime_commits": [
+    {
+      "commit": "289e60163f4bf67ccab0d19ba844a4f01f33b527",
+      "file": "experiments/ufuk/baseline-binding-repair-v1/failed4_dependency.py",
+      "operation": "remove redundant root-created copy"
+    },
+    {
+      "commit": "235290e0546f290f898edbd2396703a554f6b180",
+      "file": "experiments/ufuk/baseline-binding-repair-v1/post5_scheduling_v2.py",
+      "operation": "remove redundant root-created copy"
+    },
+    {
+      "commit": "50f1e4ee91120a71512b23880ef7d329f3bca4c8",
+      "file": "experiments/ufuk/baseline-binding-repair-v1/test_control.py",
+      "operation": "remove redundant root-created copy"
+    },
+    {
+      "commit": "0e03488acd4886e9da73a782f9ffface4283d6c7",
+      "file": "experiments/ufuk/method5-failed4-scheduling-v2/failed4_dependency.py",
+      "sha256": "621d65eba2f3cea5bc0c4a382821d3137a6d10935faf97a56798d84ed7fca547"
+    },
+    {
+      "commit": "8a1575b0aa101b3625eb9559f1a5565c6caad0be",
+      "file": "experiments/ufuk/method5-failed4-scheduling-v2/post5_scheduling_v2.py",
+      "sha256": "7278e6531a762de70e6a639d2286f90f8bfe6211f2e2e6f6e74bc5c020a2cef9"
+    },
+    {
+      "commit": "584f5d0c0935834fcfec6f90e1ad3dda850cdd14",
+      "file": "experiments/ufuk/method5-failed4-scheduling-v2/test_control.py",
+      "sha256": "fbade3910c9d6a103f60889f283efc2e573207cd9464296bbcfecd8636c134e4"
+    }
+  ],
+  "schema": "ufuk-method4-incomplete-method5-scheduling-activation-v1",
+  "status": "control-recovery-PASS-not-strength",
+  "supplement_remote_path": "/content/harbichess-fullgame-method2-inputs/method5-failed4-scheduling-v2/supplement.json",
+  "tests": "10 pure control tests passed0skip0.04s and projectRuffPASS; real staged planONLYPASS then authorizedownerlaunched; no threshold/source/books/games/seed/clock changes"
+}
