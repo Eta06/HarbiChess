@@ -1,0 +1,32 @@
+{
+  "command": [
+    "/workspace/HarbiChess/.venv/bin/python",
+    "/workspace/HarbiChess/experiments/ufuk/cpu-fresh-selfplay-v2/produce_v2.py",
+    "--config",
+    "/workspace/work/harbichess/cpu-fresh-selfplay-v2-actual/registration/qualification-config.json",
+    "--config-sha256",
+    "3707beb618fbc183538f42fa1ac2d682545b68c354eb5663cc2dc25a933bd6ac",
+    "--source-repo",
+    "/workspace/work/harbichess/cpu-additive-source-6fcc8b4",
+    "--model",
+    "/workspace/work/harbichess/a100/restoration/local-rehearsal-content/harbichess-inputs/initial-e8.safetensors",
+    "--anchor-model",
+    "/workspace/work/harbichess/a100/restoration/local-rehearsal-content/harbichess-inputs/initial-e8.safetensors",
+    "--search-helper",
+    "/workspace/HarbiChess/experiments/ufuk/cpu-budget-search-v1/search.py",
+    "--value-helper",
+    "/workspace/HarbiChess/experiments/ufuk/cpu-residual-value-v1/arena/value.py",
+    "--anchor-helper",
+    "/workspace/HarbiChess/experiments/ufuk/cpu-fresh-selfplay-v2/anchor_value.py",
+    "--output",
+    "/dev/shm/harbichess-fresh-actor-qualification-20261005/whole9.json.gz",
+    "--target-actions",
+    "9",
+    "--original-deadline",
+    "1791221595.4006422"
+  ],
+  "original_deadline_epoch": 1791221595.4006422,
+  "pid": 996747,
+  "started_epoch": 1791221065.56478,
+  "startticks": 18546496
+}
