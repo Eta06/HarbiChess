@@ -8,6 +8,7 @@ import random
 from dataclasses import replace
 
 import chess
+
 from harbichess.chess.actions import legal_action_indices, move_to_action
 from harbichess.search.full_gumbel import FullGumbelConfig
 from harbichess.search.ownsearch_wavefront import (
@@ -23,7 +24,7 @@ from harbichess.selfplay.online_epoch import (
 )
 from harbichess.training.ownsearch_targets import SearchSchedule, validate_search_ledger
 
-LEDGER_SCHEMA = "pre-action-masked-search-behavior-v2"
+LEDGER_SCHEMA = "pre-action-masked-search-behavior-v3"
 COLLECTION_SCHEMA = "full-history-search-acting-epoch-v2"
 
 
@@ -186,6 +187,7 @@ def collect_search_acting_epoch(
                             for m in result.moves
                         ],
                         simulations=result.simulations,
+                        certified_mates=[m.uci for m in result.certified_mates],
                         root_ply=states[slot].ply,
                         mover=actors.rules.view(states[slot]).side_to_move.value,
                     )
@@ -248,7 +250,7 @@ def collect_search_acting_epoch(
         neural_batch_sizes=evaluator.batch_sizes,
         neural_positions=sum(evaluator.batch_sizes),
         behavior="raw-T1-except-preselected-search-policy-T1;no-PPO",
-        targets="all-legal-Gumbel-completed-Q-policy-detached-supervision",
+        targets="all-legal-Gumbel-plus-exact-one-ply-mate-solver-policy",
         groups=groups,
         schedule_rng_before=schedule_before,
         schedule_rng_after=schedule_rng.getstate(),
@@ -267,8 +269,14 @@ def validate_search_acting(epoch, ledger, config, *, actors):
         or ledger["behavior"] != "raw-T1-except-preselected-search-policy-T1;no-PPO"
     ):
         raise ValueError("search acting ledger semantics differ")
-    legacy = dict(ledger, schema="ownsearch-random-block-targets-v1")
-    validate_search_ledger(epoch, legacy, config, rules=actors.rules)
+    legacy = dict(ledger, schema="ownsearch-random-block-targets-v2")
+    validate_search_ledger(
+        epoch,
+        legacy,
+        config,
+        rules=actors.rules,
+        claim_draw=actors.config.claim_draw,
+    )
     selected = {r["collection_index"]: r for r in ledger["roots"]}
     replay = OnlineActors(
         actors.openings,
