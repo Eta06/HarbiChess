@@ -96,9 +96,15 @@ def main():
     try:
         previous = json.loads((args.output / "pipeline-contract.json").read_text())
         assert all(owned.sha(Path(p)) == h for p, h in previous["inputs"].items())
-        assert json.loads((args.output / "pipeline-result.json").read_text())["status"] == "failed-preserved"
+        assert (
+            json.loads((args.output / "pipeline-result.json").read_text())["status"]
+            == "failed-preserved"
+        )
         fits = args.output / "fits"
-        assert json.loads((fits / "cohort-result.json").read_text())["status"] == "completed-runs-not-strength"
+        assert (
+            json.loads((fits / "cohort-result.json").read_text())["status"]
+            == "completed-runs-not-strength"
+        )
 
         def audit(tag):
             command = [
