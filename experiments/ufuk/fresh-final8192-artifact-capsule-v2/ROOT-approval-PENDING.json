@@ -1,0 +1,39 @@
+{
+  "manifest_sha256": "57a288d5fd013dd0c38980ca3ec8c0b554a38bc3431ec9188ba3a8606b2e7dd4",
+  "producer_bindings": [
+    {
+      "actions": 8192,
+      "actor_config_sha256": "b73106e21c6d8433c2132b024a2caae7527ec84541898d4f9c3db8202fccc3b5",
+      "anchor_helper_sha256": "93f243b9c20f9d9dea3314e2db1cf22e6ccd130801374a23c47e987900afa1a2",
+      "anchor_model_sha256": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03",
+      "embedded_config_sha256": "562c8e998ba99c3eec4becfec3c79964ae01a1e6c3f628b95015c4c76eec5805",
+      "journal_schema": "fresh-qsearch-selfplay-journal-v2",
+      "model_sha256": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03",
+      "original_deadline_epoch": 1791235580.0397933,
+      "phase": "epoch-action-ceiling",
+      "seed": 20262805,
+      "source_commit": "6fcc8b476d25495d1c9c413e55b2c7ba4794013e"
+    },
+    {
+      "actions": 8192,
+      "actor_config_sha256": "a3b5ac9f3933afdce858e60c0e383c9611dabd2be79e7dff128c490d6750591d",
+      "anchor_helper_sha256": "93f243b9c20f9d9dea3314e2db1cf22e6ccd130801374a23c47e987900afa1a2",
+      "anchor_model_sha256": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03",
+      "embedded_config_sha256": "d6a7c343ab28014706cdab976c6040df6c5e42756d4eebd4641e38398204c695",
+      "journal_schema": "fresh-qsearch-selfplay-journal-v2",
+      "model_sha256": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03",
+      "original_deadline_epoch": 1791235580.0397933,
+      "phase": "epoch-action-ceiling",
+      "seed": 20262806,
+      "source_commit": "6fcc8b476d25495d1c9c413e55b2c7ba4794013e"
+    }
+  ],
+  "schema": "fresh8192-root-manifest-approval-v2",
+  "source_seals": {
+    ".github/workflows/fresh-final8192-artifact-capsule-v2.yml": "488ed15660e7d09b5c3b9f225ac9ef585ce375f80cbd32a6a37c6d1a6d776ff5",
+    "experiments/ufuk/fresh-final8192-artifact-capsule-v2/artifact_capsule.py": "8f502fd0ff13b2fe682817b8ef4c59d72ccd1c80f5bb84a65dd25bed0caedffc",
+    "experiments/ufuk/fresh-final8192-artifact-capsule-v2/native_delta_codec.py": "878868940b5bae15c182dce55215320b5f0ba3692b9c5eac26988204832a31d6",
+    "experiments/ufuk/fresh-final8192-artifact-capsule-v2/release_transport_frozen.py": "035821c943f0840fc02f0a2019516095bf9e43078a6843b745033456b20c7f7e"
+  },
+  "status": "ROOT-reviewed-prospectively-approved"
+}
