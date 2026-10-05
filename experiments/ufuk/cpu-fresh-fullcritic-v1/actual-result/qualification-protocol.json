@@ -1,0 +1,124 @@
+{
+  "schema": "fresh-qsearch-full-critic-own-search-protocol-v1",
+  "status": "ROOT-REGISTERED-before-actual-CLI-proof",
+  "source_commit": "6fcc8b476d25495d1c9c413e55b2c7ba4794013e",
+  "core_sha256": "ba310f34b7a9f098f3dea8db51761ea06f0f9911e993d655b2c436ce7b71ad9e",
+  "consistency_helper_sha256": "62d9ce283d24a2026f817cb618cac2e5c372922d3b6c453f2d7903b41652a3d0",
+  "common_data_trainer_sha256": "49445cbd5059770b3ccd433be9f21a4773786885a85d2d586005e10e2359a2c6",
+  "journal_helper_sha256": "afb3ffa3c196b9da2ceb1b8000c67ae0c2781e7ffd65a950b59bed5b674c6079",
+  "feature_helper_sha256": "2fe5556e7564b2a91fc948fcd77a9214289933b7ae44a7a47bec5f00ea00c645",
+  "torch_array_encoder_sha256": "66bc3f9a2b1858b92363b31af37e9f12a42d2174c108c44769fc6cd37ac96ab3",
+  "initial_e8_sha256": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03",
+  "seeds": [
+    20262805,
+    20262806
+  ],
+  "seed_pairing": {
+    "20262805": {
+      "journal_sha256": "8109c074a9e084f33ec8d9a6c4b062eb3c57e8b6e8d897e03bd39dc8261dea8f",
+      "actor_config_sha256": "b73106e21c6d8433c2132b024a2caae7527ec84541898d4f9c3db8202fccc3b5",
+      "initial_e8_sha256": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03",
+      "actor_deadline_epoch": 1791235580.0397933,
+      "original_deadline_epoch": 1791225526.6862378
+    },
+    "20262806": {
+      "journal_sha256": "df515e393e97065cd4828ceacccc7628ea04091643c16296009f48f1b9e01645",
+      "actor_config_sha256": "a3b5ac9f3933afdce858e60c0e383c9611dabd2be79e7dff128c490d6750591d",
+      "initial_e8_sha256": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03",
+      "actor_deadline_epoch": 1791235580.0397933,
+      "original_deadline_epoch": 1791225526.6862378
+    }
+  },
+  "data": {
+    "schema": "fresh-v2-own-terminal-and-own-search-score",
+    "common_prepared_rows": "exact 12-field prepare_fresh output from the frozen MAIN CPU fresh-learning helper",
+    "trajectory_groups_split_protected_positions": "reused unchanged from the frozen common-data receipt",
+    "search_target": "recorded selected-best-move root mover score clamped to [-1, 1]",
+    "labels": "only completed own terminal WDL from mover perspective",
+    "unknown_caps_or_tails": "excluded; never draw-imputed",
+    "teacher_labels": false
+  },
+  "model": {
+    "architecture": "exact frozen original pairwise E8 specification",
+    "initialization": "exact E8 full model, weights-only transfer, fresh AdamW",
+    "trainable_prefixes": [
+      "value_conv.",
+      "value_hidden.",
+      "value_output.",
+      "invariant_value_linear.",
+      "value_tower_",
+      "global_value_"
+    ],
+    "shared_stem_blocks_policy_heads": "bitwise frozen",
+    "sparse_value_head": false,
+    "active_material_value_linear": false,
+    "expected_default_pairwise_value_scalars": "actual E8 count is 31,290 (this is not a generic default-spec count)",
+    "actual_trainable_names_and_count": "verified against exact mirrored E8; 31,290 names digest above"
+  },
+  "objective": {
+    "schema": "fresh-full-value-own-mc-search-mixed-objective-v1",
+    "own_terminal_ce_weight": 0.5,
+    "own_root_search_score_mse_weight": 0.5,
+    "fixed_e8_anchor_kl_weight": 1.0,
+    "architecture_specific_sparse_penalty": 0.0,
+    "adamw_weight_decay": 0.0,
+    "gradient_clip_norm": 5.0,
+    "regularizer_caveat": "not a pure capacity-only comparison with sparse SHRINK objective"
+  },
+  "optimizer": {
+    "name": "AdamW",
+    "learning_rate": 2e-05,
+    "weight_decay": 0.0
+  },
+  "sampler": {
+    "batch_size": 256,
+    "presentation_slots_per_train_row": 4,
+    "updates": "min(1024, floor(4 * eligible_train_rows / 256))",
+    "policy": "reuse exact game/trajectory-uniform then position-uniform common sampler"
+  },
+  "native": {
+    "schema": "fresh-qsearch-full-critic-own-search-native-v1",
+    "resume": "full offline resume requires exact E8, dataset, target ledger, model spec, optimizer and all RNG states",
+    "weights_only_from_e8": true,
+    "imports_old_optimizer": false,
+    "max_each_native_or_candidate_artifact_bytes": 2097152,
+    "scratch_proposal_tree_max_bytes": 524288
+  },
+  "runtime": {
+    "device": "cpu",
+    "threads": 1,
+    "disk_floor_bytes": 268435456,
+    "cgroup_limit_bytes": 16106127360,
+    "per_seed_work_stage_bytes": 33554432,
+    "maximum_dense_dataset_working_bytes": 536870912
+  },
+  "validation": "reports only; no update selection; formal virgin-book strength gate unchanged",
+  "strength_claim": false,
+  "trainer_sha256": "4f9f631bfb2b973da76ba18701bfaa60682fd53eece5824abb450999cc09cc96",
+  "native_sha256": "8f59bdfe9eef16f41e03234145134018d9c2d7df7aa0e8a3597a116e2e4fd974",
+  "anchor_helper_sha256": "93f243b9c20f9d9dea3314e2db1cf22e6ccd130801374a23c47e987900afa1a2",
+  "protected_position_keys": [
+    "r1bqkbnr/pppp1ppp/2n5/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R w KQkq -",
+    "rnbqkb1r/ppp1pppp/5n2/3p4/8/5NP1/PPPPPP1P/RNBQKB1R w KQkq -",
+    "rnbqkb1r/pppp1ppp/5n2/4p3/2P5/2N5/PP1PPPPP/R1BQKBNR w KQkq -",
+    "rnbqkb1r/pppppp1p/5np1/8/2PP4/8/PP2PPPP/RNBQKBNR w KQkq -",
+    "rnbqkbnr/pp2pppp/2p5/3p4/3PP3/8/PPP2PPP/RNBQKBNR w KQkq -",
+    "rnbqkbnr/pp2pppp/3p4/2p5/4P3/5N2/PPPP1PPP/RNBQKB1R w KQkq -",
+    "rnbqkbnr/ppp2ppp/4p3/3p4/2PP4/8/PP2PPPP/RNBQKBNR w KQkq -",
+    "rnbqkbnr/ppp2ppp/4p3/3p4/3PP3/8/PPP2PPP/RNBQKBNR w KQkq -"
+  ],
+  "protected_position_keys_sha256": "f14ebb7ac07e2ba7e57efeb7a90a846764a9cc8da26e2b7ee2883419b50d5806",
+  "protected_position_book_sha256": "9c36b5972c9676d19c358ca7e598b9f7f5d110b1947bed838cd660f644d845da",
+  "trainable_parameter_count": 31290,
+  "trainable_names_sha256": "e3f59fa2c46ae80bb8196b75650ad1f45e3d206a57bc713d1d725728c74a7418",
+  "qualification": {
+    "clock": "root-frozen new training/qualification deadline; per-seed actor_deadline_epoch is separately bound and must match immutable actor config",
+    "whole_vs_resume": "8 updates whole versus 4 then fresh-process resume to 8",
+    "strict_loads": "checkpoint steps 0/4/8 from whole and resumed branches",
+    "qualification_is_not_fit": true,
+    "qualification_is_not_strength": true
+  },
+  "qualifier_sha256": "261ce9db712566b82612289d1e649b36af6277fef621f4c7db522e9735248b96",
+  "first_epoch": 1791224926.6862378,
+  "root_proof_scope": "Fixed firsteligible2048 only, 8/4/fresh8/all6strictloads. Separate NEWshared600 SC/FULLproofclock, no actorclockrewrite. Mainfitfixedfinal8192 only freshinit, no bestselection."
+}
