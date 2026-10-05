@@ -1,0 +1,25 @@
+{
+  "command": [
+    "cc",
+    "-O3",
+    "-fno-fast-math",
+    "-ffp-contract=off",
+    "-fPIC",
+    "-shared",
+    "-std=c11",
+    "-I/opt/codex/runtimes/codex-primary-runtime/dependencies/python/include/python3.12",
+    "/workspace/work/harbichess/cpu-own-q-compiled18-v2-proposal/forward18_v2.c",
+    "-o",
+    "/workspace/work/harbichess/cpu-own-q-compiled18-v2-proposal/_ownq_forward18_v2.cpython-312-x86_64-linux-gnu.so",
+    "-lm"
+  ],
+  "compiler": "cc (Debian 14.2.0-19) 14.2.0",
+  "python_version": "3.12",
+  "header_sha256": "729ef157f6026e6e1b3104593f87dddc597c3b83b60c7c2965878c62a56c6f7d",
+  "source_sha256": "80c435655a04f1ff075990073c01d2ac89647c64050a16304b9c86d0576088ea",
+  "binary_sha256": "8df277e898ed50f865d087f3416d523f05e60b9afafcee2cd341f350eaa70875",
+  "finished_epoch": 1791240073.526669,
+  "change": "Python builtin sum in wrapper exactly preserves original 3.12 compensated prior; C only residual/tanh; original660 layout unchanged; new inference implementation only; native training contract unchanged",
+  "original_v1_source_sha256": "4e0c1b670563ca8835a169804f5c9603e11d3de6feef294459839b15c9a0082e",
+  "original_v1_binary_sha256": "cb6d75f68498c2d98b46c4e9ae6a20ead9412dd9a7236c9eb3dc244f47edc5ae"
+}
