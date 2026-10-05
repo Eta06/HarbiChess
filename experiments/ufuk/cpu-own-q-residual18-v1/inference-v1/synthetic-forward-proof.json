@@ -1,0 +1,8 @@
+{
+  "status": "PASS-128-nonzero-tolerance-and-128-zero-exact-synthetic-forward",
+  "max_abs_error": 5.551115123125783e-17,
+  "tolerance": 1e-12,
+  "compile_fastmath": false,
+  "compile_FP_contract": false,
+  "finished_epoch": 1791238826.6153796
+}
