@@ -1,0 +1,37 @@
+{
+  "status": "UNREGISTERED-STATIC_BINDINGS_COMPLETE-CLOCKS_AND_CORES_ROOT_ONLY",
+  "seeds": [
+    20262905,
+    20262906
+  ],
+  "max_qualified_actions": 9,
+  "actual_qualification_requires": [
+    "eachsame-seedwhole9",
+    "eachsame-seedpause4",
+    "eachfreshprocessresume9",
+    "3journalsbyte/rules/RNG/prioraudit",
+    "original600includesaudit"
+  ],
+  "fixed_collection_actions": 16384,
+  "only_config_differences": [
+    "max_actions",
+    "epoch_id",
+    "original_first_epoch",
+    "original_deadline_epoch"
+  ],
+  "rootmustfill_before_any_qualification": [
+    "actualobservedfirst_once",
+    "end=first+600<=hard08",
+    "immutableconfigpublication+SHA",
+    "selectedallowedCPUcore"
+  ],
+  "rootmustfill_before_collection": [
+    "actualobservedcollectionfirst_once",
+    "prospectivefixed2400or7200ceil(rootdecision)",
+    "completeconfigSHA",
+    "all4actualliteraltransferdeltas",
+    "actualPASSqualificationfileSHA"
+  ],
+  "no_GPU": true,
+  "no_actual_production_qualification_performed": true
+}
