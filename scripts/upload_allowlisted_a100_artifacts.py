@@ -19,6 +19,7 @@ REPOSITORY = "Eta06/HarbiChess"
 RELEASE_ID = 401698693
 RELEASE_TAG = "port-linux-preflight-20261002"
 MANIFEST = Path("docs/runs/UFUK-A100-release-transport-manifest-20261004.json")
+FORMAL45_MANIFEST = Path("docs/runs/UFUK-A100-formal45-release-transport-manifest-v2-20261005.json")
 API_ROOT = "https://api.github.com"
 UPLOAD_HOST = "uploads.github.com"
 USER_AGENT = "HarbiChess-allowlisted-release-transfer/1.0"
@@ -218,6 +219,15 @@ def _next_asset_page(link_header: str | None, current_page: int) -> int | None:
     return next_pages[0] if next_pages else None
 
 
+def _manifest_path() -> Path:
+    family = os.environ.get("HARBICHESS_RELEASE_MANIFEST", "mc84")
+    if family == "mc84":
+        return MANIFEST
+    if family == "formal45-v2":
+        return FORMAL45_MANIFEST
+    raise DeliveryError("manifest-selector-not-fixed-allowlist")
+
+
 def _validate_manifest(token: str) -> tuple[list[dict], str]:
     if (
         os.environ.get("GITHUB_REPOSITORY") != REPOSITORY
@@ -226,7 +236,7 @@ def _validate_manifest(token: str) -> tuple[list[dict], str]:
     ):
         raise DeliveryError("not-canonical-main-manual-dispatch")
     try:
-        raw = MANIFEST.read_bytes()
+        raw = _manifest_path().read_bytes()
     except Exception:
         raise DeliveryError("fixed-committed-manifest-unavailable") from None
     manifest_sha = hashlib.sha256(raw).hexdigest()
