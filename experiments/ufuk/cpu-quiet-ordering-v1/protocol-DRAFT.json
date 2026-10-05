@@ -1,0 +1,59 @@
+{
+  "schema": "own-quiet-ordering-training-protocol-v1",
+  "status": "DRAFT-NOT-REGISTERED-NOT-EXECUTED",
+  "source_commit": "6fcc8b476d25495d1c9c413e55b2c7ba4794013e",
+  "math": {
+    "lr": 0.01,
+    "batch": 256,
+    "slots": 4,
+    "max_updates": 1024,
+    "beta1": 0.9,
+    "beta2": 0.999,
+    "eps": 1e-08,
+    "clipnorm": 5.0,
+    "l2": 0.001
+  },
+  "classical_helper_directory": "/workspace/HarbiChess/experiments/ufuk/cpu-classical-own-v1",
+  "classical_helper_sha256": {
+    "journal_v3.py": "851b9967adb709beb0dcf2a9e793c61add3eccf91fb21fb2a75e80da8845968b",
+    "learner.py": "2f7bc39943146b66fb2b0863938e47484378ce2597a725893d1df0edd345883e",
+    "value.py": "a99cddfc397bd9221b99a70691427fdd663488b033fb239d9f48240786b2f277",
+    "runtime.py": "656a19611984f61f99f4fec8952250ee4ad8b6d836a34c6eaf6fcc65ed0af496",
+    "qualify_actor_v3.py": "8c4eb4052c0b7a48d07a29d9398513ba170239365a1d32ea98a96d5af3805faa",
+    "train_v3.py": "d129d11682ba5f392023be53c9ed9b62d93822b778ffa483d2d0b6b50008b51c",
+    "transfer.py": "1fb50a8d58b36cac9d781b4d29ca4e6ce65e50c838190c0355f2a3347ad6dfd8",
+    "produce_v3.py": "761ee6bb8d7db27d6b2c231dbd0636648850c97079c56c0055314efd4d13baef",
+    "run_epoch_v3.py": "565d62f9451dc3eae2f9c6b85df4dcc0fddf959d6077058449057eb6f82e10f1"
+  },
+  "ordering_helper_sha256": {
+    "train.py": "6b53354f1080a6f5af548872eafdfaf97e48e85bd0951943be013e233dbd549a",
+    "data.py": "f72cbb55477e01e68882c3676341c6e165b02ca4acaf50b94ad7bd0a09e504ff",
+    "model.py": "98c84a9b7786b4c95f6a13e07e9ed102e071ddde04a744152fe8d034dc4da5f6",
+    "ordering_learner.py": "51261f04fcd262efec61f6da6b2da73395b2dafd4533dbe3488d91554a961b2b",
+    "ordered_search.py": "b8f8815bb7fb21d83e1316236695290f0f4e55af0a1cea7c9cda86a4343036e4",
+    "qualify.py": "a7683738563998b352fd18e709bd6df824dcd39672819048f5c49154cdfdc924"
+  },
+  "inputs": {
+    "20262905": {
+      "config_sha256": "ROOT_FINAL_CONFIG_SHA",
+      "journal_sha256": "ROOT_FINAL16384_SHA"
+    },
+    "20262906": {
+      "config_sha256": "ROOT_FINAL_CONFIG_SHA",
+      "journal_sha256": "ROOT_FINAL16384_SHA"
+    }
+  },
+  "deadline_by_seed": {
+    "20262905": "ROOT_ORIGINAL_OBSERVED_DEADLINE",
+    "20262906": "ROOT_ORIGINAL_OBSERVED_DEADLINE"
+  },
+  "evaluator_prior_sha256": "afbaec307e5acc4b9fcb5222115c2fb8112290065ffe64e929b35f2a935565e1",
+  "original_search_sha256": "de53c14728a67b7772f18b396ac8ef5c35a144d4e4e616fec40099cd461a6670",
+  "search_settings": {
+    "nodes": 512,
+    "quiescence_plies": 2,
+    "max_depth": 8
+  },
+  "candidate_choice": "fixedderivedfinal-only-no-validation-selection",
+  "value_identity": "same-frozen-humanprior18-theta0-for-both-ordering-arms"
+}
