@@ -1,0 +1,68 @@
+{
+  "checkout": "/content/HarbiChess-certificate-c022bc1",
+  "frozen_config": {
+    "actors": {
+      "claim_draw": true,
+      "games": 128,
+      "max_additional_plies": 256,
+      "temperature": 1.0
+    },
+    "device": "cuda:0",
+    "epoch_steps": 256,
+    "learning_rate": 2.5e-05,
+    "objective": {
+      "behavior_kl_stop": 0.02,
+      "policy_anchor_weight": 0.03,
+      "policy_weight": 1.0,
+      "value_anchor_weight": 0.02,
+      "value_weight": 0.2
+    },
+    "schedule": {
+      "max_gradient_norm": 5.0,
+      "minibatch_size": 1024,
+      "passes": 4
+    },
+    "search": {
+      "block_plies": 8,
+      "gumbel_scale": 0.0,
+      "max_considered_actions": 4,
+      "maxvisit_init": 50.0,
+      "simulations": 16,
+      "value_scale": 0.1
+    },
+    "seed": 20261775,
+    "weight_decay": 0.0001
+  },
+  "helper_sha256": {
+    "own7_adapter_controls.py": "178f82422f84b915a1ee67f2e66cd3c45c5c4d4bd5a1cf4fd6c9831a4bd59621",
+    "own7_audit_core.py": "14cbc0b75cf333bf3faa72068d09b46b597fbab5f8b790aa6da828a0c0ac0e46",
+    "own7_audit_support.py": "e528e65f8182c0075626ba5007f59a7a204723a297eb9228895c4bc85f6a7adb",
+    "own7_qualify_e1.py": "4f32900511bbcb2e1319317b62cc9c834a030ef2f29437823ad1f7434428871f"
+  },
+  "inputs": {
+    "book": {
+      "path": "/content/harbichess-fullgame-method2-inputs/own-terminal-curriculum-preflight-20261005/book.json",
+      "sha256": "1a5ca17664a828d669e58cf2bd5d9eeb7f980b83f20d3a4031d36e4ff0930ccb"
+    },
+    "experiment_config": {
+      "path": "/content/harbichess-fullgame-method2-inputs/source7-c022-actual-qualification-v1/full-config.json",
+      "sha256": "fd151c360893e9404a7bf4b0c9202dc76c31af22bace3af8770422a1344b5c31"
+    },
+    "initial_weights": {
+      "path": "/content/harbichess-inputs/initial-e8.safetensors",
+      "sha256": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03"
+    },
+    "protocol": {
+      "path": "/content/harbichess-fullgame-method2-inputs/source7-c022-actual-qualification-v1/protocol.json",
+      "sha256": "e9d4a6acbbdda903b618ebb350b2c6c39166e71c9e53a8b59973992c9e637af0"
+    }
+  },
+  "neural_witness_K": 8,
+  "original_profile_deadline_epoch": 1791166813.4247744,
+  "run": "/content/harbichess-runs/certificate-source7-fullshape900-20261005/run",
+  "schema": "ufuk-method7-E1-auditor-development-v1",
+  "scope": "new-method7-development-E1-not-formal7",
+  "source_commit": "c022bc1605b44c3089439da5c6efb7bd4db4ff81",
+  "started_epoch": 1791165913.490512,
+  "whole_seconds": 899.9342625141144
+}
