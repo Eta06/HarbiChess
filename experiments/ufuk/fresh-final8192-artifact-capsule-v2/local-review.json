@@ -1,0 +1,32 @@
+{
+  "aggregate_runs": 1,
+  "capsule_bytes": 882330,
+  "chunks": 21,
+  "existing_v1_draft_preserved": true,
+  "file_sha256": {
+    "README.md": "f6e9d174ac243f8d3e351dd1684635964596585159ab3c53e9694783814c863f",
+    "ROOT-approval-PENDING.json": "010064b6051e1f777eec2382d8fdcd682e99723a57c5c011ede160486995fd3d",
+    "allowlist-PENDING.json": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356",
+    "artifact_capsule.py": "8f502fd0ff13b2fe682817b8ef4c59d72ccd1c80f5bb84a65dd25bed0caedffc",
+    "authorize_manifest.py": "f34e83e41dc0bb92a93e1e0511ec16314c360fa46cb2ed094b58d5487e9125e7",
+    "fresh-final8192-artifact-capsule-v2.yml": "488ed15660e7d09b5c3b9f225ac9ef585ce375f80cbd32a6a37c6d1a6d776ff5",
+    "launcher_inputs.py": "cf7e8f6b5e048db944ae65bf47168946b6548fbc3a9502053b6cfa65f3150d57",
+    "manifest-8192-DRAFT.json": "3001009247e0ca26bdf7d41dc3cb0ca471311225223f9d3734d394063b4099e9",
+    "native_delta_codec.py": "878868940b5bae15c182dce55215320b5f0ba3692b9c5eac26988204832a31d6",
+    "release_transport_frozen.py": "035821c943f0840fc02f0a2019516095bf9e43078a6843b745033456b20c7f7e",
+    "test_artifact_capsule.py": "db3309af8276a0a72b33c28bbc7caeec638882cbb8d5fdb7294e9e98dbf8d70d",
+    "transport-control-PENDING.json": "41e239bb70b136f42da7c83b1c72c9d7e1376c834be4bb82d1c347b7030832c0"
+  },
+  "network_requests": 0,
+  "new_permanent_assets_if_success": 1,
+  "opaque_payload_files_written": 0,
+  "raw_original_bytes": 885958,
+  "schema": "fresh-final8192-artifact-persistence-proposal-review-v2",
+  "status": "DRAFT-unexecuted-ROOT-approval-pending",
+  "tests": {
+    "passed": 28,
+    "ruff": "PASS",
+    "seconds": 0.17,
+    "skipped": 0
+  }
+}
