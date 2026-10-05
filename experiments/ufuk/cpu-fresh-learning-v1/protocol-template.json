@@ -1,0 +1,63 @@
+{
+  "schema": "fresh-qsearch-additive-own-mc-training-protocol-v2",
+  "status": "DRAFT-UNREGISTERED-NOT-EXECUTED",
+  "source_commit": "PENDING_ROOT_FREEZE",
+  "trainer_sha256": "PENDING",
+  "feature_helper_sha256": "PENDING",
+  "journal_helper_sha256": "PENDING_V2_HELPER",
+  "anchor_helper_sha256": "PENDING_V2_HELPER",
+  "initial_e8_sha256": "PENDING",
+  "seeds": [
+    20262805,
+    20262806
+  ],
+  "seed_pairing": {
+    "20262805": {
+      "journal_sha256": "PENDING",
+      "actor_config_sha256": "PENDING"
+    },
+    "20262806": {
+      "journal_sha256": "PENDING",
+      "actor_config_sha256": "PENDING"
+    }
+  },
+  "deadline_epoch_by_seed": {
+    "20262805": "PENDING_OWNER_CLOCK",
+    "20262806": "PENDING_OWNER_CLOCK"
+  },
+  "initialization": "E8 plus zero sparse additive residual; fresh AdamW",
+  "selfplay_data": "only its paired same-seed v2 QSEARCH journal; no old replay/teacher rows",
+  "minimum_eligible_rows": 1024,
+  "minimum_complete_games": 16,
+  "protected_position_keys": [],
+  "protected_position_keys_sha256": "PENDING_EXACT_SORTED_CANONICAL_FEN4_LIST_SHA",
+  "protected_position_book_sha256": "PENDING_ACTOR_EXCLUSION_BOOK_SHA",
+  "batch_size": 256,
+  "presentation_slots_per_train_row": 4,
+  "maximum_updates": 1024,
+  "update_formula": "min(1024, floor(4 * trajectory-disjoint-train-rows / 256))",
+  "optimizer": {
+    "name": "AdamW",
+    "learning_rate": 2e-05,
+    "weight_decay": 0.0
+  },
+  "gradient_clip_norm": 5.0,
+  "anchor_kl_beta": 1.0,
+  "regularizer": "fixed spatial/material/metadata SHRINK penalty from 6fcc8b476d25495d1c9c413e55b2c7ba4794013e",
+  "train_validation_split": "last 2 hex digits of sha256(root FEN + prefix + realized moves) mod 5; bucket 0 validation; generated trajectory groups only",
+  "validation_scope": "generated-game-disjoint internal validation; not root/source-family/state-disjoint",
+  "unknown_policy": "caps and unfinished trajectories excluded; never mapped to draw",
+  "native_schema": "fresh-qsearch-additive-own-mc-native-v2",
+  "native_proof_updates": 8,
+  "device": "cpu",
+  "threads": 1,
+  "gpu": false,
+  "disk_floor_bytes": 268435456,
+  "max_native_or_candidate_artifact_bytes": 524288,
+  "new_teacher_labels": false,
+  "new_selfplay_moves_generated_by_trainer": 0,
+  "strength_gate": "unchanged existing two-seed SF512NODES/96-game gate",
+  "strength_claim": false,
+  "learning_rate": 2e-05,
+  "root_note": "Fresh MC variant. Root must freeze actualjournal/model/config/helper SHAs and new first/deadlines before fit. Fixed8192 productiondata, qualifier first eligible2048/4096/8192 only."
+}
