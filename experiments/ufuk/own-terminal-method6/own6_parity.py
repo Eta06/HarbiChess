@@ -11,11 +11,12 @@ from pathlib import Path
 import chess
 import numpy as np
 import torch
+from own6_strength_config import SEEDS, bind_cli, validate_binding
+
 from harbichess.backends.torch_network import load_weights, sha256
 from harbichess.chess.actions import legal_action_indices
 from harbichess.chess.encoding import BoardEncoder
 from harbichess.training.torch_online_learner import _prepare_device
-from own6_strength_config import SEEDS, bind_cli, validate_binding
 
 Q = {}
 
@@ -37,6 +38,7 @@ def main():
         assert torch.cuda.is_available(), "Actual CUDA required; no fallback"
     else:
         import mlx.core as mx
+
         from harbichess.backends.pairwise_network import HarbiChessPairwiseNetwork
 
         mx.set_default_device(mx.cpu)
