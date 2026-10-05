@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import math
+
 from harbichess.core.state import ChessMove, ChessState, TerminalResult
 
 
@@ -50,3 +52,93 @@ def certified_policy(legal_moves, certified_moves, scores, *, epsilon=1e-12):
     winner_set = set(winners)
     probabilities = tuple(weight if move in winner_set else epsilon for move in legal)
     return probabilities, min(winners, key=lambda move: move.uci)
+
+
+def visited_mate_in_one_losses(rules, state: ChessState, visited_moves, *, claim_draw=True):
+    """Certify losses only among searched root actions with visited children.
+
+    A root move is certified losing only when its complete-history child is
+    nonterminal and the opponent has an exact legal mate-in-one. Terminal
+    children (including claimable/automatic draws) are deliberately excluded.
+    """
+    if rules.outcome(state, claim_draw=claim_draw) is not None:
+        return ()
+    root_board = rules.inspect(state)
+    legal = {ChessMove(move.uci()) for move in root_board.legal_moves}
+    visited = tuple(sorted(set(visited_moves), key=lambda move: move.uci))
+    if any(move not in legal for move in visited):
+        raise ValueError("visited losing-action candidates must be legal at the root")
+    certified = []
+    for move in visited:
+        child = rules.apply(state, move)
+        if rules.outcome(child, claim_draw=claim_draw) is not None:
+            continue
+        replies = immediate_mating_moves(rules, child, claim_draw=claim_draw)
+        if replies:
+            certified.append((move, replies))
+    return tuple(certified)
+
+
+def shield_visited_losses(
+    legal_moves,
+    policy,
+    move_stats,
+    certified_losses,
+    *,
+    selected_action,
+    certified_wins=(),
+    epsilon=1e-12,
+):
+    """Set exact visited one-ply losses to epsilon without removing legal support.
+
+    Exact current-side wins take precedence. If every legal action has a loss
+    certificate, the original policy/action is retained and no action is
+    described as safe. Otherwise the searched action is replaced, if needed,
+    by deterministic max-visits, then root-Q, prior, UCI among all noncertified
+    actions. Nonvisited alternatives remain UNKNOWN and eligible for fallback.
+    """
+    legal = tuple(legal_moves)
+    weights = tuple(float(value) for value in policy)
+    losses = set(certified_losses)
+    wins = set(certified_wins)
+    if (
+        not legal
+        or len(weights) != len(legal)
+        or any(not math.isfinite(p) or p < 0 for p in weights)
+        or not math.isclose(math.fsum(weights), 1.0, abs_tol=1e-9, rel_tol=0)
+        or any(move not in legal for move in losses | wins)
+        or not 0 < epsilon < 1 / len(legal)
+    ):
+        raise ValueError("invalid visited-loss policy/support input")
+    if wins:
+        return weights, selected_action, "winning-certificate-precedence"
+    if not losses:
+        return weights, selected_action, "no-visited-loss-certificate"
+    if len(losses) == len(legal):
+        return weights, selected_action, "all-legal-actions-certified-loss-no-safe-action"
+
+    safe = tuple(move for move in legal if move not in losses)
+    safe_raw = [max(weights[i], epsilon) for i, move in enumerate(legal) if move in safe]
+    safe_total = math.fsum(safe_raw)
+    remaining = 1.0 - epsilon * len(losses)
+    safe_probabilities = [remaining * value / safe_total for value in safe_raw]
+    output = []
+    cursor = 0
+    for move in legal:
+        if move in losses:
+            output.append(epsilon)
+        else:
+            output.append(safe_probabilities[cursor])
+            cursor += 1
+    stats = {row.move: row for row in move_stats}
+    if selected_action in losses:
+        selected_action = min(
+            safe,
+            key=lambda move: (
+                -stats[move].visits if move in stats else 0,
+                -stats[move].mean_value if move in stats else 0.0,
+                -stats[move].prior if move in stats else 0.0,
+                move.uci,
+            ),
+        )
+    return tuple(output), selected_action, "visited-losses-epsilon-shielded"
