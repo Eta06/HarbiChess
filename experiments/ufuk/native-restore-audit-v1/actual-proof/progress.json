@@ -1,0 +1,39 @@
+{
+  "auditor_sha256": "ef0ee11246091dcd8600faa66966b2c8e178d6b2876d842975de847c728686c1",
+  "controller_sha256": "dbdcce30cdb4bac0ecb8794d5f9c22bae82e6b7a3b3e1d5a56ff875898bdf035",
+  "cpu_affinity": [
+    0
+  ],
+  "operator_end_epoch": 1791273600,
+  "original_deadline_epoch": 1791220341.245795,
+  "public_readback_receipt_sha256": "3665de0a6a3c02a933e7f3e6d863096bc3e8957b7421e54ff54867ed5b217753",
+  "results": [
+    {
+      "invocation_result_sha256": "cb77a1f587b151888ca7d281c3d41ecd3bf365f453b0bf792f26e625b472cd4f",
+      "label": "20262305-linear",
+      "proof_sha256": null,
+      "status": "failed-original-readonly-audit"
+    },
+    {
+      "invocation_result_sha256": "3ae5cd7e0dd462af1c5f13df1a0b62f4e339edf8af3bd7749de53770d01d9b1a",
+      "label": "20262306-linear",
+      "proof_sha256": null,
+      "status": "failed-original-readonly-audit"
+    },
+    {
+      "invocation_result_sha256": "67168604748f23f06420835e168d860ab0dc40d860f54541e6c133669dcf00d3",
+      "label": "20262405-positional",
+      "proof_sha256": null,
+      "status": "failed-original-readonly-audit"
+    },
+    {
+      "invocation_result_sha256": "89a688ebdd51e2c1616c17f45134b54ed0dce7de7a4f460d22f12ad196302403",
+      "label": "20262406-positional",
+      "proof_sha256": null,
+      "status": "failed-original-readonly-audit"
+    }
+  ],
+  "schema": "cpu-public-native-sequential-readonly-audit-controller-v1",
+  "started_epoch": 1791219441.245795,
+  "status": "started"
+}
