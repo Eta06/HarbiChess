@@ -1,0 +1,25 @@
+{
+  "pid": 1010825,
+  "start_ticks": 19273526,
+  "started_epoch": 1791228335.8664198,
+  "original_first_epoch": 1791226974.7925532,
+  "original_deadline_epoch": 1791228774.7925532,
+  "controller_sha256": "cccb4334a90b65c0dc609fad82c3139ac0286c89769607152700550eb4acb0df",
+  "manifest_sha256": "a14fc6d68f159e160b2c685fe72b0d7385c499822856a7925609a756fd7b5812",
+  "command": [
+    "/workspace/HarbiChess/.venv/bin/python",
+    "/workspace/HarbiChess/experiments/ufuk/fresh-final8192-release-capsule-v3/root_dispatch_v3.py",
+    "--manifest-sha256",
+    "a14fc6d68f159e160b2c685fe72b0d7385c499822856a7925609a756fd7b5812",
+    "--workflow-sha256",
+    "3f194a7ec459b3f9deaef262dd8f7fccf5bf2ebea16ee8beddef6651f53257c3",
+    "--receiver-sha256",
+    "44078a3aeea3a8bb1fecf387d5b3003efa0a7e85038b48ee145a2029f7ba15c5",
+    "--output",
+    "/workspace/work/harbichess/continuation-20261005/fresh-final8192-public-release-recovery",
+    "--ram",
+    "/dev/shm/harbichess-fresh-final8192-public-release-v3-20261005"
+  ],
+  "GPU_used": false,
+  "signed_url_or_key_logged": false
+}
