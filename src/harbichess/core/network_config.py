@@ -39,13 +39,20 @@ def validate_policy_context(specification: dict | None, channels: int) -> dict |
 
 
 def validate_sparse_value(specification: dict | None, input_channels: int) -> dict | None:
+    """V1 replaces the value; V2 explicitly adds logits to the inherited value."""
     if specification is None:
         return None
+    if not isinstance(specification, dict):
+        raise ValueError("unsupported sparse value specification")
+    version = specification.get("schema")
+    expected = {"schema", "channels", "hidden"}
+    if version == 2:
+        expected.add("composition")
     if (
-        not isinstance(specification, dict)
-        or set(specification) != {"schema", "channels", "hidden"}
-        or any(type(specification[key]) is not int for key in specification)
-        or specification["schema"] != 1
+        set(specification) != expected
+        or any(type(specification[key]) is not int for key in ("schema", "channels", "hidden"))
+        or version not in (1, 2)
+        or (version == 2 and specification["composition"] != "additive-v1")
         or min(specification["channels"], specification["hidden"]) <= 0
         or input_channels != ENCODER_CHANNELS
     ):
