@@ -1,0 +1,20 @@
+{
+  "schema": "formal8-prospective-factory-metadata-repair-v2",
+  "status": "prospective-before-formal8-training-or-games",
+  "original_frozen_factory_sha256": "d1e4b1e70ff708fd9f0d4745b85dc84df9c3378b16c4d18e3e0109d868d49625",
+  "replacement_factory_sha256": "1aa89d2c2c70eb6d993916ab0191bf190201cabd4671a51a5e338db77f3f8093",
+  "original_frozen_template_sha256": "3a79d71538bf66e712e8486e2e77db4eeefb3d26a823c85d3ebb4d169bd983c8",
+  "replacement_template_sha256": "f2b8b8350e05b2292c54fa43853a414d8ba8508cb1c29cbf7a43c4577e38b6bc",
+  "source_commit": "3be5b87db27a0fbde83464e7ea7157f0d9a76ae4",
+  "ancestor_profile_qualified": false,
+  "changes": [
+    "two stale own6 filenames\u2192actualown7 ancestry",
+    "qualified_ancestor_core/guard fields\u2192failed_ancestor_core/guard",
+    "compute_admission explanatory text own8/95/newfixedcutoffs",
+    "prospective posttraining_reserve_seconds6000"
+  ],
+  "qualified_core_and_guard_sha256": {
+    "own8_audit_core.py": "6f212cd9f6391068ce6d29156977b5f3be8bb51a964fe6f0d4c1970a8f54c4a0",
+    "own8_adapter_controls.py": "512739d386480d62d64744f1d2c7ece831afddd39cd9c8e4ab0811fce2de4797"
+  }
+}
