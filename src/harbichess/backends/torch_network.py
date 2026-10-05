@@ -226,7 +226,7 @@ class TorchChessNetwork(nn.Module):
             if self.architecture == "pairwise"
             else self._flatten(torch.relu(self.policy_conv(trunk)))
         )
-        if self._value_sparse is not None:
+        if self._value_sparse is not None and self._value_sparse["schema"] == 1:
             return policy, self.value_sparse_head(inputs)
         value = torch.relu(self.value_hidden(self._flatten(torch.relu(self.value_conv(trunk)))))
         logits = self.value_output(value)
@@ -244,6 +244,8 @@ class TorchChessNetwork(nn.Module):
             global_features = torch.relu(self.plastic_invariant_hidden(invariants))
             hidden = torch.relu(self.plastic_value_hidden(torch.cat((global_features, tower), 1)))
             logits = (logits + self.plastic_value_output(hidden)) * self.value_logit_scale.exp()
+        if self._value_sparse is not None:
+            logits = logits + self.value_sparse_head(inputs)
         return policy, logits
 
     def _pair_policy(
