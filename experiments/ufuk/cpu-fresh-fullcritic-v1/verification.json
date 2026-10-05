@@ -1,0 +1,53 @@
+{
+  "schema": "full-critic-scratch-verification-v1",
+  "status": "scratch-only-cpu-unit-suite-passed-no-real-data-run",
+  "files": {
+    "core.py": "fa445d5f06482489f04b0571285830e0904b1ae98efa5ce16375b285cec74d3e",
+    "native.py": "83c60cebae6b43e97c9ec4b8847d171f2ca82b80d25764ec3c460b59067d14a8",
+    "train.py": "067208b394fc9b711326d5d630d20525f1e107d53d92d5e8cdbc617827137f3f",
+    "qualify.py": "508eb12c484a2a659204698eb4e4ea359f6fd70f65a3ddceeb25f63a10e913f9",
+    "protocol-template.json": "27ae783960ad75bf725e248592b8f3927cc221dfc4a6a052e16aa54d3c8b61a1",
+    "test_cli.py": "b740a8f84dc9eb2a6394a9c9d95501057a028b175781f84e85660872cb5412d6",
+    "test_core.py": "3f3dca1246e54290d76d5a3e79b2e6aa8db2e64e8fc4816c62244f0a00d137af",
+    "smoke_actual_2048.py": "ddd62fbb31d8fc3695fa6adaa329c96a7e2ad5eb423467fc8d6a43f8af2cc399",
+    "actual-2048-loader-smoke.json": "2e2156f35434571abb0d6124e735a9a1f12997d2b2945b29c1af5d2cdbcf4a18"
+  },
+  "tests": {
+    "command": "OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 PYTHONPATH=/workspace/HarbiChess/src /workspace/HarbiChess/.venv/bin/python -m pytest -q",
+    "result": "7 passed; 2.34s"
+  },
+  "ruff": "PASS",
+  "compileall": "PASS",
+  "actual_training_journal_converted": false,
+  "optimizer_fit_run": false,
+  "actor_or_match_run": false,
+  "strength_claim": false,
+  "actual_e8": "read-only model-spec and trainable-mask inspection only",
+  "actual_e8_sha256": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03",
+  "actual_e8_value_trainable_parameters": 31290,
+  "actual_e8_trainable_names_sha256": "e3f59fa2c46ae80bb8196b75650ad1f45e3d206a57bc713d1d725728c74a7418",
+  "actual_dataset_smoke": {
+    "status": "PASS-actual-2048-data-loader-only",
+    "seeds": [
+      20262805,
+      20262806
+    ],
+    "journal_sha256": {
+      "20262805": "8109c074a9e084f33ec8d9a6c4b062eb3c57e8b6e8d897e03bd39dc8261dea8f",
+      "20262806": "df515e393e97065cd4828ceacccc7628ea04091643c16296009f48f1b9e01645"
+    },
+    "known_rows": {
+      "20262805": 2011,
+      "20262806": 2002
+    },
+    "unknown_actions": {
+      "20262805": 37,
+      "20262806": 46
+    },
+    "fullhistory_dense_rows": {
+      "20262805": 2011,
+      "20262806": 2002
+    },
+    "e8_forward_fit_or_strength_query": false
+  }
+}
