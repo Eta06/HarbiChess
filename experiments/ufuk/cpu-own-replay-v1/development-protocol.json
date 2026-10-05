@@ -1,0 +1,96 @@
+{
+  "schema": "cpu-own-replay-development-arena-v1",
+  "scope": "known conventional development roots, not virgin independent confirmation; no promotion or formal strength PASS",
+  "hypothesis": "own-outcome recalibration can improve equal-search game strength while frozen raw policy preserves the e8 action prior; joint own-search CE may help or cause drift",
+  "registration_before_pilot_results_and_games": true,
+  "source_commit": "4cae08522ac940746cf9127ca8ce4a6b63a47408",
+  "source_module": "harbichess.evaluation.portable_arena",
+  "seeds": [
+    20262005,
+    20262006
+  ],
+  "arms": [
+    "value-only",
+    "joint"
+  ],
+  "candidate": "each final fixed80-update pilot endpoint, including a predeclared KL-stopped endpoint; no best checkpoint selection",
+  "opponents": [
+    "initial-e8",
+    "stockfish-512"
+  ],
+  "e8_sf_baseline": "one16-game color-paired baseline per seed; same opening/color budget as candidate; no previously sealed formal outcomes opened",
+  "openings": [
+    [
+      "e2e4",
+      "e7e5",
+      "g1f3",
+      "b8c6"
+    ],
+    [
+      "e2e4",
+      "c7c5",
+      "g1f3",
+      "d7d6"
+    ],
+    [
+      "d2d4",
+      "d7d5",
+      "c2c4",
+      "e7e6"
+    ],
+    [
+      "c2c4",
+      "e7e5",
+      "b1c3",
+      "g8f6"
+    ],
+    [
+      "g1f3",
+      "d7d5",
+      "g2g3",
+      "g8f6"
+    ],
+    [
+      "d2d4",
+      "g8f6",
+      "c2c4",
+      "g7g6"
+    ],
+    [
+      "e2e4",
+      "e7e6",
+      "d2d4",
+      "d7d5"
+    ],
+    [
+      "e2e4",
+      "c7c6",
+      "d2d4",
+      "d7d5"
+    ]
+  ],
+  "opening_pairs": 8,
+  "games_per_tournament": 16,
+  "total_planned_games": 160,
+  "simulations_per_neural_move": 16,
+  "root_actions_per_neural_move": 4,
+  "gumbel_scale": 0.0,
+  "stockfish_nodes_per_move": 512,
+  "stockfish_threads": 1,
+  "stockfish_hash_MiB": 16,
+  "stockfish_sha256": "0f83d24cc46d2c66c60f16001af5444873bc112b7d028594513426894c12da19",
+  "initial_e8_sha256": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03",
+  "max_plies": 400,
+  "threads_per_process": 1,
+  "max_concurrent_jobs": 2,
+  "wall_seconds_per_tournament": 3600,
+  "whole_owner_seconds": 19000,
+  "known_caps": "UNKNOWN scored0.5 diagnostic-only, list separately and include adversarial lower/upper bounds; no fake draws",
+  "verification": "replay every recorded UCI from initial full history with python-chess; terminal perspective/legality/cap rule, exact openings/colors/seed/hash/budget; actual SF nodes recorded",
+  "uncertainty": "8 opening-family color pairs bootstrap diagnostic CI, broad and not calibrated confirmatory evidence; paired SF deltas reported descriptively",
+  "diagnostic_advance": "both training seeds direct e8 score>0.60 and SF paired score gain>0.10 and finalSFscore>=0.25 and caps<=0.05; otherwise method has not passed screening. Passing alone is not completion",
+  "formal_unchanged_gates": "later independent prospectively frozen confirmation must retain both-seed adjusted direct/SF gain CIs, adversarial caps and latency gates; historical MAX8 closed accounting preserved separately",
+  "no_new_teacher_labels": true,
+  "GPU_used": false,
+  "failure": "preserve partial trajectories and original timers; no deadline reset or adaptive extension based on score"
+}
