@@ -16,6 +16,7 @@ import urllib.request
 from pathlib import Path, PurePosixPath
 
 REPOSITORY = "Eta06/HarbiChess"
+REPOSITORY_ID = 1345115839
 RELEASE_ID = 401698693
 RELEASE_TAG = "port-linux-preflight-20261002"
 MANIFEST = Path("docs/runs/UFUK-A100-release-transport-manifest-20261004.json")
@@ -195,7 +196,12 @@ def _next_asset_page(link_header: str | None, current_page: int) -> int | None:
         if match.group(2) != "next":
             continue
         target = urllib.parse.urlsplit(match.group(1))
-        expected_path = f"/repos/{REPOSITORY}/releases/{RELEASE_ID}/assets"
+        # GitHub emits numeric repository paths in Link headers. Validate the
+        # same fixed repository/release, then request our own canonical page.
+        expected_paths = {
+            f"/repos/{REPOSITORY}/releases/{RELEASE_ID}/assets",
+            f"/repositories/{REPOSITORY_ID}/releases/{RELEASE_ID}/assets",
+        }
         try:
             target_query = urllib.parse.parse_qs(
                 target.query, keep_blank_values=True, strict_parsing=True
@@ -205,7 +211,7 @@ def _next_asset_page(link_header: str | None, current_page: int) -> int | None:
         if (
             target.scheme != "https"
             or target.netloc != "api.github.com"
-            or target.path != expected_path
+            or target.path not in expected_paths
             or target.fragment
             or set(target_query) != {"per_page", "page"}
             or target_query.get("per_page") != [str(ASSETS_PER_PAGE)]
