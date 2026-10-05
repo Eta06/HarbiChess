@@ -1,0 +1,235 @@
+{
+  "schema": "cpu-native-delta-four-final-local-review-v1",
+  "status": "local-exact-roundtrip-pass-public-backup-PENDING",
+  "cpu_affinity_count": 1,
+  "total_elapsed_seconds": 0.6724707380053587,
+  "packets": [
+    {
+      "native_original": "/workspace/work/harbichess/cpu-outcome-value-v1-actual/fits/20262305-linear/checkpoints/step-00002048",
+      "output_directory": "/workspace/work/harbichess/native-delta-backup-proposal/20262305-linear",
+      "native_files": {
+        "checkpoint.json": {
+          "bytes": 1418,
+          "sha256": "97c6f858bb1a000c2d26cc35e485cddce8a1cabd2bd30f918e39151a55709118"
+        },
+        "model.safetensors": {
+          "bytes": 295012,
+          "sha256": "0ded026c2671e4cc5709b78d861aba7f24fbebdf1bce142fbc84f362c3d213a1"
+        },
+        "training.pt": {
+          "bytes": 419193,
+          "sha256": "3704f90cb8cbdb32dd78eee302dfaf48c252014185938b607fa95958bdd14870"
+        }
+      },
+      "binding": {
+        "accepted": 2048,
+        "feature_helper_sha256": "aae2e333ccbc5d0ce96f3a09d235851a9812387e98fcbe8d6fe7fa057b21eaba",
+        "helper_sha256": "999d6eae659d98e4cc94c749d9825b22d71955d5e03c8d669909e5a1efc9584e",
+        "initial_e8_sha256": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03",
+        "journal_sha256": [
+          "32d203b68ed29e9fd1a0845fca69f32f0faa3aa4cc1ad9e0e040b6af5027fb55",
+          "f8503b5abe08687526b6a22d98df2a246dde1da96cfd41c3ab4109ea30ae7af9",
+          "44e1487e496ce7733b18134385fa2f378ea21d3c30a5fb74174687a85e9d4a08",
+          "21c055b78b5c28da11092bcd6952989ef2a7f1d223a46fa27817fabce7815eff"
+        ],
+        "protocol_sha256": "d7642aaa47ec942cc25dbb5c6d60a08c34b9a97401b8bc96c84c700695fff39b",
+        "schema": "cpu-own-outcome-linear-training-native-v2",
+        "seed": 20262305,
+        "source_commit": "4cae08522ac940746cf9127ca8ce4a6b63a47408",
+        "torch_version": "2.14.1+cpu"
+      },
+      "manifest_sha256": "170f4737816346e57d01f6d6fcceec48aa4e09fd8a364cccd7abcb21a4df4cf5",
+      "packet_sha256": "0c263000761ae8d55721db7de2bd380be9b640ba8b13151f4e344b70ead2e2e4",
+      "packet_bytes": 51829,
+      "base64_bytes": 69108,
+      "chunks": 2,
+      "maximum_chunk_characters": 58000,
+      "all_three_original_files_unchanged": true,
+      "roundtrip": "exact-original-bytes",
+      "elapsed_seconds": 0.11945642699720338,
+      "cli_receipt": {
+        "status": "local-exact-byte-roundtrip-pass-public-pending",
+        "packet_bytes": 51829,
+        "chunks": 2,
+        "packet_sha256": "0c263000761ae8d55721db7de2bd380be9b640ba8b13151f4e344b70ead2e2e4",
+        "native_schema": "cpu-own-outcome-linear-training-native-v2",
+        "native_source_commit": "4cae08522ac940746cf9127ca8ce4a6b63a47408",
+        "no_torch_or_network_or_training": true
+      }
+    },
+    {
+      "native_original": "/workspace/work/harbichess/cpu-outcome-value-v1-actual/fits/20262306-linear/checkpoints/step-00002048",
+      "output_directory": "/workspace/work/harbichess/native-delta-backup-proposal/20262306-linear",
+      "native_files": {
+        "checkpoint.json": {
+          "bytes": 1418,
+          "sha256": "adf2180231f20a1f7b4fb725ff8f108aa773aac27427e3541d54b52dbb8691ec"
+        },
+        "model.safetensors": {
+          "bytes": 295012,
+          "sha256": "1f2ccc2b71af67a4e99eea34a0c69d36a358513c96eb88794c13137ccf6bc4df"
+        },
+        "training.pt": {
+          "bytes": 419257,
+          "sha256": "768717a919a416859f61e6fe19f2cb78e62dd61a9193924d42f875d60365111f"
+        }
+      },
+      "binding": {
+        "accepted": 2048,
+        "feature_helper_sha256": "aae2e333ccbc5d0ce96f3a09d235851a9812387e98fcbe8d6fe7fa057b21eaba",
+        "helper_sha256": "999d6eae659d98e4cc94c749d9825b22d71955d5e03c8d669909e5a1efc9584e",
+        "initial_e8_sha256": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03",
+        "journal_sha256": [
+          "29326d93118de97a851d12f1d6125633abc32ae40c81004c7d7ba2838c5c78cf",
+          "b5bad76687a466a18735eafe3e65980242b6415b52b428bbb7c7ef80f5996602",
+          "2a6e3e7748532de3c4bf862074754801a859faacefb2955446783c21dd43cfc6",
+          "e688663ee19d295e6b6f7569d7fd9cb6b2f559a87ef89cf7ab8768bc42eddf35"
+        ],
+        "protocol_sha256": "d7642aaa47ec942cc25dbb5c6d60a08c34b9a97401b8bc96c84c700695fff39b",
+        "schema": "cpu-own-outcome-linear-training-native-v2",
+        "seed": 20262306,
+        "source_commit": "4cae08522ac940746cf9127ca8ce4a6b63a47408",
+        "torch_version": "2.14.1+cpu"
+      },
+      "manifest_sha256": "525ddf05b06bdcc0e77d9ceefce7609ed7442a6568b89cf2c1a100062286c4ee",
+      "packet_sha256": "8baee246a4b65e0c54de24d70814be037248a45f8452fbb4940de448d5413b64",
+      "packet_bytes": 51851,
+      "base64_bytes": 69136,
+      "chunks": 2,
+      "maximum_chunk_characters": 58000,
+      "all_three_original_files_unchanged": true,
+      "roundtrip": "exact-original-bytes",
+      "elapsed_seconds": 0.1258907160081435,
+      "cli_receipt": {
+        "status": "local-exact-byte-roundtrip-pass-public-pending",
+        "packet_bytes": 51851,
+        "chunks": 2,
+        "packet_sha256": "8baee246a4b65e0c54de24d70814be037248a45f8452fbb4940de448d5413b64",
+        "native_schema": "cpu-own-outcome-linear-training-native-v2",
+        "native_source_commit": "4cae08522ac940746cf9127ca8ce4a6b63a47408",
+        "no_torch_or_network_or_training": true
+      }
+    },
+    {
+      "native_original": "/workspace/work/harbichess/cpu-positional-value-v1-actual/fits/20262405-positional/checkpoints/step-00004096",
+      "output_directory": "/workspace/work/harbichess/native-delta-backup-proposal/20262405-positional",
+      "native_files": {
+        "checkpoint.json": {
+          "bytes": 1601,
+          "sha256": "6e5343370e32658ac3df65eae6b95c60558819b05ac0d502c4eb847279e19698"
+        },
+        "model.safetensors": {
+          "bytes": 408040,
+          "sha256": "dcfefe0373d8879c38229b7ba487ec4d6d2ae482ac5f8aa598bf26731310dc1c"
+        },
+        "training.pt": {
+          "bytes": 852365,
+          "sha256": "a495bc4549a096401703e6eb300381f03f62716b966b8881b35fda1e47b72a30"
+        }
+      },
+      "binding": {
+        "accepted": 4096,
+        "feature_helper_sha256": "f7122f2ff3907b4888b79640b7cdd2fc7a61bdf9a8f8737d3cd091fd53431b7a",
+        "helper_sha256": "f600c6722c34ef28dc8e52b0e48e71f34477651e1cd85519ff5d8b325f1a3491",
+        "initial_e8_sha256": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03",
+        "journal_sha256": [
+          "32d203b68ed29e9fd1a0845fca69f32f0faa3aa4cc1ad9e0e040b6af5027fb55",
+          "f8503b5abe08687526b6a22d98df2a246dde1da96cfd41c3ab4109ea30ae7af9",
+          "44e1487e496ce7733b18134385fa2f378ea21d3c30a5fb74174687a85e9d4a08",
+          "21c055b78b5c28da11092bcd6952989ef2a7f1d223a46fa27817fabce7815eff"
+        ],
+        "protocol_sha256": "0271f026e03bcc27cada2ed8680f57eea3089dffd5739322a3e48479a8aba313",
+        "schema": "cpu-own-outcome-positional-training-native-v2",
+        "seed": 20262405,
+        "source_commit": "4cae08522ac940746cf9127ca8ce4a6b63a47408",
+        "torch_version": "2.14.1+cpu"
+      },
+      "manifest_sha256": "4fecd24fee160dc7195966b012e4d739e66f6e991bafecaef54a98ca857a6591",
+      "packet_sha256": "b2e5fe08e0eb6e3fcbc896cb873686984bb15bda9cebedb58f6bbb72abdf3465",
+      "packet_bytes": 387356,
+      "base64_bytes": 516476,
+      "chunks": 9,
+      "maximum_chunk_characters": 58000,
+      "all_three_original_files_unchanged": true,
+      "roundtrip": "exact-original-bytes",
+      "elapsed_seconds": 0.20962330099428073,
+      "cli_receipt": {
+        "status": "local-exact-byte-roundtrip-pass-public-pending",
+        "packet_bytes": 387356,
+        "chunks": 9,
+        "packet_sha256": "b2e5fe08e0eb6e3fcbc896cb873686984bb15bda9cebedb58f6bbb72abdf3465",
+        "native_schema": "cpu-own-outcome-positional-training-native-v2",
+        "native_source_commit": "4cae08522ac940746cf9127ca8ce4a6b63a47408",
+        "no_torch_or_network_or_training": true
+      }
+    },
+    {
+      "native_original": "/workspace/work/harbichess/cpu-positional-value-v1-actual/fits/20262406-positional/checkpoints/step-00004096",
+      "output_directory": "/workspace/work/harbichess/native-delta-backup-proposal/20262406-positional",
+      "native_files": {
+        "checkpoint.json": {
+          "bytes": 1600,
+          "sha256": "3dec32ddc142ee00061855b5a5e8b7c80c600b8bc95a7b61bbfdfdd7a867a170"
+        },
+        "model.safetensors": {
+          "bytes": 408040,
+          "sha256": "aa8e84031bbb6df56e1c9372be95d691b12fdb64df53d3d2840c184c9ec6e500"
+        },
+        "training.pt": {
+          "bytes": 852365,
+          "sha256": "50302a51f2e5b9c1149e68bc1adf3d5dc7a2ace24caaf49fb4e58c07904d1743"
+        }
+      },
+      "binding": {
+        "accepted": 4096,
+        "feature_helper_sha256": "f7122f2ff3907b4888b79640b7cdd2fc7a61bdf9a8f8737d3cd091fd53431b7a",
+        "helper_sha256": "f600c6722c34ef28dc8e52b0e48e71f34477651e1cd85519ff5d8b325f1a3491",
+        "initial_e8_sha256": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03",
+        "journal_sha256": [
+          "29326d93118de97a851d12f1d6125633abc32ae40c81004c7d7ba2838c5c78cf",
+          "b5bad76687a466a18735eafe3e65980242b6415b52b428bbb7c7ef80f5996602",
+          "2a6e3e7748532de3c4bf862074754801a859faacefb2955446783c21dd43cfc6",
+          "e688663ee19d295e6b6f7569d7fd9cb6b2f559a87ef89cf7ab8768bc42eddf35"
+        ],
+        "protocol_sha256": "0271f026e03bcc27cada2ed8680f57eea3089dffd5739322a3e48479a8aba313",
+        "schema": "cpu-own-outcome-positional-training-native-v2",
+        "seed": 20262406,
+        "source_commit": "4cae08522ac940746cf9127ca8ce4a6b63a47408",
+        "torch_version": "2.14.1+cpu"
+      },
+      "manifest_sha256": "c13fb58cf4c6103b25d8a30ae0012a6d3987bfba4baa55f7ba591f2035f11fa5",
+      "packet_sha256": "5e0e9a55b55cd1327f08468287d89898b6819adfe80dc8727621d33a82264bea",
+      "packet_bytes": 387450,
+      "base64_bytes": 516600,
+      "chunks": 9,
+      "maximum_chunk_characters": 58000,
+      "all_three_original_files_unchanged": true,
+      "roundtrip": "exact-original-bytes",
+      "elapsed_seconds": 0.21332517499104142,
+      "cli_receipt": {
+        "status": "local-exact-byte-roundtrip-pass-public-pending",
+        "packet_bytes": 387450,
+        "chunks": 9,
+        "packet_sha256": "5e0e9a55b55cd1327f08468287d89898b6819adfe80dc8727621d33a82264bea",
+        "native_schema": "cpu-own-outcome-positional-training-native-v2",
+        "native_source_commit": "4cae08522ac940746cf9127ca8ce4a6b63a47408",
+        "no_torch_or_network_or_training": true
+      }
+    }
+  ],
+  "total_chunks": 22,
+  "total_compressed_packet_bytes": 878486,
+  "tests": {
+    "passed": 13,
+    "skipped": 0,
+    "seconds": 0.61,
+    "ruff": "pass"
+  },
+  "source_files_sha256": {
+    "native_delta_codec.py": "878868940b5bae15c182dce55215320b5f0ba3692b9c5eac26988204832a31d6",
+    "test_native_delta_codec.py": "41f5ba8f3c1b75ec98f90e1e2cf980136ebd25a951fc3622ba49d9e2e355a189"
+  },
+  "network_upload_dispatch_or_training_executed": false,
+  "torch_pickle_deserialized": false,
+  "old_files_deleted_or_modified": false
+}
