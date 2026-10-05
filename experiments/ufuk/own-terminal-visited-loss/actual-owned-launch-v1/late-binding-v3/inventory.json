@@ -1,0 +1,15 @@
+{
+  "schema": "prospective-formal8-late-proof-control-v3",
+  "status": "CPU-controls-pass-before-formal-clock-NOT-executed",
+  "source_commit": "3be5b87db27a0fbde83464e7ea7157f0d9a76ae4",
+  "files": {
+    "command-plan-addendum.json": "6f8d20cf8fd2a78599d76bb1238baba6daf71572e2a288dbb7721c2b0c4fb7a5",
+    "fixtures/main.json": "b56a48bc75815c5a91dc0ff3f5749c46bc683ea3046437611909ca625e4d549d",
+    "fixtures/tiny.json": "1def37c9608dd938de52adef9b4327da85bd64497f54d374ea7884c55a251ef7",
+    "late_training_overlap_guard.py": "53edc8d240f1a896996615a12ea2dea0d7b0424c8d459003b38569cf8755feb4",
+    "launch_formal8_owned.py": "d03621a0b4a458c3b736739c2f4a53774d97c8b9cd627a2da006bff2962c7b7d",
+    "test_late_binding.py": "2c9b4d3e9837e12349b641371a502763f1b2370033375b07cf90432f84717ff1"
+  },
+  "pure_tests_passed": 11,
+  "qualified_frozen_helpers_edited": false
+}
