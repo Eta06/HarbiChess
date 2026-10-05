@@ -1,0 +1,27 @@
+{
+  "schema": "cpu-deduplicated-backup-helper-review-v1",
+  "status": "six-targeted-tests-pass-no-approved-pack-executed",
+  "original_spec_unchanged_sha256": "18242c9aec12fd1642fccc8376f4318e7d54978d6c503197cd6efb658bfde178",
+  "original_packer_unchanged_sha256": "2887821a40c8970a055f0b7464c860bcd3f2be1350e25b22a559241100351a63",
+  "explicit_original_paths": 106,
+  "original_file_bytes": 66048962,
+  "unique_regular_blob_count": 71,
+  "unique_regular_blob_bytes": 46836884,
+  "selected_actual_E2_restore_file_bytes": 40974148,
+  "selected_E2_restore_file_count": 13,
+  "source_bundle_not_generated": true,
+  "source_bundle_expected_stored_bytes": 33725601,
+  "source_bundle_conservative_upper_bound_bytes": 283532153,
+  "tests": {
+    "passed": 6,
+    "skipped": 0,
+    "elapsed_seconds": 0.2,
+    "ruff": "pass"
+  },
+  "retained_initial_test_failure": "One fixture failed because iterator restarted at artifact-map; changed iteration to archive.next and reran all six successfully.",
+  "no_training": true,
+  "no_network": true,
+  "no_actual_approved_pack": true,
+  "cpu_deduplicated_backup.py_sha256": "274eae4e0cea6046619dd599d884ca9ccb19856be88bd142a17f481055e07e99",
+  "test_cpu_dedup.py_sha256": "a65660787f2e9547ee55e03e729bff97ee591c99216d9e84fab549ab3bfdd006"
+}
