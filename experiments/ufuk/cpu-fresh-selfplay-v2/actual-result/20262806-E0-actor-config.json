@@ -1,0 +1,44 @@
+{
+  "nodes": 512,
+  "qdepth": 2,
+  "max_depth": 8,
+  "exploration": 0.05,
+  "total_ply_cap": 400,
+  "max_actions": 8192,
+  "actors": 1,
+  "seed": 20262806,
+  "epoch_id": "UFUK-FRESH-e8-search-own-E0-seed-20262806",
+  "original_deadline_epoch": 1791235580.0397933,
+  "model_sha256": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03",
+  "source_commit": "6fcc8b476d25495d1c9c413e55b2c7ba4794013e",
+  "search_helper_sha256": "de53c14728a67b7772f18b396ac8ef5c35a144d4e4e616fec40099cd461a6670",
+  "value_helper_sha256": "0e0d9092db254bd88e4a49875d63edc6b1b39770d0fc53f61e03629ccba02737",
+  "producer_sha256": "afb3ffa3c196b9da2ceb1b8000c67ae0c2781e7ffd65a950b59bed5b674c6079",
+  "runner_sha256": "381861b52fca83f912672baca5066f0e3ed0e83c6c92e0703ffa119dc5ff2691",
+  "evaluator_identity": "frozen-real-NeuralValue-CPU",
+  "anchor_model_sha256": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03",
+  "anchor_helper_sha256": "93f243b9c20f9d9dea3314e2db1cf22e6ccd130801374a23c47e987900afa1a2",
+  "anchor_target": "frozen-e8-wdl-probabilities-mover-perspective-v1",
+  "torch_version": "2.14.1+cpu",
+  "roots": [
+    {
+      "source_id": "standard-initial-position-no-human-labels",
+      "root_fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+      "prefix": []
+    }
+  ],
+  "scope": "New actualselfplay from ordinaryinitialposition; no newrootfamilies claimed. Fixed8192 transitions/seed, terminalownMC only, same frozenE8/search512 throughout epoch.",
+  "excluded_training_position_keys": [
+    "r1bqkbnr/pppp1ppp/2n5/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R w KQkq -",
+    "rnbqkb1r/ppp1pppp/5n2/3p4/8/5NP1/PPPPPP1P/RNBQKB1R w KQkq -",
+    "rnbqkb1r/pppp1ppp/5n2/4p3/2P5/2N5/PP1PPPPP/R1BQKBNR w KQkq -",
+    "rnbqkb1r/pppppp1p/5np1/8/2PP4/8/PP2PPPP/RNBQKBNR w KQkq -",
+    "rnbqkbnr/pp2pppp/2p5/3p4/3PP3/8/PPP2PPP/RNBQKBNR w KQkq -",
+    "rnbqkbnr/pp2pppp/3p4/2p5/4P3/5N2/PPPP1PPP/RNBQKB1R w KQkq -",
+    "rnbqkbnr/ppp2ppp/4p3/3p4/2PP4/8/PP2PPPP/RNBQKBNR w KQkq -",
+    "rnbqkbnr/ppp2ppp/4p3/3p4/3PP3/8/PPP2PPP/RNBQKBNR w KQkq -"
+  ],
+  "exclusion_book_sha256": "9c36b5972c9676d19c358ca7e598b9f7f5d110b1947bed838cd660f644d845da",
+  "training_exclusion_rule": "Exclude entire completedgame if any fullhistory pre-action board structural FEN4 intersects boundknown8development roots. Do not relabel UNKNOWN or prune originaljournal.",
+  "internal_validation": "Whole generatedtrajectory hash(rootfen,prefix,actualmoves), identicaltrajectories grouped; generated-game-disjoint only, NOTroot/state/source-familydisjoint."
+}
