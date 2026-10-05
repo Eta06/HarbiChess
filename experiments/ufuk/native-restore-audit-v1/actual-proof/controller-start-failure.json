@@ -1,0 +1,10 @@
+{
+  "schema": "cpu-readonly-controller-precheck-failure-v1",
+  "status": "failed-before-any-native-audit",
+  "reason": "Expected literal pass; actual authorized status PASS-four-capsules-12-original-files-byteexact-NOT-runtime-proof",
+  "original_controller_sha256": "1a8e7ab83c7de4a37da85bab408a72a11262d55a5239a521fb7dfe6e3d0f1582",
+  "original_started_epoch_conservative_directory_creation": 1791219441.245795,
+  "original_deadline_epoch": 1791220341.245795,
+  "auditor_executed": false,
+  "clock_reset": false
+}
