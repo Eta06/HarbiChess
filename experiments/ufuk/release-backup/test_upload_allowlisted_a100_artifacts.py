@@ -1,4 +1,6 @@
+import hashlib
 import importlib.util
+import io
 import json
 import urllib.error
 import urllib.parse
@@ -332,3 +334,73 @@ def test_numeric_link_foreign_identity_or_noncanonical_query_fails_before_next_r
     with pytest.raises(delivery.DeliveryError):
         delivery._asset_list("test-token")
     assert requests == ["/repos/Eta06/HarbiChess/releases/401698693/assets?per_page=100&page=1"]
+
+
+def _readback_fixture(body=b"public-archive"):
+    digest = hashlib.sha256(body).hexdigest()
+    asset = {"name": f"sha256-{digest}.tar.gz", "bytes": len(body), "sha256": digest}
+    metadata = {
+        "id": 123,
+        "name": asset["name"],
+        "size": len(body),
+        "url": f"{delivery.API_ROOT}/repos/{delivery.REPOSITORY}/releases/assets/123",
+        "browser_download_url": (
+            f"https://github.com/{delivery.REPOSITORY}/releases/download/"
+            f"{delivery.RELEASE_TAG}/{asset['name']}"
+        ),
+        "digest": f"sha256:{digest}",
+    }
+    return asset, metadata
+
+
+def test_full_readback_uses_fixed_public_browser_url_without_authorization(monkeypatch):
+    asset, metadata = _readback_fixture()
+    requests = []
+
+    def open_response(req, timeout):
+        requests.append(req)
+        assert timeout == 30
+        response = io.BytesIO(b"public-archive")
+        response.status = 200
+        return response
+
+    monkeypatch.setattr(delivery.PUBLIC_REDIRECT, "open", open_response)
+    assert delivery._public_asset_readback(asset, metadata) == asset["sha256"]
+    assert requests[0].full_url == metadata["browser_download_url"]
+    assert requests[0].get_method() == "GET"
+    assert not requests[0].has_header("Authorization")
+    assert "api.github.com" not in requests[0].full_url
+
+
+@pytest.mark.parametrize(
+    "url",
+    [
+        "https://evil.example/archive",
+        "https://github.com/Other/Repo/releases/download/tag/archive",
+        "https://token@github.com/Eta06/HarbiChess/releases/download/tag/archive",
+    ],
+)
+def test_readback_rejects_noncanonical_browser_metadata_before_network(monkeypatch, url):
+    asset, metadata = _readback_fixture()
+    metadata["browser_download_url"] = url
+
+    def forbidden(*args, **kwargs):
+        pytest.fail("untrusted URL must never be requested")
+
+    monkeypatch.setattr(delivery.PUBLIC_REDIRECT, "open", forbidden)
+    with pytest.raises(delivery.DeliveryError, match="metadata-identity-mismatch"):
+        delivery._public_asset_readback(asset, metadata)
+
+
+@pytest.mark.parametrize("body", [b"public-archivE", b"short", b"oversized-archive-body"])
+def test_browser_readback_still_requires_full_exact_size_and_sha(monkeypatch, body):
+    asset, metadata = _readback_fixture()
+
+    def open_response(req, timeout):
+        response = io.BytesIO(body)
+        response.status = 200
+        return response
+
+    monkeypatch.setattr(delivery.PUBLIC_REDIRECT, "open", open_response)
+    with pytest.raises(delivery.DeliveryError, match="over-size|size-or-sha256-mismatch"):
+        delivery._public_asset_readback(asset, metadata)
