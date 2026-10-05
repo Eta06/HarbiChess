@@ -27,6 +27,10 @@ class NumpySparseValue:
             spec = validate_sparse_value(specification.get("value_sparse"), 104)
             if spec is None:
                 raise ValueError("sparse value specification required")
+            if spec["schema"] != 1:
+                raise ValueError(
+                    "additive sparse value requires full inherited logits; use Torch or MLX"
+                )
             channels, hidden = spec["channels"], spec["hidden"]
             shapes = {
                 "feature.weight": (channels, 832),
