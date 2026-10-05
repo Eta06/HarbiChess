@@ -210,5 +210,38 @@
   },
   "strongest_validated_model_sha256": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03",
   "new_training_started": false,
-  "old_strength_gate_passed": false
+  "old_strength_gate_passed": false,
+  "subsequent_connection_observation": {
+    "verified_utc": "2026-10-05T07:35:29.840799+00:00",
+    "ssh_returncode": 255,
+    "ssh_error": "websocket: bad handshake; Connection closed by UNKNOWN port 65535",
+    "http_diagnostic": {
+      "epoch": 1791185698.9141767,
+      "url": "https://a100.emda.tr",
+      "scope": "read-only inherited-proxy HTTPS diagnostic",
+      "http_status": 403,
+      "body_excerpt": "error code: 1010\n"
+    },
+    "maintenance_owner": {
+      "pid": 978202,
+      "startticks": 15006860,
+      "started_epoch": 1791185669.2046416,
+      "interval_seconds": 900,
+      "scope": "read-only existing confirmed host maintenance; no runtime allocation, signals or training; stop this exact owned PID/group when work ends",
+      "script_sha256": "d2764071325d2cce6ae24bfcdeafe2ca4a492d271fccc8b2d05d0db3d72775cc",
+      "host": "a100.emda.tr",
+      "expected_host_fingerprint": "SHA256:TD0gsv0YY3Bt/F8GswmkBj3pAMQ2123Z68W+/8cWX/o",
+      "no_historical_training_timer_extended": true
+    },
+    "maintenance_first_receipt": {
+      "epoch": 1791185669.2283177,
+      "allocation_or_reset": false,
+      "remote_signals": false,
+      "returncode": 255,
+      "error": "connection-failed-details-suppressed",
+      "finished_epoch": 1791185669.5796006
+    },
+    "current_connectivity": "initial SSH and real CUDA passed; subsequent access failed; continuous accessibility not established",
+    "user_informed_and_connection_recovery_requested": true
+  }
 }
