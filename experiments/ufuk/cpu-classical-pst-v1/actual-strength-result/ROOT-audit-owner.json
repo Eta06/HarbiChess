@@ -1,0 +1,10 @@
+{
+  "status": "PASS-readonly-audit-executed-not-strength",
+  "error": null,
+  "first_epoch": 1791236545.4699404,
+  "deadline_epoch": 1791237445.4699404,
+  "finished_epoch": 1791236548.0131872,
+  "registration_sha256": "402796bda5a14ddffb7390be3bc226e188392156a7fc0c1f0aa21120b9531035",
+  "controller_sha256": "7ea6241e57de4ab83259803ac4a4f42d0fb50701c305a3695a937a19e9ee7150",
+  "strength_success_claimed": false
+}
