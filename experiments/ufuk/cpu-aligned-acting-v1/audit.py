@@ -12,11 +12,11 @@ import torch
 from harbichess.backends.torch_network import load_weights, sha256
 from harbichess.selfplay.online_actor import OnlineActorConfig
 from harbichess.training.fullgame_own_targets import build_fullgame_targets
-from harbichess.training.search_acting_policy import search_config_from_dict
 from harbichess.training.search_acting_epoch import (
     deserialize_search_acting_epoch,
     validate_search_acting,
 )
+from harbichess.training.search_acting_policy import search_config_from_dict
 from harbichess.training.torch_fullgame_ppo import FullGamePPOTrainConfig
 from harbichess.training.torch_ownsearch_core import OwnSearchObjective
 from harbichess.training.torch_search_acting_learner import (
