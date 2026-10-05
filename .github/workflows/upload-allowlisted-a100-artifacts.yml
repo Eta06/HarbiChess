@@ -11,6 +11,7 @@ on:
         options:
           - mc84
           - formal45-v2
+          - source7-v3
 
 permissions: {}
 
