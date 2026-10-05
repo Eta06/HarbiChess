@@ -1,0 +1,9 @@
+{
+  "schema": "classical-native-state-blob-ROOT-approval-v7",
+  "status": "ROOT-approved-frozen-transport",
+  "manifest_sha256": "96cbd9e6f9e863b5e9b25addaacc4e10fa891308abd200255cc77f0f14774033",
+  "control_sha256": "8a0f4138020e36ea4027ee9893834a3bf01dc88611efa72c1b76472ad0b76db9",
+  "blob_sha1": "441b8a9e5c0ec1aaa2c51cc29318712cf2480bc5",
+  "release_id": 404068972,
+  "scope": "253-original-byte-public-preservation-not-runtime-strength"
+}
