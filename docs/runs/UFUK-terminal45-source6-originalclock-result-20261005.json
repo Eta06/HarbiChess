@@ -1,0 +1,44 @@
+{
+  "AppleMetal_hardware": "UNTESTED",
+  "commit_identity": "Emir Tunahan Alim <emrtnhalim@gmail.com> author and committer; authorizedpush Eta06; noCoauthor",
+  "method4": "permanent INCOMPLETE baseline426 original3600; nine owned groups ended without earlycheckpointselection",
+  "method5_full_E8_native_audits": {
+    "20261525": {
+      "actual_controller_sha256": "4a39b4451b60705054690f4c634e91628827cc4ff3fda54ffe83d2516f0dbcc1",
+      "actual_full_audit_sha256": "c5d39b05e5e8a3a4b0ddcc0f004a29ba7f60c0da5652ac8f98c0702c7a98281e",
+      "finished_epoch": 1791162103.9959717,
+      "fixed_epochs": 8,
+      "fresh_transitions": 262144,
+      "native_containers_including_epoch0": 9,
+      "sample_chain_sha256": "2640d2dc4b3ebb2551c157c73f4c0bdfaef45a28b5d7a07d9fdc0b7d97366b6d",
+      "source_commit": "4515a7c0dda3b4f9615c2fc78a47c872ab14699d",
+      "status": "pass-all-fixed-search-acting-v2-native-own-data-search-ledgers"
+    },
+    "20261526": {
+      "actual_controller_sha256": "1b4d19d6591a9cc695fa4e6d3a61d6754387c91a1ecaa12477595144c855b0ad",
+      "actual_full_audit_sha256": "b09828f772a97abc4adcf07b41e2dae75f8937b78abe09af1c102f60cb0cfc38",
+      "finished_epoch": 1791162249.7220926,
+      "fixed_epochs": 8,
+      "fresh_transitions": 262144,
+      "native_containers_including_epoch0": 9,
+      "sample_chain_sha256": "8d811f64eed9b988ed104796ae643335ce4f5cf65017f2ddc33b15f2e72ee5a0",
+      "source_commit": "4515a7c0dda3b4f9615c2fc78a47c872ab14699d",
+      "status": "pass-all-fixed-search-acting-v2-native-own-data-search-ledgers"
+    }
+  },
+  "method5_original_CLI600": "failed-first1791162251.50993/deadline1791162851.50993; no retry/reset/final games",
+  "method5_owned_release_SHA256": "19a68076d73ff09443cb4f471ae21787fe7ea5e643309fef8033ec1ee04aaf60",
+  "method5_terminal_SHA256": "50876f67a21fbf0e5ef84f51fa21e9a1c2c5b9d9505ea68b4db1fc0ebb4ecac7",
+  "model_SHA256": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03",
+  "new_backup": "reviewed publicallowlistfrozen, packowner121965 original1200started1791165177.6161516; notyetuploaded/readbackverified",
+  "observed_primary_UTC": "2026-10-05T01:54:00Z",
+  "old84publicpersistence": "anonymousfullsizeSHApassed; freshCUDArestorationnotyetproven",
+  "schema": "ufuk-terminal45-new6qualification-state-result-v1",
+  "source428_development_failure_SHA256": "508c8b7a050b91878eb03d75023f638dd59b37868a5a3055450430d42d4ca5f5",
+  "source428_original900": "failed audit within ORIGINALfirst1791163947.632503/end1791164847.632503 after binding-only correction; CLI420.356s E1 12accepted4rejected; no formal6/candidate/strength eligibility",
+  "source428_owner_failure_SHA256": "d09e697dad635f1792e9348c3e500333d937ccab649bd3d0ca44625b318fcf5d",
+  "source7_PIN": "c022bc1605b44c3089439da5c6efb7bd4db4ff81",
+  "source7_qualification": "actualCUDA59 suite running; clean600/full900 not executed yet",
+  "strength_goal_passed": false,
+  "strongest_validated": "teacher-origin e8"
+}
