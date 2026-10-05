@@ -1,0 +1,24 @@
+{
+  "CPU_qualification_unproven": true,
+  "frozen_epoch": 1791171869.7930124,
+  "historical_formal4_and5": "retained including actual baseline games; no retroactive unadmitted claim",
+  "max_formal_qualification_families": 8,
+  "original_A100_source8": "INCOMPLETE-never-admitted; original03:10ceiling/600clocks preserved; permanently ineligible for future campaign qualification/heldoutselection",
+  "original_virgin_books": {
+    "20261925": "6d860c4c9a08914a50c6dfe59623f32755cd5185ccc68e3a52645f41efbd6252",
+    "20261926": "a2885098be18e8a9e45a5ac003f89a504e50877074c80fe809f01f23443aa9ff"
+  },
+  "qualification_ledger_slot": 8,
+  "runtime": "PRIMARY torch2.14.1+cpu,64x256,T1",
+  "schema": "prospective-reserved-family8-CPU-replacement-ledger-v1",
+  "seeds": [
+    20261925,
+    20261926
+  ],
+  "selection": "fixedE8only,BOTHseedIUT,noalternativecandidatechoice",
+  "source_commit": "3be5b87db27a0fbde83464e7ea7157f0d9a76ae4",
+  "statistical_controls": "unchanged perseed point/98.75%CI/cap/latency/576schedule; approximate bootstrapnominal<=.05across<=8qualificationfamilies; no globalElo claim",
+  "status": "prospective-before-any-CPU-heldout-outcome",
+  "strength_thresholds_relaxed": false,
+  "unadmitted_infrastructure_6_7_8": "development failures retained, no completed final strengthgate; reserve8 is now uniquely bound to this CPU route"
+}
