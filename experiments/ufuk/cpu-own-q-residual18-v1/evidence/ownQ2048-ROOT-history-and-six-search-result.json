@@ -1,0 +1,107 @@
+{
+  "status": "PASS-2048-full-legal-history-and-six-actual8192-search-reproductions-not-strength",
+  "rows": [
+    {
+      "seed": 20262905,
+      "roots": 1024,
+      "unique_histories": 847,
+      "unique_states": 846,
+      "unique_trajectories": 146,
+      "legal_history_plies": 45061,
+      "depth_histogram": {
+        "3": 638,
+        "4": 291,
+        "5": 40,
+        "2": 51,
+        "6": 4
+      },
+      "total_producer_nodes": 8388608,
+      "labels_sha256": "07f9923b0e18e0ac599c571451b969f308fcbbed9fddcbf19de602eca1c80a0f"
+    },
+    {
+      "seed": 20262906,
+      "roots": 1024,
+      "unique_histories": 847,
+      "unique_states": 843,
+      "unique_trajectories": 135,
+      "legal_history_plies": 45362,
+      "depth_histogram": {
+        "3": 611,
+        "4": 307,
+        "5": 48,
+        "2": 51,
+        "6": 7
+      },
+      "total_producer_nodes": 8388608,
+      "labels_sha256": "3dca536f899f70b7c9b5cb52026fd2ab2722cfd09347dfcc8b0807c994172f7b"
+    }
+  ],
+  "six_actual_searches": [
+    {
+      "seed": 20262905,
+      "ordinal": 0,
+      "row_id": "724dc7574d9064d2366821aa6bc9286e3bafb25ac16b5bcb0f20fb69c657b75d:17",
+      "move": "g5g2",
+      "value": 0.4862829961789091,
+      "nodes": 8192,
+      "evaluations": 7695,
+      "completed_depth": 3
+    },
+    {
+      "seed": 20262905,
+      "ordinal": 512,
+      "row_id": "0576c59e62c8ffbd17522f0e61b5942b39ef7a09816e9ecef61b2b596d73baf6:32",
+      "move": "c3b4",
+      "value": -0.1564814535281096,
+      "nodes": 8192,
+      "evaluations": 7984,
+      "completed_depth": 2
+    },
+    {
+      "seed": 20262905,
+      "ordinal": 1023,
+      "row_id": "f4a42dc5abf61893caed0c72f0df94a5fdab3c37332662634e85394f9247bd68:4",
+      "move": "d2d4",
+      "value": 0.23076751278236435,
+      "nodes": 8192,
+      "evaluations": 7415,
+      "completed_depth": 3
+    },
+    {
+      "seed": 20262906,
+      "ordinal": 0,
+      "row_id": "56f817cb0664bd19f58bff4085ebf6ee1134d84739765b1b8654334cc522ea01:43",
+      "move": "e5f4",
+      "value": 0.463426893516242,
+      "nodes": 8192,
+      "evaluations": 7560,
+      "completed_depth": 3
+    },
+    {
+      "seed": 20262906,
+      "ordinal": 512,
+      "row_id": "9d5cc92a6fc5f6aae2e2db678266a8084a09416deb1df8df50cf308dd90ce986:81",
+      "move": "f4f3",
+      "value": 0.9989315580891373,
+      "nodes": 8192,
+      "evaluations": 6899,
+      "completed_depth": 4
+    },
+    {
+      "seed": 20262906,
+      "ordinal": 1023,
+      "row_id": "89735a0b7105cb737c64d1500b59f7c52b9f8dac5651cc9876cea4dc34f6796d:36",
+      "move": "g7h8",
+      "value": -0.6595091491572079,
+      "nodes": 8192,
+      "evaluations": 6525,
+      "completed_depth": 4
+    }
+  ],
+  "first_epoch": 1791238153.6097362,
+  "deadline_epoch": 1791238753.6097362,
+  "finished_epoch": 1791238172.0583212,
+  "registration_sha256": "8ceb5f9ac1fd2809990b1c105d128a292aeebc61ca2887b603a4924d40a65a4b",
+  "auditor_sha256": "d5aa2b399661fcb77376fc262614d4b2c772aa2c338e4515e91135c3607926cf",
+  "strength_success_claimed": false
+}
