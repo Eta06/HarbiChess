@@ -1,0 +1,5 @@
+# UFUK PRIMARY CPU contingency
+
+The A100 source8 unit clock expired with93pass/2missing-fixturefail/0skip. Its formal admission03:10expired without admission. This separate CPU route does not convert that failure to success or claim CUDA qualification. It uses the same untouched producer3be5b87 and fixedteacher-origin e8, fresh optimizer/RNG, own-search/owncompleted-game labels only, and prospective eight epochs for BOTHseed61925/26. DifferentCPU/Torchruntime and64actorbatch are recorded before any CPU compute.
+
+All strength thresholds, paired roots/colors, independent96games perarm/seed, nominalnode budgets and latency gates remain unchanged. No outcome-based candidate or epoch selection. CPU throughput and artifactspace feasibility remain unmeasured; an incomplete route is not strength success. Rootaudits must use actual64masks/nativecpu-v3/noCUDA RNG and all epoch raw histories, K8first/last and18raw packets, six actual mutations and strict fresh resume. TrainedcandidateCUDA and AppleMetal remain untested untilhardware is available. No originality claim.
