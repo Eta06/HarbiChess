@@ -1,0 +1,25 @@
+{
+  "cgroup_budget_sha256": "a53079851ab9fb63b65dd5bef0d0e8fb01d6864ebfbf2389dcdbcab39b30289c",
+  "controller_sha256": "ce53fd84fa538e8eee717567e3d992c3b3b4c6ede5c2163da8573fe3b1a8d8e9",
+  "deadline_epoch": 1791241146.020892,
+  "dispatch_head": "ad91a6cd19aad1d2eaa5a560adead225684f81dd",
+  "guardian": {
+    "pid": 991477,
+    "start_ticks": 18238465
+  },
+  "manifest_sha256": "96cbd9e6f9e863b5e9b25addaacc4e10fa891308abd200255cc77f0f14774033",
+  "schema": "classical-state-v7-single-dispatch-registration-v1",
+  "source_files": {
+    "ROOT-approval.json": "8237f7421e540d5da689f629607d465c43f153d1bd421dd583238fd2c883cfcd",
+    "allowlist.json": "0324e6ac432fa9ded53f83f2ed1ca704c22be322b5d947acfd3a6d879c951745",
+    "control.json": "8a0f4138020e36ea4027ee9893834a3bf01dc88611efa72c1b76472ad0b76db9",
+    "manifest.json": "96cbd9e6f9e863b5e9b25addaacc4e10fa891308abd200255cc77f0f14774033",
+    "raw_capsule_v7.py": "6597d74f7110ddf8ebae3fea1f75d842e4347763061125527ab66b58f61623db",
+    "receiver_v7.py": "d4b25c519543858284eb6b7781286ea38f72da8d91b43f168c3ace6db4a9df13",
+    "release_transport_v7.py": "d5597ffae967d229551cd7db184f9be8cfd9b56e39a90b7bb14c1f46a2079052",
+    "workflow_receiver_v7.py": "bae2986a93b12f75fe97965598d1f84592a14c64a3b5fa3d9653e128e25f9172"
+  },
+  "started_epoch": 1791235746.020892,
+  "status": "ROOT-approved-frozen-controller",
+  "workflow_sha256": "674b9586d19ebb75bcc8bb8eb2e587f99ae963d2166bbbac0f64d5900b7e1591"
+}
