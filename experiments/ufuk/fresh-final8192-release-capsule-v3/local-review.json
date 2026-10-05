@@ -1,0 +1,37 @@
+{
+  "file_sha256": {
+    "README.md": "02ac24694ec56c1119e0edc60745ad82dd7547f52fb54a08e7bf750b5eb03011",
+    "ROOT-approval-PENDING.json": "94e8801b13a0d68c68999881419d9c8da6576971b7145466dcb438e69fdd0272",
+    "allowlist-PENDING.json": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356",
+    "artifact_capsule.py": "44078a3aeea3a8bb1fecf387d5b3003efa0a7e85038b48ee145a2029f7ba15c5",
+    "authorize_manifest.py": "c44b8e35d867377b9d6340e00e71faa7ff0a22692b3ff1349583f2e1330fa8c6",
+    "fresh-final8192-release-capsule-v3.yml": "3f194a7ec459b3f9deaef262dd8f7fccf5bf2ebea16ee8beddef6651f53257c3",
+    "launcher_inputs.py": "da34d8c6238748ff53a6563e819d65007ba972f6fd47fab18559e8b546d338fe",
+    "manifest-8192-DRAFT.json": "c74ec9f7bb5e14d7a64e0a4d26a48bb4945319b67f7b7f86b7c095677fd05a6d",
+    "native_delta_codec.py": "878868940b5bae15c182dce55215320b5f0ba3692b9c5eac26988204832a31d6",
+    "release_transport_frozen.py": "035821c943f0840fc02f0a2019516095bf9e43078a6843b745033456b20c7f7e",
+    "test_artifact_capsule.py": "f1e0b893bbc30e8bd680919f896e9f47c1f7a75caed551eb7001127e8245d9f8",
+    "transport-control-PENDING.json": "024510173ebaecd2c2bac005c8698f5da8547b9f2f29d7fc7c8fe8449fd6a3a9"
+  },
+  "network_requests": 0,
+  "new_permanent_assets_if_success": 22,
+  "old_v2_artifact_retained": 11365929280,
+  "old_v2_failed_run_retained": 37360596243,
+  "oldclock_no_reset": {
+    "deadline": 1791228774.7925532,
+    "first": 1791226974.7925532
+  },
+  "opaque_payload_files_written": 0,
+  "reported_existing_plus_new": 188,
+  "same_capsule_sha256": "3f6fef499cb166bbad466d4983954350df71b7337be4ceeff2d53ca2a2fb1271",
+  "same_four_originals": true,
+  "same_raw_chunk_count": 21,
+  "schema": "fresh-final8192-release-recovery-proposal-review-v3",
+  "status": "DRAFT-unexecuted-rootapproval-pending",
+  "tests": {
+    "passed": 24,
+    "ruff": "PASS",
+    "seconds": 0.16,
+    "skipped": 0
+  }
+}
