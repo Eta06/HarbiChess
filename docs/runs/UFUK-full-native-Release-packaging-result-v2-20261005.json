@@ -1,0 +1,88 @@
+{
+  "actions_run_id": 37245679397,
+  "actions_source_commit": "ef3ee3c9075c971c9fb00f4dbbc95abd4c60a408",
+  "cloud_environment_public_HEAD": "403; mandatory local proxy preserved; native GitHub runner willverifydownload",
+  "first_failed_attempt_preserved": {
+    "reason": "registration committed afterproducer231 missing from pinned source checkout; no archive published",
+    "repair": "read original registration input SHA d2b8df68f0db92b1712dcfeba70a63d582b721270fb679e093d9f393ce25792c with exactschema/source guard; originalsourcebundle unchanged",
+    "root": "/content/harbichess-runs/full-native-Release-backup-20261004"
+  },
+  "manifest_git_path": "docs/runs/UFUK-A100-release-transport-manifest-20261004.json",
+  "packaging_result": {
+    "asset_count": 84,
+    "base_url": "https://ethnic-ordering-port-tourism.trycloudflare.com",
+    "controller_sha256": "1b73d1add5bacbb6aaee610cc13b877c0dfe24750815ff22955205bcb7b3a715",
+    "finished_epoch": 1791158144.1257904,
+    "helper_sha256": "4e823c924ae09852eadc8390df2f5ef53b87e14c32bece4b4314aaccf781d630",
+    "original_packaging_deadline_epoch": 1791158639.408101,
+    "package_dirs": [
+      "/content/harbichess-runs/release-packages/seed-20261205-through-00000040-297361f5a46f",
+      "/content/harbichess-runs/release-packages/seed-20261206-through-00000040-84c51f79dbcb"
+    ],
+    "phases": [
+      {
+        "finished_epoch": 1791157778.2332869,
+        "name": "pack-20261205",
+        "returncode": 0
+      },
+      {
+        "finished_epoch": 1791158135.9102056,
+        "name": "pack-20261206",
+        "returncode": 0
+      },
+      {
+        "finished_epoch": 1791158144.120691,
+        "name": "manifest",
+        "returncode": 0
+      }
+    ],
+    "scope": "No model promotion; claim Release backup only after verified readback.",
+    "server_expiry_epoch": 1791180000,
+    "server_pid": 86190,
+    "source_commit": "2312652dc52a894e9726f48321117cf114270355",
+    "started_epoch": 1791157439.408101,
+    "status": "packaged84-full-native-and-input-source-archives-not-yet-Release-backup",
+    "transport_manifest": "/content/harbichess-runs/release-packages/fullgame40-transport-manifest-20261004.json",
+    "transport_manifest_sha256": "fed25ce174eb5c5aded7363588cc4567d54ad05d898d57fa192f14c903608f9e",
+    "tunnel_pid": 83183
+  },
+  "per_seed_package_inventory_sha256": {
+    "/content/harbichess-runs/release-packages/seed-20261205-through-00000040-297361f5a46f/package.json": "297361f5a46fee703819c8073b508f1c58e2cd09e004e510be1eb521cf627671",
+    "/content/harbichess-runs/release-packages/seed-20261206-through-00000040-84c51f79dbcb/package.json": "84c51f79dbcb15b86191be12a9a38e67129a8edc08225dd098aa8dc9d9652bab"
+  },
+  "readonly_local_server_head": {
+    "content_length": "33077346",
+    "first_asset": {
+      "bytes": 33077346,
+      "name": "sha256-05ee1f04f3f149143800ea87b3d0b20623baa5960f1260dcc0fb28d3a097fa5c.tar.gz",
+      "sha256": "05ee1f04f3f149143800ea87b3d0b20623baa5960f1260dcc0fb28d3a097fa5c",
+      "url": "https://ethnic-ordering-port-tourism.trycloudflare.com/sha256-05ee1f04f3f149143800ea87b3d0b20623baa5960f1260dcc0fb28d3a097fa5c.tar.gz"
+    },
+    "status": 200
+  },
+  "schema": "ufuk-full-native-Release-packaging-result-v2",
+  "scope": "Preparation and transport only. Full Release persistence unverified until all84anonymousfullreadbacks pass. No model promotion.",
+  "status": "84-source-and-inputs-full-native-archives-packaged-Release-readback-pending",
+  "versioned_launch_receipt": {
+    "command": [
+      "/usr/bin/python3",
+      "/content/harbichess-fullgame-method2-inputs/full-native-Release-backup-v2-20261004/remote_backup_owner.py",
+      "--root",
+      "/content/harbichess-runs/full-native-Release-backup-v2-20261004",
+      "--helper",
+      "/content/harbichess-fullgame-method2-inputs/full-native-Release-backup-v2-20261004/a100_release_backup.py",
+      "--helper-sha256",
+      "4e823c924ae09852eadc8390df2f5ef53b87e14c32bece4b4314aaccf781d630",
+      "--packaging-seconds",
+      "1200"
+    ],
+    "first_epoch": 1791157439.3475487,
+    "hard_deadline_epoch": 1791180000,
+    "helper_sha256": "4e823c924ae09852eadc8390df2f5ef53b87e14c32bece4b4314aaccf781d630",
+    "pid": 83182,
+    "root": "/content/harbichess-runs/full-native-Release-backup-v2-20261004",
+    "source_commit": "2312652dc52a894e9726f48321117cf114270355",
+    "status": "remote-owned-full-native-backup-packaging-started-no-Release-claim",
+    "training_and_arenas_untouched": true
+  }
+}
