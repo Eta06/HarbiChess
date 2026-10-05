@@ -1,0 +1,27 @@
+{
+  "status": "failed-preserved",
+  "rows": [
+    {
+      "id": 37360596243,
+      "status": "completed",
+      "conclusion": "success",
+      "head_sha": "28621d9e5abea1d6a629fae97a44d5f42e0521d3",
+      "html_url": "https://github.com/Eta06/HarbiChess/actions/runs/37360596243",
+      "display_title": "Final8192 chunk / 57a288d5fd01 / 0",
+      "created_at": "2026-10-05T19:03:21Z",
+      "updated_at": "2026-10-05T19:04:46Z",
+      "mode": "chunk",
+      "ordinal": 0,
+      "manifest_sha256": "57a288d5fd013dd0c38980ca3ec8c0b554a38bc3431ec9188ba3a8606b2e7dd4",
+      "original_deadline_epoch": 1791228774.7925532
+    }
+  ],
+  "original_first_epoch": 1791226974.7925532,
+  "original_deadline_epoch": 1791228774.7925532,
+  "finished_epoch": 1791227091.0667017,
+  "manifest_sha256": "57a288d5fd013dd0c38980ca3ec8c0b554a38bc3431ec9188ba3a8606b2e7dd4",
+  "GPU_used": false,
+  "new_paid_compute": false,
+  "public_backup_not_yet_independently_readback": true,
+  "error": "ValueError('api-failed')"
+}
