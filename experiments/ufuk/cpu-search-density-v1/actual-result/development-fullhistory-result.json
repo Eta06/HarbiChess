@@ -1,0 +1,523 @@
+{
+  "schema": "cpu-density-independent-fullhistory-arena-audit-v1",
+  "status": "PASS-fullhistory-integrity",
+  "screen_result": "FAIL",
+  "advance_arms": [],
+  "rows": [
+    {
+      "seed": 20262105,
+      "arm": "e8",
+      "opponent": "SF512",
+      "sha256": "cfa84cbddade2c39ce1c14ef45bd81bcb1d4bf4ad481dea596a73e57bbfa6d06",
+      "candidate_sha256": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03",
+      "score": 0.0,
+      "wins": 0,
+      "draws": 0,
+      "losses": 16,
+      "unknown_caps": 0,
+      "legal_continuation_plies": 828,
+      "actual_SF_nodes": 214358,
+      "wall_seconds": 19.100944717996754,
+      "bootstrap_pair_95": [
+        0.0,
+        0.0
+      ],
+      "hoeffding_pair_95": [
+        0,
+        0.48016139565996035
+      ]
+    },
+    {
+      "seed": 20262106,
+      "arm": "e8",
+      "opponent": "SF512",
+      "sha256": "a93e774f1b515a8c9637cfa9135bd53b7de60f9213f5de69281d15ff279db3ee",
+      "candidate_sha256": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03",
+      "score": 0.0,
+      "wins": 0,
+      "draws": 0,
+      "losses": 16,
+      "unknown_caps": 0,
+      "legal_continuation_plies": 828,
+      "actual_SF_nodes": 214358,
+      "wall_seconds": 17.74852884799475,
+      "bootstrap_pair_95": [
+        0.0,
+        0.0
+      ],
+      "hoeffding_pair_95": [
+        0,
+        0.48016139565996035
+      ]
+    },
+    {
+      "seed": 20262105,
+      "arm": "sparse16",
+      "opponent": "e8",
+      "sha256": "ca636f695b873e1f00b1a26e25589096858e87a9b1ae2977d287a146d9598fc6",
+      "candidate_sha256": "7b8f47f462bd4e7ed6c140d0cb3bedc5dcb39832a0cceafc5977ca397ebb394e",
+      "score": 0.46875,
+      "wins": 6,
+      "draws": 3,
+      "losses": 7,
+      "unknown_caps": 0,
+      "legal_continuation_plies": 1436,
+      "actual_SF_nodes": 0,
+      "wall_seconds": 57.73360508700716,
+      "bootstrap_pair_95": [
+        0.25,
+        0.6875
+      ],
+      "hoeffding_pair_95": [
+        0,
+        0.9489113956599604
+      ]
+    },
+    {
+      "seed": 20262105,
+      "arm": "sparse16",
+      "opponent": "SF512",
+      "sha256": "8bf88402e7129a6e406c5de5c48b550332f3bb5980fa64b633f47dfc8669b131",
+      "candidate_sha256": "7b8f47f462bd4e7ed6c140d0cb3bedc5dcb39832a0cceafc5977ca397ebb394e",
+      "score": 0.0,
+      "wins": 0,
+      "draws": 0,
+      "losses": 16,
+      "unknown_caps": 0,
+      "legal_continuation_plies": 890,
+      "actual_SF_nodes": 230348,
+      "wall_seconds": 20.141706463007722,
+      "bootstrap_pair_95": [
+        0.0,
+        0.0
+      ],
+      "hoeffding_pair_95": [
+        0,
+        0.48016139565996035
+      ]
+    },
+    {
+      "seed": 20262106,
+      "arm": "sparse16",
+      "opponent": "e8",
+      "sha256": "10364f6562065396e015613f6809c21c80a927a2e5112b8bfad9241fa0e9b166",
+      "candidate_sha256": "c290ebbde8c721c0002fb2244d24b8670a2f549d22195ea7f588bd9e43965087",
+      "score": 0.3125,
+      "wins": 3,
+      "draws": 4,
+      "losses": 9,
+      "unknown_caps": 0,
+      "legal_continuation_plies": 1574,
+      "actual_SF_nodes": 0,
+      "wall_seconds": 60.512906712974655,
+      "bootstrap_pair_95": [
+        0.125,
+        0.53125
+      ],
+      "hoeffding_pair_95": [
+        0,
+        0.7926613956599604
+      ]
+    },
+    {
+      "seed": 20262106,
+      "arm": "sparse16",
+      "opponent": "SF512",
+      "sha256": "973495a697a62b5e4a0d1a8de5c34c7d196c215c772847355e2906ae82f9380f",
+      "candidate_sha256": "c290ebbde8c721c0002fb2244d24b8670a2f549d22195ea7f588bd9e43965087",
+      "score": 0.09375,
+      "wins": 0,
+      "draws": 3,
+      "losses": 13,
+      "unknown_caps": 0,
+      "legal_continuation_plies": 1107,
+      "actual_SF_nodes": 285272,
+      "wall_seconds": 23.175954410020495,
+      "bootstrap_pair_95": [
+        0.0,
+        0.21875
+      ],
+      "hoeffding_pair_95": [
+        0,
+        0.5739113956599604
+      ]
+    },
+    {
+      "seed": 20262105,
+      "arm": "all16",
+      "opponent": "e8",
+      "sha256": "c6752b4591ee5014258e99ac02d8fb527117848e53658d273704ad0934b7a9a7",
+      "candidate_sha256": "18c674f83238c8128199ec0b1e6e30bfdca64013284e1da5158817ff56fb70ba",
+      "score": 0.5625,
+      "wins": 8,
+      "draws": 2,
+      "losses": 6,
+      "unknown_caps": 0,
+      "legal_continuation_plies": 1607,
+      "actual_SF_nodes": 0,
+      "wall_seconds": 60.4466624299821,
+      "bootstrap_pair_95": [
+        0.375,
+        0.75
+      ],
+      "hoeffding_pair_95": [
+        0.08233860434003965,
+        1
+      ]
+    },
+    {
+      "seed": 20262105,
+      "arm": "all16",
+      "opponent": "SF512",
+      "sha256": "3dcad1e394f115083da96fc6e57a93c642b310565d72bf3bc5a98d30547e17d6",
+      "candidate_sha256": "18c674f83238c8128199ec0b1e6e30bfdca64013284e1da5158817ff56fb70ba",
+      "score": 0.0625,
+      "wins": 0,
+      "draws": 2,
+      "losses": 14,
+      "unknown_caps": 0,
+      "legal_continuation_plies": 868,
+      "actual_SF_nodes": 224260,
+      "wall_seconds": 17.605602376977913,
+      "bootstrap_pair_95": [
+        0.0,
+        0.15625
+      ],
+      "hoeffding_pair_95": [
+        0,
+        0.5426613956599604
+      ]
+    },
+    {
+      "seed": 20262106,
+      "arm": "all16",
+      "opponent": "e8",
+      "sha256": "ab94dbde9e9318af35a88b9069339e9154d76bb4645c029312ba3baca6e919ea",
+      "candidate_sha256": "0833fa276185147057df0fff32f339aa69797d4ef9b2f0bdfe9b7d241ac24e4c",
+      "score": 0.65625,
+      "wins": 8,
+      "draws": 5,
+      "losses": 3,
+      "unknown_caps": 0,
+      "legal_continuation_plies": 1397,
+      "actual_SF_nodes": 0,
+      "wall_seconds": 50.76598938999814,
+      "bootstrap_pair_95": [
+        0.5,
+        0.8125
+      ],
+      "hoeffding_pair_95": [
+        0.17608860434003965,
+        1
+      ]
+    },
+    {
+      "seed": 20262106,
+      "arm": "all16",
+      "opponent": "SF512",
+      "sha256": "4d01c0039b0854e0783ae805b5a2f9c8a90a53376978ff7b0741a2455bde6ba7",
+      "candidate_sha256": "0833fa276185147057df0fff32f339aa69797d4ef9b2f0bdfe9b7d241ac24e4c",
+      "score": 0.03125,
+      "wins": 0,
+      "draws": 1,
+      "losses": 15,
+      "unknown_caps": 0,
+      "legal_continuation_plies": 931,
+      "actual_SF_nodes": 240553,
+      "wall_seconds": 18.832065785012674,
+      "bootstrap_pair_95": [
+        0.0,
+        0.09375
+      ],
+      "hoeffding_pair_95": [
+        0,
+        0.5114113956599604
+      ]
+    },
+    {
+      "seed": 20262105,
+      "arm": "all64",
+      "opponent": "e8",
+      "sha256": "b449828e82c171161298e56dfe50799a6d7a4b132b1369c9608159fc3cea5abc",
+      "candidate_sha256": "96981a5a6fffc662ceea69caf981ceec171ff7e516095c1edc8d8bce564f06d8",
+      "score": 0.4375,
+      "wins": 3,
+      "draws": 8,
+      "losses": 5,
+      "unknown_caps": 0,
+      "legal_continuation_plies": 1915,
+      "actual_SF_nodes": 0,
+      "wall_seconds": 75.11749015600071,
+      "bootstrap_pair_95": [
+        0.25,
+        0.59375
+      ],
+      "hoeffding_pair_95": [
+        0,
+        0.9176613956599604
+      ]
+    },
+    {
+      "seed": 20262105,
+      "arm": "all64",
+      "opponent": "SF512",
+      "sha256": "1e85176391adc86bc14b47381317f29e2562cf25a0f9f0314c336424b050ff32",
+      "candidate_sha256": "96981a5a6fffc662ceea69caf981ceec171ff7e516095c1edc8d8bce564f06d8",
+      "score": 0.0625,
+      "wins": 0,
+      "draws": 2,
+      "losses": 14,
+      "unknown_caps": 0,
+      "legal_continuation_plies": 938,
+      "actual_SF_nodes": 242260,
+      "wall_seconds": 18.872990578995086,
+      "bootstrap_pair_95": [
+        0.0,
+        0.15625
+      ],
+      "hoeffding_pair_95": [
+        0,
+        0.5426613956599604
+      ]
+    },
+    {
+      "seed": 20262106,
+      "arm": "all64",
+      "opponent": "e8",
+      "sha256": "66f833aeec842b9f99a19f821245afb42cf394ea8cb7b66c5fcd28f37100e88b",
+      "candidate_sha256": "977d0f0fae64c105a3679c65b0ce6963459767277b8ac5f5a68b11172f291b04",
+      "score": 0.625,
+      "wins": 9,
+      "draws": 2,
+      "losses": 5,
+      "unknown_caps": 0,
+      "legal_continuation_plies": 1285,
+      "actual_SF_nodes": 0,
+      "wall_seconds": 48.46267579999403,
+      "bootstrap_pair_95": [
+        0.53125,
+        0.75
+      ],
+      "hoeffding_pair_95": [
+        0.14483860434003965,
+        1
+      ]
+    },
+    {
+      "seed": 20262106,
+      "arm": "all64",
+      "opponent": "SF512",
+      "sha256": "b2351aa41a1a2f92f3446fba9f06a9b981452c3b252a0d16e5d7e2cdd445a7ac",
+      "candidate_sha256": "977d0f0fae64c105a3679c65b0ce6963459767277b8ac5f5a68b11172f291b04",
+      "score": 0.0,
+      "wins": 0,
+      "draws": 0,
+      "losses": 16,
+      "unknown_caps": 0,
+      "legal_continuation_plies": 994,
+      "actual_SF_nodes": 257101,
+      "wall_seconds": 20.596920334995957,
+      "bootstrap_pair_95": [
+        0.0,
+        0.0
+      ],
+      "hoeffding_pair_95": [
+        0,
+        0.48016139565996035
+      ]
+    }
+  ],
+  "contrasts": [
+    {
+      "seed": 20262105,
+      "arm": "sparse16",
+      "paired_SF_delta_by_game": {
+        "(0, 'white')": 0.0,
+        "(0, 'black')": 0.0,
+        "(1, 'white')": 0.0,
+        "(1, 'black')": 0.0,
+        "(2, 'white')": 0.0,
+        "(2, 'black')": 0.0,
+        "(3, 'white')": 0.0,
+        "(3, 'black')": 0.0,
+        "(4, 'white')": 0.0,
+        "(4, 'black')": 0.0,
+        "(5, 'white')": 0.0,
+        "(5, 'black')": 0.0,
+        "(6, 'white')": 0.0,
+        "(6, 'black')": 0.0,
+        "(7, 'white')": 0.0,
+        "(7, 'black')": 0.0
+      },
+      "paired_SF_mean_gain": 0.0,
+      "screen_gates": {
+        "direct_gt_060": false,
+        "SF_gain_gt_010": false,
+        "finalSF_ge_025": false,
+        "caps_le_005": true
+      },
+      "passed_screen": false
+    },
+    {
+      "seed": 20262106,
+      "arm": "sparse16",
+      "paired_SF_delta_by_game": {
+        "(0, 'white')": 0.0,
+        "(0, 'black')": 0.0,
+        "(1, 'white')": 0.0,
+        "(1, 'black')": 0.0,
+        "(2, 'white')": 0.0,
+        "(2, 'black')": 0.0,
+        "(3, 'white')": 0.5,
+        "(3, 'black')": 0.0,
+        "(4, 'white')": 0.0,
+        "(4, 'black')": 0.0,
+        "(5, 'white')": 0.5,
+        "(5, 'black')": 0.5,
+        "(6, 'white')": 0.0,
+        "(6, 'black')": 0.0,
+        "(7, 'white')": 0.0,
+        "(7, 'black')": 0.0
+      },
+      "paired_SF_mean_gain": 0.09375,
+      "screen_gates": {
+        "direct_gt_060": false,
+        "SF_gain_gt_010": false,
+        "finalSF_ge_025": false,
+        "caps_le_005": true
+      },
+      "passed_screen": false
+    },
+    {
+      "seed": 20262105,
+      "arm": "all16",
+      "paired_SF_delta_by_game": {
+        "(0, 'white')": 0.0,
+        "(0, 'black')": 0.0,
+        "(1, 'white')": 0.0,
+        "(1, 'black')": 0.0,
+        "(2, 'white')": 0.0,
+        "(2, 'black')": 0.0,
+        "(3, 'white')": 0.0,
+        "(3, 'black')": 0.0,
+        "(4, 'white')": 0.0,
+        "(4, 'black')": 0.0,
+        "(5, 'white')": 0.0,
+        "(5, 'black')": 0.5,
+        "(6, 'white')": 0.0,
+        "(6, 'black')": 0.0,
+        "(7, 'white')": 0.5,
+        "(7, 'black')": 0.0
+      },
+      "paired_SF_mean_gain": 0.0625,
+      "screen_gates": {
+        "direct_gt_060": false,
+        "SF_gain_gt_010": false,
+        "finalSF_ge_025": false,
+        "caps_le_005": true
+      },
+      "passed_screen": false
+    },
+    {
+      "seed": 20262106,
+      "arm": "all16",
+      "paired_SF_delta_by_game": {
+        "(0, 'white')": 0.0,
+        "(0, 'black')": 0.0,
+        "(1, 'white')": 0.0,
+        "(1, 'black')": 0.0,
+        "(2, 'white')": 0.0,
+        "(2, 'black')": 0.0,
+        "(3, 'white')": 0.0,
+        "(3, 'black')": 0.0,
+        "(4, 'white')": 0.0,
+        "(4, 'black')": 0.0,
+        "(5, 'white')": 0.0,
+        "(5, 'black')": 0.0,
+        "(6, 'white')": 0.5,
+        "(6, 'black')": 0.0,
+        "(7, 'white')": 0.0,
+        "(7, 'black')": 0.0
+      },
+      "paired_SF_mean_gain": 0.03125,
+      "screen_gates": {
+        "direct_gt_060": true,
+        "SF_gain_gt_010": false,
+        "finalSF_ge_025": false,
+        "caps_le_005": true
+      },
+      "passed_screen": false
+    },
+    {
+      "seed": 20262105,
+      "arm": "all64",
+      "paired_SF_delta_by_game": {
+        "(0, 'white')": 0.0,
+        "(0, 'black')": 0.0,
+        "(1, 'white')": 0.0,
+        "(1, 'black')": 0.0,
+        "(2, 'white')": 0.5,
+        "(2, 'black')": 0.0,
+        "(3, 'white')": 0.0,
+        "(3, 'black')": 0.0,
+        "(4, 'white')": 0.0,
+        "(4, 'black')": 0.0,
+        "(5, 'white')": 0.0,
+        "(5, 'black')": 0.0,
+        "(6, 'white')": 0.0,
+        "(6, 'black')": 0.5,
+        "(7, 'white')": 0.0,
+        "(7, 'black')": 0.0
+      },
+      "paired_SF_mean_gain": 0.0625,
+      "screen_gates": {
+        "direct_gt_060": false,
+        "SF_gain_gt_010": false,
+        "finalSF_ge_025": false,
+        "caps_le_005": true
+      },
+      "passed_screen": false
+    },
+    {
+      "seed": 20262106,
+      "arm": "all64",
+      "paired_SF_delta_by_game": {
+        "(0, 'white')": 0.0,
+        "(0, 'black')": 0.0,
+        "(1, 'white')": 0.0,
+        "(1, 'black')": 0.0,
+        "(2, 'white')": 0.0,
+        "(2, 'black')": 0.0,
+        "(3, 'white')": 0.0,
+        "(3, 'black')": 0.0,
+        "(4, 'white')": 0.0,
+        "(4, 'black')": 0.0,
+        "(5, 'white')": 0.0,
+        "(5, 'black')": 0.0,
+        "(6, 'white')": 0.0,
+        "(6, 'black')": 0.0,
+        "(7, 'white')": 0.0,
+        "(7, 'black')": 0.0
+      },
+      "paired_SF_mean_gain": 0.0,
+      "screen_gates": {
+        "direct_gt_060": true,
+        "SF_gain_gt_010": false,
+        "finalSF_ge_025": false,
+        "caps_le_005": true
+      },
+      "passed_screen": false
+    }
+  ],
+  "games": 224,
+  "legal_continuation_plies": 16598,
+  "actual_SF_nodes": 1908510,
+  "source_commit": "4cae08522ac940746cf9127ca8ce4a6b63a47408",
+  "protocol_sha256": "dea17e589462bad358f033d801d16f0078a64906fe1fcf2d03bea06c13a6ba32",
+  "audit_helper_sha256": "1bc414b6d73eddf4903d1b3287669f43cfbb6def16bec82187e3a3d376f49f7b",
+  "protected_files_unchanged": true,
+  "scope": "fixed known conventional roots, not virgin independent confirmation; no model promotion",
+  "uncertainty": "opening-color pairs bootstrap/Hoeffding descriptive;8 known families too small for independent promotion. Same roots across seeds, not independent families across seeds. Degenerate empirical bootstrap0 is not populationwin-probability0",
+  "strength_success_claimed": false,
+  "GPU_used": false
+}
