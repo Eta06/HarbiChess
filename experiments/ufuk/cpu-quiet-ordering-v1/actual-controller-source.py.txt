@@ -1,0 +1,336 @@
+"""ROOT-only readiness/proof/freshfit owner. Default no compute/publication."""
+
+import argparse
+import dataclasses
+import hashlib
+import importlib.util
+import json
+import os
+import sys
+import time
+from pathlib import Path
+
+STAGE = Path("/workspace/work/harbichess/cpu-quiet-ordering-proposal")
+CLASSIC = Path("/workspace/HarbiChess/experiments/ufuk/cpu-classical-own-v1")
+CORE = Path("/workspace/work/harbichess/cpu-additive-source-6fcc8b4")
+ACTUAL = Path("/workspace/work/harbichess/cpu-classical-own-v1-actual")
+SUPPORT = Path("/workspace/work/harbichess/classical-production-freeze-proposal/freeze_launch.py")
+SEEDS = (20262905, 20262906)
+END = 1791273600.0
+
+
+def sha(path):
+    return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+
+
+def load(path, name):
+    spec = importlib.util.spec_from_file_location(name, path)
+    module = importlib.util.module_from_spec(spec)
+    sys.modules[name] = module
+    spec.loader.exec_module(module)
+    return module
+
+
+def input_bindings():
+    rows = {}
+    for seed in SEEDS:
+        config = ACTUAL / "production-registration" / f"{seed}-production-config.json"
+        journal = Path(
+            f"/dev/shm/harbichess-classical-own-{seed}-20261005/actions-00016384.json.gz"
+        )
+        result = json.loads((journal.parent / "result.json").read_text())
+        c = json.loads(config.read_text())
+        if result["status"] != "PASS-fixed16384-classical-own-data-not-trained" or (
+            result["final_journal_sha256"] != sha(journal)
+            or c["seed"] != seed
+            or c["max_actions"] != 16384
+            or result["original_first"] != c["original_first_epoch"]
+            or result["original_deadline"] != c["original_deadline_epoch"]
+        ):
+            raise ValueError("actual immutable fixedFINAL16384 producer receipt required")
+        rows[seed] = dict(
+            config=str(config),
+            journal=str(journal),
+            config_sha256=sha(config),
+            journal_sha256=sha(journal),
+        )
+    return rows
+
+
+def zero_witnesses(config, path, search, guard):
+    from journal_v3 import read, replay
+    from ordered_search import search_type
+    from value import ClassicalValue
+
+    packets = replay(read(path), config)
+    boards = [board for _, _, positions, _ in packets for board, _, _ in positions]
+    chosen = [0, len(boards) // 2, len(boards) - 1]
+    output = []
+    newtype = search_type(search.BudgetSearch)
+    for index in chosen:
+        guard()
+        board = boards[index]
+        original = search.BudgetSearch(ClassicalValue().nonterminal, guard=guard).search(board)
+        changed = newtype(ClassicalValue().nonterminal, guard=guard).search(board)
+        if original != changed:
+            raise ValueError("actual human-prior zero-order all-result-packet identity failed")
+        packet = dataclasses.asdict(original)
+        packet["move"] = original.move.uci() if original.move else None
+        output.append(
+            dict(
+                known_flat_index=index,
+                root_fen=board.root().fen(),
+                fullmoves=[m.uci() for m in board.move_stack],
+                packet=packet,
+            )
+        )
+    return output
+
+
+def verify_phase(path, status, rows):
+    path = Path(path)
+    r = json.loads((path / "result.json").read_text())
+    if (
+        r["status"] != status
+        or r["finished"] > r["deadline"]
+        or r["inputs"] != {str(k): v for k, v in rows.items()}
+    ):
+        raise ValueError("bound completed original phase receipt required")
+    inventory = json.loads((path / "code-inventory.json").read_text())
+    if any(sha(name) != expected for name, expected in inventory.items()):
+        raise ValueError("original phase code bytes changed")
+    return r
+
+
+def main():
+    p = argparse.ArgumentParser(description=__doc__)
+    p.add_argument("--phase", choices=["readiness", "proof", "fit"], required=True)
+    p.add_argument("--output", type=Path, required=True)
+    p.add_argument("--readiness", type=Path)
+    p.add_argument("--proof", type=Path)
+    p.add_argument("--cpu-core", type=int, default=1)
+    p.add_argument(
+        "--guardian-catalog",
+        type=Path,
+        default=Path("/workspace/work/harbichess/continuation-20261005/operator-catalog.json"),
+    )
+    p.add_argument("--execute", action="store_true")
+    a = p.parse_args()
+    support = load(SUPPORT, "quiet_controller_owned_support")
+    if sha(SUPPORT) != "7836216d7afde3f86fa124ccdb3542419b8a89e3ecdca4d2d3abd1bfe2e78f7f":
+        raise ValueError("pinned ownership support differs")
+    g = support.proc(991477)
+    if g is None or g["state"] == "Z" or g["start_ticks"] != 18238465:
+        raise ValueError("actual guardian identity differs")
+    argv = Path("/proc/991477/cmdline").read_bytes().split(b"\0")
+    if str(a.guardian_catalog).encode() not in argv or str(int(END)).encode() not in argv:
+        raise ValueError("actual guardian catalog/end differs")
+    q = json.loads((STAGE / "protocol-DRAFT.json").read_text())
+    for name, expected in q["ordering_helper_sha256"].items():
+        if sha(STAGE / name) != expected:
+            raise ValueError("frozen ordering proposal changed")
+    for name, expected in q["classical_helper_sha256"].items():
+        if sha(CLASSIC / name) != expected:
+            raise ValueError("actual qualified classical dependency changed")
+    if sha(CLASSIC / "arena/search.py") != q["original_search_sha256"] or (
+        sha(CLASSIC / "prior.json") != q["evaluator_prior_sha256"]
+    ):
+        raise ValueError("original search/frozen human prior differs")
+    rows = input_bindings()
+    prior = None
+    if a.phase != "readiness":
+        if a.readiness is None:
+            raise ValueError("actual readiness phase required before any SGD")
+        prior = verify_phase(
+            a.readiness, "PASS-both-quiet-data-and-actual-zero-search-not-trained", rows
+        )
+        for seed in SEEDS:
+            file = a.readiness / f"{seed}-readiness.json"
+            if sha(file) != prior["seed_results"][str(seed)]["sha256"]:
+                raise ValueError("immutable seed readiness changed")
+    if a.phase == "fit":
+        if a.proof is None:
+            raise ValueError("actual whole8/fresh8 proof required")
+        proof = verify_phase(a.proof, "PASS-both-sixloads-quiet-native-proof-not-strength", rows)
+        for seed in SEEDS:
+            item = proof["seed_results"][str(seed)]
+            if sha(item["path"]) != item["sha256"]:
+                raise ValueError("actual proof receipt changed")
+            receipt = json.loads(Path(item["path"]).read_text())
+            if receipt["status"] != "PASS-quiet-order-whole8-pause4-freshresume8-not-strength":
+                raise ValueError("actual proof PASS required")
+            files = receipt["strict_fresh_native_loads"]
+            if len(files) != 6 or [x["step"] for x in files] != [0, 4, 8, 0, 4, 8]:
+                raise ValueError("all six native freshloads required")
+            if any(sha(x["path"]) != x["sha256"] for x in files):
+                raise ValueError("native payload mutated")
+            if Path(files[2]["path"]).read_bytes() != Path(files[5]["path"]).read_bytes():
+                raise ValueError("whole/freshresume8 native mismatch")
+    if a.output.exists():
+        raise FileExistsError("publish-once new phase root required")
+    if not a.execute:
+        print(json.dumps(dict(status="validated-no-clock-or-compute", inputs=rows, phase=a.phase)))
+        return
+    seconds = 1800 if a.phase == "fit" else 600
+    first = time.time()
+    deadline = first + seconds
+    if deadline > END:
+        raise ValueError("phase cannot fit original hard08")
+    a.output.mkdir(parents=True, exist_ok=False)
+    publish = support.publish
+    files = [STAGE / n for n in q["ordering_helper_sha256"]] + [
+        CLASSIC / n for n in q["classical_helper_sha256"]
+    ]
+    files += [Path(__file__), SUPPORT, CLASSIC / "arena/search.py", CLASSIC / "prior.json"]
+    publish(a.output / "code-inventory.json", {str(f): sha(f) for f in files})
+    publish(a.output / "original-clock.json", dict(first=first, deadline=deadline, phase=a.phase))
+    stat = support.proc(os.getpid())
+    publish(
+        a.output / "owner-process.json",
+        dict(
+            pid=os.getpid(),
+            start_ticks=stat["start_ticks"],
+            pgid=stat["pgid"],
+            original_first_epoch=first,
+            original_deadline_epoch=deadline,
+        ),
+    )
+    support.append_catalog(
+        a.guardian_catalog, [a.output / "owner-process.json"], sha(a.guardian_catalog)
+    )
+    sys.path.insert(0, str(STAGE))
+    sys.path.append(str(CLASSIC))
+    from data import prepare_ordering
+    from qualify_actor_v3 import run_owned
+    from runtime import affinity
+    from runtime import guard as resource_guard
+
+    affinity(a.cpu_core)
+
+    def guard():
+        for seed in SEEDS:
+            resource_guard(deadline, CORE, a.output / str(seed))
+        if sum(f.stat().st_size for f in a.output.rglob("*") if f.is_file()) > 32 * 2**20:
+            raise ValueError("paired output32MiB ceiling")
+
+    results = {}
+    try:
+        guard()
+        if a.phase == "readiness":
+            search = load(CLASSIC / "arena/search.py", "quiet_controller_original_search")
+            for seed in SEEDS:
+                entry = rows[seed]
+                config = json.loads(Path(entry["config"]).read_text())
+                train, val, receipt, data_sha = prepare_ordering(
+                    entry["journal"], config, config["excluded_training_position_keys"]
+                )
+                updates = min(1024, 4 * receipt["training_rows"] // 256)
+                if updates < 8:
+                    raise ValueError("fixed budget cannot support qualification8")
+                witness = zero_witnesses(config, entry["journal"], search, guard)
+                guard()
+                file = a.output / f"{seed}-readiness.json"
+                publish(
+                    file,
+                    dict(
+                        seed=seed,
+                        receipt=receipt,
+                        dataset_sha256=data_sha,
+                        updates=updates,
+                        actual_zero_packets=witness,
+                        no_SGD=True,
+                        input=entry,
+                    ),
+                )
+                results[str(seed)] = dict(path=str(file), sha256=sha(file))
+            status = "PASS-both-quiet-data-and-actual-zero-search-not-trained"
+        else:
+            q.update(
+                status="registered-quiet-" + a.phase,
+                inputs={
+                    str(s): dict(
+                        journal_sha256=rows[s]["journal_sha256"],
+                        config_sha256=rows[s]["config_sha256"],
+                    )
+                    for s in SEEDS
+                },
+                deadline_by_seed={str(s): deadline for s in SEEDS},
+            )
+            protocol = a.output / "protocol.json"
+            publish(protocol, q)
+            for seed in SEEDS:
+                output = a.output / str(seed)
+                helper = STAGE / ("qualify.py" if a.phase == "proof" else "train.py")
+                command = [
+                    sys.executable,
+                    str(helper),
+                    "--protocol",
+                    str(protocol),
+                    "--protocol-sha256",
+                    sha(protocol),
+                    "--config",
+                    rows[seed]["config"],
+                    "--journal",
+                    rows[seed]["journal"],
+                    "--source-repo",
+                    str(CORE),
+                    "--seed",
+                    str(seed),
+                    "--cpu-core",
+                    str(a.cpu_core),
+                    "--deadline",
+                    str(deadline),
+                    "--output",
+                    str(output),
+                ]
+                if a.phase == "proof":
+                    command += ["--first", str(first)]
+                run_owned(command, deadline, a.output, f"{a.phase}-{seed}", guard)
+                guard()
+                if a.phase == "proof":
+                    file = output / "result.json"
+                else:
+                    record = json.loads((a.readiness / f"{seed}-readiness.json").read_text())
+                    native = output / f"step-{record['updates']:08d}.json"
+                    n = json.loads(native.read_text())
+                    if (
+                        n["step"] != record["updates"]
+                        or n["contract"]["dataset_sha256"] != record["dataset_sha256"]
+                    ):
+                        raise ValueError("actual fixed-final model/native/data differs")
+                    file = output / "candidate.json"
+                results[str(seed)] = dict(path=str(file), sha256=sha(file))
+            status = (
+                "PASS-both-sixloads-quiet-native-proof-not-strength"
+                if a.phase == "proof"
+                else "PASS-both-fixed-final-quiet-fits-not-strength"
+            )
+        guard()
+        publish(
+            a.output / "result.json",
+            dict(
+                status=status,
+                phase=a.phase,
+                first=first,
+                deadline=deadline,
+                finished=time.time(),
+                inputs={str(k): v for k, v in rows.items()},
+                seed_results=results,
+            ),
+        )
+    except BaseException as exc:
+        publish(
+            a.output / "failure.json",
+            dict(
+                status="FAILED-preserved-original-clock-no-retry",
+                error=repr(exc),
+                first=first,
+                deadline=deadline,
+                finished=time.time(),
+            ),
+        )
+        raise
+
+
+if __name__ == "__main__":
+    main()
