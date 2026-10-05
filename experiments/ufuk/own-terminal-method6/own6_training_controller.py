@@ -98,17 +98,9 @@ def stop(process):
 
 
 def validate_training_clock(registration, first, deadline, now):
-    earliest = registration["earliest_training_epoch"]
-    assert type(earliest) in (int, float)
-    assert earliest <= first <= now
-    assert deadline == first + registration["whole_training_seconds_per_seed"]
-    assert now < deadline < END
-    assert (
-        first
-        + registration["whole_audit_seconds_from_originalfirstclock"]
-        + registration["posttraining_reserve_seconds"]
-        < END
-    )
+    from own6_schedule_v3 import validate_clock
+
+    validate_clock(registration, first, deadline, now)
 
 
 def main():
@@ -131,6 +123,8 @@ def main():
         and reg["learner_schema"] == "torch-fresh-sparse-search-acting-v2"
     )
     assert reg["controller_sha256"] == sha(Path(__file__))
+    for name, digest in reg["helper_sha256"].items():
+        assert sha(Path(__file__).with_name(name)) == digest
     assert reg["infrastructure_profile_pass"] is True
     epochs = reg["fixed_epochs"]
     assert type(epochs) is int and epochs >= 8
@@ -138,11 +132,9 @@ def main():
     assert deadline == args.started_epoch + reg["whole_training_seconds_per_seed"]
     validate_training_clock(reg, args.started_epoch, deadline, time.time())
     validate_mc_barrier(reg["mc_completion_barrier"], args.started_epoch)
-    from own6_protect_original45 import old_both_ready
+    from own6_schedule_v3 import verify_previous
 
-    assert old_both_ready(reg["protection_original45_manifest"]) is None, (
-        "Method6 admitted too late: original45 both ready; no method6 compute started"
-    )
+    verify_previous(reg["terminal45_barrier_binding"], sha)
     source = reg["source_commit"]
     assert (
         subprocess.check_output(
