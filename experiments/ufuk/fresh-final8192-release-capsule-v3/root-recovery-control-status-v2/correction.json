@@ -1,0 +1,10 @@
+{
+  "schema": "root-control-literal-correction-v2",
+  "status": "PASS-before-any-new-dispatch",
+  "reason": "ROOT used approvalstatus literal instead of frozen transportstatus. Initialcontroller failed beforeAPI/network. No clocks/caps/inputs/source/gateschanged. Originalcontrol/trace preserved.",
+  "first_epoch": 1791226974.7925532,
+  "deadline_epoch": 1791228774.7925532,
+  "actual_preflight_epoch": 1791228444.5853403,
+  "release_control_check_passed": true,
+  "manifest_validation_passed": true
+}
