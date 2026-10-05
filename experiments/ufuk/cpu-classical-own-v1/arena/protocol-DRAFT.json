@@ -1,0 +1,94 @@
+{
+  "schema": "classical-own-mixed-Q512-development-protocol-v3",
+  "status": "DRAFT-UNREGISTERED",
+  "source_commit": "6fcc8b476d25495d1c9c413e55b2c7ba4794013e",
+  "match_seeds": [
+    20262905,
+    20262906
+  ],
+  "models": {
+    "20262905": {
+      "e8": {
+        "path": "PENDING_ROOT_E8",
+        "sha256": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03"
+      },
+      "prior": {
+        "path": "/workspace/HarbiChess/experiments/ufuk/cpu-classical-own-v1/prior.json",
+        "sha256": "afbaec307e5acc4b9fcb5222115c2fb8112290065ffe64e929b35f2a935565e1"
+      },
+      "learned": {
+        "path": "PENDING_ROOT_FINAL_FIXED16384_CANDIDATE",
+        "sha256": "PENDING_ROOT",
+        "native_path": "PENDING_ROOT_FINAL_NATIVE",
+        "native_sha256": "PENDING_ROOT",
+        "accepted_updates": "PENDING_ACTUAL_FIXED_DERIVED"
+      }
+    },
+    "20262906": {
+      "e8": {
+        "path": "PENDING_ROOT_E8",
+        "sha256": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03"
+      },
+      "prior": {
+        "path": "/workspace/HarbiChess/experiments/ufuk/cpu-classical-own-v1/prior.json",
+        "sha256": "afbaec307e5acc4b9fcb5222115c2fb8112290065ffe64e929b35f2a935565e1"
+      },
+      "learned": {
+        "path": "PENDING_ROOT_FINAL_FIXED16384_CANDIDATE",
+        "sha256": "PENDING_ROOT",
+        "native_path": "PENDING_ROOT_FINAL_NATIVE",
+        "native_sha256": "PENDING_ROOT",
+        "accepted_updates": "PENDING_ACTUAL_FIXED_DERIVED"
+      }
+    }
+  },
+  "tasks": [
+    [
+      "learned",
+      "SF512"
+    ],
+    [
+      "prior",
+      "SF512"
+    ],
+    [
+      "e8",
+      "SF512"
+    ],
+    [
+      "learned",
+      "e8"
+    ],
+    [
+      "learned",
+      "prior"
+    ]
+  ],
+  "book_path": "/workspace/work/harbichess/cpu-own-replay-v1-actual/development/book.json",
+  "book_sha256": "9c36b5972c9676d19c358ca7e598b9f7f5d110b1947bed838cd660f644d845da",
+  "stockfish_path": "PENDING_ROOT_VERIFIED_BINARY",
+  "stockfish_sha256": "PENDING_ROOT",
+  "classical_value_helper": {
+    "path": "/workspace/HarbiChess/experiments/ufuk/cpu-classical-own-v1/value.py",
+    "sha256": "a99cddfc397bd9221b99a70691427fdd663488b033fb239d9f48240786b2f277"
+  },
+  "E8_value_helper": {
+    "path": "/workspace/HarbiChess/experiments/ufuk/cpu-residual-value-v1/arena/value.py",
+    "sha256": "0e0d9092db254bd88e4a49875d63edc6b1b39770d0fc53f61e03629ccba02737"
+  },
+  "search_nodes": 512,
+  "quiescence_plies": 2,
+  "max_depth": 8,
+  "stockfish_nodes": 512,
+  "max_plies": 400,
+  "opening_pairs": 8,
+  "memory_max_bytes": 16106127360,
+  "whole_seconds": 7200,
+  "per_tournament_seconds": 2700,
+  "original_first_epoch": "PENDING_ROOT",
+  "original_deadline_epoch": "PENDING_ROOT_SAME_FIRST_PLUS7200",
+  "operator_hard_deadline_epoch": 1791273600.0,
+  "disk_min_free_bytes": 268435456,
+  "reserved_output_bytes": 8388608,
+  "scope": "known8roots160gamesdevelopmentonly not formalstrength"
+}
