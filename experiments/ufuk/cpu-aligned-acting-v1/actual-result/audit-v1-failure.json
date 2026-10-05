@@ -1,0 +1,55 @@
+{
+  "schema": "cpu-aligned-audit-v1-failure-preserved-v1",
+  "status": "FAIL-auditor-legacy-ledger-assert-not-training-or-strength",
+  "reason": "audit.py line107 incorrectly expectslegacyv4 but preregisterednewactingledgerisv5; strictnative opened beforeassert, noauditscope skipped. Preserve originalfailedhelper andlogs; versionedaudit_v2 retains strictmu/rules/hash/Adam/RNG checks withcorrectv5semantic assertion",
+  "old_helper_sha256": "59d2536cda2da8a42aef7dccb3421edbf5225d6ddd37190a796ad00e3cac087a",
+  "pipeline_failure": {
+    "GPU_used": false,
+    "error": "CalledProcessError(1, ['/workspace/HarbiChess/.venv/bin/python', '/workspace/HarbiChess/experiments/ufuk/cpu-aligned-acting-v1/audit.py', '--run', '/workspace/work/harbichess/cpu-aligned-acting-v1-actual/fits/20262105-greedy90', '--config', '/workspace/work/harbichess/cpu-aligned-acting-v1-actual/fits/20262105-greedy90.config.json', '--protocol', '/workspace/HarbiChess/experiments/ufuk/cpu-aligned-acting-v1/protocol.json', '--weights', '/workspace/work/harbichess/a100/restoration/local-rehearsal-content/harbichess-inputs/initial-e8.safetensors', '--output', '/workspace/work/harbichess/cpu-aligned-acting-v1-actual/fits/20262105-greedy90.fresh-audit.json'])",
+    "finished_epoch": 1791208072.614269,
+    "status": "failed-preserved",
+    "strength_success_claimed": false
+  },
+  "original_audit_invocations": {
+    "20262105": {
+      "GPU_used": false,
+      "command": [
+        "/workspace/HarbiChess/.venv/bin/python",
+        "/workspace/HarbiChess/experiments/ufuk/cpu-aligned-acting-v1/audit.py",
+        "--run",
+        "/workspace/work/harbichess/cpu-aligned-acting-v1-actual/fits/20262105-greedy90",
+        "--config",
+        "/workspace/work/harbichess/cpu-aligned-acting-v1-actual/fits/20262105-greedy90.config.json",
+        "--protocol",
+        "/workspace/HarbiChess/experiments/ufuk/cpu-aligned-acting-v1/protocol.json",
+        "--weights",
+        "/workspace/work/harbichess/a100/restoration/local-rehearsal-content/harbichess-inputs/initial-e8.safetensors",
+        "--output",
+        "/workspace/work/harbichess/cpu-aligned-acting-v1-actual/fits/20262105-greedy90.fresh-audit.json"
+      ],
+      "original_deadline_epoch": 1791208914.745294,
+      "original_first_epoch": 1791208014.745294
+    },
+    "20262106": {
+      "GPU_used": false,
+      "command": [
+        "/workspace/HarbiChess/.venv/bin/python",
+        "/workspace/HarbiChess/experiments/ufuk/cpu-aligned-acting-v1/audit.py",
+        "--run",
+        "/workspace/work/harbichess/cpu-aligned-acting-v1-actual/fits/20262106-greedy90",
+        "--config",
+        "/workspace/work/harbichess/cpu-aligned-acting-v1-actual/fits/20262106-greedy90.config.json",
+        "--protocol",
+        "/workspace/HarbiChess/experiments/ufuk/cpu-aligned-acting-v1/protocol.json",
+        "--weights",
+        "/workspace/work/harbichess/a100/restoration/local-rehearsal-content/harbichess-inputs/initial-e8.safetensors",
+        "--output",
+        "/workspace/work/harbichess/cpu-aligned-acting-v1-actual/fits/20262106-greedy90.fresh-audit.json"
+      ],
+      "original_deadline_epoch": 1791208914.7451787,
+      "original_first_epoch": 1791208014.7451787
+    }
+  },
+  "GPU_used": false,
+  "strength_success_claimed": false
+}
