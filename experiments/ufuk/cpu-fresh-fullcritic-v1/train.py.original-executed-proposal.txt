@@ -1,0 +1,521 @@
+"""CPU-only full existing value-head trainer for fresh own QSEARCH data."""
+
+from __future__ import annotations
+
+import argparse
+import hashlib
+import importlib.util
+import json
+import math
+import random
+import shutil
+import sys
+import time
+from pathlib import Path
+
+import numpy as np
+import torch
+
+from core import (
+    OBJECTIVE_SCHEMA,
+    assert_frozen_bits,
+    bind_common_rows,
+    extract_full_history_rows,
+    freeze_shared_and_policy,
+    frozen_bits,
+    objective,
+)
+from native import NATIVE_SCHEMA, capture_native, restore_native
+from harbichess.backends.torch_network import load_weights, save_weights
+from harbichess.training.cgroup_budget import CgroupMemoryBudget
+from harbichess.training.torch_search_acting_run import clean_source
+
+MAX_ARTIFACT_BYTES = 2 * 1024**2
+
+
+def sha(path):
+    return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+
+
+def canonical(value):
+    return json.dumps(value, sort_keys=True, separators=(",", ":"), allow_nan=False).encode()
+
+
+def load_pinned(path, expected_sha, name, *, import_alias=None):
+    if sha(path) != expected_sha:
+        raise ValueError(f"{name} helper SHA differs")
+    spec = importlib.util.spec_from_file_location(import_alias or f"{name}_{expected_sha}", path)
+    module = importlib.util.module_from_spec(spec)
+    sys.modules[spec.name] = module
+    spec.loader.exec_module(module)
+    return module
+
+
+def load_common_trainer(path, expected_sha, feature_path, expected_feature_sha):
+    """Import the common helper with its exact sibling `features.py` bound."""
+    prior = sys.modules.get("features")
+    feature_module = load_pinned(
+        feature_path, expected_feature_sha, "common_features", import_alias="features"
+    )
+    search_path = str(Path(path).resolve().parent)
+    sys.path.insert(0, search_path)
+    sys.modules["features"] = feature_module
+    try:
+        module = load_pinned(path, expected_sha, "common_trainer")
+    finally:
+        if sys.path[0] != search_path:
+            raise RuntimeError("common trainer import path changed unexpectedly")
+        sys.path.pop(0)
+        if prior is None:
+            sys.modules.pop("features", None)
+        else:
+            sys.modules["features"] = prior
+    imported_feature_path = Path(module.sha.__code__.co_filename).resolve()
+    if imported_feature_path != Path(feature_path).resolve():
+        raise ValueError("common trainer did not retain its exact pinned feature helper")
+    return module
+
+
+def assert_checkout_imports(checkout):
+    source = (Path(checkout) / "src").resolve()
+    for name, module in tuple(sys.modules.items()):
+        if name == "harbichess" or name.startswith("harbichess."):
+            origin = getattr(module, "__file__", None)
+            if origin and not Path(origin).resolve().is_relative_to(source):
+                raise ValueError(f"HarbiChess import escaped pinned checkout: {name}")
+
+
+def validate_seed_clocks(actor_config, seed_contract, requested_deadline):
+    """Keep the immutable actor deadline separate from the new training clock."""
+    if (
+        requested_deadline != seed_contract.get("original_deadline_epoch")
+        or actor_config.get("original_deadline_epoch") != seed_contract.get("actor_deadline_epoch")
+    ):
+        raise ValueError("actor and new training/qualification clocks differ from their bindings")
+
+
+def metrics(model, x, labels, anchors, search, groups):
+    result = []
+    with torch.inference_mode():
+        for indices in groups:
+            index = torch.as_tensor(indices, dtype=torch.long)
+            _, logits = model._features(x[index])
+            parts = objective(anchors[index], logits, labels[index], search[index])
+            probs = torch.softmax(logits, dim=1)
+            result.append(
+                {
+                    "rows": len(indices),
+                    "own_ce": float(parts["own_terminal_ce"]),
+                    "search_mse": float(parts["own_search_score_mse"]),
+                    "anchor_kl": float(parts["fixed_e8_kl"]),
+                    "accuracy": float((logits.argmax(1) == labels[index]).float().mean()),
+                    "expected_wdl_score": float((probs[:, 0] - probs[:, 2]).mean()),
+                }
+            )
+    if not result:
+        raise ValueError("metrics require at least one whole trajectory group")
+    return {
+        "trajectory_groups": len(result),
+        "rows": sum(row["rows"] for row in result),
+        "game_equal_own_ce": float(np.mean([row["own_ce"] for row in result])),
+        "game_equal_search_mse": float(np.mean([row["search_mse"] for row in result])),
+        "game_equal_anchor_kl": float(np.mean([row["anchor_kl"] for row in result])),
+        "game_equal_accuracy": float(np.mean([row["accuracy"] for row in result])),
+    }
+
+
+def save_checkpoint(directory, payload):
+    directory = Path(directory)
+    directory.parent.mkdir(exist_ok=True, parents=True)
+    temporary = directory.parent / ("." + directory.name + ".tmp")
+    if directory.exists() or temporary.exists():
+        raise FileExistsError(directory)
+    temporary.mkdir()
+    torch.save(payload, temporary / "training.pt")
+    if (temporary / "training.pt").stat().st_size > MAX_ARTIFACT_BYTES:
+        raise RuntimeError("full-critic native payload exceeds 2MiB cap")
+    manifest = {
+        "schema": NATIVE_SCHEMA,
+        "accepted": payload["accepted"],
+        "contract": payload["contract"],
+        "training_pt_sha256": sha(temporary / "training.pt"),
+    }
+    (temporary / "checkpoint.json").write_bytes(canonical(manifest) + b"\n")
+    for child in temporary.iterdir():
+        with child.open("rb") as stream:
+            import os
+
+            os.fsync(stream.fileno())
+    temporary.rename(directory)
+    size = sum(path.stat().st_size for path in directory.parent.parent.rglob("*") if path.is_file())
+    if size > 32 * 1024**2:
+        raise RuntimeError("full-critic per-seed output stage exceeds 32 MiB")
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    for name in (
+        "output",
+        "weights",
+        "protocol",
+        "journal",
+        "actor-config",
+        "journal-helper",
+        "feature-helper",
+        "common-trainer",
+        "search-helper",
+        "array-encoder",
+    ):
+        parser.add_argument("--" + name, type=Path, required=True)
+    parser.add_argument("--source-commit", required=True)
+    parser.add_argument("--seed", type=int, required=True)
+    parser.add_argument("--deadline-epoch", type=float, required=True)
+    parser.add_argument("--stop-at", type=int)
+    parser.add_argument("--resume", type=Path)
+    parser.add_argument("--audit-only", action="store_true")
+    args = parser.parse_args()
+    checkout = clean_source(args.source_commit)
+    assert_checkout_imports(checkout)
+    if args.audit_only and args.resume is None:
+        raise ValueError("audit-only requires a native checkpoint")
+    if args.seed < 0 or not math.isfinite(args.deadline_epoch) or args.deadline_epoch <= time.time():
+        raise ValueError("positive seed and live finite original clock required")
+    if torch.cuda.is_available():
+        raise ValueError("full-critic prospective protocol is CPU-only")
+    torch.set_num_threads(1)
+    torch.set_num_interop_threads(1)
+    torch.manual_seed(args.seed)
+    np.random.seed(args.seed % 2**32)
+    random.seed(args.seed)
+
+    protocol = json.loads(args.protocol.read_text())
+    if (
+        protocol.get("schema") != "fresh-qsearch-full-critic-own-search-protocol-v1"
+        or protocol["source_commit"] != args.source_commit
+        or protocol["core_sha256"] != sha(Path(__file__).with_name("core.py"))
+        or protocol["native_sha256"] != sha(Path(__file__).with_name("native.py"))
+        or protocol["common_data_trainer_sha256"] != sha(args.common_trainer)
+        or protocol["consistency_helper_sha256"] != sha(args.search_helper)
+        or protocol["journal_helper_sha256"] != sha(args.journal_helper)
+        or protocol["feature_helper_sha256"] != sha(args.feature_helper)
+        or protocol["torch_array_encoder_sha256"] != sha(args.array_encoder)
+        or protocol["trainer_sha256"] != sha(Path(__file__))
+        or sha(args.weights) != protocol["initial_e8_sha256"]
+        or args.seed not in protocol["seeds"]
+        or protocol["max_native_or_candidate_artifact_bytes"] != MAX_ARTIFACT_BYTES
+        or protocol["objective"] != {
+            "schema": OBJECTIVE_SCHEMA,
+            "own_terminal_ce_weight": 0.5,
+            "own_root_search_score_mse_weight": 0.5,
+            "fixed_e8_anchor_kl_weight": 1.0,
+            "architecture_specific_sparse_penalty": 0.0,
+            "adamw_weight_decay": 0.0,
+            "gradient_clip_norm": 5.0,
+            "regularizer_caveat": "not a pure capacity-only comparison with sparse SHRINK objective",
+        }
+        or protocol["optimizer"] != {"name": "AdamW", "learning_rate": 2e-5, "weight_decay": 0.0}
+        or protocol["sampler"] != {
+            "batch_size": 256,
+            "presentation_slots_per_train_row": 4,
+            "updates": "min(1024, floor(4 * eligible_train_rows / 256))",
+            "policy": "reuse exact game/trajectory-uniform then position-uniform common sampler",
+        }
+    ):
+        raise ValueError("full-critic source/model/objective contract differs from protocol")
+    seed_contract = protocol["seed_pairing"].get(str(args.seed))
+    if not seed_contract:
+        raise ValueError("seed is not bound in the full-critic protocol")
+    if sha(args.journal) != seed_contract["journal_sha256"]:
+        raise ValueError("journal SHA differs from frozen seed pairing")
+    if sha(args.actor_config) != seed_contract["actor_config_sha256"]:
+        raise ValueError("actor config SHA differs from frozen seed pairing")
+    if protocol["initial_e8_sha256"] != seed_contract["initial_e8_sha256"]:
+        raise ValueError("per-seed E8 baseline differs from protocol")
+
+    stage_budget = protocol["runtime"]["per_seed_work_stage_bytes"]
+    dataset_budget = protocol["runtime"]["maximum_dense_dataset_working_bytes"]
+    if stage_budget != 32 * 1024**2 or dataset_budget != 512 * 1024**2:
+        raise ValueError("full-critic memory contract differs")
+    budget = CgroupMemoryBudget(15 * 1024**3)
+    checks = 0
+
+    def guard():
+        nonlocal checks
+        checks += 1
+        if checks == 1 or checks % 128 == 0:
+            if time.time() >= args.deadline_epoch:
+                raise TimeoutError("original full-critic CPU deadline exhausted")
+            budget.check()
+            if shutil.disk_usage(args.output.parent).free < 256 * 1024**2:
+                raise RuntimeError("registered 256 MiB disk floor violated")
+
+    common_trainer = load_common_trainer(
+        args.common_trainer,
+        protocol["common_data_trainer_sha256"],
+        args.feature_helper,
+        protocol["feature_helper_sha256"],
+    )
+    search_helper = load_pinned(args.search_helper, protocol["consistency_helper_sha256"], "own_search_consistency")
+    journal = load_pinned(args.journal_helper, protocol["journal_helper_sha256"], "journal_v2")
+    actor_config = json.loads(args.actor_config.read_text())
+    validate_seed_clocks(actor_config, seed_contract, args.deadline_epoch)
+    protected = protocol["protected_position_keys"]
+    if (
+        actor_config.get("excluded_training_position_keys") != protected
+        or actor_config.get("exclusion_book_sha256") != protocol["protected_position_book_sha256"]
+        or actor_config.get("anchor_model_sha256") != seed_contract["initial_e8_sha256"]
+        or actor_config.get("model_sha256") != seed_contract["initial_e8_sha256"]
+        or actor_config.get("anchor_helper_sha256") != protocol["anchor_helper_sha256"]
+        or actor_config.get("anchor_target")
+        != "frozen-e8-wdl-probabilities-mover-perspective-v1"
+        or actor_config.get("seed") != args.seed
+        or actor_config.get("source_commit") != args.source_commit
+        or actor_config.get("original_deadline_epoch") != seed_contract["actor_deadline_epoch"]
+        or not protected
+        or protected != sorted(set(protected))
+        or hashlib.sha256(canonical(protected)).hexdigest() != protocol["protected_position_keys_sha256"]
+        or actor_config.get("model_sha256") != seed_contract["initial_e8_sha256"]
+        or actor_config.get("anchor_model_sha256") != seed_contract["initial_e8_sha256"]
+    ):
+        raise ValueError("protected fullhistory exclusion binding differs before label conversion")
+
+    common_data = common_trainer.prepare_fresh(
+        args.journal,
+        seed_contract["journal_sha256"],
+        args.actor_config,
+        seed_contract["actor_config_sha256"],
+        args.journal_helper,
+        protocol["journal_helper_sha256"],
+        args.feature_helper,
+        protocol["feature_helper_sha256"],
+        protected_position_keys=protected,
+    )
+    x840, labels, anchors, groups, trajectory_ids, train_groups, validation_groups, train_rows, validation_rows, receipts, common_sha, actor_config = common_data
+    state = journal.read(args.journal)
+    search_extracted = search_helper.extract_verified(
+        args.journal,
+        seed_contract["journal_sha256"],
+        actor_config,
+        journal,
+        args.feature_helper,
+        protocol["feature_helper_sha256"],
+        guard,
+    )
+    search_binding = search_helper.bind_common_data(search_extracted, common_data)
+    feature_module = journal.load_module(args.feature_helper, protocol["feature_helper_sha256"])
+    from harbichess.training.torch_array_encoder import TorchArrayBoardEncoder
+
+    dense_data = extract_full_history_rows(
+        state, actor_config, journal, TorchArrayBoardEncoder(), feature_module.invariants, len(labels)
+    )
+    common_binding = bind_common_rows(common_data, dense_data, search_binding)
+    if actor_config.get("torch_version") != str(torch.__version__):
+        raise ValueError("actor's original CPU Torch runtime differs")
+    search_receipt = search_extracted["receipt"]
+    search_extended_sha = search_binding["search_extended_data_sha256"]
+    if dense_data["x104"].nbytes > dataset_budget:
+        raise RuntimeError("full 104-plane dataset exceeds frozen 512 MiB array ceiling")
+    del search_extracted, search_binding, x840
+
+    model = load_weights(args.weights).cpu()
+    if model.architecture != "pairwise" or model._value_sparse is not None:
+        raise ValueError("frozen full-critic protocol requires original dense pairwise E8")
+    trainable_names = freeze_shared_and_policy(model)
+    model.eval()
+    actual_count = sum(parameter.numel() for parameter in model.parameters() if parameter.requires_grad)
+    if protocol.get("trainable_parameter_count") != actual_count:
+        raise ValueError("actual E8 value-head count differs from pre-fit registration")
+    if protocol.get("trainable_names_sha256") != hashlib.sha256(canonical(trainable_names)).hexdigest():
+        raise ValueError("actual E8 trainable value-name list differs from pre-fit registration")
+    frozen_before = frozen_bits(model, trainable_names)
+    optimizer = torch.optim.AdamW(
+        [parameter for parameter in model.parameters() if parameter.requires_grad],
+        lr=2e-5,
+        weight_decay=0.0,
+        foreach=False,
+    )
+    sampler = random.Random(args.seed ^ 0xCA1B)
+    x104 = torch.from_numpy(dense_data["x104"])
+    labels = labels.to(dtype=torch.long)
+    anchors = anchors.to(dtype=torch.float32)
+    search_targets = torch.from_numpy(dense_data["normalized_search"])
+    updates = min(1024, (4 * len(train_rows)) // 256)
+    if updates < 8:
+        raise ValueError("fewer than eight fixed proof updates from eligible row budget")
+    if args.stop_at is not None and not 0 < args.stop_at <= updates:
+        raise ValueError("requested proof stop is outside frozen update budget")
+
+    contract = {
+        "schema": NATIVE_SCHEMA,
+        "source_commit": args.source_commit,
+        "trainer_sha256": sha(Path(__file__)),
+        "core_sha256": sha(Path(__file__).with_name("core.py")),
+        "native_helper_sha256": sha(Path(__file__).with_name("native.py")),
+        "common_trainer_sha256": protocol["common_data_trainer_sha256"],
+        "consistency_helper_sha256": protocol["consistency_helper_sha256"],
+        "journal_helper_sha256": protocol["journal_helper_sha256"],
+        "anchor_helper_sha256": protocol["anchor_helper_sha256"],
+        "feature_helper_sha256": protocol["feature_helper_sha256"],
+        "array_encoder_sha256": protocol["torch_array_encoder_sha256"],
+        "protocol_sha256": sha(args.protocol),
+        "e8_sha256": sha(args.weights),
+        "journal_sha256": seed_contract["journal_sha256"],
+        "actor_config_sha256": seed_contract["actor_config_sha256"],
+        "protected_position_keys_sha256": protocol["protected_position_keys_sha256"],
+        "protected_position_book_sha256": protocol["protected_position_book_sha256"],
+        "common_dataset_sha256": common_sha,
+        "search_extended_dataset_sha256": search_extended_sha,
+        "dense_search_rows_sha256": common_binding["search_rows_sha256"],
+        "split_sha256": hashlib.sha256(canonical({"train": train_rows, "validation": validation_rows})).hexdigest(),
+        "trajectory_ids_sha256": hashlib.sha256(canonical(trajectory_ids)).hexdigest(),
+        "trainable_names": trainable_names,
+        "trainable_parameter_count": actual_count,
+        "model_specification": model.specification,
+        "seed": args.seed,
+        "max_updates": updates,
+        "objective": protocol["objective"],
+        "optimizer": protocol["optimizer"],
+        "sampler": protocol["sampler"],
+        "original_deadline_epoch": args.deadline_epoch,
+        "actor_original_deadline_epoch": seed_contract["actor_deadline_epoch"],
+        "device": "cpu",
+        "threads": 1,
+        "teacher_labels": False,
+        "new_selfplay_moves": 0,
+        "weights_only_e8_start": True,
+    }
+    if args.resume is None:
+        args.output.mkdir(exist_ok=False, parents=True)
+        (args.output / "contract.json").write_bytes(canonical(contract) + b"\n")
+    elif json.loads((args.output / "contract.json").read_text()) != contract:
+        raise ValueError("resume contract/input/data/targets/deadline changed")
+
+    validation_groups_data = [groups[index] for index in validation_groups]
+    before = metrics(model, x104, labels, anchors, search_targets, validation_groups_data)
+    accepted = 0
+    if args.resume is None:
+        save_checkpoint(args.output / "checkpoints/step-00000000", capture_native(model, optimizer, trainable_names, contract, 0, sampler))
+    else:
+        manifest = json.loads((args.resume / "checkpoint.json").read_text())
+        if (
+            manifest.get("schema") != NATIVE_SCHEMA
+            or manifest.get("contract") != contract
+            or sha(args.resume / "training.pt") != manifest.get("training_pt_sha256")
+        ):
+            raise ValueError("native manifest/checkpoint SHA differs")
+        payload = torch.load(args.resume / "training.pt", map_location="cpu", weights_only=True)
+        accepted = restore_native(payload, model, optimizer, trainable_names, contract, sampler)
+        if accepted != manifest["accepted"] or accepted > updates:
+            raise ValueError("native update cursor differs from budget")
+    if args.audit_only:
+        print(json.dumps({"status": "audit-only-load", "accepted": accepted}), flush=True)
+        return
+    stop = args.stop_at or updates
+    if stop <= accepted:
+        raise ValueError("requested stop does not advance the native cursor")
+    history = []
+    while accepted < stop:
+        guard()
+        batch = [sampler.choice(groups[sampler.choice(train_groups)]) for _ in range(256)]
+        inputs = x104[batch]
+        labels_batch = labels[batch]
+        anchors_batch = anchors[batch]
+        search_batch = search_targets[batch]
+        model.eval()
+        _, logits = model._features(inputs)
+        parts = objective(anchors_batch, logits, labels_batch, search_batch)
+        optimizer.zero_grad(set_to_none=True)
+        parts["loss"].backward()
+        norm = torch.nn.utils.clip_grad_norm_(
+            [parameter for parameter in model.parameters() if parameter.requires_grad], 5.0
+        )
+        if not torch.isfinite(parts["loss"]) or not torch.isfinite(norm):
+            raise RuntimeError("nonfinite full-critic loss or gradient")
+        optimizer.step()
+        model.eval()
+        assert_frozen_bits(model, frozen_before)
+        accepted += 1
+        history.append(
+            {
+                "step": accepted,
+                "loss": float(parts["loss"].detach()),
+                "own_terminal_ce": float(parts["own_terminal_ce"].detach()),
+                "own_search_score_mse": float(parts["own_search_score_mse"].detach()),
+                "fixed_e8_kl": float(parts["fixed_e8_kl"].detach()),
+                "preclip_grad_norm": float(norm),
+            }
+        )
+        if accepted % 512 == 0 or accepted == stop or (stop <= 8 and accepted in (4, 8)):
+            payload = capture_native(model, optimizer, trainable_names, contract, accepted, sampler)
+            save_checkpoint(args.output / f"checkpoints/step-{accepted:08d}", payload)
+            print(json.dumps(history[-1]), flush=True)
+
+    if _hash_frozen(model, trainable_names) != _hash_frozen_from_bits(frozen_before):
+        raise ValueError("frozen shared/policy model changed")
+    result = {
+        "schema": "fresh-qsearch-full-critic-own-search-fit-v1",
+        "status": "native-proof-not-candidate" if stop < updates else "completed-fit-not-strength",
+        "accepted_updates": accepted,
+        "derived_updates": updates,
+        "raw_converter_known_rows": len(labels),
+        "eligible_known_rows": len(train_rows) + len(validation_rows),
+        "train_rows": len(train_rows),
+        "validation_rows": len(validation_rows),
+        "trainable_parameter_count": actual_count,
+        "trainable_names": trainable_names,
+        "before_validation": before,
+        "after_validation": metrics(model, x104, labels, anchors, search_targets, validation_groups_data),
+        "contract": contract,
+        "common_data_receipt": receipts,
+        "common_binding": common_binding,
+        "search_extraction_receipt": search_receipt,
+        "teacher_labels": False,
+        "strength_claimed": False,
+        "memory_snapshot": budget.check(),
+        "finished_epoch": time.time(),
+    }
+    if stop == updates:
+        candidate_path = args.output / "candidate.safetensors"
+        save_weights(
+            candidate_path,
+            model,
+            provenance={
+                "native_schema": NATIVE_SCHEMA,
+                "source_commit": args.source_commit,
+                "seed": args.seed,
+                "initial_e8_sha256": sha(args.weights),
+                "common_data_sha256": common_sha,
+                "search_data_sha256": search_extended_sha,
+                "trainable_names_sha256": hashlib.sha256(canonical(trainable_names)).hexdigest(),
+                "updates": accepted,
+                "strength_claimed": False,
+            },
+        )
+        if candidate_path.stat().st_size > MAX_ARTIFACT_BYTES:
+            candidate_path.unlink()
+            raise RuntimeError("full-critic candidate exceeds 2 MiB file ceiling")
+    result_path = args.output / f"result-step-{accepted:08d}-invocation-{time.time_ns()}.json"
+    result_path.write_bytes(canonical(result) + b"\n")
+    print(json.dumps({"status": result["status"], "accepted": accepted, "updates": updates}), flush=True)
+
+
+def _hash_frozen(model, trainable_names):
+    digest = hashlib.sha256()
+    trainable = set(trainable_names)
+    for name, parameter in model.named_parameters():
+        if name not in trainable:
+            digest.update(name.encode() + b"\0")
+            digest.update(parameter.detach().cpu().contiguous().view(torch.uint8).numpy().tobytes())
+    return digest.hexdigest()
+
+
+def _hash_frozen_from_bits(bits):
+    digest = hashlib.sha256()
+    for name, value in sorted(bits.items()):
+        digest.update(name.encode() + b"\0")
+        digest.update(value)
+    return digest.hexdigest()
+
+
+if __name__ == "__main__":
+    main()
