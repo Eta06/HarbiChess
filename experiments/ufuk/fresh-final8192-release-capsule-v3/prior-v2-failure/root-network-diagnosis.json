@@ -1,0 +1,13 @@
+{
+  "schema": "root-explicit-proxy-destination-denial-v1",
+  "run_id": 37360596243,
+  "artifact_id": 11365929280,
+  "run_status": "success",
+  "root_archive_readback": "FAIL-gh-api-follows-302-to-proxy-CONNECT403",
+  "redirect_hostname": "productionresultssa10.blob.core.windows.net",
+  "signed_url_logged": false,
+  "credential_logged": false,
+  "proxy_bypass_attempted": false,
+  "supported_environment_status": "connected/current/spec213/network-unrestricted-enforced",
+  "persistence_success_claimed": false
+}
