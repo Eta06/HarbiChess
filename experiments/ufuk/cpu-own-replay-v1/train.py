@@ -109,7 +109,10 @@ def policy_kl(model, probes, encoder, rules, features, guard):
     with torch.inference_mode():
         logits, _ = model.masked_policy_value(tensors[0], tensors[1])
         logs = F.log_softmax(logits.masked_fill(~tensors[2], -torch.inf), 1)
-        old = tensors[3]
+        # Batch fields: inputs, indices, mask, action, old_prob, advantage,
+        # behavior, immutable raw base policy, outcome, immutable base WDL.
+        # Search behavior differs from raw pi; use the registered frozen E8 pi.
+        old = tensors[7]
         safe = torch.where(old > 0, logs, 0.0)
         return float((old * (old.clamp_min(1e-30).log() - safe)).sum(1).mean())
 
@@ -335,7 +338,7 @@ def main():
             for i, row in enumerate(selected):
                 targets[i, : len(row.search_policy)] = torch.tensor(row.search_policy)
             policy_loss = -(targets * safe_logs).sum(1).mean()
-            anchor = (pt[4] * (pt[4].clamp_min(1e-30).log() - safe_logs)).sum(1).mean()
+            anchor = (pt[7] * (pt[7].clamp_min(1e-30).log() - safe_logs)).sum(1).mean()
             loss = policy_loss + 0.2 * value_loss + 0.03 * anchor + 0.02 * value_anchor
         optimizer.zero_grad(set_to_none=True)
         loss.backward()
