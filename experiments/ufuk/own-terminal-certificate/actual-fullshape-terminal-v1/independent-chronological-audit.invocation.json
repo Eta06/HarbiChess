@@ -1,0 +1,24 @@
+{
+  "absolute_deadline_epoch": 1791166813.4247744,
+  "command": [
+    "/usr/bin/python3",
+    "/content/harbichess-fullgame-method2-inputs/source7-c022-actual-qualification-v1/own7_qualify_e1.py",
+    "--manifest",
+    "/content/harbichess-runs/certificate-source7-fullshape900-20261005/independent-audit-manifest.json",
+    "--manifest-sha256",
+    "c8a0520ef97b91160ca4896d963424fd1ed4fbe76b259277e85e0ddb8311a3c8",
+    "--output",
+    "/content/harbichess-runs/certificate-source7-fullshape900-20261005/independent-audit.json",
+    "--deadline-epoch",
+    "1791166813.4247744"
+  ],
+  "error": "RuntimeError('independent-chronological-audit returned 1')",
+  "finished_epoch": 1791166694.2892344,
+  "owned_pid": 128081,
+  "owned_process_group": 128081,
+  "phase": "independent-chronological-audit",
+  "returncode": 1,
+  "started_epoch": 1791166331.9548585,
+  "status": "failed",
+  "whole_seconds": 362.3343758583069
+}
