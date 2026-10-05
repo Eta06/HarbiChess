@@ -1,0 +1,23 @@
+{
+  "schema": "actual-CPU-fixed8-bothseed-cohort-launch-v1",
+  "pid": 954598,
+  "start_ticks": "13707594",
+  "launcher_started_epoch": 1791172676.5496702,
+  "internal_original_common_clock": "cohort/original-common-clock.json sampled once BEFOREall setup/producer launches",
+  "command": [
+    "/workspace/HarbiChess/.venv/bin/python",
+    "/workspace/HarbiChess/experiments/ufuk/cpu-contingency-v1/formal-owned-launch/launch_cpu_formal.py",
+    "--config",
+    "/workspace/HarbiChess/experiments/ufuk/cpu-contingency-v1/formal-owned-launch/config-FROZEN.json",
+    "--config-sha256",
+    "e0aefad1018a385687ad5c1875f5607c19801f21f135e3fc0488e194eff99e47",
+    "--execute"
+  ],
+  "config_sha256": "e0aefad1018a385687ad5c1875f5607c19801f21f135e3fc0488e194eff99e47",
+  "source_commit": "3be5b87db27a0fbde83464e7ea7157f0d9a76ae4",
+  "max_epochs": 8,
+  "seeds": [
+    20261925,
+    20261926
+  ]
+}
