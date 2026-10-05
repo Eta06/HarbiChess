@@ -1,0 +1,46 @@
+"""ROOT activation of the already frozen fit window; no new clock or state reuse."""
+import hashlib
+import json
+import os
+from pathlib import Path
+import subprocess
+import time
+
+BASE = Path('/workspace/work/harbichess/continuation-20261005')
+REG = json.loads((BASE / 'pst-v1-registration.json').read_text())
+PROOF = Path(REG['ram_root']) / 'proof-result.json'
+RESULT = Path('/dev/shm/harbichess-pst-root-logs-v1-20261005/activation-result.json')
+proof = json.loads(PROOF.read_text())
+assert proof['status'] == 'PASS-two-seed-pause-resume-and-strict-loads'
+assert proof['protocol_sha256'] == REG['protocol_sha256']
+assert proof['finished_epoch'] < REG['deadline_epoch']
+assert proof['strict_native_loads'] == 6
+assert all(s['whole_equals_pause_resume'] for s in proof['seeds'].values())
+while time.time() < REG['fit_first_epoch']:
+    fields = Path('/proc/991477/stat').read_text().rpartition(') ')[2].split()
+    assert fields[0] != 'Z' and int(fields[19]) == 18238465
+    time.sleep(min(1, max(0, REG['fit_first_epoch'] - time.time())))
+assert time.time() < REG['fit_deadline_epoch']
+cmd = REG['command'][:]
+cmd[cmd.index('--phase') + 1] = 'fit'
+cmd[cmd.index('--ram-root') + 1] = '/dev/shm/harbichess-pst-fit-v1-20261005'
+cmd += ['--proof-receipt', str(PROOF), '--proof-receipt-sha256',
+        hashlib.sha256(PROOF.read_bytes()).hexdigest()]
+env = {**os.environ, 'PYTHONPATH': '/workspace/work/harbichess/cpu-additive-source-6fcc8b4/src',
+       'OMP_NUM_THREADS': '1', 'OPENBLAS_NUM_THREADS': '1', 'MKL_NUM_THREADS': '1',
+       'PYTHONDONTWRITEBYTECODE': '1', 'CUDA_VISIBLE_DEVICES': ''}
+root = RESULT.parent
+started = time.time()
+with (root / 'fit.stdout.log').open('xb') as out, (root / 'fit.stderr.log').open('xb') as err:
+    p = subprocess.run(cmd, cwd='/workspace/work/harbichess/cpu-additive-source-6fcc8b4',
+                       env=env, stdout=out, stderr=err,
+                       timeout=REG['fit_deadline_epoch'] - time.time())
+finished = time.time()
+value = dict(command=cmd, exit_code=p.returncode, actual_started=started, finished=finished,
+             original_first=REG['fit_first_epoch'], original_end=REG['fit_deadline_epoch'],
+             clock_reset=False, prior_qualification_optimizer_reused=False,
+             status='completed-awaiting-native-fit-receipt' if p.returncode == 0 and
+             finished < REG['fit_deadline_epoch'] else 'FAIL-preserved')
+with RESULT.open('x') as stream:
+    json.dump(value, stream, indent=2)
+    stream.write('\n')
