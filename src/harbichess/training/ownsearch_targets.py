@@ -11,6 +11,7 @@ import chess
 from harbichess.backends.torch_backend import TorchPolicyValueBackend
 from harbichess.chess.actions import move_to_action
 from harbichess.search.full_gumbel import FullGumbelConfig
+from harbichess.search.mate_certificates import immediate_mating_moves
 from harbichess.search.ownsearch_wavefront import (
     BatchedPositionEvaluator,
     WavefrontGumbel,
@@ -78,14 +79,14 @@ class SearchSchedule:
         self.actions_seen += len(actors.games)
 
 
-def validate_search_ledger(epoch, ledger, config, *, rules):
+def validate_search_ledger(epoch, ledger, config, *, rules, claim_draw=True):
     """Reproduce only exogenous schedule and legal receipt mapping; no optimizer/search rerun."""
     from harbichess.selfplay.online_epoch import _tuplify
 
     rng = random.Random()
     rng.setstate(_tuplify(ledger["schedule_rng_before"]))
     if (
-        ledger["schema"] != "ownsearch-random-block-targets-v1"
+        ledger["schema"] != "ownsearch-random-block-targets-v2"
         or ledger["model_digest"] != epoch.model_digest
     ):
         raise ValueError("own-search ledger schema/behavior mismatch")
@@ -151,6 +152,14 @@ def validate_search_ledger(epoch, ledger, config, *, rules):
             search_rngs[row.transition.slot].random()
         visits = [mapped[a]["visits"] for a in row.legal_actions]
         probabilities = receipt["search_policy"]
+        certified = [
+            m.uci
+            for m in immediate_mating_moves(
+                rules, row.transition.pre, claim_draw=claim_draw
+            )
+        ]
+        if receipt.get("certified_mates") != certified:
+            raise ValueError("exact one-ply mate certificate ledger differs")
         if (
             any(type(v) is not int or v < 0 for v in visits)
             or sum(visits) != config.simulations
@@ -164,6 +173,25 @@ def validate_search_ledger(epoch, ledger, config, *, rules):
             raise ValueError("search target finite legal normalization mismatch")
         if receipt["selected_action"] not in {m["move"] for m in moves}:
             raise ValueError("search selected action illegal")
+        if certified:
+            if receipt["selected_action"] not in certified:
+                raise ValueError("exact-mate root did not select a certified winning move")
+            if abs(receipt["root_value"] - 1.0) > 1e-12:
+                raise ValueError("terminal mate backup has wrong mover perspective")
+            selected_index = move_to_action(
+                board, chess.Move.from_uci(receipt["selected_action"])
+            )
+            if mapped[selected_index]["visits"] != config.simulations:
+                raise ValueError("exact-mate solved route changed simulation budget")
+            nonmate_mass = math.fsum(
+                probability
+                for action, probability in zip(
+                    row.legal_actions, probabilities, strict=True
+                )
+                if mapped[action]["move"] not in certified
+            )
+            if nonmate_mass > 1e-9 or any(probability <= 0 for probability in probabilities):
+                raise ValueError("certified policy lost exactness or full legal support")
     actual_movers = {"white": 0, "black": 0}
     actual_plies = {}
     for receipt in ledger["roots"]:
@@ -238,6 +266,7 @@ def make_search_ledger(
                         for m in result.moves
                     ],
                     simulations=result.simulations,
+                    certified_mates=[m.uci for m in result.certified_mates],
                 )
             )
     receipts.sort(key=lambda row: row["collection_index"])
@@ -252,7 +281,7 @@ def make_search_ledger(
         key = str(state.ply)
         ply_counts[key] = ply_counts.get(key, 0) + 1
     return dict(
-        schema="ownsearch-random-block-targets-v1",
+        schema="ownsearch-random-block-targets-v2",
         realized_target_rows=len(receipts),
         mover_counts=mover_counts,
         root_ply_counts=ply_counts,
@@ -263,5 +292,5 @@ def make_search_ledger(
         neural_batch_sizes=evaluator.batch_sizes,
         neural_positions=sum(evaluator.batch_sizes),
         behavior="raw-current-T1-not-search-action-policy",
-        targets="all-legal-Gumbel-completed-Q-policy-detached-supervision",
+        targets="all-legal-Gumbel-plus-exact-one-ply-mate-solver-policy",
     )
