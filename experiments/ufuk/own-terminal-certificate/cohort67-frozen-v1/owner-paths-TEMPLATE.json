@@ -1,0 +1,46 @@
+{
+  "status": "TEMPLATE_PENDING_ACTUAL_7_QUALIFICATION_DO_NOT_EXECUTE",
+  "repo": "/content/HarbiChess-certificate-c022bc1",
+  "python": "/usr/bin/python3",
+  "common_original_firstclock_receipt": "ROOT_SAMPLE_ONE_ACTUAL_OBSERVED_CLOCK_BEFORE_OWNER_WRITES",
+  "common_original_firstclock_receipt_sha256": "ROOT_FILL_ACTUAL_CLOCK_SHA",
+  "seeds": {
+    "20261725": {
+      "run": "/content/harbichess-runs/certificate-method7-seed-20261725/run",
+      "training_result": "/content/harbichess-runs/certificate-method7-seed-20261725/result.json",
+      "audit_result": "/content/harbichess-runs/certificate-method7-audit-seed-20261725/result.json",
+      "full_audit": "/content/harbichess-runs/certificate-method7-audit-seed-20261725/full-audit-result.json",
+      "original_training_started_epoch": "ROOT_FILL_SAME_ACTUAL_COMMON_CLOCK",
+      "baseline_result": "/content/harbichess-runs/certificate-method7-baseline-seed-20261725/result.json",
+      "baseline_arena": "/content/harbichess-runs/certificate-method7-baseline-seed-20261725/arena.json",
+      "baseline_deadline_epoch": "ROOT_FILL_ORIGINAL_BASELINE_FIRST_PLUS_3600",
+      "book": "/content/harbichess-fullgame-method2-inputs/formal7-production/book-20261725.json"
+    },
+    "20261726": {
+      "run": "/content/harbichess-runs/certificate-method7-seed-20261726/run",
+      "training_result": "/content/harbichess-runs/certificate-method7-seed-20261726/result.json",
+      "audit_result": "/content/harbichess-runs/certificate-method7-audit-seed-20261726/result.json",
+      "full_audit": "/content/harbichess-runs/certificate-method7-audit-seed-20261726/full-audit-result.json",
+      "original_training_started_epoch": "ROOT_FILL_SAME_ACTUAL_COMMON_CLOCK",
+      "baseline_result": "/content/harbichess-runs/certificate-method7-baseline-seed-20261726/result.json",
+      "baseline_arena": "/content/harbichess-runs/certificate-method7-baseline-seed-20261726/arena.json",
+      "baseline_deadline_epoch": "ROOT_FILL_ORIGINAL_BASELINE_FIRST_PLUS_3600",
+      "book": "/content/harbichess-fullgame-method2-inputs/formal7-production/book-20261726.json"
+    }
+  },
+  "posttraining": {
+    "root": "/content/harbichess-runs/certificate-method7-posttraining-20261005",
+    "initial": "/content/harbichess-inputs/initial-e8.safetensors",
+    "probes": "/content/harbichess-fullgame-method2-inputs/UFUK-width-latency-probes-20261004.json",
+    "stockfish": "ROOT_FILL_VERIFIED_SF512_BINARY_PATH",
+    "exchange_manifest": "/content/harbichess-runs/certificate-method7-posttraining-20261005/portable-exchange-manifest.json",
+    "mlx_receipt": "/content/harbichess-runs/certificate-method7-posttraining-20261005/mlx-cpu-parity.json",
+    "mlx_receipt_sha256_file": "/content/harbichess-runs/certificate-method7-posttraining-20261005/mlx-cpu-parity.sha256",
+    "expected_A100_runtime": {
+      "hostname": "045ceeb3ddfe",
+      "boot_id": "b1cf1620-f1c7-4571-832f-989ee44a5aa4",
+      "python_executable_sha256": "ROOT_FILL_VERIFIED_PYTHON_BINARY_SHA",
+      "torch_version": "2.11.0+cu130"
+    }
+  }
+}
