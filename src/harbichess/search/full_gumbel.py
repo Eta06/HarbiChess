@@ -54,6 +54,7 @@ class FullGumbelSearchResult(SearchResult):
 
     selected_action: ChessMove | None = None
     action_weights: tuple[tuple[ChessMove, float], ...] = ()
+    certified_mates: tuple[ChessMove, ...] = ()
 
     def select_move(self, *, temperature: float, rng: random.Random) -> ChessMove:
         if not self.moves or self.selected_action is None:
