@@ -1,0 +1,6 @@
+{
+  "schema": "SC-unit-original-overstrong-serialization-check-failure-v1",
+  "status": "preserved",
+  "tests": "5passed1failed25.55seconds",
+  "detail": "First synthetic unit whole8/pause4/freshresume8 completed; exact raw training.pt assertion failed at offset4791. Diagnosing complete payload storage bits separately; originalMC qualifier promises semantic tensor/tree exactness, not rawTorchpickle identity. No realdata/production native affected."
+}
