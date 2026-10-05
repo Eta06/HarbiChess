@@ -1,0 +1,41 @@
+{
+  "reason": "disk-floor",
+  "observed_epoch": 1791217780.4200053,
+  "deadline_epoch": 1791273600.0,
+  "free_bytes": 217944064,
+  "records": [
+    {
+      "owner_receipt": "/workspace/work/harbichess/cpu-budget-search-v1-actual/arena-owner-process.json",
+      "owner_sha256": "6bae10d34257bb3500dd87ae8146937ea6bdcf9802c3552e942c70d341041c6e",
+      "stopped": []
+    },
+    {
+      "owner_receipt": "/workspace/work/harbichess/cpu-shrunk-value-v1-actual/qualification-owner-process.json",
+      "owner_sha256": "d0037a450b4dbec8d296efadc278f6cd1b08652e6389ae928a4a68d979559470",
+      "stopped": []
+    },
+    {
+      "owner_receipt": "/workspace/work/harbichess/cpu-shrunk-value-v1-actual/fits-owner-process.json",
+      "owner_sha256": "37f2379b9477b985347c876014d47e59c5157867c24407338c9614a11a290d11",
+      "stopped": []
+    },
+    {
+      "owner_receipt": "/workspace/work/harbichess/cpu-shrunk-value-v1-actual/arena-owner-process.json",
+      "owner_sha256": "19a31d4ca0bc971ee1959341f16f4955b0227bbcb3af3600f14ce4dc1fd92173",
+      "stopped": [
+        {
+          "pid": 991097,
+          "state": "R",
+          "parent": 990045,
+          "ticks": "18214421"
+        },
+        {
+          "pid": 990045,
+          "ticks": "18141188"
+        }
+      ]
+    }
+  ],
+  "GPU_used": false,
+  "scope": "only exact registered PID/startticks descendants; no checkpoint rewrites or original timer resets"
+}
