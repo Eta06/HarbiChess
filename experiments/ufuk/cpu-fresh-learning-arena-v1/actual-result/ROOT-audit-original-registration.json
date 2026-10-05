@@ -1,0 +1,26 @@
+{
+  "output": "/dev/shm/harbichess-NN224-root-audit-v1-20261005",
+  "first_epoch": 1791234502.0633478,
+  "deadline_epoch": 1791235402.0633478,
+  "cpu_core": 3,
+  "checkout": "/workspace/work/harbichess/cpu-additive-source-6fcc8b4",
+  "controller_sha256": "7ea6241e57de4ab83259803ac4a4f42d0fb50701c305a3695a937a19e9ee7150",
+  "memory_guard_path": "/workspace/work/harbichess/cpu-additive-source-6fcc8b4/src/harbichess/training/cgroup_budget.py",
+  "input_pins": {
+    "/workspace/work/harbichess/continuation-20261005/run_registered_readonly_audit_v1.py": "7ea6241e57de4ab83259803ac4a4f42d0fb50701c305a3695a937a19e9ee7150",
+    "/workspace/HarbiChess/experiments/ufuk/cpu-fresh-learning-arena-v1/audit_arena.py": "ddbd4342e6c0c4b7a0bd69c9dd0e43c6a8546f19ae62aa815d6574a591487255",
+    "/workspace/HarbiChess/experiments/ufuk/cpu-fresh-learning-arena-v1/contracts.py": "d55aae75c5b9930ffa0fff7f892463d1f75c5b89ce9cf5ed983fc8fefad564a9",
+    "/workspace/HarbiChess/experiments/ufuk/cpu-fresh-learning-arena-v1/protocol.json": "884425f2939f8f527e8b3491741ce44c1be62ca97ebc35de7557dca250e9d4db",
+    "/workspace/HarbiChess/experiments/ufuk/cpu-fresh-learning-arena-v1/fit-provenance.json": "5c6db5ac1762eda796bfb5895caccdc8dfc2056fa35e55b446ee2d8f6b320de0"
+  },
+  "command": [
+    "/workspace/HarbiChess/.venv/bin/python",
+    "/workspace/HarbiChess/experiments/ufuk/cpu-fresh-learning-arena-v1/audit_arena.py",
+    "--protocol",
+    "/workspace/HarbiChess/experiments/ufuk/cpu-fresh-learning-arena-v1/protocol.json",
+    "--arena",
+    "/dev/shm/harbichess-fresh-learning-arena-v1-20261005/arena",
+    "--output",
+    "/dev/shm/harbichess-NN224-root-audit-v1-20261005/result.json"
+  ]
+}
