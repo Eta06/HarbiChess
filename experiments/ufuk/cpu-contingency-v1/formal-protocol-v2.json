@@ -1,0 +1,127 @@
+{
+  "artifact_scope": "All0..8 fullnative Adam/actor/sampler/search/global RNG, alljournals/rawhistories/model/optimizer source+inputs preserved; CPU-full-v3 zeroCUDA RNG. Initialweightsbootstrap isfreshoptimizer, notfullresume.",
+  "clocks": {
+    "actual_common_first": "one observed actual first per owned phase, serialized in manifests before producer starts; no future/reset",
+    "formal_admission_absolute_ceiling_epoch": 1791173100,
+    "formal_audit_absolute_ceiling_epoch": 1791178200,
+    "formal_training_absolute_ceiling_epoch": 1791177900,
+    "fresh_replay_seconds_per_seed": 600,
+    "hard_end_epoch": 1791180000,
+    "no_resets": true,
+    "whole_audit_seconds": 4800,
+    "whole_training_seconds": 4500
+  },
+  "final_selection": "CURRENT-epoch8-only-no-early-selection",
+  "fixed_epochs": 8,
+  "frozen_epoch": 1791171811.134766,
+  "games": {
+    "gumbel_scale": 0.0,
+    "identical_cpu_runtime_all_arms": true,
+    "max_actions": 4,
+    "max_total_plies": 400,
+    "opening_roots_per_seed": 48,
+    "paired_colors": true,
+    "per_seed_direct": 96,
+    "per_seed_e8_SF512": 96,
+    "per_seed_final_SF512": 96,
+    "sf_nodes": 512,
+    "simulations": 16,
+    "total_games": 576
+  },
+  "gates": {
+    "CI_two_sided": 0.9875,
+    "MAX8_ledger": "Reserved family8 prospective CPU replacement of unadmitted A1008; originalA1008 remainsINCOMPLETE and permanently cannot later be selected/qualified in this campaign. Allpreviousfamilies includingformal4/5 retain their existing slots; no ninth family/noalphareset. CPUqualification/start precedes any new heldout outcome.",
+    "bootstrap_replicates": 50000,
+    "caps_fraction_at_most": 0.05,
+    "direct_adjusted_lower_strictly_above": 0.5,
+    "direct_point_strictly_above": 0.6,
+    "final_SF512_score_at_least": 0.25,
+    "latency_median_ratio_at_most": 1.1,
+    "paired_SF512_gain_strictly_above": 0.1,
+    "paired_gain_adjusted_lower_strictly_above": 0.0,
+    "primary_inferential_comparisons": 4,
+    "worst_case_cap_lowerbounds_still_pass": true
+  },
+  "limitations": [
+    "Feasibility not established; no actual CPU qualification or training run by this agent.",
+    "All native/data/neural/mutation/strength/parity requirements remain mandatory; incomplete on deadline/resource failure.",
+    "Reused virgin books have no heldout outcomes; prospective seed mapping only.",
+    "Memory/disk thresholds are CPU resource admission controls, not relaxed strength gates."
+  ],
+  "neural_audit_epochs": [
+    1,
+    2,
+    3,
+    5,
+    7,
+    8
+  ],
+  "neural_witness_K": 8,
+  "prescribed_witness_rule": "FIRST8+LAST8-original64actor-root-batches-and-selected-simulation-masks;9-per-mover-history-dedup;fail-on-insufficient-coverage",
+  "protocol_id": "cpu-contingency-v1",
+  "qualification": {
+    "actual_cpu_E1_full_data_required": true,
+    "actual_data_mutations_required": 6,
+    "actual_mate_and_visited_loss_roots_required": true,
+    "actual_model_storage_changed_required": true,
+    "all_six_native_payloads_both_0_1_2_and_two_journals_bitwise": true,
+    "independent_cpu_small_CLI_whole2_pause1_freshresume2_required": true,
+    "no_A100_receipt_inherited": true,
+    "original900_CPU_E1_profile_required": true
+  },
+  "raw_neural_witnesses_per_selected_epoch": 18,
+  "readme_runtime_guard": "Developmenttinyusesfrozenv1 128MiB/16GiB, fullCPUuses256MiB/15GiB; strengthgatesidentical. Torch2.14.1+CPU; trainedcandidateCUDA/Metaluntested.",
+  "required_native_checkpoints": 9,
+  "rows_per_epoch": 16384,
+  "runtime": {
+    "cpu_quota": 4,
+    "device": "cpu",
+    "memory_limit_bytes": 16106127360,
+    "min_free_disk_bytes": 268435456,
+    "torch": "2.14.1+cpu"
+  },
+  "schema": "prospective-cpu-contingency-v1",
+  "seeds": [
+    20261925,
+    20261926
+  ],
+  "source8_A100_qualification": "INCOMPLETE-unadmitted-original-0310-ceiling-preserved",
+  "source_commit": "3be5b87db27a0fbde83464e7ea7157f0d9a76ae4",
+  "status": "frozen-before-development-E1-and-formal-execution",
+  "strength_book_sha256": {
+    "20261925": "6d860c4c9a08914a50c6dfe59623f32755cd5185ccc68e3a52645f41efbd6252",
+    "20261926": "a2885098be18e8a9e45a5ac003f89a504e50877074c80fe809f01f23443aa9ff"
+  },
+  "total_fresh_rows_per_seed": 131072,
+  "training": {
+    "actors": {
+      "claim_draw": true,
+      "games": 64,
+      "max_additional_plies": 256,
+      "temperature": 1.0
+    },
+    "epoch_steps": 256,
+    "learning_rate": 2.5e-05,
+    "objective": {
+      "behavior_kl_stop": 0.02,
+      "policy_anchor_weight": 0.03,
+      "policy_weight": 1.0,
+      "value_anchor_weight": 0.02,
+      "value_weight": 0.2
+    },
+    "schedule": {
+      "max_gradient_norm": 5.0,
+      "minibatch_size": 1024,
+      "passes": 4
+    },
+    "search": {
+      "block_plies": 8,
+      "gumbel_scale": 0.0,
+      "max_considered_actions": 4,
+      "maxvisit_init": 50.0,
+      "simulations": 16,
+      "value_scale": 0.1
+    },
+    "weight_decay": 0.0001
+  }
+}
