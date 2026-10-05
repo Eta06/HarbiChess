@@ -1,0 +1,41 @@
+{
+  "controller_sha256": "05e91c6d82b1ec6e75bfce425ee358c9ebde0f8feda9130ea424af8f503f34ce",
+  "finished_epoch": 1791229342.932922,
+  "original_deadline_epoch": 1791230782.4855845,
+  "original_first_epoch": 1791228982.4855845,
+  "registration_sha256": "551cb10c43da234f07f44d5169a0bef4f7a26e9020fe055a0a89ad3b5497693a",
+  "rows": [
+    {
+      "GPU_used": false,
+      "candidate_path": "/dev/shm/harbichess-classical-fit-recovery-v2-20261005/20262905/fit/candidate.json",
+      "candidate_sha256": "6d27aa80e481c8469ab94b60291a3baac7fe0d52813058046e8a926713ac9422",
+      "dataset_sha256": "ccacd17f05399cee8efefde1788207490781ffc8082630286d1655e0e7799635",
+      "final_native_path": "/dev/shm/harbichess-classical-fit-recovery-v2-20261005/20262905/fit/step-00000199.json",
+      "final_native_sha256": "0b534da54b0986b5ae3a63fab4605d91249f53b04d34c7889451cce949bad6bc",
+      "finished_observed_epoch": 1791229318.2848818,
+      "initial_native_path": "/dev/shm/harbichess-classical-fit-recovery-v2-20261005/20262905/fit/step-00000000.json",
+      "initial_native_sha256": "bab1e3e0281e888c796a9991d00ed1d0ee1b76819328951b6a09374fea4a5685",
+      "seed": 20262905,
+      "status": "PASS-fixed-final-fit-and-two-fresh-native-loads-not-strength",
+      "teacher_labels": false,
+      "updates": 199
+    },
+    {
+      "GPU_used": false,
+      "candidate_path": "/dev/shm/harbichess-classical-fit-recovery-v2-20261005/20262906/fit/candidate.json",
+      "candidate_sha256": "c5cc3b003d1eb8d2b9bc8e0e3102f0321d61ebb9296eae49a38770d2594f963d",
+      "dataset_sha256": "98570d7a83f53365a617c40a9a9007d767243117145bbb3111903e40b553f1a0",
+      "final_native_path": "/dev/shm/harbichess-classical-fit-recovery-v2-20261005/20262906/fit/step-00000183.json",
+      "final_native_sha256": "c4a39b8e6388b5812af53f3e997f86102454de447f7d7d1ae663d4c602c46927",
+      "finished_observed_epoch": 1791229342.9300654,
+      "initial_native_path": "/dev/shm/harbichess-classical-fit-recovery-v2-20261005/20262906/fit/step-00000000.json",
+      "initial_native_sha256": "26728dad3f6a16e4818d8a1e44aa3a1ed556f9d1a3600dd4fa3c249a006b295d",
+      "seed": 20262906,
+      "status": "PASS-fixed-final-fit-and-two-fresh-native-loads-not-strength",
+      "teacher_labels": false,
+      "updates": 183
+    }
+  ],
+  "status": "PASS-both-final-fits-and-four-fresh-native-loads-not-strength",
+  "strength_success_claimed": false
+}
