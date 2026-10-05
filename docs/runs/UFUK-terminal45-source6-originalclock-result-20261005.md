@@ -1,0 +1,15 @@
+# UFUK: actual terminal state and source6 original clock
+
+5 October, 01:54 UTC. The self-learning strength goal is unmet. The strongest independently validated HarbiChess checkpoint remains teacher-origin e8 (`e8fe6d4...f1af03`). Main40 BOTH-seed independent strength gates failed; loss and native audits are not substitutes for games.
+
+Method4 remains permanently INCOMPLETE because baseline seed20261426 exhausted its original3600 ceiling. All actual owned processes ended; durable native prefixes and partial moves are preserved. No early checkpoint was selected.
+
+Method5 BOTH fixed-E8 trainings and all nine native containers per seed passed the independent all-data audit, replaying262144 fresh transitions per seed. However its first genuine production-shaped fresh-process CLI replay exhausted its original600 ceiling at01:14:11UTC. The failure and true owned release are recorded in [terminal evidence](../../experiments/ufuk/method5-terminal-release-v3). No replay retry, fabricated latency receipt, final strength games or model promotion occurred.
+
+Source428's new curriculum profile also remains INCOMPLETE. A stale manifest SHA in the staging command failed before model work; a binding-only corrective child used the SAME original first clock01:32:27.632503 and SAME900-second ceiling01:47:27.632503. The real128x256 CLI finished in420.356seconds with12 retained optimizer updates and4 rejected updates; the subsequent independent chronological audit did not finish in the remaining time. Parent and child failure bytes and actual zero-live owned inventory are [preserved](../../experiments/ufuk/own-terminal-curriculum/original900-terminal-v1). This does not qualify formal6 or establish a strength gain.
+
+The next producer is source7 `c022bc1605b44c3089439da5c6efb7bd4db4ff81`: a training-time exact terminal-mate certificate, standard tactical verification rather than a novelty claim. Final strength search remains the same16-simulation FullGumbel engine. All59 relevant actual-A100 CUDA/unit cases are running under a prospective600 ceiling; actual20-artifact pause/resume and complete32768-row/first8-last8/18raw-packet/5-real-mutation qualification are still required. A fresh96-root book was frozen without model or heldout-outcome queries. Formal7 is not yet admitted.
+
+The old84 MC native archives retain full anonymous byte/SHA persistence verification. A new single-threaded owner is packaging the preserved4/5 complete native prefixes, optimizer/RNG/replay, exact original inputs/source and reviewed failure evidence with original1200 budget and unchanged aggregate200-asset/8GiB ceiling. New Release upload/readback is not yet complete; public fresh CUDA restoration is not yet proven. Official Colab SSH reaches the same verified A100 runtime; keepalive continues, and cannot guarantee provider retention. Apple Silicon hardware remains untested.
+
+[Machine evidence and fixed hashes](UFUK-terminal45-source6-originalclock-result-20261005.json). Author/committer are Emir Tunahan Alim; the authorized pushing account is Eta06.
