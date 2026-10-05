@@ -1329,3 +1329,11 @@ borcudur; mevcut MLX yolu korunur. Prefix başarı veya promotion anlamına gelm
 - **UFUK-QSEARCH** (2026-10-05, CPU-only): aynı öğrenilmiş/öğrenilmemiş değer modelleri için bütün yasal kök hamleleri kapsayan512node alpha-beta/quiescence kontrolü. Standart arama; search-only kazancı selflearning değildir. Önce VALUE2048 sabit critic, aynı-search e8/zero kontrolleri ve değişmeyen strength gates.
 
 - **UFUK-SHRINK** (2026-10-05, CPU-only): effective2520-coordinate affine current-piece critic in existing cross-backend sparse-value-v1, spatial residual regularization, absolute-color shortcut masked. Standard regularized linear feature model, no novelty/strength claim; own-outcome only, zero-control/freshAdam/fulloffline-native distinctions kept. Operatorharddeadline6October11İstanbul/08UTC overrides longer experimental caps without resetting originalclocks.
+
+## UFUK-RESIDUAL
+
+5October2026 CPU-only fixed-e8 additive sparsevalue-v2 residual critic. Version1 replacement remainsunchanged;Torch/MLX additiveWDL logits,unsupportedNumpy explicitlyrejects. FixedownMC1024steps/beta1KL anchor, notnewteacherlabel ornoveltyclaim. Allfailures/oldnative/clocks/gates preserved.
+
+## UFUK-BACKUP
+
+5October2026 byteexact offlineCPU native3filecapsules via22serial sealedpublicActions inputs to existingRelease. Parent/model tensorcontentcopies plusliteralremainingbytes; originalAdam/RNG/dataset/native/source retained. Publicationnotpromotion orfullactorresume. IndependentanonymousSHAreadback and strictreadonlyrestore receipts required.
