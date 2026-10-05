@@ -1,0 +1,185 @@
+{
+  "schema": "cpu-own-replay-development-fullhistory-audit-v1",
+  "status": "PASS-fullhistory-integrity-screen-FAIL",
+  "rows": [
+    {
+      "seed": 20262005,
+      "arm": "value-only",
+      "opponent": "e8",
+      "path": "/workspace/work/harbichess/cpu-own-replay-v1-actual/development/20262005-value-only-vs-e8.json",
+      "sha256": "28d795ce7a0b470b7263770d92f87fc2c254adf11a9b9e5411f577021eb52e8d",
+      "score": 0.40625,
+      "wins": 4,
+      "draws": 5,
+      "losses": 7,
+      "unknown_caps": 0,
+      "bootstrap_pair_95": [
+        0.21875,
+        0.625
+      ],
+      "hoeffding_pair_95": [
+        0,
+        0.8864113956599604
+      ],
+      "legal_continuation_plies": 1955,
+      "actual_SF_nodes": 0,
+      "wall_seconds": 83.5155246060167,
+      "positions_per_wall_second": 390.40645621055035
+    },
+    {
+      "seed": 20262005,
+      "arm": "e8",
+      "opponent": "SF512",
+      "path": "/workspace/work/harbichess/cpu-own-replay-v1-actual/development/20262005-e8-vs-SF512.json",
+      "sha256": "cefe6e82becfcdc30c70f1e3e8947023c82ddf468100dee4919cea8aff3c9301",
+      "score": 0.0,
+      "wins": 0,
+      "draws": 0,
+      "losses": 16,
+      "unknown_caps": 0,
+      "bootstrap_pair_95": [
+        0.0,
+        0.0
+      ],
+      "hoeffding_pair_95": [
+        0,
+        0.48016139565996035
+      ],
+      "legal_continuation_plies": 828,
+      "actual_SF_nodes": 214358,
+      "wall_seconds": 19.084676442987984,
+      "positions_per_wall_second": 358.4551208104706
+    },
+    {
+      "seed": 20262005,
+      "arm": "value-only",
+      "opponent": "SF512",
+      "path": "/workspace/work/harbichess/cpu-own-replay-v1-actual/development/20262005-value-only-vs-SF512.json",
+      "sha256": "edfa6ae0db2292f88d151f7fd306e0d8a5e3fc5b93dac2699c7541c9626fc01d",
+      "score": 0.0625,
+      "wins": 0,
+      "draws": 2,
+      "losses": 14,
+      "unknown_caps": 0,
+      "bootstrap_pair_95": [
+        0.0,
+        0.15625
+      ],
+      "hoeffding_pair_95": [
+        0,
+        0.5426613956599604
+      ],
+      "legal_continuation_plies": 1122,
+      "actual_SF_nodes": 289328,
+      "wall_seconds": 27.10378619399853,
+      "positions_per_wall_second": 346.26158621624893
+    },
+    {
+      "seed": 20262006,
+      "arm": "value-only",
+      "opponent": "e8",
+      "path": "/workspace/work/harbichess/cpu-own-replay-v1-actual/development/20262006-value-only-vs-e8.json",
+      "sha256": "43cde3f15b750b2db4c8bfcc1f1880b5bd11bd96ae0369a2d021a3cb9c653a2a",
+      "score": 0.625,
+      "wins": 8,
+      "draws": 4,
+      "losses": 4,
+      "unknown_caps": 0,
+      "bootstrap_pair_95": [
+        0.46875,
+        0.78125
+      ],
+      "hoeffding_pair_95": [
+        0.14483860434003965,
+        1
+      ],
+      "legal_continuation_plies": 1718,
+      "actual_SF_nodes": 0,
+      "wall_seconds": 73.43704501999309,
+      "positions_per_wall_second": 390.2117792484496
+    },
+    {
+      "seed": 20262006,
+      "arm": "e8",
+      "opponent": "SF512",
+      "path": "/workspace/work/harbichess/cpu-own-replay-v1-actual/development/20262006-e8-vs-SF512.json",
+      "sha256": "b155779b89e7869488b1dc5ccaf6b8da2f41792d2ce3fc277dc7024fa1d5aed8",
+      "score": 0.0,
+      "wins": 0,
+      "draws": 0,
+      "losses": 16,
+      "unknown_caps": 0,
+      "bootstrap_pair_95": [
+        0.0,
+        0.0
+      ],
+      "hoeffding_pair_95": [
+        0,
+        0.48016139565996035
+      ],
+      "legal_continuation_plies": 828,
+      "actual_SF_nodes": 214358,
+      "wall_seconds": 19.055571189994225,
+      "positions_per_wall_second": 359.00262090238994
+    },
+    {
+      "seed": 20262006,
+      "arm": "value-only",
+      "opponent": "SF512",
+      "path": "/workspace/work/harbichess/cpu-own-replay-v1-actual/development/20262006-value-only-vs-SF512.json",
+      "sha256": "2a4330a0354b4ca9679dd91f3ffd7349d29e813d452095f9b3934f992336b407",
+      "score": 0.0,
+      "wins": 0,
+      "draws": 0,
+      "losses": 16,
+      "unknown_caps": 0,
+      "bootstrap_pair_95": [
+        0.0,
+        0.0
+      ],
+      "hoeffding_pair_95": [
+        0,
+        0.48016139565996035
+      ],
+      "legal_continuation_plies": 1044,
+      "actual_SF_nodes": 269858,
+      "wall_seconds": 24.739920489984797,
+      "positions_per_wall_second": 351.29458089884673
+    }
+  ],
+  "contrasts": [
+    {
+      "seed": 20262005,
+      "pairedSF_mean_gain": 0.0625,
+      "screen_gates": {
+        "direct_gt_060": false,
+        "SF_gain_gt_010": false,
+        "finalSF_ge_025": false,
+        "caps_le_005": true
+      },
+      "passed_screen": false
+    },
+    {
+      "seed": 20262006,
+      "pairedSF_mean_gain": 0.0,
+      "screen_gates": {
+        "direct_gt_060": true,
+        "SF_gain_gt_010": false,
+        "finalSF_ge_025": false,
+        "caps_le_005": true
+      },
+      "passed_screen": false
+    }
+  ],
+  "games": 96,
+  "legal_continuation_plies": 7495,
+  "actual_SF_nodes": 987902,
+  "scope": "known development suite, not independent confirmation; empirical degenerate bootstrap does not prove a population probability0 or game equivalence",
+  "joint": "0updates and allparameters exact initialE8;64 duplicate games notrun as disclosed futilitydeviation",
+  "strength_success_claimed": false,
+  "method_result": "FAIL both-seed development screen",
+  "source_commit": "4cae08522ac940746cf9127ca8ce4a6b63a47408",
+  "protocol_sha256": "82ae0c5a0885a10bbe29598783f54017f9dc4db3deff5c7760dd124f712ab529",
+  "audit_helper_sha256": "324b371ba469a879bd80d06a2d32597f1d82a14794ad94fd336f59b4f45dbf07",
+  "GPU_used": false
+}
