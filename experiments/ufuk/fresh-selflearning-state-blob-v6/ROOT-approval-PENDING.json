@@ -1,0 +1,13 @@
+{
+  "blob_sha1": "30720e4020cb4109790ef6b746419777d2a659b6",
+  "control_sha256": "10208c5c00d9e228ac3e125eeacafda20568cab3aa1b05b1e3968c486b7946aa",
+  "manifest_sha256": "df5671d13e3da60f5337096b289c041fe2a730290fbc2a546f5b127c7bf729b7",
+  "release": {
+    "id": 404068972,
+    "initial_assets": 0,
+    "tag": "ufuk-cpu-ownplay-state-20261005",
+    "target_commitish": "31a18e981e27e696fcca69c7e62210e7f0e89830"
+  },
+  "schema": "fresh-selflearning-state-blob-ROOT-approval-v6",
+  "status": "ROOT-approved-frozen-transport"
+}
