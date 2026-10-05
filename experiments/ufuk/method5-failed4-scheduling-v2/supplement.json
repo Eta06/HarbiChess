@@ -1,0 +1,60 @@
+{
+  "analysis_v2_supplement": "/content/harbichess-fullgame-method2-inputs/method5-failed4-scheduling-v2/analysis-v2/supplement.json",
+  "analysis_v2_supplement_sha256": "31cb774c4a540706e1e3f36fdc8709d89bc474a05782b58c344b660c5dd4c020",
+  "analysis_v3_directory": "/content/harbichess-fullgame-method2-inputs/method5-failed4-scheduling-v2/analysis-v3",
+  "analysis_v3_helper_sha256": {
+    "analysis_repair_binding.py": "99bc96d782651b1d6814ae3c3ef4650af8c1cdfb032ebb706834fc317e51379c",
+    "own5_all_gates.py": "83b0adf05b0f47be6aabdd333f6c6b92595d678305b58f2659891b006e13b9f3",
+    "own5_strength_analysis.py": "bfe970c9823bceee32214a673e7e7cfcfe4a2c7f93cee15731a40d243a94c271",
+    "own5_strength_config.py": "9c78ef66dd93bd84483b325478f6e46d357cb67f0c6e83c33c4d0999e0ea8591"
+  },
+  "analysis_v3_supplement": "/content/harbichess-fullgame-method2-inputs/method5-failed4-scheduling-v2/analysis-v3/supplement.json",
+  "analysis_v3_supplement_sha256": "d6a16ecfdacfb6c0acd4a30f4c504c827f69a27592803eac9f3b0f8b2a412be0",
+  "control_activation_receipt": "/content/harbichess-fullgame-method2-inputs/method5-failed4-scheduling-v2/activation.json",
+  "failed4_terminal_receipt": "/content/harbichess-fullgame-method2-inputs/method5-failed4-scheduling-v2/failed4-terminal.json",
+  "failed4_terminal_receipt_sha256": "dcfac3d862c5b574be7fba30bb63a16e1802fcbfde28de0baa2881a39addc3ac",
+  "new_config": "/content/harbichess-fullgame-method2-inputs/method5-failed4-scheduling-v2/new-posttraining-config.json",
+  "new_config_sha256": "7c625247b137f54b1c200b35b79b39132a364c33737fb17752f744f032565331",
+  "original_config": "/content/harbichess-fullgame-method2-inputs/formal45-recovery-control-v2/owners-5/posttraining-config.json",
+  "original_config_sha256": "53fe6ad64859fed1c6da4063401873fb400f1a332219a1aebc3f1876140cd87f",
+  "original_helper_sha256": {
+    "own45_cohort.py": "57473769d392ad820938edacba8ce113129145c3e510c68d18b23868ad5641b8",
+    "own5_adapter_controls.py": "e5fb4dc3f18919885d906fffac8849607344294176cbc0fc87d7bb679ea8a7de",
+    "own5_all_gates.py": "25cba24733d2f9ae8f3d5e4acc53466f06e64af7f98280eeaab1e683a1dda18b",
+    "own5_audit_controller.py": "253bdd69d1bd2b94b98d6d41dd3b16408d59e83c796584ce611d9b0c6dc14d2e",
+    "own5_audit_core.py": "10a717eb0c0db21a2f23e502154a4fb4b16011a0df51de576e245c78f67c5155",
+    "own5_audit_support.py": "17e9c1473ac22acaa38d102c6f45b4891474b122c140748b7e03a96f277eabe1",
+    "own5_baseline.py": "8a2d88446bbe7397d94161d5041941937b2618e5efce2871c916b56507170e71",
+    "own5_eligibility.py": "1a0145e20bd4f851b2aa1e970b2bb0112183b1a41a34cc18bf5bd406505dd413",
+    "own5_final_arms.py": "34fbdf1367d5039e239e8f1068c264bf7606f6c8578225b221483dfaef85ed7f",
+    "own5_formal_config_factory.py": "6708e327e49adedf1f21400091bf8a7745a501a361679a76aa11eb6eee0bf265",
+    "own5_fresh_cli_replay.py": "8167d4dab719a5d2883dbac52ff38eb4149362472e87f69960f114ce6e3f40d2",
+    "own5_full_audit.py": "0885731e1d39ece44c5171b00e764edd3c1c02cac31d8fca0f4904d4bd21b404",
+    "own5_latency.py": "48516e62cc3213b55a1cdf7a6bcbadf579fa79b2a65b958f1943ab23c17d2b4f",
+    "own5_mlx_receipt_bridge.py": "c1514783326fa7787485ecc54b3fdbedcb8b5a69e58660bd9cd235b8d72b3111",
+    "own5_owner_config_factory.py": "f3bb7c5c586214dae7760b8a96f4f1ac0ca86ba71916ade5a21832ae31b24b98",
+    "own5_parity.py": "59a6e40f8e9ce5698bc46e317a0b0c314b06d11bc8ad63fc036dbb1857744272",
+    "own5_posttraining.py": "1f660ad3558285775c79c390c0a81e1b0f23465ea795e9b691b56bf7939a5828",
+    "own5_profile_e1_owned.py": "b27995a39d646a5cce936710abe8850ff814a229ef8dcf6a610584403d4e06b8",
+    "own5_qualify_e1.py": "a85a2745241e4a0d93652033fe1d4183530ba26e7abcbfcd79393f9a0e705743",
+    "own5_strength_analysis.py": "b40563592c170cde6597d9e6bf0603119a3cb151f62cae13a45ae44d3984b53a",
+    "own5_strength_config.py": "9c78ef66dd93bd84483b325478f6e46d357cb67f0c6e83c33c4d0999e0ea8591",
+    "own5_strength_runtime.py": "0b98278a2394171cdb268b95deb1212e020598602b359440e2c0ef0dd862d059",
+    "own5_training_controller.py": "6094ec0e1c69d968b83e8323f7825bc9ef9ae424746133ed96f6ab84d6df5c60"
+  },
+  "original_helpers": "/content/harbichess-fullgame-method2-inputs/formal45-production/helpers5",
+  "original_qualification_config_sha256": "5fa34fdc69a49b78fecae17ee9ade86da994c548bbda81473d86c454c6cc733a",
+  "original_registration": "/content/harbichess-fullgame-method2-inputs/formal45-production/registration-5/registration.json",
+  "original_registration_sha256": "a9ae975e6ecb486f964ee0514d98fb4bc9d50d3b949ecabd0cf1e441bd75d271",
+  "qualification_ledger_slot": 5,
+  "schema": "own5-failed4-dependency-analysis-v3-control-supplement-v1",
+  "status": "registered-before-method5-final-outcomes",
+  "stopped_original5_post_identity": {
+    "pid": 82381,
+    "startticks": 1842111
+  },
+  "supplemental_helper_sha256": {
+    "failed4_dependency.py": "621d65eba2f3cea5bc0c4a382821d3137a6d10935faf97a56798d84ed7fca547",
+    "post5_scheduling_v2.py": "7278e6531a762de70e6a639d2286f90f8bfe6211f2e2e6f6e74bc5c020a2cef9"
+  }
+}
