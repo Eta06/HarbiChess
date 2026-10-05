@@ -1,0 +1,409 @@
+"""ROOT-only single workflow dispatcher. No execution or network on import."""
+
+import argparse
+import hashlib
+import importlib.util
+import json
+import os
+import selectors
+import shutil
+import signal
+import subprocess
+import sys
+import time
+from pathlib import Path
+
+FIRST = 1791230519.529188
+END = 1791235919.529188
+MANIFEST_SHA = "df5671d13e3da60f5337096b289c041fe2a730290fbc2a546f5b127c7bf729b7"
+HEAD = "66e31aa0544b537efe8f630ec8aeab648644a444"
+REPO = "Eta06/HarbiChess"
+WORKFLOW = "fresh-selflearning-state-blob-v6.yml"
+STAGE = Path("/workspace/HarbiChess/experiments/ufuk/fresh-selflearning-state-blob-v6")
+BUDGET_HELPER = Path(
+    "/workspace/work/harbichess/cpu-additive-source-6fcc8b4/src/harbichess/training/cgroup_budget.py"
+)
+E8 = Path(
+    "/workspace/work/harbichess/a100/restoration/local-rehearsal-content/harbichess-inputs/initial-e8.safetensors"
+)
+GUARDIAN = (991477, 18238465)
+OUTPUT_LIMIT = 128 * 1024
+JSON_LIMIT = 256 * 1024
+DISK_FLOOR = 256 * 1024**2
+TITLE = "Freshstate v6 capsule / " + MANIFEST_SHA[:12]
+
+
+class Failure(RuntimeError):
+    pass
+
+
+def require(value, code):
+    if not value:
+        raise Failure(code)
+
+
+def digest(path):
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def process_info(pid):
+    try:
+        text = Path(f"/proc/{pid}/stat").read_text()
+        fields = text[text.rfind(")") + 2 :].split()
+        return dict(
+            pid=pid,
+            state=fields[0],
+            ppid=int(fields[1]),
+            pgid=int(fields[2]),
+            start_ticks=int(fields[19]),
+        )
+    except (FileNotFoundError, ProcessLookupError):
+        return None
+
+
+def original_clock(control, now=None):
+    now = time.time() if now is None else now
+    require(
+        control["started_epoch"] == FIRST
+        and control["deadline_epoch"] == END
+        and FIRST <= now < END,
+        "same-new-scope-clock-expired-or-changed",
+    )
+
+
+def validate_run(run):
+    require(
+        type(run.get("id")) is int
+        and run["id"] > 0
+        and run.get("display_title") == TITLE
+        and run.get("event") == "workflow_dispatch"
+        and run.get("path") == ".github/workflows/" + WORKFLOW
+        and run.get("head_sha") == HEAD
+        and run.get("head_branch") == "main"
+        and run.get("html_url") == f"https://github.com/{REPO}/actions/runs/{run['id']}"
+        and run.get("repository", {}).get("full_name") == REPO,
+        "owned-run-title-event-path-head-repository",
+    )
+    require(
+        run.get("status")
+        in ("queued", "in_progress", "completed", "waiting", "pending", "requested"),
+        "owned-run-status",
+    )
+    return run
+
+
+def select_owned(rows, prior):
+    matches = [r for r in rows if r.get("id") not in prior and r.get("display_title") == TITLE]
+    require(len(matches) <= 1, "ambiguous-owned-dispatch-no-repeat-post")
+    return validate_run(matches[0]) if matches else None
+
+
+def terminate_owned(process, witness):
+    current = process_info(process.pid)
+    if (
+        current is None
+        or current["state"] in ("Z", "X")
+        or current["start_ticks"] != witness["start_ticks"]
+        or current["pgid"] != process.pid
+    ):
+        return
+    os.killpg(process.pid, signal.SIGTERM)
+    try:
+        process.wait(timeout=0.5)
+    except subprocess.TimeoutExpired:
+        current = process_info(process.pid)
+        if (
+            current
+            and current["start_ticks"] == witness["start_ticks"]
+            and current["pgid"] == process.pid
+        ):
+            os.killpg(process.pid, signal.SIGKILL)
+        process.wait(timeout=0.5)
+
+
+def execute_gh(arguments, request, timeout, children):
+    command = ["gh", "api", *arguments]
+    if request is not None:
+        command += ["--input", "-"]
+    process = subprocess.Popen(
+        command,
+        stdin=subprocess.PIPE if request else subprocess.DEVNULL,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.DEVNULL,
+        start_new_session=True,
+    )
+    witness = process_info(process.pid)
+    require(witness is not None, "owned-child-start-witness")
+    children.append(witness)
+    end = time.monotonic() + timeout
+    output = bytearray()
+    try:
+        if request:
+            process.stdin.write(request)
+            process.stdin.close()
+        with selectors.DefaultSelector() as selector:
+            selector.register(process.stdout, selectors.EVENT_READ)
+            while selector.get_map():
+                remaining = end - time.monotonic()
+                if remaining <= 0:
+                    raise Failure("github-subprocess-timeout-details-suppressed")
+                for key, _ in selector.select(min(0.25, remaining)):
+                    block = os.read(key.fileobj.fileno(), 8192)
+                    if not block:
+                        selector.unregister(key.fileobj)
+                        continue
+                    output.extend(block)
+                    require(len(output) <= JSON_LIMIT, "github-json256KiB")
+        process.wait(timeout=max(0.001, end - time.monotonic()))
+        require(process.returncode == 0, "github-subprocess-failed-details-suppressed")
+        return json.loads(output) if output.strip() else None
+    except (subprocess.TimeoutExpired, json.JSONDecodeError, OSError):
+        raise Failure("github-subprocess-or-json-failed-details-suppressed") from None
+    finally:
+        terminate_owned(process, witness)
+        process.stdout.close()
+        witness["finished_epoch"] = time.time()
+        witness["final"] = process_info(process.pid)
+
+
+def get_with_retries(arguments, guard, children, call=execute_gh):
+    for attempt in range(3):
+        guard()
+        try:
+            result = call(arguments, None, min(15, END - time.time()), children)
+            guard()
+            return result
+        except Failure:
+            if attempt == 2:
+                raise
+    raise Failure("unreachable-get")
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--registration", type=Path, required=True)
+    parser.add_argument("--registration-sha256", required=True)
+    parser.add_argument("--output", type=Path, required=True)
+    args = parser.parse_args()
+    require(digest(args.registration) == args.registration_sha256, "controller-registration-sha")
+    registration = json.loads(args.registration.read_bytes())
+    require(
+        registration.get("schema") == "fresh-state-v6-single-dispatch-registration-v1"
+        and registration.get("status") == "ROOT-approved-frozen-controller"
+        and registration.get("controller_sha256") == digest(Path(__file__))
+        and registration.get("dispatch_head") == HEAD
+        and registration.get("manifest_sha256") == MANIFEST_SHA
+        and registration.get("guardian") == {"pid": GUARDIAN[0], "start_ticks": GUARDIAN[1]}
+        and registration.get("started_epoch") == FIRST
+        and registration.get("deadline_epoch") == END,
+        "ROOT-controller-registration-binding",
+    )
+    args.output.mkdir(exist_ok=False)
+    sys.path.insert(0, str(STAGE))
+    import receiver_v6 as receiver
+
+    os.environ["MANIFEST_SHA"] = MANIFEST_SHA
+    os.environ["MANIFEST_PREFIX"] = MANIFEST_SHA[:12]
+    manifest, control = receiver.load_approved()
+    for relative, sha in registration["source_files"].items():
+        require(
+            relative
+            in {
+                "receiver_v6.py",
+                "blob_delivery_v6.py",
+                "release_transport_v6.py",
+                "native_delta_codec.py",
+                "fresh_binding.py",
+                "state_bundle.py",
+                "transport-control-PENDING.json",
+                "ROOT-approval-PENDING.json",
+                "allowlist-PENDING.json",
+                "manifest-DRAFT.json",
+            },
+            "registered-source-path",
+        )
+        require(digest(STAGE / relative) == sha, "registered-checked-in-source-sha")
+    require(len(registration["source_files"]) == 10, "all10-source-control-bindings")
+    require(
+        digest(STAGE.parents[2] / ".github/workflows" / WORKFLOW)
+        == registration["workflow_sha256"],
+        "registered-workflow-sha",
+    )
+    require(digest(BUDGET_HELPER) == registration["cgroup_budget_sha256"], "registered-cgroup-code")
+    spec = importlib.util.spec_from_file_location("fixed_memory_budget", BUDGET_HELPER)
+    memory_module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(memory_module)
+    budget = memory_module.CgroupMemoryBudget(15 * 1024**3)
+    children = []
+    result = dict(
+        schema="fresh-state-v6-single-dispatch-owner-v1",
+        status="failed-preserved",
+        original_first_epoch=FIRST,
+        original_deadline_epoch=END,
+        manifest_sha256=MANIFEST_SHA,
+        controller_sha256=digest(Path(__file__)),
+        registration_sha256=args.registration_sha256,
+        dispatch_head=HEAD,
+        owner=process_info(os.getpid()),
+        guardian={"pid": GUARDIAN[0], "start_ticks": GUARDIAN[1]},
+        children=children,
+        post_attempts=0,
+        actual_started_epoch=time.time(),
+        scope="public-all22-byte-backup-not-runtime-strength",
+        release_id=404068972,
+    )
+
+    def guard():
+        original_clock(control)
+        receiver.release.check_clock(control)
+        guardian = process_info(GUARDIAN[0])
+        require(
+            guardian
+            and guardian["start_ticks"] == GUARDIAN[1]
+            and guardian["state"] not in ("Z", "X"),
+            "registered-guardian-gone-or-reused",
+        )
+        require(shutil.disk_usage(args.output.parent).free >= DISK_FLOOR, "disk256MiB-floor")
+        require(
+            sum(p.stat().st_size for p in args.output.iterdir() if p.is_file()) < OUTPUT_LIMIT,
+            "metadata128KiB",
+        )
+        budget.check()
+
+    def get(arguments):
+        return get_with_retries(arguments, guard, children)
+
+    def runs():
+        rows = []
+        for page in range(1, 11):
+            data = get(
+                [
+                    f"repos/{REPO}/actions/workflows/{WORKFLOW}/runs?event=workflow_dispatch&per_page=10&page={page}"
+                ]
+            )
+            batch = data.get("workflow_runs")
+            require(isinstance(batch, list) and len(batch) <= 10, "canonical-runs-page10")
+            rows.extend(batch)
+            require(len({r["id"] for r in rows}) == len(rows), "duplicate-run-inventory")
+            if len(batch) < 10:
+                return rows
+        raise Failure("bounded-run-inventory-incomplete")
+
+    try:
+        guard()
+        with (args.output / "owner.json").open("x") as stream:
+            json.dump(result, stream, sort_keys=True)
+        prior = {r["id"] for r in runs()}
+        request = json.dumps(
+            {
+                "ref": "main",
+                "inputs": {"manifest_sha": MANIFEST_SHA, "manifest_prefix": MANIFEST_SHA[:12]},
+            },
+            separators=(",", ":"),
+        ).encode()
+        result["post_attempts"] = 1
+        try:
+            execute_gh(
+                ["--method", "POST", f"repos/{REPO}/actions/workflows/{WORKFLOW}/dispatches"],
+                request,
+                min(15, END - time.time()),
+                children,
+            )
+            result["post_status"] = "accepted-no-repeat"
+        except Failure:
+            result["post_status"] = "ambiguous-reconcile-exact-run-no-repeat"
+        ident = None
+        while True:
+            guard()
+            run = (
+                select_owned(runs(), prior)
+                if ident is None
+                else validate_run(get([f"repos/{REPO}/actions/runs/{ident}"]))
+            )
+            if run:
+                if ident is None:
+                    with (args.output / "owned-run.json").open("x") as stream:
+                        json.dump(
+                            {
+                                "id": run["id"],
+                                "head_sha": HEAD,
+                                "title": TITLE,
+                                "manifest_sha256": MANIFEST_SHA,
+                                "original_deadline_epoch": END,
+                            },
+                            stream,
+                            sort_keys=True,
+                        )
+                ident = run["id"]
+                result["owned_run_id"] = ident
+                result["owned_run"] = {
+                    k: run.get(k)
+                    for k in (
+                        "id",
+                        "display_title",
+                        "event",
+                        "path",
+                        "head_sha",
+                        "status",
+                        "conclusion",
+                        "created_at",
+                        "updated_at",
+                        "html_url",
+                    )
+                }
+                if run["status"] == "completed":
+                    require(run.get("conclusion") == "success", "owned-workflow-failed-preserved")
+                    break
+            time.sleep(min(10, max(0, END - time.time())))
+        guard()
+        require(E8.stat().st_size == 294764, "local-exact-E8-size")
+        parent = E8.read_bytes()
+        public = receiver.release.Transport("", control, manifest["release"])
+        capsule = public.download(receiver.capsule_name(manifest), manifest["capsule_bytes"])
+        restored = receiver.bundle.decode(capsule, parent, manifest)
+        result.update(
+            anonymous_capsule_sha256=receiver.bundle.sha(capsule),
+            originals=receiver.bundle.file_rows(restored),
+            all22_original_byte_sha_verified=True,
+            status="PASS-public-all22-byte-preservation-not-native-runtime",
+        )
+        guard()
+    except BaseException as error:
+        result["error_type"] = type(error).__name__
+        # Only fixed failure codes from this controller are exposed.
+        result["error_code"] = str(error) if isinstance(error, Failure) else "details-suppressed"
+        snapshot = getattr(error, "snapshot", None)
+        if snapshot is not None:
+            result["memory_failure_snapshot"] = snapshot
+    finally:
+        result["finished_epoch"] = time.time()
+        result["final_memory_snapshot"] = budget.last_snapshot
+        result["remaining_owned_children"] = [
+            x
+            for r in children
+            if (x := process_info(r["pid"]))
+            and x["start_ticks"] == r["start_ticks"]
+            and x["state"] not in ("Z", "X")
+        ]
+        if result["finished_epoch"] >= END:
+            result["status"] = "INCOMPLETE-original-new-scope-deadline-exhausted"
+        result["children"] = [
+            [r["pid"], r["start_ticks"], r["pgid"], r.get("finished_epoch"), r.get("final")]
+            for r in children
+        ]
+        raw = json.dumps(result, sort_keys=True, separators=(",", ":")).encode() + b"\n"
+        require(len(raw) <= OUTPUT_LIMIT, "final-metadata128KiB")
+        with (args.output / "result.json").open("xb") as stream:
+            stream.write(raw)
+        print(
+            json.dumps(
+                {
+                    k: result.get(k)
+                    for k in ("status", "owned_run_id", "finished_epoch", "manifest_sha256")
+                }
+            )
+        )
+
+
+if __name__ == "__main__":
+    main()
