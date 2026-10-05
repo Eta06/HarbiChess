@@ -1,0 +1,52 @@
+{
+  "results": [
+    {
+      "NN_forward_or_fit_run": false,
+      "actor_actions": 2048,
+      "actor_config_sha256": "b73106e21c6d8433c2132b024a2caae7527ec84541898d4f9c3db8202fccc3b5",
+      "actor_original_deadline_epoch": 1791235580.0397933,
+      "common_dataset_sha256": "8f1775c2d3d1da7cfebd55073f4d873439d1ad153af1d94d40bac07246a58ec3",
+      "complete_trajectory_groups": 24,
+      "fullhistory_dense_shape": [
+        2011,
+        8,
+        8,
+        104
+      ],
+      "journal_sha256": "8109c074a9e084f33ec8d9a6c4b062eb3c57e8b6e8d897e03bd39dc8261dea8f",
+      "known_rows": 2011,
+      "row_binding_sha256": "0a67492fc4ad0714c409e1b97d200430f5fd2402db2a747dfb563909b6a51782",
+      "search_extended_data_sha256": "15a630d0e6b9104a15cfdb91a3734412d32c11e997eca931ff0d44940be09e37",
+      "seed": 20262805,
+      "teacher_labels": false,
+      "train_rows": 1740,
+      "unknown_actions": 37,
+      "validation_rows": 271
+    },
+    {
+      "NN_forward_or_fit_run": false,
+      "actor_actions": 2048,
+      "actor_config_sha256": "a3b5ac9f3933afdce858e60c0e383c9611dabd2be79e7dff128c490d6750591d",
+      "actor_original_deadline_epoch": 1791235580.0397933,
+      "common_dataset_sha256": "97b16dc10e9b1cdff032710e724cd7ae482ea56b7282befcde208e3cc48339d5",
+      "complete_trajectory_groups": 16,
+      "fullhistory_dense_shape": [
+        2002,
+        8,
+        8,
+        104
+      ],
+      "journal_sha256": "df515e393e97065cd4828ceacccc7628ea04091643c16296009f48f1b9e01645",
+      "known_rows": 2002,
+      "row_binding_sha256": "c5c941a408e8fff92069b96773f502bf98748e4a8d7be5c42ea8ed8178a2faaf",
+      "search_extended_data_sha256": "a425e2218f7bc2b3019686e60f987825f0320bc5fec1c65fac2f73c57d45db66",
+      "seed": 20262806,
+      "teacher_labels": false,
+      "train_rows": 1493,
+      "unknown_actions": 46,
+      "validation_rows": 509
+    }
+  ],
+  "scope": "read-only CPU data conversion and row-binding smoke; no E8 forward, fitting, match, or strength query",
+  "status": "PASS-actual-2048-data-loader-only"
+}
