@@ -1,0 +1,124 @@
+{
+  "E8_value_helper": {
+    "path": "/workspace/HarbiChess/experiments/ufuk/cpu-residual-value-v1/arena/value.py",
+    "sha256": "0e0d9092db254bd88e4a49875d63edc6b1b39770d0fc53f61e03629ccba02737"
+  },
+  "audit_deadline_epoch": "ROOT_REGISTERED_AUDIT900_WITH_HARD08",
+  "audit_max_seconds": 900,
+  "book_path": "/workspace/work/harbichess/cpu-own-replay-v1-actual/development/book.json",
+  "book_sha256": "9c36b5972c9676d19c358ca7e598b9f7f5d110b1947bed838cd660f644d845da",
+  "classical_value_helper": {
+    "path": "/workspace/HarbiChess/experiments/ufuk/cpu-classical-own-v1/value.py",
+    "sha256": "a99cddfc397bd9221b99a70691427fdd663488b033fb239d9f48240786b2f277"
+  },
+  "disk_min_free_bytes": 268435456,
+  "fit_cohort_path": "/dev/shm/harbichess-pst-fit-v1-20261005/fit-result.json",
+  "fit_cohort_sha256": "46048824fd1d75fd47903a3084b7afe117e2154e78a6f991c18d9e33d1da1e2d",
+  "games_per_tournament": 16,
+  "match_seeds": [
+    20262905,
+    20262906
+  ],
+  "max_depth": 8,
+  "max_plies": 400,
+  "memory_max_bytes": 16106127360,
+  "models": {
+    "20262905": {
+      "e8": {
+        "path": "/workspace/work/harbichess/a100/restoration/local-rehearsal-content/harbichess-inputs/initial-e8.safetensors",
+        "sha256": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03"
+      },
+      "learned": {
+        "path": "/dev/shm/harbichess-pst-fit-v1-20261005/20262905/fit/candidate.json",
+        "sha256": "6160aed746ab0549cf6b60a672da179b2ecbca0a8b4969ea00a34945c8faaebd",
+        "native_path": "/dev/shm/harbichess-pst-fit-v1-20261005/20262905/fit/step-00000199.native.gz",
+        "native_sha256": "5b237ad3c7d647de9e77704b80e589ff34b02b0295bcdde6d6a48bc8b6821095",
+        "initial_native_path": "/dev/shm/harbichess-pst-fit-v1-20261005/20262905/fit/step-00000000.native.gz",
+        "initial_native_sha256": "62d223c6177f3e1632fc1729ef733101fb05b88a758250006468e76e8717190d",
+        "fit_contract_path": "/dev/shm/harbichess-pst-fit-v1-20261005/20262905/fit/fit-contract.json",
+        "fit_contract_sha256": "7b042c1e1d353ac2214b6dbfbae5fcaa5b06a218bc5de6e017db0fd6b5c6bb1f",
+        "accepted_updates": 199,
+        "dataset_sha256": "173325991189bc1610fb016236d40f04e280a6347093e01575b1ce63e242118e"
+      },
+      "prior": {
+        "path": "/workspace/HarbiChess/experiments/ufuk/cpu-classical-own-v1/prior.json",
+        "sha256": "afbaec307e5acc4b9fcb5222115c2fb8112290065ffe64e929b35f2a935565e1"
+      }
+    },
+    "20262906": {
+      "e8": {
+        "path": "/workspace/work/harbichess/a100/restoration/local-rehearsal-content/harbichess-inputs/initial-e8.safetensors",
+        "sha256": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03"
+      },
+      "learned": {
+        "path": "/dev/shm/harbichess-pst-fit-v1-20261005/20262906/fit/candidate.json",
+        "sha256": "9270a3bb77d2bf467999cfe6c6287573c3ceba91a819bab2fd2f92d72aa2c2d1",
+        "native_path": "/dev/shm/harbichess-pst-fit-v1-20261005/20262906/fit/step-00000183.native.gz",
+        "native_sha256": "9ba9bd4bfe7f86d80381cb321a843b2de2a0b95e399e9547e4e9dc6fe0396aee",
+        "initial_native_path": "/dev/shm/harbichess-pst-fit-v1-20261005/20262906/fit/step-00000000.native.gz",
+        "initial_native_sha256": "c20ca438de46c6763cf281b07f3deaaf8ec2bbc56994f9398d68a767883f3e8d",
+        "fit_contract_path": "/dev/shm/harbichess-pst-fit-v1-20261005/20262906/fit/fit-contract.json",
+        "fit_contract_sha256": "db5ede3362e088358c5813f215868d65d74bce7bd88cf0ce6106d7562dfafc23",
+        "accepted_updates": 183,
+        "dataset_sha256": "fbfa1956b0e7c2d2832feb872adb10f638c78b47ca8dea73c0fc0e51fccf5e41"
+      },
+      "prior": {
+        "path": "/workspace/HarbiChess/experiments/ufuk/cpu-classical-own-v1/prior.json",
+        "sha256": "afbaec307e5acc4b9fcb5222115c2fb8112290065ffe64e929b35f2a935565e1"
+      }
+    }
+  },
+  "opening_pairs": 8,
+  "operator_hard_deadline_epoch": 1791273600.0,
+  "original_deadline_epoch": "SAME_FIRST_PLUS7200",
+  "original_first_epoch": "ROOT_OBSERVED_FIRST_BEFORE_PROFILE",
+  "per_tournament_seconds": 2700,
+  "profile_deadline_epoch": 1791230323.0130045,
+  "profile_first_epoch": 1791229723.0130045,
+  "profile_seconds": 600,
+  "promotion_priority": "NN-MC/SC/FULL then CLASSIC18 then prospective PST; at mostONEnewvirginconfirmationcampaign",
+  "quiescence_plies": 2,
+  "reserved_output_bytes": 100663296,
+  "schema": "classical-own-mixed-Q512-development-protocol-v3",
+  "scope": "fixedknown8families160PSTdevelopmentgames; notformalstrength; includeactual24profile/prep in original7200clock",
+  "search_nodes": 512,
+  "source_commit": "6fcc8b476d25495d1c9c413e55b2c7ba4794013e",
+  "status": "DRAFT-PST-ARENA-NOT-REGISTERED-NOT-EXECUTED",
+  "stockfish_nodes": 512,
+  "stockfish_path": "/workspace/work/harbichess/stockfish/stockfish-linux-x86-64-universal",
+  "stockfish_sha256": "0f83d24cc46d2c66c60f16001af5444873bc112b7d028594513426894c12da19",
+  "tasks": [
+    [
+      "learned",
+      "SF512"
+    ],
+    [
+      "prior",
+      "SF512"
+    ],
+    [
+      "e8",
+      "SF512"
+    ],
+    [
+      "learned",
+      "e8"
+    ],
+    [
+      "learned",
+      "prior"
+    ]
+  ],
+  "total_games": 160,
+  "whole_seconds": 7200,
+  "PST_helper_directory": "/workspace/HarbiChess/experiments/ufuk/cpu-classical-pst-v1",
+  "PST_training_protocol": {
+    "path": "/workspace/HarbiChess/experiments/ufuk/cpu-classical-pst-v1/protocol.json",
+    "sha256": "ae4e4e9444963a6a793ee59e92754ac8258f50923be469bb63e28b6a6ddee414"
+  },
+  "PST_fit_result": {
+    "path": "/dev/shm/harbichess-pst-fit-v1-20261005/fit-result.json",
+    "sha256": "46048824fd1d75fd47903a3084b7afe117e2154e78a6f991c18d9e33d1da1e2d"
+  },
+  "PST_native_admission_helper_sha256": "5389dac52124ccd67e99eb493c25b753142ced531d9a78352d70c2670617f055"
+}
