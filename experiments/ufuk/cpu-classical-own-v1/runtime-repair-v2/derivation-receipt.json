@@ -1,0 +1,28 @@
+{
+  "schema": "classical-own-prequalification-runtime-config-transfer-repair-v2",
+  "status": "prospective-only-before-any-real-classical-job",
+  "original_runtime_sha256": "7407fe02f0ce60c9ad7a4972c293781988d7f4abc4d01be60b7420004fe34da2",
+  "new_runtime_sha256": "656a19611984f61f99f4fec8952250ee4ad8b6d836a34c6eaf6fcc65ed0af496",
+  "original_inventory_sha256": "3ac4d71b0366e5233cfd600b549476bf07e9d42f1fe255bfb0918987722dd21b",
+  "original_verification_sha256": "39e43795008b3350b051f11e2e05a8afb102592e382bb206565f68ba3009c755",
+  "source_cgroup_helper_sha256": "a53079851ab9fb63b65dd5bef0d0e8fb01d6864ebfbf2389dcdbcab39b30289c",
+  "numeric_ceiling_changes": false,
+  "memory_policy": "Pinnedclean6fcc CgroupMemoryBudget15GiB: eligiblecache clamp,physicalreserve/charge andOOMdelta retained; cachedbudget reused throughownedchildwaits",
+  "artifact_policy": "Recursiveactualfiles16MiB sameceiling",
+  "qualification_rule": "Twoactualsame-seed9/4/fresh9 proofs600 each; only4declaredliteralconfigtransferfields",
+  "helper_closure": {
+    "journal_v3.py": "851b9967adb709beb0dcf2a9e793c61add3eccf91fb21fb2a75e80da8845968b",
+    "learner.py": "2f7bc39943146b66fb2b0863938e47484378ce2597a725893d1df0edd345883e",
+    "produce_v3.py": "761ee6bb8d7db27d6b2c231dbd0636648850c97079c56c0055314efd4d13baef",
+    "qualify_actor_v3.py": "8c4eb4052c0b7a48d07a29d9398513ba170239365a1d32ea98a96d5af3805faa",
+    "run_epoch_v3.py": "565d62f9451dc3eae2f9c6b85df4dcc0fddf959d6077058449057eb6f82e10f1",
+    "runtime.py": "656a19611984f61f99f4fec8952250ee4ad8b6d836a34c6eaf6fcc65ed0af496",
+    "train_v3.py": "d129d11682ba5f392023be53c9ed9b62d93822b778ffa483d2d0b6b50008b51c",
+    "transfer.py": "1fb50a8d58b36cac9d781b4d29ca4e6ce65e50c838190c0355f2a3347ad6dfd8",
+    "value.py": "a99cddfc397bd9221b99a70691427fdd663488b033fb239d9f48240786b2f277"
+  },
+  "pure_tests": 25,
+  "skips": 0,
+  "pytest_seconds": 0.87,
+  "no_actual_jobs": true
+}
