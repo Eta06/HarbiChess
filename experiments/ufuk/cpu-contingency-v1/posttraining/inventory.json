@@ -1,0 +1,11 @@
+{
+  "files": {
+    "README.md": "9bbb6a56f6ebdd08883029e81dda4ef540a1edb0940a788cc0ad1f0ab7e0dc0d",
+    "config-TEMPLATE.json": "e0612701cf5116eb15facc0198116d46048c6831734598c02559941b2e69664d",
+    "freeze_config.py": "60e14583d6ba06e563d4591e6d14cd5243ca1dfd69e52eabf8f095242afbed51",
+    "post_cpu.py": "8a996a82ffa38e343ab651b4f2f74506f670979a5ca754ed9d112cfbcb32f6b9",
+    "test_post_cpu.py": "edd62f9c0179d91fdc0f43ec1b610199195660041654c5fd6e90d8aade742d9a"
+  },
+  "schema": "cpu-posttraining-helper-inventory-v1",
+  "status": "4-pureCPU-controls-and-Ruff-PASS-NOT-executed"
+}
