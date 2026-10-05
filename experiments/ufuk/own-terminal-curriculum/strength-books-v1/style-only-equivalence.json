@@ -1,0 +1,6 @@
+{
+  "status": "pass-style-only-equivalent-AST",
+  "executed_file_sha256": "ad618fb855d07f99abbbb0b3ef7c66daa5f705a6a7a1ae88a1e077f1b0832511",
+  "style_only_companion_sha256": "2560725a91d39a50fe49cd1ff4195f5e91f462de15f3c27ce388e6c8921442d9",
+  "normalization": "Normalize imports into same sorted names; normalize intentionally-unused checkout variable rename only. ALL nonimport statements/branches/constants otherwise exact AST."
+}
