@@ -1,0 +1,23 @@
+{
+  "first_epoch": 1791231838.1655662,
+  "deadline_epoch": 1791232738.1655662,
+  "original_arena_first": 1791229723.0130045,
+  "original_arena_end": 1791236923.0130045,
+  "auditor_sha256": "89ac860d0cb0cee91d12d03a9760147826529a3a4b9481f5153e8dd2741c8369",
+  "command": [
+    "/workspace/HarbiChess/.venv/bin/python",
+    "/workspace/HarbiChess/experiments/ufuk/cpu-classical-own-v1/arena/audit_arena.py",
+    "--protocol",
+    "/workspace/HarbiChess/experiments/ufuk/cpu-classical-own-v1/arena/protocol.json",
+    "--arena",
+    "/dev/shm/harbichess-classical-strength-arena-v1-20261005/arena",
+    "--output",
+    "/dev/shm/harbichess-classical160-root-audit-v1-20261005/result.json"
+  ],
+  "original_failure": "KeyError: formal; missing output-only metadata after all160 fullhistory calculations",
+  "original_auditor_sha256": "89ac860d0cb0cee91d12d03a9760147826529a3a4b9481f5153e8dd2741c8369",
+  "corrected_auditor_sha256": "a669f380226817207501db052c69202434cc60428862922107294390344fb417",
+  "only_output_metadata_changed": true,
+  "clock_reset": false,
+  "gates_or_games_changed": false
+}
