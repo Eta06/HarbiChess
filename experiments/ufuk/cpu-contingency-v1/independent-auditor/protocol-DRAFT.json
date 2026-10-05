@@ -70,8 +70,10 @@
     "cpu_quota": 4,
     "device": "cpu",
     "memory_limit_bytes": 16106127360,
+    "memory_metric": "estimated-nonreclaimable-cgroup-charge=current-(file-shmem)-slab_reclaimable",
     "min_free_disk_bytes": 268435456,
-    "torch": "2.14.1+cpu"
+    "torch": "2.14.1+cpu",
+    "total_cgroup_charge_ceiling_bytes": 17179869184
   },
   "schema": "prospective-cpu-contingency-v1",
   "seeds": [
