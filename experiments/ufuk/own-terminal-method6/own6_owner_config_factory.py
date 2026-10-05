@@ -34,6 +34,10 @@ def audit_manifest(registration, inputs, seed, first, paths, helpers):
         "original_training_deadline_epoch": first
         + registration["whole_training_seconds_per_seed"],
         "whole_training_seconds": registration["whole_training_seconds_per_seed"],
+        "absolute_audit_cutoff_epoch": registration["absolute_audit_cutoff_epoch"],
+        "scheduling_helper_sha256": {
+            "own6_schedule_v3.py": sha(Path(helpers) / "own6_schedule_v3.py")
+        },
         "whole_audit_seconds": registration[
             "whole_audit_seconds_from_originalfirstclock"
         ],
@@ -106,11 +110,10 @@ def main():
         first = row["original_training_started_epoch"]
         assert first == common_first
         assert reg["earliest_training_epoch"] <= first <= time.time()
-        assert (
-            first
-            + reg["whole_audit_seconds_from_originalfirstclock"]
-            + reg["posttraining_reserve_seconds"]
-            < 1791180000
+        from own6_schedule_v3 import validate_clock
+
+        validate_clock(
+            reg, first, first + reg["whole_training_seconds_per_seed"], time.time()
         )
         full = audit_manifest(
             reg,
@@ -140,6 +143,8 @@ def main():
         "qualification_config_sha256": a.qualification_config_sha256,
         "whole_training_seconds": reg["whole_training_seconds_per_seed"],
         "whole_audit_seconds": reg["whole_audit_seconds_from_originalfirstclock"],
+        "absolute_audit_cutoff_epoch": reg["absolute_audit_cutoff_epoch"],
+        "previous45_completion_barrier": reg["terminal45_barrier_binding"],
         "seeds": rows,
     }
     publish(a.output / "posttraining-config.json", post)
