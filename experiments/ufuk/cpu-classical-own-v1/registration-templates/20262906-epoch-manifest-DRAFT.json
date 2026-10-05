@@ -1,0 +1,58 @@
+{
+  "schema": "classical-own-epoch-controller-manifest-v3",
+  "status": "DRAFT-UNREGISTERED-NOT-EXECUTED",
+  "source_repo": "/workspace/work/harbichess/cpu-additive-source-6fcc8b4",
+  "cpu_core": "PENDING_ROOT_DISTINCT_CPU_20262906",
+  "config": {
+    "path": "PENDING_ROOT_IMMUTABLE_20262906_PRODUCTION_CONFIG",
+    "sha256": "PENDING_REAL_COMPLETE_CONFIG_FILE_SHA"
+  },
+  "model": {
+    "path": "/workspace/HarbiChess/experiments/ufuk/cpu-classical-own-v1/prior.json",
+    "sha256": "afbaec307e5acc4b9fcb5222115c2fb8112290065ffe64e929b35f2a935565e1"
+  },
+  "search_helper": {
+    "path": "/workspace/HarbiChess/experiments/ufuk/cpu-classical-own-v1/arena/search.py",
+    "sha256": "de53c14728a67b7772f18b396ac8ef5c35a144d4e4e616fec40099cd461a6670"
+  },
+  "value_helper": {
+    "path": "/workspace/HarbiChess/experiments/ufuk/cpu-classical-own-v1/value.py",
+    "sha256": "a99cddfc397bd9221b99a70691427fdd663488b033fb239d9f48240786b2f277"
+  },
+  "helper_sha256": {
+    "journal_v3.py": "851b9967adb709beb0dcf2a9e793c61add3eccf91fb21fb2a75e80da8845968b",
+    "learner.py": "2f7bc39943146b66fb2b0863938e47484378ce2597a725893d1df0edd345883e",
+    "produce_v3.py": "761ee6bb8d7db27d6b2c231dbd0636648850c97079c56c0055314efd4d13baef",
+    "qualify_actor_v3.py": "8c4eb4052c0b7a48d07a29d9398513ba170239365a1d32ea98a96d5af3805faa",
+    "run_epoch_v3.py": "565d62f9451dc3eae2f9c6b85df4dcc0fddf959d6077058449057eb6f82e10f1",
+    "runtime.py": "656a19611984f61f99f4fec8952250ee4ad8b6d836a34c6eaf6fcc65ed0af496",
+    "train_v3.py": "d129d11682ba5f392023be53c9ed9b62d93822b778ffa483d2d0b6b50008b51c",
+    "transfer.py": "1fb50a8d58b36cac9d781b4d29ca4e6ce65e50c838190c0355f2a3347ad6dfd8",
+    "value.py": "a99cddfc397bd9221b99a70691427fdd663488b033fb239d9f48240786b2f277"
+  },
+  "qualification_config": {
+    "path": "PENDING_ROOT_IMMUTABLE_20262906_QUAL_CONFIG",
+    "sha256": "PENDING_REAL_COMPLETE_QUAL_CONFIG_FILE_SHA"
+  },
+  "qualification_transfer": {
+    "proof_config_sha256": "PENDING_REAL_COMPLETE_QUAL_CONFIG_FILE_SHA",
+    "allowed_difference_values": {
+      "epoch_id": {
+        "proof": "classical-own-realCPU-qualification-seed-20262906",
+        "production": "classical-own-fixed16384-seed-20262906"
+      },
+      "max_actions": {
+        "proof": 9,
+        "production": 16384
+      },
+      "original_deadline_epoch": {
+        "proof": "PENDING_SAME_QUAL_FIRST_PLUS600_20262906",
+        "production": "PENDING_ROOT_PROSPECTIVE_COLLECTION_CEILING_20262906"
+      },
+      "original_first_epoch": {
+        "proof": "PENDING_ROOT_OBSERVED_QUAL_FIRST_20262906",
+        "production": "PENDING_ROOT_OBSERVED_COLLECTION_FIRST_20262906"
+      }
+    }
+  }
+}
