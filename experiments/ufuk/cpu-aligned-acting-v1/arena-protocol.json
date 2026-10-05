@@ -1,0 +1,46 @@
+{
+  "schema": "cpu-aligned-known-development-arena-v1",
+  "scope": "fixed known conventional roots, not virgin independent confirmation; no model promotion",
+  "source_commit": "1e26d663b9d748e2c6afed5b74914a9dd88a21fe",
+  "seeds": [
+    20262105,
+    20262106
+  ],
+  "arms": [
+    "greedy90"
+  ],
+  "candidate": "each fixedepoch3 final, no bestcheckpoint selection",
+  "book_path": "/workspace/work/harbichess/cpu-own-replay-v1-actual/development/book.json",
+  "book_sha256": "9c36b5972c9676d19c358ca7e598b9f7f5d110b1947bed838cd660f644d845da",
+  "games_per_tournament": 16,
+  "opening_pairs": 8,
+  "total_planned_games": 96,
+  "initial_baseline": "fresh e8 versus SF512 at both matchseeds on same roots/colors, before candidate tournaments",
+  "simulations": 16,
+  "root_actions": 4,
+  "gumbel_scale": 0.0,
+  "threads": 1,
+  "stockfish_nodes": 512,
+  "stockfish_threads": 1,
+  "stockfish_hash_MiB": 16,
+  "stockfish_sha256": "0f83d24cc46d2c66c60f16001af5444873bc112b7d028594513426894c12da19",
+  "initial_e8_sha256": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03",
+  "max_plies": 400,
+  "per_tournament_seconds": 3600,
+  "whole_seconds": 19000,
+  "execution": "onearena worker afterboth fits andaudits complete; totalCPUjobs<=2, eachTorchT1, noGPU; native/rules/mu/RNG auditPASS required",
+  "frozen_min_screen": {
+    "both_seeds": true,
+    "direct_mean_gt": 0.6,
+    "SF_gain_gt": 0.1,
+    "final_SF_mean_ge": 0.25,
+    "caps_fraction_le": 0.05
+  },
+  "uncertainty": "opening-color pairs bootstrap/Hoeffding descriptive;8 known families too small for independent promotion. Same roots across seeds, not independent families across seeds. Degenerate empirical bootstrap0 is not populationwin-probability0",
+  "next_confirmation": "only if both-seed screen passes; prospective virgin source-root exclusion and fixed final candidate; retain unchanged stricter statistical/latency gates, closed historicalMAX8 accounting. No result-driven threshold relaxation",
+  "full_neural_search_replay": "not complete yet; shared-validator data audit is not independent chronological NN reproduction. Required before formal confirmation if any candidate qualifies",
+  "failure": "preserve all partial/full games and original clocks. Audit failures block candidate; no adaptive early score-driven tournament stop, endpoint substitution or extra game extension",
+  "teacher_training_labels_generated": false,
+  "GPU_used": false,
+  "frozen_control_comparison": "Existing all16 same-seed6kfixedendpoint224gameresult remains separateknowncomparison; no controlrerun counted asfreshmoves or independentvirginconfirmation"
+}
