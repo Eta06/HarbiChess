@@ -1,0 +1,10 @@
+{
+  "status": "PASS-actual-static-PST-and-strict-native-only",
+  "tests": 4,
+  "seconds": 0.15,
+  "ruff": "PASS-repository-config",
+  "actual_search": 0,
+  "actual_matches": 0,
+  "actual_SGD": 0,
+  "source": "6fcc8b476d25495d1c9c413e55b2c7ba4794013e"
+}
