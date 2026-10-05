@@ -1,0 +1,88 @@
+{
+  "schema": "cpu-own-value-overfit-diagnosis-v1",
+  "purpose": "Measure complete fixed checkpoint internal own-policy calibration trajectories; no endpoint selection, training, strength or optimal-play claim",
+  "source_commit": "4cae08522ac940746cf9127ca8ce4a6b63a47408",
+  "seeds": [
+    20262405,
+    20262406
+  ],
+  "steps": [
+    0,
+    512,
+    1024,
+    1536,
+    2048,
+    2560,
+    3072,
+    3584,
+    4096
+  ],
+  "journals": [
+    {
+      "path": "/workspace/HarbiChess/artifacts/ufuk-a100-mirror-20261004/harbichess-runs/fullgame-method2-seed-20261205/run/journal/epoch-00000001.json.gz",
+      "sha256": "32d203b68ed29e9fd1a0845fca69f32f0faa3aa4cc1ad9e0e040b6af5027fb55",
+      "bytes": 24149725,
+      "source_seed": 20261205,
+      "epoch": 1
+    },
+    {
+      "path": "/workspace/HarbiChess/artifacts/ufuk-a100-mirror-20261004/harbichess-runs/fullgame-method2-seed-20261205/run/journal/epoch-00000008.json.gz",
+      "sha256": "f8503b5abe08687526b6a22d98df2a246dde1da96cfd41c3ab4109ea30ae7af9",
+      "bytes": 31062706,
+      "source_seed": 20261205,
+      "epoch": 8
+    },
+    {
+      "path": "/workspace/HarbiChess/artifacts/ufuk-a100-mirror-20261004/harbichess-runs/fullgame-method2-seed-20261205/run/journal/epoch-00000016.json.gz",
+      "sha256": "44e1487e496ce7733b18134385fa2f378ea21d3c30a5fb74174687a85e9d4a08",
+      "bytes": 31227317,
+      "source_seed": 20261205,
+      "epoch": 16
+    },
+    {
+      "path": "/workspace/HarbiChess/artifacts/ufuk-a100-mirror-20261004/harbichess-runs/fullgame-method2-seed-20261205/run/journal/epoch-00000032.json.gz",
+      "sha256": "21c055b78b5c28da11092bcd6952989ef2a7f1d223a46fa27817fabce7815eff",
+      "bytes": 30998257,
+      "source_seed": 20261205,
+      "epoch": 32
+    },
+    {
+      "path": "/workspace/HarbiChess/artifacts/ufuk-a100-mirror-20261004/harbichess-runs/fullgame-method2-seed-20261206/run/journal/epoch-00000001.json.gz",
+      "sha256": "29326d93118de97a851d12f1d6125633abc32ae40c81004c7d7ba2838c5c78cf",
+      "bytes": 23832074,
+      "source_seed": 20261206,
+      "epoch": 1
+    },
+    {
+      "path": "/workspace/HarbiChess/artifacts/ufuk-a100-mirror-20261004/harbichess-runs/fullgame-method2-seed-20261206/run/journal/epoch-00000008.json.gz",
+      "sha256": "b5bad76687a466a18735eafe3e65980242b6415b52b428bbb7c7ef80f5996602",
+      "bytes": 31109518,
+      "source_seed": 20261206,
+      "epoch": 8
+    },
+    {
+      "path": "/workspace/HarbiChess/artifacts/ufuk-a100-mirror-20261004/harbichess-runs/fullgame-method2-seed-20261206/run/journal/epoch-00000016.json.gz",
+      "sha256": "2a6e3e7748532de3c4bf862074754801a859faacefb2955446783c21dd43cfc6",
+      "bytes": 31448063,
+      "source_seed": 20261206,
+      "epoch": 16
+    },
+    {
+      "path": "/workspace/HarbiChess/artifacts/ufuk-a100-mirror-20261004/harbichess-runs/fullgame-method2-seed-20261206/run/journal/epoch-00000032.json.gz",
+      "sha256": "e688663ee19d295e6b6f7569d7fd9cb6b2f559a87ef89cf7ab8768bc42eddf35",
+      "bytes": 31692618,
+      "source_seed": 20261206,
+      "epoch": 32
+    }
+  ],
+  "pairing": {
+    "20262405": 20261205,
+    "20262406": 20261206
+  },
+  "per_seed_seconds": 600,
+  "whole_seconds": 1200,
+  "max_workers": 1,
+  "GPU_used": false,
+  "memory_max_bytes": 16106127360,
+  "stop": "preserve first errors/original clocks; report every endpoint including failures. Results may inform a separate prospective experiment, never promote selected old checkpoint."
+}
