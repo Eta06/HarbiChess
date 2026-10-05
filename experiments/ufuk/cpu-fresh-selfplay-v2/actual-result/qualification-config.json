@@ -1,0 +1,31 @@
+{
+  "nodes": 512,
+  "qdepth": 2,
+  "max_depth": 8,
+  "exploration": 0.05,
+  "total_ply_cap": 400,
+  "max_actions": 9,
+  "actors": 1,
+  "seed": 20262855,
+  "epoch_id": "UFUK-FRESH-real-E8-qualification-only",
+  "original_deadline_epoch": 1791221595.4006422,
+  "model_sha256": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03",
+  "source_commit": "6fcc8b476d25495d1c9c413e55b2c7ba4794013e",
+  "search_helper_sha256": "de53c14728a67b7772f18b396ac8ef5c35a144d4e4e616fec40099cd461a6670",
+  "value_helper_sha256": "0e0d9092db254bd88e4a49875d63edc6b1b39770d0fc53f61e03629ccba02737",
+  "producer_sha256": "afb3ffa3c196b9da2ceb1b8000c67ae0c2781e7ffd65a950b59bed5b674c6079",
+  "runner_sha256": "381861b52fca83f912672baca5066f0e3ed0e83c6c92e0703ffa119dc5ff2691",
+  "evaluator_identity": "frozen-real-NeuralValue-CPU",
+  "anchor_model_sha256": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03",
+  "anchor_helper_sha256": "93f243b9c20f9d9dea3314e2db1cf22e6ccd130801374a23c47e987900afa1a2",
+  "anchor_target": "frozen-e8-wdl-probabilities-mover-perspective-v1",
+  "torch_version": "2.14.1+cpu",
+  "roots": [
+    {
+      "source_id": "standard-initial-position-no-human-labels",
+      "root_fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+      "prefix": []
+    }
+  ],
+  "scope": "Actualactorresume qualification; only9distinctpositions, repeatedexecutions notnewtrainingdata"
+}
