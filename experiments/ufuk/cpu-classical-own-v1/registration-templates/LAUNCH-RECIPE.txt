@@ -1,0 +1,41 @@
+UNREGISTERED, NO JOBS STARTED. ROOT ONLY.
+
+Use these MAIN stage helpers, not the historical work/ proposal paths. First
+seal/publish helper SHA inventory. Freeze SAME-SEED qualification configs for
+20262905 and20262906; static fields are complete. Root observes each actual
+first once BEFORE finalconfig/output writes; deadline=first+600<=hard08UTC.
+Fill actual numericclock placeholders; never use futurefirst or resetfailure.
+Publish config once, calculate exact fileSHA, assign an allowed oneCPUcore.
+Do not launch with ANY PENDING value.
+
+ROOT sourcepackage PYTHONPATH=/workspace/work/harbichess/cpu-additive-source-6fcc8b4/src
+Python /workspace/HarbiChess/.venv/bin/python
+H /workspace/HarbiChess/experiments/ufuk/cpu-classical-own-v1
+Clean source /workspace/work/harbichess/cpu-additive-source-6fcc8b4
+
+For each SAMESEED:
+python H/qualify_actor_v3.py --config IMMUTABLE_ACTUAL_QUAL_CONFIG --config-sha256 ACTUAL_CONFIG_SHA --search-helper H/arena/search.py --value-helper H/value.py --model H/prior.json --source-repo CLEAN_SOURCE --output NEW_RAM_PROOF_ROOT --cpu-core ACTUAL_ALLOWED_CORE --first ACTUAL_ORIGINAL_FIRST --deadline SAME_FIRST_PLUS600
+
+Qualification is REAL classical search, not synthetic/test mode. Both original
+600 clocks cover WHOLE9+PAUSE4+FRESHPROCESSRESUME9, all3rules/RNG/priorpacket
+replays and finalpublication. Originalactors/nativeE8V2 remain unchanged.
+Root outerguardian owns deadline/disk/physical/OOM/PIDstartticks lifecycle.
+Only actual qualified currentSHA receipts permit collection; testPASS doesnot.
+
+After actual PASS bothproofs, freeze productionconfigs eachfixed16384. EXACT
+allfields including seed/roots/model/prior/exclusions/search/helper/extra fields
+except ONLYmax_actions,epoch_id,original_first_epoch,original_deadline_epoch.
+Root fixes prospective per-seed collection2400or7200 clock before admission
+with originalfirst<=now/hard08. Fill manifest4difference literal values, real
+proofconfigpath/fileSHA and productionconfigpath/fileSHA, same9helperclosure,
+actualproof resultpath/fileSHA. No arbitrary seedtransfer. Use distinct allowed
+CPUcores if both actors overlap. No automatic learning/modelchoice/cycling.
+
+python H/run_epoch_v3.py --manifest SEALED_ACTUAL_EPOCH_MANIFEST --manifest-sha256 ACTUAL_MANIFEST_SHA --qualification ACTUAL_SAMESEED_PROOF_RESULT --qualification-sha256 ACTUAL_PROOF_SHA --first SAME_PRODUCTION_CONFIG_ORIGINAL_FIRST --output NEW_RAM_COLLECTION_ROOT
+
+Then fixedFINAL16384 readiness + actualoffline8/4/fresh8proof/freshfit under
+separate root-preregistered clocks (README commands). Minimum16distinct/1024
+known after protectedwhole-game exclusion and exactdedup; no earlierjournal
+choice, no UNKNOWNdraw, no oldtrajectory/native relabel. Candidateonlyfinal
+fixedderivedupdates. Prior-only isNOTselflearning; actual learnedvsSAMEprior,
+E8/SF with unchangedcriteria andindependentconfirmation remain necessary.
