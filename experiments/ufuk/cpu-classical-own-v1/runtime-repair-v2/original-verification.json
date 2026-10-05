@@ -1,0 +1,13 @@
+{
+  "status": "PASS-pure-synthetic-only-NOT-real-qualification",
+  "pytest_pass": 12,
+  "pytest_skip": 0,
+  "pytest_seconds": 0.81,
+  "ruff": "PASS-repo-config-from-repo-cwd",
+  "actual_searches": 0,
+  "actual_selfplay_actions": 0,
+  "actual_training_updates": 0,
+  "NN_inferences": 0,
+  "synthetic_subprocess_restart": "actor9/4/fresh9 andoffline8/4/fresh8 fullbytes equal",
+  "microbench_scope": "1800staticcalls on18fixedboards only"
+}
