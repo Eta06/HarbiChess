@@ -1,0 +1,34 @@
+{
+  "schema": "cpu-native-delta-receiver-local-review-v1",
+  "status": "mocked-controls-pass-PUBLIC-EXECUTION-PENDING",
+  "source_sha256": {
+    "native_delta_codec.py": "878868940b5bae15c182dce55215320b5f0ba3692b9c5eac26988204832a31d6",
+    "native_delta_receiver.py": "035821c943f0840fc02f0a2019516095bf9e43078a6843b745033456b20c7f7e",
+    "test_native_delta_codec.py": "41f5ba8f3c1b75ec98f90e1e2cf980136ebd25a951fc3622ba49d9e2e355a189",
+    "test_native_delta_receiver.py": "ecd5d1bda9cfb52ed9a46a847fce76413380b69396f523e9f7fad47eedc2b608",
+    "cpu-native-delta-release.yml": "bc4bc9c447d4bed126dda675a4c1f46a9dc1ef0c8b61ff905ebba5083212621b"
+  },
+  "control_sha256": "0b1d51dc8268b0289a2cb5ada0fbf719c89858999c547f4b6146650c0ad0ffde",
+  "manifest_sha256": [
+    "170f4737816346e57d01f6d6fcceec48aa4e09fd8a364cccd7abcb21a4df4cf5",
+    "4fecd24fee160dc7195966b012e4d739e66f6e991bafecaef54a98ca857a6591",
+    "525ddf05b06bdcc0e77d9ceefce7609ed7442a6568b89cf2c1a100062286c4ee",
+    "c13fb58cf4c6103b25d8a30ae0012a6d3987bfba4baa55f7ba591f2035f11fa5"
+  ],
+  "tests": {
+    "passed": 29,
+    "skipped": 0,
+    "elapsed_seconds": 1.05,
+    "ruff": "pass"
+  },
+  "network_upload_dispatch_paidresource_model_or_training_executed": false,
+  "public_parent_browser_url": "https://github.com/Eta06/HarbiChess/releases/download/port-linux-preflight-20261002/sha256-846446f3e64d7fde206c595dc50dcb8fce96fc6b2501af31fbb5186b599d64ee.tar.gz",
+  "caps": {
+    "assets": 200,
+    "bytes": 8589934592,
+    "prospective_transport_seconds": 1800,
+    "operator_end_epoch": 1791273600
+  },
+  "mocked_aggregate_real_VALUE_packet": "all3 originalfileSHA+deterministiccapsule+fullreadback+matchingretry-no-write",
+  "restore_scope": "Bytes verified only; original training deadline and contract remain unchanged. Separate readonly native audit required after original deadline expires."
+}
