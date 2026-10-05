@@ -1,0 +1,153 @@
+{
+  "schema": "cpu-own-outcome-positional-protocol-v1",
+  "stage": "UFUK-POSITION",
+  "source_commit": "4cae08522ac940746cf9127ca8ce4a6b63a47408",
+  "hypothesis": "Existing 32x32 sparse positional critic can learn piece placement from own terminal outcomes better than a 20-invariant critic. Frozen inherited teacher policy/trunk; explicit untrained zero-output sparse architecture control. Standard piece-square MLP, not novelty claim.",
+  "initial_e8_sha256": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03",
+  "journals": [
+    {
+      "path": "/workspace/HarbiChess/artifacts/ufuk-a100-mirror-20261004/harbichess-runs/fullgame-method2-seed-20261205/run/journal/epoch-00000001.json.gz",
+      "sha256": "32d203b68ed29e9fd1a0845fca69f32f0faa3aa4cc1ad9e0e040b6af5027fb55",
+      "bytes": 24149725,
+      "source_seed": 20261205,
+      "epoch": 1
+    },
+    {
+      "path": "/workspace/HarbiChess/artifacts/ufuk-a100-mirror-20261004/harbichess-runs/fullgame-method2-seed-20261205/run/journal/epoch-00000008.json.gz",
+      "sha256": "f8503b5abe08687526b6a22d98df2a246dde1da96cfd41c3ab4109ea30ae7af9",
+      "bytes": 31062706,
+      "source_seed": 20261205,
+      "epoch": 8
+    },
+    {
+      "path": "/workspace/HarbiChess/artifacts/ufuk-a100-mirror-20261004/harbichess-runs/fullgame-method2-seed-20261205/run/journal/epoch-00000016.json.gz",
+      "sha256": "44e1487e496ce7733b18134385fa2f378ea21d3c30a5fb74174687a85e9d4a08",
+      "bytes": 31227317,
+      "source_seed": 20261205,
+      "epoch": 16
+    },
+    {
+      "path": "/workspace/HarbiChess/artifacts/ufuk-a100-mirror-20261004/harbichess-runs/fullgame-method2-seed-20261205/run/journal/epoch-00000032.json.gz",
+      "sha256": "21c055b78b5c28da11092bcd6952989ef2a7f1d223a46fa27817fabce7815eff",
+      "bytes": 30998257,
+      "source_seed": 20261205,
+      "epoch": 32
+    },
+    {
+      "path": "/workspace/HarbiChess/artifacts/ufuk-a100-mirror-20261004/harbichess-runs/fullgame-method2-seed-20261206/run/journal/epoch-00000001.json.gz",
+      "sha256": "29326d93118de97a851d12f1d6125633abc32ae40c81004c7d7ba2838c5c78cf",
+      "bytes": 23832074,
+      "source_seed": 20261206,
+      "epoch": 1
+    },
+    {
+      "path": "/workspace/HarbiChess/artifacts/ufuk-a100-mirror-20261004/harbichess-runs/fullgame-method2-seed-20261206/run/journal/epoch-00000008.json.gz",
+      "sha256": "b5bad76687a466a18735eafe3e65980242b6415b52b428bbb7c7ef80f5996602",
+      "bytes": 31109518,
+      "source_seed": 20261206,
+      "epoch": 8
+    },
+    {
+      "path": "/workspace/HarbiChess/artifacts/ufuk-a100-mirror-20261004/harbichess-runs/fullgame-method2-seed-20261206/run/journal/epoch-00000016.json.gz",
+      "sha256": "2a6e3e7748532de3c4bf862074754801a859faacefb2955446783c21dd43cfc6",
+      "bytes": 31448063,
+      "source_seed": 20261206,
+      "epoch": 16
+    },
+    {
+      "path": "/workspace/HarbiChess/artifacts/ufuk-a100-mirror-20261004/harbichess-runs/fullgame-method2-seed-20261206/run/journal/epoch-00000032.json.gz",
+      "sha256": "e688663ee19d295e6b6f7569d7fd9cb6b2f559a87ef89cf7ab8768bc42eddf35",
+      "bytes": 31692618,
+      "source_seed": 20261206,
+      "epoch": 32
+    }
+  ],
+  "parent_metadata": [
+    {
+      "source_seed": 20261205,
+      "parent_metadata_sha256": "d6e5a79b329b58a21d514d46b99947e1e5a1efa34f56b76f5e1116b2d1cbaebe",
+      "original_source_commit": "2312652dc52a894e9726f48321117cf114270355",
+      "original_schema": "fullgame-ppo-run-v1"
+    },
+    {
+      "source_seed": 20261206,
+      "parent_metadata_sha256": "a5059f13e7df76718ddba6db9d3088c044796912ccb0a9a600756f2120cf632c",
+      "original_source_commit": "2312652dc52a894e9726f48321117cf114270355",
+      "original_schema": "fullgame-ppo-run-v1"
+    }
+  ],
+  "seeds": [
+    20262405,
+    20262406
+  ],
+  "pairing": {
+    "20262405": 20261205,
+    "20262406": 20261206
+  },
+  "steps": 4096,
+  "optimizer": {
+    "class": "AdamW",
+    "learning_rate": 0.003,
+    "weight_decay": 0.0001,
+    "foreach": false,
+    "batch_size": 256,
+    "clip_gradient_norm": 5.0
+  },
+  "trainable": "Only value_sparse_head 28067 parameters, inherited e8 parameters all frozen",
+  "rebase": "Versioned sparse-value-v1 weights-only architecture transfer, 32channels/32hidden, random features with explicit zero output. Fresh Adam. Not full training resume from old e8; subsequent native positional v2 full offline resume.",
+  "sampling": "equal completedgame thenuniformposition. All oldOwnfullhistories replay legality/outcome/mover. Unknowncaps/tails excluded. Entireoriginalsourcegame partitionSHAmod5==0internalvalidation; notheldoutstrength or optimalplay labels. Source groups may share board features, not state-disjoint",
+  "view_provenance": "Reuse4closed oldepochs perseed,131072oldtransitions/seed. NOT newselfplay/transitions; oldMain40FAIL remainsFAIL. HumanCC0prefixes are initialstates, onlystoredowncontinuations/terminaloutcomes used fortraining. TeacheroriginE8 frozenpolicy bootstrap, no newteacherquery",
+  "feature_tests": "5PASS/0SKIP in1.22s: all101halfmove counters/mover/mirror/repetition/EP exact sparse features, actuale8 frozen policy/full critic/portableweight forward bitparity, bothmover own outcomes, UNKNOWN exclusion/checksumtamper rejection. GPU/Apple hardware untested",
+  "qualification": {
+    "seed": 20262455,
+    "journal_sha256": "32d203b68ed29e9fd1a0845fca69f32f0faa3aa4cc1ad9e0e040b6af5027fb55",
+    "steps": 8,
+    "pause_at": 4,
+    "original_seconds": 600,
+    "scope": "actual whole8/pause4/freshresume8 payload equality and all6 fresh native loads on original600s"
+  },
+  "max_concurrent_fit_jobs": 1,
+  "per_fit_seconds": 3600,
+  "whole_fit_seconds": 10800,
+  "checkpoint_interval": 512,
+  "memory_max_bytes": 16106127360,
+  "memory_policy": "inactive-file-v1 withphysical/OOM/shmem/activecacheguards retained",
+  "disk_min_free_bytes": 268435456,
+  "resource_admission": "Sequential CPU data fitting; exact840features RAM only; minimum256MiB+1.5x32MiB fit reserve, old files retained",
+  "development_games": {
+    "scope": "same8knownrootcolorpairs, developmentonlynotvirginconfirmation",
+    "source_arena_book": "/workspace/work/harbichess/cpu-own-replay-v1-actual/development/book.json",
+    "source_arena_book_sha256": "9c36b5972c9676d19c358ca7e598b9f7f5d110b1947bed838cd660f644d845da",
+    "games_per_seed": 80,
+    "total": 160,
+    "tasks": [
+      "originalE8-vsSF512",
+      "untrainedRebased-vsSF512",
+      "trainedLinear-vsE8",
+      "trainedLinear-vsUntrainedRebased",
+      "trainedLinear-vsSF512"
+    ],
+    "simulations": 16,
+    "max_root_actions": 4,
+    "G": 0.0,
+    "threads": 1,
+    "max_plies": 400,
+    "stockfish_nodes": 512,
+    "stockfish_threads": 1,
+    "stockfish_hash_MiB": 16,
+    "stockfish_sha256": "0f83d24cc46d2c66c60f16001af5444873bc112b7d028594513426894c12da19",
+    "endpoint": "fixed4096steps, no bestcheckpoint/loss selection"
+  },
+  "unchanged_screen": {
+    "both_seeds": true,
+    "candidate_direct_E8_score_gt": 0.6,
+    "candidate_pairedSF_gain_over_originalE8_gt": 0.1,
+    "candidate_finalSF_score_ge": 0.25,
+    "caps_fraction_le": 0.05,
+    "additional_learning_control": "trainedvsuntrainedRebased directscore>.60 andpairedSFgain>0; reinitializationalone notselflearning"
+  },
+  "formal_gate": "AnydevelopmentPASS stillnotpromotion; prospectivevirginroot/source exclusions andindependentstatistical/latencyconfirmation withunchanged originalstrictergates, allhistoricalclosedMAX8 accountingretained; do notrelax orreuseoldheldouts. Additionaluntrainedcontrol also required",
+  "failure": "Same unchanged bothseed development and formal thresholds, oldMAX8 retained. No later threshold relaxation. Not learning success if only search/architecture change wins. No GPU.",
+  "new_teacher_labels": false,
+  "GPU_used": false
+}
