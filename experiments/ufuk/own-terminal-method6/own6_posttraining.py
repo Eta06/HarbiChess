@@ -112,6 +112,7 @@ def main():
         == q["helper_sha256"]["own6_previous_methods_barrier.py"]
     )
     from own6_previous_methods_barrier import LATEST_LATENCY_START, wait_previous
+    from own6_schedule_v3 import bind_argument_deadline, phase_deadline
 
     if not a.execute:
         print(
@@ -142,7 +143,9 @@ def main():
 
     def launch(name, helper, arguments, seconds, qualified=False):
         started = time.time()
-        deadline = started + seconds
+        from own6_schedule_v3 import phase_deadline
+
+        deadline = phase_deadline(started, seconds)
         assert deadline < END
         argv = [c["python"], str(helpers / helper)]
         if qualified:
@@ -152,7 +155,7 @@ def main():
                 "--qualification-config-sha256",
                 c["qualification_config_sha256"],
             ]
-        argv += list(map(str, arguments))
+        argv += bind_argument_deadline(arguments, deadline)
         publish(
             root / (name + "-command.json"),
             {"argv": argv, "started_epoch": started, "deadline_epoch": deadline},
@@ -216,7 +219,8 @@ def main():
             assert train["fixed_epochs"] == q["fixed_epochs"]
             assert train["finished_epoch"] <= first + c["whole_training_seconds"]
             audit = wait_json(
-                row["audit_controller_result"], first + c["whole_audit_seconds"]
+                row["audit_controller_result"],
+                min(first + c["whole_audit_seconds"], c["absolute_audit_cutoff_epoch"]),
             )
             assert (
                 audit["status"]
@@ -226,7 +230,9 @@ def main():
                 audit["returncode"] == 0
                 and audit["source_commit"] == q["source_commit"]
             )
-            assert audit["finished_epoch"] <= first + c["whole_audit_seconds"]
+            assert audit["finished_epoch"] <= min(
+                first + c["whole_audit_seconds"], c["absolute_audit_cutoff_epoch"]
+            )
             assert sha(row["full_audit"]) == audit["full_audit_sha256"]
             full = wait_json(row["full_audit"], END)
             assert full["audited_native_checkpoints"] == q["fixed_epochs"] + 1
@@ -269,7 +275,7 @@ def main():
                         "--audit-run",
                         replay,
                         "--deadline-epoch",
-                        clock + 600,
+                        phase_deadline(clock, 600),
                     ],
                     600,
                 )
@@ -345,7 +351,7 @@ def main():
             assert baseline["finished_epoch"] <= row["baseline_deadline_epoch"]
         previous = wait_previous(c, wait_json, sha)
         publish(
-            root / "original45-latency-and-all-four-final-owner-completion.json",
+            root / "prior45-incomplete-owned-termination-only.json",
             previous,
         )
         quiescent(min(time.time() + 60, LATEST_LATENCY_START))
