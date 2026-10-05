@@ -1,0 +1,83 @@
+{
+  "schema": "fresh-qsearch-additive-own-sc-training-protocol-v1",
+  "status": "ROOT-REGISTERED-before-actual-CLI-proof",
+  "source_commit": "6fcc8b476d25495d1c9c413e55b2c7ba4794013e",
+  "trainer_sha256": "d403219350e89b299f2b99ebe71d915b732b3e0fab8281907126c71135f9abf0",
+  "feature_helper_sha256": "2fe5556e7564b2a91fc948fcd77a9214289933b7ae44a7a47bec5f00ea00c645",
+  "journal_helper_sha256": "afb3ffa3c196b9da2ceb1b8000c67ae0c2781e7ffd65a950b59bed5b674c6079",
+  "anchor_helper_sha256": "93f243b9c20f9d9dea3314e2db1cf22e6ccd130801374a23c47e987900afa1a2",
+  "initial_e8_sha256": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03",
+  "seeds": [
+    20262805,
+    20262806
+  ],
+  "seed_pairing": {
+    "20262805": {
+      "journal_sha256": "8109c074a9e084f33ec8d9a6c4b062eb3c57e8b6e8d897e03bd39dc8261dea8f",
+      "actor_config_sha256": "b73106e21c6d8433c2132b024a2caae7527ec84541898d4f9c3db8202fccc3b5"
+    },
+    "20262806": {
+      "journal_sha256": "df515e393e97065cd4828ceacccc7628ea04091643c16296009f48f1b9e01645",
+      "actor_config_sha256": "a3b5ac9f3933afdce858e60c0e383c9611dabd2be79e7dff128c490d6750591d"
+    }
+  },
+  "deadline_epoch_by_seed": {
+    "20262805": 1791225526.6862378,
+    "20262806": 1791225526.6862378
+  },
+  "initialization": "E8 plus zero sparse additive residual; fresh AdamW",
+  "selfplay_data": "only its paired same-seed v2 QSEARCH journal; no old replay/teacher rows",
+  "minimum_eligible_rows": 1024,
+  "minimum_complete_games": 16,
+  "protected_position_keys": [
+    "r1bqkbnr/pppp1ppp/2n5/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R w KQkq -",
+    "rnbqkb1r/ppp1pppp/5n2/3p4/8/5NP1/PPPPPP1P/RNBQKB1R w KQkq -",
+    "rnbqkb1r/pppp1ppp/5n2/4p3/2P5/2N5/PP1PPPPP/R1BQKBNR w KQkq -",
+    "rnbqkb1r/pppppp1p/5np1/8/2PP4/8/PP2PPPP/RNBQKBNR w KQkq -",
+    "rnbqkbnr/pp2pppp/2p5/3p4/3PP3/8/PPP2PPP/RNBQKBNR w KQkq -",
+    "rnbqkbnr/pp2pppp/3p4/2p5/4P3/5N2/PPPP1PPP/RNBQKB1R w KQkq -",
+    "rnbqkbnr/ppp2ppp/4p3/3p4/2PP4/8/PP2PPPP/RNBQKBNR w KQkq -",
+    "rnbqkbnr/ppp2ppp/4p3/3p4/3PP3/8/PPP2PPP/RNBQKBNR w KQkq -"
+  ],
+  "protected_position_keys_sha256": "f14ebb7ac07e2ba7e57efeb7a90a846764a9cc8da26e2b7ee2883419b50d5806",
+  "protected_position_book_sha256": "9c36b5972c9676d19c358ca7e598b9f7f5d110b1947bed838cd660f644d845da",
+  "batch_size": 256,
+  "presentation_slots_per_train_row": 4,
+  "maximum_updates": 1024,
+  "update_formula": "min(1024, floor(4 * trajectory-disjoint-train-rows / 256))",
+  "optimizer": {
+    "name": "AdamW",
+    "learning_rate": 2e-05,
+    "weight_decay": 0.0
+  },
+  "gradient_clip_norm": 5.0,
+  "anchor_kl_beta": 1.0,
+  "regularizer": "fixed spatial/material/metadata SHRINK penalty from 6fcc8b476d25495d1c9c413e55b2c7ba4794013e",
+  "train_validation_split": "last 2 hex digits of sha256(root FEN + prefix + realized moves) mod 5; bucket 0 validation; generated trajectory groups only",
+  "validation_scope": "generated-game-disjoint internal validation; not root/source-family/state-disjoint",
+  "unknown_policy": "caps and unfinished trajectories excluded; never mapped to draw",
+  "native_schema": "fresh-qsearch-additive-own-sc-native-v1",
+  "native_proof_updates": 8,
+  "device": "cpu",
+  "threads": 1,
+  "gpu": false,
+  "disk_floor_bytes": 268435456,
+  "max_native_or_candidate_artifact_bytes": 524288,
+  "new_teacher_labels": false,
+  "new_selfplay_moves_generated_by_trainer": 0,
+  "strength_gate": "unchanged existing two-seed SF512NODES/96-game gate",
+  "strength_claim": false,
+  "parent_mc_trainer_sha256": "49445cbd5059770b3ccd433be9f21a4773786885a85d2d586005e10e2359a2c6",
+  "sc_helper_sha256": "62d9ce283d24a2026f817cb618cac2e5c372922d3b6c453f2d7903b41652a3d0",
+  "local_support_sha256": "2fe5556e7564b2a91fc948fcd77a9214289933b7ae44a7a47bec5f00ea00c645",
+  "own_terminal_ce_weight": 0.5,
+  "own_search_mse_weight": 0.5,
+  "search_target": "clamp-recordedselectedrootQ,-1,1;rootmover;nochildflip;UNKNOWNexcluded",
+  "data_control": "exact-same MCdata/groups/split/sampler, no teacher/no new games",
+  "source_closure": "sourcecommit pins coreNN; trainer/sc/local support/decoder/features/anchor all individually SHA-bound",
+  "old_scratch_mc_derivation_sha256": "1df7a208a0708e8f8584eb4a696aa3013381c1b54ccaafea3eb832e625ef7c2e",
+  "learning_rate": 2e-05,
+  "qualifier_sha256": "4daf8500c0d8210cefd2ec75e16dc634f8a011137d5e07b099caa701ce126002",
+  "first_epoch": 1791224926.6862378,
+  "root_proof_scope": "Fixed firsteligible2048 only, 8/4/fresh8/all6strictloads. Separate NEWshared600 SC/FULLproofclock, no actorclockrewrite. Mainfitfixedfinal8192 only freshinit, no bestselection."
+}
