@@ -1,0 +1,141 @@
+{
+  "FULL_preserved_failed_qualifications": [
+    {
+      "original_deadline_epoch": 1791225526.6862378,
+      "original_first_epoch": 1791224926.6862378,
+      "path": "/workspace/work/harbichess/cpu-fresh-sc-full-native-proof-actual/cohort-result.json",
+      "rows": [
+        {
+          "code": 1,
+          "passed": false,
+          "result_sha256": "ac34d906db67b8eeb55e55aec8bbad912c2a35868974d112408c8184d1f2bcdb",
+          "tag": "fullcritic-20262805"
+        },
+        {
+          "code": 1,
+          "passed": false,
+          "result_sha256": "5c5b644ce6bb69cbf85795906cd778b0e0ff2ab3cb55776dea6204fda24aa85a",
+          "tag": "fullcritic-20262806"
+        }
+      ],
+      "sha256": "174eaf415223d070c8e34d0ce5db1494c6a614fbaa3a0dec57ea54dbfbac8e9f",
+      "status": "failed-preserved"
+    },
+    {
+      "original_deadline_epoch": 1791225526.6862378,
+      "original_first_epoch": 1791224926.6862378,
+      "path": "/workspace/work/harbichess/cpu-fresh-full-native-proof-recovery-v2/cohort-result.json",
+      "rows": [
+        {
+          "code": 1,
+          "passed": false,
+          "result_sha256": "214e6f0fa8fb17e8ff4eab4b9d76dae2463596e92de308c6d3d429353b0d7e1f",
+          "tag": "fullcritic-20262805"
+        },
+        {
+          "code": 1,
+          "passed": false,
+          "result_sha256": "419b64d2ed9c9c2f8ec1aa76d77a48d4d533eb5920e9d405365e148314895470",
+          "tag": "fullcritic-20262806"
+        }
+      ],
+      "sha256": "38a59124e0d1f6844151a6e17413bbe2efd63ed42eb75e72d36f33bffcbeedcb",
+      "status": "failed-preserved"
+    },
+    {
+      "original_deadline_epoch": 1791226458.5434084,
+      "original_first_epoch": 1791225858.5434084,
+      "path": "/workspace/work/harbichess/cpu-fresh-full-native-proof-v3/cohort-result.json",
+      "rows": [
+        {
+          "code": 1,
+          "passed": false,
+          "result_sha256": "c9f79e6d4b64cd578d2f2a5cfa3b1181d571cd7b0228fc6021fbe8fff6ef595e",
+          "tag": "fullcritic-20262805"
+        },
+        {
+          "code": 1,
+          "passed": false,
+          "result_sha256": "7d8eaa2d5210a54e9aeda0357bcbc4bd88c8e725a160c141f959f11e30340ea9",
+          "tag": "fullcritic-20262806"
+        }
+      ],
+      "sha256": "60dcb91ac2cd914205c9fb48a334c79378cef012d45bce947ba0549c5a3a8fa4",
+      "status": "failed-preserved"
+    }
+  ],
+  "NN_forward_calls": 0,
+  "SC_prior_2048_native_evidence": [
+    {
+      "artifacts_sha256": {
+        "split/0": {
+          "checkpoint.json": "990133695d1c8454caae931c8c80d8085ee96d731f4c686a4967219fad482fdc",
+          "training.pt": "f26bf1fabb735cc6cfa58f148800c7e9a689176072817cf227971af6ad17cdb7"
+        },
+        "split/4": {
+          "checkpoint.json": "fdbb47f5bb1a3e50ec936f6f714c831d32e716d99ecf174c3d9f3d44986098d8",
+          "training.pt": "8495c7e60502d20a9a806e260956417854c47ff4e15bcb76145de5113e5e4118"
+        },
+        "split/8": {
+          "checkpoint.json": "0843e32001f610c26fc5fd22be884033d0777c558460713d9f847b8055907de6",
+          "training.pt": "cb299d9cb136507148b2352414b688f15ac739129510c121da6e0dcb50ee6dc1"
+        },
+        "whole/0": {
+          "checkpoint.json": "990133695d1c8454caae931c8c80d8085ee96d731f4c686a4967219fad482fdc",
+          "training.pt": "f26bf1fabb735cc6cfa58f148800c7e9a689176072817cf227971af6ad17cdb7"
+        },
+        "whole/4": {
+          "checkpoint.json": "fdbb47f5bb1a3e50ec936f6f714c831d32e716d99ecf174c3d9f3d44986098d8",
+          "training.pt": "8495c7e60502d20a9a806e260956417854c47ff4e15bcb76145de5113e5e4118"
+        },
+        "whole/8": {
+          "checkpoint.json": "3f9b7ca9b5c6113c702287e46e167dfd1993f6433cca4c2ebb69ee29e2654e11",
+          "training.pt": "1189c04a8c557a2a392c3ff32d83fff5ce03cd62aa96f33d7863e26ef62ec512"
+        }
+      },
+      "original_2048_proof_sha256": "de81efd9aa70946ff03f2c9c8f374ca6a3b8e610c83d2a284dffc04111580764",
+      "seed": 20262805,
+      "status": "PASS-readonly-SC-six-artifact-pairs-storage-state-equal"
+    },
+    {
+      "artifacts_sha256": {
+        "split/0": {
+          "checkpoint.json": "b14e4f5b8bc94b2e9bd8fc5c50cee0a34224139914ff987809232e4376753109",
+          "training.pt": "68912899bf3e3b323485c64cbd7389e85be39a08b390d5165fbde295919ab368"
+        },
+        "split/4": {
+          "checkpoint.json": "cdf132efceb707d3ef521b05f1254f749e39d4d72acff5c273ec4abde498659a",
+          "training.pt": "4990455add20effe4214de2081befb080d51ccea2004d8868169c96f32ec85ae"
+        },
+        "split/8": {
+          "checkpoint.json": "bc68471924d2b1453cacc5bf9064ca69939584f7ca8f8279a394dbf88bb89035",
+          "training.pt": "316912a9d9f42b086abbe3acbd30d02d6be996fab861112bf51e9ae2c96e9f4c"
+        },
+        "whole/0": {
+          "checkpoint.json": "b14e4f5b8bc94b2e9bd8fc5c50cee0a34224139914ff987809232e4376753109",
+          "training.pt": "68912899bf3e3b323485c64cbd7389e85be39a08b390d5165fbde295919ab368"
+        },
+        "whole/4": {
+          "checkpoint.json": "cdf132efceb707d3ef521b05f1254f749e39d4d72acff5c273ec4abde498659a",
+          "training.pt": "4990455add20effe4214de2081befb080d51ccea2004d8868169c96f32ec85ae"
+        },
+        "whole/8": {
+          "checkpoint.json": "e51f4c9aa8f2d42e8665e202105700b3b2084beaeb10b3d527db1ac8db30c383",
+          "training.pt": "a079682cbf697942fff5103437fbdef8d38dfd3d356d1a12a8bfb001f0750ea0"
+        }
+      },
+      "original_2048_proof_sha256": "7ff1fd287dc202e89b2d7c6c59f7b305b9a12fb4aab15157e474a45576522ac6",
+      "seed": 20262806,
+      "status": "PASS-readonly-SC-six-artifact-pairs-storage-state-equal"
+    }
+  ],
+  "exact_E8_sha256": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03",
+  "final_readiness_sha256": "90162446656105007ca713c17b01f4e0a762d694a179a5be815e0ba6174bae51",
+  "optimizer_steps": 0,
+  "original_actor_deadline": 1791235580.0397933,
+  "original_actor_first": 1791221180.0397933,
+  "registration_sha256": "c9581a43178fac4e78d69cbc7c0ac442b56a39838a23fbf6594a80a0d3d6168b",
+  "schema": "fresh-final8192-readiness-publication-and-prior-qualification-supplement-v1",
+  "scope": "Read-only evidence; no expired qualification CLI called or clocks reset. FULL v1 protocol KeyError;v2 frozen hash ordering;v3 JSON list vs tuple trainable_names resume contract mismatch. All remainfailed; future new qualification is separate.",
+  "status": "PASS-readonly-publication-SC-evidence-FULL-remains-unqualified-v3"
+}
