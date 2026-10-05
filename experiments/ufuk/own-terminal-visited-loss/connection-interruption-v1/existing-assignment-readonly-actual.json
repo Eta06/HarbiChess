@@ -1,0 +1,12 @@
+{
+  "schema": "existing-colab-assignment-readonly-metadata-v1",
+  "observed_epoch": 1791168962.2144077,
+  "method": "GET",
+  "allocation_or_reset": false,
+  "local_registry_written": false,
+  "authentication_or_refresh_attempted": false,
+  "http_status": 200,
+  "assignment_count": 0,
+  "assignments": [],
+  "status": "readonly-server-assignments-observed"
+}
