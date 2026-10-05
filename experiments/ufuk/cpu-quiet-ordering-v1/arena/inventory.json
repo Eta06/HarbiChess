@@ -1,0 +1,16 @@
+{
+  "README.txt": "b0f22721da197fbecb74ca09f5ab27f9fcf88a214472d10e1a180e30a8f3d3c3",
+  "audit_arena_v2.py": "9c93e5489877f301675b788a994162ebf331648e49928420dd48b32130b6a587",
+  "native_admission.py": "9e919f607b4d42afc5dc55dc2bc67983c6af0f4823a4d2e3e8818dd1817803e5",
+  "profile.py": "07c3f83b8d7e495ee7896495babf758aa45fcbd1ae4bfe734ba76b0cafdc3256",
+  "profile_support.py": "dd6f55d401fd878d546f1b847be5e72c60e23e35e0fb837286ddc9c0ed1e2fc1",
+  "protocol-TEMPLATE.json": "e3f1c64e2056827f9c496a7f0f3eb3c8c4e5d23eca4f4161c2484716eed577e2",
+  "run.py": "5e26371918d96b3a0ca8d268afc3dfdb88b814b850eddfa7e634a2391d7e1190",
+  "search.py": "1abd12c2237136317cddb503ad34fd5d256f3eb98e005740faa7fd17eb059bc6",
+  "search_base.py": "de53c14728a67b7772f18b396ac8ef5c35a144d4e4e616fec40099cd461a6670",
+  "strict-load-commands.json": "d3cb5df7d67c60fcb140f93fcf06c17b32e18b6cf44adfdaee7fc76e0dbe73dd",
+  "test_dispatch.py": "1814e28f762913b3939ff14bbbbbd6dff0b2d9e79bcdad617c718d0c494566fb",
+  "tournament.py": "7081128a96f575d01ebaf40f1c7de725274b4316ac3836802b539b3ce7395cb8",
+  "value.py": "64a09ad18b227e351c49d8b72a810ceefef71b00c39990f308ba3a30da209155",
+  "verification.json": "80d2268f90f482d48de569e5d476789ddf5e16fdb121f80c8469aecd38cf5924"
+}
