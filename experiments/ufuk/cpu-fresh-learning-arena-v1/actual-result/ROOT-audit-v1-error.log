@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "/workspace/HarbiChess/experiments/ufuk/cpu-fresh-learning-arena-v1/audit_arena.py", line 321, in <module>
+    main()
+  File "/workspace/HarbiChess/experiments/ufuk/cpu-fresh-learning-arena-v1/audit_arena.py", line 171, in main
+    raise ValueError("SF node trace invalid")
+ValueError: SF node trace invalid
