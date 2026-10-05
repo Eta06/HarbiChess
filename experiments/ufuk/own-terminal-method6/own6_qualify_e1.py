@@ -62,9 +62,10 @@ def main():
     assert meta["source_commit"] == spec["source_commit"]
     assert meta["max_epochs"] == meta["checkpoint_interval"] == 1
     assert meta["absolute_deadline_epoch"] == spec["original_profile_deadline_epoch"]
+    import torch
+
     import harbichess.training.torch_search_acting_checkpoint as cm
     import harbichess.training.torch_search_acting_learner as lm
-    import torch
     from harbichess.backends.torch_network import load_weights
     from harbichess.selfplay.online_actor import OnlineActorConfig
     from harbichess.training.ownsearch_targets import OwnSearchConfig
