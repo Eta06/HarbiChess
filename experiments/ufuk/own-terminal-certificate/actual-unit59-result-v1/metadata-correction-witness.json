@@ -1,0 +1,26 @@
+{
+  "epoch": 1791165435.46502,
+  "argv": [
+    "/usr/bin/python3",
+    "/content/harbichess-fullgame-method2-inputs/source7-c022-actual-qualification-v1/correct_junit_identity_v2.py",
+    "--original-root",
+    "/content/harbichess-runs/certificate-source7-unit-CUDA59-owner-20261005",
+    "--config",
+    "/content/harbichess-fullgame-method2-inputs/source7-c022-actual-qualification-v1/unit-config.json",
+    "--output",
+    "/content/harbichess-runs/certificate-source7-unit-CUDA59-owner-20261005/result-metadata-correction-v2.json",
+    "--config-sha256",
+    "67e5fe4ad4ce5bc2977a1039498d39edb8a7f3eaf07777edc15fa7d48aced436",
+    "--original-result-sha256",
+    "aa1d76d3d3b5b74f4442ec7c464159903170991d1223fafc35b8ca54487c06ae",
+    "--xml-sha256",
+    "87dd6135cfc25efb5ab1f8d4adbdae0d231e1cec96d5701b5180e664d14340a1",
+    "--stdout-sha256",
+    "e028f8156e68b8b20097bff403b1d558e3413932244d55b6c2070de37574d978"
+  ],
+  "actual_original_unit600_clock_reused": true,
+  "actual_test_compute_repeated": false,
+  "returncode": 0,
+  "stdout": "{\"status\": \"pass-actualCUDA59-no-skip\", \"result_sha256\": \"bbdc45ad38ca372c883cc5a96de5dcfcdc7a18cb6756b545d40d20bd2a32c4ac\"}\n",
+  "result_sha256": "bbdc45ad38ca372c883cc5a96de5dcfcdc7a18cb6756b545d40d20bd2a32c4ac"
+}
