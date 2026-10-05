@@ -1346,3 +1346,8 @@ borcudur; mevcut MLX yolu korunur. Prefix başarı veya promotion anlamına gelm
 ## UFUK-CLASSICAL
 
 6October deadline continuation, CPU-only: human-authored material/PSQT/pawn/mobility/king prior plus18 learned residual coordinates; no externalteacher queries/E8labels. Fixed16384 own Q512/q2 actions/seed20262905/06, separate actual same-seed native actor qualification, prospective four-literal proof→production transfer. Same-prior trained/untrained control is mandatory: faster or stronger prior alone is not self-learning. Standard value tuning/search distillation, no originality claim; independent unchanged strength gate decides.
+
+
+## UFUK-PST1 / UFUK-QUIET1 / UFUK-VAULT6 / UFUK-OWNQ1
+
+5–6October CPU continuation: PST1 tests242-feature value learning with exact native resume; QUIET1 tests learned own-search quiet ordering with an unchanged scalar evaluator. OWNQ1 preregisters1024 balanced training roots/seed at8192 own-search nodes for nonlinear residual targets; no external teacher query. VAULT6 preserves22 raw files publicly, VAULT7 prospectively preserves CLASSIC/PST/QUIET rawstates and closedCLASSIC160 evidence. These are phase labels, not success. CLASSIC160 and FRESH224 independently failed unchanged gates; old failed experiments/MAX8 ledger remain closed. Full-state proof/backup does not imply strength. Reports/protocols preserve exact source/data/model hashes and phase clocks.
