@@ -1,0 +1,40 @@
+name: Final8192 direct Release byte recovery v3
+run-name: Final8192 v3 ${{ inputs.mode }} / ${{ inputs.manifest_prefix }} / ${{ inputs.ordinal }}
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        type: choice
+        options: [chunk, aggregate]
+        required: true
+      manifest_sha:
+        required: true
+      manifest_prefix:
+        required: true
+      ordinal:
+        default: '0'
+      payload:
+        default: ''
+permissions: {}
+concurrency:
+  group: a100-allowlisted-release-delivery
+  cancel-in-progress: false
+jobs:
+  recovery:
+    if: github.repository == 'Eta06/HarbiChess' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: write
+    env:
+      MODE: ${{ inputs.mode }}
+      MANIFEST_SHA: ${{ inputs.manifest_sha }}
+      MANIFEST_PREFIX: ${{ inputs.manifest_prefix }}
+      ORDINAL: ${{ inputs.ordinal }}
+      PAYLOAD: ${{ inputs.payload }}
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - run: python experiments/ufuk/fresh-final8192-release-capsule-v3/artifact_capsule.py
