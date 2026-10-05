@@ -1,0 +1,23 @@
+{
+  "schema": "cpu-shrunk-arena-recovery-registration-v2",
+  "source_commit": "4cae08522ac940746cf9127ca8ce4a6b63a47408",
+  "parent_owner_contract_sha256": "41a31c3ec732fa83a844b30915b0f81ae6f30c4aca93e6c9ab97927c62e7300b",
+  "parent_progress_sha256": "5514a3f2c01689d0fe03ef4b40c579dbe40084a005dab9d176ce72e703012c95",
+  "parent_progress_path": "/workspace/work/harbichess/cpu-shrunk-value-v1-actual/arena/20262605-shrunk-vs-e8.progress.jsonl",
+  "operator_stop_receipt_sha256": "016889addbab45e0c32914ea403af2d8e1f59f966e8d16daeacae7cc5ee8d5bb",
+  "original_first_epoch": 1791217012.4869661,
+  "original_deadline_epoch": 1791224212.4869661,
+  "original_interrupted_deadline_epoch": 1791220444.814687,
+  "helpers": {
+    "resume_run.py": "da76db97451c31cbd8deaf1f9092c461827dd55564039561d3d168d64e44dd23",
+    "resume_tournament.py": "8ec9655dadb24385a88d6c80a78a2eaf020ee393787dbb73a71446cb568428fc",
+    "recovery_support.py": "dc2045f78c06d152abe2380663614d9391f7ea9abbf3574e910f82a722ad5ad2",
+    "audit_v2.py": "979eb0d21f2368f2feb8886a2545f38239812599ad2ee7ea73149d3bf42f921b",
+    "search.py": "de53c14728a67b7772f18b396ac8ef5c35a144d4e4e616fec40099cd461a6670",
+    "value.py": "d3bb6dfe33127e1bea48ee63c10692f3eba6cb1b2f6b48ea7c898dce389620a9"
+  },
+  "closed_groups_reused": 4,
+  "closed_games_in_interrupted_group": 2,
+  "neural_prefix_researched_moves": 10,
+  "scope": "No clocks, thresholds, endpoints or oldartifacts rewritten; exactclosedrecords reused, neuralprefix fullyresearched, lostoldwall UNKNOWN, extraNNcost disclosed. SFpartials refuse. Newseparateoutput only."
+}
