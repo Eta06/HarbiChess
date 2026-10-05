@@ -38,10 +38,38 @@ def configs(epochs, template=None):
     return values
 
 
+def check_profile_clock(profile):
+    schema = profile["schema"]
+    if (
+        schema
+        == "owned900-search-acting-v2-fullshape-development-v2-originalclock-bindingrepair"
+    ):
+        first = profile["original_started_epoch"]
+        assert type(first) in (int, float)
+        assert profile["absolute_deadline_epoch"] == first + 900
+        assert (
+            first
+            <= profile["started_epoch"]
+            <= profile["finished_epoch"]
+            <= profile["absolute_deadline_epoch"]
+        )
+    else:
+        assert schema == "owned900-search-acting-v2-fullshape-development-v1"
+        assert 0 < profile["absolute_deadline_epoch"] - profile["started_epoch"] <= 900
+        assert (
+            profile["started_epoch"]
+            <= profile["finished_epoch"]
+            <= profile["absolute_deadline_epoch"]
+        )
+    assert profile["absolute_deadline_epoch"] < 1791180000
+
+
 def check_training_evidence(profile, qualification):
     assert profile["source_commit"] == qualification["source_commit"] == SOURCE
-    assert profile["schema"] == "owned900-search-acting-v2-fullshape-development-v1"
-    assert qualification["schema"] == ("ufuk-search-acting-v2-E1-fullchronological-audit-result-v1")
+    check_profile_clock(profile)
+    assert qualification["schema"] == (
+        "ufuk-search-acting-v2-E1-fullchronological-audit-result-v1"
+    )
     assert "A100" in qualification["actual_device_name"]
     assert qualification["torch_version"] == "2.11.0+cu130"
     assert qualification["finished_epoch"] <= qualification["absolute_deadline_epoch"]
@@ -71,7 +99,10 @@ def actual_model_changed(run):
     after = load_file(str(Path(run) / "checkpoints/epoch-00000001/model.safetensors"))
     assert set(before) == set(after)
     for key in before:
-        assert before[key].shape == after[key].shape and before[key].dtype == after[key].dtype
+        assert (
+            before[key].shape == after[key].shape
+            and before[key].dtype == after[key].dtype
+        )
     changed = [
         key
         for key in before
@@ -107,6 +138,7 @@ def main():
         "curriculum-qualification",
         "unit34-receipt",
         "original45-cohort",
+        "terminal45-barrier-config",
     ):
         p.add_argument("--" + name, type=Path, required=True)
     for name in (
@@ -121,6 +153,7 @@ def main():
         "ancestor-auditor-receipt-sha256",
         "failed4-dependency-supplement-sha256",
         "original45-cohort-sha256",
+        "terminal45-barrier-config-sha256",
     ):
         p.add_argument("--" + name, required=True)
     p.add_argument("--fixed-epochs", type=int, required=True)
@@ -139,7 +172,8 @@ def main():
     assert epochs == 8
     assert a.whole_training_seconds == 6000 and a.whole_audit_seconds == 9000
     assert (
-        sha(a.training_book) == "1a5ca17664a828d669e58cf2bd5d9eeb7f980b83f20d3a4031d36e4ff0930ccb"
+        sha(a.training_book)
+        == "1a5ca17664a828d669e58cf2bd5d9eeb7f980b83f20d3a4031d36e4ff0930ccb"
     )
     assert sha(a.curriculum_provenance) == a.curriculum_provenance_sha256
     assert sha(a.curriculum_qualification) == a.curriculum_qualification_sha256
@@ -147,16 +181,16 @@ def main():
     check_cli_receipt(curriculum_qualification, a.curriculum_qualification_run, sha)
     assert sha(a.unit34_receipt) == a.unit34_receipt_sha256
     check_unit34_receipt(json.loads(a.unit34_receipt.read_text()))
-    # Preserve every declared whole-stage ceiling, both fresh replays, and parallel seeds.
-    minimum_reserve = 1200 + 120 + 120 + 60 + 180 + 7300 + 120 + 120 + 180 + 120
-    assert a.posttraining_reserve_seconds >= max(
-        minimum_reserve,
-        1791171600 - a.earliest_training_epoch - a.whole_audit_seconds + 8080,
-    )
-    assert (
-        a.earliest_training_epoch + a.whole_audit_seconds + a.posttraining_reserve_seconds
-        < 1791180000
-    )
+    from own6_schedule_v3 import AUDIT_CUTOFF, LATEST_LATENCY_START, verify_previous
+
+    assert a.earliest_training_epoch < AUDIT_CUTOFF < LATEST_LATENCY_START < 1791180000
+    terminal45_binding = {
+        "terminal45_barrier_config": str(a.terminal45_barrier_config.resolve()),
+        "terminal45_barrier_config_sha256": a.terminal45_barrier_config_sha256,
+    }
+    verify_previous(terminal45_binding, sha)
+    # Actual hard cutoffs can make this attempt INCOMPLETE; no promise that maxima fit.
+    assert a.posttraining_reserve_seconds > 0
     evidence = {}
     for name in ("profile_receipt", "auditor_receipt", "mc_completion_barrier"):
         path = getattr(a, name)
@@ -169,7 +203,10 @@ def main():
     ].items():
         assert sha(a.development_run / relative) == digest
     changed_model_tensors = actual_model_changed(a.development_run)
-    assert sha(a.weights) == "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03"
+    assert (
+        sha(a.weights)
+        == "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03"
+    )
     assert sha(a.books_provenance) == a.books_provenance_sha256
     provenance = json.loads(a.books_provenance.read_text())
     assert provenance["qualification_ledger_slot"] == 6
@@ -206,10 +243,13 @@ def main():
     assert evidence["auditor_receipt"]["qualified_report_guard_sha256"] == sha(
         a.helpers / "own6_adapter_controls.py"
     )
-    assert sha(a.failed4_dependency_supplement) == a.failed4_dependency_supplement_sha256
+    assert (
+        sha(a.failed4_dependency_supplement) == a.failed4_dependency_supplement_sha256
+    )
     scheduling_repair = json.loads(a.failed4_dependency_supplement.read_text())
     assert (
-        scheduling_repair["schema"] == "own5-failed4-dependency-analysis-v3-control-supplement-v1"
+        scheduling_repair["schema"]
+        == "own5-failed4-dependency-analysis-v3-control-supplement-v1"
     )
     assert scheduling_repair["qualification_ledger_slot"] == 5
     helpers = {path.name: sha(path) for path in sorted(a.helpers.glob("own6_*.py"))}
@@ -237,7 +277,9 @@ def main():
     registration = {
         **draft,
         "schema": "ufuk-search-acting-method6-prospective-v1",
-        "status": "frozen-before-formal-execution" if a.freeze else "NOT_FROZEN_DO_NOT_EXECUTE",
+        "status": "frozen-before-formal-execution"
+        if a.freeze
+        else "NOT_FROZEN_DO_NOT_EXECUTE",
         "source_commit": SOURCE,
         "earliest_training_epoch": a.earliest_training_epoch,
         "fixed_epochs": epochs,
@@ -247,37 +289,45 @@ def main():
         "factory_template_sha256": a.template_sha256,
         "neural_audit_epochs": selected,
         "posttraining_reserve_seconds": a.posttraining_reserve_seconds,
+        "scheduling_version": "prospective-own6-terminal45-scheduling-v3",
+        "absolute_audit_cutoff_epoch": AUDIT_CUTOFF,
+        "latest_latency_start_epoch": LATEST_LATENCY_START,
+        "terminal45_barrier_binding": terminal45_binding,
         "infrastructure_profile_pass": True,
         "development_model_storage_changed_tensor_names": changed_model_tensors,
         "development_model_sha256": {
             str(epoch): sha(
-                a.development_run / "checkpoints" / f"epoch-{epoch:08d}" / "model.safetensors"
+                a.development_run
+                / "checkpoints"
+                / f"epoch-{epoch:08d}"
+                / "model.safetensors"
             )
             for epoch in (0, 1)
         },
         "helper_sha256": helpers,
         "controller_sha256": helpers["own6_training_controller.py"],
         "curriculum_book_sha256": sha(a.training_book),
-        "protection_original45_manifest": {
-            "original_cohort": str(a.original45_cohort.resolve()),
-            "original_cohort_sha256": a.original45_cohort_sha256,
-            "failed4_dependency_supplement": str(a.failed4_dependency_supplement.resolve()),
-            "failed4_dependency_supplement_sha256": a.failed4_dependency_supplement_sha256,
-        },
+        "protection_original45_manifest": terminal45_binding,
         "curriculum_provenance_sha256": a.curriculum_provenance_sha256,
         "curriculum_actualCUDA_qualification_sha256": a.curriculum_qualification_sha256,
         "actual428_CUDA34_receipt_sha256": a.unit34_receipt_sha256,
         "ancestor_auditor_receipt_sha256": a.ancestor_auditor_receipt_sha256,
         "qualified_ancestor_source_commit": "4515a7c0dda3b4f9615c2fc78a47c872ab14699d",
-        "qualified_ancestor_core_sha256": sha(a.qualified_ancestor_helpers / "own5_audit_core.py"),
+        "qualified_ancestor_core_sha256": sha(
+            a.qualified_ancestor_helpers / "own5_audit_core.py"
+        ),
         "qualified_ancestor_guard_sha256": sha(
             a.qualified_ancestor_helpers / "own5_adapter_controls.py"
         ),
         "mc_completion_barrier": evidence["mc_completion_barrier"],
-        "prospective_evidence_sha256": {name: getattr(a, name + "_sha256") for name in evidence},
+        "prospective_evidence_sha256": {
+            name: getattr(a, name + "_sha256") for name in evidence
+        },
     }
     registration["strength"]["frozen_books"] = {str(k): v for k, v in BOOKS.items()}
-    registration["book_selection_seeds"] = list(map(int, provenance["selection_to_training_seed"]))
+    registration["book_selection_seeds"] = list(
+        map(int, provenance["selection_to_training_seed"])
+    )
     registration["books_provenance_sha256"] = a.books_provenance_sha256
     registration.pop("blockers", None)
     inputs = {"seeds": {}}
