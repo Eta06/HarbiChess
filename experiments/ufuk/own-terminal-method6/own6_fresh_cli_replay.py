@@ -8,8 +8,9 @@ import sys
 import time
 from pathlib import Path
 
-from harbichess.backends.torch_network import sha256
 from own6_adapter_controls import validate_spec
+
+from harbichess.backends.torch_network import sha256
 
 
 def main():
