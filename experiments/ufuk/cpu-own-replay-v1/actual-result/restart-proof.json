@@ -1,0 +1,15 @@
+{
+  "schema": "cpu-own-replay-restart-proof-v1",
+  "original_first_epoch": 1791202269.7776444,
+  "original_deadline_epoch": 1791202869.7776444,
+  "source_commit": "4cae08522ac940746cf9127ca8ce4a6b63a47408",
+  "scope": "training-only checkpoint/optimizer/RNG/replay proof; no online actor or strength claim",
+  "status": "pass",
+  "all_training_payload_fields_bit_identical": true,
+  "accepted_updates": 8,
+  "full_optimizer_rng_replay_contract_resume": true,
+  "native_inputs_sha256": [
+    "6c32d22338ae6b8e4472f47bd39f11a2a29e7c071453034f8b176ba210d6f756"
+  ],
+  "finished_epoch": 1791202565.6464095
+}
