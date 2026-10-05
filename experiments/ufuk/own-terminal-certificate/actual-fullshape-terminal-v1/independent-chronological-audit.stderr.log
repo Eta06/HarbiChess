@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "/content/harbichess-fullgame-method2-inputs/source7-c022-actual-qualification-v1/own7_qualify_e1.py", line 290, in <module>
+    main()
+    ~~~~^^
+  File "/content/harbichess-fullgame-method2-inputs/source7-c022-actual-qualification-v1/own7_qualify_e1.py", line 149, in main
+    validate_epoch_report(report, 1)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+  File "/content/harbichess-fullgame-method2-inputs/source7-c022-actual-qualification-v1/own7_adapter_controls.py", line 114, in validate_epoch_report
+    raise ValueError("audit report epoch/source differs from current native")
+ValueError: audit report epoch/source differs from current native
