@@ -1,0 +1,17 @@
+{
+  "schema": "cpu-residual-arena-proposal-inventory-v1",
+  "files": {
+    "value.py": "0e0d9092db254bd88e4a49875d63edc6b1b39770d0fc53f61e03629ccba02737",
+    "search.py": "de53c14728a67b7772f18b396ac8ef5c35a144d4e4e616fec40099cd461a6670",
+    "tournament.py": "c8aa6d1ac779e1ba8863c1f400ff405839dc161c47f1a7afb619e2bbcf60f701",
+    "run.py": "017ba8575a75889cebf7fa63b0d50972c52a1a86823f1f6759dbb5acd6a8e80d",
+    "audit_arena.py": "9d0bb331f3d8c090d240b1fbb324d28ddb50ae907c46257aab283c0a319eb332",
+    "profile.py": "d3210778757df1ae317f010902d2d60f8191a5813e61b7e9ac0b4495fae0c397",
+    "protocol-TEMPLATE.json": "be6799747aedc3869804aefdd7f1c8e11bf4f186eab4daa891287ec13ed3f49e",
+    "test_value_residual.py": "824ce537a62f4952ae5248ab6f6243101dc19475159ef55b545862329bba6819",
+    "test_contract.py": "7d87daf6a8ea085d5d1148a0b5819e0a773ed341ba9e700827c5751540991d81",
+    "README.md": "4ebc46ae3e6c0cd6cd9b1d871315689158e757856563a82ae0426d41ecde57de",
+    "verification.json": "9fce653c66f1dc6024c61da5d7e30720dadf67ff1197e70e4c7ac5b216e9e366"
+  },
+  "template_not_registered": true
+}
