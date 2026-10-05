@@ -1,0 +1,124 @@
+{
+  "E8_value_helper": {
+    "path": "/workspace/HarbiChess/experiments/ufuk/cpu-residual-value-v1/arena/value.py",
+    "sha256": "0e0d9092db254bd88e4a49875d63edc6b1b39770d0fc53f61e03629ccba02737"
+  },
+  "audit_deadline_epoch": "ROOT_REGISTERED_AUDIT900_HARD08",
+  "audit_max_seconds": 900,
+  "book_path": "/workspace/work/harbichess/cpu-own-replay-v1-actual/development/book.json",
+  "book_sha256": "9c36b5972c9676d19c358ca7e598b9f7f5d110b1947bed838cd660f644d845da",
+  "classical_value_helper": {
+    "path": "/workspace/HarbiChess/experiments/ufuk/cpu-classical-own-v1/value.py",
+    "sha256": "a99cddfc397bd9221b99a70691427fdd663488b033fb239d9f48240786b2f277"
+  },
+  "disk_min_free_bytes": 268435456,
+  "fit_cohort_path": "/dev/shm/harbichess-quiet-fit-v1-20261005/result.json",
+  "fit_cohort_sha256": "b0c50ee65c9d17ee68167bf9248ba90bbf712d77063cf81e48dd71dbb3ccfd14",
+  "games_per_tournament": 16,
+  "match_seeds": [
+    20262905,
+    20262906
+  ],
+  "max_depth": 8,
+  "max_plies": 400,
+  "memory_max_bytes": 16106127360,
+  "models": {
+    "20262905": {
+      "e8": {
+        "path": "/workspace/work/harbichess/a100/restoration/local-rehearsal-content/harbichess-inputs/initial-e8.safetensors",
+        "sha256": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03"
+      },
+      "learned": {
+        "path": "/dev/shm/harbichess-quiet-fit-v1-20261005/20262905/candidate.json",
+        "sha256": "70824e048b648559eac5792255c1e53ce37fa63e0df3ce68b3bd603172de0404",
+        "native_path": "/dev/shm/harbichess-quiet-fit-v1-20261005/20262905/step-00000136.json",
+        "native_sha256": "4966f4944ff25cddfddcb3cc20ab753901c63866cb5c9f3ec1ecd0edafeb9817",
+        "initial_native_path": "/dev/shm/harbichess-quiet-fit-v1-20261005/20262905/step-00000000.json",
+        "initial_native_sha256": "0ee7ba9ce59f866f985bc878c64b4c985f863342404ce654abc99d5fbca61043",
+        "accepted_updates": 136,
+        "dataset_sha256": "166da3fb342a3e8ef52475c45164626b2f390c914059b1114c60f805c80143af"
+      },
+      "prior": {
+        "path": "/workspace/HarbiChess/experiments/ufuk/cpu-classical-own-v1/prior.json",
+        "sha256": "afbaec307e5acc4b9fcb5222115c2fb8112290065ffe64e929b35f2a935565e1"
+      }
+    },
+    "20262906": {
+      "e8": {
+        "path": "/workspace/work/harbichess/a100/restoration/local-rehearsal-content/harbichess-inputs/initial-e8.safetensors",
+        "sha256": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03"
+      },
+      "learned": {
+        "path": "/dev/shm/harbichess-quiet-fit-v1-20261005/20262906/candidate.json",
+        "sha256": "1b3d824d188cbb4fd4a55379b4b83b3b04d8f2e7d91369619ea99af61c6a3e72",
+        "native_path": "/dev/shm/harbichess-quiet-fit-v1-20261005/20262906/step-00000124.json",
+        "native_sha256": "882bca3f7e35ef4b324beb86185c4b434140eb6e66d0ae73c195acc9baf22430",
+        "initial_native_path": "/dev/shm/harbichess-quiet-fit-v1-20261005/20262906/step-00000000.json",
+        "initial_native_sha256": "7c8d2d0f51db44f133f06398560f45b8058e3c0147073da12e1c070dbd3a26e7",
+        "accepted_updates": 124,
+        "dataset_sha256": "32f16ff5a47ae8904974bc1c9a4df63cb6696025659218017487c1e16f117510"
+      },
+      "prior": {
+        "path": "/workspace/HarbiChess/experiments/ufuk/cpu-classical-own-v1/prior.json",
+        "sha256": "afbaec307e5acc4b9fcb5222115c2fb8112290065ffe64e929b35f2a935565e1"
+      }
+    }
+  },
+  "opening_pairs": 8,
+  "operator_hard_deadline_epoch": 1791273600.0,
+  "original_deadline_epoch": "SAME_FIRST_PLUS7200",
+  "original_first_epoch": "ROOT_NEW_FIRST_BEFORE_PROFILE",
+  "per_tournament_seconds": 2700,
+  "profile_deadline_epoch": 1791230323.0130045,
+  "profile_first_epoch": 1791229723.0130045,
+  "profile_seconds": 600,
+  "promotion_priority": "NN-MC/SC/FULL then CLASSIC18 then prospective PST; at mostONEnewvirginconfirmationcampaign",
+  "quiescence_plies": 2,
+  "reserved_output_bytes": 100663296,
+  "schema": "classical-own-mixed-Q512-development-protocol-v3",
+  "scope": "known8families160quiet-order-development; samehumanprior18value-only interiorquietranklearned; notformalstrength",
+  "search_nodes": 512,
+  "source_commit": "6fcc8b476d25495d1c9c413e55b2c7ba4794013e",
+  "status": "DRAFT-QUIET-ORDER-ARENA-NOT-REGISTERED-NOT-EXECUTED",
+  "stockfish_nodes": 512,
+  "stockfish_path": "/workspace/work/harbichess/stockfish/stockfish-linux-x86-64-universal",
+  "stockfish_sha256": "0f83d24cc46d2c66c60f16001af5444873bc112b7d028594513426894c12da19",
+  "tasks": [
+    [
+      "learned",
+      "SF512"
+    ],
+    [
+      "prior",
+      "SF512"
+    ],
+    [
+      "e8",
+      "SF512"
+    ],
+    [
+      "learned",
+      "e8"
+    ],
+    [
+      "learned",
+      "prior"
+    ]
+  ],
+  "total_games": 160,
+  "whole_seconds": 7200,
+  "fixed_prior_model": {
+    "path": "/workspace/HarbiChess/experiments/ufuk/cpu-classical-own-v1/prior.json",
+    "sha256": "afbaec307e5acc4b9fcb5222115c2fb8112290065ffe64e929b35f2a935565e1"
+  },
+  "ordering_helper_directory": "/workspace/work/harbichess/cpu-quiet-ordering-proposal",
+  "ordering_training_protocol": {
+    "path": "/dev/shm/harbichess-quiet-fit-v1-20261005/protocol.json",
+    "sha256": "853698b8ac3f6b645efb9b965cde6a31191d5d28803b33e79a9df337feb517aa"
+  },
+  "ordering_fit_result": {
+    "path": "/dev/shm/harbichess-quiet-fit-v1-20261005/result.json",
+    "sha256": "b0c50ee65c9d17ee68167bf9248ba90bbf712d77063cf81e48dd71dbb3ccfd14"
+  },
+  "ordering_native_admission_sha256": "9e919f607b4d42afc5dc55dc2bc67983c6af0f4823a4d2e3e8818dd1817803e5"
+}
