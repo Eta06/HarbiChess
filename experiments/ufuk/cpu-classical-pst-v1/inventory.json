@@ -1,0 +1,114 @@
+{
+  "files": [
+    {
+      "bytes": 1758,
+      "path": "COPY-PLAN.md",
+      "sha256": "ee1b2001f98767b72f3250351c5bd1d4d4f713ea5e8198823553d102c4bc8405"
+    },
+    {
+      "bytes": 3742,
+      "path": "README.md",
+      "sha256": "ce3ecf4b100a124f12d03cda8aa5069a8b648e8da84d838b9b6fb51736346cce"
+    },
+    {
+      "bytes": 5199,
+      "path": "protocol-TEMPLATE.json",
+      "sha256": "1864b161e00c89256ca90cc6df7c0f631cffe8234f64763b86f99bfda644094e"
+    },
+    {
+      "bytes": 3250,
+      "path": "data-preflight-receipt-launch-ready-v2.json",
+      "sha256": "9e545524259ca853f376fb974caf44bea11672233a3fc35c287cea15d1bb8d6c"
+    },
+    {
+      "bytes": 23323,
+      "path": "launch_pst.py",
+      "sha256": "451c175b0b3e4e084b321dbae00a0d62a9c60a3ec9052ecaf484baa7dcfb07d2"
+    },
+    {
+      "bytes": 7512,
+      "path": "test_launch_pst.py",
+      "sha256": "6cbb5491cf2e0b67d3f951a7a5fba934fd81ff9ab7f76dd735e0150108d67715"
+    },
+    {
+      "bytes": 1751,
+      "path": "pst_features.py",
+      "sha256": "7d8c07ddeeed8bb6da4069c4487e1a5015798595f3bddf00282cb06d9dfd6841"
+    },
+    {
+      "bytes": 3512,
+      "path": "pst_value.py",
+      "sha256": "4c969a6102e59d5f5a9f8bda8370953ba812dd813c83c11d163905a852a1049c"
+    },
+    {
+      "bytes": 10141,
+      "path": "pst_learner.py",
+      "sha256": "9e9e209092a23225768cb4c48f8156e66c4002209d92b74c4f847a36a0e59992"
+    },
+    {
+      "bytes": 2165,
+      "path": "pst_native.py",
+      "sha256": "e087c2289361730c4c7e415883195e9677ac58483351e91294e3965f7c42c9bd"
+    },
+    {
+      "bytes": 4280,
+      "path": "prepare_pst.py",
+      "sha256": "acb7d954959bc2007b0a007751f33d420d6a7f95db9bc89f4551292d1e9bee9c"
+    },
+    {
+      "bytes": 1329,
+      "path": "mixed_value.py",
+      "sha256": "4f756a6f6a93296455636e2c1e027093a52b26705af8fa8a8a313aabb6265d28"
+    },
+    {
+      "bytes": 10828,
+      "path": "train_pst.py",
+      "sha256": "64ac713cc9ea500a001846dd4ff0a6750bd3a12ce8679f5cbd39b85411f217df"
+    },
+    {
+      "bytes": 4963,
+      "path": "verify_data.py",
+      "sha256": "95448cea7d929bec8084f2c656436e1b39cac3195d5b3d8b57e3aabc6ae0f0bc"
+    },
+    {
+      "bytes": 11402,
+      "path": "test_pst.py",
+      "sha256": "8e20373a012e405ad0942243c852c2849d8ea54c52e019a48c84907bf18947bc"
+    },
+    {
+      "bytes": 75,
+      "path": "frozen_reference/__init__.py",
+      "sha256": "5b6e0454cd3adafbb64f4ada11bad4af71c2a6bc8e11981e40e56fab8f4c38ba"
+    },
+    {
+      "bytes": 5981,
+      "path": "frozen_reference/value.py",
+      "sha256": "a99cddfc397bd9221b99a70691427fdd663488b033fb239d9f48240786b2f277"
+    },
+    {
+      "bytes": 7414,
+      "path": "frozen_reference/learner.py",
+      "sha256": "2f7bc39943146b66fb2b0863938e47484378ce2597a725893d1df0edd345883e"
+    },
+    {
+      "bytes": 12056,
+      "path": "frozen_reference/journal_v3.py",
+      "sha256": "851b9967adb709beb0dcf2a9e793c61add3eccf91fb21fb2a75e80da8845968b"
+    },
+    {
+      "bytes": 1927,
+      "path": "frozen_reference/runtime.py",
+      "sha256": "656a19611984f61f99f4fec8952250ee4ad8b6d836a34c6eaf6fcc65ed0af496"
+    }
+  ],
+  "notes": [
+    "protocol-TEMPLATE.json has placeholder proof/fit clocks and is not executable registration",
+    "data-preflight-receipt-launch-ready-v2.json is read-only and records SGD=false, searches=0, games=0",
+    "Older preflight receipts are preserved as historical drafts and are superseded by launch-ready-v2",
+    "Launcher performs no retry or cleanup; proof and fit have separate fixed clocks; each seed is sequential on CPU1",
+    "No active source checkout, Git, model training, search, game, network, or arena data was changed or run"
+  ],
+  "root": "/workspace/work/harbichess/cpu-classical-pst-proposal",
+  "schema": "classical-own-pst-scratch-inventory-v1",
+  "status": "DRAFT-unregistered-no-fit"
+}
