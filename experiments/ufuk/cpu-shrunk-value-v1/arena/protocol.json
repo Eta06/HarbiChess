@@ -1,0 +1,131 @@
+{
+  "schema": "cpu-shrunk-own-value-all-root-qsearch-protocol-v1",
+  "stage": "UFUK-SHRINK",
+  "source_commit": "4cae08522ac940746cf9127ca8ce4a6b63a47408",
+  "hypothesis": "With fixed own-outcome training1024 endpoint, spatial shrinkage/effective2520 coordinates may retain game-disjoint calibration while improving same-search e8/SF strength versus zero-rebase. All search rules/caps/gates identical to QSEARCH, capacity changes not novelty.",
+  "selection": "Fixed prospective SHRINK1024 endpoint, no bestcheckpoint choice. Reuse4oldMain40ownjournals131072transitions/seed; no newselfplay or teacherqueries. Separate shrinktraining protocol/source contracts remain immutable.",
+  "match_seeds": [
+    20262605,
+    20262606
+  ],
+  "models": {
+    "20262605": {
+      "e8": {
+        "path": "/workspace/work/harbichess/a100/restoration/local-rehearsal-content/harbichess-inputs/initial-e8.safetensors",
+        "sha256": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03",
+        "train_seed": null,
+        "accepted_updates": null
+      },
+      "rebased": {
+        "path": "/workspace/work/harbichess/cpu-shrunk-value-v1-actual/fits/20262605-shrunk/checkpoints/step-00000000/model.safetensors",
+        "sha256": "850d483af0eb9767fca296fe7e6dcb02db9983ba28e02f6c9166c5325d028cf0",
+        "train_seed": 20262605,
+        "accepted_updates": 0,
+        "native_manifest_sha256": "6a26173211a17ee63a69ec1b8852e327e0f16f39d578ab2f0168e45f4c50c84b",
+        "native_schema": "cpu-own-outcome-shrunk-training-native-v2"
+      },
+      "shrunk": {
+        "path": "/workspace/work/harbichess/cpu-shrunk-value-v1-actual/fits/20262605-shrunk/checkpoints/step-00001024/model.safetensors",
+        "sha256": "cdbfcb2c1893dd6d2ec63ae723c71ed7e645f4ad6a675a6fe3a60697a06bb722",
+        "train_seed": 20262605,
+        "accepted_updates": 1024,
+        "native_manifest_sha256": "8aaa18890e7832ced6f9c8e753b198db73491ad468751ced05a00b540462ac1d",
+        "native_schema": "cpu-own-outcome-shrunk-training-native-v2"
+      }
+    },
+    "20262606": {
+      "e8": {
+        "path": "/workspace/work/harbichess/a100/restoration/local-rehearsal-content/harbichess-inputs/initial-e8.safetensors",
+        "sha256": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03",
+        "train_seed": null,
+        "accepted_updates": null
+      },
+      "rebased": {
+        "path": "/workspace/work/harbichess/cpu-shrunk-value-v1-actual/fits/20262606-shrunk/checkpoints/step-00000000/model.safetensors",
+        "sha256": "850d483af0eb9767fca296fe7e6dcb02db9983ba28e02f6c9166c5325d028cf0",
+        "train_seed": 20262606,
+        "accepted_updates": 0,
+        "native_manifest_sha256": "3a0aaa83406049c44c2c91746e6547101c8dbfab0b53354652179107fac83e2a",
+        "native_schema": "cpu-own-outcome-shrunk-training-native-v2"
+      },
+      "shrunk": {
+        "path": "/workspace/work/harbichess/cpu-shrunk-value-v1-actual/fits/20262606-shrunk/checkpoints/step-00001024/model.safetensors",
+        "sha256": "28ca14792cd630ae66450a82f08ee92fbc2a2fee668a40a669955eecf3acac0f",
+        "train_seed": 20262606,
+        "accepted_updates": 1024,
+        "native_manifest_sha256": "ee36bf195861e00ab7f178f1878d453ef16ec2ef6819e6947a9daed758c12b3d",
+        "native_schema": "cpu-own-outcome-shrunk-training-native-v2"
+      }
+    }
+  },
+  "arms": [
+    "shrunk"
+  ],
+  "tasks": [
+    [
+      "e8",
+      "SF512"
+    ],
+    [
+      "rebased",
+      "SF512"
+    ],
+    [
+      "shrunk",
+      "e8"
+    ],
+    [
+      "shrunk",
+      "rebased"
+    ],
+    [
+      "shrunk",
+      "SF512"
+    ]
+  ],
+  "book_path": "/workspace/work/harbichess/cpu-own-replay-v1-actual/development/book.json",
+  "book_sha256": "9c36b5972c9676d19c358ca7e598b9f7f5d110b1947bed838cd660f644d845da",
+  "opening_pairs": 8,
+  "games_per_tournament": 16,
+  "total_games": 160,
+  "search_nodes": 512,
+  "quiescence_plies": 2,
+  "max_depth": 8,
+  "semantics": "Static mover W-L from existing production WDL softmax; exact terminal +/- (2-ply*1e-5), draw0 claim_draw=True. Each recursive node counted including terminal/quiescence; reserve every legal root child initial static pass. Subsequent incomplete root passes discarded, only fully completed pass selects. At q-depth0 static used even if in check; no exhaustive tactics guarantee. No TT/history truncation.",
+  "ordering": "standard MVV-LVA only orders; no handcrafted material static evaluation, no teacher query or labels. Frozen policy not used in new inference search. Existing encoder/action/rules/backend weights preserved.",
+  "qualification": {
+    "states": "first4 fixed known opening histories x e8/rebased/shrunk x bothseeds; all512node/q2, exactsameNNvalueadapter; notstrength selection",
+    "seconds": 600,
+    "required_unit_tests": "Inherited QSEARCH6PASS0SKIP and SHRINK6PASS0SKIP; actualfulltraining whole8/pause4/freshresume8/all6strictloadPASS125.418s/600. Both1024fit native0/finalstrictloads mustPASS beforearena."
+  },
+  "stockfish_nodes": 512,
+  "stockfish_threads": 1,
+  "stockfish_hash_MiB": 16,
+  "stockfish_sha256": "0f83d24cc46d2c66c60f16001af5444873bc112b7d028594513426894c12da19",
+  "budget_comparability": "NN recursive nodes and Stockfish actualnodes separately; not equal compute or node throughput. All neural arms identical node/q rules; CPUwall latency measured.",
+  "max_plies": 400,
+  "threads": 1,
+  "max_arena_workers": 1,
+  "per_tournament_seconds": 2700,
+  "whole_seconds": 7200,
+  "memory_max_bytes": 16106127360,
+  "disk_min_free_bytes": 268435456,
+  "reserved_output_bytes": 8388608,
+  "screen": {
+    "both_seeds": true,
+    "direct_same_search_e8_gt": 0.6,
+    "pairedSF_gain_over_same_search_e8_gt": 0.1,
+    "finalSF_ge": 0.25,
+    "caps_le": 0.05,
+    "trained_vs_same_search_rebased_gt": 0.6,
+    "pairedSFgain_over_rebased_gt": 0
+  },
+  "formal": "Development passing not success: fixed virgin root/source-exclusion, independent complete histories, unchanged stricter statistical/cap/latency gates and originalclosedMAX8 accounting; no result-driven extension/bestcheckpoint selection. Next actual ownplay round required before claiming sustained closedloop selflearning. SHRINKMC/zero-rebase olddata stage alone is not a sustainedclosedloop claim; nextactualfreshownplay/retrain round required.",
+  "new_training_steps": 2048,
+  "new_teacher_labels": false,
+  "GPU_used": false,
+  "scope": "Known8development families; deterministic repeatede8/zero controls acrossseeds are not new independent families; no virgin statistical confirmation.",
+  "failure": "preserve first errors/all checkpoints/data/originalclocks. If FAIL, diagnose and use another controlled method.",
+  "operator_hard_deadline_epoch": 1791273600.0,
+  "training_protocol_sha256": "c008ac6248d6cb3bf51ec4da53946bc5a42bf233cf8d536075383c1ae4767016"
+}
