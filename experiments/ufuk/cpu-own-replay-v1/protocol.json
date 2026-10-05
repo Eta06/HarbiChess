@@ -1,0 +1,67 @@
+{
+  "schema": "cpu-own-replay-pilot-protocol-v1",
+  "scope": "CPU-only own-experience TRAIN diagnostic, not formal strength qualification or promotion",
+  "source_commit": "4cae08522ac940746cf9127ca8ce4a6b63a47408",
+  "initial_weights_sha256": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03",
+  "journals": [
+    {
+      "source_seed": 20261925,
+      "path": "/workspace/work/harbichess/cpu-contingency-formal-seed-20261925-v1/run/journal/epoch-00000001.json.gz",
+      "sha256": "6c32d22338ae6b8e4472f47bd39f11a2a29e7c071453034f8b176ba210d6f756",
+      "production_origin_source": "3be5b87db27a0fbde83464e7ea7157f0d9a76ae4",
+      "independent_epoch1_audit_exists": true
+    },
+    {
+      "source_seed": 20261926,
+      "path": "/workspace/work/harbichess/cpu-contingency-formal-seed-20261926-v1/run/journal/epoch-00000001.json.gz",
+      "sha256": "5780c0b7352ecc58754a31daf5bc4ebee3e447f5940dc19c9693bec72c5d8a32",
+      "production_origin_source": "3be5b87db27a0fbde83464e7ea7157f0d9a76ae4",
+      "independent_epoch1_audit_exists": true
+    }
+  ],
+  "arms": [
+    "value-only",
+    "joint"
+  ],
+  "seeds": [
+    20262005,
+    20262006
+  ],
+  "pairing": {
+    "20262005": 20261925,
+    "20262006": 20261926
+  },
+  "updates": 80,
+  "batch_size": 128,
+  "learning_rate": 0.0005,
+  "objective": {
+    "value_weight": 0.2,
+    "value_anchor_weight": 0.02,
+    "policy_weight": 1,
+    "policy_anchor_weight": 0.03
+  },
+  "joint_policy_KL_stop": 0.02,
+  "gradient_norm_max": 5,
+  "weight_decay": 0.0001,
+  "optimizer": "AdamW; foreach=False",
+  "dataset": "only exact own completed-game mover WDL and pre-action own-search targets; no teacher queries; caps/epoch tails unknown; retrospective rows from already observed experience, not new unique selfplay",
+  "internal_validation": "entire opening source_id aliases partition by first8bytes SHA256 modulo5 ==0, not formal heldout; aliases may share historical source prefixes",
+  "sampler": "completed games equal then row uniform; policy roots uniform",
+  "value_only_mask": "value_, invariant_value_, global_value_ prefixes only; raw policy/trunk/material remain frozen",
+  "native_schema": "cpu-own-replay-training-native-v1; full optimizer, global/sampler RNG and immutable replay references; no online actor state/resume claim",
+  "checkpoint_intervals": 20,
+  "fit_seconds_per_seed_arm": 1800,
+  "threads_per_process": 1,
+  "max_concurrent_jobs": 2,
+  "active_memory_max_bytes": 16106127360,
+  "disk_min_free_bytes": 268435456,
+  "qualification": "8step whole versus pause4/resume8 data/model/optimizer/RNG equality before full fit; all original checkpoints unchanged",
+  "pilot_feasibility_gates": {
+    "min_retained_updates": 1,
+    "value_only_raw_policy_parameter_storage_identical": true,
+    "finite_loss_gradients_parameters": true,
+    "frozen_internal_validation_NLL_must_improve": true
+  },
+  "strength_success": false,
+  "next": "development games first; any confirmation must use prospectively frozen independent roots/baselines/multiplicity and unchanged strength thresholds; no epoch/model selection using confirmation scores; old campaigns keep FAIL/INCOMPLETE"
+}
