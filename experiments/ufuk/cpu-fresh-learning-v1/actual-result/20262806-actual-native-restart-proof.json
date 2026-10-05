@@ -1,0 +1,16 @@
+{
+  "accepted_updates": 8,
+  "actor_config_sha256": "a3b5ac9f3933afdce858e60c0e383c9611dabd2be79e7dff128c490d6750591d",
+  "all6_full_native_fresh_process_loads": true,
+  "dataset_contract_sha256": "97b16dc10e9b1cdff032710e724cd7ae482ea56b7282befcde208e3cc48339d5",
+  "exact_whole_vs_split_native_payload": true,
+  "finished_epoch": 1791223388.5645149,
+  "first_epoch": 1791223240.283365,
+  "journal_sha256": "df515e393e97065cd4828ceacccc7628ea04091643c16296009f48f1b9e01645",
+  "original_deadline_epoch": 1791223840.283365,
+  "schema": "fresh-qsearch-additive-native-restart-proof-v2",
+  "scope": "8-update whole/pause/resume and strict fresh-process native-load proof; no strength claim",
+  "seed": 20262806,
+  "source_commit": "6fcc8b476d25495d1c9c413e55b2c7ba4794013e",
+  "status": "PASS-native-restart-not-strength"
+}
