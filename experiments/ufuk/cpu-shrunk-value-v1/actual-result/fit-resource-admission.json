@@ -1,0 +1,8 @@
+{
+  "admitted": true,
+  "free_bytes": 317202432,
+  "required_bytes": 306184192.0,
+  "reserved_bytes": 25165824,
+  "safety_factor": 1.5,
+  "scope": "two small native fits and games; replay features held only in RAM; no oldfile deletion"
+}
