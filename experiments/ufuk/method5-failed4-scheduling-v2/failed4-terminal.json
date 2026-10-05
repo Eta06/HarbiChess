@@ -1,0 +1,177 @@
+{
+  "complete_owned_compute_inventory": true,
+  "compute_stop_decision": "Method4 is permanently strength-ineligible after original baseline426 deadline; preserve every durable/current partial artifact and terminate only registered4 compute, without selecting or promoting an earlier model.",
+  "durable_prefix_inventory": {
+    "20261425": {
+      "last_native_files": {
+        "actor.json": {
+          "bytes": 1715538,
+          "sha256": "bda161fbdf5e81218a6c721cbc4a0aac137a412bdcb88684731890e8f287292c"
+        },
+        "base.safetensors": {
+          "bytes": 294764,
+          "sha256": "ee907dcca32c0fd3d8e032d66ace4c5496378a39cc0599d08b306dda3bae03eb"
+        },
+        "behavior.safetensors": {
+          "bytes": 294764,
+          "sha256": "3a0b146b51fe0ad27204cb89176c63ae7104e46cf0f01f002c79182fb5b03ca3"
+        },
+        "checkpoint.json": {
+          "bytes": 1896704,
+          "sha256": "70981cdda4e222604493056e1f1c8ff2565ad43895f8832a72aca748398b8c99"
+        },
+        "last-frozen-epoch.json.gz": {
+          "bytes": 34377062,
+          "sha256": "19bd4974f9ac90bf3d1952761d765cbb32ec83788aab7d538b68ae34a11cbb51"
+        },
+        "model.safetensors": {
+          "bytes": 294764,
+          "sha256": "aebc159bb58c76a182c497d86694d36456f44da729d2de69faa736560c82dd21"
+        },
+        "training.pt": {
+          "bytes": 2593128,
+          "sha256": "54d06a406504c9d5af420a75f54cff149d705b1dda5a2b9fc02bd8f7bb218b29"
+        }
+      },
+      "native_epochs": [
+        "epoch-00000000",
+        "epoch-00000001",
+        "epoch-00000002",
+        "epoch-00000003",
+        "epoch-00000004",
+        "epoch-00000005",
+        "epoch-00000006",
+        "epoch-00000007",
+        "epoch-00000008",
+        "epoch-00000009",
+        "epoch-00000010"
+      ]
+    },
+    "20261426": {
+      "last_native_files": {
+        "actor.json": {
+          "bytes": 1725364,
+          "sha256": "02c8afd4805497cb832a91e8474c15f3ad94aafba66b03d63f5d7e9e37350ec7"
+        },
+        "base.safetensors": {
+          "bytes": 294764,
+          "sha256": "9b479f518482090b9e2684c4b62f80d459e2d33d1908ce6d613b85ef0a1f3718"
+        },
+        "behavior.safetensors": {
+          "bytes": 294764,
+          "sha256": "d9663820715c2a25a4156c666f2141e0f88104589eeab7cad5106100e02d4244"
+        },
+        "checkpoint.json": {
+          "bytes": 1907618,
+          "sha256": "c3c9f72b9dcdc8f4524cc49c243dbe565810f69892edcf5295fa944167037dc4"
+        },
+        "last-frozen-epoch.json.gz": {
+          "bytes": 34325847,
+          "sha256": "8eb1a621a00d4f460e8c17603f3ed40dc1bb1bd24f93a8b1835a94168aecd661"
+        },
+        "model.safetensors": {
+          "bytes": 294764,
+          "sha256": "bfc38a6b8f9244557d9bb163fac6359e1875b3035cba664f485fcedd8e330980"
+        },
+        "training.pt": {
+          "bytes": 2599592,
+          "sha256": "f21141ef07845d82a0b1f66724f3cae143003fec32d138e5da2aef5378fce43a"
+        }
+      },
+      "native_epochs": [
+        "epoch-00000000",
+        "epoch-00000001",
+        "epoch-00000002",
+        "epoch-00000003",
+        "epoch-00000004",
+        "epoch-00000005",
+        "epoch-00000006",
+        "epoch-00000007",
+        "epoch-00000008",
+        "epoch-00000009"
+      ]
+    }
+  },
+  "expired_baseline_deadline_epoch": 1791160056.1962862,
+  "expired_baseline_result": "/content/harbichess-runs/ownsearch-method4-baseline-seed-20261426/result.json",
+  "expired_baseline_seed": 20261426,
+  "external_mlx_owner_scope": "PRIMARY-host waiter, not an A100 CPU/GPU process; no remote PID fabricated",
+  "failure_artifact_sha256": {
+    "/content/harbichess-runs/ownsearch-method4-baseline-seed-20261426/result.json": "9e30c7d5f58365bb03f75458824fe03bda4fa7617c077642525cd29c5577326a"
+  },
+  "no_method4_strength_qualification_claim": true,
+  "observed_epoch": 1791161603.3689528,
+  "original_baseline_command": "/content/harbichess-fullgame-method2-inputs/formal45-recovery-control-v2/baseline-20261426-command.json",
+  "original_baseline_command_sha256": "92ceb4c6acb9c269706741ad75a877f1947731cc10daf3aae29aff8d3cc8fa05",
+  "original_cohort": "/content/harbichess-fullgame-method2-inputs/formal45-production/cohort.json",
+  "original_cohort_sha256": "85d8d34dcbdd195d49b2d847946f0d237d048a59975c4a8476f7bef95e0e51d9",
+  "original_firstclock": 1791156456.0081534,
+  "original_firstclock_receipt": "/content/harbichess-fullgame-method2-inputs/formal45-production/common-original-firstclock.json",
+  "original_firstclock_receipt_sha256": "f85711110421609d874ba5e8af7814571c164e3d9cf5dc49b510fdb688b1fe6d",
+  "original_qualification_config": "/content/harbichess-fullgame-method2-inputs/formal45-production/registration-4/strength-bindings.json",
+  "original_qualification_config_sha256": "3936d64fea439f5b733f8b1a2f548136e685b09e69d0a9274c0406e70d38173c",
+  "original_registration": "/content/harbichess-fullgame-method2-inputs/formal45-production/registration-4/registration.json",
+  "original_registration_sha256": "df8f7459aa36fcea89fadd8685ecfed55eb361a3eb7333977440e45af4c5ae3e",
+  "owned_process_group_ids": [
+    82368,
+    82371,
+    82369,
+    82372,
+    82374,
+    94118,
+    94119
+  ],
+  "owner_identities": [
+    {
+      "pid": 82368,
+      "role": "train-20261425",
+      "startticks": 1842104
+    },
+    {
+      "pid": 82371,
+      "role": "train-20261426",
+      "startticks": 1842105
+    },
+    {
+      "pid": 82369,
+      "role": "audit-20261425",
+      "startticks": 1842105
+    },
+    {
+      "pid": 82372,
+      "role": "audit-20261426",
+      "startticks": 1842106
+    },
+    {
+      "pid": 82374,
+      "role": "post-4",
+      "startticks": 1842107
+    },
+    {
+      "role": "baseline-20261425",
+      "scope": "Original deployed baseline owner terminated with import failure. Later adapter owners94118/94119 included in owned groups and actual baseline result SHA below.",
+      "terminated_owner_receipt": "/content/harbichess-fullgame-method2-inputs/formal45-recovery-control-v2/baseline-20261425-process-result.json",
+      "terminated_owner_receipt_sha256": "44ad6db73abc59c56a3fc97027c00815c620ceb8f7cc5b74653045010d9e17fd"
+    },
+    {
+      "role": "baseline-20261426",
+      "scope": "Original deployed baseline owner terminated with import failure. Later adapter owners94118/94119 included in owned groups and actual baseline result SHA below.",
+      "terminated_owner_receipt": "/content/harbichess-fullgame-method2-inputs/formal45-recovery-control-v2/baseline-20261426-process-result.json",
+      "terminated_owner_receipt_sha256": "47fd235fdf4e443c24cbe1cb526a057d6d9421f96f1a1a3d2efce61144cec845"
+    }
+  ],
+  "qualification_ledger_slot": 4,
+  "schema": "own4-terminal-incomplete-compute-inventory-v1",
+  "source_commit": "a278bba67bce962cb9294f0d24040e02e9acf1f4",
+  "status": "INCOMPLETE-original-baseline-deadline-expired",
+  "subsequent_adapter_baseline_results": {
+    "20261425": {
+      "path": "/content/harbichess-runs/ownsearch-method4-baseline-seed-20261425/result.json",
+      "sha256": "fd701b8271d935d34d45f1bb83cf51531d1f8bf77b909102b74e4a5f62ee5aba"
+    },
+    "20261426": {
+      "path": "/content/harbichess-runs/ownsearch-method4-baseline-seed-20261426/result.json",
+      "sha256": "9e30c7d5f58365bb03f75458824fe03bda4fa7617c077642525cd29c5577326a"
+    }
+  }
+}
