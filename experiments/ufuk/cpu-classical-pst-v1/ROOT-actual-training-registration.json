@@ -1,0 +1,37 @@
+{
+  "first_epoch": 1791231538.4527915,
+  "deadline_epoch": 1791232138.4527915,
+  "fit_first_epoch": 1791232138.4527915,
+  "fit_deadline_epoch": 1791233938.4527915,
+  "protocol_path": "/workspace/HarbiChess/experiments/ufuk/cpu-classical-pst-v1/protocol.json",
+  "protocol_sha256": "ae4e4e9444963a6a793ee59e92754ac8258f50923be469bb63e28b6a6ddee414",
+  "command": [
+    "/workspace/HarbiChess/.venv/bin/python",
+    "/workspace/HarbiChess/experiments/ufuk/cpu-classical-pst-v1/launch_pst.py",
+    "--phase",
+    "proof",
+    "--protocol",
+    "/workspace/HarbiChess/experiments/ufuk/cpu-classical-pst-v1/protocol.json",
+    "--protocol-sha256",
+    "ae4e4e9444963a6a793ee59e92754ac8258f50923be469bb63e28b6a6ddee414",
+    "--source-repo",
+    "/workspace/work/harbichess/cpu-additive-source-6fcc8b4",
+    "--ram-root",
+    "/dev/shm/harbichess-pst-proof-v1-20261005",
+    "--cpu-core",
+    "1"
+  ],
+  "ram_root": "/dev/shm/harbichess-pst-proof-v1-20261005",
+  "phase": "proof",
+  "guardian_pid": 991477,
+  "guardian_start_ticks": 18238465,
+  "source_snapshot": "6fcc8b476d25495d1c9c413e55b2c7ba4794013e",
+  "status": "ROOT-registered-before-any-actual-training",
+  "strength_claimed": false,
+  "preexecution_format_only_amendment": {
+    "production_AST_unchanged": true,
+    "clock_reset": false,
+    "original_protocol_sha256": "280b7ec685c2f85ae9f855ce7afb486f9b2d8c65cf37d5475a29b33fa67974a7",
+    "root_project_lint_mismatch_preserved": true
+  }
+}
