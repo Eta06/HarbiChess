@@ -1,0 +1,85 @@
+{
+  "schema": "cpu-density-fresh-replay-fullnative-v1",
+  "status": "pass-data-actor-RNG-certificates-native-not-strength",
+  "source_commit": "4cae08522ac940746cf9127ca8ce4a6b63a47408",
+  "protocol_sha256": "9be599e89c7ffcf386cc0b16204fcb9a43b2a9cb000c001957c55b2572c60769",
+  "helper_sha256": "956683663d31b7de5ee5733b1e0f1158314e8fa01b425306c9d5c1ecc6cbe86d",
+  "run": "/workspace/work/harbichess/cpu-search-density-v1-actual/fits/20262106-sparse16",
+  "rows": [
+    {
+      "epoch": 1,
+      "journal_sha256": "57df404dcced33d38c4de74a1ab5caca431f4a8144fbe224ce8ba66d37363d72",
+      "legal_transitions": 2048,
+      "search_roots": 256,
+      "actual_move_equals_deterministic_selected": 159,
+      "known_value_rows": 1620,
+      "target_counts": {
+        "schema": "completed-own-game-terminal-wdl-v1",
+        "complete_games": 16,
+        "normal_cap_games": 0,
+        "epoch_truncated_games": 8,
+        "excluded_actions": 428,
+        "win_games": 6,
+        "draw_games": 6,
+        "loss_games": 4
+      },
+      "accepted_updates": 8,
+      "attempted_updates": 8
+    },
+    {
+      "epoch": 2,
+      "journal_sha256": "e31ad861ec343689937595cd64eb10d90f947931abddb7314f5e963821c4ec3b",
+      "legal_transitions": 2048,
+      "search_roots": 259,
+      "actual_move_equals_deterministic_selected": 168,
+      "known_value_rows": 1429,
+      "target_counts": {
+        "schema": "completed-own-game-terminal-wdl-v1",
+        "complete_games": 18,
+        "normal_cap_games": 0,
+        "epoch_truncated_games": 8,
+        "excluded_actions": 619,
+        "win_games": 3,
+        "draw_games": 8,
+        "loss_games": 7
+      },
+      "accepted_updates": 20,
+      "attempted_updates": 20
+    },
+    {
+      "epoch": 3,
+      "journal_sha256": "f0e651a7d316f6260ef62a853706e88c926901c19c331da33ea6e57520b02e76",
+      "legal_transitions": 2048,
+      "search_roots": 259,
+      "actual_move_equals_deterministic_selected": 171,
+      "known_value_rows": 1784,
+      "target_counts": {
+        "schema": "completed-own-game-terminal-wdl-v1",
+        "complete_games": 22,
+        "normal_cap_games": 0,
+        "epoch_truncated_games": 8,
+        "excluded_actions": 264,
+        "win_games": 3,
+        "draw_games": 12,
+        "loss_games": 7
+      },
+      "accepted_updates": 32,
+      "attempted_updates": 32
+    }
+  ],
+  "final_artifacts": {
+    "actor.json": "c3ea620640e01571ed354f4cf5576f593948a783e4e7e285a238f1efb3b97b6c",
+    "base.safetensors": "6ad805c0c9d264aae5dbda62bca63329953a4a3a1b559b8960c87137f325c68d",
+    "behavior.safetensors": "b36be213226ba8ed4bf14576ea070383c851eb68804a0f5ef28d9103fb91b29f",
+    "last-frozen-epoch.json.gz": "f0e651a7d316f6260ef62a853706e88c926901c19c331da33ea6e57520b02e76",
+    "model.safetensors": "c290ebbde8c721c0002fb2244d24b8670a2f549d22195ea7f588bd9e43965087",
+    "training.pt": "9875e8770cd5c81f81985d781155b64aac6dd0331ba95e94b662e3b54a733721"
+  },
+  "full_native_strict_resume": true,
+  "full_actor_replay_and_rules": true,
+  "all_files_preserved": true,
+  "NN_search_independent_rerun": false,
+  "scope": "fresh-process shared rules/certificate/actor validator; not independent chronological NN search reproduction; that remains open for a formal confirmation",
+  "GPU_used": false,
+  "strength_success_claimed": false
+}
