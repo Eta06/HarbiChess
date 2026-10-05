@@ -1,0 +1,128 @@
+{
+  "NN_search_independent_rerun": false,
+  "finished_epoch": 1791206070.002244,
+  "rows": [
+    {
+      "receipt": "/workspace/work/harbichess/cpu-search-density-v1-actual/fits/20262105-sparse16.fresh-audit.json",
+      "sha256": "7e9ab084b0025f3699d8996423c2106f42942bda71c1fc1d18a9005e17222ae3",
+      "status": "already-pass-protected",
+      "tag": "20262105-sparse16"
+    },
+    {
+      "command": [
+        "/workspace/HarbiChess/.venv/bin/python",
+        "/workspace/HarbiChess/experiments/ufuk/cpu-search-density-v1/audit.py",
+        "--run",
+        "/workspace/work/harbichess/cpu-search-density-v1-actual/fits/20262106-sparse16",
+        "--config",
+        "/workspace/work/harbichess/cpu-search-density-v1-actual/fits/20262106-sparse16.config.json",
+        "--protocol",
+        "/workspace/HarbiChess/experiments/ufuk/cpu-search-density-v1/protocol.json",
+        "--weights",
+        "/workspace/work/harbichess/a100/restoration/local-rehearsal-content/harbichess-inputs/initial-e8.safetensors",
+        "--output",
+        "/workspace/work/harbichess/cpu-search-density-v1-actual/fits/20262106-sparse16.fresh-audit.json"
+      ],
+      "finished_epoch": 1791205607.3927934,
+      "first_epoch": 1791205534.5294652,
+      "original_deadline_epoch": 1791206434.5294652,
+      "receipt": "/workspace/work/harbichess/cpu-search-density-v1-actual/fits/20262106-sparse16.fresh-audit.json",
+      "sha256": "1c70ef0d5125343d7f12d7a619a6c3221dffa5c0c7b20027a41559c4a2d43e69",
+      "status": "pass-data-not-strength",
+      "tag": "20262106-sparse16"
+    },
+    {
+      "command": [
+        "/workspace/HarbiChess/.venv/bin/python",
+        "/workspace/HarbiChess/experiments/ufuk/cpu-search-density-v1/audit.py",
+        "--run",
+        "/workspace/work/harbichess/cpu-search-density-v1-actual/fits/20262105-all16",
+        "--config",
+        "/workspace/work/harbichess/cpu-search-density-v1-actual/fits/20262105-all16.config.json",
+        "--protocol",
+        "/workspace/HarbiChess/experiments/ufuk/cpu-search-density-v1/protocol.json",
+        "--weights",
+        "/workspace/work/harbichess/a100/restoration/local-rehearsal-content/harbichess-inputs/initial-e8.safetensors",
+        "--output",
+        "/workspace/work/harbichess/cpu-search-density-v1-actual/fits/20262105-all16.fresh-audit.json"
+      ],
+      "finished_epoch": 1791205723.8930576,
+      "first_epoch": 1791205607.3959408,
+      "original_deadline_epoch": 1791206507.3959408,
+      "receipt": "/workspace/work/harbichess/cpu-search-density-v1-actual/fits/20262105-all16.fresh-audit.json",
+      "sha256": "4b2192445301f8c62596c5a681de3cd40e1e9b5e0b2946e5ab8490879009939d",
+      "status": "pass-data-not-strength",
+      "tag": "20262105-all16"
+    },
+    {
+      "command": [
+        "/workspace/HarbiChess/.venv/bin/python",
+        "/workspace/HarbiChess/experiments/ufuk/cpu-search-density-v1/audit.py",
+        "--run",
+        "/workspace/work/harbichess/cpu-search-density-v1-actual/fits/20262106-all16",
+        "--config",
+        "/workspace/work/harbichess/cpu-search-density-v1-actual/fits/20262106-all16.config.json",
+        "--protocol",
+        "/workspace/HarbiChess/experiments/ufuk/cpu-search-density-v1/protocol.json",
+        "--weights",
+        "/workspace/work/harbichess/a100/restoration/local-rehearsal-content/harbichess-inputs/initial-e8.safetensors",
+        "--output",
+        "/workspace/work/harbichess/cpu-search-density-v1-actual/fits/20262106-all16.fresh-audit.json"
+      ],
+      "finished_epoch": 1791205835.793857,
+      "first_epoch": 1791205723.8950512,
+      "original_deadline_epoch": 1791206623.8950512,
+      "receipt": "/workspace/work/harbichess/cpu-search-density-v1-actual/fits/20262106-all16.fresh-audit.json",
+      "sha256": "31b503a27e3f1148bfed678db75dbabf7d0ffa578e7bdf1dc50878219405b9f5",
+      "status": "pass-data-not-strength",
+      "tag": "20262106-all16"
+    },
+    {
+      "command": [
+        "/workspace/HarbiChess/.venv/bin/python",
+        "/workspace/HarbiChess/experiments/ufuk/cpu-search-density-v1/audit.py",
+        "--run",
+        "/workspace/work/harbichess/cpu-search-density-v1-actual/fits/20262105-all64",
+        "--config",
+        "/workspace/work/harbichess/cpu-search-density-v1-actual/fits/20262105-all64.config.json",
+        "--protocol",
+        "/workspace/HarbiChess/experiments/ufuk/cpu-search-density-v1/protocol.json",
+        "--weights",
+        "/workspace/work/harbichess/a100/restoration/local-rehearsal-content/harbichess-inputs/initial-e8.safetensors",
+        "--output",
+        "/workspace/work/harbichess/cpu-search-density-v1-actual/fits/20262105-all64.fresh-audit.json"
+      ],
+      "finished_epoch": 1791205950.4921741,
+      "first_epoch": 1791205835.7961452,
+      "original_deadline_epoch": 1791206735.7961452,
+      "receipt": "/workspace/work/harbichess/cpu-search-density-v1-actual/fits/20262105-all64.fresh-audit.json",
+      "sha256": "fc83d4656788a8f6f48774332625a074509e65a91a1c4b3d0bde39dc737f6d67",
+      "status": "pass-data-not-strength",
+      "tag": "20262105-all64"
+    },
+    {
+      "command": [
+        "/workspace/HarbiChess/.venv/bin/python",
+        "/workspace/HarbiChess/experiments/ufuk/cpu-search-density-v1/audit.py",
+        "--run",
+        "/workspace/work/harbichess/cpu-search-density-v1-actual/fits/20262106-all64",
+        "--config",
+        "/workspace/work/harbichess/cpu-search-density-v1-actual/fits/20262106-all64.config.json",
+        "--protocol",
+        "/workspace/HarbiChess/experiments/ufuk/cpu-search-density-v1/protocol.json",
+        "--weights",
+        "/workspace/work/harbichess/a100/restoration/local-rehearsal-content/harbichess-inputs/initial-e8.safetensors",
+        "--output",
+        "/workspace/work/harbichess/cpu-search-density-v1-actual/fits/20262106-all64.fresh-audit.json"
+      ],
+      "finished_epoch": 1791206069.9994729,
+      "first_epoch": 1791205950.4937775,
+      "original_deadline_epoch": 1791206850.4937775,
+      "receipt": "/workspace/work/harbichess/cpu-search-density-v1-actual/fits/20262106-all64.fresh-audit.json",
+      "sha256": "fd32a2bc37ffaa8d22386dc8021c8bd5620d4a15e20d70304907d6e52df73508",
+      "status": "pass-data-not-strength",
+      "tag": "20262106-all64"
+    }
+  ],
+  "status": "PASS-data-only"
+}
