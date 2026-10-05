@@ -1,0 +1,17 @@
+{
+  "pid": 134024,
+  "startticks": 2863858,
+  "ready": {
+    "schema": "source7-one-archive-readonly18089-owned-relay-v1",
+    "status": "relay-ready-public-verification-pending",
+    "base_url": "https://bomb-disable-nylon-amp.trycloudflare.com",
+    "server_pid": 134025,
+    "tunnel_pid": 134026,
+    "port": 18089,
+    "expires_epoch": 1791180000,
+    "observed_epoch": 1791167487.6804414,
+    "original_pack_deadline_epoch": 1791167846.3326154
+  },
+  "ready_sha256": "4fbd4c249e83b5dbda0794db97c0b4710d52ea6bff396c4bfe0f849b6ef571eb",
+  "helper_sha256": "d6c82dcc7eb2680c2d090deea3ae8352ecda502a9814906a7936d88d99fbfc49"
+}
