@@ -1,0 +1,93 @@
+{
+  "arena_output": "/dev/shm/harbichess-fresh-learning-arena-v1-20261005/arena",
+  "arena_scope": "Known 8 development families; 224 paired games across E8 control and MC/SC/FULL fits. Not virgin strength confirmation.",
+  "audit_deadline_epoch": 1791239801.8651235,
+  "audit_max_seconds": 900,
+  "book_path": "/workspace/work/harbichess/cpu-own-replay-v1-actual/development/book.json",
+  "book_sha256": "9c36b5972c9676d19c358ca7e598b9f7f5d110b1947bed838cd660f644d845da",
+  "budget_comparability": "Neural recursive nodes and Stockfish actual nodes are reported separately; the requested 512-node budgets are not equal-compute claims.",
+  "disk_min_free_bytes": 268435456,
+  "fit_provenance_path": "/workspace/HarbiChess/experiments/ufuk/cpu-fresh-learning-arena-v1/fit-provenance.json",
+  "fit_provenance_sha256": "5c6db5ac1762eda796bfb5895caccdc8dfc2056fa35e55b446ee2d8f6b320de0",
+  "games_per_tournament": 16,
+  "match_seeds": [
+    20262805,
+    20262806
+  ],
+  "max_arena_workers": 1,
+  "max_depth": 8,
+  "max_plies": 400,
+  "memory_max_bytes": 16106127360,
+  "native_binding": "Use fit-provenance.json external records for each candidate, step-0/final native manifests and payload hashes. Candidate parent is not required to contain checkpoint.json.",
+  "opening_pairs": 8,
+  "operator_hard_deadline_epoch": 1791273600.0,
+  "original_deadline_epoch": 1791238901.8651235,
+  "original_first_epoch": 1791228101.8651235,
+  "per_tournament_seconds": 2700,
+  "profile_deadline_epoch": 1791228701.8651235,
+  "profile_first_epoch": 1791228101.8651235,
+  "profile_output": "/dev/shm/harbichess-fresh-learning-arena-v1-20261005/qualification.json",
+  "profile_seconds": 600,
+  "promotion_priority": [
+    "mc",
+    "sc",
+    "full"
+  ],
+  "quiescence_plies": 2,
+  "reserved_output_bytes": 100663296,
+  "roles": [
+    "mc",
+    "sc",
+    "full"
+  ],
+  "schema": "fresh-own-learning-224-paired-arena-protocol-v1",
+  "screen": {
+    "caps_at_most": 0.05,
+    "direct_same_search_e8_score_strictly_above": 0.6,
+    "evaluate_both_seeds_and_all_three_arms": true,
+    "final_sf_score_at_least": 0.25,
+    "paired_sf_gain_over_e8_strictly_above": 0.1
+  },
+  "search_nodes": 512,
+  "source_commit": "6fcc8b476d25495d1c9c413e55b2c7ba4794013e",
+  "status": "registered",
+  "status_note": "Root frozen before any profile/game. Same observed first includes qualification/preparation. Exactly224 development games. Fixed MC/SC/FULL priority for at most ONE later independent confirmation if bothseed gates pass; no outcome checkpoint or search selection.",
+  "stockfish_hash_mib": 16,
+  "stockfish_nodes": 512,
+  "stockfish_path": "/workspace/work/harbichess/stockfish/stockfish-linux-x86-64-universal",
+  "stockfish_sha256": "0f83d24cc46d2c66c60f16001af5444873bc112b7d028594513426894c12da19",
+  "stockfish_threads": 1,
+  "tasks": [
+    [
+      "e8",
+      "SF512"
+    ],
+    [
+      "mc",
+      "e8"
+    ],
+    [
+      "mc",
+      "SF512"
+    ],
+    [
+      "sc",
+      "e8"
+    ],
+    [
+      "sc",
+      "SF512"
+    ],
+    [
+      "full",
+      "e8"
+    ],
+    [
+      "full",
+      "SF512"
+    ]
+  ],
+  "threads": 1,
+  "total_games": 224,
+  "whole_seconds": 10800
+}
