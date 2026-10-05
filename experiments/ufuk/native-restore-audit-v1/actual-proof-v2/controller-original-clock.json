@@ -1,0 +1,14 @@
+{
+  "auditor_sha256": "4ed977b47711685dff98e2aadb40d775edf7fbb0450d20011053cb134d7370ca",
+  "controller_sha256": "f70b8687ae7e5010b29935e1b98e99bca2f93647bf1504d3f7dc79c974d09d7c",
+  "cpu_affinity": [
+    0
+  ],
+  "operator_end_epoch": 1791273600,
+  "original_deadline_epoch": 1791220341.245795,
+  "public_readback_receipt_sha256": "3665de0a6a3c02a933e7f3e6d863096bc3e8957b7421e54ff54867ed5b217753",
+  "results": [],
+  "schema": "cpu-public-native-sequential-readonly-audit-controller-v2",
+  "started_epoch": 1791219441.245795,
+  "status": "started"
+}
