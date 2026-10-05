@@ -1,0 +1,29 @@
+name: Fresh selflearning state exact blob delivery v6
+run-name: Freshstate v6 capsule / ${{ inputs.manifest_prefix }}
+on:
+  workflow_dispatch:
+    inputs:
+      manifest_sha:
+        required: true
+      manifest_prefix:
+        required: true
+permissions: {}
+concurrency:
+  group: a100-allowlisted-release-delivery
+  cancel-in-progress: false
+jobs:
+  backup:
+    if: github.repository == 'Eta06/HarbiChess' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    permissions:
+      contents: write
+    env:
+      MANIFEST_SHA: ${{ inputs.manifest_sha }}
+      MANIFEST_PREFIX: ${{ inputs.manifest_prefix }}
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - run: python experiments/ufuk/fresh-selflearning-state-blob-v6/receiver_v6.py
