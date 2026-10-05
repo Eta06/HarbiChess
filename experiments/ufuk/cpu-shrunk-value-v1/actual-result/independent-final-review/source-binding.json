@@ -1,0 +1,13 @@
+{
+  "schema": "shrink-readonly-source-execution-binding-v1",
+  "source_commit": "4cae08522ac940746cf9127ca8ce4a6b63a47408",
+  "clean_tracked_source": true,
+  "critical_inference_source_sha256": {
+    "src/harbichess/backends/torch_network.py": "42cf9b2a6840f7c3403b7e6ffd7a814c0ca11f9037a474abd1250048278a0644",
+    "src/harbichess/training/torch_array_encoder.py": "66bc3f9a2b1858b92363b31af37e9f12a42d2174c108c44769fc6cd37ac96ab3",
+    "src/harbichess/search/evaluator.py": "c656c57f75eec6745ac8edd88df59c0d1c1560be4288490fab838c4be7d308f4"
+  },
+  "checkout": "/workspace/work/harbichess/cpu-fix-source-4cae085",
+  "actual_NN_script_import_path": "study first; source checkout/src second, before importing Torch/search/value; no harbichess imported earlier",
+  "additional_NN_calls": 0
+}
