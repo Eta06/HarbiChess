@@ -1,0 +1,16 @@
+{
+  "status": "51-pass-0-skip-with-explicit-sealed-external-fixtures",
+  "initial_failure": {
+    "passed": 38,
+    "failed": 4,
+    "errors": 9,
+    "reason": "opaque chunk fixtures intentionally omitted from Git"
+  },
+  "corrected_fixture_env": "HARBICHESS_NATIVE_V2_FIXTURES",
+  "tests": 51,
+  "elapsed_seconds": 3.57,
+  "ruff": "PASS",
+  "validator_or_caps_weakened": false,
+  "payloads_in_git": false,
+  "transport_clock_reset": false
+}
