@@ -1,0 +1,13 @@
+{
+  "GPU_used": false,
+  "helper_sha256": "f561c6297d2485f32e38acf4cd9fe43b3a2b1233956c22d008a95932d1148cdc",
+  "manifest_path": "/workspace/work/harbichess/cpu-fresh-selfplay-v2-actual/registration/qualification-manifest.json",
+  "manifest_sha256": "c9da1ee7a067bd455b45f1f7b83a48bcae82c61aed78a966a9e9c2b0be19e0fa",
+  "original_deadline_epoch": 1791221595.4006422,
+  "original_first_epoch": 1791220995.4006422,
+  "registered_cpu_core": 0,
+  "schema": "fresh-qsearch-realCPU-qualification-owner-v1",
+  "source_commit": "6fcc8b476d25495d1c9c413e55b2c7ba4794013e",
+  "support_sha256": "6e738c3ca49dd2bc0274c069a71203d9c865a8637d99a84bad78bad0dc798c74",
+  "synthetic_mode_allowed": false
+}
