@@ -1315,3 +1315,7 @@ borcudur; mevcut MLX yolu korunur. Prefix başarı veya promotion anlamına gelm
 ## UFUK-CPUFIX
 
 5 Ekim 2026: GPU kullanmadan kayıpsız epoch feature cache’i ve opt-in Linux aggregate bellek politikası; gerçek CLI restart kontrolü ve kendi oyun kayıtlarından kontrollü öğrenme. Eski failed/incomplete koşular ve native formatlar korunur. Yeni aşama veya loss düşüşü oyun gücü başarısı değildir.
+
+## UFUK-DENSITY
+
+5 Ekim 2026: CPU üzerinde self-play’de search kullanılan hamle oranı ve kendi search hedefinin bütçesi için eşlemeli kontroller. Sparse16/all16/all64, aynı e8 başlangıcı ve iki seed; eski koşular yeniden adlandırılmaz. Search davranış farkı nedensellik veya güç başarısı değildir; bağımsız maç, resume ve veri bütünlüğü ölçülür. Standart expert iteration literatürü temel alınır, özgünlük varsayılmaz.
