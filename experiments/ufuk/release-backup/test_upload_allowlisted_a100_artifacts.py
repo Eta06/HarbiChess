@@ -404,3 +404,18 @@ def test_browser_readback_still_requires_full_exact_size_and_sha(monkeypatch, bo
     monkeypatch.setattr(delivery.PUBLIC_REDIRECT, "open", open_response)
     with pytest.raises(delivery.DeliveryError, match="over-size|size-or-sha256-mismatch"):
         delivery._public_asset_readback(asset, metadata)
+
+
+def test_fixed_source7_selector_preserves_old_two_and_rejects_path_injection(monkeypatch):
+    monkeypatch.delenv("HARBICHESS_RELEASE_MANIFEST", raising=False)
+    assert delivery._manifest_path() == delivery.MANIFEST
+    for family, expected in [
+        ("mc84", delivery.MANIFEST),
+        ("formal45-v2", delivery.FORMAL45_MANIFEST),
+        ("source7-v3", delivery.SOURCE7_MANIFEST),
+    ]:
+        monkeypatch.setenv("HARBICHESS_RELEASE_MANIFEST", family)
+        assert delivery._manifest_path() == expected
+    monkeypatch.setenv("HARBICHESS_RELEASE_MANIFEST", "/content/auth.json")
+    with pytest.raises(delivery.DeliveryError):
+        delivery._manifest_path()
