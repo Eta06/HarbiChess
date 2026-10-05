@@ -1,0 +1,16 @@
+{
+  "schema": "cpu-own-outcome-positional-restart-proof-v2",
+  "original_first_epoch": 1791212784.1876025,
+  "original_deadline_epoch": 1791213384.1876025,
+  "source_commit": "4cae08522ac940746cf9127ca8ce4a6b63a47408",
+  "scope": "training-only checkpoint/optimizer/RNG/replay proof; no online actor or strength claim",
+  "status": "pass",
+  "all6full_native_freshprocess_strictload": true,
+  "all_training_payload_fields_bit_identical": true,
+  "accepted_updates": 8,
+  "full_optimizer_rng_replay_contract_resume": true,
+  "native_inputs_sha256": [
+    "32d203b68ed29e9fd1a0845fca69f32f0faa3aa4cc1ad9e0e040b6af5027fb55"
+  ],
+  "finished_epoch": 1791212911.6657476
+}
