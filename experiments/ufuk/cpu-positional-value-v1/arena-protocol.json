@@ -7,9 +7,9 @@
     20262406
   ],
   "arms": [
-    "linear"
+    "positional"
   ],
-  "candidate": "fixed2048step endpoint, no bestmodel/loss selection",
+  "candidate": "fixed4096step endpoint, no bestmodel/loss selection",
   "book_path": "/workspace/work/harbichess/cpu-own-replay-v1-actual/development/book.json",
   "book_sha256": "9c36b5972c9676d19c358ca7e598b9f7f5d110b1947bed838cd660f644d845da",
   "games_per_tournament": 16,
@@ -64,6 +64,6 @@
       "SF512"
     ]
   ],
-  "additional_learning_control": "bothseeds linearvsrebased score>.60 andlinearSFgainoverrebased>0; otherwise reinitializationalone cannot beselflearning",
+  "additional_learning_control": "bothseeds positionalvsrebased score>.60 andpositionalSFgainoverrebased>0; otherwise reinitializationalone cannot beselflearning",
   "fixed_endpoint": "4096 own-outcome updates; no bestcheckpoint selection; zero-step untrained architecture control"
 }
