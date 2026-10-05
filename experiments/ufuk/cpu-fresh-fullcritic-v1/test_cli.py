@@ -41,3 +41,24 @@ def test_actor_deadline_and_new_training_deadline_are_separately_bound():
     changed_actor = {"original_deadline_epoch": actor_deadline + 1.0}
     with pytest.raises(ValueError, match="clocks differ"):
         validate_seed_clocks(changed_actor, contract, training_deadline)
+
+
+def test_frozen_digest_is_order_independent_and_rejects_real_mutation():
+    import torch
+    from core import freeze_shared_and_policy, frozen_bits
+    from train import _hash_frozen, _hash_frozen_from_bits
+
+    from harbichess.backends.torch_network import TorchChessNetwork
+    from harbichess.core.network_config import NetworkConfig
+
+    model = TorchChessNetwork(NetworkConfig(), architecture="pairwise")
+    trainable = freeze_shared_and_policy(model)
+    snapshot = frozen_bits(model, trainable)
+    assert list(snapshot) != sorted(snapshot)
+    assert _hash_frozen(model, trainable) == _hash_frozen_from_bits(snapshot)
+    assert _hash_frozen_from_bits(dict(reversed(list(snapshot.items())))) == _hash_frozen(
+        model, trainable
+    )
+    with torch.no_grad():
+        model.stem.weight[0, 0, 0, 0] += 1
+    assert _hash_frozen(model, trainable) != _hash_frozen_from_bits(snapshot)
