@@ -1,4 +1,6 @@
+import math
 import random
+from types import SimpleNamespace
 
 import chess
 import pytest
@@ -7,7 +9,12 @@ from harbichess.chess.rules import PythonChessRules
 from harbichess.core.state import ChessMove, ChessState
 from harbichess.search.evaluator import PositionEvaluation
 from harbichess.search.full_gumbel import FullGumbelConfig
-from harbichess.search.mate_certificates import certified_policy, immediate_mating_moves
+from harbichess.search.mate_certificates import (
+    certified_policy,
+    immediate_mating_moves,
+    shield_visited_losses,
+    visited_mate_in_one_losses,
+)
 from harbichess.search.ownsearch_wavefront import WavefrontGumbel
 
 
@@ -149,3 +156,133 @@ def test_nonterminal_nonmate_root_keeps_existing_search_schedule():
     assert result.simulations == 16
     assert sum(x.visits for x in result.moves) == 16
     assert len(result.action_weights) == len(rules.legal_moves(state))
+
+
+def test_visited_loss_certificate_checks_only_visited_nonterminal_children_and_shields_support():
+    rules = PythonChessRules()
+    state = ChessState("6rk/8/8/8/8/6q1/6B1/6K1 w - - 0 1")
+    legal = tuple(rules.legal_moves(state))
+    safe, losing = ChessMove("g1f1"), ChessMove("g1h1")
+    assert set(legal) == {safe, losing}
+    loss_proofs = visited_mate_in_one_losses(rules, state, (losing,))
+    assert loss_proofs == ((losing, (ChessMove("g3g2"),)),)
+    assert visited_mate_in_one_losses(rules, state, (safe,)) == ()
+
+    stats = (
+        SimpleNamespace(move=safe, visits=4, mean_value=-0.05, prior=0.1),
+        SimpleNamespace(move=losing, visits=12, mean_value=-0.99, prior=0.9),
+    )
+    original, selected, status = shield_visited_losses(
+        legal,
+        (0.25, 0.75),
+        stats,
+        (losing,),
+        selected_action=losing,
+    )
+    by_move = dict(zip(legal, original, strict=True))
+    assert by_move[losing] == 1e-12
+    assert by_move[safe] == pytest.approx(1 - 1e-12)
+    assert selected == safe
+    assert status == "visited-losses-epsilon-shielded"
+    assert math.fsum(original) == pytest.approx(1.0, abs=1e-15)
+    assert all(p > 0 for p in original)
+
+
+def test_visited_loss_certificates_skip_terminal_children_and_claimable_roots():
+    rules = PythonChessRules()
+    # Capturing the last rook leaves K+B versus K: an exact child draw, not a loss.
+    state = ChessState("1r5k/2B5/8/8/8/8/8/K7 w - - 0 1")
+    capture = ChessMove("c7b8")
+    child = rules.apply(state, capture)
+    assert rules.outcome(state, claim_draw=True) is None
+    assert rules.outcome(child, claim_draw=True).result.value == "1/2-1/2"
+    assert visited_mate_in_one_losses(rules, state, (capture,)) == ()
+
+    repeated = ChessState(
+        chess.STARTING_FEN,
+        tuple(ChessMove(m) for m in ("g1f3", "g8f6", "f3g1", "f6g8") * 2),
+    )
+    assert rules.outcome(repeated, claim_draw=True) is not None
+    assert visited_mate_in_one_losses(
+        rules, repeated, tuple(rules.legal_moves(repeated)), claim_draw=True
+    ) == ()
+
+
+def test_visited_loss_shield_win_precedence_all_loss_and_unknown_fallback_ties():
+    rules = PythonChessRules()
+    legal = tuple(rules.legal_moves(ChessState(chess.STARTING_FEN)))
+    weights = tuple(1 / len(legal) for _ in legal)
+    first, second = legal[:2]
+    stats = tuple(
+        SimpleNamespace(
+            move=move,
+            visits=8 if move in (first, second) else 0,
+            mean_value=0.2,
+            prior=0.3 if move == first else (0.2 if move == second else 0.0),
+        )
+        for move in legal
+    )
+    unchanged, selected, status = shield_visited_losses(
+        legal,
+        weights,
+        stats,
+        (first,),
+        selected_action=second,
+        certified_wins=(second,),
+    )
+    assert unchanged == weights
+    assert selected == second
+    assert status == "winning-certificate-precedence"
+
+    unchanged, selected, status = shield_visited_losses(
+        legal,
+        weights,
+        stats,
+        legal,
+        selected_action=first,
+    )
+    assert unchanged == weights
+    assert selected == first
+    assert status == "all-legal-actions-certified-loss-no-safe-action"
+
+    # All moves except the first two are UNKNOWN/unvisited; stable tie breaks by prior then UCI.
+    policy, selected, status = shield_visited_losses(
+        legal,
+        weights,
+        stats,
+        (first,),
+        selected_action=first,
+    )
+    assert selected == second
+    assert status == "visited-losses-epsilon-shielded"
+    assert len(policy) == len(legal) and all(p > 0 for p in policy)
+    assert math.fsum(policy) == pytest.approx(1.0, abs=1e-15)
+
+
+def test_visited_loss_certificate_rejects_illegal_candidate_and_keeps_rng_free_search_budget():
+    rules = PythonChessRules()
+    state = ChessState(chess.STARTING_FEN)
+    with pytest.raises(ValueError, match="legal at the root"):
+        visited_mate_in_one_losses(rules, state, (ChessMove("a1a8"),))
+
+    evaluator = FixedEvaluator(rules, {})
+    rng = random.Random(29)
+    before = rng.getstate()
+    result = WavefrontGumbel(
+        evaluator, rules, FullGumbelConfig(16, 4, 0.0, 0.1, 50.0, True)
+    ).search_many([state], [rng])[0]
+    after_search = rng.getstate()
+    visited = tuple(row.move for row in result.moves if row.visits > 0)
+    proofs = visited_mate_in_one_losses(rules, state, visited)
+    shield_visited_losses(
+        tuple(move for move, _ in result.action_weights),
+        tuple(p for _, p in result.action_weights),
+        result.moves,
+        tuple(move for move, _ in proofs),
+        selected_action=result.selected_action,
+        certified_wins=result.certified_mates,
+    )
+    assert before != after_search
+    assert rng.getstate() == after_search
+    assert result.simulations == 16
+    assert sum(row.visits for row in result.moves) == 16
