@@ -1,0 +1,27 @@
+{
+  "cgroup_budget_sha256": "a53079851ab9fb63b65dd5bef0d0e8fb01d6864ebfbf2389dcdbcab39b30289c",
+  "controller_sha256": "a24b3208d2dcfd2b648f59e49041c6c4bffbee258bcc916dc06aeb78fb412dc2",
+  "deadline_epoch": 1791235919.529188,
+  "dispatch_head": "66e31aa0544b537efe8f630ec8aeab648644a444",
+  "guardian": {
+    "pid": 991477,
+    "start_ticks": 18238465
+  },
+  "manifest_sha256": "df5671d13e3da60f5337096b289c041fe2a730290fbc2a546f5b127c7bf729b7",
+  "schema": "fresh-state-v6-single-dispatch-registration-v1",
+  "source_files": {
+    "ROOT-approval-PENDING.json": "307bb70eb539e9a2bc02202646f1e1fffe7a81afb0fcfe8c2017339dc1543b64",
+    "allowlist-PENDING.json": "359f24a4b2e1f2ad757ef35a7327c91760ef00f46aeb1cd29434580e03fd1960",
+    "blob_delivery_v6.py": "15252db8191d1704ea64c548795a0c804f4f99cae40e659e02ce5e77b715e68a",
+    "fresh_binding.py": "55f291e3e9cdd535cd9e030e477bf0d6eea09dd9827aa20d46b1be6bc8efb416",
+    "manifest-DRAFT.json": "df5671d13e3da60f5337096b289c041fe2a730290fbc2a546f5b127c7bf729b7",
+    "native_delta_codec.py": "878868940b5bae15c182dce55215320b5f0ba3692b9c5eac26988204832a31d6",
+    "receiver_v6.py": "2db6786a61b27f09c149f669ccfa634e683d86c908d3b00814d6930cb499a765",
+    "release_transport_v6.py": "c5f9ff97e4390fa1f502c619546ee41f60f6af59c1a2fc48bb0928e355248628",
+    "state_bundle.py": "ac81e656a90d4a8e453ad1db70ccbdb2c79606741fba719991fda505de10b096",
+    "transport-control-PENDING.json": "10208c5c00d9e228ac3e125eeacafda20568cab3aa1b05b1e3968c486b7946aa"
+  },
+  "started_epoch": 1791230519.529188,
+  "status": "ROOT-approved-frozen-controller",
+  "workflow_sha256": "921455b6ddf4d0daeddb5c140dbaf047e124dcde1d3b740f1a81bfa6d2324314"
+}
