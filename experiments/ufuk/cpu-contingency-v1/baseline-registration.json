@@ -1,0 +1,18 @@
+{
+  "CPU_fullprofile_unproven": true,
+  "baseline_only": "fixed original teacher-origin e8 vSF512, 96pairedgamesperseed, unopened outcomes, nofinalmodelselection",
+  "baseline_wall_seconds": 3600,
+  "fixed_epochs": 8,
+  "formal_CPU_training_not_started": true,
+  "hard_deadline_epoch": 1791180000,
+  "protocol_id": "cpu-contingency-v1",
+  "qualification_config_sha256": "b9baaaeb4dbad72df23a24d963f5cb12e19895cef347dfdb8c7fc6f5bdd04698",
+  "qualification_ledger_slot": 8,
+  "schema": "cpu-contingency-baseline-prospective-registration-v1",
+  "seeds": [
+    20261925,
+    20261926
+  ],
+  "source_commit": "3be5b87db27a0fbde83464e7ea7157f0d9a76ae4",
+  "status": "frozen-before-formal-execution"
+}
