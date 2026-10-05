@@ -1,0 +1,139 @@
+{
+  "GPU_used": false,
+  "actual_at_epoch": 1791221413.6324532,
+  "helper_sha256": {
+    "search.py": "de53c14728a67b7772f18b396ac8ef5c35a144d4e4e616fec40099cd461a6670",
+    "value.py": "d3bb6dfe33127e1bea48ee63c10692f3eba6cb1b2f6b48ea7c898dce389620a9"
+  },
+  "matched_packets": 6,
+  "new_games": 0,
+  "new_training_updates": 0,
+  "read_only_models": true,
+  "rows": [
+    {
+      "actual_packet": {
+        "completed_depth": 2,
+        "evaluations": 472,
+        "nodes": 512,
+        "root_actions": 27,
+        "selected_move": "f1c4",
+        "value": 0.14564191895780934
+      },
+      "candidate_color": "white",
+      "fullhistory_plies": 4,
+      "model_sha256": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03",
+      "mover": "white",
+      "opening_pair": 0,
+      "ply": 5,
+      "recorded_equals_reproduced": true,
+      "role": "e8",
+      "seed": 20262605,
+      "wall_seconds": 0.5419892159989104
+    },
+    {
+      "actual_packet": {
+        "completed_depth": 2,
+        "evaluations": 473,
+        "nodes": 512,
+        "root_actions": 33,
+        "selected_move": "d2d4",
+        "value": 0.16169391736466054
+      },
+      "candidate_color": "white",
+      "fullhistory_plies": 6,
+      "model_sha256": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03",
+      "mover": "white",
+      "opening_pair": 0,
+      "ply": 7,
+      "recorded_equals_reproduced": true,
+      "role": "e8",
+      "seed": 20262605,
+      "wall_seconds": 0.5219324229983613
+    },
+    {
+      "actual_packet": {
+        "completed_depth": 2,
+        "evaluations": 438,
+        "nodes": 512,
+        "root_actions": 27,
+        "selected_move": "a2a3",
+        "value": 0.0
+      },
+      "candidate_color": "white",
+      "fullhistory_plies": 4,
+      "model_sha256": "850d483af0eb9767fca296fe7e6dcb02db9983ba28e02f6c9166c5325d028cf0",
+      "mover": "white",
+      "opening_pair": 0,
+      "ply": 5,
+      "recorded_equals_reproduced": true,
+      "role": "rebased",
+      "seed": 20262605,
+      "wall_seconds": 0.18511823899461888
+    },
+    {
+      "actual_packet": {
+        "completed_depth": 2,
+        "evaluations": 441,
+        "nodes": 512,
+        "root_actions": 26,
+        "selected_move": "a1a2",
+        "value": 0.0
+      },
+      "candidate_color": "white",
+      "fullhistory_plies": 6,
+      "model_sha256": "850d483af0eb9767fca296fe7e6dcb02db9983ba28e02f6c9166c5325d028cf0",
+      "mover": "white",
+      "opening_pair": 0,
+      "ply": 7,
+      "recorded_equals_reproduced": true,
+      "role": "rebased",
+      "seed": 20262605,
+      "wall_seconds": 0.1845169560110662
+    },
+    {
+      "actual_packet": {
+        "completed_depth": 2,
+        "evaluations": 473,
+        "nodes": 512,
+        "root_actions": 27,
+        "selected_move": "f3e5",
+        "value": 0.061440722145872206
+      },
+      "candidate_color": "white",
+      "fullhistory_plies": 4,
+      "model_sha256": "cdbfcb2c1893dd6d2ec63ae723c71ed7e645f4ad6a675a6fe3a60697a06bb722",
+      "mover": "white",
+      "opening_pair": 0,
+      "ply": 5,
+      "recorded_equals_reproduced": true,
+      "role": "shrunk",
+      "seed": 20262605,
+      "wall_seconds": 0.19613395200576633
+    },
+    {
+      "actual_packet": {
+        "completed_depth": 2,
+        "evaluations": 449,
+        "nodes": 512,
+        "root_actions": 27,
+        "selected_move": "h2h3",
+        "value": 0.057301554498560225
+      },
+      "candidate_color": "white",
+      "fullhistory_plies": 6,
+      "model_sha256": "cdbfcb2c1893dd6d2ec63ae723c71ed7e645f4ad6a675a6fe3a60697a06bb722",
+      "mover": "white",
+      "opening_pair": 0,
+      "ply": 7,
+      "recorded_equals_reproduced": true,
+      "role": "shrunk",
+      "seed": 20262605,
+      "wall_seconds": 0.19591862900415435
+    }
+  ],
+  "schema": "shrink-six-fixed-existing-neural-packet-reproduction-v1",
+  "source_commit": "4cae08522ac940746cf9127ca8ce4a6b63a47408",
+  "status": "PASS-six-exact-packets-NOT-new-games",
+  "threads": 1,
+  "torch_version": "2.14.1+cpu"
+}
