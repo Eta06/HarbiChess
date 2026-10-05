@@ -1319,3 +1319,5 @@ borcudur; mevcut MLX yolu korunur. Prefix başarı veya promotion anlamına gelm
 ## UFUK-DENSITY
 
 5 Ekim 2026: CPU üzerinde self-play’de search kullanılan hamle oranı ve kendi search hedefinin bütçesi için eşlemeli kontroller. Sparse16/all16/all64, aynı e8 başlangıcı ve iki seed; eski koşular yeniden adlandırılmaz. Search davranış farkı nedensellik veya güç başarısı değildir; bağımsız maç, resume ve veri bütünlüğü ölçülür. Standart expert iteration literatürü temel alınır, özgünlük varsayılmaz.
+
+- **UFUK-ALIGN** (2026-10-05, CPU-only): fullsupport selected-action/search-policy mixture, rawpi/searchsupervision/actualmu ayrı v5ledger, eski auditedall16kontrolü. Hipotez/deney; strength veya özgünlük iddiası değil. Eski FAIL/INCOMPLETE/MAX8 korunur.
