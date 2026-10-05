@@ -1,0 +1,51 @@
+{
+  "all_registered_owned_groups_and_identities_terminated": true,
+  "control_supplement_sha256": "82a704fffe5c6e1b0aaa79fae0deb4e1a12d27793877f2d0dd00ea2eee685615",
+  "method4_ready_latency_final_receipts_fabricated": false,
+  "observed_epoch": 1791163740.2430143,
+  "original_cohort_sha256": "85d8d34dcbdd195d49b2d847946f0d237d048a59975c4a8476f7bef95e0e51d9",
+  "original_stop_result": "/content/harbichess-fullgame-method2-inputs/method5-failed4-scheduling-v2/owned4-stop-result.json",
+  "original_stop_result_sha256": "aa6fe404c52f9a6d57c4a0951fa0b2f8d450f4877c0b24f77df6398b3d25361c",
+  "schema": "own4-incomplete-owned-compute-terminated-witness-v1",
+  "scope": "Read-only actual ended-compute scheduling witness; no qualification, latency or final-arm receipt substituted; original stop/native/failure unchanged",
+  "signals_sent": [],
+  "terminal_receipt_sha256": "dcfac3d862c5b574be7fba30bb63a16e1802fcbfde28de0baa2881a39addc3ac",
+  "terminated_tracked_pid_startticks": [
+    {
+      "pid": 82368,
+      "startticks": 1842104
+    },
+    {
+      "pid": 82371,
+      "startticks": 1842105
+    },
+    {
+      "pid": 82369,
+      "startticks": 1842105
+    },
+    {
+      "pid": 82372,
+      "startticks": 1842106
+    },
+    {
+      "pid": 82374,
+      "startticks": 1842107
+    },
+    {
+      "pid": 82401,
+      "startticks": 1842118
+    },
+    {
+      "pid": 84069,
+      "startticks": 1880448
+    },
+    {
+      "pid": 82388,
+      "startticks": 1842115
+    },
+    {
+      "pid": 84086,
+      "startticks": 1880754
+    }
+  ]
+}
