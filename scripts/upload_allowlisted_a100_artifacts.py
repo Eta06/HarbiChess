@@ -419,11 +419,15 @@ def _upload_file(asset: dict, path: Path, token: str) -> dict:
 def _public_asset_readback(asset: dict, metadata: dict) -> str:
     asset_id = metadata.get("id")
     expected_api_url = f"{API_ROOT}/repos/{REPOSITORY}/releases/assets/{asset_id}"
+    expected_public_url = (
+        f"https://github.com/{REPOSITORY}/releases/download/{RELEASE_TAG}/{asset['name']}"
+    )
     if (
         type(asset_id) is not int
         or metadata.get("name") != asset["name"]
         or metadata.get("size") != asset["bytes"]
         or metadata.get("url") != expected_api_url
+        or metadata.get("browser_download_url") != expected_public_url
     ):
         raise DeliveryError("github-asset-metadata-identity-mismatch")
     digest_field = metadata.get("digest")
@@ -431,7 +435,7 @@ def _public_asset_readback(asset: dict, metadata: dict) -> str:
     if digest_field is not None and digest_field != expected_digest_field:
         raise DeliveryError("github-asset-api-digest-mismatch")
     req = urllib.request.Request(
-        expected_api_url,
+        expected_public_url,
         headers={"Accept": "application/octet-stream", "User-Agent": USER_AGENT},
         method="GET",
     )
