@@ -1,0 +1,19 @@
+{
+  "schema": "fresh-qsearch-controller-proposal-inventory-v1",
+  "files": {
+    "controller_support.py": "6e738c3ca49dd2bc0274c069a71203d9c865a8637d99a84bad78bad0dc798c74",
+    "qualify_actor.py": "f561c6297d2485f32e38acf4cd9fe43b3a2b1233956c22d008a95932d1148cdc",
+    "run_epoch.py": "c71077bfda3a1d46385bdabd29532faa5d0a08fb161e3a544d2d94ab63de623c",
+    "test_controllers.py": "8e206145e3a9144fecc7092654500089026403e59307c687cb222411e1445661",
+    "README.md": "b3cd9850991d8e550db3d2675da1c563030cc8db793f131ba934731600553e6b",
+    "verification.json": "bf406baf95ac4e335002071d652c5df76905e609ea14410258685f27fdf56338"
+  },
+  "actor_execution_helper_keys_exact": [
+    "journal_v1.py",
+    "journal_v2.py",
+    "produce_v2.py",
+    "anchor_value.py",
+    "search.py",
+    "value.py"
+  ]
+}
