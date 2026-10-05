@@ -1,0 +1,214 @@
+{
+  "verified_utc": "2026-10-05T07:32:19.926986+00:00",
+  "gpu": {
+    "boot_id": "570719ad-af7f-43bd-adb3-2d014b1fce11",
+    "cuda_available": true,
+    "cuda_device_count": 1,
+    "cuda_kernel_pass": true,
+    "cuda_kernel_result": 16.0,
+    "cuda_name": "NVIDIA A100-SXM4-40GB",
+    "cuda_total_memory_bytes": 42405855232,
+    "hostname": "81c9b5623364",
+    "known_project_paths": {
+      "/content/HarbiChess": false,
+      "/content/harbichess": false,
+      "/content/harbichess-inputs": false,
+      "/content/harbichess-runs": false,
+      "/workspace/HarbiChess": false
+    },
+    "nvidia_smi_returncode": 0,
+    "nvidia_smi_stderr": "",
+    "nvidia_smi_stdout": "NVIDIA A100-SXM4-40GB, 40960 MiB, 580.82.07",
+    "python": "3.13.15",
+    "relevant_training_pids": [],
+    "torch_cuda_version": "13.0",
+    "torch_version": "2.11.0+cu130"
+  },
+  "ssh_expected_fingerprint": "SHA256:TD0gsv0YY3Bt/F8GswmkBj3pAMQ2123Z68W+/8cWX/o",
+  "cohort": {
+    "audit_deadline": 1791177476.6772149,
+    "config_sha256": "e0aefad1018a385687ad5c1875f5607c19801f21f135e3fc0488e194eff99e47",
+    "error": "RuntimeError('replay-20261925 returned 1')",
+    "finished_epoch": 1791173392.9585788,
+    "original_first_epoch": 1791172676.6772149,
+    "owners": [
+      {
+        "deadline_epoch": 1791177176.6772149,
+        "name": "train-20261925-pause1",
+        "pid": 954604,
+        "returncode": 0,
+        "startticks": 13707608
+      },
+      {
+        "deadline_epoch": 1791177476.6772149,
+        "name": "audit-20261925",
+        "pid": 954605,
+        "returncode": -15,
+        "startticks": 13707608
+      },
+      {
+        "deadline_epoch": 1791177176.6772149,
+        "name": "train-20261926-pause1",
+        "pid": 954606,
+        "returncode": 0,
+        "startticks": 13707609
+      },
+      {
+        "deadline_epoch": 1791177476.6772149,
+        "name": "audit-20261926",
+        "pid": 954607,
+        "returncode": -15,
+        "startticks": 13707609
+      },
+      {
+        "deadline_epoch": 1791177176.6772149,
+        "name": "train-20261925-fresh-resume8",
+        "pid": 955437,
+        "returncode": -15,
+        "startticks": 13728435
+      },
+      {
+        "deadline_epoch": 1791177176.6772149,
+        "name": "train-20261926-fresh-resume8",
+        "pid": 955446,
+        "returncode": -15,
+        "startticks": 13728709
+      },
+      {
+        "deadline_epoch": 1791173820.0574634,
+        "name": "replay-20261925",
+        "pid": 956567,
+        "returncode": 1,
+        "startticks": 13761945
+      }
+    ],
+    "schema": "cpu-fixedE8-owned-cohort-v1",
+    "source_commit": "3be5b87db27a0fbde83464e7ea7157f0d9a76ae4",
+    "status": "incomplete",
+    "train_deadline": 1791177176.6772149
+  },
+  "fresh_cli_replay_failure": {
+    "absolute_deadline_epoch": 1791173820.0574634,
+    "actor_steps": 323,
+    "closed_boundary": false,
+    "epoch": 1,
+    "error": "RuntimeError('registered fullgame memory ceiling exceeded')",
+    "finished_epoch": 1791173387.0431314,
+    "optimizer_accepted_updates": 12,
+    "optimizer_attempted_updates": 12,
+    "optimizer_rejected_updates": 0,
+    "reason": "registered fullgame memory ceiling exceeded",
+    "sample_chain_sha256": "6c7cb4e04613469a95ec546c4f4e689669ab4cec55d960e89b36fa65582d9ff3",
+    "schema": "search-acting-supervised-invocation-v2",
+    "source_commit": "3be5b87db27a0fbde83464e7ea7157f0d9a76ae4",
+    "status": "failed",
+    "wall_seconds": 163.65511493501253
+  },
+  "formal_native_inventory": {
+    "20261925": {
+      "native_epochs_present": [
+        "epoch-00000000",
+        "epoch-00000001",
+        "epoch-00000002"
+      ],
+      "progress_is_stale_not_active": {
+        "epoch": 2,
+        "fresh_transitions": 32768,
+        "optimizer_accepted_updates": 24,
+        "optimizer_attempted_updates": 24,
+        "optimizer_rejected_updates": 0,
+        "remaining_whole_seconds": 3957.431005001068,
+        "sample_chain_sha256": "bbbc3ab4d9e20a8c5a5b9536633455458c2044ce7610faea636031e25dc3391f",
+        "status": "running"
+      },
+      "native_epoch2_files": {
+        "checkpoint.json": {
+          "bytes": 1003600,
+          "sha256": "f64add67d9a5011089a00f3afe88649de98068ebdb5977d1a9b3468e422ff2cf"
+        },
+        "model.safetensors": {
+          "bytes": 294764,
+          "sha256": "c40034276a9b2d97e3096f0774cba6df85458d409cca0f5c43c1770159e401bc"
+        },
+        "training.pt": {
+          "bytes": 2103785,
+          "sha256": "7a8e4b2f88dc217a0f5ea1482d1908e33a52885875d4c70a5d9969b38f9adb73"
+        },
+        "behavior.safetensors": {
+          "bytes": 294764,
+          "sha256": "7f52ea0ff90cfaf2bf6f9d3f820747461d0eb56e27fdd51f5c10979185c2f1b0"
+        },
+        "base.safetensors": {
+          "bytes": 294764,
+          "sha256": "4055627aadfc957e8b51739a821d58b06b2d687b7478d4874650e5613f569df9"
+        },
+        "actor.json": {
+          "bytes": 904957,
+          "sha256": "f38c682997f6009fe05a0ac93f857666ece64c108337f4dfbc4279a18f901a38"
+        },
+        "last-frozen-epoch.json.gz": {
+          "bytes": 17421508,
+          "sha256": "993049f545315f2d3e84dd2afb84b1691bb74a1847641372aeb2bd5ea9e68219"
+        }
+      },
+      "independent_completed_audits": [
+        "epoch-00000000-receipt.json",
+        "epoch-00000001-receipt.json"
+      ]
+    },
+    "20261926": {
+      "native_epochs_present": [
+        "epoch-00000000",
+        "epoch-00000001",
+        "epoch-00000002"
+      ],
+      "progress_is_stale_not_active": {
+        "epoch": 2,
+        "fresh_transitions": 32768,
+        "optimizer_accepted_updates": 21,
+        "optimizer_attempted_updates": 24,
+        "optimizer_rejected_updates": 3,
+        "remaining_whole_seconds": 3953.187091112137,
+        "sample_chain_sha256": "4691610a06131a038e4a9150c0c0a4b75c97d48f6bf39f9fb07485a7457e1504",
+        "status": "running"
+      },
+      "native_epoch2_files": {
+        "checkpoint.json": {
+          "bytes": 1004792,
+          "sha256": "bf8192b001c2341cc1eb4ac7c941e02fa23534546cec90e41c96497f7a6b1c27"
+        },
+        "model.safetensors": {
+          "bytes": 294764,
+          "sha256": "6555892943115d360be8104160009fe18406c696dedf66c79b132c7abe84c98a"
+        },
+        "training.pt": {
+          "bytes": 2105001,
+          "sha256": "2093ca16484c856802cbd5dba43889e871ef8c5e2a8debc8f4a22562aaace79a"
+        },
+        "behavior.safetensors": {
+          "bytes": 294764,
+          "sha256": "c962c4ecf0f69ed09a75c656742f002bd9b5957c1fae7b7be0b1ec8abc3973a8"
+        },
+        "base.safetensors": {
+          "bytes": 294764,
+          "sha256": "4055627aadfc957e8b51739a821d58b06b2d687b7478d4874650e5613f569df9"
+        },
+        "actor.json": {
+          "bytes": 906027,
+          "sha256": "7a767048975323b212fa53150a077ca651a67784b74bd7dac25dfe6ae96a7788"
+        },
+        "last-frozen-epoch.json.gz": {
+          "bytes": 17505441,
+          "sha256": "76a8d2be2f09e8aaa3cfad09255daa52ff17ed91ba75d9b4306a4d358156bc34"
+        }
+      },
+      "independent_completed_audits": [
+        "epoch-00000000-receipt.json",
+        "epoch-00000001-receipt.json"
+      ]
+    }
+  },
+  "strongest_validated_model_sha256": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03",
+  "new_training_started": false,
+  "old_strength_gate_passed": false
+}
