@@ -213,7 +213,10 @@ class HarbiChessPairwiseNetwork(HarbiChessDecoupledValueNetwork):
 
     def _production_value_logits(self, inputs: mx.array, trunk: mx.array) -> mx.array:
         if self._value_sparse is not None:
-            return self.value_sparse_head(inputs)
+            sparse = self.value_sparse_head(inputs)
+            if self._value_sparse["schema"] == 1:
+                return sparse
+            return super()._production_value_logits(inputs, trunk) + sparse
         return super()._production_value_logits(inputs, trunk)
 
     def __call__(self, inputs: mx.array) -> tuple[mx.array, mx.array]:
