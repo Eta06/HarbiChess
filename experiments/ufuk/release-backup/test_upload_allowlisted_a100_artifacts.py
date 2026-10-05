@@ -284,3 +284,51 @@ def test_source_download_sends_no_auth_and_rejects_redirect(tmp_path, monkeypatc
     with pytest.raises(delivery.DeliveryError, match="redirects-disallowed"):
         delivery._download_source(asset, tmp_path / "never-created.bin")
     assert seen["authorization"] is None
+
+
+def test_actual_numeric_repository_link_never_becomes_a_credentialed_request(monkeypatch):
+    first = [_asset(i) for i in range(1, 101)]
+    requests = []
+    actual_link = (
+        "<https://api.github.com/repositories/1345115839/releases/401698693/"
+        'assets?per_page=100&page=2>; rel="next", '
+        "<https://api.github.com/repositories/1345115839/releases/401698693/"
+        'assets?per_page=100&page=2>; rel="last"'
+    )
+
+    def request(path, token, *, include_headers=False):
+        requests.append(path)
+        assert token == "test-token" and include_headers
+        return (first, {"Link": actual_link}) if _page(path) == 1 else ([_asset(101)], {})
+
+    monkeypatch.setattr(delivery, "_api_request", request)
+    assert len(delivery._asset_list("test-token")) == 101
+    base = "/repos/Eta06/HarbiChess/releases/401698693/assets?per_page=100&page="
+    assert requests == [base + "1", base + "2"]
+
+
+@pytest.mark.parametrize(
+    "target",
+    [
+        "https://api.github.com/repositories/1345115840/releases/401698693/assets?per_page=100&page=2",
+        "https://api.github.com/repositories/1345115839/releases/401698694/assets?per_page=100&page=2",
+        "https://evil.example/repositories/1345115839/releases/401698693/assets?per_page=100&page=2",
+        "https://user@api.github.com/repositories/1345115839/releases/401698693/assets?per_page=100&page=2",
+        "https://api.github.com/repositories/1345115839/releases/401698693/assets?per_page=100&page=2&page=3",
+        "https://api.github.com/repositories/1345115839/releases/401698693/assets?per_page=100&page=2&token=x",
+        "https://api.github.com/repositories/1345115839/releases/401698693/assets?per_page=100&page=3",
+    ],
+)
+def test_numeric_link_foreign_identity_or_noncanonical_query_fails_before_next_request(
+    monkeypatch, target
+):
+    requests = []
+
+    def request(path, token, *, include_headers=False):
+        requests.append(path)
+        return ([_asset(i) for i in range(1, 101)], {"Link": f'<{target}>; rel="next"'})
+
+    monkeypatch.setattr(delivery, "_api_request", request)
+    with pytest.raises(delivery.DeliveryError):
+        delivery._asset_list("test-token")
+    assert requests == ["/repos/Eta06/HarbiChess/releases/401698693/assets?per_page=100&page=1"]
