@@ -1,0 +1,19 @@
+{
+  "status": "actual-A100-CUDA59-no-skip",
+  "source_commit": "c022bc1605b44c3089439da5c6efb7bd4db4ff81",
+  "tests_passed": 59,
+  "tests_skipped": 0,
+  "tests_failed": 0,
+  "actual_test_seconds": 238.94,
+  "original_driver_first": 1791164995.571109,
+  "same_original_600_deadline": 1791165595.571109,
+  "original_driver_metadata_failure_preserved": true,
+  "metadata_correction_finished_epoch": 1791165435.4523644,
+  "unit_compute_repeated": false,
+  "original_unit_clock_reset": false,
+  "remote_original_corrected_receipt_SHA256": "bbdc45ad38ca372c883cc5a96de5dcfcdc7a18cb6756b545d40d20bd2a32c4ac",
+  "local_reserialized_corrected_receipt_SHA256": "bbdc45ad38ca372c883cc5a96de5dcfcdc7a18cb6756b545d40d20bd2a32c4ac",
+  "raw59_XML_SHA256": "87dd6135cfc25efb5ab1f8d4adbdae0d231e1cec96d5701b5180e664d14340a1",
+  "four_actual_XML_corruption_ambiguity_controls_rejected": true,
+  "no_strength_or_novelty_claim": true
+}
