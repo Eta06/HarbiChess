@@ -1,0 +1,46 @@
+{
+  "status": "TEMPLATE_PENDING_ACTUAL_8_QUALIFICATION_DO_NOT_EXECUTE",
+  "repo": "/content/HarbiChess-visited-loss-3be5b87",
+  "python": "/usr/bin/python3",
+  "common_original_firstclock_receipt": "ROOT_SAMPLE_ONE_ACTUAL_OBSERVED_CLOCK_BEFORE_OWNER_WRITES",
+  "common_original_firstclock_receipt_sha256": "ROOT_FILL_ACTUAL_CLOCK_SHA",
+  "seeds": {
+    "20261825": {
+      "run": "/content/harbichess-runs/visited-loss-method8-seed-20261825/run",
+      "training_result": "/content/harbichess-runs/visited-loss-method8-seed-20261825/result.json",
+      "full_audit": "/content/harbichess-runs/visited-loss-method8-audit-seed-20261825/full-audit-result.json",
+      "original_training_started_epoch": "ROOT_FILL_SAME_ACTUAL_COMMON_CLOCK",
+      "baseline_deadline_epoch": "ROOT_FILL_ORIGINAL_BASELINE_FIRST_PLUS_3600",
+      "book": "/content/harbichess-fullgame-method2-inputs/formal8-production/book-20261825.json",
+      "audit_controller_result": "/content/harbichess-runs/visited-loss-method8-audit-seed-20261825/result.json",
+      "baseline_root": "/content/harbichess-runs/visited-loss-method8-baseline-seed-20261825",
+      "final_root": "/content/harbichess-runs/visited-loss-method8-final-seed-20261825"
+    },
+    "20261826": {
+      "run": "/content/harbichess-runs/visited-loss-method8-seed-20261826/run",
+      "training_result": "/content/harbichess-runs/visited-loss-method8-seed-20261826/result.json",
+      "full_audit": "/content/harbichess-runs/visited-loss-method8-audit-seed-20261826/full-audit-result.json",
+      "original_training_started_epoch": "ROOT_FILL_SAME_ACTUAL_COMMON_CLOCK",
+      "baseline_deadline_epoch": "ROOT_FILL_ORIGINAL_BASELINE_FIRST_PLUS_3600",
+      "book": "/content/harbichess-fullgame-method2-inputs/formal8-production/book-20261826.json",
+      "audit_controller_result": "/content/harbichess-runs/visited-loss-method8-audit-seed-20261826/result.json",
+      "baseline_root": "/content/harbichess-runs/visited-loss-method8-baseline-seed-20261826",
+      "final_root": "/content/harbichess-runs/visited-loss-method8-final-seed-20261826"
+    }
+  },
+  "posttraining": {
+    "root": "/content/harbichess-runs/visited-loss-method8-posttraining-20261005",
+    "initial": "/content/harbichess-inputs/initial-e8.safetensors",
+    "probes": "/content/harbichess-fullgame-method2-inputs/UFUK-width-latency-probes-20261004.json",
+    "stockfish": "/content/harbichess-tools/stockfish-linux-x86-64-universal",
+    "exchange_manifest": "/content/harbichess-fullgame-method2-inputs/formal8-production/method8-portable-exchange-manifest.json",
+    "mlx_receipt": "/content/harbichess-fullgame-method2-inputs/formal8-production/method8-final-mlx-cpu-parity.json",
+    "mlx_receipt_sha256_file": "/content/harbichess-fullgame-method2-inputs/formal8-production/method8-final-mlx-cpu-parity.json.sha256",
+    "expected_A100_runtime": {
+      "python_executable_sha256": "bac00abc4dfc76da8fd1a09023b9454e4d34f591172af79bbfa7ee43091165d6",
+      "torch_version": "2.11.0+cu130",
+      "hostname": "045ceeb3ddfe",
+      "boot_id": "b1cf1620-f1c7-4571-832f-989ee44a5aa4"
+    }
+  }
+}
