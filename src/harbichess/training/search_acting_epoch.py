@@ -8,8 +8,6 @@ import random
 from dataclasses import replace
 
 import chess
-
-from harbichess.backends.torch_backend import TorchPolicyValueBackend
 from harbichess.chess.actions import legal_action_indices, move_to_action
 from harbichess.search.full_gumbel import FullGumbelConfig
 from harbichess.search.ownsearch_wavefront import (
@@ -105,9 +103,16 @@ def collect_search_acting_epoch(
     search_before = [r.getstate() for r in search_rngs]
     cursor_before, actor_before = actors.cursor(), actors.rng.getstate()
     schedule = SearchSchedule(rng=schedule_rng, block_plies=config.block_plies)
-    evaluator = BatchedPositionEvaluator(
-        TorchPolicyValueBackend(behavior, device=device), actors.rules
+    # Private Torch feature traffic only; shared wavefront and MLX keep tuple encodings.
+    from harbichess.training.torch_array_encoder import (
+        TorchArrayBoardEncoder,
+        TorchArrayPolicyValueBackend,
     )
+
+    evaluator = BatchedPositionEvaluator(
+        TorchArrayPolicyValueBackend(behavior, device=device), actors.rules
+    )
+    evaluator.encoder = TorchArrayBoardEncoder(actors.rules)
     actions, receipts, groups = [], [], []
     for _ in range(steps):
         guard()
