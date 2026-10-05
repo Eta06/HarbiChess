@@ -1,0 +1,25 @@
+{
+  "schema": "cpu-native-delta-transport-control-v2",
+  "status": "ROOT-approved-frozen-transport",
+  "operator_end_epoch": 1791273600,
+  "started_epoch": 1791221470.2559595,
+  "deadline_epoch": 1791223270.2559595,
+  "transport_seconds_max": 1800,
+  "receiver_sha256": "2ada24757df8e09402b0873f129ee79e12d8860777a89d4cb8e3b515feadba9c",
+  "codec_sha256": "878868940b5bae15c182dce55215320b5f0ba3692b9c5eac26988204832a31d6",
+  "binding_adapter_sha256": "c18f507afeca44920fddbf4a9fcf89242f06bd35a0c0e12ed921aecf85769199",
+  "workflow_sha256": "c2cde4cbaaa102171ded00b4495777b37d90e3855baae4cddb4062227e2866d0",
+  "manifest_sha256": [
+    "10d2ad259754ec1ea1bdca5e4affb41bb5af06b259c03af26137f2d1a0b37806",
+    "8d9929a1b1c9e862194c2024c6b2a391ea6bc00158b3aa7c647ee19aef3b60ec",
+    "bbff8b5f8132ae88fbb00a40e0b943dff4ae2f446fef877909d8db295cc201f8",
+    "ce72e2112ed978c0648ac4e07459d13ebd16226ffeb0ca028b210373dc2e17d0"
+  ],
+  "aggregate_asset_cap": 200,
+  "aggregate_bytes_cap": 8589934592,
+  "prior_asset_count_parent_reported": 154,
+  "new_chunks": 8,
+  "new_capsules": 4,
+  "maximum_resulting_count_if_parent_inventory_unchanged": 166,
+  "note": "Prospective new version only. Root must freeze actualstart/end beforedispatch. Serialdispatch/wait completion because same GitHub concurrency lock permits onlyone pending. Allold4/v1assets/source/clocks remain unchanged. No journal extension or runtime restore proof claimed."
+}
