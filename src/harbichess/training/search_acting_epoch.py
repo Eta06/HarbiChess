@@ -6,11 +6,18 @@ import json
 import math
 import random
 from dataclasses import replace
+from types import SimpleNamespace
 
 import chess
 
 from harbichess.chess.actions import legal_action_indices, move_to_action
+from harbichess.core.state import ChessMove
 from harbichess.search.full_gumbel import FullGumbelConfig
+from harbichess.search.mate_certificates import (
+    immediate_mating_moves,
+    shield_visited_losses,
+    visited_mate_in_one_losses,
+)
 from harbichess.search.ownsearch_wavefront import (
     BatchedPositionEvaluator,
     WavefrontGumbel,
@@ -24,7 +31,8 @@ from harbichess.selfplay.online_epoch import (
 )
 from harbichess.training.ownsearch_targets import SearchSchedule, validate_search_ledger
 
-LEDGER_SCHEMA = "pre-action-masked-search-behavior-v3"
+LEDGER_SCHEMA = "pre-action-masked-search-behavior-v4"
+LOSS_SHIELD_EPSILON = 1e-12
 COLLECTION_SCHEMA = "full-history-search-acting-epoch-v2"
 
 
@@ -164,18 +172,62 @@ def collect_search_acting_epoch(
             )
             for slot, index, result in zip(slots, selected, results, strict=True):
                 board = actors.rules.inspect(states[slot])
-                by_action = {
+                raw_by_action = {
                     move_to_action(board, chess.Move.from_uci(m.uci)): p
                     for m, p in result.action_weights
                 }
+                raw_policy = normalized(
+                    tuple(raw_by_action[a] for a in legal[slot])
+                )
+                visited_moves = tuple(row.move for row in result.moves if row.visits > 0)
+                checked_moves = () if result.certified_mates else visited_moves
+                losses = (
+                    visited_mate_in_one_losses(
+                        actors.rules,
+                        states[slot],
+                        checked_moves,
+                        claim_draw=actors.config.claim_draw,
+                    )
+                    if checked_moves
+                    else ()
+                )
+                root_moves = tuple(move for move, _ in result.action_weights)
+                root_policy = tuple(probability for _, probability in result.action_weights)
+                shielded, selected_move, shield_status = shield_visited_losses(
+                    root_moves,
+                    root_policy,
+                    result.moves,
+                    tuple(move for move, _ in losses),
+                    selected_action=result.selected_action,
+                    certified_wins=result.certified_mates,
+                    epsilon=LOSS_SHIELD_EPSILON,
+                )
+                by_action = {
+                    move_to_action(board, chess.Move.from_uci(move.uci)): p
+                    for move, p in zip(root_moves, shielded, strict=True)
+                }
                 policy = normalized(tuple(by_action[a] for a in legal[slot]))
                 actor_policies[slot] = policy
+                loss_moves = {move for move, _ in losses}
+                if selected_move == result.selected_action:
+                    selected_reason = (
+                        "original-certified-losing-action-no-safe-alternative"
+                        if selected_move in loss_moves
+                        else "raw-search-selection"
+                    )
+                elif selected_move in visited_moves:
+                    selected_reason = "fallback-visited-nonloss"
+                else:
+                    selected_reason = "fallback-unvisited-unknown"
                 receipts.append(
                     dict(
                         collection_index=index,
                         legal_actions=list(legal[slot]),
+                        raw_search_policy=list(raw_policy),
                         search_policy=list(policy),
-                        selected_action=result.selected_action.uci,
+                        raw_selected_action=result.selected_action.uci,
+                        selected_action=selected_move.uci,
+                        selected_action_reason=selected_reason,
                         root_value=result.root_value,
                         moves=[
                             dict(
@@ -188,6 +240,18 @@ def collect_search_acting_epoch(
                         ],
                         simulations=result.simulations,
                         certified_mates=[m.uci for m in result.certified_mates],
+                        visited_loss_checked_actions=sorted(
+                            m.uci for m in checked_moves
+                        ),
+                        certified_losing_actions=[
+                            {
+                                "move": move.uci,
+                                "opponent_mates": [mate.uci for mate in replies],
+                            }
+                            for move, replies in losses
+                        ],
+                        loss_shield_status=shield_status,
+                        loss_shield_epsilon=LOSS_SHIELD_EPSILON,
                         root_ply=states[slot].ply,
                         mover=actors.rules.view(states[slot]).side_to_move.value,
                     )
@@ -249,8 +313,12 @@ def collect_search_acting_epoch(
         roots=receipts,
         neural_batch_sizes=evaluator.batch_sizes,
         neural_positions=sum(evaluator.batch_sizes),
-        behavior="raw-T1-except-preselected-search-policy-T1;no-PPO",
-        targets="all-legal-Gumbel-plus-exact-one-ply-mate-solver-policy",
+        behavior=(
+            "raw-T1-except-preselected-search-policy-with-visited-mate1-loss-shield-T1;no-PPO"
+        ),
+        targets=(
+            "all-legal-Gumbel-plus-exact-one-ply-mate-win-and-visited-child-mate-loss-shield"
+        ),
         groups=groups,
         schedule_rng_before=schedule_before,
         schedule_rng_after=schedule_rng.getstate(),
@@ -266,7 +334,8 @@ def collect_search_acting_epoch(
 def validate_search_acting(epoch, ledger, config, *, actors):
     if (
         ledger["schema"] != LEDGER_SCHEMA
-        or ledger["behavior"] != "raw-T1-except-preselected-search-policy-T1;no-PPO"
+        or ledger["behavior"]
+        != "raw-T1-except-preselected-search-policy-with-visited-mate1-loss-shield-T1;no-PPO"
     ):
         raise ValueError("search acting ledger semantics differ")
     legacy = dict(ledger, schema="ownsearch-random-block-targets-v2")
@@ -278,6 +347,98 @@ def validate_search_acting(epoch, ledger, config, *, actors):
         claim_draw=actors.config.claim_draw,
     )
     selected = {r["collection_index"]: r for r in ledger["roots"]}
+    for index, receipt in selected.items():
+        row = epoch.actions[index]
+        board = actors.rules.inspect(row.transition.pre)
+        moves_by_action = {
+            move_to_action(board, chess.Move.from_uci(item["move"])): item
+            for item in receipt["moves"]
+        }
+        legal_moves = tuple(
+            ChessMove(moves_by_action[action]["move"])
+            for action in row.legal_actions
+        )
+        raw_policy = tuple(receipt["raw_search_policy"])
+        if (
+            len(raw_policy) != len(row.legal_actions)
+            or any(not math.isfinite(p) or p < 0 for p in raw_policy)
+            or not math.isclose(math.fsum(raw_policy), 1.0, abs_tol=1e-9, rel_tol=0)
+        ):
+            raise ValueError("source8 raw Gumbel policy support/normalization differs")
+        wins = tuple(ChessMove(m) for m in receipt["certified_mates"])
+        expected_wins = immediate_mating_moves(
+            actors.rules, row.transition.pre, claim_draw=actors.config.claim_draw
+        )
+        if wins != expected_wins:
+            raise ValueError("source8 immediate-win certificate inventory differs")
+        visited = tuple(
+            ChessMove(item["move"])
+            for item in receipt["moves"]
+            if item["visits"] > 0
+        )
+        checked = () if wins else visited
+        if receipt["visited_loss_checked_actions"] != sorted(m.uci for m in checked):
+            raise ValueError("source8 visited-only loss-check inventory differs")
+        expected_losses = (
+            ()
+            if wins
+            else visited_mate_in_one_losses(
+                actors.rules,
+                row.transition.pre,
+                checked,
+                claim_draw=actors.config.claim_draw,
+            )
+        )
+        loss_receipt = [
+            {"move": move.uci, "opponent_mates": [mate.uci for mate in replies]}
+            for move, replies in expected_losses
+        ]
+        if receipt["certified_losing_actions"] != loss_receipt:
+            raise ValueError("source8 exact visited-child loss certificate differs")
+        stats = tuple(
+            SimpleNamespace(
+                move=ChessMove(item["move"]),
+                visits=item["visits"],
+                mean_value=item["mean_value"],
+                prior=item["prior"],
+            )
+            for item in receipt["moves"]
+        )
+        expected_policy, expected_selected, expected_status = shield_visited_losses(
+            legal_moves,
+            raw_policy,
+            stats,
+            tuple(move for move, _ in expected_losses),
+            selected_action=ChessMove(receipt["raw_selected_action"]),
+            certified_wins=wins,
+            epsilon=LOSS_SHIELD_EPSILON,
+        )
+        if (
+            receipt["loss_shield_status"] != expected_status
+            or receipt["loss_shield_epsilon"] != LOSS_SHIELD_EPSILON
+            or receipt["selected_action"] != expected_selected.uci
+            or len(receipt["search_policy"]) != len(expected_policy)
+            or any(
+                not math.isclose(actual, expected, abs_tol=1e-15, rel_tol=0)
+                for actual, expected in zip(
+                    receipt["search_policy"], expected_policy, strict=True
+                )
+            )
+        ):
+            raise ValueError("source8 loss shield policy/action/status differs")
+        if receipt["selected_action"] == receipt["raw_selected_action"]:
+            expected_reason = (
+                "original-certified-losing-action-no-safe-alternative"
+                if ChessMove(receipt["selected_action"])
+                in {move for move, _ in expected_losses}
+                else "raw-search-selection"
+            )
+        elif ChessMove(receipt["selected_action"]) in visited:
+            expected_reason = "fallback-visited-nonloss"
+        else:
+            expected_reason = "fallback-unvisited-unknown"
+        if receipt["selected_action_reason"] != expected_reason:
+            raise ValueError("source8 deterministic fallback reason differs")
     replay = OnlineActors(
         actors.openings,
         config=actors.config,
