@@ -1,0 +1,129 @@
+{
+  "schema": "cpu-own-value-all-root-qsearch-protocol-v1",
+  "stage": "UFUK-QSEARCH",
+  "source_commit": "4cae08522ac940746cf9127ca8ce4a6b63a47408",
+  "hypothesis": "Own-terminal linear critic may improve chess strength when all legal roots and forced tactical recaptures are searched. Existing Gumbel16/root4 search failed. Standard alpha-beta/quiescence, no novelty claim. Search-alone gains are not self-learning: e8 and untrained controls must use identical new search.",
+  "selection": "Fixed previously registered VALUE2048 endpoints reused; not new training or new selfplay. Chosen for low own-data validation NLL versus positional overfit, disclosed development selection. All prior failed methods remain FAIL. No thresholds relaxed.",
+  "match_seeds": [
+    20262505,
+    20262506
+  ],
+  "models": {
+    "20262505": {
+      "e8": {
+        "path": "/workspace/work/harbichess/a100/restoration/local-rehearsal-content/harbichess-inputs/initial-e8.safetensors",
+        "sha256": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03",
+        "train_seed": null,
+        "accepted_updates": null
+      },
+      "rebased": {
+        "path": "/workspace/work/harbichess/cpu-outcome-value-v1-actual/fits/20262305-linear/checkpoints/step-00000000/model.safetensors",
+        "sha256": "8c913046098ade2ae5a48965fbcb505feb16b98fde82ba894723ddf967c7d2b6",
+        "train_seed": 20262305,
+        "accepted_updates": 0,
+        "native_manifest_sha256": "7ec36f0b6b968685935829d05db4383a47e18a4688318060a6f9621cc9c5f29e",
+        "native_schema": "cpu-own-outcome-linear-training-native-v2"
+      },
+      "linear": {
+        "path": "/workspace/work/harbichess/cpu-outcome-value-v1-actual/fits/20262305-linear/checkpoints/step-00002048/model.safetensors",
+        "sha256": "0ded026c2671e4cc5709b78d861aba7f24fbebdf1bce142fbc84f362c3d213a1",
+        "train_seed": 20262305,
+        "accepted_updates": 2048,
+        "native_manifest_sha256": "97c6f858bb1a000c2d26cc35e485cddce8a1cabd2bd30f918e39151a55709118",
+        "native_schema": "cpu-own-outcome-linear-training-native-v2"
+      }
+    },
+    "20262506": {
+      "e8": {
+        "path": "/workspace/work/harbichess/a100/restoration/local-rehearsal-content/harbichess-inputs/initial-e8.safetensors",
+        "sha256": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03",
+        "train_seed": null,
+        "accepted_updates": null
+      },
+      "rebased": {
+        "path": "/workspace/work/harbichess/cpu-outcome-value-v1-actual/fits/20262306-linear/checkpoints/step-00000000/model.safetensors",
+        "sha256": "8c913046098ade2ae5a48965fbcb505feb16b98fde82ba894723ddf967c7d2b6",
+        "train_seed": 20262306,
+        "accepted_updates": 0,
+        "native_manifest_sha256": "a1de34acc8fdc22efcaa757c18f14af0d5086aabf3901791fb560b94356c26c3",
+        "native_schema": "cpu-own-outcome-linear-training-native-v2"
+      },
+      "linear": {
+        "path": "/workspace/work/harbichess/cpu-outcome-value-v1-actual/fits/20262306-linear/checkpoints/step-00002048/model.safetensors",
+        "sha256": "1f2ccc2b71af67a4e99eea34a0c69d36a358513c96eb88794c13137ccf6bc4df",
+        "train_seed": 20262306,
+        "accepted_updates": 2048,
+        "native_manifest_sha256": "adf2180231f20a1f7b4fb725ff8f108aa773aac27427e3541d54b52dbb8691ec",
+        "native_schema": "cpu-own-outcome-linear-training-native-v2"
+      }
+    }
+  },
+  "arms": [
+    "linear"
+  ],
+  "tasks": [
+    [
+      "e8",
+      "SF512"
+    ],
+    [
+      "rebased",
+      "SF512"
+    ],
+    [
+      "linear",
+      "e8"
+    ],
+    [
+      "linear",
+      "rebased"
+    ],
+    [
+      "linear",
+      "SF512"
+    ]
+  ],
+  "book_path": "/workspace/work/harbichess/cpu-own-replay-v1-actual/development/book.json",
+  "book_sha256": "9c36b5972c9676d19c358ca7e598b9f7f5d110b1947bed838cd660f644d845da",
+  "opening_pairs": 8,
+  "games_per_tournament": 16,
+  "total_games": 160,
+  "search_nodes": 512,
+  "quiescence_plies": 2,
+  "max_depth": 8,
+  "semantics": "Static mover W-L from existing production WDL softmax; exact terminal +/- (2-ply*1e-5), draw0 claim_draw=True. Each recursive node counted including terminal/quiescence; reserve every legal root child initial static pass. Subsequent incomplete root passes discarded, only fully completed pass selects. At q-depth0 static used even if in check; no exhaustive tactics guarantee. No TT/history truncation.",
+  "ordering": "standard MVV-LVA only orders; no handcrafted material static evaluation, no teacher query or labels. Frozen policy not used in new inference search. Existing encoder/action/rules/backend weights preserved.",
+  "qualification": {
+    "states": "first4 fixed book opening histories, same full512 budget for e8/rebased/linear at both seeds; legality/rootcoverage/state-preservation/bit-parity check, not games or strength selection",
+    "seconds": 600,
+    "required_unit_tests": "6PASS/0SKIP including mate/claimhistory/quiescent poisoned capture/exactbudget/fullvalueadapter e8+sparse+trainedlinear+zero"
+  },
+  "stockfish_nodes": 512,
+  "stockfish_threads": 1,
+  "stockfish_hash_MiB": 16,
+  "stockfish_sha256": "0f83d24cc46d2c66c60f16001af5444873bc112b7d028594513426894c12da19",
+  "budget_comparability": "NN recursive nodes and Stockfish actualnodes separately; not equal compute or node throughput. All neural arms identical node/q rules; CPUwall latency measured.",
+  "max_plies": 400,
+  "threads": 1,
+  "max_arena_workers": 1,
+  "per_tournament_seconds": 7200,
+  "whole_seconds": 72000,
+  "memory_max_bytes": 16106127360,
+  "disk_min_free_bytes": 268435456,
+  "reserved_output_bytes": 8388608,
+  "screen": {
+    "both_seeds": true,
+    "direct_same_search_e8_gt": 0.6,
+    "pairedSF_gain_over_same_search_e8_gt": 0.1,
+    "finalSF_ge": 0.25,
+    "caps_le": 0.05,
+    "trained_vs_same_search_rebased_gt": 0.6,
+    "pairedSFgain_over_rebased_gt": 0
+  },
+  "formal": "Development passing not success: fixed virgin root/source-exclusion, independent complete histories, unchanged stricter statistical/cap/latency gates and originalclosedMAX8 accounting; no result-driven extension/bestcheckpoint selection. Next actual ownplay round required before claiming sustained closedloop selflearning.",
+  "new_training_steps": 0,
+  "new_teacher_labels": false,
+  "GPU_used": false,
+  "scope": "known development families, not independent formal strength qualification",
+  "failure": "preserve first errors/all checkpoints/data/originalclocks. If FAIL, diagnose and use another controlled method."
+}
