@@ -58,6 +58,7 @@
   ],
   "neural_witness_K": 8,
   "prescribed_witness_rule": "FIRST8+LAST8-original64actor-root-batches-and-selected-simulation-masks;9-per-mover-history-dedup;fail-on-insufficient-coverage",
+  "prospective_guard_freeze_epoch": 1791171959.58527,
   "protocol_id": "cpu-contingency-v1",
   "qualification": {
     "actual_cpu_E1_full_data_required": true,
@@ -76,9 +77,12 @@
   "runtime": {
     "cpu_quota": 4,
     "device": "cpu",
-    "memory_limit_bytes": 16106127360,
+    "memory_metric": "current - (file - shmem) - slab_reclaimable; estimate of non-reclaimable charge, notRSS/Linuxworking-set. current,max,all components recorded.",
+    "memory_operational_estimate_limit_bytes": 16106127360,
     "min_free_disk_bytes": 268435456,
-    "torch": "2.14.1+cpu"
+    "producer_memory_max_bytes": 17179869184,
+    "torch": "2.14.1+cpu",
+    "total_cgroup_charge_limit_bytes": 17179869184
   },
   "schema": "prospective-cpu-contingency-v1",
   "seeds": [
