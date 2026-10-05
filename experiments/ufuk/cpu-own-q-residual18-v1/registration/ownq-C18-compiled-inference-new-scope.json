@@ -1,0 +1,15 @@
+{
+  "schema": "ownq-C18-compiled-inference-scope-v1",
+  "first_epoch": 1791238706.9839993,
+  "deadline_epoch": 1791239306.9839993,
+  "scope": "NEW-CPython-C-forward-implementation-18x32-same-learned-math-new-binary-not-Numpy-clock-reset",
+  "prior_numpy_18_phase_closed_as_latency_FAIL": true,
+  "source_core": "6fcc8b476d25495d1c9c413e55b2c7ba4794013e",
+  "CPU_only": true,
+  "memory_max_bytes": 16106127360,
+  "disk_floor_bytes": 268435456,
+  "fixed24_selection": "same first24distinct history hashes and order as failed18Numpy",
+  "gate": "nonzerohead ratios to ORIGINAL fastprior and E8 both<=1.10 before SGD",
+  "SGD": false,
+  "teacher_queries": 0
+}
