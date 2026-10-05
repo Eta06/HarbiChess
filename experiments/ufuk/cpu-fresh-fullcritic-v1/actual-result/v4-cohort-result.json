@@ -1,0 +1,64 @@
+{
+  "status": "PASS-all-registered-seed-method-proofs-not-strength",
+  "rows": [
+    {
+      "tag": "fullcritic-20262805",
+      "code": 0,
+      "passed": true,
+      "result": {
+        "accepted_updates": 8,
+        "actor_config_sha256": "b73106e21c6d8433c2132b024a2caae7527ec84541898d4f9c3db8202fccc3b5",
+        "all_six_strict_fresh_process_loads": true,
+        "common_dataset_sha256": "8f1775c2d3d1da7cfebd55073f4d873439d1ad153af1d94d40bac07246a58ec3",
+        "exact_whole_vs_pause_resume_native_payload": true,
+        "finished_epoch": 1791226135.319565,
+        "first_epoch": 1791225858.5434084,
+        "journal_sha256": "8109c074a9e084f33ec8d9a6c4b062eb3c57e8b6e8d897e03bd39dc8261dea8f",
+        "original_deadline_epoch": 1791226458.5434084,
+        "schema": "fresh-qsearch-full-critic-native-restart-proof-v1",
+        "scope": "whole8 vs pause4/resume8 exact full-native CPU proof; no real fit or strength claim",
+        "search_dataset_sha256": "15a630d0e6b9104a15cfdb91a3734412d32c11e997eca931ff0d44940be09e37",
+        "seed": 20262805,
+        "source_commit": "6fcc8b476d25495d1c9c413e55b2c7ba4794013e",
+        "status": "PASS-native-restart-not-fit",
+        "trainer_sha256": "bc2ad127802db3d69b03f59f6c23a873ad5481aed78a0ddf9613bc80162310db"
+      },
+      "result_sha256": "e62eb4f9b08633adea2a8f825a754e325e0389ba49e17fd8b52dcbe8a8959868",
+      "started_epoch": 1791226059.3704748,
+      "finished_epoch": 1791226136.0218632
+    },
+    {
+      "tag": "fullcritic-20262806",
+      "code": 0,
+      "passed": true,
+      "result": {
+        "accepted_updates": 8,
+        "actor_config_sha256": "a3b5ac9f3933afdce858e60c0e383c9611dabd2be79e7dff128c490d6750591d",
+        "all_six_strict_fresh_process_loads": true,
+        "common_dataset_sha256": "97b16dc10e9b1cdff032710e724cd7ae482ea56b7282befcde208e3cc48339d5",
+        "exact_whole_vs_pause_resume_native_payload": true,
+        "finished_epoch": 1791226222.0351648,
+        "first_epoch": 1791225858.5434084,
+        "journal_sha256": "df515e393e97065cd4828ceacccc7628ea04091643c16296009f48f1b9e01645",
+        "original_deadline_epoch": 1791226458.5434084,
+        "schema": "fresh-qsearch-full-critic-native-restart-proof-v1",
+        "scope": "whole8 vs pause4/resume8 exact full-native CPU proof; no real fit or strength claim",
+        "search_dataset_sha256": "a425e2218f7bc2b3019686e60f987825f0320bc5fec1c65fac2f73c57d45db66",
+        "seed": 20262806,
+        "source_commit": "6fcc8b476d25495d1c9c413e55b2c7ba4794013e",
+        "status": "PASS-native-restart-not-fit",
+        "trainer_sha256": "bc2ad127802db3d69b03f59f6c23a873ad5481aed78a0ddf9613bc80162310db"
+      },
+      "result_sha256": "f68b9ea1d85118730801971fd367e5b994fa482db98f36f7a2c268e930e5defa",
+      "started_epoch": 1791226136.0222878,
+      "finished_epoch": 1791226222.8205473
+    }
+  ],
+  "original_first_epoch": 1791225858.5434084,
+  "original_deadline_epoch": 1791226458.5434084,
+  "finished_epoch": 1791226222.820579,
+  "GPU_used": false,
+  "strength_success": false,
+  "registration_sha256": "b38d78cc155869115deaeb4a2b478d4d6479a8be5dab52038d22ad13c98a9bf1",
+  "controller_sha256": "3e04f2f89f0ce4eff1353b57322eb78020eec450241bd9245ca0075c74aa1ba3"
+}
