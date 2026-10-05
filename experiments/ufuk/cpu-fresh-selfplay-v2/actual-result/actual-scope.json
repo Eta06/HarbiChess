@@ -1,0 +1,29 @@
+{
+  "status": "PASS-real-actor-native-qualification-generation-running-not-strength",
+  "new_qualification_actions_executed": 18,
+  "distinct_trajectory_positions": 9,
+  "whole": 9,
+  "pause": 4,
+  "freshprocess_resume_to": 9,
+  "exact_actor_journal_state_RNG_anchors": true,
+  "independent_anchor_checks": 22,
+  "selfplay_seed_pair": [
+    20262805,
+    20262806
+  ],
+  "production_actions_fixed_per_seed": 8192,
+  "training_dataset_fixed_final8192": true,
+  "qualification_data_first_eligible_of": [
+    2048,
+    4096,
+    8192
+  ],
+  "qualification_admission": {
+    "distinct_completed_known_trajectories": 16,
+    "eligible_known_rows": 1024
+  },
+  "new_teacher_labels": 0,
+  "training_updates": 0,
+  "strength_success": false,
+  "GPU_used": false
+}
