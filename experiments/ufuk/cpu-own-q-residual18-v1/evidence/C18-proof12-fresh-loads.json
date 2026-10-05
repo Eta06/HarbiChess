@@ -1,0 +1,153 @@
+{
+  "status": "PASS-12-fresh-interpreter-native-loads-all-weights-Adam-global-private-sampler-RNG-and-exact-data-source",
+  "rows": [
+    {
+      "status": "PASS-fresh-process-full-native-Adam-RNG-data-source-load-no-SGD",
+      "native_path": "/dev/shm/harbichess-own-q-residual18/C18-proof-v1/20262905/whole0.native.json.gz",
+      "native_sha256": "4355781a6e6222a77b457d8af772ed73438fb5ce2d157780f838fb8157530e14",
+      "step": 0,
+      "registration_sha256": "03e16b7f3c296229025197b558f59ecfd5b4131de6c08263e97470cd6c34fbac",
+      "state_digest": "82036aea61db7cb43d5f8ff0d268559d6aaaca41cbc7781719be617bcaf14335",
+      "first_epoch": 1791239108.4035254,
+      "deadline_epoch": 1791239708.4035254,
+      "finished_epoch": 1791239214.4717412,
+      "optimizer_steps_run": 0
+    },
+    {
+      "status": "PASS-fresh-process-full-native-Adam-RNG-data-source-load-no-SGD",
+      "native_path": "/dev/shm/harbichess-own-q-residual18/C18-proof-v1/20262905/whole4.native.json.gz",
+      "native_sha256": "0d629bd093ac4f8af811dcc4085c64e66e550cd977fdf5bdb352f21c7503d684",
+      "step": 4,
+      "registration_sha256": "03e16b7f3c296229025197b558f59ecfd5b4131de6c08263e97470cd6c34fbac",
+      "state_digest": "2b594568287d0c356adf0ca7ddf3a918b1e58e47466d7f8830eddece152e0242",
+      "first_epoch": 1791239108.4035254,
+      "deadline_epoch": 1791239708.4035254,
+      "finished_epoch": 1791239214.5733426,
+      "optimizer_steps_run": 0
+    },
+    {
+      "status": "PASS-fresh-process-full-native-Adam-RNG-data-source-load-no-SGD",
+      "native_path": "/dev/shm/harbichess-own-q-residual18/C18-proof-v1/20262905/whole8.native.json.gz",
+      "native_sha256": "31555ede84df4ca2d16ca785b685850849db8ef60f7194654ebdefdf8ef6f851",
+      "step": 8,
+      "registration_sha256": "03e16b7f3c296229025197b558f59ecfd5b4131de6c08263e97470cd6c34fbac",
+      "state_digest": "f080228d4efc5ea91676b2430f1f1c42b7c7c00c95dca072af77dc2457f003a0",
+      "first_epoch": 1791239108.4035254,
+      "deadline_epoch": 1791239708.4035254,
+      "finished_epoch": 1791239214.6785877,
+      "optimizer_steps_run": 0
+    },
+    {
+      "status": "PASS-fresh-process-full-native-Adam-RNG-data-source-load-no-SGD",
+      "native_path": "/dev/shm/harbichess-own-q-residual18/C18-proof-v1/20262905/split0.native.json.gz",
+      "native_sha256": "4355781a6e6222a77b457d8af772ed73438fb5ce2d157780f838fb8157530e14",
+      "step": 0,
+      "registration_sha256": "03e16b7f3c296229025197b558f59ecfd5b4131de6c08263e97470cd6c34fbac",
+      "state_digest": "82036aea61db7cb43d5f8ff0d268559d6aaaca41cbc7781719be617bcaf14335",
+      "first_epoch": 1791239108.4035254,
+      "deadline_epoch": 1791239708.4035254,
+      "finished_epoch": 1791239214.7769768,
+      "optimizer_steps_run": 0
+    },
+    {
+      "status": "PASS-fresh-process-full-native-Adam-RNG-data-source-load-no-SGD",
+      "native_path": "/dev/shm/harbichess-own-q-residual18/C18-proof-v1/20262905/pause4.native.json.gz",
+      "native_sha256": "0d629bd093ac4f8af811dcc4085c64e66e550cd977fdf5bdb352f21c7503d684",
+      "step": 4,
+      "registration_sha256": "03e16b7f3c296229025197b558f59ecfd5b4131de6c08263e97470cd6c34fbac",
+      "state_digest": "2b594568287d0c356adf0ca7ddf3a918b1e58e47466d7f8830eddece152e0242",
+      "first_epoch": 1791239108.4035254,
+      "deadline_epoch": 1791239708.4035254,
+      "finished_epoch": 1791239214.8773298,
+      "optimizer_steps_run": 0
+    },
+    {
+      "status": "PASS-fresh-process-full-native-Adam-RNG-data-source-load-no-SGD",
+      "native_path": "/dev/shm/harbichess-own-q-residual18/C18-proof-v1/20262905/resume8.native.json.gz",
+      "native_sha256": "31555ede84df4ca2d16ca785b685850849db8ef60f7194654ebdefdf8ef6f851",
+      "step": 8,
+      "registration_sha256": "03e16b7f3c296229025197b558f59ecfd5b4131de6c08263e97470cd6c34fbac",
+      "state_digest": "f080228d4efc5ea91676b2430f1f1c42b7c7c00c95dca072af77dc2457f003a0",
+      "first_epoch": 1791239108.4035254,
+      "deadline_epoch": 1791239708.4035254,
+      "finished_epoch": 1791239214.9773178,
+      "optimizer_steps_run": 0
+    },
+    {
+      "status": "PASS-fresh-process-full-native-Adam-RNG-data-source-load-no-SGD",
+      "native_path": "/dev/shm/harbichess-own-q-residual18/C18-proof-v1/20262906/whole0.native.json.gz",
+      "native_sha256": "f32ddd188d6f9ac1ae6b3f6e2b54f0c9ba289e0ee30678aba7b87e1b6be5516a",
+      "step": 0,
+      "registration_sha256": "42821548378cfb3fdf735fab64f7b2bda5c031df56b1030a3785bc84b597d187",
+      "state_digest": "f8ae8ad5440e34c5605b944b66b390ade11c387ca0fd471c426cd92bf7965740",
+      "first_epoch": 1791239108.4035254,
+      "deadline_epoch": 1791239708.4035254,
+      "finished_epoch": 1791239215.0741918,
+      "optimizer_steps_run": 0
+    },
+    {
+      "status": "PASS-fresh-process-full-native-Adam-RNG-data-source-load-no-SGD",
+      "native_path": "/dev/shm/harbichess-own-q-residual18/C18-proof-v1/20262906/whole4.native.json.gz",
+      "native_sha256": "23338841058d9a4beefa73086b15c17a81a167ee1fe00cfb5e3079640daade67",
+      "step": 4,
+      "registration_sha256": "42821548378cfb3fdf735fab64f7b2bda5c031df56b1030a3785bc84b597d187",
+      "state_digest": "80810ba5bd28914410eb57e5d8645312f20e89525dd747cae9f0e2ed6a0ca9fe",
+      "first_epoch": 1791239108.4035254,
+      "deadline_epoch": 1791239708.4035254,
+      "finished_epoch": 1791239215.1789176,
+      "optimizer_steps_run": 0
+    },
+    {
+      "status": "PASS-fresh-process-full-native-Adam-RNG-data-source-load-no-SGD",
+      "native_path": "/dev/shm/harbichess-own-q-residual18/C18-proof-v1/20262906/whole8.native.json.gz",
+      "native_sha256": "675aa011bd3026f8bdb0d0e1723c82f6b05c98f3b8a6efb63135dca0ebe54609",
+      "step": 8,
+      "registration_sha256": "42821548378cfb3fdf735fab64f7b2bda5c031df56b1030a3785bc84b597d187",
+      "state_digest": "5f652b96039a578360e812a6b76836be7fe8377300e965029bcf0f8e2b68c722",
+      "first_epoch": 1791239108.4035254,
+      "deadline_epoch": 1791239708.4035254,
+      "finished_epoch": 1791239215.2762353,
+      "optimizer_steps_run": 0
+    },
+    {
+      "status": "PASS-fresh-process-full-native-Adam-RNG-data-source-load-no-SGD",
+      "native_path": "/dev/shm/harbichess-own-q-residual18/C18-proof-v1/20262906/split0.native.json.gz",
+      "native_sha256": "f32ddd188d6f9ac1ae6b3f6e2b54f0c9ba289e0ee30678aba7b87e1b6be5516a",
+      "step": 0,
+      "registration_sha256": "42821548378cfb3fdf735fab64f7b2bda5c031df56b1030a3785bc84b597d187",
+      "state_digest": "f8ae8ad5440e34c5605b944b66b390ade11c387ca0fd471c426cd92bf7965740",
+      "first_epoch": 1791239108.4035254,
+      "deadline_epoch": 1791239708.4035254,
+      "finished_epoch": 1791239215.3738415,
+      "optimizer_steps_run": 0
+    },
+    {
+      "status": "PASS-fresh-process-full-native-Adam-RNG-data-source-load-no-SGD",
+      "native_path": "/dev/shm/harbichess-own-q-residual18/C18-proof-v1/20262906/pause4.native.json.gz",
+      "native_sha256": "23338841058d9a4beefa73086b15c17a81a167ee1fe00cfb5e3079640daade67",
+      "step": 4,
+      "registration_sha256": "42821548378cfb3fdf735fab64f7b2bda5c031df56b1030a3785bc84b597d187",
+      "state_digest": "80810ba5bd28914410eb57e5d8645312f20e89525dd747cae9f0e2ed6a0ca9fe",
+      "first_epoch": 1791239108.4035254,
+      "deadline_epoch": 1791239708.4035254,
+      "finished_epoch": 1791239215.4718018,
+      "optimizer_steps_run": 0
+    },
+    {
+      "status": "PASS-fresh-process-full-native-Adam-RNG-data-source-load-no-SGD",
+      "native_path": "/dev/shm/harbichess-own-q-residual18/C18-proof-v1/20262906/resume8.native.json.gz",
+      "native_sha256": "675aa011bd3026f8bdb0d0e1723c82f6b05c98f3b8a6efb63135dca0ebe54609",
+      "step": 8,
+      "registration_sha256": "42821548378cfb3fdf735fab64f7b2bda5c031df56b1030a3785bc84b597d187",
+      "state_digest": "5f652b96039a578360e812a6b76836be7fe8377300e965029bcf0f8e2b68c722",
+      "first_epoch": 1791239108.4035254,
+      "deadline_epoch": 1791239708.4035254,
+      "finished_epoch": 1791239215.5720656,
+      "optimizer_steps_run": 0
+    }
+  ],
+  "finished_epoch": 1791239215.5848281,
+  "first_epoch": 1791239108.4035254,
+  "deadline_epoch": 1791239708.4035254,
+  "optimizer_steps_run": 0
+}
