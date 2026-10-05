@@ -1,0 +1,37 @@
+{
+  "search.py": {
+    "original_path": "/workspace/HarbiChess/experiments/ufuk/cpu-classical-own-v1/arena/search.py",
+    "original_sha256": "de53c14728a67b7772f18b396ac8ef5c35a144d4e4e616fec40099cd461a6670",
+    "new_sha256": "de53c14728a67b7772f18b396ac8ef5c35a144d4e4e616fec40099cd461a6670"
+  },
+  "tournament.py": {
+    "original_path": "/workspace/HarbiChess/experiments/ufuk/cpu-classical-own-v1/arena/tournament.py",
+    "original_sha256": "7081128a96f575d01ebaf40f1c7de725274b4316ac3836802b539b3ce7395cb8",
+    "new_sha256": "7081128a96f575d01ebaf40f1c7de725274b4316ac3836802b539b3ce7395cb8"
+  },
+  "profile.py": {
+    "original_path": "/workspace/HarbiChess/experiments/ufuk/cpu-classical-own-v1/arena/profile.py",
+    "original_sha256": "07c3f83b8d7e495ee7896495babf758aa45fcbd1ae4bfe734ba76b0cafdc3256",
+    "new_sha256": "07c3f83b8d7e495ee7896495babf758aa45fcbd1ae4bfe734ba76b0cafdc3256"
+  },
+  "profile_support.py": {
+    "original_path": "/workspace/HarbiChess/experiments/ufuk/cpu-classical-own-v1/arena/profile_support.py",
+    "original_sha256": "dd6f55d401fd878d546f1b847be5e72c60e23e35e0fb837286ddc9c0ed1e2fc1",
+    "new_sha256": "dd6f55d401fd878d546f1b847be5e72c60e23e35e0fb837286ddc9c0ed1e2fc1"
+  },
+  "run.py": {
+    "original_path": "/workspace/HarbiChess/experiments/ufuk/cpu-classical-own-v1/arena/run.py",
+    "original_sha256": "642292c50a8708cdd59722574939aac5de7dfb52d388f762f69d7e97bdd69321",
+    "new_sha256": "52de45c055f169b12239580b07157d59fddd11b2c27f1a7d8d52d5f5dbdb95b0"
+  },
+  "value.py": {
+    "original_path": "/workspace/HarbiChess/experiments/ufuk/cpu-classical-own-v1/arena/value.py",
+    "original_sha256": "2abb3ac2812853c19abb001a0d38a9a1874115b8ab272cc9322bf7123f6cfd84",
+    "new_sha256": "8e90a1d7b60006f6849341b77b8f5bad76a24af89e98cf1045b55e6e4b34bf3e"
+  },
+  "audit_arena_v2.py": {
+    "original_path": "/workspace/HarbiChess/experiments/ufuk/cpu-classical-own-v1/arena/audit_arena_v2.py",
+    "original_sha256": "a669f380226817207501db052c69202434cc60428862922107294390344fb417",
+    "new_sha256": "a669f380226817207501db052c69202434cc60428862922107294390344fb417"
+  }
+}
