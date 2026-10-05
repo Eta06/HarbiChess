@@ -1,0 +1,17 @@
+{
+  "pid": 1016184,
+  "start_ticks": 19599777,
+  "command": [
+    "/workspace/HarbiChess/.venv/bin/python",
+    "/workspace/work/harbichess/fresh-state-v6-controller-proposal/dispatch_once_v6.py",
+    "--registration",
+    "/workspace/work/harbichess/continuation-20261005/fresh-state-v6-actual/controller-registration.json",
+    "--registration-sha256",
+    "1baeb217875809ee4293779fb1da94f0dcd32f39289dfeed319300e01917dac7",
+    "--output",
+    "/workspace/work/harbichess/continuation-20261005/fresh-state-v6-actual/single-dispatch"
+  ],
+  "original_first_epoch": 1791230519.529188,
+  "original_deadline_epoch": 1791235919.529188,
+  "registration_sha256": "1baeb217875809ee4293779fb1da94f0dcd32f39289dfeed319300e01917dac7"
+}
