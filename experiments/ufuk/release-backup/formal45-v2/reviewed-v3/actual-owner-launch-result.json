@@ -1,0 +1,6 @@
+{
+  "returncode": 0,
+  "stdout": "{\"status\": \"approved-formal45-backup-owner-started\", \"pid\": 121965, \"startticks\": 2633258, \"argv\": [\"/usr/bin/python3\", \"/content/harbichess-fullgame-method2-inputs/formal45-release-reviewed-v3-20261005/formal45_remote_backup_owner_v2.py\", \"--root\", \"/content/harbichess-runs/formal45-public-backup-v3-20261005\", \"--helper\", \"/content/harbichess-fullgame-method2-inputs/formal45-release-reviewed-v3-20261005/formal45_release_backup.py\", \"--helper-sha256\", \"5936b67303c178ab2b8ba97fc50742e3bf6c63274d7c2f792bdd1a4c4469a4f8\", \"--spec\", \"/content/harbichess-fullgame-method2-inputs/formal45-release-reviewed-v3-20261005/spec.json\", \"--spec-sha256\", \"bdbb12d3f81ac6547c023ce1dba598df0126877a79d15dbda17ebcc261c5df09\", \"--packaging-seconds\", \"1200\"], \"started_epoch\": 1791165177.6161516, \"whole_packaging_seconds\": 1200, \"owner_root\": \"/content/harbichess-runs/formal45-public-backup-v3-20261005\", \"gzip_single_thread\": true, \"git_pack_threads\": 1, \"no_original_source_or_native_mutations\": true}\n",
+  "stderr_suppressed_bytes": 0,
+  "completed_epoch": 1791165177.6574185
+}
