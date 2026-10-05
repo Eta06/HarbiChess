@@ -1310,3 +1310,8 @@ borcudur; mevcut MLX yolu korunur. Prefix başarı veya promotion anlamına gelm
 
 - [Ön kayıt](../runs/PORT-linux-preregistration-20261002.md)
 - [Linux sonucu](../runs/PORT-linux-result-20261002.md)
+
+
+## UFUK-CPUFIX
+
+5 Ekim 2026: GPU kullanmadan kayıpsız epoch feature cache’i ve opt-in Linux aggregate bellek politikası; gerçek CLI restart kontrolü ve kendi oyun kayıtlarından kontrollü öğrenme. Eski failed/incomplete koşular ve native formatlar korunur. Yeni aşama veya loss düşüşü oyun gücü başarısı değildir.
