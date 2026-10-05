@@ -1,0 +1,36 @@
+{
+  "GPU_used": false,
+  "Torch_version": "2.14.1+cpu",
+  "all3_journals_independently_rule_replayed": true,
+  "contract": {
+    "GPU_used": false,
+    "helper_sha256": "f561c6297d2485f32e38acf4cd9fe43b3a2b1233956c22d008a95932d1148cdc",
+    "manifest_path": "/workspace/work/harbichess/cpu-fresh-selfplay-v2-actual/registration/qualification-manifest.json",
+    "manifest_sha256": "c9da1ee7a067bd455b45f1f7b83a48bcae82c61aed78a966a9e9c2b0be19e0fa",
+    "original_deadline_epoch": 1791221595.4006422,
+    "original_first_epoch": 1791220995.4006422,
+    "registered_cpu_core": 0,
+    "schema": "fresh-qsearch-realCPU-qualification-owner-v1",
+    "source_commit": "6fcc8b476d25495d1c9c413e55b2c7ba4794013e",
+    "support_sha256": "6e738c3ca49dd2bc0274c069a71203d9c865a8637d99a84bad78bad0dc798c74",
+    "synthetic_mode_allowed": false
+  },
+  "distinct_fullhistory_anchor_NN_positions": 9,
+  "finished_epoch": 1791221080.9267702,
+  "full_WDL_anchor_rows_checked": 22,
+  "journal_paths": {
+    "pause4.json.gz": "/dev/shm/harbichess-fresh-actor-qualification-20261005/pause4.json.gz",
+    "resumed9.json.gz": "/dev/shm/harbichess-fresh-actor-qualification-20261005/resumed9.json.gz",
+    "whole9.json.gz": "/dev/shm/harbichess-fresh-actor-qualification-20261005/whole9.json.gz"
+  },
+  "journal_sha256": {
+    "pause4.json.gz": "aa92d9fe619cf87de5705ca39b33633348b9244930f2149a67fc537b3e626bf1",
+    "resumed9.json.gz": "8cefc77d1acba554f4f528183949f291fb33c33040648a72cac83a22eac301f2",
+    "whole9.json.gz": "8cefc77d1acba554f4f528183949f291fb33c33040648a72cac83a22eac301f2"
+  },
+  "new_generation_actions": 18,
+  "old_online_training_resume_claimed": false,
+  "schema": "fresh-qsearch-realCPU-actor-qualification-v1",
+  "status": "PASS-actualCPU-realE8-freshactor-whole9-pause4-resume9-allstate-RNG-anchors",
+  "strength_success_claimed": false
+}
