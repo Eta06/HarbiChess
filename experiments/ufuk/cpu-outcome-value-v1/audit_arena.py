@@ -177,7 +177,10 @@ def main():
                 "direct_gt_060": direct["score"] > 0.60,
                 "SF_gain_gt_010": gain > 0.10,
                 "finalSF_ge_025": final["score"] >= 0.25,
-                "caps_le_005": all(r["unknown_caps"] / 16 <= 0.05 for r in (direct, final, base)),
+                "caps_le_005": all(
+                    r["unknown_caps"] / 16 <= 0.05
+                    for r in (direct, final, base, zero_direct, zero_sf)
+                ),
             }
             contrasts.append(
                 {
