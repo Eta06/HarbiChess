@@ -1,0 +1,8 @@
+{
+  "status": "PASS-code-only-tiny-synthetic-tests",
+  "tests": 5,
+  "seconds": 0.19,
+  "ruff": "PASS-repository-config",
+  "actual_training": 0,
+  "actual_search_or_games": 0
+}
