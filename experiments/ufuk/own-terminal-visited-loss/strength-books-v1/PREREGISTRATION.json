@@ -1,0 +1,111 @@
+{
+  "schema": "ownterminal-family8-virgin-roots-prereg-v1",
+  "qualification_ledger_slot": 8,
+  "status": "roots-only-no-games-no-model-queries",
+  "selection_seeds": [
+    20260709,
+    20260710
+  ],
+  "training_seed_map": {
+    "20260709": 20261825,
+    "20260710": 20261826
+  },
+  "source_pin": {
+    "consumer_repo_commit": "635413e426ef5b09cb76073c0955898912247466",
+    "pgn_sha256": "5b8c29f91628ed27d468dc6355bf3eaad98a03bcdf638c32f3c3106bff162c8a"
+  },
+  "train_candidate_book_sha256": "1a5ca17664a828d669e58cf2bd5d9eeb7f980b83f20d3a4031d36e4ff0930ccb",
+  "curriculum_training_exclusions_sha256": "066d060f037fd6eb188df0c2ad0d1071a80043371a237d516698453b14a9e4a1",
+  "prior_exclusion_union": "Allmethod5 inheritedexclusions, bothmethod4/5 books and fullprefixes, allhistoricalteacher/TRAIN/arena sourceIDs and root/fullprefixes, source231TRAIN32 allpre/postkeys INCLUDING UNKNOWN; real origin sourceIDs retained (virtualaliases cannot bypass exclusions). Newsecondbook alsoexcludesfirstfamily6 source/fullprefixes. Plus complete main40-exclusions-v2 union: ALL80 journals across both20261205/06 epochs1..40;2,621,440 fresh transitions includingUNKNOWN,2,581,543 unique pre/post keys and4096 underlying originalTRAIN source IDs. This amendment is frozen BEFORE either seed selection. Family7 inherits the immutable exact family6 second exclusion union; BOTH committed family6 books fullprefixes/source IDs are additionally excluded, and second7 excludes first7 fullprefixes/source IDs. No duplicate large exclusion union files are created; each output stores inherited SHA references and exact added delta. NEWfamily8 additionally excludes BOTHfamily7 books fullprefixes/source IDs and second8 excludes first8. Family7qualificationfailed; no family7 formal games or training started.",
+  "per_seed_selection_ceiling_seconds": 600,
+  "per_seed_total_with_independent_replay_ceiling_seconds": 900,
+  "prospective_gate": "exact48distinctsource-record roots/colors perseed; alloriginalPGNhash/rules/Elo2000/TC60/selectedply16,24,32,48,64,96/nonterminal invariants",
+  "no_training_admission_or_outcome_claim": true,
+  "all_main40_train_exclusions": {
+    "path": "/workspace/work/harbichess/family6-strength-books/main40-exclusions-v2/exclusions.json",
+    "sha256": "377b31c49603072de29475afdd8e26d84a62ebd24b7fb9a88185affd45f2e3fd",
+    "status": "pass-all80-exact-TRAIN-fullhistory-journals",
+    "journal_count": 80,
+    "source_training_seeds": [
+      20261205,
+      20261206
+    ],
+    "epochs_per_seed": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39,
+      40
+    ],
+    "fresh_transitions_examined": 2621440,
+    "unique_pre_post_position_keys": 2581543,
+    "underlying_original_TRAIN_source_ids": 4096,
+    "includes_unknown": true,
+    "exclusion_policy": "ALL observed pre/post fullhistory position keys and real original TRAIN source IDs, no outcome filtering"
+  },
+  "inherited_union": {
+    "position_keys_path": "/workspace/work/harbichess/family6-strength-books/20261706/excluded-position-keys.json",
+    "position_keys_sha256": "37f032f5b3b25904cb5f7cc380ed66191b4dcce75c12b2bdb805acdc4b5b7334",
+    "source_ids_path": "/workspace/work/harbichess/family6-strength-books/20261706/excluded-source-games.json",
+    "source_ids_sha256": "502676c441f2417c75d5b6f991b1c340835ed9c92823c0cf2331844f1de59a75",
+    "audit_sha256": "791ad6c0c3df59e60eec97c85fa90f80c7ee31f0106da4f4047ae9d63c2df473"
+  },
+  "both_family6_strength_books": [
+    {
+      "path": "/workspace/HarbiChess/experiments/ufuk/own-terminal-curriculum/strength-books-v1/book-20261625.json",
+      "sha256": "251b4d49420a381e8314b36f68769ffe57cdcca2aecfeab89c6ed2181ab3a4d8"
+    },
+    {
+      "path": "/workspace/HarbiChess/experiments/ufuk/own-terminal-curriculum/strength-books-v1/book-20261626.json",
+      "sha256": "26382c11c0237d61b498f77614dcdf8c7795bbe65434b53dd230391731ed6d0d"
+    },
+    {
+      "path": "/workspace/work/harbichess/family7-strength-books/20260707/opening-splits.json",
+      "sha256": "cf3455abea53dd1146aaae4a55593e51ca42981cfdacf80cc2a5e9704df48ef8",
+      "role": "additional-prior-family7-unplayed-strength-book"
+    },
+    {
+      "path": "/workspace/work/harbichess/family7-strength-books/20260708/opening-splits.json",
+      "sha256": "13f4722d04a15b512f770c78c65145f96946d7d58ad30db7a20fa9eeef4bd0b7",
+      "role": "additional-prior-family7-unplayed-strength-book"
+    }
+  ],
+  "standard_selection_function": "harbichess.training.history_openings.freeze from unchanged clean consumer635413; exact rules independent PGN replay after selection; no model/engine query.",
+  "factory_sha256": "cc2d6d917cf25232c804f021a7689eeec5cbe162fee999a5ccc99fd2a9b19d0b",
+  "history_openings_source_sha256": "bea86f921dbbdc01bc007b9735d259309c83395daade2c43f4a4e7064e490c38"
+}
