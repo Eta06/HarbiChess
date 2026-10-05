@@ -1,0 +1,69 @@
+{
+  "blind_overlap": {
+    "path": "ROOT_MUST_FILL_ACTUAL_BLIND_RESULT_PATH",
+    "required_values": {
+      "schema": "ROOT_MUST_FREEZE_LUNA_SCHEMA",
+      "status": "ROOT_MUST_FREEZE_ZERO_OVERLAP_STATUS"
+    },
+    "sha256": "ROOT_UNKNOWN"
+  },
+  "candidates": [
+    {
+      "audit_root": "/workspace/work/harbichess/cpu-contingency-formal-seed-20261925-v1/full-audit",
+      "baseline_arena": {
+        "path": "/workspace/work/harbichess/cpu-contingency-baseline-20261925-actual/arena.json",
+        "sha256": "1c4a5e01dec0b5af425bd0ca2aab1bf1f5da1a4594592e9cf6dec9b7118c00cc"
+      },
+      "baseline_result": {
+        "path": "/workspace/work/harbichess/cpu-contingency-baseline-20261925-actual/result.json",
+        "sha256": "df690b4471edbb5ebe4bcc58f5f066671b25684474dd37304675f71e6dff3a81"
+      },
+      "book": "/workspace/work/harbichess/family8-strength-books/20260709/opening-splits.json",
+      "replay_run": "/workspace/work/harbichess/cpu-contingency-formal-seed-20261925-v1/independent-replay",
+      "run": "/workspace/work/harbichess/cpu-contingency-formal-seed-20261925-v1/run",
+      "seed": 20261925
+    },
+    {
+      "audit_root": "/workspace/work/harbichess/cpu-contingency-formal-seed-20261926-v1/full-audit",
+      "baseline_arena": {
+        "path": "/workspace/work/harbichess/cpu-contingency-baseline-20261926-actual/arena.json",
+        "sha256": "4ebc4f3a81873383f43b29f4abc26ffc8a8ad8b2af9c4cfc680dbd188e6b44ca"
+      },
+      "baseline_result": {
+        "path": "/workspace/work/harbichess/cpu-contingency-baseline-20261926-actual/result.json",
+        "sha256": "4ab558f945fbcbfdc61ddfb348b061ebf14e90bb1c1f0eeeba1b8988a3d10cde"
+      },
+      "book": "/workspace/work/harbichess/family8-strength-books/20260710/opening-splits.json",
+      "replay_run": "/workspace/work/harbichess/cpu-contingency-formal-seed-20261926-v1/independent-replay",
+      "run": "/workspace/work/harbichess/cpu-contingency-formal-seed-20261926-v1/run",
+      "seed": 20261926
+    }
+  ],
+  "checkout": "/workspace/work/harbichess/own8-source-3be5",
+  "cohort_clock": {
+    "path": "/workspace/work/harbichess/cpu-contingency-formal-owned-cohort-v1/original-common-clock.json",
+    "sha256": "13b9ba30a2f7c5c0479aa77654f2498d22ed9c7efb615bd8dbc11258c50335ac"
+  },
+  "cohort_result": "/workspace/work/harbichess/cpu-contingency-formal-owned-cohort-v1/result.json",
+  "hard_end_epoch": 1791180000,
+  "helpers": "/workspace/HarbiChess/experiments/ufuk/cpu-contingency-v1/independent-auditor",
+  "initial": "/workspace/work/harbichess/a100/restoration/local-rehearsal-content/harbichess-inputs/initial-e8.safetensors",
+  "owned_runtime": {
+    "path": "/workspace/HarbiChess/experiments/ufuk/cpu-contingency-v1/formal-owned-launch/launch_cpu_formal.py",
+    "sha256": "e0945d48a1fdafd7405892117a9f68c7f3f9189d36b914802ad62ed6eaa411d6"
+  },
+  "probes": "/workspace/HarbiChess/docs/research/UFUK-width-latency-probes-20261004.json",
+  "python": "/workspace/HarbiChess/.venv/bin/python",
+  "qualification_config": {
+    "path": "/workspace/HarbiChess/experiments/ufuk/cpu-contingency-v1/strength-bindings.json",
+    "sha256": "b9baaaeb4dbad72df23a24d963f5cb12e19895cef347dfdb8c7fc6f5bdd04698"
+  },
+  "root": "/workspace/work/harbichess/cpu-contingency-posttraining-v1",
+  "schema": "cpu-posttraining-config-v1",
+  "seeds": [
+    20261925,
+    20261926
+  ],
+  "source_commit": "3be5b87db27a0fbde83464e7ea7157f0d9a76ae4",
+  "stockfish": "/workspace/work/harbichess/stockfish/stockfish-linux-x86-64-universal"
+}
