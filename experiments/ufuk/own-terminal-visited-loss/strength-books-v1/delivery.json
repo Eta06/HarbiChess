@@ -1,0 +1,18 @@
+{
+  "status": "pass96-roots-only-independent-PGN-no-query",
+  "files": {
+    "PREREGISTRATION.json": "411ea71a5c2fa0c8e191df0d747bcaae4090b4e4f2cd5bad57873c14e705a5cc",
+    "freeze-family8-book.py": "cc2d6d917cf25232c804f021a7689eeec5cbe162fee999a5ccc99fd2a9b19d0b",
+    "independent_family8_replay.py": "e9cfd619043ac2429aae01cc7a6d96f0b54177ddcdd46fae7c11b9bb30ba948c",
+    "combined-audit.json": "3cb9f69f7627a010cbfdaa195858e935e127cb998776199f3bbcf6e5dc985379",
+    "independent-evidence.json": "1d18dc3bde063ce3b71d41df2ae1248f6a12d36cc543061f2cd5522437b98800",
+    "20260709/opening-splits.json": "6d860c4c9a08914a50c6dfe59623f32755cd5185ccc68e3a52645f41efbd6252",
+    "20260709/audit.json": "d087228c040b0d72584bc5199324fefafdacc6abcdb76e8349decc33ea7bd1d5",
+    "20260710/opening-splits.json": "a2885098be18e8a9e45a5ac003f89a504e50877074c80fe809f01f23443aa9ff",
+    "20260710/audit.json": "52a8a2aeffaee9c728d069fecfcbaf14500d5214db5ade1803cb5b7902654052"
+  },
+  "model_or_engine_queries": 0,
+  "games_played": 0,
+  "updates": 0,
+  "large_exclusion_unions_not_for_Git": true
+}
