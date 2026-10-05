@@ -1,0 +1,9 @@
+{
+  "status": "PASS-anonymous-transient-blob-all253-raw-not-durable",
+  "files": 253,
+  "capsule_sha256": "06104b5fb2332a94176f7b4dbeb121acf8912cc8a9cbfb69b2a15d8f954e2ef6",
+  "blob_sha1": "441b8a9e5c0ec1aaa2c51cc29318712cf2480bc5",
+  "finished_epoch": 1791237596.9067879,
+  "first": 1791235746.020892,
+  "deadline": 1791241146.020892
+}
