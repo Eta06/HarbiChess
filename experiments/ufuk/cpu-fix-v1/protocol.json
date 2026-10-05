@@ -1,0 +1,28 @@
+{
+  "schema": "cpu-fix-infrastructure-protocol-v1",
+  "scope": "CPU ONLY infrastructure control; no old training clock reset, promotion or CUDA/Apple hardware claim",
+  "origin_source": "3be5b87db27a0fbde83464e7ea7157f0d9a76ae4",
+  "resource_policy": "inactive-file-v1; aggregate active estimate <= min(15GiB, physicalmax-512MiB); totalphysicalcharge and OOM events separately hard-protected",
+  "memory_max_bytes": 16106127360,
+  "disk_min_free_bytes": 268435456,
+  "torch_threads": 1,
+  "whole_seconds": 600,
+  "run_order": [
+    "whole2",
+    "pause1",
+    "fresh_resume2",
+    "independent_fresh_process_strict_load_all_six_native_boundaries"
+  ],
+  "success_conditions": [
+    "all20native-payload/journal byte-identical",
+    "semanticnative-manifests match aside from relative input paths",
+    "all6fresh-process strict native loads",
+    "nonzero accepted optimizer updates",
+    "all original checkpoint and failed receipts preserved"
+  ],
+  "failure_conditions": [
+    "budget violation, command error, hash difference or strict load failure"
+  ],
+  "strength_success_claim": false,
+  "legacy_resume": "legacy-total-v1 metadata remains default; old-source checkouts/nativeformats retained; no old-to-new full source migration claimed"
+}
