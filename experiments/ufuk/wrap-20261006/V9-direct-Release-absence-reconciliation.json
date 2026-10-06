@@ -1,0 +1,10 @@
+{
+  "observed_epoch": 1791245343.09972,
+  "asset_matches": [],
+  "all_names": [
+    "classical-state-v7-sha256-06104b5fb2332a94176f7b4dbeb121acf8912cc8a9cbfb69b2a15d8f954e2ef6.bundle.zlib",
+    "classical-state-v8-sha256-7d695171ceede302e7a5efee81ca75c43cf21c64aa8f44c506e2111b80047f8a.bundle.zlib",
+    "freshstatev6-sha256-66ef6b4f05a9ff3d404debb424d477860b2a7439c7ce51fe91c4c6d3399409ff.bundle.zlib"
+  ],
+  "POST_automatic_retry": false
+}
