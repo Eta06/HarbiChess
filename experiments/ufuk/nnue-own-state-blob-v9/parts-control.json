@@ -1,0 +1,120 @@
+{
+  "schema": "NNUE-V9-exact-capsule-eight-parts-v1",
+  "status": "ROOT-approved-before-part-POST",
+  "parts": [
+    {
+      "index": 0,
+      "offset": 0,
+      "bytes": 8388608,
+      "sha256": "fc84240d8992fe384477fedab1d09db77725d31e528dac6c5e24a42d2fc38c42",
+      "git_blob_sha1": "7b929180e354c03ae41045c60f6f992801a7689e",
+      "asset_name": "nnue-state-v9-f257b3812862-part00-fc84240d8992.bin",
+      "local_path": "/dev/shm/harbichess-nnue-state-v9-parts-v1/part00.bin"
+    },
+    {
+      "index": 1,
+      "offset": 8388608,
+      "bytes": 8388608,
+      "sha256": "978dd15eea5ec7fa70b9affcb78e36f1302ded51f2c9850858012002aa2b8efd",
+      "git_blob_sha1": "d4fbc9b57b3afe29bd7e7bad2cd60279411e805e",
+      "asset_name": "nnue-state-v9-f257b3812862-part01-978dd15eea5e.bin",
+      "local_path": "/dev/shm/harbichess-nnue-state-v9-parts-v1/part01.bin"
+    },
+    {
+      "index": 2,
+      "offset": 16777216,
+      "bytes": 8388608,
+      "sha256": "0f98f57ff04f9875d52a052519f1e9c0af5ff274f650aeb84fa6cff547fd11b5",
+      "git_blob_sha1": "d760a34e273f4c0fb0f9ebc76999df16d0a18ed3",
+      "asset_name": "nnue-state-v9-f257b3812862-part02-0f98f57ff04f.bin",
+      "local_path": "/dev/shm/harbichess-nnue-state-v9-parts-v1/part02.bin"
+    },
+    {
+      "index": 3,
+      "offset": 25165824,
+      "bytes": 8388608,
+      "sha256": "2235fa204533ceb611400e801a85b69a1739d0138ba53222ee516b3aa2d9dabb",
+      "git_blob_sha1": "4c07426a60c0467d468931c06fae2e6c4ed5df77",
+      "asset_name": "nnue-state-v9-f257b3812862-part03-2235fa204533.bin",
+      "local_path": "/dev/shm/harbichess-nnue-state-v9-parts-v1/part03.bin"
+    },
+    {
+      "index": 4,
+      "offset": 33554432,
+      "bytes": 8388608,
+      "sha256": "7435cb0274a76c5775d4e7f6ef6870b28028fd1045ca6a0e9dbdf05c49a71af3",
+      "git_blob_sha1": "44b797f882da3f172fc0c8a19d192fcfa762b5e9",
+      "asset_name": "nnue-state-v9-f257b3812862-part04-7435cb0274a7.bin",
+      "local_path": "/dev/shm/harbichess-nnue-state-v9-parts-v1/part04.bin"
+    },
+    {
+      "index": 5,
+      "offset": 41943040,
+      "bytes": 8388608,
+      "sha256": "d5729024ecec5164b14423224d94916853197a95e59d1ad7b997fcea6017478f",
+      "git_blob_sha1": "44541cadb494eee213c8ccf88c815947c78dac59",
+      "asset_name": "nnue-state-v9-f257b3812862-part05-d5729024ecec.bin",
+      "local_path": "/dev/shm/harbichess-nnue-state-v9-parts-v1/part05.bin"
+    },
+    {
+      "index": 6,
+      "offset": 50331648,
+      "bytes": 8388608,
+      "sha256": "44f73312339af98b34e1f567b091b204c51b0779e974f39438d29119a6197862",
+      "git_blob_sha1": "294056662b19accefa5593d092f40f21bfbe3a8d",
+      "asset_name": "nnue-state-v9-f257b3812862-part06-44f73312339a.bin",
+      "local_path": "/dev/shm/harbichess-nnue-state-v9-parts-v1/part06.bin"
+    },
+    {
+      "index": 7,
+      "offset": 58720256,
+      "bytes": 6130901,
+      "sha256": "63878245b47e40603fa8ef6efe56fe967d9336d356f05bcf1c2995cc6a400762",
+      "git_blob_sha1": "8cfab5504783b5bb7729b9a07f7fd3d44561ecd8",
+      "asset_name": "nnue-state-v9-f257b3812862-part07-63878245b47e.bin",
+      "local_path": "/dev/shm/harbichess-nnue-state-v9-parts-v1/part07.bin"
+    }
+  ],
+  "part_limit_bytes": 8388608,
+  "max_parts": 8,
+  "full_capsule_sha256": "f257b3812862c1018dcdfbce4a27a3f752ef9f74f86a3fe67ac2537551bc64a2",
+  "full_capsule_bytes": 64851157,
+  "original_manifest_sha256": "4b20541fb58fc72885f18638bf6048dcc0b271f1eefad070a034aaaadc1872ca",
+  "original_manifest_path": "/dev/shm/harbichess-nnue-state-v9-manifest.json",
+  "original_capsule_verified453": true,
+  "clock": {
+    "deadline_epoch": 1791250451.2415879,
+    "operator_end_epoch": 1791273600,
+    "schema": "classical-raw-blob-release-clock-v9",
+    "started_epoch": 1791245051.2415879,
+    "status": "ROOT-approved-frozen-transport"
+  },
+  "release_id": 404068972,
+  "release_tag": "ufuk-cpu-ownplay-state-20261005",
+  "first": 1791245051.2415879,
+  "deadline": 1791250451.2415879,
+  "old_single_blob_POST_failed_reconciled_404": true,
+  "old_single_Release_POST_ambiguous_reconciled_absent": true,
+  "original_V9_capsule_manifest_unchanged": true,
+  "new_teacher_or_compute": 0,
+  "original_files": 453,
+  "delivery_helper_sha256": {
+    "raw_capsule_v9.py": "8b2f7dbea781972b8a7091aca37a253f92b330e7d8979c3b9c8f1e9688ed6de5",
+    "release_transport_v9.py": "6460d6aaa7cc439040736eac7c691ca277c4ebb150f35b4abaf58ccbd8d5867b",
+    "parts_receiver_v1.py": "a645551f8e6f5f861f9fde2f08b1260f87764b0a494fb95de61d4594b2dd32d5"
+  },
+  "protected_assets": [
+    {
+      "name": "freshstatev6-sha256-66ef6b4f05a9ff3d404debb424d477860b2a7439c7ce51fe91c4c6d3399409ff.bundle.zlib",
+      "bytes": 1845748
+    },
+    {
+      "name": "classical-state-v7-sha256-06104b5fb2332a94176f7b4dbeb121acf8912cc8a9cbfb69b2a15d8f954e2ef6.bundle.zlib",
+      "bytes": 2643352
+    },
+    {
+      "name": "classical-state-v8-sha256-7d695171ceede302e7a5efee81ca75c43cf21c64aa8f44c506e2111b80047f8a.bundle.zlib",
+      "bytes": 12254992
+    }
+  ]
+}
