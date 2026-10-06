@@ -1,0 +1,42 @@
+{
+  "build-receipt.json": {
+    "path": "/workspace/work/harbichess/cpu-ownq-coarse80-proposal/build-receipt.json",
+    "sha256": "9489991e011008117ff254958fd486370fd8d863796aa3e591d12a8befd48d8d"
+  },
+  "coarse80.py": {
+    "path": "/workspace/work/harbichess/cpu-ownq-coarse80-proposal/coarse80.py",
+    "sha256": "204360ef216af37a5db3005e030903d14c4e46275230f11952bd5f5dc59c000e"
+  },
+  "compiled80.py": {
+    "path": "/workspace/work/harbichess/cpu-ownq-coarse80-proposal/compiled80.py",
+    "sha256": "26fb3d74569cd4f07bf4dc51ae3a9001fe209c7cd4b7251d779782b59f98fcaa"
+  },
+  "dataset80.py": {
+    "path": "/workspace/work/harbichess/cpu-ownq-coarse80-proposal/dataset80.py",
+    "sha256": "f67196d9dcf97797a79264039e35720688f0c891cb7065970f12a4f6ea4c3613"
+  },
+  "forward80.c": {
+    "path": "/workspace/work/harbichess/cpu-ownq-coarse80-proposal/forward80.c",
+    "sha256": "201c08c5a554110db5556e54a891c382d4eb901fc789618ba9b2468166161a98"
+  },
+  "learner80.py": {
+    "path": "/workspace/work/harbichess/cpu-ownq-coarse80-proposal/learner80.py",
+    "sha256": "df0dba9a0391b17a6c201a03d57afbdabcdb1c4414efdf8a307edbdfd3560d76"
+  },
+  "libcoarse80.so": {
+    "path": "/workspace/work/harbichess/cpu-ownq-coarse80-proposal/libcoarse80.so",
+    "sha256": "0c522abc7220ce748008c41fe7520b48c0c22a71d69f92486c70bf610b84f173"
+  },
+  "proof_synthetic.py": {
+    "path": "/workspace/work/harbichess/cpu-ownq-coarse80-proposal/proof_synthetic.py",
+    "sha256": "a0da091860526a5dfb2d3c968099e8d8004f4d6b31115d62510a2b3339e889f5"
+  },
+  "registered_cli.py": {
+    "path": "/workspace/work/harbichess/cpu-ownq-coarse80-proposal/registered_cli.py",
+    "sha256": "cdf0861ebb3da0f567e28e2ddfe36d7169dd4f8feec8608c9438fc96731e03b1"
+  },
+  "resume_worker.py": {
+    "path": "/workspace/work/harbichess/cpu-ownq-coarse80-proposal/resume_worker.py",
+    "sha256": "34c1bd551d43898a44575d63653979d8f8b3f645b1f0b5bd829bc3ece7d5ffd1"
+  }
+}
