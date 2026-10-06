@@ -1,0 +1,1374 @@
+{
+  "status": "PASS-USER-pause-all-registered-owned-workers-stopped-and-guardian-stopped",
+  "observed_epoch": 1791245744.806852,
+  "registered_owner_receipts": 123,
+  "live_owned_workers": [],
+  "owners": [
+    {
+      "owner_receipt": "/workspace/work/harbichess/cpu-budget-search-v1-actual/arena-owner-process.json",
+      "pid": 987409,
+      "start_ticks": "17823901",
+      "actual": {
+        "pid": 987409,
+        "state": "Z",
+        "start_ticks": 17823901
+      },
+      "owned_live": false
+    },
+    {
+      "owner_receipt": "/workspace/work/harbichess/cpu-shrunk-value-v1-actual/qualification-owner-process.json",
+      "pid": 989288,
+      "start_ticks": "18075559",
+      "actual": {
+        "pid": 989288,
+        "state": "Z",
+        "start_ticks": 18075559
+      },
+      "owned_live": false
+    },
+    {
+      "owner_receipt": "/workspace/work/harbichess/cpu-shrunk-value-v1-actual/fits-owner-process.json",
+      "pid": 989710,
+      "start_ticks": "18103854",
+      "actual": {
+        "pid": 989710,
+        "state": "Z",
+        "start_ticks": 18103854
+      },
+      "owned_live": false
+    },
+    {
+      "owner_receipt": "/workspace/work/harbichess/cpu-shrunk-value-v1-actual/arena-owner-process.json",
+      "pid": 990045,
+      "start_ticks": "18141188",
+      "actual": {
+        "pid": 990045,
+        "state": "Z",
+        "start_ticks": 18141188
+      },
+      "owned_live": false
+    },
+    {
+      "owner_receipt": "/workspace/work/harbichess/cpu-residual-value-v1-actual/anchor-owner-process.json",
+      "pid": 993046,
+      "start_ticks": "18278429",
+      "actual": {
+        "pid": 993046,
+        "state": "Z",
+        "start_ticks": 18278429
+      },
+      "owned_live": false
+    },
+    {
+      "owner_receipt": "/workspace/work/harbichess/cpu-shrunk-value-v1-actual/recovery-v2-owner-process.json",
+      "pid": 993990,
+      "start_ticks": "18307276",
+      "actual": {
+        "pid": 993990,
+        "state": "Z",
+        "start_ticks": 18307276
+      },
+      "owned_live": false
+    },
+    {
+      "owner_receipt": "/workspace/work/harbichess/cpu-residual-value-v1-actual/qualification-owner-process.json",
+      "pid": 993991,
+      "start_ticks": "18307277",
+      "actual": {
+        "pid": 993991,
+        "state": "Z",
+        "start_ticks": 18307277
+      },
+      "owned_live": false
+    },
+    {
+      "owner_receipt": "/workspace/work/harbichess/cpu-residual-value-v1-actual/fits-owner-process.json",
+      "pid": 994239,
+      "start_ticks": "18354815",
+      "actual": {
+        "pid": 994239,
+        "state": "Z",
+        "start_ticks": 18354815
+      },
+      "owned_live": false
+    },
+    {
+      "owner_receipt": "/workspace/work/harbichess/cpu-residual-value-v1-actual/arena-qualification-owner-process.json",
+      "pid": 995671,
+      "start_ticks": "18454061",
+      "actual": {
+        "pid": 995671,
+        "state": "Z",
+        "start_ticks": 18454061
+      },
+      "owned_live": false
+    },
+    {
+      "owner_receipt": "/workspace/work/harbichess/cpu-residual-value-v1-actual/arena-owner-process.json",
+      "pid": 995805,
+      "start_ticks": "18470141",
+      "actual": {
+        "pid": 995805,
+        "state": "Z",
+        "start_ticks": 18470141
+      },
+      "owned_live": false
+    },
+    {
+      "owner_receipt": "/workspace/work/harbichess/cpu-fresh-selfplay-v2-actual/qualification-owner-process.json",
+      "pid": 996741,
+      "start_ticks": "18546488",
+      "actual": {
+        "pid": 996741,
+        "state": "Z",
+        "start_ticks": 18546488
+      },
+      "owned_live": false
+    },
+    {
+      "owner_receipt": "/workspace/work/harbichess/cpu-fresh-selfplay-v2-actual/20262805-E0-owner-process.json",
+      "pid": 996818,
+      "start_ticks": "18557943",
+      "actual": {
+        "pid": 996818,
+        "state": "Z",
+        "start_ticks": 18557943
+      },
+      "owned_live": false
+    },
+    {
+      "owner_receipt": "/workspace/work/harbichess/cpu-fresh-selfplay-v2-actual/20262806-E0-owner-process.json",
+      "pid": 996819,
+      "start_ticks": "18557944",
+      "actual": {
+        "pid": 996819,
+        "state": "Z",
+        "start_ticks": 18557944
+      },
+      "owned_live": false
+    },
+    {
+      "owner_receipt": "/workspace/work/harbichess/continuation-20261005/dispatch-native-v2-owner-process.json",
+      "pid": 998254,
+      "start_ticks": 18709607,
+      "actual": {
+        "pid": 998254,
+        "state": "Z",
+        "start_ticks": 18709607
+      },
+      "owned_live": false
+    },
+    {
+      "owner_receipt": "/workspace/work/harbichess/cpu-fresh-learning-v1-actual/qualification-owner-process.json",
+      "pid": 1001066,
+      "start_ticks": 18768593,
+      "actual": {
+        "pid": 1001066,
+        "state": "Z",
+        "start_ticks": 18768593
+      },
+      "owned_live": false
+    },
+    {
+      "owner_receipt": "/workspace/work/harbichess/cpu-fresh-sc-full-native-proof-actual/owner-process.json",
+      "pid": 1003823,
+      "start_ticks": 18936468,
+      "actual": {
+        "pid": 1003823,
+        "state": "Z",
+        "start_ticks": 18936468
+      },
+      "owned_live": false
+    },
+    {
+      "owner_receipt": "/workspace/work/harbichess/cpu-fresh-full-native-proof-recovery-v2/owner-process.json",
+      "pid": 1004369,
+      "start_ticks": 18963647,
+      "actual": {
+        "pid": 1004369,
+        "state": "Z",
+        "start_ticks": 18963647
+      },
+      "owned_live": false
+    },
+    {
+      "owner_receipt": "/workspace/work/harbichess/cpu-fresh-full-native-proof-v3/owner-process.json",
+      "pid": 1004663,
+      "start_ticks": 19025794,
+      "actual": {
+        "pid": 1004663,
+        "state": "Z",
+        "start_ticks": 19025794
+      },
+      "owned_live": false
+    },
+    {
+      "owner_receipt": "/workspace/work/harbichess/cpu-fresh-full-native-proof-v4/owner-process.json",
+      "pid": 1005001,
+      "start_ticks": 19045873,
+      "actual": {
+        "pid": 1005001,
+        "state": "Z",
+        "start_ticks": 19045873
+      },
+      "owned_live": false
+    },
+    {
+      "owner_receipt": "/workspace/work/harbichess/cpu-classical-own-v1-actual/20262905-qualification-owner-process.json",
+      "pid": 1005103,
+      "start_ticks": 19051936,
+      "actual": {
+        "pid": 1005103,
+        "state": "Z",
+        "start_ticks": 19051936
+      },
+      "owned_live": false
+    },
+    {
+      "owner_receipt": "/workspace/work/harbichess/cpu-classical-own-v1-actual/20262906-qualification-owner-process.json",
+      "pid": 1005104,
+      "start_ticks": 19051936,
+      "actual": {
+        "pid": 1005104,
+        "state": "Z",
+        "start_ticks": 19051936
+      },
+      "owned_live": false
+    },
+    {
+      "owner_receipt": "/workspace/work/harbichess/cpu-fresh-production-fits-v1/owner-process.json",
+      "pid": 1005391,
+      "start_ticks": 19066348,
+      "actual": {
+        "pid": 1005391,
+        "state": "Z",
+        "start_ticks": 19066348
+      },
+      "owned_live": false
+    },
+    {
+      "owner_receipt": "/workspace/work/harbichess/cpu-fresh-fullcritic-production-fits-v1/owner-process.json",
+      "pid": 1005545,
+      "start_ticks": 19078084,
+      "actual": {
+        "pid": 1005545,
+        "state": "Z",
+        "start_ticks": 19078084
+      },
+      "owned_live": false
+    },
+    {
+      "owner_receipt": "/workspace/work/harbichess/cpu-classical-own-v1-actual/production-registration/20262905-production-owner-process.json",
+      "pid": 1007935,
+      "start_ticks": 19100552,
+      "actual": {
+        "pid": 1007935,
+        "state": "Z",
+        "start_ticks": 19100552
+      },
+      "owned_live": false
+    },
+    {
+      "owner_receipt": "/workspace/work/harbichess/cpu-classical-own-v1-actual/production-registration/20262906-production-owner-process.json",
+      "pid": 1007936,
+      "start_ticks": 19100552,
+      "actual": {
+        "pid": 1007936,
+        "state": "Z",
+        "start_ticks": 19100552
+      },
+      "owned_live": false
+    },
+    {
+      "owner_receipt": "/workspace/work/harbichess/continuation-20261005/fresh-final8192-dispatch-owner-process.json",
+      "pid": 1008499,
+      "start_ticks": 19139885,
+      "actual": {
+        "pid": 1008499,
+        "state": "Z",
+        "start_ticks": 19139885
+      },
+      "owned_live": false
+    },
+    {
+      "owner_receipt": "/workspace/work/harbichess/cpu-fresh-learning-arena-v1-actual/owner-process.json",
+      "pid": 1009840,
+      "start_ticks": 19250126,
+      "actual": {
+        "pid": 1009840,
+        "state": "Z",
+        "start_ticks": 19250126
+      },
+      "owned_live": false
+    },
+    {
+      "owner_receipt": "/workspace/work/harbichess/continuation-20261005/fresh-final8192-release-v3-owner-process.json",
+      "pid": 1010825,
+      "start_ticks": 19273526,
+      "actual": {
+        "pid": 1010825,
+        "state": "Z",
+        "start_ticks": 19273526
+      },
+      "owned_live": false
+    },
+    {
+      "owner_receipt": "/workspace/work/harbichess/continuation-20261005/fresh-final8192-release-v3-retry-owner-process.json",
+      "pid": 1010997,
+      "start_ticks": 19286182,
+      "actual": {
+        "pid": 1010997,
+        "state": "Z",
+        "start_ticks": 19286182
+      },
+      "owned_live": false
+    },
+    {
+      "owner_receipt": "/workspace/work/harbichess/cpu-classical-own-v1-actual/offline-qualification-registration/20262905-owner-process.json",
+      "pid": 1011419,
+      "start_ticks": 19317483,
+      "actual": {
+        "pid": 1011419,
+        "state": "Z",
+        "start_ticks": 19317483
+      },
+      "owned_live": false
+    },
+    {
+      "owner_receipt": "/workspace/work/harbichess/cpu-classical-own-v1-actual/offline-qualification-registration/20262906-owner-process.json",
+      "pid": 1011420,
+      "start_ticks": 19317483,
+      "actual": {
+        "pid": 1011420,
+        "state": "Z",
+        "start_ticks": 19317483
+      },
+      "owned_live": false
+    },
+    {
+      "owner_receipt": "/workspace/work/harbichess/cpu-classical-own-v1-actual/offline-fit-registration/20262905-owner-process.json",
+      "pid": 1011649,
+      "start_ticks": 19338188,
+      "actual": {
+        "pid": 1011649,
+        "state": "Z",
+        "start_ticks": 19338188
+      },
+      "owned_live": false
+    },
+    {
+      "owner_receipt": "/workspace/work/harbichess/cpu-classical-own-v1-actual/offline-fit-registration/20262906-owner-process.json",
+      "pid": 1011650,
+      "start_ticks": 19338189,
+      "actual": {
+        "pid": 1011650,
+        "state": "Z",
+        "start_ticks": 19338189
+      },
+      "owned_live": false
+    },
+    {
+      "owner_receipt": "/workspace/work/harbichess/cpu-classical-own-v1-actual/offline-fit-recovery-v2/owner-process.json",
+      "pid": 1011862,
+      "start_ticks": 19369405,
+      "actual": {
+        "pid": 1011862,
+        "state": "Z",
+        "start_ticks": 19369405
+      },
+      "owned_live": false
+    },
+    {
+      "owner_receipt": "/workspace/work/harbichess/cpu-classical-own-v1-actual/arena-registration/owner-process.json",
+      "pid": 1013394,
+      "start_ticks": 19412251,
+      "actual": {
+        "pid": 1013394,
+        "state": "Z",
+        "start_ticks": 19412251
+      },
+      "owned_live": false
+    },
+    {
+      "owner_receipt": "/workspace/work/harbichess/continuation-20261005/fresh-state-v6-actual/controller-owner-process.json",
+      "pid": 1016184,
+      "start_ticks": 19599777,
+      "actual": {
+        "pid": 1016184,
+        "state": "Z",
+        "start_ticks": 19599777
+      },
+      "owned_live": false
+    },
+    {
+      "owner_receipt": "/workspace/work/harbichess/continuation-20261005/pst-v1-proof-owner-process.json",
+      "pid": 1016436,
+      "start_ticks": 19618797,
+      "actual": {
+        "pid": 1016436,
+        "state": "Z",
+        "start_ticks": 19618797
+      },
+      "owned_live": false
+    },
+    {
+      "owner_receipt": "/workspace/work/harbichess/continuation-20261005/pst-v1-fit-activation-owner-process.json",
+      "pid": 1016780,
+      "start_ticks": 19667106,
+      "actual": {
+        "pid": 1016780,
+        "state": "Z",
+        "start_ticks": 19667106
+      },
+      "owned_live": false
+    },
+    {
+      "owner_receipt": "/workspace/work/harbichess/continuation-20261005/quiet-readiness-v1-external-owner-process.json",
+      "pid": 1016851,
+      "start_ticks": 19674607,
+      "actual": {
+        "pid": 1016851,
+        "state": "Z",
+        "start_ticks": 19674607
+      },
+      "owned_live": false
+    },
+    {
+      "owner_receipt": "/dev/shm/harbichess-quiet-readiness-v1-20261005/owner-process.json",
+      "pid": 1016851,
+      "start_ticks": 19674607,
+      "actual": {
+        "pid": 1016851,
+        "state": "Z",
+        "start_ticks": 19674607
+      },
+      "owned_live": false
+    },
+    {
+      "owner_receipt": "/workspace/work/harbichess/continuation-20261005/quiet-proof-v1-external-owner-process.json",
+      "pid": 1017044,
+      "start_ticks": 19701321,
+      "actual": {
+        "pid": 1017044,
+        "state": "Z",
+        "start_ticks": 19701321
+      },
+      "owned_live": false
+    },
+    {
+      "owner_receipt": "/dev/shm/harbichess-quiet-proof-v1-20261005/owner-process.json",
+      "pid": 1017044,
+      "start_ticks": 19701321,
+      "actual": {
+        "pid": 1017044,
+        "state": "Z",
+        "start_ticks": 19701321
+      },
+      "owned_live": false
+    },
+    {
+      "owner_receipt": "/workspace/work/harbichess/continuation-20261005/pst-arena-v1-registration/owner-process.json",
+      "pid": 1017528,
+      "start_ticks": 19779714,
+      "actual": {
+        "pid": 1017528,
+        "state": "Z",
+        "start_ticks": 19779714
+      },
+      "owned_live": false
+    },
+    {
+      "owner_receipt": "/workspace/work/harbichess/continuation-20261005/quiet-fit-v1-external-owner-process.json",
+      "pid": 1017586,
+      "start_ticks": 19786020,
+      "actual": {
+        "pid": 1017586,
+        "state": "Z",
+        "start_ticks": 19786020
+      },
+      "owned_live": false
+    },
+    {
+      "owner_receipt": "/dev/shm/harbichess-quiet-fit-v1-20261005/owner-process.json",
+      "pid": 1017586,
+      "start_ticks": 19786020,
+      "actual": {
+        "pid": 1017586,
+        "state": "Z",
+        "start_ticks": 19786020
+      },
+      "owned_live": false
+    },
+    {
+      "owner_receipt": "/workspace/work/harbichess/continuation-20261005/quiet-final-native-loads-v1-owner-process.json",
+      "pid": 1019766,
+      "start_ticks": 19877310,
+      "actual": {
+        "pid": 1019766,
+        "state": "Z",
+        "start_ticks": 19877310
+      },
+      "owned_live": false
+    },
+    {
+      "owner_receipt": "/workspace/work/harbichess/continuation-20261005/NN224-root-audit-v1-owner-process.json",
+      "pid": 1019932,
+      "start_ticks": 19890146,
+      "actual": {
+        "pid": 1019932,
+        "state": "Z",
+        "start_ticks": 19890146
+      },
+      "owned_live": false
+    },
+    {
+      "owner_receipt": "/workspace/work/harbichess/continuation-20261005/NN224-root-audit-v2-owner-process.json",
+      "pid": 1020024,
+      "start_ticks": 19899416,
+      "actual": {
+        "pid": 1020024,
+        "state": "Z",
+        "start_ticks": 19899416
+      },
+      "owned_live": false
+    },
+    {
+      "owner_receipt": "/workspace/work/harbichess/continuation-20261005/quiet-arena-v1-registration/owner-process.json",
+      "pid": 1020291,
+      "start_ticks": 19922332,
+      "actual": {
+        "pid": 1020291,
+        "state": "Z",
+        "start_ticks": 19922332
+      },
+      "owned_live": false
+    },
+    {
+      "owner_receipt": "/workspace/work/harbichess/continuation-20261005/NN224-root-six-searches-v1-owner-process.json",
+      "pid": 1020567,
+      "start_ticks": 19941912,
+      "actual": {
+        "pid": 1020567,
+        "state": "Z",
+        "start_ticks": 19941912
+      },
+      "owned_live": false
+    },
+    {
+      "owner_receipt": "/workspace/work/harbichess/continuation-20261005/own-q-reanalysis-v1-registration/20262905-owner-process.json",
+      "pid": 1020645,
+      "start_ticks": 19949430,
+      "actual": {
+        "pid": 1020645,
+        "state": "Z",
+        "start_ticks": 19949430
+      },
+      "owned_live": false
+    },
+    {
+      "owner_receipt": "/workspace/work/harbichess/continuation-20261005/own-q-reanalysis-v1-registration/20262906-owner-process.json",
+      "pid": 1020646,
+      "start_ticks": 19949430,
+      "actual": {
+        "pid": 1020646,
+        "state": "Z",
+        "start_ticks": 19949430
+      },
+      "owned_live": false
+    },
+    {
+      "owner_receipt": "/workspace/work/harbichess/continuation-20261005/NN224-root-audit-v3-owner-process.json",
+      "pid": 1020855,
+      "start_ticks": 19973572,
+      "actual": {
+        "pid": 1020855,
+        "state": "Z",
+        "start_ticks": 19973572
+      },
+      "owned_live": false
+    },
+    {
+      "owner_receipt": "/workspace/work/harbichess/continuation-20261005/PST160-root-audit-v1-owner-process.json",
+      "pid": 1022364,
+      "start_ticks": 20094486,
+      "actual": {
+        "pid": 1022364,
+        "state": "Z",
+        "start_ticks": 20094486
+      },
+      "owned_live": false
+    },
+    {
+      "owner_receipt": "/workspace/work/harbichess/continuation-20261005/PST160-root-six-v1-owner-process.json",
+      "pid": 1024098,
+      "start_ticks": 20172821,
+      "actual": {
+        "pid": 1024098,
+        "state": "Z",
+        "start_ticks": 20172821
+      },
+      "owned_live": false
+    },
+    {
+      "owner_receipt": "/workspace/work/harbichess/continuation-20261005/QUIET160-root-audit-v1-owner-process.json",
+      "pid": 1024227,
+      "start_ticks": 20177799,
+      "actual": {
+        "pid": 1024227,
+        "state": "Z",
+        "start_ticks": 20177799
+      },
+      "owned_live": false
+    },
+    {
+      "owner_receipt": "/workspace/work/harbichess/continuation-20261005/QUIET160-root-six-v1-owner-process.json",
+      "pid": 1024340,
+      "start_ticks": 20184645,
+      "actual": {
+        "pid": 1024340,
+        "state": "Z",
+        "start_ticks": 20184645
+      },
+      "owned_live": false
+    },
+    {
+      "owner_receipt": "/workspace/work/harbichess/continuation-20261005/own-q-latency-242-v1-owner-process.json",
+      "pid": 1024720,
+      "start_ticks": 20193681,
+      "actual": {
+        "pid": 1024720,
+        "state": "Z",
+        "start_ticks": 20193681
+      },
+      "owned_live": false
+    },
+    {
+      "owner_receipt": "/workspace/work/harbichess/continuation-20261005/own-deeper-action-v1-registration/20262905-owner-process.json",
+      "pid": 1024856,
+      "start_ticks": 20201963,
+      "actual": {
+        "pid": 1024856,
+        "state": "Z",
+        "start_ticks": 20201963
+      },
+      "owned_live": false
+    },
+    {
+      "owner_receipt": "/workspace/work/harbichess/continuation-20261005/own-deeper-action-v1-registration/20262906-owner-process.json",
+      "pid": 1024857,
+      "start_ticks": 20201963,
+      "actual": {
+        "pid": 1024857,
+        "state": "Z",
+        "start_ticks": 20201963
+      },
+      "owned_live": false
+    },
+    {
+      "owner_receipt": "/workspace/work/harbichess/continuation-20261005/classical-state-v7-actual/dispatcher-owner-process.json",
+      "pid": 1024885,
+      "start_ticks": 20201983,
+      "actual": {
+        "pid": 1024885,
+        "state": "Z",
+        "start_ticks": 20201983
+      },
+      "owned_live": false
+    },
+    {
+      "owner_receipt": "/workspace/work/harbichess/continuation-20261005/own-q-latency-242-v2-owner-process.json",
+      "pid": 1025216,
+      "start_ticks": 20210641,
+      "actual": {
+        "pid": 1025216,
+        "state": "Z",
+        "start_ticks": 20210641
+      },
+      "owned_live": false
+    },
+    {
+      "owner_receipt": "/workspace/work/harbichess/continuation-20261005/own-q-latency-18x32-v1-owner-process.json",
+      "pid": 1026268,
+      "start_ticks": 20247382,
+      "actual": {
+        "pid": 1026268,
+        "state": "Z",
+        "start_ticks": 20247382
+      },
+      "owned_live": false
+    },
+    {
+      "owner_receipt": "/workspace/work/harbichess/continuation-20261005/ownq2048-ROOT-independent-v1-owner-process.json",
+      "pid": 1026430,
+      "start_ticks": 20255300,
+      "actual": {
+        "pid": 1026430,
+        "state": "Z",
+        "start_ticks": 20255300
+      },
+      "owned_live": false
+    },
+    {
+      "owner_receipt": "/workspace/work/harbichess/continuation-20261005/own-q-latency-18x32-v2-owner-process.json",
+      "pid": 1026509,
+      "start_ticks": 20259855,
+      "actual": {
+        "pid": 1026509,
+        "state": "Z",
+        "start_ticks": 20259855
+      },
+      "owned_live": false
+    },
+    {
+      "owner_receipt": "/workspace/work/harbichess/continuation-20261005/own-q-latency-18x32-v3-owner-process.json",
+      "pid": 1027005,
+      "start_ticks": 20279824,
+      "actual": {
+        "pid": 1027005,
+        "state": "Z",
+        "start_ticks": 20279824
+      },
+      "owned_live": false
+    },
+    {
+      "owner_receipt": "/workspace/work/harbichess/continuation-20261005/ownq-C18-latency-v1-owner-process.json",
+      "pid": 1028027,
+      "start_ticks": 20326044,
+      "actual": {
+        "pid": 1028027,
+        "state": "Z",
+        "start_ticks": 20326044
+      },
+      "owned_live": false
+    },
+    {
+      "owner_receipt": "/workspace/work/harbichess/continuation-20261005/selective-q-labels-v1-registration/owner-process.json",
+      "pid": 1028478,
+      "start_ticks": 20345208,
+      "actual": {
+        "pid": 1028478,
+        "state": "Z",
+        "start_ticks": 20345208
+      },
+      "owned_live": false
+    },
+    {
+      "owner_receipt": "/workspace/work/harbichess/continuation-20261005/ownq-C18-training-v1-registration/proof-owner-process.json",
+      "pid": 1028586,
+      "start_ticks": 20350782,
+      "actual": {
+        "pid": 1028586,
+        "state": "Z",
+        "start_ticks": 20350782
+      },
+      "owned_live": false
+    },
+    {
+      "owner_receipt": "/workspace/work/harbichess/continuation-20261005/C18-proof-freshloads-v1-owner-process.json",
+      "pid": 1028867,
+      "start_ticks": 20361373,
+      "actual": {
+        "pid": 1028867,
+        "state": "Z",
+        "start_ticks": 20361373
+      },
+      "owned_live": false
+    },
+    {
+      "owner_receipt": "/workspace/work/harbichess/continuation-20261005/ownq-C18-training-v1-registration/fit-owner-process.json",
+      "pid": 1029070,
+      "start_ticks": 20370822,
+      "actual": {
+        "pid": 1029070,
+        "state": "Z",
+        "start_ticks": 20370822
+      },
+      "owned_live": false
+    },
+    {
+      "owner_receipt": "/workspace/work/harbichess/continuation-20261005/C18-final-four-freshloads-v1-owner-process.json",
+      "pid": 1029375,
+      "start_ticks": 20414653,
+      "actual": {
+        "pid": 1029375,
+        "state": "Z",
+        "start_ticks": 20414653
+      },
+      "owned_live": false
+    },
+    {
+      "owner_receipt": "/workspace/work/harbichess/continuation-20261005/ACTION-training-v1-registration/proof-owner-process.json",
+      "pid": 1029439,
+      "start_ticks": 20420031,
+      "actual": {
+        "pid": 1029439,
+        "state": "Z",
+        "start_ticks": 20420031
+      },
+      "owned_live": false
+    },
+    {
+      "owner_receipt": "/workspace/work/harbichess/continuation-20261005/ACTION-training-v1-registration/fit-owner-process.json",
+      "pid": 1029654,
+      "start_ticks": 20429021,
+      "actual": {
+        "pid": 1029654,
+        "state": "Z",
+        "start_ticks": 20429021
+      },
+      "owned_live": false
+    },
+    {
+      "owner_receipt": "/workspace/work/harbichess/continuation-20261005/C18-strength-v1-registration/profile-owner-process.json",
+      "pid": 1029777,
+      "start_ticks": 20437523,
+      "actual": {
+        "pid": 1029777,
+        "state": "Z",
+        "start_ticks": 20437523
+      },
+      "owned_live": false
+    },
+    {
+      "owner_receipt": "/workspace/work/harbichess/continuation-20261005/C18-strength-v1-registration/profile-v2-owner-process.json",
+      "pid": 1029886,
+      "start_ticks": 20451678,
+      "actual": {
+        "pid": 1029886,
+        "state": "Z",
+        "start_ticks": 20451678
+      },
+      "owned_live": false
+    },
+    {
+      "owner_receipt": "/workspace/work/harbichess/continuation-20261005/C18-strength-v1-registration/arena-owner-process.json",
+      "pid": 1029909,
+      "start_ticks": 20454531,
+      "actual": {
+        "pid": 1029909,
+        "state": "Z",
+        "start_ticks": 20454531
+      },
+      "owned_live": false
+    },
+    {
+      "owner_receipt": "/workspace/work/harbichess/continuation-20261005/selective-q-profile-v1-registration/owner-process.json",
+      "pid": 1029932,
+      "start_ticks": 20456999,
+      "actual": {
+        "pid": 1029932,
+        "state": "Z",
+        "start_ticks": 20456999
+      },
+      "owned_live": false
+    },
+    {
+      "owner_receipt": "/workspace/work/harbichess/continuation-20261005/ACTION-strength-v1-registration/profile-owner-process.json",
+      "pid": 1029953,
+      "start_ticks": 20460361,
+      "actual": {
+        "pid": 1029953,
+        "state": "Z",
+        "start_ticks": 20460361
+      },
+      "owned_live": false
+    },
+    {
+      "owner_receipt": "/workspace/work/harbichess/continuation-20261005/selective-q-proof-v1-registration/owner-process.json",
+      "pid": 1030065,
+      "start_ticks": 20470995,
+      "actual": {
+        "pid": 1030065,
+        "state": "Z",
+        "start_ticks": 20470995
+      },
+      "owned_live": false
+    },
+    {
+      "owner_receipt": "/workspace/work/harbichess/continuation-20261005/ACTION-strength-v1-registration/arena-owner-process.json",
+      "pid": 1030214,
+      "start_ticks": 20477646,
+      "actual": {
+        "pid": 1030214,
+        "state": "Z",
+        "start_ticks": 20477646
+      },
+      "owned_live": false
+    },
+    {
+      "owner_receipt": "/workspace/work/harbichess/continuation-20261005/selective-q-fit-v1-registration/owner-process.json",
+      "pid": 1030348,
+      "start_ticks": 20486684,
+      "actual": {
+        "pid": 1030348,
+        "state": "Z",
+        "start_ticks": 20486684
+      },
+      "owned_live": false
+    },
+    {
+      "owner_receipt": "/workspace/work/harbichess/continuation-20261005/selective-q-strength-v1-registration/profile-v2-owner-process.json",
+      "pid": 1032252,
+      "start_ticks": 20549910,
+      "actual": {
+        "pid": 1032252,
+        "state": "Z",
+        "start_ticks": 20549910
+      },
+      "owned_live": false
+    },
+    {
+      "owner_receipt": "/workspace/work/harbichess/continuation-20261005/selective-q-strength-v1-registration/arena-owner-process.json",
+      "pid": 1032503,
+      "start_ticks": 20574203,
+      "actual": {
+        "pid": 1032503,
+        "state": "Z",
+        "start_ticks": 20574203
+      },
+      "owned_live": false
+    },
+    {
+      "owner_receipt": "/workspace/work/harbichess/continuation-20261005/Stockfish-exact-upstream-locator-v1/owner-process.json",
+      "pid": 1032821,
+      "start_ticks": 20613001,
+      "actual": {
+        "pid": 1032821,
+        "state": "Z",
+        "start_ticks": 20613001
+      },
+      "owned_live": false
+    },
+    {
+      "owner_receipt": "/workspace/work/harbichess/continuation-20261005/coarse80-preflight-v1-registration/owner-process.json",
+      "pid": 1033591,
+      "start_ticks": 20685814,
+      "actual": {
+        "pid": 1033591,
+        "state": "Z",
+        "start_ticks": 20685814
+      },
+      "owned_live": false
+    },
+    {
+      "owner_receipt": "/workspace/work/harbichess/continuation-20261005/C18-root-audit-v1-registration/owner-process.json",
+      "pid": 1033592,
+      "start_ticks": 20685814,
+      "actual": {
+        "pid": 1033592,
+        "state": "Z",
+        "start_ticks": 20685814
+      },
+      "owned_live": false
+    },
+    {
+      "owner_receipt": "/workspace/work/harbichess/continuation-20261005/coarse80-proof-v1-registration/owner-process.json",
+      "pid": 1033830,
+      "start_ticks": 20698020,
+      "actual": {
+        "pid": 1033830,
+        "state": "Z",
+        "start_ticks": 20698020
+      },
+      "owned_live": false
+    },
+    {
+      "owner_receipt": "/workspace/work/harbichess/continuation-20261005/coarse80-proof-parent-recovery-v1-registration/owner-process.json",
+      "pid": 1033904,
+      "start_ticks": 20700793,
+      "actual": {
+        "pid": 1033904,
+        "state": "Z",
+        "start_ticks": 20700793
+      },
+      "owned_live": false
+    },
+    {
+      "owner_receipt": "/workspace/work/harbichess/continuation-20261005/coarse80-fit-v1-registration/owner-process.json",
+      "pid": 1034190,
+      "start_ticks": 20711686,
+      "actual": {
+        "pid": 1034190,
+        "state": "Z",
+        "start_ticks": 20711686
+      },
+      "owned_live": false
+    },
+    {
+      "owner_receipt": "/workspace/work/harbichess/continuation-20261005/ACTION-root-audit-v1-registration/owner-process.json",
+      "pid": 1034243,
+      "start_ticks": 20713710,
+      "actual": {
+        "pid": 1034243,
+        "state": "Z",
+        "start_ticks": 20713710
+      },
+      "owned_live": false
+    },
+    {
+      "owner_receipt": "/workspace/work/harbichess/continuation-20261005/ACTION-root-audit-v2-registration/owner-process.json",
+      "pid": 1034688,
+      "start_ticks": 20739533,
+      "actual": {
+        "pid": 1034688,
+        "state": "Z",
+        "start_ticks": 20739533
+      },
+      "owned_live": false
+    },
+    {
+      "owner_receipt": "/workspace/work/harbichess/continuation-20261005/NNUE-teacher-metadata-v1/20262905-controller/owner-process.json",
+      "pid": 1034737,
+      "start_ticks": 20742432,
+      "actual": {
+        "pid": 1034737,
+        "state": "Z",
+        "start_ticks": 20742432
+      },
+      "owned_live": false
+    },
+    {
+      "owner_receipt": "/workspace/work/harbichess/continuation-20261005/NNUE-teacher-metadata-v1/20262906-controller/owner-process.json",
+      "pid": 1034738,
+      "start_ticks": 20742436,
+      "actual": {
+        "pid": 1034738,
+        "state": "Z",
+        "start_ticks": 20742436
+      },
+      "owned_live": false
+    },
+    {
+      "owner_receipt": "/workspace/work/harbichess/continuation-20261005/NNUE16-architecture-preflight-v1-registration/owner-process.json",
+      "pid": 1034856,
+      "start_ticks": 20752966,
+      "actual": {
+        "pid": 1034856,
+        "state": "Z",
+        "start_ticks": 20752966
+      },
+      "owned_live": false
+    },
+    {
+      "owner_receipt": "/workspace/work/harbichess/continuation-20261005/NNUE16-architecture-preflight-v2-registration/owner-process.json",
+      "pid": 1034915,
+      "start_ticks": 20756390,
+      "actual": {
+        "pid": 1034915,
+        "state": "Z",
+        "start_ticks": 20756390
+      },
+      "owned_live": false
+    },
+    {
+      "owner_receipt": "/workspace/work/harbichess/continuation-20261005/coarse80-strength-v1-registration/owner-process.json",
+      "pid": 1035019,
+      "start_ticks": 20772125,
+      "actual": {
+        "pid": 1035019,
+        "state": "Z",
+        "start_ticks": 20772125
+      },
+      "owned_live": false
+    },
+    {
+      "owner_receipt": "/workspace/work/harbichess/continuation-20261005/Selective-root-audit-v1-registration/owner-process.json",
+      "pid": 1035058,
+      "start_ticks": 20779900,
+      "actual": {
+        "pid": 1035058,
+        "state": "Z",
+        "start_ticks": 20779900
+      },
+      "owned_live": false
+    },
+    {
+      "owner_receipt": "/workspace/work/harbichess/continuation-20261005/NNUE-teacher-production-v1/20262905-controller/owner-process.json",
+      "pid": 1035067,
+      "start_ticks": 20779958,
+      "actual": {
+        "pid": 1035067,
+        "state": "Z",
+        "start_ticks": 20779958
+      },
+      "owned_live": false
+    },
+    {
+      "owner_receipt": "/workspace/work/harbichess/continuation-20261005/NNUE-teacher-production-v1/20262906-controller/owner-process.json",
+      "pid": 1035068,
+      "start_ticks": 20779962,
+      "actual": {
+        "pid": 1035068,
+        "state": "Z",
+        "start_ticks": 20779962
+      },
+      "owned_live": false
+    },
+    {
+      "owner_receipt": "/workspace/work/harbichess/continuation-20261005/coarse80-strength-v2-registration/owner-process.json",
+      "pid": 1035304,
+      "start_ticks": 20794645,
+      "actual": {
+        "pid": 1035304,
+        "state": "Z",
+        "start_ticks": 20794645
+      },
+      "owned_live": false
+    },
+    {
+      "owner_receipt": "/workspace/work/harbichess/continuation-20261005/coarse80-strength-parent-recovery-v3-registration/owner-process.json",
+      "pid": 1035458,
+      "start_ticks": 20803265,
+      "actual": {
+        "pid": 1035458,
+        "state": "Z",
+        "start_ticks": 20803265
+      },
+      "owned_live": false
+    },
+    {
+      "owner_receipt": "/workspace/work/harbichess/continuation-20261005/coarse80-arena-v1-registration/owner-process.json",
+      "pid": 1035624,
+      "start_ticks": 20827766,
+      "actual": {
+        "pid": 1035624,
+        "state": "Z",
+        "start_ticks": 20827766
+      },
+      "owned_live": false
+    },
+    {
+      "owner_receipt": "/workspace/work/harbichess/continuation-20261005/NNUE-teacher-conversion-v1/20262905-controller/owner-process.json",
+      "pid": 1035625,
+      "start_ticks": 20827768,
+      "actual": {
+        "pid": 1035625,
+        "state": "Z",
+        "start_ticks": 20827768
+      },
+      "owned_live": false
+    },
+    {
+      "owner_receipt": "/workspace/work/harbichess/continuation-20261005/NNUE-teacher-conversion-v1/20262906-controller/owner-process.json",
+      "pid": 1035626,
+      "start_ticks": 20827768,
+      "actual": {
+        "pid": 1035626,
+        "state": "Z",
+        "start_ticks": 20827768
+      },
+      "owned_live": false
+    },
+    {
+      "owner_receipt": "/workspace/work/harbichess/continuation-20261005/NNUE-teacher-proof-v1/20262905-controller/owner-process.json",
+      "pid": 1035687,
+      "start_ticks": 20833942,
+      "actual": {
+        "pid": 1035687,
+        "state": "Z",
+        "start_ticks": 20833942
+      },
+      "owned_live": false
+    },
+    {
+      "owner_receipt": "/workspace/work/harbichess/continuation-20261005/NNUE-teacher-proof-v1/20262906-controller/owner-process.json",
+      "pid": 1035688,
+      "start_ticks": 20833942,
+      "actual": {
+        "pid": 1035688,
+        "state": "Z",
+        "start_ticks": 20833942
+      },
+      "owned_live": false
+    },
+    {
+      "owner_receipt": "/workspace/work/harbichess/continuation-20261005/fresh-state-v8-actual/local-build-registration/owner-process.json",
+      "pid": 1035849,
+      "start_ticks": 20843397,
+      "actual": {
+        "pid": 1035849,
+        "state": "Z",
+        "start_ticks": 20843397
+      },
+      "owned_live": false
+    },
+    {
+      "owner_receipt": "/workspace/work/harbichess/continuation-20261005/NNUE-teacher-fit-v1/20262905-controller/owner-process.json",
+      "pid": 1035902,
+      "start_ticks": 20848702,
+      "actual": {
+        "pid": 1035902,
+        "state": "Z",
+        "start_ticks": 20848702
+      },
+      "owned_live": false
+    },
+    {
+      "owner_receipt": "/workspace/work/harbichess/continuation-20261005/NNUE-teacher-fit-v1/20262906-controller/owner-process.json",
+      "pid": 1035903,
+      "start_ticks": 20848702,
+      "actual": {
+        "pid": 1035903,
+        "state": "Z",
+        "start_ticks": 20848702
+      },
+      "owned_live": false
+    },
+    {
+      "owner_receipt": "/workspace/work/harbichess/continuation-20261005/balanced16-proof-v2/20262905-owner/owner-process.json",
+      "pid": 1036395,
+      "start_ticks": 20901584,
+      "actual": {
+        "pid": 1036395,
+        "state": "Z",
+        "start_ticks": 20901584
+      },
+      "owned_live": false
+    },
+    {
+      "owner_receipt": "/workspace/work/harbichess/continuation-20261005/balanced16-proof-v2/20262906-owner/owner-process.json",
+      "pid": 1036398,
+      "start_ticks": 20901589,
+      "actual": {
+        "pid": 1036398,
+        "state": "Z",
+        "start_ticks": 20901589
+      },
+      "owned_live": false
+    },
+    {
+      "owner_receipt": "/workspace/work/harbichess/continuation-20261005/fresh-state-v8-dispatch-v1/owner/owner-process.json",
+      "pid": 1036539,
+      "start_ticks": 20903644,
+      "actual": {
+        "pid": 1036539,
+        "state": "Z",
+        "start_ticks": 20903644
+      },
+      "owned_live": false
+    },
+    {
+      "owner_receipt": "/workspace/work/harbichess/continuation-20261005/balanced16-architecture-v2/20262905-owner/owner-process.json",
+      "pid": 1036613,
+      "start_ticks": 20907518,
+      "actual": {
+        "pid": 1036613,
+        "state": "Z",
+        "start_ticks": 20907518
+      },
+      "owned_live": false
+    },
+    {
+      "owner_receipt": "/workspace/work/harbichess/continuation-20261005/balanced16-architecture-v2/20262906-owner/owner-process.json",
+      "pid": 1036616,
+      "start_ticks": 20907524,
+      "actual": {
+        "pid": 1036616,
+        "state": "Z",
+        "start_ticks": 20907524
+      },
+      "owned_live": false
+    },
+    {
+      "owner_receipt": "/workspace/work/harbichess/continuation-20261005/balanced16-fit-v2/20262905-owner/owner-process.json",
+      "pid": 1036816,
+      "start_ticks": 20915216,
+      "actual": {
+        "pid": 1036816,
+        "state": "Z",
+        "start_ticks": 20915216
+      },
+      "owned_live": false
+    },
+    {
+      "owner_receipt": "/workspace/work/harbichess/continuation-20261005/balanced16-fit-v2/20262906-owner/owner-process.json",
+      "pid": 1036819,
+      "start_ticks": 20915220,
+      "actual": {
+        "pid": 1036819,
+        "state": "Z",
+        "start_ticks": 20915220
+      },
+      "owned_live": false
+    },
+    {
+      "owner_receipt": "/workspace/work/harbichess/continuation-20261005/NNUE-teacher-trained-profile-v1/owner/owner-process.json",
+      "pid": 1036952,
+      "start_ticks": 20918716,
+      "actual": {
+        "pid": 1036952,
+        "state": "Z",
+        "start_ticks": 20918716
+      },
+      "owned_live": false
+    },
+    {
+      "owner_receipt": "/workspace/work/harbichess/continuation-20261005/fresh-state-v8-public-readback-v2/owner/owner-process.json",
+      "pid": 1037019,
+      "start_ticks": 20921928,
+      "actual": {
+        "pid": 1037019,
+        "state": "Z",
+        "start_ticks": 20921928
+      },
+      "owned_live": false
+    },
+    {
+      "owner_receipt": "/workspace/work/harbichess/continuation-20261005/NNUE-teacher-trained-profile-v2/owner/owner-process.json",
+      "pid": 1037270,
+      "start_ticks": 20934247,
+      "actual": {
+        "pid": 1037270,
+        "state": "Z",
+        "start_ticks": 20934247
+      },
+      "owned_live": false
+    },
+    {
+      "owner_receipt": "/workspace/work/harbichess/continuation-20261005/nnue-state-v9-actual/build-owner/owner-process.json",
+      "pid": 1037357,
+      "start_ticks": 20947344,
+      "actual": {
+        "pid": 1037357,
+        "state": "Z",
+        "start_ticks": 20947344
+      },
+      "owned_live": false
+    },
+    {
+      "owner_receipt": "/workspace/work/harbichess/continuation-20261005/nnue-state-v9-parts-v1/POST-owner/owner-process.json",
+      "pid": 1041641,
+      "start_ticks": 20981763,
+      "actual": {
+        "pid": 1041641,
+        "state": "Z",
+        "start_ticks": 20981763
+      },
+      "owned_live": false
+    },
+    {
+      "owner_receipt": "/workspace/work/harbichess/continuation-20261005/nnue-state-v9-parts-v1/dispatch-owner/owner-process.json",
+      "pid": 1042158,
+      "start_ticks": 21003199,
+      "actual": {
+        "pid": 1042158,
+        "state": "Z",
+        "start_ticks": 21003199
+      },
+      "owned_live": false
+    }
+  ],
+  "guardian_before": {
+    "pid": 991477,
+    "state": "S",
+    "start_ticks": 18238465
+  },
+  "guardian_after": {
+    "pid": 991477,
+    "state": "Z",
+    "start_ticks": 18238465
+  },
+  "guardian_signal": "SIGTERM",
+  "no_checkpoint_or_model_writes": true,
+  "no_unrelated_processes_terminated": true
+}
