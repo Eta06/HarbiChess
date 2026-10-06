@@ -1,0 +1,21 @@
+{
+  "code_bytes": 46217,
+  "new_label_data_generated": false,
+  "optimizer_updates_executed": 0,
+  "original_failed_test": "selector byte SHA changed by formatter; recopy immutable original fixed it; 6PASS1FAIL initial kept as note",
+  "ruff": "PASS",
+  "schema": "deeper-bestmove-static-verification-v1",
+  "search_calls_executed": 0,
+  "source_sha256": {
+    "action_labels.py": "ccaf09caa4e5a942a212b0cee3f85dded7c417f13f04e69656e2e419bc6ffdc3",
+    "action_learner.py": "955249846bc8636ef0ddb9f63db06b200c003944715b8c2963b30f37bd9725f0",
+    "action_model.py": "873eeaa29c67c8c895dfcb54463cba80151b268dce04f3db62013874b9918509",
+    "produce_actions.py": "132a43a07186920e1a825a061693e0c83b29d882d7a1acbedfdf9280ae78ae83",
+    "qualify_actions.py": "5a742e99432473d39a4762ae38bd3662eeada3dc944c5c48a9edee8a068e3d64",
+    "select_roots.py": "ca571105a075bf23f5992a9a5856ab1d4dc3f7e4f43ffd9f69391e5faca7a17c",
+    "student_search.py": "3ad9cfcfd70dacf08620511e76b0fa2996c126133bc1b2ff85d93a6499f4d838",
+    "test_actions.py": "0b40f53cb3745ad182ca34c6145c571247a93caaad8966013f957a37179d26f6",
+    "train_actions.py": "1924c7bc007a3b8a94354d710c8ead82d15f2a49e5fc5bd8fb3697948712b38f"
+  },
+  "tests_passed": 10
+}
