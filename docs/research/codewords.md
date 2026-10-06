@@ -1356,3 +1356,8 @@ borcudur; mevcut MLX yolu korunur. Prefix başarı veya promotion anlamına gelm
 ## UFUK-OWNQ-C18 / UFUK-ACTION / UFUK-SELECTIVEQ
 
 5October CPU continuation: own8192-Q residual distillation, own8192-bestmove root ordering, and learned optional quiescence effort are separate teacher-free hypotheses under SAMEinitializer controls and unchanged strength gates. C18v1 real zero-prior summation failure is retained; v2 reader corrects Python3.12 sum without changing native training state or claiming fullresume migration. Proof/speed/data admission are not strength; formal global exposure closure remains incomplete. Established ExIt/selective-search/PSQT mechanisms, no originality claim.
+
+
+## UFUK-WRAP — 6 October 2026
+
+User-requested pause and durable state handoff. C18/ACTION/Selective development strength failures remain failures; NNUE teacher-only bootstrap and balanced48 native qualification do not imply self-learning success. Coarse80 arena stopped incomplete; v2 ancestry confirmation approved but not launched. [Wrap-up record](../runs/UFUK-WRAP-status-20261006.md).
