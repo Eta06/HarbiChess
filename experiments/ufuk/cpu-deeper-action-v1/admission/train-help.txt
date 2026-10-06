@@ -1,0 +1,21 @@
+usage: train_actions.py [-h] --protocol PROTOCOL --labels LABELS --output
+                        OUTPUT --source-repo SOURCE_REPO --protocol-sha256
+                        PROTOCOL_SHA256 --seed SEED --cpu-core CPU_CORE
+                        --deadline DEADLINE [--stop-at STOP_AT]
+                        [--resume RESUME] [--resume-sha256 RESUME_SHA256]
+                        [--audit-only]
+
+options:
+  -h, --help            show this help message and exit
+  --protocol PROTOCOL
+  --labels LABELS
+  --output OUTPUT
+  --source-repo SOURCE_REPO
+  --protocol-sha256 PROTOCOL_SHA256
+  --seed SEED
+  --cpu-core CPU_CORE
+  --deadline DEADLINE
+  --stop-at STOP_AT
+  --resume RESUME
+  --resume-sha256 RESUME_SHA256
+  --audit-only
