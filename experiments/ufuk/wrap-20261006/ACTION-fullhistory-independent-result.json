@@ -1,0 +1,231 @@
+{
+  "status": "PASS-separate-160-fullhistory-and-root-stat-comparison",
+  "games": 160,
+  "observed_finished": 1791242998.764868,
+  "original_audit_deadline": 1791243637.6963508,
+  "rows": [
+    {
+      "seed": 20262905,
+      "arm": "learned",
+      "opponent": "SF512",
+      "score": 0.03125,
+      "wins": 0,
+      "draws": 1,
+      "losses": 15,
+      "model_nodes": 416768,
+      "evaluations": 380369,
+      "model_calls": 814,
+      "plies": 1635,
+      "SF_nodes": 421343,
+      "SF_calls": 821,
+      "SF_overruns": 255,
+      "SF_max_nodes": 550
+    },
+    {
+      "seed": 20262906,
+      "arm": "learned",
+      "opponent": "SF512",
+      "score": 0.1875,
+      "wins": 0,
+      "draws": 6,
+      "losses": 10,
+      "model_nodes": 393898,
+      "evaluations": 362280,
+      "model_calls": 770,
+      "plies": 1542,
+      "SF_nodes": 396189,
+      "SF_calls": 772,
+      "SF_overruns": 239,
+      "SF_max_nodes": 550
+    },
+    {
+      "seed": 20262905,
+      "arm": "prior",
+      "opponent": "SF512",
+      "score": 0.125,
+      "wins": 0,
+      "draws": 4,
+      "losses": 12,
+      "model_nodes": 346624,
+      "evaluations": 316157,
+      "model_calls": 677,
+      "plies": 1358,
+      "SF_nodes": 349430,
+      "SF_calls": 681,
+      "SF_overruns": 194,
+      "SF_max_nodes": 544
+    },
+    {
+      "seed": 20262906,
+      "arm": "prior",
+      "opponent": "SF512",
+      "score": 0.125,
+      "wins": 0,
+      "draws": 4,
+      "losses": 12,
+      "model_nodes": 346624,
+      "evaluations": 316157,
+      "model_calls": 677,
+      "plies": 1358,
+      "SF_nodes": 349430,
+      "SF_calls": 681,
+      "SF_overruns": 194,
+      "SF_max_nodes": 544
+    },
+    {
+      "seed": 20262905,
+      "arm": "e8",
+      "opponent": "SF512",
+      "score": 0.0,
+      "wins": 0,
+      "draws": 0,
+      "losses": 16,
+      "model_nodes": 276480,
+      "evaluations": 253552,
+      "model_calls": 540,
+      "plies": 1088,
+      "SF_nodes": 281271,
+      "SF_calls": 548,
+      "SF_overruns": 156,
+      "SF_max_nodes": 557
+    },
+    {
+      "seed": 20262906,
+      "arm": "e8",
+      "opponent": "SF512",
+      "score": 0.0,
+      "wins": 0,
+      "draws": 0,
+      "losses": 16,
+      "model_nodes": 276480,
+      "evaluations": 253552,
+      "model_calls": 540,
+      "plies": 1088,
+      "SF_nodes": 281271,
+      "SF_calls": 548,
+      "SF_overruns": 156,
+      "SF_max_nodes": 557
+    },
+    {
+      "seed": 20262905,
+      "arm": "learned",
+      "opponent": "e8",
+      "score": 0.8125,
+      "wins": 13,
+      "draws": 0,
+      "losses": 3,
+      "model_nodes": 647680,
+      "evaluations": 587112,
+      "model_calls": 1265,
+      "plies": 1265
+    },
+    {
+      "seed": 20262906,
+      "arm": "learned",
+      "opponent": "e8",
+      "score": 0.8125,
+      "wins": 13,
+      "draws": 0,
+      "losses": 3,
+      "model_nodes": 648704,
+      "evaluations": 587800,
+      "model_calls": 1267,
+      "plies": 1267
+    },
+    {
+      "seed": 20262905,
+      "arm": "learned",
+      "opponent": "prior",
+      "score": 0.5,
+      "wins": 6,
+      "draws": 4,
+      "losses": 6,
+      "model_nodes": 666112,
+      "evaluations": 603991,
+      "model_calls": 1301,
+      "plies": 1301
+    },
+    {
+      "seed": 20262906,
+      "arm": "learned",
+      "opponent": "prior",
+      "score": 0.53125,
+      "wins": 7,
+      "draws": 3,
+      "losses": 6,
+      "model_nodes": 682496,
+      "evaluations": 618278,
+      "model_calls": 1333,
+      "plies": 1333
+    }
+  ],
+  "totals": {
+    "model_nodes": 4701866,
+    "evaluations": 4279248,
+    "model_calls": 9184,
+    "plies": 13235,
+    "SF_nodes": 2078934,
+    "SF_calls": 4051,
+    "SF_overruns": 1194,
+    "SF_max_nodes": 557
+  },
+  "contrasts": [
+    {
+      "seed": 20262905,
+      "gates": {
+        "direct_e8_gt060": true,
+        "SFgain_e8_gt010": false,
+        "finalSF_ge025": false,
+        "learning_sameprior_gt060": false,
+        "SFgain_prior_gt0": false,
+        "caps_le005": true
+      },
+      "passed": false
+    },
+    {
+      "seed": 20262906,
+      "gates": {
+        "direct_e8_gt060": true,
+        "SFgain_e8_gt010": true,
+        "finalSF_ge025": false,
+        "learning_sameprior_gt060": false,
+        "SFgain_prior_gt0": true,
+        "caps_le005": true
+      },
+      "passed": false
+    }
+  ],
+  "root_result_sha256": "e3e51d04f60f03ec8f099248f5857b2e7e88649cfde4caa6a103d47f23076799",
+  "protocol_sha256": "7422bde26a952927c2c4a8766fe66526c830b80270f2e33fe24803ffaf7c461d",
+  "no_search_or_models_queried": true,
+  "native_inventory": [
+    {
+      "seed": 20262905,
+      "status": "strict-frozen-offline64-native-PASS",
+      "step": 64,
+      "native_sha256": "7e7062a2af794ed916bc6896dcf95b920693408ddc6ae1511fe8ba828a66f2e8",
+      "candidate_sha256": "7217d0ae44f908cdd6153ff192d8f270f74069c74c578d8ec8f5586454972063",
+      "original_fit_deadline_preserved": 1791241690.7202837,
+      "training_restarted": false
+    },
+    {
+      "seed": 20262906,
+      "status": "strict-frozen-offline64-native-PASS",
+      "step": 64,
+      "native_sha256": "4964191e2a1f2dbd80ddd2aee8e90c487d54edb7c2e00db5884821275a5fcf2a",
+      "candidate_sha256": "d76384f26438a6b70a191c3811ea8c5b5ff02e5755958c5cd31442c3e4510381",
+      "original_fit_deadline_preserved": 1791241690.7202837,
+      "training_restarted": false
+    }
+  ],
+  "metadata_repair": {
+    "parent_helper_sha256": "85134336ce7a8e3a717cd1d4359aaa0174dd69e7b37376d9daa1195cba0c477e",
+    "changed": "full canonical JSON native equality replacing raw list-versus-tuple equality",
+    "actual_different_keys": [
+      "global_rng",
+      "sampler_rng"
+    ],
+    "source_models_games_gates_clock_unchanged": true
+  },
+  "uncertainty": "known8 development; no virgin confirmation; SFactual overrun disclosed"
+}
