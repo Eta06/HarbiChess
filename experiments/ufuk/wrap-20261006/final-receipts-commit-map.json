@@ -1,0 +1,66 @@
+{
+  "final_receipts_stage": [
+    {
+      "commit": "4577b9cf0b0db75c47fc34c6e45d8c60d12b1b11",
+      "file": "experiments/ufuk/wrap-20261006/V9-ROOT-public-eight-parts-453-readback.json"
+    },
+    {
+      "commit": "bfa38ea69ae260c05c1f778402171a2d3e76366d",
+      "file": "experiments/ufuk/wrap-20261006/USER-pause-final-owned-process-audit.json"
+    },
+    {
+      "commit": "de6010b70218b2d0c1418bd8a96339e2115f8d8a",
+      "file": "experiments/ufuk/wrap-20261006/V9-single-blob-failure-404-reconciliation.json"
+    },
+    {
+      "commit": "79557fc17ff8cff17059bb9e4aa2662d9815c89b",
+      "file": "experiments/ufuk/wrap-20261006/V9-direct-Release-failure.json"
+    },
+    {
+      "commit": "0bfc6dda0721a035b0e726f80dd9c91b55203d2b",
+      "file": "experiments/ufuk/wrap-20261006/V9-direct-Release-absence-reconciliation.json"
+    },
+    {
+      "commit": "7b0065912bb0793f20fa86bee9ca1a7ea4869bb8",
+      "file": "experiments/ufuk/wrap-20261006/state-at-user-pause.json"
+    },
+    {
+      "commit": "e262e4275e92c9e87bf0d6c2ff7325b56aa131b7",
+      "file": "experiments/ufuk/wrap-20261006/source-and-preservation-commit-map.json"
+    },
+    {
+      "commit": "9c803afe3c4af8293dca4a445945933dbbf2b0be",
+      "file": "experiments/ufuk/wrap-20261006/preservation-controllers/dispatch_and_readback_once.py"
+    },
+    {
+      "commit": "77dc8a4090d4b3ea7c5440413ce50c31a758767d",
+      "file": "experiments/ufuk/wrap-20261006/preservation-controllers/dispatch-registration.json"
+    },
+    {
+      "commit": "d530076093ad6d1d61018470a0687142f24612dd",
+      "file": "experiments/ufuk/wrap-20261006/preservation-controllers/post_parts_once.py"
+    },
+    {
+      "commit": "5d3348b5ac143df2875d9889ca01fb21386b1052",
+      "file": "experiments/ufuk/wrap-20261006/preservation-controllers/parts-POST-controller-registration.json"
+    },
+    {
+      "commit": "d36153bd9b3e9b56ff1bfec5347fcbb6b1f0c4d8",
+      "file": "docs/runs/UFUK-WRAP-final-handoff-20261006.md"
+    },
+    {
+      "commit": "a6e3ae888dc5340ab2f0eb2cdad356b17d537067",
+      "file": "experiments/ufuk/nnue-own-state-blob-v9/TRANSPORT-STATUS.md"
+    }
+  ],
+  "source_preservation_map": "source-and-preservation-commit-map.json",
+  "recorded_commits": 228,
+  "final_map_itself_is_one_additional_atomic_commit": true,
+  "total_new_commits_in_this_wrap_up": 229,
+  "one_file_per_commit_verified": true,
+  "author_and_committer": "Emir Tunahan Alim <emrtnhalim@gmail.com>",
+  "coauthor_added": false,
+  "final_map_commit": "excluded to avoid self-reference; final response provides HEAD",
+  "public_V9_verified": true,
+  "owned_training_workers_live": 0
+}
