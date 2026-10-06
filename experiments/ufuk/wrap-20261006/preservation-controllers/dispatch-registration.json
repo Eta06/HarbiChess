@@ -1,0 +1,24 @@
+{
+  "controller_sha256": "92ed861e5b9f8a22e06966d98211b026917ab329bcd8ab01d30785ee407aaa75",
+  "common_controller_sha256": "92fd6e8a8728fb6a88043f975f27559d9f616eb1233c0a4e36ee309dbe901561",
+  "first": 1791245051.2415879,
+  "deadline": 1791250451.2415879,
+  "head": "179265aa8bf1a460a615016b362ba42cc5bb5f64",
+  "parts_control_sha256": "7d1766d76df839f725221c76ab42b9483cc4bb61416aff3d53086993a87c7265",
+  "guardian": {
+    "pid": 991477,
+    "start_ticks": 18238465
+  },
+  "pins": {
+    "/workspace/work/harbichess/continuation-20261005/nnue-state-v9-parts-v1/dispatch_and_readback_once.py": "92ed861e5b9f8a22e06966d98211b026917ab329bcd8ab01d30785ee407aaa75",
+    "/workspace/work/harbichess/continuation-20261005/fresh-state-v8-dispatch-v1/dispatch_once_v8.py": "92fd6e8a8728fb6a88043f975f27559d9f616eb1233c0a4e36ee309dbe901561",
+    "/workspace/HarbiChess/experiments/ufuk/nnue-own-state-blob-v9/parts-control.json": "7d1766d76df839f725221c76ab42b9483cc4bb61416aff3d53086993a87c7265",
+    "/workspace/HarbiChess/experiments/ufuk/nnue-own-state-blob-v9/manifest.json": "4b20541fb58fc72885f18638bf6048dcc0b271f1eefad070a034aaaadc1872ca",
+    "/workspace/HarbiChess/experiments/ufuk/nnue-own-state-blob-v9/raw_capsule_v9.py": "8b2f7dbea781972b8a7091aca37a253f92b330e7d8979c3b9c8f1e9688ed6de5",
+    "/workspace/HarbiChess/experiments/ufuk/nnue-own-state-blob-v9/release_transport_v9.py": "6460d6aaa7cc439040736eac7c691ca277c4ebb150f35b4abaf58ccbd8d5867b",
+    "/workspace/HarbiChess/experiments/ufuk/nnue-own-state-blob-v9/parts_receiver_v1.py": "a645551f8e6f5f861f9fde2f08b1260f87764b0a494fb95de61d4594b2dd32d5",
+    "/workspace/HarbiChess/.github/workflows/nnue-own-state-parts-v9.yml": "4503b7deaaf0f36dec96e1e0dfe4a289adddf1446238b314d2adad726ad535ee"
+  },
+  "exact_single_dispatch_POST": true,
+  "anonymous_all8parts_and453_originals_required": true
+}
