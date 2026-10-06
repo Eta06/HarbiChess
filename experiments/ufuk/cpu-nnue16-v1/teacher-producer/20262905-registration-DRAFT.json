@@ -1,0 +1,42 @@
+{
+  "core_source_commit": "6fcc8b476d25495d1c9c413e55b2c7ba4794013e",
+  "core_source_repo": "/workspace/work/harbichess/cpu-additive-source-6fcc8b4",
+  "count": 4096,
+  "cpu_core": 4,
+  "known8_exclusions": {
+    "path": "PENDING-explicit-known8-book-plus-ALL-closed-played-input-inventory",
+    "sha256": "PENDING"
+  },
+  "model_endpoint_selection_by_results": false,
+  "nnue_feature": {
+    "path": "/workspace/work/harbichess/cpu-kingbucket-nnue-proposal/model.py",
+    "sha256": "c04914bc5a560ad51de81c6d0aaeb3fae4d04b45c07cd8e39bbd31f655d36565"
+  },
+  "original_deadline_epoch": "PENDING-ROOT",
+  "original_first_epoch": "PENDING-ROOT",
+  "output": "/dev/shm/harbichess-NNUE-teacher8192-v1/20262905",
+  "parent_registration": {
+    "path": "/workspace/work/harbichess/continuation-20261005/own-deeper-action-v1-registration/20262905-registration.json",
+    "sha256": "b73cd739fb0b357e6c57f26452ddec229f2f886936a534b467e4bc8e100024b9"
+  },
+  "phase": "teacher-labels",
+  "schema": "NNUE-teacher8192-ROOT-registration-v1",
+  "seed": 20262905,
+  "selection": "fixed-salt SHA pseudorandom ranks +round-robin complete TRAIN trajectories; no score/outcome sorting",
+  "source_sha256": {
+    "/workspace/work/harbichess/cpu-nnue-teacher8192-proposal/producer.py": "3310319b218d671e92bca79a82559959d36e2950107ac046f0928d8a82787533",
+    "/workspace/work/harbichess/cpu-nnue-teacher8192-proposal/selection.py": "2d5030857822e6f94cd0ae2cbe54892a422ba31286e4f97149b422d35f503ad8"
+  },
+  "status": "DRAFT-not-registered-no-SF",
+  "teacher": {
+    "ClearHash_each_root": true,
+    "Hash": 16,
+    "Threads": 1,
+    "asset_id": 545574859,
+    "compressed_sha256": "9defc0d4e55d49c65a6d042f3e571a39fcea499ade6dbe741b53b8c65e03611f",
+    "nominal_nodes": 8192,
+    "path": "/workspace/work/harbichess/stockfish/stockfish-linux-x86-64-universal",
+    "sha256": "0f83d24cc46d2c66c60f16001af5444873bc112b7d028594513426894c12da19"
+  },
+  "teacher_bootstrap_is_selflearning": false
+}
