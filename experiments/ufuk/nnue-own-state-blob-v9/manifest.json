@@ -1,0 +1,3290 @@
+{
+  "schema": "classical-explicit-raw-native-capsule-v9",
+  "approval": "ROOT-approved-exact-files",
+  "status": "frozen-scope-NOT-built-NOT-public",
+  "rows": [
+    {
+      "path": "/dev/shm/harbichess-NNUE-teacher-data-v1/20262905/dataset.json",
+      "member": "files/0000",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 635456,
+      "sha256": "df36c1011f2d4044ecbd57ad9c1872da36a21f4f55a01366492449bed1389c7d"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-teacher-data-v1/20262905/provenance.json",
+      "member": "files/0001",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 2097,
+      "sha256": "c0eac3de98692b56594730d2d16e5a5533f76503f4c226c9a29e6238e34c12f9"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-teacher-data-v1/20262906/dataset.json",
+      "member": "files/0002",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 637383,
+      "sha256": "85a960a0c78f53d6232a26b17a9e5956c555926e84874458944c4e897c3cbef6"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-teacher-data-v1/20262906/provenance.json",
+      "member": "files/0003",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 2097,
+      "sha256": "60652b510df90b2fa80ac696a814046d43459fcd5454c5663704c16230414d63"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-teacher-fit-v1/20262905/result.json",
+      "member": "files/0004",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 2929,
+      "sha256": "c563e310042d2f25edab8208d7c423548d0312d64b589d511c891214eb87d28b"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-teacher-fit-v1/20262905/whole/candidate.pt",
+      "member": "files/0005",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 1579169,
+      "sha256": "52e029bba0e895740f975109f4c52358c7a59fe22082cb1fb528821e3fa2b02d"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-teacher-fit-v1/20262905/whole/initial.pt",
+      "member": "files/0006",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 3166097,
+      "sha256": "c54462de77192889b758d54616b728fa02ed6ec069c96da80f173e541a2b2c85"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-teacher-fit-v1/20262905/whole/native.pt",
+      "member": "files/0007",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 6314227,
+      "sha256": "a278669e6656f39e92b423b027aaa986531ee752900685c060d0336b226840a6"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-teacher-fit-v1/20262905/whole/result.json",
+      "member": "files/0008",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 172,
+      "sha256": "5518bb97ea079e4b7239393b8cc16a4535e23018c656fa9e7ddeaf3252c0c964"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-teacher-fit-v1/20262906/result.json",
+      "member": "files/0009",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 2930,
+      "sha256": "c75b10f73474b379032b3e29df1008552d337fbdab715e9545cdeeaf76ff77e6"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-teacher-fit-v1/20262906/whole/candidate.pt",
+      "member": "files/0010",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 1579169,
+      "sha256": "4ff008426e2e8a09eeef5cc232195e015a1c6a498dd0ffb768e905e897eff4c8"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-teacher-fit-v1/20262906/whole/initial.pt",
+      "member": "files/0011",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 3166097,
+      "sha256": "5439e375a6ca325be843c57122f8be97ccf08bec93097d995f600f724085d8f7"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-teacher-fit-v1/20262906/whole/native.pt",
+      "member": "files/0012",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 6314163,
+      "sha256": "4abe755dfe5baae3b85d3686c55bdd6e013692a48f7aae72055602274efca612"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-teacher-fit-v1/20262906/whole/result.json",
+      "member": "files/0013",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 172,
+      "sha256": "e7ee2a034b4e786777a4d0b96f62a67aa949a8310a42a70756feeb75a3bc3cf7"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-teacher-proof-v1/20262905/pause/initial.pt",
+      "member": "files/0014",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 3165777,
+      "sha256": "b6f5f280642aa327aed992d9b3e184fdd0f7b088c40f42c662ccfd5fe53acb34"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-teacher-proof-v1/20262905/pause/native.pt",
+      "member": "files/0015",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 6313843,
+      "sha256": "08a379de4fbf19b6e9a4cd0616e9531dc1e0d4dd6bb43eaab4449ae6a24b3212"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-teacher-proof-v1/20262905/pause/result.json",
+      "member": "files/0016",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 169,
+      "sha256": "07f1d58673dc5f5a5c16814f3edfb21428dd4ea606894698d562d4496f0fdf7e"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-teacher-proof-v1/20262905/result.json",
+      "member": "files/0017",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 8243,
+      "sha256": "44de33f19087e2b8e044a071b04ff0fa6ae06e3767d33d2d5864e124f473f643"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-teacher-proof-v1/20262905/resume/initial.pt",
+      "member": "files/0018",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 6313907,
+      "sha256": "735e2699c13eabca20d80be05fa59a801403f882519eda70abb55ee2e601a95f"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-teacher-proof-v1/20262905/resume/native.pt",
+      "member": "files/0019",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 6313843,
+      "sha256": "26d24fe9c9823c38266f10d69ad96696573e284751714f2cfb1739d514074676"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-teacher-proof-v1/20262905/resume/result.json",
+      "member": "files/0020",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 170,
+      "sha256": "467374fe14556d166a671caf9dc047d32bfd56d9be752a932261f89eb1736ba5"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-teacher-proof-v1/20262905/whole/initial.pt",
+      "member": "files/0021",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 3165777,
+      "sha256": "b6f5f280642aa327aed992d9b3e184fdd0f7b088c40f42c662ccfd5fe53acb34"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-teacher-proof-v1/20262905/whole/native.pt",
+      "member": "files/0022",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 6313843,
+      "sha256": "cc49ce6784b0b5117745143922117a84748d3cfadabe93b4bd6986df180a8a8a"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-teacher-proof-v1/20262905/whole/result.json",
+      "member": "files/0023",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 170,
+      "sha256": "56f81759b4b887273449bab507bce8e4ff1ff75655a64add6e220c2dc4bb091a"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-teacher-proof-v1/20262906/pause/initial.pt",
+      "member": "files/0024",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 3165777,
+      "sha256": "ea82064181d62ef2317b99c37b3eb68e1341a840f498b3b7700de74466f95889"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-teacher-proof-v1/20262906/pause/native.pt",
+      "member": "files/0025",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 6313843,
+      "sha256": "2334fc234add5d41179cc8ef0122a32b21dab658a059ff470ff27f772411efb8"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-teacher-proof-v1/20262906/pause/result.json",
+      "member": "files/0026",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 169,
+      "sha256": "caf86659d444ee6e4979a97956b50918e5da01eb74c1a19bb1b4c605637fff16"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-teacher-proof-v1/20262906/result.json",
+      "member": "files/0027",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 8243,
+      "sha256": "8d79048b3f2da708744ba8a013329cc778021c649974d91bbf09e3a717516cbd"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-teacher-proof-v1/20262906/resume/initial.pt",
+      "member": "files/0028",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 6313843,
+      "sha256": "880845c47b15706156c99a268d00fc72a646a11135bcd7f4b01e60a0d93fde14"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-teacher-proof-v1/20262906/resume/native.pt",
+      "member": "files/0029",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 6313843,
+      "sha256": "ea6502e3783a5cb7a8b96c7b4cd1128bcb6aad1209fcdf7558c14cc8d07376fb"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-teacher-proof-v1/20262906/resume/result.json",
+      "member": "files/0030",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 170,
+      "sha256": "17575e8e751dd1a82845209b237b30f7876ba9fd23aca79c7f8a27eee2d4e2e9"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-teacher-proof-v1/20262906/whole/initial.pt",
+      "member": "files/0031",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 3165777,
+      "sha256": "ea82064181d62ef2317b99c37b3eb68e1341a840f498b3b7700de74466f95889"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-teacher-proof-v1/20262906/whole/native.pt",
+      "member": "files/0032",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 6313843,
+      "sha256": "0c8683a4563f13a29f8e3d396d3e4835b182928fc5d7a197b6d38081632692d3"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-teacher-proof-v1/20262906/whole/result.json",
+      "member": "files/0033",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 170,
+      "sha256": "4f155743efd3d3569d14f14168e76577f27ef0ff26350645083ebbfcf9507aba"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-teacher-trained-profile-v1.json",
+      "member": "files/0034",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 657,
+      "sha256": "9a3ad49ba39645fa9c11e4da5786b3f64fe442e2eaeb5d2044afc919270ee8da"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-teacher-trained-profile-v2.json",
+      "member": "files/0035",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 27144,
+      "sha256": "daface422c690e1e989599fb8378317c9bf37f2d773ee5977e08a7f8273179d9"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-teacher8192-v1/20262905/labels-00004096.json.gz",
+      "member": "files/0036",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 1201176,
+      "sha256": "64104394a216fc5f679a885d7a95e7145540c50700a75db11c006e4b6156ef8a"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-teacher8192-v1/20262905/partial-labels.jsonl",
+      "member": "files/0037",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 4983780,
+      "sha256": "835311a3254db5e775d447ead1aa52718b7e577e55482fdab4a1feb495dea40b"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-teacher8192-v1/20262905/selection.json",
+      "member": "files/0038",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 3116944,
+      "sha256": "08c612152c011f2a856613d3bebd62d373138742f7a5605b7b24a9e7d73e89b6"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-teacher8192-v1/20262906/labels-00004096.json.gz",
+      "member": "files/0039",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 1215098,
+      "sha256": "43956d265b5363079682d5cd82dc6218667ed4253c3e01c0154ce1268acab10e"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-teacher8192-v1/20262906/partial-labels.jsonl",
+      "member": "files/0040",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 4995666,
+      "sha256": "3e86f8899a764eda31727fb3aba3751675672f1fb85dd1b67d86099e843cb18c"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-teacher8192-v1/20262906/selection.json",
+      "member": "files/0041",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 3126695,
+      "sha256": "47848ba93d36a6ffca52177531ee23acbbcb5dfda57da38aceddec9fb6580e05"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE16-architecture-preflight-v1/result.json",
+      "member": "files/0042",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 11798,
+      "sha256": "81db10c4c80c12d14fdf63f8544289cae450b5a8dd63af663ba5e633c024f133"
+    },
+    {
+      "path": "/dev/shm/harbichess-V8-anonymous-readback-v2.json",
+      "member": "files/0043",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 169874,
+      "sha256": "05c8ebe21d3614202d8da39a09861888a9239e9836c0e614d030d43add140843"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-architecture-v2/20262905/profile.json",
+      "member": "files/0044",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 7685,
+      "sha256": "ac2bff333fb1cc02f3eeadf7a082aec31a704730d9e3ac8f0413cbb4be8c396f"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-architecture-v2/20262906/profile.json",
+      "member": "files/0045",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 7933,
+      "sha256": "74cd86a02d85aa5582aaef61a57d8abde3a4119d48626278ba01451dcd300914"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-fit-v2/20262905/candidate.json",
+      "member": "files/0046",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 646,
+      "sha256": "6da5a0ee5626cfc8060c94099399099d4c220a7a174240a28a7929c68bc35ba9"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-fit-v2/20262905/fresh-load-0/candidate.json",
+      "member": "files/0047",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 422,
+      "sha256": "7822e27d4b634def275740479f18dc2e0430b5e07c32d843b8fbeacf902130c1"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-fit-v2/20262905/fresh-load-0/initial.json",
+      "member": "files/0048",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 18137,
+      "sha256": "c37d485a54932b8b17b72e8f36261aaa2624b84ac95657a9f73644c6bef330ea"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-fit-v2/20262905/fresh-load-0/native.json",
+      "member": "files/0049",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 18137,
+      "sha256": "c37d485a54932b8b17b72e8f36261aaa2624b84ac95657a9f73644c6bef330ea"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-fit-v2/20262905/fresh-load-0/result.json",
+      "member": "files/0050",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 211,
+      "sha256": "5e2cd52cb716c40d15af140e7386a711ba70aadeced6bd6e6110ebfcd85c8e25"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-fit-v2/20262905/fresh-load-0-owner.json",
+      "member": "files/0051",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 421,
+      "sha256": "f18c1193f51fdf8515e991a54a474d2415ffeaf8e49aac26b30dd6724bc99268"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-fit-v2/20262905/fresh-load-0-registration.json",
+      "member": "files/0052",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 3307,
+      "sha256": "ba340aff078247a2b50c4a1082b52a4ee98c1dc51ad0a08aaa1735152b05fcb8"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-fit-v2/20262905/fresh-load-0.log",
+      "member": "files/0053",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-fit-v2/20262905/fresh-load-1/candidate.json",
+      "member": "files/0054",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 646,
+      "sha256": "6da5a0ee5626cfc8060c94099399099d4c220a7a174240a28a7929c68bc35ba9"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-fit-v2/20262905/fresh-load-1/initial.json",
+      "member": "files/0055",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 19082,
+      "sha256": "9b0dc03f1c318daeee237fa101902b3895788950d979ad8b37b68c9e209e9e6c"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-fit-v2/20262905/fresh-load-1/native.json",
+      "member": "files/0056",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 19082,
+      "sha256": "9b0dc03f1c318daeee237fa101902b3895788950d979ad8b37b68c9e209e9e6c"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-fit-v2/20262905/fresh-load-1/result.json",
+      "member": "files/0057",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 212,
+      "sha256": "766bddca10df6fbb852b0f7e148d178526d8aa6bbd58a58dd2f6dc457ab5dd5f"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-fit-v2/20262905/fresh-load-1-owner.json",
+      "member": "files/0058",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 421,
+      "sha256": "8a3f0236165f84eb888ff32607d2a781e37d42cb5cfa35c97f51f860b6858e27"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-fit-v2/20262905/fresh-load-1-registration.json",
+      "member": "files/0059",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 3307,
+      "sha256": "2677a5f85a24374a6aa7631a09de93b0e09d9fdbf5124b3aab07dee3efb908bb"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-fit-v2/20262905/fresh-load-1.log",
+      "member": "files/0060",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-fit-v2/20262905/fresh-loads.json",
+      "member": "files/0061",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 900,
+      "sha256": "74b361ef9ff5566b817534a4ad2828366b6e66246b7ec710f2a32a9a9f9272bc"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-fit-v2/20262905/fresh48/candidate.json",
+      "member": "files/0062",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 646,
+      "sha256": "6da5a0ee5626cfc8060c94099399099d4c220a7a174240a28a7929c68bc35ba9"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-fit-v2/20262905/fresh48/initial.json",
+      "member": "files/0063",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 18137,
+      "sha256": "c37d485a54932b8b17b72e8f36261aaa2624b84ac95657a9f73644c6bef330ea"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-fit-v2/20262905/fresh48/native.json",
+      "member": "files/0064",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 19082,
+      "sha256": "9b0dc03f1c318daeee237fa101902b3895788950d979ad8b37b68c9e209e9e6c"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-fit-v2/20262905/fresh48/result.json",
+      "member": "files/0065",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 214,
+      "sha256": "3499d95c2b45462e6a4a4c526c7293e61568ca0135c1a10d0590e2227829ef42"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-fit-v2/20262905/fresh48-owner.json",
+      "member": "files/0066",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 321,
+      "sha256": "e47960eb16d0633d0becfe2c59951c1aeeccaec748478cacac546be1d3555d8f"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-fit-v2/20262905/fresh48-registration.json",
+      "member": "files/0067",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 3302,
+      "sha256": "01ce5b3c38c078db37342784881c4231a97b2f4a9b449f04f08ef703eb431a7a"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-fit-v2/20262905/fresh48.log",
+      "member": "files/0068",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-fit-v2/20262905/initial.json",
+      "member": "files/0069",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 18137,
+      "sha256": "c37d485a54932b8b17b72e8f36261aaa2624b84ac95657a9f73644c6bef330ea"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-fit-v2/20262905/native.json",
+      "member": "files/0070",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 19082,
+      "sha256": "9b0dc03f1c318daeee237fa101902b3895788950d979ad8b37b68c9e209e9e6c"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-fit-v2/20262905/result.json",
+      "member": "files/0071",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 214,
+      "sha256": "3499d95c2b45462e6a4a4c526c7293e61568ca0135c1a10d0590e2227829ef42"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-fit-v2/20262906/candidate.json",
+      "member": "files/0072",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 662,
+      "sha256": "70fa6a41f2c7d7caed85eaa4297f77fa826378317cf6935e5d70a707631c90fa"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-fit-v2/20262906/fresh-load-0/candidate.json",
+      "member": "files/0073",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 422,
+      "sha256": "7822e27d4b634def275740479f18dc2e0430b5e07c32d843b8fbeacf902130c1"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-fit-v2/20262906/fresh-load-0/initial.json",
+      "member": "files/0074",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 18127,
+      "sha256": "90a48353aa8b33fe9ec3b77ab1b5734985a97b6c9bf2e107a92a5a5877425a63"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-fit-v2/20262906/fresh-load-0/native.json",
+      "member": "files/0075",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 18127,
+      "sha256": "90a48353aa8b33fe9ec3b77ab1b5734985a97b6c9bf2e107a92a5a5877425a63"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-fit-v2/20262906/fresh-load-0/result.json",
+      "member": "files/0076",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 212,
+      "sha256": "a3b6f5dd0bede72904d29ddc59e44a95dbbf77ddc3d179f41dbb2ccbc7eee924"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-fit-v2/20262906/fresh-load-0-owner.json",
+      "member": "files/0077",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 421,
+      "sha256": "ae10a7240aa222083a6b6859f871a369b9179a7bdee2079805b6dbf5d07e0ce5"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-fit-v2/20262906/fresh-load-0-registration.json",
+      "member": "files/0078",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 3307,
+      "sha256": "3d37edab448d5387bb6aad005029005594d6859ecdf54972b7f0074532abeafc"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-fit-v2/20262906/fresh-load-0.log",
+      "member": "files/0079",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-fit-v2/20262906/fresh-load-1/candidate.json",
+      "member": "files/0080",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 662,
+      "sha256": "70fa6a41f2c7d7caed85eaa4297f77fa826378317cf6935e5d70a707631c90fa"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-fit-v2/20262906/fresh-load-1/initial.json",
+      "member": "files/0081",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 19159,
+      "sha256": "38a24c17503e42bb410127c01c91412cd16fa019ed7eae15014013251ac9b3b7"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-fit-v2/20262906/fresh-load-1/native.json",
+      "member": "files/0082",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 19159,
+      "sha256": "38a24c17503e42bb410127c01c91412cd16fa019ed7eae15014013251ac9b3b7"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-fit-v2/20262906/fresh-load-1/result.json",
+      "member": "files/0083",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 213,
+      "sha256": "5cc0d9a5f15166e5a5e2212d771dd4769b1553c4a1d592fa7801c29d2ffee3b2"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-fit-v2/20262906/fresh-load-1-owner.json",
+      "member": "files/0084",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 421,
+      "sha256": "bda1490f9e8c9eb238b654f1cde02ab10496cd42745ef1ce617e04e8b341ad75"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-fit-v2/20262906/fresh-load-1-registration.json",
+      "member": "files/0085",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 3307,
+      "sha256": "4b6ffbbe1492430c2864ebfe9a8d453da68d0bb4e3e5dddf63e0ab452e915c8f"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-fit-v2/20262906/fresh-load-1.log",
+      "member": "files/0086",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-fit-v2/20262906/fresh-loads.json",
+      "member": "files/0087",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 900,
+      "sha256": "bbf455098d044a2da33b3b1b10e8e1d25473cc0ff47a1b998c0c1648a967b383"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-fit-v2/20262906/fresh48/candidate.json",
+      "member": "files/0088",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 662,
+      "sha256": "70fa6a41f2c7d7caed85eaa4297f77fa826378317cf6935e5d70a707631c90fa"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-fit-v2/20262906/fresh48/initial.json",
+      "member": "files/0089",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 18127,
+      "sha256": "90a48353aa8b33fe9ec3b77ab1b5734985a97b6c9bf2e107a92a5a5877425a63"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-fit-v2/20262906/fresh48/native.json",
+      "member": "files/0090",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 19159,
+      "sha256": "38a24c17503e42bb410127c01c91412cd16fa019ed7eae15014013251ac9b3b7"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-fit-v2/20262906/fresh48/result.json",
+      "member": "files/0091",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 214,
+      "sha256": "d3ae13ed05fff510e4bca8b5973c6e920f8c3baac1f96eddc8c3a912a3cff83c"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-fit-v2/20262906/fresh48-owner.json",
+      "member": "files/0092",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 321,
+      "sha256": "076f0c30a3b4e77aff1441d025fb73e33f522445dd626461b2287fe9d0e485b1"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-fit-v2/20262906/fresh48-registration.json",
+      "member": "files/0093",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 3302,
+      "sha256": "b336e754414e3cdf89e708ce348214ff22eb08677f530194074b7f3837e17c05"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-fit-v2/20262906/fresh48.log",
+      "member": "files/0094",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-fit-v2/20262906/initial.json",
+      "member": "files/0095",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 18127,
+      "sha256": "90a48353aa8b33fe9ec3b77ab1b5734985a97b6c9bf2e107a92a5a5877425a63"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-fit-v2/20262906/native.json",
+      "member": "files/0096",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 19159,
+      "sha256": "38a24c17503e42bb410127c01c91412cd16fa019ed7eae15014013251ac9b3b7"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-fit-v2/20262906/result.json",
+      "member": "files/0097",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 214,
+      "sha256": "d3ae13ed05fff510e4bca8b5973c6e920f8c3baac1f96eddc8c3a912a3cff83c"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-proof-v2/20262905/qualification.json",
+      "member": "files/0098",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 2231,
+      "sha256": "67d74510c350d73e1dde0ff650d9f87e65461c984a42b37e5e6c5983cfbf1745"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-proof-v2/20262905/resume/candidate.json",
+      "member": "files/0099",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 652,
+      "sha256": "83fcddbfb3641a79c47071a8dba5412103752655b03cab54d7e4ed47c993bcd4"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-proof-v2/20262905/resume/initial.json",
+      "member": "files/0100",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 18757,
+      "sha256": "1ca8574831efdf989ab947a1c09457e0d7968df2ba9152dc40bf3e804a948815"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-proof-v2/20262905/resume/native.json",
+      "member": "files/0101",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 18730,
+      "sha256": "103fdde08fe9a51751e8cfb332eb08f6fbbc2e49c8f8276a3047b5b823e27562"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-proof-v2/20262905/resume/result.json",
+      "member": "files/0102",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 213,
+      "sha256": "3362433be83d71bc4fba36ad1a09c268d19963edc3a1c3a935ec748508c264b7"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-proof-v2/20262905/resume-registration.json",
+      "member": "files/0103",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 2945,
+      "sha256": "a38ccfea000e1a143bc3a57133820d31c3fd33bce1b461360de15d926a4ccd51"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-proof-v2/20262905/resume.stdout",
+      "member": "files/0104",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-proof-v2/20262905/split/candidate.json",
+      "member": "files/0105",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 656,
+      "sha256": "551d8cea5b4ef113f86b1370b27baff7aea38bc679519eeaa038134cbe2de70a"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-proof-v2/20262905/split/initial.json",
+      "member": "files/0106",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 17779,
+      "sha256": "8a60a7b80a180615bdad0dcf4206f6e88942e57a032aa8ace29a21ab64a18f22"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-proof-v2/20262905/split/native.json",
+      "member": "files/0107",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 18757,
+      "sha256": "1ca8574831efdf989ab947a1c09457e0d7968df2ba9152dc40bf3e804a948815"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-proof-v2/20262905/split/result.json",
+      "member": "files/0108",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 213,
+      "sha256": "c4af8817706b8cbd171ae273419b11f0845d30779acd973cd3c0c1328314ab7f"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-proof-v2/20262905/split-registration.json",
+      "member": "files/0109",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 2944,
+      "sha256": "5137583c41a4a18ad9c371c72c776123ec45ab7a8f4e7f768334d14facd05f08"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-proof-v2/20262905/split.stdout",
+      "member": "files/0110",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-proof-v2/20262905/strict-0/candidate.json",
+      "member": "files/0111",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 422,
+      "sha256": "7822e27d4b634def275740479f18dc2e0430b5e07c32d843b8fbeacf902130c1"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-proof-v2/20262905/strict-0/initial.json",
+      "member": "files/0112",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 17779,
+      "sha256": "8a60a7b80a180615bdad0dcf4206f6e88942e57a032aa8ace29a21ab64a18f22"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-proof-v2/20262905/strict-0/native.json",
+      "member": "files/0113",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 17779,
+      "sha256": "8a60a7b80a180615bdad0dcf4206f6e88942e57a032aa8ace29a21ab64a18f22"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-proof-v2/20262905/strict-0/result.json",
+      "member": "files/0114",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 213,
+      "sha256": "c2c94dcb0c94e0edb752ecf72b1b39619c1ae7bf8e6fa5f3087790ebd8898b5a"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-proof-v2/20262905/strict-0-registration.json",
+      "member": "files/0115",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 2947,
+      "sha256": "18c02886f95229f822e486c7f82b256a5e6eb20d97d183282334a3a486af735f"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-proof-v2/20262905/strict-0.stdout",
+      "member": "files/0116",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-proof-v2/20262905/strict-1/candidate.json",
+      "member": "files/0117",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 652,
+      "sha256": "83fcddbfb3641a79c47071a8dba5412103752655b03cab54d7e4ed47c993bcd4"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-proof-v2/20262905/strict-1/initial.json",
+      "member": "files/0118",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 18730,
+      "sha256": "103fdde08fe9a51751e8cfb332eb08f6fbbc2e49c8f8276a3047b5b823e27562"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-proof-v2/20262905/strict-1/native.json",
+      "member": "files/0119",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 18730,
+      "sha256": "103fdde08fe9a51751e8cfb332eb08f6fbbc2e49c8f8276a3047b5b823e27562"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-proof-v2/20262905/strict-1/result.json",
+      "member": "files/0120",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 213,
+      "sha256": "be5c0a112ee8feb87800a5bf74ed5df2a178507d0514f4e21e619a1cd95549ed"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-proof-v2/20262905/strict-1-registration.json",
+      "member": "files/0121",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 2947,
+      "sha256": "6e49294a38eb42afe323da5e904f20a038d765516f8b0e165e64342f16a2f6a7"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-proof-v2/20262905/strict-1.stdout",
+      "member": "files/0122",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-proof-v2/20262905/strict-2/candidate.json",
+      "member": "files/0123",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 422,
+      "sha256": "7822e27d4b634def275740479f18dc2e0430b5e07c32d843b8fbeacf902130c1"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-proof-v2/20262905/strict-2/initial.json",
+      "member": "files/0124",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 17779,
+      "sha256": "8a60a7b80a180615bdad0dcf4206f6e88942e57a032aa8ace29a21ab64a18f22"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-proof-v2/20262905/strict-2/native.json",
+      "member": "files/0125",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 17779,
+      "sha256": "8a60a7b80a180615bdad0dcf4206f6e88942e57a032aa8ace29a21ab64a18f22"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-proof-v2/20262905/strict-2/result.json",
+      "member": "files/0126",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 213,
+      "sha256": "d0a05fad2d89afe8870c9811e004f01fd28d08f91f22ff5d88a7fb250647692c"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-proof-v2/20262905/strict-2-registration.json",
+      "member": "files/0127",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 2947,
+      "sha256": "b1814091cafeb0b86d7006638319a37e3c5354a714e20a4d3729f350320d11f9"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-proof-v2/20262905/strict-2.stdout",
+      "member": "files/0128",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-proof-v2/20262905/strict-3/candidate.json",
+      "member": "files/0129",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 656,
+      "sha256": "551d8cea5b4ef113f86b1370b27baff7aea38bc679519eeaa038134cbe2de70a"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-proof-v2/20262905/strict-3/initial.json",
+      "member": "files/0130",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 18757,
+      "sha256": "1ca8574831efdf989ab947a1c09457e0d7968df2ba9152dc40bf3e804a948815"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-proof-v2/20262905/strict-3/native.json",
+      "member": "files/0131",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 18757,
+      "sha256": "1ca8574831efdf989ab947a1c09457e0d7968df2ba9152dc40bf3e804a948815"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-proof-v2/20262905/strict-3/result.json",
+      "member": "files/0132",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 213,
+      "sha256": "023eb1132e293164bb6175865e7f35c9dfd1e645d8e8115cdf94defedfe31ac4"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-proof-v2/20262905/strict-3-registration.json",
+      "member": "files/0133",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 2947,
+      "sha256": "e5ddbd432f9da7951dd280a76be0902b4195834da1767f68687470045edebdac"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-proof-v2/20262905/strict-3.stdout",
+      "member": "files/0134",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-proof-v2/20262905/strict-4/candidate.json",
+      "member": "files/0135",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 656,
+      "sha256": "551d8cea5b4ef113f86b1370b27baff7aea38bc679519eeaa038134cbe2de70a"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-proof-v2/20262905/strict-4/initial.json",
+      "member": "files/0136",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 18757,
+      "sha256": "1ca8574831efdf989ab947a1c09457e0d7968df2ba9152dc40bf3e804a948815"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-proof-v2/20262905/strict-4/native.json",
+      "member": "files/0137",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 18757,
+      "sha256": "1ca8574831efdf989ab947a1c09457e0d7968df2ba9152dc40bf3e804a948815"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-proof-v2/20262905/strict-4/result.json",
+      "member": "files/0138",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 213,
+      "sha256": "fad7dc166306e8ad89911a33d668bd3f9f3af87a08c6de464e6a9421ceeae992"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-proof-v2/20262905/strict-4-registration.json",
+      "member": "files/0139",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 2947,
+      "sha256": "9d020e677571ead804ee6332c3c0eab766df1bd35659a9027704cd06e21b6a09"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-proof-v2/20262905/strict-4.stdout",
+      "member": "files/0140",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-proof-v2/20262905/strict-5/candidate.json",
+      "member": "files/0141",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 652,
+      "sha256": "83fcddbfb3641a79c47071a8dba5412103752655b03cab54d7e4ed47c993bcd4"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-proof-v2/20262905/strict-5/initial.json",
+      "member": "files/0142",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 18730,
+      "sha256": "103fdde08fe9a51751e8cfb332eb08f6fbbc2e49c8f8276a3047b5b823e27562"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-proof-v2/20262905/strict-5/native.json",
+      "member": "files/0143",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 18730,
+      "sha256": "103fdde08fe9a51751e8cfb332eb08f6fbbc2e49c8f8276a3047b5b823e27562"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-proof-v2/20262905/strict-5/result.json",
+      "member": "files/0144",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 213,
+      "sha256": "34d5dbfe3c9bc3815b23a1a404304d5775ec040c9f562b687559e2814e5fcb78"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-proof-v2/20262905/strict-5-registration.json",
+      "member": "files/0145",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 2947,
+      "sha256": "16e6aec3be85eee805934c402f2c21b3874156afc8c942fec803f39fe8b9def1"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-proof-v2/20262905/strict-5.stdout",
+      "member": "files/0146",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-proof-v2/20262905/whole/candidate.json",
+      "member": "files/0147",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 652,
+      "sha256": "83fcddbfb3641a79c47071a8dba5412103752655b03cab54d7e4ed47c993bcd4"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-proof-v2/20262905/whole/initial.json",
+      "member": "files/0148",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 17779,
+      "sha256": "8a60a7b80a180615bdad0dcf4206f6e88942e57a032aa8ace29a21ab64a18f22"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-proof-v2/20262905/whole/native.json",
+      "member": "files/0149",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 18730,
+      "sha256": "103fdde08fe9a51751e8cfb332eb08f6fbbc2e49c8f8276a3047b5b823e27562"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-proof-v2/20262905/whole/result.json",
+      "member": "files/0150",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 213,
+      "sha256": "de38f7c124d17877f0ba918c42e18c7bdd5ddc1cda808d7c462b7098640cbda2"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-proof-v2/20262905/whole-registration.json",
+      "member": "files/0151",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 2944,
+      "sha256": "d0c2a3af7a6d88a9822276aa361b70641d28821114249e40fad98e3d5a011f44"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-proof-v2/20262905/whole.stdout",
+      "member": "files/0152",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-proof-v2/20262906/qualification.json",
+      "member": "files/0153",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 2230,
+      "sha256": "e653367aef251b4986ec54dc2877a3b7571b248d324a5c67a8f4d5cb136df73c"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-proof-v2/20262906/resume/candidate.json",
+      "member": "files/0154",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 668,
+      "sha256": "e6886ba039ab80a6e3e81e66463b9eb6ea920c5fbf52701411ce78b634abb90d"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-proof-v2/20262906/resume/initial.json",
+      "member": "files/0155",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 18812,
+      "sha256": "1b04c886c77532eb217acaee990390143fad783601ae45b4b288a3ca373e106d"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-proof-v2/20262906/resume/native.json",
+      "member": "files/0156",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 18799,
+      "sha256": "d329d76e06eb6f07b6abd005c62b24e0f77b1a4748d057907c4b6a473734ba99"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-proof-v2/20262906/resume/result.json",
+      "member": "files/0157",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 213,
+      "sha256": "3e68f32620d88675e3cf3a7d1b91653583a1f211dd30c025d7fd9700c12db939"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-proof-v2/20262906/resume-registration.json",
+      "member": "files/0158",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 2945,
+      "sha256": "519a869a648756f2adb59115dcfd5d1eea136ba7086043a410e66d87a1b8d39e"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-proof-v2/20262906/resume.stdout",
+      "member": "files/0159",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-proof-v2/20262906/split/candidate.json",
+      "member": "files/0160",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 673,
+      "sha256": "ab40ee08e22a43a99c96dd9adbcf7ef4760d0d5cc8f69255f34cc50d40155bc8"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-proof-v2/20262906/split/initial.json",
+      "member": "files/0161",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 17769,
+      "sha256": "527cf73d166dce817306b18f62326ea043b44dad92132e0bb23802ac7b0f7f0c"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-proof-v2/20262906/split/native.json",
+      "member": "files/0162",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 18812,
+      "sha256": "1b04c886c77532eb217acaee990390143fad783601ae45b4b288a3ca373e106d"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-proof-v2/20262906/split/result.json",
+      "member": "files/0163",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 213,
+      "sha256": "61b190fbd2f302b9c1e60f39fefafdafab48d986e5c91b5a283907f1d1fb5ff7"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-proof-v2/20262906/split-registration.json",
+      "member": "files/0164",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 2944,
+      "sha256": "aebd8fdfe84b633def21b4bcc66681b067fd53ce9aa3b40e965792ecd4554f8e"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-proof-v2/20262906/split.stdout",
+      "member": "files/0165",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-proof-v2/20262906/strict-0/candidate.json",
+      "member": "files/0166",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 422,
+      "sha256": "7822e27d4b634def275740479f18dc2e0430b5e07c32d843b8fbeacf902130c1"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-proof-v2/20262906/strict-0/initial.json",
+      "member": "files/0167",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 17769,
+      "sha256": "527cf73d166dce817306b18f62326ea043b44dad92132e0bb23802ac7b0f7f0c"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-proof-v2/20262906/strict-0/native.json",
+      "member": "files/0168",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 17769,
+      "sha256": "527cf73d166dce817306b18f62326ea043b44dad92132e0bb23802ac7b0f7f0c"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-proof-v2/20262906/strict-0/result.json",
+      "member": "files/0169",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 212,
+      "sha256": "684770c7d4a835d7930fad0035a297f49f3723e1bd3d3ffd30b8dab0e2b8f4f1"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-proof-v2/20262906/strict-0-registration.json",
+      "member": "files/0170",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 2947,
+      "sha256": "e1eb475db700714924f9b8885868a3eeb4746bd71c54270756708c78014950e4"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-proof-v2/20262906/strict-0.stdout",
+      "member": "files/0171",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-proof-v2/20262906/strict-1/candidate.json",
+      "member": "files/0172",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 668,
+      "sha256": "e6886ba039ab80a6e3e81e66463b9eb6ea920c5fbf52701411ce78b634abb90d"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-proof-v2/20262906/strict-1/initial.json",
+      "member": "files/0173",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 18799,
+      "sha256": "d329d76e06eb6f07b6abd005c62b24e0f77b1a4748d057907c4b6a473734ba99"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-proof-v2/20262906/strict-1/native.json",
+      "member": "files/0174",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 18799,
+      "sha256": "d329d76e06eb6f07b6abd005c62b24e0f77b1a4748d057907c4b6a473734ba99"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-proof-v2/20262906/strict-1/result.json",
+      "member": "files/0175",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 213,
+      "sha256": "4085817ce87195788555fff240361fbcc6d817e221f6134b3257b80dc9e47f17"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-proof-v2/20262906/strict-1-registration.json",
+      "member": "files/0176",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 2947,
+      "sha256": "0aa2c8c0fcbcc366d54108ef5136fe3db04fae270c451175b0846923eed8affb"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-proof-v2/20262906/strict-1.stdout",
+      "member": "files/0177",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-proof-v2/20262906/strict-2/candidate.json",
+      "member": "files/0178",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 422,
+      "sha256": "7822e27d4b634def275740479f18dc2e0430b5e07c32d843b8fbeacf902130c1"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-proof-v2/20262906/strict-2/initial.json",
+      "member": "files/0179",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 17769,
+      "sha256": "527cf73d166dce817306b18f62326ea043b44dad92132e0bb23802ac7b0f7f0c"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-proof-v2/20262906/strict-2/native.json",
+      "member": "files/0180",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 17769,
+      "sha256": "527cf73d166dce817306b18f62326ea043b44dad92132e0bb23802ac7b0f7f0c"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-proof-v2/20262906/strict-2/result.json",
+      "member": "files/0181",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 211,
+      "sha256": "211a2416c041dc04a4e617e28b8abd46418e5283492fcf7410d6b359161c9437"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-proof-v2/20262906/strict-2-registration.json",
+      "member": "files/0182",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 2947,
+      "sha256": "6a88cc67535be1059aa97fb56606f2e59666b7106bd5772a17b9a95948fbdcdb"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-proof-v2/20262906/strict-2.stdout",
+      "member": "files/0183",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-proof-v2/20262906/strict-3/candidate.json",
+      "member": "files/0184",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 673,
+      "sha256": "ab40ee08e22a43a99c96dd9adbcf7ef4760d0d5cc8f69255f34cc50d40155bc8"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-proof-v2/20262906/strict-3/initial.json",
+      "member": "files/0185",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 18812,
+      "sha256": "1b04c886c77532eb217acaee990390143fad783601ae45b4b288a3ca373e106d"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-proof-v2/20262906/strict-3/native.json",
+      "member": "files/0186",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 18812,
+      "sha256": "1b04c886c77532eb217acaee990390143fad783601ae45b4b288a3ca373e106d"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-proof-v2/20262906/strict-3/result.json",
+      "member": "files/0187",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 213,
+      "sha256": "031608001ef9ca58a177779cfe9fd84ab8f54b07e89bc8a128117ed30bc49977"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-proof-v2/20262906/strict-3-registration.json",
+      "member": "files/0188",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 2947,
+      "sha256": "aaec13082c22bd368449c990b8db6b82aa1a37e24c2e16f9e6a8a463027f1448"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-proof-v2/20262906/strict-3.stdout",
+      "member": "files/0189",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-proof-v2/20262906/strict-4/candidate.json",
+      "member": "files/0190",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 673,
+      "sha256": "ab40ee08e22a43a99c96dd9adbcf7ef4760d0d5cc8f69255f34cc50d40155bc8"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-proof-v2/20262906/strict-4/initial.json",
+      "member": "files/0191",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 18812,
+      "sha256": "1b04c886c77532eb217acaee990390143fad783601ae45b4b288a3ca373e106d"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-proof-v2/20262906/strict-4/native.json",
+      "member": "files/0192",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 18812,
+      "sha256": "1b04c886c77532eb217acaee990390143fad783601ae45b4b288a3ca373e106d"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-proof-v2/20262906/strict-4/result.json",
+      "member": "files/0193",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 213,
+      "sha256": "448eb4687be7e03bf7d4d149912ea559ebecdcd583977b2bdbda1e35aaf5dee9"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-proof-v2/20262906/strict-4-registration.json",
+      "member": "files/0194",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 2947,
+      "sha256": "a89b208e1bfd24f459ce7724a114d934ccdf32fda4d88d44272b80bf740241f2"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-proof-v2/20262906/strict-4.stdout",
+      "member": "files/0195",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-proof-v2/20262906/strict-5/candidate.json",
+      "member": "files/0196",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 668,
+      "sha256": "e6886ba039ab80a6e3e81e66463b9eb6ea920c5fbf52701411ce78b634abb90d"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-proof-v2/20262906/strict-5/initial.json",
+      "member": "files/0197",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 18799,
+      "sha256": "d329d76e06eb6f07b6abd005c62b24e0f77b1a4748d057907c4b6a473734ba99"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-proof-v2/20262906/strict-5/native.json",
+      "member": "files/0198",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 18799,
+      "sha256": "d329d76e06eb6f07b6abd005c62b24e0f77b1a4748d057907c4b6a473734ba99"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-proof-v2/20262906/strict-5/result.json",
+      "member": "files/0199",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 213,
+      "sha256": "6980211dfe7717557769a04621c9f85d934c78c8d5c1640f5e026e3ffaf622f4"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-proof-v2/20262906/strict-5-registration.json",
+      "member": "files/0200",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 2947,
+      "sha256": "f58541cb477e6b0aae6e4b6c32e577f0f41dff1e948cdb1e800ef27e84c60b7f"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-proof-v2/20262906/strict-5.stdout",
+      "member": "files/0201",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-proof-v2/20262906/whole/candidate.json",
+      "member": "files/0202",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 668,
+      "sha256": "e6886ba039ab80a6e3e81e66463b9eb6ea920c5fbf52701411ce78b634abb90d"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-proof-v2/20262906/whole/initial.json",
+      "member": "files/0203",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 17769,
+      "sha256": "527cf73d166dce817306b18f62326ea043b44dad92132e0bb23802ac7b0f7f0c"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-proof-v2/20262906/whole/native.json",
+      "member": "files/0204",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 18799,
+      "sha256": "d329d76e06eb6f07b6abd005c62b24e0f77b1a4748d057907c4b6a473734ba99"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-proof-v2/20262906/whole/result.json",
+      "member": "files/0205",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 213,
+      "sha256": "12e223831c64143f946c63dd8981d626542a1089a8bbfc016f05f9a718d70f0a"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-proof-v2/20262906/whole-registration.json",
+      "member": "files/0206",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 2944,
+      "sha256": "23703b3c145c0a9dda2e8fda0a8e84068134c7afc47bc86243cbec36a7021889"
+    },
+    {
+      "path": "/dev/shm/harbichess-balanced16-proof-v2/20262906/whole.stdout",
+      "member": "files/0207",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/dev/shm/harbichess-coarse80-strength-arena-v1/20262905-e8-vs-SF512.invocation.json",
+      "member": "files/0208",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 1038,
+      "sha256": "36cf8eaa7fb78103eebcdea1a7d5e957af0ac5c599b6018aac35d151fc64308a"
+    },
+    {
+      "path": "/dev/shm/harbichess-coarse80-strength-arena-v1/20262905-e8-vs-SF512.json",
+      "member": "files/0209",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 306202,
+      "sha256": "2983e7d832e070f98c3620b36621096dc924ccfc6abd9458fd9e1718b5c2495d"
+    },
+    {
+      "path": "/dev/shm/harbichess-coarse80-strength-arena-v1/20262905-e8-vs-SF512.owner-result.json",
+      "member": "files/0210",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 1223,
+      "sha256": "bef0916e12c9482e4693221dde88100dee82573ccb41183f3a146e3f275fb909"
+    },
+    {
+      "path": "/dev/shm/harbichess-coarse80-strength-arena-v1/20262905-e8-vs-SF512.progress.jsonl",
+      "member": "files/0211",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 241973,
+      "sha256": "e36cd320005445ba9dd60a30a43ce26a43f0e7ab0df63e9eac0218ee7c8ffdf7"
+    },
+    {
+      "path": "/dev/shm/harbichess-coarse80-strength-arena-v1/20262905-e8-vs-SF512.stderr.log",
+      "member": "files/0212",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/dev/shm/harbichess-coarse80-strength-arena-v1/20262905-e8-vs-SF512.stdout.log",
+      "member": "files/0213",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 504,
+      "sha256": "50b4c93aa21469bb838e2edb44be99fc4741bfc51c2572fad837edf431bd91b5"
+    },
+    {
+      "path": "/dev/shm/harbichess-coarse80-strength-arena-v1/20262905-learned-vs-SF512.invocation.json",
+      "member": "files/0214",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 1006,
+      "sha256": "5c7a191946d5793f2bbbee9e0aebbc3de1ccadeda8f243a8ff2d83604096b3d5"
+    },
+    {
+      "path": "/dev/shm/harbichess-coarse80-strength-arena-v1/20262905-learned-vs-SF512.json",
+      "member": "files/0215",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 319023,
+      "sha256": "5e8c9142c24774d0fe588e06f188ee3a7d4da285ebf00ebb58d71556d0c9227e"
+    },
+    {
+      "path": "/dev/shm/harbichess-coarse80-strength-arena-v1/20262905-learned-vs-SF512.owner-result.json",
+      "member": "files/0216",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 1191,
+      "sha256": "1dbfb13b61d6cb9c4120ddfed247f81591a6024a43e21414b567cffd8298e924"
+    },
+    {
+      "path": "/dev/shm/harbichess-coarse80-strength-arena-v1/20262905-learned-vs-SF512.progress.jsonl",
+      "member": "files/0217",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 252355,
+      "sha256": "6d36edf1bcbe5b39e7312c04c026eb26c4750a35fdb0876c8ce35ee185d7ad3f"
+    },
+    {
+      "path": "/dev/shm/harbichess-coarse80-strength-arena-v1/20262905-learned-vs-SF512.stderr.log",
+      "member": "files/0218",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/dev/shm/harbichess-coarse80-strength-arena-v1/20262905-learned-vs-SF512.stdout.log",
+      "member": "files/0219",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 518,
+      "sha256": "04967931cf6d0e32bc81736910cb715193abf089a6f0791fd899ecdb70880131"
+    },
+    {
+      "path": "/dev/shm/harbichess-coarse80-strength-arena-v1/20262905-learned-vs-e8.invocation.json",
+      "member": "files/0220",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 1103,
+      "sha256": "8d0e496ec928f0f52cc67c0a59259f30e240070e2fafbb9f6fb1965f3a0ff184"
+    },
+    {
+      "path": "/dev/shm/harbichess-coarse80-strength-arena-v1/20262905-learned-vs-e8.progress.jsonl",
+      "member": "files/0221",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 191022,
+      "sha256": "08f73fd67fcab8be816e51a3541417e2474413f5434d27cd0c90f970fd820b31"
+    },
+    {
+      "path": "/dev/shm/harbichess-coarse80-strength-arena-v1/20262905-learned-vs-e8.stderr.log",
+      "member": "files/0222",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/dev/shm/harbichess-coarse80-strength-arena-v1/20262905-learned-vs-e8.stdout.log",
+      "member": "files/0223",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/dev/shm/harbichess-coarse80-strength-arena-v1/20262905-prior-vs-SF512.invocation.json",
+      "member": "files/0224",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 1009,
+      "sha256": "6563e0ce9982e8b79e17582c2265b98866f74c2d33657f1e5466a83e9229e4ec"
+    },
+    {
+      "path": "/dev/shm/harbichess-coarse80-strength-arena-v1/20262905-prior-vs-SF512.json",
+      "member": "files/0225",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 381816,
+      "sha256": "a3d734d7fafb0d0f705a1487c3e3b093d6b2d1d9da4a65ab5d33812b86bda80b"
+    },
+    {
+      "path": "/dev/shm/harbichess-coarse80-strength-arena-v1/20262905-prior-vs-SF512.owner-result.json",
+      "member": "files/0226",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 1194,
+      "sha256": "de36b3151b21e3db4735ceaaaca9c606aaedef2382fe958e5ae294765debfc2d"
+    },
+    {
+      "path": "/dev/shm/harbichess-coarse80-strength-arena-v1/20262905-prior-vs-SF512.progress.jsonl",
+      "member": "files/0227",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 302440,
+      "sha256": "02201b0574f65f71ead499745c018bd0d8c676b43305c052dd0166ab30625ca7"
+    },
+    {
+      "path": "/dev/shm/harbichess-coarse80-strength-arena-v1/20262905-prior-vs-SF512.stderr.log",
+      "member": "files/0228",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/dev/shm/harbichess-coarse80-strength-arena-v1/20262905-prior-vs-SF512.stdout.log",
+      "member": "files/0229",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 512,
+      "sha256": "6197bf641cb3eb8651ada0ea6867f6ffe873a619895f5c694f3882704ce2b763"
+    },
+    {
+      "path": "/dev/shm/harbichess-coarse80-strength-arena-v1/20262906-e8-vs-SF512.invocation.json",
+      "member": "files/0230",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 1038,
+      "sha256": "4b1a40904c27ee9b4fec45bf5b7601f9b5cc419d4ed9380e66d2d7f6f6103dda"
+    },
+    {
+      "path": "/dev/shm/harbichess-coarse80-strength-arena-v1/20262906-e8-vs-SF512.json",
+      "member": "files/0231",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 306235,
+      "sha256": "8bbf1580d488db0ea27b82e920cec02eca5ac84e5be82a18023f816684b6edc4"
+    },
+    {
+      "path": "/dev/shm/harbichess-coarse80-strength-arena-v1/20262906-e8-vs-SF512.owner-result.json",
+      "member": "files/0232",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 1222,
+      "sha256": "272d2ade0607e15702c7a825ffdd005ea27aef31ede03a64dbab8135a01ff9ea"
+    },
+    {
+      "path": "/dev/shm/harbichess-coarse80-strength-arena-v1/20262906-e8-vs-SF512.progress.jsonl",
+      "member": "files/0233",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 242006,
+      "sha256": "e516a536995dd02057293a178837935929e350f7f1eb0343c8dc1a227b6ca4fb"
+    },
+    {
+      "path": "/dev/shm/harbichess-coarse80-strength-arena-v1/20262906-e8-vs-SF512.stderr.log",
+      "member": "files/0234",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/dev/shm/harbichess-coarse80-strength-arena-v1/20262906-e8-vs-SF512.stdout.log",
+      "member": "files/0235",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 504,
+      "sha256": "50b4c93aa21469bb838e2edb44be99fc4741bfc51c2572fad837edf431bd91b5"
+    },
+    {
+      "path": "/dev/shm/harbichess-coarse80-strength-arena-v1/20262906-learned-vs-SF512.invocation.json",
+      "member": "files/0236",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 1009,
+      "sha256": "3b4af1c570aa1395d22a7d61b409d74eac7c8922cdd95cdf6b6b412d44d3b958"
+    },
+    {
+      "path": "/dev/shm/harbichess-coarse80-strength-arena-v1/20262906-learned-vs-SF512.json",
+      "member": "files/0237",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 339902,
+      "sha256": "70c69f26d91f9cdca1a0e25bff4bcb951388e7bc8c841e3678b01ed668e234f0"
+    },
+    {
+      "path": "/dev/shm/harbichess-coarse80-strength-arena-v1/20262906-learned-vs-SF512.owner-result.json",
+      "member": "files/0238",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 1194,
+      "sha256": "73b513170ead8badf3b5117051e720bf3bb7343b4ba0b6307502f8021eee8153"
+    },
+    {
+      "path": "/dev/shm/harbichess-coarse80-strength-arena-v1/20262906-learned-vs-SF512.progress.jsonl",
+      "member": "files/0239",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 269032,
+      "sha256": "ae819717c0167fe4cd723a57170abacf79cde32f307580168ada1aca6d96e855"
+    },
+    {
+      "path": "/dev/shm/harbichess-coarse80-strength-arena-v1/20262906-learned-vs-SF512.stderr.log",
+      "member": "files/0240",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/dev/shm/harbichess-coarse80-strength-arena-v1/20262906-learned-vs-SF512.stdout.log",
+      "member": "files/0241",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 520,
+      "sha256": "019c9fffa2501121071d6604202dbe2c308961221a11f7eec2e99ed376c9e185"
+    },
+    {
+      "path": "/dev/shm/harbichess-coarse80-strength-arena-v1/20262906-prior-vs-SF512.invocation.json",
+      "member": "files/0242",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 1009,
+      "sha256": "41074b41eea201b519a02a4ff86bd17c560e7e5b5ba92b6dbd117d8ad2caa66a"
+    },
+    {
+      "path": "/dev/shm/harbichess-coarse80-strength-arena-v1/20262906-prior-vs-SF512.json",
+      "member": "files/0243",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 381833,
+      "sha256": "b4dcd9d7351359454662583231b51dfc25cbff4e1a6dce4880f16d321256b0e7"
+    },
+    {
+      "path": "/dev/shm/harbichess-coarse80-strength-arena-v1/20262906-prior-vs-SF512.owner-result.json",
+      "member": "files/0244",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 1194,
+      "sha256": "3dc193911888d436c1b064e4209b961a5a9a92bda0c040d21039e55b3ed55150"
+    },
+    {
+      "path": "/dev/shm/harbichess-coarse80-strength-arena-v1/20262906-prior-vs-SF512.progress.jsonl",
+      "member": "files/0245",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 302457,
+      "sha256": "44c39c8ba1867a2affbac87e64270f05f2b2538508a398806fee0e48fa5c14eb"
+    },
+    {
+      "path": "/dev/shm/harbichess-coarse80-strength-arena-v1/20262906-prior-vs-SF512.stderr.log",
+      "member": "files/0246",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/dev/shm/harbichess-coarse80-strength-arena-v1/20262906-prior-vs-SF512.stdout.log",
+      "member": "files/0247",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 512,
+      "sha256": "6197bf641cb3eb8651ada0ea6867f6ffe873a619895f5c694f3882704ce2b763"
+    },
+    {
+      "path": "/dev/shm/harbichess-coarse80-strength-arena-v1/owner-contract.json",
+      "member": "files/0248",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 752,
+      "sha256": "7b82ec78b2ba2adafd945fc3b8acc962016fdabc289ed78bf7c503a6a746a700"
+    },
+    {
+      "path": "/dev/shm/harbichess-coarse80-strength-arena-v1/resource-admission.json",
+      "member": "files/0249",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 84,
+      "sha256": "96a907249d75a4938ad6364fb3aa7fe4d6dd8b45eb125db5acfa090200f1b858"
+    },
+    {
+      "path": "/dev/shm/harbichess-coarse80-strength-arena-v1/strict-native-admission.json",
+      "member": "files/0250",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 1029,
+      "sha256": "f6c0bcbb9973e2bfe066be0d0d19a184d1dc2aea1ff626156ae834fc618d3195"
+    },
+    {
+      "path": "/workspace/HarbiChess/experiments/ufuk/cpu-classical-own-v1/prior.json",
+      "member": "files/0251",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 622,
+      "sha256": "afbaec307e5acc4b9fcb5222115c2fb8112290065ffe64e929b35f2a935565e1"
+    },
+    {
+      "path": "/workspace/HarbiChess/experiments/ufuk/cpu-classical-own-v1/value.py",
+      "member": "files/0252",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 5981,
+      "sha256": "a99cddfc397bd9221b99a70691427fdd663488b033fb239d9f48240786b2f277"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261005/NNUE-teacher-conversion-v1/20262905-controller/controller-registration.json",
+      "member": "files/0253",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 2187,
+      "sha256": "2e5fc08b891697558281d482fd41b0e40c84aa7843c734ed9d491e0e66ad8315"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261005/NNUE-teacher-conversion-v1/20262905-controller/controller.log",
+      "member": "files/0254",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 395,
+      "sha256": "0b17ebd11419a0fc851bf2c48017e6908148d40aa9501a164d7f27f3284aaaef"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261005/NNUE-teacher-conversion-v1/20262905-controller/owner-process.json",
+      "member": "files/0255",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 269,
+      "sha256": "1fa2dd7906114199db2cdb009112e89bc543df55192701a6c9b8c18b57fa6ce6"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261005/NNUE-teacher-conversion-v1/20262905-seal.json",
+      "member": "files/0256",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 835,
+      "sha256": "81c134f9c96a2d5f5f9018e5ab6d9e518ca4e57b67fd92c999a0606cd6c424fa"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261005/NNUE-teacher-conversion-v1/20262906-controller/controller-registration.json",
+      "member": "files/0257",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 2189,
+      "sha256": "26c459333e107af4c21e39ce41b686819e1bb28ffc4c673f6ef0eea483fa0d8c"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261005/NNUE-teacher-conversion-v1/20262906-controller/controller.log",
+      "member": "files/0258",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 397,
+      "sha256": "457c4d165fbec7962348bdae01ee73647f9d358fd72e622ae8087878669e4bff"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261005/NNUE-teacher-conversion-v1/20262906-controller/owner-process.json",
+      "member": "files/0259",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 271,
+      "sha256": "54ef4276a63882f125547bfde9d439d28c5b0f2303e6a62a5c4bcbb3b84de60d"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261005/NNUE-teacher-conversion-v1/20262906-seal.json",
+      "member": "files/0260",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 835,
+      "sha256": "732882ae7654183b4b5ce98b309c29aec2a5b64e808155582004bcaa66a165d1"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261005/NNUE-teacher-fit-v1/20262905-contract.json",
+      "member": "files/0261",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 4007,
+      "sha256": "6d25036db305a31259f5a90d6cf997bbefa315f77fe8c651502782858b0a8a46"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261005/NNUE-teacher-fit-v1/20262905-controller/controller-registration.json",
+      "member": "files/0262",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 3951,
+      "sha256": "37ba05ace97e387377249981f54e469ebeca9f957337f86645af04bc5b546de3"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261005/NNUE-teacher-fit-v1/20262905-controller/controller.log",
+      "member": "files/0263",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 397,
+      "sha256": "bbf6a81a50bfb655964bb9edca3c92675f6c9653910f7b9651b0c06fa046a16f"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261005/NNUE-teacher-fit-v1/20262905-controller/owner-process.json",
+      "member": "files/0264",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 264,
+      "sha256": "e4604e4104e0ef952b6d3a372376f7629cf44320bec7509b7f872a270f1dcf27"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261005/NNUE-teacher-fit-v1/20262905-registration.json",
+      "member": "files/0265",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 1000,
+      "sha256": "59a805f3e408b585f2f3f73ae64889d2422bd4c0db93142af84c90c133dd8736"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261005/NNUE-teacher-fit-v1/20262906-contract.json",
+      "member": "files/0266",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 4007,
+      "sha256": "926cb00aba5bd1b86bb2c008fd77e9930fca6cf52b3b20759a07dded149659d6"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261005/NNUE-teacher-fit-v1/20262906-controller/controller-registration.json",
+      "member": "files/0267",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 3951,
+      "sha256": "a5f85b12fdf78bb5677276ea0950c1462e4e78345e1153e3d02448290acff7cf"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261005/NNUE-teacher-fit-v1/20262906-controller/controller.log",
+      "member": "files/0268",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 397,
+      "sha256": "d84a3a12b62cef8a5f0eced982a5894be1781e284c5b5408c233cff1bb990ee7"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261005/NNUE-teacher-fit-v1/20262906-controller/owner-process.json",
+      "member": "files/0269",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 264,
+      "sha256": "c07c60ddd34681d230e10141ead7a6d3ea6ceced1d9c9cb45d9e0419fbb17c66"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261005/NNUE-teacher-fit-v1/20262906-registration.json",
+      "member": "files/0270",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 1000,
+      "sha256": "56e58407b911a018f2341813b47f66f85931070629b7b747903a169a0c67563b"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261005/NNUE-teacher-metadata-v1/20262905-controller/controller-registration.json",
+      "member": "files/0271",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 26268,
+      "sha256": "41a799f561c6e0eebdcd59e5223b4ca10f035a46814a11313ac48320e1de0609"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261005/NNUE-teacher-metadata-v1/20262905-controller/controller.log",
+      "member": "files/0272",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 397,
+      "sha256": "05bd5a3aa8c2d98c75c43ff9dab72cd980007481947eefe0feaaf17c314f9b87"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261005/NNUE-teacher-metadata-v1/20262905-controller/owner-process.json",
+      "member": "files/0273",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 269,
+      "sha256": "4cf628042f41581edaae7a478c28e8a6e12faccc8d3c02690c9c68d950e43f71"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261005/NNUE-teacher-metadata-v1/20262905-registration.json",
+      "member": "files/0274",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 2056,
+      "sha256": "5312eeac24bb81b2c2bdd8fedad5ebfb16cd8838015d0bf9e325fa7b04f50d39"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261005/NNUE-teacher-metadata-v1/20262906-controller/controller-registration.json",
+      "member": "files/0275",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 26266,
+      "sha256": "6ad894d697e3f3e0724c3a6afd727e91694860c1209979b45d464e93748e21d8"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261005/NNUE-teacher-metadata-v1/20262906-controller/controller.log",
+      "member": "files/0276",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 394,
+      "sha256": "c4c581f9cbb69b9065a4c81ea8ddda5bc99a52936f38fdcc5ba51c8dcf435a3c"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261005/NNUE-teacher-metadata-v1/20262906-controller/owner-process.json",
+      "member": "files/0277",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 267,
+      "sha256": "6c92edcca294d07f6c108a8431e8477d160449f5bb3fa0c7382b4eccce8be540"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261005/NNUE-teacher-metadata-v1/20262906-registration.json",
+      "member": "files/0278",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 2054,
+      "sha256": "0f2478e581fea4d8e9d388f2e64c9a82f70e1bc91c52793f91815ffdb785254a"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261005/NNUE-teacher-metadata-v1/known8-exclusions.json",
+      "member": "files/0279",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 33543,
+      "sha256": "2e12d6327c7403a82ef4879bc9d80eaa178726bbe73c1cedb960ecae5b425a0a"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261005/NNUE-teacher-production-v1/20262905-controller/controller-registration.json",
+      "member": "files/0280",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 26710,
+      "sha256": "a2a2b9c477878da42aecf74126476259bc6b344f6ae227161c5346002069a795"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261005/NNUE-teacher-production-v1/20262905-controller/controller.log",
+      "member": "files/0281",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 395,
+      "sha256": "a44cdf8ef2eb2d1a0da0607d1f0935bf04afcb3befe8595aec4b315d0ef10596"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261005/NNUE-teacher-production-v1/20262905-controller/owner-process.json",
+      "member": "files/0282",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 269,
+      "sha256": "6a08b485c0a305269deb16631456cd8f644fbe73e9e031eb24096eaf994b8322"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261005/NNUE-teacher-production-v1/20262905-registration.json",
+      "member": "files/0283",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 2046,
+      "sha256": "acdbdd1b2537de95441b717820c3b0c4ed27b5132dac508cd45b3bdf0c816441"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261005/NNUE-teacher-production-v1/20262906-controller/controller-registration.json",
+      "member": "files/0284",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 26710,
+      "sha256": "d9f306fda76862bd1fb03fc183b3c667c365b5665a15604c0fde7032c36dc9dc"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261005/NNUE-teacher-production-v1/20262906-controller/controller.log",
+      "member": "files/0285",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 395,
+      "sha256": "76af5a8c65a73b2f810712d6b26d953db992394974171c76da0e9232edbaa9d8"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261005/NNUE-teacher-production-v1/20262906-controller/owner-process.json",
+      "member": "files/0286",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 269,
+      "sha256": "b4524c52d3a0e8822a5eb2f5feb4932ef800214c103563a5e6df1d072b58f080"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261005/NNUE-teacher-production-v1/20262906-registration.json",
+      "member": "files/0287",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 2046,
+      "sha256": "8f2591ad8d641805aaf0cddcf0d66eafd9c9199a0a98498301c66bfcba648c01"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261005/NNUE-teacher-production-v1/known8-exclusions.json",
+      "member": "files/0288",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 34082,
+      "sha256": "b8efbd623c92b85aa343acb9e832ee1c9bae9a56544c18c4e5f06f38e737898b"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261005/NNUE-teacher-proof-v1/20262905-contract.json",
+      "member": "files/0289",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 3685,
+      "sha256": "f39dce438cddbb0fbab178e2f549940e6d3942857aa100a86834676a80447f3f"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261005/NNUE-teacher-proof-v1/20262905-controller/controller-registration.json",
+      "member": "files/0290",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 3821,
+      "sha256": "e062447f538399d24e1f58807e92b0a7d4d23286c8909078e6008c79b1904756"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261005/NNUE-teacher-proof-v1/20262905-controller/controller.log",
+      "member": "files/0291",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 397,
+      "sha256": "1471b181014a733b6fd54c53f165486212046b920dd3d665cb78745eee5146fb"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261005/NNUE-teacher-proof-v1/20262905-controller/owner-process.json",
+      "member": "files/0292",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 266,
+      "sha256": "02b57677777f944596b84d89d74577ab456b50a5676bbf31a1027d067639749d"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261005/NNUE-teacher-proof-v1/20262905-registration.json",
+      "member": "files/0293",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 1000,
+      "sha256": "a4939231d636e9fb4034c1e826e03d83b22c11aa3475b843c29c3fbea3151c3c"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261005/NNUE-teacher-proof-v1/20262906-contract.json",
+      "member": "files/0294",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 3685,
+      "sha256": "962d46d518a89aa5ea576976b455fa2c0bed67e5a19face6c32bbe791ba72321"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261005/NNUE-teacher-proof-v1/20262906-controller/controller-registration.json",
+      "member": "files/0295",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 3821,
+      "sha256": "30ec67dcc1a1dc66faab6a4c006dd3a00e18eb3376b09e5502e00a6039fe41be"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261005/NNUE-teacher-proof-v1/20262906-controller/controller.log",
+      "member": "files/0296",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 397,
+      "sha256": "ae30b29e87fed24cb19e05c7b72d83343ca300bda6c21715472bc945f17487cc"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261005/NNUE-teacher-proof-v1/20262906-controller/owner-process.json",
+      "member": "files/0297",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 266,
+      "sha256": "16873cb134c31e85cbc81df6a2e6c1128320b2c56d46970fe864d25348302605"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261005/NNUE-teacher-proof-v1/20262906-registration.json",
+      "member": "files/0298",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 1000,
+      "sha256": "167d0a34e802194d96f9892a7e3d310ac974761695943a94d6405aad9ed8850f"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261005/NNUE-teacher-trained-profile-v1/owner/controller-registration.json",
+      "member": "files/0299",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 9438,
+      "sha256": "aa76d5a84353e0b6ed2b9af620e73a32bdd4c2779f9cd453b4be51a229b43f86"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261005/NNUE-teacher-trained-profile-v1/owner/controller.log",
+      "member": "files/0300",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 408,
+      "sha256": "ff66999451dbac418100d4d7789f93a64d73797219c247da75fa8cf2e9e286f3"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261005/NNUE-teacher-trained-profile-v1/owner/owner-process.json",
+      "member": "files/0301",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 262,
+      "sha256": "822c2bebeb8ee9ba627bc9a8e55a5ff85c4f529b8225b21b04b88328fff13484"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261005/NNUE-teacher-trained-profile-v1/owner-result.json/finished.json",
+      "member": "files/0302",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 426,
+      "sha256": "c0ac66e8a2a1353e0c637fff95e7167df960a4096c5205a60773653f1c745cc2"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261005/NNUE-teacher-trained-profile-v1/owner-result.json/stderr.log",
+      "member": "files/0303",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 2047,
+      "sha256": "037a95966bda9a8dad777596a9508b196c974821cb45b04090d6bf17c11eead5"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261005/NNUE-teacher-trained-profile-v1/owner-result.json/stdout.log",
+      "member": "files/0304",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261005/NNUE-teacher-trained-profile-v1/registration.json",
+      "member": "files/0305",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 11599,
+      "sha256": "eba30fadfe5380a98757276c6b29fe763d0ab5b40d143a0022165940a71087d0"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261005/NNUE-teacher-trained-profile-v2/SAME-clock-import-only-recovery.json",
+      "member": "files/0306",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 455,
+      "sha256": "2c3c2464aa5e78f5e0993f0f74b02d5c47ddc9155fc21cd5d24d5ae8efc922c5"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261005/NNUE-teacher-trained-profile-v2/owner/controller-registration.json",
+      "member": "files/0307",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 9783,
+      "sha256": "4ef2fc3e717bd248717417995a522c4849bab22d180f05fd6f577edf3ab0ea16"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261005/NNUE-teacher-trained-profile-v2/owner/controller.log",
+      "member": "files/0308",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 397,
+      "sha256": "2f1de4bce608dacc3628915c0f3cb74ad4c53d7d9c458b85e5e8f2eff2cf25a7"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261005/NNUE-teacher-trained-profile-v2/owner/owner-process.json",
+      "member": "files/0309",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 262,
+      "sha256": "22143a5df6290e561c5f499ba7859c0ce238c369daecede2631e54f0ddd597d4"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261005/NNUE-teacher-trained-profile-v2/owner-result.json/finished.json",
+      "member": "files/0310",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 415,
+      "sha256": "8a7d16e25f1f2e11343f48de1b78c6f948fe2f242d0dca050fc61223f5126f79"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261005/NNUE-teacher-trained-profile-v2/owner-result.json/stderr.log",
+      "member": "files/0311",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261005/NNUE-teacher-trained-profile-v2/owner-result.json/stdout.log",
+      "member": "files/0312",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261005/NNUE-teacher-trained-profile-v2/registration.json",
+      "member": "files/0313",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 11759,
+      "sha256": "af1b8eea45f6749a4b2c20d8e9093b8aad58d0d71bff64551eb5c2c93a20337b"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261005/USER-wrap-up-coarse80-stop-v1.json",
+      "member": "files/0314",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 2388,
+      "sha256": "076438076f905a35ecebbab2fe20356b8a7fb624e91b6e70f02d2b72fc2e9c97"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261005/balanced16-architecture-v2/20262905-architecture.json",
+      "member": "files/0315",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 3309,
+      "sha256": "a436f7bc98ba58c2b7a55ef07303b7490cbdc73f3091fa7d2e67223eb4d7cca0"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261005/balanced16-architecture-v2/20262905-owner/controller-registration.json",
+      "member": "files/0316",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 3600,
+      "sha256": "0e163875605028d95b766fb2e351d07242e1bbe93707e788c48490d00ddbf7b4"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261005/balanced16-architecture-v2/20262905-owner/controller.log",
+      "member": "files/0317",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 395,
+      "sha256": "8df3ad0ea033ed7d1d8eb66ffe016f41ff3597799af82d397d999194293ea3d7"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261005/balanced16-architecture-v2/20262905-owner/owner-process.json",
+      "member": "files/0318",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 264,
+      "sha256": "820edd0341ea043774ed831e03fc725f654070c6aa14ebf5548e53729b7cd38e"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261005/balanced16-architecture-v2/20262905-owner-result.json/finished.json",
+      "member": "files/0319",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 413,
+      "sha256": "e54820c8284c4d261abaec7690481e5b4ec1452fb1c45ad359893934ea443f22"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261005/balanced16-architecture-v2/20262905-owner-result.json/stderr.log",
+      "member": "files/0320",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261005/balanced16-architecture-v2/20262905-owner-result.json/stdout.log",
+      "member": "files/0321",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261005/balanced16-architecture-v2/20262906-architecture.json",
+      "member": "files/0322",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 3309,
+      "sha256": "7f9ca5a1ae02dfd36a08b44fe48dca0b1d31c7e4469586c2ff051b3c4eb10a8a"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261005/balanced16-architecture-v2/20262906-owner/controller-registration.json",
+      "member": "files/0323",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 3600,
+      "sha256": "b66bc2dc26beaaf6f7a24220653104857413f100841f4b94f73a46b046bcde98"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261005/balanced16-architecture-v2/20262906-owner/controller.log",
+      "member": "files/0324",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 395,
+      "sha256": "f3831957cfeb37c180b151d4ef75dffb6ebc249f3cff57ea703bcba4e7cdac34"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261005/balanced16-architecture-v2/20262906-owner/owner-process.json",
+      "member": "files/0325",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 264,
+      "sha256": "85a35aa3429218830a2c5e6c80214b6552960f2fc820d9bc82e82e2e4dd112ba"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261005/balanced16-architecture-v2/20262906-owner-result.json/finished.json",
+      "member": "files/0326",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 413,
+      "sha256": "678d020e5e3c3f88aa4d1353ca9889f10583b06bd46d506bf44e0c047e1745d2"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261005/balanced16-architecture-v2/20262906-owner-result.json/stderr.log",
+      "member": "files/0327",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261005/balanced16-architecture-v2/20262906-owner-result.json/stdout.log",
+      "member": "files/0328",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261005/balanced16-architecture-v2/clock.json",
+      "member": "files/0329",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 116,
+      "sha256": "4b036548345c9a53feac76f989579f3261744000beb71e2f10115bad42735556"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261005/balanced16-fit-v2/20262905-fit.json",
+      "member": "files/0330",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 3294,
+      "sha256": "798d897846521bc827ff36e153d496f4c32d180e13a49162501f3df80d6f8e79"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261005/balanced16-fit-v2/20262905-owner/controller-registration.json",
+      "member": "files/0331",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 4162,
+      "sha256": "f29d51c3ec82b70d2a48234f3c350118b8c7b25598ddcd77150d397169f6da67"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261005/balanced16-fit-v2/20262905-owner/controller.log",
+      "member": "files/0332",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 396,
+      "sha256": "27ac1e5d99614318069df093d525edf292588a8a2f753f5f5c848e5ef3479eea"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261005/balanced16-fit-v2/20262905-owner/owner-process.json",
+      "member": "files/0333",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 257,
+      "sha256": "385f630785743244f1ee4fe8d36ac923ace019975763c1422bd51cdc7bd59c89"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261005/balanced16-fit-v2/20262905-owner-result.json/finished.json",
+      "member": "files/0334",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 414,
+      "sha256": "a29522dc53babbb365cf54be12129c5bfd22740a51053b41b243d7b2d2cb8d60"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261005/balanced16-fit-v2/20262905-owner-result.json/stderr.log",
+      "member": "files/0335",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261005/balanced16-fit-v2/20262905-owner-result.json/stdout.log",
+      "member": "files/0336",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261005/balanced16-fit-v2/20262906-fit.json",
+      "member": "files/0337",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 3294,
+      "sha256": "b2c4269462dc29a35c8a2f694be1e5df496b88e87c7ca5fd42e893967acfeab0"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261005/balanced16-fit-v2/20262906-owner/controller-registration.json",
+      "member": "files/0338",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 4162,
+      "sha256": "459e95f6e56fa1049fd068d290b7185f80e8b71e92863187aede60d2c0bfc2f5"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261005/balanced16-fit-v2/20262906-owner/controller.log",
+      "member": "files/0339",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 397,
+      "sha256": "a1ecc58f46fe832cee0379eab96b79b04bc745ecca79d434f81fa2844f73837a"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261005/balanced16-fit-v2/20262906-owner/owner-process.json",
+      "member": "files/0340",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 257,
+      "sha256": "9a1c379881eee0fd780f6f28cedd82b34b4d59dec97ff597b5d9e80ead481414"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261005/balanced16-fit-v2/20262906-owner-result.json/finished.json",
+      "member": "files/0341",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 415,
+      "sha256": "7f9e5989ee34bd88473877d898ef1014c27e8ae3b208db1404f4f4fc13dfba60"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261005/balanced16-fit-v2/20262906-owner-result.json/stderr.log",
+      "member": "files/0342",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261005/balanced16-fit-v2/20262906-owner-result.json/stdout.log",
+      "member": "files/0343",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261005/balanced16-fit-v2/clock.json",
+      "member": "files/0344",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 121,
+      "sha256": "e9d226aea855d5f07110dbb2dd6f6f5f908ebc0da69cb603c6c74a821562239f"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261005/balanced16-proof-v2/20262905-owner/controller-registration.json",
+      "member": "files/0345",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 3547,
+      "sha256": "ba7be4f8245caeb8e776d81edc71613c100837d7c828d682094fc870adc99b50"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261005/balanced16-proof-v2/20262905-owner/controller.log",
+      "member": "files/0346",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 396,
+      "sha256": "e826f2fb1eccb773d3a271c705da9ba76b8dae689e08b82f15b8e1ab449f42ab"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261005/balanced16-proof-v2/20262905-owner/owner-process.json",
+      "member": "files/0347",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 259,
+      "sha256": "8273a1639d618777627eb0461f3a42930551bfbafa28547143ee6bb9424fb7bb"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261005/balanced16-proof-v2/20262905-owner-result.json/finished.json",
+      "member": "files/0348",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 414,
+      "sha256": "62c299d44a8d5e9778af6430a78bc0337edd877104f93595f38ac9185f36d985"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261005/balanced16-proof-v2/20262905-owner-result.json/stderr.log",
+      "member": "files/0349",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261005/balanced16-proof-v2/20262905-owner-result.json/stdout.log",
+      "member": "files/0350",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261005/balanced16-proof-v2/20262905-proof.json",
+      "member": "files/0351",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 2938,
+      "sha256": "24ccfb475ba9949591d05cff6857c0b9504599b22074a8664cf2861940656755"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261005/balanced16-proof-v2/20262906-owner/controller-registration.json",
+      "member": "files/0352",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 3547,
+      "sha256": "cb82185a5b8f200a0a71383ece940d170bac5c8e255268729ae8150994c6eb93"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261005/balanced16-proof-v2/20262906-owner/controller.log",
+      "member": "files/0353",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 397,
+      "sha256": "ab6426ff604c8f1a9c6e241a16d25b2bbd71140be6d58f2753f3b2f0afc1dbc9"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261005/balanced16-proof-v2/20262906-owner/owner-process.json",
+      "member": "files/0354",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 259,
+      "sha256": "171a37e0bb2a842bdf341c39c2690a1e6404d67bdfc506e107cd6b13beaa380f"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261005/balanced16-proof-v2/20262906-owner-result.json/finished.json",
+      "member": "files/0355",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 415,
+      "sha256": "daea961d5cf14c82cd9b08b5ec0a046cadc08733039e191ee926cffb2bfaa45f"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261005/balanced16-proof-v2/20262906-owner-result.json/stderr.log",
+      "member": "files/0356",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261005/balanced16-proof-v2/20262906-owner-result.json/stdout.log",
+      "member": "files/0357",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261005/balanced16-proof-v2/20262906-proof.json",
+      "member": "files/0358",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 2938,
+      "sha256": "cc05f76876039c76696591b375bde69f1444432011ff35f5ff617661cce8c7c4"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261005/balanced16-proof-v2/clock.json",
+      "member": "files/0359",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 111,
+      "sha256": "e6fc1db56ddbe34e8f32778b43574f2baad200baf6409adc7054369b3b7b82f8"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261005/coarse80-arena-v1-registration/controller-registration.json",
+      "member": "files/0360",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 2739,
+      "sha256": "01a5ecf55f4354b184abd24a309f650fec8bca2643fec079083a0944217d40f4"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261005/coarse80-arena-v1-registration/controller.log",
+      "member": "files/0361",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 387,
+      "sha256": "8dd870a4dd25f69b2c3f93c6bb4f89d29ef5cd1f7f68839e445f6242e266cb74"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261005/coarse80-arena-v1-registration/owner-process.json",
+      "member": "files/0362",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 253,
+      "sha256": "483cae3e54bca1f513ecb37b15c03f0cc30ff3afcf2b40f34b3a434385eb1d63"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261005/nnue16-root-runtime-v1/architecture-preflight-registration.json",
+      "member": "files/0363",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 16844,
+      "sha256": "a15a560a3f0d92fad090469774bcd73c6194e767862e726fdf6a204272d18c52"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261005/nnue16-root-runtime-v1/architecture-preflight-v2-registration.json",
+      "member": "files/0364",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 17014,
+      "sha256": "bae4592e816700439e84bb7f0b80ae65443bf79167cde5ef64b281b21eca8af3"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261005/nnue16-root-runtime-v1/preflight-import-recovery-v2.json",
+      "member": "files/0365",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 576,
+      "sha256": "a0682c9828addf19fc28e36d9aada9a8b15d1ce14675a19601ba6099d8aaaf6b"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261005/nnue16-root-runtime-v1/preflight_nnue16_v1.py",
+      "member": "files/0366",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 5994,
+      "sha256": "8d5907e26b1d884441fccb06a8c93db5d22dbffe201708f03e3754b20c813e0f"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261005/nnue16-root-runtime-v1/preflight_nnue16_v2.py",
+      "member": "files/0367",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 6058,
+      "sha256": "11fb0e7d6aab6c5aa803e52189826484fd3c43e0fdbf21ebd3033a043658120b"
+    },
+    {
+      "path": "/workspace/work/harbichess/cpu-kingbucket-nnue-proposal/C-parity-receipt.json",
+      "member": "files/0368",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 386,
+      "sha256": "b6cd9bc585b43ed0fdf3444fb9841fa6dae874e0ec2397ff092889d260392490"
+    },
+    {
+      "path": "/workspace/work/harbichess/cpu-kingbucket-nnue-proposal/FROZEN-CLOSURE.json",
+      "member": "files/0369",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 1821,
+      "sha256": "75c80e91bec0c173be77485b4abd2400649a135c0964f12fd4e3e91727b8193e"
+    },
+    {
+      "path": "/workspace/work/harbichess/cpu-kingbucket-nnue-proposal/README.txt",
+      "member": "files/0370",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 5900,
+      "sha256": "e09a6064888977a0803396f3fa500434908f53d0f0be55a17b29c03e99d35fba"
+    },
+    {
+      "path": "/workspace/work/harbichess/cpu-kingbucket-nnue-proposal/_kingbucket16.cpython-312-x86_64-linux-gnu.so",
+      "member": "files/0371",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 16624,
+      "sha256": "495505cdebd6dbc029ee314846dbac79d5cca6d445de26c804a43821808d644b"
+    },
+    {
+      "path": "/workspace/work/harbichess/cpu-kingbucket-nnue-proposal/build-receipt.json",
+      "member": "files/0372",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 648,
+      "sha256": "d998140e9505cb667f91b8295f8aae0cd68091b03ddc387633e79fc3fb326e80"
+    },
+    {
+      "path": "/workspace/work/harbichess/cpu-kingbucket-nnue-proposal/build.py",
+      "member": "files/0373",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 1141,
+      "sha256": "aa8ce2d2bdc3b046c5be9e0ceb14b1a793147868f107a5b7a79a76505c8c39b1"
+    },
+    {
+      "path": "/workspace/work/harbichess/cpu-kingbucket-nnue-proposal/evaluator.py",
+      "member": "files/0374",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 2624,
+      "sha256": "5317e736f872a2e237e45942c8df9e797c5acee8f626bb12009464869fab8d95"
+    },
+    {
+      "path": "/workspace/work/harbichess/cpu-kingbucket-nnue-proposal/forward.c",
+      "member": "files/0375",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 2987,
+      "sha256": "454f8c8f2b5d177f0ff31fd520b9554636a278b10ddb2f1eedcd92a0f9ad44e0"
+    },
+    {
+      "path": "/workspace/work/harbichess/cpu-kingbucket-nnue-proposal/model.py",
+      "member": "files/0376",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 3877,
+      "sha256": "c04914bc5a560ad51de81c6d0aaeb3fae4d04b45c07cd8e39bbd31f655d36565"
+    },
+    {
+      "path": "/workspace/work/harbichess/cpu-kingbucket-nnue-proposal/native.py",
+      "member": "files/0377",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 8940,
+      "sha256": "f60a1f9814f48691af1e2d1f1db1b548cff3e7df0a7cae9718051de1865b8b69"
+    },
+    {
+      "path": "/workspace/work/harbichess/cpu-kingbucket-nnue-proposal/qualify.py",
+      "member": "files/0378",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 5354,
+      "sha256": "111d0abc504acca0d4ed545532243272df9b6e1f90d06bb2d1fd0b27eef3f276"
+    },
+    {
+      "path": "/workspace/work/harbichess/cpu-kingbucket-nnue-proposal/synthetic-proof-invocation.json",
+      "member": "files/0379",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 726,
+      "sha256": "164d9997402f64143ba573f67553a77b7e4a1471da3ecc3b0b615311f478bb55"
+    },
+    {
+      "path": "/workspace/work/harbichess/cpu-kingbucket-nnue-proposal/test_proposal.py",
+      "member": "files/0380",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 5756,
+      "sha256": "f929545a74a3f4cd2a11b47986e3b84f4577e0d39dabde0fb8032f8b3d3b23b3"
+    },
+    {
+      "path": "/workspace/work/harbichess/cpu-kingbucket-nnue-proposal/train.py",
+      "member": "files/0381",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 5576,
+      "sha256": "5644a7455498209a149a8672745868cf7e7cf4a3baae817dfce2128ff4d8f6c6"
+    },
+    {
+      "path": "/workspace/work/harbichess/cpu-kingbucket-nnue-proposal/verification.json",
+      "member": "files/0382",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 2154,
+      "sha256": "e8640b534a58b3544518c266dd6f693e2291f4757e8b88f51de7019fe707d176"
+    },
+    {
+      "path": "/workspace/work/harbichess/cpu-nnue-own-training-proposal/WRAPUP.txt",
+      "member": "files/0383",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 3884,
+      "sha256": "ce5cc29874e7d035a336323e74fe2ab4332fa20d13a5623c7280991e8dfe27f5"
+    },
+    {
+      "path": "/workspace/work/harbichess/cpu-nnue-own-training-proposal/convert.py",
+      "member": "files/0384",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 13758,
+      "sha256": "809d2613efdfb435b9c2ae35309884f7d78c558d567de823e7cdd25f7a6c2a92"
+    },
+    {
+      "path": "/workspace/work/harbichess/cpu-nnue-own-training-proposal/inventory.json",
+      "member": "files/0385",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 520,
+      "sha256": "681afb1b3b26c0a4aac1a3bf250585659f8ac8bc066237c91154b5bf9cb887a1"
+    },
+    {
+      "path": "/workspace/work/harbichess/cpu-nnue-own-training-proposal/prove.py",
+      "member": "files/0386",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 7888,
+      "sha256": "b57269d0d57caf5e49db035cfab0c22abd0804575b719046bb528ade719ea5db"
+    },
+    {
+      "path": "/workspace/work/harbichess/cpu-nnue-own-training-proposal/test_conversion.py",
+      "member": "files/0387",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 2115,
+      "sha256": "99c065ca75e7b27488f5c9af2f60b9a8d59b8d2cb971eadab6e781fa92fb72a0"
+    },
+    {
+      "path": "/workspace/work/harbichess/cpu-nnue-own-training-proposal/verification.json",
+      "member": "files/0388",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 259,
+      "sha256": "f735906b346b682549f70c8e0253ea49ee0e95798d0cb057b1b24494ffbc4094"
+    },
+    {
+      "path": "/workspace/work/harbichess/cpu-nnue-ownq-production-proposal/.pytest_cache/.gitignore",
+      "member": "files/0389",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 37,
+      "sha256": "3ed731b65d06150c138e2dadb0be0697550888a6b47eb8c45ecc9adba8b8e9bd"
+    },
+    {
+      "path": "/workspace/work/harbichess/cpu-nnue-ownq-production-proposal/.pytest_cache/CACHEDIR.TAG",
+      "member": "files/0390",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 191,
+      "sha256": "37dc88ef9a0abeddbe81053a6dd8fdfb13afb613045ea1eb4a5c815a74a3bde4"
+    },
+    {
+      "path": "/workspace/work/harbichess/cpu-nnue-ownq-production-proposal/.pytest_cache/README.md",
+      "member": "files/0391",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 302,
+      "sha256": "73fd6fccdd802c419a6b2d983d6c3173b7da97558ac4b589edec2dfe443db9ad"
+    },
+    {
+      "path": "/workspace/work/harbichess/cpu-nnue-ownq-production-proposal/.pytest_cache/v/cache/nodeids",
+      "member": "files/0392",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 1049,
+      "sha256": "0d618034ca86951558e0ff105f0903279a6c82076657675a65c5674fad672f0a"
+    },
+    {
+      "path": "/workspace/work/harbichess/cpu-nnue-ownq-production-proposal/README.md",
+      "member": "files/0393",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 2164,
+      "sha256": "63501c4f544f745ddcc93877f6b100717611d5227c3798c95041ee5574df94ad"
+    },
+    {
+      "path": "/workspace/work/harbichess/cpu-nnue-ownq-production-proposal/collector.py",
+      "member": "files/0394",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 9004,
+      "sha256": "57540cc1c25c780ce69e7411bfd74e2d82b1de701ca804efe81a480948e0ba0a"
+    },
+    {
+      "path": "/workspace/work/harbichess/cpu-nnue-ownq-production-proposal/run_collection.py",
+      "member": "files/0395",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 7728,
+      "sha256": "b16e4dcfa136b1c287da4b24b15b2a0a736220f99308d95a1f2cf35d13027a59"
+    },
+    {
+      "path": "/workspace/work/harbichess/cpu-nnue-ownq-production-proposal/test_collector.py",
+      "member": "files/0396",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 2834,
+      "sha256": "04518b8c57aebbb261091e859f02bab90f34de95902f2d484ee16dc4c81afe30"
+    },
+    {
+      "path": "/workspace/work/harbichess/cpu-nnue-teacher-training-proposal/README.md",
+      "member": "files/0397",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 3823,
+      "sha256": "f4356851af1c82c050f27865c3fa946768ca11a34e03153d4e84f4f67506b7da"
+    },
+    {
+      "path": "/workspace/work/harbichess/cpu-nnue-teacher-training-proposal/convert.py",
+      "member": "files/0398",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 7554,
+      "sha256": "8d3bf034629eaa25d7bf8827b9f6ba6a4bbdf1854b30a8f9be8d66d1b584e331"
+    },
+    {
+      "path": "/workspace/work/harbichess/cpu-nnue-teacher-training-proposal/prove.py",
+      "member": "files/0399",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 4240,
+      "sha256": "e6a1937e0ef7d10721e9e44009a152ff4d2f91ddf335a6bcd820785a67a119af"
+    },
+    {
+      "path": "/workspace/work/harbichess/cpu-nnue-teacher-training-proposal/test_conversion.py",
+      "member": "files/0400",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 1823,
+      "sha256": "421e63608161d4c355f252fe04c4c70509dd7d41bdd1452734483804ed374f07"
+    },
+    {
+      "path": "/workspace/work/harbichess/cpu-nnue-teacher8192-proposal/20262905-registration-DRAFT.json",
+      "member": "files/0401",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 1968,
+      "sha256": "c1424d1c499b00a37cb6811d4b23bae842c5c8796f26db1a3c2a366cdea0c762"
+    },
+    {
+      "path": "/workspace/work/harbichess/cpu-nnue-teacher8192-proposal/20262906-registration-DRAFT.json",
+      "member": "files/0402",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 1968,
+      "sha256": "6b38b42e82ddc48d4dc6fe7becee0a3af7d4d0547e330b6f3c19721272b46896"
+    },
+    {
+      "path": "/workspace/work/harbichess/cpu-nnue-teacher8192-proposal/README.txt",
+      "member": "files/0403",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 3897,
+      "sha256": "5e6f2235330b540ea75a01c7508231f7b577a103168fc703b8eb14409a09d5e5"
+    },
+    {
+      "path": "/workspace/work/harbichess/cpu-nnue-teacher8192-proposal/known8-exclusions-DRAFT.json",
+      "member": "files/0404",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 400,
+      "sha256": "02d895345a8f4a235fc8a41a5a53b9041cbfe77705618ac6d4bbe2faf0da12f8"
+    },
+    {
+      "path": "/workspace/work/harbichess/cpu-nnue-teacher8192-proposal/producer.py",
+      "member": "files/0405",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 13859,
+      "sha256": "3310319b218d671e92bca79a82559959d36e2950107ac046f0928d8a82787533"
+    },
+    {
+      "path": "/workspace/work/harbichess/cpu-nnue-teacher8192-proposal/selection.py",
+      "member": "files/0406",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 2783,
+      "sha256": "2d5030857822e6f94cd0ae2cbe54892a422ba31286e4f97149b422d35f503ad8"
+    },
+    {
+      "path": "/workspace/work/harbichess/cpu-nnue-teacher8192-proposal/test_selection.py",
+      "member": "files/0407",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 2220,
+      "sha256": "f31a318a6493d263245225ead584816328e38886fcf2fa2c67d0c4ef36ee3b3b"
+    },
+    {
+      "path": "/workspace/work/harbichess/cpu-nnue-teacher8192-proposal/verification.json",
+      "member": "files/0408",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 910,
+      "sha256": "ae3ccfcbeb32ef9070101d56fdd136ad4ee8de1e7430f5a32ef28d9b306525f8"
+    },
+    {
+      "path": "/workspace/work/harbichess/cpu-nnue-trained-admission-proposal/ARENA-RECIPE.md",
+      "member": "files/0409",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 3117,
+      "sha256": "4fb3d5dc6310f7a2ced19ac5d80283cf8c7b318d0fb37d542ddc8c83a870de38"
+    },
+    {
+      "path": "/workspace/work/harbichess/cpu-nnue-trained-admission-proposal/admission.py",
+      "member": "files/0410",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 5810,
+      "sha256": "94d80c5ab1f3ca9a2d5260d52bda5f7ab16ff236970a57a9a2c70e2351d92781"
+    },
+    {
+      "path": "/workspace/work/harbichess/cpu-nnue-trained-admission-proposal/child_admission.py",
+      "member": "files/0411",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 3875,
+      "sha256": "75ab8018135219d06867a9720c0d9c347d01273771d990f5b0756cacb8f9f091"
+    },
+    {
+      "path": "/workspace/work/harbichess/cpu-nnue-trained-admission-proposal/profile-v2-import-fix-verification.json",
+      "member": "files/0412",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 665,
+      "sha256": "31483def74d02665a6220b1b557796abf6ecaea3daaf2f3d99827035bbb96b9e"
+    },
+    {
+      "path": "/workspace/work/harbichess/cpu-nnue-trained-admission-proposal/profile.py",
+      "member": "files/0413",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 8002,
+      "sha256": "3bee71dbde17b8616cb550ed2a116d22f5a4d92affe924fcd82d54a3c013e7d0"
+    },
+    {
+      "path": "/workspace/work/harbichess/cpu-nnue-trained-admission-proposal/teacher-profile-DRAFT.json",
+      "member": "files/0414",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 11530,
+      "sha256": "5117feadafa16212956ac01e1142041571e7e5821cf7ebd350e73d8e700f524b"
+    },
+    {
+      "path": "/workspace/work/harbichess/cpu-nnue-trained-admission-proposal/teacher_profile_v2.py",
+      "member": "files/0415",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 8527,
+      "sha256": "ee139bef8f8210737a25aa0f93ef7ac6cb7b933f2917e426dda33b62b6b915b8"
+    },
+    {
+      "path": "/workspace/work/harbichess/cpu-nnue-trained-admission-proposal/test_admission.py",
+      "member": "files/0416",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 1572,
+      "sha256": "ad24df2717aa83dc2d405c0394b3286686a75276496df6a081720bfdbd858305"
+    },
+    {
+      "path": "/workspace/work/harbichess/cpu-nnue-trained-admission-proposal/test_profile_import_v2.py",
+      "member": "files/0417",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 768,
+      "sha256": "e1aa93da4b093d07a43ce4bd10e86dbf60eeb6e178e7c20e2979bed6623b2484"
+    },
+    {
+      "path": "/workspace/work/harbichess/cpu-selective-q-balanced16-arena-v2/audit_arena_v2.py",
+      "member": "files/0418",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 11532,
+      "sha256": "2f3e5d901a419daa547474e850a93d0b287f4444098f81d45aa4f039f1501c52"
+    },
+    {
+      "path": "/workspace/work/harbichess/cpu-selective-q-balanced16-arena-v2/audit_support.py",
+      "member": "files/0419",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 964,
+      "sha256": "293c5b3a7acb94bb740e352924c6258578a3e371000ee21cee25b461da45ddf6"
+    },
+    {
+      "path": "/workspace/work/harbichess/cpu-selective-q-balanced16-arena-v2/inventory.json",
+      "member": "files/0420",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 1318,
+      "sha256": "7a5231c16c08ee54850e4e6f2b0c166cd3943a4c3797bf4c2b374ab2c6380740"
+    },
+    {
+      "path": "/workspace/work/harbichess/cpu-selective-q-balanced16-arena-v2/native_admission.py",
+      "member": "files/0421",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 9186,
+      "sha256": "0ec1a49a4062c5a9bce777ae01d75f3866c313e1c04b9d6a22b943a6e55e47d5"
+    },
+    {
+      "path": "/workspace/work/harbichess/cpu-selective-q-balanced16-arena-v2/newzero.json",
+      "member": "files/0422",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 550,
+      "sha256": "41235a6cdd50b5596471d62e22c4267bed26d9ff648b1b4ffbf6421c90cd071d"
+    },
+    {
+      "path": "/workspace/work/harbichess/cpu-selective-q-balanced16-arena-v2/profile.py",
+      "member": "files/0423",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 5457,
+      "sha256": "2810fa026f8163cea95a661e82f13c13471ab13d2980f4ce7b15def90e372774"
+    },
+    {
+      "path": "/workspace/work/harbichess/cpu-selective-q-balanced16-arena-v2/profile_support.py",
+      "member": "files/0424",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 973,
+      "sha256": "dd6f55d401fd878d546f1b847be5e72c60e23e35e0fb837286ddc9c0ed1e2fc1"
+    },
+    {
+      "path": "/workspace/work/harbichess/cpu-selective-q-balanced16-arena-v2/protocol-DRAFT.json",
+      "member": "files/0425",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 10636,
+      "sha256": "0b7c64356603531b7643336d0bb364025953375a2fc81eb69e661044526c09f2"
+    },
+    {
+      "path": "/workspace/work/harbichess/cpu-selective-q-balanced16-arena-v2/run.py",
+      "member": "files/0426",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 7316,
+      "sha256": "28249b22a5768f6eaa19250aa790642a88c7e58ce6b75f98f96cfe0081f1b641"
+    },
+    {
+      "path": "/workspace/work/harbichess/cpu-selective-q-balanced16-arena-v2/seal.py",
+      "member": "files/0427",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 3577,
+      "sha256": "044a0cef673220a0f1b5c8972d34a2f943b7318ae454a180bbd7da08b1dc59e0"
+    },
+    {
+      "path": "/workspace/work/harbichess/cpu-selective-q-balanced16-arena-v2/search.py",
+      "member": "files/0428",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 1979,
+      "sha256": "0ea5a0dd269a78059a7c2f455a952262884e4420f72e7e2a9008f656e2fd8dd6"
+    },
+    {
+      "path": "/workspace/work/harbichess/cpu-selective-q-balanced16-arena-v2/support.py",
+      "member": "files/0429",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 668,
+      "sha256": "66f3cf9163ad45a8ed7b7f19606e1d4d425c65c77696f4d68f7787fff2f7778a"
+    },
+    {
+      "path": "/workspace/work/harbichess/cpu-selective-q-balanced16-arena-v2/test_binding.py",
+      "member": "files/0430",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 3350,
+      "sha256": "eb4da847bc971a2500ed44451224bfbb57272c177e8cd8e814cb8a0440cb0591"
+    },
+    {
+      "path": "/workspace/work/harbichess/cpu-selective-q-balanced16-arena-v2/tournament.py",
+      "member": "files/0431",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 9360,
+      "sha256": "d362bfb656f19ee51772f4ed8e6dc5dba1f0e14a8e2fb91a9b7737c5e89c410b"
+    },
+    {
+      "path": "/workspace/work/harbichess/cpu-selective-q-balanced16-arena-v2/value.py",
+      "member": "files/0432",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 1871,
+      "sha256": "172a8bcbd00278b548f1bb00ea9443dbbc9e1d28c9721e48db5433ea796fd258"
+    },
+    {
+      "path": "/workspace/work/harbichess/cpu-selective-q-balanced16-proposal/README.txt",
+      "member": "files/0433",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 3138,
+      "sha256": "33d7ce4a6c86eaae44d1a94944b56a3ef3d96d7ae2f8cfa6927c03a22ee40a43"
+    },
+    {
+      "path": "/workspace/work/harbichess/cpu-selective-q-balanced16-proposal/admission-READONLY.json",
+      "member": "files/0434",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 1587,
+      "sha256": "8a43bbb59aa2035997f5ed68f042b886fb16abc815cfd7103faed8d956191ea6"
+    },
+    {
+      "path": "/workspace/work/harbichess/cpu-selective-q-balanced16-proposal/learner_v2.py",
+      "member": "files/0435",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 3820,
+      "sha256": "4a144f3ca332775dfecbfaa34807c207845eda005e9863f838c97fa37e850639"
+    },
+    {
+      "path": "/workspace/work/harbichess/cpu-selective-q-balanced16-proposal/protocol-PENDING.json",
+      "member": "files/0436",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 2302,
+      "sha256": "03b1679d4477c95e82d0fbf955e0f4c00db119d5d7379530ea855ec6a9522ada"
+    },
+    {
+      "path": "/workspace/work/harbichess/cpu-selective-q-balanced16-proposal/test_balanced.py",
+      "member": "files/0437",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 3360,
+      "sha256": "2c6791ab38c11cca1979bd9b8e3ea94fefa2af9e8dd0ebdfd04355410cc61a91"
+    },
+    {
+      "path": "/workspace/work/harbichess/cpu-selective-q-balanced16-proposal/transform.py",
+      "member": "files/0438",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 4137,
+      "sha256": "5decac7cdbee537feba47939ba3ca2a42c7823d54360d91a4242fcd952e8622a"
+    },
+    {
+      "path": "/workspace/work/harbichess/cpu-selective-q-balanced16-training-proposal/ROOT-RECIPE.txt",
+      "member": "files/0439",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 5133,
+      "sha256": "a254483af5dbc495a49c2664de278627083730c8fc6c037a48edb4daf2dd073e"
+    },
+    {
+      "path": "/workspace/work/harbichess/cpu-selective-q-balanced16-training-proposal/architecture.py",
+      "member": "files/0440",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 3147,
+      "sha256": "12b1f1a853c7e804374fd543139cc1e503b672d3a428f0fe0a82807acf711786"
+    },
+    {
+      "path": "/workspace/work/harbichess/cpu-selective-q-balanced16-training-proposal/fit.py",
+      "member": "files/0441",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 3677,
+      "sha256": "762fd4d2a761d1381f70fcee9d311c62bd8bc4f6e0c580e8ae11c8793cc76727"
+    },
+    {
+      "path": "/workspace/work/harbichess/cpu-selective-q-balanced16-training-proposal/inventory.json",
+      "member": "files/0442",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 1227,
+      "sha256": "cd5055ebdb3bceae5c07081925143b874853c4263733233cbd6a72159144486f"
+    },
+    {
+      "path": "/workspace/work/harbichess/cpu-selective-q-balanced16-training-proposal/learner_v2.py",
+      "member": "files/0443",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 3820,
+      "sha256": "4a144f3ca332775dfecbfaa34807c207845eda005e9863f838c97fa37e850639"
+    },
+    {
+      "path": "/workspace/work/harbichess/cpu-selective-q-balanced16-training-proposal/protocol-DRAFT.json",
+      "member": "files/0444",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 2699,
+      "sha256": "d95c596cd3322774f5cf6812c4d3cfbe42bd517d090b1569eab351ca4542aa0d"
+    },
+    {
+      "path": "/workspace/work/harbichess/cpu-selective-q-balanced16-training-proposal/qualify.py",
+      "member": "files/0445",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 3410,
+      "sha256": "95d5865694be374dab0fc6a2e50b7bfb806e14c73123bfda462a3f78f7b5818a"
+    },
+    {
+      "path": "/workspace/work/harbichess/cpu-selective-q-balanced16-training-proposal/register.py",
+      "member": "files/0446",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 5001,
+      "sha256": "b6ac5caf9ba47de8ead4cfbb0c0cc5af54332964c66230fbb6462a99eb81983e"
+    },
+    {
+      "path": "/workspace/work/harbichess/cpu-selective-q-balanced16-training-proposal/support.py",
+      "member": "files/0447",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 2954,
+      "sha256": "a0823647f17108827a4376546e1193ce525adeb86d7898154fb104f3a153f8e1"
+    },
+    {
+      "path": "/workspace/work/harbichess/cpu-selective-q-balanced16-training-proposal/test_balanced.py",
+      "member": "files/0448",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 3360,
+      "sha256": "2c6791ab38c11cca1979bd9b8e3ea94fefa2af9e8dd0ebdfd04355410cc61a91"
+    },
+    {
+      "path": "/workspace/work/harbichess/cpu-selective-q-balanced16-training-proposal/test_glue.py",
+      "member": "files/0449",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 2972,
+      "sha256": "ae6fcea654567797c50bdb0be1c47948a284226b507a53dfcdc2fa057f0a9110"
+    },
+    {
+      "path": "/workspace/work/harbichess/cpu-selective-q-balanced16-training-proposal/train.py",
+      "member": "files/0450",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 2826,
+      "sha256": "4401521d8c38135a10c1fd82430112699774c6b2bf3c58b88c313e394d76fdf5"
+    },
+    {
+      "path": "/workspace/work/harbichess/cpu-selective-q-balanced16-training-proposal/transform.py",
+      "member": "files/0451",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 4137,
+      "sha256": "5decac7cdbee537feba47939ba3ca2a42c7823d54360d91a4242fcd952e8622a"
+    },
+    {
+      "path": "/workspace/work/harbichess/cpu-selective-q-balanced16-training-proposal/verification.json",
+      "member": "files/0452",
+      "role": "explicit-V9-byte-preservation-NOT-runtime-strength",
+      "bytes": 434,
+      "sha256": "a711bfcc3cdec68c796bfe8f61d7da34b6d0e2e08c141338762e47fc510701c2"
+    }
+  ],
+  "row_count": 453,
+  "raw_bytes": 111099693,
+  "limits": {
+    "files": 2048,
+    "raw_bytes": 402653184,
+    "encoded_bytes": 67108864,
+    "file_bytes": 8388608,
+    "header_bytes": 1048576
+  },
+  "source_commit": "6fcc8b476d25495d1c9c413e55b2c7ba4794013e",
+  "release_id": 404068972,
+  "release_tag": "ufuk-cpu-ownplay-state-20261005",
+  "workflow_path": ".github/workflows/nnue-own-state-blob-v9.yml",
+  "workflow_sha256": "5f6c96db202444a435652791f158d2638e0d5153fa1f859a1fcd14c196d43826",
+  "source_bindings": {
+    "workflow_receiver_v9.py": "f46794e1480fa47c892dbaff87af9c2abd48963fa2187ad399c918f2d7f7d527",
+    "raw_capsule_v9.py": "8b2f7dbea781972b8a7091aca37a253f92b330e7d8979c3b9c8f1e9688ed6de5",
+    "receiver_v9.py": "b4811340990aa3dc9a80cfb7589180d43d32f8a56d13fd69f5be1f11a33eb459",
+    "release_transport_v9.py": "6460d6aaa7cc439040736eac7c691ca277c4ebb150f35b4abaf58ccbd8d5867b"
+  },
+  "action_pins": {
+    "checkout": "11bd71901bbe5b1630ceea73d27597364c9af683"
+  },
+  "coverage_cutoff": "USER wrap-up: NNUE teacher bootstrap actual full models/native Adam/RNG/data/proofs/fits; balancedv2 actual proof/fresh48, source/proposals frozen. Coarse80 incomplete96 complete games+partialprogress explicitly retained; no formal strength result or full online actor resume. Own NNUE producer UNEXECUTED; owntraining INCOMPLETE drafts. No GPU/credentials/globalsource6/8 closure.",
+  "external_dependencies": [
+    {
+      "name": "Stockfish103MB",
+      "path": "/workspace/work/harbichess/stockfish/stockfish-linux-x86-64-universal",
+      "bytes": 103153472,
+      "sha256": "0f83d24cc46d2c66c60f16001af5444873bc112b7d028594513426894c12da19",
+      "public_upstream_exact_byte_locator": {
+        "url": "https://github.com/official-stockfish/Stockfish/releases/download/sf_19/stockfish-linux-x86-64-universal.tar.gz",
+        "asset_id": 545574859,
+        "archive_bytes": 81388977,
+        "archive_sha256": "9defc0d4e55d49c65a6d042f3e571a39fcea499ade6dbe741b53b8c65e03611f",
+        "member": "stockfish/stockfish-linux-x86-64-universal",
+        "ROOT_fullarchive_and_member_verified": true,
+        "proof_sha256": "e063d0e496973ddda0ffa0e54cdc752cfe4d7f25c2e8604290ff0f27d2922aa7"
+      },
+      "included": false
+    },
+    {
+      "name": "corecleancheckout/PythonABI/chess/runtime",
+      "source_commit": "6fcc8b476d25495d1c9c413e55b2c7ba4794013e",
+      "included_full_checkout": false,
+      "exact_runtime_public_locator": null,
+      "claim": "helper/source byte preservation is not runnable fullenvironment restore"
+    },
+    {
+      "name": "E8/comparisonNNweights/fullNNnative",
+      "included": false,
+      "claim": "priorV6 bytebackup ancestor; V8 rawarenas do not backupNN trainingstates again; exactall model dependency SHAs remain in arena protocols"
+    }
+  ],
+  "parent_preservation": {
+    "V8publiccapsule_sha256": "7d695171ceede302e7a5efee81ca75c43cf21c64aa8f44c506e2111b80047f8a",
+    "V8public_original_files": 1426,
+    "old_assets_mutated": false
+  },
+  "new_scope_clock": {
+    "first": 1791245051.2415879,
+    "deadline": 1791250451.2415879
+  },
+  "scope_roots": [
+    "/dev/shm/harbichess-NNUE-teacher-data-v1",
+    "/dev/shm/harbichess-NNUE-teacher-fit-v1",
+    "/dev/shm/harbichess-NNUE-teacher-proof-v1",
+    "/dev/shm/harbichess-NNUE-teacher8192-v1",
+    "/dev/shm/harbichess-balanced16-architecture-v2",
+    "/dev/shm/harbichess-balanced16-fit-v2",
+    "/dev/shm/harbichess-balanced16-proof-v2",
+    "/dev/shm/harbichess-coarse80-strength-arena-v1",
+    "/workspace/work/harbichess/continuation-20261005/NNUE-teacher-conversion-v1",
+    "/workspace/work/harbichess/continuation-20261005/NNUE-teacher-fit-v1",
+    "/workspace/work/harbichess/continuation-20261005/NNUE-teacher-metadata-v1",
+    "/workspace/work/harbichess/continuation-20261005/NNUE-teacher-production-v1",
+    "/workspace/work/harbichess/continuation-20261005/NNUE-teacher-proof-v1",
+    "/workspace/work/harbichess/continuation-20261005/NNUE-teacher-trained-profile-v1",
+    "/workspace/work/harbichess/continuation-20261005/NNUE-teacher-trained-profile-v2",
+    "/workspace/work/harbichess/continuation-20261005/balanced16-architecture-v2",
+    "/workspace/work/harbichess/continuation-20261005/balanced16-fit-v2",
+    "/workspace/work/harbichess/continuation-20261005/balanced16-proof-v2",
+    "/workspace/work/harbichess/continuation-20261005/coarse80-arena-v1-registration",
+    "/workspace/work/harbichess/continuation-20261005/nnue16-root-runtime-v1",
+    "/workspace/work/harbichess/cpu-kingbucket-nnue-proposal",
+    "/workspace/work/harbichess/cpu-nnue-own-training-proposal",
+    "/workspace/work/harbichess/cpu-nnue-ownq-production-proposal",
+    "/workspace/work/harbichess/cpu-nnue-teacher-training-proposal",
+    "/workspace/work/harbichess/cpu-nnue-teacher8192-proposal",
+    "/workspace/work/harbichess/cpu-nnue-trained-admission-proposal",
+    "/workspace/work/harbichess/cpu-selective-q-balanced16-arena-v2",
+    "/workspace/work/harbichess/cpu-selective-q-balanced16-proposal",
+    "/workspace/work/harbichess/cpu-selective-q-balanced16-training-proposal"
+  ],
+  "exact_files": [
+    "/dev/shm/harbichess-NNUE-teacher-trained-profile-v1.json",
+    "/dev/shm/harbichess-NNUE-teacher-trained-profile-v2.json",
+    "/dev/shm/harbichess-NNUE16-architecture-preflight-v1/result.json",
+    "/dev/shm/harbichess-V8-anonymous-readback-v2.json",
+    "/workspace/HarbiChess/experiments/ufuk/cpu-classical-own-v1/prior.json",
+    "/workspace/HarbiChess/experiments/ufuk/cpu-classical-own-v1/value.py",
+    "/workspace/work/harbichess/continuation-20261005/USER-wrap-up-coarse80-stop-v1.json"
+  ],
+  "scope_config_sha256": "0cf3a8ae74d7fe5ac92baa97f460dcfee6b555c7be9838ca259a08c040e800b0",
+  "scope_quiescence_receipt": {
+    "path": "/workspace/work/harbichess/continuation-20261005/nnue-state-v9-actual/scope-owned-quiescence-v2.json",
+    "sha256": "1982f33e8aeeea4484ee989c77ec3eebf0aaed0d017101e3b68412bd6b9bfcd0"
+  },
+  "producer_bindings": {
+    "prepare_v9.py": "b8ab1105d6448e9603b8872d150b4611937f7b914a012a397a1c80afe71f7d79",
+    "build_seal_v9.py": "50bd6b59364a9b371422394908f973ea7440955b7a5af1c22e3fb504f7548cce"
+  }
+}
