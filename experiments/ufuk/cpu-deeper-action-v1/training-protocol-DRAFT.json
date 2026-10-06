@@ -1,0 +1,54 @@
+{
+  "classical_helper_directory": "/workspace/HarbiChess/experiments/ufuk/cpu-classical-own-v1",
+  "deadline_by_seed": {
+    "20262905": "PENDING-new-fit1800-end",
+    "20262906": "PENDING-new-fit1800-end"
+  },
+  "helpers": {
+    "action_labels.py": "ccaf09caa4e5a942a212b0cee3f85dded7c417f13f04e69656e2e419bc6ffdc3",
+    "action_learner.py": "955249846bc8636ef0ddb9f63db06b200c003944715b8c2963b30f37bd9725f0",
+    "action_model.py": "873eeaa29c67c8c895dfcb54463cba80151b268dce04f3db62013874b9918509",
+    "produce_actions.py": "132a43a07186920e1a825a061693e0c83b29d882d7a1acbedfdf9280ae78ae83",
+    "qualify_actions.py": "5a742e99432473d39a4762ae38bd3662eeada3dc944c5c48a9edee8a068e3d64",
+    "select_roots.py": "ca571105a075bf23f5992a9a5856ab1d4dc3f7e4f43ffd9f69391e5faca7a17c",
+    "student_search.py": "3ad9cfcfd70dacf08620511e76b0fa2996c126133bc1b2ff85d93a6499f4d838",
+    "train_actions.py": "1924c7bc007a3b8a94354d710c8ead82d15f2a49e5fc5bd8fb3697948712b38f"
+  },
+  "inputs": {
+    "20262905": {
+      "labels_sha256": "PENDING-new-action-labels-fullSHA",
+      "producer_registration_sha256": "PENDING-new-producer-registrationSHA"
+    },
+    "20262906": {
+      "labels_sha256": "PENDING-new-action-labels-fullSHA",
+      "producer_registration_sha256": "PENDING-new-producer-registrationSHA"
+    }
+  },
+  "math": {
+    "batch": 256,
+    "beta1": 0.9,
+    "beta2": 0.999,
+    "clipnorm": 5.0,
+    "eps": 1e-08,
+    "l2": 0.001,
+    "lr": 0.01,
+    "max_updates": 1024,
+    "slots": 4
+  },
+  "newlabels": "own frozenprior8192 q2 depth8 bestmove only; no visits/Stockfish/heldout",
+  "production_admission": "PENDING-new600 native8/4/fresh8+all6freshloads; new24-real-profile; fixed64fit1800; new160gate+900audit; no old clock reset",
+  "runtime_sha256": "656a19611984f61f99f4fec8952250ee4ad8b6d836a34c6eaf6fcc65ed0af496",
+  "schema": "own-deeper-bestmove-training-protocol-v1",
+  "source_commit": "6fcc8b476d25495d1c9c413e55b2c7ba4794013e",
+  "status": "PENDING-ROOT-registration",
+  "student": {
+    "correction": ".01*(legal-softmax-probability-1/legal_count)",
+    "max_depth": 8,
+    "nodes": 512,
+    "ordering": "quiet-root-only bounded correction; capture/promotion/exact-terminal-range protected; original interior unchanged",
+    "prior_score_dominant": true,
+    "quiescence": 2,
+    "root_epsilon": 0.01
+  },
+  "value_sha256": "a99cddfc397bd9221b99a70691427fdd663488b033fb239d9f48240786b2f277"
+}
