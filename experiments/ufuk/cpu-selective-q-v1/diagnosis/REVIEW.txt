@@ -1,0 +1,39 @@
+Readonly Selective diagnosis, all12 closed groups; no search/inference/SGD.
+The proposed prerequisite 'no learned optional activation' is FALSE. Therefore
+no balanced-BCE learner variant was prepared under this conditional request.
+Existing model/source/auditor/contracts/gates were not changed.
+
+Seed05:1929 learned search calls;70 calls had optional receipts(3.63%).
+218 optional completed/4 censored,467+13 charged nodes. Seed06:1892 calls;
+31 optional(1.64%),99 completed/2 censored,194+7 nodes. Newzero has no optional
+receipts, as expected strictp>.5 at zero. Total optional681/1,560,551 learned
+nodes=.0436%; mandatory in-check work dominates recorded extensions:
+15,142 completed/1,259 censored,50,335+5,205 charged nodes.
+
+These ledgers include attempted/discarded ROOTpasses. A 'completed' optional
+extension does NOT prove its value contributed to the last fully completed
+rootpass or selected action. Current receipt lacks rootpass/depth-retention
+association. This is a missing diagnosis field, not a retrospective excuse
+or evidence of a search/source fault. ROOT six fixed chronological replays
+will test actual recorded packets, not estimate general effect of extension.
+
+TRAIN complete rows:05=676/201 positive,29 groups;06=657/179,26 groups.
+Game-equal positive mass=.3034/.2723 (not~.2 universally).
+82/71 TRAINrows are checked horizons,53/41 checked positives. Runtime checked
+extension is mandatory and bypasses classifier entirely. Nonchecked TRAIN
+positive fractions148/594=.2492 and138/586=.2355. Training the same classifier
+on mandatory checked examples partially differs from optional deployment;
+this is an objective-alignment issue worth a future TRAIN-only design, not
+proof that balancing improves strength. Class weighting would change risk
+semantics, not calibrated probability, and can spend budget on low-utility
+extensions or discard complete deeper passes. It must have new objective/
+native contract, freshzero initializer, same newzero controller, exact48
+updates and proof/fit clocks before any new strength observations.
+
+Observed equal learnedSF/newzeroSF .125 is not a success. All strongest
+original strength gates remain unchanged. Candidate selection or a new
+fallback after an independent confirmation result is not authorized here.
+The existing192 screen is known-book development only. diagnosis.json holds
+pergroup/perseed counts and TRAIN facts; raw actual receipt SHA/path bindings
+were also saved to /dev/shm/selective-diagnosis-readonly-v1.json. No claims
+about unlogged states or retained optional improvements were made.
