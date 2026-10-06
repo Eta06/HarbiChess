@@ -1,0 +1,55 @@
+FROZEN INCOMPLETE PREPARATION, no actual converter/proof/fit/search executed.
+User requested wrap-up before ROOT ran any new own-phase job.
+
+convert.py: pure own-Q converter draft against finalized producer fields:
+mate_range_score_returned (not independent mate certificate), selected_action_played,
+protected_search_aliases, event search_alias_ref. Replays all full histories and
+chronological actual played actions, mover/nonterminal/legality/node counts,
+clipped mover Q, terminal mover WDL vs UNKNOWN, whole-game protected exclusion,
+sealed raw search-alias chunk references, sparseindices and authoritative human prior.
+Own-Q targets from teacher-initialized CURRENT parent do not become SF labels or
+calibrated WDL; teacher ancestry must remain explicit. Capped episodes retain
+completed own-Q packets but their terminal WDL remains UNKNOWN.
+
+prove.py: draft ROOT-clocked own-phase whole8/pause4/fresh8 +six actual strict-load
+children per seed; fresh64 +two actual strict-load children per seed, independent
+newAdam/globalTorch/privateSampler from SAME named teacher candidate weights only.
+No teacher-native optimizer/RNG/resume transfer. CPU1,15GiB CgroupBudget,
+workspace256MiB floor, ROOT600 proof/1800 fit and RAM96MiB total per phase.
+Parent catches failure and terminates only its currently owned process group.
+No Torch ZIP-byte-identity claim; full tensor/optimizer/all RNG bits compare.
+
+3 synthetic packet/schema/CLI-help tests PASS0skip; RuffPASS.
+These are NOT full converter, actual data, model load, optimizer, or hardware proofs.
+
+Remaining blockers BEFORE ROOT execution:
+1. Final producer frozen source inventory/receipt, complete event/alias archive and
+   parent/source/teacher-proof+teacher-fit lineage available and SHA-sealed.
+2. Full converter integration tests for1024-row reconciliation, all chronology,
+   protected discarded-unplayed last packet, alias byte-span completeness, terminal
+   POV/caps, incomplete producer rejection and all input/source tampering.
+3. ROOT contract/manifest builder still UNIMPLEMENTED: include64 own-learning MATH,
+   FEATURE_SCHEMA, exact3 native sourcefiles model/native/train, complete inference
+   Python/C/sharedobject, prior and converted own-target provenance, bootstrap
+   candidate fullpath/SHA, original raw producer registration/receipt/events/chunks,
+   teacher BOTH proof12-load and fresh256-fit4-load evidence (separate ancestry).
+4. Admission must independently validate ALL teacher-parent original proof/fit
+   receipt statuses/counts/contract/native/candidate consistency and source/clocks,
+   rather than treating presence of their fileSHA alone as positive qualification.
+5. Converter current all-chunk reference reader is bounded only by sealed input;
+   before run add strict raw/event/file caps plus span coverage, ROOT first equality,
+   exact featurehelper origin matching parent model.py and final atomic publish.
+6. Actual own converter600, proof600 pair12-load, fresh64 fit1800 pair4-load, final
+   strict native/candidate/source/data admission and inference parity still UNKNOWN.
+
+Future ROOT-only commands after all blockers resolved and fresh registration:
+VENV=/workspace/HarbiChess/.venv/bin/python
+$VENV convert.py --seal ROOT_OWN_CONVERTER_SEAL --output NEW_RAM_CONVERTED
+$VENV prove.py --registration ROOT_OWN_PROOF_REGISTRATION
+$VENV prove.py --registration ROOT_FRESH64_REGISTRATION
+Seal schema NNUE-own1024-dataset-conversion-seal-v1 (ROOT first/deadline<=first+600).
+Proof/fit registration schema NNUE-own-training-orchestration-v1,mode proof/fresh-fit,
+status registered,first/deadline observed NOW only (600/1800),seed/cpu_core/output,
+train/native/contract/dataset/parent_candidate pathSHA refs,inputs sealed closure,
+source_sha256 helpers. Contract phase own-learning,updates64 and original phaseclock.
+All clocks remain NULL/unregistered here. Hard end1791273600 unchanged.
