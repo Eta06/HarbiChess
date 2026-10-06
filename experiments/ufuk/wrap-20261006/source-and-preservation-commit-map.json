@@ -1,0 +1,874 @@
+{
+  "source_stage": [
+    {
+      "commit": "17d9af0a068f2cc81e2541479830557d76a9c81f",
+      "file": "experiments/ufuk/cpu-deeper-action-v1/README.txt"
+    },
+    {
+      "commit": "90ad23ba7308473c97560ba6935ba329a5bd829d",
+      "file": "experiments/ufuk/cpu-deeper-action-v1/action_labels.py"
+    },
+    {
+      "commit": "40afd191b17ddb0c017805e1090d144935f1f6d9",
+      "file": "experiments/ufuk/cpu-deeper-action-v1/action_learner.py"
+    },
+    {
+      "commit": "6bd709ef8667fbb54ebcf560595f39bc00b14023",
+      "file": "experiments/ufuk/cpu-deeper-action-v1/action_model.py"
+    },
+    {
+      "commit": "f2d9811cad190aabe748d9edebfee4f97cdd5ca2",
+      "file": "experiments/ufuk/cpu-deeper-action-v1/produce_actions.py"
+    },
+    {
+      "commit": "d00a4361739df1bacbc107c004e94fb92e461b74",
+      "file": "experiments/ufuk/cpu-deeper-action-v1/qualify_actions.py"
+    },
+    {
+      "commit": "cc5f63219dfd822a2fd0ec0d777befd63bfde8ed",
+      "file": "experiments/ufuk/cpu-deeper-action-v1/select_roots.py"
+    },
+    {
+      "commit": "2c549f8a9dccc4d28fbd9a60b3425dfaabeee106",
+      "file": "experiments/ufuk/cpu-deeper-action-v1/student_search.py"
+    },
+    {
+      "commit": "436ae9968e34e8f3844a031776829fc3a6b89b26",
+      "file": "experiments/ufuk/cpu-deeper-action-v1/test_actions.py"
+    },
+    {
+      "commit": "7e20e4a9c78816f392fc0b5af17fdb4a253d2062",
+      "file": "experiments/ufuk/cpu-deeper-action-v1/train_actions.py"
+    },
+    {
+      "commit": "27058b0d11532048e1fe99efbb75cabd90856961",
+      "file": "experiments/ufuk/cpu-deeper-action-v1/training-protocol-DRAFT.json"
+    },
+    {
+      "commit": "9680cee2fe691e07a818696dcdd960a18f8c9a3f",
+      "file": "experiments/ufuk/cpu-deeper-action-v1/verification.json"
+    },
+    {
+      "commit": "67053eac87c8024c6c2f84d9b507a3a065fc0702",
+      "file": "experiments/ufuk/cpu-deeper-action-v1/admission/README.txt"
+    },
+    {
+      "commit": "c154c37617c50ba636f2659ef16729d1c71daff6",
+      "file": "experiments/ufuk/cpu-deeper-action-v1/admission/TT-ALTERNATIVE-PROSPECTIVE.txt"
+    },
+    {
+      "commit": "0c55f8b751dc02da0a8e5c5f8e8816a7995c4384",
+      "file": "experiments/ufuk/cpu-deeper-action-v1/admission/arena-help.txt"
+    },
+    {
+      "commit": "a79fd7f344ab4237b2c546c141a236490e029827",
+      "file": "experiments/ufuk/cpu-deeper-action-v1/admission/fit-protocol-DRAFT.json"
+    },
+    {
+      "commit": "77cc444dcc7e017450a619f3c77668b7c893ca68",
+      "file": "experiments/ufuk/cpu-deeper-action-v1/admission/owner-help.txt"
+    },
+    {
+      "commit": "af52d0c347cd497c7e918cb751e271ed18d60686",
+      "file": "experiments/ufuk/cpu-deeper-action-v1/admission/profile-help.txt"
+    },
+    {
+      "commit": "67aa39c3e280f185f580856709850012abbcbb21",
+      "file": "experiments/ufuk/cpu-deeper-action-v1/admission/proof-protocol-DRAFT.json"
+    },
+    {
+      "commit": "c35f26ee7fcbc11c9f8bafb0589a634e81b06fa7",
+      "file": "experiments/ufuk/cpu-deeper-action-v1/admission/qualify-help.txt"
+    },
+    {
+      "commit": "f8fef78513948d1d4d7dc7f572cd90542c489620",
+      "file": "experiments/ufuk/cpu-deeper-action-v1/admission/seal-recipe.txt"
+    },
+    {
+      "commit": "560d354fac5e555e6eb058b796b2d5c565c5b580",
+      "file": "experiments/ufuk/cpu-deeper-action-v1/admission/seal_arena.py"
+    },
+    {
+      "commit": "155bb4e64871ffbaa1635c5b12fa9975a2565a8f",
+      "file": "experiments/ufuk/cpu-deeper-action-v1/admission/stamp_training.py"
+    },
+    {
+      "commit": "5856f0fa50d3d07c9862c7094cd37d0901f7bdb0",
+      "file": "experiments/ufuk/cpu-deeper-action-v1/admission/synthetic_native_worker.py"
+    },
+    {
+      "commit": "70823008ec635510221636208b52b88b6c57c2ae",
+      "file": "experiments/ufuk/cpu-deeper-action-v1/admission/test_admission.py"
+    },
+    {
+      "commit": "32b5c9e6aa5ec3fc8e87665bcc27d0f1e52a4d9e",
+      "file": "experiments/ufuk/cpu-deeper-action-v1/admission/test_seal_arena.py"
+    },
+    {
+      "commit": "49e99f9e0cdaa712d7c142f56d1fb23f75e6d102",
+      "file": "experiments/ufuk/cpu-deeper-action-v1/admission/train-help.txt"
+    },
+    {
+      "commit": "fe94b9c7c07fa7cd0703d2bcd06ace7efd5de33a",
+      "file": "experiments/ufuk/cpu-deeper-action-v1/admission/verification.json"
+    },
+    {
+      "commit": "bd77f2e8d9cad83903e247d5cfb11b43d93959c1",
+      "file": "experiments/ufuk/cpu-selective-q-v1/20262905-labels-registration-DRAFT.json"
+    },
+    {
+      "commit": "7dddc7fce9c79f3ea5fffe30be91eabb6d80bcad",
+      "file": "experiments/ufuk/cpu-selective-q-v1/20262906-labels-registration-DRAFT.json"
+    },
+    {
+      "commit": "d381ae1721df14528d96bea9e7f6c15a08951bbf",
+      "file": "experiments/ufuk/cpu-selective-q-v1/README.md"
+    },
+    {
+      "commit": "de041236e2e0e9946b1e550070999c3a6e3e646e",
+      "file": "experiments/ufuk/cpu-selective-q-v1/labels.py"
+    },
+    {
+      "commit": "6724f6383ba0ece1ffc2b4693303f7818bf16f97",
+      "file": "experiments/ufuk/cpu-selective-q-v1/learner.py"
+    },
+    {
+      "commit": "ea997daf7f5e00f91a63e9b6ad2f56e6c02cbec6",
+      "file": "experiments/ufuk/cpu-selective-q-v1/model.py"
+    },
+    {
+      "commit": "fdd628deed9e4fa93631e9b6fc19b58fafab60a1",
+      "file": "experiments/ufuk/cpu-selective-q-v1/produce_labels.py"
+    },
+    {
+      "commit": "26614115d393d4f07ba2f02e52bf0e0c4ef68204",
+      "file": "experiments/ufuk/cpu-selective-q-v1/profile.py"
+    },
+    {
+      "commit": "9a5a19dc0c456638e9b597dbf70625cc890d0aff",
+      "file": "experiments/ufuk/cpu-selective-q-v1/qualify.py"
+    },
+    {
+      "commit": "d227c315f2eafd79a8ea95bb609fbd839cb1a9e5",
+      "file": "experiments/ufuk/cpu-selective-q-v1/search.py"
+    },
+    {
+      "commit": "56bb5d1d2cb89e24e70a5df10318ad03774dee04",
+      "file": "experiments/ufuk/cpu-selective-q-v1/support.py"
+    },
+    {
+      "commit": "eecd55cfd47b64ab637c8615a2997b4c2ac2a58b",
+      "file": "experiments/ufuk/cpu-selective-q-v1/test_proposal.py"
+    },
+    {
+      "commit": "a82e8c7af3f403b9df92ed9a863541c8de6f5668",
+      "file": "experiments/ufuk/cpu-selective-q-v1/train.py"
+    },
+    {
+      "commit": "1b9fdf70c883fa1d96076d6225e8869749e722b9",
+      "file": "experiments/ufuk/cpu-selective-q-v1/verification.json"
+    },
+    {
+      "commit": "cfdbb72c17cdd2c16766805c600e5c12b5ae5a48",
+      "file": "experiments/ufuk/cpu-selective-q-v1/arena-v2/README.txt"
+    },
+    {
+      "commit": "15d0139a44dc78ede1ded85bce48274fe4c74d8d",
+      "file": "experiments/ufuk/cpu-selective-q-v1/arena-v2/ROOT-seal-recovery-recipe.json"
+    },
+    {
+      "commit": "9433a0d492aab8e7a01e2f02dd54c5f19ebc0a93",
+      "file": "experiments/ufuk/cpu-selective-q-v1/arena-v2/audit_arena_v2.py"
+    },
+    {
+      "commit": "43c4e5ee967e9843e4e77c17dd36d7aeea16a9d3",
+      "file": "experiments/ufuk/cpu-selective-q-v1/arena-v2/audit_support.py"
+    },
+    {
+      "commit": "d6f0c992ef1c282583f21162425b2eebe1ffff4c",
+      "file": "experiments/ufuk/cpu-selective-q-v1/arena-v2/native_admission.py"
+    },
+    {
+      "commit": "435e2bbe31a98abf12c28d24767bf119b31feb5b",
+      "file": "experiments/ufuk/cpu-selective-q-v1/arena-v2/profile.py"
+    },
+    {
+      "commit": "5e444d7c5a6981f8b3ab2c51dc494409ffc4cde6",
+      "file": "experiments/ufuk/cpu-selective-q-v1/arena-v2/profile_support.py"
+    },
+    {
+      "commit": "e803231343a610c3f61c3165d5e84285861629e1",
+      "file": "experiments/ufuk/cpu-selective-q-v1/arena-v2/protocol-DRAFT.json"
+    },
+    {
+      "commit": "6c1df1894736c27ee3fdd9e0ae148f3aa72b8a0e",
+      "file": "experiments/ufuk/cpu-selective-q-v1/arena-v2/protocol.json"
+    },
+    {
+      "commit": "e701e8608217128d0670aca69a98df36931c2886",
+      "file": "experiments/ufuk/cpu-selective-q-v1/arena-v2/run.py"
+    },
+    {
+      "commit": "c9f88e86a65032c8cfa48a89b2a238a28dbc3239",
+      "file": "experiments/ufuk/cpu-selective-q-v1/arena-v2/seal.py"
+    },
+    {
+      "commit": "ddee548fb55004947cf5f4c59436f2d455904efe",
+      "file": "experiments/ufuk/cpu-selective-q-v1/arena-v2/search.py"
+    },
+    {
+      "commit": "f30a6bbf80e552f0eb5cf94f4fa282a7311d74bf",
+      "file": "experiments/ufuk/cpu-selective-q-v1/arena-v2/support.py"
+    },
+    {
+      "commit": "9205ba3c28e383da9663336d0459fa31d44320a4",
+      "file": "experiments/ufuk/cpu-selective-q-v1/arena-v2/test_adapter.py"
+    },
+    {
+      "commit": "41b921fcd5d24e862866b8f36d89e2e22e0d98f7",
+      "file": "experiments/ufuk/cpu-selective-q-v1/arena-v2/test_v2_qualification.py"
+    },
+    {
+      "commit": "982388948e6ead50a849ead3a0e43a85d12a6295",
+      "file": "experiments/ufuk/cpu-selective-q-v1/arena-v2/tournament.py"
+    },
+    {
+      "commit": "bc21b795ee1eb76e15dc0bf6e3cf4798f4afb85b",
+      "file": "experiments/ufuk/cpu-selective-q-v1/arena-v2/value.py"
+    },
+    {
+      "commit": "fa060669cc54af1d61364338546f6f9836d0e24d",
+      "file": "experiments/ufuk/cpu-selective-q-v1/arena-v2/verification.json"
+    },
+    {
+      "commit": "1970f1c73019321c597287ba03758a8f649fa56f",
+      "file": "experiments/ufuk/cpu-selective-q-v1/diagnosis/REVIEW.txt"
+    },
+    {
+      "commit": "5aab853ae1d08289d37246d0dc4c0f5ff3262207",
+      "file": "experiments/ufuk/cpu-coarse80-v1/README.md"
+    },
+    {
+      "commit": "2302b1182069fa99c5cdf0d14fc2bc87680662b5",
+      "file": "experiments/ufuk/cpu-coarse80-v1/build-receipt.json"
+    },
+    {
+      "commit": "4970043089b0a40ba89235b18189dc5519433b02",
+      "file": "experiments/ufuk/cpu-coarse80-v1/build_forward80.py"
+    },
+    {
+      "commit": "2cd1d20e4d31067f99d69a436679a3aaa916ee29",
+      "file": "experiments/ufuk/cpu-coarse80-v1/coarse80.py"
+    },
+    {
+      "commit": "8a4dd4b4934ba0ad7a16cdeee3ee72da1b7836c5",
+      "file": "experiments/ufuk/cpu-coarse80-v1/compiled80.py"
+    },
+    {
+      "commit": "4fda1903131a11eb749f2d15d7da154c4d9052e9",
+      "file": "experiments/ufuk/cpu-coarse80-v1/dataset80.py"
+    },
+    {
+      "commit": "84bb028b616f1b0e03ede5a09ee7b210590ddbc2",
+      "file": "experiments/ufuk/cpu-coarse80-v1/forward80.c"
+    },
+    {
+      "commit": "675f65c3edad6d0dcbc2597de70698195955357a",
+      "file": "experiments/ufuk/cpu-coarse80-v1/learner80.py"
+    },
+    {
+      "commit": "b05cae49ac8f89503ef481870b0448a4c0e9f648",
+      "file": "experiments/ufuk/cpu-coarse80-v1/make_closure.py"
+    },
+    {
+      "commit": "b8ba4559daf01fdbeeaebfe9242088ec567037c8",
+      "file": "experiments/ufuk/cpu-coarse80-v1/proof_synthetic.py"
+    },
+    {
+      "commit": "d889714920f791412feb6f756e9167f408c86110",
+      "file": "experiments/ufuk/cpu-coarse80-v1/registered_cli.py"
+    },
+    {
+      "commit": "7f105681a51830296430607ec2fb4274ae3301e8",
+      "file": "experiments/ufuk/cpu-coarse80-v1/resume_worker.py"
+    },
+    {
+      "commit": "a52ac25809fa6167033008a87e1bf98a183331a0",
+      "file": "experiments/ufuk/cpu-coarse80-v1/source-closure.json"
+    },
+    {
+      "commit": "aa566c842d4a9a30c21802cea35575fb39843b64",
+      "file": "experiments/ufuk/cpu-coarse80-v1/test_coarse80.py"
+    },
+    {
+      "commit": "024309a7412e7cb3fd0de91f78414cbf05fd21e9",
+      "file": "experiments/ufuk/cpu-coarse80-v1/test_dataset80.py"
+    },
+    {
+      "commit": "69e8fc0a776d91386a3762d021efd6ceeaf4b71e",
+      "file": "experiments/ufuk/cpu-coarse80-v1/verification.json"
+    },
+    {
+      "commit": "6dd5f99ed929c422eb45a440e953900ae47becfb",
+      "file": "experiments/ufuk/cpu-coarse80-v1/arena-v1-preserved/README.txt"
+    },
+    {
+      "commit": "71c4fc4c28e7c4b63e1f3653eb570658340d8668",
+      "file": "experiments/ufuk/cpu-coarse80-v1/arena-v1-preserved/audit_arena_v2.py"
+    },
+    {
+      "commit": "bee075f4d98f126bea8fee02c7392664c50b61c2",
+      "file": "experiments/ufuk/cpu-coarse80-v1/arena-v1-preserved/native_admission.py"
+    },
+    {
+      "commit": "b13d0bbad67c30bb06771d2366d9495ada301931",
+      "file": "experiments/ufuk/cpu-coarse80-v1/arena-v1-preserved/profile.py"
+    },
+    {
+      "commit": "cb5aff28a9c548a4fc76e975fc07ba760b098acf",
+      "file": "experiments/ufuk/cpu-coarse80-v1/arena-v1-preserved/profile_support.py"
+    },
+    {
+      "commit": "dc567977436f00d817c492b6215868a3c384863b",
+      "file": "experiments/ufuk/cpu-coarse80-v1/arena-v1-preserved/protocol-DRAFT.json"
+    },
+    {
+      "commit": "37e23dcb8c020d0055ba49deee21e1ba567663a1",
+      "file": "experiments/ufuk/cpu-coarse80-v1/arena-v1-preserved/protocol.json"
+    },
+    {
+      "commit": "7fba9230329e82b4f252b4bcdfdd7b91bd4171a9",
+      "file": "experiments/ufuk/cpu-coarse80-v1/arena-v1-preserved/run.py"
+    },
+    {
+      "commit": "9c28e5d364a7208b9dd90cfa55aec565645fd60b",
+      "file": "experiments/ufuk/cpu-coarse80-v1/arena-v1-preserved/search.py"
+    },
+    {
+      "commit": "cc8457b408174a39b65b38aefb2b5555f08f19d8",
+      "file": "experiments/ufuk/cpu-coarse80-v1/arena-v1-preserved/test_contracts.py"
+    },
+    {
+      "commit": "d31ee127f2bde5808eadaeb73d2733d43d69be0a",
+      "file": "experiments/ufuk/cpu-coarse80-v1/arena-v1-preserved/tournament.py"
+    },
+    {
+      "commit": "5951b824b8273eb952110c36f960e88e30cc0f6a",
+      "file": "experiments/ufuk/cpu-coarse80-v1/arena-v1-preserved/train_parity.py"
+    },
+    {
+      "commit": "30f74b614c45d5c6937e9617dab56de13aca1e55",
+      "file": "experiments/ufuk/cpu-coarse80-v1/arena-v1-preserved/value.py"
+    },
+    {
+      "commit": "b1e9076a8adada3830662b6f2af527e8b5c6e62f",
+      "file": "experiments/ufuk/cpu-coarse80-v1/arena-v2/README.txt"
+    },
+    {
+      "commit": "f875486e7fc48430284f56e790f3e2f93fc8bc96",
+      "file": "experiments/ufuk/cpu-coarse80-v1/arena-v2/ROOT-envelope-reader-v2-recovery.json"
+    },
+    {
+      "commit": "e93905ea6ea0b440a1b986cef8f4f1b9f0e573c7",
+      "file": "experiments/ufuk/cpu-coarse80-v1/arena-v2/audit_arena_v2.py"
+    },
+    {
+      "commit": "9142c6ab651f27afd6d5e565b78d6f7fb2caf0b6",
+      "file": "experiments/ufuk/cpu-coarse80-v1/arena-v2/native_admission.py"
+    },
+    {
+      "commit": "46e0e9a42028a1682393e789ee5261f22bcb1a6f",
+      "file": "experiments/ufuk/cpu-coarse80-v1/arena-v2/profile.py"
+    },
+    {
+      "commit": "95a2da9f770ec7959de56a1c08924a52bba68f9b",
+      "file": "experiments/ufuk/cpu-coarse80-v1/arena-v2/profile_support.py"
+    },
+    {
+      "commit": "48c0ef802a437eeea54077d232aa66759eab42c0",
+      "file": "experiments/ufuk/cpu-coarse80-v1/arena-v2/protocol-DRAFT.json"
+    },
+    {
+      "commit": "255d39a541f397c6652ae0c232f1c8f3ce8b041c",
+      "file": "experiments/ufuk/cpu-coarse80-v1/arena-v2/protocol.json"
+    },
+    {
+      "commit": "1621be5d808ee6dfb9e8a7d37a1f8c2fffff57af",
+      "file": "experiments/ufuk/cpu-coarse80-v1/arena-v2/run.py"
+    },
+    {
+      "commit": "f922312514b6306b89aa4310dec60d7e82c31db5",
+      "file": "experiments/ufuk/cpu-coarse80-v1/arena-v2/search.py"
+    },
+    {
+      "commit": "15e309ea6a3a5bb53b41fffe1ce49188f08b213e",
+      "file": "experiments/ufuk/cpu-coarse80-v1/arena-v2/test_contracts.py"
+    },
+    {
+      "commit": "9a69055c68861c4f185d8cbd55b6ba5bb9d14007",
+      "file": "experiments/ufuk/cpu-coarse80-v1/arena-v2/tournament.py"
+    },
+    {
+      "commit": "290217a2475de4c3e54598c7e3fa93cef45a8ba0",
+      "file": "experiments/ufuk/cpu-coarse80-v1/arena-v2/train_parity.py"
+    },
+    {
+      "commit": "45ca11d428d28fe9213c1c586163ef6ffcc7756e",
+      "file": "experiments/ufuk/cpu-coarse80-v1/arena-v2/value.py"
+    },
+    {
+      "commit": "22b334b5bd0810afe62cf39d35cd3728dfadbeb2",
+      "file": "experiments/ufuk/cpu-nnue16-v1/C-parity-receipt.json"
+    },
+    {
+      "commit": "5ca4156bbbdd2b2cabfb9c31156b9751076a94d4",
+      "file": "experiments/ufuk/cpu-nnue16-v1/FROZEN-CLOSURE.json"
+    },
+    {
+      "commit": "25efedf8f189a8add80b198df4e78c12a32fda25",
+      "file": "experiments/ufuk/cpu-nnue16-v1/README.txt"
+    },
+    {
+      "commit": "ed00f2f3b771ee069daee501f88de4bf9acf06be",
+      "file": "experiments/ufuk/cpu-nnue16-v1/build-receipt.json"
+    },
+    {
+      "commit": "d7e586038ece995a578d37e7474a9e73df63745d",
+      "file": "experiments/ufuk/cpu-nnue16-v1/build.py"
+    },
+    {
+      "commit": "b03f08f895f5086d97e53d34e3b218e34d7ac5d1",
+      "file": "experiments/ufuk/cpu-nnue16-v1/evaluator.py"
+    },
+    {
+      "commit": "2c1cf802b37e8373f576d93611c0557d744cec58",
+      "file": "experiments/ufuk/cpu-nnue16-v1/forward.c"
+    },
+    {
+      "commit": "a7065dadc541933ea839fb16848ae1eb7009f66b",
+      "file": "experiments/ufuk/cpu-nnue16-v1/model.py"
+    },
+    {
+      "commit": "208bd411a4f56ea0d22938287b81c43e0b180972",
+      "file": "experiments/ufuk/cpu-nnue16-v1/native.py"
+    },
+    {
+      "commit": "4aa92f1c34898b1b33a2b7a345bee407bc102696",
+      "file": "experiments/ufuk/cpu-nnue16-v1/qualify.py"
+    },
+    {
+      "commit": "0907d64b06e3bdf307ba53f0e214785c482ca7b8",
+      "file": "experiments/ufuk/cpu-nnue16-v1/test_proposal.py"
+    },
+    {
+      "commit": "b2362039116877195370d7e15ea1c7f49437f905",
+      "file": "experiments/ufuk/cpu-nnue16-v1/train.py"
+    },
+    {
+      "commit": "b34549dc1686f44dbb7f61f3b344ae9146838870",
+      "file": "experiments/ufuk/cpu-nnue16-v1/verification.json"
+    },
+    {
+      "commit": "04b672edb6fe51c53249acbb4aca6fc87c730924",
+      "file": "experiments/ufuk/cpu-nnue16-v1/teacher-producer/20262905-registration-DRAFT.json"
+    },
+    {
+      "commit": "5231b236beefeeb184c91b8636f00f9015f2c356",
+      "file": "experiments/ufuk/cpu-nnue16-v1/teacher-producer/20262906-registration-DRAFT.json"
+    },
+    {
+      "commit": "578e29be983018c1aaa8ebdf86ef07b214ef6d2a",
+      "file": "experiments/ufuk/cpu-nnue16-v1/teacher-producer/README.txt"
+    },
+    {
+      "commit": "ccf864900bbe24882dcfed8bad32565311f68687",
+      "file": "experiments/ufuk/cpu-nnue16-v1/teacher-producer/known8-exclusions-DRAFT.json"
+    },
+    {
+      "commit": "52ea32da52a966b7b06de9802a53f64a8c2be46c",
+      "file": "experiments/ufuk/cpu-nnue16-v1/teacher-producer/producer.py"
+    },
+    {
+      "commit": "0485bb614ef56d18645ea651cbd2bce9668dfd31",
+      "file": "experiments/ufuk/cpu-nnue16-v1/teacher-producer/selection.py"
+    },
+    {
+      "commit": "0c7bf3c73e3a784c6976a70e6cb39f5106d3e29f",
+      "file": "experiments/ufuk/cpu-nnue16-v1/teacher-producer/test_selection.py"
+    },
+    {
+      "commit": "4325ef698cc70d9689f0966c4b47a10a0ed75e92",
+      "file": "experiments/ufuk/cpu-nnue16-v1/teacher-producer/verification.json"
+    },
+    {
+      "commit": "4b62c639db67d0cd5e4bad1849cad03b2caac733",
+      "file": "experiments/ufuk/cpu-nnue16-v1/teacher-training/README.md"
+    },
+    {
+      "commit": "22aa01dcba895f347582adab7fba6f1178b748bf",
+      "file": "experiments/ufuk/cpu-nnue16-v1/teacher-training/convert.py"
+    },
+    {
+      "commit": "26f5dcc94ca59e8f41db0724c6257dea0cae7307",
+      "file": "experiments/ufuk/cpu-nnue16-v1/teacher-training/prove.py"
+    },
+    {
+      "commit": "6ceea8f50e37b96c85d9eaf34c7e1e7ac4897e4e",
+      "file": "experiments/ufuk/cpu-nnue16-v1/teacher-training/test_conversion.py"
+    },
+    {
+      "commit": "341690caa2315ed17883c6d441dfdd3a63965f20",
+      "file": "experiments/ufuk/cpu-nnue16-v1/admission/ARENA-RECIPE.md"
+    },
+    {
+      "commit": "8b5a7132421367e78e8fdb036e75f22b05a2183d",
+      "file": "experiments/ufuk/cpu-nnue16-v1/admission/admission.py"
+    },
+    {
+      "commit": "329a236bd9e9fd9c6cdcef15c92f175a30ee1930",
+      "file": "experiments/ufuk/cpu-nnue16-v1/admission/child_admission.py"
+    },
+    {
+      "commit": "55afe21175bceee60df64848ab96b12309defce4",
+      "file": "experiments/ufuk/cpu-nnue16-v1/admission/profile.py"
+    },
+    {
+      "commit": "fa1b71a8d5caa09143b183eb511c7daa8f9d4e5c",
+      "file": "experiments/ufuk/cpu-nnue16-v1/admission/teacher-profile-DRAFT.json"
+    },
+    {
+      "commit": "d62bab7eaf2ce8e534f3fba4debae1ac710ffb21",
+      "file": "experiments/ufuk/cpu-nnue16-v1/admission/teacher_profile_v2.py"
+    },
+    {
+      "commit": "c79ca7ff6662b3facc1b0229d5a9e71ca8ccaef1",
+      "file": "experiments/ufuk/cpu-nnue16-v1/admission/test_admission.py"
+    },
+    {
+      "commit": "e704eb1566c4c0e8513e5f77783700ab859dd3d8",
+      "file": "experiments/ufuk/cpu-nnue16-v1/admission/test_profile_import_v2.py"
+    },
+    {
+      "commit": "f5a64fc6ba35d6e21bc8565e9e034e16ebc7a1c3",
+      "file": "experiments/ufuk/cpu-nnue16-v1/own-producer-UNEXECUTED/README.md"
+    },
+    {
+      "commit": "f65fb8050d57ae156f1a9d9779c59f6b44a77768",
+      "file": "experiments/ufuk/cpu-nnue16-v1/own-producer-UNEXECUTED/collector.py"
+    },
+    {
+      "commit": "b7df2e5d710fe5702fdcf9604d64ce249fc415ef",
+      "file": "experiments/ufuk/cpu-nnue16-v1/own-producer-UNEXECUTED/run_collection.py"
+    },
+    {
+      "commit": "9d4d39459a2bb5c231fd286d1500803b42188687",
+      "file": "experiments/ufuk/cpu-nnue16-v1/own-producer-UNEXECUTED/test_collector.py"
+    },
+    {
+      "commit": "da597fc93f6b8c35aff56c1c7acc632adaa2540f",
+      "file": "experiments/ufuk/cpu-nnue16-v1/own-training-INCOMPLETE/WRAPUP.txt"
+    },
+    {
+      "commit": "db0990af1c0f525da69b08438846b5c0b6e1f5f6",
+      "file": "experiments/ufuk/cpu-nnue16-v1/own-training-INCOMPLETE/convert.py"
+    },
+    {
+      "commit": "346cfcc28e1fe28592b1dd3365c56acc9a33da69",
+      "file": "experiments/ufuk/cpu-nnue16-v1/own-training-INCOMPLETE/prove.py"
+    },
+    {
+      "commit": "6206d587c7976bc84343ff6016f29c6ead47ad54",
+      "file": "experiments/ufuk/cpu-nnue16-v1/own-training-INCOMPLETE/test_conversion.py"
+    },
+    {
+      "commit": "4ad8968eb5539a942b3c37adaaf86f87cf04a1b5",
+      "file": "experiments/ufuk/cpu-nnue16-v1/own-training-INCOMPLETE/verification.json"
+    },
+    {
+      "commit": "978cadedfa5531239d93d8433f1291fe45bd5ee9",
+      "file": "experiments/ufuk/cpu-balanced16-v2/ROOT-RECIPE.txt"
+    },
+    {
+      "commit": "16233611c2ba098400bd8673b87c12e5e052c13a",
+      "file": "experiments/ufuk/cpu-balanced16-v2/architecture.py"
+    },
+    {
+      "commit": "e181eebdefd55473bc85396b7d620dfed13417e2",
+      "file": "experiments/ufuk/cpu-balanced16-v2/fit.py"
+    },
+    {
+      "commit": "06fe4700dfa6ce3777fd902ebc0acfb19bcd92e9",
+      "file": "experiments/ufuk/cpu-balanced16-v2/learner_v2.py"
+    },
+    {
+      "commit": "1ba35543c2b08f8a6c7b6192901f178b09c5ea9f",
+      "file": "experiments/ufuk/cpu-balanced16-v2/protocol-DRAFT.json"
+    },
+    {
+      "commit": "a08d976a33a4a1336f7b71e4c21f0732bb790e50",
+      "file": "experiments/ufuk/cpu-balanced16-v2/qualify.py"
+    },
+    {
+      "commit": "21852d313e816356314b708ce07ca5f910dc9416",
+      "file": "experiments/ufuk/cpu-balanced16-v2/register.py"
+    },
+    {
+      "commit": "377e8756842b2cca2c16e3420d19fb96fdd7bd92",
+      "file": "experiments/ufuk/cpu-balanced16-v2/support.py"
+    },
+    {
+      "commit": "b4ccb4a1907f9f6a8be8436aaa01a65ec34c4524",
+      "file": "experiments/ufuk/cpu-balanced16-v2/test_balanced.py"
+    },
+    {
+      "commit": "378837a00f17c9f19db746f9408beeb7a835b5d7",
+      "file": "experiments/ufuk/cpu-balanced16-v2/test_glue.py"
+    },
+    {
+      "commit": "dda87ed56bc9d43384f1bd0f9f1492d40b8d29b0",
+      "file": "experiments/ufuk/cpu-balanced16-v2/train.py"
+    },
+    {
+      "commit": "c2ec9df12adfc9f7f501d75126078033fb738703",
+      "file": "experiments/ufuk/cpu-balanced16-v2/transform.py"
+    },
+    {
+      "commit": "445be39a1d4c3703ae513d9077a502ce87adfdcf",
+      "file": "experiments/ufuk/cpu-balanced16-v2/verification.json"
+    },
+    {
+      "commit": "7f1163de698fd3345392fa6f6d4953426a98d0ee",
+      "file": "experiments/ufuk/cpu-balanced16-v2/arena-UNEXECUTED/audit_arena_v2.py"
+    },
+    {
+      "commit": "6ff8f58d67cd2cc41b625cde37b918af55382621",
+      "file": "experiments/ufuk/cpu-balanced16-v2/arena-UNEXECUTED/audit_support.py"
+    },
+    {
+      "commit": "0602e0791fd173f51f3f9594edae4d3ce2e7a662",
+      "file": "experiments/ufuk/cpu-balanced16-v2/arena-UNEXECUTED/native_admission.py"
+    },
+    {
+      "commit": "10f301daa11a3a7f68245e54428312a1c1b0a848",
+      "file": "experiments/ufuk/cpu-balanced16-v2/arena-UNEXECUTED/profile.py"
+    },
+    {
+      "commit": "75f7f02af36b5ee37c9fc71d2a20ab54a0bc062f",
+      "file": "experiments/ufuk/cpu-balanced16-v2/arena-UNEXECUTED/profile_support.py"
+    },
+    {
+      "commit": "e16f4de9e316b5f2b73386d610784284cfdeca07",
+      "file": "experiments/ufuk/cpu-balanced16-v2/arena-UNEXECUTED/protocol-DRAFT.json"
+    },
+    {
+      "commit": "c3563caa4ee42da93cc6d7625bae9e09bb9320ee",
+      "file": "experiments/ufuk/cpu-balanced16-v2/arena-UNEXECUTED/run.py"
+    },
+    {
+      "commit": "1dab652a56866261ed6b81c005d47bd2375de016",
+      "file": "experiments/ufuk/cpu-balanced16-v2/arena-UNEXECUTED/seal.py"
+    },
+    {
+      "commit": "8cf193c18f4b5485d7dfa21fae9df423d7f5cde6",
+      "file": "experiments/ufuk/cpu-balanced16-v2/arena-UNEXECUTED/search.py"
+    },
+    {
+      "commit": "218b4c70909aa7d5ea910d7e42e83dac505a82b8",
+      "file": "experiments/ufuk/cpu-balanced16-v2/arena-UNEXECUTED/support.py"
+    },
+    {
+      "commit": "e5ffbb21c7678284d894737bb4ec279784e705d3",
+      "file": "experiments/ufuk/cpu-balanced16-v2/arena-UNEXECUTED/test_binding.py"
+    },
+    {
+      "commit": "e7d7a93e0d4dd7af83a87658c5d729b5b7c862eb",
+      "file": "experiments/ufuk/cpu-balanced16-v2/arena-UNEXECUTED/tournament.py"
+    },
+    {
+      "commit": "b30da3dc51ac72d37e5ae904291c46b7018e4d98",
+      "file": "experiments/ufuk/cpu-balanced16-v2/arena-UNEXECUTED/value.py"
+    },
+    {
+      "commit": "8dc916e898abcb7d85520a46d51372493584598c",
+      "file": "experiments/ufuk/cpu-coarse80-v1/root-runtime/fast_evaluator80_v1.py"
+    },
+    {
+      "commit": "dda39b68b62fcc8647367a15484517351e5a1ebe",
+      "file": "experiments/ufuk/cpu-coarse80-v1/root-runtime/production80_v1.py"
+    },
+    {
+      "commit": "1ab6f74804026afd1bb09e1f5737c56954160930",
+      "file": "docs/runs/UFUK-WRAP-source-byte-inventory-20261006.json"
+    },
+    {
+      "commit": "5f9b6c836573e1c312ba12e2e0261e3d8edb1275",
+      "file": "experiments/ufuk/wrap-20261006/20262905-NNUE-teacher-fit-receipt.json"
+    },
+    {
+      "commit": "ad5057dd7684abf0778c4f2e366e2e58980d9d8a",
+      "file": "experiments/ufuk/wrap-20261006/20262905-NNUE-teacher-proof-receipt.json"
+    },
+    {
+      "commit": "7e5feeeb6db739a32169018cbfb894711969d166",
+      "file": "experiments/ufuk/wrap-20261006/20262905-balanced-fit-receipt.json"
+    },
+    {
+      "commit": "9a674bca202e662143fb2fe6698fb9e53066a089",
+      "file": "experiments/ufuk/wrap-20261006/20262905-balanced-proof-receipt.json"
+    },
+    {
+      "commit": "54cceb0d2c5e500ad079379606126f08763fef10",
+      "file": "experiments/ufuk/wrap-20261006/20262906-NNUE-teacher-fit-receipt.json"
+    },
+    {
+      "commit": "a1c7edffe83ec75e82eefb3ebd6e771d86db4a3c",
+      "file": "experiments/ufuk/wrap-20261006/20262906-NNUE-teacher-proof-receipt.json"
+    },
+    {
+      "commit": "c9f6ccd1c46fa753d9bbff17d1a48c602864b006",
+      "file": "experiments/ufuk/wrap-20261006/20262906-balanced-fit-receipt.json"
+    },
+    {
+      "commit": "f8f041db0efd313f85f9219d4b7973694c758d43",
+      "file": "experiments/ufuk/wrap-20261006/20262906-balanced-proof-receipt.json"
+    },
+    {
+      "commit": "33d04b30092cb645d5055f6b092c67e9f2173850",
+      "file": "experiments/ufuk/wrap-20261006/ACTION-fullhistory-independent-result.json"
+    },
+    {
+      "commit": "1ff5999d5bf72d72dc6dd483cfbfd72f85c48f20",
+      "file": "experiments/ufuk/wrap-20261006/ACTION-six-actual-searches.json"
+    },
+    {
+      "commit": "2bfeb46b3371f40bd1e26f5b876827a959644775",
+      "file": "experiments/ufuk/wrap-20261006/C18-fullhistory-independent-result.json"
+    },
+    {
+      "commit": "7fe47900dbc41045f951bb017a76ea821b3fc0f2",
+      "file": "experiments/ufuk/wrap-20261006/C18-six-actual-searches.json"
+    },
+    {
+      "commit": "7a3fe47f557bdfbe56a17d46164cf47dfe3a868b",
+      "file": "experiments/ufuk/wrap-20261006/NNUE-teacher-trained-profile-v1-failed.json"
+    },
+    {
+      "commit": "678f829fa5bc08ad85d33d3c6a2e14df26db73cf",
+      "file": "experiments/ufuk/wrap-20261006/NNUE-teacher-trained-profile-v2.json"
+    },
+    {
+      "commit": "7500143ac462b153b6ee3b938cf81a10963d320c",
+      "file": "experiments/ufuk/wrap-20261006/Selective-fullhistory-independent-result.json"
+    },
+    {
+      "commit": "f3c4921131a68a60513e1ae2fb47a250a93f2002",
+      "file": "experiments/ufuk/wrap-20261006/Selective-six-actual-searches.json"
+    },
+    {
+      "commit": "30087c5d30ffcc0b05b6428351b7774557e41422",
+      "file": "experiments/ufuk/wrap-20261006/USER-v2-scope-approved-pause.json"
+    },
+    {
+      "commit": "c726a4cb8ca7c1e5060a0335b07b0af919e29002",
+      "file": "experiments/ufuk/wrap-20261006/USER-wrap-up-coarse80-stop.json"
+    },
+    {
+      "commit": "9e25bc9121745e9c88658bdf09eab0e6b02d95b0",
+      "file": "experiments/ufuk/wrap-20261006/V8-ROOT-public-1426-readback.json"
+    },
+    {
+      "commit": "3f9204a00140a1c927c0b13adb605ddea67e3216",
+      "file": "experiments/ufuk/wrap-20261006/state-at-user-pause.json"
+    },
+    {
+      "commit": "cdd4877a91cbd0fcc633d3deb97ef27e0c686c84",
+      "file": "docs/runs/UFUK-WRAP-status-20261006.md"
+    },
+    {
+      "commit": "1e97035a55525cfa3099992531e1ff9fe4e41cdb",
+      "file": "docs/research/codewords.md"
+    }
+  ],
+  "preservation_source_control_stage": [
+    {
+      "commit": "b92be3a6a2ae8334d33fd612dd7b643cac7ba17f",
+      "file": "experiments/ufuk/nnue-own-state-blob-v9/ROOT-RECIPE.txt"
+    },
+    {
+      "commit": "73af6078aadb6aea1a81ccb6ae76f33d7d552d56",
+      "file": "experiments/ufuk/nnue-own-state-blob-v9/ROOT-approval.json"
+    },
+    {
+      "commit": "ac9507e2ab6e77f339e280b4bdf3d40fdd882a7a",
+      "file": "experiments/ufuk/nnue-own-state-blob-v9/TRANSPORT-STATUS.md"
+    },
+    {
+      "commit": "155b55c249fc90c4e2a275a1a503c65e4a006b74",
+      "file": "experiments/ufuk/nnue-own-state-blob-v9/allowlist.json"
+    },
+    {
+      "commit": "63d660bbfce0af0e4ffa331c52ce1cf4b71ae92d",
+      "file": "experiments/ufuk/nnue-own-state-blob-v9/build_seal_v9.py"
+    },
+    {
+      "commit": "50456124ef0d246abc5826b94a1bdd2078d46056",
+      "file": "experiments/ufuk/nnue-own-state-blob-v9/control.json"
+    },
+    {
+      "commit": "91ab1b62cf2b4c32290035fc413fab1b6c05ea83",
+      "file": "experiments/ufuk/nnue-own-state-blob-v9/manifest.json"
+    },
+    {
+      "commit": "4ea3df2624a43fb1fd897127cc638c4326fab4c6",
+      "file": "experiments/ufuk/nnue-own-state-blob-v9/parts-control.json"
+    },
+    {
+      "commit": "222bca626f8c8d4cc6f75c66b8ef286402adb1ac",
+      "file": "experiments/ufuk/nnue-own-state-blob-v9/parts_receiver_v1.py"
+    },
+    {
+      "commit": "9107323a2bdb83fd5e019e7e0cdf65c4e34aa935",
+      "file": "experiments/ufuk/nnue-own-state-blob-v9/prepare_v9.py"
+    },
+    {
+      "commit": "6b04fedec96815fc24b12bab2ebf050d1c2bc3e9",
+      "file": "experiments/ufuk/nnue-own-state-blob-v9/raw_capsule_v9.py"
+    },
+    {
+      "commit": "1d0c034838f327237126260814b99f45ab67659a",
+      "file": "experiments/ufuk/nnue-own-state-blob-v9/receiver_v9.py"
+    },
+    {
+      "commit": "11e8480c758d07f1af8c408c1e595dc26c920b33",
+      "file": "experiments/ufuk/nnue-own-state-blob-v9/release_transport_v9.py"
+    },
+    {
+      "commit": "7ab43aa0557b10f2377bf71ac0e61bb8e6afa32d",
+      "file": "experiments/ufuk/nnue-own-state-blob-v9/test_parts_v1.py"
+    },
+    {
+      "commit": "b25183eb352ae8737f88912ec7d863b85e4ef699",
+      "file": "experiments/ufuk/nnue-own-state-blob-v9/test_v9_metadata.py"
+    },
+    {
+      "commit": "e48d2b01476dba918feaae31d3ad9690e5e4c262",
+      "file": "experiments/ufuk/nnue-own-state-blob-v9/workflow_receiver_v9.py"
+    },
+    {
+      "commit": "a6174f1eb00a1ca50a8360bfecb7f9c554034796",
+      "file": ".github/workflows/nnue-own-state-blob-v9.yml"
+    },
+    {
+      "commit": "179265aa8bf1a460a615016b362ba42cc5bb5f64",
+      "file": ".github/workflows/nnue-own-state-parts-v9.yml"
+    }
+  ],
+  "counts": {
+    "source_stage": 197,
+    "preservation_source_control_stage": 18
+  },
+  "one_meaningful_file_per_commit_verified": true,
+  "author_and_committer": "Emir Tunahan Alim <emrtnhalim@gmail.com>",
+  "coauthor_added": false,
+  "final_receipts_stage": "reported separately after this map; no self-referential commit hash"
+}
