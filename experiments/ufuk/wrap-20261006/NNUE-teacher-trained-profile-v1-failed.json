@@ -1,0 +1,16 @@
+{
+  "admission_sha256": "94d80c5ab1f3ca9a2d5260d52bda5f7ab16ff236970a57a9a2c70e2351d92781",
+  "admissions": [],
+  "deadline": 1791245387.7380247,
+  "error": "AttributeError(\"module 'profile' has no attribute 'run'\")",
+  "finished": 1791244788.8745577,
+  "first": 1791244787.7380247,
+  "helper_sha256": "3bee71dbde17b8616cb550ed2a116d22f5a4d92affe924fcd82d54a3c013e7d0",
+  "packets": [],
+  "parity": [],
+  "registration_sha256": "eba30fadfe5380a98757276c6b29fe763d0ab5b40d143a0022165940a71087d0",
+  "schema": "NNUE-trained-teacher-profile-result-v1",
+  "status": "FAILED-preserved",
+  "strength_success_claimed": false,
+  "teacher_is_selflearning": false
+}
