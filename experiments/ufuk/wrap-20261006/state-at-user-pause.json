@@ -170,7 +170,72 @@
     "full_anonymous_readback_all_original_sha": true,
     "owned_workflow_37391389127": "failed inherited8MiB GET assertion; original approved32MiB v2ROOT readback passed; not workflow success"
   },
-  "V9_public_backup": "pending now, update separate final preservation receipt",
+  "V9_public_backup": {
+    "status": "PASS-public-eight-parts-and-all453-original-byte-SHA-not-runtime-strength",
+    "original_files": 453,
+    "raw_bytes": 111099693,
+    "capsule_bytes": 64851157,
+    "capsule_sha256": "f257b3812862c1018dcdfbce4a27a3f752ef9f74f86a3fe67ac2537551bc64a2",
+    "workflow_run": 37392894041,
+    "workflow_head": "179265aa8bf1a460a615016b362ba42cc5bb5f64",
+    "public_parts": [
+      {
+        "browser_download_url": "https://github.com/Eta06/HarbiChess/releases/download/ufuk-cpu-ownplay-state-20261005/nnue-state-v9-f257b3812862-part00-fc84240d8992.bin",
+        "id": 613968410,
+        "name": "nnue-state-v9-f257b3812862-part00-fc84240d8992.bin",
+        "size": 8388608
+      },
+      {
+        "browser_download_url": "https://github.com/Eta06/HarbiChess/releases/download/ufuk-cpu-ownplay-state-20261005/nnue-state-v9-f257b3812862-part01-978dd15eea5e.bin",
+        "id": 613968519,
+        "name": "nnue-state-v9-f257b3812862-part01-978dd15eea5e.bin",
+        "size": 8388608
+      },
+      {
+        "browser_download_url": "https://github.com/Eta06/HarbiChess/releases/download/ufuk-cpu-ownplay-state-20261005/nnue-state-v9-f257b3812862-part02-0f98f57ff04f.bin",
+        "id": 613968610,
+        "name": "nnue-state-v9-f257b3812862-part02-0f98f57ff04f.bin",
+        "size": 8388608
+      },
+      {
+        "browser_download_url": "https://github.com/Eta06/HarbiChess/releases/download/ufuk-cpu-ownplay-state-20261005/nnue-state-v9-f257b3812862-part03-2235fa204533.bin",
+        "id": 613968695,
+        "name": "nnue-state-v9-f257b3812862-part03-2235fa204533.bin",
+        "size": 8388608
+      },
+      {
+        "browser_download_url": "https://github.com/Eta06/HarbiChess/releases/download/ufuk-cpu-ownplay-state-20261005/nnue-state-v9-f257b3812862-part04-7435cb0274a7.bin",
+        "id": 613968800,
+        "name": "nnue-state-v9-f257b3812862-part04-7435cb0274a7.bin",
+        "size": 8388608
+      },
+      {
+        "browser_download_url": "https://github.com/Eta06/HarbiChess/releases/download/ufuk-cpu-ownplay-state-20261005/nnue-state-v9-f257b3812862-part05-d5729024ecec.bin",
+        "id": 613968954,
+        "name": "nnue-state-v9-f257b3812862-part05-d5729024ecec.bin",
+        "size": 8388608
+      },
+      {
+        "browser_download_url": "https://github.com/Eta06/HarbiChess/releases/download/ufuk-cpu-ownplay-state-20261005/nnue-state-v9-f257b3812862-part06-44f73312339a.bin",
+        "id": 613969087,
+        "name": "nnue-state-v9-f257b3812862-part06-44f73312339a.bin",
+        "size": 8388608
+      },
+      {
+        "browser_download_url": "https://github.com/Eta06/HarbiChess/releases/download/ufuk-cpu-ownplay-state-20261005/nnue-state-v9-f257b3812862-part07-63878245b47e.bin",
+        "id": 613969183,
+        "name": "nnue-state-v9-f257b3812862-part07-63878245b47e.bin",
+        "size": 6130901
+      }
+    ],
+    "all8parts_and453_originals_full_anonymous_SHA": true,
+    "public_verification_finished_epoch": 1791245682.2619095,
+    "original_clock_retained": true,
+    "full_environment_resume_claimed": false
+  },
   "original_deadline_UTC": "2026-10-06 08:00:00",
-  "pause_supersedes_continuous_work": true
+  "pause_supersedes_continuous_work": true,
+  "final_registered_owned_workers_live": 0,
+  "guardian_stopped_at_USER_pause": true,
+  "final_state_update_epoch": 1791245813.9254198
 }
