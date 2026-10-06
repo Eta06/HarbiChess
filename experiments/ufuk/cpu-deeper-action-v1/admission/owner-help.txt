@@ -1,0 +1,13 @@
+usage: run.py [-h] --checkout CHECKOUT --study STUDY --qualification
+              QUALIFICATION --output OUTPUT --first-epoch FIRST_EPOCH
+
+One owned CPU arena worker, immutable models and prior actual full-native
+receipts.
+
+options:
+  -h, --help            show this help message and exit
+  --checkout CHECKOUT
+  --study STUDY
+  --qualification QUALIFICATION
+  --output OUTPUT
+  --first-epoch FIRST_EPOCH
