@@ -1,0 +1,59 @@
+{
+  "actual_training_or_search_performed": false,
+  "architecture_profile_seconds": 600,
+  "arena_package": "/workspace/work/harbichess/cpu-selective-q-balanced16-arena-v2",
+  "arena_seconds": 7200,
+  "audit_seconds": 900,
+  "controller": "unchanged charged512 global/allroot/q2/extra64/strict>.5; learned and sameNEWzero share source",
+  "deadline_epoch": null,
+  "expected_fit": "two FRESH48 plus4 strict initial/final loads",
+  "expected_proof": "bothseeds whole8/pause4/fresh8 plus12 strict fresh-native loads",
+  "files": {
+    "learner_v2.py": "4a144f3ca332775dfecbfaa34807c207845eda005e9863f838c97fa37e850639",
+    "test_balanced.py": "2c6791ab38c11cca1979bd9b8e3ea94fefa2af9e8dd0ebdfd04355410cc61a91",
+    "transform.py": "5decac7cdbee537feba47939ba3ca2a42c7823d54360d91a4242fcd952e8622a"
+  },
+  "first_epoch": null,
+  "fit_max_seconds": 900,
+  "fit_seconds": 900,
+  "gradient_normalization": "2*(1-p)",
+  "hard_end": 1791273600,
+  "initializer": "freshzero16/newAdam/newglobal+samplerRNG; no v1 native import",
+  "model_score": "BALANCED class risk sigmoid, NOT calibrated posterior",
+  "oldprior_search_only_control_retained": true,
+  "original_inputs": {
+    "20262905": {
+      "dataset": {
+        "path": "/dev/shm/harbichess-selective-q-labels-20262905-v1/dataset.json",
+        "sha256": "cb17f03e5edd662c37845fdfa488e2a4159a8b38d1abef7c89ba9577293d1822"
+      },
+      "split": {
+        "path": "/dev/shm/harbichess-selective-q-labels-20262905-v1/split.json",
+        "sha256": "e24410334f1ed55f8a01440a0dbc7e449dd259f010827a02e4295676356984b7"
+      }
+    },
+    "20262906": {
+      "dataset": {
+        "path": "/dev/shm/harbichess-selective-q-labels-20262906-v1/dataset.json",
+        "sha256": "c835e4293a9df7f20964dfcf039b96812963d945c266811aca23cd0a2da12e09"
+      },
+      "split": {
+        "path": "/dev/shm/harbichess-selective-q-labels-20262906-v1/split.json",
+        "sha256": "4194bb11c74734a7e7d3ce223f7ec32882943497efb29ff239af540c63e90949"
+      }
+    }
+  },
+  "original_v1_noactivation_hypothesis": "FALSIFIED; original evidence preserved",
+  "pos_weight": "(1-p)/p",
+  "prevalence": "fixed game-equal positive fraction over eligible nonchecked completed TRAINGROUPS only",
+  "proof_max_seconds": 900,
+  "proof_seconds": 900,
+  "runtime_package": "/workspace/work/harbichess/cpu-selective-q-balanced16-training-proposal",
+  "schema": "own-selective-Q-balanced-risk-proposal-v2",
+  "source_bytes": 7957,
+  "status": "UNREGISTERED-NOT-trained",
+  "strength_gates_unchanged": true,
+  "trained_profile_seconds": 600,
+  "updates": 48,
+  "verification": "3 synthetic testsPASS; canonical repo RuffPASS; no SGD/search/inference; legal/history metadata transform only"
+}
