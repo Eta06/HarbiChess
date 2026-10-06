@@ -1,0 +1,37 @@
+{
+  "actual_help_files": {
+    "arena-help.txt": "32f35e5c9c2a1fc43017276286aeed1c01d12e300c0a2c98935f453885f6bd86",
+    "owner-help.txt": "89e5d3711c8d2231757b47481eb24c96bd535a46bfc574e3ea3c0f66a0ca3cee",
+    "profile-help.txt": "1a0e600cb8596075afa55d8f59bc69d4a56516bd17380267f5505c7d660852c8",
+    "qualify-help.txt": "72bd96de7f8cb54857c57f0db131ad1cf7814ffe5a65cd626ccdd3ac7cabca38",
+    "train-help.txt": "428907cc3977e66682396794bff313d08492ec5709206a93a595b03340816ebf"
+  },
+  "actual_real_label_optimizer_updates": 0,
+  "actual_search_calls": 0,
+  "code_bytes": 51619,
+  "frozen_original_producer_edited": false,
+  "initial_test_failure_preserved": "static prior theta tuple/list fixture corrected; no actual engine change",
+  "protocol_sha256": {
+    "arena/protocol-DRAFT.json": "dc89ac147f7b488be5f068ec7fb41f58494e163df91d899ebc8668030a709bdb",
+    "fit-protocol-DRAFT.json": "46e6aa97ec1d1e1663190cf0f3da7333c2399bf06865949009e8d9d9312d402c",
+    "proof-protocol-DRAFT.json": "1913f8244daa73710eca1dfa18ad7d82f19e701ea2caa36773d297c421184d96"
+  },
+  "ruff": "PASS",
+  "schema": "own-action-actual-CLI-and-synthetic-native-admission-v1",
+  "source_sha256": {
+    "arena/audit_arena_v2.py": "9c93e5489877f301675b788a994162ebf331648e49928420dd48b32130b6a587",
+    "arena/native_admission.py": "df749c3f5205ca584a682c21ab13d7ab50dc4c7438cd1fceee655f3e3319d218",
+    "arena/profile.py": "c09c4a2a4af40a3b74936b8cb95fd6c7a59e8d0958689f9714ee9e19a2709fcd",
+    "arena/profile_support.py": "dd6f55d401fd878d546f1b847be5e72c60e23e35e0fb837286ddc9c0ed1e2fc1",
+    "arena/run.py": "d2f4e38d57d2ef04b8413b2dde9e5b6ecdea3d523bc2f007974f17a7b2c5d7a8",
+    "arena/search.py": "9a7d631434c38c1ea6b8478ee884e2f4087078a0b4848f1217b776b331005220",
+    "arena/tournament.py": "7081128a96f575d01ebaf40f1c7de725274b4316ac3836802b539b3ce7395cb8",
+    "arena/value.py": "c27954ea2468267d4177d11c357bf42081c9b4249b5ca111036db0cd9d44b959",
+    "stamp_training.py": "1f24a78ede70a6ed384620c0925ab57e9f062fec340e9ac974338ae146ac294e",
+    "synthetic_native_worker.py": "71fb766dbd48904260ebac51c0213dd2d00240066bb3cfcd8f7726298ebf8222",
+    "test_admission.py": "4c7e899c493f0757f60c0f969768515bba6474d278acbaf3d23636f71119e6e3"
+  },
+  "status": "PASS-static-import-and-synthetic-only-actual-label-proof-pending",
+  "synthetic_native_proof_sha256": "630e37d3bca1d80783a6b6bbc1602609133ecddcf8284f114375aa27c2af9e83",
+  "tests": 7
+}
