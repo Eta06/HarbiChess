@@ -1,0 +1,16 @@
+{
+  "actual_metadata_selection_or_SF_or_search_or_SGD": false,
+  "files": {
+    "20262905-registration-DRAFT.json": "c1424d1c499b00a37cb6811d4b23bae842c5c8796f26db1a3c2a366cdea0c762",
+    "20262906-registration-DRAFT.json": "6b38b42e82ddc48d4dc6fe7becee0a3af7d4d0547e330b6f3c19721272b46896",
+    "README.txt": "5e6f2235330b540ea75a01c7508231f7b577a103168fc703b8eb14409a09d5e5",
+    "known8-exclusions-DRAFT.json": "02d895345a8f4a235fc8a41a5a53b9041cbfe77705618ac6d4bbe2faf0da12f8",
+    "producer.py": "3310319b218d671e92bca79a82559959d36e2950107ac046f0928d8a82787533",
+    "selection.py": "2d5030857822e6f94cd0ae2cbe54892a422ba31286e4f97149b422d35f503ad8",
+    "test_selection.py": "f31a318a6493d263245225ead584816328e38886fcf2fa2c67d0c4ef36ee3b3b"
+  },
+  "ruff": "PASS canonicalROOT",
+  "runtime_source_bytes": 16628,
+  "schema": "NNUE-teacher8192-preparation-verification-v1",
+  "tests": "3PASS0skip0.13s"
+}
