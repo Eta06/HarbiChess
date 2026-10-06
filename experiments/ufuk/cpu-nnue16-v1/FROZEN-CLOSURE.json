@@ -1,0 +1,25 @@
+{
+  "build_sha256": "d998140e9505cb667f91b8295f8aae0cd68091b03ddc387633e79fc3fb326e80",
+  "environment": "Python3.12.14/Torch2.8CPU,1CPU; binary ABI pinned buildreceipt",
+  "files": {
+    "C-parity-receipt.json": "b6cd9bc585b43ed0fdf3444fb9841fa6dae874e0ec2397ff092889d260392490",
+    "README.txt": "e09a6064888977a0803396f3fa500434908f53d0f0be55a17b29c03e99d35fba",
+    "_kingbucket16.cpython-312-x86_64-linux-gnu.so": "495505cdebd6dbc029ee314846dbac79d5cca6d445de26c804a43821808d644b",
+    "build-receipt.json": "d998140e9505cb667f91b8295f8aae0cd68091b03ddc387633e79fc3fb326e80",
+    "build.py": "aa8ce2d2bdc3b046c5be9e0ceb14b1a793147868f107a5b7a79a76505c8c39b1",
+    "evaluator.py": "5317e736f872a2e237e45942c8df9e797c5acee8f626bb12009464869fab8d95",
+    "forward.c": "454f8c8f2b5d177f0ff31fd520b9554636a278b10ddb2f1eedcd92a0f9ad44e0",
+    "model.py": "c04914bc5a560ad51de81c6d0aaeb3fae4d04b45c07cd8e39bbd31f655d36565",
+    "native.py": "f60a1f9814f48691af1e2d1f1db1b548cff3e7df0a7cae9718051de1865b8b69",
+    "qualify.py": "111d0abc504acca0d4ed545532243272df9b6e1f90d06bb2d1fd0b27eef3f276",
+    "synthetic-proof-invocation.json": "164d9997402f64143ba573f67553a77b7e4a1471da3ecc3b0b615311f478bb55",
+    "test_proposal.py": "f929545a74a3f4cd2a11b47986e3b84f4577e0d39dabde0fb8032f8b3d3b23b3",
+    "train.py": "5644a7455498209a149a8672745868cf7e7cf4a3baae817dfce2128ff4d8f6c6",
+    "verification.json": "e8640b534a58b3544518c266dd6f693e2291f4757e8b88f51de7019fe707d176"
+  },
+  "native_proof_sha256": "1bb350ddac907e24fcc5b1c8766d2cade70c44a00092b9ca0e1e7abfe620f88b",
+  "schema": "kingbucket-nnue16-frozen-preparation-closure-v1",
+  "synthetic_proof_deadline": 1791242124.2584782,
+  "synthetic_proof_first": 1791242004.2584782,
+  "verification_sha256": "e8640b534a58b3544518c266dd6f693e2291f4757e8b88f51de7019fe707d176"
+}
