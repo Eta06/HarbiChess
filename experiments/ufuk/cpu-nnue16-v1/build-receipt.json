@@ -1,0 +1,19 @@
+{
+  "binary_sha256": "495505cdebd6dbc029ee314846dbac79d5cca6d445de26c804a43821808d644b",
+  "command": [
+    "cc",
+    "-O3",
+    "-fno-fast-math",
+    "-ffp-contract=off",
+    "-fPIC",
+    "-shared",
+    "-std=c11",
+    "-I/opt/codex/runtimes/codex-primary-runtime/dependencies/python/include/python3.12",
+    "/workspace/work/harbichess/cpu-kingbucket-nnue-proposal/forward.c",
+    "-o",
+    "/workspace/work/harbichess/cpu-kingbucket-nnue-proposal/_kingbucket16.cpython-312-x86_64-linux-gnu.so",
+    "-lm"
+  ],
+  "scope": "build only; not real-board parity",
+  "source_sha256": "454f8c8f2b5d177f0ff31fd520b9554636a278b10ddb2f1eedcd92a0f9ad44e0"
+}
