@@ -1,0 +1,1051 @@
+{
+  "status": "exact experimental source snapshot, runtime evidence separate; NNUE own-training INCOMPLETE",
+  "files": [
+    {
+      "file": "experiments/ufuk/cpu-deeper-action-v1/README.txt",
+      "source": "/workspace/work/harbichess/cpu-own-deeper-action-proposal/README.txt",
+      "sha256": "b1bd240de87e4648da125d8da0005f564f6c975912517cdbb91028e8c8d8e03b",
+      "bytes": 6305
+    },
+    {
+      "file": "experiments/ufuk/cpu-deeper-action-v1/action_labels.py",
+      "source": "/workspace/work/harbichess/cpu-own-deeper-action-proposal/action_labels.py",
+      "sha256": "ccaf09caa4e5a942a212b0cee3f85dded7c417f13f04e69656e2e419bc6ffdc3",
+      "bytes": 3600
+    },
+    {
+      "file": "experiments/ufuk/cpu-deeper-action-v1/action_learner.py",
+      "source": "/workspace/work/harbichess/cpu-own-deeper-action-proposal/action_learner.py",
+      "sha256": "955249846bc8636ef0ddb9f63db06b200c003944715b8c2963b30f37bd9725f0",
+      "bytes": 4162
+    },
+    {
+      "file": "experiments/ufuk/cpu-deeper-action-v1/action_model.py",
+      "source": "/workspace/work/harbichess/cpu-own-deeper-action-proposal/action_model.py",
+      "sha256": "873eeaa29c67c8c895dfcb54463cba80151b268dce04f3db62013874b9918509",
+      "bytes": 2048
+    },
+    {
+      "file": "experiments/ufuk/cpu-deeper-action-v1/produce_actions.py",
+      "source": "/workspace/work/harbichess/cpu-own-deeper-action-proposal/produce_actions.py",
+      "sha256": "132a43a07186920e1a825a061693e0c83b29d882d7a1acbedfdf9280ae78ae83",
+      "bytes": 13691
+    },
+    {
+      "file": "experiments/ufuk/cpu-deeper-action-v1/qualify_actions.py",
+      "source": "/workspace/work/harbichess/cpu-own-deeper-action-proposal/qualify_actions.py",
+      "sha256": "5a742e99432473d39a4762ae38bd3662eeada3dc944c5c48a9edee8a068e3d64",
+      "bytes": 4314
+    },
+    {
+      "file": "experiments/ufuk/cpu-deeper-action-v1/select_roots.py",
+      "source": "/workspace/work/harbichess/cpu-own-deeper-action-proposal/select_roots.py",
+      "sha256": "ca571105a075bf23f5992a9a5856ab1d4dc3f7e4f43ffd9f69391e5faca7a17c",
+      "bytes": 2646
+    },
+    {
+      "file": "experiments/ufuk/cpu-deeper-action-v1/student_search.py",
+      "source": "/workspace/work/harbichess/cpu-own-deeper-action-proposal/student_search.py",
+      "sha256": "3ad9cfcfd70dacf08620511e76b0fa2996c126133bc1b2ff85d93a6499f4d838",
+      "bytes": 4056
+    },
+    {
+      "file": "experiments/ufuk/cpu-deeper-action-v1/test_actions.py",
+      "source": "/workspace/work/harbichess/cpu-own-deeper-action-proposal/test_actions.py",
+      "sha256": "0b40f53cb3745ad182ca34c6145c571247a93caaad8966013f957a37179d26f6",
+      "bytes": 7222
+    },
+    {
+      "file": "experiments/ufuk/cpu-deeper-action-v1/train_actions.py",
+      "source": "/workspace/work/harbichess/cpu-own-deeper-action-proposal/train_actions.py",
+      "sha256": "1924c7bc007a3b8a94354d710c8ead82d15f2a49e5fc5bd8fb3697948712b38f",
+      "bytes": 7392
+    },
+    {
+      "file": "experiments/ufuk/cpu-deeper-action-v1/training-protocol-DRAFT.json",
+      "source": "/workspace/work/harbichess/cpu-own-deeper-action-proposal/training-protocol-DRAFT.json",
+      "sha256": "f8b78f6da16e5dd5331ff6ef40c9cebc3caf53a40d0db1aae4fbbe482a33ad08",
+      "bytes": 2414
+    },
+    {
+      "file": "experiments/ufuk/cpu-deeper-action-v1/verification.json",
+      "source": "/workspace/work/harbichess/cpu-own-deeper-action-proposal/verification.json",
+      "sha256": "ae1c08393d9ad66f1c7868ee699e3cc730ec706d2988a6ad6924eaf363087a03",
+      "bytes": 1215
+    },
+    {
+      "file": "experiments/ufuk/cpu-deeper-action-v1/admission/README.txt",
+      "source": "/workspace/work/harbichess/cpu-own-deeper-action-admission/README.txt",
+      "sha256": "375c7774cc0b718d58429300af219d94682a6cbafce15a2061c98299d4dadec4",
+      "bytes": 6354
+    },
+    {
+      "file": "experiments/ufuk/cpu-deeper-action-v1/admission/TT-ALTERNATIVE-PROSPECTIVE.txt",
+      "source": "/workspace/work/harbichess/cpu-own-deeper-action-admission/TT-ALTERNATIVE-PROSPECTIVE.txt",
+      "sha256": "5b2b744061a4a5b3158423b2291b64fd60dad1af35f5362b60c083fae99f222b",
+      "bytes": 2730
+    },
+    {
+      "file": "experiments/ufuk/cpu-deeper-action-v1/admission/arena-help.txt",
+      "source": "/workspace/work/harbichess/cpu-own-deeper-action-admission/arena-help.txt",
+      "sha256": "32f35e5c9c2a1fc43017276286aeed1c01d12e300c0a2c98935f453885f6bd86",
+      "bytes": 605
+    },
+    {
+      "file": "experiments/ufuk/cpu-deeper-action-v1/admission/fit-protocol-DRAFT.json",
+      "source": "/workspace/work/harbichess/cpu-own-deeper-action-admission/fit-protocol-DRAFT.json",
+      "sha256": "46e6aa97ec1d1e1663190cf0f3da7333c2399bf06865949009e8d9d9312d402c",
+      "bytes": 3573
+    },
+    {
+      "file": "experiments/ufuk/cpu-deeper-action-v1/admission/owner-help.txt",
+      "source": "/workspace/work/harbichess/cpu-own-deeper-action-admission/owner-help.txt",
+      "sha256": "89e5d3711c8d2231757b47481eb24c96bd535a46bfc574e3ea3c0f66a0ca3cee",
+      "bytes": 406
+    },
+    {
+      "file": "experiments/ufuk/cpu-deeper-action-v1/admission/profile-help.txt",
+      "source": "/workspace/work/harbichess/cpu-own-deeper-action-admission/profile-help.txt",
+      "sha256": "1a0e600cb8596075afa55d8f59bc69d4a56516bd17380267f5505c7d660852c8",
+      "bytes": 237
+    },
+    {
+      "file": "experiments/ufuk/cpu-deeper-action-v1/admission/proof-protocol-DRAFT.json",
+      "source": "/workspace/work/harbichess/cpu-own-deeper-action-admission/proof-protocol-DRAFT.json",
+      "sha256": "1913f8244daa73710eca1dfa18ad7d82f19e701ea2caa36773d297c421184d96",
+      "bytes": 3582
+    },
+    {
+      "file": "experiments/ufuk/cpu-deeper-action-v1/admission/qualify-help.txt",
+      "source": "/workspace/work/harbichess/cpu-own-deeper-action-admission/qualify-help.txt",
+      "sha256": "72bd96de7f8cb54857c57f0db131ad1cf7814ffe5a65cd626ccdd3ac7cabca38",
+      "bytes": 549
+    },
+    {
+      "file": "experiments/ufuk/cpu-deeper-action-v1/admission/seal-recipe.txt",
+      "source": "/workspace/work/harbichess/cpu-own-deeper-action-admission/seal-recipe.txt",
+      "sha256": "6368df12864553b4720073f4ddb35497da35b58b2a16a5075868d099b571b09d",
+      "bytes": 1166
+    },
+    {
+      "file": "experiments/ufuk/cpu-deeper-action-v1/admission/seal_arena.py",
+      "source": "/workspace/work/harbichess/cpu-own-deeper-action-admission/seal_arena.py",
+      "sha256": "f6b9da712d8affac8622ff85d57ab7dfc88ea65e0bb6640bcb1e05a4a6e65c8a",
+      "bytes": 8495
+    },
+    {
+      "file": "experiments/ufuk/cpu-deeper-action-v1/admission/stamp_training.py",
+      "source": "/workspace/work/harbichess/cpu-own-deeper-action-admission/stamp_training.py",
+      "sha256": "1f24a78ede70a6ed384620c0925ab57e9f062fec340e9ac974338ae146ac294e",
+      "bytes": 2537
+    },
+    {
+      "file": "experiments/ufuk/cpu-deeper-action-v1/admission/synthetic_native_worker.py",
+      "source": "/workspace/work/harbichess/cpu-own-deeper-action-admission/synthetic_native_worker.py",
+      "sha256": "71fb766dbd48904260ebac51c0213dd2d00240066bb3cfcd8f7726298ebf8222",
+      "bytes": 1801
+    },
+    {
+      "file": "experiments/ufuk/cpu-deeper-action-v1/admission/test_admission.py",
+      "source": "/workspace/work/harbichess/cpu-own-deeper-action-admission/test_admission.py",
+      "sha256": "4c7e899c493f0757f60c0f969768515bba6474d278acbaf3d23636f71119e6e3",
+      "bytes": 5101
+    },
+    {
+      "file": "experiments/ufuk/cpu-deeper-action-v1/admission/test_seal_arena.py",
+      "source": "/workspace/work/harbichess/cpu-own-deeper-action-admission/test_seal_arena.py",
+      "sha256": "10fafec5596a0d660e211c27bee88306d719cf200831e848ec12806bd34f286e",
+      "bytes": 1368
+    },
+    {
+      "file": "experiments/ufuk/cpu-deeper-action-v1/admission/train-help.txt",
+      "source": "/workspace/work/harbichess/cpu-own-deeper-action-admission/train-help.txt",
+      "sha256": "428907cc3977e66682396794bff313d08492ec5709206a93a595b03340816ebf",
+      "bytes": 729
+    },
+    {
+      "file": "experiments/ufuk/cpu-deeper-action-v1/admission/verification.json",
+      "source": "/workspace/work/harbichess/cpu-own-deeper-action-admission/verification.json",
+      "sha256": "12c68fe2092a911efb5ecc38d5fa938079158cdeb7d6cb39d6a36b990c0f0387",
+      "bytes": 2420
+    },
+    {
+      "file": "experiments/ufuk/cpu-selective-q-v1/20262905-labels-registration-DRAFT.json",
+      "source": "/workspace/work/harbichess/cpu-selective-quiescence-proposal/20262905-labels-registration-DRAFT.json",
+      "sha256": "c1d4bfcb56f2d7e023032c4d1db55e3587d19bf17ee8a7d2fcc5710f3d874e02",
+      "bytes": 3761
+    },
+    {
+      "file": "experiments/ufuk/cpu-selective-q-v1/20262906-labels-registration-DRAFT.json",
+      "source": "/workspace/work/harbichess/cpu-selective-quiescence-proposal/20262906-labels-registration-DRAFT.json",
+      "sha256": "8d53f38f151802425350332f88d7d4470a5e806ae456a74fc89c0f96f4ff4a0f",
+      "bytes": 3761
+    },
+    {
+      "file": "experiments/ufuk/cpu-selective-q-v1/README.md",
+      "source": "/workspace/work/harbichess/cpu-selective-quiescence-proposal/README.md",
+      "sha256": "b1376a84b95640541471337b857d3f8bdac973fab02c142387d5e63a87bdd807",
+      "bytes": 5100
+    },
+    {
+      "file": "experiments/ufuk/cpu-selective-q-v1/labels.py",
+      "source": "/workspace/work/harbichess/cpu-selective-quiescence-proposal/labels.py",
+      "sha256": "1d21a8885f3dc19f6338bc9b7b6470cbb29fc83e76ba9b2d7f30fd32351b6fd4",
+      "bytes": 5322
+    },
+    {
+      "file": "experiments/ufuk/cpu-selective-q-v1/learner.py",
+      "source": "/workspace/work/harbichess/cpu-selective-quiescence-proposal/learner.py",
+      "sha256": "3d77eea89bf3817f8de096b7de9bcded5bb1f7d017a60aac89c38aba826022b4",
+      "bytes": 3993
+    },
+    {
+      "file": "experiments/ufuk/cpu-selective-q-v1/model.py",
+      "source": "/workspace/work/harbichess/cpu-selective-quiescence-proposal/model.py",
+      "sha256": "14f5a1790f5e9518170a7d9bd490ba0aa61c001086286798a6d1315f00e0b9d2",
+      "bytes": 2155
+    },
+    {
+      "file": "experiments/ufuk/cpu-selective-q-v1/produce_labels.py",
+      "source": "/workspace/work/harbichess/cpu-selective-quiescence-proposal/produce_labels.py",
+      "sha256": "34492036c1bac452224397f1366d11181db2c09f5b1a725d9bdb24b451c10b6f",
+      "bytes": 3468
+    },
+    {
+      "file": "experiments/ufuk/cpu-selective-q-v1/profile.py",
+      "source": "/workspace/work/harbichess/cpu-selective-quiescence-proposal/profile.py",
+      "sha256": "46801c80d9404d723fd7e284d8948616afaa834b428aea0d64605228ab5ac067",
+      "bytes": 2644
+    },
+    {
+      "file": "experiments/ufuk/cpu-selective-q-v1/qualify.py",
+      "source": "/workspace/work/harbichess/cpu-selective-quiescence-proposal/qualify.py",
+      "sha256": "b9cea68cfd8131f1a476ec2057a2080d9329c9d4ef4cfb8653a1ceecf4b59dd6",
+      "bytes": 3196
+    },
+    {
+      "file": "experiments/ufuk/cpu-selective-q-v1/search.py",
+      "source": "/workspace/work/harbichess/cpu-selective-quiescence-proposal/search.py",
+      "sha256": "993e9c2c6d949b3d8753935405b5c289b35249a108b0ef3f8f984ac55de94293",
+      "bytes": 3126
+    },
+    {
+      "file": "experiments/ufuk/cpu-selective-q-v1/support.py",
+      "source": "/workspace/work/harbichess/cpu-selective-quiescence-proposal/support.py",
+      "sha256": "d99c1de872313ae26624575d49d8d10e32645cea5583192ad0359c73c1e0bb92",
+      "bytes": 2952
+    },
+    {
+      "file": "experiments/ufuk/cpu-selective-q-v1/test_proposal.py",
+      "source": "/workspace/work/harbichess/cpu-selective-quiescence-proposal/test_proposal.py",
+      "sha256": "eb352185c128e98ce73a9162ad3c8a551d198181e31a319fda32f57d263ddfb9",
+      "bytes": 6057
+    },
+    {
+      "file": "experiments/ufuk/cpu-selective-q-v1/train.py",
+      "source": "/workspace/work/harbichess/cpu-selective-quiescence-proposal/train.py",
+      "sha256": "e4e7ec15ac270204a605c8ecae5e4d73d8b59686e6b77a894dc1f4c90bb2def4",
+      "bytes": 2602
+    },
+    {
+      "file": "experiments/ufuk/cpu-selective-q-v1/verification.json",
+      "source": "/workspace/work/harbichess/cpu-selective-quiescence-proposal/verification.json",
+      "sha256": "a0c177499e5e9aa3f08796a45db15147c12cbd67f791982e295180012a183a74",
+      "bytes": 2025
+    },
+    {
+      "file": "experiments/ufuk/cpu-selective-q-v1/arena-v2/README.txt",
+      "source": "/workspace/work/harbichess/cpu-selective-q-arena-v2-proposal/README.txt",
+      "sha256": "570275abe513696c9f82ee183f5914efd0e1dc2c0c1c00ed1a2dcb3d0a0197d5",
+      "bytes": 3443
+    },
+    {
+      "file": "experiments/ufuk/cpu-selective-q-v1/arena-v2/ROOT-seal-recovery-recipe.json",
+      "source": "/workspace/work/harbichess/cpu-selective-q-arena-v2-proposal/ROOT-seal-recovery-recipe.json",
+      "sha256": "2f61141161bba506f66f6117c4e066a3333a42ea39b382ce24259d86b25a8d11",
+      "bytes": 2703
+    },
+    {
+      "file": "experiments/ufuk/cpu-selective-q-v1/arena-v2/audit_arena_v2.py",
+      "source": "/workspace/work/harbichess/cpu-selective-q-arena-v2-proposal/audit_arena_v2.py",
+      "sha256": "2f3e5d901a419daa547474e850a93d0b287f4444098f81d45aa4f039f1501c52",
+      "bytes": 11532
+    },
+    {
+      "file": "experiments/ufuk/cpu-selective-q-v1/arena-v2/audit_support.py",
+      "source": "/workspace/work/harbichess/cpu-selective-q-arena-v2-proposal/audit_support.py",
+      "sha256": "293c5b3a7acb94bb740e352924c6258578a3e371000ee21cee25b461da45ddf6",
+      "bytes": 964
+    },
+    {
+      "file": "experiments/ufuk/cpu-selective-q-v1/arena-v2/native_admission.py",
+      "source": "/workspace/work/harbichess/cpu-selective-q-arena-v2-proposal/native_admission.py",
+      "sha256": "d5d4a516adb4884c46d451ba1a8a6c4c4bfa19a6433f7d5dd23c83554b3030bc",
+      "bytes": 7207
+    },
+    {
+      "file": "experiments/ufuk/cpu-selective-q-v1/arena-v2/profile.py",
+      "source": "/workspace/work/harbichess/cpu-selective-q-arena-v2-proposal/profile.py",
+      "sha256": "24edea9463b5d386ceba465ef84cff6577991396e75c482d90de8185b1c07183",
+      "bytes": 5343
+    },
+    {
+      "file": "experiments/ufuk/cpu-selective-q-v1/arena-v2/profile_support.py",
+      "source": "/workspace/work/harbichess/cpu-selective-q-arena-v2-proposal/profile_support.py",
+      "sha256": "dd6f55d401fd878d546f1b847be5e72c60e23e35e0fb837286ddc9c0ed1e2fc1",
+      "bytes": 973
+    },
+    {
+      "file": "experiments/ufuk/cpu-selective-q-v1/arena-v2/protocol-DRAFT.json",
+      "source": "/workspace/work/harbichess/cpu-selective-q-arena-v2-proposal/protocol-DRAFT.json",
+      "sha256": "2d88f2ca138b47e27c68e57e044a4ca43fa74f665a5d19ede2e6022539764f02",
+      "bytes": 11289
+    },
+    {
+      "file": "experiments/ufuk/cpu-selective-q-v1/arena-v2/protocol.json",
+      "source": "/workspace/work/harbichess/cpu-selective-q-arena-v2-proposal/protocol.json",
+      "sha256": "ac5dd138bdb4ec9c5ac62c572ec2b4403052c7dbcec9398db6c801cc82b29cbf",
+      "bytes": 14435
+    },
+    {
+      "file": "experiments/ufuk/cpu-selective-q-v1/arena-v2/run.py",
+      "source": "/workspace/work/harbichess/cpu-selective-q-arena-v2-proposal/run.py",
+      "sha256": "bc3b213e241ec37375fd73f4e58342d3cb5c1fb649835b40f9c4c6e892a1cb2c",
+      "bytes": 7294
+    },
+    {
+      "file": "experiments/ufuk/cpu-selective-q-v1/arena-v2/seal.py",
+      "source": "/workspace/work/harbichess/cpu-selective-q-arena-v2-proposal/seal.py",
+      "sha256": "18859eac95d40a516f4f38077b803b425a38d0537367134b30c75c1ff55a3a05",
+      "bytes": 3772
+    },
+    {
+      "file": "experiments/ufuk/cpu-selective-q-v1/arena-v2/search.py",
+      "source": "/workspace/work/harbichess/cpu-selective-q-arena-v2-proposal/search.py",
+      "sha256": "0ea5a0dd269a78059a7c2f455a952262884e4420f72e7e2a9008f656e2fd8dd6",
+      "bytes": 1979
+    },
+    {
+      "file": "experiments/ufuk/cpu-selective-q-v1/arena-v2/support.py",
+      "source": "/workspace/work/harbichess/cpu-selective-q-arena-v2-proposal/support.py",
+      "sha256": "66f3cf9163ad45a8ed7b7f19606e1d4d425c65c77696f4d68f7787fff2f7778a",
+      "bytes": 668
+    },
+    {
+      "file": "experiments/ufuk/cpu-selective-q-v1/arena-v2/test_adapter.py",
+      "source": "/workspace/work/harbichess/cpu-selective-q-arena-v2-proposal/test_adapter.py",
+      "sha256": "beffac61ba45c8fbe8dcea4b469d8c16acc966c01820010e18b34c042103b091",
+      "bytes": 2823
+    },
+    {
+      "file": "experiments/ufuk/cpu-selective-q-v1/arena-v2/test_v2_qualification.py",
+      "source": "/workspace/work/harbichess/cpu-selective-q-arena-v2-proposal/test_v2_qualification.py",
+      "sha256": "0b09d53bd24e365067568a1875a69cd2c84519e715dc155f7843b88b78cc4e78",
+      "bytes": 2120
+    },
+    {
+      "file": "experiments/ufuk/cpu-selective-q-v1/arena-v2/tournament.py",
+      "source": "/workspace/work/harbichess/cpu-selective-q-arena-v2-proposal/tournament.py",
+      "sha256": "d362bfb656f19ee51772f4ed8e6dc5dba1f0e14a8e2fb91a9b7737c5e89c410b",
+      "bytes": 9360
+    },
+    {
+      "file": "experiments/ufuk/cpu-selective-q-v1/arena-v2/value.py",
+      "source": "/workspace/work/harbichess/cpu-selective-q-arena-v2-proposal/value.py",
+      "sha256": "48eb8a2bf53589b72bca31571a49846f93bc80cd0c4e200e0d8495d9f3e10e33",
+      "bytes": 1660
+    },
+    {
+      "file": "experiments/ufuk/cpu-selective-q-v1/arena-v2/verification.json",
+      "source": "/workspace/work/harbichess/cpu-selective-q-arena-v2-proposal/verification.json",
+      "sha256": "71f1488936d503ace3edb33d04652f9e5843329554e84e5d431aa64d3e16198e",
+      "bytes": 1647
+    },
+    {
+      "file": "experiments/ufuk/cpu-selective-q-v1/diagnosis/REVIEW.txt",
+      "source": "/workspace/work/harbichess/selective-q-diagnosis-proposal/REVIEW.txt",
+      "sha256": "648367fcf6961d83dfb5de2a9c3c3bd017c1fa2fe30536cf90d42cff0b4ca63c",
+      "bytes": 2577
+    },
+    {
+      "file": "experiments/ufuk/cpu-coarse80-v1/README.md",
+      "source": "/workspace/work/harbichess/cpu-ownq-coarse80-proposal/README.md",
+      "sha256": "7957cdfef05c40d8834711821c36130bd74dc3051aece849b6251cd657c47918",
+      "bytes": 3780
+    },
+    {
+      "file": "experiments/ufuk/cpu-coarse80-v1/build-receipt.json",
+      "source": "/workspace/work/harbichess/cpu-ownq-coarse80-proposal/build-receipt.json",
+      "sha256": "9489991e011008117ff254958fd486370fd8d863796aa3e591d12a8befd48d8d",
+      "bytes": 746
+    },
+    {
+      "file": "experiments/ufuk/cpu-coarse80-v1/build_forward80.py",
+      "source": "/workspace/work/harbichess/cpu-ownq-coarse80-proposal/build_forward80.py",
+      "sha256": "e3da3e1e51a08b5f0df5e56bce64af2cd9e49a3153fc74f292d9c37d27d5531d",
+      "bytes": 1212
+    },
+    {
+      "file": "experiments/ufuk/cpu-coarse80-v1/coarse80.py",
+      "source": "/workspace/work/harbichess/cpu-ownq-coarse80-proposal/coarse80.py",
+      "sha256": "204360ef216af37a5db3005e030903d14c4e46275230f11952bd5f5dc59c000e",
+      "bytes": 4451
+    },
+    {
+      "file": "experiments/ufuk/cpu-coarse80-v1/compiled80.py",
+      "source": "/workspace/work/harbichess/cpu-ownq-coarse80-proposal/compiled80.py",
+      "sha256": "26fb3d74569cd4f07bf4dc51ae3a9001fe209c7cd4b7251d779782b59f98fcaa",
+      "bytes": 971
+    },
+    {
+      "file": "experiments/ufuk/cpu-coarse80-v1/dataset80.py",
+      "source": "/workspace/work/harbichess/cpu-ownq-coarse80-proposal/dataset80.py",
+      "sha256": "f67196d9dcf97797a79264039e35720688f0c891cb7065970f12a4f6ea4c3613",
+      "bytes": 4496
+    },
+    {
+      "file": "experiments/ufuk/cpu-coarse80-v1/forward80.c",
+      "source": "/workspace/work/harbichess/cpu-ownq-coarse80-proposal/forward80.c",
+      "sha256": "201c08c5a554110db5556e54a891c382d4eb901fc789618ba9b2468166161a98",
+      "bytes": 904
+    },
+    {
+      "file": "experiments/ufuk/cpu-coarse80-v1/learner80.py",
+      "source": "/workspace/work/harbichess/cpu-ownq-coarse80-proposal/learner80.py",
+      "sha256": "df0dba9a0391b17a6c201a03d57afbdabcdb1c4414efdf8a307edbdfd3560d76",
+      "bytes": 9035
+    },
+    {
+      "file": "experiments/ufuk/cpu-coarse80-v1/make_closure.py",
+      "source": "/workspace/work/harbichess/cpu-ownq-coarse80-proposal/make_closure.py",
+      "sha256": "fc15e4536ece508dd81261e8105303895c0772da26be89dbeb01d23a2fd69090",
+      "bytes": 872
+    },
+    {
+      "file": "experiments/ufuk/cpu-coarse80-v1/proof_synthetic.py",
+      "source": "/workspace/work/harbichess/cpu-ownq-coarse80-proposal/proof_synthetic.py",
+      "sha256": "a0da091860526a5dfb2d3c968099e8d8004f4d6b31115d62510a2b3339e889f5",
+      "bytes": 3324
+    },
+    {
+      "file": "experiments/ufuk/cpu-coarse80-v1/registered_cli.py",
+      "source": "/workspace/work/harbichess/cpu-ownq-coarse80-proposal/registered_cli.py",
+      "sha256": "cdf0861ebb3da0f567e28e2ddfe36d7169dd4f8feec8608c9438fc96731e03b1",
+      "bytes": 6728
+    },
+    {
+      "file": "experiments/ufuk/cpu-coarse80-v1/resume_worker.py",
+      "source": "/workspace/work/harbichess/cpu-ownq-coarse80-proposal/resume_worker.py",
+      "sha256": "34c1bd551d43898a44575d63653979d8f8b3f645b1f0b5bd829bc3ece7d5ffd1",
+      "bytes": 942
+    },
+    {
+      "file": "experiments/ufuk/cpu-coarse80-v1/source-closure.json",
+      "source": "/workspace/work/harbichess/cpu-ownq-coarse80-proposal/source-closure.json",
+      "sha256": "cc0813b79ced8ac74c33dd57446453eca2ec7359877748c705aabaeb84cc3cb2",
+      "bytes": 1927
+    },
+    {
+      "file": "experiments/ufuk/cpu-coarse80-v1/test_coarse80.py",
+      "source": "/workspace/work/harbichess/cpu-ownq-coarse80-proposal/test_coarse80.py",
+      "sha256": "a6e1a1dce2580f49290adbda42c6e3411bace5f0f8e4f48afd7ff415a3bc569d",
+      "bytes": 3689
+    },
+    {
+      "file": "experiments/ufuk/cpu-coarse80-v1/test_dataset80.py",
+      "source": "/workspace/work/harbichess/cpu-ownq-coarse80-proposal/test_dataset80.py",
+      "sha256": "61a6f9a54f85b8bcbeda72704265155671346ea255ca45221f68f2acddbde732",
+      "bytes": 1889
+    },
+    {
+      "file": "experiments/ufuk/cpu-coarse80-v1/verification.json",
+      "source": "/workspace/work/harbichess/cpu-ownq-coarse80-proposal/verification.json",
+      "sha256": "37979a98e6a1157526f637fadaea960c10d918b1ecbd3f605b2d163bf5a0f19e",
+      "bytes": 1156
+    },
+    {
+      "file": "experiments/ufuk/cpu-coarse80-v1/arena-v1-preserved/README.txt",
+      "source": "/workspace/work/harbichess/cpu-coarse80-arena-proposal/README.txt",
+      "sha256": "86aae9159aba04c25aa487993b8d45c2f6947a988b37a5166bd8619f1361b900",
+      "bytes": 3633
+    },
+    {
+      "file": "experiments/ufuk/cpu-coarse80-v1/arena-v1-preserved/audit_arena_v2.py",
+      "source": "/workspace/work/harbichess/cpu-coarse80-arena-proposal/audit_arena_v2.py",
+      "sha256": "9c93e5489877f301675b788a994162ebf331648e49928420dd48b32130b6a587",
+      "bytes": 10921
+    },
+    {
+      "file": "experiments/ufuk/cpu-coarse80-v1/arena-v1-preserved/native_admission.py",
+      "source": "/workspace/work/harbichess/cpu-coarse80-arena-proposal/native_admission.py",
+      "sha256": "f0fdab052608df432432685bad2c8876e87cf3527d0a5f65e72e1f069c6de850",
+      "bytes": 8000
+    },
+    {
+      "file": "experiments/ufuk/cpu-coarse80-v1/arena-v1-preserved/profile.py",
+      "source": "/workspace/work/harbichess/cpu-coarse80-arena-proposal/profile.py",
+      "sha256": "04c8ffc49dc02aea9ff8417dad62a5e24f4653ab5a91a2bf114ebdabc86da464",
+      "bytes": 5532
+    },
+    {
+      "file": "experiments/ufuk/cpu-coarse80-v1/arena-v1-preserved/profile_support.py",
+      "source": "/workspace/work/harbichess/cpu-coarse80-arena-proposal/profile_support.py",
+      "sha256": "dd6f55d401fd878d546f1b847be5e72c60e23e35e0fb837286ddc9c0ed1e2fc1",
+      "bytes": 973
+    },
+    {
+      "file": "experiments/ufuk/cpu-coarse80-v1/arena-v1-preserved/protocol-DRAFT.json",
+      "source": "/workspace/work/harbichess/cpu-coarse80-arena-proposal/protocol-DRAFT.json",
+      "sha256": "c17b63550c3800ea03c5a723bbd8e65bebab672dd187750a30e2ad121680ea01",
+      "bytes": 12388
+    },
+    {
+      "file": "experiments/ufuk/cpu-coarse80-v1/arena-v1-preserved/protocol.json",
+      "source": "/workspace/work/harbichess/cpu-coarse80-arena-proposal/protocol.json",
+      "sha256": "f983ac0511cbc6d372d9f20bbccb526cdce5b36527ca993896ba3874af29b567",
+      "bytes": 12440
+    },
+    {
+      "file": "experiments/ufuk/cpu-coarse80-v1/arena-v1-preserved/run.py",
+      "source": "/workspace/work/harbichess/cpu-coarse80-arena-proposal/run.py",
+      "sha256": "ecce7a5acccd853c7784cba9149537e40161bc74c6baea8ddc899dc600b83c93",
+      "bytes": 7488
+    },
+    {
+      "file": "experiments/ufuk/cpu-coarse80-v1/arena-v1-preserved/search.py",
+      "source": "/workspace/work/harbichess/cpu-coarse80-arena-proposal/search.py",
+      "sha256": "de53c14728a67b7772f18b396ac8ef5c35a144d4e4e616fec40099cd461a6670",
+      "bytes": 5944
+    },
+    {
+      "file": "experiments/ufuk/cpu-coarse80-v1/arena-v1-preserved/test_contracts.py",
+      "source": "/workspace/work/harbichess/cpu-coarse80-arena-proposal/test_contracts.py",
+      "sha256": "e5cd2e66ef018f51fb76148421063b56da9a5d054898227ee7223abd7ce7635f",
+      "bytes": 3286
+    },
+    {
+      "file": "experiments/ufuk/cpu-coarse80-v1/arena-v1-preserved/tournament.py",
+      "source": "/workspace/work/harbichess/cpu-coarse80-arena-proposal/tournament.py",
+      "sha256": "7081128a96f575d01ebaf40f1c7de725274b4316ac3836802b539b3ce7395cb8",
+      "bytes": 9052
+    },
+    {
+      "file": "experiments/ufuk/cpu-coarse80-v1/arena-v1-preserved/train_parity.py",
+      "source": "/workspace/work/harbichess/cpu-coarse80-arena-proposal/train_parity.py",
+      "sha256": "a8cf97cb8452b49274805ffe256bad5a504d0cbfe0c06eb491134dde2fec3ab3",
+      "bytes": 3832
+    },
+    {
+      "file": "experiments/ufuk/cpu-coarse80-v1/arena-v1-preserved/value.py",
+      "source": "/workspace/work/harbichess/cpu-coarse80-arena-proposal/value.py",
+      "sha256": "d5016b326f6ab0dd5f1b1b6e0586f7d7b46a4146e06bdaa03b240054d4ab6df7",
+      "bytes": 3429
+    },
+    {
+      "file": "experiments/ufuk/cpu-coarse80-v1/arena-v2/README.txt",
+      "source": "/workspace/work/harbichess/cpu-coarse80-arena-v2-proposal/README.txt",
+      "sha256": "86aae9159aba04c25aa487993b8d45c2f6947a988b37a5166bd8619f1361b900",
+      "bytes": 3633
+    },
+    {
+      "file": "experiments/ufuk/cpu-coarse80-v1/arena-v2/ROOT-envelope-reader-v2-recovery.json",
+      "source": "/workspace/work/harbichess/cpu-coarse80-arena-v2-proposal/ROOT-envelope-reader-v2-recovery.json",
+      "sha256": "d3623564026576987e189557dd441d8d6aa3e823063968749d5a355cfbdb4ad5",
+      "bytes": 548
+    },
+    {
+      "file": "experiments/ufuk/cpu-coarse80-v1/arena-v2/audit_arena_v2.py",
+      "source": "/workspace/work/harbichess/cpu-coarse80-arena-v2-proposal/audit_arena_v2.py",
+      "sha256": "9c93e5489877f301675b788a994162ebf331648e49928420dd48b32130b6a587",
+      "bytes": 10921
+    },
+    {
+      "file": "experiments/ufuk/cpu-coarse80-v1/arena-v2/native_admission.py",
+      "source": "/workspace/work/harbichess/cpu-coarse80-arena-v2-proposal/native_admission.py",
+      "sha256": "7e676ef9a6432dbf3a69335b3da2bac1be267189bb7780b6467bff9b7cb00a3f",
+      "bytes": 8847
+    },
+    {
+      "file": "experiments/ufuk/cpu-coarse80-v1/arena-v2/profile.py",
+      "source": "/workspace/work/harbichess/cpu-coarse80-arena-v2-proposal/profile.py",
+      "sha256": "04c8ffc49dc02aea9ff8417dad62a5e24f4653ab5a91a2bf114ebdabc86da464",
+      "bytes": 5532
+    },
+    {
+      "file": "experiments/ufuk/cpu-coarse80-v1/arena-v2/profile_support.py",
+      "source": "/workspace/work/harbichess/cpu-coarse80-arena-v2-proposal/profile_support.py",
+      "sha256": "dd6f55d401fd878d546f1b847be5e72c60e23e35e0fb837286ddc9c0ed1e2fc1",
+      "bytes": 973
+    },
+    {
+      "file": "experiments/ufuk/cpu-coarse80-v1/arena-v2/protocol-DRAFT.json",
+      "source": "/workspace/work/harbichess/cpu-coarse80-arena-v2-proposal/protocol-DRAFT.json",
+      "sha256": "c17b63550c3800ea03c5a723bbd8e65bebab672dd187750a30e2ad121680ea01",
+      "bytes": 12388
+    },
+    {
+      "file": "experiments/ufuk/cpu-coarse80-v1/arena-v2/protocol.json",
+      "source": "/workspace/work/harbichess/cpu-coarse80-arena-v2-proposal/protocol.json",
+      "sha256": "4e6ef00c0ea1957cd4f525f868e8c1c52019956dda48ef9756c43d41979db350",
+      "bytes": 14204
+    },
+    {
+      "file": "experiments/ufuk/cpu-coarse80-v1/arena-v2/run.py",
+      "source": "/workspace/work/harbichess/cpu-coarse80-arena-v2-proposal/run.py",
+      "sha256": "ecce7a5acccd853c7784cba9149537e40161bc74c6baea8ddc899dc600b83c93",
+      "bytes": 7488
+    },
+    {
+      "file": "experiments/ufuk/cpu-coarse80-v1/arena-v2/search.py",
+      "source": "/workspace/work/harbichess/cpu-coarse80-arena-v2-proposal/search.py",
+      "sha256": "de53c14728a67b7772f18b396ac8ef5c35a144d4e4e616fec40099cd461a6670",
+      "bytes": 5944
+    },
+    {
+      "file": "experiments/ufuk/cpu-coarse80-v1/arena-v2/test_contracts.py",
+      "source": "/workspace/work/harbichess/cpu-coarse80-arena-v2-proposal/test_contracts.py",
+      "sha256": "e5cd2e66ef018f51fb76148421063b56da9a5d054898227ee7223abd7ce7635f",
+      "bytes": 3286
+    },
+    {
+      "file": "experiments/ufuk/cpu-coarse80-v1/arena-v2/tournament.py",
+      "source": "/workspace/work/harbichess/cpu-coarse80-arena-v2-proposal/tournament.py",
+      "sha256": "7081128a96f575d01ebaf40f1c7de725274b4316ac3836802b539b3ce7395cb8",
+      "bytes": 9052
+    },
+    {
+      "file": "experiments/ufuk/cpu-coarse80-v1/arena-v2/train_parity.py",
+      "source": "/workspace/work/harbichess/cpu-coarse80-arena-v2-proposal/train_parity.py",
+      "sha256": "91f493e01e509ac8a695f8bad01f65c7ffac9f51c4420b84ed29986793ea5887",
+      "bytes": 3919
+    },
+    {
+      "file": "experiments/ufuk/cpu-coarse80-v1/arena-v2/value.py",
+      "source": "/workspace/work/harbichess/cpu-coarse80-arena-v2-proposal/value.py",
+      "sha256": "af94631f6e18f6ebec08509e106a14a40b9e998539dd329a660d8ba3277000ba",
+      "bytes": 3995
+    },
+    {
+      "file": "experiments/ufuk/cpu-nnue16-v1/C-parity-receipt.json",
+      "source": "/workspace/work/harbichess/cpu-kingbucket-nnue-proposal/C-parity-receipt.json",
+      "sha256": "b6cd9bc585b43ed0fdf3444fb9841fa6dae874e0ec2397ff092889d260392490",
+      "bytes": 386
+    },
+    {
+      "file": "experiments/ufuk/cpu-nnue16-v1/FROZEN-CLOSURE.json",
+      "source": "/workspace/work/harbichess/cpu-kingbucket-nnue-proposal/FROZEN-CLOSURE.json",
+      "sha256": "75c80e91bec0c173be77485b4abd2400649a135c0964f12fd4e3e91727b8193e",
+      "bytes": 1821
+    },
+    {
+      "file": "experiments/ufuk/cpu-nnue16-v1/README.txt",
+      "source": "/workspace/work/harbichess/cpu-kingbucket-nnue-proposal/README.txt",
+      "sha256": "e09a6064888977a0803396f3fa500434908f53d0f0be55a17b29c03e99d35fba",
+      "bytes": 5900
+    },
+    {
+      "file": "experiments/ufuk/cpu-nnue16-v1/build-receipt.json",
+      "source": "/workspace/work/harbichess/cpu-kingbucket-nnue-proposal/build-receipt.json",
+      "sha256": "d998140e9505cb667f91b8295f8aae0cd68091b03ddc387633e79fc3fb326e80",
+      "bytes": 648
+    },
+    {
+      "file": "experiments/ufuk/cpu-nnue16-v1/build.py",
+      "source": "/workspace/work/harbichess/cpu-kingbucket-nnue-proposal/build.py",
+      "sha256": "aa8ce2d2bdc3b046c5be9e0ceb14b1a793147868f107a5b7a79a76505c8c39b1",
+      "bytes": 1141
+    },
+    {
+      "file": "experiments/ufuk/cpu-nnue16-v1/evaluator.py",
+      "source": "/workspace/work/harbichess/cpu-kingbucket-nnue-proposal/evaluator.py",
+      "sha256": "5317e736f872a2e237e45942c8df9e797c5acee8f626bb12009464869fab8d95",
+      "bytes": 2624
+    },
+    {
+      "file": "experiments/ufuk/cpu-nnue16-v1/forward.c",
+      "source": "/workspace/work/harbichess/cpu-kingbucket-nnue-proposal/forward.c",
+      "sha256": "454f8c8f2b5d177f0ff31fd520b9554636a278b10ddb2f1eedcd92a0f9ad44e0",
+      "bytes": 2987
+    },
+    {
+      "file": "experiments/ufuk/cpu-nnue16-v1/model.py",
+      "source": "/workspace/work/harbichess/cpu-kingbucket-nnue-proposal/model.py",
+      "sha256": "c04914bc5a560ad51de81c6d0aaeb3fae4d04b45c07cd8e39bbd31f655d36565",
+      "bytes": 3877
+    },
+    {
+      "file": "experiments/ufuk/cpu-nnue16-v1/native.py",
+      "source": "/workspace/work/harbichess/cpu-kingbucket-nnue-proposal/native.py",
+      "sha256": "f60a1f9814f48691af1e2d1f1db1b548cff3e7df0a7cae9718051de1865b8b69",
+      "bytes": 8940
+    },
+    {
+      "file": "experiments/ufuk/cpu-nnue16-v1/qualify.py",
+      "source": "/workspace/work/harbichess/cpu-kingbucket-nnue-proposal/qualify.py",
+      "sha256": "111d0abc504acca0d4ed545532243272df9b6e1f90d06bb2d1fd0b27eef3f276",
+      "bytes": 5354
+    },
+    {
+      "file": "experiments/ufuk/cpu-nnue16-v1/test_proposal.py",
+      "source": "/workspace/work/harbichess/cpu-kingbucket-nnue-proposal/test_proposal.py",
+      "sha256": "f929545a74a3f4cd2a11b47986e3b84f4577e0d39dabde0fb8032f8b3d3b23b3",
+      "bytes": 5756
+    },
+    {
+      "file": "experiments/ufuk/cpu-nnue16-v1/train.py",
+      "source": "/workspace/work/harbichess/cpu-kingbucket-nnue-proposal/train.py",
+      "sha256": "5644a7455498209a149a8672745868cf7e7cf4a3baae817dfce2128ff4d8f6c6",
+      "bytes": 5576
+    },
+    {
+      "file": "experiments/ufuk/cpu-nnue16-v1/verification.json",
+      "source": "/workspace/work/harbichess/cpu-kingbucket-nnue-proposal/verification.json",
+      "sha256": "e8640b534a58b3544518c266dd6f693e2291f4757e8b88f51de7019fe707d176",
+      "bytes": 2154
+    },
+    {
+      "file": "experiments/ufuk/cpu-nnue16-v1/teacher-producer/20262905-registration-DRAFT.json",
+      "source": "/workspace/work/harbichess/cpu-nnue-teacher8192-proposal/20262905-registration-DRAFT.json",
+      "sha256": "c1424d1c499b00a37cb6811d4b23bae842c5c8796f26db1a3c2a366cdea0c762",
+      "bytes": 1968
+    },
+    {
+      "file": "experiments/ufuk/cpu-nnue16-v1/teacher-producer/20262906-registration-DRAFT.json",
+      "source": "/workspace/work/harbichess/cpu-nnue-teacher8192-proposal/20262906-registration-DRAFT.json",
+      "sha256": "6b38b42e82ddc48d4dc6fe7becee0a3af7d4d0547e330b6f3c19721272b46896",
+      "bytes": 1968
+    },
+    {
+      "file": "experiments/ufuk/cpu-nnue16-v1/teacher-producer/README.txt",
+      "source": "/workspace/work/harbichess/cpu-nnue-teacher8192-proposal/README.txt",
+      "sha256": "5e6f2235330b540ea75a01c7508231f7b577a103168fc703b8eb14409a09d5e5",
+      "bytes": 3897
+    },
+    {
+      "file": "experiments/ufuk/cpu-nnue16-v1/teacher-producer/known8-exclusions-DRAFT.json",
+      "source": "/workspace/work/harbichess/cpu-nnue-teacher8192-proposal/known8-exclusions-DRAFT.json",
+      "sha256": "02d895345a8f4a235fc8a41a5a53b9041cbfe77705618ac6d4bbe2faf0da12f8",
+      "bytes": 400
+    },
+    {
+      "file": "experiments/ufuk/cpu-nnue16-v1/teacher-producer/producer.py",
+      "source": "/workspace/work/harbichess/cpu-nnue-teacher8192-proposal/producer.py",
+      "sha256": "3310319b218d671e92bca79a82559959d36e2950107ac046f0928d8a82787533",
+      "bytes": 13859
+    },
+    {
+      "file": "experiments/ufuk/cpu-nnue16-v1/teacher-producer/selection.py",
+      "source": "/workspace/work/harbichess/cpu-nnue-teacher8192-proposal/selection.py",
+      "sha256": "2d5030857822e6f94cd0ae2cbe54892a422ba31286e4f97149b422d35f503ad8",
+      "bytes": 2783
+    },
+    {
+      "file": "experiments/ufuk/cpu-nnue16-v1/teacher-producer/test_selection.py",
+      "source": "/workspace/work/harbichess/cpu-nnue-teacher8192-proposal/test_selection.py",
+      "sha256": "f31a318a6493d263245225ead584816328e38886fcf2fa2c67d0c4ef36ee3b3b",
+      "bytes": 2220
+    },
+    {
+      "file": "experiments/ufuk/cpu-nnue16-v1/teacher-producer/verification.json",
+      "source": "/workspace/work/harbichess/cpu-nnue-teacher8192-proposal/verification.json",
+      "sha256": "ae3ccfcbeb32ef9070101d56fdd136ad4ee8de1e7430f5a32ef28d9b306525f8",
+      "bytes": 910
+    },
+    {
+      "file": "experiments/ufuk/cpu-nnue16-v1/teacher-training/README.md",
+      "source": "/workspace/work/harbichess/cpu-nnue-teacher-training-proposal/README.md",
+      "sha256": "f4356851af1c82c050f27865c3fa946768ca11a34e03153d4e84f4f67506b7da",
+      "bytes": 3823
+    },
+    {
+      "file": "experiments/ufuk/cpu-nnue16-v1/teacher-training/convert.py",
+      "source": "/workspace/work/harbichess/cpu-nnue-teacher-training-proposal/convert.py",
+      "sha256": "8d3bf034629eaa25d7bf8827b9f6ba6a4bbdf1854b30a8f9be8d66d1b584e331",
+      "bytes": 7554
+    },
+    {
+      "file": "experiments/ufuk/cpu-nnue16-v1/teacher-training/prove.py",
+      "source": "/workspace/work/harbichess/cpu-nnue-teacher-training-proposal/prove.py",
+      "sha256": "e6a1937e0ef7d10721e9e44009a152ff4d2f91ddf335a6bcd820785a67a119af",
+      "bytes": 4240
+    },
+    {
+      "file": "experiments/ufuk/cpu-nnue16-v1/teacher-training/test_conversion.py",
+      "source": "/workspace/work/harbichess/cpu-nnue-teacher-training-proposal/test_conversion.py",
+      "sha256": "421e63608161d4c355f252fe04c4c70509dd7d41bdd1452734483804ed374f07",
+      "bytes": 1823
+    },
+    {
+      "file": "experiments/ufuk/cpu-nnue16-v1/admission/ARENA-RECIPE.md",
+      "source": "/workspace/work/harbichess/cpu-nnue-trained-admission-proposal/ARENA-RECIPE.md",
+      "sha256": "4fb3d5dc6310f7a2ced19ac5d80283cf8c7b318d0fb37d542ddc8c83a870de38",
+      "bytes": 3117
+    },
+    {
+      "file": "experiments/ufuk/cpu-nnue16-v1/admission/admission.py",
+      "source": "/workspace/work/harbichess/cpu-nnue-trained-admission-proposal/admission.py",
+      "sha256": "94d80c5ab1f3ca9a2d5260d52bda5f7ab16ff236970a57a9a2c70e2351d92781",
+      "bytes": 5810
+    },
+    {
+      "file": "experiments/ufuk/cpu-nnue16-v1/admission/child_admission.py",
+      "source": "/workspace/work/harbichess/cpu-nnue-trained-admission-proposal/child_admission.py",
+      "sha256": "75ab8018135219d06867a9720c0d9c347d01273771d990f5b0756cacb8f9f091",
+      "bytes": 3875
+    },
+    {
+      "file": "experiments/ufuk/cpu-nnue16-v1/admission/profile.py",
+      "source": "/workspace/work/harbichess/cpu-nnue-trained-admission-proposal/profile.py",
+      "sha256": "3bee71dbde17b8616cb550ed2a116d22f5a4d92affe924fcd82d54a3c013e7d0",
+      "bytes": 8002
+    },
+    {
+      "file": "experiments/ufuk/cpu-nnue16-v1/admission/teacher-profile-DRAFT.json",
+      "source": "/workspace/work/harbichess/cpu-nnue-trained-admission-proposal/teacher-profile-DRAFT.json",
+      "sha256": "5117feadafa16212956ac01e1142041571e7e5821cf7ebd350e73d8e700f524b",
+      "bytes": 11530
+    },
+    {
+      "file": "experiments/ufuk/cpu-nnue16-v1/admission/teacher_profile_v2.py",
+      "source": "/workspace/work/harbichess/cpu-nnue-trained-admission-proposal/teacher_profile_v2.py",
+      "sha256": "ee139bef8f8210737a25aa0f93ef7ac6cb7b933f2917e426dda33b62b6b915b8",
+      "bytes": 8527
+    },
+    {
+      "file": "experiments/ufuk/cpu-nnue16-v1/admission/test_admission.py",
+      "source": "/workspace/work/harbichess/cpu-nnue-trained-admission-proposal/test_admission.py",
+      "sha256": "ad24df2717aa83dc2d405c0394b3286686a75276496df6a081720bfdbd858305",
+      "bytes": 1572
+    },
+    {
+      "file": "experiments/ufuk/cpu-nnue16-v1/admission/test_profile_import_v2.py",
+      "source": "/workspace/work/harbichess/cpu-nnue-trained-admission-proposal/test_profile_import_v2.py",
+      "sha256": "e1aa93da4b093d07a43ce4bd10e86dbf60eeb6e178e7c20e2979bed6623b2484",
+      "bytes": 768
+    },
+    {
+      "file": "experiments/ufuk/cpu-nnue16-v1/own-producer-UNEXECUTED/README.md",
+      "source": "/workspace/work/harbichess/cpu-nnue-ownq-production-proposal/README.md",
+      "sha256": "63501c4f544f745ddcc93877f6b100717611d5227c3798c95041ee5574df94ad",
+      "bytes": 2164
+    },
+    {
+      "file": "experiments/ufuk/cpu-nnue16-v1/own-producer-UNEXECUTED/collector.py",
+      "source": "/workspace/work/harbichess/cpu-nnue-ownq-production-proposal/collector.py",
+      "sha256": "57540cc1c25c780ce69e7411bfd74e2d82b1de701ca804efe81a480948e0ba0a",
+      "bytes": 9004
+    },
+    {
+      "file": "experiments/ufuk/cpu-nnue16-v1/own-producer-UNEXECUTED/run_collection.py",
+      "source": "/workspace/work/harbichess/cpu-nnue-ownq-production-proposal/run_collection.py",
+      "sha256": "b16e4dcfa136b1c287da4b24b15b2a0a736220f99308d95a1f2cf35d13027a59",
+      "bytes": 7728
+    },
+    {
+      "file": "experiments/ufuk/cpu-nnue16-v1/own-producer-UNEXECUTED/test_collector.py",
+      "source": "/workspace/work/harbichess/cpu-nnue-ownq-production-proposal/test_collector.py",
+      "sha256": "04518b8c57aebbb261091e859f02bab90f34de95902f2d484ee16dc4c81afe30",
+      "bytes": 2834
+    },
+    {
+      "file": "experiments/ufuk/cpu-nnue16-v1/own-training-INCOMPLETE/WRAPUP.txt",
+      "source": "/workspace/work/harbichess/cpu-nnue-own-training-proposal/WRAPUP.txt",
+      "sha256": "ce5cc29874e7d035a336323e74fe2ab4332fa20d13a5623c7280991e8dfe27f5",
+      "bytes": 3884
+    },
+    {
+      "file": "experiments/ufuk/cpu-nnue16-v1/own-training-INCOMPLETE/convert.py",
+      "source": "/workspace/work/harbichess/cpu-nnue-own-training-proposal/convert.py",
+      "sha256": "809d2613efdfb435b9c2ae35309884f7d78c558d567de823e7cdd25f7a6c2a92",
+      "bytes": 13758
+    },
+    {
+      "file": "experiments/ufuk/cpu-nnue16-v1/own-training-INCOMPLETE/prove.py",
+      "source": "/workspace/work/harbichess/cpu-nnue-own-training-proposal/prove.py",
+      "sha256": "b57269d0d57caf5e49db035cfab0c22abd0804575b719046bb528ade719ea5db",
+      "bytes": 7888
+    },
+    {
+      "file": "experiments/ufuk/cpu-nnue16-v1/own-training-INCOMPLETE/test_conversion.py",
+      "source": "/workspace/work/harbichess/cpu-nnue-own-training-proposal/test_conversion.py",
+      "sha256": "99c065ca75e7b27488f5c9af2f60b9a8d59b8d2cb971eadab6e781fa92fb72a0",
+      "bytes": 2115
+    },
+    {
+      "file": "experiments/ufuk/cpu-nnue16-v1/own-training-INCOMPLETE/verification.json",
+      "source": "/workspace/work/harbichess/cpu-nnue-own-training-proposal/verification.json",
+      "sha256": "f735906b346b682549f70c8e0253ea49ee0e95798d0cb057b1b24494ffbc4094",
+      "bytes": 259
+    },
+    {
+      "file": "experiments/ufuk/cpu-balanced16-v2/ROOT-RECIPE.txt",
+      "source": "/workspace/work/harbichess/cpu-selective-q-balanced16-training-proposal/ROOT-RECIPE.txt",
+      "sha256": "a254483af5dbc495a49c2664de278627083730c8fc6c037a48edb4daf2dd073e",
+      "bytes": 5133
+    },
+    {
+      "file": "experiments/ufuk/cpu-balanced16-v2/architecture.py",
+      "source": "/workspace/work/harbichess/cpu-selective-q-balanced16-training-proposal/architecture.py",
+      "sha256": "12b1f1a853c7e804374fd543139cc1e503b672d3a428f0fe0a82807acf711786",
+      "bytes": 3147
+    },
+    {
+      "file": "experiments/ufuk/cpu-balanced16-v2/fit.py",
+      "source": "/workspace/work/harbichess/cpu-selective-q-balanced16-training-proposal/fit.py",
+      "sha256": "762fd4d2a761d1381f70fcee9d311c62bd8bc4f6e0c580e8ae11c8793cc76727",
+      "bytes": 3677
+    },
+    {
+      "file": "experiments/ufuk/cpu-balanced16-v2/learner_v2.py",
+      "source": "/workspace/work/harbichess/cpu-selective-q-balanced16-training-proposal/learner_v2.py",
+      "sha256": "4a144f3ca332775dfecbfaa34807c207845eda005e9863f838c97fa37e850639",
+      "bytes": 3820
+    },
+    {
+      "file": "experiments/ufuk/cpu-balanced16-v2/protocol-DRAFT.json",
+      "source": "/workspace/work/harbichess/cpu-selective-q-balanced16-training-proposal/protocol-DRAFT.json",
+      "sha256": "d95c596cd3322774f5cf6812c4d3cfbe42bd517d090b1569eab351ca4542aa0d",
+      "bytes": 2699
+    },
+    {
+      "file": "experiments/ufuk/cpu-balanced16-v2/qualify.py",
+      "source": "/workspace/work/harbichess/cpu-selective-q-balanced16-training-proposal/qualify.py",
+      "sha256": "95d5865694be374dab0fc6a2e50b7bfb806e14c73123bfda462a3f78f7b5818a",
+      "bytes": 3410
+    },
+    {
+      "file": "experiments/ufuk/cpu-balanced16-v2/register.py",
+      "source": "/workspace/work/harbichess/cpu-selective-q-balanced16-training-proposal/register.py",
+      "sha256": "b6ac5caf9ba47de8ead4cfbb0c0cc5af54332964c66230fbb6462a99eb81983e",
+      "bytes": 5001
+    },
+    {
+      "file": "experiments/ufuk/cpu-balanced16-v2/support.py",
+      "source": "/workspace/work/harbichess/cpu-selective-q-balanced16-training-proposal/support.py",
+      "sha256": "a0823647f17108827a4376546e1193ce525adeb86d7898154fb104f3a153f8e1",
+      "bytes": 2954
+    },
+    {
+      "file": "experiments/ufuk/cpu-balanced16-v2/test_balanced.py",
+      "source": "/workspace/work/harbichess/cpu-selective-q-balanced16-training-proposal/test_balanced.py",
+      "sha256": "2c6791ab38c11cca1979bd9b8e3ea94fefa2af9e8dd0ebdfd04355410cc61a91",
+      "bytes": 3360
+    },
+    {
+      "file": "experiments/ufuk/cpu-balanced16-v2/test_glue.py",
+      "source": "/workspace/work/harbichess/cpu-selective-q-balanced16-training-proposal/test_glue.py",
+      "sha256": "ae6fcea654567797c50bdb0be1c47948a284226b507a53dfcdc2fa057f0a9110",
+      "bytes": 2972
+    },
+    {
+      "file": "experiments/ufuk/cpu-balanced16-v2/train.py",
+      "source": "/workspace/work/harbichess/cpu-selective-q-balanced16-training-proposal/train.py",
+      "sha256": "4401521d8c38135a10c1fd82430112699774c6b2bf3c58b88c313e394d76fdf5",
+      "bytes": 2826
+    },
+    {
+      "file": "experiments/ufuk/cpu-balanced16-v2/transform.py",
+      "source": "/workspace/work/harbichess/cpu-selective-q-balanced16-training-proposal/transform.py",
+      "sha256": "5decac7cdbee537feba47939ba3ca2a42c7823d54360d91a4242fcd952e8622a",
+      "bytes": 4137
+    },
+    {
+      "file": "experiments/ufuk/cpu-balanced16-v2/verification.json",
+      "source": "/workspace/work/harbichess/cpu-selective-q-balanced16-training-proposal/verification.json",
+      "sha256": "a711bfcc3cdec68c796bfe8f61d7da34b6d0e2e08c141338762e47fc510701c2",
+      "bytes": 434
+    },
+    {
+      "file": "experiments/ufuk/cpu-balanced16-v2/arena-UNEXECUTED/audit_arena_v2.py",
+      "source": "/workspace/work/harbichess/cpu-selective-q-balanced16-arena-v2/audit_arena_v2.py",
+      "sha256": "2f3e5d901a419daa547474e850a93d0b287f4444098f81d45aa4f039f1501c52",
+      "bytes": 11532
+    },
+    {
+      "file": "experiments/ufuk/cpu-balanced16-v2/arena-UNEXECUTED/audit_support.py",
+      "source": "/workspace/work/harbichess/cpu-selective-q-balanced16-arena-v2/audit_support.py",
+      "sha256": "293c5b3a7acb94bb740e352924c6258578a3e371000ee21cee25b461da45ddf6",
+      "bytes": 964
+    },
+    {
+      "file": "experiments/ufuk/cpu-balanced16-v2/arena-UNEXECUTED/native_admission.py",
+      "source": "/workspace/work/harbichess/cpu-selective-q-balanced16-arena-v2/native_admission.py",
+      "sha256": "0ec1a49a4062c5a9bce777ae01d75f3866c313e1c04b9d6a22b943a6e55e47d5",
+      "bytes": 9186
+    },
+    {
+      "file": "experiments/ufuk/cpu-balanced16-v2/arena-UNEXECUTED/profile.py",
+      "source": "/workspace/work/harbichess/cpu-selective-q-balanced16-arena-v2/profile.py",
+      "sha256": "2810fa026f8163cea95a661e82f13c13471ab13d2980f4ce7b15def90e372774",
+      "bytes": 5457
+    },
+    {
+      "file": "experiments/ufuk/cpu-balanced16-v2/arena-UNEXECUTED/profile_support.py",
+      "source": "/workspace/work/harbichess/cpu-selective-q-balanced16-arena-v2/profile_support.py",
+      "sha256": "dd6f55d401fd878d546f1b847be5e72c60e23e35e0fb837286ddc9c0ed1e2fc1",
+      "bytes": 973
+    },
+    {
+      "file": "experiments/ufuk/cpu-balanced16-v2/arena-UNEXECUTED/protocol-DRAFT.json",
+      "source": "/workspace/work/harbichess/cpu-selective-q-balanced16-arena-v2/protocol-DRAFT.json",
+      "sha256": "0b7c64356603531b7643336d0bb364025953375a2fc81eb69e661044526c09f2",
+      "bytes": 10636
+    },
+    {
+      "file": "experiments/ufuk/cpu-balanced16-v2/arena-UNEXECUTED/run.py",
+      "source": "/workspace/work/harbichess/cpu-selective-q-balanced16-arena-v2/run.py",
+      "sha256": "28249b22a5768f6eaa19250aa790642a88c7e58ce6b75f98f96cfe0081f1b641",
+      "bytes": 7316
+    },
+    {
+      "file": "experiments/ufuk/cpu-balanced16-v2/arena-UNEXECUTED/seal.py",
+      "source": "/workspace/work/harbichess/cpu-selective-q-balanced16-arena-v2/seal.py",
+      "sha256": "044a0cef673220a0f1b5c8972d34a2f943b7318ae454a180bbd7da08b1dc59e0",
+      "bytes": 3577
+    },
+    {
+      "file": "experiments/ufuk/cpu-balanced16-v2/arena-UNEXECUTED/search.py",
+      "source": "/workspace/work/harbichess/cpu-selective-q-balanced16-arena-v2/search.py",
+      "sha256": "0ea5a0dd269a78059a7c2f455a952262884e4420f72e7e2a9008f656e2fd8dd6",
+      "bytes": 1979
+    },
+    {
+      "file": "experiments/ufuk/cpu-balanced16-v2/arena-UNEXECUTED/support.py",
+      "source": "/workspace/work/harbichess/cpu-selective-q-balanced16-arena-v2/support.py",
+      "sha256": "66f3cf9163ad45a8ed7b7f19606e1d4d425c65c77696f4d68f7787fff2f7778a",
+      "bytes": 668
+    },
+    {
+      "file": "experiments/ufuk/cpu-balanced16-v2/arena-UNEXECUTED/test_binding.py",
+      "source": "/workspace/work/harbichess/cpu-selective-q-balanced16-arena-v2/test_binding.py",
+      "sha256": "eb4da847bc971a2500ed44451224bfbb57272c177e8cd8e814cb8a0440cb0591",
+      "bytes": 3350
+    },
+    {
+      "file": "experiments/ufuk/cpu-balanced16-v2/arena-UNEXECUTED/tournament.py",
+      "source": "/workspace/work/harbichess/cpu-selective-q-balanced16-arena-v2/tournament.py",
+      "sha256": "d362bfb656f19ee51772f4ed8e6dc5dba1f0e14a8e2fb91a9b7737c5e89c410b",
+      "bytes": 9360
+    },
+    {
+      "file": "experiments/ufuk/cpu-balanced16-v2/arena-UNEXECUTED/value.py",
+      "source": "/workspace/work/harbichess/cpu-selective-q-balanced16-arena-v2/value.py",
+      "sha256": "172a8bcbd00278b548f1bb00ea9443dbbc9e1d28c9721e48db5433ea796fd258",
+      "bytes": 1871
+    },
+    {
+      "file": "experiments/ufuk/cpu-coarse80-v1/root-runtime/fast_evaluator80_v1.py",
+      "source": "/workspace/work/harbichess/continuation-20261005/coarse80-root-runtime-v1/fast_evaluator80_v1.py",
+      "sha256": "29acb44d413c9e8c0bf27dfff0e37112e7a475c53ad63dc195baba6b3f94acdf",
+      "bytes": 2348
+    },
+    {
+      "file": "experiments/ufuk/cpu-coarse80-v1/root-runtime/production80_v1.py",
+      "source": "/workspace/work/harbichess/continuation-20261005/coarse80-root-runtime-v1/production80_v1.py",
+      "sha256": "e922084336f00c25644dd3fc601b58b3361a1dd021ace02a460c4983b1ba1954",
+      "bytes": 9172
+    }
+  ],
+  "models_in_Git": false,
+  "root_source_commit": "6fcc8b476d25495d1c9c413e55b2c7ba4794013e"
+}
