@@ -1,0 +1,207 @@
+{
+  "commands": [
+    {
+      "code": 0,
+      "command": [
+        "/workspace/HarbiChess/.venv/bin/python",
+        "/workspace/work/harbichess/cpu-kingbucket-nnue-proposal/train.py",
+        "--contract",
+        "/workspace/work/harbichess/continuation-20261005/NNUE-teacher-proof-v1/20262906-contract.json",
+        "--dataset",
+        "/dev/shm/harbichess-NNUE-teacher-data-v1/20262906/dataset.json",
+        "--output",
+        "/dev/shm/harbichess-NNUE-teacher-proof-v1/20262906/whole",
+        "--stop",
+        "8"
+      ],
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "code": 0,
+      "command": [
+        "/workspace/HarbiChess/.venv/bin/python",
+        "/workspace/work/harbichess/cpu-kingbucket-nnue-proposal/train.py",
+        "--contract",
+        "/workspace/work/harbichess/continuation-20261005/NNUE-teacher-proof-v1/20262906-contract.json",
+        "--dataset",
+        "/dev/shm/harbichess-NNUE-teacher-data-v1/20262906/dataset.json",
+        "--output",
+        "/dev/shm/harbichess-NNUE-teacher-proof-v1/20262906/pause",
+        "--stop",
+        "4"
+      ],
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "code": 0,
+      "command": [
+        "/workspace/HarbiChess/.venv/bin/python",
+        "/workspace/work/harbichess/cpu-kingbucket-nnue-proposal/train.py",
+        "--contract",
+        "/workspace/work/harbichess/continuation-20261005/NNUE-teacher-proof-v1/20262906-contract.json",
+        "--dataset",
+        "/dev/shm/harbichess-NNUE-teacher-data-v1/20262906/dataset.json",
+        "--output",
+        "/dev/shm/harbichess-NNUE-teacher-proof-v1/20262906/resume",
+        "--stop",
+        "8",
+        "--resume",
+        "/dev/shm/harbichess-NNUE-teacher-proof-v1/20262906/pause/native.pt",
+        "--resume-sha256",
+        "2334fc234add5d41179cc8ef0122a32b21dab658a059ff470ff27f772411efb8"
+      ],
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "code": 0,
+      "command": [
+        "/workspace/HarbiChess/.venv/bin/python",
+        "/workspace/work/harbichess/cpu-kingbucket-nnue-proposal/train.py",
+        "--contract",
+        "/workspace/work/harbichess/continuation-20261005/NNUE-teacher-proof-v1/20262906-contract.json",
+        "--dataset",
+        "/dev/shm/harbichess-NNUE-teacher-data-v1/20262906/dataset.json",
+        "--output",
+        "/dev/shm/harbichess-NNUE-teacher-proof-v1/20262906/audit-0",
+        "--stop",
+        "0",
+        "--resume",
+        "/dev/shm/harbichess-NNUE-teacher-proof-v1/20262906/whole/initial.pt",
+        "--resume-sha256",
+        "ea82064181d62ef2317b99c37b3eb68e1341a840f498b3b7700de74466f95889",
+        "--audit-only"
+      ],
+      "stderr": "",
+      "stdout": "{\"status\": \"PASS-strict-native-readonly\", \"step\": 0}\n"
+    },
+    {
+      "code": 0,
+      "command": [
+        "/workspace/HarbiChess/.venv/bin/python",
+        "/workspace/work/harbichess/cpu-kingbucket-nnue-proposal/train.py",
+        "--contract",
+        "/workspace/work/harbichess/continuation-20261005/NNUE-teacher-proof-v1/20262906-contract.json",
+        "--dataset",
+        "/dev/shm/harbichess-NNUE-teacher-data-v1/20262906/dataset.json",
+        "--output",
+        "/dev/shm/harbichess-NNUE-teacher-proof-v1/20262906/audit-1",
+        "--stop",
+        "8",
+        "--resume",
+        "/dev/shm/harbichess-NNUE-teacher-proof-v1/20262906/whole/native.pt",
+        "--resume-sha256",
+        "0c8683a4563f13a29f8e3d396d3e4835b182928fc5d7a197b6d38081632692d3",
+        "--audit-only"
+      ],
+      "stderr": "",
+      "stdout": "{\"status\": \"PASS-strict-native-readonly\", \"step\": 8}\n"
+    },
+    {
+      "code": 0,
+      "command": [
+        "/workspace/HarbiChess/.venv/bin/python",
+        "/workspace/work/harbichess/cpu-kingbucket-nnue-proposal/train.py",
+        "--contract",
+        "/workspace/work/harbichess/continuation-20261005/NNUE-teacher-proof-v1/20262906-contract.json",
+        "--dataset",
+        "/dev/shm/harbichess-NNUE-teacher-data-v1/20262906/dataset.json",
+        "--output",
+        "/dev/shm/harbichess-NNUE-teacher-proof-v1/20262906/audit-2",
+        "--stop",
+        "0",
+        "--resume",
+        "/dev/shm/harbichess-NNUE-teacher-proof-v1/20262906/pause/initial.pt",
+        "--resume-sha256",
+        "ea82064181d62ef2317b99c37b3eb68e1341a840f498b3b7700de74466f95889",
+        "--audit-only"
+      ],
+      "stderr": "",
+      "stdout": "{\"status\": \"PASS-strict-native-readonly\", \"step\": 0}\n"
+    },
+    {
+      "code": 0,
+      "command": [
+        "/workspace/HarbiChess/.venv/bin/python",
+        "/workspace/work/harbichess/cpu-kingbucket-nnue-proposal/train.py",
+        "--contract",
+        "/workspace/work/harbichess/continuation-20261005/NNUE-teacher-proof-v1/20262906-contract.json",
+        "--dataset",
+        "/dev/shm/harbichess-NNUE-teacher-data-v1/20262906/dataset.json",
+        "--output",
+        "/dev/shm/harbichess-NNUE-teacher-proof-v1/20262906/audit-3",
+        "--stop",
+        "4",
+        "--resume",
+        "/dev/shm/harbichess-NNUE-teacher-proof-v1/20262906/pause/native.pt",
+        "--resume-sha256",
+        "2334fc234add5d41179cc8ef0122a32b21dab658a059ff470ff27f772411efb8",
+        "--audit-only"
+      ],
+      "stderr": "",
+      "stdout": "{\"status\": \"PASS-strict-native-readonly\", \"step\": 4}\n"
+    },
+    {
+      "code": 0,
+      "command": [
+        "/workspace/HarbiChess/.venv/bin/python",
+        "/workspace/work/harbichess/cpu-kingbucket-nnue-proposal/train.py",
+        "--contract",
+        "/workspace/work/harbichess/continuation-20261005/NNUE-teacher-proof-v1/20262906-contract.json",
+        "--dataset",
+        "/dev/shm/harbichess-NNUE-teacher-data-v1/20262906/dataset.json",
+        "--output",
+        "/dev/shm/harbichess-NNUE-teacher-proof-v1/20262906/audit-4",
+        "--stop",
+        "4",
+        "--resume",
+        "/dev/shm/harbichess-NNUE-teacher-proof-v1/20262906/resume/initial.pt",
+        "--resume-sha256",
+        "880845c47b15706156c99a268d00fc72a646a11135bcd7f4b01e60a0d93fde14",
+        "--audit-only"
+      ],
+      "stderr": "",
+      "stdout": "{\"status\": \"PASS-strict-native-readonly\", \"step\": 4}\n"
+    },
+    {
+      "code": 0,
+      "command": [
+        "/workspace/HarbiChess/.venv/bin/python",
+        "/workspace/work/harbichess/cpu-kingbucket-nnue-proposal/train.py",
+        "--contract",
+        "/workspace/work/harbichess/continuation-20261005/NNUE-teacher-proof-v1/20262906-contract.json",
+        "--dataset",
+        "/dev/shm/harbichess-NNUE-teacher-data-v1/20262906/dataset.json",
+        "--output",
+        "/dev/shm/harbichess-NNUE-teacher-proof-v1/20262906/audit-5",
+        "--stop",
+        "8",
+        "--resume",
+        "/dev/shm/harbichess-NNUE-teacher-proof-v1/20262906/resume/native.pt",
+        "--resume-sha256",
+        "ea6502e3783a5cb7a8b96c7b4cd1128bcb6aad1209fcdf7558c14cc8d07376fb",
+        "--audit-only"
+      ],
+      "stderr": "",
+      "stdout": "{\"status\": \"PASS-strict-native-readonly\", \"step\": 8}\n"
+    }
+  ],
+  "contract_sha256": "962d46d518a89aa5ea576976b455fa2c0bed67e5a19face6c32bbe791ba72321",
+  "deadline": 1791244540.0285552,
+  "finished": 1791243964.1135387,
+  "first": 1791243940.0285552,
+  "full_payload_bits_equal": true,
+  "mode": "proof",
+  "native_sha256": {
+    "/dev/shm/harbichess-NNUE-teacher-proof-v1/20262906/pause/initial.pt": "ea82064181d62ef2317b99c37b3eb68e1341a840f498b3b7700de74466f95889",
+    "/dev/shm/harbichess-NNUE-teacher-proof-v1/20262906/pause/native.pt": "2334fc234add5d41179cc8ef0122a32b21dab658a059ff470ff27f772411efb8",
+    "/dev/shm/harbichess-NNUE-teacher-proof-v1/20262906/resume/initial.pt": "880845c47b15706156c99a268d00fc72a646a11135bcd7f4b01e60a0d93fde14",
+    "/dev/shm/harbichess-NNUE-teacher-proof-v1/20262906/resume/native.pt": "ea6502e3783a5cb7a8b96c7b4cd1128bcb6aad1209fcdf7558c14cc8d07376fb",
+    "/dev/shm/harbichess-NNUE-teacher-proof-v1/20262906/whole/initial.pt": "ea82064181d62ef2317b99c37b3eb68e1341a840f498b3b7700de74466f95889",
+    "/dev/shm/harbichess-NNUE-teacher-proof-v1/20262906/whole/native.pt": "0c8683a4563f13a29f8e3d396d3e4835b182928fc5d7a197b6d38081632692d3"
+  },
+  "raw_zip_identity_claimed": false,
+  "status": "PASS-readonly-loads-and-fixed-phase-not-strength"
+}
