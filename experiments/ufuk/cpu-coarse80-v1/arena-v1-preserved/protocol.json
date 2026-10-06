@@ -1,0 +1,200 @@
+{
+  "E8_sha256": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03",
+  "E8_value_helper": {
+    "path": "/workspace/HarbiChess/experiments/ufuk/cpu-residual-value-v1/arena/value.py",
+    "sha256": "0e0d9092db254bd88e4a49875d63edc6b1b39770d0fc53f61e03629ccba02737"
+  },
+  "arena_helper_sha256": {
+    "run.py": "ecce7a5acccd853c7784cba9149537e40161bc74c6baea8ddc899dc600b83c93",
+    "value.py": "d5016b326f6ab0dd5f1b1b6e0586f7d7b46a4146e06bdaa03b240054d4ab6df7",
+    "native_admission.py": "f0fdab052608df432432685bad2c8876e87cf3527d0a5f65e72e1f069c6de850",
+    "profile_support.py": "dd6f55d401fd878d546f1b847be5e72c60e23e35e0fb837286ddc9c0ed1e2fc1",
+    "train_parity.py": "a8cf97cb8452b49274805ffe256bad5a504d0cbfe0c06eb491134dde2fec3ab3",
+    "profile.py": "04c8ffc49dc02aea9ff8417dad62a5e24f4653ab5a91a2bf114ebdabc86da464",
+    "tournament.py": "7081128a96f575d01ebaf40f1c7de725274b4316ac3836802b539b3ce7395cb8",
+    "audit_arena_v2.py": "9c93e5489877f301675b788a994162ebf331648e49928420dd48b32130b6a587",
+    "test_contracts.py": "e5cd2e66ef018f51fb76148421063b56da9a5d054898227ee7223abd7ce7635f",
+    "search.py": "de53c14728a67b7772f18b396ac8ef5c35a144d4e4e616fec40099cd461a6670"
+  },
+  "audit_deadline_epoch": null,
+  "audit_max_seconds": 900,
+  "book_path": "/workspace/work/harbichess/cpu-own-replay-v1-actual/development/book.json",
+  "book_sha256": "9c36b5972c9676d19c358ca7e598b9f7f5d110b1947bed838cd660f644d845da",
+  "classical_value_helper": {
+    "path": "/workspace/HarbiChess/experiments/ufuk/cpu-classical-own-v1/value.py",
+    "sha256": "a99cddfc397bd9221b99a70691427fdd663488b033fb239d9f48240786b2f277"
+  },
+  "compiled_binary": {
+    "path": "/workspace/work/harbichess/cpu-ownq-coarse80-proposal/libcoarse80.so",
+    "sha256": "0c522abc7220ce748008c41fe7520b48c0c22a71d69f92486c70bf610b84f173"
+  },
+  "disk_min_free_bytes": 268435456,
+  "games_per_tournament": 16,
+  "match_seeds": [
+    20262905,
+    20262906
+  ],
+  "max_depth": 8,
+  "max_plies": 400,
+  "memory_max_bytes": 16106127360,
+  "models": {
+    "20262905": {
+      "e8": {
+        "path": "/workspace/work/harbichess/a100/restoration/local-rehearsal-content/harbichess-inputs/initial-e8.safetensors",
+        "sha256": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03"
+      },
+      "learned": {
+        "fresh0_path": "/dev/shm/harbichess-ownq-coarse80/fit-v1/20262905/fresh0.native.gz",
+        "native_path": "/dev/shm/harbichess-ownq-coarse80/fit-v1/20262905/final64.native.gz",
+        "path": "/dev/shm/harbichess-ownq-coarse80/fit-v1/20262905/candidate.json",
+        "sha256": "6b81ec79e0e42216be37da9853df648fa8580382e236208c57bcdcea20f58525",
+        "accepted_updates": 64,
+        "fresh0_sha256": "f4b8b5d9358e3aba6179be991fcdf1a8db0e112d268c299786f1ee6e1f73152e",
+        "native_sha256": "30c9f915d8fc8063c37f3e851debe723fe2c0f1b469e474fa3a23433d7a9347f"
+      },
+      "prior": {
+        "path": "/workspace/HarbiChess/experiments/ufuk/cpu-classical-own-v1/prior.json",
+        "sha256": "afbaec307e5acc4b9fcb5222115c2fb8112290065ffe64e929b35f2a935565e1"
+      }
+    },
+    "20262906": {
+      "e8": {
+        "path": "/workspace/work/harbichess/a100/restoration/local-rehearsal-content/harbichess-inputs/initial-e8.safetensors",
+        "sha256": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03"
+      },
+      "learned": {
+        "fresh0_path": "/dev/shm/harbichess-ownq-coarse80/fit-v1/20262906/fresh0.native.gz",
+        "native_path": "/dev/shm/harbichess-ownq-coarse80/fit-v1/20262906/final64.native.gz",
+        "path": "/dev/shm/harbichess-ownq-coarse80/fit-v1/20262906/candidate.json",
+        "sha256": "a0935cc0fb01cdafa596713bb07d9eeee53172b7b8addf66ae302fb2880dfeca",
+        "accepted_updates": 64,
+        "fresh0_sha256": "a57c31a65884543ccc69cc94f2c723240dae6a7e7ff30f24580547f05a6ee211",
+        "native_sha256": "2c8f33d37780cec96fc4d526ed17716b3fe20275691591872bcbff95b229dcb7"
+      },
+      "prior": {
+        "path": "/workspace/HarbiChess/experiments/ufuk/cpu-classical-own-v1/prior.json",
+        "sha256": "afbaec307e5acc4b9fcb5222115c2fb8112290065ffe64e929b35f2a935565e1"
+      }
+    }
+  },
+  "native_qualification": "actual proof12 strict loads plus actual final four fresh-interpreter loads PASS; profile still PENDING",
+  "opening_pairs": 8,
+  "operator_hard_deadline_epoch": 1791273600.0,
+  "original_deadline_epoch": 1791250521.852049,
+  "original_first_epoch": 1791243321.852049,
+  "original_mixed_value": {
+    "path": "/workspace/HarbiChess/experiments/ufuk/cpu-classical-own-v1/arena/value.py",
+    "sha256": "2abb3ac2812853c19abb001a0d38a9a1874115b8ab272cc9322bf7123f6cfd84"
+  },
+  "original_search": {
+    "path": "/workspace/HarbiChess/experiments/ufuk/cpu-classical-own-v1/arena/search.py",
+    "sha256": "de53c14728a67b7772f18b396ac8ef5c35a144d4e4e616fec40099cd461a6670"
+  },
+  "per_tournament_seconds": 2700,
+  "profile_deadline_epoch": 1791243921.852049,
+  "profile_first_epoch": 1791243321.852049,
+  "profile_seconds": 600,
+  "promotion_priority": "known development only; not formal eligibility or model selection",
+  "quiescence_plies": 2,
+  "reserved_output_bytes": 100663296,
+  "schema": "ownQ-coarse80-arena-protocol-DRAFT-v1",
+  "scope": "known development roots; not formal virgin strength confirmation",
+  "search_nodes": 512,
+  "source_commit": "6fcc8b476d25495d1c9c413e55b2c7ba4794013e",
+  "status": "PENDING-ROOT-original600-profile-and7200-arena",
+  "stockfish_nodes": 512,
+  "stockfish_path": "/workspace/work/harbichess/stockfish/stockfish-linux-x86-64-universal",
+  "stockfish_sha256": "0f83d24cc46d2c66c60f16001af5444873bc112b7d028594513426894c12da19",
+  "tasks": [
+    [
+      "learned",
+      "SF512"
+    ],
+    [
+      "prior",
+      "SF512"
+    ],
+    [
+      "e8",
+      "SF512"
+    ],
+    [
+      "learned",
+      "e8"
+    ],
+    [
+      "learned",
+      "prior"
+    ]
+  ],
+  "total_games": 160,
+  "whole_seconds": 7200,
+  "coarse_directory": "/workspace/work/harbichess/cpu-ownq-coarse80-proposal",
+  "source_whitelist": {
+    "/workspace/work/harbichess/continuation-20261005/coarse80-root-runtime-v1/production80_v1.py": "e922084336f00c25644dd3fc601b58b3361a1dd021ace02a460c4983b1ba1954",
+    "/workspace/work/harbichess/cpu-ownq-coarse80-proposal/registered_cli.py": "cdf0861ebb3da0f567e28e2ddfe36d7169dd4f8feec8608c9438fc96731e03b1",
+    "/workspace/work/harbichess/cpu-ownq-coarse80-proposal/coarse80.py": "204360ef216af37a5db3005e030903d14c4e46275230f11952bd5f5dc59c000e",
+    "/workspace/work/harbichess/cpu-ownq-coarse80-proposal/build_forward80.py": "e3da3e1e51a08b5f0df5e56bce64af2cd9e49a3153fc74f292d9c37d27d5531d",
+    "/workspace/work/harbichess/cpu-ownq-coarse80-proposal/learner80.py": "df0dba9a0391b17a6c201a03d57afbdabcdb1c4414efdf8a307edbdfd3560d76",
+    "/workspace/work/harbichess/cpu-ownq-coarse80-proposal/test_dataset80.py": "61a6f9a54f85b8bcbeda72704265155671346ea255ca45221f68f2acddbde732",
+    "/workspace/work/harbichess/cpu-ownq-coarse80-proposal/compiled80.py": "26fb3d74569cd4f07bf4dc51ae3a9001fe209c7cd4b7251d779782b59f98fcaa",
+    "/workspace/work/harbichess/cpu-ownq-coarse80-proposal/test_coarse80.py": "a6e1a1dce2580f49290adbda42c6e3411bace5f0f8e4f48afd7ff415a3bc569d",
+    "/workspace/work/harbichess/cpu-ownq-coarse80-proposal/resume_worker.py": "34c1bd551d43898a44575d63653979d8f8b3f645b1f0b5bd829bc3ece7d5ffd1",
+    "/workspace/work/harbichess/cpu-ownq-coarse80-proposal/proof_synthetic.py": "a0da091860526a5dfb2d3c968099e8d8004f4d6b31115d62510a2b3339e889f5",
+    "/workspace/work/harbichess/cpu-ownq-coarse80-proposal/make_closure.py": "fc15e4536ece508dd81261e8105303895c0772da26be89dbeb01d23a2fd69090",
+    "/workspace/work/harbichess/cpu-ownq-coarse80-proposal/dataset80.py": "f67196d9dcf97797a79264039e35720688f0c891cb7065970f12a4f6ea4c3613",
+    "/workspace/work/harbichess/cpu-ownq-coarse80-proposal/source-closure.json": "cc0813b79ced8ac74c33dd57446453eca2ec7359877748c705aabaeb84cc3cb2",
+    "/workspace/work/harbichess/cpu-ownq-coarse80-proposal/forward80.c": "201c08c5a554110db5556e54a891c382d4eb901fc789618ba9b2468166161a98",
+    "/workspace/work/harbichess/cpu-ownq-coarse80-proposal/libcoarse80.so": "0c522abc7220ce748008c41fe7520b48c0c22a71d69f92486c70bf610b84f173",
+    "/workspace/work/harbichess/cpu-ownq-coarse80-proposal/build-receipt.json": "9489991e011008117ff254958fd486370fd8d863796aa3e591d12a8befd48d8d",
+    "/workspace/work/harbichess/continuation-20261005/coarse80-root-runtime-v1/fast_evaluator80_v1.py": "29acb44d413c9e8c0bf27dfff0e37112e7a475c53ad63dc195baba6b3f94acdf",
+    "/workspace/HarbiChess/experiments/ufuk/cpu-classical-own-v1/value.py": "a99cddfc397bd9221b99a70691427fdd663488b033fb239d9f48240786b2f277",
+    "/dev/shm/harbichess-coarse80-preflight-v1/result.json": "2c7fcd041e4312b9c8785cf86b8f3d97e4de7bf5bb69f65296a57ff52f864997",
+    "/dev/shm/harbichess-ownq2048-ROOT-independent-v1/result.json": "e0152170ec9f1b4ba51e359cc9ca756c255672f78a01233491686fd72245ab79",
+    "/dev/shm/harbichess-own-q-reanalysis/20262905/labels-00001024.json.gz": "07f9923b0e18e0ac599c571451b969f308fcbbed9fddcbf19de602eca1c80a0f",
+    "/dev/shm/harbichess-own-q-reanalysis/20262906/labels-00001024.json.gz": "3dca536f899f70b7c9b5cb52026fd2ab2722cfd09347dfcc8b0807c994172f7b",
+    "/dev/shm/harbichess-ownq-coarse80/proof-v1/result.json": "032c8eb24c1b6916fba1536d5b41e85e130d80615ad7b4fd94a79f82054e7428",
+    "/workspace/work/harbichess/continuation-20261005/coarse80-root-runtime-v1/proof-registration.json": "fac24c777e4788c27d3d1cea5e99ed00a967004e3005d669e8076e197a499cd3",
+    "/workspace/work/harbichess/cpu-coarse80-arena-proposal/run.py": "ecce7a5acccd853c7784cba9149537e40161bc74c6baea8ddc899dc600b83c93",
+    "/workspace/work/harbichess/cpu-coarse80-arena-proposal/value.py": "d5016b326f6ab0dd5f1b1b6e0586f7d7b46a4146e06bdaa03b240054d4ab6df7",
+    "/workspace/work/harbichess/cpu-coarse80-arena-proposal/native_admission.py": "f0fdab052608df432432685bad2c8876e87cf3527d0a5f65e72e1f069c6de850",
+    "/workspace/work/harbichess/cpu-coarse80-arena-proposal/profile_support.py": "dd6f55d401fd878d546f1b847be5e72c60e23e35e0fb837286ddc9c0ed1e2fc1",
+    "/workspace/work/harbichess/cpu-coarse80-arena-proposal/train_parity.py": "a8cf97cb8452b49274805ffe256bad5a504d0cbfe0c06eb491134dde2fec3ab3",
+    "/workspace/work/harbichess/cpu-coarse80-arena-proposal/profile.py": "04c8ffc49dc02aea9ff8417dad62a5e24f4653ab5a91a2bf114ebdabc86da464",
+    "/workspace/work/harbichess/cpu-coarse80-arena-proposal/tournament.py": "7081128a96f575d01ebaf40f1c7de725274b4316ac3836802b539b3ce7395cb8",
+    "/workspace/work/harbichess/cpu-coarse80-arena-proposal/audit_arena_v2.py": "9c93e5489877f301675b788a994162ebf331648e49928420dd48b32130b6a587",
+    "/workspace/work/harbichess/cpu-coarse80-arena-proposal/test_contracts.py": "e5cd2e66ef018f51fb76148421063b56da9a5d054898227ee7223abd7ce7635f",
+    "/workspace/work/harbichess/cpu-coarse80-arena-proposal/search.py": "de53c14728a67b7772f18b396ac8ef5c35a144d4e4e616fec40099cd461a6670"
+  },
+  "native_phase_bindings": {
+    "fit": {
+      "registration": {
+        "path": "/workspace/work/harbichess/continuation-20261005/coarse80-root-runtime-v1/fit-registration.json",
+        "sha256": "e61d00090033f799c2222340cd78f59096579b1e394797133f239c38d567c182"
+      },
+      "result": {
+        "path": "/dev/shm/harbichess-ownq-coarse80/fit-v1/result.json",
+        "sha256": "f640a959cefc1a4560a525d334e19c5880658a0d62437b0ef0f1e8ee52baf7bc"
+      }
+    },
+    "proof": {
+      "registration": {
+        "path": "/workspace/work/harbichess/continuation-20261005/coarse80-root-runtime-v1/proof-registration.json",
+        "sha256": "fac24c777e4788c27d3d1cea5e99ed00a967004e3005d669e8076e197a499cd3"
+      },
+      "result": {
+        "path": "/dev/shm/harbichess-ownq-coarse80/proof-v1/result.json",
+        "sha256": "032c8eb24c1b6916fba1536d5b41e85e130d80615ad7b4fd94a79f82054e7428"
+      }
+    }
+  },
+  "fast_reader": {
+    "path": "/workspace/work/harbichess/continuation-20261005/coarse80-root-runtime-v1/fast_evaluator80_v1.py",
+    "sha256": "29acb44d413c9e8c0bf27dfff0e37112e7a475c53ad63dc195baba6b3f94acdf"
+  },
+  "derived_from_C18_v2_protocol_sha256": "dd801289fda5ebdaec36306eff12769097d1ad97981d9e5323cebee2ba521f28",
+  "architecture_preflight_receipt": {
+    "path": "/dev/shm/harbichess-coarse80-preflight-v1/result.json",
+    "sha256": "2c7fcd041e4312b9c8785cf86b8f3d97e4de7bf5bb69f65296a57ff52f864997"
+  }
+}
