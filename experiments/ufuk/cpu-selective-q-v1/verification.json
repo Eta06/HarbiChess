@@ -1,0 +1,63 @@
+{
+  "status": "PASS-eight-synthetic-tests-NOT-actual-data-qualification",
+  "pytest": "8 passed in0.64s",
+  "ruff": "PASS canonical repo cwd/config",
+  "CLI_help": "produce_labels PASS",
+  "actual_labels": 0,
+  "real_SGD": 0,
+  "games": 0,
+  "files": {
+    "produce_labels.py": {
+      "sha256": "34492036c1bac452224397f1366d11181db2c09f5b1a725d9bdb24b451c10b6f",
+      "bytes": 3468
+    },
+    "20262906-labels-registration-DRAFT.json": {
+      "sha256": "8d53f38f151802425350332f88d7d4470a5e806ae456a74fc89c0f96f4ff4a0f",
+      "bytes": 3761
+    },
+    "learner.py": {
+      "sha256": "3d77eea89bf3817f8de096b7de9bcded5bb1f7d017a60aac89c38aba826022b4",
+      "bytes": 3993
+    },
+    "test_proposal.py": {
+      "sha256": "eb352185c128e98ce73a9162ad3c8a551d198181e31a319fda32f57d263ddfb9",
+      "bytes": 6057
+    },
+    "20262905-labels-registration-DRAFT.json": {
+      "sha256": "c1d4bfcb56f2d7e023032c4d1db55e3587d19bf17ee8a7d2fcc5710f3d874e02",
+      "bytes": 3761
+    },
+    "qualify.py": {
+      "sha256": "b9cea68cfd8131f1a476ec2057a2080d9329c9d4ef4cfb8653a1ceecf4b59dd6",
+      "bytes": 3196
+    },
+    "README.md": {
+      "sha256": "b1376a84b95640541471337b857d3f8bdac973fab02c142387d5e63a87bdd807",
+      "bytes": 5100
+    },
+    "labels.py": {
+      "sha256": "1d21a8885f3dc19f6338bc9b7b6470cbb29fc83e76ba9b2d7f30fd32351b6fd4",
+      "bytes": 5322
+    },
+    "model.py": {
+      "sha256": "14f5a1790f5e9518170a7d9bd490ba0aa61c001086286798a6d1315f00e0b9d2",
+      "bytes": 2155
+    },
+    "profile.py": {
+      "sha256": "46801c80d9404d723fd7e284d8948616afaa834b428aea0d64605228ab5ac067",
+      "bytes": 2644
+    },
+    "train.py": {
+      "sha256": "e4e7ec15ac270204a605c8ecae5e4d73d8b59686e6b77a894dc1f4c90bb2def4",
+      "bytes": 2602
+    },
+    "support.py": {
+      "sha256": "d99c1de872313ae26624575d49d8d10e32645cea5583192ad0359c73c1e0bb92",
+      "bytes": 2952
+    },
+    "search.py": {
+      "sha256": "993e9c2c6d949b3d8753935405b5c289b35249a108b0ef3f8f984ac55de94293",
+      "bytes": 3126
+    }
+  }
+}
