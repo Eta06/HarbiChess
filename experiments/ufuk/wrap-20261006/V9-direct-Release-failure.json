@@ -1,0 +1,7 @@
+{
+  "status": "failed-preserved",
+  "POST_attempts": 1,
+  "error_type": "Failure",
+  "error_code": "post-ambiguous-no-automatic-retry",
+  "finished_epoch": 1791245308.0573425
+}
