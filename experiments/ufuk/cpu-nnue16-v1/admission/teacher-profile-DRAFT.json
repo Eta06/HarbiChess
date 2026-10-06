@@ -1,0 +1,165 @@
+{
+  "binary": {
+    "path": "/workspace/work/harbichess/cpu-kingbucket-nnue-proposal/_kingbucket16.cpython-312-x86_64-linux-gnu.so",
+    "sha256": "495505cdebd6dbc029ee314846dbac79d5cca6d445de26c804a43821808d644b"
+  },
+  "book": {
+    "path": "/workspace/work/harbichess/cpu-own-replay-v1-actual/development/book.json",
+    "sha256": "9c36b5972c9676d19c358ca7e598b9f7f5d110b1947bed838cd660f644d845da"
+  },
+  "core_commit": "6fcc8b476d25495d1c9c413e55b2c7ba4794013e",
+  "core_repo": "/workspace/work/harbichess/cpu-additive-source-6fcc8b4",
+  "cpu_core": null,
+  "deadline": null,
+  "e8": {
+    "path": "/workspace/work/harbichess/a100/restoration/local-rehearsal-content/harbichess-inputs/initial-e8.safetensors",
+    "sha256": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03"
+  },
+  "e8_protocol": {
+    "path": "/workspace/work/harbichess/cpu-ownq-C18-arena-v2-proposal/protocol.json",
+    "sha256": "dd801289fda5ebdaec36306eff12769097d1ad97981d9e5323cebee2ba521f28"
+  },
+  "first": null,
+  "input_pins": {
+    "/dev/shm/harbichess-own-q-reanalysis/20262905/labels-00001024.json.gz": "07f9923b0e18e0ac599c571451b969f308fcbbed9fddcbf19de602eca1c80a0f",
+    "/dev/shm/harbichess-own-q-reanalysis/20262906/labels-00001024.json.gz": "3dca536f899f70b7c9b5cb52026fd2ab2722cfd09347dfcc8b0807c994172f7b",
+    "/workspace/HarbiChess/experiments/ufuk/cpu-classical-own-v1/arena/search.py": "de53c14728a67b7772f18b396ac8ef5c35a144d4e4e616fec40099cd461a6670",
+    "/workspace/HarbiChess/experiments/ufuk/cpu-classical-own-v1/arena/value.py": "2abb3ac2812853c19abb001a0d38a9a1874115b8ab272cc9322bf7123f6cfd84",
+    "/workspace/HarbiChess/experiments/ufuk/cpu-classical-own-v1/value.py": "a99cddfc397bd9221b99a70691427fdd663488b033fb239d9f48240786b2f277",
+    "/workspace/work/harbichess/a100/restoration/local-rehearsal-content/harbichess-inputs/initial-e8.safetensors": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03",
+    "/workspace/work/harbichess/continuation-20261005/coarse80-root-runtime-v1/fast_evaluator80_v1.py": "29acb44d413c9e8c0bf27dfff0e37112e7a475c53ad63dc195baba6b3f94acdf",
+    "/workspace/work/harbichess/continuation-20261005/nnue16-root-runtime-v1/preflight_nnue16_v1.py": "8d5907e26b1d884441fccb06a8c93db5d22dbffe201708f03e3754b20c813e0f",
+    "/workspace/work/harbichess/continuation-20261005/nnue16-root-runtime-v1/preflight_nnue16_v2.py": "11fb0e7d6aab6c5aa803e52189826484fd3c43e0fdbf21ebd3033a043658120b",
+    "/workspace/work/harbichess/cpu-kingbucket-nnue-proposal/FROZEN-CLOSURE.json": "75c80e91bec0c173be77485b4abd2400649a135c0964f12fd4e3e91727b8193e",
+    "/workspace/work/harbichess/cpu-kingbucket-nnue-proposal/_kingbucket16.cpython-312-x86_64-linux-gnu.so": "495505cdebd6dbc029ee314846dbac79d5cca6d445de26c804a43821808d644b",
+    "/workspace/work/harbichess/cpu-kingbucket-nnue-proposal/build.py": "aa8ce2d2bdc3b046c5be9e0ceb14b1a793147868f107a5b7a79a76505c8c39b1",
+    "/workspace/work/harbichess/cpu-kingbucket-nnue-proposal/evaluator.py": "5317e736f872a2e237e45942c8df9e797c5acee8f626bb12009464869fab8d95",
+    "/workspace/work/harbichess/cpu-kingbucket-nnue-proposal/forward.c": "454f8c8f2b5d177f0ff31fd520b9554636a278b10ddb2f1eedcd92a0f9ad44e0",
+    "/workspace/work/harbichess/cpu-kingbucket-nnue-proposal/model.py": "c04914bc5a560ad51de81c6d0aaeb3fae4d04b45c07cd8e39bbd31f655d36565",
+    "/workspace/work/harbichess/cpu-kingbucket-nnue-proposal/native.py": "f60a1f9814f48691af1e2d1f1db1b548cff3e7df0a7cae9718051de1865b8b69",
+    "/workspace/work/harbichess/cpu-kingbucket-nnue-proposal/qualify.py": "111d0abc504acca0d4ed545532243272df9b6e1f90d06bb2d1fd0b27eef3f276",
+    "/workspace/work/harbichess/cpu-kingbucket-nnue-proposal/test_proposal.py": "f929545a74a3f4cd2a11b47986e3b84f4577e0d39dabde0fb8032f8b3d3b23b3",
+    "/workspace/work/harbichess/cpu-kingbucket-nnue-proposal/train.py": "5644a7455498209a149a8672745868cf7e7cf4a3baae817dfce2128ff4d8f6c6",
+    "/workspace/work/harbichess/cpu-nnue-trained-admission-proposal/admission.py": "94d80c5ab1f3ca9a2d5260d52bda5f7ab16ff236970a57a9a2c70e2351d92781",
+    "/workspace/work/harbichess/cpu-nnue-trained-admission-proposal/profile.py": "3bee71dbde17b8616cb550ed2a116d22f5a4d92affe924fcd82d54a3c013e7d0",
+    "/workspace/work/harbichess/cpu-own-replay-v1-actual/development/book.json": "9c36b5972c9676d19c358ca7e598b9f7f5d110b1947bed838cd660f644d845da",
+    "/workspace/work/harbichess/cpu-own-search-reanalysis-18x32-proposal/latency_metrics18.py": "47f689e66b18fcd370a658cfe4ada55350b92f5c235d4437f968968cf17b367d",
+    "/workspace/work/harbichess/cpu-ownq-C18-arena-v2-proposal/protocol.json": "dd801289fda5ebdaec36306eff12769097d1ad97981d9e5323cebee2ba521f28",
+    "/workspace/work/harbichess/cpu-ownq-coarse80-proposal/build-receipt.json": "9489991e011008117ff254958fd486370fd8d863796aa3e591d12a8befd48d8d",
+    "/workspace/work/harbichess/cpu-ownq-coarse80-proposal/build_forward80.py": "e3da3e1e51a08b5f0df5e56bce64af2cd9e49a3153fc74f292d9c37d27d5531d",
+    "/workspace/work/harbichess/cpu-ownq-coarse80-proposal/coarse80.py": "204360ef216af37a5db3005e030903d14c4e46275230f11952bd5f5dc59c000e",
+    "/workspace/work/harbichess/cpu-ownq-coarse80-proposal/compiled80.py": "26fb3d74569cd4f07bf4dc51ae3a9001fe209c7cd4b7251d779782b59f98fcaa",
+    "/workspace/work/harbichess/cpu-ownq-coarse80-proposal/dataset80.py": "f67196d9dcf97797a79264039e35720688f0c891cb7065970f12a4f6ea4c3613",
+    "/workspace/work/harbichess/cpu-ownq-coarse80-proposal/forward80.c": "201c08c5a554110db5556e54a891c382d4eb901fc789618ba9b2468166161a98",
+    "/workspace/work/harbichess/cpu-ownq-coarse80-proposal/learner80.py": "df0dba9a0391b17a6c201a03d57afbdabcdb1c4414efdf8a307edbdfd3560d76",
+    "/workspace/work/harbichess/cpu-ownq-coarse80-proposal/libcoarse80.so": "0c522abc7220ce748008c41fe7520b48c0c22a71d69f92486c70bf610b84f173",
+    "/workspace/work/harbichess/cpu-ownq-coarse80-proposal/make_closure.py": "fc15e4536ece508dd81261e8105303895c0772da26be89dbeb01d23a2fd69090",
+    "/workspace/work/harbichess/cpu-ownq-coarse80-proposal/proof_synthetic.py": "a0da091860526a5dfb2d3c968099e8d8004f4d6b31115d62510a2b3339e889f5",
+    "/workspace/work/harbichess/cpu-ownq-coarse80-proposal/registered_cli.py": "cdf0861ebb3da0f567e28e2ddfe36d7169dd4f8feec8608c9438fc96731e03b1",
+    "/workspace/work/harbichess/cpu-ownq-coarse80-proposal/resume_worker.py": "34c1bd551d43898a44575d63653979d8f8b3f645b1f0b5bd829bc3ece7d5ffd1",
+    "/workspace/work/harbichess/cpu-ownq-coarse80-proposal/source-closure.json": "cc0813b79ced8ac74c33dd57446453eca2ec7359877748c705aabaeb84cc3cb2",
+    "/workspace/work/harbichess/cpu-ownq-coarse80-proposal/test_coarse80.py": "a6e1a1dce2580f49290adbda42c6e3411bace5f0f8e4f48afd7ff415a3bc569d",
+    "/workspace/work/harbichess/cpu-ownq-coarse80-proposal/test_dataset80.py": "61a6f9a54f85b8bcbeda72704265155671346ea255ca45221f68f2acddbde732"
+  },
+  "mixed_helper": {
+    "path": "/workspace/HarbiChess/experiments/ufuk/cpu-classical-own-v1/arena/value.py",
+    "sha256": "2abb3ac2812853c19abb001a0d38a9a1874115b8ab272cc9322bf7123f6cfd84"
+  },
+  "nnue_directory": "/workspace/work/harbichess/cpu-kingbucket-nnue-proposal",
+  "output": null,
+  "prior_helper": {
+    "path": "/workspace/HarbiChess/experiments/ufuk/cpu-classical-own-v1/value.py",
+    "sha256": "a99cddfc397bd9221b99a70691427fdd663488b033fb239d9f48240786b2f277"
+  },
+  "schema": "NNUE-trained-teacher-profile-v1",
+  "search_helper": {
+    "path": "/workspace/HarbiChess/experiments/ufuk/cpu-classical-own-v1/arena/search.py",
+    "sha256": "de53c14728a67b7772f18b396ac8ef5c35a144d4e4e616fec40099cd461a6670"
+  },
+  "search_math": {
+    "max_depth": 8,
+    "nodes": 512,
+    "quiescence_plies": 2
+  },
+  "status": "DRAFT-NOT-EXECUTABLE",
+  "teachers": {
+    "20262905": {
+      "candidate": {
+        "path": "/dev/shm/harbichess-NNUE-teacher-fit-v1/20262905/whole/candidate.pt",
+        "sha256": "52e029bba0e895740f975109f4c52358c7a59fe22082cb1fb528821e3fa2b02d"
+      },
+      "contract": {
+        "path": "/workspace/work/harbichess/continuation-20261005/NNUE-teacher-fit-v1/20262905-contract.json",
+        "sha256": "6d25036db305a31259f5a90d6cf997bbefa315f77fe8c651502782858b0a8a46"
+      },
+      "dataset": {
+        "path": "/dev/shm/harbichess-NNUE-teacher-data-v1/20262905/dataset.json",
+        "sha256": "df36c1011f2d4044ecbd57ad9c1872da36a21f4f55a01366492449bed1389c7d"
+      },
+      "fit_result": {
+        "path": "/dev/shm/harbichess-NNUE-teacher-fit-v1/20262905/result.json",
+        "sha256": "c563e310042d2f25edab8208d7c423548d0312d64b589d511c891214eb87d28b"
+      },
+      "initial": {
+        "path": "/dev/shm/harbichess-NNUE-teacher-fit-v1/20262905/whole/initial.pt",
+        "sha256": "c54462de77192889b758d54616b728fa02ed6ec069c96da80f173e541a2b2c85"
+      },
+      "labels": {
+        "path": "/dev/shm/harbichess-NNUE-teacher8192-v1/20262905/labels-00004096.json.gz",
+        "sha256": "64104394a216fc5f679a885d7a95e7145540c50700a75db11c006e4b6156ef8a"
+      },
+      "native": {
+        "path": "/dev/shm/harbichess-NNUE-teacher-fit-v1/20262905/whole/native.pt",
+        "sha256": "a278669e6656f39e92b423b027aaa986531ee752900685c060d0336b226840a6"
+      },
+      "proof_contract": {
+        "path": "/workspace/work/harbichess/continuation-20261005/NNUE-teacher-proof-v1/20262905-contract.json",
+        "sha256": "f39dce438cddbb0fbab178e2f549940e6d3942857aa100a86834676a80447f3f"
+      },
+      "proof_result": {
+        "path": "/dev/shm/harbichess-NNUE-teacher-proof-v1/20262905/result.json",
+        "sha256": "44de33f19087e2b8e044a071b04ff0fa6ae06e3767d33d2d5864e124f473f643"
+      },
+      "seed": 20262905
+    },
+    "20262906": {
+      "candidate": {
+        "path": "/dev/shm/harbichess-NNUE-teacher-fit-v1/20262906/whole/candidate.pt",
+        "sha256": "4ff008426e2e8a09eeef5cc232195e015a1c6a498dd0ffb768e905e897eff4c8"
+      },
+      "contract": {
+        "path": "/workspace/work/harbichess/continuation-20261005/NNUE-teacher-fit-v1/20262906-contract.json",
+        "sha256": "926cb00aba5bd1b86bb2c008fd77e9930fca6cf52b3b20759a07dded149659d6"
+      },
+      "dataset": {
+        "path": "/dev/shm/harbichess-NNUE-teacher-data-v1/20262906/dataset.json",
+        "sha256": "85a960a0c78f53d6232a26b17a9e5956c555926e84874458944c4e897c3cbef6"
+      },
+      "fit_result": {
+        "path": "/dev/shm/harbichess-NNUE-teacher-fit-v1/20262906/result.json",
+        "sha256": "c75b10f73474b379032b3e29df1008552d337fbdab715e9545cdeeaf76ff77e6"
+      },
+      "initial": {
+        "path": "/dev/shm/harbichess-NNUE-teacher-fit-v1/20262906/whole/initial.pt",
+        "sha256": "5439e375a6ca325be843c57122f8be97ccf08bec93097d995f600f724085d8f7"
+      },
+      "labels": {
+        "path": "/dev/shm/harbichess-NNUE-teacher8192-v1/20262906/labels-00004096.json.gz",
+        "sha256": "43956d265b5363079682d5cd82dc6218667ed4253c3e01c0154ce1268acab10e"
+      },
+      "native": {
+        "path": "/dev/shm/harbichess-NNUE-teacher-fit-v1/20262906/whole/native.pt",
+        "sha256": "4abe755dfe5baae3b85d3686c55bdd6e013692a48f7aae72055602274efca612"
+      },
+      "proof_contract": {
+        "path": "/workspace/work/harbichess/continuation-20261005/NNUE-teacher-proof-v1/20262906-contract.json",
+        "sha256": "962d46d518a89aa5ea576976b455fa2c0bed67e5a19face6c32bbe791ba72321"
+      },
+      "proof_result": {
+        "path": "/dev/shm/harbichess-NNUE-teacher-proof-v1/20262906/result.json",
+        "sha256": "8d79048b3f2da708744ba8a013329cc778021c649974d91bbf09e3a717516cbd"
+      },
+      "seed": 20262906
+    }
+  }
+}
