@@ -1,0 +1,10 @@
+{
+  "common_START_ancestry_allowed": true,
+  "known8_book": {
+    "path": "/workspace/work/harbichess/cpu-own-replay-v1-actual/development/book.json",
+    "sha256": "9c36b5972c9676d19c358ca7e598b9f7f5d110b1947bed838cd660f644d845da"
+  },
+  "played_files": [],
+  "schema": "NNUE-teacher-known8-currentstate-exclusions-v1",
+  "status": "PENDING-ROOT-complete-explicit-closed-played-history-inventory"
+}
