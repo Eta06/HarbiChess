@@ -1,0 +1,243 @@
+{
+  "E8_sha256": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03",
+  "E8_value_helper": {
+    "path": "/workspace/HarbiChess/experiments/ufuk/cpu-residual-value-v1/arena/value.py",
+    "sha256": "0e0d9092db254bd88e4a49875d63edc6b1b39770d0fc53f61e03629ccba02737"
+  },
+  "admission_version_provenance": {
+    "clocks_reset": false,
+    "initial_failure_receipt": "/workspace/work/harbichess/continuation-20261005/selective-q-strength-v1-registration/seal-repeat-readonly-diagnostic.json",
+    "original_arena_end": 1791248015.3156154,
+    "original_profile_end": 1791241415.3156154,
+    "original_profile_first": 1791240815.3156154,
+    "parent_draft_sha256": "0cccf824e3c9ef3f33d8a75db57e66de61eea79dfd037a5c6cb5905c1209eecb"
+  },
+  "arena_helper_sha256": {
+    "audit_arena_v2.py": "2f3e5d901a419daa547474e850a93d0b287f4444098f81d45aa4f039f1501c52",
+    "audit_support.py": "293c5b3a7acb94bb740e352924c6258578a3e371000ee21cee25b461da45ddf6",
+    "native_admission.py": "d5d4a516adb4884c46d451ba1a8a6c4c4bfa19a6433f7d5dd23c83554b3030bc",
+    "profile.py": "24edea9463b5d386ceba465ef84cff6577991396e75c482d90de8185b1c07183",
+    "profile_support.py": "dd6f55d401fd878d546f1b847be5e72c60e23e35e0fb837286ddc9c0ed1e2fc1",
+    "run.py": "bc3b213e241ec37375fd73f4e58342d3cb5c1fb649835b40f9c4c6e892a1cb2c",
+    "seal.py": "18859eac95d40a516f4f38077b803b425a38d0537367134b30c75c1ff55a3a05",
+    "search.py": "0ea5a0dd269a78059a7c2f455a952262884e4420f72e7e2a9008f656e2fd8dd6",
+    "support.py": "66f3cf9163ad45a8ed7b7f19606e1d4d425c65c77696f4d68f7787fff2f7778a",
+    "tournament.py": "d362bfb656f19ee51772f4ed8e6dc5dba1f0e14a8e2fb91a9b7737c5e89c410b",
+    "value.py": "48eb8a2bf53589b72bca31571a49846f93bc80cd0c4e200e0d8495d9f3e10e33"
+  },
+  "audit_deadline_epoch": "PENDING",
+  "audit_max_seconds": 900,
+  "book_path": "/workspace/work/harbichess/cpu-own-replay-v1-actual/development/book.json",
+  "book_sha256": "9c36b5972c9676d19c358ca7e598b9f7f5d110b1947bed838cd660f644d845da",
+  "classical_value_helper": {
+    "path": "/workspace/HarbiChess/experiments/ufuk/cpu-classical-own-v1/value.py",
+    "sha256": "a99cddfc397bd9221b99a70691427fdd663488b033fb239d9f48240786b2f277"
+  },
+  "disk_min_free_bytes": 268435456,
+  "effort_semantics": {
+    "extra_node_cap": 64,
+    "in_check": "mandatory checked-horizon extension in learned AND newzero; failed bounded evasion censors whole unfinished root pass",
+    "nominal_q2": 2,
+    "optional_extra_plies": 2,
+    "profile": "actual trained24 sum4 per seed learned vs ORIGINAL fastprior and E8 <=1.10",
+    "scalar": "same unchanged humanprior18",
+    "total_actual_nodes": 512,
+    "zero": "probability .5 never >.5, optional extension disabled; in-check mandatory retained"
+  },
+  "fit_cohort_path": "PENDING",
+  "fit_cohort_sha256": "PENDING",
+  "fit_inputs": {
+    "20262905": {
+      "path": "PENDING-ROOT-fresh48-registration",
+      "sha256": "PENDING"
+    },
+    "20262906": {
+      "path": "PENDING-ROOT-fresh48-registration",
+      "sha256": "PENDING"
+    }
+  },
+  "games_per_tournament": 16,
+  "match_seeds": [
+    20262905,
+    20262906
+  ],
+  "max_depth": 8,
+  "max_plies": 400,
+  "memory_max_bytes": 16106127360,
+  "models": {
+    "20262905": {
+      "e8": {
+        "path": "/workspace/work/harbichess/a100/restoration/local-rehearsal-content/harbichess-inputs/initial-e8.safetensors",
+        "sha256": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03"
+      },
+      "learned": {
+        "accepted_updates": 48,
+        "fit_result_path": "/dev/shm/harbichess-selective-q-fit-v1/20262905/result.json",
+        "fit_result_sha256": "PENDING",
+        "fresh0_path": "/dev/shm/harbichess-selective-q-fit-v1/20262905/initial.json",
+        "fresh0_sha256": "PENDING",
+        "native_path": "/dev/shm/harbichess-selective-q-fit-v1/20262905/native.json",
+        "native_sha256": "PENDING",
+        "path": "/dev/shm/harbichess-selective-q-fit-v1/20262905/candidate.json",
+        "sha256": "PENDING"
+      },
+      "newzero": {
+        "path": "/workspace/work/harbichess/cpu-selective-q-arena-v2-proposal/newzero.json",
+        "sha256": "e828725eb6985d365380eb448b95a0ee4ca0f3895420676cef3dbd9a0165adb8"
+      },
+      "prior": {
+        "path": "/workspace/HarbiChess/experiments/ufuk/cpu-classical-own-v1/prior.json",
+        "sha256": "afbaec307e5acc4b9fcb5222115c2fb8112290065ffe64e929b35f2a935565e1"
+      }
+    },
+    "20262906": {
+      "e8": {
+        "path": "/workspace/work/harbichess/a100/restoration/local-rehearsal-content/harbichess-inputs/initial-e8.safetensors",
+        "sha256": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03"
+      },
+      "learned": {
+        "accepted_updates": 48,
+        "fit_result_path": "/dev/shm/harbichess-selective-q-fit-v1/20262906/result.json",
+        "fit_result_sha256": "PENDING",
+        "fresh0_path": "/dev/shm/harbichess-selective-q-fit-v1/20262906/initial.json",
+        "fresh0_sha256": "PENDING",
+        "native_path": "/dev/shm/harbichess-selective-q-fit-v1/20262906/native.json",
+        "native_sha256": "PENDING",
+        "path": "/dev/shm/harbichess-selective-q-fit-v1/20262906/candidate.json",
+        "sha256": "PENDING"
+      },
+      "newzero": {
+        "path": "/workspace/work/harbichess/cpu-selective-q-arena-v2-proposal/newzero.json",
+        "sha256": "e828725eb6985d365380eb448b95a0ee4ca0f3895420676cef3dbd9a0165adb8"
+      },
+      "prior": {
+        "path": "/workspace/HarbiChess/experiments/ufuk/cpu-classical-own-v1/prior.json",
+        "sha256": "afbaec307e5acc4b9fcb5222115c2fb8112290065ffe64e929b35f2a935565e1"
+      }
+    }
+  },
+  "native_qualification": "PENDING-actual-proof12-plus-final48-native-source-input-admission",
+  "opening_pairs": 8,
+  "operator_hard_deadline_epoch": 1791273600.0,
+  "original_deadline_epoch": "PENDING",
+  "original_first_epoch": "PENDING",
+  "original_mixed_value": {
+    "path": "/workspace/HarbiChess/experiments/ufuk/cpu-classical-own-v1/arena/value.py",
+    "sha256": "2abb3ac2812853c19abb001a0d38a9a1874115b8ab272cc9322bf7123f6cfd84"
+  },
+  "original_prior_path": "/workspace/HarbiChess/experiments/ufuk/cpu-classical-own-v1/prior.json",
+  "original_search": {
+    "path": "/workspace/HarbiChess/experiments/ufuk/cpu-classical-own-v1/arena/search.py",
+    "sha256": "de53c14728a67b7772f18b396ac8ef5c35a144d4e4e616fec40099cd461a6670"
+  },
+  "per_tournament_seconds": 2700,
+  "profile_deadline_epoch": "PENDING",
+  "profile_first_epoch": "PENDING",
+  "profile_qualification_bindings": {
+    "20262905": {
+      "path": "/dev/shm/harbichess-selective-q-profile-v1/20262905/profile.json",
+      "registration_path": "/workspace/work/harbichess/continuation-20261005/selective-q-profile-v1-registration/20262905-registration.json",
+      "registration_sha256": "3f11b0452affcc90177fa154b0a142c37d69539f4591e0d3893c17b6e12b6fd5",
+      "sha256": "7fdd95e498abab4706c44167c0c19d229040ea8f2d4038e3a396e02dfdcbb9d2"
+    },
+    "20262906": {
+      "path": "/dev/shm/harbichess-selective-q-profile-v1/20262906/profile.json",
+      "registration_path": "/workspace/work/harbichess/continuation-20261005/selective-q-profile-v1-registration/20262906-registration.json",
+      "registration_sha256": "1a3906d9361e9767f4f1f84b58d323edeb9224657cfa5171121140a8e74867a5",
+      "sha256": "ddfc5dc3b01ea294ff0111b6e7ecf0714b9d9526877d6d3d35692120239cdd27"
+    }
+  },
+  "profile_seconds": 600,
+  "promotion_priority": "known development only; not formal eligibility or model selection",
+  "proof_inputs": {
+    "20262905": {
+      "path": "/dev/shm/harbichess-selective-q-proof-v1/20262905/qualification.json",
+      "registration_path": "/workspace/work/harbichess/continuation-20261005/selective-q-proof-v1-registration/20262905-registration.json",
+      "registration_sha256": "21a09d5f8d98cd1d7b185e08d93c5487097dafef70a35c946caf1ea3ab7a41b0",
+      "sha256": "393fa226a01a673154ba26130235ab8acc2c8f137e1e32cbf72e40c7a7ed4890"
+    },
+    "20262906": {
+      "path": "/dev/shm/harbichess-selective-q-proof-v1/20262906/qualification.json",
+      "registration_path": "/workspace/work/harbichess/continuation-20261005/selective-q-proof-v1-registration/20262906-registration.json",
+      "registration_sha256": "e98b493cac48e0e5c0b5c2a7ab12a3157adc90c6bdec25ac1ee51444134e7c8b",
+      "sha256": "89d1dba65cc6f27639f10a11ef05235465a4e4142d79d438461ed0da5d428a59"
+    }
+  },
+  "quiescence_plies": 2,
+  "reserved_output_bytes": 100663296,
+  "schema": "own-selective-Q-effort-arena-protocol-v2",
+  "scope": "known development roots; learned effort vs identical newzero plus old-prior search-only ablation; not formal; v2 admission distinguishes shared data and additional qualified receipts",
+  "search_nodes": 512,
+  "selective_directory": "/workspace/work/harbichess/cpu-selective-quiescence-proposal",
+  "selective_helpers": {
+    "labels.py": {
+      "path": "/workspace/work/harbichess/cpu-selective-quiescence-proposal/labels.py",
+      "sha256": "1d21a8885f3dc19f6338bc9b7b6470cbb29fc83e76ba9b2d7f30fd32351b6fd4"
+    },
+    "learner.py": {
+      "path": "/workspace/work/harbichess/cpu-selective-quiescence-proposal/learner.py",
+      "sha256": "3d77eea89bf3817f8de096b7de9bcded5bb1f7d017a60aac89c38aba826022b4"
+    },
+    "model.py": {
+      "path": "/workspace/work/harbichess/cpu-selective-quiescence-proposal/model.py",
+      "sha256": "14f5a1790f5e9518170a7d9bd490ba0aa61c001086286798a6d1315f00e0b9d2"
+    },
+    "produce_labels.py": {
+      "path": "/workspace/work/harbichess/cpu-selective-quiescence-proposal/produce_labels.py",
+      "sha256": "34492036c1bac452224397f1366d11181db2c09f5b1a725d9bdb24b451c10b6f"
+    },
+    "profile.py": {
+      "path": "/workspace/work/harbichess/cpu-selective-quiescence-proposal/profile.py",
+      "sha256": "46801c80d9404d723fd7e284d8948616afaa834b428aea0d64605228ab5ac067"
+    },
+    "qualify.py": {
+      "path": "/workspace/work/harbichess/cpu-selective-quiescence-proposal/qualify.py",
+      "sha256": "b9cea68cfd8131f1a476ec2057a2080d9329c9d4ef4cfb8653a1ceecf4b59dd6"
+    },
+    "search.py": {
+      "path": "/workspace/work/harbichess/cpu-selective-quiescence-proposal/search.py",
+      "sha256": "993e9c2c6d949b3d8753935405b5c289b35249a108b0ef3f8f984ac55de94293"
+    },
+    "support.py": {
+      "path": "/workspace/work/harbichess/cpu-selective-quiescence-proposal/support.py",
+      "sha256": "d99c1de872313ae26624575d49d8d10e32645cea5583192ad0359c73c1e0bb92"
+    },
+    "train.py": {
+      "path": "/workspace/work/harbichess/cpu-selective-quiescence-proposal/train.py",
+      "sha256": "e4e7ec15ac270204a605c8ecae5e4d73d8b59686e6b77a894dc1f4c90bb2def4"
+    }
+  },
+  "source_commit": "6fcc8b476d25495d1c9c413e55b2c7ba4794013e",
+  "status": "DRAFT-ROOT-new-clock-and-completed-fit-required",
+  "stockfish_nodes": 512,
+  "stockfish_path": "/workspace/work/harbichess/stockfish/stockfish-linux-x86-64-universal",
+  "stockfish_sha256": "0f83d24cc46d2c66c60f16001af5444873bc112b7d028594513426894c12da19",
+  "tasks": [
+    [
+      "learned",
+      "SF512"
+    ],
+    [
+      "newzero",
+      "SF512"
+    ],
+    [
+      "prior",
+      "SF512"
+    ],
+    [
+      "e8",
+      "SF512"
+    ],
+    [
+      "learned",
+      "e8"
+    ],
+    [
+      "learned",
+      "newzero"
+    ]
+  ],
+  "total_games": 192,
+  "whole_seconds": 7200
+}
