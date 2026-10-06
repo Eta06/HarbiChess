@@ -1,0 +1,38 @@
+Separate later algorithm family: fullhistory iterative bound table (standard TT /
+alpha-beta/PV/history ordering, not novel). No code or actualsearch yet.
+
+The current algorithm intentionally spends fullshallow coverage for ALLlegalroot
+moves then restarts eachiterative-depth search, discarding partialpasses. Reusing
+computed EXACT/LOWER/UPPER bounds from samefullhistory nodes mayreduce repeated
+recursivework at512 consumednodes. It is an engineering/search hypothesis, not
+learning proof; learned-vs-zero mustuse IDENTICAL newTT engine to isolatelearning.
+
+Safe key mustinclude rootFEN FULL sixfields + orderedfullmovehistory (UCI tuple),
+currentply-from-searchroot (mate2-minus-ply magnitude), evaluatorSHA and qdepth
+mode. FEN-only key is invalid: repetition/claims/halfmove/originalroot differ.
+Fullhistory key largely prevents true move-order transpositions; expect MAINLY
+iterative/repeated-same-history hits, not chessposition transposition reuse.
+This limitation mustbe measured and could make TT useless at512.
+
+Newtable scope is ONE search invocation, bounded4096entries, deterministicFIFO
+or explicitdepth-preferredreplacement; no staleglobal/crossmodel table/RNG.
+Probe only AFTER same consume/terminal checks. Count tablehits as actualconsumed
+recursive nodes; don'tcall 512 traversals512evaluations. Emit probes/hits/cutoffs/
+staticcalls plusoriginalnodes separately. Terminal/root protections andcomplete
+legalshallow coverage remain. Nevercache incompleteBudgetExhausted returns.
+Boundflag uses original alpha/beta window, depthremaining and exactqdepth/checked
+quiescencemode. EXACTreturn, LOWER alpha=max(), UPPER beta=min(); cachedcutoff
+only when alpha>=beta. Insufficientdepth entries mayprovide ONLY legalPVordering.
+For conservativecorrectness, begin SAMErequesteddepth-only entries; deeperbound
+substitution changes fixed-horizon semantics and needs separateexplicitvariant.
+Storedmatevalue mustretain same search-rootply convention or normalize explicitly.
+Boardpush/pop and drawhistory remain oracleauthoritative, not reconstructedFEN.
+
+Admission beforeanystrength: syntheticboundwindow/terminal/repetition/EP/castle/
+mateply/partialbudget/mutation tests; unlimited-budget fixed-depth packetscompare
+newTT and zeroTT WITHOUT tie-order ambiguity; separate finite512 diagnostic is
+allowed to differ but legal/allroots/nodecaps and oldzero-engine control reported.
+New24CPUwholeprofile, ownlearned+zero sameTT actual160dev/900ruleaudit, freshfixed
+source/protocol/counters/fullnativeinputs and unchangedformalbook/gates/accounting.
+No retrofit toactivequiet/deeperACTOR or oldMODEL/natives/clocks. Real broadstrength
+must stillshow fixedsame-inference learned vsuntrainedparent andSF—not TT-onlywins.
