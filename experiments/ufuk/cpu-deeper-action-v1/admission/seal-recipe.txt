@@ -1,0 +1,13 @@
+ROOT ONLY; no actual seal/profile executed by agent.
+python /workspace/work/harbichess/cpu-own-deeper-action-admission/seal_arena.py \
+ --registration-directory /workspace/work/harbichess/continuation-20261005/ACTION-training-v1-registration \
+ --draft-sha256 dc89ac147f7b488be5f068ec7fb41f58494e163df91d899ebc8668030a709bdb \
+ --fit-protocol-sha256 f8ed19ab2bfa6185c931b26bb9a6f8d7b650289085ebf73b3b3e4bccbf643deb \
+ --proof-protocol-sha256 cc4fa8fee4ed96c4acc6ca3bf6ed9a0ba9a361084e13b40ebf9dc5a4c83e8066 \
+ --proof-sha256 8cdce04f61ef9b31dab9e04cb5cf7db4447d103622fe37614271d26e04af67d3 \
+ --fits-sha256 2b0dde254074108635b88f2432e9958875b0ca4ad9a3b657ab6b44599236f8b4 \
+ --profile-first ROOT_NEW_PROFILE_FIRST --arena-first ROOT_NEW_ARENA_FIRST \
+ --output /workspace/work/harbichess/cpu-own-deeper-action-admission/arena/protocol.json
+
+Then original qualified32-call profile: 24 learned/prior/E8 +8 literalzero originalpacket references, followed by original run.py 160/7200 and full audit900.
+Use cleanCORE6fcc cwd/PYTHONPATH; no ACTION8source changes. Arena first must >=profile first and arenaend+900<=1791273600. Existing protocol output refuses overwrite.
