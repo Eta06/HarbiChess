@@ -1,0 +1,10 @@
+{
+  "actual_SGD": false,
+  "actual_collection": false,
+  "actual_inference": false,
+  "registered_clock": null,
+  "skips": 0,
+  "status": "INCOMPLETE-preparation-frozen-user-wrapup",
+  "test_scope": "synthetic packet and CLI-help only",
+  "tests_passed": 3
+}
