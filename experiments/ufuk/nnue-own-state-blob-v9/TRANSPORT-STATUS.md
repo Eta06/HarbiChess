@@ -1,0 +1,11 @@
+# V9 exact latest-state byte preservation
+
+453 originals,111,099,693 raw bytes, unchanged64,851,157-byte capsule SHA f257b3812862c1018dcdfbce4a27a3f752ef9f74f86a3fe67ac2537551bc64a2. This contains teacher-only NNUE256 full checkpoint/optimizer/RNG/data/proofs, balanced48 full state, and user-interrupted coarse80 games. It is not self-learning strength or a full environment restore.
+
+Original V9 prospectively approved2048files/raw384MiB/encoded64MiB/file8MiB/header1MiB/5400seconds, ROOTfirst1791245051.2415879 anddeadline1791250451.2415879. Encoded bounds were not changed after build. Single64.85MB Gitblob POST failed and read-only reconciliation returned404. Single direct Release POST was ambiguous and reconciliation found no matching asset. Failure receipts retained; neither POST was automatically retried.
+
+NEW delivery representation splits the exact unchanged capsule into eight bounded8MiB pieces. Eight distinct Gitblobs were each POSTed once and exact expected GitSHA responses verified. Each part has a unique content-addressed Release asset. The OLD single-blob workflow/source/controls remain historical failed-path records; **do not dispatch the single-blob workflow**. The active attempt is `nnue-own-state-parts-v9.yml`, with exact parts-control SHA; it preservesV6/V7/V8, verifies every whole anonymous public part, joins and checks the original full capsule SHA, then checks all453 original byteSHA/size values. It retains the SAME original V9 clock.
+
+Permanent public preservation remains PENDING until owned workflow and independent ROOT anonymous all-part/all-original readback are recorded. Download parts in index order using browser_download_url from the final public receipt; verify each SHA/size, join, verify full capsuleSHA, then `raw_capsule_v9.verify(joined, manifest)`. Recovery should write into an isolated directory mapped by manifest members, never overwrite original paths automatically. Original absolute source/contract paths and Python/C ABI must be restored or explicitly versioned before strict native loading; byte preservation alone does not prove runnable full native resume.
+
+Metadata/part integrity tests:14PASS0skip/RuffPASS. No model/training/strength work ran for preservation.
