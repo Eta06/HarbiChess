@@ -1,0 +1,77 @@
+{
+  "commands": [
+    {
+      "code": 0,
+      "command": [
+        "/workspace/HarbiChess/.venv/bin/python",
+        "/workspace/work/harbichess/cpu-kingbucket-nnue-proposal/train.py",
+        "--contract",
+        "/workspace/work/harbichess/continuation-20261005/NNUE-teacher-fit-v1/20262905-contract.json",
+        "--dataset",
+        "/dev/shm/harbichess-NNUE-teacher-data-v1/20262905/dataset.json",
+        "--output",
+        "/dev/shm/harbichess-NNUE-teacher-fit-v1/20262905/whole",
+        "--stop",
+        "256"
+      ],
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "code": 0,
+      "command": [
+        "/workspace/HarbiChess/.venv/bin/python",
+        "/workspace/work/harbichess/cpu-kingbucket-nnue-proposal/train.py",
+        "--contract",
+        "/workspace/work/harbichess/continuation-20261005/NNUE-teacher-fit-v1/20262905-contract.json",
+        "--dataset",
+        "/dev/shm/harbichess-NNUE-teacher-data-v1/20262905/dataset.json",
+        "--output",
+        "/dev/shm/harbichess-NNUE-teacher-fit-v1/20262905/audit-0",
+        "--stop",
+        "0",
+        "--resume",
+        "/dev/shm/harbichess-NNUE-teacher-fit-v1/20262905/whole/initial.pt",
+        "--resume-sha256",
+        "c54462de77192889b758d54616b728fa02ed6ec069c96da80f173e541a2b2c85",
+        "--audit-only"
+      ],
+      "stderr": "",
+      "stdout": "{\"status\": \"PASS-strict-native-readonly\", \"step\": 0}\n"
+    },
+    {
+      "code": 0,
+      "command": [
+        "/workspace/HarbiChess/.venv/bin/python",
+        "/workspace/work/harbichess/cpu-kingbucket-nnue-proposal/train.py",
+        "--contract",
+        "/workspace/work/harbichess/continuation-20261005/NNUE-teacher-fit-v1/20262905-contract.json",
+        "--dataset",
+        "/dev/shm/harbichess-NNUE-teacher-data-v1/20262905/dataset.json",
+        "--output",
+        "/dev/shm/harbichess-NNUE-teacher-fit-v1/20262905/audit-1",
+        "--stop",
+        "256",
+        "--resume",
+        "/dev/shm/harbichess-NNUE-teacher-fit-v1/20262905/whole/native.pt",
+        "--resume-sha256",
+        "a278669e6656f39e92b423b027aaa986531ee752900685c060d0336b226840a6",
+        "--audit-only"
+      ],
+      "stderr": "",
+      "stdout": "{\"status\": \"PASS-strict-native-readonly\", \"step\": 256}\n"
+    }
+  ],
+  "contract_sha256": "6d25036db305a31259f5a90d6cf997bbefa315f77fe8c651502782858b0a8a46",
+  "deadline": 1791245887.6232884,
+  "finished": 1791244097.883693,
+  "first": 1791244087.6232884,
+  "full_payload_bits_equal": false,
+  "mode": "fresh-fit",
+  "native_sha256": {
+    "/dev/shm/harbichess-NNUE-teacher-fit-v1/20262905/whole/initial.pt": "c54462de77192889b758d54616b728fa02ed6ec069c96da80f173e541a2b2c85",
+    "/dev/shm/harbichess-NNUE-teacher-fit-v1/20262905/whole/native.pt": "a278669e6656f39e92b423b027aaa986531ee752900685c060d0336b226840a6"
+  },
+  "raw_zip_identity_claimed": false,
+  "status": "PASS-readonly-loads-and-fixed-phase-not-strength"
+}
