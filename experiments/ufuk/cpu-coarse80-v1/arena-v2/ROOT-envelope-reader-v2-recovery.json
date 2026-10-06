@@ -1,0 +1,10 @@
+{
+  "status": "v1-wrapped-candidate-reader-failure-preserved-before-inference-search",
+  "old_protocol_sha256": "f983ac0511cbc6d372d9f20bbccb526cdce5b36527ca993896ba3874af29b567",
+  "failure_sha256": "210476ff2247fe3afab1ece8652f24fed08debf4c31faf9be5d44666954b070e",
+  "cause": "prototype arena assumed bare model; actual trained candidate retains full native/contract/registration envelope",
+  "models_and_training_native_bytes_changed": false,
+  "clock_reset": false,
+  "first_epoch": 1791243321.852049,
+  "observed_epoch": 1791243547.0069435
+}
