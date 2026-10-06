@@ -1,0 +1,8 @@
+usage: profile.py [-h] --protocol PROTOCOL --output OUTPUT --first-epoch
+                  FIRST_EPOCH
+
+options:
+  -h, --help            show this help message and exit
+  --protocol PROTOCOL
+  --output OUTPUT
+  --first-epoch FIRST_EPOCH
