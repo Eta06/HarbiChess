@@ -1,0 +1,921 @@
+{
+  "admission_sha256": "94d80c5ab1f3ca9a2d5260d52bda5f7ab16ff236970a57a9a2c70e2351d92781",
+  "admissions": [
+    {
+      "fit_fresh_loads": 2,
+      "proof_fresh_loads": 6,
+      "seed": 20262905,
+      "strict_native_loads": 8,
+      "teacher_candidate_sha256": "52e029bba0e895740f975109f4c52358c7a59fe22082cb1fb528821e3fa2b02d",
+      "teacher_is_selflearning": false
+    },
+    {
+      "fit_fresh_loads": 2,
+      "proof_fresh_loads": 6,
+      "seed": 20262906,
+      "strict_native_loads": 8,
+      "teacher_candidate_sha256": "4ff008426e2e8a09eeef5cc232195e015a1c6a498dd0ffb768e905e897eff4c8",
+      "teacher_is_selflearning": false
+    }
+  ],
+  "deadline": 1791245387.7380247,
+  "finished": 1791244960.7487435,
+  "first": 1791244787.7380247,
+  "helper_sha256": "ee139bef8f8210737a25aa0f93ef7ac6cb7b933f2917e426dda33b62b6b915b8",
+  "latency_ratios": [
+    {
+      "seed": 20262905,
+      "teacher_vs_e8": 0.35417237462121276,
+      "teacher_vs_prior": 0.9059263049130615
+    },
+    {
+      "seed": 20262906,
+      "teacher_vs_e8": 0.38382779296242037,
+      "teacher_vs_prior": 1.050343902795374
+    }
+  ],
+  "packets": [
+    {
+      "completed_depth": 2,
+      "evaluations": 444,
+      "move": "h1g1",
+      "nodes": 512,
+      "opening": 0,
+      "role": "teacher",
+      "root_actions": 27,
+      "seconds": 0.191014333977364,
+      "seed": 20262905,
+      "value": 0.2772761357428021
+    },
+    {
+      "completed_depth": 2,
+      "evaluations": 461,
+      "move": "b1c3",
+      "nodes": 512,
+      "opening": 0,
+      "role": "prior",
+      "root_actions": 27,
+      "seconds": 0.20350384298944846,
+      "seed": 20262905,
+      "value": -0.011666137374496012
+    },
+    {
+      "completed_depth": 2,
+      "evaluations": 472,
+      "move": "f1c4",
+      "nodes": 512,
+      "opening": 0,
+      "role": "e8",
+      "root_actions": 27,
+      "seconds": 0.5424341170000844,
+      "seed": 20262905,
+      "value": 0.14564191895780934
+    },
+    {
+      "completed_depth": 2,
+      "evaluations": 467,
+      "move": "f1c4",
+      "nodes": 512,
+      "opening": 1,
+      "role": "prior",
+      "root_actions": 28,
+      "seconds": 0.2120228020066861,
+      "seed": 20262905,
+      "value": 0.024994792968420686
+    },
+    {
+      "completed_depth": 2,
+      "evaluations": 479,
+      "move": "d2d4",
+      "nodes": 512,
+      "opening": 1,
+      "role": "e8",
+      "root_actions": 28,
+      "seconds": 0.5457080930063967,
+      "seed": 20262905,
+      "value": 0.20925158516150688
+    },
+    {
+      "completed_depth": 2,
+      "evaluations": 450,
+      "move": "b1a3",
+      "nodes": 512,
+      "opening": 1,
+      "role": "teacher",
+      "root_actions": 28,
+      "seconds": 0.18049417997826822,
+      "seed": 20262905,
+      "value": 0.5832594747531924
+    },
+    {
+      "completed_depth": 2,
+      "evaluations": 456,
+      "move": "d1d2",
+      "nodes": 512,
+      "opening": 2,
+      "role": "e8",
+      "root_actions": 30,
+      "seconds": 0.5166792330273893,
+      "seed": 20262905,
+      "value": 0.24457323977642625
+    },
+    {
+      "completed_depth": 2,
+      "evaluations": 478,
+      "move": "b1a3",
+      "nodes": 512,
+      "opening": 2,
+      "role": "teacher",
+      "root_actions": 30,
+      "seconds": 0.1967596440226771,
+      "seed": 20262905,
+      "value": 0.0035088914015078887
+    },
+    {
+      "completed_depth": 2,
+      "evaluations": 470,
+      "move": "d1a4",
+      "nodes": 512,
+      "opening": 2,
+      "role": "prior",
+      "root_actions": 30,
+      "seconds": 0.2183174340170808,
+      "seed": 20262905,
+      "value": -0.03332099313882286
+    },
+    {
+      "completed_depth": 2,
+      "evaluations": 454,
+      "move": "e2e4",
+      "nodes": 512,
+      "opening": 3,
+      "role": "teacher",
+      "root_actions": 26,
+      "seconds": 0.18423922298825346,
+      "seed": 20262905,
+      "value": 0.10306308982612056
+    },
+    {
+      "completed_depth": 2,
+      "evaluations": 463,
+      "move": "g1f3",
+      "nodes": 512,
+      "opening": 3,
+      "role": "prior",
+      "root_actions": 26,
+      "seconds": 0.2053591059811879,
+      "seed": 20262905,
+      "value": -0.00999966667999946
+    },
+    {
+      "completed_depth": 2,
+      "evaluations": 434,
+      "move": "b2b4",
+      "nodes": 512,
+      "opening": 3,
+      "role": "e8",
+      "root_actions": 26,
+      "seconds": 0.4726007550198119,
+      "seed": 20262905,
+      "value": 0.21739676931612079
+    },
+    {
+      "completed_depth": 2,
+      "evaluations": 467,
+      "move": "b1c3",
+      "nodes": 512,
+      "opening": 4,
+      "role": "prior",
+      "root_actions": 23,
+      "seconds": 0.2097913319885265,
+      "seed": 20262905,
+      "value": -0.024994792968420686
+    },
+    {
+      "completed_depth": 2,
+      "evaluations": 460,
+      "move": "f3e5",
+      "nodes": 512,
+      "opening": 4,
+      "role": "e8",
+      "root_actions": 23,
+      "seconds": 0.5114420890167821,
+      "seed": 20262905,
+      "value": 0.135405049147599
+    },
+    {
+      "completed_depth": 2,
+      "evaluations": 440,
+      "move": "b1a3",
+      "nodes": 512,
+      "opening": 4,
+      "role": "teacher",
+      "root_actions": 23,
+      "seconds": 0.1777475250128191,
+      "seed": 20262905,
+      "value": 0.10504126255234922
+    },
+    {
+      "completed_depth": 2,
+      "evaluations": 446,
+      "move": "e2e4",
+      "nodes": 512,
+      "opening": 5,
+      "role": "e8",
+      "root_actions": 30,
+      "seconds": 0.5298006990051363,
+      "seed": 20262905,
+      "value": 0.33867693213489414
+    },
+    {
+      "completed_depth": 2,
+      "evaluations": 453,
+      "move": "b1a3",
+      "nodes": 512,
+      "opening": 5,
+      "role": "teacher",
+      "root_actions": 30,
+      "seconds": 0.16710800901637413,
+      "seed": 20262905,
+      "value": 0.25377449187288775
+    },
+    {
+      "completed_depth": 2,
+      "evaluations": 455,
+      "move": "b1c3",
+      "nodes": 512,
+      "opening": 5,
+      "role": "prior",
+      "root_actions": 30,
+      "seconds": 0.19602986899553798,
+      "seed": 20262905,
+      "value": 0.0033333209877091908
+    },
+    {
+      "completed_depth": 2,
+      "evaluations": 463,
+      "move": "b1a3",
+      "nodes": 512,
+      "opening": 6,
+      "role": "teacher",
+      "root_actions": 38,
+      "seconds": 0.20608380599878728,
+      "seed": 20262905,
+      "value": 0.1980763506739632
+    },
+    {
+      "completed_depth": 2,
+      "evaluations": 463,
+      "move": "f1b5",
+      "nodes": 512,
+      "opening": 6,
+      "role": "prior",
+      "root_actions": 38,
+      "seconds": 0.21267964999424294,
+      "seed": 20262905,
+      "value": -0.0066665679029903665
+    },
+    {
+      "completed_depth": 1,
+      "evaluations": 497,
+      "move": "e4e5",
+      "nodes": 512,
+      "opening": 6,
+      "role": "e8",
+      "root_actions": 38,
+      "seconds": 0.5741220930067357,
+      "seed": 20262905,
+      "value": 0.5697666335025086
+    },
+    {
+      "completed_depth": 2,
+      "evaluations": 453,
+      "move": "e4d5",
+      "nodes": 512,
+      "opening": 7,
+      "role": "prior",
+      "root_actions": 38,
+      "seconds": 0.19568207598058507,
+      "seed": 20262905,
+      "value": -0.03165608603411248
+    },
+    {
+      "completed_depth": 1,
+      "evaluations": 482,
+      "move": "e4e5",
+      "nodes": 512,
+      "opening": 7,
+      "role": "e8",
+      "root_actions": 38,
+      "seconds": 0.5363569149922114,
+      "seed": 20262905,
+      "value": 0.5332432128913238
+    },
+    {
+      "completed_depth": 2,
+      "evaluations": 452,
+      "move": "b1d2",
+      "nodes": 512,
+      "opening": 7,
+      "role": "teacher",
+      "root_actions": 38,
+      "seconds": 0.1943992500018794,
+      "seed": 20262905,
+      "value": 0.06945705754346307
+    },
+    {
+      "completed_depth": 2,
+      "evaluations": 466,
+      "move": "h1g1",
+      "nodes": 512,
+      "opening": 0,
+      "role": "teacher",
+      "root_actions": 27,
+      "seconds": 0.19136111802072264,
+      "seed": 20262906,
+      "value": 0.19807759968944433
+    },
+    {
+      "completed_depth": 2,
+      "evaluations": 461,
+      "move": "b1c3",
+      "nodes": 512,
+      "opening": 0,
+      "role": "prior",
+      "root_actions": 27,
+      "seconds": 0.2162643919873517,
+      "seed": 20262906,
+      "value": -0.011666137374496012
+    },
+    {
+      "completed_depth": 2,
+      "evaluations": 472,
+      "move": "f1c4",
+      "nodes": 512,
+      "opening": 0,
+      "role": "e8",
+      "root_actions": 27,
+      "seconds": 0.5220597269944847,
+      "seed": 20262906,
+      "value": 0.14564191895780934
+    },
+    {
+      "completed_depth": 2,
+      "evaluations": 467,
+      "move": "f1c4",
+      "nodes": 512,
+      "opening": 1,
+      "role": "prior",
+      "root_actions": 28,
+      "seconds": 0.1860786160104908,
+      "seed": 20262906,
+      "value": 0.024994792968420686
+    },
+    {
+      "completed_depth": 2,
+      "evaluations": 479,
+      "move": "d2d4",
+      "nodes": 512,
+      "opening": 1,
+      "role": "e8",
+      "root_actions": 28,
+      "seconds": 0.5910411980003119,
+      "seed": 20262906,
+      "value": 0.20925158516150688
+    },
+    {
+      "completed_depth": 2,
+      "evaluations": 467,
+      "move": "d2d3",
+      "nodes": 512,
+      "opening": 1,
+      "role": "teacher",
+      "root_actions": 28,
+      "seconds": 0.21534156700363383,
+      "seed": 20262906,
+      "value": 0.05377791384242204
+    },
+    {
+      "completed_depth": 2,
+      "evaluations": 456,
+      "move": "d1d2",
+      "nodes": 512,
+      "opening": 2,
+      "role": "e8",
+      "root_actions": 30,
+      "seconds": 0.5230306040029973,
+      "seed": 20262906,
+      "value": 0.24457323977642625
+    },
+    {
+      "completed_depth": 2,
+      "evaluations": 474,
+      "move": "e2e4",
+      "nodes": 512,
+      "opening": 2,
+      "role": "teacher",
+      "root_actions": 30,
+      "seconds": 0.23048839200055227,
+      "seed": 20262906,
+      "value": -0.09781352254246505
+    },
+    {
+      "completed_depth": 2,
+      "evaluations": 470,
+      "move": "d1a4",
+      "nodes": 512,
+      "opening": 2,
+      "role": "prior",
+      "root_actions": 30,
+      "seconds": 0.2024193330144044,
+      "seed": 20262906,
+      "value": -0.03332099313882286
+    },
+    {
+      "completed_depth": 2,
+      "evaluations": 468,
+      "move": "c3d5",
+      "nodes": 512,
+      "opening": 3,
+      "role": "teacher",
+      "root_actions": 26,
+      "seconds": 0.19983882800443098,
+      "seed": 20262906,
+      "value": -0.03247872946621214
+    },
+    {
+      "completed_depth": 2,
+      "evaluations": 463,
+      "move": "g1f3",
+      "nodes": 512,
+      "opening": 3,
+      "role": "prior",
+      "root_actions": 26,
+      "seconds": 0.19136818900005892,
+      "seed": 20262906,
+      "value": -0.00999966667999946
+    },
+    {
+      "completed_depth": 2,
+      "evaluations": 434,
+      "move": "b2b4",
+      "nodes": 512,
+      "opening": 3,
+      "role": "e8",
+      "root_actions": 26,
+      "seconds": 0.49527106899768114,
+      "seed": 20262906,
+      "value": 0.21739676931612079
+    },
+    {
+      "completed_depth": 2,
+      "evaluations": 467,
+      "move": "b1c3",
+      "nodes": 512,
+      "opening": 4,
+      "role": "prior",
+      "root_actions": 23,
+      "seconds": 0.1873163039854262,
+      "seed": 20262906,
+      "value": -0.024994792968420686
+    },
+    {
+      "completed_depth": 2,
+      "evaluations": 460,
+      "move": "f3e5",
+      "nodes": 512,
+      "opening": 4,
+      "role": "e8",
+      "root_actions": 23,
+      "seconds": 0.5171111050003674,
+      "seed": 20262906,
+      "value": 0.135405049147599
+    },
+    {
+      "completed_depth": 2,
+      "evaluations": 454,
+      "move": "e2e4",
+      "nodes": 512,
+      "opening": 4,
+      "role": "teacher",
+      "root_actions": 23,
+      "seconds": 0.20229247299721465,
+      "seed": 20262906,
+      "value": -0.17079113135107832
+    },
+    {
+      "completed_depth": 2,
+      "evaluations": 446,
+      "move": "e2e4",
+      "nodes": 512,
+      "opening": 5,
+      "role": "e8",
+      "root_actions": 30,
+      "seconds": 0.5615884869766887,
+      "seed": 20262906,
+      "value": 0.33867693213489414
+    },
+    {
+      "completed_depth": 2,
+      "evaluations": 470,
+      "move": "e2e4",
+      "nodes": 512,
+      "opening": 5,
+      "role": "teacher",
+      "root_actions": 30,
+      "seconds": 0.1894854319980368,
+      "seed": 20262906,
+      "value": -0.13436892726882657
+    },
+    {
+      "completed_depth": 2,
+      "evaluations": 455,
+      "move": "b1c3",
+      "nodes": 512,
+      "opening": 5,
+      "role": "prior",
+      "root_actions": 30,
+      "seconds": 0.17679205600870773,
+      "seed": 20262906,
+      "value": 0.0033333209877091908
+    },
+    {
+      "completed_depth": 2,
+      "evaluations": 471,
+      "move": "c2c3",
+      "nodes": 512,
+      "opening": 6,
+      "role": "teacher",
+      "root_actions": 38,
+      "seconds": 0.23471310097374953,
+      "seed": 20262906,
+      "value": 0.06629716656735689
+    },
+    {
+      "completed_depth": 2,
+      "evaluations": 463,
+      "move": "f1b5",
+      "nodes": 512,
+      "opening": 6,
+      "role": "prior",
+      "root_actions": 38,
+      "seconds": 0.20560961699811742,
+      "seed": 20262906,
+      "value": -0.0066665679029903665
+    },
+    {
+      "completed_depth": 1,
+      "evaluations": 497,
+      "move": "e4e5",
+      "nodes": 512,
+      "opening": 6,
+      "role": "e8",
+      "root_actions": 38,
+      "seconds": 0.5498273560078815,
+      "seed": 20262906,
+      "value": 0.5697666335025086
+    },
+    {
+      "completed_depth": 2,
+      "evaluations": 453,
+      "move": "e4d5",
+      "nodes": 512,
+      "opening": 7,
+      "role": "prior",
+      "root_actions": 38,
+      "seconds": 0.2224227940023411,
+      "seed": 20262906,
+      "value": -0.03165608603411248
+    },
+    {
+      "completed_depth": 1,
+      "evaluations": 482,
+      "move": "e4e5",
+      "nodes": 512,
+      "opening": 7,
+      "role": "e8",
+      "root_actions": 38,
+      "seconds": 0.5863713409926277,
+      "seed": 20262906,
+      "value": 0.5332432128913238
+    },
+    {
+      "completed_depth": 2,
+      "evaluations": 467,
+      "move": "c1g5",
+      "nodes": 512,
+      "opening": 7,
+      "role": "teacher",
+      "root_actions": 38,
+      "seconds": 0.20471016599913128,
+      "seed": 20262906,
+      "value": -0.0053398022011084696
+    }
+  ],
+  "parity": [
+    {
+      "rows": [
+        {
+          "error": 0.0,
+          "history_sha256": "ec67d22e30544bb68418c816522192f975e10b01476008ed4fb04c222a9dc038",
+          "ordinal": 0,
+          "row_id": "97821a972e108cc55a9534c74ff3e6e516962d47ca52720bba8c52cdb8a74fb6:17"
+        },
+        {
+          "error": 0.0,
+          "history_sha256": "47e97ab85bddfb84e3483c59845471235896a40e4e0d7f0f785f4743d0dd839d",
+          "ordinal": 1,
+          "row_id": "59c398fe765d1cd753bc04441aa79a64d133070ed4726a20e44f96f139c1c575:51"
+        },
+        {
+          "error": 0.0,
+          "history_sha256": "aec257cf7af35fcbe683f7c7b7a994e3e7b43cb577a084376a1b38a12965d075",
+          "ordinal": 2,
+          "row_id": "2481aac90310c61b0af19e5b5a792697b0ca0c624533540f75210d2e001f263f:63"
+        },
+        {
+          "error": 0.0,
+          "history_sha256": "b06b2ca6a1b90574c3ea81910e9e423008bc8112f8301702c55e4974cd14ed6b",
+          "ordinal": 3,
+          "row_id": "9340039992acf72319660ef2feda9b2dcc8a96caa631cc5e0ee36be33c98a4a3:22"
+        },
+        {
+          "error": 0.0,
+          "history_sha256": "7b73e5370d27080a2034d35f379458a25abc20f230c0bb8af98814996a98e4bc",
+          "ordinal": 4,
+          "row_id": "2a777e62194ffa6132fc4abfab3206382f932d7a609d1f515058c49fc6fe411a:30"
+        },
+        {
+          "error": 0.0,
+          "history_sha256": "a85d1d784d953afedad22600a63b8c7536a87d26c13f4bbc2a5440e067e0ee11",
+          "ordinal": 5,
+          "row_id": "dca3fa62d2c878625e066d23ae7f937110e9d0f53c5ad2240c2a8b5e1eb57677:25"
+        },
+        {
+          "error": 0.0,
+          "history_sha256": "457fc839677cef228512d80c6ac6041aa60313d77f570b513956682687aa5f6c",
+          "ordinal": 6,
+          "row_id": "341659566dbb9abe659a5bbf5054221bab8df342a4ba4da27a56f0b9a9ddbd70:47"
+        },
+        {
+          "error": 0.0,
+          "history_sha256": "6d303f7e0e06dd1352bf9a79bc56bff597761ee7b5bd57b6574ea272a8763eb3",
+          "ordinal": 7,
+          "row_id": "e968e97511d2ef8f478db98fcdbb7470bb4d6398da73ca5902ca1292cdc096e2:34"
+        },
+        {
+          "error": 0.0,
+          "history_sha256": "dc5fe4664c0254bff7721628b4d46c5fc060796c268ab04417ebcf81f323cca0",
+          "ordinal": 8,
+          "row_id": "58ec0e661b7e2ae1779024288e28ed228a3cc26ba0b6674368b193fac3472f79:42"
+        },
+        {
+          "error": 0.0,
+          "history_sha256": "44fe598f36333f480c61efd61907d6787d6f1d31e07c10c16cf9354515a3bcb0",
+          "ordinal": 9,
+          "row_id": "4cb5be1a9228ebb8de9c2d7c7450a99367f0a43a66dec066f6156839f7b01ed1:54"
+        },
+        {
+          "error": 0.0,
+          "history_sha256": "25e29805159c2e6d02a75db0971f03100bed3af21cae0df56a4fb5fa84679601",
+          "ordinal": 10,
+          "row_id": "ca8a42fc8494c6988ab7efb3b8ce48bed9d443f5699329ef3352106564bd4931:32"
+        },
+        {
+          "error": 4.163336342344337e-17,
+          "history_sha256": "3c23904e90ee299705ed0bacbba2836541efe296a584074e8c33d33943494911",
+          "ordinal": 11,
+          "row_id": "c4a5262c93418c93678d33d776c3f3743b4731f9aeb53f82cc83c98bca40439c:5"
+        },
+        {
+          "error": 0.0,
+          "history_sha256": "8128775c71bad3c57932d6530586c7a7a861f5a112c63298be41fbbf834ea898",
+          "ordinal": 12,
+          "row_id": "32f62fd68880928961858b9d756450882d91ddab008c83412c9e4a62697a8d94:53"
+        },
+        {
+          "error": 0.0,
+          "history_sha256": "a262a06698b12df386eaea48ac05ae21918cfcd5d0960e7efeac1e607f90f204",
+          "ordinal": 13,
+          "row_id": "4021aaaace1bb37cc5d1e53b8dffd78aff5358f497ad52838157d7078b2f3298:7"
+        },
+        {
+          "error": 0.0,
+          "history_sha256": "5b2e8c14853f488e1e461b88123376e9b4c3e7e329d1b7502c268715a4af96be",
+          "ordinal": 14,
+          "row_id": "c0f9972287ec32d0633025607012e8ff96e339347294e4fe01a6bcc0405b07d0:27"
+        },
+        {
+          "error": 0.0,
+          "history_sha256": "bc0119b71cecc92221a8c7c899faff5c8a02f896351bb0b89ca3bcd73b50e49e",
+          "ordinal": 15,
+          "row_id": "bd13fb0014f5674e4554ecc35053db7de1f4cf1cb2b0c03d8a7fa6593653dff8:23"
+        },
+        {
+          "error": 0.0,
+          "history_sha256": "9e72275966691056b9540c0a14c6e2b2363838f32b8c0863c51c818d0426fa50",
+          "ordinal": 16,
+          "row_id": "cf08574bd99cf05122cac4cabe29ade594d866d8adf6a6f5d394ffcc725eb9c9:125"
+        },
+        {
+          "error": 0.0,
+          "history_sha256": "a54f52df49fac514d48381cb63178a72e2ecd47d75b4727e8ccce7781dd5b9e1",
+          "ordinal": 17,
+          "row_id": "40166d1cc8ab42c4866741e8aa9af8cf96a9a2b6880924c518d125bc04c17ca1:34"
+        },
+        {
+          "error": 0.0,
+          "history_sha256": "784169fc815115a76fb8ab76ce99509cbe6e33ef16a40ec5be81868ff8b65f7f",
+          "ordinal": 18,
+          "row_id": "0576c59e62c8ffbd17522f0e61b5942b39ef7a09816e9ecef61b2b596d73baf6:30"
+        },
+        {
+          "error": 0.0,
+          "history_sha256": "a1b915de8839d72dbe1f900bbc8aec384f0ee1afde76f0ab23afc56ef018f8a7",
+          "ordinal": 19,
+          "row_id": "7524902a4657ae0a3894a4a96417a4006e42e995fa8358c36e11e7e5c65234ca:79"
+        },
+        {
+          "error": 0.0,
+          "history_sha256": "b0c2f25138963995d023e33c75c9007d4de54bbb8a0ea616f7dfc5f2c6b9b29b",
+          "ordinal": 20,
+          "row_id": "1bcda291b346a2640b9c530636859bfd149848a48252e3447bc17c317625a5ac:18"
+        },
+        {
+          "error": 0.0,
+          "history_sha256": "d51eb157847f31b96a751fe5412ac18e6fbebb175b296666c0744dec8820f8b9",
+          "ordinal": 21,
+          "row_id": "373ac0cc3c004f073991a5c8eb247cd67aa86d2c3e4680e388ee09cd924d075e:68"
+        },
+        {
+          "error": 1.1102230246251565e-16,
+          "history_sha256": "964d358b636e8b469b5c04ee12d0dc5d264f5ddde261dc2b011437fa54c1ebba",
+          "ordinal": 22,
+          "row_id": "6adef4240a9b9113ce08829507543a27ce3d7df1ad2e9de013abe5d7ac0a1f34:80"
+        },
+        {
+          "error": 0.0,
+          "history_sha256": "508dbdcc2497e02d18cd8d11eecf496f8952fa72949e3411e4c7cc90e67a8321",
+          "ordinal": 23,
+          "row_id": "197c10051913e20b210e49ae9f9d9c78ccb4dd8d8645b795ac700cc065dd1299:7"
+        }
+      ],
+      "seed": 20262905
+    },
+    {
+      "rows": [
+        {
+          "error": 0.0,
+          "history_sha256": "f0bd15355c6d75851e21b70ac0425238cd99e21d321ae277234f136d58b150c1",
+          "ordinal": 0,
+          "row_id": "42e23feea775d47264e82664c39f59c77e8362fd263003b7f49488a06f849293:68"
+        },
+        {
+          "error": 0.0,
+          "history_sha256": "fac791c9c7ead296ce129259c97c12937cdb4b9987695f049180abcb3e85354f",
+          "ordinal": 1,
+          "row_id": "10d96bdb8d1b93160224ad26c878220892441cda2c90180cc6c60a9bbd9b7d93:103"
+        },
+        {
+          "error": 0.0,
+          "history_sha256": "c3cb52c59e5a8f363f55945c69a068ed86c3ac9e64233c6ed9f9863893f9499e",
+          "ordinal": 2,
+          "row_id": "5121ce3e784c1e632ff6e3d4caf6e52925795829192acc469580af87ad6d40b1:13"
+        },
+        {
+          "error": 0.0,
+          "history_sha256": "e332ba2b58cafc2fdc84e3a1dedac7438e9b1665cca5a9b954fc315005f486a7",
+          "ordinal": 3,
+          "row_id": "fd6a964c42faa0d55f8e056a0af2d41a9fb6063dd4b666eb644288943119ff25:32"
+        },
+        {
+          "error": 5.551115123125783e-17,
+          "history_sha256": "f350d16544ae80c27728e2a8fdbeb2c4ec2b6756203fdf9d6da394f66a527e23",
+          "ordinal": 4,
+          "row_id": "b9d829226e99814d7c873ad8a236eb57303a5763f125c2c9319a978e48df1421:70"
+        },
+        {
+          "error": 0.0,
+          "history_sha256": "2468531aacf1edd5fd68e05000b3a0858a1125cc20a83416efa3f93c9e36195e",
+          "ordinal": 5,
+          "row_id": "cad4916d6fe803501e633061e0c2ceb9a0bf376aae516f2c7b716f2a91c1cfa4:20"
+        },
+        {
+          "error": 0.0,
+          "history_sha256": "c0b9cc8f5b90e27f510d10fca71b1d4e2edafdc05d990c10c2af0d0d8bcf3c3b",
+          "ordinal": 6,
+          "row_id": "b50143841029b4b9d63656ba453d5cf10409daa9fb402c832310e0836e00c1bf:38"
+        },
+        {
+          "error": 0.0,
+          "history_sha256": "3c9a8374b3b7f89a4f7ab39cf5739e17cfa419793481e3307ed8c3e499cda8f7",
+          "ordinal": 7,
+          "row_id": "ccfccb8931fba502a16cafcb3935fe9fca38bfc641396bf63ef0e1afe6cf7ef3:94"
+        },
+        {
+          "error": 6.938893903907228e-18,
+          "history_sha256": "eac7acf5aec87f12e37cef9b8219e2fac99349ae0a195050bb63a4980e8ca39f",
+          "ordinal": 8,
+          "row_id": "6eabfaacd79e92a6cf62fe0361a5067a47a6f26c9a50d2388ac7dcfbeb52fd7f:58"
+        },
+        {
+          "error": 0.0,
+          "history_sha256": "29733e68d790dc7d74583a3dadaa02961729ef3cde607170dcac169997a9b368",
+          "ordinal": 9,
+          "row_id": "66d89f2e02808d8e20e0549716dadbc290445e4861094499da4fb43a85ebe06c:55"
+        },
+        {
+          "error": 0.0,
+          "history_sha256": "60d0bfdbe6dcffbb374c195e8d64e38b78fa49d05cfa8589dcaa59be20c72b74",
+          "ordinal": 10,
+          "row_id": "ab091cf8355d9fd4e7412ffc0331da077fbcc6a6147f888cbae17589f2f9945e:63"
+        },
+        {
+          "error": 0.0,
+          "history_sha256": "fef91e69f393822cd4c5db142657f25be97e135eadd287337f95a5e51e776767",
+          "ordinal": 11,
+          "row_id": "cefe8e5a3a586911656ab040a13beedd04d83a9d429662677336a8c06ce01ddf:158"
+        },
+        {
+          "error": 0.0,
+          "history_sha256": "2f17802695c840cc0206582592a1495cb09d7ff72064cd39b67deffcb1c29304",
+          "ordinal": 12,
+          "row_id": "6bbe1c331cdc5f4fe5186e2316833004348ad8530474d03504a7046646534826:20"
+        },
+        {
+          "error": 0.0,
+          "history_sha256": "5790c6d6e5120c9cbab8668a058f4988a667bffceaee79c09a38095acf0baaf5",
+          "ordinal": 13,
+          "row_id": "ac666a328050a301d9bbb1180e1f34f5896a7090e7e48e82357e817088b5057b:58"
+        },
+        {
+          "error": 1.6653345369377348e-16,
+          "history_sha256": "b72a12a0bcbb0b05cd50e800228b8a241e581fe3d37d0bada3b02a7518453d35",
+          "ordinal": 14,
+          "row_id": "670765ae97c255a6f4126c87a6958f73efc36e3c80f31504008e82e82646df24:36"
+        },
+        {
+          "error": 0.0,
+          "history_sha256": "1d2487933029721f2bf64ab092213c5f4818077a90f3d5d5e7c7a6430a489177",
+          "ordinal": 15,
+          "row_id": "80d48813c767f09215e654383d1044d394815920ac088f73d9ab7bef0554be26:89"
+        },
+        {
+          "error": 0.0,
+          "history_sha256": "849c7dcfbccf0b508a5a7b93d09ed5b233379350991a91e724c36749e6f702e2",
+          "ordinal": 16,
+          "row_id": "d24c420acd5fb029d6e6dbdd0204f4b72e09f7605813b3d417ebb24cb6397474:38"
+        },
+        {
+          "error": 0.0,
+          "history_sha256": "9855dc291d102115075005535f464413889862209e846e013e9bde0fa9cee7a0",
+          "ordinal": 17,
+          "row_id": "7c6dcde7675d82b2f7b90ff070a88a71a5568d98d7330f3ab02d626ea55f61a1:40"
+        },
+        {
+          "error": 0.0,
+          "history_sha256": "d91343d43734f05123cc1c03a6510ce6055b18d129fa384c1879baa6096810d0",
+          "ordinal": 18,
+          "row_id": "9affdb1829b316e06713abff5f2a4cb07937190199d5196fc624772e3ce32952:34"
+        },
+        {
+          "error": 0.0,
+          "history_sha256": "c1d93fd071beb78369c97b3ec1678a396631f82ab18f6ed63ae05384bbe37d8a",
+          "ordinal": 19,
+          "row_id": "7af95dc1da6d1d57bf78c2ba9f326e71549b80517e742103ffc0f2d6418a91e3:14"
+        },
+        {
+          "error": 0.0,
+          "history_sha256": "7338bd88fc0ff0f27f0229476ff65f440f6299851c449dca6e1751977ff7aa1f",
+          "ordinal": 20,
+          "row_id": "056d3d1164f3c5b2ae0a40d2e6ec013bc7d41cc406a77d0ddcf91565631bff80:41"
+        },
+        {
+          "error": 0.0,
+          "history_sha256": "1343e28a6df43f66f50ffea103e42f4730d9e212bc4e3300d66e0c09cb532e65",
+          "ordinal": 21,
+          "row_id": "eb3c9d419fa76db467a0c083af829a9e9cb73881161127550bb5ab536ac80cfd:47"
+        },
+        {
+          "error": 0.0,
+          "history_sha256": "c6575dba94d8c0c74a2ec47691168c57fcc67c7999ff355fc944e7cfc4107b4f",
+          "ordinal": 22,
+          "row_id": "91166cdd11e31d8ff7622030c4d0a446285ad3a80791d4b44cb9d0b6b69927fb:27"
+        },
+        {
+          "error": 0.0,
+          "history_sha256": "417454e7c7a6ee2164aea4ef046fa1de262a00495d3c2bc908f32103db8283f7",
+          "ordinal": 23,
+          "row_id": "4a26eaef5b5b1ee0379d24efba048c7c6b82262178ea12e979262797ca43eebd:19"
+        }
+      ],
+      "seed": 20262906
+    }
+  ],
+  "registration_sha256": "af1b8eea45f6749a4b2c20d8e9093b8aad58d0d71bff64551eb5c2c93a20337b",
+  "schema": "NNUE-trained-teacher-profile-result-v1",
+  "scope": "48 parity and 48 search calls, zeroHEX48",
+  "status": "PASS-trained-teacher-profile-not-selflearning",
+  "strength_success_claimed": false,
+  "teacher_is_selflearning": false
+}
