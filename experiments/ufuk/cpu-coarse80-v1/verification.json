@@ -1,0 +1,27 @@
+{
+  "schema": "ownq-coarse80-preparation-verification-v1",
+  "scope": "scratch-only, synthetic tests and C-kernel build; no production dataset, board inference, search, fit, or games",
+  "test_command": "taskset -c 4 /workspace/HarbiChess/.venv/bin/python -m pytest -q test_coarse80.py test_dataset80.py",
+  "tests": {"passed": 7, "failed": 0, "seconds": 0.35},
+  "native_proof": {
+    "whole_updates": 8,
+    "pause_at": 4,
+    "fresh_process_resume_to": 8,
+    "exact_native_bytes_equal": true,
+    "strict_load_count": 6,
+    "dataset": "synthetic-fixture-only"
+  },
+  "cli_import_help_exit": 0,
+  "c_kernel": {
+    "built": true,
+    "fast_math": false,
+    "ffp_contract": "off",
+    "source_sha256": "201c08c5a554110db5556e54a891c382d4eb901fc789618ba9b2468166161a98",
+    "binary_sha256": "0c522abc7220ce748008c41fe7520b48c0c22a71d69f92486c70bf610b84f173",
+    "tested_against": "synthetic bitboard masks only"
+  },
+  "code_closure_sha256": "cc0813b79ced8ac74c33dd57446453eca2ec7359877748c705aabaeb84cc3cb2",
+  "production_registration": "not created",
+  "real_prior_latency_or_zerohex_proof": "not run",
+  "512_node_search_or_strength": "not run"
+}
