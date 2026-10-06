@@ -1,0 +1,11 @@
+{
+  "actual_data_SGD": false,
+  "actual_search": false,
+  "elapsed_seconds": 0.56,
+  "remaining": "ROOT actual proof12, fresh48 pair+load4, architecture and trained24 profile,192 games+fullhistory gates",
+  "ruff": "PASS-canonical-repo-cwd",
+  "skips": 0,
+  "status": "PASS-preparation-only",
+  "test_scope": "synthetic resume/gradient/schema, four-input/source/clock mutation, frozen arena bytes and CLI help",
+  "tests_passed": 9
+}
