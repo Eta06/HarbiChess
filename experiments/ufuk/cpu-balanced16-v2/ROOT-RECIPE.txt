@@ -1,0 +1,60 @@
+NEW balancedv2, prep-only. No actual model/search/fit/arena execution by reviewer.
+Prototype objective is unchanged; copied learner/transform formatting produces NEW helper SHA.
+Original v1 checkpoints/proofs remain historical; they NEVER qualify this learner.
+All commands use /workspace/HarbiChess/.venv/bin/python and clean source 6fcc8b4.
+Run from clean source with PYTHONPATH=$SOURCE/src. Set OMP/MKL/OPENBLAS threads=1.
+Freeze helper inventory after any ROOT promotion/import-order fixes, before qualification.
+register.py hashes complete local code + pinned parent model/Adam/features/search/rules/resource dependencies.
+ROOT-stamp ONE observed first per phase (both seeds may share that original clock); no future first/reset.
+Every phase output must be NEW /dev/shm, own16MiB including nested logs/native.
+CPU core is explicit. ROOT own outer controller/guardian retains physical/OOM/diskfloor256MiB.
+
+T=/workspace/work/harbichess/cpu-selective-q-balanced16-training-proposal
+A=/workspace/work/harbichess/cpu-selective-q-balanced16-arena-v2
+P=/workspace/HarbiChess/.venv/bin/python
+SOURCE=/workspace/work/harbichess/cpu-additive-source-6fcc8b4
+R=ROOT-chosen-NEW-registration-directory
+
+For each S=20262905,20262906, ROOT stamps QFIRST:
+$P $T/register.py --phase proof --seed $S --first $QFIRST --cpu-core 3 --output /dev/shm/harbichess-balanced16-proof-v2/$S --registration $R/$S-proof.json
+$P $T/qualify.py --registration $R/$S-proof.json
+Result: whole8 / pause4 / freshresume8 exact bytes + six ACTUAL fresh-process loads per seed.
+All audit work is INCLUDED in original QFIRST+900. Failure remains INCOMPLETE; no restart clock.
+
+Architecture binding is preserved as a NEW same-helper zero-head profile (NOT v1 native qualification).
+ROOT stamps AFIRST, then each seed:
+$P $T/register.py --phase architecture --seed $S --first $AFIRST --cpu-core 3 --output /dev/shm/harbichess-balanced16-architecture-v2/$S --registration $R/$S-architecture.json
+$P $T/architecture.py --registration $R/$S-architecture.json
+600 each/sharedoriginal, 24 fixed TRAIN moves (12 old-q2 +12 newzero), ratio<=1.10.
+
+Only both NEW proofs/architecture PASS, stamp FFIRST:
+$P $T/register.py --phase fit --seed $S --first $FFIRST --cpu-core 3 --output /dev/shm/harbichess-balanced16-fit-v2/$S --registration $R/$S-fit.json --proof-registration $R/$S-proof.json --proof-receipt /dev/shm/harbichess-balanced16-proof-v2/$S/qualification.json --architecture-registration $R/$S-architecture.json --architecture-receipt /dev/shm/harbichess-balanced16-architecture-v2/$S/profile.json
+$P $T/fit.py --registration $R/$S-fit.json
+Fresh zero/newAdam 48 steps, then ACTUAL fresh0/final48 strict-load processes, four across pair.
+No reuse of proof optimizer/init. Parent directory contains initial/native/candidate/result +fresh-loads.json.
+Native contract binds raw dataset/split, own NEW proof/architecture receipts, exact transform/groupSHA/p/weight/normalizer, full helper closure/source and original900.
+
+Arena DRAFT protocol: edit only ROOT-unexecuted draft fields BEFORE seal:
+fit_inputs per seed -> $R/$S-fit.json +SHA
+proof_inputs -> actual new proof registration/receipt +allSHAs
+profile_qualification_bindings -> actual NEW architecture registration/receipt +allSHAs
+fit_fresh_loads -> actual $S/fresh-loads.json SHA
+Models already target fresh48 paths; never substitute old learned/initial head.
+Rehash arena helper inventory/transform+learner SHA after copy; preserve original search/tournament/auditor bytes.
+Arena clocks must NULL until ROOT seals. seal requires actual observed PFIRST, ARENAFIRST>=PFIRST,
+600 profile,7200 arena,900 audit and whole<=hard08; no inherited old selective clock.
+
+$P $A/seal.py --draft-sha256 ACTUAL_DRAFT_SHA --profile-first $PFIRST --arena-first $ARENAFIRST --fit05-registration $R/20262905-fit.json --fit05-registration-sha256 ACTUAL_SHA --fit06-registration $R/20262906-fit.json --fit06-registration-sha256 ACTUAL_SHA --output $A/protocol.json
+$P $A/profile.py --protocol $A/protocol.json --first-epoch $PFIRST --output NEW_PROFILE_RESULT
+Actual TRAINED24 search calls (4 known openings x learned/prior/E8 x2seed); ratios<=1.10 vs BOTH prior/E8.
+$P $A/run.py --checkout $SOURCE --study $A --qualification NEW_PROFILE_RESULT --output NEW_RAM_ARENA --first-epoch $ARENAFIRST
+$P $A/audit_arena_v2.py --protocol $A/protocol.json --arena NEW_RAM_ARENA --output NEW_RAM_AUDIT
+ROOT external original900 audit bound must include independent checks/search replays if requested.
+192 known-book games, SAME six roles/rules512/q2/extra64/mandatory checked horizon.
+Trained/newzero share source controller; zero p=.5 => optional strict>.5 disabled.
+All original screen/statistical functions BYTEIDENTICAL to old selective auditor/tournament.
+This is known development screening, not the ONE pending virgin confirmation or originality claim.
+
+PREP verification: 9 pure/synthetic tests passed; CLI--help only, no actual-data SGD/search.
+Remaining actual blockers: NEW proof12, architecture48, fresh fit96+load4, trainedprofile24,
+192 actual games, fullhistories/native/source/node audits and unchanged gates. No success claimed.
