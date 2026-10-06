@@ -1,0 +1,88 @@
+{
+  "status": "PASS-six-actual-search-counter-and-arena-packet-replays",
+  "rows": [
+    {
+      "seed": 20262905,
+      "role": "e8",
+      "model_sha256": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03",
+      "move": "f1c4",
+      "value": 0.14564191895780934,
+      "value_float_hex": "0x1.2a464f76cdc51p-3",
+      "nodes": 512,
+      "evaluations": 472,
+      "depth": 2,
+      "roots": 27,
+      "original_arena_sha256": "1f687a5ae08cc070f81f3d1c8cabf53b0f894d0ce0a4bfb42c377387029f4277"
+    },
+    {
+      "seed": 20262905,
+      "role": "prior",
+      "model_sha256": "afbaec307e5acc4b9fcb5222115c2fb8112290065ffe64e929b35f2a935565e1",
+      "move": "b1c3",
+      "value": -0.011666137374496012,
+      "value_float_hex": "-0x1.7e46a73f3eca1p-7",
+      "nodes": 512,
+      "evaluations": 461,
+      "depth": 2,
+      "roots": 27,
+      "original_arena_sha256": "f840ba9f1844d33b872d2914e2c5987821495faff1d37495a8906be2157969c5"
+    },
+    {
+      "seed": 20262905,
+      "role": "learned",
+      "model_sha256": "7217d0ae44f908cdd6153ff192d8f270f74069c74c578d8ec8f5586454972063",
+      "move": "b1c3",
+      "value": -0.011666137374496012,
+      "value_float_hex": "-0x1.7e46a73f3eca1p-7",
+      "nodes": 512,
+      "evaluations": 461,
+      "depth": 2,
+      "roots": 27,
+      "original_arena_sha256": "50a01724dd18b163941555ce5784315ae8b1b19381193a4ed743abc07f4d14a1"
+    },
+    {
+      "seed": 20262906,
+      "role": "e8",
+      "model_sha256": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03",
+      "move": "f1c4",
+      "value": 0.14564191895780934,
+      "value_float_hex": "0x1.2a464f76cdc51p-3",
+      "nodes": 512,
+      "evaluations": 472,
+      "depth": 2,
+      "roots": 27,
+      "original_arena_sha256": "b3eec990455a774e29ab04059b3aa7a1f167ad68819b97c8d9c0a40ee527b72d"
+    },
+    {
+      "seed": 20262906,
+      "role": "prior",
+      "model_sha256": "afbaec307e5acc4b9fcb5222115c2fb8112290065ffe64e929b35f2a935565e1",
+      "move": "b1c3",
+      "value": -0.011666137374496012,
+      "value_float_hex": "-0x1.7e46a73f3eca1p-7",
+      "nodes": 512,
+      "evaluations": 461,
+      "depth": 2,
+      "roots": 27,
+      "original_arena_sha256": "33499d8f1ec537a81ceff3b196b5a46347dc0499b684b7601390ec3d3bddeb60"
+    },
+    {
+      "seed": 20262906,
+      "role": "learned",
+      "model_sha256": "d76384f26438a6b70a191c3811ea8c5b5ff02e5755958c5cd31442c3e4510381",
+      "move": "b1c3",
+      "value": -0.011666137374496012,
+      "value_float_hex": "-0x1.7e46a73f3eca1p-7",
+      "nodes": 512,
+      "evaluations": 461,
+      "depth": 2,
+      "roots": 27,
+      "original_arena_sha256": "4a3df6dfe4409880fe87127383a880a3a732848a7168b4c1741367ec92e04709"
+    }
+  ],
+  "original_deadline": 1791243637.6963508,
+  "finished": 1791243001.3472502,
+  "qualification_sha256": "a858c5e4cb801dd18f7e6795497ce46aa89fe367fa6c1f30a0f7d248e6a6dd93",
+  "uncertainty": "Profile support differs by role; same-board arena packets matched exactfloathex, full histories and counters; only six designated moves recomputed",
+  "training_or_new_games": 0
+}
