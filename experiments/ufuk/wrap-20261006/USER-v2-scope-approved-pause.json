@@ -1,0 +1,19 @@
+{
+  "schema": "UFUK-ancestry-confirmation-v2-user-approval-v1",
+  "status": "USER-approved-scope-NO-confirmation-launched",
+  "observed_epoch": 1791245249.8117816,
+  "proposal_commit": "7ec49b644b0ef5938eea278bd45933c5916316dc",
+  "proposal_file": "docs/runs/UFUK-ancestry-confirmation-amendment-v2-DRAFT-20261005.md",
+  "user_reply": "v2 \u00f6nerisini onayl\u0131yorum; belirtilen daha dar iddiayla do\u011frula. Ama yava\u015ftan \u015fimdilik wrap up yap sonras\u0131nda beraber devam edece\u011fiz. son de\u011fi\u015fikliklerini bitir",
+  "primary_comparator": "E8",
+  "additional_comparator": "same exact frozen parent",
+  "scope": "unseen within selected candidate verified training ancestry, NOT globally unseen across all project history",
+  "formal_campaign_started": false,
+  "new_holdout_books_generated": false,
+  "joint_alpha": 0.00625,
+  "cumulative_alpha_upper_bound": 0.05625,
+  "LCBs": 8,
+  "one_sided_alpha_per_LCB": 0.00078125,
+  "numeric_thresholds_relaxed": false,
+  "globalsource6_source8_still_missing": true
+}
