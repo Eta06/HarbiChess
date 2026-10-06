@@ -1,0 +1,38 @@
+{
+  "status": "USER-requested-wrap-up-owned-arena-stop-INCOMPLETE",
+  "requested_epoch": 1791244958.4612408,
+  "original_first_epoch": 1791243321.852049,
+  "original_deadline_epoch": 1791250521.852049,
+  "owned_tree": [
+    {
+      "pid": 1035624,
+      "state": "S",
+      "ppid": 1,
+      "pgid": 1035624,
+      "start_ticks": 20827766,
+      "command": "/workspace/HarbiChess/.venv/bin/python /workspace/work/harbichess/continuation-20261005/run_registered_readonly_audit_v1.py /workspace/work/harbichess/continuation-20261005/coarse80-arena-v1-registration/controller-registration.json "
+    },
+    {
+      "pid": 1035627,
+      "state": "S",
+      "ppid": 1035624,
+      "pgid": 1035627,
+      "start_ticks": 20827769,
+      "command": "/workspace/HarbiChess/.venv/bin/python /workspace/work/harbichess/cpu-coarse80-arena-v2-proposal/run.py --checkout /workspace/work/harbichess/cpu-additive-source-6fcc8b4 --study /workspace/work/harbichess/cpu-coarse80-arena-v2-proposal --qualification /dev/shm/harbichess-coarse80-trained-profile-v2/profile-result.json --first-epoch 1791243321.852049 --output /dev/shm/harbichess-coarse80-strength-arena-v1 "
+    },
+    {
+      "pid": 1036893,
+      "state": "R",
+      "ppid": 1035627,
+      "pgid": 1036893,
+      "start_ticks": 20915662,
+      "command": "/workspace/HarbiChess/.venv/bin/python /workspace/work/harbichess/cpu-coarse80-arena-v2-proposal/tournament.py --protocol /workspace/work/harbichess/cpu-coarse80-arena-v2-proposal/protocol.json --candidate /dev/shm/harbichess-ownq-coarse80/fit-v1/20262905/candidate.json --opponent /workspace/work/harbichess/a100/restoration/local-rehearsal-content/harbichess-inputs/initial-e8.safetensors --seed 20262905 --book /workspace/work/harbichess/cpu-own-replay-v1-actual/development/book.json --stockfish /workspace/work/harbichess/stockfish/stockfish-linux-x86-64-universal --deadline-epoch 1791247457.2224212 --progress /dev/shm/harbichess-coarse80-strength-arena-v1/20262905-learned-vs-e8.progress.jsonl --output /dev/shm/harbichess-coarse80-strength-arena-v1/20262905-learned-vs-e8.json "
+    }
+  ],
+  "checkpoint_weights_modified": false,
+  "CLI_pause_resume_claimed": false,
+  "scope": "fixed160 arena incomplete; preserve all completedgames and partialprogress; not a strength result",
+  "SIGKILL_needed_for": [],
+  "finished_epoch": 1791244960.462044,
+  "remaining_owned_live": []
+}
