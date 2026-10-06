@@ -1,0 +1,176 @@
+{
+  "status": "USER-requested-pause; no new self-learning model promoted",
+  "observed_epoch": 1791245249.81539,
+  "root_core_commit": "6fcc8b476d25495d1c9c413e55b2c7ba4794013e",
+  "GPU_used": false,
+  "new_SF_teacher_labels": 8192,
+  "teacher_imitation_is_self_learning": false,
+  "NNUE_own_producer_executed": false,
+  "NNUE_own_training_status": "INCOMPLETE drafts, no actual own data/SGD",
+  "balanced48_proof_fresh48_native_complete": true,
+  "balanced_strength_arena_started": false,
+  "coarse80_arena": "INCOMPLETE-user-stop: six full16game groups=96 complete games + one partial group trace; not online actor resume",
+  "formal_scope_approval": {
+    "schema": "UFUK-ancestry-confirmation-v2-user-approval-v1",
+    "status": "USER-approved-scope-NO-confirmation-launched",
+    "observed_epoch": 1791245249.8117816,
+    "proposal_commit": "7ec49b644b0ef5938eea278bd45933c5916316dc",
+    "proposal_file": "docs/runs/UFUK-ancestry-confirmation-amendment-v2-DRAFT-20261005.md",
+    "user_reply": "v2 \u00f6nerisini onayl\u0131yorum; belirtilen daha dar iddiayla do\u011frula. Ama yava\u015ftan \u015fimdilik wrap up yap sonras\u0131nda beraber devam edece\u011fiz. son de\u011fi\u015fikliklerini bitir",
+    "primary_comparator": "E8",
+    "additional_comparator": "same exact frozen parent",
+    "scope": "unseen within selected candidate verified training ancestry, NOT globally unseen across all project history",
+    "formal_campaign_started": false,
+    "new_holdout_books_generated": false,
+    "joint_alpha": 0.00625,
+    "cumulative_alpha_upper_bound": 0.05625,
+    "LCBs": 8,
+    "one_sided_alpha_per_LCB": 0.00078125,
+    "numeric_thresholds_relaxed": false,
+    "globalsource6_source8_still_missing": true
+  },
+  "model_inventory": [
+    {
+      "seed": 20262905,
+      "role": "teacher-bootstrap",
+      "path": "/dev/shm/harbichess-NNUE-teacher-fit-v1/20262905/whole/candidate.pt",
+      "sha256": "52e029bba0e895740f975109f4c52358c7a59fe22082cb1fb528821e3fa2b02d",
+      "bytes": 1579169,
+      "promoted": false,
+      "strength_gate_pass": false
+    },
+    {
+      "seed": 20262905,
+      "role": "balanced48",
+      "path": "/dev/shm/harbichess-balanced16-fit-v2/20262905/candidate.json",
+      "sha256": "6da5a0ee5626cfc8060c94099399099d4c220a7a174240a28a7929c68bc35ba9",
+      "bytes": 646,
+      "promoted": false,
+      "strength_gate_pass": false
+    },
+    {
+      "seed": 20262905,
+      "role": "coarse80-own64",
+      "path": "/dev/shm/harbichess-ownq-coarse80/fit-v1/20262905/candidate.json",
+      "sha256": "6b81ec79e0e42216be37da9853df648fa8580382e236208c57bcdcea20f58525",
+      "bytes": 2947,
+      "promoted": false,
+      "strength_gate_pass": false
+    },
+    {
+      "seed": 20262906,
+      "role": "teacher-bootstrap",
+      "path": "/dev/shm/harbichess-NNUE-teacher-fit-v1/20262906/whole/candidate.pt",
+      "sha256": "4ff008426e2e8a09eeef5cc232195e015a1c6a498dd0ffb768e905e897eff4c8",
+      "bytes": 1579169,
+      "promoted": false,
+      "strength_gate_pass": false
+    },
+    {
+      "seed": 20262906,
+      "role": "balanced48",
+      "path": "/dev/shm/harbichess-balanced16-fit-v2/20262906/candidate.json",
+      "sha256": "70fa6a41f2c7d7caed85eaa4297f77fa826378317cf6935e5d70a707631c90fa",
+      "bytes": 662,
+      "promoted": false,
+      "strength_gate_pass": false
+    },
+    {
+      "seed": 20262906,
+      "role": "coarse80-own64",
+      "path": "/dev/shm/harbichess-ownq-coarse80/fit-v1/20262906/candidate.json",
+      "sha256": "a0935cc0fb01cdafa596713bb07d9eeee53172b7b8addf66ae302fb2880dfeca",
+      "bytes": 2945,
+      "promoted": false,
+      "strength_gate_pass": false
+    }
+  ],
+  "evidence": [
+    {
+      "file": "experiments/ufuk/wrap-20261006/C18-fullhistory-independent-result.json",
+      "sha256": "eb4fda04f5d50ae97506bf610492062c4762680bc957c85d95885668704b68bf"
+    },
+    {
+      "file": "experiments/ufuk/wrap-20261006/C18-six-actual-searches.json",
+      "sha256": "3f369ce6175cfb4bbd6c8307f658e8715335ff00af33f6288559feabc51f70a8"
+    },
+    {
+      "file": "experiments/ufuk/wrap-20261006/ACTION-fullhistory-independent-result.json",
+      "sha256": "12030d913ddcd51f291f4b32bc594684d3d4e475b983d368887f766af418f8ea"
+    },
+    {
+      "file": "experiments/ufuk/wrap-20261006/ACTION-six-actual-searches.json",
+      "sha256": "208a4fab278a7bb493c4ad20267c4b5d56450b5c600333f59f10a4393b9f8893"
+    },
+    {
+      "file": "experiments/ufuk/wrap-20261006/Selective-fullhistory-independent-result.json",
+      "sha256": "18a5bb849ed2ca3b718852a5466e60988aeb180abf5a0ed6199fb0e199c7be54"
+    },
+    {
+      "file": "experiments/ufuk/wrap-20261006/Selective-six-actual-searches.json",
+      "sha256": "ec692f67c616d9df559554e26addd841d40525e4648e5c26c3c7d34625663d92"
+    },
+    {
+      "file": "experiments/ufuk/wrap-20261006/NNUE-teacher-trained-profile-v2.json",
+      "sha256": "daface422c690e1e989599fb8378317c9bf37f2d773ee5977e08a7f8273179d9"
+    },
+    {
+      "file": "experiments/ufuk/wrap-20261006/NNUE-teacher-trained-profile-v1-failed.json",
+      "sha256": "9a3ad49ba39645fa9c11e4da5786b3f64fe442e2eaeb5d2044afc919270ee8da"
+    },
+    {
+      "file": "experiments/ufuk/wrap-20261006/V8-ROOT-public-1426-readback.json",
+      "sha256": "05c8ebe21d3614202d8da39a09861888a9239e9836c0e614d030d43add140843"
+    },
+    {
+      "file": "experiments/ufuk/wrap-20261006/USER-wrap-up-coarse80-stop.json",
+      "sha256": "076438076f905a35ecebbab2fe20356b8a7fb624e91b6e70f02d2b72fc2e9c97"
+    },
+    {
+      "file": "experiments/ufuk/wrap-20261006/20262905-NNUE-teacher-proof-receipt.json",
+      "sha256": "44de33f19087e2b8e044a071b04ff0fa6ae06e3767d33d2d5864e124f473f643"
+    },
+    {
+      "file": "experiments/ufuk/wrap-20261006/20262905-NNUE-teacher-fit-receipt.json",
+      "sha256": "c563e310042d2f25edab8208d7c423548d0312d64b589d511c891214eb87d28b"
+    },
+    {
+      "file": "experiments/ufuk/wrap-20261006/20262905-balanced-proof-receipt.json",
+      "sha256": "67d74510c350d73e1dde0ff650d9f87e65461c984a42b37e5e6c5983cfbf1745"
+    },
+    {
+      "file": "experiments/ufuk/wrap-20261006/20262905-balanced-fit-receipt.json",
+      "sha256": "74b361ef9ff5566b817534a4ad2828366b6e66246b7ec710f2a32a9a9f9272bc"
+    },
+    {
+      "file": "experiments/ufuk/wrap-20261006/20262906-NNUE-teacher-proof-receipt.json",
+      "sha256": "8d79048b3f2da708744ba8a013329cc778021c649974d91bbf09e3a717516cbd"
+    },
+    {
+      "file": "experiments/ufuk/wrap-20261006/20262906-NNUE-teacher-fit-receipt.json",
+      "sha256": "c75b10f73474b379032b3e29df1008552d337fbdab715e9545cdeeaf76ff77e6"
+    },
+    {
+      "file": "experiments/ufuk/wrap-20261006/20262906-balanced-proof-receipt.json",
+      "sha256": "e653367aef251b4986ec54dc2877a3b7571b248d324a5c67a8f4d5cb136df73c"
+    },
+    {
+      "file": "experiments/ufuk/wrap-20261006/20262906-balanced-fit-receipt.json",
+      "sha256": "bbf455098d044a2da33b3b1b10e8e1d25473cc0ff47a1b998c0c1648a967b383"
+    },
+    {
+      "file": "experiments/ufuk/wrap-20261006/USER-v2-scope-approved-pause.json"
+    }
+  ],
+  "public_V8": {
+    "original_files": 1426,
+    "capsule_bytes": 12254992,
+    "asset_id": 613934626,
+    "capsule_sha256": "7d695171ceede302e7a5efee81ca75c43cf21c64aa8f44c506e2111b80047f8a",
+    "full_anonymous_readback_all_original_sha": true,
+    "owned_workflow_37391389127": "failed inherited8MiB GET assertion; original approved32MiB v2ROOT readback passed; not workflow success"
+  },
+  "V9_public_backup": "pending now, update separate final preservation receipt",
+  "original_deadline_UTC": "2026-10-06 08:00:00",
+  "pause_supersedes_continuous_work": true
+}
