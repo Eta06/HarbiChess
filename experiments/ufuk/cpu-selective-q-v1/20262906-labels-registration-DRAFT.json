@@ -1,0 +1,66 @@
+{
+  "schema": "own-selective-q-ROOT-registration-v1",
+  "status": "DRAFT-NOT-EXECUTABLE",
+  "seed": 20262906,
+  "source_repo": "/workspace/work/harbichess/cpu-additive-source-6fcc8b4",
+  "source_commit": "6fcc8b476d25495d1c9c413e55b2c7ba4794013e",
+  "first_epoch": null,
+  "deadline_epoch": null,
+  "cpu_core": 1,
+  "output": "/dev/shm/harbichess-selective-q-labels-20262906-ROOTFILL",
+  "helper_sha256": {
+    "/workspace/work/harbichess/cpu-selective-quiescence-proposal/produce_labels.py": "34492036c1bac452224397f1366d11181db2c09f5b1a725d9bdb24b451c10b6f",
+    "/workspace/work/harbichess/cpu-selective-quiescence-proposal/learner.py": "3d77eea89bf3817f8de096b7de9bcded5bb1f7d017a60aac89c38aba826022b4",
+    "/workspace/work/harbichess/cpu-selective-quiescence-proposal/qualify.py": "b9cea68cfd8131f1a476ec2057a2080d9329c9d4ef4cfb8653a1ceecf4b59dd6",
+    "/workspace/work/harbichess/cpu-selective-quiescence-proposal/labels.py": "1d21a8885f3dc19f6338bc9b7b6470cbb29fc83e76ba9b2d7f30fd32351b6fd4",
+    "/workspace/work/harbichess/cpu-selective-quiescence-proposal/model.py": "14f5a1790f5e9518170a7d9bd490ba0aa61c001086286798a6d1315f00e0b9d2",
+    "/workspace/work/harbichess/cpu-selective-quiescence-proposal/profile.py": "46801c80d9404d723fd7e284d8948616afaa834b428aea0d64605228ab5ac067",
+    "/workspace/work/harbichess/cpu-selective-quiescence-proposal/train.py": "e4e7ec15ac270204a605c8ecae5e4d73d8b59686e6b77a894dc1f4c90bb2def4",
+    "/workspace/work/harbichess/cpu-selective-quiescence-proposal/support.py": "d99c1de872313ae26624575d49d8d10e32645cea5583192ad0359c73c1e0bb92",
+    "/workspace/work/harbichess/cpu-selective-quiescence-proposal/search.py": "993e9c2c6d949b3d8753935405b5c289b35249a108b0ef3f8f984ac55de94293",
+    "/workspace/work/harbichess/cpu-additive-source-6fcc8b4/src/harbichess/training/cgroup_budget.py": "a53079851ab9fb63b65dd5bef0d0e8fb01d6864ebfbf2389dcdbcab39b30289c",
+    "/workspace/HarbiChess/experiments/ufuk/cpu-classical-own-v1/arena/search.py": "de53c14728a67b7772f18b396ac8ef5c35a144d4e4e616fec40099cd461a6670",
+    "/workspace/HarbiChess/experiments/ufuk/cpu-classical-own-v1/value.py": "a99cddfc397bd9221b99a70691427fdd663488b033fb239d9f48240786b2f277"
+  },
+  "inputs": {
+    "ownQ_labels": {
+      "path": "/dev/shm/harbichess-own-q-reanalysis/20262906/labels-00001024.json.gz",
+      "sha256": "3dca536f899f70b7c9b5cb52026fd2ab2722cfd09347dfcc8b0807c994172f7b"
+    },
+    "prior": {
+      "path": "/workspace/HarbiChess/experiments/ufuk/cpu-classical-own-v1/prior.json",
+      "sha256": "afbaec307e5acc4b9fcb5222115c2fb8112290065ffe64e929b35f2a935565e1"
+    }
+  },
+  "parent_data_sha256": {
+    "journal_sha256": "8fc609c0d705252e337d94a0eee46220b2f952f14252dab1acb5cf93ef515020",
+    "config_sha256": "6871b198da2565f6cde7417cedab84021b32c22edfaf7eee31e4ecf8063c3505",
+    "training_dataset_sha256": "98570d7a83f53365a617c40a9a9007d767243117145bbb3111903e40b553f1a0"
+  },
+  "base_search": {
+    "path": "/workspace/HarbiChess/experiments/ufuk/cpu-classical-own-v1/arena/search.py",
+    "sha256": "de53c14728a67b7772f18b396ac8ef5c35a144d4e4e616fec40099cd461a6670"
+  },
+  "prior_value": {
+    "path": "/workspace/HarbiChess/experiments/ufuk/cpu-classical-own-v1/value.py",
+    "sha256": "a99cddfc397bd9221b99a70691427fdd663488b033fb239d9f48240786b2f277"
+  },
+  "selection": {
+    "roots": 256,
+    "order": "lexicographic-row_id",
+    "leaves": 4,
+    "leaf_order": "chronological-q2-horizon",
+    "base_nodes": 512,
+    "counterfactual_nodes": 64,
+    "counterfactual_extra_plies": 2,
+    "label_absolute_delta_strict_gt": 0.1
+  },
+  "resources": {
+    "CPU": 1,
+    "memory_budget": 16106127360,
+    "workspacefloor": 268435456,
+    "ownRAM": 16777216,
+    "original_seconds": 900,
+    "hard_end": 1791273600
+  }
+}
