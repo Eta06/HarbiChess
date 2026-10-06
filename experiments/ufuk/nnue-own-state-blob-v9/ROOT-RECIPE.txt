@@ -1,0 +1,94 @@
+V9 PREPARATION ONLY — no build, capsule decode, transport or workflow executed.
+
+ROOT approved, BEFORE V9 freeze/build: 2048 explicit files, 128MiB sum of raw
+file bytes, 32MiB compressed capsule, 2MiB/file, 1MiB header; CPU1, pinned
+stdlib CgroupMemoryBudget15GiB, workspace256MiB floor, ONE newly observed5400s
+clock bounded by1791273600 (Oct6 08UTC). New authorization does not change
+V7 251/253-file historical receipts or either old public asset. Approval and
+actual observed clock are separate: all draft clock fields remain NULL.
+
+Latest metadata-only enumeration:1172 files,49,409,582 raw bytes. No file
+content SHA freeze or compressed-size measurement performed. Size may grow
+while live C18/ACTION/selective processes run. Encoded size UNKNOWN. Never
+silently omit states to fit a cap; fail and preserve evidence. Exclusions
+remain INCOMPLETE for source6/8: this V9 backup does not close that inventory.
+
+Scope currently enumerates OwnQ/C18/ACTION/selective labels, input metadata,
+full native/Adam/RNG/proof/fits, source and both compiled18v1/v2 binaries;
+NN224/PST160/QUIET160 raw game/progress/helper/ROOT-independent-six receipts;
+C18/ACTION160 raw arenas and originals/classical FINAL16384 journals. The
+scope-config-DRAFT.json explicitly lists73 roots plus exact files, not a
+claim of all RAM contents. Selective192 or other newly registered arena roots
+must be added explicitly before freeze. Add its exact closed cohort check
+(group count12 for192 ONLY if actual schema/commands agree), source, current
+profile/proof/fit/arena owner metadata. If excluded at a cutoff, state its
+LIVE/PENDING absence, never call it preserved. Required current cohorts
+C18/ACTION/PST/QUIET have10 groups each, NN22414; all16 games pergroup and
+original result SHAs must match. Claimed completed scope needs actual owned
+quiescence, not file-existence alone.
+
+Excluded explicitly: Stockfish103,153,472B with protocol SHA0f83d24cc46d2c66c60f16001af5444873bc112b7d028594513426894c12da19,
+full checkout/Python/ABI environment, previously preserved E8/comparison
+fullNN payloads. Exact upstream byte locators remain UNKNOWN. These are
+external dependencies, not missing files secretly represented as included.
+This is original-byte preservation, not native load/strength/runtime proof.
+
+ROOT-only sequence (do not run from this review):
+1. Promote six runtime/preparation Python helpers plus workflow into a NEW
+   experiments/ufuk/nnue-own-state-blob-v9 directory and
+   .github/workflows/nnue-own-state-blob-v9.yml. Promote tests and
+   derivation evidence separately. Canonical Ruff cwd MUST be repo. Helper
+   hashes are recomputed from actual promoted bytes by prepare_v9; no scratch
+   hash substitution. V7 paths are never overwritten.
+2. Before freeze/build sample ONE actual clock first=time.time(),
+   deadline=min(first+5400,1791273600). Record new scope approval using
+   NEW-scope-approval-PENDING.json; no future first/reset/retry deadline.
+   Fill draft scope config with approved approval='ROOT-approved-new-V9-scope',
+   exact roots/files/cutoff and actual helper/workflow paths. Verify all
+   intended domains are closed and owned process identities terminated.
+   Publish a new quiescence receipt with exact sorted scope_roots/exact_files,
+   source_commit, same clock, observed_epoch between first and now,
+   status='PASS-closed-V9-scope-owned-quiescence', remaining_owned=[] and
+   actual host/PID-startticks observations. Draft template is PENDING, not
+   evidence. Bind its exact path/SHA into config; no circular configSHA field
+   is required inside the receipt.
+3. ROOT command (all outputs NEW RAM paths):
+   .venv/bin/python experiments/ufuk/nnue-own-state-blob-v9/prepare_v9.py \
+     --config /dev/shm/V9-scope-config.json --output /dev/shm/V9-manifest.json --freeze
+   .venv/bin/python experiments/ufuk/nnue-own-state-blob-v9/build_seal_v9.py \
+     --manifest /dev/shm/V9-manifest.json --output /dev/shm/V9-build \
+     --source-root /workspace/work/harbichess/cpu-additive-source-6fcc8b4
+   Freeze binds exact file SHA/size, all four delivery helpers, both preparer/
+   builder SHAs, workflow SHA, scope+quiescence receipt. Build rereads scope
+   enumeration before/after so an unlisted new checkpoint tail causes FAIL.
+   It checks clock/cgroup/disk during each64KiB encode block, then verifies
+   every original file from the complete bounded capsule. Never re-freeze
+   altered live data silently after an already-started publication attempt.
+4. Build produces capsule.bundle.zlib, blob-POST-body.json, control.json,
+   ROOT-approval.json, allowlist.json, local-build-proof.json. The blob JSON
+   base64 may reach~43MiB while compressed cap remains32MiB. RAM/memory guard
+   applies. Local proof is NOT public and native_payloads_decoded=false.
+   ROOT validates full local proof and exact immutable control, then performs
+   ONE POST to GitHub git/blobs using exact generated body (repository
+   Eta06/HarbiChess). Compare returned SHA1 with control.blob_sha1. Ambiguous
+   POST must not trigger automatic retry. Existing dispatcher can provide
+   transport; this proposal does not run an API client.
+5. ROOT commits exact frozen manifest/control/ROOT-approval/allowlist and
+   promoted byte-identical runtime/workflow. Validate load_approved locally
+   without execute; actual workflow helpers remain exactly4 source_bindings.
+   ONE workflow_dispatch with manifest_sha and first12characters. Workflow
+   readback uses full Git blob then creates a content-addressed distinct V9
+   asset on existing authorized release404068972/tagufuk-cpu-ownplay-state-20261005.
+   Old release401698693 and both protected V6/V7 assets stay untouched.
+6. Before public PASS, ROOT independently FULL-downloads anonymously the
+   entire release asset, verifies compressedSHA/bytes, bounded V9 header,
+   all1172-or-actual frozen originals' SHA/size via raw_capsule_v9.verify.
+   Partial/range/header-only or Git object existence is not durable public
+   backup proof. Preserve workflow/API receipts and old protected-asset
+   readback. Raw capsule decode is not native model/runtime validation.
+
+Tests:6 pure metadata/tamper tests PASS, canonical repo Ruff PASS. They cover
+prospective2048 cap, exact bounds, original path/member/SHA constraints,
+quiescence source/scope/clock/PID-list mismatches and recursively added state
+or symlink. They do not claim actual encode/decode/transport/restore success.
+All runtime invocation/network/build is ROOT-owned and unexecuted here.
