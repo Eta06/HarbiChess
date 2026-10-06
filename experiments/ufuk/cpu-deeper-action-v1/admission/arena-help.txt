@@ -1,0 +1,18 @@
+usage: tournament.py [-h] --protocol PROTOCOL --candidate CANDIDATE --book
+                     BOOK --stockfish STOCKFISH --output OUTPUT --progress
+                     PROGRESS --opponent OPPONENT --seed SEED --deadline-epoch
+                     DEADLINE_EPOCH
+
+Fixed paired CPU neural-value alpha-beta tournaments, independent of training.
+
+options:
+  -h, --help            show this help message and exit
+  --protocol PROTOCOL
+  --candidate CANDIDATE
+  --book BOOK
+  --stockfish STOCKFISH
+  --output OUTPUT
+  --progress PROGRESS
+  --opponent OPPONENT
+  --seed SEED
+  --deadline-epoch DEADLINE_EPOCH
