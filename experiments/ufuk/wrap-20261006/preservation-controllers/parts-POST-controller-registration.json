@@ -1,0 +1,25 @@
+{
+  "output": "/workspace/work/harbichess/continuation-20261005/nnue-state-v9-parts-v1/POST-owner-result.json",
+  "first_epoch": 1791245051.2415879,
+  "deadline_epoch": 1791250451.2415879,
+  "cpu_core": 0,
+  "checkout": "/workspace/work/harbichess/cpu-additive-source-6fcc8b4",
+  "controller_sha256": "7ea6241e57de4ab83259803ac4a4f42d0fb50701c305a3695a937a19e9ee7150",
+  "memory_guard_path": "/workspace/work/harbichess/cpu-additive-source-6fcc8b4/src/harbichess/training/cgroup_budget.py",
+  "input_pins": {
+    "/workspace/work/harbichess/continuation-20261005/nnue-state-v9-parts-v1/post_parts_once.py": "05e2e364ad49be17cdaa646ef3151f78985ebb0255d1f9faba6d808b97a0b9c7",
+    "/workspace/work/harbichess/continuation-20261005/nnue-state-v9-parts-v1/parts-control-PENDING.json": "c71c5a4b3c94bd446d8351c9d84a9f7640c3c68f8eee883c5767e49c3aba8e4f",
+    "/dev/shm/harbichess-nnue-state-v9-parts-v1/part00.bin": "fc84240d8992fe384477fedab1d09db77725d31e528dac6c5e24a42d2fc38c42",
+    "/dev/shm/harbichess-nnue-state-v9-parts-v1/part01.bin": "978dd15eea5ec7fa70b9affcb78e36f1302ded51f2c9850858012002aa2b8efd",
+    "/dev/shm/harbichess-nnue-state-v9-parts-v1/part02.bin": "0f98f57ff04f9875d52a052519f1e9c0af5ff274f650aeb84fa6cff547fd11b5",
+    "/dev/shm/harbichess-nnue-state-v9-parts-v1/part03.bin": "2235fa204533ceb611400e801a85b69a1739d0138ba53222ee516b3aa2d9dabb",
+    "/dev/shm/harbichess-nnue-state-v9-parts-v1/part04.bin": "7435cb0274a76c5775d4e7f6ef6870b28028fd1045ca6a0e9dbdf05c49a71af3",
+    "/dev/shm/harbichess-nnue-state-v9-parts-v1/part05.bin": "d5729024ecec5164b14423224d94916853197a95e59d1ad7b997fcea6017478f",
+    "/dev/shm/harbichess-nnue-state-v9-parts-v1/part06.bin": "44f73312339af98b34e1f567b091b204c51b0779e974f39438d29119a6197862",
+    "/dev/shm/harbichess-nnue-state-v9-parts-v1/part07.bin": "63878245b47e40603fa8ef6efe56fe967d9336d356f05bcf1c2995cc6a400762"
+  },
+  "command": [
+    "/workspace/HarbiChess/.venv/bin/python",
+    "/workspace/work/harbichess/continuation-20261005/nnue-state-v9-parts-v1/post_parts_once.py"
+  ]
+}
