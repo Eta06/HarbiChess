@@ -1,0 +1,28 @@
+{
+  "schema": "ROOT-pv-actual-audit-registration-v1",
+  "first": 1791371644.260522,
+  "deadline": 1791372544.260522,
+  "helper_sha256": "5ea35d3dcfeb3ebbd50cc897080c927a5b9ebf9ac75ac6f96a2a52b9586d204e",
+  "develop": {
+    "path": "/workspace/work/harbichess/continuation-20261007/pv-history-search-v1/qualification/develop.py",
+    "sha256": "53d5a39bf52c862c390f6e41722c27bd8b551f5daa0e6d1eb5a603e9e87eec26"
+  },
+  "output": "/dev/shm/harbichess-pv-independent-audit-v2",
+  "profile_registration": {
+    "path": "/workspace/work/harbichess/continuation-20261007/pv-human-profile-v2/registration.json",
+    "sha256": "a08a4ff8297f537e625b90c73e19d6c66f8d11a18547d050ae6e18aa3573c298"
+  },
+  "profile_result": {
+    "path": "/dev/shm/harbichess-pv-human-profile-v2/result.json",
+    "sha256": "549b135d3485f4f9ccea642a866019d2067d10135d760a6747d7f6f1d9b2ef5e"
+  },
+  "arena_registration": {
+    "path": "/workspace/work/harbichess/continuation-20261007/pv-human-arena-v2/registration.json",
+    "sha256": "bbbe1152315e3dffbae554d01c802f574d79ea41d09c257cb364e14245406eeb"
+  },
+  "arena_result": {
+    "path": "/dev/shm/harbichess-pv-human-arena-v2/result.json",
+    "sha256": "5bd3d4583536f5d4e21a059f9863ab229a72cd1998154ee3965f46a56e651fa6"
+  },
+  "derivative_reason": "JSON tuple/list canonicalization for logged principal_variation; first failed audit retained; same original clock and exact packet fields"
+}
