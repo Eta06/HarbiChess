@@ -1,0 +1,27 @@
+{
+  "command": [
+    "/workspace/HarbiChess/.venv/bin/python",
+    "/workspace/work/harbichess/continuation-20261007/tdleaf-search-equivalence-v3/qualify.py",
+    "--registration",
+    "/workspace/work/harbichess/continuation-20261007/TDLeaf-v4-equivalence-actual-20262906/qualification-registration.json"
+  ],
+  "cpu_core": 0,
+  "deadline": 1791380198.3333185,
+  "error": "ValueError('actual same24 protected/search/wall qualification failed')",
+  "finished": 1791379982.1222708,
+  "first": 1791379598.3333185,
+  "helper": {
+    "path": "/workspace/work/harbichess/continuation-20261007/execute_TDLeaf_search_qualification_v4.py",
+    "sha256": "73961d457f3aeb471309cf9a6452219d8e7975da94d1a7b8c5532c799e58a9f0"
+  },
+  "operator_end_epoch": 1791448916.685839,
+  "registration": {
+    "path": "/workspace/work/harbichess/continuation-20261007/TDLeaf-v4-equivalence-actual-20262906/qualification-registration.json",
+    "sha256": "040d3381ebd0ac2885146768ccb0ca64bd1242e27a9231a9e6b8bc6c224348ea"
+  },
+  "schema": "ROOT-TDLeaf-v3-actual-equivalence-owner-v1",
+  "seed": 20262906,
+  "status": "FAILED-preserved",
+  "teacher_labels_used": false,
+  "updates": 0
+}
