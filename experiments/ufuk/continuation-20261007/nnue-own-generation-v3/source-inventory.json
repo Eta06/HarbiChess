@@ -1,0 +1,129 @@
+{
+  "cli_import_help": {
+    "log": "cli-help-final.log",
+    "passed": 11
+  },
+  "incoming_weights_bridge_full_resume": false,
+  "model_search_sgd_executed": false,
+  "native_schema": "own-kingbucket-nnue16-generation-native-cpu-v3",
+  "operator_end_epoch": 1791448916.685839,
+  "original_source_inputs": {
+    "audit_collection_six.py": {
+      "path": "/workspace/work/harbichess/continuation-20261007/nnue-strength-v2/audit_collection_six_v2.py",
+      "sha256": "2082c379ac0dc0540e3e758ce70da09c20d972a267eee057a8b95cd2609a491e"
+    },
+    "collector.py": {
+      "path": "/workspace/HarbiChess/experiments/ufuk/continuation-20261007/nnue-own-producer-v2/collector.py",
+      "sha256": "b7f87d37d2213997be0a68b7749784b774b33d2a2cc2b7bf68f676c48a7c6bc5"
+    },
+    "contracts.py": {
+      "path": "/workspace/work/harbichess/continuation-20261007/nnue-own-training-v2/contracts.py",
+      "sha256": "605a0d9e11f606c7e06998c6c216134c005894f73d7602efcfb97fe494be6e9b"
+    },
+    "convert.py": {
+      "path": "/workspace/work/harbichess/continuation-20261007/nnue-own-training-v2/convert.py",
+      "sha256": "bdfc780e544bac9f6ff3abe25b458babd1ee8b883434fb6aaf3e2085fe6e1edc"
+    },
+    "metadata_factory.py": {
+      "path": "/workspace/HarbiChess/experiments/ufuk/continuation-20261007/nnue-own-producer-v2/metadata_factory.py",
+      "sha256": "8d8bb59f500befe26744e40e1c50d25ad1f027272841558e40b9ae3aac8ca43c"
+    },
+    "model.py": {
+      "path": "/workspace/work/harbichess/continuation-20261007/nnue-own-training-v2/model.py",
+      "sha256": "c04914bc5a560ad51de81c6d0aaeb3fae4d04b45c07cd8e39bbd31f655d36565"
+    },
+    "native.py": {
+      "path": "/workspace/work/harbichess/continuation-20261007/nnue-own-training-v2/native.py",
+      "sha256": "f60a1f9814f48691af1e2d1f1db1b548cff3e7df0a7cae9718051de1865b8b69"
+    },
+    "prove.py": {
+      "path": "/workspace/work/harbichess/continuation-20261007/nnue-own-training-v2/prove.py",
+      "sha256": "a320c0ec335d14e2432d165f85b1b8295d4b4afe58c2f9c6ba332422f0cde22d"
+    },
+    "run_collection.py": {
+      "path": "/workspace/HarbiChess/experiments/ufuk/continuation-20261007/nnue-own-producer-v2/run_collection.py",
+      "sha256": "b4c06d2762e0978472e3e278c4a7da94b833a1c675fb23628651b5e7c507c29e"
+    },
+    "specs.py": {
+      "path": "/workspace/work/harbichess/continuation-20261007/root-phase-specs/specs.py",
+      "sha256": "850e288c3e9bbd4cfbeea55bbb90ce6a42e574f951de86f3dda52cd9b78e9bd0"
+    },
+    "train.py": {
+      "path": "/workspace/work/harbichess/continuation-20261007/nnue-own-training-v2/train.py",
+      "sha256": "c5f16b69bf32183e9bf21f5d8d5e41ecf5636eae8176ec07e7f09ffe5d3a98dd"
+    }
+  },
+  "production_qualified": false,
+  "runtime_files": {
+    "admit_parent.py": {
+      "bytes": 2633,
+      "sha256": "a7acdfd43805818dcfc0332f036f9a3fcb44528106a8b93948f892daf737f54f"
+    },
+    "audit_collection_six.py": {
+      "bytes": 11900,
+      "sha256": "3f60f2fe3c62224e364d92365eaf191726bdc1e5585228e7e235ee46bcedd5e8"
+    },
+    "collector.py": {
+      "bytes": 11584,
+      "sha256": "769223978c2073688c6ca4dac08e462c97598bff76aaa0b38571674c955b5029"
+    },
+    "contracts.py": {
+      "bytes": 8057,
+      "sha256": "dc288b355952d0d0f980e8d822e96233ca9aa2de2d4694b77a80e17870b29a00"
+    },
+    "convert.py": {
+      "bytes": 21649,
+      "sha256": "4ed1201e81f97b20a42078652ce6540f85bd6f26ac1d6912d36640e4b2367cea"
+    },
+    "ledger.py": {
+      "bytes": 2993,
+      "sha256": "ffd35b758b77a183773bfb8565bea21d696c4d0ef619829246b5f6141352c7d9"
+    },
+    "metadata_factory.py": {
+      "bytes": 5628,
+      "sha256": "d1662038de01d6a77ef48beefab229b0a5eda1852c86ca173b1fa7c1d509a097"
+    },
+    "model.py": {
+      "bytes": 3877,
+      "sha256": "c04914bc5a560ad51de81c6d0aaeb3fae4d04b45c07cd8e39bbd31f655d36565"
+    },
+    "native.py": {
+      "bytes": 9158,
+      "sha256": "def2ed85423d392ec0694f9ca33cfec7ee6b4a31ab95cd44520a50ed112bdf0f"
+    },
+    "parent_bridge.py": {
+      "bytes": 10754,
+      "sha256": "8fe1aa7201c241053d6c9517dd6e1a04592c042bfd681d4b91e426c4407158dc"
+    },
+    "parent_seal.py": {
+      "bytes": 2035,
+      "sha256": "92f50a46b5a5f9063379c1f3f8a67c51ceea645342d05619c5605d67114970c7"
+    },
+    "prove.py": {
+      "bytes": 8282,
+      "sha256": "9024f0d72b85b9d89c9feb0d643b2a1985cb125d61971a2299f823d9e79d4962"
+    },
+    "run_collection.py": {
+      "bytes": 10452,
+      "sha256": "5b65f513a10ad8fa8f0b4c41a0d200a5dd382dddad752123fecc7a4627aba3ce"
+    },
+    "specs.py": {
+      "bytes": 15664,
+      "sha256": "c0b1c2d77addb52dc00d45b6056470dd3d1d7c43b178c97b1fdfdc104f174c99"
+    },
+    "train.py": {
+      "bytes": 6266,
+      "sha256": "1113c12f96fda6a8cd2623bdd40143cde9ac6ad368379876c54d88708c2bf3e6"
+    }
+  },
+  "schema": "NNUE-own-generation-v3-runtime-source-inventory",
+  "tests": {
+    "log": "tests-freeze.log",
+    "passed": 10,
+    "skipped": 0
+  },
+  "verification_logs_sha256": {
+    "cli-help-final.log": "cad09d6537d3abcdbfd437474d134ad9b605845ddfe693e4c4310d3b92a65e76",
+    "tests-freeze.log": "28dc98209e7e9490c512aff654391b44ac2b8b03bdb7bdb0591dd998930c089e"
+  }
+}
