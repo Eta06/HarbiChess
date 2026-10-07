@@ -1,0 +1,1842 @@
+{
+  "schema": "NNUE-own-Oct7-explicit-native-capsule-v10b",
+  "approval": "ROOT-approved-exact-files",
+  "limits": {
+    "files": 2048,
+    "raw_bytes": 402653184,
+    "encoded_bytes": 268435456,
+    "file_bytes": 8388608,
+    "header_bytes": 1048576
+  },
+  "row_count": 261,
+  "raw_bytes": 200118263,
+  "rows": [
+    {
+      "path": "/dev/shm/harbichess-NNUE-own-contracts-v2/20262905/fit.json",
+      "member": "files/0000",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 13048,
+      "sha256": "47bdc76675bd903155e868a652aa75b4a084a1cbdf3b44ac55cf2b211b5f6ac6"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-own-contracts-v2/20262905/proof.json",
+      "member": "files/0001",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 12436,
+      "sha256": "e744b586d44818663aa9836b6a7f9bd2bf4d9885e72f84b31e17245eda06081e"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-own-contracts-v2/20262906/fit.json",
+      "member": "files/0002",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 13048,
+      "sha256": "3edcbec21427ed72f562f23931b7765ea999b8e5eeaedd9cad70597050e46fa8"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-own-contracts-v2/20262906/proof.json",
+      "member": "files/0003",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 12436,
+      "sha256": "d7da2dcce77812642f5058faddd7a986683562bc6ce84214f22f42bc3cf6eab8"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-own-data-v2/20262905/dataset.json",
+      "member": "files/0004",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 152416,
+      "sha256": "ce1bcef9d7d4a8ae67d3a0a6764ff0f6bcaef86679ae87a5070cf3be02419b1d"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-own-data-v2/20262905/provenance.json",
+      "member": "files/0005",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 346616,
+      "sha256": "ed6c745ebaf47433a9338b508290400880189691ebc1a0b9307fdba6ed52932a"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-own-data-v2/20262905/result.json",
+      "member": "files/0006",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 336,
+      "sha256": "6d4581e80ee1026d8fa34912e3bb875269e8a42894c72045ca54b538c09300e6"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-own-data-v2/20262906/dataset.json",
+      "member": "files/0007",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 160892,
+      "sha256": "4d96cdac6e6b1812c31b3a55b4c8ecb627ce8e086e531427721d1fff94988727"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-own-data-v2/20262906/provenance.json",
+      "member": "files/0008",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 349482,
+      "sha256": "e69cc5ef4ecb1eb7c2d8ff014dfcc47512a8419ee34e806cc437b477d7f15076"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-own-data-v2/20262906/result.json",
+      "member": "files/0009",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 336,
+      "sha256": "a7b42bb658b51f2a8425dadbc5d00a3f2734bc9bb222e3bb08cb8d362a1793e4"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-own-fit-v2/20262905/audit-0.log",
+      "member": "files/0010",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 53,
+      "sha256": "dc3e05800f22bf18940120d2b5eb8a7dfc2257059ba01d53db3a5a35e67f5dc5"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-own-fit-v2/20262905/audit-1.log",
+      "member": "files/0011",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 54,
+      "sha256": "4d7810e2817a917f5f083fd0d51c357644f2e4769d9972986e0e1565b7bc0ed3"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-own-fit-v2/20262905/result.json",
+      "member": "files/0012",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 3295,
+      "sha256": "5cce5ebf4ec5aa4f077e7228c53fca244a93583c619e0af77e0c7911d808d36e"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-own-fit-v2/20262905/whole/candidate.pt",
+      "member": "files/0013",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 1588769,
+      "sha256": "287df0c1ff5779e0ee4cc9ab9df38b077c71daee298dff376f2d819e4a2f27a4"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-own-fit-v2/20262905/whole/initial.pt",
+      "member": "files/0014",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 3176017,
+      "sha256": "94846f9275d3ad8d5844860173cc9c9735506c4337782a61aaa3fcef026d5154"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-own-fit-v2/20262905/whole/native.pt",
+      "member": "files/0015",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 6324467,
+      "sha256": "1ff6d22f6bbf7f5187381fc91c86c25fd9731ff06796b6b60a5c9236afe0457b"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-own-fit-v2/20262905/whole/result.json",
+      "member": "files/0016",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 170,
+      "sha256": "ef1f3fb5edcb17a9a2eb7ffe1fdd7e839e3f787ed5212027923bdcbaed3ad06c"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-own-fit-v2/20262905/whole.log",
+      "member": "files/0017",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-own-fit-v2/20262906/audit-0.log",
+      "member": "files/0018",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 53,
+      "sha256": "dc3e05800f22bf18940120d2b5eb8a7dfc2257059ba01d53db3a5a35e67f5dc5"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-own-fit-v2/20262906/audit-1.log",
+      "member": "files/0019",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 54,
+      "sha256": "4d7810e2817a917f5f083fd0d51c357644f2e4769d9972986e0e1565b7bc0ed3"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-own-fit-v2/20262906/result.json",
+      "member": "files/0020",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 3296,
+      "sha256": "c160c621696627227cf92cf3518df9e9c0bc0deccef15e6c20ed59499d5ea572"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-own-fit-v2/20262906/whole/candidate.pt",
+      "member": "files/0021",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 1588769,
+      "sha256": "8627e94ca0cd6a177f3644b57ce89f30873b03b8cc99363fdf7663dddae05328"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-own-fit-v2/20262906/whole/initial.pt",
+      "member": "files/0022",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 3176017,
+      "sha256": "67e48b25938cf4a5049f2be5256aa9cc777f2914fe357faa480bdf4bba172b70"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-own-fit-v2/20262906/whole/native.pt",
+      "member": "files/0023",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 6324467,
+      "sha256": "8e6be628a09e41e6036bae54e1525d609f2f791b6f33a123b2d7f5ec42d56fb6"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-own-fit-v2/20262906/whole/result.json",
+      "member": "files/0024",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 171,
+      "sha256": "fe578c5e0f8ec067f1dc12bcfb64885fe4bd6f1a3cc92a5a87d99d6a7f9ac543"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-own-fit-v2/20262906/whole.log",
+      "member": "files/0025",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-own-proof-v2/20262905/audit-0.log",
+      "member": "files/0026",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 53,
+      "sha256": "dc3e05800f22bf18940120d2b5eb8a7dfc2257059ba01d53db3a5a35e67f5dc5"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-own-proof-v2/20262905/audit-1.log",
+      "member": "files/0027",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 53,
+      "sha256": "9d4272e765c07a97e7bb9e5d6a42eeb76c045df821203791a1f803f2d30f472f"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-own-proof-v2/20262905/audit-2.log",
+      "member": "files/0028",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 53,
+      "sha256": "dc3e05800f22bf18940120d2b5eb8a7dfc2257059ba01d53db3a5a35e67f5dc5"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-own-proof-v2/20262905/audit-3.log",
+      "member": "files/0029",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 53,
+      "sha256": "3ccd8d2859f79e9b575f37c8ef9144929baa52942fd68af1f4125c28a44db120"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-own-proof-v2/20262905/audit-4.log",
+      "member": "files/0030",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 53,
+      "sha256": "3ccd8d2859f79e9b575f37c8ef9144929baa52942fd68af1f4125c28a44db120"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-own-proof-v2/20262905/audit-5.log",
+      "member": "files/0031",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 53,
+      "sha256": "9d4272e765c07a97e7bb9e5d6a42eeb76c045df821203791a1f803f2d30f472f"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-own-proof-v2/20262905/pause/initial.pt",
+      "member": "files/0032",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 3175377,
+      "sha256": "4711775906667729983e7f56f8dc07dbbd064b52262f6b9de5b20d2c81e03800"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-own-proof-v2/20262905/pause/native.pt",
+      "member": "files/0033",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 6323763,
+      "sha256": "002e32f65ed7276547ed9028bfdd6328634331776e2edc1e2bd5bc7f5e943008"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-own-proof-v2/20262905/pause/result.json",
+      "member": "files/0034",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 170,
+      "sha256": "8b75b88f8131f7f22f4c374fb01ade59e7da1a709292a8be78407e3049f790a9"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-own-proof-v2/20262905/pause.log",
+      "member": "files/0035",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-own-proof-v2/20262905/result.json",
+      "member": "files/0036",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 8492,
+      "sha256": "5938bec697c0e6b3840e4002650f346b394d69aec8c7ab092593e90fb6055c55"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-own-proof-v2/20262905/resume/initial.pt",
+      "member": "files/0037",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 6323827,
+      "sha256": "0cd61524b8fa3471cb2f04e8b0bdeeaf033b2840fb779ebade19b66fbaba2372"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-own-proof-v2/20262905/resume/native.pt",
+      "member": "files/0038",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 6323827,
+      "sha256": "e5f154c42f8910c43b6760778c807e39be4424835c27c4faa474f572eb6f7674"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-own-proof-v2/20262905/resume/result.json",
+      "member": "files/0039",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 170,
+      "sha256": "6a9d4c47ed9636abaa8849445687a68745c95fdea76d00b1f7b7a9f1a62d084a"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-own-proof-v2/20262905/resume.log",
+      "member": "files/0040",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-own-proof-v2/20262905/whole/initial.pt",
+      "member": "files/0041",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 3175377,
+      "sha256": "4711775906667729983e7f56f8dc07dbbd064b52262f6b9de5b20d2c81e03800"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-own-proof-v2/20262905/whole/native.pt",
+      "member": "files/0042",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 6323763,
+      "sha256": "c473eeee958780799e9ae0dbe34471e74644add4d93176823bb56076764e3629"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-own-proof-v2/20262905/whole/result.json",
+      "member": "files/0043",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 170,
+      "sha256": "46955e2019be7a37ecebd683389b86eeb0f8bd59efc8b4b0bc15f25625b29cb9"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-own-proof-v2/20262905/whole.log",
+      "member": "files/0044",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-own-proof-v2/20262906/audit-0.log",
+      "member": "files/0045",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 53,
+      "sha256": "dc3e05800f22bf18940120d2b5eb8a7dfc2257059ba01d53db3a5a35e67f5dc5"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-own-proof-v2/20262906/audit-1.log",
+      "member": "files/0046",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 53,
+      "sha256": "9d4272e765c07a97e7bb9e5d6a42eeb76c045df821203791a1f803f2d30f472f"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-own-proof-v2/20262906/audit-2.log",
+      "member": "files/0047",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 53,
+      "sha256": "dc3e05800f22bf18940120d2b5eb8a7dfc2257059ba01d53db3a5a35e67f5dc5"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-own-proof-v2/20262906/audit-3.log",
+      "member": "files/0048",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 53,
+      "sha256": "3ccd8d2859f79e9b575f37c8ef9144929baa52942fd68af1f4125c28a44db120"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-own-proof-v2/20262906/audit-4.log",
+      "member": "files/0049",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 53,
+      "sha256": "3ccd8d2859f79e9b575f37c8ef9144929baa52942fd68af1f4125c28a44db120"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-own-proof-v2/20262906/audit-5.log",
+      "member": "files/0050",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 53,
+      "sha256": "9d4272e765c07a97e7bb9e5d6a42eeb76c045df821203791a1f803f2d30f472f"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-own-proof-v2/20262906/pause/initial.pt",
+      "member": "files/0051",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 3175377,
+      "sha256": "b1aea88e5c051f21e319bbe404af896b37d38bf91fa5c7439ce586b5a3194499"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-own-proof-v2/20262906/pause/native.pt",
+      "member": "files/0052",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 6323763,
+      "sha256": "ae08a7eb52aa61e0df0ce2789f496bb8fae2f8e49ad3fcdd62020f14259c6f29"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-own-proof-v2/20262906/pause/result.json",
+      "member": "files/0053",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 170,
+      "sha256": "ebabe8ae9910e7aade17c1d822d84be153e32b9027524a7b52b09603fcff9b1b"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-own-proof-v2/20262906/pause.log",
+      "member": "files/0054",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-own-proof-v2/20262906/result.json",
+      "member": "files/0055",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 8490,
+      "sha256": "f0d5888f6659b2d9fe1181adda65d17262668cdc741893dfdb9b6512651eec12"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-own-proof-v2/20262906/resume/initial.pt",
+      "member": "files/0056",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 6323763,
+      "sha256": "57b7858504973f176d5423c0a5fa2a65444dd21a11851737034fe516fdfba1fe"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-own-proof-v2/20262906/resume/native.pt",
+      "member": "files/0057",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 6323763,
+      "sha256": "afa64832bbeecbb394df5fc4f22d843b282010b887ebf7aa0eb00fe1de8ff9e4"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-own-proof-v2/20262906/resume/result.json",
+      "member": "files/0058",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 169,
+      "sha256": "c30fee57674c512e72edda10718b56e4ba72a37d16ce649846f8c5efd6b4d34d"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-own-proof-v2/20262906/resume.log",
+      "member": "files/0059",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-own-proof-v2/20262906/whole/initial.pt",
+      "member": "files/0060",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 3175377,
+      "sha256": "b1aea88e5c051f21e319bbe404af896b37d38bf91fa5c7439ce586b5a3194499"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-own-proof-v2/20262906/whole/native.pt",
+      "member": "files/0061",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 6323763,
+      "sha256": "bc2285590120b92e94eb1f547e716cfce09aa9915bcbdb3b266756adf767dd7f"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-own-proof-v2/20262906/whole/result.json",
+      "member": "files/0062",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 169,
+      "sha256": "d20422a60a3f9266dfeaa4f1fbf42c0fcaaeaca58d3bbf80c99becd4c8fc3d08"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-own-proof-v2/20262906/whole.log",
+      "member": "files/0063",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/dev/shm/harbichess-continuation-20261007/known160-data/profile.json",
+      "member": "files/0064",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 5061,
+      "sha256": "b8c77bff3477eea91b2aee799e0c3c38f55248912e43dab3fccd8aa9630fc574"
+    },
+    {
+      "path": "/dev/shm/harbichess-continuation-20261007/known160-e8-wiring-recovery-data/profile.json",
+      "member": "files/0065",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 25346,
+      "sha256": "22c316eb2eb9a0b611d649ca75cf06069730eff3a3442e39607488e01f210f38"
+    },
+    {
+      "path": "/dev/shm/harbichess-continuation-20261007/metadata-20262905/excluded-fullhistories.json",
+      "member": "files/0066",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 7223573,
+      "sha256": "b55f40cdbae32d981b4306ee40865daa78c153dbdf30e868cc52db00eee3a7da"
+    },
+    {
+      "path": "/dev/shm/harbichess-continuation-20261007/metadata-20262905/protected-aliases.bin",
+      "member": "files/0067",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 832512,
+      "sha256": "e9ff3bfb0c6914b573d68b7df0a2cc110cd061a07b2381c8412f3be2473e81d9"
+    },
+    {
+      "path": "/dev/shm/harbichess-continuation-20261007/metadata-20262905/protected-manifest.json",
+      "member": "files/0068",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 34351,
+      "sha256": "89d191d8826a23b0ddb69a383efaf07a95d81e248a56da92472dd4cd72772168"
+    },
+    {
+      "path": "/dev/shm/harbichess-continuation-20261007/metadata-20262905/result.json",
+      "member": "files/0069",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 1235,
+      "sha256": "73754d38c39ab2802089658cb81005a0d9626cd0c0c74cd42994400628bbe6bc"
+    },
+    {
+      "path": "/dev/shm/harbichess-continuation-20261007/metadata-20262906/excluded-fullhistories.json",
+      "member": "files/0070",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 7276137,
+      "sha256": "90eb9067973f4e3e39617207188bea0fac4c7ecc00dd37f7b8b783140295cb3b"
+    },
+    {
+      "path": "/dev/shm/harbichess-continuation-20261007/metadata-20262906/protected-aliases.bin",
+      "member": "files/0071",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 838384,
+      "sha256": "63865f92ebc82cae794c021d084ac7cd272449ea7a1c05a13be82d3753f0d4b5"
+    },
+    {
+      "path": "/dev/shm/harbichess-continuation-20261007/metadata-20262906/protected-manifest.json",
+      "member": "files/0072",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 34351,
+      "sha256": "7e8d7074085e5a08b30ab914c22d4a56e09b62a89d43650b787e51d1bd1b2256"
+    },
+    {
+      "path": "/dev/shm/harbichess-continuation-20261007/metadata-20262906/result.json",
+      "member": "files/0073",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 1235,
+      "sha256": "c4b09188d5eace9435aa83734c76a66319ef979c8e24dbd89650dfcd976f3f1c"
+    },
+    {
+      "path": "/dev/shm/harbichess-ownq-v2/20262905/events.jsonl",
+      "member": "files/0074",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 1749342,
+      "sha256": "cb82303fd42b10e911f6500a13182a188d5a2be59e5bff6466abff5a07def364"
+    },
+    {
+      "path": "/dev/shm/harbichess-ownq-v2/20262905/receipt.json",
+      "member": "files/0075",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 88208,
+      "sha256": "320e526a12f331829a87c15af8ac6fab3687161bf5810cb729e626d0051b2982"
+    },
+    {
+      "path": "/dev/shm/harbichess-ownq-v2/20262905/search-aliases-0000.bin",
+      "member": "files/0076",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 8345072,
+      "sha256": "e478f6d594e3dee8d8400c784ae06af1c45daafe7a086a1286776a8aa14d45c9"
+    },
+    {
+      "path": "/dev/shm/harbichess-ownq-v2/20262905/search-aliases-0001.bin",
+      "member": "files/0077",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 8349840,
+      "sha256": "ad50e8ea16c1c5dd36545b886b6816390f21f7e5f2cd0db753b1b3544b2671d0"
+    },
+    {
+      "path": "/dev/shm/harbichess-ownq-v2/20262905/search-aliases-0002.bin",
+      "member": "files/0078",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 8379160,
+      "sha256": "bc634b46ba1dba4a136f02ad124c0d54ba7a4beca4a1101cdd34547572588de1"
+    },
+    {
+      "path": "/dev/shm/harbichess-ownq-v2/20262905/search-aliases-0003.bin",
+      "member": "files/0079",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 8369552,
+      "sha256": "e8430d46f4f512fed205d763d1422e15e2d29163d947baeaf199f561d904fc88"
+    },
+    {
+      "path": "/dev/shm/harbichess-ownq-v2/20262905/search-aliases-0004.bin",
+      "member": "files/0080",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 8375000,
+      "sha256": "55124a085da984c6c96d023bfc9d9b4c3c5edbde09b6d93093999d84b7587f91"
+    },
+    {
+      "path": "/dev/shm/harbichess-ownq-v2/20262905/search-aliases-0005.bin",
+      "member": "files/0081",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 874624,
+      "sha256": "1062525c410d4a8a980b967a003ba851e43c185e1b313ea212cf16ad91de90ab"
+    },
+    {
+      "path": "/dev/shm/harbichess-ownq-v2/20262906/events.jsonl",
+      "member": "files/0082",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 1678449,
+      "sha256": "a62b381557f7620cd968e9883b45709079c0be9be778dbea8c42650ba8fd5178"
+    },
+    {
+      "path": "/dev/shm/harbichess-ownq-v2/20262906/receipt.json",
+      "member": "files/0083",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 87883,
+      "sha256": "39e56c4eb3446fad8e0404a8ddb71c3f46b94c23750464ff6bf31bf72757e057"
+    },
+    {
+      "path": "/dev/shm/harbichess-ownq-v2/20262906/search-aliases-0000.bin",
+      "member": "files/0084",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 8368920,
+      "sha256": "b50b06b29704d43302fc9b9c3c66ba95061aa4358349572bd6740f8958231301"
+    },
+    {
+      "path": "/dev/shm/harbichess-ownq-v2/20262906/search-aliases-0001.bin",
+      "member": "files/0085",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 8347808,
+      "sha256": "199cf3252c251b86f20d0cf3d38506859e665f6b0d8840936a9f388d31fd18c6"
+    },
+    {
+      "path": "/dev/shm/harbichess-ownq-v2/20262906/search-aliases-0002.bin",
+      "member": "files/0086",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 8386576,
+      "sha256": "db0fa2b87cf1e70bf8baaa0b6eb28618fa6e4410b1e637ae2ba6d19d2b467417"
+    },
+    {
+      "path": "/dev/shm/harbichess-ownq-v2/20262906/search-aliases-0003.bin",
+      "member": "files/0087",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 8358432,
+      "sha256": "38caf5bfda10d9318df615b1410e397c982f447ef2a8936b65139d56a0f46430"
+    },
+    {
+      "path": "/dev/shm/harbichess-ownq-v2/20262906/search-aliases-0004.bin",
+      "member": "files/0088",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 8360008,
+      "sha256": "50ae4d3a52c9451965da2421efc02376faf23f4686fac6bc1561eb40ff808308"
+    },
+    {
+      "path": "/dev/shm/harbichess-ownq-v2/20262906/search-aliases-0005.bin",
+      "member": "files/0089",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 2444016,
+      "sha256": "61e952e1f00421015a568bb9756b310db9bdfcd8c83155ccf9c132b86cec775a"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/cache-relocation-receipt-v2.json",
+      "member": "files/0090",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 69788,
+      "sha256": "1441caa722766a1235286481ad76f30f66bfbd674a5f8848731783b8019c8b19"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/cache-relocation-receipt.json",
+      "member": "files/0091",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 56227,
+      "sha256": "9785a2af3acccb2a362430b36812b059a1488f6d43f76e7db5e459cf2ef1eaec"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/confirmation-betting-supplement-v1/MATH-AND-SCOPE.txt",
+      "member": "files/0092",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 4309,
+      "sha256": "63d66f4b85ce7c59d1fb8e37ee99702f87b922df1bcafd77c840dc9c4a68f861"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/confirmation-betting-supplement-v1/bounded_betting.py",
+      "member": "files/0093",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 4861,
+      "sha256": "35628fc596ff53a7de9108b4de282e70d0390b2c54f534b6313cf27f70b54634"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/confirmation-betting-supplement-v1/inventory.json",
+      "member": "files/0094",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 475,
+      "sha256": "af153ca71699e1ba3f67787246cdf4c47c6c5429841f3399d7e5819be822420b"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/confirmation-betting-supplement-v1/preregistration-DRAFT.json",
+      "member": "files/0095",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 1456,
+      "sha256": "9e5d3195486b8ae73a061776fa490e623c333e1fb9e4e76d468262f823082651"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/confirmation-betting-supplement-v1/preregistration-REGISTERED.json",
+      "member": "files/0096",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 2390,
+      "sha256": "3af38106e741be9f4021dee6ac9b1adfea82dcbdf3cc4458982f9e092feb9810"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/confirmation-betting-supplement-v1/test_bounded_betting.py",
+      "member": "files/0097",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 3156,
+      "sha256": "e2fa476fb0bedbc5041351f243e49f3cf9a09795f11a40b1bb49dc18b7266c38"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/confirmation-betting-supplement-v1/verification.json",
+      "member": "files/0098",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 451,
+      "sha256": "56ac3058009b0cae7eddf022cf2c543df61a836a9fdc3f21475ca71c123bf0a4"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/controller.py",
+      "member": "files/0099",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 3184,
+      "sha256": "5090ef465aafd81fd39a49dd86b205cfe7d2d97f73c357c83aa2822f321d464b"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/execute_known160.py",
+      "member": "files/0100",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 1368,
+      "sha256": "486a36169b09de8cd33ec6df1a69b457b123acaaa8e385a313abadfc4ae456cc"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/execute_phase_plan.py",
+      "member": "files/0101",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 968,
+      "sha256": "ba0bae9e552a7e8812252d9b3f63f3eb7b5541b63ba260e2d4328684c917fad0"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/launch.py",
+      "member": "files/0102",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 2593,
+      "sha256": "cd6a39ee4581c583c1ac4ade371452b673ba04f287f3a8f364466710fd2efa9b"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/nnue-own-producer-v2/.pytest_cache/.gitignore",
+      "member": "files/0103",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 37,
+      "sha256": "3ed731b65d06150c138e2dadb0be0697550888a6b47eb8c45ecc9adba8b8e9bd"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/nnue-own-producer-v2/.pytest_cache/CACHEDIR.TAG",
+      "member": "files/0104",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 191,
+      "sha256": "37dc88ef9a0abeddbe81053a6dd8fdfb13afb613045ea1eb4a5c815a74a3bde4"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/nnue-own-producer-v2/.pytest_cache/README.md",
+      "member": "files/0105",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 302,
+      "sha256": "73fd6fccdd802c419a6b2d983d6c3173b7da97558ac4b589edec2dfe443db9ad"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/nnue-own-producer-v2/.pytest_cache/v/cache/lastfailed",
+      "member": "files/0106",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 2,
+      "sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/nnue-own-producer-v2/.pytest_cache/v/cache/nodeids",
+      "member": "files/0107",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 363,
+      "sha256": "790e86f20e7c73a34f0773dbec7a5be17021442ce35875d0d144ac26742e36c4"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/nnue-own-producer-v2/README.md",
+      "member": "files/0108",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 3970,
+      "sha256": "bed627bacbe0b9ba37a33b4de4bb6b220e60dd4bcdf53fe9421d983370fe39c9"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/nnue-own-producer-v2/collector.py",
+      "member": "files/0109",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 9883,
+      "sha256": "b7f87d37d2213997be0a68b7749784b774b33d2a2cc2b7bf68f676c48a7c6bc5"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/nnue-own-producer-v2/input-pools/20262905.json",
+      "member": "files/0110",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 2963017,
+      "sha256": "a8b43b377d5376a5f67f3a56edb893f949b54e92be9e7a60b1e6ff91bfdfaa6a"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/nnue-own-producer-v2/input-pools/20262906.json",
+      "member": "files/0111",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 2972665,
+      "sha256": "ae9c02b7b00dc8605688d768cea3ec549d938042e2ed87c9000ff09526b82b97"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/nnue-own-producer-v2/metadata_factory.py",
+      "member": "files/0112",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 12430,
+      "sha256": "8d8bb59f500befe26744e40e1c50d25ad1f027272841558e40b9ae3aac8ca43c"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/nnue-own-producer-v2/pool-projection-receipt.json",
+      "member": "files/0113",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 2006,
+      "sha256": "0d0230a0e00e96188a1a7f7bc2a89f6b40382e11cc58736f643f01644d6d67a5"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/nnue-own-producer-v2/registrations/20262905.json",
+      "member": "files/0114",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 3557,
+      "sha256": "f9f36e02cdfbec9c13219af06a6ae75316c1f276394377ccf38862d78a4c142c"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/nnue-own-producer-v2/registrations/20262906.json",
+      "member": "files/0115",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 3557,
+      "sha256": "cc912ba1502dd7ca48c69060cd6b4aadbec60dd292b1f45ba671f3d5da11014c"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/nnue-own-producer-v2/run_collection.py",
+      "member": "files/0116",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 9141,
+      "sha256": "b4c06d2762e0978472e3e278c4a7da94b833a1c675fb23628651b5e7c507c29e"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/nnue-own-producer-v2/test_collector.py",
+      "member": "files/0117",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 4085,
+      "sha256": "3532f1a290ddf06e0676a34e7ebc30f0cacc300c38effd239f2446bbdae13d00"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/nnue-own-training-v2/README.md",
+      "member": "files/0118",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 5826,
+      "sha256": "5dfe88a77568ad7abfb353b9f965d945a80467181e0ebfc44206c5644f88237a"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/nnue-own-training-v2/attempt1-fixture-failure-note.json",
+      "member": "files/0119",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 379,
+      "sha256": "2bbe363ea70f02f1340508728ac75abf0431f738f0fc1f0a4c5f4396a244a2a8"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/nnue-own-training-v2/contracts-help.log",
+      "member": "files/0120",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 231,
+      "sha256": "ae9db5c764ab9a8b64833d94c99dc6434a6b141495ad8362eee4e824a75d7f12"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/nnue-own-training-v2/contracts.py",
+      "member": "files/0121",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 7118,
+      "sha256": "605a0d9e11f606c7e06998c6c216134c005894f73d7602efcfb97fe494be6e9b"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/nnue-own-training-v2/convert-help.log",
+      "member": "files/0122",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 232,
+      "sha256": "d4137f774161c49ab1fe1de8d02fd94cc9c65bfa9420196de41c7ba6c051925d"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/nnue-own-training-v2/convert.py",
+      "member": "files/0123",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 20615,
+      "sha256": "bdfc780e544bac9f6ff3abe25b458babd1ee8b883434fb6aaf3e2085fe6e1edc"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/nnue-own-training-v2/model.py",
+      "member": "files/0124",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 3877,
+      "sha256": "c04914bc5a560ad51de81c6d0aaeb3fae4d04b45c07cd8e39bbd31f655d36565"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/nnue-own-training-v2/native.py",
+      "member": "files/0125",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 8940,
+      "sha256": "f60a1f9814f48691af1e2d1f1db1b548cff3e7df0a7cae9718051de1865b8b69"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/nnue-own-training-v2/prove-help.log",
+      "member": "files/0126",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 232,
+      "sha256": "9489da73bc8c30cef2873728ef0b82155ad3ceccca788a49f4245bef3cb2414a"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/nnue-own-training-v2/prove.py",
+      "member": "files/0127",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 8034,
+      "sha256": "a320c0ec335d14e2432d165f85b1b8295d4b4afe58c2f9c6ba332422f0cde22d"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/nnue-own-training-v2/synthetic-native-attempt1.log",
+      "member": "files/0128",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/nnue-own-training-v2/synthetic-native-attempt2.log",
+      "member": "files/0129",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/nnue-own-training-v2/synthetic_native.py",
+      "member": "files/0130",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 3353,
+      "sha256": "4a887d408b7051e4d24114d6e86edb72c568e10b26c6014bf14e4df5deb0ced0"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/nnue-own-training-v2/test_v2.py",
+      "member": "files/0131",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 9254,
+      "sha256": "71a206509ba4d2ee97f20e64b90afbb27d543395cc88a64557e395b9dd489b63"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/nnue-own-training-v2/tests-attempt2.log",
+      "member": "files/0132",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 23913,
+      "sha256": "c3191a2a30fea6e7105a8bf909919e88498d8aef44a5cde852fa18ce52005444"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/nnue-own-training-v2/tests-attempt3.log",
+      "member": "files/0133",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 98,
+      "sha256": "044ab3fd79e8b7314e9090537f59ef9f672195723b8baeb8a82c24f8c7b3d4d6"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/nnue-own-training-v2/tests-attempt4.log",
+      "member": "files/0134",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 98,
+      "sha256": "47eeeccc231ad02c645530297455267a1c317417606140a8b7235f5f41cfc20b"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/nnue-own-training-v2/tests-final.log",
+      "member": "files/0135",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 98,
+      "sha256": "b13d7d2bd9bd091122cfe9833a0d647c460ce8fafb8d6fe160f62fa127e10907"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/nnue-own-training-v2/train-help.log",
+      "member": "files/0136",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 561,
+      "sha256": "7ae9e5d14830b22aeb5fe98264d4cf3799a5311404da4fc498e346563b85bf4d"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/nnue-own-training-v2/train-source-bridge.diff.txt",
+      "member": "files/0137",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 1154,
+      "sha256": "4996cea0ae64d2194555a436b2971ea7453c8089b5ff143e6e32ea6dc43f7435"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/nnue-own-training-v2/train.py",
+      "member": "files/0138",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 6186,
+      "sha256": "c5f16b69bf32183e9bf21f5d8d5e41ecf5636eae8176ec07e7f09ffe5d3a98dd"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/nnue-own-training-v2/verification.json",
+      "member": "files/0139",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 2544,
+      "sha256": "1400c7f59964d7c8f3d9b6a10405a1150318860ca1abc3ecc3cb6de543002b9d"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/nnue-strength-v2/ROOT-RECIPE.txt",
+      "member": "files/0140",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 7811,
+      "sha256": "a06c4dd8285a7af8c6afa7a21a6a33f1cbfb395d21add4c38f495671151bd9ed"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/nnue-strength-v2/admission.py",
+      "member": "files/0141",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 13054,
+      "sha256": "2e4a4eef372b5f46f1151c6a6371646e3102bdf68059ed6c0e2a4179e65ab788"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/nnue-strength-v2/audit_collection_six.py",
+      "member": "files/0142",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 10086,
+      "sha256": "1a5a7c78cf6589d17f7f6965bf2eae2b4f9138c747830c5f9529fe718fe608a0"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/nnue-strength-v2/audit_collection_six_v2.py",
+      "member": "files/0143",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 11274,
+      "sha256": "2082c379ac0dc0540e3e758ce70da09c20d972a267eee057a8b95cd2609a491e"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/nnue-strength-v2/audit_known160.py",
+      "member": "files/0144",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 11440,
+      "sha256": "b9164c2be23a8ac422d4c3c1eee52718bef17410fc27c7e7b890853ebcf87206"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/nnue-strength-v2/audit_known160_v2.py",
+      "member": "files/0145",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 11561,
+      "sha256": "d8ffdf03389e74f80e28d9cfd360f6e3807a56ea9d05a726ee0dfe40fc52159d"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/nnue-strength-v2/collection-audit-clock-DRAFT.json",
+      "member": "files/0146",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 427,
+      "sha256": "314ce9cc92dfaa972fd5832b79a0d1b05029bbcacdb63ab0317b327867e7154e"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/nnue-strength-v2/confirmation-DRAFT.json",
+      "member": "files/0147",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 2171,
+      "sha256": "e194c06417bec0d388512df9abee597a7e0eeed2402e147ec0ff71f2a6ef5986"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/nnue-strength-v2/confirmation_stats.py",
+      "member": "files/0148",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 3890,
+      "sha256": "aaf1fb4811a835bb725cfe1226c56e819eb12d6617dfe0d759dcf1d99278bbdd"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/nnue-strength-v2/inventory.json",
+      "member": "files/0149",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 1902,
+      "sha256": "c2b6b53d19b3752843625141d66cfbaf72439cc30039789c8fca17f87bdec42c"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/nnue-strength-v2/protocol-DRAFT.json",
+      "member": "files/0150",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 11742,
+      "sha256": "e7e93b631df050627693c383ef4a451c47c66b67ca398d1194a56f778538c7bb"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/nnue-strength-v2/protocol-completed-DRAFT.json",
+      "member": "files/0151",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 14377,
+      "sha256": "1abd8e4a3b585b87a50d85957d72bedcaa47144942fd994ae4ed3062c98bf528"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/nnue-strength-v2/protocol.json",
+      "member": "files/0152",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 15844,
+      "sha256": "be90e4fd96c366dd88da5c1e6586251574be6e6c37caa62db82481a2a3de63b9"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/nnue-strength-v2/qualify_profile.py",
+      "member": "files/0153",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 8128,
+      "sha256": "1106ffe7271757153077a5a3aebd9410dc2b12d7be26613fdca6a3031cc0ca81"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/nnue-strength-v2/replay_six.py",
+      "member": "files/0154",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 4829,
+      "sha256": "2a3574fa0a297d20b46d96e6113e87fca65f50f96232cbefa661f9d9d2cf2ed6"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/nnue-strength-v2/run.py",
+      "member": "files/0155",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 6658,
+      "sha256": "9c1823c0a10db786f299f6608251f59af125b56761ece8074844801e52ec3d30"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/nnue-strength-v2/seal.py",
+      "member": "files/0156",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 2907,
+      "sha256": "7abecf1c60f42ba470c9b82e37886f791a4cf86ea943236283f7ff11eff81314"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/nnue-strength-v2/search.py",
+      "member": "files/0157",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 5944,
+      "sha256": "de53c14728a67b7772f18b396ac8ef5c35a144d4e4e616fec40099cd461a6670"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/nnue-strength-v2/teacher_admission.py",
+      "member": "files/0158",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 5810,
+      "sha256": "94d80c5ab1f3ca9a2d5260d52bda5f7ab16ff236970a57a9a2c70e2351d92781"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/nnue-strength-v2/test_collection_audit.py",
+      "member": "files/0159",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 2519,
+      "sha256": "d7f700d2baceeb9db2e70ccb8a7dd6402595db8c349331cc93665e63dd0c0332"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/nnue-strength-v2/test_collection_audit_v2.py",
+      "member": "files/0160",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 1303,
+      "sha256": "dae05f0b610e2bcfb4a63759d31480d4687b3aa44025b1da2b9c1a7e9641b440"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/nnue-strength-v2/test_controls.py",
+      "member": "files/0161",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 8052,
+      "sha256": "84215b3a34672bedda202f2fc476cd62f285c69b1ea06b8dfda79302096a9d2f"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/nnue-strength-v2/test_depth_metadata_v2.py",
+      "member": "files/0162",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 698,
+      "sha256": "147f7bb645a4b84262b63534ad9a0169a3c9787565b67eae84fa48d01f41b51f"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/nnue-strength-v2/tournament.py",
+      "member": "files/0163",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 9052,
+      "sha256": "7081128a96f575d01ebaf40f1c7de725274b4316ac3836802b539b3ce7395cb8"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/nnue-strength-v2/value.py",
+      "member": "files/0164",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 2373,
+      "sha256": "f6388c16e5a40d29a67fb599f7f4a7e9293e9abe051839853409e90183717fe6"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/nnue-strength-v2/verification.json",
+      "member": "files/0165",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 1015,
+      "sha256": "6cbda41c8f700e74aa3c7b4cefd54fe4562a31f49dbf7d0b2fddd963f375860d"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/nnue-strength-v2-e8-wiring-recovery/ROOT-RECIPE.txt",
+      "member": "files/0166",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 7811,
+      "sha256": "a06c4dd8285a7af8c6afa7a21a6a33f1cbfb395d21add4c38f495671151bd9ed"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/nnue-strength-v2-e8-wiring-recovery/admission.py",
+      "member": "files/0167",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 13054,
+      "sha256": "2e4a4eef372b5f46f1151c6a6371646e3102bdf68059ed6c0e2a4179e65ab788"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/nnue-strength-v2-e8-wiring-recovery/audit_collection_six.py",
+      "member": "files/0168",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 10086,
+      "sha256": "1a5a7c78cf6589d17f7f6965bf2eae2b4f9138c747830c5f9529fe718fe608a0"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/nnue-strength-v2-e8-wiring-recovery/audit_collection_six_v2.py",
+      "member": "files/0169",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 11274,
+      "sha256": "2082c379ac0dc0540e3e758ce70da09c20d972a267eee057a8b95cd2609a491e"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/nnue-strength-v2-e8-wiring-recovery/audit_known160.py",
+      "member": "files/0170",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 11440,
+      "sha256": "b9164c2be23a8ac422d4c3c1eee52718bef17410fc27c7e7b890853ebcf87206"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/nnue-strength-v2-e8-wiring-recovery/audit_known160_v2.py",
+      "member": "files/0171",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 11561,
+      "sha256": "d8ffdf03389e74f80e28d9cfd360f6e3807a56ea9d05a726ee0dfe40fc52159d"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/nnue-strength-v2-e8-wiring-recovery/collection-audit-clock-DRAFT.json",
+      "member": "files/0172",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 427,
+      "sha256": "314ce9cc92dfaa972fd5832b79a0d1b05029bbcacdb63ab0317b327867e7154e"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/nnue-strength-v2-e8-wiring-recovery/confirmation-DRAFT.json",
+      "member": "files/0173",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 2171,
+      "sha256": "e194c06417bec0d388512df9abee597a7e0eeed2402e147ec0ff71f2a6ef5986"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/nnue-strength-v2-e8-wiring-recovery/confirmation_stats.py",
+      "member": "files/0174",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 3890,
+      "sha256": "aaf1fb4811a835bb725cfe1226c56e819eb12d6617dfe0d759dcf1d99278bbdd"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/nnue-strength-v2-e8-wiring-recovery/inventory.json",
+      "member": "files/0175",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 1902,
+      "sha256": "c2b6b53d19b3752843625141d66cfbaf72439cc30039789c8fca17f87bdec42c"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/nnue-strength-v2-e8-wiring-recovery/protocol-DRAFT.json",
+      "member": "files/0176",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 11742,
+      "sha256": "e7e93b631df050627693c383ef4a451c47c66b67ca398d1194a56f778538c7bb"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/nnue-strength-v2-e8-wiring-recovery/protocol-completed-DRAFT.json",
+      "member": "files/0177",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 15144,
+      "sha256": "e25e7611797adc1f71724a5846b4daeb39efecf6cf6726262e4a598be55ad336"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/nnue-strength-v2-e8-wiring-recovery/protocol.json",
+      "member": "files/0178",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 16611,
+      "sha256": "22f87ce706483bcc1364a650a405b7edbf9b2fdccd380741a24a12fd2a29ddb2"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/nnue-strength-v2-e8-wiring-recovery/qualify_profile.py",
+      "member": "files/0179",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 8128,
+      "sha256": "1106ffe7271757153077a5a3aebd9410dc2b12d7be26613fdca6a3031cc0ca81"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/nnue-strength-v2-e8-wiring-recovery/replay_six.py",
+      "member": "files/0180",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 4829,
+      "sha256": "2a3574fa0a297d20b46d96e6113e87fca65f50f96232cbefa661f9d9d2cf2ed6"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/nnue-strength-v2-e8-wiring-recovery/run.py",
+      "member": "files/0181",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 6658,
+      "sha256": "9c1823c0a10db786f299f6608251f59af125b56761ece8074844801e52ec3d30"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/nnue-strength-v2-e8-wiring-recovery/seal.py",
+      "member": "files/0182",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 2907,
+      "sha256": "7abecf1c60f42ba470c9b82e37886f791a4cf86ea943236283f7ff11eff81314"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/nnue-strength-v2-e8-wiring-recovery/search.py",
+      "member": "files/0183",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 5944,
+      "sha256": "de53c14728a67b7772f18b396ac8ef5c35a144d4e4e616fec40099cd461a6670"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/nnue-strength-v2-e8-wiring-recovery/teacher_admission.py",
+      "member": "files/0184",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 5810,
+      "sha256": "94d80c5ab1f3ca9a2d5260d52bda5f7ab16ff236970a57a9a2c70e2351d92781"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/nnue-strength-v2-e8-wiring-recovery/test_collection_audit.py",
+      "member": "files/0185",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 2519,
+      "sha256": "d7f700d2baceeb9db2e70ccb8a7dd6402595db8c349331cc93665e63dd0c0332"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/nnue-strength-v2-e8-wiring-recovery/test_collection_audit_v2.py",
+      "member": "files/0186",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 1303,
+      "sha256": "dae05f0b610e2bcfb4a63759d31480d4687b3aa44025b1da2b9c1a7e9641b440"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/nnue-strength-v2-e8-wiring-recovery/test_controls.py",
+      "member": "files/0187",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 8052,
+      "sha256": "84215b3a34672bedda202f2fc476cd62f285c69b1ea06b8dfda79302096a9d2f"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/nnue-strength-v2-e8-wiring-recovery/test_depth_metadata_v2.py",
+      "member": "files/0188",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 698,
+      "sha256": "147f7bb645a4b84262b63534ad9a0169a3c9787565b67eae84fa48d01f41b51f"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/nnue-strength-v2-e8-wiring-recovery/tournament.py",
+      "member": "files/0189",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 9052,
+      "sha256": "7081128a96f575d01ebaf40f1c7de725274b4316ac3836802b539b3ce7395cb8"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/nnue-strength-v2-e8-wiring-recovery/value.py",
+      "member": "files/0190",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 2373,
+      "sha256": "f6388c16e5a40d29a67fb599f7f4a7e9293e9abe051839853409e90183717fe6"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/nnue-strength-v2-e8-wiring-recovery/verification.json",
+      "member": "files/0191",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 1015,
+      "sha256": "6cbda41c8f700e74aa3c7b4cefd54fe4562a31f49dbf7d0b2fddd963f375860d"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/operator-window.json",
+      "member": "files/0192",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 322,
+      "sha256": "a335e5c2bfb2a3b04b82ccd815c6ad0f0cc408dad64a08e103096b067650e9a0"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/ownq-20262905-controller/controller-registration.json",
+      "member": "files/0193",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 3421,
+      "sha256": "1a43f94cb50d0eee5707e74114ecfb9cc6c0805f2bf86531e1a41d9895725b95"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/ownq-20262905-controller/controller.log",
+      "member": "files/0194",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 429,
+      "sha256": "7a9be53febf2f197de056cf39b5724bda034ba30dd3f00d6d5cd87e772641c09"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/ownq-20262905-controller/owner-process.json",
+      "member": "files/0195",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 292,
+      "sha256": "d78b9d5572f368a05a5b5352aa37f3e80952bd2ef83b549c2124dfe100c88c1f"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/ownq-20262905-convert-controller/controller-registration.json",
+      "member": "files/0196",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 1598,
+      "sha256": "c4a3f13100531dd89c50b00dba858e8bd30106fede17fa84514c744517b61df8"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/ownq-20262905-convert-controller/controller.log",
+      "member": "files/0197",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 429,
+      "sha256": "749be72bb9a7442de1e99af8d68decc9826152b2428b43f59728d90e73c71c8e"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/ownq-20262905-convert-controller/owner-process.json",
+      "member": "files/0198",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 300,
+      "sha256": "3417a2b6faf3691e049a02ac760b61d626d484da6672984d0efbf1e6c3afbde7"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/ownq-20262905-convert-spec/commands.json",
+      "member": "files/0199",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 329,
+      "sha256": "1e81fba127c2901a11b9b3fef6fce2d9c6ba5453257edf87dc91f1b84bf3fe43"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/ownq-20262905-convert-spec/convert-seal.json",
+      "member": "files/0200",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 2504,
+      "sha256": "caac833ce6b6bb98b275863d3e4eb762db8ffdf45a8ce00798f9f1f88c720d0d"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/ownq-20262905-fit-controller/controller-registration.json",
+      "member": "files/0201",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 3397,
+      "sha256": "a53818a94897c444d55bf132efe5a99328ea0bc2278cb816ad0e74d1ae02d0c8"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/ownq-20262905-fit-controller/controller.log",
+      "member": "files/0202",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 429,
+      "sha256": "c95f0229bc8378f5574da94b76e533847daa34a702f451d92fe0131d7194410f"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/ownq-20262905-fit-controller/owner-process.json",
+      "member": "files/0203",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 296,
+      "sha256": "5baef8723cda2f974e1eccc8fc791020a234a964c52e574aeb38833e91253707"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/ownq-20262905-fit-spec/build-seal.json",
+      "member": "files/0204",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 4585,
+      "sha256": "027e9046c3f9b87f81d2c3dfcf8963664282d5154e2ec95eb29c9f72628d2438"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/ownq-20262905-fit-spec/commands.json",
+      "member": "files/0205",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 722,
+      "sha256": "4bc1133ce5fa5efd03693960eda648bb7843f9333de1521d4e6dc29f9f9b5f32"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/ownq-20262905-fit-spec/registry-plan.json",
+      "member": "files/0206",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 3670,
+      "sha256": "b9b53f3395ab3d5b325fda1a5890ca974977dd49003ec45f6c2d5e0910600c76"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/ownq-20262905-fit-spec-registry/commands.json",
+      "member": "files/0207",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 271,
+      "sha256": "6d4570a1c13b8ad60bf29969d263b4094d0fc2b90949e0a59fcc105ef3ca6fff"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/ownq-20262905-fit-spec-registry/registration.json",
+      "member": "files/0208",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 4326,
+      "sha256": "ac2b56bec73d3e810411e052da2a4e2541a39b621cc1c4ffe4b9c5ea66142a78"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/ownq-20262905-proof-controller/controller-registration.json",
+      "member": "files/0209",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 3258,
+      "sha256": "d0cb7312bf489d4f53f2d2dd225ddd618a7fc7fd699953def3e43189bd565a8d"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/ownq-20262905-proof-controller/controller.log",
+      "member": "files/0210",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 428,
+      "sha256": "40d983acb1a685a933f18a02082ad097d7d853c16fadf4a38f124854f5b5e131"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/ownq-20262905-proof-controller/owner-process.json",
+      "member": "files/0211",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 298,
+      "sha256": "5fcaaa66f3e5f75b307ccdfd9584ea33134308b35b06c47e6a67403b18f1500e"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/ownq-20262905-proof-spec/build-seal.json",
+      "member": "files/0212",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 4208,
+      "sha256": "02106c668279e6597af5483d7d43034764fab5238f78dfc80528a5beb2e52ecc"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/ownq-20262905-proof-spec/commands.json",
+      "member": "files/0213",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 730,
+      "sha256": "cd20e8673be0ef112bd8c0c8d821ea2af68915996ff08e9ca90237c4aab2f4fa"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/ownq-20262905-proof-spec/registry-plan.json",
+      "member": "files/0214",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 3672,
+      "sha256": "2e0825ebf7eb85886aceddb1e5aea063d1d64bc3e20ee4c66b38df1a3ab75978"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/ownq-20262905-proof-spec-registry/commands.json",
+      "member": "files/0215",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 273,
+      "sha256": "682928ae934d5ef0cac4600e197ce38fcbaff8228300230e796cea188daa095f"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/ownq-20262905-proof-spec-registry/registration.json",
+      "member": "files/0216",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 4328,
+      "sha256": "6cbf1bf33b56d1b79623da23f63479a485ff85e148353192048bdd36905fed86"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/ownq-20262905-six-audit/clock.json",
+      "member": "files/0217",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 596,
+      "sha256": "34fced44d6d83539f0e0dd0689b486f83b5d989421ebca4e7b60df9e8b614248"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/ownq-20262905-six-audit/result.json",
+      "member": "files/0218",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 3342,
+      "sha256": "4b5c663c7d9474939c00ac2c25d13bdf247742112f615202da8ee2700b1ecb72"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/ownq-20262905-six-audit-controller/controller-registration.json",
+      "member": "files/0219",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 3009,
+      "sha256": "e905a532f3f8e01f6b3aacb02213ac8c5aebff5fadcadcd4704e1317804a5f72"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/ownq-20262905-six-audit-controller/controller.log",
+      "member": "files/0220",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 429,
+      "sha256": "ec3fdf2b4fc18cfec96efd40e068c1b7677ad8a54dd773eb023b4884f9f6b2e5"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/ownq-20262905-six-audit-controller/owner-process.json",
+      "member": "files/0221",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 302,
+      "sha256": "f89f5e2dcd4fe968cc4089aaedd655e34c26ad2ce42c356a1bd66b7a6ec23e2a"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/ownq-20262906-controller/controller-registration.json",
+      "member": "files/0222",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 3421,
+      "sha256": "8afecc1b5278ffe99eae283cae573dbc58a975bc449d495a4d00a538b3d1c6a9"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/ownq-20262906-controller/controller.log",
+      "member": "files/0223",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 429,
+      "sha256": "7e816107980cb27e2ada49c41c89ed0838bbf7dc7b665e263c1d1162810c3cf5"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/ownq-20262906-controller/owner-process.json",
+      "member": "files/0224",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 292,
+      "sha256": "bb07e78181860a5b531b7cdaff8a891275a4d6443dc79af5a111cc897bac12e9"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/ownq-20262906-convert-controller/controller-registration.json",
+      "member": "files/0225",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 1598,
+      "sha256": "589f635941b11d731f455328dacd1b0490adbd97f85fb1b33dc6201605f7adb2"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/ownq-20262906-convert-controller/controller.log",
+      "member": "files/0226",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 429,
+      "sha256": "db8349579dbf3e363277d2d304a23017bd9a3ab20202fc5564dd35382454373a"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/ownq-20262906-convert-controller/owner-process.json",
+      "member": "files/0227",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 300,
+      "sha256": "c1ace9779c955ac7b3b2db938145cffb15834c2925dd53f077eb56781693cbe9"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/ownq-20262906-convert-spec/commands.json",
+      "member": "files/0228",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 329,
+      "sha256": "959db14b36b21325f9a5c67b48d1087492329dfc22cfab3aaac9e37b0d39426d"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/ownq-20262906-convert-spec/convert-seal.json",
+      "member": "files/0229",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 2504,
+      "sha256": "13bf7ee3c81558791225723fb68558ea3bc722fa48be0eb9d254b4fae2bbabc9"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/ownq-20262906-fit-controller/controller-registration.json",
+      "member": "files/0230",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 3397,
+      "sha256": "3cc2961546a1b5fc2d9ba9ed82bd0d212bad72b47bd934f1b8337b3fae1cb256"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/ownq-20262906-fit-controller/controller.log",
+      "member": "files/0231",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 428,
+      "sha256": "7ecc6ed915b48761a9895f6fc1b12bdd5f6ec1e732845c68f5f26d6c22168e66"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/ownq-20262906-fit-controller/owner-process.json",
+      "member": "files/0232",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 296,
+      "sha256": "b9af75cbbedf95a45c95c16d2bea3688620c21ff5cc2690abb6ba6bf7d7b20de"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/ownq-20262906-fit-spec/build-seal.json",
+      "member": "files/0233",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 4585,
+      "sha256": "9ed3cfbdad46fdfe3702690fc8e1ae27393a8c874f9748dcab79cb7c6e421524"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/ownq-20262906-fit-spec/commands.json",
+      "member": "files/0234",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 722,
+      "sha256": "0b8c4e40d705e4fb3c4a9a4f265e4f5b1eef89277c524f48f70766974b95405f"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/ownq-20262906-fit-spec/registry-plan.json",
+      "member": "files/0235",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 3670,
+      "sha256": "5ff38bc04e040b98cf8800a78823c2713f386043c293647544bfee3ef6dfafe5"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/ownq-20262906-fit-spec-registry/commands.json",
+      "member": "files/0236",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 271,
+      "sha256": "c17f5d1dd8f34e9fd5ce0906d58fdc241b09505538c0b8999d27c51d6adaacc6"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/ownq-20262906-fit-spec-registry/registration.json",
+      "member": "files/0237",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 4326,
+      "sha256": "31cd8748bccf1150f6e133ef636f0be5ae94901a672c71ebda61dd31348e4ceb"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/ownq-20262906-proof-controller/controller-registration.json",
+      "member": "files/0238",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 3258,
+      "sha256": "f8ccd87ae42d78152f1748b9866e0af81beb390d2136930eac0816fb338e9d19"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/ownq-20262906-proof-controller/controller.log",
+      "member": "files/0239",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 429,
+      "sha256": "4ef6157abe50f67e562d1018fa0e4277d9471d04ed17f029c21a4b5d35155e50"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/ownq-20262906-proof-controller/owner-process.json",
+      "member": "files/0240",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 298,
+      "sha256": "5ad672b95e4d5a7422d737f5388ac74938e10681dc4d44e197fb329eb26e9b9d"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/ownq-20262906-proof-spec/build-seal.json",
+      "member": "files/0241",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 4208,
+      "sha256": "b8ebe4cd05e74f37da6da2ac3fa043b815c224421108f2ebedc5335d8e2b0276"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/ownq-20262906-proof-spec/commands.json",
+      "member": "files/0242",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 730,
+      "sha256": "46d07bdc752c569cf772b18240b7cbd7d2dd2934f49972348458011fb0e42bc5"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/ownq-20262906-proof-spec/registry-plan.json",
+      "member": "files/0243",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 3672,
+      "sha256": "511d413c708695f72efa81d5347aa882544fbcce51ebd5532cbd480ad13bd1f2"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/ownq-20262906-proof-spec-registry/commands.json",
+      "member": "files/0244",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 273,
+      "sha256": "8a84cd0d43bbcf9e0a68649d028d8121bf5011844159653ec6fe4fa021181e87"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/ownq-20262906-proof-spec-registry/registration.json",
+      "member": "files/0245",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 4328,
+      "sha256": "364095a57c47109cef9f485d6c4d4037e3323adefc77fdf13cdaa99626cdc3e0"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/ownq-20262906-six-audit/clock.json",
+      "member": "files/0246",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 594,
+      "sha256": "0a7228548402cea086523a4d7b3d8766cdcebf85b36719f6ecfc0cab0c655168"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/ownq-20262906-six-audit/result.json",
+      "member": "files/0247",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 3347,
+      "sha256": "6315111229e996bcfcd06ad6ab9fac5df16cf4ceece141c7a0ddd62a2ed9116b"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/ownq-20262906-six-audit-controller/controller-registration.json",
+      "member": "files/0248",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 3007,
+      "sha256": "10844bbc9a5e8e5395e3eb8115d8f756dac971963666eb7fba7e9217fdea5754"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/ownq-20262906-six-audit-controller/controller.log",
+      "member": "files/0249",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 427,
+      "sha256": "36432a37deadf181918f36a4e11b4b6bc9f7deaaacd51a0dc9e3158e78ad0ad4"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/ownq-20262906-six-audit-controller/owner-process.json",
+      "member": "files/0250",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 300,
+      "sha256": "12414738e94b47772ef7503f0485d205f9dce830b3acd9fb5c65f14738b81132"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/ownq-actual-audit-set.json",
+      "member": "files/0251",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 1216,
+      "sha256": "0b9192ed491d558be7ec4cec042d52d42ee4c5b96a842bf9ab8b810c1bebc8cf"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/ownq-completed-registrations.json",
+      "member": "files/0252",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 233,
+      "sha256": "20ac66e0d1ee77d5c8a4d2672c314b0675ee5930c868ddc71ea875faec8f7ac8"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/protected_metadata.py",
+      "member": "files/0253",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 2389,
+      "sha256": "28e02cf75014a564301d58677c8a9724174be1f55f8ededf3a377207ae392f47"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/root-phase-specs/README.md",
+      "member": "files/0254",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 3674,
+      "sha256": "d4ed1b52fd0c3416facb77bbdf60a2feb76a89cf9d29c069d5018749fc0a875a"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/root-phase-specs/help.log",
+      "member": "files/0255",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 1222,
+      "sha256": "6a4d5f57d9701220c27f029c6118eb89b7fdb2e29350475cebbffee32a031b91"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/root-phase-specs/specs.py",
+      "member": "files/0256",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 14763,
+      "sha256": "850e288c3e9bbd4cfbeea55bbb90ce6a42e574f951de86f3dda52cd9b78e9bd0"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/root-phase-specs/test_specs.py",
+      "member": "files/0257",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 6926,
+      "sha256": "df10eb55dc1f18ba5a34a4a99c6d53c29da8f7b5c0cf4f6690c5fe75ec33adf9"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/root-phase-specs/tests-final.log",
+      "member": "files/0258",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 98,
+      "sha256": "4389b56885d24ad3c0212124adcac5049cd8550cd047de2185842dbf63b1bd56"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/root-phase-specs/tests.log",
+      "member": "files/0259",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 98,
+      "sha256": "8e77b268860e20bfd1a0c8f416d4da525a08324403608345305a9eebf76ca0b2"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/root-phase-specs/verification.json",
+      "member": "files/0260",
+      "role": "Oct7-own-current-parent-native-replay-source",
+      "bytes": 991,
+      "sha256": "21e114acafc634d43072b9122b62b67dcd750e66c7946545a86958b169904af5"
+    }
+  ]
+}
