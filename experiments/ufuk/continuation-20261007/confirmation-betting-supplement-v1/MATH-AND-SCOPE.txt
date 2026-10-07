@@ -1,0 +1,65 @@
+Prospective additional confirmation requirement, not a bootstrap replacement.
+No chess outcomes/models/arenas were loaded for this supplement.
+
+For a single metric observe FIXED n=48 independent root blocks X_i in [L,U].
+Null: average of their population expectations m_i is <=mu, where mu>L.
+For each FIXED fraction f in {.1,.2,...,1} define lambda=f/(mu-L) and
+K_f(mu)=product_i (1+lambda*(X_i-mu)). Every factor is nonnegative.
+Independence gives E K_f =product_i[1+lambda*(m_i-mu)]. AM-GM bounds this
+by [1+lambda*(average m_i-mu)]^n <=1. Mixture E_mu=average_f K_f therefore
+is a nonnegative e-value. Markov yields P(E_mu>=1280)<=1/1280=.00078125.
+This works with unequal root expectations; independence is essential.
+
+Each factor=(1-f)+f*(X_i-L)/(mu-L) is decreasing in mu. Hence E_mu is
+monotone decreasing. At the sample mean, observed AM-GM gives E<=1. Invert
+below that mean. The reported LCB is a rejected-side endpoint: if LCB>the
+true average mean, monotonicity implies E_at_true_mean>=1280. Thus one-sided
+coverage is >=1-1/1280. At true mean=L, boundedness forces every X_i=L
+almost surely; code returns L. f=1 and X_i=L contributes zero capital, not
+NaN. Sum logs is stable, and the final reported endpoint is CERTIFIED with
+exact rational arithmetic using exact represented outcomes, exact fractions
+1/10..1, and EXACT rejection threshold1280. Float bisection cannot inflate
+the certified endpoint; uncertifiable numeric failure returns L conservatively.
+
+Use L=0,U=1 for paired-color direct scores, L=-1,U=1 for paired SF score
+differences on the SAME root block. Within-root color/arm dependence is
+arbitrary. Across-root independence conditional on frozen models/seeds/book
+sampling remains required. Distinct IDs alone do not establish it. Independent
+source/ECO-family clusters and actual outcome-blind randomized sampling must
+be audited. Shared RNG constants may be conditioned upon, but correlated
+source draws cannot be wished away. For a fully deterministic selected book
+without a justified sampling population this is conditional mathematical
+coverage, not an empirical universal general-Elo guarantee.
+
+IMPORTANT fixed-n qualification only. Average-null heterogeneous means do NOT
+make these prefix products supermartingales. No optional stopping, rootwise
+peeking, adaptive bets, changed grid, changed n, replacement roots or additional
+candidate campaign. Actual incomplete games/caps receive preregistered adverse
+recode; all96 games and allfive arms must close/reconcile before calculation.
+
+Eight NEW adverse-cap LCBs: BOTH seeds each direct over E8 >.50, paired SF
+gain E8 >0, direct over exact parent >.50, paired SF gain parent >0.
+All ORIGINAL point gates and ALL original8 bootstrap LCBs are still required:
+direct>.60; SFgainE8>.10; SFgainparent>0; finalSF>=.25; caps<=.05; median
+latency<=1.10; fullnative/provenance/rules integrity. No weakening or retuning.
+Adverse metrics are componentwise<=raw metrics; monotone inversion means their
+LCBs also lower-bound raw counterparts. Raw betting bounds need not create a
+second set of primary tests. Eight exact conditional tail bounds union to
+<=.00625 regardless of dependence among comparisons/seeds. Bootstrap remains
+nominal, but requiring ALSO these certified bounds supplies a fixed-sample
+error guarantee under stated independence assumptions. OldMAX8 stays CLOSED;
+old+new conservative accounting remains<=.05625, not global.05 or alpha reset.
+
+Games: TWO seeds *FIVE arms *48 roots *TWO colors =960. Training replication
+and root-cluster independence are different requirements. AbsoluteSF/caps/speed
+are point constraints, not additional population-mean confidence statements.
+
+Prior art, NOT a novelty claim (Crossref title/authors verified Oct7):
+Ian Waudby-Smith and Aaditya Ramdas, Estimating means of bounded random variables
+by betting, JRSS Series B, DOI https://doi.org/10.1093/jrsssb/qkad009
+(online2023; journal publication metadata should be cited from the DOI).
+Glenn Shafer, Alexander Shen, Nikolai Vereshchagin and Vladimir Vovk,
+Test Martingales, Bayes Factors and p-Values, Statistical Science (2011),
+DOI https://doi.org/10.1214/10-STS347.
+These sources motivate betting/e-values; the fixed-n unequal-mean AM-GM proof
+above is stated explicitly rather than claiming optional-stopping validity.
