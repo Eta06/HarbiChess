@@ -1,0 +1,11 @@
+{
+  "schema": "NNUE-own-collection-six-root-audit-clock-v2",
+  "first": 1791365935.7405105,
+  "deadline": 1791366535.7405105,
+  "cpu_core": 1,
+  "producer_directory": "/workspace/work/harbichess/continuation-20261007/nnue-own-producer-v2",
+  "registration_sha256": "f9f36e02cdfbec9c13219af06a6ae75316c1f276394377ccf38862d78a4c142c",
+  "receipt_sha256": "320e526a12f331829a87c15af8ac6fab3687161bf5810cb729e626d0051b2982",
+  "events_sha256": "cb82303fd42b10e911f6500a13182a188d5a2be59e5bff6466abff5a07def364",
+  "helper_sha256": "2082c379ac0dc0540e3e758ce70da09c20d972a267eee057a8b95cd2609a491e"
+}
