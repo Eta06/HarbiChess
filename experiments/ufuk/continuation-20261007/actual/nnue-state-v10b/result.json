@@ -1,0 +1,164 @@
+{
+  "status": "PASS-local-allowlisted-capsule-all-original-bytes-not-durable",
+  "manifest_sha256": "60d35e976716444b5e955faad873d92c434cc02871873b8c20edd2f47c067ed3",
+  "full_capsule_bytes": 151168518,
+  "full_capsule_sha256": "bbb42d35ca972140331b15b66a8e9ea74aae3316bb4bf99c6dd3bfd353ad3844",
+  "original_files": 261,
+  "raw_bytes": 200118263,
+  "parts": [
+    {
+      "index": 0,
+      "offset": 0,
+      "bytes": 8388608,
+      "sha256": "be70604e181148c6bcb2f6dd20da991ff022b9e3adc5cc8bfcb482bd12ecc9cb",
+      "git_blob_sha1": "f835e03b52a6bf39d10161b0bd0c71753a4c1626",
+      "asset_name": "nnue-state-v10b-bbb42d35ca97-part00-be70604e1811.bin"
+    },
+    {
+      "index": 1,
+      "offset": 8388608,
+      "bytes": 8388608,
+      "sha256": "c9785fbbd61b6726b8cb5377f4f31c6aaecf7dd4d7995d6719ca2af2159c064e",
+      "git_blob_sha1": "259f828500dc989b731014b6f5f8c2a7b08ab541",
+      "asset_name": "nnue-state-v10b-bbb42d35ca97-part01-c9785fbbd61b.bin"
+    },
+    {
+      "index": 2,
+      "offset": 16777216,
+      "bytes": 8388608,
+      "sha256": "812bb5fe8a6a154304bff928fec2a4295e0a01cb68f03cdd834779fd169b3fb3",
+      "git_blob_sha1": "ec7aa9ebcb009499f363d939b9f602294b56317f",
+      "asset_name": "nnue-state-v10b-bbb42d35ca97-part02-812bb5fe8a6a.bin"
+    },
+    {
+      "index": 3,
+      "offset": 25165824,
+      "bytes": 8388608,
+      "sha256": "428f30d04a270e0f55074b26bba194e7f73cfcdf7a03d12479659afa8fa0f015",
+      "git_blob_sha1": "3533f62575ffd909eb38a8c32e93cbe3457b5d56",
+      "asset_name": "nnue-state-v10b-bbb42d35ca97-part03-428f30d04a27.bin"
+    },
+    {
+      "index": 4,
+      "offset": 33554432,
+      "bytes": 8388608,
+      "sha256": "aa2579a7aff8d2c16e6242a5d1180ab2f0873bf9071b9741b307e09aa986a661",
+      "git_blob_sha1": "076372551dcf6433d40eab151c876f9d9b469db2",
+      "asset_name": "nnue-state-v10b-bbb42d35ca97-part04-aa2579a7aff8.bin"
+    },
+    {
+      "index": 5,
+      "offset": 41943040,
+      "bytes": 8388608,
+      "sha256": "831d7c5c53c03f86328759054aa5da5c425f10041ef7d7a6de513db71b203f40",
+      "git_blob_sha1": "26bd6ef36fd71b712269ab434d101cfb9669eb07",
+      "asset_name": "nnue-state-v10b-bbb42d35ca97-part05-831d7c5c53c0.bin"
+    },
+    {
+      "index": 6,
+      "offset": 50331648,
+      "bytes": 8388608,
+      "sha256": "918db99955728a23765fe2dc8e87cf3af39e0e9981c3b89d1798bbee3b76bc70",
+      "git_blob_sha1": "9537a5aaae6fb6e2c27e1b57abdf451c67d91f8a",
+      "asset_name": "nnue-state-v10b-bbb42d35ca97-part06-918db9995572.bin"
+    },
+    {
+      "index": 7,
+      "offset": 58720256,
+      "bytes": 8388608,
+      "sha256": "0db7582e927000ff37afe3030f62b77537c252caf91ba87a1315b650f7c5394a",
+      "git_blob_sha1": "6e8c3131838fa0568c3ac9e06aa7ec6ac3791339",
+      "asset_name": "nnue-state-v10b-bbb42d35ca97-part07-0db7582e9270.bin"
+    },
+    {
+      "index": 8,
+      "offset": 67108864,
+      "bytes": 8388608,
+      "sha256": "a7a62aebec406db8ecf8f456d4c72f88157ea08c6a5feacc8c15ba84d1821114",
+      "git_blob_sha1": "2c391d9c1bdf24405181f11abba7aab7642bff88",
+      "asset_name": "nnue-state-v10b-bbb42d35ca97-part08-a7a62aebec40.bin"
+    },
+    {
+      "index": 9,
+      "offset": 75497472,
+      "bytes": 8388608,
+      "sha256": "461a3a6a4c38a418076cfa0a330a4058350bcbef4f458ebb3736198e41b68a30",
+      "git_blob_sha1": "90ddbe46d1c31aec00f11bf944754a31b4cc5a59",
+      "asset_name": "nnue-state-v10b-bbb42d35ca97-part09-461a3a6a4c38.bin"
+    },
+    {
+      "index": 10,
+      "offset": 83886080,
+      "bytes": 8388608,
+      "sha256": "3f72b0d25772f82a0339a88394db8698d759c6b531957a9bf26be56d16581d54",
+      "git_blob_sha1": "0475cceb4a992bb6c7eddfa7b17f4aa144bc9301",
+      "asset_name": "nnue-state-v10b-bbb42d35ca97-part10-3f72b0d25772.bin"
+    },
+    {
+      "index": 11,
+      "offset": 92274688,
+      "bytes": 8388608,
+      "sha256": "b1687d525357c0e6d7eec2c7c58a38333d3a9ae64362e37d6928ef85e9fbd848",
+      "git_blob_sha1": "0b9fefb148568b730f39b29397a4b5c0083eaaad",
+      "asset_name": "nnue-state-v10b-bbb42d35ca97-part11-b1687d525357.bin"
+    },
+    {
+      "index": 12,
+      "offset": 100663296,
+      "bytes": 8388608,
+      "sha256": "2096d29d41f90fae9142771917c069f8bc6ff89cb1afb757d6310395bcd2353b",
+      "git_blob_sha1": "e9406ded6776df5d0587d213e3ecc541dd9c0d50",
+      "asset_name": "nnue-state-v10b-bbb42d35ca97-part12-2096d29d41f9.bin"
+    },
+    {
+      "index": 13,
+      "offset": 109051904,
+      "bytes": 8388608,
+      "sha256": "2ea40a92ceb184999ab5e134579552599c638d79465df5fbd8cff9efe7095004",
+      "git_blob_sha1": "6af56df7faaffd97eee7ff02d36670c48ffbd244",
+      "asset_name": "nnue-state-v10b-bbb42d35ca97-part13-2ea40a92ceb1.bin"
+    },
+    {
+      "index": 14,
+      "offset": 117440512,
+      "bytes": 8388608,
+      "sha256": "8d6474273fe16d10e584727b68110e40f52012b82ac6d5939f3988c04005eccd",
+      "git_blob_sha1": "5e7ec1ed6d04f3b5c7d75c67473dd9ebb9fcd0ed",
+      "asset_name": "nnue-state-v10b-bbb42d35ca97-part14-8d6474273fe1.bin"
+    },
+    {
+      "index": 15,
+      "offset": 125829120,
+      "bytes": 8388608,
+      "sha256": "e0b20e0db1b7a94b712bee138c0fd7c06f90c265e46f6ffc7b72ee0f88d72e15",
+      "git_blob_sha1": "122a1c148011d73094e3c2a65a216ce6310c0d2a",
+      "asset_name": "nnue-state-v10b-bbb42d35ca97-part15-e0b20e0db1b7.bin"
+    },
+    {
+      "index": 16,
+      "offset": 134217728,
+      "bytes": 8388608,
+      "sha256": "71b30603df4271dbc90c7176409dc0d93d3c487ae1ce8b7fd699c0bef353c2ce",
+      "git_blob_sha1": "3a1e93ad477f7016d3e6bf7d71c6f822834832eb",
+      "asset_name": "nnue-state-v10b-bbb42d35ca97-part16-71b30603df42.bin"
+    },
+    {
+      "index": 17,
+      "offset": 142606336,
+      "bytes": 8388608,
+      "sha256": "d4e9bc28fca80dbbfa91af4fdf1c2a13f2d9e006b1105cf5032c3ca9d748232a",
+      "git_blob_sha1": "a9a3136e92ba9881a40c727d3e58391aff5485be",
+      "asset_name": "nnue-state-v10b-bbb42d35ca97-part17-d4e9bc28fca8.bin"
+    },
+    {
+      "index": 18,
+      "offset": 150994944,
+      "bytes": 173574,
+      "sha256": "13020c79371ca6cc498200ef04746818206b3fc99958d4ae9b18dc31d0fee36f",
+      "git_blob_sha1": "55933540d5e09e5c55ab179d093d39aacdc3afe7",
+      "asset_name": "nnue-state-v10b-bbb42d35ca97-part18-13020c79371c.bin"
+    }
+  ],
+  "strength_success": false,
+  "runtime_restore_claimed": false
+}
