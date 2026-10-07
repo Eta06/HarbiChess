@@ -1,0 +1,65 @@
+{
+  "SGD": 0,
+  "actual_bank_metadata": {
+    "20262905": {
+      "accepted_count": 4096,
+      "attempt_count": 4099,
+      "attempt_trace": {
+        "path": "/dev/shm/harbichess-human-randomstarts-bank-v2/20262905/attempts.jsonl",
+        "sha256": "38625c8106e2d59b7acbbef7764a8dbf6c9fc0513e955f9698ea6ae7e9f72fda"
+      },
+      "deadline": 1791375538.9847505,
+      "finished_epoch": 1791374958.1952875,
+      "first": 1791374938.9847505,
+      "receipt": {
+        "path": "/dev/shm/harbichess-human-randomstarts-bank-v2/20262905/receipt.json",
+        "sha256": "4b5fae8365caf2b59132cff92a4bb7d59fc451b756a472af0d70296f4c61b343"
+      },
+      "seed": 20262905,
+      "selection": {
+        "path": "/dev/shm/harbichess-human-randomstarts-bank-v2/20262905/selection.json",
+        "sha256": "cdf34418ddfacef3287c5c140da103e2bfc4e05a95752d317c9d4a9ec61ef3bd"
+      },
+      "status": "PASS-rule-only-procedural-root-bank"
+    },
+    "20262906": {
+      "accepted_count": 4096,
+      "attempt_count": 4103,
+      "attempt_trace": {
+        "path": "/dev/shm/harbichess-human-randomstarts-bank-v2/20262906/attempts.jsonl",
+        "sha256": "a7f5355f957dabe4c93ae24bcfaff1a7f513034aeac543a711759acfcf41ab11"
+      },
+      "deadline": 1791375558.2788703,
+      "finished_epoch": 1791374975.8625708,
+      "first": 1791374958.2788703,
+      "receipt": {
+        "path": "/dev/shm/harbichess-human-randomstarts-bank-v2/20262906/receipt.json",
+        "sha256": "d5306320ed25181c990ee066339135d1933f078a009593cb523a5c5a08b94fde"
+      },
+      "seed": 20262906,
+      "selection": {
+        "path": "/dev/shm/harbichess-human-randomstarts-bank-v2/20262906/selection.json",
+        "sha256": "ac1c0bd8d18ad33a11384330a67c4245d738293d7fad5aa199602206ca9a7382"
+      },
+      "status": "PASS-rule-only-procedural-root-bank"
+    }
+  },
+  "findings": [
+    "No verified producer/converter path conflict: specs convert uses --producer for raw identity and --training for converter execution. Keep both the same frozen v2 directory for this unmodified route.",
+    "Actual zero incoming admission seal generation1 correctly describes outgoing generation; actual parent contract is generation0/phase human-prior-zero-residual-init-v1/updates0. Collection and child must be generation1.",
+    "Native/source math remains v1, but dataset/provenance/collection/audit/orchestration identities are distinct procedural v2. known160 adapter requires root_source_type procedural-uniform-legal-walk-v2 and current named parent.",
+    "Producer breaks at exact remaining row budget, unlike MC terminal completion; no prefix-overflow repair is needed for this own-Q route. Protected episodes discarded whole; UNKNOWN own-Q allowed and terminal WDL remains unknown.",
+    "Own proof/fit require BOTH new six-row audits through specs.require_audits. Zero synthetic proof does not substitute for actual procedural data proof.",
+    "Erroneous duplicated-argv alert was withdrawn after line-numbered verification; source argv has one output path. No corrective source change warranted."
+  ],
+  "limitation": "Source and closed metadata review only; actual model equality/inference, full bank replay, actor histories, conversion and optimizer qualification remain ROOT-controlled.",
+  "model_reads": 0,
+  "pure_bank_regeneration": false,
+  "schema": "human-randomstarts-preactor-source-integration-review-v1",
+  "searches": 0,
+  "source_inventory": {
+    "path": "/workspace/work/harbichess/continuation-20261007/human-randomstarts-own-v2/source-inventory.json",
+    "sha256": "84e0d669dcdfebce018385984cb88e8aecca4eeafaa530b56b603be1ea660683"
+  },
+  "status": "PASS-static-binding-review-not-production-admission"
+}
