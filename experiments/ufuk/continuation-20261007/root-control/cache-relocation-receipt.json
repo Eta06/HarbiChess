@@ -1,0 +1,1539 @@
+{
+  "status": "PASS-cache-only-relocation-all-bytes-preserved",
+  "observed_epoch": 1791361959.6213775,
+  "records": [
+    {
+      "old_path": "/workspace/HarbiChess/.venv/lib/python3.12/site-packages/torch/_inductor/__pycache__",
+      "RAM_copy": "/dev/shm/harbichess-python-cache-relocation-20261007/cache00",
+      "files": [
+        {
+          "name": "__init__.cpython-312.pyc",
+          "bytes": 16218,
+          "sha256": "0fc0bf2511ef2ab660998a39c8cd3861e742d79cdb34315216341e50bdeefb58"
+        },
+        {
+          "name": "_functionalize_collectives.cpython-312.pyc",
+          "bytes": 14421,
+          "sha256": "925193d0be1d876c3b0d83d61a42f6cd757248230ee7a09cfe024642d38269f5"
+        },
+        {
+          "name": "analyze_preserves_zero_mask.cpython-312.pyc",
+          "bytes": 9833,
+          "sha256": "2e494693afaa35d7c1648f87305bcf1642686c5131da1d99f6867f2ce78f4485"
+        },
+        {
+          "name": "async_compile.cpython-312.pyc",
+          "bytes": 41826,
+          "sha256": "1a5a138d94cada127e96d78721c963793cd759dcc76ff4cde8c9ab1e61788814"
+        },
+        {
+          "name": "autotune_process.cpython-312.pyc",
+          "bytes": 74387,
+          "sha256": "48361ccc0bac62e6826c07539f73fe51227cbcb6510a241c84e32332a5be9aac"
+        },
+        {
+          "name": "autows_utils.cpython-312.pyc",
+          "bytes": 1094,
+          "sha256": "bf59c48a81be702f44e6911e57650ce7c9bdf1e873955c633ee73edbe9b87a0b"
+        },
+        {
+          "name": "await_utils.cpython-312.pyc",
+          "bytes": 8139,
+          "sha256": "acafb0060d405e0041dda8e4f83c2027b30ef15c064367c020872c9f7982cb3b"
+        },
+        {
+          "name": "bounds.cpython-312.pyc",
+          "bytes": 14865,
+          "sha256": "b6695ceacfc3f1e1a1a414b9a3d7a66b0bde2697d8da81ab93faf1fce3212ea2"
+        },
+        {
+          "name": "cache_key.cpython-312.pyc",
+          "bytes": 4934,
+          "sha256": "5645f10fd194593b113865c382706046a7ae5d2928e3637c98b12c78c6bcf6a0"
+        },
+        {
+          "name": "choices.cpython-312.pyc",
+          "bytes": 30880,
+          "sha256": "3b84867c4575470fb7f9c1bce26bc6c3f375d79d767bc88f8978fc90afedfa53"
+        },
+        {
+          "name": "codecache.cpython-312.pyc",
+          "bytes": 236370,
+          "sha256": "28fb55f7a34c3611ddb266f65e7662f3e0d8b7958f50d9deb30ab8ff3d6844e0"
+        },
+        {
+          "name": "comm_analysis.cpython-312.pyc",
+          "bytes": 34093,
+          "sha256": "d80460d3a9c523ef8ecf4a9c755889b3c0eddf3f7d92ea4ead3f8721bffd20b0"
+        },
+        {
+          "name": "comm_lowering.cpython-312.pyc",
+          "bytes": 41008,
+          "sha256": "0f42676f6a063f138434d2f44b9fb7536a1007788ba5789adf13f49406c1a605"
+        },
+        {
+          "name": "comms.cpython-312.pyc",
+          "bytes": 76798,
+          "sha256": "90c753e249f2e479d42295ebb21bd6b3ff79d1935b870b81dea98622380da5c8"
+        },
+        {
+          "name": "compile_fx.cpython-312.pyc",
+          "bytes": 137024,
+          "sha256": "4cfec85dc49a1a779083cbca8c9d610c17eb71a20d5e3b918fb19eccbea28ac4"
+        },
+        {
+          "name": "compiler_bisector.cpython-312.pyc",
+          "bytes": 35155,
+          "sha256": "eaf8c88029dabcbab8c5213351e20c218061dca187cb34a19522ef96f7e31059"
+        },
+        {
+          "name": "config.cpython-312.pyc",
+          "bytes": 74563,
+          "sha256": "fd648a38ac4800d496ea4e560342e5120f9425b832d8cbd81c6d5e01702f7116"
+        },
+        {
+          "name": "config_comms.cpython-312.pyc",
+          "bytes": 2159,
+          "sha256": "77bea274c20710b41dab147fc851719e5c8cf691fd2e4c92d01911862fdd7612"
+        },
+        {
+          "name": "constant_folding.cpython-312.pyc",
+          "bytes": 21377,
+          "sha256": "735735f28ea69ce3dd72a219d2408171b4e3fe046cb3a06f9f329a692d663f03"
+        },
+        {
+          "name": "cpp_builder.cpython-312.pyc",
+          "bytes": 121173,
+          "sha256": "85ef1de9dfb1d1c76fdb75a01441418a48282c856e4a8313ed1cb9300dd6a81d"
+        },
+        {
+          "name": "cpu_vec_isa.cpython-312.pyc",
+          "bytes": 27635,
+          "sha256": "c264cccd7cc260985816b2625bc5105c06f14823fc7bfa5440edb1ed0affd916"
+        },
+        {
+          "name": "cudagraph_utils.cpython-312.pyc",
+          "bytes": 28096,
+          "sha256": "667c115e0a33768ca83490cd00befde1cbde32258c6e4fbfff16eda075466dfa"
+        },
+        {
+          "name": "custom_graph_pass.cpython-312.pyc",
+          "bytes": 11499,
+          "sha256": "dadf3dea398f0483735c09b77ab2134c18c7bc12844e641ddee8022b3573c192"
+        },
+        {
+          "name": "debug.cpython-312.pyc",
+          "bytes": 69921,
+          "sha256": "6e75a14a5143af0e51f1411dc975220b286481f65fd9e5b9e8dd7f8851e12843"
+        },
+        {
+          "name": "decomposition.cpython-312.pyc",
+          "bytes": 72245,
+          "sha256": "e0c2f8b09fb8e7faef944280ae8c4e8ecdc5906fc9c8eb728cc8a043effa4f9b"
+        },
+        {
+          "name": "dependencies.cpython-312.pyc",
+          "bytes": 48510,
+          "sha256": "c3ec41ee5317814aa3fb1dc300169f51ae4b84b5d20e555f09656a89584c9557"
+        },
+        {
+          "name": "distributed_autotune.cpython-312.pyc",
+          "bytes": 16813,
+          "sha256": "d7a96a03a68daf581190759d4b359cbc7f7f5f0e0ebbf6a60ef7526569341c85"
+        },
+        {
+          "name": "dtype_propagation.cpython-312.pyc",
+          "bytes": 24377,
+          "sha256": "64c2e737f59db8b19d71e2f16f4f66476a53e0536fafd58ccabbf1e8d2d664ca"
+        },
+        {
+          "name": "exc.cpython-312.pyc",
+          "bytes": 9239,
+          "sha256": "d085569d24f4ce348320fec55bba3740ae6597db2a8c894cb03d4e5f0e73b6f6"
+        },
+        {
+          "name": "extern_node_serializer.cpython-312.pyc",
+          "bytes": 1529,
+          "sha256": "cb04e50c814d3ce6e1b2eddf29b48420082e387daf09f1df58e07d372cded911"
+        },
+        {
+          "name": "freezing_utils.cpython-312.pyc",
+          "bytes": 2269,
+          "sha256": "873d2841be72dec5a987377e0dbbcb37e53bc822a8c94325d12438b085e0c7fc"
+        },
+        {
+          "name": "fx_utils.cpython-312.pyc",
+          "bytes": 43496,
+          "sha256": "ddd4f4cd69cf47fca47b4cd9d8634021daa7b8c53a5d9ee672157d8fb3e5e9f6"
+        },
+        {
+          "name": "graph.cpython-312.pyc",
+          "bytes": 138953,
+          "sha256": "1b1919f1a24c9a12d04e0aae3442f32f73f7fa40329b47f8486837117bbec55e"
+        },
+        {
+          "name": "hooks.cpython-312.pyc",
+          "bytes": 1152,
+          "sha256": "a4e98d05c177bc07feebb3b000aef01a13d0b2f5746f0c4538f63b05b67a7660"
+        },
+        {
+          "name": "index_propagation.cpython-312.pyc",
+          "bytes": 21959,
+          "sha256": "af81c454603f53df42437616a1e512446b46f14ca4f9672ae260c4d0c386bf96"
+        },
+        {
+          "name": "inductor_prims.cpython-312.pyc",
+          "bytes": 18593,
+          "sha256": "a3a07104b1e01ec63cfb2ab3c4bccb4deb7a312e6eed784e016671918ce260e5"
+        },
+        {
+          "name": "ir.cpython-312.pyc",
+          "bytes": 534792,
+          "sha256": "181672ddf991e548fdc736cde87b224e3b90dada37a1f617da11f34a24f6a089"
+        },
+        {
+          "name": "jagged_lowerings.cpython-312.pyc",
+          "bytes": 9673,
+          "sha256": "213ff6a8280f86d5ce318091d70d319952e9214cabfa462045415248301673e9"
+        },
+        {
+          "name": "kernel_inputs.cpython-312.pyc",
+          "bytes": 15529,
+          "sha256": "959f041e67d2d1846d9fc230b8d4d29837e03dd57f235139a6bc1dc786e9d63d"
+        },
+        {
+          "name": "kernel_template_choice.cpython-312.pyc",
+          "bytes": 4043,
+          "sha256": "47bd8ff7562ef650b5bcdcd7c5973ea0c12491fc8bae4597749ab11ad9124c59"
+        },
+        {
+          "name": "loop_body.cpython-312.pyc",
+          "bytes": 45590,
+          "sha256": "f8410507e39e4c764abf8fce48c76fb3f5c3c66ef6c9373e20f3b3f79ffcd885"
+        },
+        {
+          "name": "lowering.cpython-312.pyc",
+          "bytes": 429626,
+          "sha256": "4c81f32389ee6306fff15307d08c9d7e77dd400caa62e94351ffae6f362c175b"
+        },
+        {
+          "name": "memory.cpython-312.pyc",
+          "bytes": 48107,
+          "sha256": "9732f2bec29d5bcf57b763b1eb1387ab2d09f8ddfbff11b290e2390dcc67ceea"
+        },
+        {
+          "name": "metrics.cpython-312.pyc",
+          "bytes": 17621,
+          "sha256": "6ad51d84cdd2b0b2ab94a8c295bcc89f117d0fcff0965d9b7fafe843028f7d62"
+        },
+        {
+          "name": "mkldnn_ir.cpython-312.pyc",
+          "bytes": 46933,
+          "sha256": "59433eb0c7758149896a02f21dc4f0cda1949538ef44b27e2c82c426e5330699"
+        },
+        {
+          "name": "mkldnn_lowerings.cpython-312.pyc",
+          "bytes": 56500,
+          "sha256": "f78368786d8403ffe7cd84a4213736bcb11565b2b05287571de666bf8a180e82"
+        },
+        {
+          "name": "ops_handler.cpython-312.pyc",
+          "bytes": 56806,
+          "sha256": "085a127d3b5a12c0c2650e9ea4f613e494fc31ae6885171c02242a3540c675c9"
+        },
+        {
+          "name": "optimize_indexing.cpython-312.pyc",
+          "bytes": 22595,
+          "sha256": "307ac095367f1127486d5f9f80be71e975c734bdae86902851d487898fed75e0"
+        },
+        {
+          "name": "output_code.cpython-312.pyc",
+          "bytes": 54747,
+          "sha256": "bd25a85c3059483c30bc32d4e9aadfb048eacd2af6d70312bc376b3137e140c3"
+        },
+        {
+          "name": "pattern_matcher.cpython-312.pyc",
+          "bytes": 142524,
+          "sha256": "8281d01a68a63b7f95caf747d14e3bbd835becc47c0fe453a10c4443050813d9"
+        },
+        {
+          "name": "quantized_lowerings.cpython-312.pyc",
+          "bytes": 8189,
+          "sha256": "131cccbf1bd5784cc418d97f58df44078ff3268f98ddbff2181fbc89e13e80eb"
+        },
+        {
+          "name": "remote_cache.cpython-312.pyc",
+          "bytes": 21835,
+          "sha256": "d07f29d3f8aaae3856d82c2fd18d667348ae4cac6a9ef1da95e075b7e57fe099"
+        },
+        {
+          "name": "remote_gemm_autotune_cache.cpython-312.pyc",
+          "bytes": 1040,
+          "sha256": "01557a2f358dbc05959ac78843d47be0c216f19b4e7e413f14cca6325aa04f85"
+        },
+        {
+          "name": "scheduler.cpython-312.pyc",
+          "bytes": 483380,
+          "sha256": "2d978457ace85d19a7aacdd904e3833faea7f89dd462976da5759f2e18e5c603"
+        },
+        {
+          "name": "select_algorithm.cpython-312.pyc",
+          "bytes": 268284,
+          "sha256": "cc723a653a6363c5483a40c8af3425a98d3bd60be41841db385e7a047ffde9e0"
+        },
+        {
+          "name": "shape_propagation.cpython-312.pyc",
+          "bytes": 8503,
+          "sha256": "9af94c1b04ccf20ead81ad52a4a8375451c9cf2e16be8838e3138a61294148be"
+        },
+        {
+          "name": "sizevars.cpython-312.pyc",
+          "bytes": 74695,
+          "sha256": "535181d8341423d6cc589fea2ddae592e4d120a0615f5857cc1ecb61eb44e572"
+        },
+        {
+          "name": "standalone_compile.cpython-312.pyc",
+          "bytes": 38991,
+          "sha256": "42836c7a8a2a7f3998ecccf5d3311789672c6da11bb872e3f1704840dfa69081"
+        },
+        {
+          "name": "stream_constants.cpython-312.pyc",
+          "bytes": 476,
+          "sha256": "4ca7e58f4a875591dc41aa522247e1dcb71bfa568375431b8e42d1f81377b571"
+        },
+        {
+          "name": "stream_utils.cpython-312.pyc",
+          "bytes": 4160,
+          "sha256": "1469e13cef8e646deb416787c1c69d1f9c02383a5bfa5d4f79726c1e4d3831a3"
+        },
+        {
+          "name": "test_operators.cpython-312-pytest-8.4.2.pyc",
+          "bytes": 2073,
+          "sha256": "d23a8be41c57146acf3f40f7fe1b4c6b2f0e3060c39cb77ca8a7210cc92421ff"
+        },
+        {
+          "name": "test_operators.cpython-312.pyc",
+          "bytes": 1959,
+          "sha256": "f42d982beb4f5353132f5b307543fedac097f5eda9961baa261ae304f7b9040a"
+        },
+        {
+          "name": "triton_bundler.cpython-312.pyc",
+          "bytes": 19454,
+          "sha256": "c87afa2dec6ec9d0f960d5c31c51a0fc04cf09ede57984f024188472c33c5812"
+        },
+        {
+          "name": "utils.cpython-312.pyc",
+          "bytes": 218380,
+          "sha256": "d6251a1849161d7e12dd5c17273f0c0fdbcaa953ed677c1091fd45189ca52a4c"
+        },
+        {
+          "name": "virtualized.cpython-312.pyc",
+          "bytes": 26701,
+          "sha256": "571ff474f3b7a3a64ea0b8e1914195e292a05a91382bb7ded573adcefa1721bb"
+        },
+        {
+          "name": "wrapper_benchmark.cpython-312.pyc",
+          "bytes": 20868,
+          "sha256": "0b01dd85d012804fa0cbfebbe17151b8efe12f1775161a570e2129cc3629255f"
+        }
+      ],
+      "bytes": 4216677
+    },
+    {
+      "old_path": "/workspace/HarbiChess/.venv/lib/python3.12/site-packages/torch/_inductor/codegen/__pycache__",
+      "RAM_copy": "/dev/shm/harbichess-python-cache-relocation-20261007/cache01",
+      "files": [
+        {
+          "name": "__init__.cpython-312.pyc",
+          "bytes": 189,
+          "sha256": "7e0cfb63eff702f801a5649df223070b5a833744d220dea92d8b5a8701d2f2c5"
+        },
+        {
+          "name": "aoti_hipify_utils.cpython-312.pyc",
+          "bytes": 1336,
+          "sha256": "ca08c68a21a3e4354443b3ebd1a13f9db946ecaac19ad22b6c4175678c51f709"
+        },
+        {
+          "name": "block_analysis.cpython-312.pyc",
+          "bytes": 9460,
+          "sha256": "241ec177ad24bce1504058b1af0e8214bacd6de79e292a7e4baeade699ea2e4a"
+        },
+        {
+          "name": "common.cpython-312.pyc",
+          "bytes": 149874,
+          "sha256": "68cf4751bc28ef64015d796a35311156e3cadfe88a5048f2ae9383277d30d72f"
+        },
+        {
+          "name": "cpp.cpython-312.pyc",
+          "bytes": 294671,
+          "sha256": "ec613102010ff49b5d08d31999fdffa61b876f988f367460dcce73df6a5a9b5a"
+        },
+        {
+          "name": "cpp_flex_attention_template.cpython-312.pyc",
+          "bytes": 62776,
+          "sha256": "b1bf178703e74b61252d9626724bbf0ffb0b24786ffca78fa2a96b2443ed665b"
+        },
+        {
+          "name": "cpp_gemm_template.cpython-312.pyc",
+          "bytes": 86743,
+          "sha256": "dc203ffc86b8482fb1a309078aaf935757a8d79d8694b82f43a2c42c2b211ecd"
+        },
+        {
+          "name": "cpp_grouped_gemm_template.cpython-312.pyc",
+          "bytes": 25005,
+          "sha256": "28455a9c7d26227f7e95e69d56f9c83f4560482855024fb208e83ea1d162061d"
+        },
+        {
+          "name": "cpp_micro_gemm.cpython-312.pyc",
+          "bytes": 82996,
+          "sha256": "fbe6a3a5ab7346b49faf584f9f761a3958ce8794d05b0e364d634229355d5227"
+        },
+        {
+          "name": "cpp_template.cpython-312.pyc",
+          "bytes": 7777,
+          "sha256": "f8d860b46d5d5548eac33b06c46aa02c4347092dd49822f7fc4353f596b8f2a1"
+        },
+        {
+          "name": "cpp_template_kernel.cpython-312.pyc",
+          "bytes": 39136,
+          "sha256": "73dae305a1eeb5d8b5cb666f0288a2d05befde0e59a8dcadee2d5cff25d98290"
+        },
+        {
+          "name": "cpp_utils.cpython-312.pyc",
+          "bytes": 46105,
+          "sha256": "26a7e271946c2bfa2efa402096f2deab3a5d4482ba0a2b474e5e06dfbc2fed6a"
+        },
+        {
+          "name": "cpp_wrapper_cpu.cpython-312.pyc",
+          "bytes": 215935,
+          "sha256": "374dc3cf80e4a95aa9000cdedf1e8ee368d5b3bdb7e13780f25e2a08403a6581"
+        },
+        {
+          "name": "cpp_wrapper_gpu.cpython-312.pyc",
+          "bytes": 80750,
+          "sha256": "5a051e41a4e802cd97a036972340fd644e8703a7be8ee1992fd1769348fc3715"
+        },
+        {
+          "name": "cpp_wrapper_mps.cpython-312.pyc",
+          "bytes": 12505,
+          "sha256": "3885cd07c2a88ef37c91ff2e5b011608256a224dd6a82fa8e8cabfa834bc6621"
+        },
+        {
+          "name": "cpu_device_op_overrides.cpython-312.pyc",
+          "bytes": 1613,
+          "sha256": "7e16e384f46fad0ba0ddfff59cb14b7b8d2d70658e6bea37f07c99f577740443"
+        },
+        {
+          "name": "cuda_combined_scheduling.cpython-312.pyc",
+          "bytes": 14744,
+          "sha256": "9d39e4fe7d9ce636c92ec1b1d6916f079a9ecf42f53e10685a821bddbe1ef326"
+        },
+        {
+          "name": "custom_extern_kernel_codegen.cpython-312.pyc",
+          "bytes": 3472,
+          "sha256": "200e491c516a39b2e7749ee08fc273ac422367469ff5bdceed48cca2f8e2e51b"
+        },
+        {
+          "name": "debug_utils.cpython-312.pyc",
+          "bytes": 11404,
+          "sha256": "bb3bab5a84f4989eacc1420fbc43f8a89185caa0f14281ff6ab1844a5dd6c9f6"
+        },
+        {
+          "name": "halide.cpython-312.pyc",
+          "bytes": 99511,
+          "sha256": "42e2d94cdbd3348d3b97ec9b6b0bc3cde0cf63f5b2e02b30686225b5e80ef516"
+        },
+        {
+          "name": "memory_planning.cpython-312.pyc",
+          "bytes": 45147,
+          "sha256": "1dc14929ecb7aa9e4b1b9cea8755593d237b95747a8a3319c4880fab841ad9de"
+        },
+        {
+          "name": "mps.cpython-312.pyc",
+          "bytes": 63820,
+          "sha256": "85700a9977e3b5417c60322ce8ceaa545e2cb2a4dcd150d9c46ea6881893e3f3"
+        },
+        {
+          "name": "mps_device_op_overrides.cpython-312.pyc",
+          "bytes": 1661,
+          "sha256": "d49d45ec87c300e72f30915a9a50c41e8908ff8bbe273213b7b1d596d2895ad7"
+        },
+        {
+          "name": "multi_kernel.cpython-312.pyc",
+          "bytes": 32759,
+          "sha256": "fc3652329d34b3ca333de694b33536151f2358c3b1b89d0645e2131b7359c5f7"
+        },
+        {
+          "name": "pallas.cpython-312.pyc",
+          "bytes": 211106,
+          "sha256": "1aeb8a759c24ccf1d8d149bca46e22f5e31eb07a37674e6c27272b110d89bb75"
+        },
+        {
+          "name": "python_wrapper_mtia.cpython-312.pyc",
+          "bytes": 1633,
+          "sha256": "a6bcf1c3747a3cab8328d9f13bf9dbff3ea5dfa845c17f276ccf21930e50dd66"
+        },
+        {
+          "name": "segmented_tree.cpython-312.pyc",
+          "bytes": 9274,
+          "sha256": "0eb1da59818d55d63fd9686a25869c420cd1c9d09ea43648d0e3e575eedec102"
+        },
+        {
+          "name": "simd.cpython-312.pyc",
+          "bytes": 214057,
+          "sha256": "f3bf5b278ab036d3142d62e56b180f3b820fada2aa1d43cf1f58c0ca6371491a"
+        },
+        {
+          "name": "simd_kernel_features.cpython-312.pyc",
+          "bytes": 42760,
+          "sha256": "bcfbaa0b8d0b0a70956f706970ab3af0e5ca061966072ff6a997b4dcbfe93a9a"
+        },
+        {
+          "name": "subgraph.cpython-312.pyc",
+          "bytes": 28499,
+          "sha256": "121fbca7953b3dd828e2143c491aab4926aa055a2b88bd7a319de9959b68a43f"
+        },
+        {
+          "name": "triton.cpython-312.pyc",
+          "bytes": 377791,
+          "sha256": "104b16f8747c13bc84b43b9525817abbd1e1d3d8d48f2f41c7acb4af318f4ddb"
+        },
+        {
+          "name": "triton_utils.cpython-312.pyc",
+          "bytes": 15919,
+          "sha256": "f83f5e006ef79cbd6e15f89d20298e3c1670b1a6fa827125045929684c101fa1"
+        },
+        {
+          "name": "wrapper.cpython-312.pyc",
+          "bytes": 261372,
+          "sha256": "6c529491a97878f3abc3257ec3aa458633f380323646324ed0cc676ccf9cfe8a"
+        },
+        {
+          "name": "wrapper_fxir.cpython-312.pyc",
+          "bytes": 73505,
+          "sha256": "e0c2ede3fac70de86938844c6531ca782b4be15fa7362c7f46d40021e5e861d9"
+        }
+      ],
+      "bytes": 2625305
+    },
+    {
+      "old_path": "/workspace/HarbiChess/.venv/lib/python3.12/site-packages/torch/_dynamo/__pycache__",
+      "RAM_copy": "/dev/shm/harbichess-python-cache-relocation-20261007/cache02",
+      "files": [
+        {
+          "name": "__init__.cpython-312.pyc",
+          "bytes": 9221,
+          "sha256": "4e3b00f5614d912e41dceaa2c526f1c007a071ccb4399a3a8508d6c22e2b1881"
+        },
+        {
+          "name": "_trace_wrapped_higher_order_op.cpython-312.pyc",
+          "bytes": 15223,
+          "sha256": "39d81f767501eac874c6a57467c0c0e8e31e987530077498504f265e83e05eb0"
+        },
+        {
+          "name": "aot_compile.cpython-312.pyc",
+          "bytes": 29010,
+          "sha256": "92be526fa3c95298b81a63e3bce2da7a577c5ee07df42b8e5aee0019eb287ffe"
+        },
+        {
+          "name": "aot_compile_types.cpython-312.pyc",
+          "bytes": 9663,
+          "sha256": "fe46bbc25873457c00e2bf2c3be1efeb16a48801376d7d4016163280a7842a07"
+        },
+        {
+          "name": "bytecode_analysis.cpython-312.pyc",
+          "bytes": 14563,
+          "sha256": "1512988d09320394fec09d1c86c1cafa71da859607c351803c64788182147579"
+        },
+        {
+          "name": "bytecode_debugger.cpython-312.pyc",
+          "bytes": 48231,
+          "sha256": "0876a673e51536a01c9af1a3891be8448bab847d63bb50ed655c3e14930d70ca"
+        },
+        {
+          "name": "bytecode_transformation.cpython-312.pyc",
+          "bytes": 88956,
+          "sha256": "1e9b57729a6b1ed518cab09412f39c425a230ba05f86887634368ff51a144719"
+        },
+        {
+          "name": "cache_size.cpython-312.pyc",
+          "bytes": 4952,
+          "sha256": "f561827552b39f89dab62e945827d4004944ae1e51f6e6cc4e7bf5d73793e974"
+        },
+        {
+          "name": "callback.cpython-312.pyc",
+          "bytes": 8251,
+          "sha256": "5a1c17b07e0f484592306ffb2871a42fc7b3aecc70d5e93974b3aa6bbbffe49d"
+        },
+        {
+          "name": "code_context.cpython-312.pyc",
+          "bytes": 2971,
+          "sha256": "4e24affa922f6ffd2405f9e028b629fc01c4ffdc56c561055ac54bacb39e9311"
+        },
+        {
+          "name": "codegen.cpython-312.pyc",
+          "bytes": 41550,
+          "sha256": "93362225a51cdf7839c91ef398504fabb9c052ae1abda9c15ffbe85104d980e9"
+        },
+        {
+          "name": "compiled_autograd.cpython-312.pyc",
+          "bytes": 83793,
+          "sha256": "ea1f9f09dcc222836730cd207e7d7bfe8146f54b24d175eed0bae6c6255780a8"
+        },
+        {
+          "name": "comprehension_graph_break.cpython-312.pyc",
+          "bytes": 25578,
+          "sha256": "afb551f8a2f9423c4470556d3b8cc8ada51a202bf5e8f30de59d0f803533977e"
+        },
+        {
+          "name": "comptime.cpython-312.pyc",
+          "bytes": 24201,
+          "sha256": "dfd9bb15bce60be4ef637ed46e21cce727e9e1d1b35f22cb12b086bd2a9750ad"
+        },
+        {
+          "name": "config.cpython-312.pyc",
+          "bytes": 13868,
+          "sha256": "51c4046976093fbd5df41c399ab6244391d3dac4e60179dcd1866f8740a137a7"
+        },
+        {
+          "name": "convert_frame.cpython-312.pyc",
+          "bytes": 107540,
+          "sha256": "be66d491e006ba3f7788a2937116075842d7b489e7cdc4e8e43f04058e0052e3"
+        },
+        {
+          "name": "create_parameter_op.cpython-312.pyc",
+          "bytes": 4085,
+          "sha256": "bf946ff12a974fd6247cb928ba4c1615f2d2a87f07040d32285cca42fc7129a4"
+        },
+        {
+          "name": "current_scope_id.cpython-312.pyc",
+          "bytes": 1872,
+          "sha256": "e02f08707b719dc69cf4b112f0d08474a43478e481969cd744f698d7e20a2b82"
+        },
+        {
+          "name": "dce_extra_outputs.cpython-312.pyc",
+          "bytes": 10023,
+          "sha256": "408b308ceb67f9a17037df8db4ba279d145ebfcb2d791737c8644aacedbe9c7a"
+        },
+        {
+          "name": "debug_utils.cpython-312.pyc",
+          "bytes": 58021,
+          "sha256": "c938551f55f44554cb60cbf4ce23af979a8745997eaad5df737d557249017316"
+        },
+        {
+          "name": "decorators.cpython-312.pyc",
+          "bytes": 80969,
+          "sha256": "ef12de63e6aa522dbc16248806f39974ff0c4f0a098a3bd7a1f3ef0d30a0a04d"
+        },
+        {
+          "name": "device_interface.cpython-312.pyc",
+          "bytes": 37456,
+          "sha256": "7149ee38c948051ae1b61f69a27fd260e61da6b530f06d71212c4d3d6a059921"
+        },
+        {
+          "name": "distributed.cpython-312.pyc",
+          "bytes": 2546,
+          "sha256": "29ed4877225696a1fd3e68cfce4414c1936ae00d66533ed0d9d29e72461d6116"
+        },
+        {
+          "name": "dynamo_profiler.cpython-312.pyc",
+          "bytes": 17572,
+          "sha256": "9922b9ad21fbb72c8003688293d0b0f866b351113374f01958f8a6782d841658"
+        },
+        {
+          "name": "eval_frame.cpython-312.pyc",
+          "bytes": 117438,
+          "sha256": "0dcffb147bb583110002723171f434ce31d5f056080367dc7e0c01ba33f3bf4f"
+        },
+        {
+          "name": "exc.cpython-312.pyc",
+          "bytes": 40561,
+          "sha256": "29c3a2ce3a1ce70c600a9ac8ebb360a84b205005eb7459609ea69cbd7c2fa89a"
+        },
+        {
+          "name": "external_utils.cpython-312.pyc",
+          "bytes": 14118,
+          "sha256": "b03687fb034335207a5b9081899e6644eaa449937c918a84ac43fc37ce0c830d"
+        },
+        {
+          "name": "funcname_cache.cpython-312.pyc",
+          "bytes": 3342,
+          "sha256": "4830d4a28bcc5ae7d87075075fcaca9b4a0448b412d0abf049c204e31e7a9980"
+        },
+        {
+          "name": "functional_export.cpython-312.pyc",
+          "bytes": 49615,
+          "sha256": "db97adcedcea98360db6b530b322c600f28b1563b42289890ee1e5ac5ff5e316"
+        },
+        {
+          "name": "graph_break_hints.cpython-312.pyc",
+          "bytes": 1856,
+          "sha256": "f6dec9853ee7cf8948a7801877cb6c0bd0b5747e8e4a74f5c8ffab2625275043"
+        },
+        {
+          "name": "graph_bytecode_inputs.cpython-312.pyc",
+          "bytes": 4725,
+          "sha256": "99f8b28fd182f1c71fed15b573d4d3c2b303300196d18352cccfac3e113d87fd"
+        },
+        {
+          "name": "graph_deduplication.cpython-312.pyc",
+          "bytes": 25284,
+          "sha256": "29ea13dd33c16052a38fc8f5516886ea03ea31262954cc8d5ee39f31521fa8a2"
+        },
+        {
+          "name": "graph_id_filter.cpython-312.pyc",
+          "bytes": 19828,
+          "sha256": "369dda67d3b2ec388782eba3bb5bba6cbe890733a1e92dfb435c1ce17d7461d9"
+        },
+        {
+          "name": "graph_region_tracker.cpython-312.pyc",
+          "bytes": 24563,
+          "sha256": "92b3b9d1c8078227bdf4bfda698dc31e2c6aadf3f3ed61cf7c6a1f45fbb3fb87"
+        },
+        {
+          "name": "graph_utils.cpython-312.pyc",
+          "bytes": 4415,
+          "sha256": "c212613e17d95fe46162df4f76887a5a8e83dc872cd41cdf1a6a65bb0c815524"
+        },
+        {
+          "name": "guards.cpython-312.pyc",
+          "bytes": 231577,
+          "sha256": "3c9a1923e23bddd7f302c98056e57d6ab7a35b3e2fdb62db8a949703b88d120d"
+        },
+        {
+          "name": "hooks.cpython-312.pyc",
+          "bytes": 1427,
+          "sha256": "311b00d0d6867ec0b2467ed303b45e292f88e907830cbdddb8eacfc08e0a7498"
+        },
+        {
+          "name": "logging.cpython-312.pyc",
+          "bytes": 2508,
+          "sha256": "9b309b4891adbd123e01a40717af3d6c2e00c612e1d33756405248931dfc5a8c"
+        },
+        {
+          "name": "metrics_context.cpython-312.pyc",
+          "bytes": 13277,
+          "sha256": "ff06a5c80a6650523502ab1a090944d9eea17b4f6edf38a8026a0fb02f510952"
+        },
+        {
+          "name": "mutation_guard.cpython-312.pyc",
+          "bytes": 8574,
+          "sha256": "8079432473bcf78da5824f5331eeb08fc6f328d38a3f47bb268f2be58cc03acf"
+        },
+        {
+          "name": "output_graph.cpython-312.pyc",
+          "bytes": 197131,
+          "sha256": "f05f6b1973d7d913db47fb5a777eda8a208b9086a6c4505f46170a67b72fdcc5"
+        },
+        {
+          "name": "package.cpython-312.pyc",
+          "bytes": 62053,
+          "sha256": "2719445de5c60782b55eebafbdcefe4b667d31b21c3633c1061458a77546d30e"
+        },
+        {
+          "name": "pgo.cpython-312.pyc",
+          "bytes": 43953,
+          "sha256": "a6f8c7f3194a4416470e518164560e7923bd5b6eee272c8f5bd9c35c5f5d3bbf"
+        },
+        {
+          "name": "precompile_context.cpython-312.pyc",
+          "bytes": 10212,
+          "sha256": "f8e30a3eedc9f208bad7ec8b59a2c29936ac53dbc61977c6cea48eca20b097f2"
+        },
+        {
+          "name": "replay_record.cpython-312.pyc",
+          "bytes": 7431,
+          "sha256": "9123f08b1cd8fab63e1cb9a34e7f3ba79a24c6e28fd6b237212383d21d0d0e50"
+        },
+        {
+          "name": "resume_execution.cpython-312.pyc",
+          "bytes": 28852,
+          "sha256": "e44468fb7cccffe6fd2106362244d823fbd23f65d5d84b5c77bd9aca02801f85"
+        },
+        {
+          "name": "side_effects.cpython-312.pyc",
+          "bytes": 90598,
+          "sha256": "2ee9ca74766d03137ae8a06b94ffb002cc2eabf5f3ec1ce200f6005d45a6adaa"
+        },
+        {
+          "name": "source.cpython-312.pyc",
+          "bytes": 75159,
+          "sha256": "49e4de92e16d6764613a02fa13cf30405b32fca1be098c101cd69633e758d13e"
+        },
+        {
+          "name": "symbolic_convert.cpython-312.pyc",
+          "bytes": 275027,
+          "sha256": "e6378c0743a09130037f394804f1135082ca112da4711a52d035cc93c549005a"
+        },
+        {
+          "name": "testing.cpython-312.pyc",
+          "bytes": 31513,
+          "sha256": "0bbe0c5755844c0656b3def7c34a6806f821d351addaec25207839031a5da84c"
+        },
+        {
+          "name": "trace_rules.cpython-312.pyc",
+          "bytes": 135953,
+          "sha256": "353d111799587eb6b2904e830437af8ba69d9158e368d7eb98a045b720b8ca33"
+        },
+        {
+          "name": "types.cpython-312.pyc",
+          "bytes": 7487,
+          "sha256": "5cf1aeae3974ff02fdfa6fa318d1d67e7dde214f3999b3324aa792466f9fbd16"
+        },
+        {
+          "name": "utils.cpython-312.pyc",
+          "bytes": 259562,
+          "sha256": "b620ce16a8f7146fb154f767974e0433ebe9fcaf746ed992974107acd211a616"
+        }
+      ],
+      "bytes": 2528154
+    },
+    {
+      "old_path": "/workspace/HarbiChess/.venv/lib/python3.12/site-packages/torch/__pycache__",
+      "RAM_copy": "/dev/shm/harbichess-python-cache-relocation-20261007/cache03",
+      "files": [
+        {
+          "name": "_VF.cpython-312.pyc",
+          "bytes": 1520,
+          "sha256": "0701faba2eaf5b1dbeafcd8f208280f792ccf231170674c0dcd90e7b28bf1255"
+        },
+        {
+          "name": "__config__.cpython-312.pyc",
+          "bytes": 1036,
+          "sha256": "32c1258c2c61d55d62866f499c8b596bc9eab5b767468b27458b454adbeb44a4"
+        },
+        {
+          "name": "__future__.cpython-312.pyc",
+          "bytes": 3536,
+          "sha256": "2fd6af59312a8c245c3d41e5873822201733e3020f6acf90a2f90ed9b27da368"
+        },
+        {
+          "name": "__init__.cpython-312.pyc",
+          "bytes": 145076,
+          "sha256": "cce3a8abd86bb9e10bf70341f085eb8be656bf051fdfb9d5c8792720f8fe6b51"
+        },
+        {
+          "name": "_appdirs.cpython-312.pyc",
+          "bytes": 29566,
+          "sha256": "59915a4335d8934686716ce600a1318f4f38ada76597de5c52b5830c8a69af05"
+        },
+        {
+          "name": "_classes.cpython-312.pyc",
+          "bytes": 3295,
+          "sha256": "5b4170493215b0115f03f32cfd5aedae8b4521b76fcab289edc3207dc4aba83a"
+        },
+        {
+          "name": "_compile.cpython-312.pyc",
+          "bytes": 2497,
+          "sha256": "d3f14c5d20dffa13284dc3c08b1c8945210fae5d59dae7085fdad3fe15c0f6cb"
+        },
+        {
+          "name": "_custom_class_base.cpython-312.pyc",
+          "bytes": 1399,
+          "sha256": "413886438295bd467a1fd84dc3e4015445deb54e4e5ad6d30f36d21dae225eb4"
+        },
+        {
+          "name": "_custom_ops.cpython-312.pyc",
+          "bytes": 13864,
+          "sha256": "f26d75423ff03cc16bd478cc28ff5fed184b667f50bc4c54ff61e097a74c7bb5"
+        },
+        {
+          "name": "_environment.cpython-312.pyc",
+          "bytes": 475,
+          "sha256": "7c11932e060185b357f8e6c3f060aa1084eeb9be668ebaddc6febe92605dc755"
+        },
+        {
+          "name": "_guards.cpython-312.pyc",
+          "bytes": 68466,
+          "sha256": "12d3dc28b707d58c3aa64ead5db436bafc656b05bfa92dd43fdafcd4258dcc00"
+        },
+        {
+          "name": "_jit_internal.cpython-312.pyc",
+          "bytes": 54666,
+          "sha256": "57931b259dac6ffabb10197226f75fc8a3b137829bcfa02538212484e996ad6c"
+        },
+        {
+          "name": "_linalg_utils.cpython-312.pyc",
+          "bytes": 8027,
+          "sha256": "a3f98aab123b852606fe0da5fc7f67537e466422a9aa4b75a4e89791ea8eafdd"
+        },
+        {
+          "name": "_lobpcg.cpython-312.pyc",
+          "bytes": 50387,
+          "sha256": "c481b7e2a0a968e2260d191ac37a04ec864f822506392e9c694f196a2634b6c6"
+        },
+        {
+          "name": "_lowrank.cpython-312.pyc",
+          "bytes": 12754,
+          "sha256": "b36bdc425081c033a39f6a2c179c2c5bcb002978b9728b003b1a640b6e03ecd3"
+        },
+        {
+          "name": "_meta_registrations.cpython-312.pyc",
+          "bytes": 429894,
+          "sha256": "d3a0bae398f34d0d5a566c143f4f15bf495c7ef2f438ec590d42b96033d0b471"
+        },
+        {
+          "name": "_ops.cpython-312.pyc",
+          "bytes": 69628,
+          "sha256": "9d4f2b2ab35b4b05c1b76106b26de2c38cb752167af00b0d8505c737be3e1f08"
+        },
+        {
+          "name": "_precompile.cpython-312.pyc",
+          "bytes": 73802,
+          "sha256": "e3c65d94f50b16d5f5bc51f5db5d2dbbaeaca719dceb90b13d7c4e695fcc7535"
+        },
+        {
+          "name": "_size_docs.cpython-312.pyc",
+          "bytes": 1311,
+          "sha256": "eb6ba66975491d0157928e95a22082a4b5689a0b26a047a5376182a92f2994cb"
+        },
+        {
+          "name": "_sources.cpython-312.pyc",
+          "bytes": 5655,
+          "sha256": "6904f8122daeb830712e56a3b50f37b6f8b82f799364b63416ae5aca205ced24"
+        },
+        {
+          "name": "_storage_docs.cpython-312.pyc",
+          "bytes": 1701,
+          "sha256": "1cf4b0d7364e74f604a2ea2d496fcd67ee70fc958501749f59847fe6fc3e482e"
+        },
+        {
+          "name": "_tensor.cpython-312.pyc",
+          "bytes": 72312,
+          "sha256": "79fdd5ebd7fd2ed59601110868c3096f39bf8f9820d076190a1640cab9ac067a"
+        },
+        {
+          "name": "_tensor_docs.cpython-312.pyc",
+          "bytes": 146273,
+          "sha256": "bf2be47f8c4db868200d70b6a726022a43a2caaa34d57f9c8523efb6aeb73fd5"
+        },
+        {
+          "name": "_tensor_iterator.cpython-312.pyc",
+          "bytes": 16290,
+          "sha256": "8cc6304b4042ecff15391df778f3b2af92937cc26852a891cc7e2e401e67d9a2"
+        },
+        {
+          "name": "_tensor_str.cpython-312.pyc",
+          "bytes": 32045,
+          "sha256": "295bdb42d5bc59863feee8dd4c8274a514097563b18059e621433791067dbcf7"
+        },
+        {
+          "name": "_thread_safe_fork.cpython-312.pyc",
+          "bytes": 180,
+          "sha256": "b308ec03890a74dd20892fc5c4e3e2606ddaf4c3b3c800cf8c4e2c89c36f32a4"
+        },
+        {
+          "name": "_torch_docs.cpython-312.pyc",
+          "bytes": 468350,
+          "sha256": "c87f2d9a87170cce625682b06c7557c4dbc79859a7a06ab9b9459edbe870995e"
+        },
+        {
+          "name": "_utils.cpython-312.pyc",
+          "bytes": 60512,
+          "sha256": "714257a865cb872a6f27672081927576f0708352d27763a77f1b0cdd1af20add"
+        },
+        {
+          "name": "_utils_internal.cpython-312.pyc",
+          "bytes": 15892,
+          "sha256": "87aa129e3a305d0b519829ea8d89df9dcd002e00eb7153bb0f39095a6d797885"
+        },
+        {
+          "name": "_vmap_internals.cpython-312.pyc",
+          "bytes": 10150,
+          "sha256": "7c9a2973702dbd687261cb64932d7e6d339d8c8fa4a4fd97ca31c673a3a2ebe7"
+        },
+        {
+          "name": "_weights_only_unpickler.cpython-312.pyc",
+          "bytes": 26390,
+          "sha256": "c04cf6f4aec93e56cebb7d6cefddf4989a18ec6e8f906a7c93f91b426e06925d"
+        },
+        {
+          "name": "functional.cpython-312.pyc",
+          "bytes": 88094,
+          "sha256": "2d8f6f1733c33a1e1784921fc87bb5082ea7f2f95420ae912d79557d0c8280a1"
+        },
+        {
+          "name": "hub.cpython-312.pyc",
+          "bytes": 37813,
+          "sha256": "de4a97421db56221385d40b44e2458cf7042f023af83fc18290f526da5f59f18"
+        },
+        {
+          "name": "library.cpython-312.pyc",
+          "bytes": 83233,
+          "sha256": "caad95c029aec01fcff6c067fc9e46b1bb65c60bd933dfd4db2718e4b029a3b3"
+        },
+        {
+          "name": "overrides.cpython-312.pyc",
+          "bytes": 259467,
+          "sha256": "d331b0a5e42acb8d81ea7c8900b52ee092e002f9f04bc603773279580cb9b56b"
+        },
+        {
+          "name": "quasirandom.cpython-312.pyc",
+          "bytes": 10335,
+          "sha256": "946692497c5bb96dac1648978d15564da645f5910603ae0cf310903206180e04"
+        },
+        {
+          "name": "random.cpython-312.pyc",
+          "bytes": 11326,
+          "sha256": "9e675541ea0e4989e2276da847e30f4246fe00b096da02783f9b0dd3bb1c457c"
+        },
+        {
+          "name": "return_types.cpython-312.pyc",
+          "bytes": 2004,
+          "sha256": "d11e95423268a609075dc0644a7a3623168f7f05c5032e8a170f1dbd8dc792d3"
+        },
+        {
+          "name": "serialization.cpython-312.pyc",
+          "bytes": 90732,
+          "sha256": "97ce1e66cb5eee96593c726da6f92530c0e78533a1cc935b719d25f8b568bd91"
+        },
+        {
+          "name": "storage.cpython-312.pyc",
+          "bytes": 74463,
+          "sha256": "4b2c27a58b86a8ecbaa04e7d97dc844ebcb04aa217a9d27b82d58c3ee510d4d5"
+        },
+        {
+          "name": "torch_version.cpython-312.pyc",
+          "bytes": 3228,
+          "sha256": "9ecc8c1a83314ca409cf7d99011136d057ff013b03da8bfb0f597c157aa37754"
+        },
+        {
+          "name": "types.cpython-312.pyc",
+          "bytes": 4260,
+          "sha256": "9dbd5dce96d11284e0e4d5d5c925c41494ff69268d7ac597189c83c89fd4f925"
+        },
+        {
+          "name": "version.cpython-312.pyc",
+          "bytes": 588,
+          "sha256": "e4b41121f777fcbb852f2e468c4ffc4a7dd4b3eda8f9e7909044d6a0615a8381"
+        }
+      ],
+      "bytes": 2492492
+    },
+    {
+      "old_path": "/workspace/HarbiChess/.venv/lib/python3.12/site-packages/torch/_dynamo/variables/__pycache__",
+      "RAM_copy": "/dev/shm/harbichess-python-cache-relocation-20261007/cache04",
+      "files": [
+        {
+          "name": "__init__.cpython-312.pyc",
+          "bytes": 7979,
+          "sha256": "6bef55e8ff14b45ef38cd6e8f3a0b0f71917323940ed143b80392752f226624d"
+        },
+        {
+          "name": "base.cpython-312.pyc",
+          "bytes": 123472,
+          "sha256": "58a64ac8f610aaca0a11d4457207c0741c842e3203c3932bf331601f0d1c1145"
+        },
+        {
+          "name": "builder.cpython-312.pyc",
+          "bytes": 219551,
+          "sha256": "45724879894a68352ab4d322ec6f39e08d62b1474323d32b7e83d086d9fbc08d"
+        },
+        {
+          "name": "builtin.cpython-312.pyc",
+          "bytes": 160245,
+          "sha256": "c63b7bfd76f9f0d431880f9bb168034250a7a0d9ba3b2333a9ba01fc8e930d22"
+        },
+        {
+          "name": "constant.cpython-312.pyc",
+          "bytes": 47186,
+          "sha256": "8d8b7338829bbd079e48a6a899eef40300b58f2e59ecaf04f2ae76478aac270c"
+        },
+        {
+          "name": "ctx_manager.cpython-312.pyc",
+          "bytes": 95805,
+          "sha256": "1ec52e955d87e75ab43231f44070104cbd8e8524de614b3bf37b1408b0b7e806"
+        },
+        {
+          "name": "dicts.cpython-312.pyc",
+          "bytes": 80623,
+          "sha256": "eab98a04cbc40b08e41a956d44bb4c5658b8660c03d0a7c1e49c664605cbe5a7"
+        },
+        {
+          "name": "distributed.cpython-312.pyc",
+          "bytes": 12613,
+          "sha256": "4f246f3395471998ac8ee9af90d4a3aa148215b0e603637e31111c81166ae55e"
+        },
+        {
+          "name": "functions.cpython-312.pyc",
+          "bytes": 223019,
+          "sha256": "f7e0748731bb10a1c9976b2a5067dbb3404948f1550513b2406249bde140f659"
+        },
+        {
+          "name": "hashable.cpython-312.pyc",
+          "bytes": 8809,
+          "sha256": "99751667b52affb75e325f87c327488510630116dba3fccd828a5df1bb94e652"
+        },
+        {
+          "name": "higher_order_ops.cpython-312.pyc",
+          "bytes": 214889,
+          "sha256": "5031ac0b3b06ad4c969001327e30866611c27d0f68214dc7c6448246dbd48e55"
+        },
+        {
+          "name": "invoke_subgraph.cpython-312.pyc",
+          "bytes": 52181,
+          "sha256": "d9fa742365023c73166b9c6d2503d36a8755aba2f041bded80e4fa127af6adc0"
+        },
+        {
+          "name": "iter.cpython-312.pyc",
+          "bytes": 42900,
+          "sha256": "e8389127ea76771c3f82f3049900d36d514333b6924c47b5e33c604ca45e1018"
+        },
+        {
+          "name": "lazy.cpython-312.pyc",
+          "bytes": 33581,
+          "sha256": "9899fb1edd191f073aa34365fe1158acc6174c6d9e002c2fb6b00aaebd4eab4e"
+        },
+        {
+          "name": "lists.cpython-312.pyc",
+          "bytes": 110340,
+          "sha256": "0e3f160b65785d3aec8d8659c6c379730d2def761205c37b8de03cd07282a820"
+        },
+        {
+          "name": "memory.cpython-312.pyc",
+          "bytes": 11255,
+          "sha256": "6f04254189bcd169a8d01fe05aaf147de202f1869dba9995d42790321979b568"
+        },
+        {
+          "name": "misc.cpython-312.pyc",
+          "bytes": 140941,
+          "sha256": "c979e96f41f40d6963778cbe845b6fa48d1fa6539e0540fc0f892f0b8bca9d09"
+        },
+        {
+          "name": "nn_module.cpython-312.pyc",
+          "bytes": 72839,
+          "sha256": "fdcd67f4dc174bfdf3d82b557330803acaf8ddd459165139e1c6db02a55cebec"
+        },
+        {
+          "name": "object_protocol.cpython-312.pyc",
+          "bytes": 79536,
+          "sha256": "cc8acb9a4b6a3d1b203c9c7624a1b766fe129783e862fe52b46e2b48a68a6d32"
+        },
+        {
+          "name": "optimizer.cpython-312.pyc",
+          "bytes": 20584,
+          "sha256": "62ceb9a52e0a511fa45b2991e2c29c8e6a3cc6e756bc00c8d0d97ab7587c34e0"
+        },
+        {
+          "name": "script_object.cpython-312.pyc",
+          "bytes": 26070,
+          "sha256": "d5342ce82f286776b76e0a802ec67d93e5de13d0bcf74f076ac12911fd52f9d6"
+        },
+        {
+          "name": "sdpa.cpython-312.pyc",
+          "bytes": 5085,
+          "sha256": "e53828d6e4023f51c9242951ba594283a192280820cb2a08809296ac390b9553"
+        },
+        {
+          "name": "sets.cpython-312.pyc",
+          "bytes": 52034,
+          "sha256": "1d2602fe9fe36e23ab1eaac095553855d673308fe1c89841088f0e1e54a64e58"
+        },
+        {
+          "name": "streams.cpython-312.pyc",
+          "bytes": 38053,
+          "sha256": "87f95e23bc24e0fa18da38e828be548d7cf88e63994ccef706db7ad59746298d"
+        },
+        {
+          "name": "tensor.cpython-312.pyc",
+          "bytes": 146917,
+          "sha256": "dd9a072d60ca97665d667d12557bc0c4452c7eae4cccfb6867d7a92e26ed52c3"
+        },
+        {
+          "name": "torch.cpython-312.pyc",
+          "bytes": 196903,
+          "sha256": "f4c2db52de8a1034eae4861340da3f8c95bf0a0e404e7b2c48519bbfbfe71957"
+        },
+        {
+          "name": "torch_function.cpython-312.pyc",
+          "bytes": 31984,
+          "sha256": "d311e4d574ec6798e00a5ab1c353b10a7df07ddd2785e4cef49c0fd90ac3186b"
+        },
+        {
+          "name": "user_defined.cpython-312.pyc",
+          "bytes": 221416,
+          "sha256": "b5178ecc63750d3b1312247d1aad234980a89497367a29c59c0d1e113bc21efa"
+        }
+      ],
+      "bytes": 2476810
+    },
+    {
+      "old_path": "/workspace/HarbiChess/.venv/lib/python3.12/site-packages/sympy/polys/__pycache__",
+      "RAM_copy": "/dev/shm/harbichess-python-cache-relocation-20261007/cache05",
+      "files": [
+        {
+          "name": "__init__.cpython-312.pyc",
+          "bytes": 5553,
+          "sha256": "f2ac275ed9a0875689df245b629ed2952119d36474733bb52852bf71895da986"
+        },
+        {
+          "name": "appellseqs.cpython-312.pyc",
+          "bytes": 10365,
+          "sha256": "1f1335f0a31259732db5fcd739dc0a04b681524505c2b648effcf682fe27bce1"
+        },
+        {
+          "name": "compatibility.cpython-312.pyc",
+          "bytes": 112064,
+          "sha256": "44c5d521d9df299da1526c59be245c6bb067e59a11ab832a659c0a008539f34c"
+        },
+        {
+          "name": "constructor.cpython-312.pyc",
+          "bytes": 13864,
+          "sha256": "06bf22efc4a37c79f1dc2238de3dca699b85f9f28b165444159bca2c1a5eb4de"
+        },
+        {
+          "name": "densearith.cpython-312.pyc",
+          "bytes": 45158,
+          "sha256": "b2ae11a9ce3f11ff874b8f470de88dae4ad2d8ed901e208e5d51a43192602229"
+        },
+        {
+          "name": "densebasic.cpython-312.pyc",
+          "bytes": 50475,
+          "sha256": "218052e0c7bd9c7ccd7ceb1059531efdf8b9a768e63321433b9faba5df8be2d0"
+        },
+        {
+          "name": "densetools.cpython-312.pyc",
+          "bytes": 39723,
+          "sha256": "3ab21f04c99dec8a08ca79e83f3efcb05538dff573fad650f6aad82fca3319d7"
+        },
+        {
+          "name": "domainmatrix.cpython-312.pyc",
+          "bytes": 519,
+          "sha256": "5d628d16515ead47af30a95826c36fdd4ce6d858845efec3f70249dcd91d6be4"
+        },
+        {
+          "name": "euclidtools.cpython-312.pyc",
+          "bytes": 54068,
+          "sha256": "7da99ec935fe13c7dc1b2d54dab4a321d28e4678dd60e9bd7474ae0a4f6b6812"
+        },
+        {
+          "name": "factortools.cpython-312.pyc",
+          "bytes": 57208,
+          "sha256": "fc5a9af8991b4fb14f57305f6e0b534cf61421c3209fad31c9a18b091a804671"
+        },
+        {
+          "name": "fglmtools.cpython-312.pyc",
+          "bytes": 9632,
+          "sha256": "a64bd7952c55a7ce89757e642e72c5cbee6aa8edbec5d3d48d5786079afdbef8"
+        },
+        {
+          "name": "fields.cpython-312.pyc",
+          "bytes": 36146,
+          "sha256": "0a3c9bf0d8a0723b7d0e7981ed42223852877718326257953c99a0eb275d4c16"
+        },
+        {
+          "name": "galoistools.cpython-312.pyc",
+          "bytes": 74823,
+          "sha256": "b45f8f85de8a22267a82b64aab79a7cdac33411dde445eb6396a42cbefaa0298"
+        },
+        {
+          "name": "groebnertools.cpython-312.pyc",
+          "bytes": 33515,
+          "sha256": "0b5222ed08cb024cbe8a66a7c2c1ef29dce9964863e82d17b9c1f83c494d9872"
+        },
+        {
+          "name": "heuristicgcd.cpython-312.pyc",
+          "bytes": 4986,
+          "sha256": "4268780287d269d751c4734fb052b672f7d66d3c089806e4f46ae9d7d224e174"
+        },
+        {
+          "name": "monomials.cpython-312.pyc",
+          "bytes": 26229,
+          "sha256": "e7dfbaa78cdeda1dc31a547486113c1d707266618ec76f261b2595504a7fb91e"
+        },
+        {
+          "name": "orderings.cpython-312.pyc",
+          "bytes": 14738,
+          "sha256": "8cead4090134ed778b768e2b1c83bb0f2b07d250fb4fadb6d9278f79cc0fc530"
+        },
+        {
+          "name": "orthopolys.cpython-312.pyc",
+          "bytes": 15501,
+          "sha256": "a25450e0fa575f23a98ef9e137eb3fef721acf7880fb5cc93c97c424893caf7e"
+        },
+        {
+          "name": "partfrac.cpython-312.pyc",
+          "bytes": 17912,
+          "sha256": "54b3e71124bad7e72298bc1f97c7107f3ea171e13abc437d90c11a6cd0c1d894"
+        },
+        {
+          "name": "polyclasses.cpython-312.pyc",
+          "bytes": 159876,
+          "sha256": "81be8e64df851523f3af8793529f0d3dd972ac9bd7a40193e73b86f113da7f94"
+        },
+        {
+          "name": "polyconfig.cpython-312.pyc",
+          "bytes": 2231,
+          "sha256": "4cac0afe92f285bc587433fd6ff0dff149b5bb5d7d32c1c353cc2c56b4e83c2c"
+        },
+        {
+          "name": "polyerrors.cpython-312.pyc",
+          "bytes": 9750,
+          "sha256": "f3656cc92bab3bb9bfe9a10a77cb8aa9ebc0c32e75b07f01dd8e13118b482f22"
+        },
+        {
+          "name": "polyfuncs.cpython-312.pyc",
+          "bytes": 11908,
+          "sha256": "926748cdbbe065a8cf56943560071f3d6a5cf89f00aedfc647bcc6b981e1a105"
+        },
+        {
+          "name": "polyoptions.cpython-312.pyc",
+          "bytes": 32997,
+          "sha256": "135aba1887a7a05c0bc44490069c887751723c9d635a96de4f6ee4d1cdaec316"
+        },
+        {
+          "name": "polyquinticconst.cpython-312.pyc",
+          "bytes": 516639,
+          "sha256": "8c28c982df2e2a21204e7346d2a022ed31d335720143bd9358ac35aaeec7fc4a"
+        },
+        {
+          "name": "polyroots.cpython-312.pyc",
+          "bytes": 49552,
+          "sha256": "3bb6a7ae4b4599639ee229967b6db48c9c9871060dd4f8ae4e6eaf66a12848b7"
+        },
+        {
+          "name": "polytools.cpython-312.pyc",
+          "bytes": 274658,
+          "sha256": "d00add1ed3f6318a063f1b1f6ccdf97573e2f7f4c323a20ff4872403d3a341f6"
+        },
+        {
+          "name": "polyutils.cpython-312.pyc",
+          "bytes": 24416,
+          "sha256": "1c3203b1556d93f19832de3313ef7b2a0211b3390225aaaefaf284757881387c"
+        },
+        {
+          "name": "puiseux.cpython-312.pyc",
+          "bytes": 40839,
+          "sha256": "21c81f48391eefca24d8be85c521b35b235fa800a10518bbf1acc946ec40aca9"
+        },
+        {
+          "name": "rationaltools.cpython-312.pyc",
+          "bytes": 3618,
+          "sha256": "800ac202dbf7548ef4d5139287ef4f1a21974f528401855162643e8ca259e8e1"
+        },
+        {
+          "name": "ring_series.cpython-312.pyc",
+          "bytes": 76638,
+          "sha256": "9c60cfae71ad2eaaf48847599f0d2f999b3de0fd3c29d1e43cf6dbc74bf496fc"
+        },
+        {
+          "name": "rings.cpython-312.pyc",
+          "bytes": 124662,
+          "sha256": "8349bcb3822852db493df08e074a0cbdcf8cea18d5f84fd0ad11a7ba23be1a34"
+        },
+        {
+          "name": "rootisolation.cpython-312.pyc",
+          "bytes": 80423,
+          "sha256": "5563be16a91811d8f5ed72a25db4710908f2633a0e8be0cac1879509b9b19045"
+        },
+        {
+          "name": "rootoftools.cpython-312.pyc",
+          "bytes": 54446,
+          "sha256": "8cd044a465cfc61d4473613b07af52887244b21e3d97d81dbb5002d378ed7404"
+        },
+        {
+          "name": "solvers.cpython-312.pyc",
+          "bytes": 16808,
+          "sha256": "93b065ee77113050a586ecb477c7886cbcdedf1d28785aea29e1841e94f1bc7c"
+        },
+        {
+          "name": "specialpolys.cpython-312.pyc",
+          "bytes": 29888,
+          "sha256": "ef0053ae804b1d44bb9cf3e35424c35e73b63c581f666969bb2c87078fd73a55"
+        },
+        {
+          "name": "sqfreetools.cpython-312.pyc",
+          "bytes": 24217,
+          "sha256": "9cc518fc4b78f8a0b0e581fbd251ad2adb47bcd6aec2164d15fd7f91c6e36a33"
+        }
+      ],
+      "bytes": 2156045
+    },
+    {
+      "old_path": "/workspace/HarbiChess/.venv/lib/python3.12/site-packages/sympy/core/__pycache__",
+      "RAM_copy": "/dev/shm/harbichess-python-cache-relocation-20261007/cache06",
+      "files": [
+        {
+          "name": "__init__.cpython-312.pyc",
+          "bytes": 3399,
+          "sha256": "07cead0fe135954da06192dc14afca183553e59b460cf0fe76cb361fd5affdb9"
+        },
+        {
+          "name": "_print_helpers.cpython-312.pyc",
+          "bytes": 2439,
+          "sha256": "5cdeeb22af19618cb697689f6de0fc52a8b2c547ec030991db10fea98099b32d"
+        },
+        {
+          "name": "add.cpython-312.pyc",
+          "bytes": 54658,
+          "sha256": "9cde0487639f649f12ad213485bdc19d1610db11c93b1eb9941052dbd697bc9d"
+        },
+        {
+          "name": "alphabets.cpython-312.pyc",
+          "bytes": 343,
+          "sha256": "6f994a4c87173206fb188fa975fcb5c4ed282cb13320db5ff333453e8390ce8c"
+        },
+        {
+          "name": "assumptions.cpython-312.pyc",
+          "bytes": 21759,
+          "sha256": "295b60509c70a7a2fc695dc80af957fd9b785aabe2c04b2d2c1454c7941cecbe"
+        },
+        {
+          "name": "assumptions_generated.cpython-312.pyc",
+          "bytes": 15493,
+          "sha256": "352668a09cc78a300011d5ac8130f6b9e2ab7c6931d0d6dc9ba1c540ef7dea4d"
+        },
+        {
+          "name": "basic.cpython-312.pyc",
+          "bytes": 84254,
+          "sha256": "cd9876a6659093ad9c09f620d4c8d8cbf3ebe49811a4c3f4b68c566b3172018f"
+        },
+        {
+          "name": "cache.cpython-312.pyc",
+          "bytes": 8448,
+          "sha256": "7c8258dcfcb632d9f2807d37795024b3feaaed7b5ddbb4e16802405b505640ac"
+        },
+        {
+          "name": "containers.cpython-312.pyc",
+          "bytes": 19119,
+          "sha256": "0e31ff3f5a5420f7914ccee843c1271a4f081b3082ca7d5709ab15ca42a668bd"
+        },
+        {
+          "name": "core.cpython-312.pyc",
+          "bytes": 1174,
+          "sha256": "2da8e95033fbd4e7124f183a3b594c44e9b29e90a2437d3b155409d91b604935"
+        },
+        {
+          "name": "coreerrors.cpython-312.pyc",
+          "bytes": 1510,
+          "sha256": "625b565c69e4bdf890c35fa7fb1904400dd832bd2da9c1e00b45ebe3322c3ab5"
+        },
+        {
+          "name": "decorators.cpython-312.pyc",
+          "bytes": 9894,
+          "sha256": "c67b77fb6d41a2681af91db8720d3342a51e5ef8561fae368a356377861cf592"
+        },
+        {
+          "name": "evalf.cpython-312.pyc",
+          "bytes": 65228,
+          "sha256": "f1eeb9f84782a1f276460714d1191a273ebec9fdef7751b55628d3d6cec7e45a"
+        },
+        {
+          "name": "expr.cpython-312.pyc",
+          "bytes": 156230,
+          "sha256": "af6399c9ae820f94f314ce1e82bbdd091256c444f303d7c242b4a9fc3a85451c"
+        },
+        {
+          "name": "exprtools.cpython-312.pyc",
+          "bytes": 62285,
+          "sha256": "9916c12fe216d0201554773dfe689e64cf7e1e6061b0159355237e5eb575a4bc"
+        },
+        {
+          "name": "facts.cpython-312.pyc",
+          "bytes": 23578,
+          "sha256": "915b8dcc0ef50930447f7e00f0e4113aee5589af4de62ad8359a9f5c2f664736"
+        },
+        {
+          "name": "function.cpython-312.pyc",
+          "bytes": 137724,
+          "sha256": "5fb57cf54a8f244744981b62f399ea1a85f01adb9b62fca7278d9825eb2641f4"
+        },
+        {
+          "name": "intfunc.cpython-312.pyc",
+          "bytes": 14322,
+          "sha256": "2921d07e1e6b9c1ac4b96a9943c6c448228815e910d002d661b154f4181bcb72"
+        },
+        {
+          "name": "kind.cpython-312.pyc",
+          "bytes": 14662,
+          "sha256": "e7da8dbfb5e807f19d96f0e036d3a1db7c5737bdeea112eaedc7374a50e89940"
+        },
+        {
+          "name": "logic.cpython-312.pyc",
+          "bytes": 13979,
+          "sha256": "e24787b3d01f4740ed409d1dd7496a59816e9b10783c15c4b1de655099275178"
+        },
+        {
+          "name": "mod.cpython-312.pyc",
+          "bytes": 11241,
+          "sha256": "c7649584c88367dfa7acee5ef400cde89f042b22c066fa132d5693cff04ed7ba"
+        },
+        {
+          "name": "mul.cpython-312.pyc",
+          "bytes": 87506,
+          "sha256": "b534d87b371d2bc3ab5e253485133188eaa3b33c2bb19f2d09e3825c397ec060"
+        },
+        {
+          "name": "multidimensional.cpython-312.pyc",
+          "bytes": 4902,
+          "sha256": "a112fa176a7cfb3498c36646a0ffb4e45e3f3508f1362bdf0f6732652a93aea8"
+        },
+        {
+          "name": "numbers.cpython-312.pyc",
+          "bytes": 184597,
+          "sha256": "2165cf920d798966b8d999b4f26c7c779d9b91f54b920c744c019e2515582d55"
+        },
+        {
+          "name": "operations.cpython-312.pyc",
+          "bytes": 29416,
+          "sha256": "3da49558e42eee904aa7454119fdfab849f3d5d36bf640963bfe1679cd301aee"
+        },
+        {
+          "name": "parameters.cpython-312.pyc",
+          "bytes": 5464,
+          "sha256": "744b4a882c9f00cae4c9b4a70e0e5b1b078df83b4f1316d466134ff7ed627ae7"
+        },
+        {
+          "name": "power.cpython-312.pyc",
+          "bytes": 88501,
+          "sha256": "2610cfaf79dfeee5f000cf543975007f834dc0651f0625aaeb20cbaf38bd94b3"
+        },
+        {
+          "name": "random.cpython-312.pyc",
+          "bytes": 8834,
+          "sha256": "37371a48b0155237c8a3009ad5426ede315f5c90b93e765e79462cb3f86937b5"
+        },
+        {
+          "name": "relational.cpython-312.pyc",
+          "bytes": 60221,
+          "sha256": "e96178e4d37f1e50fdc387e1fe22017f83bd2135f71088c783a6c0639406de2e"
+        },
+        {
+          "name": "rules.cpython-312.pyc",
+          "bytes": 2309,
+          "sha256": "26f1e04fdef8c99afb4bd986585b6eb21dea07a6013575eb9dd25989e882ef41"
+        },
+        {
+          "name": "singleton.cpython-312.pyc",
+          "bytes": 8074,
+          "sha256": "53e3796ef3f7470ead13ecb83249badf4c9f5da8ba80d5354dfacc0fccb8f88e"
+        },
+        {
+          "name": "sorting.cpython-312.pyc",
+          "bytes": 12261,
+          "sha256": "f9affc94e7c9ff2506cd5f37b9b5fa28ca042c5bbc1afa811f33ffdcb21fcb49"
+        },
+        {
+          "name": "symbol.cpython-312.pyc",
+          "bytes": 36078,
+          "sha256": "d5a5bb4e45a51fdb9f6ded058e52f8446cc4e0508efdf62aaf24dc4338b8995d"
+        },
+        {
+          "name": "sympify.cpython-312.pyc",
+          "bytes": 21234,
+          "sha256": "a18a971ae46a7612023d7967b4c46a41556f16e3dd71c5cea00ead63881229ec"
+        },
+        {
+          "name": "traversal.cpython-312.pyc",
+          "bytes": 10932,
+          "sha256": "0d43981f9074bc35650db20441d2a13a5e8eb7d3c204701ed8226d15d628f0d9"
+        }
+      ],
+      "bytes": 1282068
+    }
+  ],
+  "reclaimed_bytes": 17777551,
+  "old_source_checkpoint_research_files_modified": false,
+  "installed_dependencies_reinstalled": false,
+  "free_workspace_bytes": 285974528
+}
