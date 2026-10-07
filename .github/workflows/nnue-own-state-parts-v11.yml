@@ -1,0 +1,29 @@
+name: NNUE state exact bounded-part delivery v11
+run-name: NNUE V11 parts / ${{ inputs.control_prefix }}
+on:
+  workflow_dispatch:
+    inputs:
+      parts_control_sha:
+        required: true
+      control_prefix:
+        required: true
+permissions: {}
+concurrency:
+  group: a100-allowlisted-release-delivery
+  cancel-in-progress: false
+jobs:
+  backup:
+    if: github.repository == 'Eta06/HarbiChess' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    permissions:
+      contents: write
+    env:
+      PARTS_CONTROL_SHA: ${{ inputs.parts_control_sha }}
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+          ref: ${{ github.sha }}
+      - run: python experiments/ufuk/continuation-20261007/nnue-state-v11/parts_receiver_v11.py
