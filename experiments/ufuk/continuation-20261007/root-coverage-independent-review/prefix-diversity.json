@@ -1,0 +1,1589 @@
+{
+  "schema": "independent-sealed-pool-prefix-diversity-v1",
+  "seeds": [
+    {
+      "seed": 20262905,
+      "pool_sha256": "a8b43b377d5376a5f67f3a56edb893f949b54e92be9e7a60b1e6ff91bfdfaa6a",
+      "protected_sha256": "e9ff3bfb0c6914b573d68b7df0a2cc110cd061a07b2381c8412f3be2473e81d9",
+      "fixed128_order_sha256": "b7eae6ad0d0ae3be4a25588bbbe9d49ba435209faa9e39fd178ec28b41a820f8",
+      "pool": {
+        "rows": 4096,
+        "4": {
+          "complete_prefix_rows": 4080,
+          "too_short": 16,
+          "unique_complete_prefixes": 26,
+          "top8": [
+            {
+              "uci": [
+                "e2e4",
+                "e7e5",
+                "b1c3",
+                "d8g5"
+              ],
+              "rows": 3166,
+              "fraction_of_all_rows": 0.77294921875
+            },
+            {
+              "uci": [
+                "b1c3",
+                "e7e5",
+                "e2e4",
+                "d8g5"
+              ],
+              "rows": 60,
+              "fraction_of_all_rows": 0.0146484375
+            },
+            {
+              "uci": [
+                "e2e4",
+                "g8h6",
+                "d1h5",
+                "b8c6"
+              ],
+              "rows": 59,
+              "fraction_of_all_rows": 0.014404296875
+            },
+            {
+              "uci": [
+                "b2b4",
+                "b8c6",
+                "c2c3",
+                "g8f6"
+              ],
+              "rows": 58,
+              "fraction_of_all_rows": 0.01416015625
+            },
+            {
+              "uci": [
+                "e2e4",
+                "a7a6",
+                "d1h5",
+                "b8c6"
+              ],
+              "rows": 58,
+              "fraction_of_all_rows": 0.01416015625
+            },
+            {
+              "uci": [
+                "e2e4",
+                "g7g6",
+                "b1c3",
+                "e7e5"
+              ],
+              "rows": 58,
+              "fraction_of_all_rows": 0.01416015625
+            },
+            {
+              "uci": [
+                "e2e4",
+                "e7e5",
+                "b1c3",
+                "c7c5"
+              ],
+              "rows": 57,
+              "fraction_of_all_rows": 0.013916015625
+            },
+            {
+              "uci": [
+                "e2e4",
+                "e7e5",
+                "b1c3",
+                "b7b5"
+              ],
+              "rows": 43,
+              "fraction_of_all_rows": 0.010498046875
+            }
+          ]
+        },
+        "8": {
+          "complete_prefix_rows": 4017,
+          "too_short": 79,
+          "unique_complete_prefixes": 55,
+          "top8": [
+            {
+              "uci": [
+                "e2e4",
+                "e7e5",
+                "b1c3",
+                "d8g5",
+                "c3d5",
+                "f8d6",
+                "d1f3",
+                "g8f6"
+              ],
+              "rows": 2394,
+              "fraction_of_all_rows": 0.58447265625
+            },
+            {
+              "uci": [
+                "e2e4",
+                "g7g6",
+                "b1c3",
+                "e7e5",
+                "d1g4",
+                "b8c6",
+                "c3d5",
+                "c6d4"
+              ],
+              "rows": 58,
+              "fraction_of_all_rows": 0.01416015625
+            },
+            {
+              "uci": [
+                "e2e4",
+                "e7e5",
+                "b1c3",
+                "d8g5",
+                "b2b4",
+                "f8b4",
+                "c3d5",
+                "b4d6"
+              ],
+              "rows": 56,
+              "fraction_of_all_rows": 0.013671875
+            },
+            {
+              "uci": [
+                "b2b4",
+                "b8c6",
+                "c2c3",
+                "g8f6",
+                "d2d3",
+                "d7d5",
+                "g1f3",
+                "c8f5"
+              ],
+              "rows": 55,
+              "fraction_of_all_rows": 0.013427734375
+            },
+            {
+              "uci": [
+                "e2e4",
+                "a7a6",
+                "d1h5",
+                "b8c6",
+                "b1c3",
+                "e7e5",
+                "c3d5",
+                "f8c5"
+              ],
+              "rows": 54,
+              "fraction_of_all_rows": 0.01318359375
+            },
+            {
+              "uci": [
+                "b1c3",
+                "e7e5",
+                "e2e4",
+                "d8g5",
+                "c3d5",
+                "f8d6",
+                "d1f3",
+                "g8f6"
+              ],
+              "rows": 30,
+              "fraction_of_all_rows": 0.00732421875
+            },
+            {
+              "uci": [
+                "e2e4",
+                "e7e5",
+                "b1a3",
+                "d8g5",
+                "d1f3",
+                "f8a3",
+                "f3a3",
+                "d7d6"
+              ],
+              "rows": 30,
+              "fraction_of_all_rows": 0.00732421875
+            },
+            {
+              "uci": [
+                "e2e4",
+                "e7e5",
+                "b1c3",
+                "d8g5",
+                "a1b1",
+                "b8c6",
+                "c3d5",
+                "f8d6"
+              ],
+              "rows": 30,
+              "fraction_of_all_rows": 0.00732421875
+            }
+          ]
+        },
+        "16": {
+          "complete_prefix_rows": 3773,
+          "too_short": 323,
+          "unique_complete_prefixes": 89,
+          "top8": [
+            {
+              "uci": [
+                "e2e4",
+                "e7e5",
+                "b1c3",
+                "d8g5",
+                "c3d5",
+                "f8d6",
+                "d1f3",
+                "g8f6",
+                "d5c7",
+                "d6c7",
+                "f1c4",
+                "d7d5",
+                "e4d5",
+                "c8f5",
+                "c4b5",
+                "e8d8"
+              ],
+              "rows": 1370,
+              "fraction_of_all_rows": 0.33447265625
+            },
+            {
+              "uci": [
+                "e2e4",
+                "e7e5",
+                "b1c3",
+                "d8g5",
+                "c3d5",
+                "f8d6",
+                "d1f3",
+                "g8f6",
+                "d5c7",
+                "d6c7",
+                "f1c4",
+                "d7d5",
+                "e4d5",
+                "c8f5",
+                "d5d6",
+                "c7d6"
+              ],
+              "rows": 83,
+              "fraction_of_all_rows": 0.020263671875
+            },
+            {
+              "uci": [
+                "e2e4",
+                "e7e5",
+                "b1c3",
+                "d8g5",
+                "c3d5",
+                "f8d6",
+                "d1f3",
+                "g8f6",
+                "d5c7",
+                "d6c7",
+                "f1c4",
+                "d7d5",
+                "e4d5",
+                "c8f5",
+                "c4b5",
+                "e8f8"
+              ],
+              "rows": 57,
+              "fraction_of_all_rows": 0.013916015625
+            },
+            {
+              "uci": [
+                "e2e4",
+                "e7e5",
+                "b1c3",
+                "d8g5",
+                "c3d5",
+                "f8d6",
+                "d1f3",
+                "g8f6",
+                "d5c7",
+                "d6c7",
+                "f1c4",
+                "d7d5",
+                "e4d5",
+                "c8e6",
+                "d5e6",
+                "f7e6"
+              ],
+              "rows": 54,
+              "fraction_of_all_rows": 0.01318359375
+            },
+            {
+              "uci": [
+                "b2b4",
+                "b8c6",
+                "c2c3",
+                "g8f6",
+                "d2d3",
+                "d7d5",
+                "g1f3",
+                "c8f5",
+                "c1e3",
+                "e7e5",
+                "b1d2",
+                "g7g5",
+                "f3g5",
+                "h7h5",
+                "h2h4",
+                "a7a5"
+              ],
+              "rows": 48,
+              "fraction_of_all_rows": 0.01171875
+            },
+            {
+              "uci": [
+                "e2e4",
+                "a7a6",
+                "d1h5",
+                "b8c6",
+                "b1c3",
+                "e7e5",
+                "c3d5",
+                "f8c5",
+                "g1f3",
+                "g8f6",
+                "d5f6",
+                "d8f6",
+                "d2d4",
+                "c6d4",
+                "h5e5",
+                "f6e5"
+              ],
+              "rows": 48,
+              "fraction_of_all_rows": 0.01171875
+            },
+            {
+              "uci": [
+                "b1c3",
+                "e7e5",
+                "e2e4",
+                "d8g5",
+                "c3d5",
+                "f8d6",
+                "d1f3",
+                "g8f6",
+                "d5c7",
+                "d6c7",
+                "f1c4",
+                "d7d5",
+                "e4d5",
+                "c8f5",
+                "c4b5",
+                "e8d8"
+              ],
+              "rows": 30,
+              "fraction_of_all_rows": 0.00732421875
+            },
+            {
+              "uci": [
+                "e2e4",
+                "e7e5",
+                "b1a3",
+                "d8g5",
+                "d1f3",
+                "f8a3",
+                "f3a3",
+                "d7d6",
+                "f1b5",
+                "e8f8",
+                "g1e2",
+                "g5g2",
+                "e2g3",
+                "b8c6",
+                "b5c6",
+                "b7c6"
+              ],
+              "rows": 30,
+              "fraction_of_all_rows": 0.00732421875
+            }
+          ]
+        }
+      },
+      "fixed128": {
+        "rows": 128,
+        "4": {
+          "complete_prefix_rows": 128,
+          "too_short": 0,
+          "unique_complete_prefixes": 14,
+          "top8": [
+            {
+              "uci": [
+                "e2e4",
+                "e7e5",
+                "b1c3",
+                "d8g5"
+              ],
+              "rows": 105,
+              "fraction_of_all_rows": 0.8203125
+            },
+            {
+              "uci": [
+                "a2a4",
+                "e7e5",
+                "e2e4",
+                "d8g5"
+              ],
+              "rows": 3,
+              "fraction_of_all_rows": 0.0234375
+            },
+            {
+              "uci": [
+                "e2e4",
+                "e7e5",
+                "b1c3",
+                "d8h4"
+              ],
+              "rows": 3,
+              "fraction_of_all_rows": 0.0234375
+            },
+            {
+              "uci": [
+                "b2b4",
+                "b8c6",
+                "c2c3",
+                "g8f6"
+              ],
+              "rows": 2,
+              "fraction_of_all_rows": 0.015625
+            },
+            {
+              "uci": [
+                "e2e4",
+                "a7a6",
+                "d1h5",
+                "b8c6"
+              ],
+              "rows": 2,
+              "fraction_of_all_rows": 0.015625
+            },
+            {
+              "uci": [
+                "e2e4",
+                "b8c6",
+                "b1c3",
+                "g8f6"
+              ],
+              "rows": 2,
+              "fraction_of_all_rows": 0.015625
+            },
+            {
+              "uci": [
+                "e2e4",
+                "e7e5",
+                "b1c3",
+                "a7a5"
+              ],
+              "rows": 2,
+              "fraction_of_all_rows": 0.015625
+            },
+            {
+              "uci": [
+                "e2e4",
+                "e7e5",
+                "b1c3",
+                "b7b5"
+              ],
+              "rows": 2,
+              "fraction_of_all_rows": 0.015625
+            }
+          ]
+        },
+        "8": {
+          "complete_prefix_rows": 123,
+          "too_short": 5,
+          "unique_complete_prefixes": 33,
+          "top8": [
+            {
+              "uci": [
+                "e2e4",
+                "e7e5",
+                "b1c3",
+                "d8g5",
+                "c3d5",
+                "f8d6",
+                "d1f3",
+                "g8f6"
+              ],
+              "rows": 74,
+              "fraction_of_all_rows": 0.578125
+            },
+            {
+              "uci": [
+                "a2a4",
+                "e7e5",
+                "e2e4",
+                "d8g5",
+                "b1c3",
+                "b8c6",
+                "c3d5",
+                "f8d6"
+              ],
+              "rows": 3,
+              "fraction_of_all_rows": 0.0234375
+            },
+            {
+              "uci": [
+                "e2e4",
+                "e7e5",
+                "b1c3",
+                "d8g5",
+                "b2b4",
+                "f8b4",
+                "c3d5",
+                "b4d6"
+              ],
+              "rows": 3,
+              "fraction_of_all_rows": 0.0234375
+            },
+            {
+              "uci": [
+                "e2e4",
+                "e7e5",
+                "b1c3",
+                "d8g5",
+                "c3d5",
+                "f8d6",
+                "a2a4",
+                "b8c6"
+              ],
+              "rows": 3,
+              "fraction_of_all_rows": 0.0234375
+            },
+            {
+              "uci": [
+                "b2b4",
+                "b8c6",
+                "c2c3",
+                "g8f6",
+                "d2d3",
+                "d7d5",
+                "g1f3",
+                "c8f5"
+              ],
+              "rows": 2,
+              "fraction_of_all_rows": 0.015625
+            },
+            {
+              "uci": [
+                "e2e4",
+                "a7a6",
+                "d1h5",
+                "b8c6",
+                "b1c3",
+                "e7e5",
+                "c3d5",
+                "f8c5"
+              ],
+              "rows": 2,
+              "fraction_of_all_rows": 0.015625
+            },
+            {
+              "uci": [
+                "e2e4",
+                "e7e5",
+                "b1c3",
+                "a7a5",
+                "d1g4",
+                "b8c6",
+                "f1c4",
+                "d7d5"
+              ],
+              "rows": 2,
+              "fraction_of_all_rows": 0.015625
+            },
+            {
+              "uci": [
+                "e2e4",
+                "e7e5",
+                "b1c3",
+                "d8g5",
+                "c3d5",
+                "f7f5",
+                "d5c7",
+                "e8d8"
+              ],
+              "rows": 2,
+              "fraction_of_all_rows": 0.015625
+            }
+          ]
+        },
+        "16": {
+          "complete_prefix_rows": 117,
+          "too_short": 11,
+          "unique_complete_prefixes": 51,
+          "top8": [
+            {
+              "uci": [
+                "e2e4",
+                "e7e5",
+                "b1c3",
+                "d8g5",
+                "c3d5",
+                "f8d6",
+                "d1f3",
+                "g8f6",
+                "d5c7",
+                "d6c7",
+                "f1c4",
+                "d7d5",
+                "e4d5",
+                "c8f5",
+                "c4b5",
+                "e8d8"
+              ],
+              "rows": 47,
+              "fraction_of_all_rows": 0.3671875
+            },
+            {
+              "uci": [
+                "a2a4",
+                "e7e5",
+                "e2e4",
+                "d8g5",
+                "b1c3",
+                "b8c6",
+                "c3d5",
+                "f8d6",
+                "d1f3",
+                "g8f6",
+                "d5c7",
+                "d6c7",
+                "f1c4",
+                "d7d5",
+                "e4d5",
+                "c6d4"
+              ],
+              "rows": 3,
+              "fraction_of_all_rows": 0.0234375
+            },
+            {
+              "uci": [
+                "e2e4",
+                "e7e5",
+                "b1c3",
+                "d8g5",
+                "c3d5",
+                "f8d6",
+                "a2a4",
+                "b8c6",
+                "d1f3",
+                "g8f6",
+                "d5c7",
+                "d6c7",
+                "f1c4",
+                "d7d5",
+                "e4d5",
+                "c6d4"
+              ],
+              "rows": 3,
+              "fraction_of_all_rows": 0.0234375
+            },
+            {
+              "uci": [
+                "e2e4",
+                "e7e5",
+                "b1c3",
+                "d8g5",
+                "c3d5",
+                "f8d6",
+                "d1f3",
+                "g8f6",
+                "d5c7",
+                "d6c7",
+                "f1c4",
+                "d7d5",
+                "e4d5",
+                "c8e6",
+                "d5e6",
+                "f7e6"
+              ],
+              "rows": 3,
+              "fraction_of_all_rows": 0.0234375
+            },
+            {
+              "uci": [
+                "b2b4",
+                "b8c6",
+                "c2c3",
+                "g8f6",
+                "d2d3",
+                "d7d5",
+                "g1f3",
+                "c8f5",
+                "c1e3",
+                "e7e5",
+                "b1d2",
+                "g7g5",
+                "f3g5",
+                "h7h5",
+                "h2h4",
+                "a7a5"
+              ],
+              "rows": 2,
+              "fraction_of_all_rows": 0.015625
+            },
+            {
+              "uci": [
+                "e2e4",
+                "a7a6",
+                "d1h5",
+                "b8c6",
+                "b1c3",
+                "e7e5",
+                "c3d5",
+                "f8c5",
+                "g1f3",
+                "g8f6",
+                "d5f6",
+                "d8f6",
+                "d2d4",
+                "c6d4",
+                "h5e5",
+                "f6e5"
+              ],
+              "rows": 2,
+              "fraction_of_all_rows": 0.015625
+            },
+            {
+              "uci": [
+                "e2e4",
+                "e7e5",
+                "b1c3",
+                "a7a5",
+                "d1g4",
+                "b8c6",
+                "f1c4",
+                "d7d5",
+                "g4h5",
+                "d5c4",
+                "c3d5",
+                "f8c5",
+                "g1e2",
+                "d8d7",
+                "d2d4",
+                "c4d3"
+              ],
+              "rows": 2,
+              "fraction_of_all_rows": 0.015625
+            },
+            {
+              "uci": [
+                "e2e4",
+                "e7e5",
+                "b1c3",
+                "d8g5",
+                "b2b4",
+                "f8b4",
+                "c3d5",
+                "b4d6",
+                "d1f3",
+                "g5g4",
+                "f3g4",
+                "g7g6",
+                "g1f3",
+                "h7h5",
+                "g4g5",
+                "d6c5"
+              ],
+              "rows": 2,
+              "fraction_of_all_rows": 0.015625
+            }
+          ]
+        }
+      }
+    },
+    {
+      "seed": 20262906,
+      "pool_sha256": "ae9c02b7b00dc8605688d768cea3ec549d938042e2ed87c9000ff09526b82b97",
+      "protected_sha256": "63865f92ebc82cae794c021d084ac7cd272449ea7a1c05a13be82d3753f0d4b5",
+      "fixed128_order_sha256": "5ea2a47d86cc71003d0796c5fa13fedb059d0329e50dabcc311a0fdc91f42e85",
+      "pool": {
+        "rows": 4096,
+        "4": {
+          "complete_prefix_rows": 4077,
+          "too_short": 19,
+          "unique_complete_prefixes": 29,
+          "top8": [
+            {
+              "uci": [
+                "e2e4",
+                "e7e5",
+                "b1c3",
+                "d8g5"
+              ],
+              "rows": 3082,
+              "fraction_of_all_rows": 0.75244140625
+            },
+            {
+              "uci": [
+                "e2e4",
+                "f7f5",
+                "e4f5",
+                "g8f6"
+              ],
+              "rows": 66,
+              "fraction_of_all_rows": 0.01611328125
+            },
+            {
+              "uci": [
+                "a2a4",
+                "e7e5",
+                "e2e4",
+                "d8g5"
+              ],
+              "rows": 65,
+              "fraction_of_all_rows": 0.015869140625
+            },
+            {
+              "uci": [
+                "e2e4",
+                "a7a6",
+                "d1h5",
+                "b8c6"
+              ],
+              "rows": 45,
+              "fraction_of_all_rows": 0.010986328125
+            },
+            {
+              "uci": [
+                "b1c3",
+                "e7e5",
+                "e2e4",
+                "d8g5"
+              ],
+              "rows": 35,
+              "fraction_of_all_rows": 0.008544921875
+            },
+            {
+              "uci": [
+                "e2e4",
+                "e7e5",
+                "b1c3",
+                "b7b5"
+              ],
+              "rows": 35,
+              "fraction_of_all_rows": 0.008544921875
+            },
+            {
+              "uci": [
+                "e2e4",
+                "e7e5",
+                "b1c3",
+                "d7d5"
+              ],
+              "rows": 35,
+              "fraction_of_all_rows": 0.008544921875
+            },
+            {
+              "uci": [
+                "e2e4",
+                "e7e5",
+                "b1c3",
+                "d7d6"
+              ],
+              "rows": 35,
+              "fraction_of_all_rows": 0.008544921875
+            }
+          ]
+        },
+        "8": {
+          "complete_prefix_rows": 4031,
+          "too_short": 65,
+          "unique_complete_prefixes": 46,
+          "top8": [
+            {
+              "uci": [
+                "e2e4",
+                "e7e5",
+                "b1c3",
+                "d8g5",
+                "c3d5",
+                "f8d6",
+                "d1f3",
+                "g8f6"
+              ],
+              "rows": 2580,
+              "fraction_of_all_rows": 0.6298828125
+            },
+            {
+              "uci": [
+                "e2e4",
+                "f7f5",
+                "e4f5",
+                "g8f6",
+                "b1c3",
+                "b8c6",
+                "d2d4",
+                "d7d6"
+              ],
+              "rows": 65,
+              "fraction_of_all_rows": 0.015869140625
+            },
+            {
+              "uci": [
+                "b1c3",
+                "e7e5",
+                "e2e4",
+                "d8g5",
+                "c3d5",
+                "f8d6",
+                "d1f3",
+                "g8f6"
+              ],
+              "rows": 35,
+              "fraction_of_all_rows": 0.008544921875
+            },
+            {
+              "uci": [
+                "e2e4",
+                "e7e5",
+                "b1c3",
+                "d8g5",
+                "c3d5",
+                "f8d6",
+                "d1f3",
+                "f7f6"
+              ],
+              "rows": 35,
+              "fraction_of_all_rows": 0.008544921875
+            },
+            {
+              "uci": [
+                "e2e4",
+                "e7e5",
+                "b1c3",
+                "d8g5",
+                "c3d5",
+                "f8d6",
+                "d1f3",
+                "g5f5"
+              ],
+              "rows": 35,
+              "fraction_of_all_rows": 0.008544921875
+            },
+            {
+              "uci": [
+                "e2e4",
+                "e7e5",
+                "b1c3",
+                "d8g5",
+                "c3d5",
+                "f8d6",
+                "d1f3",
+                "g5g2"
+              ],
+              "rows": 35,
+              "fraction_of_all_rows": 0.008544921875
+            },
+            {
+              "uci": [
+                "e2e4",
+                "e7e5",
+                "b1c3",
+                "d8g5",
+                "f1e2",
+                "g5g2",
+                "e2f3",
+                "g2g5"
+              ],
+              "rows": 35,
+              "fraction_of_all_rows": 0.008544921875
+            },
+            {
+              "uci": [
+                "e2e4",
+                "a7a6",
+                "d1h5",
+                "b8c6",
+                "b1c3",
+                "e7e5",
+                "c3d5",
+                "f8c5"
+              ],
+              "rows": 34,
+              "fraction_of_all_rows": 0.00830078125
+            }
+          ]
+        },
+        "16": {
+          "complete_prefix_rows": 3822,
+          "too_short": 274,
+          "unique_complete_prefixes": 78,
+          "top8": [
+            {
+              "uci": [
+                "e2e4",
+                "e7e5",
+                "b1c3",
+                "d8g5",
+                "c3d5",
+                "f8d6",
+                "d1f3",
+                "g8f6",
+                "d5c7",
+                "d6c7",
+                "f1c4",
+                "d7d5",
+                "e4d5",
+                "c8f5",
+                "c4b5",
+                "e8d8"
+              ],
+              "rows": 1412,
+              "fraction_of_all_rows": 0.3447265625
+            },
+            {
+              "uci": [
+                "e2e4",
+                "e7e5",
+                "b1c3",
+                "d8g5",
+                "c3d5",
+                "f8d6",
+                "d1f3",
+                "g8f6",
+                "d5c7",
+                "d6c7",
+                "f1c4",
+                "d7d5",
+                "c4b3",
+                "f6e4",
+                "b3a4",
+                "e8f8"
+              ],
+              "rows": 67,
+              "fraction_of_all_rows": 0.016357421875
+            },
+            {
+              "uci": [
+                "e2e4",
+                "e7e5",
+                "b1c3",
+                "d8g5",
+                "c3d5",
+                "f8d6",
+                "d1f3",
+                "g8f6",
+                "d5c7",
+                "e8e7",
+                "c7a8",
+                "b8c6",
+                "a8c7",
+                "d6c7",
+                "f3a3",
+                "c7d6"
+              ],
+              "rows": 63,
+              "fraction_of_all_rows": 0.015380859375
+            },
+            {
+              "uci": [
+                "e2e4",
+                "f7f5",
+                "e4f5",
+                "g8f6",
+                "b1c3",
+                "b8c6",
+                "d2d4",
+                "d7d6",
+                "g2g4",
+                "b7b5",
+                "f1b5",
+                "c8d7",
+                "b5c4",
+                "e7e6",
+                "f5e6",
+                "d8e7"
+              ],
+              "rows": 58,
+              "fraction_of_all_rows": 0.01416015625
+            },
+            {
+              "uci": [
+                "e2e4",
+                "e7e5",
+                "b1c3",
+                "d8g5",
+                "c3d5",
+                "f8d6",
+                "d1f3",
+                "g8f6",
+                "d5c7",
+                "d6c7",
+                "f1c4",
+                "d7d5",
+                "e4d5",
+                "c8f5",
+                "c4b5",
+                "e8e7"
+              ],
+              "rows": 35,
+              "fraction_of_all_rows": 0.008544921875
+            },
+            {
+              "uci": [
+                "e2e4",
+                "e7e5",
+                "b1c3",
+                "d8g5",
+                "c3d5",
+                "f8d6",
+                "d1f3",
+                "g8f6",
+                "d5c7",
+                "d6c7",
+                "f1c4",
+                "d7d5",
+                "e4d5",
+                "c8f5",
+                "c4b5",
+                "f6d7"
+              ],
+              "rows": 35,
+              "fraction_of_all_rows": 0.008544921875
+            },
+            {
+              "uci": [
+                "e2e4",
+                "e7e5",
+                "b1c3",
+                "d8g5",
+                "c3d5",
+                "f8d6",
+                "d1f3",
+                "g8f6",
+                "d5c7",
+                "d6c7",
+                "f1c4",
+                "d7d5",
+                "e4d5",
+                "e8f8",
+                "f3a3",
+                "f8g8"
+              ],
+              "rows": 35,
+              "fraction_of_all_rows": 0.008544921875
+            },
+            {
+              "uci": [
+                "e2e4",
+                "e7e5",
+                "b1c3",
+                "d8g5",
+                "c3d5",
+                "f8d6",
+                "d1f3",
+                "g8f6",
+                "d5c7",
+                "d6c7",
+                "f1c4",
+                "d7d5",
+                "e4d5",
+                "e8g8",
+                "d5d6",
+                "c7d6"
+              ],
+              "rows": 35,
+              "fraction_of_all_rows": 0.008544921875
+            }
+          ]
+        }
+      },
+      "fixed128": {
+        "rows": 128,
+        "4": {
+          "complete_prefix_rows": 128,
+          "too_short": 0,
+          "unique_complete_prefixes": 24,
+          "top8": [
+            {
+              "uci": [
+                "e2e4",
+                "e7e5",
+                "b1c3",
+                "d8g5"
+              ],
+              "rows": 95,
+              "fraction_of_all_rows": 0.7421875
+            },
+            {
+              "uci": [
+                "d2d3",
+                "e7e5",
+                "b1c3",
+                "d8h4"
+              ],
+              "rows": 4,
+              "fraction_of_all_rows": 0.03125
+            },
+            {
+              "uci": [
+                "a2a4",
+                "e7e5",
+                "e2e4",
+                "d8g5"
+              ],
+              "rows": 2,
+              "fraction_of_all_rows": 0.015625
+            },
+            {
+              "uci": [
+                "e2e4",
+                "a7a6",
+                "d1h5",
+                "b8c6"
+              ],
+              "rows": 2,
+              "fraction_of_all_rows": 0.015625
+            },
+            {
+              "uci": [
+                "e2e4",
+                "d7d6",
+                "d1h5",
+                "b8c6"
+              ],
+              "rows": 2,
+              "fraction_of_all_rows": 0.015625
+            },
+            {
+              "uci": [
+                "e2e4",
+                "e7e5",
+                "b1c3",
+                "d7d5"
+              ],
+              "rows": 2,
+              "fraction_of_all_rows": 0.015625
+            },
+            {
+              "uci": [
+                "e2e4",
+                "f7f5",
+                "g1f3",
+                "f5e4"
+              ],
+              "rows": 2,
+              "fraction_of_all_rows": 0.015625
+            },
+            {
+              "uci": [
+                "e2e4",
+                "g7g6",
+                "b1c3",
+                "e7e5"
+              ],
+              "rows": 2,
+              "fraction_of_all_rows": 0.015625
+            }
+          ]
+        },
+        "8": {
+          "complete_prefix_rows": 126,
+          "too_short": 2,
+          "unique_complete_prefixes": 37,
+          "top8": [
+            {
+              "uci": [
+                "e2e4",
+                "e7e5",
+                "b1c3",
+                "d8g5",
+                "c3d5",
+                "f8d6",
+                "d1f3",
+                "g8f6"
+              ],
+              "rows": 79,
+              "fraction_of_all_rows": 0.6171875
+            },
+            {
+              "uci": [
+                "d2d3",
+                "e7e5",
+                "b1c3",
+                "d8h4",
+                "g1f3",
+                "h4f6",
+                "c3d5",
+                "f6c6"
+              ],
+              "rows": 4,
+              "fraction_of_all_rows": 0.03125
+            },
+            {
+              "uci": [
+                "e2e4",
+                "d7d6",
+                "d1h5",
+                "b8c6",
+                "b1c3",
+                "g8f6",
+                "h5g5",
+                "c8g4"
+              ],
+              "rows": 2,
+              "fraction_of_all_rows": 0.015625
+            },
+            {
+              "uci": [
+                "e2e4",
+                "e7e5",
+                "b1c3",
+                "d7d5",
+                "c3d5",
+                "f8c5",
+                "f1b5",
+                "c7c6"
+              ],
+              "rows": 2,
+              "fraction_of_all_rows": 0.015625
+            },
+            {
+              "uci": [
+                "e2e4",
+                "e7e5",
+                "b1c3",
+                "d8g5",
+                "c3d5",
+                "f8a3",
+                "d5c7",
+                "e8f8"
+              ],
+              "rows": 2,
+              "fraction_of_all_rows": 0.015625
+            },
+            {
+              "uci": [
+                "e2e4",
+                "e7e5",
+                "b1c3",
+                "d8g5",
+                "c3d5",
+                "f8d6",
+                "g1h3",
+                "g5h4"
+              ],
+              "rows": 2,
+              "fraction_of_all_rows": 0.015625
+            },
+            {
+              "uci": [
+                "e2e4",
+                "e7e5",
+                "b1c3",
+                "d8g5",
+                "d2d4",
+                "g5f6",
+                "c3d5",
+                "f6c6"
+              ],
+              "rows": 2,
+              "fraction_of_all_rows": 0.015625
+            },
+            {
+              "uci": [
+                "e2e4",
+                "f7f5",
+                "g1f3",
+                "f5e4",
+                "f3e5",
+                "g8f6",
+                "b1c3",
+                "b8c6"
+              ],
+              "rows": 2,
+              "fraction_of_all_rows": 0.015625
+            }
+          ]
+        },
+        "16": {
+          "complete_prefix_rows": 120,
+          "too_short": 8,
+          "unique_complete_prefixes": 53,
+          "top8": [
+            {
+              "uci": [
+                "e2e4",
+                "e7e5",
+                "b1c3",
+                "d8g5",
+                "c3d5",
+                "f8d6",
+                "d1f3",
+                "g8f6",
+                "d5c7",
+                "d6c7",
+                "f1c4",
+                "d7d5",
+                "e4d5",
+                "c8f5",
+                "c4b5",
+                "e8d8"
+              ],
+              "rows": 49,
+              "fraction_of_all_rows": 0.3828125
+            },
+            {
+              "uci": [
+                "d2d3",
+                "e7e5",
+                "b1c3",
+                "d8h4",
+                "g1f3",
+                "h4f6",
+                "c3d5",
+                "f6c6",
+                "e2e4",
+                "c6b5",
+                "d5c7",
+                "e8d8",
+                "c7b5",
+                "f8b4",
+                "c2c3",
+                "b4e7"
+              ],
+              "rows": 4,
+              "fraction_of_all_rows": 0.03125
+            },
+            {
+              "uci": [
+                "e2e4",
+                "e7e5",
+                "b1c3",
+                "d8g5",
+                "c3d5",
+                "f8d6",
+                "d1f3",
+                "g8f6",
+                "d5c7",
+                "d6c7",
+                "f1c4",
+                "d7d5",
+                "h2h3",
+                "d5c4",
+                "g1e2",
+                "b8c6"
+              ],
+              "rows": 3,
+              "fraction_of_all_rows": 0.0234375
+            },
+            {
+              "uci": [
+                "e2e4",
+                "e7e5",
+                "b1c3",
+                "d8g5",
+                "c3d5",
+                "f8d6",
+                "d1f3",
+                "g8f6",
+                "d5c7",
+                "d6c7",
+                "f3f6",
+                "g5f6",
+                "g1f3",
+                "b8c6",
+                "f1c4",
+                "d7d5"
+              ],
+              "rows": 3,
+              "fraction_of_all_rows": 0.0234375
+            },
+            {
+              "uci": [
+                "e2e4",
+                "d7d6",
+                "d1h5",
+                "b8c6",
+                "b1c3",
+                "g8f6",
+                "h5g5",
+                "c8g4",
+                "g1f3",
+                "g4f3",
+                "g2f3",
+                "c6d4",
+                "f1b5",
+                "f6d7",
+                "b5d7",
+                "d8d7"
+              ],
+              "rows": 2,
+              "fraction_of_all_rows": 0.015625
+            },
+            {
+              "uci": [
+                "e2e4",
+                "e7e5",
+                "b1c3",
+                "d7d5",
+                "c3d5",
+                "f8c5",
+                "f1b5",
+                "c7c6",
+                "b5a4",
+                "c5f2",
+                "e1f2",
+                "d8h4",
+                "f2f1",
+                "h4e4",
+                "d5c7",
+                "e8f8"
+              ],
+              "rows": 2,
+              "fraction_of_all_rows": 0.015625
+            },
+            {
+              "uci": [
+                "e2e4",
+                "e7e5",
+                "b1c3",
+                "d8g5",
+                "c3d5",
+                "f8a3",
+                "d5c7",
+                "e8f8",
+                "b2a3",
+                "g8f6",
+                "c7a8",
+                "f6e4",
+                "a8c7",
+                "e4d2",
+                "c1d2",
+                "g5e7"
+              ],
+              "rows": 2,
+              "fraction_of_all_rows": 0.015625
+            },
+            {
+              "uci": [
+                "e2e4",
+                "e7e5",
+                "b1c3",
+                "d8g5",
+                "c3d5",
+                "f8d6",
+                "d1f3",
+                "g8f6",
+                "d5c7",
+                "d6c7",
+                "c2c3",
+                "b8c6",
+                "f1c4",
+                "d7d5",
+                "e4d5",
+                "e5e4"
+              ],
+              "rows": 2,
+              "fraction_of_all_rows": 0.015625
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "actual_model_reads": 0,
+  "searches": 0,
+  "root_selection_changes": 0,
+  "caveat": "Full prefixes count human move sequences, not ECO families or statistical independence; deterministic schedule reconstruction does not select new roots."
+}
