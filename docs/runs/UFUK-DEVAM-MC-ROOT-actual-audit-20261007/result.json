@@ -1,0 +1,42 @@
+{
+  "status": "PASS-integrity-and-six-actual-not-strength",
+  "first": 1791378880.4477415,
+  "deadline": 1791379780.4477415,
+  "helper_sha256": "b9155182a33de2ee21bb4f5b69dabe6d398b9bef11f412e87efe73d8e72d2ebf",
+  "pid": 1092931,
+  "commands": [
+    [
+      "/workspace/HarbiChess/.venv/bin/python",
+      "/workspace/work/harbichess/continuation-20261007/MC-known160-runtime/audit_known160_v2.py",
+      "--protocol",
+      "/workspace/work/harbichess/continuation-20261007/MC-known160-runtime/protocol.json",
+      "--arena",
+      "/dev/shm/harbichess-continuation-20261007/MC-known160-data/arena",
+      "--output",
+      "/workspace/work/harbichess/continuation-20261007/MC-root-independent-audit/fullhistory.json"
+    ],
+    [
+      "/workspace/HarbiChess/.venv/bin/python",
+      "/workspace/work/harbichess/continuation-20261007/MC-known160-runtime/replay_six.py",
+      "--protocol",
+      "/workspace/work/harbichess/continuation-20261007/MC-known160-runtime/protocol.json",
+      "--profile",
+      "/dev/shm/harbichess-continuation-20261007/MC-known160-data/profile.json",
+      "--arena",
+      "/dev/shm/harbichess-continuation-20261007/MC-known160-data/arena",
+      "--clock",
+      "/workspace/work/harbichess/continuation-20261007/MC-root-independent-audit/clock.json",
+      "--output",
+      "/workspace/work/harbichess/continuation-20261007/MC-root-independent-audit/six-actual-replays.json"
+    ]
+  ],
+  "completed": [
+    0,
+    1
+  ],
+  "outputs": {
+    "fullhistory.json": "f6128ff93f6dbbe3852b864a62ddee519dcf2ce88bb9edbb917edfa5d1108020",
+    "six-actual-replays.json": "1b7838a39355b0c99072d6f385aed88be822ed1f947bb00fff01272f458eb4cf"
+  },
+  "finished": 1791378937.726918
+}
