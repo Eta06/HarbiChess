@@ -1,0 +1,7 @@
+usage: develop.py [-h] --registration REGISTRATION
+
+ROOT-clocked paired HUMAN PRIOR search-only development, no SGD/model labels.
+
+options:
+  -h, --help            show this help message and exit
+  --registration REGISTRATION
