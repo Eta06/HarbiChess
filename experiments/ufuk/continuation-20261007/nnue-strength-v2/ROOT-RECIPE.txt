@@ -1,0 +1,102 @@
+NNUE OWN64 vs EXACT teacher256 ancestor, Oct7 NEW technical/operator scope.
+PREPARATION ONLY: no source/model/data selection, NN forward/search/game/SGD executed here.
+Seven pure schema/bootstrap/CLI controls PASS; original search de53/tournament7081 EXACT.
+All old teacher proof/fit/source/data/clock artifacts remain immutable historical evidence.
+ROOT operator_end=1791448916.685839; each NEW phase gets ROOT observed actual clock.
+
+P=/workspace/HarbiChess/.venv/bin/python
+S=/workspace/work/harbichess/continuation-20261007/nnue-strength-v2
+CORE=/workspace/work/harbichess/cpu-additive-source-6fcc8b4
+Use CORE cwd, PYTHONPATH=$CORE/src, OMP/MKL/OPENBLAS=1, assigned singleCPU.
+No profile.py in this directory: standard-library profile/cProfile collision avoided.
+
+Before execution fill ONLY unregistered protocol-DRAFT input fields after fixed own64:
+- teachers: original exact teacher256 full contract/dataset/labels/proof6loads/fit2loads,
+  candidate/native/initial refs perseed already carried from historical teacher-profile draft.
+- children: ACTUAL Oct7 own-training-v2 contract/proof_contract/proof_result/fit_result,
+  proof_registration/fit_registration refs, dataset/collection_receipt/registration,
+  raw events ref, converter ref (actual immutable execution_helpers_sha256 convert.py),
+  fixed candidate/native/initial refs under NNUE-own-fit-v2/SEED/whole.
+- models.learned: SAME child candidate; parent EXACT teachers.candidate; E8 fixed e8fe.
+- nnue_directory/helpers/binary: actual same frozen model/native/evaluator/C reader.
+  If native/helper directory changed at ROOT promotion, pin ACTUAL origins/hashes.
+  Full contracts' source/inference/execution closure is independently reread.
+- cpu_core: ROOT assigned free/quiescent actual profile/arena CPU.
+No v1 own proof/native reused. Parent teacher proof6+fit2 perseed are ancestry,
+not current own qualification. Child requires NEW proof6+fit2 perseed, whole8 vs
+freshresume8 ALLmodel/baseline/Adam/Python/globalTorch/privateSampler bits equal;
+actual fit0 is teacherWEIGHTS with NEWemptyAdam, final64 changed/candidate matched.
+Each actual child fresh-load log/command/counter/file is independently verified.
+Only exact mode/phase clocks/namedproof metadata differ between proof andfreshfit;
+ALL unknown contract/build-seal/data/source/math/initializer fields must remainequal.
+Pinned converter.convert(provenance.inputs) is replayed byte-for-byte at admission,
+including fullhistory/mover/censor/terminal/alias spans/protected wholetrajectory.
+This raw-data replay invokes no search/NN/optimizer. Own targets are own-parent Q,
+not fresh SF labels; teacher-derived initialization ancestry remains explicit.
+
+ROOT stamp ONE observed FIRST immediately before seal. Native admission+48parity/
+48search profile are INCLUDED in the same ORIGINAL whole7200; no future FIRST/reset.
+Need FIRST+8100<=operator_end; otherwise INCOMPLETE/resource-plan decision BEFOREjob.
+$P $S/seal.py --draft $S/protocol-DRAFT.json --draft-sha256 ACTUAL_SHA --first $FIRST --operator-end 1791448916.685839 --output $S/protocol.json
+$P $S/qualify_profile.py --protocol $S/protocol.json --first-epoch $FIRST --output NEW_RAM_PROFILE
+Profile original600: both seeds FIRST24 eligible OWN TRAIN histories C/Torch parity
+<=1e-12 =48; eight known roots×learned/EXACTparent/E8×two seeds=48 rotated searches.
+Alllegal original512/q2/depth8 unchanged. Median learned/parent ANDlearned/E8<=1.10.
+Original teacher trained48 parity/profile stays distinct, not child qualification.
+$P $S/run.py --checkout $CORE --study $S --qualification NEW_RAM_PROFILE --output NEW_RAM_ARENA --first-epoch $FIRST
+Five arms×eight known roots×two colors×two seeds=160, never192.
+OriginalSF512 Threads1/Hash16, official0f83binary; actualSFnodes can overrun512.
+Matched original fixedNN512 counts charged terminal/quiescence; depth0 is valid
+original alllegal shallow fallback, NOT a changed search algorithm or lower gate.
+
+ROOT register NEW audit900 first/deadline <=operator_end, own clock JSON schema
+NNUE-strength-root-independent-audit-clock-v2: {first,deadline,cpu_core,protocol_sha256}.
+Include fullhistory audit/native consistency and six search replays in SAME900.
+$P $S/audit_known160.py --protocol $S/protocol.json --arena NEW_RAM_ARENA --output NEW_RAM_AUDIT
+$P $S/replay_six.py --protocol $S/protocol.json --profile NEW_RAM_PROFILE --arena NEW_RAM_ARENA --clock ROOT_IMMUTABLE_AUDIT_CLOCK --output NEW_RAM_SIX
+Six are seed×learned/parent/E8, opening0 first WHITE chronological neural move.
+Exact floathex/move/nodes/evals/completed_depth/legalrootcount vsactual profile ANDarena.
+Not allmove inference reproduction. All160 rules/result/mover/source/rawNN/SFnodes
+are independently checked; SFoverrun max/count reported, noequalactualnode claim.
+Known8 screen output remains development-only, never the 8-LCB confirmation gate.
+
+ONE APPROVED narrower v2 confirmation PLAN (confirmation-DRAFT.json) remainsUNREGISTERED.
+Freeze ONE exact eligible recipe and two independent fixed64 candidates BEFOREbooks.
+Do not select fresh books now. Actual source/ECO/source-ID alias independence,
+full legal PGN replay and chosen DAG currentteacherTRAIN/owninput/proof/dev/UNKNOWN/
+tails/search expansion exposures +known8 exclusions must be independently reconciled.
+Globally virgin remainsBLOCKED by historical source6/8/missingexposures; unknownE8
+pretraining/sharedSTART/teacher-internalunloggedSFleaves explicitly disclosed.
+USERapproved conditional claim is incremental improvement against named ancestor.
+No generalElo, novelty, alpha reset, closedMAX8 refund or automaticfallback.
+
+Five VIRGIN arms each96/seed (48roots×2colors), two seeds =960 TOTALgames.
+Four inferentialcontrasts×two seeds=8 primaryLCBs. Newjointnominalalpha.00625;
+one-sidedtail.00078125 each; symmetriccoverage99.84375%; 50k source-root pairedbootstrap.
+Cumulativeold+new bound<=.05625, NOTglobal.05; nominalcoverage assumed, not exact.
+confirmation_stats.py frozen prospective pure implementation, no actual inputs read.
+Perseed unchanged E8direct>.60/lower>.50; SFgainoverE8>.10/lower>0;
+parentdirect>.60/lower>.50; SFgainoverparent>0/lower>0; finalSF>=.25;
+ALLarms caps<=.05 and adversecap robust SAMEpoint/inferentialgates; speedmedian<=1.10.
+Adverseprimary8bounds imply rawbounds monotonically using SAMEbootstrapdraws;
+rawbands are descriptive, not a false simultaneous16-interval claim.
+ONEfail/incomplete ends that campaign; no endpoint/threshold/book reselection.
+Formal960 executor/bookbinding/rawfullhistory adapter STILLprospective aftercandidate
+freeze; do not mistake existing known160 rawlabel scope for formalregistration.
+
+COLLECTION SIX-ROW AUDIT BEFORE OWN SGD (ROOT ONLY)
+Per seed20262905/06 use completed actual registered-v2 receipt and events.
+ROOT stamps observed first BEFORE model import, deadline=first+600<=1791448916.685839,
+cpu_core available, producer_directory exact frozen three-source directory.
+Pin registration/receipt/events/helper SHA in collection-audit-clock-DRAFT.json.
+Do not inherit collection clock or restart a failed audit timer.
+/workspace/HarbiChess/.venv/bin/python audit_collection_six.py \
+ --registration ACTUAL_COLLECTION_REGISTRATION.json \
+ --receipt /dev/shm/harbichess-ownq-v2/SEED/receipt.json \
+ --events /dev/shm/harbichess-ownq-v2/SEED/events.jsonl \
+ --clock ROOT_STAMPED_AUDIT_CLOCK.json --output NEW_ROOT_SIX_RESULT.json
+Both six-packet receipts must PASS before converter/proof/own SGD. Their SHA refs
+should be retained in the execution registration. Full-data converter replay remains
+mandatory independently: this packet audit is six designated actual searches per seed.
+Completed depth0 is legitimate original BudgetSearch fallback; report it, do not alter it.
+No individual mate proof is inferred from a mate-range failsoft search score.
