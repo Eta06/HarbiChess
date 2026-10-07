@@ -1,0 +1,32 @@
+{
+  "schema": "human-randomstarts-known160-prospective-verification-v2",
+  "status": "READY-prospective-not-actual-qualified",
+  "pure_tests_pass": 8,
+  "skips": 0,
+  "ruff": "PASS-canonical-repo-cwd",
+  "cli_help_pass": [
+    "seal.py",
+    "qualify_profile.py",
+    "run.py",
+    "audit_known160_v2.py",
+    "replay_six.py"
+  ],
+  "unchanged_helpers": {
+    "search.py": "de53c14728a67b7772f18b396ac8ef5c35a144d4e4e616fec40099cd461a6670",
+    "tournament.py": "7081128a96f575d01ebaf40f1c7de725274b4316ac3836802b539b3ce7395cb8",
+    "qualify_profile.py": "814d04b1db08d5aa9b5d101ed430797584dc59dc25716061a1e077e7d82eda8d",
+    "run.py": "9c1823c0a10db786f299f6608251f59af125b56761ece8074844801e52ec3d30",
+    "audit_known160_v2.py": "bef1a8267f7425086e38905597b264a37c8ec7a5a87f192ff00cf0b510ac82df",
+    "replay_six.py": "2a3574fa0a297d20b46d96e6113e87fca65f50f96232cbefa661f9d9d2cf2ed6",
+    "confirmation_stats.py": "aaf1fb4811a835bb725cfe1226c56e819eb12d6617dfe0d759dcf1d99278bbdd"
+  },
+  "procedural_source_inventory_sha256": "84e0d669dcdfebce018385984cb88e8aecca4eeafaa530b56b603be1ea660683",
+  "actual_models_read": 0,
+  "actual_searches": 0,
+  "actual_games": 0,
+  "actual_optimizer_updates": 0,
+  "actual_bank_generations": 0,
+  "actual_clocks_stamped": 0,
+  "actual_qualification": "PENDING-new-bank4096/rejections/collection12/nativeproof12/fit4/profile",
+  "observed_epoch": 1791373794.127697
+}
