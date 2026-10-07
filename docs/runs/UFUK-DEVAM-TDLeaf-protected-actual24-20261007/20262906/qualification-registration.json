@@ -1,0 +1,103 @@
+{
+  "ancestral_registration": {
+    "path": "/workspace/work/harbichess/continuation-20261007/nnue-own-producer-v2/registrations/20262906.json",
+    "sha256": "cc912ba1502dd7ca48c69060cd6b4aadbec60dd292b1f45ba671f3d5da11014c"
+  },
+  "core_commit": "6fcc8b476d25495d1c9c413e55b2c7ba4794013e",
+  "core_repo": "/workspace/work/harbichess/cpu-additive-source-6fcc8b4",
+  "cpu_core": 0,
+  "current_parent_registration": {
+    "path": "/workspace/work/harbichess/continuation-20261007/human-random-collect-actual-20262906/collection-registration.json",
+    "sha256": "745ecdaf984755a57fba1ccd1c0a822455b19b17d79b011120fe2f49730c3454"
+  },
+  "deadline_epoch": 1791382300.130769,
+  "first_epoch": 1791381700.130769,
+  "generation": 1,
+  "generation_helper_sha256": {
+    "/workspace/work/harbichess/continuation-20261007/human-randomstarts-own-v2/parent_bridge.py": "3bd364014815e9cbbe738209486fa7113bccdb0e84e5ec060dbe8397aadf7fad"
+  },
+  "max_attempted_roots": 128,
+  "operator_end_epoch": 1791448916.685839,
+  "original_deadline_epoch": 1791382340.1456876,
+  "original_first_epoch": 1791375140.1456876,
+  "output_path": "/dev/shm/harbichess-TDLeaf-search-equivalence-v5/20262906/report.json",
+  "packet_dir": "/dev/shm/harbichess-TDLeaf-search-equivalence-v5/20262906/packets",
+  "parent_admission_result": {
+    "path": "/workspace/work/harbichess/continuation-20261007/human-zero-actual-20262906/parent-admission-result.json",
+    "sha256": "5ec86c9997808ff5357189e1bce1f382377385040f3ca59001907a18e5d492f5"
+  },
+  "parent_admission_seal": {
+    "path": "/workspace/work/harbichess/continuation-20261007/human-zero-actual-20262906/parent-admission-seal.json",
+    "sha256": "880d741ff7f389e5d8fa725727527473edd7876d963fc5fd99cc3795343c4de4"
+  },
+  "parent_candidate": {
+    "contract_sha256": "8ad924393912a7929fba792201a1e3d08763cde066094b063a93ccd5f1d89ba9",
+    "path": "/dev/shm/harbichess-human-prior-zero-v1/20262906/candidate.pt",
+    "sha256": "65fdeab31819b501f495ed8ca4d5f088ae4904216f239fbda4c6dde7c3e0f04d"
+  },
+  "parent_helpers": {
+    "directory": "/workspace/work/harbichess/cpu-kingbucket-nnue-proposal",
+    "evaluator_sha256": "5317e736f872a2e237e45942c8df9e797c5acee8f626bb12009464869fab8d95",
+    "extension_path": "/workspace/work/harbichess/cpu-kingbucket-nnue-proposal/_kingbucket16.cpython-312-x86_64-linux-gnu.so",
+    "extension_sha256": "495505cdebd6dbc029ee314846dbac79d5cca6d445de26c804a43821808d644b",
+    "model_sha256": "c04914bc5a560ad51de81c6d0aaeb3fae4d04b45c07cd8e39bbd31f655d36565",
+    "native_sha256": "f60a1f9814f48691af1e2d1f1db1b548cff3e7df0a7cae9718051de1865b8b69",
+    "prior_path": "/workspace/HarbiChess/experiments/ufuk/cpu-classical-own-v1/value.py",
+    "prior_sha256": "a99cddfc397bd9221b99a70691427fdd663488b033fb239d9f48240786b2f277"
+  },
+  "plies_per_root": 16,
+  "procedural_bank_receipt": {
+    "path": "/dev/shm/harbichess-human-randomstarts-bank-v2/20262906/receipt.json",
+    "sha256": "d5306320ed25181c990ee066339135d1933f078a009593cb523a5c5a08b94fde"
+  },
+  "producer_source_sha256": {
+    "collector.py": "be41bc9ca2d8c65020afdac2e9458f7c1f7c92cc4c4ad774ea096109e8f94879",
+    "metadata_factory.py": "9c4ec8056a3031eaffe8d46176afe056370ba6da59f2e3af38cf2b7c3a4f414e",
+    "root_bank.py": "7156f5fcf205d7bac43d5538afd2e58fc20e5cce710a34dcec9a69b4e32a8c21",
+    "run_collection.py": "4e0b47b956287ecdafec5e92aec0371dcdc838095b94303e6df6f0000b59e303"
+  },
+  "protected_aliases": {
+    "path": "/dev/shm/harbichess-continuation-20261007/metadata-20262906/protected-aliases.bin",
+    "sha256": "63865f92ebc82cae794c021d084ac7cd272449ea7a1c05a13be82d3753f0d4b5"
+  },
+  "qualifier_source_inventory": {
+    "path": "/workspace/work/harbichess/continuation-20261007/tdleaf-search-equivalence-v4-protected-source-cohort/source-inventory.json",
+    "sha256": "de5644200d1d28c6925edd80f3161201e9b9a3a0b3765ec1029a9077fd815201"
+  },
+  "root_count": 24,
+  "root_limit": 128,
+  "root_pool": {
+    "path": "/workspace/work/harbichess/continuation-20261007/nnue-own-producer-v2/input-pools/20262906.json",
+    "sha256": "ae9c02b7b00dc8605688d768cea3ec549d938042e2ed87c9000ff09526b82b97"
+  },
+  "row_limit": 1024,
+  "schema": "tdleaf-search-equivalence-registration-v4",
+  "search": {
+    "max_depth": 8,
+    "nodes": 8192,
+    "qdepth": 2
+  },
+  "search_helper": {
+    "path": "/workspace/HarbiChess/experiments/ufuk/cpu-budget-search-v1/search.py",
+    "sha256": "de53c14728a67b7772f18b396ac8ef5c35a144d4e4e616fec40099cd461a6670"
+  },
+  "seed": 20262906,
+  "selection_rule": "first24-source-order-current-query-PV-protected-clear-v1",
+  "source": {
+    "baseline_search": {
+      "path": "/workspace/work/harbichess/continuation-20261007/tdleaf-search-equivalence-v4-protected-source-cohort/search_original.py",
+      "sha256": "de53c14728a67b7772f18b396ac8ef5c35a144d4e4e616fec40099cd461a6670"
+    },
+    "parent_runner": {
+      "path": "/workspace/work/harbichess/continuation-20261007/tdleaf-human-prior-own-v2-qualified-producer-v3/run_collection.py",
+      "sha256": "c7f1caa2da9c6b23b7d4c2bb78f390e92fefb58f4670cbf683d4076ec3d02f15"
+    },
+    "pv_search": {
+      "path": "/workspace/work/harbichess/continuation-20261007/tdleaf-search-equivalence-v4-protected-source-cohort/search_pv.py",
+      "sha256": "a6fa35675fd4eb9c0c346a893bd44a6507b06bbff107f689a3f67a7dcc79015d"
+    }
+  },
+  "status": "registered",
+  "teacher_labels_used": false,
+  "updates": 0
+}
