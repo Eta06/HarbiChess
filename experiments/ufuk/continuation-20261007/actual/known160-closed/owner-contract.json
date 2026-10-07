@@ -1,0 +1,15 @@
+{
+  "GPU_used": false,
+  "helper_sha256": "9c1823c0a10db786f299f6608251f59af125b56761ece8074844801e52ec3d30",
+  "inputs": {
+    "protocol.json": "22f87ce706483bcc1364a650a405b7edbf9b2fdccd380741a24a12fd2a29ddb2",
+    "search.py": "de53c14728a67b7772f18b396ac8ef5c35a144d4e4e616fec40099cd461a6670",
+    "tournament.py": "7081128a96f575d01ebaf40f1c7de725274b4316ac3836802b539b3ce7395cb8",
+    "value.py": "f6388c16e5a40d29a67fb599f7f4a7e9293e9abe051839853409e90183717fe6"
+  },
+  "max_arena_workers": 1,
+  "original_deadline_epoch": 1791373466.8496559,
+  "original_first_epoch": 1791366266.8496559,
+  "qualification_sha256": "22c316eb2eb9a0b611d649ca75cf06069730eff3a3442e39607488e01f210f38",
+  "source_commit": "6fcc8b476d25495d1c9c413e55b2c7ba4794013e"
+}
