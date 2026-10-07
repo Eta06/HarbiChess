@@ -1,0 +1,78 @@
+{
+  "collection_replay_audit_set": {
+    "path": "/workspace/work/harbichess/continuation-20261007/ownq-actual-audit-set.json",
+    "sha256": "0b9192ed491d558be7ec4cec042d52d42ee4c5b96a842bf9ab8b810c1bebc8cf"
+  },
+  "contract": {
+    "path": "/dev/shm/harbichess-NNUE-own-contracts-v2/20262905/proof.json",
+    "sha256": "e744b586d44818663aa9836b6a7f9bd2bf4d9885e72f84b31e17245eda06081e"
+  },
+  "cpu_core": 1,
+  "dataset": {
+    "path": "/dev/shm/harbichess-NNUE-own-data-v2/20262905/dataset.json",
+    "sha256": "ce1bcef9d7d4a8ae67d3a0a6764ff0f6bcaef86679ae87a5070cf3be02419b1d"
+  },
+  "deadline": 1791366692.3959281,
+  "first": 1791366092.3959281,
+  "inputs": {
+    "build_seal": {
+      "path": "/workspace/work/harbichess/continuation-20261007/ownq-20262905-proof-spec/build-seal.json",
+      "sha256": "02106c668279e6597af5483d7d43034764fab5238f78dfc80528a5beb2e52ecc"
+    },
+    "collection_replay_20262905_clock": {
+      "path": "/workspace/work/harbichess/continuation-20261007/ownq-20262905-six-audit/clock.json",
+      "sha256": "34fced44d6d83539f0e0dd0689b486f83b5d989421ebca4e7b60df9e8b614248"
+    },
+    "collection_replay_20262905_result": {
+      "path": "/workspace/work/harbichess/continuation-20261007/ownq-20262905-six-audit/result.json",
+      "sha256": "4b5c663c7d9474939c00ac2c25d13bdf247742112f615202da8ee2700b1ecb72"
+    },
+    "collection_replay_20262906_clock": {
+      "path": "/workspace/work/harbichess/continuation-20261007/ownq-20262906-six-audit/clock.json",
+      "sha256": "0a7228548402cea086523a4d7b3d8766cdcebf85b36719f6ecfc0cab0c655168"
+    },
+    "collection_replay_20262906_result": {
+      "path": "/workspace/work/harbichess/continuation-20261007/ownq-20262906-six-audit/result.json",
+      "sha256": "6315111229e996bcfcd06ad6ab9fac5df16cf4ceece141c7a0ddd62a2ed9116b"
+    },
+    "collection_replay_audit_set": {
+      "path": "/workspace/work/harbichess/continuation-20261007/ownq-actual-audit-set.json",
+      "sha256": "0b9192ed491d558be7ec4cec042d52d42ee4c5b96a842bf9ab8b810c1bebc8cf"
+    },
+    "collection_replay_helper": {
+      "path": "/workspace/work/harbichess/continuation-20261007/nnue-strength-v2/audit_collection_six_v2.py",
+      "sha256": "2082c379ac0dc0540e3e758ce70da09c20d972a267eee057a8b95cd2609a491e"
+    }
+  },
+  "metadata_spec_helper": {
+    "path": "/workspace/work/harbichess/continuation-20261007/root-phase-specs/specs.py",
+    "sha256": "850e288c3e9bbd4cfbeea55bbb90ce6a42e574f951de86f3dda52cd9b78e9bd0"
+  },
+  "mode": "proof",
+  "native": {
+    "path": "/workspace/work/harbichess/continuation-20261007/nnue-own-training-v2/native.py",
+    "sha256": "f60a1f9814f48691af1e2d1f1db1b548cff3e7df0a7cae9718051de1865b8b69"
+  },
+  "operator_end_epoch": 1791448916.685839,
+  "output": "/dev/shm/harbichess-NNUE-own-proof-v2/20262905",
+  "parent_candidate": {
+    "contract_sha256": "b397f76376b269c0ffada0871d4a2c06f19cb38df53fdbd5bc1a608ad13dd90c",
+    "path": "/dev/shm/harbichess-NNUE-teacher-fit-v1/20262905/whole/candidate.pt",
+    "sha256": "52e029bba0e895740f975109f4c52358c7a59fe22082cb1fb528821e3fa2b02d"
+  },
+  "schema": "NNUE-own-training-orchestration-v2",
+  "seed": 20262905,
+  "source_sha256": {
+    "/workspace/work/harbichess/continuation-20261007/nnue-own-training-v2/contracts.py": "605a0d9e11f606c7e06998c6c216134c005894f73d7602efcfb97fe494be6e9b",
+    "/workspace/work/harbichess/continuation-20261007/nnue-own-training-v2/convert.py": "bdfc780e544bac9f6ff3abe25b458babd1ee8b883434fb6aaf3e2085fe6e1edc",
+    "/workspace/work/harbichess/continuation-20261007/nnue-own-training-v2/model.py": "c04914bc5a560ad51de81c6d0aaeb3fae4d04b45c07cd8e39bbd31f655d36565",
+    "/workspace/work/harbichess/continuation-20261007/nnue-own-training-v2/native.py": "f60a1f9814f48691af1e2d1f1db1b548cff3e7df0a7cae9718051de1865b8b69",
+    "/workspace/work/harbichess/continuation-20261007/nnue-own-training-v2/prove.py": "a320c0ec335d14e2432d165f85b1b8295d4b4afe58c2f9c6ba332422f0cde22d",
+    "/workspace/work/harbichess/continuation-20261007/nnue-own-training-v2/train.py": "c5f16b69bf32183e9bf21f5d8d5e41ecf5636eae8176ec07e7f09ffe5d3a98dd"
+  },
+  "status": "registered",
+  "train": {
+    "path": "/workspace/work/harbichess/continuation-20261007/nnue-own-training-v2/train.py",
+    "sha256": "c5f16b69bf32183e9bf21f5d8d5e41ecf5636eae8176ec07e7f09ffe5d3a98dd"
+  }
+}
