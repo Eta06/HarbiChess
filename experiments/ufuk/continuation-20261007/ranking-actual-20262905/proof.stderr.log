@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/workspace/work/harbichess/continuation-20261007/action-ranking-own-v1/source/prove.py", line 241, in <module>
+    execute(reg)
+  File "/workspace/work/harbichess/continuation-20261007/action-ranking-own-v1/source/prove.py", line 161, in execute
+    run("whole", stop)
+  File "/workspace/work/harbichess/continuation-20261007/action-ranking-own-v1/source/prove.py", line 155, in run
+    raise RuntimeError("owned child failed " + name)
+RuntimeError: owned child failed whole
