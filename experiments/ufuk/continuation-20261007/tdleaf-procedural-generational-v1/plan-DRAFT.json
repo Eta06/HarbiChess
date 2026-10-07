@@ -1,0 +1,74 @@
+{
+  "schema": "procedural-TDLeaf-three-generation-plan-v1",
+  "status": "DRAFT-unregistered-not-executable",
+  "recipe": {
+    "generations": 3,
+    "eligible_rows": 2048,
+    "root_limit": 512,
+    "plies_per_root": 16,
+    "updates": 128,
+    "batch": 256,
+    "search_nodes": 8192,
+    "qdepth": 2,
+    "max_depth": 8,
+    "endpoint_generation": 3,
+    "transfer": "named-parent-weights-only-fresh-Adam-global-and-private-RNG",
+    "rng_seed": "seed+1000003*generation",
+    "prior_teacher_labels": false
+  },
+  "seeds": [
+    20262905,
+    20262906
+  ],
+  "first": null,
+  "operator_end_epoch": 1791448916.685839,
+  "protected_aliases": {
+    "path": null,
+    "sha256": null
+  },
+  "banks": {
+    "20262905": {
+      "1": {
+        "path": null,
+        "sha256": null
+      },
+      "2": {
+        "path": null,
+        "sha256": null
+      },
+      "3": {
+        "path": null,
+        "sha256": null
+      }
+    },
+    "20262906": {
+      "1": {
+        "path": null,
+        "sha256": null
+      },
+      "2": {
+        "path": null,
+        "sha256": null
+      },
+      "3": {
+        "path": null,
+        "sha256": null
+      }
+    }
+  },
+  "bank_seeds": {
+    "20262905": {
+      "1": 20272905,
+      "2": 20282905,
+      "3": 20292905
+    },
+    "20262906": {
+      "1": 20272906,
+      "2": 20282906,
+      "3": 20292906
+    }
+  },
+  "actor_max_seconds": 10800,
+  "artifact_output_cap_bytes": 268435456,
+  "actual_banks_generated": false
+}
