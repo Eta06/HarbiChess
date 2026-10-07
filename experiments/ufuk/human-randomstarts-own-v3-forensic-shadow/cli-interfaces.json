@@ -1,0 +1,103 @@
+{
+  "status": "PASS-imports-and-CLI-help-only",
+  "first": 1791373260.2527692,
+  "finished": 1791373263.5467794,
+  "interfaces": [
+    {
+      "file": "root_bank.py",
+      "returncode": 0,
+      "stdout_sha256": "8816fbaa78b4abba579020c622a0851f1325b130dbe2d69d719ba9cb08588668",
+      "stderr": ""
+    },
+    {
+      "file": "prepare_bank.py",
+      "returncode": 0,
+      "stdout_sha256": "3f9eddf06773593bfe293fc6dde5210a29717e7f10d198ea929c8b0b3a441706",
+      "stderr": ""
+    },
+    {
+      "file": "prepare_collection.py",
+      "returncode": 0,
+      "stdout_sha256": "5f5089d1271fc1cf3419e18af979c34bf7eff5025d238b8ecea9ea07a33488d0",
+      "stderr": ""
+    },
+    {
+      "file": "metadata_factory.py",
+      "returncode": 0,
+      "stdout_sha256": "78df15f8c7937d5408ba146be28f6e158ad5a6db91169a4d471d8b89d391d96c",
+      "stderr": ""
+    },
+    {
+      "file": "run_collection.py",
+      "returncode": 0,
+      "stdout_sha256": "26acd0f40d65056a6fdd5b8181df2085c04a4475c0018c4f5d6679c482a3a061",
+      "stderr": ""
+    },
+    {
+      "file": "audit_collection_six.py",
+      "returncode": 0,
+      "stdout_sha256": "297d215e09f7b139db5fad8e45a0f082e44623ec4e34d606149917af269a9fcb",
+      "stderr": ""
+    },
+    {
+      "file": "convert.py",
+      "returncode": 0,
+      "stdout_sha256": "d4137f774161c49ab1fe1de8d02fd94cc9c65bfa9420196de41c7ba6c051925d",
+      "stderr": ""
+    },
+    {
+      "file": "contracts.py",
+      "returncode": 0,
+      "stdout_sha256": "cd09274c05ef2d57b2b0496a0c9e794092b6857ab57b93ae451688136d86a852",
+      "stderr": ""
+    },
+    {
+      "file": "specs.py",
+      "returncode": 0,
+      "stdout_sha256": "a450884eaa710763e550629a030676384087b43c1eef3c7a9135274fe19c49d6",
+      "stderr": ""
+    },
+    {
+      "file": "prove.py",
+      "returncode": 0,
+      "stdout_sha256": "ea6af6bfeace19c9ca7b9bf560102c7e401b01a7d68690d33c0064042c4aecdc",
+      "stderr": ""
+    },
+    {
+      "file": "train.py",
+      "returncode": 0,
+      "stdout_sha256": "b6ac9d794385ddf7b9fa18414b15baeda9af1f444fa99c0a750037c6277400e5",
+      "stderr": ""
+    },
+    {
+      "file": "admit_parent.py",
+      "returncode": 0,
+      "stdout_sha256": "21bb9f9e3d7fa233ac8d08ec21f35743ce165249b2d979b67691d22b7d7a581a",
+      "stderr": ""
+    },
+    {
+      "file": "parent_seal.py",
+      "returncode": 0,
+      "stdout_sha256": "941bcb4156976c466ee26596959992c49ff9cac2c4a1205428d070439a3fa16d",
+      "stderr": ""
+    },
+    {
+      "file": "ledger.py",
+      "returncode": 0,
+      "stdout_sha256": "51603bd8881f2c9f975063a9ea0fe1c5642664792419e38d36780db149576e1b",
+      "stderr": ""
+    },
+    {
+      "file": "initialize.py",
+      "returncode": 0,
+      "stdout_sha256": "3523e5cb385cf51b0e1bf4d2531b80996adb0c37ce3a0597e9233ffc54481006",
+      "stderr": ""
+    },
+    {
+      "file": "prepare_zero.py",
+      "returncode": 0,
+      "stdout_sha256": "a7e7896ce65bd511f1cc3ecec6e57c4d91bb20b0277f77a63b29b6a90180fb8c",
+      "stderr": ""
+    }
+  ]
+}
