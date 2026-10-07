@@ -1,0 +1,15 @@
+{
+  "schema": "preservative-cache-relocation-v1",
+  "status": "PASS-exact-all-file-bytes-and-link-targets",
+  "original": "/workspace/.cache/uv",
+  "destination": "/tmp/harbichess-preserved-uv-cache-20261007",
+  "files": 1369,
+  "bytes": 59627217,
+  "inventory_sha256": "f597c4cb7c5454ac8bfd4f8e5cfdaf0785cc22ff6dd9a611ef855cc0b0c2aa70",
+  "first": 1791380444.8489828,
+  "finished": 1791380445.6113353,
+  "disk_free_before": 270295040,
+  "disk_free_after": 270295040,
+  "no_project_checkpoint_replay_sources_modified": true,
+  "no_private_key_accessed": true
+}
