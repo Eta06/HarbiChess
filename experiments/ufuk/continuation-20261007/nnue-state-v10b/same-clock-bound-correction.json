@@ -1,0 +1,14 @@
+{
+  "reason": "original261sourcefilesSHAunchanged; encoded128MiBcap insufficient for200118263rawbytes",
+  "old_manifest_sha256": "8884976c877c6da2f76cf242157f7cb2a35a984e8e7bad81c3a03e532306b6a5",
+  "failed_controller_finished": "6ab5998e468a225ab6673de356f1e7c9b8ca747c030147a7b7bf1b35bce02580",
+  "original_first": 1791366907.4313974,
+  "original_deadline": 1791372307.4313974,
+  "new_clock_first": 1791366907.4313974,
+  "new_encoded_cap": 268435456,
+  "max_parts": 32,
+  "original_files_changed": false,
+  "POST_attempts": 0,
+  "training_changed": false,
+  "strength_thresholds_changed": false
+}
