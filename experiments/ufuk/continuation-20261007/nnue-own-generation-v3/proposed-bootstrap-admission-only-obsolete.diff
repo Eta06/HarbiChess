@@ -1,0 +1,47 @@
+--- FROZEN-v2/native.py
++++ PROPOSED-v3/native.py
+@@ -8,7 +8,7 @@
+ import torch
+ from model import FEATURE_SCHEMA, MODEL_SCHEMA, NNUE16, tensor_batch
+ 
+-SCHEMA = "own-kingbucket-nnue16-full-native-cpu-v1"
++SCHEMA = "own-kingbucket-nnue16-generation-native-cpu-v3"
+ MATH = dict(
+     lr=0.001,
+     batch=256,
+@@ -208,18 +208,20 @@
+ 
+ 
+ def bootstrap_weights(contract):
+-    path = Path(contract["bootstrap_candidate_path"])
+-    if path.stat().st_size > 8 * 2**20 or sha(path) != contract["bootstrap_candidate_sha256"]:
+-        raise ValueError("exact named bootstrap candidate bytes")
+-    packet = torch.load(path, map_location="cpu", weights_only=False)
+-    if (
+-        packet.keys() != {"schema", "contract", "model"}
+-        or packet["schema"] != MODEL_SCHEMA
+-        or packet["contract"]["phase"] != "teacher-bootstrap"
+-        or packet["contract"]["updates"] != 256
+-        or packet["contract"]["feature_schema"] != contract["feature_schema"]
+-        or packet["contract"]["prior_helper_sha256"] != contract["prior_helper_sha256"]
+-    ):
+-        raise ValueError("same architecture and frozen prior teacher-bootstrap required")
+-    validate_weights(packet["model"])
+-    return packet["model"]
++    # PROPOSED only: parent_bridge and source loader must be pinned in v3 contract.
++    # Import/load the incoming native's ORIGINAL model/native module namespace.
++    # Do not monkeypatch or relabel a v2 native module.
++    from parent_bridge import admit, read
++    from v3_source_loader import original_native_module  # integration still required
++    seal = read(contract["parent_admission_seal"])
++    if (seal["generation"] != contract["generation"]
++            or seal["seed"] != contract["seed"]
++            or seal["parent_candidate"]["sha256"] != contract["bootstrap_candidate_sha256"]):
++        raise ValueError("exact current-parent generation weights bridge")
++    original = original_native_module(seal)
++    weights, receipt = admit(seal, original,
++        lambda path: torch.load(path, map_location="cpu", weights_only=False))
++    # Receipt is admitted current-parent evidence, never new own-phase training.
++    if receipt["outgoing_bridge_full_resume"] is not False:
++        raise ValueError("weights-only bridge, new Adam and RNG")
++    return weights
