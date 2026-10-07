@@ -1,0 +1,11 @@
+{
+  "status": "FAILED-fixture-setup-preserved",
+  "reason": "New producer requires source_selection_sha256/source_teacher_labels_sha256; initial fixture omitted them",
+  "raw_tool_output_preserved_in_conversation": true,
+  "subsequent_failure_log": "tests-attempt2.log",
+  "subsequent_pass_logs": [
+    "tests-attempt3.log",
+    "tests-attempt4.log",
+    "tests-final.log"
+  ]
+}
