@@ -1,0 +1,73 @@
+{
+  "schema": "ROOT-generational-TDLeaf-control-config-v2-required-parents",
+  "status": "DRAFT-source-preflight-only",
+  "operator_end_epoch": 1791448916.685839,
+  "seeds": [
+    20262905,
+    20262906
+  ],
+  "helper_directory": "/workspace/work/harbichess/continuation-20261007/tdleaf-procedural-generational-v1",
+  "helper_inventory": {
+    "path": "/workspace/work/harbichess/continuation-20261007/tdleaf-procedural-generational-v1/source-inventory.json",
+    "sha256": "d9487eaa9bcd8dbb83d8eae7dbd6996aab33e1e307d035d2650d4b5b58e0d494"
+  },
+  "core_repo": "/workspace/work/harbichess/cpu-additive-source-6fcc8b4",
+  "core_commit": "6fcc8b476d25495d1c9c413e55b2c7ba4794013e",
+  "zero_parent_seals": {
+    "20262905": {
+      "path": "/workspace/work/harbichess/continuation-20261007/human-zero-actual-20262905/parent-admission-seal.json",
+      "sha256": "5c29d5ac627515c5a453c63cf3e0772907105cf99853bcd99602299d5d97fe59"
+    },
+    "20262906": {
+      "path": "/workspace/work/harbichess/continuation-20261007/human-zero-actual-20262906/parent-admission-seal.json",
+      "sha256": "880d741ff7f389e5d8fa725727527473edd7876d963fc5fd99cc3795343c4de4"
+    }
+  },
+  "parent_helpers": {
+    "directory": "/workspace/work/harbichess/cpu-kingbucket-nnue-proposal",
+    "evaluator_sha256": "5317e736f872a2e237e45942c8df9e797c5acee8f626bb12009464869fab8d95",
+    "extension_path": "/workspace/work/harbichess/cpu-kingbucket-nnue-proposal/_kingbucket16.cpython-312-x86_64-linux-gnu.so",
+    "extension_sha256": "495505cdebd6dbc029ee314846dbac79d5cca6d445de26c804a43821808d644b",
+    "model_sha256": "c04914bc5a560ad51de81c6d0aaeb3fae4d04b45c07cd8e39bbd31f655d36565",
+    "native_sha256": "f60a1f9814f48691af1e2d1f1db1b548cff3e7df0a7cae9718051de1865b8b69",
+    "prior_path": "/workspace/HarbiChess/experiments/ufuk/cpu-classical-own-v1/value.py",
+    "prior_sha256": "a99cddfc397bd9221b99a70691427fdd663488b033fb239d9f48240786b2f277"
+  },
+  "protected_aliases": {
+    "path": "/dev/shm/harbichess-continuation-20261007/metadata-20262906/protected-aliases.bin",
+    "sha256": "63865f92ebc82cae794c021d084ac7cd272449ea7a1c05a13be82d3753f0d4b5"
+  },
+  "search_helper": {
+    "path": "/workspace/HarbiChess/experiments/ufuk/cpu-budget-search-v1/search.py",
+    "sha256": "de53c14728a67b7772f18b396ac8ef5c35a144d4e4e616fec40099cd461a6670"
+  },
+  "cpu_cores": {
+    "20262905": 1,
+    "20262906": 3
+  },
+  "strength_scope": {
+    "endpoint_generation": 3,
+    "required_parent_baseline": "literalzero-generation0",
+    "required_current_parent": "CURRENT-generation2",
+    "development_arms": 7,
+    "development_games": 224,
+    "formal_arms": 7,
+    "formal_games": 1344,
+    "formal_lower_bounds": 12,
+    "formal_per_bound_alpha": 0.0005208333333333333,
+    "formal_e_threshold": 1920,
+    "formal_joint_alpha": 0.00625,
+    "historical_plus_new_bound": 0.05625,
+    "numerical_gates": "unchanged-no-relaxation",
+    "formal_campaign": "SAME-ONE-undrawn-root-draw-no-reroll"
+  },
+  "control_source_sha256": {
+    "generation_entry.py": "dac0ba0770bb5e12095dec044c4f127047a3c65d659cd0e9ee4f4c1cad79da7a",
+    "train_entry.py": "ead1365d52fe5c4c810d2097997ad7e389f987b34d722851d50f68fb909d49ea",
+    "learn.py": "e51e784b5484c7225c03428cb4b3249ac59b61d0b8c2ef3cc3ae84ce696cc3de",
+    "collect_entry.py": "1322a17c4b0900164f74af730ad3c9bc8e65e72980f29688ae567d71e6d415d8",
+    "run_all.py": "090c6d180583a27c07468b2dfbac1e8eef7f199ffd50e167c096ed4df69f5bf6",
+    "seal_plan.py": "51e230a438eea4a0c2330d873e0e6cf9b361b3e3d990621d1f03ece23a4e175a",
+    "control.py": "85b5cf00f37530d68e5ab88deb6da84540b732586738067ca5e212860d49d178"
+  }
+}
