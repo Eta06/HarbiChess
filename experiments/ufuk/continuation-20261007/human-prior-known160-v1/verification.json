@@ -1,0 +1,30 @@
+{
+  "schema": "human-prior-known160-prospective-verification-v1",
+  "status": "READY-prospective-not-actual-qualified",
+  "pure_tests_pass": 6,
+  "skips": 0,
+  "cli_help_pass": [
+    "seal.py",
+    "qualify_profile.py",
+    "run.py",
+    "audit_known160_v2.py",
+    "replay_six.py"
+  ],
+  "ruff": "PASS-canonical-repo-cwd",
+  "unchanged_helpers": {
+    "search.py": "de53c14728a67b7772f18b396ac8ef5c35a144d4e4e616fec40099cd461a6670",
+    "tournament.py": "7081128a96f575d01ebaf40f1c7de725274b4316ac3836802b539b3ce7395cb8",
+    "run.py": "9c1823c0a10db786f299f6608251f59af125b56761ece8074844801e52ec3d30",
+    "replay_six.py": "2a3574fa0a297d20b46d96e6113e87fca65f50f96232cbefa661f9d9d2cf2ed6",
+    "confirmation_stats.py": "aaf1fb4811a835bb725cfe1226c56e819eb12d6617dfe0d759dcf1d99278bbdd"
+  },
+  "actual_models_read": 0,
+  "actual_searches": 0,
+  "actual_games": 0,
+  "actual_optimizer_updates": 0,
+  "actual_clocks_stamped": 0,
+  "init_qualification": "PENDING-original-zero0/two-real-loads/HEX-parity",
+  "own_qualification": "PENDING-new-human-collection12/actual-proof6-and-fit2-per-seed",
+  "observed_epoch": 1791372279.9135585,
+  "parent_registry_binding": "actual path/SHA plus canonical admitted-parent-contract SHA; independently recomputed"
+}
