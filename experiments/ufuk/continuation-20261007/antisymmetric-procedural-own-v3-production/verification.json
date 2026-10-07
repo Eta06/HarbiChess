@@ -1,0 +1,19 @@
+{
+  "schema": "antisymmetric-production-source-verification-v3",
+  "synthetic_actual_math_native_tests": "3 passed27.97s inclfreshresume/sixopens; newmetadata tests3pass1.00s",
+  "distinct_tests": 5,
+  "actual_metadata_inputs": "both1024 full roots/targets/features paired3.08s; no alias-list reprocessing",
+  "CLI_help": "10initial+9final PASSED actualimports, noNN calls",
+  "Ruff": "PASS ROOTexplicitconfig",
+  "unchanged_known_helpers": {
+    "search.py": "de53c14728a67b7772f18b396ac8ef5c35a144d4e4e616fec40099cd461a6670",
+    "tournament.py": "7081128a96f575d01ebaf40f1c7de725274b4316ac3836802b539b3ce7395cb8",
+    "audit_known160_v2.py": "bef1a8267f7425086e38905597b264a37c8ec7a5a87f192ff00cf0b510ac82df",
+    "alias_pool.py": "74f3929f46c7a8ffeec3622c6f0b13d4cf0193d137f90632f050725d671fb7ec",
+    "confirmation_stats.py": "aaf1fb4811a835bb725cfe1226c56e819eb12d6617dfe0d759dcf1d99278bbdd"
+  },
+  "actual_zero_proof_fit_profile_strength": "NOT RUN by agent; mandatory ROOT qualified phases remain",
+  "synthetic_only_actual_admission_rejected": true,
+  "final_targeted_tests": "4 passed,1 deselected1.12s; production-math fresh-process test previously PASS unchanged native",
+  "final_interface_fix": "run_known160 consumes actual profile finished rather than absent finished_epoch; source interface test"
+}
