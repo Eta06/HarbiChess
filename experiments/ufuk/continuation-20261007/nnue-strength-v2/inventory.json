@@ -1,0 +1,25 @@
+{
+  "schema": "NNUE-own-strength-v2-preparation-inventory",
+  "helper_sha256": {
+    "ROOT-RECIPE.txt": "a06c4dd8285a7af8c6afa7a21a6a33f1cbfb395d21add4c38f495671151bd9ed",
+    "admission.py": "2e4a4eef372b5f46f1151c6a6371646e3102bdf68059ed6c0e2a4179e65ab788",
+    "audit_collection_six.py": "1a5a7c78cf6589d17f7f6965bf2eae2b4f9138c747830c5f9529fe718fe608a0",
+    "audit_known160.py": "b9164c2be23a8ac422d4c3c1eee52718bef17410fc27c7e7b890853ebcf87206",
+    "collection-audit-clock-DRAFT.json": "314ce9cc92dfaa972fd5832b79a0d1b05029bbcacdb63ab0317b327867e7154e",
+    "confirmation-DRAFT.json": "e194c06417bec0d388512df9abee597a7e0eeed2402e147ec0ff71f2a6ef5986",
+    "confirmation_stats.py": "aaf1fb4811a835bb725cfe1226c56e819eb12d6617dfe0d759dcf1d99278bbdd",
+    "protocol-DRAFT.json": "e7e93b631df050627693c383ef4a451c47c66b67ca398d1194a56f778538c7bb",
+    "qualify_profile.py": "1106ffe7271757153077a5a3aebd9410dc2b12d7be26613fdca6a3031cc0ca81",
+    "replay_six.py": "2a3574fa0a297d20b46d96e6113e87fca65f50f96232cbefa661f9d9d2cf2ed6",
+    "run.py": "9c1823c0a10db786f299f6608251f59af125b56761ece8074844801e52ec3d30",
+    "seal.py": "7abecf1c60f42ba470c9b82e37886f791a4cf86ea943236283f7ff11eff81314",
+    "search.py": "de53c14728a67b7772f18b396ac8ef5c35a144d4e4e616fec40099cd461a6670",
+    "teacher_admission.py": "94d80c5ab1f3ca9a2d5260d52bda5f7ab16ff236970a57a9a2c70e2351d92781",
+    "test_collection_audit.py": "d7f700d2baceeb9db2e70ccb8a7dd6402595db8c349331cc93665e63dd0c0332",
+    "test_controls.py": "84215b3a34672bedda202f2fc476cd62f285c69b1ea06b8dfda79302096a9d2f",
+    "tournament.py": "7081128a96f575d01ebaf40f1c7de725274b4316ac3836802b539b3ce7395cb8",
+    "value.py": "f6388c16e5a40d29a67fb599f7f4a7e9293e9abe051839853409e90183717fe6",
+    "verification.json": "6cbda41c8f700e74aa3c7b4cefd54fe4562a31f49dbf7d0b2fddd963f375860d"
+  },
+  "status": "READY-preparation-not-actual-qualification"
+}
