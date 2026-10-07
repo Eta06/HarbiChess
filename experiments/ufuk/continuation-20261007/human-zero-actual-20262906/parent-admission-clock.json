@@ -1,0 +1,9 @@
+{
+  "schema": "human-prior-own-parent-readonly-admission-clock-v1",
+  "status": "registered",
+  "first": 1791374711.8205383,
+  "deadline": 1791375311.8205383,
+  "operator_end_epoch": 1791448916.685839,
+  "seal_sha256": "880d741ff7f389e5d8fa725727527473edd7876d963fc5fd99cc3795343c4de4",
+  "helper_sha256": "233945dd2e922c26520768728dc04e7aa89a6d170c20659b21b050db9f2659ce"
+}
