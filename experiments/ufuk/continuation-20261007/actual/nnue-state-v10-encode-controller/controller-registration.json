@@ -1,0 +1,33 @@
+{
+  "schema": "UFUK-DEVAM-bounded-cpu-phase-v1",
+  "phase": "NEW-v10-byte-capsule-preserve-own-native-and-replay",
+  "output": "/dev/shm/harbichess-continuation-20261007/nnue-state-v10-encode-controller",
+  "first_epoch": 1791366907.4313974,
+  "deadline_epoch": 1791372307.4313974,
+  "operator_end_epoch": 1791448916.685839,
+  "cpu_core": 0,
+  "checkout": "/workspace/work/harbichess/cpu-additive-source-6fcc8b4",
+  "controller_sha256": "5090ef465aafd81fd39a49dd86b205cfe7d2d97f73c357c83aa2822f321d464b",
+  "memory_guard_path": "/workspace/work/harbichess/cpu-additive-source-6fcc8b4/src/harbichess/training/cgroup_budget.py",
+  "input_pins": {
+    "/workspace/work/harbichess/continuation-20261007/nnue-state-v10/manifest.json": "8884976c877c6da2f76cf242157f7cb2a35a984e8e7bad81c3a03e532306b6a5",
+    "/workspace/work/harbichess/continuation-20261007/nnue-state-v10/clock.json": "3ec1149c12f410e88ac39ac64079e3b71933f27f9e6fb90e796f484fd67a3711",
+    "/workspace/work/harbichess/continuation-20261007/nnue-state-v10/prepare_capsule.py": "2f5a6fdac5a63f16b5b346af6ad09919ba85297884e4c37365fd943441f1fc29",
+    "/workspace/work/harbichess/continuation-20261007/nnue-state-v10/raw_capsule_v10.py": "04af86f9d5a622662b2f7346e97e702e966d07fa22a25ad4044fa00ed08ce5a4",
+    "/workspace/work/harbichess/continuation-20261007/nnue-state-v10/release_transport_v10.py": "7c7b4b368d21f41887b56ec5982dd0d04f746b9b758c14f7db53aa13a9840391"
+  },
+  "command": [
+    "/workspace/HarbiChess/.venv/bin/python",
+    "/workspace/work/harbichess/continuation-20261007/nnue-state-v10/prepare_capsule.py",
+    "--manifest",
+    "/workspace/work/harbichess/continuation-20261007/nnue-state-v10/manifest.json",
+    "--clock",
+    "/workspace/work/harbichess/continuation-20261007/nnue-state-v10/clock.json",
+    "--output",
+    "/dev/shm/harbichess-nnue-state-v10"
+  ],
+  "source_core_commit": "6fcc8b476d25495d1c9c413e55b2c7ba4794013e",
+  "historical_timer_reset": false,
+  "GPU_used": false,
+  "hash_guard_interval_seconds": 30
+}
