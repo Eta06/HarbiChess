@@ -1,0 +1,8 @@
+{
+  "pid": 1090736,
+  "start_ticks": 34186853,
+  "registration": "/workspace/work/harbichess/continuation-20261007/nnue-state-v12a-delivery-controller/controller-registration.json",
+  "first_epoch": 1791376262.7057917,
+  "deadline_epoch": 1791381662.7057917,
+  "operator_end_epoch": 1791448916.685839
+}
