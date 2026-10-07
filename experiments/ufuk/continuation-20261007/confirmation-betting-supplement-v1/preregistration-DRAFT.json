@@ -1,0 +1,38 @@
+{
+  "schema": "ONE-confirmation-additional-fixed-n-betting-preregistration-v1",
+  "status": "DRAFT-before-any-strength-outcome",
+  "observed_first_epoch": null,
+  "original_confirmation_registration_sha256": null,
+  "original_stats_sha256": "aaf1fb4811a835bb725cfe1226c56e819eb12d6617dfe0d759dcf1d99278bbdd",
+  "original_bounds_unchanged_required": true,
+  "new_code_sha256": "35628fc596ff53a7de9108b4de282e70d0390b2c54f534b6313cf27f70b54634",
+  "tests_sha256": "e2fa476fb0bedbc5041351f243e49f3cf9a09795f11a40b1bb49dc18b7266c38",
+  "math_note_sha256": "63d66f4b85ce7c59d1fb8e37ee99702f87b922df1bcafd77c840dc9c4a68f861",
+  "fraction_grid": [
+    "1/10",
+    "2/10",
+    "3/10",
+    "4/10",
+    "5/10",
+    "6/10",
+    "7/10",
+    "8/10",
+    "9/10",
+    "1"
+  ],
+  "root_blocks_fixed_n": 48,
+  "new_required_bounds": 8,
+  "exact_alpha_each": "1/1280",
+  "exact_new_union_alpha": "1/160",
+  "point_and_CI_thresholds_unchanged": true,
+  "optional_stopping_allowed": false,
+  "data_driven_bets_allowed": false,
+  "input_metrics": "ALL5arms/96games perseed; paired root/color means, adverse-cap recode; 4metrics perseed",
+  "preconditions": [
+    "originalfixedcandidate/protocol/source/books and bounds frozen",
+    "48 independent source-root clusters perseed with documented sampling population",
+    "ALL960games complete audited no substitutions",
+    "oldMAX8 closed ONEcampaign no fallback after failure"
+  ],
+  "data_and_model_reads_performed": false
+}
