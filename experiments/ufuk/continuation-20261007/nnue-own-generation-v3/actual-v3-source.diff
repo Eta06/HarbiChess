@@ -1,0 +1,2526 @@
+--- /workspace/work/harbichess/continuation-20261007/nnue-own-training-v2/native.py
++++ NEW-v3/native.py
+@@ -8,7 +8,7 @@
+ import torch
+ from model import FEATURE_SCHEMA, MODEL_SCHEMA, NNUE16, tensor_batch
+ 
+-SCHEMA = "own-kingbucket-nnue16-full-native-cpu-v1"
++SCHEMA = "own-kingbucket-nnue16-generation-native-cpu-v3"
+ MATH = dict(
+     lr=0.001,
+     batch=256,
+@@ -32,7 +32,8 @@
+             and a.dtype == b.dtype
+             and a.shape == b.shape
+             and torch.equal(
+-                a.detach().reshape(-1).view(torch.uint8), b.detach().reshape(-1).view(torch.uint8)
++                a.detach().reshape(-1).view(torch.uint8),
++                b.detach().reshape(-1).view(torch.uint8),
+             )
+         )
+     if type(a) is not type(b):
+@@ -40,12 +41,18 @@
+     if isinstance(a, dict):
+         return a.keys() == b.keys() and all(bits_equal(a[k], b[k]) for k in a)
+     if isinstance(a, list | tuple):
+-        return len(a) == len(b) and all(bits_equal(x, y) for x, y in zip(a, b, strict=True))
++        return len(a) == len(b) and all(
++            bits_equal(x, y) for x, y in zip(a, b, strict=True)
++        )
+     return a == b
+ 
+ 
+ def validate_weights(state):
+-    expected = {"embedding.weight": (12288, 16), "head.weight": (1, 16), "head.bias": (1,)}
++    expected = {
++        "embedding.weight": (12288, 16),
++        "head.weight": (1, 16),
++        "head.bias": (1,),
++    }
+     if state.keys() != expected.keys() or any(
+         not torch.is_tensor(state[k])
+         or state[k].device.type != "cpu"
+@@ -60,7 +67,8 @@
+ class Learner:
+     def __init__(self, contract, state=None, weights_initializer=None):
+         if (
+-            contract["phase"] not in ["teacher-bootstrap", "own-learning", "synthetic-test"]
++            contract["phase"]
++            not in ["teacher-bootstrap", "own-learning", "synthetic-test"]
+             or contract["updates"]
+             != {"teacher-bootstrap": 256, "own-learning": 64, "synthetic-test": 8}[
+                 contract["phase"]
+@@ -69,7 +77,9 @@
+             or contract["feature_schema"] != FEATURE_SCHEMA
+             or (state is not None and weights_initializer is not None)
+         ):
+-            raise ValueError("exact versioned phase/math; weights bridge is not full resume")
++            raise ValueError(
++                "exact versioned phase/math; weights bridge is not full resume"
++            )
+         self.contract = copy.deepcopy(contract)
+         random.seed(contract["seed"])
+         torch.manual_seed(contract["seed"])
+@@ -89,7 +99,11 @@
+             )
+         self.baseline = copy.deepcopy(self.model.state_dict())
+         self.optimizer = torch.optim.Adam(
+-            self.model.parameters(), lr=0.001, betas=(0.9, 0.999), eps=1e-8, weight_decay=0
++            self.model.parameters(),
++            lr=0.001,
++            betas=(0.9, 0.999),
++            eps=1e-8,
++            weight_decay=0,
+         )
+         self.sampler = random.Random(contract["seed"] ^ 0xB007)
+         self.step = 0
+@@ -119,7 +133,9 @@
+         validate_weights(state["model"])
+         validate_weights(state["baseline"])
+         if not bits_equal(state["baseline"], self.baseline):
+-            raise ValueError("immutable initialized/frozen-bootstrap baseline bits differ")
++            raise ValueError(
++                "immutable initialized/frozen-bootstrap baseline bits differ"
++            )
+         self.model.load_state_dict(state["model"])
+         self.baseline = copy.deepcopy(state["baseline"])
+         self.optimizer.load_state_dict(state["optimizer"])
+@@ -168,7 +184,9 @@
+             prediction = torch.tanh(prior + self.model.residual(ids, offsets))
+             loss = (prediction - target).square().mean()
+             loss.backward()
+-            torch.nn.utils.clip_grad_norm_(self.model.parameters(), 5, error_if_nonfinite=True)
++            torch.nn.utils.clip_grad_norm_(
++                self.model.parameters(), 5, error_if_nonfinite=True
++            )
+             self.optimizer.step()
+             self.step += 1
+             guard()
+@@ -208,18 +226,22 @@
+ 
+ 
+ def bootstrap_weights(contract):
+-    path = Path(contract["bootstrap_candidate_path"])
+-    if path.stat().st_size > 8 * 2**20 or sha(path) != contract["bootstrap_candidate_sha256"]:
+-        raise ValueError("exact named bootstrap candidate bytes")
+-    packet = torch.load(path, map_location="cpu", weights_only=False)
++    from parent_bridge import admitted_candidate
++
++    packet = admitted_candidate(
++        contract["parent_admission_seal"], contract["parent_admission_result"], torch
++    )
++    parent = packet["contract"]
+     if (
+-        packet.keys() != {"schema", "contract", "model"}
+-        or packet["schema"] != MODEL_SCHEMA
+-        or packet["contract"]["phase"] != "teacher-bootstrap"
+-        or packet["contract"]["updates"] != 256
+-        or packet["contract"]["feature_schema"] != contract["feature_schema"]
+-        or packet["contract"]["prior_helper_sha256"] != contract["prior_helper_sha256"]
++        contract["generation"] != parent.get("generation", 1) + 1
++        or parent["seed"] != contract["seed"]
++        or parent["feature_schema"] != contract["feature_schema"]
++        or parent["prior_helper_sha256"] != contract["prior_helper_sha256"]
++        or sha(contract["bootstrap_candidate_path"])
++        != contract["bootstrap_candidate_sha256"]
++        or contract["bootstrap_candidate_sha256"]
++        != contract["parent_candidate"]["sha256"]
+     ):
+-        raise ValueError("same architecture and frozen prior teacher-bootstrap required")
++        raise ValueError("exact current own-parent generation/features/prior")
+     validate_weights(packet["model"])
+     return packet["model"]
+--- /workspace/work/harbichess/continuation-20261007/nnue-own-training-v2/train.py
++++ NEW-v3/train.py
+@@ -66,7 +66,8 @@
+     if not rows:
+         raise ValueError("nonempty frozen dataset")
+     if contract["phase"] != "synthetic-test" and (
+-        not contract.get("target_provenance_sha256") or not contract.get("prior_helper_sha256")
++        not contract.get("target_provenance_sha256")
++        or not contract.get("prior_helper_sha256")
+     ):
+         raise ValueError("teacher/own target and frozen prior source required")
+     if contract["phase"] != "synthetic-test":
+@@ -86,10 +87,12 @@
+ 
+         pins_tree(contract["raw_collection_inputs"])
+     first, end = contract["original_first_epoch"], contract["original_deadline_epoch"]
+-    if (contract.get("execution_scope_schema") != "NNUE-own-execution-contract-v2"
+-            or contract.get("execution_mode") not in ["proof", "fresh-fit"]
+-            or not first < end <= contract["operator_end_epoch"] <= 1791448916.685839
+-            or end - first > (600 if contract["execution_mode"] == "proof" else 1800)):
++    if (
++        contract.get("execution_scope_schema") != "NNUE-own-execution-contract-v3"
++        or contract.get("execution_mode") not in ["proof", "fresh-fit"]
++        or not first < end <= contract["operator_end_epoch"] <= 1791448916.685839
++        or end - first > (600 if contract["execution_mode"] == "proof" else 1800)
++    ):
+         raise ValueError("operator hard cap and separate prospective phase clock")
+     import shutil
+     import sys
+@@ -116,13 +119,18 @@
+         if a.bootstrap_candidate:
+             if sha(a.bootstrap_candidate) != contract["bootstrap_candidate_sha256"]:
+                 raise ValueError("named bootstrap candidate SHA")
+-            if str(a.bootstrap_candidate.resolve()) != contract["bootstrap_candidate_path"]:
++            if (
++                str(a.bootstrap_candidate.resolve())
++                != contract["bootstrap_candidate_path"]
++            ):
+                 raise ValueError("exact weights-only bootstrap input path")
+             weights = bootstrap_weights(contract)
+         learner = Learner(contract, weights_initializer=weights)
+     if a.audit_only:
+         guard()
+-        print(json.dumps({"status": "PASS-strict-native-readonly", "step": learner.step}))
++        print(
++            json.dumps({"status": "PASS-strict-native-readonly", "step": learner.step})
++        )
+         return
+     a.output.mkdir(exist_ok=False)
+     save_once(a.output / "initial.pt", learner.native())
+--- /workspace/work/harbichess/continuation-20261007/nnue-own-training-v2/prove.py
++++ NEW-v3/prove.py
+@@ -1,4 +1,4 @@
+-"""ROOT own-phase proof or fresh64; named teacher WEIGHTS only, full state strict loads."""
++"""ROOT own-phase proof or fresh64; current own-parent WEIGHTS only, full state strict loads."""
+ 
+ import argparse
+ import json
+@@ -13,13 +13,20 @@
+ 
+ 
+ def execute(reg):
+-    if reg["schema"] != "NNUE-own-training-orchestration-v2" or reg["status"] != "registered":
++    if (
++        reg["schema"] != "NNUE-own-training-orchestration-v3"
++        or reg["status"] != "registered"
++    ):
+         raise ValueError("ROOT own-phase immutable registration")
+     first, end = reg["first"], reg["deadline"]
+     proof = reg["mode"] == "proof"
+     if (
+         reg["mode"] not in ["proof", "fresh-fit"]
+-        or not first <= time.time() < end <= reg["operator_end_epoch"] <= 1791448916.685839
++        or not first
++        <= time.time()
++        < end
++        <= reg["operator_end_epoch"]
++        <= 1791448916.685839
+         or end - first > (600 if proof else 1800)
+     ):
+         raise ValueError("separate original600/1800 clock")
+@@ -40,9 +47,10 @@
+         or c["original_first_epoch"] != first
+         or c["original_deadline_epoch"] != end
+         or c["bootstrap_candidate_sha256"] != reg["parent_candidate"]["sha256"]
+-        or c["bootstrap_candidate_path"] != str(pinned(reg["parent_candidate"]).resolve())
++        or c["bootstrap_candidate_path"]
++        != str(pinned(reg["parent_candidate"]).resolve())
+     ):
+-        raise ValueError("strict own64/current namedteacher weights-only contract")
++        raise ValueError("strict own64/current namedparent weights-only contract")
+     for row in reg["inputs"].values():
+         pinned(row)
+     for path, h in reg["source_sha256"].items():
+@@ -105,7 +113,10 @@
+             owner = dict(
+                 command=cmd,
+                 pid=proc.pid,
+-                startticks=Path(f"/proc/{proc.pid}/stat").read_text().rsplit(")", 1)[1].split()[19],
++                startticks=Path(f"/proc/{proc.pid}/stat")
++                .read_text()
++                .rsplit(")", 1)[1]
++                .split()[19],
+             )
+             try:
+                 while proc.poll() is None:
+@@ -173,20 +184,25 @@
+             or zero["optimizer"]["state"]
+             or not native.bits_equal(zero["model"], zero["baseline"])
+         ):
+-            raise ValueError("NEW ownAdam and teacherweights-only baseline")
++            raise ValueError("NEW ownAdam and currentparent-weights-only baseline")
+         if not proof:
+             if native.bits_equal(zero["model"], final["model"]):
+                 raise ValueError("own64 must actually change weights")
+             import torch
+ 
+-            packet = torch.load(out / "whole/candidate.pt", map_location="cpu", weights_only=False)
+-            if not native.bits_equal(packet, native.load_native(paths[1], c).candidate()):
++            packet = torch.load(
++                out / "whole/candidate.pt", map_location="cpu", weights_only=False
++            )
++            if not native.bits_equal(
++                packet, native.load_native(paths[1], c).candidate()
++            ):
+                 raise ValueError("fixed64 candidate vs fullnative")
+         guard()
+         result = dict(
+             status="PASS-own-NNUE-fixed-phase-and-fresh-native-loads-not-strength",
+             mode=reg["mode"],
+             own_updates=stop,
++            generation=c["generation"],
+             full_payload_bits_equal=proof,
+             raw_zip_identity_claimed=False,
+             native_payloads=checks,
+@@ -199,7 +215,9 @@
+         result = dict(status="FAILED-preserved", error=repr(e))
+         raise
+     finally:
+-        result.update(first=first, deadline=end, finished=time.time(), commands=commands)
++        result.update(
++            first=first, deadline=end, finished=time.time(), commands=commands
++        )
+         with (out / "result.json").open("xb") as stream:
+             stream.write(canonical(result) + b"\n")
+ 
+--- /workspace/work/harbichess/continuation-20261007/nnue-own-training-v2/convert.py
++++ NEW-v3/convert.py
+@@ -13,7 +13,9 @@
+ 
+ 
+ def canonical(x):
+-    return json.dumps(x, sort_keys=True, separators=(",", ":"), allow_nan=False).encode()
++    return json.dumps(
++        x, sort_keys=True, separators=(",", ":"), allow_nan=False
++    ).encode()
+ 
+ 
+ def sha(p):
+@@ -62,7 +64,9 @@
+ 
+ def alias(b):
+     return int.from_bytes(
+-        hashlib.sha256(min(b.board_fen(), b.mirror().board_fen()).encode()).digest()[:8],
++        hashlib.sha256(min(b.board_fen(), b.mirror().board_fen()).encode()).digest()[
++            :8
++        ],
+         "little",
+         signed=True,
+     )
+@@ -100,7 +104,8 @@
+     ):
+         raise ValueError("completed root search/global actual counters")
+     prior_logit = (
+-        sum(w * x for w, x in zip(prior.PRIOR, prior.features(b), strict=True)) / prior.SCALE
++        sum(w * x for w, x in zip(prior.PRIOR, prior.features(b), strict=True))
++        / prior.SCALE
+     )
+     return dict(
+         indices=features.board_indices(b),
+@@ -110,14 +115,14 @@
+ 
+ 
+ def convert(spec, guard=lambda: None):
+-    if spec["schema"] != "NNUE-own1024-dataset-conversion-seal-v2":
++    if spec["schema"] != "NNUE-own1024-dataset-conversion-seal-v3":
+         raise ValueError("own seal required")
+     reg = json.loads(pinned(spec["registration"]).read_bytes())
+     receipt = json.loads(pinned(spec["receipt"]).read_bytes())
+     if (
+-        reg["schema"] != "own-nnue-ownq-collection-registration-v2"
++        reg["schema"] != "own-nnue-ownq-collection-registration-v3"
+         or reg["status"] != "registered"
+-        or receipt["schema"] != "own-nnue-ownq-collection-receipt-v2"
++        or receipt["schema"] != "own-nnue-ownq-collection-receipt-v3"
+         or receipt["status"] != "PASS-exact-row-budget"
+         or receipt["train_rows"] != 1024
+         or receipt["registration_sha256"] != spec["registration"]["sha256"]
+@@ -142,33 +147,48 @@
+         pinned(entry)
+     for name, digest in reg["producer_source_sha256"].items():
+         pinned(dict(path=str(Path(spec["producer_directory"]) / name), sha256=digest))
++    if receipt["generation_helper_sha256"] != reg["generation_helper_sha256"]:
++        raise ValueError("generation source closure receipt differs")
++    for path,digest in reg["generation_helper_sha256"].items():
++        pinned(dict(path=path,sha256=digest))
+     protected_raw = pinned(reg["protected_aliases"]).read_bytes()
+     if len(protected_raw) % 8:
+         raise ValueError("int64 protected aliases")
+-    protected_values = list(struct.unpack(f"<{len(protected_raw) // 8}q", protected_raw))
++    protected_values = list(
++        struct.unpack(f"<{len(protected_raw) // 8}q", protected_raw)
++    )
+     if protected_values != sorted(set(protected_values)):
+         raise ValueError("canonical protected aliases")
+     protected = set(protected_values)
+-    if (spec["features"]["sha256"] != reg["parent_helpers"]["model_sha256"]
+-            or Path(spec["features"]["path"]).resolve() !=
+-            (Path(reg["parent_helpers"]["directory"]) / "model.py").resolve()):
++    if (
++        spec["features"]["sha256"] != reg["parent_helpers"]["model_sha256"]
++        or Path(spec["features"]["path"]).resolve()
++        != (Path(reg["parent_helpers"]["directory"]) / "model.py").resolve()
++    ):
+         raise ValueError("exact frozen parent feature origin")
+-    if (receipt["events_sha256"] != spec["events"]["sha256"]
+-            or receipt["operator_end_epoch"] != reg["operator_end_epoch"]
+-            or receipt["producer_source_sha256"] != reg["producer_source_sha256"]
+-            or receipt["parent_helpers"] != reg["parent_helpers"]):
++    if (
++        receipt["events_sha256"] != spec["events"]["sha256"]
++        or receipt["operator_end_epoch"] != reg["operator_end_epoch"]
++        or receipt["producer_source_sha256"] != reg["producer_source_sha256"]
++        or receipt["parent_helpers"] != reg["parent_helpers"]
++    ):
+         raise ValueError("complete producer/event/parent receipt bindings")
+     event_path = pinned(spec["events"])
+-    if (event_path.stat().st_size != receipt["events_bytes"]
+-            or event_path.stat().st_size > 16 * 2**20):
++    if (
++        event_path.stat().st_size != receipt["events_bytes"]
++        or event_path.stat().st_size > 16 * 2**20
++    ):
+         raise ValueError("event bytes/cap")
+     chunks, spans = {}, {}
+     if len(spec["alias_chunks"]) > 32:
+         raise ValueError("sidecar count cap")
+     inventory = []
+     for name, ref in spec["alias_chunks"].items():
+-        if (Path(name).name != name or not name.startswith("search-aliases-")
+-                or not name.endswith(".bin")):
++        if (
++            Path(name).name != name
++            or not name.startswith("search-aliases-")
++            or not name.endswith(".bin")
++        ):
+             raise ValueError("fixed sidecar basename")
+         raw = pinned(ref).read_bytes()
+         if len(raw) > 8 * 2**20 or len(raw) % 8:
+@@ -176,31 +196,54 @@
+         chunks[name], spans[name] = raw, []
+         inventory.append(dict(file=name, bytes=len(raw), sha256=ref["sha256"]))
+     if sorted(inventory, key=lambda x: x["file"]) != sorted(
+-            receipt["alias_chunks"], key=lambda x: x["file"]):
++        receipt["alias_chunks"], key=lambda x: x["file"]
++    ):
+         raise ValueError("exact full sidecar receipt inventory")
+-    collector = module(dict(path=str(Path(spec["producer_directory"]) / "collector.py"),
+-                            sha256=reg["producer_source_sha256"]["collector.py"]),
+-                       "own_converter_collector")
++    collector = module(
++        dict(
++            path=str(Path(spec["producer_directory"]) / "collector.py"),
++            sha256=reg["producer_source_sha256"]["collector.py"],
++        ),
++        "own_converter_collector",
++    )
+     pool = json.loads(pinned(reg["root_pool"]).read_bytes())
+     pool_ref = reg["root_pool"]
+-    selection_ref = dict(path=pool_ref["selection_path"], sha256=pool_ref["selection_sha256"])
+-    labels_ref = dict(path=pool_ref["teacher_labels_path"],
+-                      sha256=pool_ref["teacher_labels_sha256"])
++    selection_ref = dict(
++        path=pool_ref["selection_path"], sha256=pool_ref["selection_sha256"]
++    )
+     original_selection = json.loads(pinned(selection_ref).read_bytes())
+-    pinned(labels_ref)
+-    if (pool["source_selection_sha256"] != selection_ref["sha256"]
+-            or pool["source_teacher_labels_sha256"] != labels_ref["sha256"]
+-            or receipt["teacher_selection_path"] != selection_ref["path"]
+-            or receipt["teacher_selection_sha256"] != selection_ref["sha256"]
+-            or receipt["teacher_labels_path"] != labels_ref["path"]
+-            or receipt["teacher_labels_sha256"] != labels_ref["sha256"]):
+-        raise ValueError("exact original teacher selection/labels source")
++    if (
++        pool["source_selection_sha256"] != selection_ref["sha256"]
++        or receipt["ancestral_selection_path"] != selection_ref["path"]
++        or receipt["ancestral_selection_sha256"] != selection_ref["sha256"]
++        or pool["ancestral_teacher_labels_sha256"]
++        != receipt["ancestral_teacher_labels_sha256"]
++    ):
++        raise ValueError(
++            "immutable ancestral TRAIN selection; no teacher label file read"
++        )
++    from parent_bridge import validate_admission_result
++
++    validate_admission_result(
++        reg["parent_admission_seal"], reg["parent_admission_result"]
++    )
++    if (
++        reg["generation"] != receipt["generation"]
++        or reg["parent_admission_result"] != receipt["parent_admission_result"]
++        or reg["parent_admission_seal"] != receipt["parent_admission_seal"]
++    ):
++        raise ValueError("same admitted current own-parent and generation")
+     if len(original_selection["rows"]) != 4096 or len(pool["rows"]) != 4096:
+         raise ValueError("whole original4096 pool")
+     for source, projected in zip(original_selection["rows"], pool["rows"], strict=True):
+-        expected = dict(root_id=source["row_id"], source_row_id=source["row_id"],
+-                        trajectory_id=source["trajectory_id"], root_fen=source["root_fen"],
+-                        prefix_uci=source["prefix_uci"], role="TRAIN")
++        expected = dict(
++            root_id=source["row_id"],
++            source_row_id=source["row_id"],
++            trajectory_id=source["trajectory_id"],
++            root_fen=source["root_fen"],
++            prefix_uci=source["prefix_uci"],
++            role="TRAIN",
++        )
+         if any(projected.get(k) != v for k, v in expected.items()):
+             raise ValueError("exact fixed TRAIN selection projection")
+     chosen, order_sha = collector.starts(pool, reg["seed"], protected)
+@@ -210,7 +253,9 @@
+     prior = module(spec["prior"], "own_conversion_prior")
+     if spec["prior"]["sha256"] != reg["parent_helpers"]["prior_sha256"]:
+         raise ValueError("original authoritative parent prior")
+-    events = [json.loads(line) for line in pinned(spec["events"]).read_bytes().splitlines()]
++    events = [
++        json.loads(line) for line in pinned(spec["events"]).read_bytes().splitlines()
++    ]
+     starts = {}
+     rows = {}
+     ends = {}
+@@ -227,9 +272,12 @@
+                 raise ValueError("duplicate trajectory start")
+             ordinal = len(starts)
+             root = chosen[ordinal]
+-            if (event["root_ordinal"] != ordinal or key != root["root_id"]
+-                    or event["root_fen"] != root["root_fen"]
+-                    or event["root_prefix_uci"] != root["prefix_uci"]):
++            if (
++                event["root_ordinal"] != ordinal
++                or key != root["root_id"]
++                or event["root_fen"] != root["root_fen"]
++                or event["root_prefix_uci"] != root["prefix_uci"]
++            ):
+                 raise ValueError("exact chosen root/full prefix")
+             start_board = collector.replay(root)
+             if event["root_alias"] != alias(start_board):
+@@ -247,7 +295,9 @@
+             start = starts[key]
+             if any(x["selected_action_played"] is not True for x in sequence):
+                 raise ValueError("no action after discarded protected search row")
+-            prefix = start["root_prefix_uci"] + [x["selected_best_uci"] for x in sequence]
++            prefix = start["root_prefix_uci"] + [
++                x["selected_best_uci"] for x in sequence
++            ]
+             if (
+                 row["local_ply"] != len(sequence)
+                 or row["history_uci"] != prefix
+@@ -279,7 +329,8 @@
+             if (
+                 row["protected_search_aliases"] != sorted(set(vals) & protected)
+                 or type(row["selected_action_played"]) is not bool
+-                or row["selected_action_played"] != (not row["protected_search_aliases"])
++                or row["selected_action_played"]
++                != (not row["protected_search_aliases"])
+             ):
+                 raise ValueError("exact protected search witnesses/action played")
+             aliases.update(vals)
+@@ -308,7 +359,10 @@
+     for key, sequence in rows.items():
+         guard()
+         end = ends[key]
+-        hit = any(r["root_alias"] in protected or set(r["_aliases"]) & protected for r in sequence)
++        hit = any(
++            r["root_alias"] in protected or set(r["_aliases"]) & protected
++            for r in sequence
++        )
+         if sequence:
+             final = board_at(sequence[-1])
+             if sequence[-1]["selected_action_played"]:
+@@ -317,9 +371,12 @@
+             final = chess.Board(starts[key]["root_fen"])
+             for u in starts[key]["root_prefix_uci"]:
+                 final.push_uci(u)
+-        expected_final = dict(fen4=" ".join(final.fen().split()[:4]), alias=alias(final),
+-                              history_uci=[m.uci() for m in final.move_stack],
+-                              protected=alias(final) in protected)
++        expected_final = dict(
++            fen4=" ".join(final.fen().split()[:4]),
++            alias=alias(final),
++            history_uci=[m.uci() for m in final.move_stack],
++            protected=alias(final) in protected,
++        )
+         if end["final_state"] != expected_final:
+             raise ValueError("full exact final-board/history packet")
+         exposure.add(alias(final))
+@@ -330,7 +387,9 @@
+         if len(sequence) > 16 or type(eligible) is not bool:
+             raise ValueError("fixed ply cap/episode eligibility")
+         if hit != (status == "excluded-protected-trajectory"):
+-            raise ValueError("protected status must match actual path/evaluator witnesses")
++            raise ValueError(
++                "protected status must match actual path/evaluator witnesses"
++            )
+         if hit:
+             if eligible:
+                 raise ValueError("whole trajectory protected path/branch leakage")
+@@ -361,7 +420,9 @@
+                 dict(
+                     row_id=rid,
+                     history_sha256=hashlib.sha256(
+-                        canonical(dict(root_fen=r["root_fen"], prefix_uci=r["history_uci"]))
++                        canonical(
++                            dict(root_fen=r["root_fen"], prefix_uci=r["history_uci"])
++                        )
+                     ).hexdigest(),
+                     raw_q_mover=r["raw_q_mover"],
+                     target=r["clipped_q_mover"],
+@@ -371,18 +432,22 @@
+                     train_eligible=eligible,
+                 )
+             )
+-    expected_games = [dict(root_id=k, status=ends[k]["status"], rows=len(v))
+-                      for k, v in rows.items()]
+-    if (receipt["starts_considered"] != len(starts) or receipt["games"] != expected_games
+-            or receipt["exposed_board_alias_count"] != len(exposure)):
++    expected_games = [
++        dict(root_id=k, status=ends[k]["status"], rows=len(v)) for k, v in rows.items()
++    ]
++    if (
++        receipt["starts_considered"] != len(starts)
++        or receipt["games"] != expected_games
++        or receipt["exposed_board_alias_count"] != len(exposure)
++    ):
+         raise ValueError("all episode/exposure counts reconcile")
+     ids = receipt["training_row_ids"]
+     if (
+         len(ids) != 1024
+         or len(set(ids)) != 1024
+         or ids != list(selected)
+-        or receipt["periodic_independent_search_rows"] !=
+-        [ids[i] for i in (0, 204, 409, 614, 819, 1023)]
++        or receipt["periodic_independent_search_rows"]
++        != [ids[i] for i in (0, 204, 409, 614, 819, 1023)]
+         or receipt["all_actor_rows"] != sum(map(len, rows.values()))
+     ):
+         raise ValueError("exact all-row reconciliation/1024 eligible rows")
+@@ -397,18 +462,23 @@
+         + b"\n"
+     )
+     provenance = dict(
+-        schema="NNUE-own1024-converted-data-provenance-v1",
++        schema="NNUE-own1024-converted-data-provenance-v3",
+         inputs=spec,
+         seed=reg["seed"],
+         rows=1024,
+         dataset_sha256=hashlib.sha256(data).hexdigest(),
+         trace=trace,
+         teacher_labels_used=False,
+-        target=("clipped completed current-parent root-search mover Q; "
+-                "terminal WDL audited separately"),
+-        mate_score_semantics=("producer search mate-range score, "
+-                              "not an independent mate certificate"),
+-        initializer="named teacher candidate WEIGHTS only; newAdam/globalTorch/privateSampler",
++        target=(
++            "clipped completed current-parent root-search mover Q; "
++            "terminal WDL audited separately"
++        ),
++        mate_score_semantics=(
++            "producer search mate-range score, not an independent mate certificate"
++        ),
++        initializer="current own-parent WEIGHTS only; newAdam/globalTorch/privateSampler",
++        generation=reg["generation"],
++        parent_admission_result=reg["parent_admission_result"],
+         protected_scope="entire trajectory actual-path and traced static-evaluator aliases",
+         unique_search_aliases=len(aliases),
+         collection_receipt_sha256=spec["receipt"]["sha256"],
+@@ -424,9 +494,14 @@
+     a = p.parse_args()
+     spec = json.loads(a.seal.read_bytes())
+     first, end = spec["first"], spec["deadline"]
+-    if (spec["status"] != "registered" or not first <= time.time() < end
+-            <= min(first + 600, spec["operator_end_epoch"])
+-            or spec["operator_end_epoch"] > 1791448916.685839):
++    if (
++        spec["status"] != "registered"
++        or not first
++        <= time.time()
++        < end
++        <= min(first + 600, spec["operator_end_epoch"])
++        or spec["operator_end_epoch"] > 1791448916.685839
++    ):
+         raise ValueError("ROOT original600")
+     import shutil
+     import sys
+@@ -445,9 +520,9 @@
+ 
+     data, provenance = convert(spec, guard)
+     guard()
+-    if len(data) + len(provenance) > 96 * 2**20 or not a.output.resolve().is_relative_to(
+-        "/dev/shm"
+-    ):
++    if len(data) + len(
++        provenance
++    ) > 96 * 2**20 or not a.output.resolve().is_relative_to("/dev/shm"):
+         raise ValueError("RAM96MiB phase cap")
+     a.output.mkdir(parents=True, exist_ok=False)
+     for name, raw in [("dataset.json", data), ("provenance.json", provenance)]:
+--- /workspace/work/harbichess/continuation-20261007/nnue-own-training-v2/contracts.py
++++ NEW-v3/contracts.py
+@@ -1,4 +1,5 @@
+ """ROOT-clocked own64 contracts; cached original teacher admission, no optimizer step."""
++
+ import argparse
+ import hashlib
+ import json
+@@ -14,101 +15,162 @@
+ def clock(spec):
+     first, end, operator = spec["first"], spec["deadline"], spec["operator_end_epoch"]
+     cap = 600 if spec["mode"] == "proof" else 1800
+-    if (spec["mode"] not in ("proof", "fresh-fit")
+-            or any(type(x) not in (float, int) or not math.isfinite(x)
+-                   for x in (first, end, operator))
+-            or not first < end <= min(first + cap, operator)
+-            or operator > 1791448916.685839):
+-        raise ValueError("ROOT new prospective phase clocks; no historical clock mutation")
++    if (
++        spec["mode"] not in ("proof", "fresh-fit")
++        or any(
++            type(x) not in (float, int) or not math.isfinite(x)
++            for x in (first, end, operator)
++        )
++        or not first < end <= min(first + cap, operator)
++        or operator > 1791448916.685839
++    ):
++        raise ValueError(
++            "ROOT new prospective phase clocks; no historical clock mutation"
++        )
+ 
+ 
+ def build(spec):
+-    if spec["schema"] != "NNUE-own-contract-build-seal-v2" or spec["status"] != "registered":
++    if (
++        spec["schema"] != "NNUE-own-contract-build-seal-v3"
++        or spec["status"] != "registered"
++    ):
+         raise ValueError("ROOT immutable contract build seal")
+     clock(spec)
++    from specs import require_audits
++    require_audits(pinned(spec["collection_replay_audit_set"]),
++                   json.loads(pinned(spec["collection_registrations"]).read_bytes()))
+     data = pinned(spec["dataset"])
+     provenance_path = pinned(spec["provenance"])
+     provenance = json.loads(provenance_path.read_bytes())
+     rows = json.loads(data.read_bytes())
+-    if (rows["schema"] != "own-kingbucket-sparse-training-data-v1"
+-            or rows["phase"] != "own-learning" or len(rows["rows"]) != 1024
+-            or provenance["schema"] != "NNUE-own1024-converted-data-provenance-v1"
+-            or provenance["teacher_labels_used"] is not False
+-            or provenance["dataset_sha256"] != spec["dataset"]["sha256"]
+-            or provenance["seed"] != spec["seed"]):
++    if (
++        rows["schema"] != "own-kingbucket-sparse-training-data-v1"
++        or rows["phase"] != "own-learning"
++        or len(rows["rows"]) != 1024
++        or provenance["schema"] != "NNUE-own1024-converted-data-provenance-v3"
++        or provenance["teacher_labels_used"] is not False
++        or provenance["dataset_sha256"] != spec["dataset"]["sha256"]
++        or provenance["seed"] != spec["seed"]
++    ):
+         raise ValueError("strict1024 own-data and converted provenance")
+     pins_tree(provenance["inputs"])
+     conversion = provenance["inputs"]
+     receipt = json.loads(pinned(conversion["receipt"]).read_bytes())
+-    if receipt["parent_candidate_sha256"] != spec["teacher"]["candidate"]["sha256"]:
+-        raise ValueError("exact current teacher parent produces own targets")
++    from parent_bridge import validate_admission_result
++
++    parent_seal, parent_contract = validate_admission_result(
++        spec["parent_admission_seal"], spec["parent_admission_result"]
++    )
++    if receipt["parent_candidate_sha256"] != parent_seal["parent_candidate"]["sha256"]:
++        raise ValueError("exact current own-parent produces own targets")
+     sys.path.insert(0, str(HERE))
+-    native = module(dict(path=str(HERE / "native.py"), sha256=sha(HERE / "native.py")),
+-                    "own_contract_native")
+-    original_admission = module(spec["teacher_admission"], "cached_teacher_admission")
+-    _, _, teacher_proof = original_admission.teacher(spec["teacher"], native)
+-    parent_contract = json.loads(pinned(spec["teacher"]["contract"]).read_bytes())
++    native = module(
++        dict(path=str(HERE / "native.py"), sha256=sha(HERE / "native.py")),
++        "own_contract_native",
++    )
+     collection_reg = json.loads(pinned(conversion["registration"]).read_bytes())
+     parent_binding = collection_reg["parent_candidate"]
+-    expected_parent_contract_sha = hashlib.sha256(canonical(parent_contract)).hexdigest()
+-    if (parent_binding["contract_sha256"] != expected_parent_contract_sha
+-            or receipt["parent_contract_sha256"] != expected_parent_contract_sha
+-            or parent_binding["path"] != spec["teacher"]["candidate"]["path"]):
+-        raise ValueError("same full teacher contract produces own targets")
++    expected_parent_contract_sha = hashlib.sha256(
++        canonical(parent_contract)
++    ).hexdigest()
++    if (
++        parent_binding["contract_sha256"] != expected_parent_contract_sha
++        or receipt["parent_contract_sha256"] != expected_parent_contract_sha
++        or parent_binding["path"] != parent_seal["parent_candidate"]["path"]
++        or collection_reg["generation"] != parent_seal["generation"]
++        or collection_reg["parent_admission_result"] != spec["parent_admission_result"]
++    ):
++        raise ValueError("same full own-parent contract produces own targets")
+     if spec["seed"] != parent_contract["seed"]:
+-        raise ValueError("same named teacher seed")
++        raise ValueError("same named lineage seed")
+     inference = dict(parent_contract["inference_source_sha256"])
+     for path, h in inference.items():
+         pinned(dict(path=path, sha256=h))
+     own_proof = None
+     if spec["mode"] == "fresh-fit":
+         own_proof = json.loads(pinned(spec["own_proof_result"]).read_bytes())
+-        if (own_proof["status"] != "PASS-own-NNUE-fixed-phase-and-fresh-native-loads-not-strength"
+-                or own_proof["mode"] != "proof" or own_proof["own_updates"] != 8
+-                or own_proof["full_payload_bits_equal"] is not True
+-                or own_proof["weights_only_initializer"]["sha256"] !=
+-                spec["teacher"]["candidate"]["sha256"]
+-                or [x["step"] for x in own_proof["native_payloads"]] != [0, 8, 0, 4, 4, 8]
+-                or not own_proof["first"] < own_proof["finished"] < own_proof["deadline"]):
++        if (
++            own_proof["status"]
++            != "PASS-own-NNUE-fixed-phase-and-fresh-native-loads-not-strength"
++            or own_proof["mode"] != "proof"
++            or own_proof["own_updates"] != 8
++            or own_proof["full_payload_bits_equal"] is not True
++            or own_proof["weights_only_initializer"]["sha256"]
++            != parent_seal["parent_candidate"]["sha256"]
++            or [x["step"] for x in own_proof["native_payloads"]] != [0, 8, 0, 4, 4, 8]
++            or not own_proof["first"] < own_proof["finished"] < own_proof["deadline"]
++        ):
+             raise ValueError("actual own proof before production admission")
+         for item in own_proof["native_payloads"]:
+             pinned(item)
+             log = Path(item["log_path"])
+-            if json.loads(log.read_bytes()) != dict(status="PASS-strict-native-readonly",
+-                                                    step=item["step"]):
++            if json.loads(log.read_bytes()) != dict(
++                status="PASS-strict-native-readonly", step=item["step"]
++            ):
+                 raise ValueError("six actual own fresh-load results")
+         proof_contract = json.loads(pinned(spec["own_proof_contract"]).read_bytes())
+-        if (own_proof["contract_sha256"] != spec["own_proof_contract"]["sha256"]
+-                or proof_contract["dataset_sha256"] != sha(data)
+-                or proof_contract["bootstrap_candidate_sha256"] !=
+-                spec["teacher"]["candidate"]["sha256"]
+-                or proof_contract["seed"] != spec["seed"]
+-                or proof_contract["math"] != native.MATH):
++        if (
++            own_proof["contract_sha256"] != spec["own_proof_contract"]["sha256"]
++            or proof_contract["dataset_sha256"] != sha(data)
++            or proof_contract["bootstrap_candidate_sha256"]
++            != parent_seal["parent_candidate"]["sha256"]
++            or proof_contract["seed"] != spec["seed"]
++            or proof_contract["math"] != native.MATH
++        ):
+             raise ValueError("same-data same-parent actual own proof")
+         inference[spec["own_proof_result"]["path"]] = spec["own_proof_result"]["sha256"]
+-    source = {str(HERE / n): sha(HERE / n) for n in ("model.py", "native.py", "train.py")}
+-    helpers = {str(HERE / n): sha(HERE / n) for n in ("convert.py", "contracts.py", "prove.py")}
++    source = {
++        str(HERE / n): sha(HERE / n) for n in ("model.py", "native.py", "train.py")
++    }
++    helpers = {
++        str(HERE / n): sha(HERE / n)
++        for n in (
++            "convert.py",
++            "contracts.py",
++            "prove.py",
++            "parent_bridge.py",
++            "admit_parent.py",
++            "specs.py",
++            "audit_collection_six.py",
++        )
++    }
+     return dict(
+-        phase="own-learning", updates=64, seed=spec["seed"], math=native.MATH,
+-        feature_schema=parent_contract["feature_schema"], dataset_sha256=sha(data),
+-        source_sha256=source, execution_helpers_sha256=helpers,
+-        execution_scope_schema="NNUE-own-execution-contract-v2", execution_mode=spec["mode"],
+-        original_first_epoch=spec["first"], original_deadline_epoch=spec["deadline"],
++        phase="own-learning",
++        updates=64,
++        seed=spec["seed"],
++        math=native.MATH,
++        feature_schema=parent_contract["feature_schema"],
++        dataset_sha256=sha(data),
++        source_sha256=source,
++        execution_helpers_sha256=helpers,
++        execution_scope_schema="NNUE-own-execution-contract-v3",
++        generation=parent_seal["generation"],
++        parent_generation=parent_seal["generation"] - 1,
++        execution_mode=spec["mode"],
++        original_first_epoch=spec["first"],
++        original_deadline_epoch=spec["deadline"],
+         operator_end_epoch=spec["operator_end_epoch"],
+         core_source_repo=parent_contract["core_source_repo"],
+         core_source_commit=parent_contract["core_source_commit"],
+-        target_provenance_path=str(provenance_path), target_provenance_sha256=sha(provenance_path),
++        target_provenance_path=str(provenance_path),
++        target_provenance_sha256=sha(provenance_path),
+         prior_helper_path=parent_contract["prior_helper_path"],
+         prior_helper_sha256=parent_contract["prior_helper_sha256"],
+         inference_source_sha256=inference,
+-        bootstrap_candidate_path=str(pinned(spec["teacher"]["candidate"]).resolve()),
+-        bootstrap_candidate_sha256=spec["teacher"]["candidate"]["sha256"],
+-        weights_bridge="teacher MODEL weights only; NEW Adam/Python/Torch/private sampler RNG",
+-        teacher_ancestry=spec["teacher"], teacher_admission=spec["teacher_admission"],
+-        teacher_admission_result=teacher_proof, teacher_labels_used_in_own_phase=False,
++        bootstrap_candidate_path=str(pinned(parent_seal["parent_candidate"]).resolve()),
++        bootstrap_candidate_sha256=parent_seal["parent_candidate"]["sha256"],
++        weights_bridge="CURRENT OWN PARENT MODEL only; NEW Adam/Python/Torch/private sampler RNG",
++        parent_candidate=parent_seal["parent_candidate"],
++        parent_native=parent_seal["parent_native"],
++        parent_admission_seal=spec["parent_admission_seal"],
++        parent_admission_result=spec["parent_admission_result"],
++        parent_ancestry=parent_seal,
++        teacher_labels_used_in_own_phase=False,
+         own_phase_proof=spec.get("own_proof_result"),
+         collection_receipt_sha256=conversion["receipt"]["sha256"],
+-        raw_collection_inputs=conversion, contract_build_seal=spec)
++        raw_collection_inputs=conversion,
++        contract_build_seal=spec,
++    )
+ 
+ 
+ if __name__ == "__main__":
+--- /workspace/HarbiChess/experiments/ufuk/continuation-20261007/nnue-own-producer-v2/collector.py
++++ NEW-v3/collector.py
+@@ -1,9 +1,13 @@
+ """Deterministic current-parent own-play/Q collector; pure collection API."""
+-import hashlib, math, struct
++
++import hashlib
++import math
++import struct
+ from pathlib import Path
++
+ import chess
+ 
+-POOL = "teacher-selected-ownq-train-roots-v2"
++POOL = "own-generation-train-roots-v3"
+ ROWS, ROOTS, PLIES, NODES, QDEPTH, DEPTH = 1024, 128, 16, 8192, 2, 8
+ CHUNK = 8 * 2**20
+ 
+@@ -17,7 +21,9 @@
+ def replay(root):
+     if root.get("role") != "TRAIN" or root.get("root_fen") != chess.STARTING_FEN:
+         raise ValueError("full standard-start TRAIN history required")
+-    if not isinstance(root.get("root_id"), str) or not isinstance(root.get("prefix_uci"), list):
++    if not isinstance(root.get("root_id"), str) or not isinstance(
++        root.get("prefix_uci"), list
++    ):
+         raise ValueError("root ID/full UCI prefix required")
+     board = chess.Board()
+     for uci in root["prefix_uci"]:
+@@ -31,144 +37,290 @@
+ 
+ 
+ def starts(pool, seed, protected, n=ROOTS, pool_size=4096):
+-    if pool.get("schema") != POOL or pool.get("selection_status") != "pass" or pool.get("train_only") is not True:
++    if (
++        pool.get("schema") != POOL
++        or pool.get("selection_status") != "pass"
++        or pool.get("train_only") is not True
++    ):
+         raise ValueError("sealed TRAIN-only pool required")
+     rs = pool.get("rows")
+-    if (not isinstance(rs, list) or len(rs) != pool_size
+-            or not isinstance(pool.get("source_selection_sha256"), str)
+-            or len(pool["source_selection_sha256"]) != 64
+-            or not isinstance(pool.get("source_teacher_labels_sha256"), str)
+-            or len(pool["source_teacher_labels_sha256"]) != 64):
++    if (
++        not isinstance(rs, list)
++        or len(rs) != pool_size
++        or not isinstance(pool.get("source_selection_sha256"), str)
++        or len(pool["source_selection_sha256"]) != 64
++        or not isinstance(pool.get("ancestral_teacher_labels_sha256"), str)
++        or len(pool["ancestral_teacher_labels_sha256"]) != 64
++    ):
+         raise ValueError("fixed root pool count")
+     ids, histories, usable = set(), set(), []
+     for r in rs:
+         b = replay(r)
+-        h = hashlib.sha256((r["root_fen"] + "\n" + " ".join(r["prefix_uci"])).encode()).hexdigest()
+-        if (r["root_id"] in ids or h in histories
+-                or not isinstance(r.get("trajectory_id"), str)
+-                or not isinstance(r.get("source_row_id"), str)):
++        h = hashlib.sha256(
++            (r["root_fen"] + "\n" + " ".join(r["prefix_uci"])).encode()
++        ).hexdigest()
++        if (
++            r["root_id"] in ids
++            or h in histories
++            or not isinstance(r.get("trajectory_id"), str)
++            or not isinstance(r.get("source_row_id"), str)
++        ):
+             raise ValueError("duplicate root/history")
+-        ids.add(r["root_id"]); histories.add(h)
++        ids.add(r["root_id"])
++        histories.add(h)
+         if alias(b) not in protected:
+             usable.append(r)
+     if len(usable) < n:
+         raise ValueError("fixed pool exhausted; no validation/autofill")
+-    chosen = sorted(usable, key=lambda r: hashlib.sha256(
+-        f"own-nnue-ownq-start-v1|{seed}|{r['root_id']}".encode()).digest())[:n]
+-    return chosen, hashlib.sha256("\n".join(r["root_id"] for r in chosen).encode()).hexdigest()
++    chosen = sorted(
++        usable,
++        key=lambda r: hashlib.sha256(
++            f"own-nnue-ownq-start-v1|{seed}|{r['root_id']}".encode()
++        ).digest(),
++    )[:n]
++    return chosen, hashlib.sha256(
++        "\n".join(r["root_id"] for r in chosen).encode()
++    ).hexdigest()
+ 
+ 
+ class Traced:
+-    def __init__(self, fn): self.fn, self.seen, self.calls = fn, set(), 0
+-    def reset(self): self.seen.clear(); self.calls = 0
++    def __init__(self, fn):
++        self.fn, self.seen, self.calls = fn, set(), 0
++
++    def reset(self):
++        self.seen.clear()
++        self.calls = 0
++
+     def __call__(self, board):
+-        self.seen.add(alias(board)); self.calls += 1
++        self.seen.add(alias(board))
++        self.calls += 1
+         x = float(self.fn(board))
+-        if not math.isfinite(x) or abs(x) > 1: raise ValueError("static mover W-L range")
++        if not math.isfinite(x) or abs(x) > 1:
++            raise ValueError("static mover W-L range")
+         return x
+ 
+ 
+ def _label(rows, status, white_result=None):
+     for r in rows:
+         r["episode_status"] = status
+-        r["own_wdl_mover"] = None if white_result is None else (
+-            white_result if r["mover"] == "white" else -white_result)
+-        r["outcome_status"] = "UNKNOWN" if white_result is None else "known-own-terminal"
+-        r["train_eligible"] = white_result is not None or status != "excluded-protected-trajectory"
+-
+-
+-def collect(pool, *, seed, protected, factory, row_limit=ROWS, start_limit=ROOTS,
+-            plies=PLIES, pool_size=4096, guard=lambda: None, on_event=lambda _event: None):
++        r["own_wdl_mover"] = (
++            None
++            if white_result is None
++            else (white_result if r["mover"] == "white" else -white_result)
++        )
++        r["outcome_status"] = (
++            "UNKNOWN" if white_result is None else "known-own-terminal"
++        )
++        r["train_eligible"] = (
++            white_result is not None or status != "excluded-protected-trajectory"
++        )
++
++
++def collect(
++    pool,
++    *,
++    seed,
++    protected,
++    factory,
++    row_limit=ROWS,
++    start_limit=ROOTS,
++    plies=PLIES,
++    pool_size=4096,
++    guard=lambda: None,
++    on_event=lambda _event: None,
++):
+     roots, order_sha = starts(pool, seed, protected, start_limit, pool_size)
+     train, allrows, games, exposure = [], [], [], set()
+     for ordinal, root in enumerate(roots):
+-        guard(); board = replay(root); prefix = list(root["prefix_uci"])
++        guard()
++        board = replay(root)
++        prefix = list(root["prefix_uci"])
+         rows, was_protected = [], False
+-        on_event(dict(type="game_start", root_id=root["root_id"], root_ordinal=ordinal,
+-                      root_fen=root["root_fen"], root_prefix_uci=list(prefix),
+-                      root_alias=alias(board)))
+-        traced = Traced(factory.evaluator); search = factory.make(traced)
++        on_event(
++            dict(
++                type="game_start",
++                root_id=root["root_id"],
++                root_ordinal=ordinal,
++                root_fen=root["root_fen"],
++                root_prefix_uci=list(prefix),
++                root_alias=alias(board),
++            )
++        )
++        traced = Traced(factory.evaluator)
++        search = factory.make(traced)
+         status, white_result = "unknown-ply-cap", None
+         exposure.add(alias(board))
+         for ply in range(plies):
+             guard()
+             outcome = board.outcome(claim_draw=True)
+             if outcome:
+-                white_result = 0 if outcome.winner is None else (1 if outcome.winner else -1)
+-                status = "completed-own-terminal"; break
+-            root_alias = alias(board); exposure.add(root_alias)
++                white_result = (
++                    0 if outcome.winner is None else (1 if outcome.winner else -1)
++                )
++                status = "completed-own-terminal"
++                break
++            root_alias = alias(board)
++            exposure.add(root_alias)
+             if root_alias in protected:
+-                was_protected = True; status = "excluded-protected-trajectory"; break
+-            traced.reset(); result = search.search(board)
++                was_protected = True
++                status = "excluded-protected-trajectory"
++                break
++            traced.reset()
++            result = search.search(board)
+             legal = board.legal_moves.count()
+             if result.move is None or result.move not in board.legal_moves:
+                 raise ValueError("selected best move illegal")
+-            if (result.nodes < result.root_actions + 1 or result.nodes > NODES
+-                    or result.root_actions != legal or result.evaluations != traced.calls):
++            if (
++                result.nodes < result.root_actions + 1
++                or result.nodes > NODES
++                or result.root_actions != legal
++                or result.evaluations != traced.calls
++            ):
+                 raise ValueError("search/root/evaluation accounting")
+             q = float(result.value)
+-            if not math.isfinite(q) or abs(q) > 2: raise ValueError("mover Q range")
++            if not math.isfinite(q) or abs(q) > 2:
++                raise ValueError("mover Q range")
+             protected_hits = sorted(traced.seen & protected)
+-            r = dict(root_id=root["root_id"], root_ordinal=ordinal, root_fen=root["root_fen"],
+-                root_prefix_uci=list(root["prefix_uci"]), local_ply=ply, history_uci=prefix.copy(),
+-                fen4=" ".join(board.fen().split()[:4]), mover="white" if board.turn else "black",
+-                root_alias=root_alias, raw_q_mover=q, clipped_q_mover=max(-1., min(1., q)),
+-                mate_range_score_returned=abs(q) > 1, selected_best_uci=result.move.uci(),
+-                nodes=result.nodes, evaluations=result.evaluations, completed_depth=result.completed_depth,
+-                root_actions=result.root_actions, actual_eval_calls=traced.calls,
+-                eval_aliases=sorted(traced.seen), protected_search_aliases=protected_hits,
++            r = dict(
++                root_id=root["root_id"],
++                root_ordinal=ordinal,
++                root_fen=root["root_fen"],
++                root_prefix_uci=list(root["prefix_uci"]),
++                local_ply=ply,
++                history_uci=prefix.copy(),
++                fen4=" ".join(board.fen().split()[:4]),
++                mover="white" if board.turn else "black",
++                root_alias=root_alias,
++                raw_q_mover=q,
++                clipped_q_mover=max(-1.0, min(1.0, q)),
++                mate_range_score_returned=abs(q) > 1,
++                selected_best_uci=result.move.uci(),
++                nodes=result.nodes,
++                evaluations=result.evaluations,
++                completed_depth=result.completed_depth,
++                root_actions=result.root_actions,
++                actual_eval_calls=traced.calls,
++                eval_aliases=sorted(traced.seen),
++                protected_search_aliases=protected_hits,
+                 selected_action_played=not protected_hits,
+                 behavior_policy_available=False,
+-                label_source="own-frozen-parent-search", train_eligible=False)
+-            rows.append(r); allrows.append(r); exposure.update(traced.seen)
++                label_source="own-frozen-parent-search",
++                train_eligible=False,
++            )
++            rows.append(r)
++            allrows.append(r)
++            exposure.update(traced.seen)
+             on_event(dict(type="search_row", row=dict(r)))
+             if r["protected_search_aliases"]:
+-                was_protected = True; status = "excluded-protected-trajectory"; break
+-            board.push(result.move); prefix.append(result.move.uci())
+-            next_alias = alias(board); exposure.add(next_alias)
++                was_protected = True
++                status = "excluded-protected-trajectory"
++                break
++            board.push(result.move)
++            prefix.append(result.move.uci())
++            next_alias = alias(board)
++            exposure.add(next_alias)
+             if next_alias in protected:
+-                was_protected = True; status = "excluded-protected-trajectory"; break
++                was_protected = True
++                status = "excluded-protected-trajectory"
++                break
+             outcome = board.outcome(claim_draw=True)
+             if outcome:
+-                white_result = 0 if outcome.winner is None else (1 if outcome.winner else -1)
+-                status = "completed-own-terminal"; break
++                white_result = (
++                    0 if outcome.winner is None else (1 if outcome.winner else -1)
++                )
++                status = "completed-own-terminal"
++                break
+             if len(train) + len(rows) >= row_limit:
+-                status = "unknown-row-budget-prefix"; break
+-        final = dict(fen4=" ".join(board.fen().split()[:4]), alias=alias(board),
+-                     history_uci=prefix.copy(), protected=alias(board) in protected)
++                status = "unknown-row-budget-prefix"
++                break
++        final = dict(
++            fen4=" ".join(board.fen().split()[:4]),
++            alias=alias(board),
++            history_uci=prefix.copy(),
++            protected=alias(board) in protected,
++        )
+         exposure.add(final["alias"])
+         if was_protected:
+-            _label(rows, status); games.append(dict(root_id=root["root_id"], status=status, rows=len(rows)))
+-            on_event(dict(type="game_end", root_id=root["root_id"], status=status,
+-                          final_state=final, training_eligible=False,
+-                          row_labels=[r["own_wdl_mover"] for r in rows]))
++            _label(rows, status)
++            games.append(dict(root_id=root["root_id"], status=status, rows=len(rows)))
++            on_event(
++                dict(
++                    type="game_end",
++                    root_id=root["root_id"],
++                    status=status,
++                    final_state=final,
++                    training_eligible=False,
++                    row_labels=[r["own_wdl_mover"] for r in rows],
++                )
++            )
+             continue
+-        _label(rows, status, white_result); train.extend(rows)
++        _label(rows, status, white_result)
++        train.extend(rows)
+         games.append(dict(root_id=root["root_id"], status=status, rows=len(rows)))
+-        on_event(dict(type="game_end", root_id=root["root_id"], status=status,
+-                      final_state=final, training_eligible=True,
+-                      row_labels=[r["own_wdl_mover"] for r in rows]))
++        on_event(
++            dict(
++                type="game_end",
++                root_id=root["root_id"],
++                status=status,
++                final_state=final,
++                training_eligible=True,
++                row_labels=[r["own_wdl_mover"] for r in rows],
++            )
++        )
+         if len(train) == row_limit:
+-            return dict(schema="own-nnue-ownq-labels-v2", seed=seed,
+-                selected_root_order_sha256=order_sha, rows=allrows,
+-                training_row_ids=[r["root_id"] + ":" + str(r["local_ply"]) for r in train],
+-                games=games, exposed_piece_aliases=sorted(exposure), starts_considered=ordinal+1,
++            return dict(
++                schema="own-nnue-ownq-labels-v3",
++                seed=seed,
++                selected_root_order_sha256=order_sha,
++                rows=allrows,
++                training_row_ids=[
++                    r["root_id"] + ":" + str(r["local_ply"]) for r in train
++                ],
++                games=games,
++                exposed_piece_aliases=sorted(exposure),
++                starts_considered=ordinal + 1,
+                 target_source="own-search; own WDL only for completed episodes",
+-                teacher_labels_used=False, status="PASS-exact-row-budget")
+-        if len(train) > row_limit: raise ValueError("row budget overshoot")
++                teacher_labels_used=False,
++                status="PASS-exact-row-budget",
++            )
++        if len(train) > row_limit:
++            raise ValueError("row budget overshoot")
+     raise ValueError("fixed root pool exhausted before exact row budget")
+ 
+ 
+ class AliasWriter:
+     """Sorted unique int64 search-input aliases; each binary file <=8MiB."""
+-    def __init__(self, directory): self.d=Path(directory); self.i=0; self.used=0; self.f=None; self.name=None
++
++    def __init__(self, directory):
++        self.d = Path(directory)
++        self.i = 0
++        self.used = 0
++        self.f = None
++        self.name = None
++
+     def append(self, vals):
+-        vals=sorted(set(vals)); raw=struct.pack(f"<{len(vals)}q",*vals) if vals else b""
+-        if len(raw)>CHUNK: raise ValueError("one alias row exceeds chunk cap")
+-        if self.f is None or self.used+len(raw)>CHUNK:
+-            if self.f: self.f.flush(); self.f.close(); self.i+=1
+-            self.name=f"search-aliases-{self.i:04d}.bin"; self.f=(self.d/self.name).open("xb"); self.used=0
+-        ref=dict(file=self.name,offset_bytes=self.used,count=len(vals)); self.f.write(raw); self.f.flush(); __import__("os").fsync(self.f.fileno()); self.used+=len(raw)
++        vals = sorted(set(vals))
++        raw = struct.pack(f"<{len(vals)}q", *vals) if vals else b""
++        if len(raw) > CHUNK:
++            raise ValueError("one alias row exceeds chunk cap")
++        if self.f is None or self.used + len(raw) > CHUNK:
++            if self.f:
++                self.f.flush()
++                self.f.close()
++                self.i += 1
++            self.name = f"search-aliases-{self.i:04d}.bin"
++            self.f = (self.d / self.name).open("xb")
++            self.used = 0
++        ref = dict(file=self.name, offset_bytes=self.used, count=len(vals))
++        self.f.write(raw)
++        self.f.flush()
++        __import__("os").fsync(self.f.fileno())
++        self.used += len(raw)
+         return ref
++
+     def close(self):
+-        if self.f: self.f.flush(); __import__("os").fsync(self.f.fileno()); self.f.close(); self.f=None
++        if self.f:
++            self.f.flush()
++            __import__("os").fsync(self.f.fileno())
++            self.f.close()
++            self.f = None
+--- /workspace/HarbiChess/experiments/ufuk/continuation-20261007/nnue-own-producer-v2/run_collection.py
++++ NEW-v3/run_collection.py
+@@ -1,138 +1,272 @@
+ """ROOT-registered producer only. This code does not train or call Stockfish."""
+-import argparse, hashlib, importlib.util, json, os, shutil, subprocess, sys, time
++
++import argparse
++import hashlib
++import importlib.util
++import json
++import os
++import shutil
++import subprocess
++import sys
++import time
+ from pathlib import Path
+ from types import SimpleNamespace
++
+ import torch
+ from collector import AliasWriter, collect
+ 
+-HARD_MAX_SECONDS=7200
+-OUTPUT_MAX=128*2**20
+-
+-def sha(p): return hashlib.sha256(Path(p).read_bytes()).hexdigest()
+-def canon(x): return json.dumps(x,sort_keys=True,separators=(",",":"),allow_nan=False).encode()
++HARD_MAX_SECONDS = 7200
++OUTPUT_MAX = 128 * 2**20
++
++
++def sha(p):
++    return hashlib.sha256(Path(p).read_bytes()).hexdigest()
++
++
++def canon(x):
++    return json.dumps(
++        x, sort_keys=True, separators=(",", ":"), allow_nan=False
++    ).encode()
++
++
+ def load(path, digest, name):
+-    path=Path(path).resolve()
+-    if sha(path)!=digest: raise ValueError("pinned helper SHA differs: "+path.name)
+-    spec=importlib.util.spec_from_file_location(name,path); mod=importlib.util.module_from_spec(spec)
+-    sys.modules[name]=mod; spec.loader.exec_module(mod)
+-    if Path(mod.__file__).resolve()!=path: raise ValueError("helper origin differs")
++    path = Path(path).resolve()
++    if sha(path) != digest:
++        raise ValueError("pinned helper SHA differs: " + path.name)
++    spec = importlib.util.spec_from_file_location(name, path)
++    mod = importlib.util.module_from_spec(spec)
++    sys.modules[name] = mod
++    spec.loader.exec_module(mod)
++    if Path(mod.__file__).resolve() != path:
++        raise ValueError("helper origin differs")
+     return mod
+ 
++
+ def parent(reg):
+-    h=reg["parent_helpers"]; d=Path(h["directory"]).resolve()
+-    sys.path.insert(0,str(d)); sys.modules.pop("model",None); sys.modules.pop("native",None)
+-    m=load(d/"model.py",h["model_sha256"],"model")
+-    n=load(d/"native.py",h["native_sha256"],"native")
+-    prior_mod=load(h["prior_path"],h["prior_sha256"],"ownq_prior")
+-    ext=load(h["extension_path"],h["extension_sha256"],"_kingbucket16")
+-    e=load(d/"evaluator.py",h["evaluator_sha256"],"ownq_evaluator")
+-    row=reg["parent_candidate"]; p=Path(row["path"]).resolve()
+-    if p != Path(f"/dev/shm/harbichess-NNUE-teacher-fit-v1/{reg['seed']}/whole/candidate.pt"):
+-        raise ValueError("exact future frozen teacher-parent path required")
+-    if p.stat().st_size>32*2**20 or sha(p)!=row["sha256"]: raise ValueError("parent file hash/size")
+-    packet=torch.load(p,map_location="cpu",weights_only=False)
+-    if set(packet)!={"schema","contract","model"} or packet["schema"]!=m.MODEL_SCHEMA:
+-        raise ValueError("parent candidate schema")
+-    c=packet["contract"]
+-    if (hashlib.sha256(canon(c)).hexdigest()!=row["contract_sha256"]
+-        or c.get("phase")!="teacher-bootstrap" or c.get("updates")!=256
+-        or c.get("seed")!=reg["seed"] or c.get("feature_schema")!=m.FEATURE_SCHEMA
+-        or c.get("prior_helper_sha256")!=h["prior_sha256"]):
+-        raise ValueError("exact same-seed teacher-once parent contract")
++    h = reg["parent_helpers"]
++    d = Path(h["directory"]).resolve()
++    sys.path.insert(0, str(d))
++    sys.modules.pop("model", None)
++    sys.modules.pop("native", None)
++    m = load(d / "model.py", h["model_sha256"], "model")
++    n = load(d / "native.py", h["native_sha256"], "native")
++    prior_mod = load(h["prior_path"], h["prior_sha256"], "ownq_prior")
++    ext = load(h["extension_path"], h["extension_sha256"], "_kingbucket16")
++    e = load(d / "evaluator.py", h["evaluator_sha256"], "ownq_evaluator")
++    from parent_bridge import admitted_candidate
++
++    packet = admitted_candidate(
++        reg["parent_admission_seal"], reg["parent_admission_result"], torch
++    )
++    c = packet["contract"]
++    if (
++        c["seed"] != reg["seed"]
++        or reg["generation"] != c.get("generation", 1) + 1
++        or c["feature_schema"] != m.FEATURE_SCHEMA
++        or c["prior_helper_sha256"] != h["prior_sha256"]
++        or hashlib.sha256(canon(c)).hexdigest()
++        != reg["parent_candidate"]["contract_sha256"]
++    ):
++        raise ValueError("exact admitted current own-parent and unchanged model/prior")
+     n.validate_weights(packet["model"])
+-    prior=e.AuthoritativePrior(prior_mod,prior_mod.ClassicalValue())
+-    return e.Evaluator(packet["model"],prior=prior,compiled=ext)
++    prior = e.AuthoritativePrior(prior_mod, prior_mod.ClassicalValue())
++    return e.Evaluator(packet["model"], prior=prior, compiled=ext)
++
+ 
+ def execute(path):
+-    path=Path(path).resolve()
+-    reg=json.loads(Path(path).read_bytes())
+-    if reg.get("schema")!="own-nnue-ownq-collection-registration-v2" or reg.get("status")!="registered":
++    path = Path(path).resolve()
++    reg = json.loads(Path(path).read_bytes())
++    if (
++        reg.get("schema") != "own-nnue-ownq-collection-registration-v3"
++        or reg.get("status") != "registered"
++    ):
+         raise ValueError("ROOT immutable registration required")
+-    if reg.get("seed") not in (20262905,20262906) or reg.get("search")!={"nodes":8192,"qdepth":2,"max_depth":8}:
++    if reg.get("seed") not in (20262905, 20262906) or reg.get("search") != {
++        "nodes": 8192,
++        "qdepth": 2,
++        "max_depth": 8,
++    }:
+         raise ValueError("fixed seed/search contract")
+-    if (reg.get("row_limit"),reg.get("root_limit"),reg.get("plies_per_root"))!=(1024,128,16):
++    if (reg.get("row_limit"), reg.get("root_limit"), reg.get("plies_per_root")) != (
++        1024,
++        128,
++        16,
++    ):
+         raise ValueError("fixed collection budget")
+-    for name in ("collector.py","run_collection.py","metadata_factory.py"):
+-        if sha(Path(__file__).with_name(name))!=reg["producer_source_sha256"][name]:
++    for name in ("collector.py", "run_collection.py", "metadata_factory.py"):
++        if sha(Path(__file__).with_name(name)) != reg["producer_source_sha256"][name]:
+             raise ValueError("registered producer source differs")
+-    first,end,op_end=(reg[k] for k in ("original_first_epoch","original_deadline_epoch","operator_end_epoch"))
+-    if (not first<=time.time()<end<=op_end or end-first>HARD_MAX_SECONDS
+-            or reg.get("output_path")!=f"/dev/shm/harbichess-ownq-v2/{reg['seed']}"):
++    for path, digest in reg["generation_helper_sha256"].items():
++        if sha(path) != digest:
++            raise ValueError("generation helper changed")
++    first, end, op_end = (
++        reg[k]
++        for k in (
++            "original_first_epoch",
++            "original_deadline_epoch",
++            "operator_end_epoch",
++        )
++    )
++    if (
++        not first <= time.time() < end <= op_end
++        or end - first > HARD_MAX_SECONDS
++        or reg.get("output_path")
++        != f"/dev/shm/harbichess-ownq-v3/g-{reg['generation']}/{reg['seed']}"
++    ):
+         raise TimeoutError("ROOT observed phase/operator clock/output path")
+-    core=Path(reg["core_repo"]).resolve()
+-    if subprocess.check_output(["git","rev-parse","HEAD"],cwd=core,text=True).strip()!=reg["core_commit"] or subprocess.check_output(["git","status","--porcelain"],cwd=core,text=True):
++    core = Path(reg["core_repo"]).resolve()
++    if subprocess.check_output(
++        ["git", "rev-parse", "HEAD"], cwd=core, text=True
++    ).strip() != reg["core_commit"] or subprocess.check_output(
++        ["git", "status", "--porcelain"], cwd=core, text=True
++    ):
+         raise ValueError("clean core pin")
+-    os.sched_setaffinity(0,{reg["cpu_core"]}); torch.set_num_threads(1)
+-    sys.path.insert(0,str(core/"src"))
++    os.sched_setaffinity(0, {reg["cpu_core"]})
++    torch.set_num_threads(1)
++    sys.path.insert(0, str(core / "src"))
+     from harbichess.training.cgroup_budget import CgroupMemoryBudget
+-    budget=CgroupMemoryBudget(15*2**30); root=Path(reg["root_pool"]["path"])
+-    protected_path=Path(reg["protected_aliases"]["path"]); out=Path(reg["output_path"]).resolve()
+-    if not out.is_relative_to(Path("/dev/shm/harbichess-ownq-v2")) or out.exists(): raise ValueError("publish-once RAM output")
+-    if sha(root)!=reg["root_pool"]["sha256"] or root.stat().st_size>8*2**20: raise ValueError("4096-root pool pin/size")
+-    if (sha(protected_path)!=reg["protected_aliases"]["sha256"] or protected_path.stat().st_size%8
+-            or protected_path.stat().st_size>256*2**20): raise ValueError("protected projection input")
++
++    budget = CgroupMemoryBudget(15 * 2**30)
++    root = Path(reg["root_pool"]["path"])
++    protected_path = Path(reg["protected_aliases"]["path"])
++    out = Path(reg["output_path"]).resolve()
++    if not out.is_relative_to(Path("/dev/shm/harbichess-ownq-v3")) or out.exists():
++        raise ValueError("publish-once RAM output")
++    if sha(root) != reg["root_pool"]["sha256"] or root.stat().st_size > 8 * 2**20:
++        raise ValueError("4096-root pool pin/size")
++    if (
++        sha(protected_path) != reg["protected_aliases"]["sha256"]
++        or protected_path.stat().st_size % 8
++        or protected_path.stat().st_size > 256 * 2**20
++    ):
++        raise ValueError("protected projection input")
+     import struct
+-    packed=protected_path.read_bytes(); values=list(struct.unpack(f"<{len(packed)//8}q",packed))
+-    if values!=sorted(set(values)): raise ValueError("protected alias canonical encoding")
++
++    packed = protected_path.read_bytes()
++    values = list(struct.unpack(f"<{len(packed) // 8}q", packed))
++    if values != sorted(set(values)):
++        raise ValueError("protected alias canonical encoding")
++
+     def guard():
+         budget.check()
+-        if shutil.disk_usage("/workspace").free<256*2**20: raise RuntimeError("workspace disk floor")
+-        if time.time()>=end or time.time()>=op_end: raise TimeoutError("original collection/operator clock")
++        if shutil.disk_usage("/workspace").free < 256 * 2**20:
++            raise RuntimeError("workspace disk floor")
++        if time.time() >= end or time.time() >= op_end:
++            raise TimeoutError("original collection/operator clock")
++
+     guard()
+-    out.mkdir(parents=True,exist_ok=False); log=(out/"events.jsonl").open("xb"); aliases=AliasWriter(out)
++    out.mkdir(parents=True, exist_ok=False)
++    log = (out / "events.jsonl").open("xb")
++    aliases = AliasWriter(out)
++
+     def emit(event, check=True):
+-        if event["type"]=="search_row":
+-            event["row"]["search_alias_ref"]=aliases.append(event["row"].pop("eval_aliases"))
+-        log.write(canon(event)+b"\n"); log.flush(); os.fsync(log.fileno())
+-        if sum(p.stat().st_size for p in out.iterdir() if p.is_file())>OUTPUT_MAX:
++        if event["type"] == "search_row":
++            event["row"]["search_alias_ref"] = aliases.append(
++                event["row"].pop("eval_aliases")
++            )
++        log.write(canon(event) + b"\n")
++        log.flush()
++        os.fsync(log.fileno())
++        if sum(p.stat().st_size for p in out.iterdir() if p.is_file()) > OUTPUT_MAX:
+             raise RuntimeError("registered RAM artifact ceiling128MiB")
+-        if check: guard()
++        if check:
++            guard()
++
+     try:
+-        search=load(reg["search_helper"]["path"],reg["search_helper"]["sha256"],"ownq_search")
+-        value=parent(reg)
+-        factory=SimpleNamespace(evaluator=value.nonterminal,
+-            make=lambda fn:search.BudgetSearch(fn,nodes=8192,quiescence_plies=2,max_depth=8,guard=guard))
+-        pool=json.loads(root.read_bytes())
+-        result=collect(pool,seed=reg["seed"],protected=set(values),factory=factory,guard=guard,on_event=emit)
++        search = load(
++            reg["search_helper"]["path"], reg["search_helper"]["sha256"], "ownq_search"
++        )
++        value = parent(reg)
++        factory = SimpleNamespace(
++            evaluator=value.nonterminal,
++            make=lambda fn: search.BudgetSearch(
++                fn, nodes=8192, quiescence_plies=2, max_depth=8, guard=guard
++            ),
++        )
++        pool = json.loads(root.read_bytes())
++        result = collect(
++            pool,
++            seed=reg["seed"],
++            protected=set(values),
++            factory=factory,
++            guard=guard,
++            on_event=emit,
++        )
+         aliases.close()
+-        audit_ids=[result["training_row_ids"][i] for i in (0,204,409,614,819,1023)]
+-        chunks=[{"file":p.name,"bytes":p.stat().st_size,"sha256":sha(p)}
+-                for p in sorted(out.glob("search-aliases-*.bin"))]
+-        log.flush(); os.fsync(log.fileno())
+-        receipt={"schema":"own-nnue-ownq-collection-receipt-v2","status":result["status"],
+-            "seed":reg["seed"],"registration_sha256":sha(path),
+-            "parent_candidate_sha256":reg["parent_candidate"]["sha256"],
+-            "parent_contract_sha256":reg["parent_candidate"]["contract_sha256"],
+-            "parent_helpers":reg["parent_helpers"],
+-            "teacher_admission":reg["teacher_admission"],
+-            "search_helper_sha256":reg["search_helper"]["sha256"],
+-            "root_pool_sha256":reg["root_pool"]["sha256"],"protected_aliases_sha256":reg["protected_aliases"]["sha256"],
+-            "teacher_selection_path":reg["root_pool"]["selection_path"],
+-            "teacher_selection_sha256":reg["root_pool"]["selection_sha256"],
+-            "teacher_labels_path":reg["root_pool"]["teacher_labels_path"],
+-            "teacher_labels_sha256":reg["root_pool"]["teacher_labels_sha256"],
+-            "source_selection_sha256":reg["root_pool"]["selection_sha256"],
+-            "source_teacher_labels_sha256":reg["root_pool"]["teacher_labels_sha256"],
+-            "selected_root_order_sha256":result["selected_root_order_sha256"],"train_rows":len(result["training_row_ids"]),
+-            "all_actor_rows":len(result["rows"]),"starts_considered":result["starts_considered"],
+-            "training_row_ids":result["training_row_ids"],"periodic_independent_search_rows":audit_ids,
+-            "games":result["games"],"unique_exposure_aliases":len(result["exposed_piece_aliases"]),
+-            "alias_chunks":chunks,"events_bytes":(out/"events.jsonl").stat().st_size,
+-            "events_sha256":sha(out/"events.jsonl"),
+-            "search":reg["search"],"teacher_labels_used":False,"target_source":result["target_source"],
+-            "original_first_epoch":first,"original_deadline_epoch":end,
+-            "operator_end_epoch":op_end,"finished_epoch":time.time(),
+-            "producer_source_sha256":reg["producer_source_sha256"],
+-            "exposed_board_alias_count":len(result["exposed_piece_aliases"]),
+-            "exposure_definition":"all path boards plus actual static evaluator inputs; per-row evaluator aliases in sorted-unique sidecars"}
++        audit_ids = [
++            result["training_row_ids"][i] for i in (0, 204, 409, 614, 819, 1023)
++        ]
++        chunks = [
++            {"file": p.name, "bytes": p.stat().st_size, "sha256": sha(p)}
++            for p in sorted(out.glob("search-aliases-*.bin"))
++        ]
++        log.flush()
++        os.fsync(log.fileno())
++        receipt = {
++            "schema": "own-nnue-ownq-collection-receipt-v3",
++            "status": result["status"],
++            "seed": reg["seed"],
++            "registration_sha256": sha(path),
++            "parent_candidate_sha256": reg["parent_candidate"]["sha256"],
++            "parent_contract_sha256": reg["parent_candidate"]["contract_sha256"],
++            "parent_helpers": reg["parent_helpers"],
++            "parent_admission_result": reg["parent_admission_result"],
++            "parent_admission_seal": reg["parent_admission_seal"],
++            "generation": reg["generation"],
++            "search_helper_sha256": reg["search_helper"]["sha256"],
++            "root_pool_sha256": reg["root_pool"]["sha256"],
++            "protected_aliases_sha256": reg["protected_aliases"]["sha256"],
++            "ancestral_selection_path": reg["root_pool"]["selection_path"],
++            "ancestral_selection_sha256": reg["root_pool"]["selection_sha256"],
++            "ancestral_teacher_labels_sha256": reg["root_pool"][
++                "ancestral_teacher_labels_sha256"
++            ],
++            "source_selection_sha256": reg["root_pool"]["selection_sha256"],
++            "source_ancestral_teacher_labels_sha256": reg["root_pool"][
++                "ancestral_teacher_labels_sha256"
++            ],
++            "selected_root_order_sha256": result["selected_root_order_sha256"],
++            "train_rows": len(result["training_row_ids"]),
++            "all_actor_rows": len(result["rows"]),
++            "starts_considered": result["starts_considered"],
++            "training_row_ids": result["training_row_ids"],
++            "periodic_independent_search_rows": audit_ids,
++            "games": result["games"],
++            "unique_exposure_aliases": len(result["exposed_piece_aliases"]),
++            "alias_chunks": chunks,
++            "events_bytes": (out / "events.jsonl").stat().st_size,
++            "events_sha256": sha(out / "events.jsonl"),
++            "search": reg["search"],
++            "teacher_labels_used": False,
++            "target_source": result["target_source"],
++            "original_first_epoch": first,
++            "original_deadline_epoch": end,
++            "operator_end_epoch": op_end,
++            "finished_epoch": time.time(),
++            "producer_source_sha256": reg["producer_source_sha256"],
++            "generation_helper_sha256":reg["generation_helper_sha256"],
++            "exposed_board_alias_count": len(result["exposed_piece_aliases"]),
++            "exposure_definition": ("all path boards plus actual static evaluator inputs; "
++                    "per-row evaluator aliases in sorted-unique sidecars"),
++        }
+         guard()
+-        with (out/"receipt.json").open("xb") as f:
+-            f.write(canon(receipt)+b"\n"); f.flush(); os.fsync(f.fileno())
++        with (out / "receipt.json").open("xb") as f:
++            f.write(canon(receipt) + b"\n")
++            f.flush()
++            os.fsync(f.fileno())
+     except BaseException as exc:
+-        aliases.close(); emit({"type":"producer-failure","error":repr(exc),"time":time.time()},False); raise
++        aliases.close()
++        emit(
++            {"type": "producer-failure", "error": repr(exc), "time": time.time()}, False
++        )
++        raise
+     finally:
+-        log.flush(); os.fsync(log.fileno()); log.close()
+-
+-if __name__=="__main__":
+-    p=argparse.ArgumentParser(description=__doc__); p.add_argument("--registration",required=True,type=Path)
++        log.flush()
++        os.fsync(log.fileno())
++        log.close()
++
++
++if __name__ == "__main__":
++    p = argparse.ArgumentParser(description=__doc__)
++    p.add_argument("--registration", required=True, type=Path)
+     execute(p.parse_args().registration)
+--- /workspace/HarbiChess/experiments/ufuk/continuation-20261007/nnue-own-producer-v2/metadata_factory.py
++++ NEW-v3/metadata_factory.py
+@@ -1,162 +1,149 @@
+-"""Metadata-only, fail-closed NNUE own-search registration builder; never loads weights."""
+-import argparse, hashlib, json, struct, subprocess, time
++"""Pure versioned current-own-parent collection registration; no model calls."""
++
++import argparse
++import json
++import time
+ from pathlib import Path
+-import chess
+ 
+-HERE=Path(__file__).resolve().parent
+-ROOT=Path('/workspace/HarbiChess/experiments/ufuk')
+-SEEDS=(20262905,20262906)
+-CORE='/workspace/work/harbichess/cpu-additive-source-6fcc8b4'
+-COMMIT='6fcc8b476d25495d1c9c413e55b2c7ba4794013e'
+-PROFILE=ROOT/'wrap-20261006/NNUE-teacher-trained-profile-v2.json'
+-PROFILE_SHA='daface422c690e1e989599fb8378317c9bf37f2d773ee5977e08a7f8273179d9'
+-PARENT=ROOT/'cpu-nnue16-v1'
+-EXT=Path('/workspace/work/harbichess/cpu-kingbucket-nnue-proposal/_kingbucket16.cpython-312-x86_64-linux-gnu.so')
+-SEARCH=ROOT/'cpu-budget-search-v1/search.py'
+-SEARCH_SHA='de53c14728a67b7772f18b396ac8ef5c35a144d4e4e616fec40099cd461a6670'
+-LABELDIR=Path('/dev/shm/harbichess-NNUE-teacher8192-v1')
+-LINEAGE={20262905:('b73cd739fb0b357e6c57f26452ddec229f2f886936a534b467e4bc8e100024b9',
+-  '/workspace/work/harbichess/continuation-20261005/own-deeper-action-v1-registration/20262905-registration.json'),
+- 20262906:('e4bdb4cc6da1a3688cc6d1f1394cfe786c66c55e3479868f30733240fc9b30bf',
+-  '/workspace/work/harbichess/continuation-20261005/own-deeper-action-v1-registration/20262906-registration.json')}
++from parent_bridge import canonical, pinned, sha, validate_admission_result
++
++HERE = Path(__file__).resolve().parent
++END = 1791448916.685839
++SEARCH_SHA = "de53c14728a67b7772f18b396ac8ef5c35a144d4e4e616fec40099cd461a6670"
+ 
+ 
+-def sha(path): return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+-def canon(obj): return json.dumps(obj,sort_keys=True,separators=(',',':'),allow_nan=False).encode()
+-def hex64(s): return isinstance(s,str) and len(s)==64 and all(c in '0123456789abcdef' for c in s)
+-def write_once(path,data):
+-    path=Path(path); path.parent.mkdir(parents=True,exist_ok=True)
+-    with path.open('xb') as f: f.write(data); f.flush(); __import__('os').fsync(f.fileno())
+-def exact_once(path,data):
+-    path=Path(path)
+-    if path.exists():
+-        if path.read_bytes()!=data: raise ValueError('existing immutable pool bytes differ')
+-    else: write_once(path,data)
+-def project_selection(seed, selection, labels):
+-    selection=Path(selection); labels=Path(labels)
+-    expected=LABELDIR/str(seed)
+-    if selection.resolve()!=expected/'selection.json' or labels.resolve()!=expected/'labels-00004096.json.gz':
+-        raise ValueError('exact final teacher TRAIN selection/label paths required')
+-    sel=json.loads(selection.read_bytes()); receipt=sel.get('receipt',{}); rows=sel.get('rows')
+-    if len(rows or [])!=4096 or receipt.get('selected_roots')!=4096 or not labels.is_file():
+-        raise ValueError('final teacher selection must contain exactly4096 roots')
+-    if receipt.get('original_validation_games',0)<1 or receipt.get('selected_trajectories',0)<1:
+-        raise ValueError('teacher TRAIN/VAL lineage receipt required')
+-    lineage=receipt.get('original_lineage',{}); expected_lineage=LINEAGE[seed]
+-    if (lineage.get('path')!=expected_lineage[1] or lineage.get('sha256')!=expected_lineage[0]
+-            or sha(lineage['path'])!=expected_lineage[0]):
+-        raise ValueError('exact inherited own-training/VAL source registration')
+-    projected=[]; ids=set(); histories=set()
+-    for r in rows:
+-        if set(('root_fen','prefix_uci','row_id','trajectory_id','history_sha256'))-r.keys():
+-            raise ValueError('root source row fields missing')
+-        b=chess.Board(r['root_fen']); prefix=r['prefix_uci']
+-        if not isinstance(prefix,list) or not prefix: raise ValueError('nonempty full history required')
+-        for uci in prefix:
+-            m=chess.Move.from_uci(uci)
+-            if m not in b.legal_moves: raise ValueError('illegal teacher-selected root history')
+-            b.push(m)
+-        h=hashlib.sha256((r['root_fen']+'\n'+' '.join(prefix)).encode()).hexdigest()
+-        if (not b.is_valid() or b.outcome(claim_draw=True) or h!=r['history_sha256']
+-                or ' '.join(b.fen().split()[:4])!=r['fen4']):
+-            raise ValueError('root history/FEN/fullhistory digest mismatch')
+-        if r['row_id'] in ids or h in histories: raise ValueError('duplicate selected root/history')
+-        ids.add(r['row_id']); histories.add(h)
+-        projected.append(dict(root_id=r['row_id'],source_row_id=r['row_id'],
+-            trajectory_id=r['trajectory_id'],role='TRAIN',root_fen=r['root_fen'],prefix_uci=prefix.copy()))
+-    if len({r['trajectory_id'] for r in projected})!=receipt['selected_trajectories']:
+-        raise ValueError('trajectory lineage count mismatch')
+-    pool=dict(schema='teacher-selected-ownq-train-roots-v2',selection_status='pass',train_only=True,
+-        source_selection_sha256=sha(selection),source_teacher_labels_sha256=sha(labels),
+-        source_teacher_receipt=receipt,rows=projected)
+-    return pool
++def ref(p):
++    p = Path(p).resolve()
++    return {"path": str(p), "sha256": sha(p)}
+ 
+ 
+-def build(control_path):
+-    cp=Path(control_path).resolve(); c=json.loads(cp.read_bytes())
+-    required={'schema','status','seed','original_first_epoch','original_deadline_epoch','operator_end_epoch',
+-      'core_repo','core_commit','cpu_core','root_pool_output','protected_aliases','parent_candidate',
+-      'output_path','registration_output'}
+-    if set(c)!=required: raise ValueError('operator control has missing/extra fields')
+-    if c.get('schema')!='own-nnue-ownq-v2-root-control' or c.get('status')!='registered':
+-        raise ValueError('ROOT registered operator control required')
+-    seed=c.get('seed')
+-    if seed not in SEEDS: raise ValueError('fixed teacher seed')
+-    first,end,operator_end=(c.get(k) for k in ('original_first_epoch','original_deadline_epoch','operator_end_epoch'))
+-    if (type(first) not in (int,float) or type(end) not in (int,float) or type(operator_end) not in (int,float)
+-            or not first<end<=first+7200 or not end<=operator_end or not first<=time.time()<end):
+-        raise ValueError('fresh ROOT observed 7200s phase clock/operator end')
+-    if c.get('core_repo')!=CORE or c.get('core_commit')!=COMMIT or c.get('cpu_core') not in range(4):
+-        raise ValueError('exact clean runtime pin and CPU core')
+-    if c.get('output_path')!=f'/dev/shm/harbichess-ownq-v2/{seed}':
+-        raise ValueError('exact immutable RAM output path')
+-    if c.get('root_pool_output')!=f'/workspace/work/harbichess/continuation-20261007/nnue-own-producer-v2/input-pools/{seed}.json':
+-        raise ValueError('exact metadata pool path')
+-    if subprocess.check_output(['git','rev-parse','HEAD'],cwd=CORE,text=True).strip()!=COMMIT or subprocess.check_output(['git','status','--porcelain'],cwd=CORE,text=True):
+-        raise ValueError('clean core checkout')
+-    if sha(PROFILE)!=PROFILE_SHA: raise ValueError('frozen teacher admission profile SHA')
+-    profile=json.loads(PROFILE.read_bytes())
+-    admission=next((x for x in profile['admissions'] if x['seed']==seed),None)
+-    parent=c.get('parent_candidate',{}); pp=Path(f'/dev/shm/harbichess-NNUE-teacher-fit-v1/{seed}/whole/candidate.pt')
+-    if set(parent)!={'path','sha256','contract_sha256'}: raise ValueError('exact parent candidate inventory')
+-    if (profile.get('status')!='PASS-trained-teacher-profile-not-selflearning'
+-        or profile.get('strength_success_claimed') is not False
+-        or admission is None or admission['proof_fresh_loads']!=6 or admission['fit_fresh_loads']!=2
+-        or admission['strict_native_loads']!=8 or admission['teacher_is_selflearning'] is not False
+-        or parent.get('path')!=str(pp) or parent.get('sha256')!=admission['teacher_candidate_sha256']
+-        or not hex64(parent.get('contract_sha256'))):
+-        raise ValueError('same-seed teacher parent must pass frozen proof/fit and exact candidate admission')
+-    selection=LABELDIR/str(seed)/'selection.json'; labels=LABELDIR/str(seed)/'labels-00004096.json.gz'
+-    pool=project_selection(seed,selection,labels)
+-    dest=Path(c['root_pool_output']).resolve()
+-    if not dest.is_relative_to(Path('/workspace/work/harbichess/continuation-20261007/nnue-own-producer-v2/input-pools')):
+-        raise ValueError('publish-once bounded metadata output path')
+-    exact_once(dest,canon(pool)+b'\n')
+-    protected=c.get('protected_aliases',{})
+-    if set(protected)!={'path','sha256','manifest_path','manifest_sha256'}: raise ValueError('exact protection inventory')
+-    binary=Path(protected.get('path','')).resolve(); manifest=Path(protected.get('manifest_path','')).resolve()
+-    if sha(binary)!=protected.get('sha256') or binary.stat().st_size%8 or binary.stat().st_size>256*2**20:
+-        raise ValueError('canonical protected int64 alias input binding')
+-    raw=binary.read_bytes(); vals=list(struct.unpack(f'<{len(raw)//8}q',raw))
+-    if vals!=sorted(set(vals)): raise ValueError('protected aliases must be sorted unique int64')
+-    if sha(manifest)!=protected.get('manifest_sha256'): raise ValueError('protected source manifest SHA')
+-    pm=json.loads(manifest.read_bytes())
+-    if (pm.get('schema')!='ownq-protected-aliases-manifest-v1' or pm.get('status')!='PASS-complete'
+-            or pm.get('alias_binary_sha256')!=sha(binary)
+-            or pm.get('alias_encoding')!='canonical-mirror-boardfen-sha256-64le-v1'
+-            or not {'known8','validation','root_manifest'}.issubset(set(pm.get('source_roles',[])))):
+-        raise ValueError('known8/VAL/root-manifest protected projection incomplete')
+-    for src in pm.get('sources',[]):
+-        if sha(src['path'])!=src['sha256']: raise ValueError('protected source changed')
+-    helper={
+-      'directory':str(PARENT),'model_sha256':'c04914bc5a560ad51de81c6d0aaeb3fae4d04b45c07cd8e39bbd31f655d36565',
+-      'native_sha256':'f60a1f9814f48691af1e2d1f1db1b548cff3e7df0a7cae9718051de1865b8b69',
+-      'evaluator_sha256':'5317e736f872a2e237e45942c8df9e797c5acee8f626bb12009464869fab8d95',
+-      'prior_path':str(ROOT/'cpu-classical-own-v1/value.py'),'prior_sha256':'a99cddfc397bd9221b99a70691427fdd663488b033fb239d9f48240786b2f277',
+-      'extension_path':str(EXT),'extension_sha256':'495505cdebd6dbc029ee314846dbac79d5cca6d445de26c804a43821808d644b'}
+-    for f,k in [(PARENT/'model.py','model_sha256'),(PARENT/'native.py','native_sha256'),(PARENT/'evaluator.py','evaluator_sha256'),(Path(helper['prior_path']),'prior_sha256'),(EXT,'extension_sha256')]:
+-        if sha(f)!=helper[k]: raise ValueError('NNUE/prior helper source closure differs')
+-    if sha(SEARCH)!=SEARCH_SHA: raise ValueError('fixed BudgetSearch source changed')
+-    sources={name:sha(HERE/name) for name in ('collector.py','run_collection.py','metadata_factory.py')}
+-    reg=dict(schema='own-nnue-ownq-collection-registration-v2',status='registered',seed=seed,
+-      operator_end_epoch=operator_end,original_first_epoch=first,original_deadline_epoch=end,
+-      core_repo=CORE,core_commit=COMMIT,cpu_core=c['cpu_core'],
+-      root_pool=dict(path=str(dest),sha256=sha(dest),
+-        selection_path=str(selection),selection_sha256=pool['source_selection_sha256'],
+-        teacher_labels_path=str(labels),teacher_labels_sha256=pool['source_teacher_labels_sha256']),
+-      protected_aliases=dict(path=str(binary),sha256=sha(binary),manifest_path=str(manifest),manifest_sha256=sha(manifest),count=len(vals)),
+-      parent_candidate=dict(path=str(pp),sha256=parent['sha256'],contract_sha256=parent['contract_sha256']),
+-      teacher_admission=dict(path=str(PROFILE),sha256=PROFILE_SHA,status=profile['status'],strict_native_loads=admission['strict_native_loads'],proof_fresh_loads=admission['proof_fresh_loads'],fit_fresh_loads=admission['fit_fresh_loads']),
+-      parent_helpers=helper,search_helper=dict(path=str(SEARCH),sha256=SEARCH_SHA),
+-      output_path=c['output_path'],search=dict(nodes=8192,qdepth=2,max_depth=8),
+-      row_limit=1024,root_limit=128,plies_per_root=16,producer_source_sha256=sources,
+-      root_control_sha256=sha(cp),selection_source_sha256=pool['source_selection_sha256'],
+-      teacher_label_source_sha256=pool['source_teacher_labels_sha256'],protected_source_roles=pm['source_roles'])
+-    out=Path(c['registration_output']).resolve()
+-    if out!=Path(f'/workspace/work/harbichess/continuation-20261007/nnue-own-producer-v2/registrations/{seed}.json'):
+-        raise ValueError('registration output path is fixed to scratch')
+-    write_once(out,canon(reg)+b'\n')
+-    return dict(status='PASS-metadata-only-registration',registration_path=str(out),registration_sha256=sha(out),root_pool_path=str(dest),root_pool_sha256=sha(dest),roots=4096,protected_aliases=len(vals))
++def publish(path, value):
++    path = Path(path)
++    path.parent.mkdir(parents=True, exist_ok=True)
++    with path.open("xb") as f:
++        f.write(canonical(value) + b"\n")
+ 
+-if __name__=='__main__':
+-    p=argparse.ArgumentParser(description=__doc__); p.add_argument('--control',required=True,type=Path); print(json.dumps(build(p.parse_args().control),sort_keys=True))
++
++def collection(spec, output):
++    if (
++        spec["schema"] != "NNUE-own-generation-collection-build-seal-v3"
++        or spec["status"] != "registered"
++    ):
++        raise ValueError("ROOT registered v3 source/clock seal")
++    first, end, op = spec["first"], spec["deadline"], spec["operator_end_epoch"]
++    if not first <= time.time() < end <= min(first + 7200, op, END):
++        raise ValueError("new original collection clock")
++    parent, contract = validate_admission_result(
++        spec["parent_admission_seal"], spec["parent_admission_result"]
++    )
++    generation, seed = parent["generation"], parent["seed"]
++    source = json.loads(pinned(spec["ancestral_root_pool"]).read_bytes())
++    selection_ref = spec["ancestral_selection"]
++    selected = json.loads(pinned(selection_ref).read_bytes())
++    if (
++        source["schema"] != "teacher-selected-ownq-train-roots-v2"
++        or source["selection_status"] != "pass" or source["train_only"] is not True
++        or source["source_selection_sha256"] != selection_ref["sha256"]
++        or len(source["rows"]) != 4096
++        or len(selected["rows"]) != 4096
++    ):
++        raise ValueError("fixed original legal TRAIN-only4096 projection ancestry")
++    for old, new in zip(selected["rows"], source["rows"], strict=True):
++        expected = dict(
++            root_id=old["row_id"],
++            source_row_id=old["row_id"],
++            trajectory_id=old["trajectory_id"],
++            root_fen=old["root_fen"],
++            prefix_uci=old["prefix_uci"],
++            role="TRAIN",
++        )
++        if any(new.get(k) != v for k, v in expected.items()):
++            raise ValueError("exact ancestral TRAIN projection")
++    pool = dict(
++        schema="own-generation-train-roots-v3",
++        selection_status="pass",
++        train_only=True,
++        source_selection_sha256=selection_ref["sha256"],
++        ancestral_teacher_labels_sha256=source["source_teacher_labels_sha256"],
++        rows=source["rows"],
++    )
++    # No teacher label path or content is consumed by this factory.
++    pool_path = Path(spec["root_pool_output"])
++    publish(pool_path, pool)
++    protected = pinned(spec["protected_aliases"])
++    if protected.stat().st_size % 8:
++        raise ValueError("int64 protection")
++    h = spec["parent_helpers"]
++    if (
++        h["model_sha256"] != sha(HERE / "model.py")
++        or h["prior_sha256"] != contract["prior_helper_sha256"]
++    ):
++        raise ValueError("unchanged architecture/prior")
++    for path, key in [
++        (Path(h["directory"]) / "model.py", "model_sha256"),
++        (Path(h["directory"]) / "native.py", "native_sha256"),
++        (Path(h["directory"]) / "evaluator.py", "evaluator_sha256"),
++        (Path(h["prior_path"]), "prior_sha256"),
++        (Path(h["extension_path"]), "extension_sha256"),
++    ]:
++        pinned({"path": str(path), "sha256": h[key]})
++    pinned(spec["search_helper"])
++    if spec["search_helper"]["sha256"] != SEARCH_SHA:
++        raise ValueError("original de53 search")
++    reg = dict(
++        schema="own-nnue-ownq-collection-registration-v3",
++        status="registered",
++        generation=generation,
++        seed=seed,
++        cpu_core=spec["cpu_core"],
++        original_first_epoch=first,
++        original_deadline_epoch=end,
++        operator_end_epoch=op,
++        core_repo=contract["core_source_repo"],
++        core_commit=contract["core_source_commit"],
++        output_path=f"/dev/shm/harbichess-ownq-v3/g-{generation}/{seed}",
++        parent_candidate={
++            **parent["parent_candidate"],
++            "contract_sha256": sha_canonical(contract),
++        },
++        parent_admission_seal=spec["parent_admission_seal"],
++        parent_admission_result=spec["parent_admission_result"],
++        parent_helpers=h,
++        root_pool=dict(
++            **ref(pool_path),
++            selection_path=selection_ref["path"],
++            selection_sha256=selection_ref["sha256"],
++            ancestral_teacher_labels_sha256=pool["ancestral_teacher_labels_sha256"],
++        ),
++        protected_aliases=spec["protected_aliases"],
++        search_helper=spec["search_helper"],
++        search=dict(nodes=8192, qdepth=2, max_depth=8),
++        row_limit=1024,
++        root_limit=128,
++        plies_per_root=16,
++        producer_source_sha256={
++            n: sha(HERE / n)
++            for n in ("collector.py", "run_collection.py", "metadata_factory.py")
++        },
++        generation_helper_sha256={
++            str(HERE / n): sha(HERE / n) for n in ("parent_bridge.py",)
++        },
++        ancestral_pool=spec["ancestral_root_pool"],
++        teacher_labels_used=False,
++    )
++    publish(output, reg)
++    return reg
++
++
++def sha_canonical(x):
++    import hashlib
++
++    return hashlib.sha256(canonical(x)).hexdigest()
++
++
++if __name__ == "__main__":
++    p = argparse.ArgumentParser(description=__doc__)
++    p.add_argument("--seal", type=Path, required=True)
++    p.add_argument("--output", type=Path, required=True)
++    a = p.parse_args()
++    collection(json.loads(a.seal.read_bytes()), a.output)
+--- /workspace/work/harbichess/continuation-20261007/nnue-strength-v2/audit_collection_six_v2.py
++++ NEW-v3/audit_collection_six.py
+@@ -35,13 +35,15 @@
+     expected["value_hex"] = float(row["raw_q_mover"]).hex()
+     if actual != expected or aliases != sorted(set(aliases)):
+         raise ValueError("actual packet or alias canonical order differs")
+-    if (row["fen4"] != " ".join(board.fen().split()[:4])
+-            or row["mover"] != ("white" if board.turn else "black")
+-            or not 1 <= actual["nodes"] <= 8192
+-            or actual["root_actions"] != board.legal_moves.count()
+-            or actual["evaluations"] != actual["actual_eval_calls"]
+-            or row["clipped_q_mover"] != max(-1., min(1., row["raw_q_mover"]))
+-            or row["mate_range_score_returned"] != (abs(row["raw_q_mover"]) > 1)):
++    if (
++        row["fen4"] != " ".join(board.fen().split()[:4])
++        or row["mover"] != ("white" if board.turn else "black")
++        or not 1 <= actual["nodes"] <= 8192
++        or actual["root_actions"] != board.legal_moves.count()
++        or actual["evaluations"] != actual["actual_eval_calls"]
++        or row["clipped_q_mover"] != max(-1.0, min(1.0, row["raw_q_mover"]))
++        or row["mate_range_score_returned"] != (abs(row["raw_q_mover"]) > 1)
++    ):
+         raise ValueError("history/POV/accounting packet differs")
+ 
+ 
+@@ -54,8 +56,14 @@
+     if p.stat().st_size != entry["bytes"] or sha(p) != entry["sha256"]:
+         raise ValueError("alias chunk bytes/SHA")
+     offset, count = ref["offset_bytes"], ref["count"]
+-    if (type(offset) is not int or type(count) is not int or offset < 0
+-            or count < 0 or offset % 8 or offset + count * 8 > entry["bytes"]):
++    if (
++        type(offset) is not int
++        or type(count) is not int
++        or offset < 0
++        or count < 0
++        or offset % 8
++        or offset + count * 8 > entry["bytes"]
++    ):
+         raise ValueError("alias segment bounds")
+     with p.open("rb") as f:
+         f.seek(offset)
+@@ -67,9 +75,12 @@
+ 
+ 
+ def selected_rows(raw_rows, ids, prescribed):
+-    if (len(ids) != 1024 or len(set(ids)) != 1024
+-            or any(type(x) is not str for x in ids)
+-            or prescribed != [ids[x] for x in ORDINALS]):
++    if (
++        len(ids) != 1024
++        or len(set(ids)) != 1024
++        or any(type(x) is not str for x in ids)
++        or prescribed != [ids[x] for x in ORDINALS]
++    ):
+         raise ValueError("exact fixed string row IDs/chronological six selection")
+     mapping = {}
+     for row in raw_rows:
+@@ -95,34 +106,46 @@
+     clock = json.loads(a.clock.read_bytes())
+     reg = json.loads(a.registration.read_bytes())
+     receipt = json.loads(a.receipt.read_bytes())
+-    if (clock["schema"] != "NNUE-own-collection-six-root-audit-clock-v2"
+-            or not clock["first"] <= time.time() < clock["deadline"]
+-            <= min(clock["first"] + 600, reg["operator_end_epoch"])
+-            or clock["helper_sha256"] != sha(__file__)
+-            or any(clock[k + "_sha256"] != sha(getattr(a, k))
+-                   for k in ("registration", "receipt", "events"))):
++    if (
++        clock["schema"] != "NNUE-own-collection-six-root-audit-clock-v3"
++        or not clock["first"]
++        <= time.time()
++        < clock["deadline"]
++        <= min(clock["first"] + 600, reg["operator_end_epoch"])
++        or clock["helper_sha256"] != sha(__file__)
++        or any(
++            clock[k + "_sha256"] != sha(getattr(a, k))
++            for k in ("registration", "receipt", "events")
++        )
++    ):
+         raise ValueError("ROOT observed immutable original600 audit clock/bindings")
+-    if (reg["schema"] != "own-nnue-ownq-collection-registration-v2"
+-            or reg["status"] != "registered" or reg["seed"] not in (20262905, 20262906)
+-            or receipt["schema"] != "own-nnue-ownq-collection-receipt-v2"
+-            or receipt["status"] != "PASS-exact-row-budget"
+-            or receipt["seed"] != reg["seed"] or receipt["train_rows"] != 1024
+-            or receipt["registration_sha256"] != sha(a.registration)
+-            or receipt["events_sha256"] != sha(a.events)
+-            or receipt["events_bytes"] != a.events.stat().st_size
+-            or receipt["parent_candidate_sha256"] != reg["parent_candidate"]["sha256"]
+-            or receipt["producer_source_sha256"] != reg["producer_source_sha256"]
+-            or receipt["search"] != reg["search"]
+-            or reg["search"] != dict(nodes=8192, qdepth=2, max_depth=8)
+-            or receipt["original_first_epoch"] != reg["original_first_epoch"]
+-            or receipt["original_deadline_epoch"] != reg["original_deadline_epoch"]
+-            or not reg["original_first_epoch"] <= receipt["finished_epoch"]
+-            <= reg["original_deadline_epoch"] <= reg["operator_end_epoch"]):
++    if (
++        reg["schema"] != "own-nnue-ownq-collection-registration-v3"
++        or reg["status"] != "registered"
++        or reg["seed"] not in (20262905, 20262906)
++        or receipt["schema"] != "own-nnue-ownq-collection-receipt-v3"
++        or receipt["status"] != "PASS-exact-row-budget"
++        or receipt["seed"] != reg["seed"]
++        or receipt["train_rows"] != 1024
++        or receipt["registration_sha256"] != sha(a.registration)
++        or receipt["events_sha256"] != sha(a.events)
++        or receipt["events_bytes"] != a.events.stat().st_size
++        or receipt["parent_candidate_sha256"] != reg["parent_candidate"]["sha256"]
++        or receipt["producer_source_sha256"] != reg["producer_source_sha256"]
++        or receipt["search"] != reg["search"]
++        or reg["search"] != dict(nodes=8192, qdepth=2, max_depth=8)
++        or receipt["original_first_epoch"] != reg["original_first_epoch"]
++        or receipt["original_deadline_epoch"] != reg["original_deadline_epoch"]
++        or not reg["original_first_epoch"]
++        <= receipt["finished_epoch"]
++        <= reg["original_deadline_epoch"]
++        <= reg["operator_end_epoch"]
++    ):
+         raise ValueError("actual completed same-parent collection-v2 required")
+     core = Path(reg["core_repo"])
+-    if (subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=core, text=True).strip()
+-            != reg["core_commit"]
+-            or subprocess.check_output(["git", "status", "--porcelain"], cwd=core, text=True)):
++    if subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=core, text=True).strip() != reg[
++        "core_commit"
++    ] or subprocess.check_output(["git", "status", "--porcelain"], cwd=core, text=True):
+         raise ValueError("clean source pin")
+     sys.path.insert(0, str(core / "src"))
+     import chess
+@@ -149,16 +172,34 @@
+         if sha(path) != digest:
+             raise ValueError("actual frozen producer helper differs")
+         snapshots[str(path)] = digest
+-    collector = load(directory / "collector.py", reg["producer_source_sha256"]["collector.py"],
+-                     "collector")
+-    producer = load(directory / "run_collection.py",
+-                    reg["producer_source_sha256"]["run_collection.py"], "own_collection_replay")
+-    search = load(reg["search_helper"]["path"], reg["search_helper"]["sha256"],
+-                  "own_collection_original_search")
++    if receipt["generation_helper_sha256"] != reg["generation_helper_sha256"]:
++        raise ValueError("generation helper receipt differs")
++    for path, digest in reg["generation_helper_sha256"].items():
++        if sha(path) != digest:
++            raise ValueError("generation source changed")
++        snapshots[path] = digest
++    collector = load(
++        directory / "collector.py",
++        reg["producer_source_sha256"]["collector.py"],
++        "collector",
++    )
++    producer = load(
++        directory / "run_collection.py",
++        reg["producer_source_sha256"]["run_collection.py"],
++        "own_collection_replay",
++    )
++    search = load(
++        reg["search_helper"]["path"],
++        reg["search_helper"]["sha256"],
++        "own_collection_original_search",
++    )
+     ids = receipt["training_row_ids"]
+     chosen = [ids[x] for x in ORDINALS]
+-    if (len(ids) != 1024 or len(set(ids)) != 1024
+-            or chosen != receipt["periodic_independent_search_rows"]):
++    if (
++        len(ids) != 1024
++        or len(set(ids)) != 1024
++        or chosen != receipt["periodic_independent_search_rows"]
++    ):
+         raise ValueError("fixed chronological six-row selection")
+     for entry in receipt["alias_chunks"]:
+         chunk = a.events.parent / entry["file"]
+@@ -178,8 +219,10 @@
+     evaluator = producer.parent(reg)
+     for row_id, row in selected:
+         guard()
+-        if (row["root_fen"] != chess.STARTING_FEN
+-                or row["history_uci"][:len(row["root_prefix_uci"])] != row["root_prefix_uci"]):
++        if (
++            row["root_fen"] != chess.STARTING_FEN
++            or row["history_uci"][: len(row["root_prefix_uci"])] != row["root_prefix_uci"]
++        ):
+             raise ValueError("full standard-start root prefix binding")
+         board = chess.Board(row["root_fen"])
+         for uci in row["history_uci"]:
+@@ -191,36 +234,62 @@
+             raise ValueError("terminal/invalid preaction row")
+         before = board.fen(), tuple(board.move_stack)
+         traced = collector.Traced(evaluator)
+-        result = search.BudgetSearch(traced, nodes=8192, quiescence_plies=2,
+-                                     max_depth=8, guard=guard).search(board)
+-        actual = dict(selected_best_uci=result.move.uci(), value_hex=float(result.value).hex(),
+-                      nodes=result.nodes, evaluations=result.evaluations,
+-                      completed_depth=result.completed_depth, root_actions=result.root_actions,
+-                      actual_eval_calls=traced.calls)
++        result = search.BudgetSearch(
++            traced, nodes=8192, quiescence_plies=2, max_depth=8, guard=guard
++        ).search(board)
++        actual = dict(
++            selected_best_uci=result.move.uci(),
++            value_hex=float(result.value).hex(),
++            nodes=result.nodes,
++            evaluations=result.evaluations,
++            completed_depth=result.completed_depth,
++            root_actions=result.root_actions,
++            actual_eval_calls=traced.calls,
++        )
+         aliases = alias_segment(row, receipt, a.events.parent)
+         check_packet(row, actual, aliases, board)
+-        if (sorted(traced.seen) != aliases or before != (board.fen(), tuple(board.move_stack))
+-                or collector.alias(board) != row["root_alias"]):
++        if (
++            sorted(traced.seen) != aliases
++            or before != (board.fen(), tuple(board.move_stack))
++            or collector.alias(board) != row["root_alias"]
++        ):
+             raise ValueError("actual complete evaluator trace/history differs")
+-        packets.append(dict(row_id=row_id, actual_packet=actual,
+-                            unique_aliases=len(aliases), search_alias_ref=row["search_alias_ref"]))
++        packets.append(
++            dict(
++                row_id=row_id,
++                actual_packet=actual,
++                unique_aliases=len(aliases),
++                search_alias_ref=row["search_alias_ref"],
++            )
++        )
+         guard()
+     for path, digest in snapshots.items():
+         if sha(path) != digest:
+             raise ValueError("immutable source/input changed during replay")
+     guard()
+-    result = dict(schema="NNUE-own-collection-six-root-audit-result-v2",
+-                  row_identifier_repair="root-id:local-ply-mapping-v2",
+-                  status="PASS-six-actual-chronological-parent-search-packets-and-full-alias-traces",
+-                  seed=reg["seed"], registration_sha256=sha(a.registration),
+-                  receipt_sha256=sha(a.receipt), events_sha256=sha(a.events),
+-                  helper_sha256=sha(__file__), clock_sha256=sha(a.clock), packets=packets,
+-                  duplicate_search_nodes=sum(x["actual_packet"]["nodes"] for x in packets),
+-                  duplicate_static_evaluations=sum(
+-                      x["actual_packet"]["evaluations"] for x in packets),
+-                  new_training_rows=0, new_games=0, optimizer_updates=0,
+-                  first=clock["first"], deadline=clock["deadline"], finished=time.time(),
+-                  scope="six packets per seed only; all rows require independent converter replay")
++    result = dict(
++        schema="NNUE-own-collection-six-root-audit-result-v3",
++        row_identifier_repair="root-id:local-ply-mapping-v2",
++        status="PASS-six-actual-chronological-parent-search-packets-and-full-alias-traces",
++        generation=reg["generation"],
++        parent_admission_result=reg["parent_admission_result"],
++        seed=reg["seed"],
++        registration_sha256=sha(a.registration),
++        receipt_sha256=sha(a.receipt),
++        events_sha256=sha(a.events),
++        helper_sha256=sha(__file__),
++        clock_sha256=sha(a.clock),
++        packets=packets,
++        duplicate_search_nodes=sum(x["actual_packet"]["nodes"] for x in packets),
++        duplicate_static_evaluations=sum(x["actual_packet"]["evaluations"] for x in packets),
++        new_training_rows=0,
++        new_games=0,
++        optimizer_updates=0,
++        first=clock["first"],
++        deadline=clock["deadline"],
++        finished=time.time(),
++        scope="six packets per seed only; all rows require independent converter replay",
++    )
+     with a.output.open("x") as f:
+         json.dump(result, f, sort_keys=True, allow_nan=False)
+         f.flush()
+--- /workspace/work/harbichess/continuation-20261007/root-phase-specs/specs.py
++++ NEW-v3/specs.py
+@@ -11,7 +11,9 @@
+ END = 1791448916.685839
+ SEEDS = (20262905, 20262906)
+ OFFSETS = (0, 204, 409, 614, 819, 1023)
+-AUDIT_SHA = "2082c379ac0dc0540e3e758ce70da09c20d972a267eee057a8b95cd2609a491e"
++AUDIT_SHA = hashlib.sha256(
++    Path(__file__).with_name("audit_collection_six.py").read_bytes()
++).hexdigest()
+ RAM = Path("/dev/shm")
+ 
+ 
+@@ -43,7 +45,7 @@
+ def collection(registration):
+     reg = read(registration)
+     if (
+-        reg["schema"] != "own-nnue-ownq-collection-registration-v2"
++        reg["schema"] != "own-nnue-ownq-collection-registration-v3"
+         or reg["status"] != "registered"
+         or reg["seed"] not in SEEDS
+     ):
+@@ -51,7 +53,7 @@
+     root = Path(reg["output_path"])
+     receipt = read(root / "receipt.json")
+     if (
+-        receipt["schema"] != "own-nnue-ownq-collection-receipt-v2"
++        receipt["schema"] != "own-nnue-ownq-collection-receipt-v3"
+         or receipt["status"] != "PASS-exact-row-budget"
+         or receipt["registration_sha256"] != sha(registration)
+         or receipt["seed"] != reg["seed"]
+@@ -82,7 +84,10 @@
+         if Path(name).name != name or name in chunks:
+             raise ValueError("exact unique regular sidecar names")
+         r = ref(root / name)
+-        if r["sha256"] != chunk["sha256"] or Path(r["path"]).stat().st_size != chunk["bytes"]:
++        if (
++            r["sha256"] != chunk["sha256"]
++            or Path(r["path"]).stat().st_size != chunk["bytes"]
++        ):
+             raise ValueError("complete raw sidecar SHA/bytes")
+         chunks[name] = r
+     return reg, receipt, events, chunks
+@@ -90,7 +95,7 @@
+ 
+ def require_audits(manifest_path, registrations):
+     manifest = read(manifest_path)
+-    if manifest["schema"] != "NNUE-own-collection-replay-audit-set-v2":
++    if manifest["schema"] != "NNUE-own-collection-replay-audit-set-v3":
+         raise ValueError("ROOT twelve-packet audit manifest")
+     if manifest["helper"]["sha256"] != AUDIT_SHA:
+         raise ValueError("only corrected string-ID helper is eligible")
+@@ -103,25 +108,32 @@
+         reg, receipt, events, _ = collection(registrations[str(seed)])
+         result, clock = read(pinned(audit["result"])), read(pinned(audit["clock"]))
+         if (
+-            result["schema"] != "NNUE-own-collection-six-root-audit-result-v2"
++            result["schema"] != "NNUE-own-collection-six-root-audit-result-v3"
+             or result["status"]
+             != "PASS-six-actual-chronological-parent-search-packets-and-full-alias-traces"
+             or result["row_identifier_repair"] != "root-id:local-ply-mapping-v2"
+             or result["seed"] != seed
+             or result["helper_sha256"] != AUDIT_SHA
++            or result["generation"] != reg["generation"]
++            or result["parent_admission_result"] != reg["parent_admission_result"]
+             or result["clock_sha256"] != audit["clock"]["sha256"]
+-            or clock["schema"] != "NNUE-own-collection-six-root-audit-clock-v2"
++            or clock["schema"] != "NNUE-own-collection-six-root-audit-clock-v3"
+             or clock["helper_sha256"] != AUDIT_SHA
+             or clock["registration_sha256"] != result["registration_sha256"]
+             or clock["receipt_sha256"] != result["receipt_sha256"]
+             or clock["events_sha256"] != result["events_sha256"]
+             or result["registration_sha256"] != sha(registrations[str(seed)])
+-            or result["receipt_sha256"] != sha(Path(reg["output_path"]) / "receipt.json")
++            or result["receipt_sha256"]
++            != sha(Path(reg["output_path"]) / "receipt.json")
+             or result["events_sha256"] != events["sha256"]
+             or [p["row_id"] for p in result["packets"]]
+             != receipt["periodic_independent_search_rows"]
+-            or any(result[k] != 0 for k in ("new_training_rows", "new_games", "optimizer_updates"))
+-            or (result["first"], result["deadline"]) != (clock["first"], clock["deadline"])
++            or any(
++                result[k] != 0
++                for k in ("new_training_rows", "new_games", "optimizer_updates")
++            )
++            or (result["first"], result["deadline"])
++            != (clock["first"], clock["deadline"])
+             or not result["first"]
+             < result["finished"]
+             <= result["deadline"]
+@@ -134,7 +146,10 @@
+ def checked_clock(phase, first, deadline, operator):
+     cap = 1800 if phase == "fit" else 600
+     if (
+-        not all(type(x) in (int, float) and math.isfinite(x) for x in (first, deadline, operator))
++        not all(
++            type(x) in (int, float) and math.isfinite(x)
++            for x in (first, deadline, operator)
++        )
+         or not first <= time.time() < deadline <= min(first + cap, operator)
+         or operator > END
+     ):
+@@ -149,10 +164,19 @@
+     if reg["seed"] != a.seed or reg["operator_end_epoch"] != a.operator_end:
+         raise ValueError("same-seed ROOT window")
+     training = Path(a.training).resolve()
+-    for name in ("model.py", "native.py", "train.py", "convert.py", "contracts.py", "prove.py"):
++    for name in (
++        "model.py",
++        "native.py",
++        "train.py",
++        "convert.py",
++        "contracts.py",
++        "prove.py",
++        "parent_bridge.py",
++        "admit_parent.py",
++    ):
+         if not (training / name).is_file():
+             raise ValueError("complete frozen training helper inventory")
+-    data = RAM / "harbichess-NNUE-own-data-v2" / str(a.seed)
++    data = RAM / "harbichess-NNUE-own-data-v3" / f"g-{reg['generation']}" / str(a.seed)
+     if a.phase == "convert":
+         producer = Path(a.producer).resolve()
+         for name, digest in reg["producer_source_sha256"].items():
+@@ -165,7 +189,7 @@
+         ):
+             raise ValueError("exact parent features/prior")
+         seal = dict(
+-            schema="NNUE-own1024-dataset-conversion-seal-v2",
++            schema="NNUE-own1024-dataset-conversion-seal-v3",
+             status="registered",
+             first=a.first,
+             deadline=a.deadline,
+@@ -189,28 +213,29 @@
+                 str(data),
+             ]
+         ]
+-    if not a.audits or not a.registrations or not a.teacher_registry or not a.teacher_admission:
+-        raise ValueError("both collection replay audits and original teacher refs required")
++    if not a.audits or not a.registrations:
++        raise ValueError("both current-parent collection replay audits required")
+     audit_set = require_audits(a.audits, read(a.registrations))
+-    teachers = read(a.teacher_registry)["teachers"]
+-    teacher = teachers[str(a.seed)]
+-    if teacher["candidate"]["sha256"] != reg["parent_candidate"]["sha256"]:
+-        raise ValueError("named actual teacher parent")
+-    for r in teacher.values():
+-        if isinstance(r, dict) and "path" in r and "sha256" in r:
+-            pinned(r)
++    from parent_bridge import validate_admission_result
++
++    parent_seal, _ = validate_admission_result(
++        reg["parent_admission_seal"], reg["parent_admission_result"]
++    )
++    if parent_seal["parent_candidate"]["sha256"] != reg["parent_candidate"]["sha256"]:
++        raise ValueError("exact admitted current own-parent")
+     if type(a.cpu_core) is not int or a.cpu_core < 0:
+         raise ValueError("explicit ROOT CPU core required")
+     mode = "proof" if a.phase == "proof" else "fresh-fit"
+     audits_metadata = read(a.audits)
+     audit_inputs = dict(
+-        collection_replay_audit_set=audit_set, collection_replay_helper=audits_metadata["helper"]
++        collection_replay_audit_set=audit_set,
++        collection_replay_helper=audits_metadata["helper"],
+     )
+     for item in audits_metadata["audits"]:
+         for key in ("result", "clock"):
+             audit_inputs[f"collection_replay_{item['seed']}_{key}"] = item[key]
+     build = dict(
+-        schema="NNUE-own-contract-build-seal-v2",
++        schema="NNUE-own-contract-build-seal-v3",
+         status="registered",
+         seed=a.seed,
+         mode=mode,
+@@ -219,10 +244,10 @@
+         operator_end_epoch=a.operator_end,
+         dataset=ref(data / "dataset.json"),
+         provenance=ref(data / "provenance.json"),
+-        teacher=teacher,
+-        teacher_admission=ref(a.teacher_admission),
++        parent_admission_seal=reg["parent_admission_seal"],
++        parent_admission_result=reg["parent_admission_result"],
+         collection_replay_audit_set=audit_set,
+-        teacher_registry=ref(a.teacher_registry),
++        collection_registrations=ref(a.registrations),
+         collection_replay_results=read(a.audits)["audits"],
+         metadata_spec_helper=ref(__file__),
+     )
+@@ -230,11 +255,19 @@
+         if not a.own_proof_result or not a.own_proof_contract:
+             raise ValueError("actual own proof required before fresh64")
+         build.update(
+-            own_proof_result=ref(a.own_proof_result), own_proof_contract=ref(a.own_proof_contract)
++            own_proof_result=ref(a.own_proof_result),
++            own_proof_contract=ref(a.own_proof_contract),
+         )
+-    contract = RAM / "harbichess-NNUE-own-contracts-v2" / str(a.seed) / (a.phase + ".json")
++    contract = (
++        RAM
++        / "harbichess-NNUE-own-contracts-v3"
++        / f"g-{reg['generation']}"
++        / str(a.seed)
++        / (a.phase + ".json")
++    )
+     plan = dict(
+-        schema="NNUE-own-registry-plan-v2",
++        schema="NNUE-own-registry-plan-v3",
++        generation=reg["generation"],
+         seed=a.seed,
+         mode=mode,
+         first=a.first,
+@@ -246,11 +279,19 @@
+         dataset=build["dataset"],
+         parent_candidate=reg["parent_candidate"],
+         collection_replay_audit_set=audit_set,
++        collection_registrations=ref(a.registrations),
+         collection_replay_results=build["collection_replay_results"],
+-        inputs=dict(build_seal=ref_pending(Path(a.output) / "build-seal.json"), **audit_inputs),
++        inputs=dict(
++            build_seal=ref_pending(Path(a.output) / "build-seal.json"), **audit_inputs
++        ),
+         output=str(
+             RAM
+-            / ("harbichess-NNUE-own-proof-v2" if mode == "proof" else "harbichess-NNUE-own-fit-v2")
++            / (
++                "harbichess-NNUE-own-proof-v3"
++                if mode == "proof"
++                else "harbichess-NNUE-own-fit-v3"
++            )
++            / f"g-{reg['generation']}"
+             / str(a.seed)
+         ),
+     )
+@@ -328,7 +369,7 @@
+     }
+     r.update(
+         metadata_spec_helper=ref(__file__),
+-        schema="NNUE-own-training-orchestration-v2",
++        schema="NNUE-own-training-orchestration-v3",
+         status="registered",
+         contract=contract,
+         train=ref(training / "train.py"),
+@@ -336,7 +377,16 @@
+         inputs=inputs,
+         source_sha256={
+             str(training / n): sha(training / n)
+-            for n in ("model.py", "native.py", "train.py", "convert.py", "contracts.py", "prove.py")
++            for n in (
++                "model.py",
++                "native.py",
++                "train.py",
++                "convert.py",
++                "contracts.py",
++                "prove.py",
++                "parent_bridge.py",
++                "admit_parent.py",
++            )
+         },
+         collection_replay_audit_set=plan["collection_replay_audit_set"],
+     )
+@@ -345,7 +395,9 @@
+ 
+ if __name__ == "__main__":
+     p = argparse.ArgumentParser(description=__doc__)
+-    p.add_argument("--phase", choices=["convert", "proof", "fit", "registry"], required=True)
++    p.add_argument(
++        "--phase", choices=["convert", "proof", "fit", "registry"], required=True
++    )
+     p.add_argument("--output", type=Path, required=True)
+     p.add_argument("--plan", type=Path)
+     for name in (
+@@ -354,8 +406,6 @@
+         "training",
+         "producer",
+         "audits",
+-        "teacher-registry",
+-        "teacher-admission",
+         "own-proof-result",
+         "own-proof-contract",
+     ):
+@@ -386,5 +436,7 @@
+         documents, commands = prepare(a)
+     a.output.mkdir(parents=True, exist_ok=False)
+     for name, document in documents.items():
+-        (a.output / name).write_text(json.dumps(document, sort_keys=True, indent=2) + "\n")
++        (a.output / name).write_text(
++            json.dumps(document, sort_keys=True, indent=2) + "\n"
++        )
+     (a.output / "commands.json").write_text(json.dumps(commands, indent=2) + "\n")
