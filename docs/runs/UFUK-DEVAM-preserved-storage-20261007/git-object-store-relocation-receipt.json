@@ -1,0 +1,26 @@
+{
+  "schema": "preservative-git-object-store-relocation-v1",
+  "status": "PASS-all-object-file-bytes-links-and-repository-states",
+  "original": "/workspace/HarbiChess/.git/objects",
+  "destination": "/tmp/harbichess-preserved-git-objects-20261007",
+  "files": 5487,
+  "bytes": 128265551,
+  "inventory_sha256": "5c7875ef2752c7aa51297e490e9d9cba91c8848e49997a7fa5cc0de88790e55d",
+  "first": 1791380517.6704822,
+  "finished": 1791380519.1233234,
+  "disk_free_before": 270262272,
+  "disk_free_after": 416907264,
+  "states": [
+    {
+      "repo": "/workspace/HarbiChess",
+      "head": "f554be34725fdeb2e2fec8009e8cb067225bd1ee",
+      "status": ""
+    },
+    {
+      "repo": "/workspace/work/harbichess/cpu-additive-source-6fcc8b4",
+      "head": "6fcc8b476d25495d1c9c413e55b2c7ba4794013e",
+      "status": ""
+    }
+  ],
+  "project_source_checkpoint_replay_bytes_changed": false
+}
