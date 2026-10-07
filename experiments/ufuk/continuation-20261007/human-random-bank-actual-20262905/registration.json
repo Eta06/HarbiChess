@@ -1,0 +1,25 @@
+{
+  "schema": "ROOT-teacher-free-procedural-phase-v2",
+  "status": "running",
+  "phase": "bank",
+  "seed": 20262905,
+  "cpu_core": 3,
+  "first": 1791374938.9847505,
+  "deadline": 1791375538.9847505,
+  "helper": {
+    "path": "/workspace/work/harbichess/continuation-20261007/execute_human_random_collection.py",
+    "sha256": "745353a8c7429a4c4d28dd6476e6c63ce2b4a8372aaab6a70a1a5954cf873f67"
+  },
+  "source_inventory": {
+    "path": "/workspace/work/harbichess/continuation-20261007/human-randomstarts-own-v2/source-inventory.json",
+    "sha256": "84e0d669dcdfebce018385984cb88e8aecca4eeafaa530b56b603be1ea660683"
+  },
+  "protected_aliases": {
+    "path": "/dev/shm/harbichess-continuation-20261007/metadata-20262906/protected-aliases.bin",
+    "sha256": "63865f92ebc82cae794c021d084ac7cd272449ea7a1c05a13be82d3753f0d4b5"
+  },
+  "commands": [],
+  "teacher_labels_used": false,
+  "trained_teacher_weights_used": false,
+  "outcome_selection": false
+}
