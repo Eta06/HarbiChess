@@ -1,0 +1,20 @@
+{
+  "schema": "typed-variant-known160-pure-verification-v1",
+  "status": "READY-prospective-not-actual-qualified",
+  "tests_pass": 17,
+  "skips": 0,
+  "ruff": "PASS-canonical-repo-cwd",
+  "search_sha256": "de53c14728a67b7772f18b396ac8ef5c35a144d4e4e616fec40099cd461a6670",
+  "actual_models_read": 0,
+  "actual_search_calls": 0,
+  "actual_games": 0,
+  "actual_training": 0,
+  "actual_book_draws": 0,
+  "variants": [
+    "own-q-v2",
+    "tdlambda-0.5-v1",
+    "closed-terminal-mc-v1"
+  ],
+  "mc_actual_evidence": "PENDING-new-collection12/proof12/fit4-no-reuse",
+  "observed_epoch": 1791369814.7730007
+}
