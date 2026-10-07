@@ -1,0 +1,11 @@
+test_new_sampler_accepts_typed_pool_rejects_fake_ancestry_and_bad_history (test_root_bank.SourceTests.test_new_sampler_accepts_typed_pool_rejects_fake_ancestry_and_bad_history) ... ok
+test_original_model_native_training_and_bridge_bytes_preserved (test_root_bank.SourceTests.test_original_model_native_training_and_bridge_bytes_preserved) ... ok
+test_production_verify_rejects_fixture_even_with_correct_hashes (test_root_bank.SourceTests.test_production_verify_rejects_fixture_even_with_correct_hashes) ... ok
+test_protected_final_discard_and_fixed_attempt_no_relaxation (test_root_bank.SourceTests.test_protected_final_discard_and_fixed_attempt_no_relaxation) ... ok
+test_seeded_walk_replay_order_and_global_rng_untouched (test_root_bank.SourceTests.test_seeded_walk_replay_order_and_global_rng_untouched) ... ok
+test_terminal_and_duplicate_rejections_are_rule_only (test_root_bank.SourceTests.test_terminal_and_duplicate_rejections_are_rule_only) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.433s
+
+OK
