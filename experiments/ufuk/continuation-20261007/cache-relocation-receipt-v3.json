@@ -1,0 +1,16 @@
+{
+  "schema": "ROOT-verified-preserved-inactive-cli-cache-relocation-v3",
+  "observed": 1791375849.5162446,
+  "original": "/workspace/work/harbichess/colab-cli/cache",
+  "new": "/tmp/harbichess-preserved-cli-cache-20261007",
+  "files": 3312,
+  "bytes": 219867979,
+  "manifest_sha256": "aab846fd9a41f17f429328fac7b25b0b5da77be498304c71df718db7b81b345f",
+  "free_before": 271372288,
+  "free_after": 285020160,
+  "old_path_preserved_by_symlink": true,
+  "original_cache_bytes_preserved": true,
+  "source_checkpoint_research_files_unchanged": true,
+  "private_keys_untouched": true,
+  "GPU_used": false
+}
