@@ -1,0 +1,11 @@
+{
+  "schema": "root-coverage-provenance-wording-correction-v1",
+  "original_reports": {
+    "audit.py": "2391f3498b2f9971ea7d47aee6c9058ead13935e9d78f505db13345b5af1101e",
+    "result.json": "6beb2f40ce477735a0fc6943143f5ee228d2d6727b857ca252e864beb6b35654",
+    "prefix_diversity.py": "b0d476cc1501605f877e5a803762b4ba4329b91ff40acb162096983d433a6b62",
+    "prefix-diversity.json": "764f42964bff2cf44c6d7fe4afcb23bf5d33252a6c96cdb37a5f1b3cbf63937c"
+  },
+  "correction": "Source trajectories are CLASSIC own-training episodes, not human PGN games. Pool original_lineage binds own-deeper-action-v1-registration. Statistics unchanged; teacher labels/models were not read.",
+  "status": "metadata-only-no-causal-or-strength-claim"
+}
