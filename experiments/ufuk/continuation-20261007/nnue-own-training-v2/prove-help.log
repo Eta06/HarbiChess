@@ -1,0 +1,8 @@
+usage: prove.py [-h] --registration REGISTRATION
+
+ROOT own-phase proof or fresh64; named teacher WEIGHTS only, full state strict
+loads.
+
+options:
+  -h, --help            show this help message and exit
+  --registration REGISTRATION
