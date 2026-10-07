@@ -1,0 +1,21 @@
+{
+  "actual_collection_or_training_executed": false,
+  "collection_audit_helper_sha256": "2082c379ac0dc0540e3e758ce70da09c20d972a267eee057a8b95cd2609a491e",
+  "files_sha256": {
+    "README.md": "d4ed1b52fd0c3416facb77bbdf60a2feb76a89cf9d29c069d5018749fc0a875a",
+    "help.log": "6a4d5f57d9701220c27f029c6118eb89b7fdb2e29350475cebbffee32a031b91",
+    "specs.py": "850e288c3e9bbd4cfbeea55bbb90ce6a42e574f951de86f3dda52cd9b78e9bd0",
+    "test_specs.py": "df10eb55dc1f18ba5a34a4a99c6d53c29da8f7b5c0cf4f6690c5fe75ec33adf9",
+    "tests-final.log": "4389b56885d24ad3c0212124adcac5049cd8550cd047de2185842dbf63b1bd56",
+    "tests.log": "8e77b268860e20bfd1a0c8f416d4da525a08324403608345305a9eebf76ca0b2"
+  },
+  "operator_end_epoch_max": 1791448916.685839,
+  "schema": "NNUE-own-root-phase-specs-source-verification-v2",
+  "scope": "metadata-only; synthetic tests; no model/search/SGD/child launch",
+  "tests": {
+    "cpu_core": 4,
+    "log": "tests-final.log",
+    "passed": 8,
+    "skipped": 0
+  }
+}
