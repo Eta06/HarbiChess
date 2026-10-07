@@ -1,0 +1,43 @@
+{
+  "actual_phase_executed": false,
+  "files": {
+    "V6-ROOT-RECIPE.md": "f933be6bb5664b4bb2b2b87c8bb394840ee9de7c6952a6181b83035623d61794",
+    "admission.py": "a42120aedf33de0a216aea3a2ba9d1e864abd15fece756af9e60ddb6e6619c12",
+    "alias_pool.py": "74f3929f46c7a8ffeec3622c6f0b13d4cf0193d137f90632f050725d671fb7ec",
+    "audit_known160_v2.py": "d8ffdf03389e74f80e28d9cfd360f6e3807a56ea9d05a726ee0dfe40fc52159d",
+    "build_protocol_v5.py": "4e40ae6668cda2d5c42bf479c1e969c8e4668e6b26931e5c1c3493dda545ce19",
+    "build_protocol_v6.py": "0769e3626d7b873bf702ed193261390dcfc8a78b0d4250dea6aaeeb0d1f3e101",
+    "collection_admission.py": "eb488dc65e2943991979cc8f46aedb6358fba54cb05cea41d10875faab0b10e1",
+    "confirmation_stats.py": "aaf1fb4811a835bb725cfe1226c56e819eb12d6617dfe0d759dcf1d99278bbdd",
+    "original_ownq_admission.py": "2e4a4eef372b5f46f1151c6a6371646e3102bdf68059ed6c0e2a4179e65ab788",
+    "qualify_profile.py": "0a4d2d79eee162925db1d403fb14ba2f99149f6632f1bedadbac999d5242c109",
+    "replay_six.py": "2a3574fa0a297d20b46d96e6113e87fca65f50f96232cbefa661f9d9d2cf2ed6",
+    "run.py": "0da82075a8935319baf85bec4b3dfe5e14cbf6022603aacba8ad906c3d222427",
+    "runtime.py": "3c22c21df71a894de5274718653ff28edc2318c907c26ef95a014c8fbb00d02d",
+    "seal.py": "c7bbe18c976ff232e285b75fcc12627d1668cdefb13aeff52a193d089c8463ff",
+    "search.py": "de53c14728a67b7772f18b396ac8ef5c35a144d4e4e616fec40099cd461a6670",
+    "teacher_admission.py": "94d80c5ab1f3ca9a2d5260d52bda5f7ab16ff236970a57a9a2c70e2351d92781",
+    "test_h0_admission.py": "b5aae62cd740fe73895359050cd9adba262fdaf84368edfd4f9e95714ba7f437",
+    "test_v6_value.py": "5d1d68150f81998264cf6a2767eaa828717e6772fda32518fad8d94b5fca2922",
+    "tournament.py": "7081128a96f575d01ebaf40f1c7de725274b4316ac3836802b539b3ce7395cb8",
+    "value.py": "78664381b7da7c2318c7cd3d0156b51e75d32c7df79633672eabecde332dfe64",
+    "wiring.py": "fa9b66dde7917ecb1ba20f29f06eb8f35cbdc7c473fe976a88ffaf4ece7ce9a0"
+  },
+  "schema": "forensic-H0-runtime-repair-v6-source-only",
+  "tests": "5 metadata/mock constructor PASS1.55s; four actualCLI imports/help PASS; changed7 RuffPASS",
+  "unchanged_v5_files": {
+    "admission.py": "a42120aedf33de0a216aea3a2ba9d1e864abd15fece756af9e60ddb6e6619c12",
+    "alias_pool.py": "74f3929f46c7a8ffeec3622c6f0b13d4cf0193d137f90632f050725d671fb7ec",
+    "audit_known160_v2.py": "d8ffdf03389e74f80e28d9cfd360f6e3807a56ea9d05a726ee0dfe40fc52159d",
+    "build_protocol_v5.py": "4e40ae6668cda2d5c42bf479c1e969c8e4668e6b26931e5c1c3493dda545ce19",
+    "collection_admission.py": "eb488dc65e2943991979cc8f46aedb6358fba54cb05cea41d10875faab0b10e1",
+    "confirmation_stats.py": "aaf1fb4811a835bb725cfe1226c56e819eb12d6617dfe0d759dcf1d99278bbdd",
+    "original_ownq_admission.py": "2e4a4eef372b5f46f1151c6a6371646e3102bdf68059ed6c0e2a4179e65ab788",
+    "replay_six.py": "2a3574fa0a297d20b46d96e6113e87fca65f50f96232cbefa661f9d9d2cf2ed6",
+    "search.py": "de53c14728a67b7772f18b396ac8ef5c35a144d4e4e616fec40099cd461a6670",
+    "teacher_admission.py": "94d80c5ab1f3ca9a2d5260d52bda5f7ab16ff236970a57a9a2c70e2351d92781",
+    "test_h0_admission.py": "b5aae62cd740fe73895359050cd9adba262fdaf84368edfd4f9e95714ba7f437",
+    "tournament.py": "7081128a96f575d01ebaf40f1c7de725274b4316ac3836802b539b3ce7395cb8",
+    "wiring.py": "fa9b66dde7917ecb1ba20f29f06eb8f35cbdc7c473fe976a88ffaf4ece7ce9a0"
+  }
+}
