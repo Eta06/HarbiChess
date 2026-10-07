@@ -1,0 +1,59 @@
+{
+  "schema": "TD-known160-independent-completion-audit-plan-v1",
+  "status": "PENDING-cohort-close-not-strength",
+  "observed_epoch": 1791371713.378843,
+  "protocol": {
+    "path": "/workspace/work/harbichess/continuation-20261007/variant-known160-v1/protocol.json",
+    "sha256": "fcb7e6db7885d4f814816217ac3fd5427362ac31121dca1c410c9a5c2d1b169d"
+  },
+  "whole_deadline": 1791377388.3141692,
+  "audit_ceiling": 1791378288.3141692,
+  "closed_group_count": 2,
+  "closed_games": 32,
+  "partial_scores_read": false,
+  "actual_model_reads": 0,
+  "actual_searches": 0,
+  "optimizer_updates": 0,
+  "requires": "all10 group owners/results and completed cohort, exact actual 160; no partial screen",
+  "root_clock": "ROOT must register ONE observed900 capped at sealed audit ceiling and operator end; external owned timeout wraps rules helper (it has no inner clock)",
+  "commands": [
+    [
+      "/workspace/HarbiChess/.venv/bin/python",
+      "/workspace/work/harbichess/continuation-20261007/variant-known160-v1/audit_known160_v2.py",
+      "--protocol",
+      "/workspace/work/harbichess/continuation-20261007/variant-known160-v1/protocol.json",
+      "--arena",
+      "/dev/shm/harbichess-continuation-20261007/tdlambda-known160-data/arena",
+      "--output",
+      "NEW/fullhistory.json"
+    ],
+    [
+      "/workspace/HarbiChess/.venv/bin/python",
+      "/workspace/work/harbichess/continuation-20261007/variant-known160-v1/replay_six.py",
+      "--protocol",
+      "/workspace/work/harbichess/continuation-20261007/variant-known160-v1/protocol.json",
+      "--profile",
+      "/dev/shm/harbichess-continuation-20261007/tdlambda-known160-data/profile.json",
+      "--arena",
+      "/dev/shm/harbichess-continuation-20261007/tdlambda-known160-data/arena",
+      "--clock",
+      "ROOT_REGISTERED_SAME_900_CLOCK",
+      "--output",
+      "NEW/six.json"
+    ]
+  ],
+  "scope": [
+    "full legal history/terminal/mover/400 caps",
+    "actual NN global512/rootcoverage/eval/depth1..8",
+    "SF actual nonnegative node counts and explicit overruns; no equal-node claim",
+    "exact paired5arms/2seeds/8root2colors/source/model/owner clocks",
+    "strict typed TD own64/proof6/fit2 native +parent provenance supplied by existing admission",
+    "point-development gates unchanged; no formal inference from known8"
+  ],
+  "human_prior_risks": [
+    "frozen teacher-specific admission cannot be reused for zero native",
+    "compare exact admitted same-current-generation parent, preserve independent-parent gates",
+    "runtime registration search/candidate binding hardening sent agent1; factory currently checks"
+  ],
+  "original_sources_changed": false
+}
