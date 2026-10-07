@@ -1,0 +1,31 @@
+{
+  "schema": "NNUE-own-collection-replay-audit-set-v2",
+  "helper": {
+    "path": "/workspace/work/harbichess/continuation-20261007/nnue-strength-v2/audit_collection_six_v2.py",
+    "sha256": "2082c379ac0dc0540e3e758ce70da09c20d972a267eee057a8b95cd2609a491e"
+  },
+  "audits": [
+    {
+      "seed": 20262905,
+      "result": {
+        "path": "/workspace/work/harbichess/continuation-20261007/ownq-20262905-six-audit/result.json",
+        "sha256": "4b5c663c7d9474939c00ac2c25d13bdf247742112f615202da8ee2700b1ecb72"
+      },
+      "clock": {
+        "path": "/workspace/work/harbichess/continuation-20261007/ownq-20262905-six-audit/clock.json",
+        "sha256": "34fced44d6d83539f0e0dd0689b486f83b5d989421ebca4e7b60df9e8b614248"
+      }
+    },
+    {
+      "seed": 20262906,
+      "result": {
+        "path": "/workspace/work/harbichess/continuation-20261007/ownq-20262906-six-audit/result.json",
+        "sha256": "6315111229e996bcfcd06ad6ab9fac5df16cf4ceece141c7a0ddd62a2ed9116b"
+      },
+      "clock": {
+        "path": "/workspace/work/harbichess/continuation-20261007/ownq-20262906-six-audit/clock.json",
+        "sha256": "0a7228548402cea086523a4d7b3d8766cdcebf85b36719f6ecfc0cab0c655168"
+      }
+    }
+  ]
+}
