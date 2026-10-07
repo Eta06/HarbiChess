@@ -1,0 +1,15 @@
+{
+  "schema": "NNUE-played-depth-metadata-correction-v2",
+  "old_helper_sha256": "b9164c2be23a8ac422d4c3c1eee52718bef17410fc27c7e7b890853ebcf87206",
+  "new_helper_sha256": "d8ffdf03389e74f80e28d9cfd360f6e3807a56ea9d05a726ee0dfe40fc52159d",
+  "tests_sha256": "147f7bb645a4b84262b63534ad9a0169a3c9787565b67eae84fa48d01f41b51f",
+  "tests_passed": 2,
+  "skips": 0,
+  "ruff": "PASS canonical repo cwd",
+  "correction": "typed completed_depth1..8 for played nonterminal NN moves;0 rejected",
+  "source_sha256": "de53c14728a67b7772f18b396ac8ef5c35a144d4e4e616fec40099cd461a6670",
+  "source_evidence": "search.py lines126-128 terminal returns moveNone/depth0;130-143 reserved alllegal shallow completed=1;144-147 depth loop1..8",
+  "original_search_unchanged": true,
+  "actual_arena_or_search_calls": false,
+  "obsolete_claim": "old recipe/review depth0-played-fallback claim is INCORRECT and superseded"
+}
