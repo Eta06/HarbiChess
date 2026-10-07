@@ -5,7 +5,7 @@ This addendum is separate from `own-search-next-mechanisms.md`; the original fil
 ## Corrections to the evidence summary
 
 - The independent own-Q audit covered **1,024 selected histories per seed** (2,048 total). Its depth histograms are per seed; they are not 2,048 histories per seed. The immutable receipt is `experiments/ufuk/cpu-own-q-residual18-v1/evidence/ownQ2048-ROOT-history-and-six-search-result.json`.
-- C18 was not profile-only. Its full 160-game known-development screen completed and failed: learned-versus-SF512 scores were `.0625` and `.03125`, while the original prior scored `.125` on both seeds. Receipt: `experiments/ufuk/cpu-classical-own-v1/arena/independent-fullhistory-result.json`. This is additional negative evidence, still not a virgin confirmation.
+- Two distinct 18-feature stages must not be conflated. The older CLASSIC stage completed 160 games and failed: learned-versus-SF512 scores `.0625/.03125`, prior `.125/.125` (`experiments/ufuk/cpu-classical-own-v1/arena/independent-fullhistory-result.json`). The later own-Q residual C18 stage also completed 160 games and failed: `.09375/.03125`, prior `.125/.125` (`experiments/ufuk/wrap-20261006/C18-fullhistory-independent-result.json`). The later seed05 count was one win, one draw and fourteen losses: 1.5/16=.09375. ROOT reread both immutable full-history receipts on Oct7. Neither stage was profile-only or virgin confirmation.
 - The fresh E8-derived MC, SC, and full-critic screen failures are already summarized in the original note. All screens are limited development evidence and none is an estimate of final strength.
 
 ## TD(lambda) prototype boundary
