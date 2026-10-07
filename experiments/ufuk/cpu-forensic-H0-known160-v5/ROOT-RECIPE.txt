@@ -1,0 +1,30 @@
+ROOT-only, not launched by this agent. This is a new known160 development protocol whose parent role is the admitted literal-zero H0 candidate. It does not use or imply teacher256 ancestry. The original 512-node/q2/max-depth-8, 160-game known8 screens, E8 comparison, H0 comparison, and Stockfish controls remain as frozen in protocol-DRAFT.json.
+
+Inputs are already actual and immutable:
+- forensic-v4 full raw audit set and exact forensic-v4 converted datasets/provenance;
+- both actual proof+fresh64 contracts/results/native payloads, all fresh loads;
+- each own64 contract embeds the original H0 parent admission seal/result;
+- the v5 protocol contains `parents`, no `teachers`, and models.parent == the exact H0 candidate for each seed.
+
+Before any match, ROOT records one observed start and seals once. The seal performs read-only parent/native admission and full history/target replay, plus source/profile protocol sealing. It does no search, forward benchmark, optimizer update, or game.
+
+```bash
+PY=/workspace/HarbiChess/.venv/bin/python
+STUDY=/workspace/work/harbichess/continuation-20261007/variant-known160-forensic-v5-h0
+CORE=/workspace/work/harbichess/cpu-additive-source-6fcc8b4
+# ROOT supplies one live observed FIRST and current operator-end; do not reuse old clocks.
+$PY "$STUDY/seal.py" --draft "$STUDY/protocol-DRAFT.json" \
+  --draft-sha256 <ROOT-verified-draft-sha> --first <ROOT-observed-FIRST> \
+  --operator-end <ROOT-current-operator-end> --output <new-immutable-protocol.json>
+# Freeze this source inventory/protocol before profile. Pin the process to the assigned
+# allowed CPU (ROOT chooses core 1 or 3 and ensures it is available).
+$PY "$STUDY/qualify_profile.py" --protocol <new-immutable-protocol.json> \
+  --output <new-RAM-profile.json> --first-epoch <same-FIRST>
+$PY "$STUDY/run.py" --checkout "$CORE" --study "$STUDY" \
+  --qualification <new-RAM-profile.json> --output <new-RAM-arena-dir> \
+  --first-epoch <same-FIRST>
+$PY "$STUDY/audit_known160_v2.py" --protocol <new-immutable-protocol.json> \
+  --arena <new-RAM-arena-dir> --output <new-audit-result.json>
+```
+
+Profile and admission consume the same original inclusive first+600 seconds; the 160-game phase uses first+7200, with one independent audit window through first+8100. No clock is reset after setup or failure. ROOT must maintain the existing cgroup/disk/CPU guards, preserve failed outputs, and require independent audit before interpreting scores. This is a known-development diagnostic, not a formal confirmation or strength pass. No arena/matches were run for this v5 preparation.
