@@ -1,0 +1,33 @@
+usage: specs.py [-h] --phase {convert,proof,fit,registry} --output OUTPUT
+                [--plan PLAN] [--registration REGISTRATION]
+                [--registrations REGISTRATIONS] [--training TRAINING]
+                [--producer PRODUCER] [--audits AUDITS]
+                [--teacher-registry TEACHER_REGISTRY]
+                [--teacher-admission TEACHER_ADMISSION]
+                [--own-proof-result OWN_PROOF_RESULT]
+                [--own-proof-contract OWN_PROOF_CONTRACT] [--seed SEED]
+                [--cpu-core CPU_CORE] [--first FIRST] [--deadline DEADLINE]
+                [--operator-end OPERATOR_END]
+
+Metadata-only ROOT phase wiring; no imports of Torch, model, engine or
+trainer.
+
+options:
+  -h, --help            show this help message and exit
+  --phase {convert,proof,fit,registry}
+  --output OUTPUT
+  --plan PLAN
+  --registration REGISTRATION
+  --registrations REGISTRATIONS
+  --training TRAINING
+  --producer PRODUCER
+  --audits AUDITS
+  --teacher-registry TEACHER_REGISTRY
+  --teacher-admission TEACHER_ADMISSION
+  --own-proof-result OWN_PROOF_RESULT
+  --own-proof-contract OWN_PROOF_CONTRACT
+  --seed SEED
+  --cpu-core CPU_CORE
+  --first FIRST
+  --deadline DEADLINE
+  --operator-end OPERATOR_END
