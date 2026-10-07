@@ -1,0 +1,34 @@
+{
+  "schema": "UFUK-DEVAM-bounded-cpu-phase-v1",
+  "phase": "SAME-clock-v10b-encoded-bound-correction-no-original-change",
+  "output": "/dev/shm/harbichess-continuation-20261007/nnue-state-v10b-encode-controller",
+  "first_epoch": 1791366907.4313974,
+  "deadline_epoch": 1791372307.4313974,
+  "operator_end_epoch": 1791448916.685839,
+  "cpu_core": 0,
+  "checkout": "/workspace/work/harbichess/cpu-additive-source-6fcc8b4",
+  "controller_sha256": "5090ef465aafd81fd39a49dd86b205cfe7d2d97f73c357c83aa2822f321d464b",
+  "memory_guard_path": "/workspace/work/harbichess/cpu-additive-source-6fcc8b4/src/harbichess/training/cgroup_budget.py",
+  "input_pins": {
+    "/workspace/work/harbichess/continuation-20261007/nnue-state-v10b/manifest.json": "60d35e976716444b5e955faad873d92c434cc02871873b8c20edd2f47c067ed3",
+    "/workspace/work/harbichess/continuation-20261007/nnue-state-v10b/clock.json": "0b0c1aefe8b6c3286c203e50bd1ae456d170ec8102e1ab4402191d7023695995",
+    "/workspace/work/harbichess/continuation-20261007/nnue-state-v10b/parts_receiver_v10b.py": "f0fe355e9c258955865379a574b7c6d5af389c5226dae5eeb16a5c00cadf9df9",
+    "/workspace/work/harbichess/continuation-20261007/nnue-state-v10b/prepare_capsule.py": "545368b53e1fc4e4e64d1b7eb69eb6f8ef21182376fbb6cd97abd03d8d4e3a2e",
+    "/workspace/work/harbichess/continuation-20261007/nnue-state-v10b/release_transport_v10b.py": "e874b8bb8d43cad10ce3ab486e4931c187588fe00ad38f80ef675f31d30a41f5",
+    "/workspace/work/harbichess/continuation-20261007/nnue-state-v10b/raw_capsule_v10b.py": "e2dcde304b617ff16f3a7ab2fa47729cc727a4e90350abd8692e24e6f5a598f2"
+  },
+  "command": [
+    "/workspace/HarbiChess/.venv/bin/python",
+    "/workspace/work/harbichess/continuation-20261007/nnue-state-v10b/prepare_capsule.py",
+    "--manifest",
+    "/workspace/work/harbichess/continuation-20261007/nnue-state-v10b/manifest.json",
+    "--clock",
+    "/workspace/work/harbichess/continuation-20261007/nnue-state-v10b/clock.json",
+    "--output",
+    "/dev/shm/harbichess-nnue-state-v10b"
+  ],
+  "source_core_commit": "6fcc8b476d25495d1c9c413e55b2c7ba4794013e",
+  "historical_timer_reset": false,
+  "GPU_used": false,
+  "hash_guard_interval_seconds": 30
+}
