@@ -1,0 +1,27 @@
+{
+  "status": "PASS-metadata-only-not-strength",
+  "seed": 20262905,
+  "receipt": {
+    "original_training_rows": 12773,
+    "original_training_games": 146,
+    "original_validation_games": 31,
+    "original_training_dataset_sha256": "ccacd17f05399cee8efefde1788207490781ffc8082630286d1655e0e7799635",
+    "excluded_current_states": 104462,
+    "excluded_fullhistories": 106229,
+    "shared_START_ancestry_allowed": true,
+    "original_lineage": {
+      "path": "/workspace/work/harbichess/continuation-20261005/own-deeper-action-v1-registration/20262905-registration.json",
+      "sha256": "b73cd739fb0b357e6c57f26452ddec229f2f886936a534b467e4bc8e100024b9"
+    }
+  },
+  "training_trajectory_count": 146,
+  "protected_alias_count": 104064,
+  "protected_alias_sha256": "e9ff3bfb0c6914b573d68b7df0a2cc110cd061a07b2381c8412f3be2473e81d9",
+  "teacher_registration_sha256": "acdbdd1b2537de95441b717820c3b0c4ed27b5132dac508cd45b3bdf0c816441",
+  "registration_sha256": "6ddb37638ed4f82546adb4e48d49a846781048b7bfb1f89705ebd88a8f526c66",
+  "finished_epoch": 1791362546.4104404,
+  "alias_definition": "min(piece placement, vertical-color mirror); SHA256 first8 signed little64",
+  "stockfish_calls": 0,
+  "model_calls": 0,
+  "SGD_updates": 0
+}
