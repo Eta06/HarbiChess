@@ -1,0 +1,30 @@
+{
+  "schema": "UFUK-DEVAM-bounded-cpu-phase-v1",
+  "phase": "ROOT-pv32-integrity-and-six-actual-replays-json-canonicalization-v2",
+  "output": "/dev/shm/harbichess-continuation-20261007/pv-independent-audit-v2-controller",
+  "first_epoch": 1791371644.260522,
+  "deadline_epoch": 1791372544.260522,
+  "operator_end_epoch": 1791448916.685839,
+  "cpu_core": 2,
+  "checkout": "/workspace/work/harbichess/cpu-additive-source-6fcc8b4",
+  "controller_sha256": "5090ef465aafd81fd39a49dd86b205cfe7d2d97f73c357c83aa2822f321d464b",
+  "memory_guard_path": "/workspace/work/harbichess/cpu-additive-source-6fcc8b4/src/harbichess/training/cgroup_budget.py",
+  "input_pins": {
+    "/workspace/work/harbichess/continuation-20261007/audit_pv_actual_v2.py": "5ea35d3dcfeb3ebbd50cc897080c927a5b9ebf9ac75ac6f96a2a52b9586d204e",
+    "/workspace/work/harbichess/continuation-20261007/pv-independent-audit/registration-v2.json": "da5770f6719b7add1b5ac2c1459efeedf831cc758889f4b4520110b2f65ee51e",
+    "/workspace/work/harbichess/continuation-20261007/pv-history-search-v1/qualification/develop.py": "53d5a39bf52c862c390f6e41722c27bd8b551f5daa0e6d1eb5a603e9e87eec26",
+    "/workspace/work/harbichess/continuation-20261007/pv-human-profile-v2/registration.json": "a08a4ff8297f537e625b90c73e19d6c66f8d11a18547d050ae6e18aa3573c298",
+    "/dev/shm/harbichess-pv-human-profile-v2/result.json": "549b135d3485f4f9ccea642a866019d2067d10135d760a6747d7f6f1d9b2ef5e",
+    "/workspace/work/harbichess/continuation-20261007/pv-human-arena-v2/registration.json": "bbbe1152315e3dffbae554d01c802f574d79ea41d09c257cb364e14245406eeb",
+    "/dev/shm/harbichess-pv-human-arena-v2/result.json": "5bd3d4583536f5d4e21a059f9863ab229a72cd1998154ee3965f46a56e651fa6"
+  },
+  "command": [
+    "/workspace/HarbiChess/.venv/bin/python",
+    "/workspace/work/harbichess/continuation-20261007/audit_pv_actual_v2.py",
+    "/workspace/work/harbichess/continuation-20261007/pv-independent-audit/registration-v2.json"
+  ],
+  "source_core_commit": "6fcc8b476d25495d1c9c413e55b2c7ba4794013e",
+  "historical_timer_reset": false,
+  "GPU_used": false,
+  "hash_guard_interval_seconds": 30
+}
