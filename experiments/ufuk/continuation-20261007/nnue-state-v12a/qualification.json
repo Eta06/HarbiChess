@@ -1,0 +1,14 @@
+{
+  "status": "PASS-new-codec-fixtures-not-native-strength",
+  "checks": [
+    "actual9MiB-file-with-new32MiBbound-exact-byte-roundtrip",
+    "truncated-rejected",
+    "trailing-rejected",
+    "corrupt-rejected",
+    "old-v11-type-rejected"
+  ],
+  "old_preparer_Ruff_E702_preserved": true,
+  "new_preparer_v2_Ruff_PASS": true,
+  "manifest_original_clock_unchanged": true,
+  "source_helpers_Ruff_PASS": true
+}
