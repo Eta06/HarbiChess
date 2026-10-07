@@ -1,0 +1,353 @@
+{
+  "status": "PASS-fullhistory-integrity",
+  "screen_result": "FAIL",
+  "rows": [
+    {
+      "seed": 20262905,
+      "arm": "learned",
+      "opponent": "e8",
+      "sha256": "02970db06ade8ba77887e32ca82d61db66f2725b3f141d5443bd4e5583185c9e",
+      "score": 0.21875,
+      "wins": 3,
+      "draws": 1,
+      "losses": 12,
+      "unknown_caps": 0,
+      "legal_continuation_plies": 1325,
+      "actual_SF_nodes": 0,
+      "actual_SF_moves_over_nominal512": 0,
+      "actual_SF_max_move_nodes": 0,
+      "search_nodes": 678400,
+      "static_evaluations": 623852,
+      "candidate_median_move_seconds": 0.12632402195595205,
+      "bootstrap_pair_95": [
+        0.0,
+        0.46875
+      ],
+      "hoeffding_pair_95": [
+        0,
+        0.6989113956599604
+      ]
+    },
+    {
+      "seed": 20262906,
+      "arm": "learned",
+      "opponent": "e8",
+      "sha256": "8c1ccdae15eb04f26c2543346c042556a1140b9b0d6f9281432d99f91e5bc59c",
+      "score": 0.4375,
+      "wins": 6,
+      "draws": 2,
+      "losses": 8,
+      "unknown_caps": 0,
+      "legal_continuation_plies": 1774,
+      "actual_SF_nodes": 0,
+      "actual_SF_moves_over_nominal512": 0,
+      "actual_SF_max_move_nodes": 0,
+      "search_nodes": 907763,
+      "static_evaluations": 818004,
+      "candidate_median_move_seconds": 0.11559425498126075,
+      "bootstrap_pair_95": [
+        0.25,
+        0.625
+      ],
+      "hoeffding_pair_95": [
+        0,
+        0.9176613956599604
+      ]
+    },
+    {
+      "seed": 20262905,
+      "arm": "learned",
+      "opponent": "parent",
+      "sha256": "19c2d2a1c937feafd845fea99b91f86b74ee233c2483cd615c4243e118f2f680",
+      "score": 0.46875,
+      "wins": 4,
+      "draws": 7,
+      "losses": 5,
+      "unknown_caps": 0,
+      "legal_continuation_plies": 2315,
+      "actual_SF_nodes": 0,
+      "actual_SF_moves_over_nominal512": 0,
+      "actual_SF_max_move_nodes": 0,
+      "search_nodes": 1184303,
+      "static_evaluations": 1055032,
+      "candidate_median_move_seconds": 0.11688070103991777,
+      "bootstrap_pair_95": [
+        0.34375,
+        0.59375
+      ],
+      "hoeffding_pair_95": [
+        0,
+        0.9489113956599604
+      ]
+    },
+    {
+      "seed": 20262906,
+      "arm": "learned",
+      "opponent": "parent",
+      "sha256": "1060d11c23d4cf16919cc26162be61a7726b853ab5f277d2dde38faf2fd66d16",
+      "score": 0.625,
+      "wins": 9,
+      "draws": 2,
+      "losses": 5,
+      "unknown_caps": 0,
+      "legal_continuation_plies": 1612,
+      "actual_SF_nodes": 0,
+      "actual_SF_moves_over_nominal512": 0,
+      "actual_SF_max_move_nodes": 0,
+      "search_nodes": 825344,
+      "static_evaluations": 751731,
+      "candidate_median_move_seconds": 0.11574679199839011,
+      "bootstrap_pair_95": [
+        0.40625,
+        0.84375
+      ],
+      "hoeffding_pair_95": [
+        0.14483860434003965,
+        1
+      ]
+    },
+    {
+      "seed": 20262905,
+      "arm": "learned",
+      "opponent": "SF512",
+      "sha256": "20ed730ba526b265ac76ec1e01d39305605b1b32e5e72d1a9ceae550dc545be8",
+      "score": 0.03125,
+      "wins": 0,
+      "draws": 1,
+      "losses": 15,
+      "unknown_caps": 0,
+      "legal_continuation_plies": 1087,
+      "actual_SF_nodes": 280915,
+      "actual_SF_moves_over_nominal512": 181,
+      "actual_SF_max_move_nodes": 553,
+      "search_nodes": 276480,
+      "static_evaluations": 255440,
+      "candidate_median_move_seconds": 0.13005191297270358,
+      "bootstrap_pair_95": [
+        0.0,
+        0.09375
+      ],
+      "hoeffding_pair_95": [
+        0,
+        0.5114113956599604
+      ]
+    },
+    {
+      "seed": 20262906,
+      "arm": "learned",
+      "opponent": "SF512",
+      "sha256": "03cd596978d30f51b1c716d17a8553f4828689f37146cad795868cd80136ead8",
+      "score": 0.03125,
+      "wins": 0,
+      "draws": 1,
+      "losses": 15,
+      "unknown_caps": 0,
+      "legal_continuation_plies": 1139,
+      "actual_SF_nodes": 294109,
+      "actual_SF_moves_over_nominal512": 158,
+      "actual_SF_max_move_nodes": 567,
+      "search_nodes": 289792,
+      "static_evaluations": 268982,
+      "candidate_median_move_seconds": 0.13143153302371502,
+      "bootstrap_pair_95": [
+        0.0,
+        0.09375
+      ],
+      "hoeffding_pair_95": [
+        0,
+        0.5114113956599604
+      ]
+    },
+    {
+      "seed": 20262905,
+      "arm": "parent",
+      "opponent": "SF512",
+      "sha256": "e3b6d47dec6f973462c0206cdd3a1381076ef71f09602bc46bab3277fbfa5c88",
+      "score": 0.0,
+      "wins": 0,
+      "draws": 0,
+      "losses": 16,
+      "unknown_caps": 0,
+      "legal_continuation_plies": 944,
+      "actual_SF_nodes": 244355,
+      "actual_SF_moves_over_nominal512": 132,
+      "actual_SF_max_move_nodes": 561,
+      "search_nodes": 239616,
+      "static_evaluations": 221349,
+      "candidate_median_move_seconds": 0.13335392996668816,
+      "bootstrap_pair_95": [
+        0.0,
+        0.0
+      ],
+      "hoeffding_pair_95": [
+        0,
+        0.48016139565996035
+      ]
+    },
+    {
+      "seed": 20262906,
+      "arm": "parent",
+      "opponent": "SF512",
+      "sha256": "c0b0c1a437e8ebee732da09c81bc6e2331e924cf9fa2ed8a8625ff7754b2db81",
+      "score": 0.03125,
+      "wins": 0,
+      "draws": 1,
+      "losses": 15,
+      "unknown_caps": 0,
+      "legal_continuation_plies": 1057,
+      "actual_SF_nodes": 273304,
+      "actual_SF_moves_over_nominal512": 153,
+      "actual_SF_max_move_nodes": 561,
+      "search_nodes": 268800,
+      "static_evaluations": 251117,
+      "candidate_median_move_seconds": 0.1352910110144876,
+      "bootstrap_pair_95": [
+        0.0,
+        0.09375
+      ],
+      "hoeffding_pair_95": [
+        0,
+        0.5114113956599604
+      ]
+    },
+    {
+      "seed": 20262905,
+      "arm": "e8",
+      "opponent": "SF512",
+      "sha256": "e2e722b047cb84762e271a558a5c3017c86716e649e91ef29261e46eadd606c9",
+      "score": 0.0,
+      "wins": 0,
+      "draws": 0,
+      "losses": 16,
+      "unknown_caps": 0,
+      "legal_continuation_plies": 1088,
+      "actual_SF_nodes": 281271,
+      "actual_SF_moves_over_nominal512": 156,
+      "actual_SF_max_move_nodes": 557,
+      "search_nodes": 276480,
+      "static_evaluations": 253552,
+      "candidate_median_move_seconds": 0.5677532579866238,
+      "bootstrap_pair_95": [
+        0.0,
+        0.0
+      ],
+      "hoeffding_pair_95": [
+        0,
+        0.48016139565996035
+      ]
+    },
+    {
+      "seed": 20262906,
+      "arm": "e8",
+      "opponent": "SF512",
+      "sha256": "7e2412571a1295c22613459b3a76c160b78c8b01ca2c718b2fa6bfe7d1d56d86",
+      "score": 0.0,
+      "wins": 0,
+      "draws": 0,
+      "losses": 16,
+      "unknown_caps": 0,
+      "legal_continuation_plies": 1088,
+      "actual_SF_nodes": 281271,
+      "actual_SF_moves_over_nominal512": 156,
+      "actual_SF_max_move_nodes": 557,
+      "search_nodes": 276480,
+      "static_evaluations": 253552,
+      "candidate_median_move_seconds": 0.7248419860261492,
+      "bootstrap_pair_95": [
+        0.0,
+        0.0
+      ],
+      "hoeffding_pair_95": [
+        0,
+        0.48016139565996035
+      ]
+    }
+  ],
+  "contrasts": [
+    {
+      "seed": 20262905,
+      "arm": "learned",
+      "screen_gates": {
+        "direct_same_search_e8_gt_060": false,
+        "pairedSF_gain_same_search_e8_gt_010": false,
+        "finalSF_ge_025": false,
+        "trained_vs_exact_teacher_parent_gt_060": false,
+        "pairedSF_gain_exact_teacher_parent_gt_0": true,
+        "caps_le_005": true
+      },
+      "passed_screen": false,
+      "paired_SF_delta_by_game": {
+        "(0, 'white')": 0.0,
+        "(0, 'black')": 0.0,
+        "(1, 'white')": 0.0,
+        "(1, 'black')": 0.0,
+        "(2, 'white')": 0.0,
+        "(2, 'black')": 0.0,
+        "(3, 'white')": 0.0,
+        "(3, 'black')": 0.0,
+        "(4, 'white')": 0.0,
+        "(4, 'black')": 0.0,
+        "(5, 'white')": 0.0,
+        "(5, 'black')": 0.0,
+        "(6, 'white')": 0.5,
+        "(6, 'black')": 0.0,
+        "(7, 'white')": 0.0,
+        "(7, 'black')": 0.0
+      },
+      "paired_SF_gain": 0.03125
+    },
+    {
+      "seed": 20262906,
+      "arm": "learned",
+      "screen_gates": {
+        "direct_same_search_e8_gt_060": false,
+        "pairedSF_gain_same_search_e8_gt_010": false,
+        "finalSF_ge_025": false,
+        "trained_vs_exact_teacher_parent_gt_060": true,
+        "pairedSF_gain_exact_teacher_parent_gt_0": false,
+        "caps_le_005": true
+      },
+      "passed_screen": false,
+      "paired_SF_delta_by_game": {
+        "(0, 'white')": 0.0,
+        "(0, 'black')": 0.0,
+        "(1, 'white')": 0.0,
+        "(1, 'black')": 0.0,
+        "(2, 'white')": 0.0,
+        "(2, 'black')": 0.0,
+        "(3, 'white')": 0.0,
+        "(3, 'black')": 0.0,
+        "(4, 'white')": 0.0,
+        "(4, 'black')": 0.0,
+        "(5, 'white')": 0.0,
+        "(5, 'black')": 0.0,
+        "(6, 'white')": 0.0,
+        "(6, 'black')": 0.0,
+        "(7, 'white')": 0.5,
+        "(7, 'black')": 0.0
+      },
+      "paired_SF_gain": 0.03125
+    }
+  ],
+  "games": 160,
+  "legal_continuation_plies": 13429,
+  "actual_SF_nodes": 1655225,
+  "search_nodes": 5223458,
+  "protocol_sha256": "fcb7e6db7885d4f814816217ac3fd5427362ac31121dca1c410c9a5c2d1b169d",
+  "helper_sha256": "d8ffdf03389e74f80e28d9cfd360f6e3807a56ea9d05a726ee0dfe40fc52159d",
+  "protected_files_unchanged": true,
+  "strength_success_claimed": false,
+  "unchanged_inferential_strength_gate": "NOT-QUALIFIED: known8 point screen; approved ONE confirmation requires all8 LCBs on new48 paired source blocks perseed",
+  "GPU_used": false,
+  "scope": {
+    "GPU": false,
+    "development": "known8 paired160, not independent strength",
+    "target": "TDlambda0.5 same-own1024/exactteacher bootstrap weights; newAdam/RNG",
+    "teacher_labels_in_new_phase": false
+  },
+  "formal_requirement": {
+    "status": "not-registered-known-book-screen-only",
+    "prospective_memo_sha256": "b6e58037e2c579a2254f4b1510281869bef5a535c277b81fd9788228c513a325"
+  },
+  "uncertainty": "8 shared known opening families; descriptive paired intervals, not virgin confirmation or independent seeds-as-families. Degenerate empirical bootstrap is not population zero."
+}
