@@ -1,0 +1,9 @@
+Traceback (most recent call last):
+  File "/workspace/work/harbichess/continuation-20261007/closed-terminal-own-v1/source/convert.py", line 533, in <module>
+    main()
+  File "/workspace/work/harbichess/continuation-20261007/closed-terminal-own-v1/source/convert.py", line 506, in main
+    data, provenance = convert(spec, guard)
+                       ^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/work/harbichess/continuation-20261007/closed-terminal-own-v1/source/convert.py", line 432, in convert
+    raise ValueError("exact all-row reconciliation/1024 eligible rows")
+ValueError: exact all-row reconciliation/1024 eligible rows
