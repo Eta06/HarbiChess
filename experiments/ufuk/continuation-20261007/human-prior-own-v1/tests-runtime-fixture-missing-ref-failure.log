@@ -1,0 +1,23 @@
+test_compiled_reader_literal_zero_delegates_authoritative_fake_prior_hex (test_human_parent.ZeroTests.test_compiled_reader_literal_zero_delegates_authoritative_fake_prior_hex) ... ok
+test_corruption_signedzero_embedding_rng_phase_rejected (test_human_parent.ZeroTests.test_corruption_signedzero_embedding_rng_phase_rejected) ... ok
+test_direct_collection_parent_search_and_source_tamper_rejected (test_human_parent.ZeroTests.test_direct_collection_parent_search_and_source_tamper_rejected) ... ERROR
+test_initializer_source_closure_and_no_teacher_scope (test_human_parent.ZeroTests.test_initializer_source_closure_and_no_teacher_scope) ... ok
+test_literal_zero_native_candidate_and_rng_restore (test_human_parent.ZeroTests.test_literal_zero_native_candidate_and_rng_restore) ... ok
+test_typed_ancestry_never_teacher_as_zero (test_human_parent.ZeroTests.test_typed_ancestry_never_teacher_as_zero) ... ok
+test_zero_receipt_actual_argv_namespace_and_corruption (test_human_parent.ZeroTests.test_zero_receipt_actual_argv_namespace_and_corruption) ... ok
+
+======================================================================
+ERROR: test_direct_collection_parent_search_and_source_tamper_rejected (test_human_parent.ZeroTests.test_direct_collection_parent_search_and_source_tamper_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/work/harbichess/continuation-20261007/human-prior-own-v1/test_human_parent.py", line 304, in test_direct_collection_parent_search_and_source_tamper_rejected
+    run_collection.parent(bad)
+  File "/workspace/work/harbichess/continuation-20261007/human-prior-own-v1/run_collection.py", line 51, in parent
+    reg["parent_admission_seal"], reg["parent_admission_result"]
+    ~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyError: 'parent_admission_seal'
+
+----------------------------------------------------------------------
+Ran 7 tests in 1.284s
+
+FAILED (errors=1)
