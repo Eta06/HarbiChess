@@ -1,0 +1,17 @@
+usage: train.py [-h] --contract CONTRACT --dataset DATASET --output OUTPUT
+                --stop STOP [--resume RESUME] [--resume-sha256 RESUME_SHA256]
+                [--bootstrap-candidate BOOTSTRAP_CANDIDATE] [--audit-only]
+
+Explicit synthetic/teacher/own phases, full CPU native and fixed source
+contracts.
+
+options:
+  -h, --help            show this help message and exit
+  --contract CONTRACT
+  --dataset DATASET
+  --output OUTPUT
+  --stop STOP
+  --resume RESUME
+  --resume-sha256 RESUME_SHA256
+  --bootstrap-candidate BOOTSTRAP_CANDIDATE
+  --audit-only
