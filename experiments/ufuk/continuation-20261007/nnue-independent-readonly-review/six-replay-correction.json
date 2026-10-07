@@ -1,0 +1,15 @@
+{
+  "schema": "NNUE-six-replay-string-id-correction-v2",
+  "status": "READY-new-prospective-helper-not-actual-replay",
+  "old_helper_sha256": "1a5a7c78cf6589d17f7f6965bf2eae2b4f9138c747830c5f9529fe718fe608a0",
+  "new_helper_sha256": "2082c379ac0dc0540e3e758ce70da09c20d972a267eee057a8b95cd2609a491e",
+  "test_sha256": "dae05f0b610e2bcfb4a63759d31480d4687b3aa44025b1da2b9c1a7e9641b440",
+  "tests_passed": 2,
+  "skips": 0,
+  "ruff": "PASS canonical repo cwd",
+  "old_helper_executed": false,
+  "change": "map raw rows by exact root_id:local_ply string; reject duplicate/missing/non-string/out-of-order IDs and raw-count mismatch before parent model loading",
+  "clock_and_search": "unchanged v2 clock/schema/600; original8192/q2/max8; samesix prescribed chronological IDs",
+  "old_inventory_preserved": "c2b6b53d19b3752843625141d66cfbaf72439cc30039789c8fca17f87bdec42c",
+  "actual_inference_or_search_executed": false
+}
