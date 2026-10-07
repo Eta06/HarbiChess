@@ -1,0 +1,1325 @@
+{
+  "schema": "NNUE-own-Oct7-explicit-native-capsule-v11",
+  "approval": "ROOT-approved-exact-files",
+  "limits": {
+    "files": 2048,
+    "raw_bytes": 402653184,
+    "encoded_bytes": 268435456,
+    "file_bytes": 8388608,
+    "header_bytes": 1048576
+  },
+  "rows": [
+    {
+      "path": "/dev/shm/harbichess-NNUE-tdlambda-data-v1/20262905/dataset.json",
+      "member": "files/0000",
+      "role": "actual-TD-data-20262905",
+      "bytes": 242703,
+      "sha256": "15bc93969445dea6fa9dd1ef62cc62b3d5a399693af537ec2833ce7e2584500e"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-tdlambda-data-v1/20262905/fit-contract.json",
+      "member": "files/0001",
+      "role": "actual-TD-data-20262905",
+      "bytes": 8445,
+      "sha256": "76ee25219e36520eb4274cea319f719a14aba83d7bd2088a9b2d6a4ddd9e82af"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-tdlambda-data-v1/20262905/proof-contract.json",
+      "member": "files/0002",
+      "role": "actual-TD-data-20262905",
+      "bytes": 8266,
+      "sha256": "1f21bc86d2b9e0c864fe18c00c2c6564a6cc1b5bc8a0436a23584ecddfa27b33"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-tdlambda-data-v1/20262905/provenance.json",
+      "member": "files/0003",
+      "role": "actual-TD-data-20262905",
+      "bytes": 306004,
+      "sha256": "0fae7023c719df71282900274304b9b2ab8c54a74925756338da05971d79fe35"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-tdlambda-data-v1/20262906/dataset.json",
+      "member": "files/0004",
+      "role": "actual-TD-data-20262906",
+      "bytes": 251316,
+      "sha256": "b65dbeb453788f455e6845e14d6c94a38f1b3a98935f8e3c268037decbcd78a6"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-tdlambda-data-v1/20262906/fit-contract.json",
+      "member": "files/0005",
+      "role": "actual-TD-data-20262906",
+      "bytes": 8447,
+      "sha256": "e561a2dcff9683a8ef14e79ff5a95b871ab3004d319f74f90a6eeb241ea07c2b"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-tdlambda-data-v1/20262906/proof-contract.json",
+      "member": "files/0006",
+      "role": "actual-TD-data-20262906",
+      "bytes": 8268,
+      "sha256": "ccde76c295c2fe1674dd169dbcdb37d3f7e6763b8b5da86b72afd1eeb2469a50"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-tdlambda-data-v1/20262906/provenance.json",
+      "member": "files/0007",
+      "role": "actual-TD-data-20262906",
+      "bytes": 307937,
+      "sha256": "7923f53a144e900ea9f6a0f3dbca996cd75329804c90a657d6bc15a34e7cbce1"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-tdlambda-fit-v1/20262905/audit-0.log",
+      "member": "files/0008",
+      "role": "actual-TD-fit-20262905",
+      "bytes": 53,
+      "sha256": "dc3e05800f22bf18940120d2b5eb8a7dfc2257059ba01d53db3a5a35e67f5dc5"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-tdlambda-fit-v1/20262905/audit-1.log",
+      "member": "files/0009",
+      "role": "actual-TD-fit-20262905",
+      "bytes": 54,
+      "sha256": "4d7810e2817a917f5f083fd0d51c357644f2e4769d9972986e0e1565b7bc0ed3"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-tdlambda-fit-v1/20262905/result.json",
+      "member": "files/0010",
+      "role": "actual-TD-fit-20262905",
+      "bytes": 3512,
+      "sha256": "b2f312be415ddb744a0f5e823269fc0ad863bc89439fb562f718ba5168cbb60d"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-tdlambda-fit-v1/20262905/whole.log",
+      "member": "files/0011",
+      "role": "actual-TD-fit-20262905",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-tdlambda-fit-v1/20262905/whole/candidate.pt",
+      "member": "files/0012",
+      "role": "actual-TD-fit-20262905",
+      "bytes": 1584161,
+      "sha256": "c116bbe33891f04beda9de7541d0e0276b359b41c3c0acbd862458e7909eb1e6"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-tdlambda-fit-v1/20262905/whole/initial.pt",
+      "member": "files/0013",
+      "role": "actual-TD-fit-20262905",
+      "bytes": 3171217,
+      "sha256": "7902608a351e5cedf6f6e0615ebfebcb71c343b7f2df5eec2524702dfe788029"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-tdlambda-fit-v1/20262905/whole/native.pt",
+      "member": "files/0014",
+      "role": "actual-TD-fit-20262905",
+      "bytes": 6319539,
+      "sha256": "2785c9680d9ec0af4cf08d061dc08fceb0f70fc3b00554d2f7374d0f12f0cf58"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-tdlambda-fit-v1/20262905/whole/result.json",
+      "member": "files/0015",
+      "role": "actual-TD-fit-20262905",
+      "bytes": 171,
+      "sha256": "3f32652cf9c2d476d850a8cd5b3b034d54bbae120fd20ca08f970125698c2ea4"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-tdlambda-fit-v1/20262906/audit-0.log",
+      "member": "files/0016",
+      "role": "actual-TD-fit-20262906",
+      "bytes": 53,
+      "sha256": "dc3e05800f22bf18940120d2b5eb8a7dfc2257059ba01d53db3a5a35e67f5dc5"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-tdlambda-fit-v1/20262906/audit-1.log",
+      "member": "files/0017",
+      "role": "actual-TD-fit-20262906",
+      "bytes": 54,
+      "sha256": "4d7810e2817a917f5f083fd0d51c357644f2e4769d9972986e0e1565b7bc0ed3"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-tdlambda-fit-v1/20262906/result.json",
+      "member": "files/0018",
+      "role": "actual-TD-fit-20262906",
+      "bytes": 3515,
+      "sha256": "fd6c85ff5f5500f5c1016c6a64209ed1a3c533130987eabab82b37af1f03e716"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-tdlambda-fit-v1/20262906/whole.log",
+      "member": "files/0019",
+      "role": "actual-TD-fit-20262906",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-tdlambda-fit-v1/20262906/whole/candidate.pt",
+      "member": "files/0020",
+      "role": "actual-TD-fit-20262906",
+      "bytes": 1584161,
+      "sha256": "fd3b233971becc466976c3a0300dde6cb5360ebbf9fe33ecac292c7b28163076"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-tdlambda-fit-v1/20262906/whole/initial.pt",
+      "member": "files/0021",
+      "role": "actual-TD-fit-20262906",
+      "bytes": 3171281,
+      "sha256": "43f44a812456e82f0a8436877052f116827c151102001f1991cffcea38bd6307"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-tdlambda-fit-v1/20262906/whole/native.pt",
+      "member": "files/0022",
+      "role": "actual-TD-fit-20262906",
+      "bytes": 6319539,
+      "sha256": "f401cda061a25795e9e17e029177f1c0252c1205bffdc2fe552f155f9e5800a6"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-tdlambda-fit-v1/20262906/whole/result.json",
+      "member": "files/0023",
+      "role": "actual-TD-fit-20262906",
+      "bytes": 171,
+      "sha256": "1ffae6054064a44e0cc586cb5ed9547ff3e137c8eab2c7f69a176a15024191e3"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-tdlambda-proof-v1/20262905/audit-0.log",
+      "member": "files/0024",
+      "role": "actual-TD-proof-20262905",
+      "bytes": 53,
+      "sha256": "dc3e05800f22bf18940120d2b5eb8a7dfc2257059ba01d53db3a5a35e67f5dc5"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-tdlambda-proof-v1/20262905/audit-1.log",
+      "member": "files/0025",
+      "role": "actual-TD-proof-20262905",
+      "bytes": 53,
+      "sha256": "9d4272e765c07a97e7bb9e5d6a42eeb76c045df821203791a1f803f2d30f472f"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-tdlambda-proof-v1/20262905/audit-2.log",
+      "member": "files/0026",
+      "role": "actual-TD-proof-20262905",
+      "bytes": 53,
+      "sha256": "dc3e05800f22bf18940120d2b5eb8a7dfc2257059ba01d53db3a5a35e67f5dc5"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-tdlambda-proof-v1/20262905/audit-3.log",
+      "member": "files/0027",
+      "role": "actual-TD-proof-20262905",
+      "bytes": 53,
+      "sha256": "3ccd8d2859f79e9b575f37c8ef9144929baa52942fd68af1f4125c28a44db120"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-tdlambda-proof-v1/20262905/audit-4.log",
+      "member": "files/0028",
+      "role": "actual-TD-proof-20262905",
+      "bytes": 53,
+      "sha256": "3ccd8d2859f79e9b575f37c8ef9144929baa52942fd68af1f4125c28a44db120"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-tdlambda-proof-v1/20262905/audit-5.log",
+      "member": "files/0029",
+      "role": "actual-TD-proof-20262905",
+      "bytes": 53,
+      "sha256": "9d4272e765c07a97e7bb9e5d6a42eeb76c045df821203791a1f803f2d30f472f"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-tdlambda-proof-v1/20262905/pause.log",
+      "member": "files/0030",
+      "role": "actual-TD-proof-20262905",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-tdlambda-proof-v1/20262905/pause/initial.pt",
+      "member": "files/0031",
+      "role": "actual-TD-proof-20262905",
+      "bytes": 3171025,
+      "sha256": "ea04b5796c2d79cd4627dfa4fbba2b71abb54bbbf29a87d432fc4e99b9344e37"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-tdlambda-proof-v1/20262905/pause/native.pt",
+      "member": "files/0032",
+      "role": "actual-TD-proof-20262905",
+      "bytes": 6319347,
+      "sha256": "674dce227239360ccc8dd8a8f8cbde6ea9a465a2e3f12fc76f0dd77e3f91d605"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-tdlambda-proof-v1/20262905/pause/result.json",
+      "member": "files/0033",
+      "role": "actual-TD-proof-20262905",
+      "bytes": 169,
+      "sha256": "35e36b45190c29d087f9ce3b2d27fcc2f0d73288ae36b85ca0732aac51851a15"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-tdlambda-proof-v1/20262905/result.json",
+      "member": "files/0034",
+      "role": "actual-TD-proof-20262905",
+      "bytes": 8927,
+      "sha256": "6c377fe449d92e32631b691376b13f1282c92f32b41e5f44c13a2d6826f396b2"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-tdlambda-proof-v1/20262905/resume.log",
+      "member": "files/0035",
+      "role": "actual-TD-proof-20262905",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-tdlambda-proof-v1/20262905/resume/initial.pt",
+      "member": "files/0036",
+      "role": "actual-TD-proof-20262905",
+      "bytes": 6319347,
+      "sha256": "c823fee983decb3e353a101710226592d8095d9a75c05f608ddcfb308622f7cf"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-tdlambda-proof-v1/20262905/resume/native.pt",
+      "member": "files/0037",
+      "role": "actual-TD-proof-20262905",
+      "bytes": 6319347,
+      "sha256": "2479c3cfd19fc859bfb3f65c94492449e91be079e345fff2b5244495d7f22df9"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-tdlambda-proof-v1/20262905/resume/result.json",
+      "member": "files/0038",
+      "role": "actual-TD-proof-20262905",
+      "bytes": 170,
+      "sha256": "23e3ccb51502e73d85ab55998007bb756e3f05a548c62adb65c2f36efc1d8d9e"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-tdlambda-proof-v1/20262905/whole.log",
+      "member": "files/0039",
+      "role": "actual-TD-proof-20262905",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-tdlambda-proof-v1/20262905/whole/initial.pt",
+      "member": "files/0040",
+      "role": "actual-TD-proof-20262905",
+      "bytes": 3171025,
+      "sha256": "ea04b5796c2d79cd4627dfa4fbba2b71abb54bbbf29a87d432fc4e99b9344e37"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-tdlambda-proof-v1/20262905/whole/native.pt",
+      "member": "files/0041",
+      "role": "actual-TD-proof-20262905",
+      "bytes": 6319347,
+      "sha256": "eb5a953ddc3c59f3633b450fb54183bdc2db4e165d91815ea445332e6f0b4e71"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-tdlambda-proof-v1/20262905/whole/result.json",
+      "member": "files/0042",
+      "role": "actual-TD-proof-20262905",
+      "bytes": 170,
+      "sha256": "9cba65dac09f7fb58a0051ed7f965720c2aada6f190c6560806236242c1732cc"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-tdlambda-proof-v1/20262906/audit-0.log",
+      "member": "files/0043",
+      "role": "actual-TD-proof-20262906",
+      "bytes": 53,
+      "sha256": "dc3e05800f22bf18940120d2b5eb8a7dfc2257059ba01d53db3a5a35e67f5dc5"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-tdlambda-proof-v1/20262906/audit-1.log",
+      "member": "files/0044",
+      "role": "actual-TD-proof-20262906",
+      "bytes": 53,
+      "sha256": "9d4272e765c07a97e7bb9e5d6a42eeb76c045df821203791a1f803f2d30f472f"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-tdlambda-proof-v1/20262906/audit-2.log",
+      "member": "files/0045",
+      "role": "actual-TD-proof-20262906",
+      "bytes": 53,
+      "sha256": "dc3e05800f22bf18940120d2b5eb8a7dfc2257059ba01d53db3a5a35e67f5dc5"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-tdlambda-proof-v1/20262906/audit-3.log",
+      "member": "files/0046",
+      "role": "actual-TD-proof-20262906",
+      "bytes": 53,
+      "sha256": "3ccd8d2859f79e9b575f37c8ef9144929baa52942fd68af1f4125c28a44db120"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-tdlambda-proof-v1/20262906/audit-4.log",
+      "member": "files/0047",
+      "role": "actual-TD-proof-20262906",
+      "bytes": 53,
+      "sha256": "3ccd8d2859f79e9b575f37c8ef9144929baa52942fd68af1f4125c28a44db120"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-tdlambda-proof-v1/20262906/audit-5.log",
+      "member": "files/0048",
+      "role": "actual-TD-proof-20262906",
+      "bytes": 53,
+      "sha256": "9d4272e765c07a97e7bb9e5d6a42eeb76c045df821203791a1f803f2d30f472f"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-tdlambda-proof-v1/20262906/pause.log",
+      "member": "files/0049",
+      "role": "actual-TD-proof-20262906",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-tdlambda-proof-v1/20262906/pause/initial.pt",
+      "member": "files/0050",
+      "role": "actual-TD-proof-20262906",
+      "bytes": 3171089,
+      "sha256": "a849ccfca362505d4b585ff9c93b7c3cd8f3e7c842f812215a781dc65d13adc2"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-tdlambda-proof-v1/20262906/pause/native.pt",
+      "member": "files/0051",
+      "role": "actual-TD-proof-20262906",
+      "bytes": 6319347,
+      "sha256": "5f87bb8734ec379b3f66a032f12c8f746a5c274d76e9dfd9f8d86e031382819f"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-tdlambda-proof-v1/20262906/pause/result.json",
+      "member": "files/0052",
+      "role": "actual-TD-proof-20262906",
+      "bytes": 169,
+      "sha256": "4b975a1ca2028d5363218f534155dfbaf3de7210d5f2206bd714e9402ff771cf"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-tdlambda-proof-v1/20262906/result.json",
+      "member": "files/0053",
+      "role": "actual-TD-proof-20262906",
+      "bytes": 8928,
+      "sha256": "2b8e47579252640de6138333ea4f3b6dd1cf74703b86e9cdd0ad8ab8f55c75ba"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-tdlambda-proof-v1/20262906/resume.log",
+      "member": "files/0054",
+      "role": "actual-TD-proof-20262906",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-tdlambda-proof-v1/20262906/resume/initial.pt",
+      "member": "files/0055",
+      "role": "actual-TD-proof-20262906",
+      "bytes": 6319347,
+      "sha256": "4bb7e4e4f0e3c52be8677e7377ac2913c7dcac178e1839bca94c3dc09379c112"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-tdlambda-proof-v1/20262906/resume/native.pt",
+      "member": "files/0056",
+      "role": "actual-TD-proof-20262906",
+      "bytes": 6319347,
+      "sha256": "45be52c3d84d27647479c5fc6a07aa34da8b2953b10ba49521b75f63415f2801"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-tdlambda-proof-v1/20262906/resume/result.json",
+      "member": "files/0057",
+      "role": "actual-TD-proof-20262906",
+      "bytes": 170,
+      "sha256": "02a0183b90f269f91a54336112cbc9e89693e80c444d90faafe94d130d51abd0"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-tdlambda-proof-v1/20262906/whole.log",
+      "member": "files/0058",
+      "role": "actual-TD-proof-20262906",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-tdlambda-proof-v1/20262906/whole/initial.pt",
+      "member": "files/0059",
+      "role": "actual-TD-proof-20262906",
+      "bytes": 3171089,
+      "sha256": "a849ccfca362505d4b585ff9c93b7c3cd8f3e7c842f812215a781dc65d13adc2"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-tdlambda-proof-v1/20262906/whole/native.pt",
+      "member": "files/0060",
+      "role": "actual-TD-proof-20262906",
+      "bytes": 6319347,
+      "sha256": "1f9df98b1bb550c9783a34595d0d7f21a49bcfb16d4b757c35016810b8b3896d"
+    },
+    {
+      "path": "/dev/shm/harbichess-NNUE-tdlambda-proof-v1/20262906/whole/result.json",
+      "member": "files/0061",
+      "role": "actual-TD-proof-20262906",
+      "bytes": 169,
+      "sha256": "9963c4805da74700a2fe826f18409312f302242954e98b4e06b8844792d407c4"
+    },
+    {
+      "path": "/dev/shm/harbichess-continuation-20261007/known160-e8-wiring-recovery-data/arena/20262905-e8-vs-SF512.invocation.json",
+      "member": "files/0062",
+      "role": "closed-known160-actual",
+      "bytes": 1160,
+      "sha256": "9526ab8592eab8cacd3bbde14389902681f494d1dba2d386cb8a45639ecd07d7"
+    },
+    {
+      "path": "/dev/shm/harbichess-continuation-20261007/known160-e8-wiring-recovery-data/arena/20262905-e8-vs-SF512.json",
+      "member": "files/0063",
+      "role": "closed-known160-actual",
+      "bytes": 306139,
+      "sha256": "e14d7484f5afe2a46613c2ca15e20485b2d09b74fb95b03243023c7dcf9fc19e"
+    },
+    {
+      "path": "/dev/shm/harbichess-continuation-20261007/known160-e8-wiring-recovery-data/arena/20262905-e8-vs-SF512.owner-result.json",
+      "member": "files/0064",
+      "role": "closed-known160-actual",
+      "bytes": 1343,
+      "sha256": "2aa5c89795fa04a608d6c87e360c7d029d08cfda1cf40ddf13a37f23cdd61e73"
+    },
+    {
+      "path": "/dev/shm/harbichess-continuation-20261007/known160-e8-wiring-recovery-data/arena/20262905-e8-vs-SF512.progress.jsonl",
+      "member": "files/0065",
+      "role": "closed-known160-actual",
+      "bytes": 241910,
+      "sha256": "0049ca67f1de48bcf809f531f87eb5bed95c8ea8e7869615f7d634c606ce1b19"
+    },
+    {
+      "path": "/dev/shm/harbichess-continuation-20261007/known160-e8-wiring-recovery-data/arena/20262905-e8-vs-SF512.stderr.log",
+      "member": "files/0066",
+      "role": "closed-known160-actual",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/dev/shm/harbichess-continuation-20261007/known160-e8-wiring-recovery-data/arena/20262905-e8-vs-SF512.stdout.log",
+      "member": "files/0067",
+      "role": "closed-known160-actual",
+      "bytes": 504,
+      "sha256": "50b4c93aa21469bb838e2edb44be99fc4741bfc51c2572fad837edf431bd91b5"
+    },
+    {
+      "path": "/dev/shm/harbichess-continuation-20261007/known160-e8-wiring-recovery-data/arena/20262905-learned-vs-SF512.invocation.json",
+      "member": "files/0068",
+      "role": "closed-known160-actual",
+      "bytes": 1130,
+      "sha256": "18a8c12f69f11366eba6fb080e7029f298e33c5f54c46eb1b3f0440fbee90d62"
+    },
+    {
+      "path": "/dev/shm/harbichess-continuation-20261007/known160-e8-wiring-recovery-data/arena/20262905-learned-vs-SF512.json",
+      "member": "files/0069",
+      "role": "closed-known160-actual",
+      "bytes": 292558,
+      "sha256": "7d04e71e63d2a51a350723193676cf8d2d5c502e5189c3fccf7e623923346afb"
+    },
+    {
+      "path": "/dev/shm/harbichess-continuation-20261007/known160-e8-wiring-recovery-data/arena/20262905-learned-vs-SF512.owner-result.json",
+      "member": "files/0070",
+      "role": "closed-known160-actual",
+      "bytes": 1315,
+      "sha256": "a9443fcf9aded914e47be335ba92d241358dd93053dd3a9f878546e1385ef107"
+    },
+    {
+      "path": "/dev/shm/harbichess-continuation-20261007/known160-e8-wiring-recovery-data/arena/20262905-learned-vs-SF512.progress.jsonl",
+      "member": "files/0071",
+      "role": "closed-known160-actual",
+      "bytes": 231157,
+      "sha256": "846ced4dbfb4e23c5108271c7ef4ce4f08a8b53f368567df2a2365bda5f65bd5"
+    },
+    {
+      "path": "/dev/shm/harbichess-continuation-20261007/known160-e8-wiring-recovery-data/arena/20262905-learned-vs-SF512.stderr.log",
+      "member": "files/0072",
+      "role": "closed-known160-actual",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/dev/shm/harbichess-continuation-20261007/known160-e8-wiring-recovery-data/arena/20262905-learned-vs-SF512.stdout.log",
+      "member": "files/0073",
+      "role": "closed-known160-actual",
+      "bytes": 520,
+      "sha256": "0f79bb5189082831027baed22a610d7ee4d52dc8845f3344788d8c336d6187b2"
+    },
+    {
+      "path": "/dev/shm/harbichess-continuation-20261007/known160-e8-wiring-recovery-data/arena/20262905-learned-vs-e8.invocation.json",
+      "member": "files/0074",
+      "role": "closed-known160-actual",
+      "bytes": 1224,
+      "sha256": "5b6f33f991fdfcb9680ebef22774b94397239636f1b1d4f92923a35149627456"
+    },
+    {
+      "path": "/dev/shm/harbichess-continuation-20261007/known160-e8-wiring-recovery-data/arena/20262905-learned-vs-e8.json",
+      "member": "files/0075",
+      "role": "closed-known160-actual",
+      "bytes": 556048,
+      "sha256": "04afee44b37338c72e4cd84076c513b320f9e2889bb737322306f65794e3175d"
+    },
+    {
+      "path": "/dev/shm/harbichess-continuation-20261007/known160-e8-wiring-recovery-data/arena/20262905-learned-vs-e8.owner-result.json",
+      "member": "files/0076",
+      "role": "closed-known160-actual",
+      "bytes": 1409,
+      "sha256": "7a700a2aa5ece29b77a26f21be9dbf605e0520f07629dad2211de37d1ad3639c"
+    },
+    {
+      "path": "/dev/shm/harbichess-continuation-20261007/known160-e8-wiring-recovery-data/arena/20262905-learned-vs-e8.progress.jsonl",
+      "member": "files/0077",
+      "role": "closed-known160-actual",
+      "bytes": 424272,
+      "sha256": "2c14d71946c8215e0afaade18e72195056e5669c9ed6609fa3eb1930869774c2"
+    },
+    {
+      "path": "/dev/shm/harbichess-continuation-20261007/known160-e8-wiring-recovery-data/arena/20262905-learned-vs-e8.stderr.log",
+      "member": "files/0078",
+      "role": "closed-known160-actual",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/dev/shm/harbichess-continuation-20261007/known160-e8-wiring-recovery-data/arena/20262905-learned-vs-e8.stdout.log",
+      "member": "files/0079",
+      "role": "closed-known160-actual",
+      "bytes": 518,
+      "sha256": "0f6e3d3fd9958836b8cdaab49909fc29eda7d0c4e3d7feaf6c1a98fb2fed7fa7"
+    },
+    {
+      "path": "/dev/shm/harbichess-continuation-20261007/known160-e8-wiring-recovery-data/arena/20262905-learned-vs-parent.invocation.json",
+      "member": "files/0080",
+      "role": "closed-known160-actual",
+      "bytes": 1195,
+      "sha256": "9e53983447704f3f00bc2332adebfbb0cd18325eb30a319d96274fcde3363588"
+    },
+    {
+      "path": "/dev/shm/harbichess-continuation-20261007/known160-e8-wiring-recovery-data/arena/20262905-learned-vs-parent.json",
+      "member": "files/0081",
+      "role": "closed-known160-actual",
+      "bytes": 696014,
+      "sha256": "9a25924fece1485d105cad903967f65af1a47043eca25bc221efadad11ce3f2f"
+    },
+    {
+      "path": "/dev/shm/harbichess-continuation-20261007/known160-e8-wiring-recovery-data/arena/20262905-learned-vs-parent.owner-result.json",
+      "member": "files/0082",
+      "role": "closed-known160-actual",
+      "bytes": 1380,
+      "sha256": "38bb28d9355f34c45f8a0c62c81d5aa99a03779ac99f4936b7779f02c7a1ff45"
+    },
+    {
+      "path": "/dev/shm/harbichess-continuation-20261007/known160-e8-wiring-recovery-data/arena/20262905-learned-vs-parent.progress.jsonl",
+      "member": "files/0083",
+      "role": "closed-known160-actual",
+      "bytes": 532032,
+      "sha256": "c8167ad20c6b7e6b4b54f6ad8f214c4dd91c735642c0deacbd55735a3cdd4dea"
+    },
+    {
+      "path": "/dev/shm/harbichess-continuation-20261007/known160-e8-wiring-recovery-data/arena/20262905-learned-vs-parent.stderr.log",
+      "member": "files/0084",
+      "role": "closed-known160-actual",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/dev/shm/harbichess-continuation-20261007/known160-e8-wiring-recovery-data/arena/20262905-learned-vs-parent.stdout.log",
+      "member": "files/0085",
+      "role": "closed-known160-actual",
+      "bytes": 524,
+      "sha256": "3588910b6e9d25f19b5b3ffdb7a99b68e71747021115f9bc28fd708010630f26"
+    },
+    {
+      "path": "/dev/shm/harbichess-continuation-20261007/known160-e8-wiring-recovery-data/arena/20262905-parent-vs-SF512.invocation.json",
+      "member": "files/0086",
+      "role": "closed-known160-actual",
+      "bytes": 1128,
+      "sha256": "2063b2ae41a38c2167f15d674f4129984a330da63c253eb8e20ef7349b313882"
+    },
+    {
+      "path": "/dev/shm/harbichess-continuation-20261007/known160-e8-wiring-recovery-data/arena/20262905-parent-vs-SF512.json",
+      "member": "files/0087",
+      "role": "closed-known160-actual",
+      "bytes": 267606,
+      "sha256": "b9d75079c86918ce66a0c4e1ae66533fb44abf32ff5df1cbd0dee4dc3126fe8d"
+    },
+    {
+      "path": "/dev/shm/harbichess-continuation-20261007/known160-e8-wiring-recovery-data/arena/20262905-parent-vs-SF512.owner-result.json",
+      "member": "files/0088",
+      "role": "closed-known160-actual",
+      "bytes": 1313,
+      "sha256": "673de95e4b249e22163e6a0cf25ee97361e3dda49223decbf5b54b32120446cf"
+    },
+    {
+      "path": "/dev/shm/harbichess-continuation-20261007/known160-e8-wiring-recovery-data/arena/20262905-parent-vs-SF512.progress.jsonl",
+      "member": "files/0089",
+      "role": "closed-known160-actual",
+      "bytes": 211373,
+      "sha256": "8d48ffd66d2f0d6aa061de60c4f77a0d72936068c2cf1b7beb06e47792df4339"
+    },
+    {
+      "path": "/dev/shm/harbichess-continuation-20261007/known160-e8-wiring-recovery-data/arena/20262905-parent-vs-SF512.stderr.log",
+      "member": "files/0090",
+      "role": "closed-known160-actual",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/dev/shm/harbichess-continuation-20261007/known160-e8-wiring-recovery-data/arena/20262905-parent-vs-SF512.stdout.log",
+      "member": "files/0091",
+      "role": "closed-known160-actual",
+      "bytes": 504,
+      "sha256": "50b4c93aa21469bb838e2edb44be99fc4741bfc51c2572fad837edf431bd91b5"
+    },
+    {
+      "path": "/dev/shm/harbichess-continuation-20261007/known160-e8-wiring-recovery-data/arena/20262906-e8-vs-SF512.invocation.json",
+      "member": "files/0092",
+      "role": "closed-known160-actual",
+      "bytes": 1160,
+      "sha256": "df1940a887d5848ca31a48b5916165ca481ed9fe1a973f5a0efd8f84b3bbd1af"
+    },
+    {
+      "path": "/dev/shm/harbichess-continuation-20261007/known160-e8-wiring-recovery-data/arena/20262906-e8-vs-SF512.json",
+      "member": "files/0093",
+      "role": "closed-known160-actual",
+      "bytes": 306142,
+      "sha256": "cde0ed08eb959740239e2a2ce2d69714e725ebe2db814d57e6b9102acdd07e0f"
+    },
+    {
+      "path": "/dev/shm/harbichess-continuation-20261007/known160-e8-wiring-recovery-data/arena/20262906-e8-vs-SF512.owner-result.json",
+      "member": "files/0094",
+      "role": "closed-known160-actual",
+      "bytes": 1345,
+      "sha256": "198a0d4c943600ef0b436b9ebbc7837196eb1aca193db8a1b41b5bc788bc0807"
+    },
+    {
+      "path": "/dev/shm/harbichess-continuation-20261007/known160-e8-wiring-recovery-data/arena/20262906-e8-vs-SF512.progress.jsonl",
+      "member": "files/0095",
+      "role": "closed-known160-actual",
+      "bytes": 241913,
+      "sha256": "7730c88b80434177e0d143635372ce1b8d661c322e1c76fd0a99b77b923ff39b"
+    },
+    {
+      "path": "/dev/shm/harbichess-continuation-20261007/known160-e8-wiring-recovery-data/arena/20262906-e8-vs-SF512.stderr.log",
+      "member": "files/0096",
+      "role": "closed-known160-actual",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/dev/shm/harbichess-continuation-20261007/known160-e8-wiring-recovery-data/arena/20262906-e8-vs-SF512.stdout.log",
+      "member": "files/0097",
+      "role": "closed-known160-actual",
+      "bytes": 504,
+      "sha256": "50b4c93aa21469bb838e2edb44be99fc4741bfc51c2572fad837edf431bd91b5"
+    },
+    {
+      "path": "/dev/shm/harbichess-continuation-20261007/known160-e8-wiring-recovery-data/arena/20262906-learned-vs-SF512.invocation.json",
+      "member": "files/0098",
+      "role": "closed-known160-actual",
+      "bytes": 1130,
+      "sha256": "b2a08ad93c4453197314337714d652cbaa6b3caf80dd3c3570ae6f7c6fae2341"
+    },
+    {
+      "path": "/dev/shm/harbichess-continuation-20261007/known160-e8-wiring-recovery-data/arena/20262906-learned-vs-SF512.json",
+      "member": "files/0099",
+      "role": "closed-known160-actual",
+      "bytes": 339136,
+      "sha256": "eefcc2a4011f0ddae56df880eccd2631b011139816c431cb229bc4841dd2f888"
+    },
+    {
+      "path": "/dev/shm/harbichess-continuation-20261007/known160-e8-wiring-recovery-data/arena/20262906-learned-vs-SF512.owner-result.json",
+      "member": "files/0100",
+      "role": "closed-known160-actual",
+      "bytes": 1313,
+      "sha256": "3853f60c6aa26fe3e3a2ab91b543b5ce9d01e888e4a3b2d469b2513acbfad7ff"
+    },
+    {
+      "path": "/dev/shm/harbichess-continuation-20261007/known160-e8-wiring-recovery-data/arena/20262906-learned-vs-SF512.progress.jsonl",
+      "member": "files/0101",
+      "role": "closed-known160-actual",
+      "bytes": 268305,
+      "sha256": "3a930e69b494a4d38238c14537651ad14bc58d0a2799efcd2186507fd900af60"
+    },
+    {
+      "path": "/dev/shm/harbichess-continuation-20261007/known160-e8-wiring-recovery-data/arena/20262906-learned-vs-SF512.stderr.log",
+      "member": "files/0102",
+      "role": "closed-known160-actual",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/dev/shm/harbichess-continuation-20261007/known160-e8-wiring-recovery-data/arena/20262906-learned-vs-SF512.stdout.log",
+      "member": "files/0103",
+      "role": "closed-known160-actual",
+      "bytes": 518,
+      "sha256": "04967931cf6d0e32bc81736910cb715193abf089a6f0791fd899ecdb70880131"
+    },
+    {
+      "path": "/dev/shm/harbichess-continuation-20261007/known160-e8-wiring-recovery-data/arena/20262906-learned-vs-e8.invocation.json",
+      "member": "files/0104",
+      "role": "closed-known160-actual",
+      "bytes": 1224,
+      "sha256": "72b89e6c4a7f00bbd1f82e4189dd357804509f545ac2482f1fadbea04be33cde"
+    },
+    {
+      "path": "/dev/shm/harbichess-continuation-20261007/known160-e8-wiring-recovery-data/arena/20262906-learned-vs-e8.json",
+      "member": "files/0105",
+      "role": "closed-known160-actual",
+      "bytes": 627775,
+      "sha256": "717cfdc5528b8551ed197f6eb16075c1d54a15f7d14a5bc263ccb481f08f0b0b"
+    },
+    {
+      "path": "/dev/shm/harbichess-continuation-20261007/known160-e8-wiring-recovery-data/arena/20262906-learned-vs-e8.owner-result.json",
+      "member": "files/0106",
+      "role": "closed-known160-actual",
+      "bytes": 1409,
+      "sha256": "d3db9a8f9660cf25ddbe98674b6823cf4e54826b532f6ec2ce5a4aa2fa1adc54"
+    },
+    {
+      "path": "/dev/shm/harbichess-continuation-20261007/known160-e8-wiring-recovery-data/arena/20262906-learned-vs-e8.progress.jsonl",
+      "member": "files/0107",
+      "role": "closed-known160-actual",
+      "bytes": 479340,
+      "sha256": "8a5225cc8786e54ac24716da0690e642fe810e38ba9a0da991e21e57ffa25085"
+    },
+    {
+      "path": "/dev/shm/harbichess-continuation-20261007/known160-e8-wiring-recovery-data/arena/20262906-learned-vs-e8.stderr.log",
+      "member": "files/0108",
+      "role": "closed-known160-actual",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/dev/shm/harbichess-continuation-20261007/known160-e8-wiring-recovery-data/arena/20262906-learned-vs-e8.stdout.log",
+      "member": "files/0109",
+      "role": "closed-known160-actual",
+      "bytes": 522,
+      "sha256": "0e3540e401e6aa66c5e24881dd95a0e1b93fa4a7e6de149388fbadcadd0d5614"
+    },
+    {
+      "path": "/dev/shm/harbichess-continuation-20261007/known160-e8-wiring-recovery-data/arena/20262906-learned-vs-parent.invocation.json",
+      "member": "files/0110",
+      "role": "closed-known160-actual",
+      "bytes": 1195,
+      "sha256": "bb92f9cf921729397b17e47b36485dd0b87c2eb6a9ff7e5618fa6694b8e7ddff"
+    },
+    {
+      "path": "/dev/shm/harbichess-continuation-20261007/known160-e8-wiring-recovery-data/arena/20262906-learned-vs-parent.json",
+      "member": "files/0111",
+      "role": "closed-known160-actual",
+      "bytes": 740271,
+      "sha256": "36d74622ad4e1ed73c934adfb5fcd50d4fc933a924bf04c8cbdfcb80f16827a7"
+    },
+    {
+      "path": "/dev/shm/harbichess-continuation-20261007/known160-e8-wiring-recovery-data/arena/20262906-learned-vs-parent.owner-result.json",
+      "member": "files/0112",
+      "role": "closed-known160-actual",
+      "bytes": 1380,
+      "sha256": "0b8ef7985090a83cbfcec49cd4f56a650cb23d782f19d02a93a68a67d29cfbde"
+    },
+    {
+      "path": "/dev/shm/harbichess-continuation-20261007/known160-e8-wiring-recovery-data/arena/20262906-learned-vs-parent.progress.jsonl",
+      "member": "files/0113",
+      "role": "closed-known160-actual",
+      "bytes": 566016,
+      "sha256": "e122b87dfa5f2826f648372c956396d7daba3c4e10fc5753b381e4e006fe6f69"
+    },
+    {
+      "path": "/dev/shm/harbichess-continuation-20261007/known160-e8-wiring-recovery-data/arena/20262906-learned-vs-parent.stderr.log",
+      "member": "files/0114",
+      "role": "closed-known160-actual",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/dev/shm/harbichess-continuation-20261007/known160-e8-wiring-recovery-data/arena/20262906-learned-vs-parent.stdout.log",
+      "member": "files/0115",
+      "role": "closed-known160-actual",
+      "bytes": 522,
+      "sha256": "47e18845c2f1c7edda2ce91b5f353fd83938d8ef429f731f9caa248ca3c7e245"
+    },
+    {
+      "path": "/dev/shm/harbichess-continuation-20261007/known160-e8-wiring-recovery-data/arena/20262906-parent-vs-SF512.invocation.json",
+      "member": "files/0116",
+      "role": "closed-known160-actual",
+      "bytes": 1131,
+      "sha256": "ad673ad737f8efff15007a2457077d2ae18ebdca6357b49593ecaf6cb310ad85"
+    },
+    {
+      "path": "/dev/shm/harbichess-continuation-20261007/known160-e8-wiring-recovery-data/arena/20262906-parent-vs-SF512.json",
+      "member": "files/0117",
+      "role": "closed-known160-actual",
+      "bytes": 298540,
+      "sha256": "9df2d6355a47199c8c002e083692a86e82662995b372c89ee34c060d1ccb5d6f"
+    },
+    {
+      "path": "/dev/shm/harbichess-continuation-20261007/known160-e8-wiring-recovery-data/arena/20262906-parent-vs-SF512.owner-result.json",
+      "member": "files/0118",
+      "role": "closed-known160-actual",
+      "bytes": 1315,
+      "sha256": "e87bc9fd1329b07b5a99f5c4d92e7c060097b0afbb9569ee808ad750040f44e5"
+    },
+    {
+      "path": "/dev/shm/harbichess-continuation-20261007/known160-e8-wiring-recovery-data/arena/20262906-parent-vs-SF512.progress.jsonl",
+      "member": "files/0119",
+      "role": "closed-known160-actual",
+      "bytes": 235930,
+      "sha256": "3eadd32fe4f8ac71e6fb2bd12f02b22598975ea0ad26d079c22fbf3f399c47eb"
+    },
+    {
+      "path": "/dev/shm/harbichess-continuation-20261007/known160-e8-wiring-recovery-data/arena/20262906-parent-vs-SF512.stderr.log",
+      "member": "files/0120",
+      "role": "closed-known160-actual",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/dev/shm/harbichess-continuation-20261007/known160-e8-wiring-recovery-data/arena/20262906-parent-vs-SF512.stdout.log",
+      "member": "files/0121",
+      "role": "closed-known160-actual",
+      "bytes": 520,
+      "sha256": "bafdcd874c367e35a5f2b444a66b943568bced10c948a6ae4da5366fd00719db"
+    },
+    {
+      "path": "/dev/shm/harbichess-continuation-20261007/known160-e8-wiring-recovery-data/arena/cohort-result.json",
+      "member": "files/0122",
+      "role": "closed-known160-actual",
+      "bytes": 15712,
+      "sha256": "afbe313cb58901ef78053b8924f600ac8bf25f37cbc9d9232b9d2b3bf3df507e"
+    },
+    {
+      "path": "/dev/shm/harbichess-continuation-20261007/known160-e8-wiring-recovery-data/arena/owner-contract.json",
+      "member": "files/0123",
+      "role": "closed-known160-actual",
+      "bytes": 754,
+      "sha256": "9d88b4d06083db3d57c07dc68770aed308ae7a7fe1672910b5d8294d15f3a89c"
+    },
+    {
+      "path": "/dev/shm/harbichess-continuation-20261007/known160-e8-wiring-recovery-data/arena/resource-admission.json",
+      "member": "files/0124",
+      "role": "closed-known160-actual",
+      "bytes": 84,
+      "sha256": "d3fe25a17f567474be5b476a829419fa08ed751682214013a754f63e8068fb2f"
+    },
+    {
+      "path": "/dev/shm/harbichess-continuation-20261007/known160-e8-wiring-recovery-data/arena/strict-own-parent-native-admission.json",
+      "member": "files/0125",
+      "role": "closed-known160-actual",
+      "bytes": 1053,
+      "sha256": "1bf0df419d4ece12b40930f8b6dcbd96da40f5ad63d433b359e7ab2e43a38cab"
+    },
+    {
+      "path": "/workspace/HarbiChess/docs/runs/UFUK-DEVAM-ownQ-known160-FAIL-20261007.md",
+      "member": "files/0126",
+      "role": "interpretation-registration",
+      "bytes": 3576,
+      "sha256": "68d92b760ceef21bd5d5fd6d1668074cbbefe6c2a9a6d2014a1bb7acc3eb5b4b"
+    },
+    {
+      "path": "/workspace/HarbiChess/docs/runs/UFUK-DEVAM-target-ablation-preregistration-20261007.md",
+      "member": "files/0127",
+      "role": "interpretation-registration",
+      "bytes": 5059,
+      "sha256": "43bb89a2e56a440a467974a10c0c3e0fd6970ef447fd9ace3abb8b6533c114aa"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/MC-runtime-qualified-before-actual-commit-map.json",
+      "member": "files/0128",
+      "role": "source-or-commitmap",
+      "bytes": 2620,
+      "sha256": "eaae66f049d3fa86b5183000d711480a8d7eccf5697e33f7493f0206dafd29a7"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/execute_known160_audit.py",
+      "member": "files/0129",
+      "role": "source-or-commitmap",
+      "bytes": 2738,
+      "sha256": "4c260c3ed02efdbbff699f9438067ea471e82c36d2f10cf8eb328cff6d084efd"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/execute_tdlambda_chain.py",
+      "member": "files/0130",
+      "role": "source-or-commitmap",
+      "bytes": 9649,
+      "sha256": "f8aa90ea1b8186af7dcbaa8c90e7e06579a7ef96ef63776b4f28716d6f26505b"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/known160-fail-and-target-preregistration-commit-map.json",
+      "member": "files/0131",
+      "role": "source-or-commitmap",
+      "bytes": 2814,
+      "sha256": "4b490f018da74e3c10b04708bb4694092df9672265af7c9ad17333c534a507f7"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/known160-root-independent-audit/0.stderr.log",
+      "member": "files/0132",
+      "role": "ROOT-known160-fullaudit",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/known160-root-independent-audit/0.stdout.log",
+      "member": "files/0133",
+      "role": "ROOT-known160-fullaudit",
+      "bytes": 80,
+      "sha256": "6a2ba13cd529f1193a855b5d67797deb2fbf15b330720cf998bbdd4edc496180"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/known160-root-independent-audit/1.stderr.log",
+      "member": "files/0134",
+      "role": "ROOT-known160-fullaudit",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/known160-root-independent-audit/1.stdout.log",
+      "member": "files/0135",
+      "role": "ROOT-known160-fullaudit",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/known160-root-independent-audit/clock.json",
+      "member": "files/0136",
+      "role": "ROOT-known160-fullaudit",
+      "bytes": 235,
+      "sha256": "01e2e8f8b3a5739cba1ea5dc897328b3e06ebc3da3c927e5ed1c12a13d014799"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/known160-root-independent-audit/fullhistory.json",
+      "member": "files/0137",
+      "role": "ROOT-known160-fullaudit",
+      "bytes": 10002,
+      "sha256": "514cca1ac0de823f5ad73ddec2bcf80e420c54e507d268247239fe7ad464d89e"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/known160-root-independent-audit/registration.json",
+      "member": "files/0138",
+      "role": "ROOT-known160-fullaudit",
+      "bytes": 1539,
+      "sha256": "8f803bcd05f16c107e10d0bc5972827296f83bf86f92836f14f5fff0d09cd942"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/known160-root-independent-audit/result.json",
+      "member": "files/0139",
+      "role": "ROOT-known160-fullaudit",
+      "bytes": 1834,
+      "sha256": "80092a8e56426cc1d42a1359b582e81be0bef4793bae3ab69b74315c3b557c66"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/known160-root-independent-audit/six-actual-replays.json",
+      "member": "files/0140",
+      "role": "ROOT-known160-fullaudit",
+      "bytes": 2413,
+      "sha256": "47572297a3f52f30656c264e2e7c005b7a606e786f661a0ee7585b2b382b0037"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/tdlambda-actual-20262905/conversion-seal.json",
+      "member": "files/0141",
+      "role": "TD-ROOT-records-20262905",
+      "bytes": 3729,
+      "sha256": "97c7adeb2f54ef7e10318b511b73831138e82d34099f70be8de612cd2cdd1fb2"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/tdlambda-actual-20262905/convert.stderr.log",
+      "member": "files/0142",
+      "role": "TD-ROOT-records-20262905",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/tdlambda-actual-20262905/convert.stdout.log",
+      "member": "files/0143",
+      "role": "TD-ROOT-records-20262905",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/tdlambda-actual-20262905/fresh-fit-contract.stderr.log",
+      "member": "files/0144",
+      "role": "TD-ROOT-records-20262905",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/tdlambda-actual-20262905/fresh-fit-contract.stdout.log",
+      "member": "files/0145",
+      "role": "TD-ROOT-records-20262905",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/tdlambda-actual-20262905/fresh-fit-registration.json",
+      "member": "files/0146",
+      "role": "TD-ROOT-records-20262905",
+      "bytes": 3971,
+      "sha256": "346271366d7fb7429b30d50eea1408fc3ce5d10e59fe25c0435d888ea30c63e0"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/tdlambda-actual-20262905/fresh-fit-seal.json",
+      "member": "files/0147",
+      "role": "TD-ROOT-records-20262905",
+      "bytes": 6642,
+      "sha256": "45d1524a47b31d2e8644986751004c9d30172680eeb7438f0a410b2ff20108bf"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/tdlambda-actual-20262905/fresh-fit.stderr.log",
+      "member": "files/0148",
+      "role": "TD-ROOT-records-20262905",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/tdlambda-actual-20262905/fresh-fit.stdout.log",
+      "member": "files/0149",
+      "role": "TD-ROOT-records-20262905",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/tdlambda-actual-20262905/proof-contract.stderr.log",
+      "member": "files/0150",
+      "role": "TD-ROOT-records-20262905",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/tdlambda-actual-20262905/proof-contract.stdout.log",
+      "member": "files/0151",
+      "role": "TD-ROOT-records-20262905",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/tdlambda-actual-20262905/proof-registration.json",
+      "member": "files/0152",
+      "role": "TD-ROOT-records-20262905",
+      "bytes": 3967,
+      "sha256": "675c452f8421ed6217d71516cf72996934634c3bafff584263be7cf12955d002"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/tdlambda-actual-20262905/proof-seal.json",
+      "member": "files/0153",
+      "role": "TD-ROOT-records-20262905",
+      "bytes": 6279,
+      "sha256": "671a337e5c3ca8eea827d866d6faa50e202a27076e0ff191940f96d1562b5eb7"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/tdlambda-actual-20262905/proof.stderr.log",
+      "member": "files/0154",
+      "role": "TD-ROOT-records-20262905",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/tdlambda-actual-20262905/proof.stdout.log",
+      "member": "files/0155",
+      "role": "TD-ROOT-records-20262905",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/tdlambda-actual-20262905/registration.json",
+      "member": "files/0156",
+      "role": "TD-ROOT-records-20262905",
+      "bytes": 1873,
+      "sha256": "eb3245b07af3c6df71e550cc8912c5e72103b2fa1c5abc1889b174925fff5aed"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/tdlambda-actual-20262905/result.json",
+      "member": "files/0157",
+      "role": "TD-ROOT-records-20262905",
+      "bytes": 5874,
+      "sha256": "c4956bee41db398afa77082191ef0dc90de4be90b6e0c189249a07ad74558a29"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/tdlambda-actual-20262906/conversion-seal.json",
+      "member": "files/0158",
+      "role": "TD-ROOT-records-20262906",
+      "bytes": 3727,
+      "sha256": "4adc00f6821c2d1f40446b2291ea80ea44b558fb6aee7805476420fb1ccabf02"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/tdlambda-actual-20262906/convert.stderr.log",
+      "member": "files/0159",
+      "role": "TD-ROOT-records-20262906",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/tdlambda-actual-20262906/convert.stdout.log",
+      "member": "files/0160",
+      "role": "TD-ROOT-records-20262906",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/tdlambda-actual-20262906/fresh-fit-contract.stderr.log",
+      "member": "files/0161",
+      "role": "TD-ROOT-records-20262906",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/tdlambda-actual-20262906/fresh-fit-contract.stdout.log",
+      "member": "files/0162",
+      "role": "TD-ROOT-records-20262906",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/tdlambda-actual-20262906/fresh-fit-registration.json",
+      "member": "files/0163",
+      "role": "TD-ROOT-records-20262906",
+      "bytes": 3973,
+      "sha256": "44c84b3b4ffe4945423e07835f7a1fd72f016af6c2f0955d97f308f5d45748ab"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/tdlambda-actual-20262906/fresh-fit-seal.json",
+      "member": "files/0164",
+      "role": "TD-ROOT-records-20262906",
+      "bytes": 6644,
+      "sha256": "3c88d874bb3d5f508919aee3f26e923ade3acbe7fa99b922d88d91a1f661f4e7"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/tdlambda-actual-20262906/fresh-fit.stderr.log",
+      "member": "files/0165",
+      "role": "TD-ROOT-records-20262906",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/tdlambda-actual-20262906/fresh-fit.stdout.log",
+      "member": "files/0166",
+      "role": "TD-ROOT-records-20262906",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/tdlambda-actual-20262906/proof-contract.stderr.log",
+      "member": "files/0167",
+      "role": "TD-ROOT-records-20262906",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/tdlambda-actual-20262906/proof-contract.stdout.log",
+      "member": "files/0168",
+      "role": "TD-ROOT-records-20262906",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/tdlambda-actual-20262906/proof-registration.json",
+      "member": "files/0169",
+      "role": "TD-ROOT-records-20262906",
+      "bytes": 3969,
+      "sha256": "e5e05369eb853d4c0757460935a0bb10553fd0019687178cd21a479b7fb56c69"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/tdlambda-actual-20262906/proof-seal.json",
+      "member": "files/0170",
+      "role": "TD-ROOT-records-20262906",
+      "bytes": 6281,
+      "sha256": "2bee6b5e43b16a459dd4c3bb1d0e94a37925bdb76bfb787d1a85140845d2d468"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/tdlambda-actual-20262906/proof.stderr.log",
+      "member": "files/0171",
+      "role": "TD-ROOT-records-20262906",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/tdlambda-actual-20262906/proof.stdout.log",
+      "member": "files/0172",
+      "role": "TD-ROOT-records-20262906",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/tdlambda-actual-20262906/registration.json",
+      "member": "files/0173",
+      "role": "TD-ROOT-records-20262906",
+      "bytes": 1873,
+      "sha256": "f1f933a76f2942c8bbb93988a8a7405047332b59347798022093d496a0e8268a"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/tdlambda-actual-20262906/result.json",
+      "member": "files/0174",
+      "role": "TD-ROOT-records-20262906",
+      "bytes": 5874,
+      "sha256": "17a061f2e33a6fe8b6c5049b4c48b07cf52138f5196b2ebfa430c181c4abe4e4"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/tdlambda-training-v1/source/.ruff_cache/.gitignore",
+      "member": "files/0175",
+      "role": "frozen-TD-runtime",
+      "bytes": 35,
+      "sha256": "9e3a60f1e6ec4ae60215c11d54b171392745ec25e9dded433d5bd921363af316"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/tdlambda-training-v1/source/.ruff_cache/0.12.12/1123896477494775116",
+      "member": "files/0176",
+      "role": "frozen-TD-runtime",
+      "bytes": 181,
+      "sha256": "552df5c86636208d20b7534eadf48ba1ed1758cfd3b36f9e136bf385e3b596e5"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/tdlambda-training-v1/source/.ruff_cache/CACHEDIR.TAG",
+      "member": "files/0177",
+      "role": "frozen-TD-runtime",
+      "bytes": 43,
+      "sha256": "5953156d7e0c564a427251316eaf26f8870e6483ae2197f916b630e4f93e31ae"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/tdlambda-training-v1/source/arena_adapter.py",
+      "member": "files/0178",
+      "role": "frozen-TD-runtime",
+      "bytes": 10668,
+      "sha256": "a9fcd2d122132fe8aeb341c115089d5718d24470dfa4e99fa8a9a61877dd5f70"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/tdlambda-training-v1/source/contract.py",
+      "member": "files/0179",
+      "role": "frozen-TD-runtime",
+      "bytes": 3999,
+      "sha256": "b305255705d6df3da347d7323129a533e33afaf115272cf7bf3750e45aada88c"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/tdlambda-training-v1/source/contract_builder.py",
+      "member": "files/0180",
+      "role": "frozen-TD-runtime",
+      "bytes": 10118,
+      "sha256": "ec1b225d3576b878803362c1a61f48ebaf3da259ba5dd7a6d04792f42fdec51c"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/tdlambda-training-v1/source/model.py",
+      "member": "files/0181",
+      "role": "frozen-TD-runtime",
+      "bytes": 3877,
+      "sha256": "c04914bc5a560ad51de81c6d0aaeb3fae4d04b45c07cd8e39bbd31f655d36565"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/tdlambda-training-v1/source/native.py",
+      "member": "files/0182",
+      "role": "frozen-TD-runtime",
+      "bytes": 9252,
+      "sha256": "73351242b444522bd03b93a07839c5c19c896c897de0e3af4948568af61a2e3a"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/tdlambda-training-v1/source/prepare.py",
+      "member": "files/0183",
+      "role": "frozen-TD-runtime",
+      "bytes": 20560,
+      "sha256": "c35e3af467a652772444c376f30eed21aa5d0b3afa265d660f22d93f0326ae9a"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/tdlambda-training-v1/source/prove.py",
+      "member": "files/0184",
+      "role": "frozen-TD-runtime",
+      "bytes": 8636,
+      "sha256": "55057e69620390c12e489c20eb1c5b55fb772adf0762d59fae8854201e42dd89"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/tdlambda-training-v1/source/tdlambda_targets.py",
+      "member": "files/0185",
+      "role": "frozen-TD-runtime",
+      "bytes": 5965,
+      "sha256": "c99a20bb4fbf69fa2b06fd16b46b23e697a87ce1ff7992b6c4c72c74c4fbb1e8"
+    },
+    {
+      "path": "/workspace/work/harbichess/continuation-20261007/tdlambda-training-v1/source/train.py",
+      "member": "files/0186",
+      "role": "frozen-TD-runtime",
+      "bytes": 7452,
+      "sha256": "a06d80034794e2798ef5e516799cacf1e5896e005b5771a959b9cb6e86e9e0ea"
+    }
+  ],
+  "row_count": 187,
+  "raw_bytes": 94655835,
+  "scope": "ActualTDproof/fresh64/fullnative+closedownQ160 FULLlogs; no hot MC files, no privateauth; V10b dependencies remain public. Bytes only not strength/promotion/crossABI restore."
+}
