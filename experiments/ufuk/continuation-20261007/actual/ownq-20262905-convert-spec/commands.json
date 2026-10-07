@@ -1,0 +1,10 @@
+[
+  [
+    "/workspace/HarbiChess/.venv/bin/python",
+    "/workspace/work/harbichess/continuation-20261007/nnue-own-training-v2/convert.py",
+    "--seal",
+    "/workspace/work/harbichess/continuation-20261007/ownq-20262905-convert-spec/convert-seal.json",
+    "--output",
+    "/dev/shm/harbichess-NNUE-own-data-v2/20262905"
+  ]
+]
