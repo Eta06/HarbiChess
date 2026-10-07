@@ -1,0 +1,90 @@
+{
+  "ROOT_launcher_sha256": "6e42b04a4aed1312ba7da7a08f988b0d421e459b1a8796643df9f662092a8df1",
+  "ROOT_preregistration": {
+    "commit": "7b0095c254a71e837cf4030fe8c024ad1132fdc3",
+    "path": "docs/runs/UFUK-DEVAM-target-ablation-preregistration-20261007.md",
+    "sha256": "43bb89a2e56a440a467974a10c0c3e0fd6970ef447fd9ace3abb8b6533c114aa"
+  },
+  "actor_row_limit": 4096,
+  "core_commit": "6fcc8b476d25495d1c9c413e55b2c7ba4794013e",
+  "core_repo": "/workspace/work/harbichess/cpu-additive-source-6fcc8b4",
+  "cpu_core": 1,
+  "operator_end_epoch": 1791448916.685839,
+  "original_deadline_epoch": 1791376606.3909914,
+  "original_first_epoch": 1791369406.3909914,
+  "output_path": "/dev/shm/harbichess-closedterminal-v1/20262905",
+  "parent_candidate": {
+    "contract_sha256": "b397f76376b269c0ffada0871d4a2c06f19cb38df53fdbd5bc1a608ad13dd90c",
+    "path": "/dev/shm/harbichess-NNUE-teacher-fit-v1/20262905/whole/candidate.pt",
+    "sha256": "52e029bba0e895740f975109f4c52358c7a59fe22082cb1fb528821e3fa2b02d"
+  },
+  "parent_helpers": {
+    "directory": "/workspace/HarbiChess/experiments/ufuk/cpu-nnue16-v1",
+    "evaluator_sha256": "5317e736f872a2e237e45942c8df9e797c5acee8f626bb12009464869fab8d95",
+    "extension_path": "/workspace/work/harbichess/cpu-kingbucket-nnue-proposal/_kingbucket16.cpython-312-x86_64-linux-gnu.so",
+    "extension_sha256": "495505cdebd6dbc029ee314846dbac79d5cca6d445de26c804a43821808d644b",
+    "model_sha256": "c04914bc5a560ad51de81c6d0aaeb3fae4d04b45c07cd8e39bbd31f655d36565",
+    "native_sha256": "f60a1f9814f48691af1e2d1f1db1b548cff3e7df0a7cae9718051de1865b8b69",
+    "prior_path": "/workspace/HarbiChess/experiments/ufuk/cpu-classical-own-v1/value.py",
+    "prior_sha256": "a99cddfc397bd9221b99a70691427fdd663488b033fb239d9f48240786b2f277"
+  },
+  "plies_per_root": 400,
+  "producer_source_sha256": {
+    "arena_adapter.py": "bc976f5f0d26216cd0383c405e9e3f28f99162c672ae4b120daf7c1712a04098",
+    "collector.py": "99f2ea31ae1587c3d9c281f0d1838aa575ea9f603869dc662c1df98551055ba9",
+    "contract.py": "168116a2a245f47fdb3c2f367048361ef2f7e8b6fccaac918d4432f6538e4f19",
+    "contract_builder.py": "93b2f26de37631f35806fe8931d086cb93d7af906b88f50cc59e44fe3f496dff",
+    "convert.py": "f88f94f6d8a3b7fad0fc24b4f298e24a7676d84c3cf3bca692c88c46c870233a",
+    "model.py": "c04914bc5a560ad51de81c6d0aaeb3fae4d04b45c07cd8e39bbd31f655d36565",
+    "native.py": "cb37924f529b1647509a07eb99e79532f033b56abcf2e95adce5bb3031457949",
+    "prove.py": "a314abb5b8aa00501eceefe1bc1c2f37414f3fae0d500ef85016f8f5b80327fe",
+    "run_collection.py": "ec48d3277d969b11e2cae55a0151101d4fa3a270b08e6a1abe7ef3fa758a6ce5",
+    "train.py": "b441af70e2334c634a420275cf565db105395b0da9c9139c7ebe76bd69412a19"
+  },
+  "protected_aliases": {
+    "count": 104064,
+    "manifest_path": "/dev/shm/harbichess-continuation-20261007/metadata-20262905/protected-manifest.json",
+    "manifest_sha256": "89d191d8826a23b0ddb69a383efaf07a95d81e248a56da92472dd4cd72772168",
+    "path": "/dev/shm/harbichess-continuation-20261007/metadata-20262905/protected-aliases.bin",
+    "sha256": "e9ff3bfb0c6914b573d68b7df0a2cc110cd061a07b2381c8412f3be2473e81d9"
+  },
+  "protected_source_roles": [
+    "known8",
+    "validation",
+    "unknown",
+    "root_manifest"
+  ],
+  "root_control_sha256": "f80cdae21eb25a328c745133f23cb22ea3c4165cb632d2135fc385fe55cec422",
+  "root_limit": 128,
+  "root_pool": {
+    "path": "/workspace/work/harbichess/continuation-20261007/nnue-own-producer-v2/input-pools/20262905.json",
+    "selection_path": "/dev/shm/harbichess-NNUE-teacher8192-v1/20262905/selection.json",
+    "selection_sha256": "08c612152c011f2a856613d3bebd62d373138742f7a5605b7b24a9e7d73e89b6",
+    "sha256": "a8b43b377d5376a5f67f3a56edb893f949b54e92be9e7a60b1e6ff91bfdfaa6a",
+    "teacher_labels_path": "/dev/shm/harbichess-NNUE-teacher8192-v1/20262905/labels-00004096.json.gz",
+    "teacher_labels_sha256": "64104394a216fc5f679a885d7a95e7145540c50700a75db11c006e4b6156ef8a"
+  },
+  "row_limit": 1024,
+  "schema": "own-nnue-closed-terminal-collection-registration-v1",
+  "search": {
+    "max_depth": 8,
+    "nodes": 8192,
+    "qdepth": 2
+  },
+  "search_helper": {
+    "path": "/workspace/HarbiChess/experiments/ufuk/cpu-budget-search-v1/search.py",
+    "sha256": "de53c14728a67b7772f18b396ac8ef5c35a144d4e4e616fec40099cd461a6670"
+  },
+  "seed": 20262905,
+  "selection_source_sha256": "08c612152c011f2a856613d3bebd62d373138742f7a5605b7b24a9e7d73e89b6",
+  "status": "registered",
+  "teacher_admission": {
+    "fit_fresh_loads": 2,
+    "path": "/workspace/HarbiChess/experiments/ufuk/wrap-20261006/NNUE-teacher-trained-profile-v2.json",
+    "proof_fresh_loads": 6,
+    "sha256": "daface422c690e1e989599fb8378317c9bf37f2d773ee5977e08a7f8273179d9",
+    "status": "PASS-trained-teacher-profile-not-selflearning",
+    "strict_native_loads": 8
+  },
+  "teacher_label_source_sha256": "64104394a216fc5f679a885d7a95e7145540c50700a75db11c006e4b6156ef8a"
+}
