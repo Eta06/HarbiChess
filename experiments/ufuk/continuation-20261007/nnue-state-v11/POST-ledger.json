@@ -1,0 +1,110 @@
+{
+  "status": "PASS-seven-single-attempt-Git-blobs-not-public-yet",
+  "parts": [
+    {
+      "index": 0,
+      "offset": 0,
+      "bytes": 8388608,
+      "sha256": "5cb7f232fb3f7f9446debf7323ead7d4e97d6df1d4b87fe394c1234e956b1fc1",
+      "git_blob_sha1": "e8df93208df351b6520374e32fa356d6bba2aa68",
+      "asset_name": "nnue-state-v11-6dfd66da8776-part00-5cb7f232fb3f.bin",
+      "POST_result": {
+        "returncode": 0,
+        "attempts": 1,
+        "response_sha256": "a9b2059d090e4c89dd264cda37328b4dbe1995f38db066c7f8450b769b8b01f5",
+        "error_details_suppressed": true,
+        "git_blob_sha1": "e8df93208df351b6520374e32fa356d6bba2aa68"
+      }
+    },
+    {
+      "index": 1,
+      "offset": 8388608,
+      "bytes": 8388608,
+      "sha256": "aceb1f24cb5cfd999dd0a2c3e3e84b9531b7922babb759bb30106a24ffda2e12",
+      "git_blob_sha1": "4019e03493864155df253790e2039dcf7b246371",
+      "asset_name": "nnue-state-v11-6dfd66da8776-part01-aceb1f24cb5c.bin",
+      "POST_result": {
+        "returncode": 0,
+        "attempts": 1,
+        "response_sha256": "f81f4d8c2b4c26ce8037c01e2d4521ed1f09ece0cec9e6fe0c7205fe2822284f",
+        "error_details_suppressed": true,
+        "git_blob_sha1": "4019e03493864155df253790e2039dcf7b246371"
+      }
+    },
+    {
+      "index": 2,
+      "offset": 16777216,
+      "bytes": 8388608,
+      "sha256": "20c24b588bb0e89fa3b95f328c5783ca352e242b1bd8d0f65b6b87a68263ce15",
+      "git_blob_sha1": "f71e5111aed8c9f28292aa51aeb57ddd6c5897d4",
+      "asset_name": "nnue-state-v11-6dfd66da8776-part02-20c24b588bb0.bin",
+      "POST_result": {
+        "returncode": 0,
+        "attempts": 1,
+        "response_sha256": "3d1455790087b9a205bc3a6e9d3458f30e2882e5ee36dcbdab4f999b0ad8df29",
+        "error_details_suppressed": true,
+        "git_blob_sha1": "f71e5111aed8c9f28292aa51aeb57ddd6c5897d4"
+      }
+    },
+    {
+      "index": 3,
+      "offset": 25165824,
+      "bytes": 8388608,
+      "sha256": "e3ee75ce73baac3de40425d6bd2d9e7c2d03781d9748730b9fa1e03c80d96b37",
+      "git_blob_sha1": "d0977000a0bb2d12f8aee999a8c5434ade1ec85c",
+      "asset_name": "nnue-state-v11-6dfd66da8776-part03-e3ee75ce73ba.bin",
+      "POST_result": {
+        "returncode": 0,
+        "attempts": 1,
+        "response_sha256": "cd5b653bcd830ee8bb9610f524d5a87252201fbd741b59a4f092bfa8dab073c5",
+        "error_details_suppressed": true,
+        "git_blob_sha1": "d0977000a0bb2d12f8aee999a8c5434ade1ec85c"
+      }
+    },
+    {
+      "index": 4,
+      "offset": 33554432,
+      "bytes": 8388608,
+      "sha256": "b0e1052fe228635eb990cb170cb9e34e11ec692275af699273201fe58a1a61e0",
+      "git_blob_sha1": "f9a35f9e1065dcefb8c60b2aa220593ff28e97b2",
+      "asset_name": "nnue-state-v11-6dfd66da8776-part04-b0e1052fe228.bin",
+      "POST_result": {
+        "returncode": 0,
+        "attempts": 1,
+        "response_sha256": "3c8e6b6605d4170d6352ee02c114e13c29fff3944f5c6f5665d7d625bc6c366f",
+        "error_details_suppressed": true,
+        "git_blob_sha1": "f9a35f9e1065dcefb8c60b2aa220593ff28e97b2"
+      }
+    },
+    {
+      "index": 5,
+      "offset": 41943040,
+      "bytes": 8388608,
+      "sha256": "2be1f1233d817b54972dae74e17a72edaee4e0665c5387140a8e99124add3877",
+      "git_blob_sha1": "95303791dc43e9f3d81f8f8bc5c4c4c5f95f0172",
+      "asset_name": "nnue-state-v11-6dfd66da8776-part05-2be1f1233d81.bin",
+      "POST_result": {
+        "returncode": 0,
+        "attempts": 1,
+        "response_sha256": "e1660024739718c273f1c70044e58311fcfad346562379f5f8548b916ffb51bd",
+        "error_details_suppressed": true,
+        "git_blob_sha1": "95303791dc43e9f3d81f8f8bc5c4c4c5f95f0172"
+      }
+    },
+    {
+      "index": 6,
+      "offset": 50331648,
+      "bytes": 6440331,
+      "sha256": "ccfb16e1197a33d4aedb41ba2284d992a845abafa78056a46fdeb786583a87ed",
+      "git_blob_sha1": "89c71826864f9ce7dbdcb63719f66e6aab908575",
+      "asset_name": "nnue-state-v11-6dfd66da8776-part06-ccfb16e1197a.bin",
+      "POST_result": {
+        "returncode": 0,
+        "attempts": 1,
+        "response_sha256": "9428c01e59600ecaa685162e016eb688612074d30f00bfa3b7828e30cf27a503",
+        "error_details_suppressed": true,
+        "git_blob_sha1": "89c71826864f9ce7dbdcb63719f66e6aab908575"
+      }
+    }
+  ]
+}
