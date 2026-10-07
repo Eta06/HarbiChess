@@ -1,0 +1,73 @@
+{
+  "schema": "human-randomstarts-known160-source-inventory-v2",
+  "files": {
+    "ROOT-RECIPE.txt": {
+      "sha256": "c247fc2e128099b1e850f9da16c287cc69741a0e3e040e87054d441df46fb18d",
+      "bytes": 7562
+    },
+    "admission.py": {
+      "sha256": "35c52091053a6803b39bf47033729b9da17e8867df708020c3cd7ec64e316068",
+      "bytes": 16087
+    },
+    "alias_pool.py": {
+      "sha256": "74f3929f46c7a8ffeec3622c6f0b13d4cf0193d137f90632f050725d671fb7ec",
+      "bytes": 1007
+    },
+    "audit_known160_v2.py": {
+      "sha256": "bef1a8267f7425086e38905597b264a37c8ec7a5a87f192ff00cf0b510ac82df",
+      "bytes": 11561
+    },
+    "confirmation_stats.py": {
+      "sha256": "aaf1fb4811a835bb725cfe1226c56e819eb12d6617dfe0d759dcf1d99278bbdd",
+      "bytes": 3890
+    },
+    "original_ownq_admission.py": {
+      "sha256": "2e4a4eef372b5f46f1151c6a6371646e3102bdf68059ed6c0e2a4179e65ab788",
+      "bytes": 13054
+    },
+    "qualify_profile.py": {
+      "sha256": "814d04b1db08d5aa9b5d101ed430797584dc59dc25716061a1e077e7d82eda8d",
+      "bytes": 8797
+    },
+    "replay_six.py": {
+      "sha256": "2a3574fa0a297d20b46d96e6113e87fca65f50f96232cbefa661f9d9d2cf2ed6",
+      "bytes": 4829
+    },
+    "run.py": {
+      "sha256": "9c1823c0a10db786f299f6608251f59af125b56761ece8074844801e52ec3d30",
+      "bytes": 6658
+    },
+    "seal.py": {
+      "sha256": "9402903eec965dcd6b3d4fe8b920daf267fa0e9d6d604316a47f26135b8c2958",
+      "bytes": 3101
+    },
+    "search.py": {
+      "sha256": "de53c14728a67b7772f18b396ac8ef5c35a144d4e4e616fec40099cd461a6670",
+      "bytes": 5944
+    },
+    "teacher_admission.py": {
+      "sha256": "94d80c5ab1f3ca9a2d5260d52bda5f7ab16ff236970a57a9a2c70e2351d92781",
+      "bytes": 5810
+    },
+    "test_human.py": {
+      "sha256": "ec11e4b717807db538947a40b6caffdfe5108071e69cb82d7c5b562860eaaabc",
+      "bytes": 8157
+    },
+    "tournament.py": {
+      "sha256": "7081128a96f575d01ebaf40f1c7de725274b4316ac3836802b539b3ce7395cb8",
+      "bytes": 9052
+    },
+    "value.py": {
+      "sha256": "bd21fead0c98ce59e5c123aafa96a5e013fba7660f0b33f6ac7ec77705115bc3",
+      "bytes": 3279
+    },
+    "verification.json": {
+      "sha256": "c2325187b1fa924d0bbeb3155ac450479b6df94c3543047f56b5fa3eea76664c",
+      "bytes": 1408
+    },
+    "wiring.py": {
+      "sha256": "3184ad94c939a3d698f490deef03861a7b9297217aa7c0dcdbe70b1974cb86eb",
+      "bytes": 1220
+    }
+  }
+}
