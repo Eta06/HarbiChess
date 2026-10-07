@@ -1,0 +1,185 @@
+"""One-time explicit source derivation, not a phase runner."""
+
+from pathlib import Path
+
+B = Path("/workspace/work/harbichess/continuation-20261007")
+OUT = B / "nnue-own-generation-v3"
+TRAIN = B / "nnue-own-training-v2"
+PROD = Path(
+    "/workspace/HarbiChess/experiments/ufuk/continuation-20261007/nnue-own-producer-v2"
+)
+
+
+def put(name, s):
+    (OUT / name).write_text(s)
+
+
+def swap(s, a, b):
+    if a not in s:
+        raise ValueError("missing exact source anchor: " + a[:70])
+    return s.replace(a, b)
+
+
+put("model.py", (TRAIN / "model.py").read_text())
+s = (TRAIN / "native.py").read_text()
+s = swap(
+    s,
+    "own-kingbucket-nnue16-full-native-cpu-v1",
+    "own-kingbucket-nnue16-generation-native-cpu-v3",
+)
+a = s.index("def bootstrap_weights(contract):")
+s = (
+    s[:a]
+    + """def bootstrap_weights(contract):
+    from parent_bridge import admitted_candidate
+    packet = admitted_candidate(contract["parent_admission_seal"],
+                                contract["parent_admission_result"], torch)
+    parent = packet["contract"]
+    if (contract["generation"] != parent.get("generation", 1) + 1
+            or parent["seed"] != contract["seed"]
+            or parent["feature_schema"] != contract["feature_schema"]
+            or parent["prior_helper_sha256"] != contract["prior_helper_sha256"]
+            or sha(contract["bootstrap_candidate_path"]) != contract["bootstrap_candidate_sha256"]
+            or contract["bootstrap_candidate_sha256"] !=
+               contract["parent_candidate"]["sha256"]):
+        raise ValueError("exact current own-parent generation/features/prior")
+    validate_weights(packet["model"])
+    return packet["model"]
+"""
+)
+put("native.py", s)
+s = (TRAIN / "train.py").read_text()
+s = swap(s, "NNUE-own-execution-contract-v2", "NNUE-own-execution-contract-v3")
+put("train.py", s)
+s = (TRAIN / "prove.py").read_text()
+s = swap(s, "NNUE-own-training-orchestration-v2", "NNUE-own-training-orchestration-v3")
+s = (
+    swap(s, '"teacher_labels_used":False', '"teacher_labels_used":False')
+    if '"teacher_labels_used":False' in s
+    else s
+)
+s = (
+    s.replace("named teacher WEIGHTS", "current own-parent WEIGHTS")
+    .replace("namedteacher", "namedparent")
+    .replace("teacherweights-only", "currentparent-weights-only")
+)
+put("prove.py", s)
+s = (PROD / "collector.py").read_text()
+s = swap(s, "teacher-selected-ownq-train-roots-v2", "own-generation-train-roots-v3")
+s = swap(s, "own-nnue-ownq-labels-v2", "own-nnue-ownq-labels-v3")
+s = swap(s, "source_teacher_labels_sha256", "ancestral_teacher_labels_sha256")
+put("collector.py", s)
+s = (PROD / "run_collection.py").read_text()
+s = swap(
+    s,
+    "own-nnue-ownq-collection-registration-v2",
+    "own-nnue-ownq-collection-registration-v3",
+)
+s = swap(
+    s, "own-nnue-ownq-collection-receipt-v2", "own-nnue-ownq-collection-receipt-v3"
+)
+s = swap(
+    s,
+    "f\"/dev/shm/harbichess-ownq-v2/{reg['seed']}\"",
+    "f\"/dev/shm/harbichess-ownq-v3/g-{reg['generation']}/{reg['seed']}\"",
+)
+s = swap(
+    s, 'Path("/dev/shm/harbichess-ownq-v2")', 'Path("/dev/shm/harbichess-ownq-v3")'
+)
+a = s.index('    row=reg["parent_candidate"];')
+z = s.index('    n.validate_weights(packet["model"])', a)
+s = (
+    s[:a]
+    + """    from parent_bridge import admitted_candidate
+    packet = admitted_candidate(reg["parent_admission_seal"],reg["parent_admission_result"],torch)
+    c=packet["contract"]
+    if (c["seed"]!=reg["seed"] or reg["generation"]!=c.get("generation",1)+1
+        or c["feature_schema"]!=m.FEATURE_SCHEMA or c["prior_helper_sha256"]!=h["prior_sha256"]
+        or hashlib.sha256(canon(c)).hexdigest()!=reg["parent_candidate"]["contract_sha256"]):
+        raise ValueError("exact admitted current own-parent and unchanged model/prior")
+"""
+    + s[z:]
+)
+s = s.replace(
+    '"teacher_admission":reg["teacher_admission"],',
+    '"parent_admission_result":reg["parent_admission_result"],\n            "parent_admission_seal":reg["parent_admission_seal"],"generation":reg["generation"],',
+)
+s = s.replace('"teacher_selection_path":', '"ancestral_selection_path":').replace(
+    '"teacher_selection_sha256":', '"ancestral_selection_sha256":'
+)
+s = s.replace(
+    '            "teacher_labels_path":reg["root_pool"]["teacher_labels_path"],\n', ""
+)
+s = s.replace(
+    '"teacher_labels_sha256":reg["root_pool"]["teacher_labels_sha256"],',
+    '"ancestral_teacher_labels_sha256":reg["root_pool"]["ancestral_teacher_labels_sha256"],',
+)
+s = s.replace(
+    '"source_teacher_labels_sha256":reg["root_pool"]["teacher_labels_sha256"],',
+    '"source_ancestral_teacher_labels_sha256":reg["root_pool"]["ancestral_teacher_labels_sha256"],',
+)
+put("run_collection.py", s)
+s = (TRAIN / "convert.py").read_text()
+for a, b in [
+    (
+        "NNUE-own1024-dataset-conversion-seal-v2",
+        "NNUE-own1024-dataset-conversion-seal-v3",
+    ),
+    (
+        "own-nnue-ownq-collection-registration-v2",
+        "own-nnue-ownq-collection-registration-v3",
+    ),
+    ("own-nnue-ownq-collection-receipt-v2", "own-nnue-ownq-collection-receipt-v3"),
+    (
+        "NNUE-own1024-converted-data-provenance-v1",
+        "NNUE-own1024-converted-data-provenance-v3",
+    ),
+]:
+    s = swap(s, a, b)
+a = s.index("    labels_ref = dict(")
+z = s.index('    if len(original_selection["rows"])', a)
+s = (
+    s[:a]
+    + """    original_selection = json.loads(pinned(selection_ref).read_bytes())
+    if (pool["source_selection_sha256"] != selection_ref["sha256"]
+            or receipt["ancestral_selection_path"] != selection_ref["path"]
+            or receipt["ancestral_selection_sha256"] != selection_ref["sha256"]
+            or pool["ancestral_teacher_labels_sha256"] !=
+               receipt["ancestral_teacher_labels_sha256"]):
+        raise ValueError("immutable ancestral TRAIN selection; no teacher label file read")
+    from parent_bridge import validate_admission_result
+    validate_admission_result(reg["parent_admission_seal"],reg["parent_admission_result"])
+    if (reg["generation"] != receipt["generation"]
+            or reg["parent_admission_result"] != receipt["parent_admission_result"]
+            or reg["parent_admission_seal"] != receipt["parent_admission_seal"]):
+        raise ValueError("same admitted current own-parent and generation")
+"""
+    + s[z:]
+)
+s = s.replace(
+    'initializer="named teacher candidate WEIGHTS only; newAdam/globalTorch/privateSampler",',
+    'initializer="current own-parent WEIGHTS only; newAdam/globalTorch/privateSampler",\n        generation=reg["generation"],parent_admission_result=reg["parent_admission_result"],',
+)
+put("convert.py", s)
+s = (B / "nnue-strength-v2/audit_collection_six_v2.py").read_text()
+for a, b in [
+    (
+        "NNUE-own-collection-six-root-audit-clock-v2",
+        "NNUE-own-collection-six-root-audit-clock-v3",
+    ),
+    (
+        "NNUE-own-collection-six-root-audit-result-v2",
+        "NNUE-own-collection-six-root-audit-result-v3",
+    ),
+    (
+        "own-nnue-ownq-collection-registration-v2",
+        "own-nnue-ownq-collection-registration-v3",
+    ),
+    ("own-nnue-ownq-collection-receipt-v2", "own-nnue-ownq-collection-receipt-v3"),
+]:
+    s = swap(s, a, b)
+s = s.replace(
+    'seed=reg["seed"], registration_sha256=',
+    'generation=reg["generation"],parent_admission_result=reg["parent_admission_result"],\n                  seed=reg["seed"], registration_sha256=',
+)
+put("audit_collection_six.py", s)
