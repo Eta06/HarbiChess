@@ -1,0 +1,199 @@
+{
+  "schema": "ROOT-actual-human-zero-and-synthetic-native-proof-v1",
+  "status": "PASS-actual-zero-init-admission-and-synthetic-native-proof-not-strength",
+  "first": 1791374703.6886115,
+  "deadline": 1791376503.6886115,
+  "seed": 20262906,
+  "cpu_core": 3,
+  "helper": {
+    "path": "/workspace/work/harbichess/continuation-20261007/execute_human_zero_chain.py",
+    "sha256": "e2e370455528ccca2166f25de4b75b30266d7dcae68a415f8d98817d87f62b25"
+  },
+  "source_inventory": {
+    "path": "/workspace/work/harbichess/continuation-20261007/human-prior-own-v1/source-inventory.json",
+    "sha256": "485d30553beeafd7bd0a168efed2ca3bc41baee4932bf73ccf5f4f4ef2a1bfcc"
+  },
+  "trained_teacher_weights_used": false,
+  "teacher_label_calls": 0,
+  "optimizer_updates_on_actual_data": 0,
+  "commands": [
+    {
+      "command": [
+        "/workspace/HarbiChess/.venv/bin/python",
+        "/workspace/work/harbichess/continuation-20261007/human-prior-own-v1/prepare_zero.py",
+        "--seed",
+        "20262906",
+        "--first",
+        "1791374703.688853",
+        "--deadline",
+        "1791375303.688853",
+        "--operator-end-epoch",
+        "1791448916.685839",
+        "--core-repo",
+        "/workspace/work/harbichess/cpu-additive-source-6fcc8b4",
+        "--core-commit",
+        "6fcc8b476d25495d1c9c413e55b2c7ba4794013e",
+        "--prior-helper",
+        "/workspace/HarbiChess/experiments/ufuk/cpu-classical-own-v1/value.py",
+        "--search-helper",
+        "/workspace/HarbiChess/experiments/ufuk/cpu-budget-search-v1/search.py",
+        "--output",
+        "/workspace/work/harbichess/continuation-20261007/human-zero-actual-20262906/initialization-seal.json",
+        "--inference-file",
+        "/workspace/work/harbichess/cpu-kingbucket-nnue-proposal/model.py",
+        "--inference-file",
+        "/workspace/work/harbichess/cpu-kingbucket-nnue-proposal/native.py",
+        "--inference-file",
+        "/workspace/work/harbichess/cpu-kingbucket-nnue-proposal/evaluator.py",
+        "--inference-file",
+        "/workspace/work/harbichess/cpu-kingbucket-nnue-proposal/forward.c",
+        "--inference-file",
+        "/workspace/work/harbichess/cpu-kingbucket-nnue-proposal/_kingbucket16.cpython-312-x86_64-linux-gnu.so",
+        "--inference-file",
+        "/workspace/work/harbichess/cpu-kingbucket-nnue-proposal/build-receipt.json",
+        "--inference-file",
+        "/workspace/HarbiChess/experiments/ufuk/cpu-classical-own-v1/value.py"
+      ],
+      "returncode": 0,
+      "finished": 1791374703.721954,
+      "stdout": {
+        "path": "/workspace/work/harbichess/continuation-20261007/human-zero-actual-20262906/prepare-zero.stdout.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/workspace/work/harbichess/continuation-20261007/human-zero-actual-20262906/prepare-zero.stderr.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "command": [
+        "/workspace/HarbiChess/.venv/bin/python",
+        "/workspace/work/harbichess/continuation-20261007/human-prior-own-v1/initialize.py",
+        "--seal",
+        "/workspace/work/harbichess/continuation-20261007/human-zero-actual-20262906/initialization-seal.json",
+        "--output",
+        "/dev/shm/harbichess-human-prior-zero-v1/20262906"
+      ],
+      "returncode": 0,
+      "finished": 1791374711.8203883,
+      "stdout": {
+        "path": "/workspace/work/harbichess/continuation-20261007/human-zero-actual-20262906/initialize.stdout.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/workspace/work/harbichess/continuation-20261007/human-zero-actual-20262906/initialize.stderr.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "command": [
+        "/workspace/HarbiChess/.venv/bin/python",
+        "/workspace/work/harbichess/continuation-20261007/human-prior-own-v1/zero_parent.py",
+        "--initialization-result",
+        "/dev/shm/harbichess-human-prior-zero-v1/20262906/result.json",
+        "--output",
+        "/workspace/work/harbichess/continuation-20261007/human-zero-actual-20262906/parent-admission-seal.json"
+      ],
+      "returncode": 0,
+      "finished": 1791374711.88674,
+      "stdout": {
+        "path": "/workspace/work/harbichess/continuation-20261007/human-zero-actual-20262906/parent-seal.stdout.log",
+        "sha256": "a89127438412c3d6ebf5f787382dade02567e796e8cc7c022a29db574afc01ed"
+      },
+      "stderr": {
+        "path": "/workspace/work/harbichess/continuation-20261007/human-zero-actual-20262906/parent-seal.stderr.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "command": [
+        "/workspace/HarbiChess/.venv/bin/python",
+        "/workspace/work/harbichess/continuation-20261007/human-prior-own-v1/admit_parent.py",
+        "--seal",
+        "/workspace/work/harbichess/continuation-20261007/human-zero-actual-20262906/parent-admission-seal.json",
+        "--clock",
+        "/workspace/work/harbichess/continuation-20261007/human-zero-actual-20262906/parent-admission-clock.json",
+        "--output",
+        "/workspace/work/harbichess/continuation-20261007/human-zero-actual-20262906/parent-admission-result.json"
+      ],
+      "returncode": 0,
+      "finished": 1791374714.5115354,
+      "stdout": {
+        "path": "/workspace/work/harbichess/continuation-20261007/human-zero-actual-20262906/parent-admission.stdout.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/workspace/work/harbichess/continuation-20261007/human-zero-actual-20262906/parent-admission.stderr.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "command": [
+        "/workspace/HarbiChess/.venv/bin/python",
+        "/workspace/work/harbichess/continuation-20261007/human-prior-own-v1/qualification/qualify.py",
+        "--prepare-observed",
+        "--initialization-result",
+        "/dev/shm/harbichess-human-prior-zero-v1/20262906/result.json",
+        "--seed",
+        "20262906",
+        "--cpu-core",
+        "3",
+        "--first",
+        "1791374714.5116768",
+        "--deadline",
+        "1791375314.5116768",
+        "--operator-end",
+        "1791448916.685839",
+        "--stage",
+        "/workspace/work/harbichess/continuation-20261007/human-prior-own-v1",
+        "--inventory",
+        "/workspace/work/harbichess/continuation-20261007/human-prior-own-v1/source-inventory.json",
+        "--proof-output",
+        "/dev/shm/harbichess-human-prior-synthetic-v1/20262906",
+        "--output",
+        "/workspace/work/harbichess/continuation-20261007/human-zero-actual-20262906/synthetic-qualification-registration.json"
+      ],
+      "returncode": 0,
+      "finished": 1791374714.5785408,
+      "stdout": {
+        "path": "/workspace/work/harbichess/continuation-20261007/human-zero-actual-20262906/prepare-synthetic-qualification.stdout.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/workspace/work/harbichess/continuation-20261007/human-zero-actual-20262906/prepare-synthetic-qualification.stderr.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "command": [
+        "/workspace/HarbiChess/.venv/bin/python",
+        "/workspace/work/harbichess/continuation-20261007/human-prior-own-v1/qualification/qualify.py",
+        "--registration",
+        "/workspace/work/harbichess/continuation-20261007/human-zero-actual-20262906/synthetic-qualification-registration.json"
+      ],
+      "returncode": 0,
+      "finished": 1791374781.9772367,
+      "stdout": {
+        "path": "/workspace/work/harbichess/continuation-20261007/human-zero-actual-20262906/synthetic-native-qualification.stdout.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/workspace/work/harbichess/continuation-20261007/human-zero-actual-20262906/synthetic-native-qualification.stderr.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  ],
+  "zero_result": {
+    "path": "/dev/shm/harbichess-human-prior-zero-v1/20262906/result.json",
+    "sha256": "4ae95e1465a0fb6c0944e5619d5389827313d7cc1f760812e7886a3fdbf0665d"
+  },
+  "parent_admission_seal": {
+    "path": "/workspace/work/harbichess/continuation-20261007/human-zero-actual-20262906/parent-admission-seal.json",
+    "sha256": "880d741ff7f389e5d8fa725727527473edd7876d963fc5fd99cc3795343c4de4"
+  },
+  "parent_admission_result": {
+    "path": "/workspace/work/harbichess/continuation-20261007/human-zero-actual-20262906/parent-admission-result.json",
+    "sha256": "5ec86c9997808ff5357189e1bce1f382377385040f3ca59001907a18e5d492f5"
+  },
+  "finished": 1791374781.9774601
+}
