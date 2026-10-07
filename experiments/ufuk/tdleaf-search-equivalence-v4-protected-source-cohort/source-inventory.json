@@ -1,0 +1,13 @@
+{
+  "schema": "versioned-preactor-source-inventory-v1",
+  "directory": "/workspace/work/harbichess/continuation-20261007/tdleaf-search-equivalence-v4-protected-source-cohort",
+  "execution_status": "SOURCE ONLY, no actual collection/SGD",
+  "files": {
+    "README.md": "554ba4e36a30dc92e0b6a423ef841acae09a6d94f7f02b95df2583dc90a5d5b3",
+    "collector_reference.py": "6bd65f7348665da5c01ec41699140d4ca7c2d7dbdfce8f289cc32702aa868d30",
+    "qualify.py": "05904d715ee0e6c7c287e7a451b00b00a22718f0cee39d7691d701b2a000e2f8",
+    "search_original.py": "de53c14728a67b7772f18b396ac8ef5c35a144d4e4e616fec40099cd461a6670",
+    "search_pv.py": "a6fa35675fd4eb9c0c346a893bd44a6507b06bbff107f689a3f67a7dcc79015d",
+    "test_qualify.py": "36ba0b6bc19bbc8fb58ca5ef695320e12dd66a3d85d4043e0b8c15879c8f8d02"
+  }
+}
