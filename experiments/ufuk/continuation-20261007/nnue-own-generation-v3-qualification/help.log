@@ -1,0 +1,25 @@
+usage: qualify.py [-h] [--prepare] [--spec SPEC] [--prepare-observed]
+                  [--output OUTPUT] [--registration REGISTRATION]
+                  [--seed SEED] [--cpu-core CPU_CORE] [--stage STAGE]
+                  [--inventory INVENTORY] [--proof-output PROOF_OUTPUT]
+                  [--first FIRST] [--deadline DEADLINE]
+                  [--operator-end OPERATOR_END]
+
+ROOT executable synthetic native bridge qualification, NOT collection or
+strength.
+
+options:
+  -h, --help            show this help message and exit
+  --prepare
+  --spec SPEC
+  --prepare-observed
+  --output OUTPUT
+  --registration REGISTRATION
+  --seed SEED
+  --cpu-core CPU_CORE
+  --stage STAGE
+  --inventory INVENTORY
+  --proof-output PROOF_OUTPUT
+  --first FIRST
+  --deadline DEADLINE
+  --operator-end OPERATOR_END
