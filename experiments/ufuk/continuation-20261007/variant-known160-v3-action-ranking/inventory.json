@@ -1,0 +1,189 @@
+{
+  "files": {
+    "ROOT-RECIPE.txt": {
+      "bytes": 9761,
+      "sha256": "51be360fdf93f3066113132d9c93108058883b3e084d3333fbb486971b894a79"
+    },
+    "admission.py": {
+      "bytes": 17488,
+      "sha256": "7e9eb01fa132aa172e520c9f72e5ac570bd2d26e01cbf4a92b2708ce78eeb62c"
+    },
+    "alias_pool.py": {
+      "bytes": 1007,
+      "sha256": "74f3929f46c7a8ffeec3622c6f0b13d4cf0193d137f90632f050725d671fb7ec"
+    },
+    "audit_known160_v2.py": {
+      "bytes": 11561,
+      "sha256": "d8ffdf03389e74f80e28d9cfd360f6e3807a56ea9d05a726ee0dfe40fc52159d"
+    },
+    "collection_admission.py": {
+      "bytes": 2550,
+      "sha256": "eb488dc65e2943991979cc8f46aedb6358fba54cb05cea41d10875faab0b10e1"
+    },
+    "confirmation_stats.py": {
+      "bytes": 3890,
+      "sha256": "aaf1fb4811a835bb725cfe1226c56e819eb12d6617dfe0d759dcf1d99278bbdd"
+    },
+    "formal-runtime-alias-v2/admission.py": {
+      "bytes": 17488,
+      "sha256": "7e9eb01fa132aa172e520c9f72e5ac570bd2d26e01cbf4a92b2708ce78eeb62c"
+    },
+    "formal-runtime-alias-v2/alias_pool.py": {
+      "bytes": 1007,
+      "sha256": "74f3929f46c7a8ffeec3622c6f0b13d4cf0193d137f90632f050725d671fb7ec"
+    },
+    "formal-runtime-alias-v2/audit_formal.py": {
+      "bytes": 11673,
+      "sha256": "bf736a158afd5e9737eae2b2d95d6dfe58fc1c669ec00573759595d63b0bee46"
+    },
+    "formal-runtime-alias-v2/bindings.py": {
+      "bytes": 6589,
+      "sha256": "0911889f13932673aed1b29949821de67ca5fb7e5f4b050ca58dff189dffd7b1"
+    },
+    "formal-runtime-alias-v2/bounded_betting.py": {
+      "bytes": 4861,
+      "sha256": "35628fc596ff53a7de9108b4de282e70d0390b2c54f534b6313cf27f70b54634"
+    },
+    "formal-runtime-alias-v2/collection_admission.py": {
+      "bytes": 2550,
+      "sha256": "eb488dc65e2943991979cc8f46aedb6358fba54cb05cea41d10875faab0b10e1"
+    },
+    "formal-runtime-alias-v2/confirmation_stats.py": {
+      "bytes": 3890,
+      "sha256": "aaf1fb4811a835bb725cfe1226c56e819eb12d6617dfe0d759dcf1d99278bbdd"
+    },
+    "formal-runtime-alias-v2/eligibility.py": {
+      "bytes": 6454,
+      "sha256": "edf19412873d79e918020819baf70b3d7578e53187ee3288f0b56d04ffdcdebb"
+    },
+    "formal-runtime-alias-v2/exposure.py": {
+      "bytes": 8610,
+      "sha256": "729b0125fa5b734aa76c958ed62d8ca8c83b2f3e4078724caf9a8d1429e361f3"
+    },
+    "formal-runtime-alias-v2/final_join.py": {
+      "bytes": 6981,
+      "sha256": "34ac081a4a35cca77ce36105d2052564cc002dd98601bd4ed476a5324c942c0f"
+    },
+    "formal-runtime-alias-v2/original_ownq_admission.py": {
+      "bytes": 13054,
+      "sha256": "2e4a4eef372b5f46f1151c6a6371646e3102bdf68059ed6c0e2a4179e65ab788"
+    },
+    "formal-runtime-alias-v2/prepare_specs.py": {
+      "bytes": 3538,
+      "sha256": "a980b2af396ebf452b9dc33faed027029d0074f8c885ac9619052aed5b95e7a6"
+    },
+    "formal-runtime-alias-v2/run_formal.py": {
+      "bytes": 5238,
+      "sha256": "555e50852275220814fa122a9630b7584831cf73ff8f3a298b32d6adb8976984"
+    },
+    "formal-runtime-alias-v2/runtime_support.py": {
+      "bytes": 1191,
+      "sha256": "4dd49c4ece7822f614aad6a7880510b637b1c0e8495e93a6cdc81f06424decd6"
+    },
+    "formal-runtime-alias-v2/seal_metadata.py": {
+      "bytes": 6980,
+      "sha256": "cb12f0c6b52f28db78b3441e3db79797669c3f10273f5e0e336699fce2079006"
+    },
+    "formal-runtime-alias-v2/search.py": {
+      "bytes": 5944,
+      "sha256": "de53c14728a67b7772f18b396ac8ef5c35a144d4e4e616fec40099cd461a6670"
+    },
+    "formal-runtime-alias-v2/select_books.py": {
+      "bytes": 11167,
+      "sha256": "109003f094d960702af5d1fe5552726e52e3b17944449b0a5829c01adedbe229"
+    },
+    "formal-runtime-alias-v2/teacher_admission.py": {
+      "bytes": 5810,
+      "sha256": "94d80c5ab1f3ca9a2d5260d52bda5f7ab16ff236970a57a9a2c70e2351d92781"
+    },
+    "formal-runtime-alias-v2/test_final_join.py": {
+      "bytes": 1795,
+      "sha256": "3929845452b19b91ff5f78547277c5ca85c9cea912d04d600834121e82ea1e25"
+    },
+    "formal-runtime-alias-v2/test_runtime.py": {
+      "bytes": 5768,
+      "sha256": "1e787383d4309c48ebc62f7c2561ad76700a6f82a8f44c8f913aedd9fdfc7d84"
+    },
+    "formal-runtime-alias-v2/test_selection.py": {
+      "bytes": 2783,
+      "sha256": "c765903ae58fde7e6759eb2e107ba0e496515ceaee035fb9cc395e761c9556cf"
+    },
+    "formal-runtime-alias-v2/test_variant.py": {
+      "bytes": 7202,
+      "sha256": "e87a9420142f13681c8d1bd720068ade414650a93c3543d761589c085ec9a9ed"
+    },
+    "formal-runtime-alias-v2/tournament.py": {
+      "bytes": 9003,
+      "sha256": "9c28c5190c8a95947d8cd5ba0fa3f0ab5f966ed5f11a75e788d82db51a8b970a"
+    },
+    "formal-runtime-alias-v2/value.py": {
+      "bytes": 3298,
+      "sha256": "df82de8ac14557540bdf4864ab4dd34c5f227d62d2e82107498bca5730a6460b"
+    },
+    "formal-runtime-alias-v2/verify_books.py": {
+      "bytes": 5077,
+      "sha256": "745903f4fe4e528c798e48b9e88a0f7b8584b3ccfb20c9af81ef5a0f4fb2f0d6"
+    },
+    "formal-runtime-alias-v2/wiring.py": {
+      "bytes": 1189,
+      "sha256": "352669bbc06977255d12488bd1aff0d0abd1af3f6c3b630942dc4a2e251d1e42"
+    },
+    "original_ownq_admission.py": {
+      "bytes": 13054,
+      "sha256": "2e4a4eef372b5f46f1151c6a6371646e3102bdf68059ed6c0e2a4179e65ab788"
+    },
+    "protocol-DRAFT.json": {
+      "bytes": 24025,
+      "sha256": "573d48c033b79447f19bffa24848bb6dabafdf60630a824ce1c11f626c861f3f"
+    },
+    "protocol.json": {
+      "bytes": 24178,
+      "sha256": "fcb7e6db7885d4f814816217ac3fd5427362ac31121dca1c410c9a5c2d1b169d"
+    },
+    "qualify_profile.py": {
+      "bytes": 8128,
+      "sha256": "1106ffe7271757153077a5a3aebd9410dc2b12d7be26613fdca6a3031cc0ca81"
+    },
+    "replay_six.py": {
+      "bytes": 4829,
+      "sha256": "2a3574fa0a297d20b46d96e6113e87fca65f50f96232cbefa661f9d9d2cf2ed6"
+    },
+    "run.py": {
+      "bytes": 6658,
+      "sha256": "9c1823c0a10db786f299f6608251f59af125b56761ece8074844801e52ec3d30"
+    },
+    "seal.py": {
+      "bytes": 3042,
+      "sha256": "f73b0d0ca7dcb4def0bf264bbb1301fef6b4fe273a0fe1fe59dcaa6317c8656c"
+    },
+    "search.py": {
+      "bytes": 5944,
+      "sha256": "de53c14728a67b7772f18b396ac8ef5c35a144d4e4e616fec40099cd461a6670"
+    },
+    "teacher_admission.py": {
+      "bytes": 5810,
+      "sha256": "94d80c5ab1f3ca9a2d5260d52bda5f7ab16ff236970a57a9a2c70e2351d92781"
+    },
+    "test_variant.py": {
+      "bytes": 9633,
+      "sha256": "8361acc741c4debd5cf35a403d5823cff08fee5e7d69d6a29e60623c6617dba6"
+    },
+    "tournament.py": {
+      "bytes": 9052,
+      "sha256": "7081128a96f575d01ebaf40f1c7de725274b4316ac3836802b539b3ce7395cb8"
+    },
+    "value.py": {
+      "bytes": 3298,
+      "sha256": "df82de8ac14557540bdf4864ab4dd34c5f227d62d2e82107498bca5730a6460b"
+    },
+    "verification.json": {
+      "bytes": 3210,
+      "sha256": "e2583f50ec1bcdc103fd11587863af13a7caa479bad0dfc1a5fdbc3ad439b512"
+    },
+    "wiring.py": {
+      "bytes": 1189,
+      "sha256": "352669bbc06977255d12488bd1aff0d0abd1af3f6c3b630942dc4a2e251d1e42"
+    }
+  },
+  "schema": "typed-ranking-variant-known160-source-inventory-v3"
+}
