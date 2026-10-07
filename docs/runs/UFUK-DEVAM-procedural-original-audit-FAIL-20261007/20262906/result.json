@@ -1,0 +1,59 @@
+{
+  "collection_receipt": {
+    "path": "/dev/shm/harbichess-human-randomstarts-ownq-v2/g-1/20262906/receipt.json",
+    "sha256": "5654857f3ca4b805de6957e2acc614dc006344f171d43802ddb106affa6229e9"
+  },
+  "collection_registration": {
+    "path": "/workspace/work/harbichess/continuation-20261007/human-random-collect-actual-20262906/collection-registration.json",
+    "sha256": "745ecdaf984755a57fba1ccd1c0a822455b19b17d79b011120fe2f49730c3454"
+  },
+  "commands": [
+    {
+      "command": [
+        "/workspace/HarbiChess/.venv/bin/python",
+        "/workspace/work/harbichess/continuation-20261007/human-randomstarts-own-v2/audit_collection_six.py",
+        "--registration",
+        "/workspace/work/harbichess/continuation-20261007/human-random-collect-actual-20262906/collection-registration.json",
+        "--receipt",
+        "/dev/shm/harbichess-human-randomstarts-ownq-v2/g-1/20262906/receipt.json",
+        "--events",
+        "/dev/shm/harbichess-human-randomstarts-ownq-v2/g-1/20262906/events.jsonl",
+        "--clock",
+        "/workspace/work/harbichess/continuation-20261007/procedural-own-audit-actual-20262906/clock.json",
+        "--output",
+        "/workspace/work/harbichess/continuation-20261007/procedural-own-audit-actual-20262906/six-actual-replays.json"
+      ],
+      "finished": 1791379438.0009685,
+      "name": "six-actual-replays",
+      "returncode": 1,
+      "stderr": {
+        "path": "/dev/shm/harbichess-continuation-20261007/procedural-own-audit-actual-20262906/six-actual-replays.stderr.log",
+        "sha256": "32b7106d154f113356f2a28c17e5f89e929ce174094e235ef11f76bd8172bb47"
+      },
+      "stdout": {
+        "path": "/dev/shm/harbichess-continuation-20261007/procedural-own-audit-actual-20262906/six-actual-replays.stdout.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  ],
+  "cpu_core": 3,
+  "deadline": 1791380037.9344573,
+  "error": "RuntimeError('owned phase failed: six-actual-replays')",
+  "finished": 1791379438.001143,
+  "first": 1791379437.9344573,
+  "helper": {
+    "path": "/workspace/work/harbichess/continuation-20261007/execute_procedural_own_learning.py",
+    "sha256": "3ea6a52380f0979bacf94b32ab76f5090adf61f104d257f3de147b837cce143c"
+  },
+  "operator_end_epoch": 1791448916.685839,
+  "phase": "audit",
+  "schema": "ROOT-procedural-own-learning-phase-v2",
+  "seed": 20262906,
+  "source_inventory": {
+    "path": "/workspace/work/harbichess/continuation-20261007/human-randomstarts-own-v2/source-inventory.json",
+    "sha256": "84e0d669dcdfebce018385984cb88e8aecca4eeafaa530b56b603be1ea660683"
+  },
+  "status": "FAILED-preserved",
+  "teacher_labels_used": false,
+  "trained_teacher_weights_used": false
+}
