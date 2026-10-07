@@ -1,0 +1,19 @@
+{
+  "schema": "human-randomstarts-derivation-v2",
+  "ancestor_source_inventory_sha256": "485d30553beeafd7bd0a168efed2ca3bc41baee4932bf73ccf5f4f4ef2a1bfcc",
+  "numerical_native_schema_unchanged": true,
+  "native_sources_preserved": [
+    "model.py",
+    "native.py",
+    "train.py",
+    "prove.py",
+    "parent_bridge.py",
+    "admit_parent.py",
+    "parent_seal.py",
+    "zero_parent.py",
+    "initialize.py",
+    "prepare_zero.py"
+  ],
+  "distribution_change": "procedural6..24 first4096/16384 final-protected-alias filter; complete interior exposure trace",
+  "validation": "7 pure tests /16 import-help; actual new-data proof unexecuted"
+}
