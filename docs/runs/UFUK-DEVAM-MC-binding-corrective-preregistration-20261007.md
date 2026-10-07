@@ -1,0 +1,7 @@
+# UFUK-DEVAM: MC producer/converter binding v3 corrective phase
+
+The two original MC conversion attempts failed before SGD; original clocks are CLOSED and never rewritten. Collection seed06 remains the actual raw1364/eligible1079/registeredfirst1024 chronological terminal dataset. The v3 converter validates ALL original raw events/episode terminals/protected queries/ordered alias hashes and separately SHA-binds the corrected converter helper. Original producer_directory points to immutable closed-terminal-own-v1/source; it is not relabeled as a new producer. Seven binding fixtures pass, no actual conversion/proof/fit claim at registration.
+
+NEW corrective conversion<=600s, NEW real six original packet/complete alias search audit<=600s, real new8/4/fresh8 six-native proof<=600s, then exactlyfresh64 two-native fit<=1800s from the same frozen parent weights with fresh Adam/RNG. These are new versioned corrective phases, not resumes/restarts of old timed phases. First1024 row rule, MC exact terminalWDL objective, schedule and all strength gates stay as originally registered. First seed05 collection remains running under its original cap; do not restart or extend it.
+
+Source: closed-terminal-own-v3-producer-converter-binding. ROOT execute_closedterminal_chain_v3.py. Failed logs/attempts remain; conversion source hashes and actual producer hashes are distinct retained identities. Full/native state and dataset go to next immutable Release delta; no model promotion without independent confirmation.
