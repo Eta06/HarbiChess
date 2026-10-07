@@ -1,0 +1,13 @@
+# UFUK-DEVAM: actual own1024, full-state proof and fresh64
+
+7 October2026. Both frozen parents generated1,024 eligible own-search rows with8192nodes/q2/depth8. No new Stockfish/teacher scores. Seed05:1,026 raw rows; seed06:1,035. Wallclock3,024.90/3,056.66s. Protected wholeepisodes excluded. Actual terminal supervision157/97 rows; UNKNOWN867/927 rows; caps are not draws.
+
+ROOT six prescribed real searches perseed (12total) reproduced exact bestmove/valuehex/nodes/evals/depth and whole static-evaluator alias segments. Full converter independently replayed every history/move/terminal/protection/sidecar/count, exact1,024rows perseed. Both actual own8whole versus4/freshresume8 proofs matched all model/baseline/Adam/globalPython/globalTorch/privateSampler bits and passed six actual strict subprocess native loads each. Subsequent production fits started separately from SAME teacher weights with NEW Adam/RNG,64updates, actual initial/final strict loads two each. Weights bridge is not teacher training resume.
+
+Candidate05 SHA287df0c1ff5779e0ee4cc9ab9df38b077c71daee298dff376f2d819e4a2f27a4;06 SHA8627e94ca0cd6a177f3644b57ce89f30873b03b8cc99363fdf7663dddae05328. Fixedendpoint, no selection. Modelmath/source remains original NNUE16 float64; original de53 search unchanged. Source core6fcc8b476d25495d1c9c413e55b2c7ba4794013e.
+
+The first known160 profile failed before any game/search packet because metadata lacked original_mixed_value for the unchanged E8 adapter. This failed receipt is preserved. A NEW metadata-only recovery binds the original classical-arena MixedValue adapter, SAME original first1791366266.8496559, profile600/whole7200/audit900. No training/source/math/threshold change or timer reset. Recovery48 TRAIN C/Torch checks and48 matched search calls PASS; median child/parent.997827/.976836, child/E8.239620/.241366. Known160 actual matches continue; no completed independent strength result or promotion.
+
+A synthetic fastpath prototype passed equivalence checks but was1.493x slower and rejected. Prospective additional exact fixed-n betting requirement was registered and pushed before strength results. Original point/bootstrap gates remain required, no threshold weakening. It assumes independent fixed48 root clusters perseed; no optional stopping or global-Elo claim. V2 ancestry-conditional formal960 remains unselected until known160 eligibility.
+
+Current new artifacts remain RAM-resident pending NEW versioned Release delivery/readback; oldV9/453-file durable backup and historical failures are untouched. CPU4quota,16GiB cgroup,15GiB guard; no GPU/SSH/paid resources. More .pyc caches were copied to RAM, independently SHA verified and linked to preserve the256MiB diskfloor; no model/research bytes removed.
