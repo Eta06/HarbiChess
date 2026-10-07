@@ -1,0 +1,16 @@
+{
+  "schema": "fixed-root-betting-preparation-verification-v1",
+  "tests": 5,
+  "passed": 5,
+  "skipped": 0,
+  "ruff": "PASS canonical repo cwd",
+  "actual_data_used": false,
+  "test_scope": [
+    "supportboundaries/allL/f1zero",
+    "monotonicity/affine invariance",
+    "exact final1280 rejection certificate",
+    "heterogeneous mean-null exhaustive3Bernoulli",
+    "exact48-binomial null plus fixedsimulation",
+    "exact8metricgate wiring"
+  ]
+}
