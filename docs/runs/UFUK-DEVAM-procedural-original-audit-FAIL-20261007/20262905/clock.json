@@ -1,0 +1,11 @@
+{
+  "cpu_core": 1,
+  "deadline": 1791380037.8753927,
+  "events_sha256": "80ac37a57532793c15b8979c28d484f26bb1c7b916a7743fb117cbd2bf1507b5",
+  "first": 1791379437.8753927,
+  "helper_sha256": "f4d891f574f31014cbd20ba94a334906dec1065d761cb962f32bfa3cb3226f27",
+  "producer_directory": "/workspace/work/harbichess/continuation-20261007/human-randomstarts-own-v2",
+  "receipt_sha256": "a1687605f26517ade4abbc0695e2878a988bda197cd5e1df91fed4b07bf24be0",
+  "registration_sha256": "1732eeb4259824a6bbe99c0a8b3740ab33761bc3d3355ed673a31f89fc39dff0",
+  "schema": "human-randomstarts-own-six-root-audit-clock-v2"
+}
