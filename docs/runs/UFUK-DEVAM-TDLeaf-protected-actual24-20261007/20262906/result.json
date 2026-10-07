@@ -1,0 +1,30 @@
+{
+  "command": [
+    "/workspace/HarbiChess/.venv/bin/python",
+    "/workspace/work/harbichess/continuation-20261007/tdleaf-search-equivalence-v4-protected-source-cohort/qualify.py",
+    "--registration",
+    "/workspace/work/harbichess/continuation-20261007/TDLeaf-v5-equivalence-actual-20262906/qualification-registration.json"
+  ],
+  "cpu_core": 0,
+  "deadline": 1791382300.130769,
+  "finished": 1791382096.2987468,
+  "first": 1791381700.130769,
+  "helper": {
+    "path": "/workspace/work/harbichess/continuation-20261007/execute_TDLeaf_search_qualification_v5.py",
+    "sha256": "cae6656c87fb60d8aefad1db0d3c2c914d23a6ba6366ae44fb436903fcac8dde"
+  },
+  "operator_end_epoch": 1791448916.685839,
+  "registration": {
+    "path": "/workspace/work/harbichess/continuation-20261007/TDLeaf-v5-equivalence-actual-20262906/qualification-registration.json",
+    "sha256": "f4ef37fdf947157dfd0274026c91567bc17056ba3db264c80a5725c9e1f67159"
+  },
+  "report": {
+    "path": "/dev/shm/harbichess-TDLeaf-search-equivalence-v5/20262906/report.json",
+    "sha256": "0d2b4359e2b9fe7d624ae97d1bd764d282b4557bec6f20a5c94516fc31fbb6bf"
+  },
+  "schema": "ROOT-TDLeaf-v3-actual-equivalence-owner-v1",
+  "seed": 20262906,
+  "status": "PASS-actual24-fullquery-history-HEX-and-search-instrumentation-not-strength",
+  "teacher_labels_used": false,
+  "updates": 0
+}
