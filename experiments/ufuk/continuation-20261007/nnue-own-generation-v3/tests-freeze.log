@@ -1,0 +1,15 @@
+test_admission_uses_original_contract_and_exact_candidate_bits (test_parent_bridge.BridgeTests.test_admission_uses_original_contract_and_exact_candidate_bits) ... ok
+test_changed_data_source_and_binary_rejected (test_parent_bridge.BridgeTests.test_changed_data_source_and_binary_rejected) ... ok
+test_closed_historical_clock_is_not_new_training_clock (test_parent_bridge.BridgeTests.test_closed_historical_clock_is_not_new_training_clock) ... ok
+test_full_resume_cannot_be_claimed_or_generation_skipped (test_parent_bridge.BridgeTests.test_full_resume_cannot_be_claimed_or_generation_skipped) ... ok
+test_proof_failure_or_missing_fresh_load_rejected (test_parent_bridge.BridgeTests.test_proof_failure_or_missing_fresh_load_rejected) ... ok
+test_teacher_cannot_be_admitted_as_own_final (test_parent_bridge.BridgeTests.test_teacher_cannot_be_admitted_as_own_final) ... ok
+test_actual_cli_parser_interfaces_are_present (test_v3_sources.Sources.test_actual_cli_parser_interfaces_are_present) ... ok
+test_network_native_optimizer_and_replay_math_preserved (test_v3_sources.Sources.test_network_native_optimizer_and_replay_math_preserved) ... ok
+test_no_new_teacher_label_file_is_read (test_v3_sources.Sources.test_no_new_teacher_label_file_is_read) ... ok
+test_replay_proof_uses_new_schema_and_new_helper_pin (test_v3_sources.Sources.test_replay_proof_uses_new_schema_and_new_helper_pin) ... ok
+
+----------------------------------------------------------------------
+Ran 10 tests in 0.083s
+
+OK
