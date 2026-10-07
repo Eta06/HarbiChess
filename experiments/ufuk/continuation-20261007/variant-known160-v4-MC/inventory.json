@@ -1,0 +1,44 @@
+{
+  "changed_from_v3": [
+    "admission.py"
+  ],
+  "files": {
+    "admission.py": "df19b68faf1fee12746226fb0088dfa2adc93402ff5d440a85ca72004785e511",
+    "alias_pool.py": "74f3929f46c7a8ffeec3622c6f0b13d4cf0193d137f90632f050725d671fb7ec",
+    "audit_known160_v2.py": "d8ffdf03389e74f80e28d9cfd360f6e3807a56ea9d05a726ee0dfe40fc52159d",
+    "collection_admission.py": "eb488dc65e2943991979cc8f46aedb6358fba54cb05cea41d10875faab0b10e1",
+    "confirmation_stats.py": "aaf1fb4811a835bb725cfe1226c56e819eb12d6617dfe0d759dcf1d99278bbdd",
+    "original_ownq_admission.py": "2e4a4eef372b5f46f1151c6a6371646e3102bdf68059ed6c0e2a4179e65ab788",
+    "qualify_profile.py": "1106ffe7271757153077a5a3aebd9410dc2b12d7be26613fdca6a3031cc0ca81",
+    "replay_six.py": "2a3574fa0a297d20b46d96e6113e87fca65f50f96232cbefa661f9d9d2cf2ed6",
+    "run.py": "9c1823c0a10db786f299f6608251f59af125b56761ece8074844801e52ec3d30",
+    "seal.py": "f73b0d0ca7dcb4def0bf264bbb1301fef6b4fe273a0fe1fe59dcaa6317c8656c",
+    "search.py": "de53c14728a67b7772f18b396ac8ef5c35a144d4e4e616fec40099cd461a6670",
+    "teacher_admission.py": "94d80c5ab1f3ca9a2d5260d52bda5f7ab16ff236970a57a9a2c70e2351d92781",
+    "test_mc_augmentation.py": "86fc53cd9f5b213a91d2ff24a38fb725f37b2c2b0f605bdfecd31bb73bfa72f5",
+    "test_variant.py": "8361acc741c4debd5cf35a403d5823cff08fee5e7d69d6a29e60623c6617dba6",
+    "tournament.py": "7081128a96f575d01ebaf40f1c7de725274b4316ac3836802b539b3ce7395cb8",
+    "value.py": "df82de8ac14557540bdf4864ab4dd34c5f227d62d2e82107498bca5730a6460b",
+    "wiring.py": "352669bbc06977255d12488bd1aff0d0abd1af3f6c3b630942dc4a2e251d1e42"
+  },
+  "schema": "variant-known160-v4-MC-source-inventory",
+  "status": "READY-source-only-no-model-load-or-search",
+  "tests": "22 PASS0skip; canonical Ruff PASS",
+  "unchanged_from_v3": {
+    "alias_pool.py": "74f3929f46c7a8ffeec3622c6f0b13d4cf0193d137f90632f050725d671fb7ec",
+    "audit_known160_v2.py": "d8ffdf03389e74f80e28d9cfd360f6e3807a56ea9d05a726ee0dfe40fc52159d",
+    "collection_admission.py": "eb488dc65e2943991979cc8f46aedb6358fba54cb05cea41d10875faab0b10e1",
+    "confirmation_stats.py": "aaf1fb4811a835bb725cfe1226c56e819eb12d6617dfe0d759dcf1d99278bbdd",
+    "original_ownq_admission.py": "2e4a4eef372b5f46f1151c6a6371646e3102bdf68059ed6c0e2a4179e65ab788",
+    "qualify_profile.py": "1106ffe7271757153077a5a3aebd9410dc2b12d7be26613fdca6a3031cc0ca81",
+    "replay_six.py": "2a3574fa0a297d20b46d96e6113e87fca65f50f96232cbefa661f9d9d2cf2ed6",
+    "run.py": "9c1823c0a10db786f299f6608251f59af125b56761ece8074844801e52ec3d30",
+    "seal.py": "f73b0d0ca7dcb4def0bf264bbb1301fef6b4fe273a0fe1fe59dcaa6317c8656c",
+    "search.py": "de53c14728a67b7772f18b396ac8ef5c35a144d4e4e616fec40099cd461a6670",
+    "teacher_admission.py": "94d80c5ab1f3ca9a2d5260d52bda5f7ab16ff236970a57a9a2c70e2351d92781",
+    "test_variant.py": "8361acc741c4debd5cf35a403d5823cff08fee5e7d69d6a29e60623c6617dba6",
+    "tournament.py": "7081128a96f575d01ebaf40f1c7de725274b4316ac3836802b539b3ce7395cb8",
+    "value.py": "df82de8ac14557540bdf4864ab4dd34c5f227d62d2e82107498bca5730a6460b",
+    "wiring.py": "352669bbc06977255d12488bd1aff0d0abd1af3f6c3b630942dc4a2e251d1e42"
+  }
+}
