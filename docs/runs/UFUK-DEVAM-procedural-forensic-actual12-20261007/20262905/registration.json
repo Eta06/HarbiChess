@@ -1,0 +1,74 @@
+{
+  "commands": [
+    [
+      "/workspace/HarbiChess/.venv/bin/python",
+      "/workspace/work/harbichess/continuation-20261007/human-randomstarts-own-v3-forensic-shadow/forensic_receipt.py",
+      "--registration",
+      "/workspace/work/harbichess/continuation-20261007/human-random-collect-actual-20262905/collection-registration.json",
+      "--receipt",
+      "/dev/shm/harbichess-human-randomstarts-ownq-v2/g-1/20262905/receipt.json",
+      "--producer-directory",
+      "/workspace/work/harbichess/continuation-20261007/human-randomstarts-own-v2",
+      "--output",
+      "/dev/shm/harbichess-continuation-20261007/forensic-v3-20262905/receipt-view.json"
+    ],
+    [
+      "/workspace/HarbiChess/.venv/bin/python",
+      "/workspace/work/harbichess/continuation-20261007/human-randomstarts-own-v3-forensic-shadow/prepare_forensic_audit_clock.py",
+      "--root",
+      "/workspace/work/harbichess/continuation-20261007",
+      "--seed",
+      "20262905",
+      "--first",
+      "1791381700.136289",
+      "--deadline",
+      "1791382300.136289",
+      "--cpu-core",
+      "1",
+      "--helper",
+      "/workspace/work/harbichess/continuation-20261007/human-randomstarts-own-v3-forensic-shadow/audit_collection_six_v3.py",
+      "--output",
+      "/workspace/work/harbichess/continuation-20261007/procedural-forensic-v3-audit-actual-20262905/clock.json"
+    ],
+    [
+      "/workspace/HarbiChess/.venv/bin/python",
+      "/workspace/work/harbichess/continuation-20261007/human-randomstarts-own-v3-forensic-shadow/audit_collection_six_v3.py",
+      "--registration",
+      "/workspace/work/harbichess/continuation-20261007/human-random-collect-actual-20262905/collection-registration.json",
+      "--receipt",
+      "/dev/shm/harbichess-human-randomstarts-ownq-v2/g-1/20262905/receipt.json",
+      "--events",
+      "/dev/shm/harbichess-human-randomstarts-ownq-v2/g-1/20262905/events.jsonl",
+      "--forensic_view",
+      "/dev/shm/harbichess-continuation-20261007/forensic-v3-20262905/receipt-view.json",
+      "--clock",
+      "/workspace/work/harbichess/continuation-20261007/procedural-forensic-v3-audit-actual-20262905/clock.json",
+      "--output",
+      "/dev/shm/harbichess-human-randomstarts-forensic-audit-v3/20262905/result.json"
+    ]
+  ],
+  "completed": [],
+  "cpu_core": 1,
+  "deadline": 1791382300.136289,
+  "first": 1791381700.136289,
+  "helper": {
+    "path": "/workspace/work/harbichess/continuation-20261007/execute_procedural_forensic_audit_v3.py",
+    "sha256": "e11a7f283d72e95eb59971c1f6d42822302189619c667f49c02263c75310254f"
+  },
+  "operator_end_epoch": 1791448916.685839,
+  "original_raw_receipt": {
+    "path": "/dev/shm/harbichess-human-randomstarts-ownq-v2/g-1/20262905/receipt.json",
+    "sha256": "a1687605f26517ade4abbc0695e2878a988bda197cd5e1df91fed4b07bf24be0"
+  },
+  "original_registration": {
+    "path": "/workspace/work/harbichess/continuation-20261007/human-random-collect-actual-20262905/collection-registration.json",
+    "sha256": "1732eeb4259824a6bbe99c0a8b3740ab33761bc3d3355ed673a31f89fc39dff0"
+  },
+  "schema": "ROOT-procedural-forensic-v3-actual-audit-owner-v1",
+  "seed": 20262905,
+  "source_inventory": {
+    "path": "/workspace/work/harbichess/continuation-20261007/human-randomstarts-own-v3-forensic-shadow/forensic-v3-inventory.json",
+    "sha256": "5e8c4effdaff7fbdc243e34c02ac32763dfba54d10325098798e3b933acf29db"
+  },
+  "status": "running"
+}
