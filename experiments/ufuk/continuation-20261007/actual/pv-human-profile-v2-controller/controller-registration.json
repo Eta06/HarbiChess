@@ -1,0 +1,31 @@
+{
+  "schema": "UFUK-DEVAM-bounded-cpu-phase-v1",
+  "phase": "actual-human24-advanced-search-v2-paired-latency",
+  "output": "/dev/shm/harbichess-continuation-20261007/pv-human-profile-v2-controller",
+  "first_epoch": 1791370124.939302,
+  "deadline_epoch": 1791370724.939302,
+  "operator_end_epoch": 1791448916.685839,
+  "cpu_core": 2,
+  "checkout": "/workspace/work/harbichess/cpu-additive-source-6fcc8b4",
+  "controller_sha256": "5090ef465aafd81fd39a49dd86b205cfe7d2d97f73c357c83aa2822f321d464b",
+  "memory_guard_path": "/workspace/work/harbichess/cpu-additive-source-6fcc8b4/src/harbichess/training/cgroup_budget.py",
+  "input_pins": {
+    "/workspace/work/harbichess/continuation-20261007/pv-human-profile-v2/registration.json": "a08a4ff8297f537e625b90c73e19d6c66f8d11a18547d050ae6e18aa3573c298",
+    "/workspace/work/harbichess/continuation-20261007/pv-history-search-v1/qualification/develop.py": "53d5a39bf52c862c390f6e41722c27bd8b551f5daa0e6d1eb5a603e9e87eec26",
+    "/workspace/work/harbichess/continuation-20261007/pv-history-search-v1/qualification/register.py": "9e551d1ccd80398aff5d211ed3167fb10346fd48deda658dc53d97d69be8d075",
+    "/workspace/HarbiChess/experiments/ufuk/cpu-budget-search-v1/search.py": "de53c14728a67b7772f18b396ac8ef5c35a144d4e4e616fec40099cd461a6670",
+    "/workspace/work/harbichess/continuation-20261007/pv-history-search-v1/search_v2.py": "90c85ba8e3401cba57c82e6c2a34764d25aa999a03b244a4f2838124a8b46357",
+    "/workspace/HarbiChess/experiments/ufuk/cpu-classical-own-v1/value.py": "a99cddfc397bd9221b99a70691427fdd663488b033fb239d9f48240786b2f277",
+    "/workspace/work/harbichess/continuation-20261007/nnue-own-producer-v2/input-pools/20262905.json": "a8b43b377d5376a5f67f3a56edb893f949b54e92be9e7a60b1e6ff91bfdfaa6a"
+  },
+  "command": [
+    "/workspace/HarbiChess/.venv/bin/python",
+    "/workspace/work/harbichess/continuation-20261007/pv-history-search-v1/qualification/develop.py",
+    "--registration",
+    "/workspace/work/harbichess/continuation-20261007/pv-human-profile-v2/registration.json"
+  ],
+  "source_core_commit": "6fcc8b476d25495d1c9c413e55b2c7ba4794013e",
+  "historical_timer_reset": false,
+  "GPU_used": false,
+  "hash_guard_interval_seconds": 30
+}
