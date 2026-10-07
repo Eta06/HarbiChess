@@ -1,0 +1,42 @@
+{
+  "status": "PASS-integrity-and-six-actual-not-strength",
+  "first": 1791373020.6528218,
+  "deadline": 1791373920.6528218,
+  "helper_sha256": "d070487909a5b599156a54d841da592aa541e53b0f6074afa5411488e225d12a",
+  "pid": 1071564,
+  "commands": [
+    [
+      "/workspace/HarbiChess/.venv/bin/python",
+      "/workspace/work/harbichess/continuation-20261007/variant-known160-v1/audit_known160_v2.py",
+      "--protocol",
+      "/workspace/work/harbichess/continuation-20261007/variant-known160-v1/protocol.json",
+      "--arena",
+      "/dev/shm/harbichess-continuation-20261007/tdlambda-known160-data/arena",
+      "--output",
+      "/workspace/work/harbichess/continuation-20261007/tdlambda-root-independent-audit/fullhistory.json"
+    ],
+    [
+      "/workspace/HarbiChess/.venv/bin/python",
+      "/workspace/work/harbichess/continuation-20261007/variant-known160-v1/replay_six.py",
+      "--protocol",
+      "/workspace/work/harbichess/continuation-20261007/variant-known160-v1/protocol.json",
+      "--profile",
+      "/dev/shm/harbichess-continuation-20261007/tdlambda-known160-data/profile.json",
+      "--arena",
+      "/dev/shm/harbichess-continuation-20261007/tdlambda-known160-data/arena",
+      "--clock",
+      "/workspace/work/harbichess/continuation-20261007/tdlambda-root-independent-audit/clock.json",
+      "--output",
+      "/workspace/work/harbichess/continuation-20261007/tdlambda-root-independent-audit/six-actual-replays.json"
+    ]
+  ],
+  "completed": [
+    0,
+    1
+  ],
+  "outputs": {
+    "fullhistory.json": "f5a4f1bef0bf01765d39d30e91fa793e765f89443139b133d51dd384b84ef96e",
+    "six-actual-replays.json": "651250e68f2bbe41e4873fba3afc61e2b89fba460638e1a92d1987eb3dd0d063"
+  },
+  "finished": 1791373072.2991345
+}
