@@ -1,0 +1,10 @@
+{
+  "schema": "NNUE-v10b-ROOT-owned-one-dispatch-registration-v1",
+  "head": "0e274151f9abec2a17a2f8a91eb6a3ac2225df83",
+  "parts_control_sha256": "1156bc37fa06188e209043dc7d66609f552e65e3fa6daa72df8b6b597f49a90e",
+  "original_first": 1791366907.4313974,
+  "original_deadline": 1791372307.4313974,
+  "operator_end": 1791448916.685839,
+  "POST_attempts_allowed": 1,
+  "independent_anonymous_originals_required": 261
+}
