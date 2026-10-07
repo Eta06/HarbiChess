@@ -1,0 +1,42 @@
+{
+  "status": "PASS-integrity-and-six-actual-not-strength",
+  "first": 1791368930.4177356,
+  "deadline": 1791369830.4177356,
+  "helper_sha256": "4c260c3ed02efdbbff699f9438067ea471e82c36d2f10cf8eb328cff6d084efd",
+  "pid": 1058272,
+  "commands": [
+    [
+      "/workspace/HarbiChess/.venv/bin/python",
+      "/workspace/work/harbichess/continuation-20261007/nnue-strength-v2-e8-wiring-recovery/audit_known160_v2.py",
+      "--protocol",
+      "/workspace/work/harbichess/continuation-20261007/nnue-strength-v2-e8-wiring-recovery/protocol.json",
+      "--arena",
+      "/dev/shm/harbichess-continuation-20261007/known160-e8-wiring-recovery-data/arena",
+      "--output",
+      "/workspace/work/harbichess/continuation-20261007/known160-root-independent-audit/fullhistory.json"
+    ],
+    [
+      "/workspace/HarbiChess/.venv/bin/python",
+      "/workspace/work/harbichess/continuation-20261007/nnue-strength-v2-e8-wiring-recovery/replay_six.py",
+      "--protocol",
+      "/workspace/work/harbichess/continuation-20261007/nnue-strength-v2-e8-wiring-recovery/protocol.json",
+      "--profile",
+      "/dev/shm/harbichess-continuation-20261007/known160-e8-wiring-recovery-data/profile.json",
+      "--arena",
+      "/dev/shm/harbichess-continuation-20261007/known160-e8-wiring-recovery-data/arena",
+      "--clock",
+      "/workspace/work/harbichess/continuation-20261007/known160-root-independent-audit/clock.json",
+      "--output",
+      "/workspace/work/harbichess/continuation-20261007/known160-root-independent-audit/six-actual-replays.json"
+    ]
+  ],
+  "completed": [
+    0,
+    1
+  ],
+  "outputs": {
+    "fullhistory.json": "514cca1ac0de823f5ad73ddec2bcf80e420c54e507d268247239fe7ad464d89e",
+    "six-actual-replays.json": "47572297a3f52f30656c264e2e7c005b7a606e786f661a0ee7585b2b382b0037"
+  },
+  "finished": 1791368935.9169867
+}
