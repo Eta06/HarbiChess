@@ -1,0 +1,51 @@
+{
+  "actual_production_labels_or_planner_used": false,
+  "actual_real_own_data_conversion_proof_fit_pending": true,
+  "cli_actual_import_help": [
+    "convert.py",
+    "contracts.py",
+    "prove.py",
+    "train.py"
+  ],
+  "frozen_model_native_bytes_identical": true,
+  "historical_teacher_deadlines_and_artifacts_unchanged": true,
+  "original_training_sha256": "5644a7455498209a149a8672745868cf7e7cf4a3baae817dfce2128ff4d8f6c6",
+  "root_operator_end_epoch": 1791448916.685839,
+  "ruff": "PASS",
+  "schema": "NNUE-own-training-v2-preparation-verification-v1",
+  "source_sha256": {
+    "README.md": "5dfe88a77568ad7abfb353b9f965d945a80467181e0ebfc44206c5644f88237a",
+    "contracts.py": "605a0d9e11f606c7e06998c6c216134c005894f73d7602efcfb97fe494be6e9b",
+    "convert.py": "bdfc780e544bac9f6ff3abe25b458babd1ee8b883434fb6aaf3e2085fe6e1edc",
+    "model.py": "c04914bc5a560ad51de81c6d0aaeb3fae4d04b45c07cd8e39bbd31f655d36565",
+    "native.py": "f60a1f9814f48691af1e2d1f1db1b548cff3e7df0a7cae9718051de1865b8b69",
+    "prove.py": "a320c0ec335d14e2432d165f85b1b8295d4b4afe58c2f9c6ba332422f0cde22d",
+    "synthetic_native.py": "4a887d408b7051e4d24114d6e86edb72c568e10b26c6014bf14e4df5deb0ced0",
+    "test_v2.py": "71a206509ba4d2ee97f20e64b90afbb27d543395cc88a64557e395b9dd489b63",
+    "train-source-bridge.diff.txt": "4996cea0ae64d2194555a436b2971ea7453c8089b5ff143e6e32ea6dc43f7435",
+    "train.py": "c5f16b69bf32183e9bf21f5d8d5e41ecf5636eae8176ec07e7f09ffe5d3a98dd"
+  },
+  "status": "READY-for-ROOT-real-data-phases-not-production-proof",
+  "synthetic_actual_native_proof": {
+    "all_storagebits_equal": true,
+    "deadline": 1791362800.5960724,
+    "executed_source_current_sha_all_exact": true,
+    "finished": 1791362763.602263,
+    "first": 1791362740.5960724,
+    "fresh_native_loads": 6,
+    "path": "/dev/shm/harbichess-own-native-v2-synthetic-20261007-2/proof/result.json",
+    "raw_torch_zip_identity_claimed": false,
+    "scope": "ONE seed SYNTHETIC one-row data, immutable named teacher weights, not real own labels",
+    "sha256": "35e5cde5087565988fa58a7a69e9f9e024af4a83934d4077ec39256821ae44cf",
+    "wall_seconds": 23.006190538406372
+  },
+  "tests": {
+    "cpu_core": 4,
+    "passed": 6,
+    "path": "/workspace/work/harbichess/continuation-20261007/nnue-own-training-v2/tests-final.log",
+    "sha256": "b13d7d2bd9bd091122cfe9833a0d647c460ce8fafb8d6fe160f62fa127e10907",
+    "skipped": 0,
+    "wall_seconds": 7.25
+  },
+  "training_change_scope": "execution clock/source/raw-input checks only; original model/native/math unchanged"
+}
