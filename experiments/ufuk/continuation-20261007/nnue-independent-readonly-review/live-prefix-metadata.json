@@ -1,0 +1,50 @@
+{
+  "schema": "NNUE-own-live-metadata-independent-review-v1",
+  "observed_epoch": 1791363581.9569678,
+  "sources": {
+    "collector.py": "b7f87d37d2213997be0a68b7749784b774b33d2a2cc2b7bf68f676c48a7c6bc5",
+    "run_collection.py": "b4c06d2762e0978472e3e278c4a7da94b833a1c675fb23628651b5e7c507c29e"
+  },
+  "seeds": {
+    "20262905": {
+      "snapshot_bytes": 348374,
+      "snapshot_sha256": "7adf40729b2ad6a21f9b2f92ad96a5308ac05cc7ab892d0e96ba488cbad00bbd",
+      "partial_final_line_ignored": false,
+      "event_types": {
+        "game_start": 17,
+        "search_row": 208,
+        "game_end": 16
+      },
+      "starts": 17,
+      "raw_search_rows": 208,
+      "closed_episodes": 16,
+      "rows_through_last_closed_episode": 203,
+      "active_tail_rows": 5,
+      "duplicate_row_ids": 0,
+      "first_row_id": "75f77ad9f59f33106d09f472492e1b220272ed29c3b7a45c8a2cd97e80fca0e9:30:0",
+      "metadata_issues": [],
+      "receipt_present": false,
+      "scope": "read-only observed byte prefix; live files may grow; no endpoint/outcome selection or inference"
+    },
+    "20262906": {
+      "snapshot_bytes": 319083,
+      "snapshot_sha256": "9f9ca30f0d131ac579aaa2fded36df901e034b51af27f2c1827ce63ca007c798",
+      "partial_final_line_ignored": false,
+      "event_types": {
+        "game_start": 15,
+        "search_row": 198,
+        "game_end": 14
+      },
+      "starts": 15,
+      "raw_search_rows": 198,
+      "closed_episodes": 14,
+      "rows_through_last_closed_episode": 186,
+      "active_tail_rows": 12,
+      "duplicate_row_ids": 0,
+      "first_row_id": "b0589a7dde5794048681c71807ca88fa6d114924589c0b5fa29d07e14049b368:64:0",
+      "metadata_issues": [],
+      "receipt_present": false,
+      "scope": "read-only observed byte prefix; live files may grow; no endpoint/outcome selection or inference"
+    }
+  }
+}
