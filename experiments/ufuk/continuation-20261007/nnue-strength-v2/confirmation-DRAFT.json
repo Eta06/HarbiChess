@@ -1,0 +1,78 @@
+{
+  "ROOToperator_end_epoch": null,
+  "SF512": {
+    "actual_overruns": "recorded; no equal actualnode claim",
+    "hash_mib": 16,
+    "nodes": 512,
+    "threads": 1
+  },
+  "approval_scope": "USERapproved narrower ancestry-conditional v2; registration remains prospective and unexecuted",
+  "arms": [
+    [
+      "learned",
+      "e8"
+    ],
+    [
+      "learned",
+      "parent"
+    ],
+    [
+      "learned",
+      "SF512"
+    ],
+    [
+      "parent",
+      "SF512"
+    ],
+    [
+      "e8",
+      "SF512"
+    ]
+  ],
+  "book_pairs_per_seed": 48,
+  "bootstrap_replicates": 50000,
+  "candidate_endpoint": "BOTH independent seeds FIXED own64; no endpoint/fallback selection",
+  "candidate_recipe": null,
+  "clocks": null,
+  "colors": [
+    "white",
+    "black"
+  ],
+  "gates": {
+    "E8_direct_gt": 0.6,
+    "E8_direct_lower_gt": 0.5,
+    "SF_gain_E8_gt": 0.1,
+    "SF_gain_E8_lower_gt": 0,
+    "SF_gain_parent_gt": 0,
+    "SF_gain_parent_lower_gt": 0,
+    "absolute_SF_ge": 0.25,
+    "adverse_cap_robustness": "ALL same point+inferential gates",
+    "caps_le": 0.05,
+    "median_latency_ratio_le": 1.1,
+    "parent_direct_gt": 0.6,
+    "parent_direct_lower_gt": 0.5
+  },
+  "joint_nominal_alpha": 0.00625,
+  "lower_bounds": 8,
+  "old_MAX8": "closed, not refunded/reopened",
+  "old_plus_new_nominal_bound": 0.05625,
+  "one_sided_alpha_each": 0.00078125,
+  "parent": "same-seed exact frozen teacher256",
+  "repeat_or_fallback": false,
+  "root_and_source_exclusions": "all CURRENT selected DAG teacher-source aliases/teacher-training roots/own played/UNKNOWN/cap/tails/search-input traces/proof/dev/validation/known8; independent source/ECO books only after candidate freeze",
+  "root_books": null,
+  "schema": "ONE-ancestry-conditional-NNUE-own64-confirmation-v2",
+  "search": {
+    "max_depth": 8,
+    "nodes": 512,
+    "q2": 2
+  },
+  "status": "DRAFT-no-candidate-or-book-selection",
+  "total_games": 960,
+  "train_seeds": [
+    20262905,
+    20262906
+  ],
+  "two_sided_coverage": 0.9984375,
+  "unresolved_exposure": "historical source6/8 and unlogged teacher-internal SF nodes, unknown E8 pretrained exposure, shared START ancestors; no globally virgin/generalElo claim"
+}
