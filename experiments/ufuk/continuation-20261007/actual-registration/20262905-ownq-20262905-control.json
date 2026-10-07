@@ -1,0 +1,25 @@
+{
+  "schema": "own-nnue-ownq-v2-root-control",
+  "status": "registered",
+  "seed": 20262905,
+  "original_first_epoch": 1791362828.5941622,
+  "original_deadline_epoch": 1791370028.5941622,
+  "operator_end_epoch": 1791448916.685839,
+  "core_repo": "/workspace/work/harbichess/cpu-additive-source-6fcc8b4",
+  "core_commit": "6fcc8b476d25495d1c9c413e55b2c7ba4794013e",
+  "cpu_core": 1,
+  "root_pool_output": "/workspace/work/harbichess/continuation-20261007/nnue-own-producer-v2/input-pools/20262905.json",
+  "output_path": "/dev/shm/harbichess-ownq-v2/20262905",
+  "protected_aliases": {
+    "path": "/dev/shm/harbichess-continuation-20261007/metadata-20262905/protected-aliases.bin",
+    "sha256": "e9ff3bfb0c6914b573d68b7df0a2cc110cd061a07b2381c8412f3be2473e81d9",
+    "manifest_path": "/dev/shm/harbichess-continuation-20261007/metadata-20262905/protected-manifest.json",
+    "manifest_sha256": "89d191d8826a23b0ddb69a383efaf07a95d81e248a56da92472dd4cd72772168"
+  },
+  "parent_candidate": {
+    "path": "/dev/shm/harbichess-NNUE-teacher-fit-v1/20262905/whole/candidate.pt",
+    "sha256": "52e029bba0e895740f975109f4c52358c7a59fe22082cb1fb528821e3fa2b02d",
+    "contract_sha256": "b397f76376b269c0ffada0871d4a2c06f19cb38df53fdbd5bc1a608ad13dd90c"
+  },
+  "registration_output": "/workspace/work/harbichess/continuation-20261007/nnue-own-producer-v2/registrations/20262905.json"
+}
