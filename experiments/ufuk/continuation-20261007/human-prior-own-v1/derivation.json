@@ -1,0 +1,207 @@
+{
+  "math_note": "Learner.advance AST exact; model bytes exact. New zero phase/full initial state validation, strict origin/search/helper bindings and typed containers are actual changes.",
+  "methods": {
+    "admit_parent.py": {
+      "added": [],
+      "ast_body_identical": [],
+      "byte_identical": false,
+      "changed": [
+        "main"
+      ]
+    },
+    "audit_collection_six.py": {
+      "added": [],
+      "ast_body_identical": [
+        "alias_segment",
+        "check_packet",
+        "load",
+        "selected_rows",
+        "sha"
+      ],
+      "byte_identical": false,
+      "changed": [
+        "main"
+      ]
+    },
+    "collector.py": {
+      "added": [],
+      "ast_body_identical": [
+        "AliasWriter.__init__",
+        "AliasWriter.append",
+        "AliasWriter.close",
+        "Traced.__call__",
+        "Traced.__init__",
+        "Traced.reset",
+        "_label",
+        "alias",
+        "replay",
+        "starts"
+      ],
+      "byte_identical": false,
+      "changed": [
+        "collect"
+      ]
+    },
+    "contracts.py": {
+      "added": [],
+      "ast_body_identical": [
+        "clock"
+      ],
+      "byte_identical": false,
+      "changed": [
+        "build"
+      ]
+    },
+    "convert.py": {
+      "added": [],
+      "ast_body_identical": [
+        "alias",
+        "board_at",
+        "canonical",
+        "main",
+        "module",
+        "pinned",
+        "pins_tree",
+        "sha",
+        "verify_row"
+      ],
+      "byte_identical": false,
+      "changed": [
+        "convert"
+      ]
+    },
+    "ledger.py": {
+      "added": [],
+      "ast_body_identical": [],
+      "byte_identical": false,
+      "changed": [
+        "build"
+      ]
+    },
+    "metadata_factory.py": {
+      "added": [],
+      "ast_body_identical": [
+        "publish",
+        "ref",
+        "sha_canonical"
+      ],
+      "byte_identical": false,
+      "changed": [
+        "collection"
+      ]
+    },
+    "model.py": {
+      "added": [],
+      "ast_body_identical": [
+        "NNUE16.__init__",
+        "NNUE16.residual",
+        "NNUE16.zero_head",
+        "board_indices",
+        "feature_indices",
+        "tensor_batch"
+      ],
+      "byte_identical": true,
+      "changed": []
+    },
+    "native.py": {
+      "added": [],
+      "ast_body_identical": [
+        "Learner.advance",
+        "Learner.candidate",
+        "Learner.native",
+        "bits_equal",
+        "load_native",
+        "sha",
+        "validate_weights"
+      ],
+      "byte_identical": false,
+      "changed": [
+        "Learner.__init__",
+        "Learner.restore",
+        "bootstrap_weights"
+      ]
+    },
+    "parent_bridge.py": {
+      "added": [
+        "require_collection_parent"
+      ],
+      "ast_body_identical": [
+        "admitted_candidate",
+        "canonical",
+        "native_rows",
+        "pin_tree",
+        "pinned",
+        "read",
+        "sha"
+      ],
+      "byte_identical": false,
+      "changed": [
+        "admit",
+        "validate_admission_result",
+        "validate_metadata"
+      ]
+    },
+    "parent_seal.py": {
+      "added": [],
+      "ast_body_identical": [
+        "ref"
+      ],
+      "byte_identical": false,
+      "changed": [
+        "build"
+      ]
+    },
+    "prove.py": {
+      "added": [],
+      "ast_body_identical": [],
+      "byte_identical": false,
+      "changed": [
+        "execute"
+      ]
+    },
+    "run_collection.py": {
+      "added": [],
+      "ast_body_identical": [
+        "canon",
+        "load",
+        "sha"
+      ],
+      "byte_identical": false,
+      "changed": [
+        "execute",
+        "parent"
+      ]
+    },
+    "specs.py": {
+      "added": [],
+      "ast_body_identical": [
+        "checked_clock",
+        "pinned",
+        "read",
+        "ref",
+        "ref_pending",
+        "sha"
+      ],
+      "byte_identical": false,
+      "changed": [
+        "collection",
+        "prepare",
+        "registry",
+        "require_audits"
+      ]
+    },
+    "train.py": {
+      "added": [],
+      "ast_body_identical": [
+        "save_once",
+        "sha"
+      ],
+      "byte_identical": false,
+      "changed": [
+        "main"
+      ]
+    }
+  },
+  "schema": "human-prior-own-v1-source-derivation",
+  "source_inventory_sha256": "485d30553beeafd7bd0a168efed2ca3bc41baee4932bf73ccf5f4f4ef2a1bfcc"
+}
