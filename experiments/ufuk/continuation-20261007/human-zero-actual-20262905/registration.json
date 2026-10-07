@@ -1,0 +1,20 @@
+{
+  "schema": "ROOT-actual-human-zero-and-synthetic-native-proof-v1",
+  "status": "running",
+  "first": 1791374630.1074626,
+  "deadline": 1791376430.1074626,
+  "seed": 20262905,
+  "cpu_core": 3,
+  "helper": {
+    "path": "/workspace/work/harbichess/continuation-20261007/execute_human_zero_chain.py",
+    "sha256": "e2e370455528ccca2166f25de4b75b30266d7dcae68a415f8d98817d87f62b25"
+  },
+  "source_inventory": {
+    "path": "/workspace/work/harbichess/continuation-20261007/human-prior-own-v1/source-inventory.json",
+    "sha256": "485d30553beeafd7bd0a168efed2ca3bc41baee4932bf73ccf5f4f4ef2a1bfcc"
+  },
+  "trained_teacher_weights_used": false,
+  "teacher_label_calls": 0,
+  "optimizer_updates_on_actual_data": 0,
+  "commands": []
+}
