@@ -1,0 +1,18 @@
+{
+  "schema": "source-only-generational-TDLeaf-verification-v1",
+  "status": "PASS-28-synthetic-source-tests-not-real-qualification",
+  "tests_passed": 28,
+  "tests_skipped": 0,
+  "test_seconds": 26.06,
+  "command": "PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -m pytest -q -p no:cacheprovider /workspace/work/harbichess/continuation-20261007/tdleaf-procedural-generational-v1/test_tdleaf.py /workspace/work/harbichess/continuation-20261007/tdleaf-procedural-generational-v1/test_generations.py",
+  "canonical_Ruff": "PASS from repo cwd with --config pyproject.toml",
+  "real_model_or_parent_reads": false,
+  "actual_actor_or_fit_or_search_run": false,
+  "remaining": [
+    "ROOT six NEW bank creation and plan freeze",
+    "actual new branch g0 admission",
+    "new source native8/4/fresh8 proof and full real target audit eachgeneration",
+    "future typed generation3 strength admission/runtime",
+    "actual throughput/admission;256MiB actors/event16MiB/data8MiB fail closed"
+  ]
+}
