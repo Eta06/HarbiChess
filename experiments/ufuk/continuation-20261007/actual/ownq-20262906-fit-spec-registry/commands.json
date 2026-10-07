@@ -1,0 +1,8 @@
+[
+  [
+    "/workspace/HarbiChess/.venv/bin/python",
+    "/workspace/work/harbichess/continuation-20261007/nnue-own-training-v2/prove.py",
+    "--registration",
+    "/workspace/work/harbichess/continuation-20261007/ownq-20262906-fit-spec-registry/registration.json"
+  ]
+]
