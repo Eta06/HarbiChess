@@ -1,0 +1,39 @@
+{
+  "schema": "UFUK-DEVAM-bounded-cpu-phase-v1",
+  "phase": "actual-frozen-parent-own-search-no-new-teacher",
+  "output": "/dev/shm/harbichess-continuation-20261007/ownq-20262905-controller",
+  "first_epoch": 1791362828.5941622,
+  "deadline_epoch": 1791370028.5941622,
+  "operator_end_epoch": 1791448916.685839,
+  "cpu_core": 1,
+  "checkout": "/workspace/work/harbichess/cpu-additive-source-6fcc8b4",
+  "controller_sha256": "5090ef465aafd81fd39a49dd86b205cfe7d2d97f73c357c83aa2822f321d464b",
+  "memory_guard_path": "/workspace/work/harbichess/cpu-additive-source-6fcc8b4/src/harbichess/training/cgroup_budget.py",
+  "input_pins": {
+    "/workspace/work/harbichess/continuation-20261007/nnue-own-producer-v2/registrations/20262905.json": "f9f36e02cdfbec9c13219af06a6ae75316c1f276394377ccf38862d78a4c142c",
+    "/workspace/work/harbichess/continuation-20261007/nnue-own-producer-v2/collector.py": "b7f87d37d2213997be0a68b7749784b774b33d2a2cc2b7bf68f676c48a7c6bc5",
+    "/workspace/work/harbichess/continuation-20261007/nnue-own-producer-v2/metadata_factory.py": "8d8bb59f500befe26744e40e1c50d25ad1f027272841558e40b9ae3aac8ca43c",
+    "/workspace/work/harbichess/continuation-20261007/nnue-own-producer-v2/run_collection.py": "b4c06d2762e0978472e3e278c4a7da94b833a1c675fb23628651b5e7c507c29e",
+    "/workspace/work/harbichess/continuation-20261007/nnue-own-producer-v2/input-pools/20262905.json": "a8b43b377d5376a5f67f3a56edb893f949b54e92be9e7a60b1e6ff91bfdfaa6a",
+    "/dev/shm/harbichess-continuation-20261007/metadata-20262905/protected-aliases.bin": "e9ff3bfb0c6914b573d68b7df0a2cc110cd061a07b2381c8412f3be2473e81d9",
+    "/dev/shm/harbichess-continuation-20261007/metadata-20262905/protected-manifest.json": "89d191d8826a23b0ddb69a383efaf07a95d81e248a56da92472dd4cd72772168",
+    "/dev/shm/harbichess-NNUE-teacher-fit-v1/20262905/whole/candidate.pt": "52e029bba0e895740f975109f4c52358c7a59fe22082cb1fb528821e3fa2b02d",
+    "/workspace/HarbiChess/experiments/ufuk/wrap-20261006/NNUE-teacher-trained-profile-v2.json": "daface422c690e1e989599fb8378317c9bf37f2d773ee5977e08a7f8273179d9",
+    "/workspace/HarbiChess/experiments/ufuk/cpu-budget-search-v1/search.py": "de53c14728a67b7772f18b396ac8ef5c35a144d4e4e616fec40099cd461a6670",
+    "/workspace/HarbiChess/experiments/ufuk/cpu-nnue16-v1/model.py": "c04914bc5a560ad51de81c6d0aaeb3fae4d04b45c07cd8e39bbd31f655d36565",
+    "/workspace/HarbiChess/experiments/ufuk/cpu-nnue16-v1/native.py": "f60a1f9814f48691af1e2d1f1db1b548cff3e7df0a7cae9718051de1865b8b69",
+    "/workspace/HarbiChess/experiments/ufuk/cpu-nnue16-v1/evaluator.py": "5317e736f872a2e237e45942c8df9e797c5acee8f626bb12009464869fab8d95",
+    "/workspace/HarbiChess/experiments/ufuk/cpu-classical-own-v1/value.py": "a99cddfc397bd9221b99a70691427fdd663488b033fb239d9f48240786b2f277",
+    "/workspace/work/harbichess/cpu-kingbucket-nnue-proposal/_kingbucket16.cpython-312-x86_64-linux-gnu.so": "495505cdebd6dbc029ee314846dbac79d5cca6d445de26c804a43821808d644b"
+  },
+  "command": [
+    "/workspace/HarbiChess/.venv/bin/python",
+    "/workspace/work/harbichess/continuation-20261007/nnue-own-producer-v2/run_collection.py",
+    "--registration",
+    "/workspace/work/harbichess/continuation-20261007/nnue-own-producer-v2/registrations/20262905.json"
+  ],
+  "source_core_commit": "6fcc8b476d25495d1c9c413e55b2c7ba4794013e",
+  "historical_timer_reset": false,
+  "GPU_used": false,
+  "hash_guard_interval_seconds": 30
+}
