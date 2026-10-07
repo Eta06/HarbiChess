@@ -1,0 +1,24 @@
+{
+  "files": {
+    "ROOT_RECIPE.md": "905f8642556c3fea4211c588304a944cf58b6c398393d2f726c3f61e427c6076",
+    "integration/audit_six.py": "6873abc17c33989a7e8424d9bfca0e94df1b17e382462201727cd1bc7403b473",
+    "integration/seal_factory.py": "adb4e4f803c7f45cf8bc7a5a297aec08335e8bf9d7554ed7323b3409f273335f",
+    "integration/test_audit_six.py": "2277254de5bd8ec573204f6f111225042bf2103958fa83b46d6f156a31ee40f7",
+    "integration/test_seal_factory.py": "cdf0c13e901bf86e467125997f0e35a5b926052144b3e8e04380f1f9befdba77",
+    "source/arena_adapter.py": "bc976f5f0d26216cd0383c405e9e3f28f99162c672ae4b120daf7c1712a04098",
+    "source/collector.py": "99f2ea31ae1587c3d9c281f0d1838aa575ea9f603869dc662c1df98551055ba9",
+    "source/contract.py": "168116a2a245f47fdb3c2f367048361ef2f7e8b6fccaac918d4432f6538e4f19",
+    "source/contract_builder.py": "93b2f26de37631f35806fe8931d086cb93d7af906b88f50cc59e44fe3f496dff",
+    "source/convert.py": "4cca9e179f93938f1c85757177674fc408fd2aad4576b8dc036fb0a669ed225a",
+    "source/model.py": "c04914bc5a560ad51de81c6d0aaeb3fae4d04b45c07cd8e39bbd31f655d36565",
+    "source/native.py": "cb37924f529b1647509a07eb99e79532f033b56abcf2e95adce5bb3031457949",
+    "source/prove.py": "a314abb5b8aa00501eceefe1bc1c2f37414f3fae0d500ef85016f8f5b80327fe",
+    "source/run_collection.py": "ec48d3277d969b11e2cae55a0151101d4fa3a270b08e6a1abe7ef3fa758a6ce5",
+    "source/train.py": "b441af70e2334c634a420275cf565db105395b0da9c9139c7ebe76bd69412a19",
+    "test_binding_v3.py": "7e536527f6372ef08938e88a54705e7e49b57fcda6b10040246ca8b5c91b8e45"
+  },
+  "original_converter_clock": "expired; new correction must receive separate prospective registration; not a resume",
+  "schema": "MC-corrective-producer-converter-binding-source-inventory-v3",
+  "status": "READY-source-only-no-actual-conversion-proof-fit-or-strength",
+  "tests": "7 PASS,0 skips; canonical repo Ruff PASS"
+}
