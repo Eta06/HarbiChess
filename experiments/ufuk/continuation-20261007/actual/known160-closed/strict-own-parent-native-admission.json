@@ -1,0 +1,34 @@
+[
+  {
+    "full_native_checks": 8,
+    "own_candidate_sha256": "287df0c1ff5779e0ee4cc9ab9df38b077c71daee298dff376f2d819e4a2f27a4",
+    "own_fit_fresh_loads": 2,
+    "own_proof_fresh_loads": 6,
+    "own_updates": 64,
+    "seed": 20262905,
+    "teacher": {
+      "fit_fresh_loads": 2,
+      "proof_fresh_loads": 6,
+      "strict_native_loads": 8,
+      "teacher_candidate_sha256": "52e029bba0e895740f975109f4c52358c7a59fe22082cb1fb528821e3fa2b02d",
+      "teacher_is_selflearning": false
+    },
+    "teacher_ancestry": true
+  },
+  {
+    "full_native_checks": 8,
+    "own_candidate_sha256": "8627e94ca0cd6a177f3644b57ce89f30873b03b8cc99363fdf7663dddae05328",
+    "own_fit_fresh_loads": 2,
+    "own_proof_fresh_loads": 6,
+    "own_updates": 64,
+    "seed": 20262906,
+    "teacher": {
+      "fit_fresh_loads": 2,
+      "proof_fresh_loads": 6,
+      "strict_native_loads": 8,
+      "teacher_candidate_sha256": "4ff008426e2e8a09eeef5cc232195e015a1c6a498dd0ffb768e905e897eff4c8",
+      "teacher_is_selflearning": false
+    },
+    "teacher_ancestry": true
+  }
+]
