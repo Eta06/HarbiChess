@@ -1,0 +1,27 @@
+{
+  "schema": "closed-terminal-own-integration-only-verification-v1",
+  "status": "PASS-synthetic-integration-tests-only",
+  "actual_collection": false,
+  "actual_converter_run": false,
+  "actual_search_replay": false,
+  "actual_training_or_optimizer": false,
+  "actual_strength_evaluation": false,
+  "tests": "7 packet/audit and seal/typed-record tests passed",
+  "ruff": "PASS",
+  "commands": [
+    "/workspace/HarbiChess/.venv/bin/ruff check --config /workspace/HarbiChess/pyproject.toml integration",
+    "/workspace/HarbiChess/.venv/bin/pytest -q integration"
+  ],
+  "source_sha256": {
+    "audit_six.py": "ff34297f8c59b589dfbc9bdb05659a33b100fc0a8734bf3e6f085d7d79559315",
+    "seal_factory.py": "5e5c5cecbaa80ca6eb3429a1ba071869deadf39f87ee0fb95e43c82cc391569a",
+    "test_audit_six.py": "2277254de5bd8ec573204f6f111225042bf2103958fa83b46d6f156a31ee40f7",
+    "test_seal_factory.py": "cdf0c13e901bf86e467125997f0e35a5b926052144b3e8e04380f1f9befdba77",
+    "ROOT_RUNBOOK.md": "7d75a5c0dc5a72e6429955d210c0aeacdbe40d2ef74ec0512b32656a26a418bc"
+  },
+  "scope_limitations": [
+    "This scratch integration does not establish actual MC collection, converter, model, training, fresh-process native, or strength outcomes.",
+    "The registered audit CLI must be run under ROOT's separately sealed clock and actual frozen producer inputs.",
+    "The actual adapter must continue to re-run the frozen full converter and native contract checks."
+  ]
+}
