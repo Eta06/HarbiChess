@@ -1,0 +1,9 @@
+usage: contracts.py [-h] --seal SEAL --output OUTPUT
+
+ROOT-clocked own64 contracts; cached original teacher admission, no optimizer
+step.
+
+options:
+  -h, --help       show this help message and exit
+  --seal SEAL
+  --output OUTPUT
