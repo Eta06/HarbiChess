@@ -1,0 +1,11 @@
+{
+  "schema": "NNUE-own-collection-six-root-audit-clock-v2",
+  "first": null,
+  "deadline": null,
+  "cpu_core": null,
+  "producer_directory": "/workspace/work/harbichess/continuation-20261007/nnue-own-producer-v2",
+  "registration_sha256": "ROOT-FILL-ACTUAL",
+  "receipt_sha256": "ROOT-FILL-ACTUAL",
+  "events_sha256": "ROOT-FILL-ACTUAL",
+  "helper_sha256": "1a5a7c78cf6589d17f7f6965bf2eae2b4f9138c747830c5f9529fe718fe608a0"
+}
