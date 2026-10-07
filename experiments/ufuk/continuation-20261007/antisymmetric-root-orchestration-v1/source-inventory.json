@@ -1,0 +1,11 @@
+{
+  "actual_phase_calls": 0,
+  "files": {
+    "ROOT-RECIPE.md": "3a166f3a45e2a8f9478525bfc110978c2fdf9e56d975d152c05385918855b456",
+    "execute.py": "fe8553e2ffbf337adf3f4e73f0c999283f3c14676c2ab30054206253b725cf86",
+    "test_execute.py": "ad62b38c110c895b7ea1f5f4472b4d42cf5f4e3f3d704ac03f3662f536595e75"
+  },
+  "frozen_pipeline_inventory": "dbf7e13d5b406ff30d8d4c13c6ea33d9ebfdaf6abc14d18d46a69f98d8a3f8a7",
+  "schema": "ROOT-antisymmetric-external-orchestration-source-v1",
+  "tests": "4 metadata-only PASS0.20s, actualCLIhelp PASS, Ruff explicitROOTconfig PASS"
+}
