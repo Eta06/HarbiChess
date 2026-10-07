@@ -1,0 +1,23 @@
+{
+  "schema": "ROOT-pre-SGD-metadata-corrective-derivatives-v1",
+  "observed": 1791373954.9572554,
+  "MC": {
+    "old": "closed-terminal-own-v1",
+    "new": "closed-terminal-own-v2-reconciliation",
+    "reason": "all1079 eligible terminal rows reconciled but first1024 selected as preregistered; preserve55 extra rows",
+    "old_converter_sha256": "f88f94f6d8a3b7fad0fc24b4f298e24a7676d84c3cf3bca692c88c46c870233a",
+    "new_converter_sha256": "84917f42c0cf4b3f5879f7f6058a83437727fa4785a822ebac2c41b8e0cc5876"
+  },
+  "ranking": {
+    "old": "action-ranking-own-v1",
+    "new": "action-ranking-own-v2-source-binding",
+    "reason": "imported contract.py belongs to separately SHA-bound execution_helpers, four training source entries retained exactly",
+    "old_train_sha256": "ee85ec7c5a158a7500e729ee79e90805cde889ff37d7725a0f647920eb673cec",
+    "new_train_sha256": "791a6fbc03895a999c9885fc2f508af96a5cd2bfb4e29e638f8c7f3686207bb5"
+  },
+  "old_files_changed": false,
+  "new_targets": false,
+  "thresholds_changed": false,
+  "old_failed_attempts_preserved": true,
+  "pre_SGD_failure": true
+}
