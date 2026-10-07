@@ -1,0 +1,23 @@
+{
+  "schema": "antisymmetric-readonly-actual-input-shape-v3",
+  "no_optimizer_forward_or_search": true,
+  "diagnostics": {
+    "20262905": {
+      "actual_optimizer_updates": 0,
+      "dataset_sha256": "c0f0efee069a4ac90913c98a1095bc1004784573821735020febf1817a3f4edf",
+      "rows": 1024,
+      "seconds": 1.554093360900879,
+      "seed": 20262905,
+      "status": "PASS-readonly-source-shape-not-actual-phase-conversion"
+    },
+    "20262906": {
+      "actual_optimizer_updates": 0,
+      "dataset_sha256": "e541f48586fbc9f1cdff5245fd0cca74983bbe69bf6c7053b1cea6e4a04dd7cc",
+      "rows": 1024,
+      "seconds": 1.490285873413086,
+      "seed": 20262906,
+      "status": "PASS-readonly-source-shape-not-actual-phase-conversion"
+    }
+  },
+  "not_phase_conversion_or_qualification": true
+}
