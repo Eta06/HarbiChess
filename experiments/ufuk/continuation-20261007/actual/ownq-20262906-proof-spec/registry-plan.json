@@ -1,0 +1,79 @@
+{
+  "collection_replay_audit_set": {
+    "path": "/workspace/work/harbichess/continuation-20261007/ownq-actual-audit-set.json",
+    "sha256": "0b9192ed491d558be7ec4cec042d52d42ee4c5b96a842bf9ab8b810c1bebc8cf"
+  },
+  "collection_replay_results": [
+    {
+      "clock": {
+        "path": "/workspace/work/harbichess/continuation-20261007/ownq-20262905-six-audit/clock.json",
+        "sha256": "34fced44d6d83539f0e0dd0689b486f83b5d989421ebca4e7b60df9e8b614248"
+      },
+      "result": {
+        "path": "/workspace/work/harbichess/continuation-20261007/ownq-20262905-six-audit/result.json",
+        "sha256": "4b5c663c7d9474939c00ac2c25d13bdf247742112f615202da8ee2700b1ecb72"
+      },
+      "seed": 20262905
+    },
+    {
+      "clock": {
+        "path": "/workspace/work/harbichess/continuation-20261007/ownq-20262906-six-audit/clock.json",
+        "sha256": "0a7228548402cea086523a4d7b3d8766cdcebf85b36719f6ecfc0cab0c655168"
+      },
+      "result": {
+        "path": "/workspace/work/harbichess/continuation-20261007/ownq-20262906-six-audit/result.json",
+        "sha256": "6315111229e996bcfcd06ad6ab9fac5df16cf4ceece141c7a0ddd62a2ed9116b"
+      },
+      "seed": 20262906
+    }
+  ],
+  "contract_path": "/dev/shm/harbichess-NNUE-own-contracts-v2/20262906/proof.json",
+  "cpu_core": 3,
+  "dataset": {
+    "path": "/dev/shm/harbichess-NNUE-own-data-v2/20262906/dataset.json",
+    "sha256": "4d96cdac6e6b1812c31b3a55b4c8ecb627ce8e086e531427721d1fff94988727"
+  },
+  "deadline": 1791366692.5601761,
+  "first": 1791366092.5601761,
+  "inputs": {
+    "build_seal": {
+      "path": "/workspace/work/harbichess/continuation-20261007/ownq-20262906-proof-spec/build-seal.json",
+      "sha256": "PENDING-unpublished-build-seal"
+    },
+    "collection_replay_20262905_clock": {
+      "path": "/workspace/work/harbichess/continuation-20261007/ownq-20262905-six-audit/clock.json",
+      "sha256": "34fced44d6d83539f0e0dd0689b486f83b5d989421ebca4e7b60df9e8b614248"
+    },
+    "collection_replay_20262905_result": {
+      "path": "/workspace/work/harbichess/continuation-20261007/ownq-20262905-six-audit/result.json",
+      "sha256": "4b5c663c7d9474939c00ac2c25d13bdf247742112f615202da8ee2700b1ecb72"
+    },
+    "collection_replay_20262906_clock": {
+      "path": "/workspace/work/harbichess/continuation-20261007/ownq-20262906-six-audit/clock.json",
+      "sha256": "0a7228548402cea086523a4d7b3d8766cdcebf85b36719f6ecfc0cab0c655168"
+    },
+    "collection_replay_20262906_result": {
+      "path": "/workspace/work/harbichess/continuation-20261007/ownq-20262906-six-audit/result.json",
+      "sha256": "6315111229e996bcfcd06ad6ab9fac5df16cf4ceece141c7a0ddd62a2ed9116b"
+    },
+    "collection_replay_audit_set": {
+      "path": "/workspace/work/harbichess/continuation-20261007/ownq-actual-audit-set.json",
+      "sha256": "0b9192ed491d558be7ec4cec042d52d42ee4c5b96a842bf9ab8b810c1bebc8cf"
+    },
+    "collection_replay_helper": {
+      "path": "/workspace/work/harbichess/continuation-20261007/nnue-strength-v2/audit_collection_six_v2.py",
+      "sha256": "2082c379ac0dc0540e3e758ce70da09c20d972a267eee057a8b95cd2609a491e"
+    }
+  },
+  "mode": "proof",
+  "operator_end_epoch": 1791448916.685839,
+  "output": "/dev/shm/harbichess-NNUE-own-proof-v2/20262906",
+  "parent_candidate": {
+    "contract_sha256": "cbe290ea7f70125e57ce13a72efafb7da7299c98b33b4ff02660844ba08fc123",
+    "path": "/dev/shm/harbichess-NNUE-teacher-fit-v1/20262906/whole/candidate.pt",
+    "sha256": "4ff008426e2e8a09eeef5cc232195e015a1c6a498dd0ffb768e905e897eff4c8"
+  },
+  "schema": "NNUE-own-registry-plan-v2",
+  "seed": 20262906,
+  "training": "/workspace/work/harbichess/continuation-20261007/nnue-own-training-v2"
+}
