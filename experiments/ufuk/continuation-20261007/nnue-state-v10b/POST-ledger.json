@@ -1,0 +1,271 @@
+{
+  "status": "PASS-19-exact-once-Gitblob-POST-not-public-Release",
+  "records": [
+    {
+      "index": 0,
+      "started": {
+        "expected_git_blob_sha1": "f835e03b52a6bf39d10161b0bd0c71753a4c1626",
+        "attempts": 1
+      },
+      "result": {
+        "returncode": 0,
+        "attempts": 1,
+        "response_sha256": "4f1c57415b96f0e18d290c4c7e4a215bc8fb908a26bd691bde30dad0a4b7546f",
+        "error_details_suppressed": true,
+        "git_blob_sha1": "f835e03b52a6bf39d10161b0bd0c71753a4c1626"
+      }
+    },
+    {
+      "index": 1,
+      "started": {
+        "expected_git_blob_sha1": "259f828500dc989b731014b6f5f8c2a7b08ab541",
+        "attempts": 1
+      },
+      "result": {
+        "returncode": 0,
+        "attempts": 1,
+        "response_sha256": "2cd1c7a51fd2d179825893d41cd253982a6e8dbf5b268a444fa93c66628b0126",
+        "error_details_suppressed": true,
+        "git_blob_sha1": "259f828500dc989b731014b6f5f8c2a7b08ab541"
+      }
+    },
+    {
+      "index": 2,
+      "started": {
+        "expected_git_blob_sha1": "ec7aa9ebcb009499f363d939b9f602294b56317f",
+        "attempts": 1
+      },
+      "result": {
+        "returncode": 0,
+        "attempts": 1,
+        "response_sha256": "37b86f4307518b4c596ccd4194859a671db08854002d98da64123af6f2460357",
+        "error_details_suppressed": true,
+        "git_blob_sha1": "ec7aa9ebcb009499f363d939b9f602294b56317f"
+      }
+    },
+    {
+      "index": 3,
+      "started": {
+        "expected_git_blob_sha1": "3533f62575ffd909eb38a8c32e93cbe3457b5d56",
+        "attempts": 1
+      },
+      "result": {
+        "returncode": 0,
+        "attempts": 1,
+        "response_sha256": "336109e3472830941f37e76235982c800f9ce5e5810b64262825ec73566571f0",
+        "error_details_suppressed": true,
+        "git_blob_sha1": "3533f62575ffd909eb38a8c32e93cbe3457b5d56"
+      }
+    },
+    {
+      "index": 4,
+      "started": {
+        "expected_git_blob_sha1": "076372551dcf6433d40eab151c876f9d9b469db2",
+        "attempts": 1
+      },
+      "result": {
+        "returncode": 0,
+        "attempts": 1,
+        "response_sha256": "d620c369dce97f5c719c45aa276d1d961e88e26a3d11d8358c95fa3e4a19dd45",
+        "error_details_suppressed": true,
+        "git_blob_sha1": "076372551dcf6433d40eab151c876f9d9b469db2"
+      }
+    },
+    {
+      "index": 5,
+      "started": {
+        "expected_git_blob_sha1": "26bd6ef36fd71b712269ab434d101cfb9669eb07",
+        "attempts": 1
+      },
+      "result": {
+        "returncode": 0,
+        "attempts": 1,
+        "response_sha256": "306c38ef9443f51ba89484fbf8a3abb1d4dee0921fe752092aa9e1f00d0aabe6",
+        "error_details_suppressed": true,
+        "git_blob_sha1": "26bd6ef36fd71b712269ab434d101cfb9669eb07"
+      }
+    },
+    {
+      "index": 6,
+      "started": {
+        "expected_git_blob_sha1": "9537a5aaae6fb6e2c27e1b57abdf451c67d91f8a",
+        "attempts": 1
+      },
+      "result": {
+        "returncode": 0,
+        "attempts": 1,
+        "response_sha256": "6275275efc33d26b81ecfca9b22213e892f76441bf1e6c5e695d2868c8f14100",
+        "error_details_suppressed": true,
+        "git_blob_sha1": "9537a5aaae6fb6e2c27e1b57abdf451c67d91f8a"
+      }
+    },
+    {
+      "index": 7,
+      "started": {
+        "expected_git_blob_sha1": "6e8c3131838fa0568c3ac9e06aa7ec6ac3791339",
+        "attempts": 1
+      },
+      "result": {
+        "returncode": 0,
+        "attempts": 1,
+        "response_sha256": "094e3e37fd0e3e56dd0325518fdd0d51d537edab786e41d79cbf812dd3420266",
+        "error_details_suppressed": true,
+        "git_blob_sha1": "6e8c3131838fa0568c3ac9e06aa7ec6ac3791339"
+      }
+    },
+    {
+      "index": 8,
+      "started": {
+        "expected_git_blob_sha1": "2c391d9c1bdf24405181f11abba7aab7642bff88",
+        "attempts": 1
+      },
+      "result": {
+        "returncode": 0,
+        "attempts": 1,
+        "response_sha256": "af8f89c57f8a0b487a14b330357373324a6d8ec7baf920941a9b0715c89df57d",
+        "error_details_suppressed": true,
+        "git_blob_sha1": "2c391d9c1bdf24405181f11abba7aab7642bff88"
+      }
+    },
+    {
+      "index": 9,
+      "started": {
+        "expected_git_blob_sha1": "90ddbe46d1c31aec00f11bf944754a31b4cc5a59",
+        "attempts": 1
+      },
+      "result": {
+        "returncode": 0,
+        "attempts": 1,
+        "response_sha256": "fc67a60b7e3c54b60c88ff5888afb929c73a20abd0f5c0b8f6d52641d29933ad",
+        "error_details_suppressed": true,
+        "git_blob_sha1": "90ddbe46d1c31aec00f11bf944754a31b4cc5a59"
+      }
+    },
+    {
+      "index": 10,
+      "started": {
+        "expected_git_blob_sha1": "0475cceb4a992bb6c7eddfa7b17f4aa144bc9301",
+        "attempts": 1
+      },
+      "result": {
+        "returncode": 0,
+        "attempts": 1,
+        "response_sha256": "bb254cb161bce9d3e600b55bf56fbc2d945514251766be3739b250c6ed81e289",
+        "error_details_suppressed": true,
+        "git_blob_sha1": "0475cceb4a992bb6c7eddfa7b17f4aa144bc9301"
+      }
+    },
+    {
+      "index": 11,
+      "started": {
+        "expected_git_blob_sha1": "0b9fefb148568b730f39b29397a4b5c0083eaaad",
+        "attempts": 1
+      },
+      "result": {
+        "returncode": 0,
+        "attempts": 1,
+        "response_sha256": "3f716f76f1b50035259175495483044e833a0508fb4fa2adad27ed25fc3f5fec",
+        "error_details_suppressed": true,
+        "git_blob_sha1": "0b9fefb148568b730f39b29397a4b5c0083eaaad"
+      }
+    },
+    {
+      "index": 12,
+      "started": {
+        "expected_git_blob_sha1": "e9406ded6776df5d0587d213e3ecc541dd9c0d50",
+        "attempts": 1
+      },
+      "result": {
+        "returncode": 0,
+        "attempts": 1,
+        "response_sha256": "1d3c227fc12277182bcdd699727db1d7537647dcf8d4a7c48ca38182635fbcc3",
+        "error_details_suppressed": true,
+        "git_blob_sha1": "e9406ded6776df5d0587d213e3ecc541dd9c0d50"
+      }
+    },
+    {
+      "index": 13,
+      "started": {
+        "expected_git_blob_sha1": "6af56df7faaffd97eee7ff02d36670c48ffbd244",
+        "attempts": 1
+      },
+      "result": {
+        "returncode": 0,
+        "attempts": 1,
+        "response_sha256": "86cdc55f46d75819258a246b47f9fb6fc4422a4c8ffbccab33b69402f7c097bf",
+        "error_details_suppressed": true,
+        "git_blob_sha1": "6af56df7faaffd97eee7ff02d36670c48ffbd244"
+      }
+    },
+    {
+      "index": 14,
+      "started": {
+        "expected_git_blob_sha1": "5e7ec1ed6d04f3b5c7d75c67473dd9ebb9fcd0ed",
+        "attempts": 1
+      },
+      "result": {
+        "returncode": 0,
+        "attempts": 1,
+        "response_sha256": "be2eca66d4a18999c76957d10363b592ae6f80cd02d1c335509211dfdce42ba5",
+        "error_details_suppressed": true,
+        "git_blob_sha1": "5e7ec1ed6d04f3b5c7d75c67473dd9ebb9fcd0ed"
+      }
+    },
+    {
+      "index": 15,
+      "started": {
+        "expected_git_blob_sha1": "122a1c148011d73094e3c2a65a216ce6310c0d2a",
+        "attempts": 1
+      },
+      "result": {
+        "returncode": 0,
+        "attempts": 1,
+        "response_sha256": "b1584e6900d030258599c7683adc508fd6b1505b475683531501489aec095014",
+        "error_details_suppressed": true,
+        "git_blob_sha1": "122a1c148011d73094e3c2a65a216ce6310c0d2a"
+      }
+    },
+    {
+      "index": 16,
+      "started": {
+        "expected_git_blob_sha1": "3a1e93ad477f7016d3e6bf7d71c6f822834832eb",
+        "attempts": 1
+      },
+      "result": {
+        "returncode": 0,
+        "attempts": 1,
+        "response_sha256": "6827904758a68663c2a756a97881839b430b240ce9e4d109dbdfcd699e42c3d3",
+        "error_details_suppressed": true,
+        "git_blob_sha1": "3a1e93ad477f7016d3e6bf7d71c6f822834832eb"
+      }
+    },
+    {
+      "index": 17,
+      "started": {
+        "expected_git_blob_sha1": "a9a3136e92ba9881a40c727d3e58391aff5485be",
+        "attempts": 1
+      },
+      "result": {
+        "returncode": 0,
+        "attempts": 1,
+        "response_sha256": "c7ada291f6ad3e80ac4a363c4f5cf5ad4febca2c200f5c3d4a876216b1d1ae93",
+        "error_details_suppressed": true,
+        "git_blob_sha1": "a9a3136e92ba9881a40c727d3e58391aff5485be"
+      }
+    },
+    {
+      "index": 18,
+      "started": {
+        "expected_git_blob_sha1": "55933540d5e09e5c55ab179d093d39aacdc3afe7",
+        "attempts": 1
+      },
+      "result": {
+        "returncode": 0,
+        "attempts": 1,
+        "response_sha256": "79f3c70be0734000a4247e7422783a649425aea2993c7d39fbf33d9bed5764c4",
+        "error_details_suppressed": true,
+        "git_blob_sha1": "55933540d5e09e5c55ab179d093d39aacdc3afe7"
+      }
+    }
+  ]
+}
