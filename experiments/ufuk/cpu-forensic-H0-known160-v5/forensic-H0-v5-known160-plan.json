@@ -1,0 +1,9 @@
+{
+  "study": "/workspace/work/harbichess/continuation-20261007/variant-known160-forensic-v5-h0",
+  "output": "/dev/shm/harbichess-continuation-20261007/forensic-H0-v5-known160-data",
+  "draft": "/workspace/work/harbichess/continuation-20261007/variant-known160-forensic-v5-h0/protocol-DRAFT.json",
+  "draft_sha256": "98f0c860278eb08fb58b0c2e571be28a413587c591488a1db8652c41934ef33d",
+  "first": 1791384866.630516,
+  "operator_end": 1791448916.685839,
+  "checkout": "/workspace/work/harbichess/cpu-additive-source-6fcc8b4"
+}
