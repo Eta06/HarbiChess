@@ -1,0 +1,409 @@
+EEEEE.                                                                   [100%]
+==================================== ERRORS ====================================
+_ ERROR at setup of test_full1024_synthetic_complete_ledger_no_terminal_fabrication _
+
+tmp_path_factory = TempPathFactory(_given_basetemp=None, _trace=<pluggy._tracing.TagTracerSub object at 0x7fa2406a2c00>, _basetemp=PosixPath('/tmp/pytest-of-agent/pytest-554'), _retention_count=3, _retention_policy='all')
+
+    @pytest.fixture(scope="module")
+    def ledger(tmp_path_factory):
+        d = tmp_path_factory.mktemp("synthetic-own-ledger")
+        # Use independently frozen test copy of production's metadata/rules collector.
+        producer = d / 'producer'
+        producer.mkdir()
+        for name in ('collector.py', 'run_collection.py'):
+            (producer / name).write_bytes((PRODUCER / name).read_bytes())
+        spec = importlib.util.spec_from_file_location('synthetic_own_collector', producer / 'collector.py')
+        c = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(c)
+        rows, queue = [], [[]]
+        while len(rows) < 4096:
+            prefix = queue.pop(0)
+            board = chess.Board()
+            for uci in prefix:
+                board.push_uci(uci)
+            if board.outcome(claim_draw=True) is None:
+                rows.append(dict(root_id=f'synthetic-{len(rows)}', root_fen=chess.STARTING_FEN,
+                                 prefix_uci=prefix, role='TRAIN'))
+                queue.extend(prefix + [m.uci()] for m in board.legal_moves)
+        pool = dict(schema=c.POOL, selection_status='pass', train_only=True, rows=rows,
+                    source_selection_sha256="0" * 64, source_teacher_labels_sha256="1" * 64)
+        writer = c.AliasWriter(d)
+        events = []
+    
+        def emit(event):
+            if event['type'] == 'search_row':
+                event['row']['search_alias_ref'] = writer.append(event['row'].pop('eval_aliases'))
+            events.append(event)
+    
+        class FakeSearch:
+            def __init__(self, fn):
+                self.fn = fn
+    
+            def search(self, board):
+                self.fn(board)  # Only mock scalar; zero network/search work.
+                moves = sorted(board.legal_moves, key=lambda m: m.uci())
+                return SimpleNamespace(move=moves[0], value=0.2, nodes=len(moves) + 1,
+                                       root_actions=len(moves), evaluations=1, completed_depth=0)
+    
+>       result = c.collect(pool, seed=20262905, protected=set(),
+                           factory=SimpleNamespace(evaluator=lambda _: 0.0, make=FakeSearch),
+                           on_event=emit)
+
+work/harbichess/continuation-20261007/nnue-own-training-v2/test_v2.py:67: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/tmp/pytest-of-agent/pytest-554/synthetic-own-ledger0/producer/collector.py:82: in collect
+    roots, order_sha = starts(pool, seed, protected, start_limit, pool_size)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+pool = {'rows': [{'prefix_uci': [], 'role': 'TRAIN', 'root_fen': 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1', ...on_status': 'pass', 'source_selection_sha256': '0000000000000000000000000000000000000000000000000000000000000000', ...}
+seed = 20262905, protected = set(), n = 128, pool_size = 4096
+
+    def starts(pool, seed, protected, n=ROOTS, pool_size=4096):
+        if pool.get("schema") != POOL or pool.get("selection_status") != "pass" or pool.get("train_only") is not True:
+            raise ValueError("sealed TRAIN-only pool required")
+        rs = pool.get("rows")
+        if (not isinstance(rs, list) or len(rs) != pool_size
+                or not isinstance(pool.get("source_selection_sha256"), str)
+                or len(pool["source_selection_sha256"]) != 64
+                or not isinstance(pool.get("source_teacher_labels_sha256"), str)
+                or len(pool["source_teacher_labels_sha256"]) != 64):
+            raise ValueError("fixed root pool count")
+        ids, histories, usable = set(), set(), []
+        for r in rs:
+            b = replay(r)
+            h = hashlib.sha256((r["root_fen"] + "\n" + " ".join(r["prefix_uci"])).encode()).hexdigest()
+            if (r["root_id"] in ids or h in histories
+                    or not isinstance(r.get("trajectory_id"), str)
+                    or not isinstance(r.get("source_row_id"), str)):
+>               raise ValueError("duplicate root/history")
+E               ValueError: duplicate root/history
+
+/tmp/pytest-of-agent/pytest-554/synthetic-own-ledger0/producer/collector.py:50: ValueError
+__ ERROR at setup of test_hash_resealed_semantic_corruption_rejected[source] ___
+
+tmp_path_factory = TempPathFactory(_given_basetemp=None, _trace=<pluggy._tracing.TagTracerSub object at 0x7fa2406a2c00>, _basetemp=PosixPath('/tmp/pytest-of-agent/pytest-554'), _retention_count=3, _retention_policy='all')
+
+    @pytest.fixture(scope="module")
+    def ledger(tmp_path_factory):
+        d = tmp_path_factory.mktemp("synthetic-own-ledger")
+        # Use independently frozen test copy of production's metadata/rules collector.
+        producer = d / 'producer'
+        producer.mkdir()
+        for name in ('collector.py', 'run_collection.py'):
+            (producer / name).write_bytes((PRODUCER / name).read_bytes())
+        spec = importlib.util.spec_from_file_location('synthetic_own_collector', producer / 'collector.py')
+        c = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(c)
+        rows, queue = [], [[]]
+        while len(rows) < 4096:
+            prefix = queue.pop(0)
+            board = chess.Board()
+            for uci in prefix:
+                board.push_uci(uci)
+            if board.outcome(claim_draw=True) is None:
+                rows.append(dict(root_id=f'synthetic-{len(rows)}', root_fen=chess.STARTING_FEN,
+                                 prefix_uci=prefix, role='TRAIN'))
+                queue.extend(prefix + [m.uci()] for m in board.legal_moves)
+        pool = dict(schema=c.POOL, selection_status='pass', train_only=True, rows=rows,
+                    source_selection_sha256="0" * 64, source_teacher_labels_sha256="1" * 64)
+        writer = c.AliasWriter(d)
+        events = []
+    
+        def emit(event):
+            if event['type'] == 'search_row':
+                event['row']['search_alias_ref'] = writer.append(event['row'].pop('eval_aliases'))
+            events.append(event)
+    
+        class FakeSearch:
+            def __init__(self, fn):
+                self.fn = fn
+    
+            def search(self, board):
+                self.fn(board)  # Only mock scalar; zero network/search work.
+                moves = sorted(board.legal_moves, key=lambda m: m.uci())
+                return SimpleNamespace(move=moves[0], value=0.2, nodes=len(moves) + 1,
+                                       root_actions=len(moves), evaluations=1, completed_depth=0)
+    
+>       result = c.collect(pool, seed=20262905, protected=set(),
+                           factory=SimpleNamespace(evaluator=lambda _: 0.0, make=FakeSearch),
+                           on_event=emit)
+
+work/harbichess/continuation-20261007/nnue-own-training-v2/test_v2.py:67: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/tmp/pytest-of-agent/pytest-554/synthetic-own-ledger0/producer/collector.py:82: in collect
+    roots, order_sha = starts(pool, seed, protected, start_limit, pool_size)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+pool = {'rows': [{'prefix_uci': [], 'role': 'TRAIN', 'root_fen': 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1', ...on_status': 'pass', 'source_selection_sha256': '0000000000000000000000000000000000000000000000000000000000000000', ...}
+seed = 20262905, protected = set(), n = 128, pool_size = 4096
+
+    def starts(pool, seed, protected, n=ROOTS, pool_size=4096):
+        if pool.get("schema") != POOL or pool.get("selection_status") != "pass" or pool.get("train_only") is not True:
+            raise ValueError("sealed TRAIN-only pool required")
+        rs = pool.get("rows")
+        if (not isinstance(rs, list) or len(rs) != pool_size
+                or not isinstance(pool.get("source_selection_sha256"), str)
+                or len(pool["source_selection_sha256"]) != 64
+                or not isinstance(pool.get("source_teacher_labels_sha256"), str)
+                or len(pool["source_teacher_labels_sha256"]) != 64):
+            raise ValueError("fixed root pool count")
+        ids, histories, usable = set(), set(), []
+        for r in rs:
+            b = replay(r)
+            h = hashlib.sha256((r["root_fen"] + "\n" + " ".join(r["prefix_uci"])).encode()).hexdigest()
+            if (r["root_id"] in ids or h in histories
+                    or not isinstance(r.get("trajectory_id"), str)
+                    or not isinstance(r.get("source_row_id"), str)):
+>               raise ValueError("duplicate root/history")
+E               ValueError: duplicate root/history
+
+/tmp/pytest-of-agent/pytest-554/synthetic-own-ledger0/producer/collector.py:50: ValueError
+_ ERROR at setup of test_hash_resealed_semantic_corruption_rejected[alias-span] _
+
+tmp_path_factory = TempPathFactory(_given_basetemp=None, _trace=<pluggy._tracing.TagTracerSub object at 0x7fa2406a2c00>, _basetemp=PosixPath('/tmp/pytest-of-agent/pytest-554'), _retention_count=3, _retention_policy='all')
+
+    @pytest.fixture(scope="module")
+    def ledger(tmp_path_factory):
+        d = tmp_path_factory.mktemp("synthetic-own-ledger")
+        # Use independently frozen test copy of production's metadata/rules collector.
+        producer = d / 'producer'
+        producer.mkdir()
+        for name in ('collector.py', 'run_collection.py'):
+            (producer / name).write_bytes((PRODUCER / name).read_bytes())
+        spec = importlib.util.spec_from_file_location('synthetic_own_collector', producer / 'collector.py')
+        c = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(c)
+        rows, queue = [], [[]]
+        while len(rows) < 4096:
+            prefix = queue.pop(0)
+            board = chess.Board()
+            for uci in prefix:
+                board.push_uci(uci)
+            if board.outcome(claim_draw=True) is None:
+                rows.append(dict(root_id=f'synthetic-{len(rows)}', root_fen=chess.STARTING_FEN,
+                                 prefix_uci=prefix, role='TRAIN'))
+                queue.extend(prefix + [m.uci()] for m in board.legal_moves)
+        pool = dict(schema=c.POOL, selection_status='pass', train_only=True, rows=rows,
+                    source_selection_sha256="0" * 64, source_teacher_labels_sha256="1" * 64)
+        writer = c.AliasWriter(d)
+        events = []
+    
+        def emit(event):
+            if event['type'] == 'search_row':
+                event['row']['search_alias_ref'] = writer.append(event['row'].pop('eval_aliases'))
+            events.append(event)
+    
+        class FakeSearch:
+            def __init__(self, fn):
+                self.fn = fn
+    
+            def search(self, board):
+                self.fn(board)  # Only mock scalar; zero network/search work.
+                moves = sorted(board.legal_moves, key=lambda m: m.uci())
+                return SimpleNamespace(move=moves[0], value=0.2, nodes=len(moves) + 1,
+                                       root_actions=len(moves), evaluations=1, completed_depth=0)
+    
+>       result = c.collect(pool, seed=20262905, protected=set(),
+                           factory=SimpleNamespace(evaluator=lambda _: 0.0, make=FakeSearch),
+                           on_event=emit)
+
+work/harbichess/continuation-20261007/nnue-own-training-v2/test_v2.py:67: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/tmp/pytest-of-agent/pytest-554/synthetic-own-ledger0/producer/collector.py:82: in collect
+    roots, order_sha = starts(pool, seed, protected, start_limit, pool_size)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+pool = {'rows': [{'prefix_uci': [], 'role': 'TRAIN', 'root_fen': 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1', ...on_status': 'pass', 'source_selection_sha256': '0000000000000000000000000000000000000000000000000000000000000000', ...}
+seed = 20262905, protected = set(), n = 128, pool_size = 4096
+
+    def starts(pool, seed, protected, n=ROOTS, pool_size=4096):
+        if pool.get("schema") != POOL or pool.get("selection_status") != "pass" or pool.get("train_only") is not True:
+            raise ValueError("sealed TRAIN-only pool required")
+        rs = pool.get("rows")
+        if (not isinstance(rs, list) or len(rs) != pool_size
+                or not isinstance(pool.get("source_selection_sha256"), str)
+                or len(pool["source_selection_sha256"]) != 64
+                or not isinstance(pool.get("source_teacher_labels_sha256"), str)
+                or len(pool["source_teacher_labels_sha256"]) != 64):
+            raise ValueError("fixed root pool count")
+        ids, histories, usable = set(), set(), []
+        for r in rs:
+            b = replay(r)
+            h = hashlib.sha256((r["root_fen"] + "\n" + " ".join(r["prefix_uci"])).encode()).hexdigest()
+            if (r["root_id"] in ids or h in histories
+                    or not isinstance(r.get("trajectory_id"), str)
+                    or not isinstance(r.get("source_row_id"), str)):
+>               raise ValueError("duplicate root/history")
+E               ValueError: duplicate root/history
+
+/tmp/pytest-of-agent/pytest-554/synthetic-own-ledger0/producer/collector.py:50: ValueError
+___ ERROR at setup of test_hash_resealed_semantic_corruption_rejected[mover] ___
+
+tmp_path_factory = TempPathFactory(_given_basetemp=None, _trace=<pluggy._tracing.TagTracerSub object at 0x7fa2406a2c00>, _basetemp=PosixPath('/tmp/pytest-of-agent/pytest-554'), _retention_count=3, _retention_policy='all')
+
+    @pytest.fixture(scope="module")
+    def ledger(tmp_path_factory):
+        d = tmp_path_factory.mktemp("synthetic-own-ledger")
+        # Use independently frozen test copy of production's metadata/rules collector.
+        producer = d / 'producer'
+        producer.mkdir()
+        for name in ('collector.py', 'run_collection.py'):
+            (producer / name).write_bytes((PRODUCER / name).read_bytes())
+        spec = importlib.util.spec_from_file_location('synthetic_own_collector', producer / 'collector.py')
+        c = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(c)
+        rows, queue = [], [[]]
+        while len(rows) < 4096:
+            prefix = queue.pop(0)
+            board = chess.Board()
+            for uci in prefix:
+                board.push_uci(uci)
+            if board.outcome(claim_draw=True) is None:
+                rows.append(dict(root_id=f'synthetic-{len(rows)}', root_fen=chess.STARTING_FEN,
+                                 prefix_uci=prefix, role='TRAIN'))
+                queue.extend(prefix + [m.uci()] for m in board.legal_moves)
+        pool = dict(schema=c.POOL, selection_status='pass', train_only=True, rows=rows,
+                    source_selection_sha256="0" * 64, source_teacher_labels_sha256="1" * 64)
+        writer = c.AliasWriter(d)
+        events = []
+    
+        def emit(event):
+            if event['type'] == 'search_row':
+                event['row']['search_alias_ref'] = writer.append(event['row'].pop('eval_aliases'))
+            events.append(event)
+    
+        class FakeSearch:
+            def __init__(self, fn):
+                self.fn = fn
+    
+            def search(self, board):
+                self.fn(board)  # Only mock scalar; zero network/search work.
+                moves = sorted(board.legal_moves, key=lambda m: m.uci())
+                return SimpleNamespace(move=moves[0], value=0.2, nodes=len(moves) + 1,
+                                       root_actions=len(moves), evaluations=1, completed_depth=0)
+    
+>       result = c.collect(pool, seed=20262905, protected=set(),
+                           factory=SimpleNamespace(evaluator=lambda _: 0.0, make=FakeSearch),
+                           on_event=emit)
+
+work/harbichess/continuation-20261007/nnue-own-training-v2/test_v2.py:67: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/tmp/pytest-of-agent/pytest-554/synthetic-own-ledger0/producer/collector.py:82: in collect
+    roots, order_sha = starts(pool, seed, protected, start_limit, pool_size)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+pool = {'rows': [{'prefix_uci': [], 'role': 'TRAIN', 'root_fen': 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1', ...on_status': 'pass', 'source_selection_sha256': '0000000000000000000000000000000000000000000000000000000000000000', ...}
+seed = 20262905, protected = set(), n = 128, pool_size = 4096
+
+    def starts(pool, seed, protected, n=ROOTS, pool_size=4096):
+        if pool.get("schema") != POOL or pool.get("selection_status") != "pass" or pool.get("train_only") is not True:
+            raise ValueError("sealed TRAIN-only pool required")
+        rs = pool.get("rows")
+        if (not isinstance(rs, list) or len(rs) != pool_size
+                or not isinstance(pool.get("source_selection_sha256"), str)
+                or len(pool["source_selection_sha256"]) != 64
+                or not isinstance(pool.get("source_teacher_labels_sha256"), str)
+                or len(pool["source_teacher_labels_sha256"]) != 64):
+            raise ValueError("fixed root pool count")
+        ids, histories, usable = set(), set(), []
+        for r in rs:
+            b = replay(r)
+            h = hashlib.sha256((r["root_fen"] + "\n" + " ".join(r["prefix_uci"])).encode()).hexdigest()
+            if (r["root_id"] in ids or h in histories
+                    or not isinstance(r.get("trajectory_id"), str)
+                    or not isinstance(r.get("source_row_id"), str)):
+>               raise ValueError("duplicate root/history")
+E               ValueError: duplicate root/history
+
+/tmp/pytest-of-agent/pytest-554/synthetic-own-ledger0/producer/collector.py:50: ValueError
+_ ERROR at setup of test_hash_resealed_semantic_corruption_rejected[final-history] _
+
+tmp_path_factory = TempPathFactory(_given_basetemp=None, _trace=<pluggy._tracing.TagTracerSub object at 0x7fa2406a2c00>, _basetemp=PosixPath('/tmp/pytest-of-agent/pytest-554'), _retention_count=3, _retention_policy='all')
+
+    @pytest.fixture(scope="module")
+    def ledger(tmp_path_factory):
+        d = tmp_path_factory.mktemp("synthetic-own-ledger")
+        # Use independently frozen test copy of production's metadata/rules collector.
+        producer = d / 'producer'
+        producer.mkdir()
+        for name in ('collector.py', 'run_collection.py'):
+            (producer / name).write_bytes((PRODUCER / name).read_bytes())
+        spec = importlib.util.spec_from_file_location('synthetic_own_collector', producer / 'collector.py')
+        c = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(c)
+        rows, queue = [], [[]]
+        while len(rows) < 4096:
+            prefix = queue.pop(0)
+            board = chess.Board()
+            for uci in prefix:
+                board.push_uci(uci)
+            if board.outcome(claim_draw=True) is None:
+                rows.append(dict(root_id=f'synthetic-{len(rows)}', root_fen=chess.STARTING_FEN,
+                                 prefix_uci=prefix, role='TRAIN'))
+                queue.extend(prefix + [m.uci()] for m in board.legal_moves)
+        pool = dict(schema=c.POOL, selection_status='pass', train_only=True, rows=rows,
+                    source_selection_sha256="0" * 64, source_teacher_labels_sha256="1" * 64)
+        writer = c.AliasWriter(d)
+        events = []
+    
+        def emit(event):
+            if event['type'] == 'search_row':
+                event['row']['search_alias_ref'] = writer.append(event['row'].pop('eval_aliases'))
+            events.append(event)
+    
+        class FakeSearch:
+            def __init__(self, fn):
+                self.fn = fn
+    
+            def search(self, board):
+                self.fn(board)  # Only mock scalar; zero network/search work.
+                moves = sorted(board.legal_moves, key=lambda m: m.uci())
+                return SimpleNamespace(move=moves[0], value=0.2, nodes=len(moves) + 1,
+                                       root_actions=len(moves), evaluations=1, completed_depth=0)
+    
+>       result = c.collect(pool, seed=20262905, protected=set(),
+                           factory=SimpleNamespace(evaluator=lambda _: 0.0, make=FakeSearch),
+                           on_event=emit)
+
+work/harbichess/continuation-20261007/nnue-own-training-v2/test_v2.py:67: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/tmp/pytest-of-agent/pytest-554/synthetic-own-ledger0/producer/collector.py:82: in collect
+    roots, order_sha = starts(pool, seed, protected, start_limit, pool_size)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+pool = {'rows': [{'prefix_uci': [], 'role': 'TRAIN', 'root_fen': 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1', ...on_status': 'pass', 'source_selection_sha256': '0000000000000000000000000000000000000000000000000000000000000000', ...}
+seed = 20262905, protected = set(), n = 128, pool_size = 4096
+
+    def starts(pool, seed, protected, n=ROOTS, pool_size=4096):
+        if pool.get("schema") != POOL or pool.get("selection_status") != "pass" or pool.get("train_only") is not True:
+            raise ValueError("sealed TRAIN-only pool required")
+        rs = pool.get("rows")
+        if (not isinstance(rs, list) or len(rs) != pool_size
+                or not isinstance(pool.get("source_selection_sha256"), str)
+                or len(pool["source_selection_sha256"]) != 64
+                or not isinstance(pool.get("source_teacher_labels_sha256"), str)
+                or len(pool["source_teacher_labels_sha256"]) != 64):
+            raise ValueError("fixed root pool count")
+        ids, histories, usable = set(), set(), []
+        for r in rs:
+            b = replay(r)
+            h = hashlib.sha256((r["root_fen"] + "\n" + " ".join(r["prefix_uci"])).encode()).hexdigest()
+            if (r["root_id"] in ids or h in histories
+                    or not isinstance(r.get("trajectory_id"), str)
+                    or not isinstance(r.get("source_row_id"), str)):
+>               raise ValueError("duplicate root/history")
+E               ValueError: duplicate root/history
+
+/tmp/pytest-of-agent/pytest-554/synthetic-own-ledger0/producer/collector.py:50: ValueError
+=========================== short test summary info ============================
+ERROR work/harbichess/continuation-20261007/nnue-own-training-v2/test_v2.py::test_full1024_synthetic_complete_ledger_no_terminal_fabrication
+ERROR work/harbichess/continuation-20261007/nnue-own-training-v2/test_v2.py::test_hash_resealed_semantic_corruption_rejected[source]
+ERROR work/harbichess/continuation-20261007/nnue-own-training-v2/test_v2.py::test_hash_resealed_semantic_corruption_rejected[alias-span]
+ERROR work/harbichess/continuation-20261007/nnue-own-training-v2/test_v2.py::test_hash_resealed_semantic_corruption_rejected[mover]
+ERROR work/harbichess/continuation-20261007/nnue-own-training-v2/test_v2.py::test_hash_resealed_semantic_corruption_rejected[final-history]
+1 passed, 5 errors in 0.94s
