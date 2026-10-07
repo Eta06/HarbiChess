@@ -1,0 +1,36 @@
+{
+  "schema": "NEW-prospective-generation-source-derivation-v1",
+  "ancestor_directory": "/workspace/work/harbichess/continuation-20261007/tdleaf-human-prior-own-v2-qualified-producer-v3",
+  "ancestor_inventory_sha256": "750b2f64e4261704138d208a5dbd96a649d1599425ca3462d196c032a3648481",
+  "original_files": {
+    "README.md": "2da4afad7583bd2c0abd22d833062e855d15ae7ee1f8b2c882a484571f02e05b",
+    "audit_collection_six.py": "e65b5585fa847ff73a413967c1098a0b0a0a0f9ae399816ce0c5b3e7bbe3d963",
+    "capture_record.py": "944c59b06ab72ff9e286786d411933e98c83e56fb66aba9439c058c30c527956",
+    "collector.py": "884f192b3bebc1a008c3ce31913198615ba114c40318ffccd572a422db177dbb",
+    "contracts.py": "cb3ed7eb97a9e8b1c8a8ed6f7d14888bc9e8d73133c7ef3f517ba62c6ee68080",
+    "convert.py": "b49a8b6db8d6808666528de0858fb0d01d0c467101180e286535bd35dd71bc8d",
+    "metadata_factory.py": "b5051a67c656ea0722f92ea4abb008058cf286613439097e80cf597d1cc6b2e1",
+    "model.py": "c04914bc5a560ad51de81c6d0aaeb3fae4d04b45c07cd8e39bbd31f655d36565",
+    "native.py": "c1cb391673544f60458b4356b81d19da9f0d6b1b402ca45133131cf20e1f22b7",
+    "parent_bridge.py": "3bd364014815e9cbbe738209486fa7113bccdb0e84e5ec060dbe8397aadf7fad",
+    "prove.py": "ea009eb065a4a655d7dd81f4028fd8bd297a0e51f7f0007c22c6c1b080872bed",
+    "run_collection.py": "c7f1caa2da9c6b23b7d4c2bb78f390e92fefb58f4670cbf683d4076ec3d02f15",
+    "search_original.py": "de53c14728a67b7772f18b396ac8ef5c35a144d4e4e616fec40099cd461a6670",
+    "search_pv.py": "a6fa35675fd4eb9c0c346a893bd44a6507b06bbff107f689a3f67a7dcc79015d",
+    "tdleaf_objective.py": "51ce5a0a1522f8b9b8b141a489dfd68a6a5bd458a9739c8952d4435ee7dc93e8",
+    "tdleaf_targets.py": "0ea99387cede507116c1598f5fed8c94484824814f0ac9062c151a178c754749",
+    "test_tdleaf.py": "54da842aafddb0dee87591226d37346750923883f419d1d9acbef8b8a612c034",
+    "train.py": "f9667ad909a4c454063a96a3b7d9ff30b30bf1864a10c29a17de84e7bfc79cc6",
+    "zero_parent.py": "d80b726a442ae47f082ea20b6fe6fdee16535396983ed86619f5dc2cf12a3cf1"
+  },
+  "source_only": true,
+  "actual_training_or_search_performed": false,
+  "changes": [
+    "new2048/512 collection and proceduralbank source",
+    "new128-update native and typed3-generation admission",
+    "fixedgeneration3 endpoint",
+    "weights-only freshAdam/RNG per generation",
+    "new10800 actor cap before any actor",
+    "prove imports correct load_module API"
+  ]
+}
