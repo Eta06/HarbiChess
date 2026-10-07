@@ -1,0 +1,11 @@
+{
+  "CPU_core": 0,
+  "checkout": "/workspace/work/harbichess/cpu-additive-source-6fcc8b4",
+  "draft": "/workspace/work/harbichess/continuation-20261007/variant-known160-v1/protocol-DRAFT.json",
+  "draft_sha256": "573d48c033b79447f19bffa24848bb6dabafdf60630a824ce1c11f626c861f3f",
+  "first": 1791370188.3141692,
+  "operator_end": 1791448916.685839,
+  "output": "/dev/shm/harbichess-continuation-20261007/tdlambda-known160-data",
+  "source_publication_commit": "a99350c69469578b1271a63a076fd35c63fc594d",
+  "study": "/workspace/work/harbichess/continuation-20261007/variant-known160-v1"
+}
