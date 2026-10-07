@@ -1,0 +1,24 @@
+H=/workspace/work/harbichess/continuation-20261007/human-randomstarts-own-v2
+PY=/workspace/HarbiChess/.venv/bin/python
+SEEDS=20262905,20262906; operator end<=1791448916.685839. ROOT alone observes each phase first. Phase clocks NEW convert600/audit600/proof600/freshfit1800; no historical clock rewrite.
+
+BEFORE ACTOR: actual zero parent admission seal/result from human-zero-actual-SEED; outgoing seal generation1, parent contract generation0. Existing execute_human_random_collection.py stages these exact refs, new procedural bank receipts, fixedsearchde53 and unchanged inference closure. Full recipe uses actual v2 bank and original v1 zero-native sources separately. Metadatafactory and run_collection check SAME parent's search and all inference/contract/candidate identities before model loading.
+
+AFTER BOTH ACTORS CLOSED1024: collect original registration paths REG05/REG06 and their output receipts/events. Both original clocks/receipt hashes unchanged. Each own-Q actor stops exactly1024 even with UNKNOWN row-budget tail; UNKNOWN Q rows permitted, not draw labels. Whole protected trajectory remains excluded.
+
+CONVERSION perseed:
+$PY $H/specs.py --phase convert --seed SEED --registration REG --producer $H --training $H --first ROOT_FIRST --deadline ROOT_FIRST_PLUS600 --operator-end END --output NEW_SPEC_DIRECTORY
+Execute commands.json exactly (one converter command); output is /dev/shm/harbichess-human-randomstarts-own-data-v2/g-1/SEED. No corrected MC converter or oldhumanv1 converter substitution.
+
+SIX SEARCHES perseed: clock JSON schema human-randomstarts-own-six-root-audit-clock-v2 with helper_sha256=SHA($H/audit_collection_six.py), registration_sha256,receipt_sha256,events_sha256; cpu_core,first,deadline<=first+600/operator. Invoke $PY $H/audit_collection_six.py --registration REG --receipt ORIGINAL_OUTPUT/receipt.json --events ORIGINAL_OUTPUT/events.jsonl --clock CLOCK --output NEW_RESULT. Selected IDs exactly receipt.training_row_ids[0,204,409,614,819,1023]; distinct string root-id:local-ply; actual128schedule/originalparent and full alias packet replay mandatory.
+
+AUDIT SET: publish JSON {schema:human-randomstarts-own-replay-audit-set-v2,helper:{path:H/audit_collection_six.py,sha256:ACTUAL},audits:[{seed:20262905,result:REF,clock:REF},{seed:20262906,result:REF,clock:REF}]}. Registrations JSON is {"20262905":"REG05","20262906":"REG06"} PATH STRINGS (specs.collection expects paths, not refs).
+
+PROOF perseed:
+$PY $H/specs.py --phase proof --seed SEED --registration REG --registrations REGISTRATIONS_JSON --audits AUDIT_SET --training $H --cpu-core CORE --first ROOT_FIRST --deadline ROOT_FIRST_PLUS600 --operator-end END --output NEW_PROOF_SPEC_DIR
+Execute returned commands.json sequentially: contracts build then specs registry. Registry publishes own proof commands, then execute prove.py --registration REGISTRY_DIR/registration.json; whole8/pause4/fresh8 and SIX strict opens are required.
+
+FIT perseed only after BOTH proof results actualPASS:
+Same specs flags --phase fit plus --own-proof-result ACTUAL_PROOF/result.json --own-proof-contract ACTUAL_PROOF_CONTRACT; NEW first/deadline<=first+1800. Fresh64 starts named zero parent weights only with new Adam/RNG (never production from proof optimizer), then two strict0/64 opens. Bothproof+fit schemas/status preserved; native common v1 has explicit human phase/source/generation contract.
+
+KNOWN160: runtime human-randomstarts-known160-v2. q.target_variant human-randomstarts-own-q-v2, no teachers map; q.parents exact ACTUAL zero/currentown admission refs; models.parent exact currentparent and models.learned child64. Actual q.children human_helpers model,parent_bridge,zero_parent,native,root_bank,convert,specs,contracts from H; procedural_helpers prepare_bank,metadata_factory and procedural_source_inventory actual H inventory; bank receipts perseed. All new actual contracts/build seals/proof/fit/reg/data/events refs; collection_audit_set actual new v2. Adapter reconstructs raw bank ALL attempts and converter fulltrace and reopens zero0/own6+2 native states. Preserve original_mixed_value AND E8_value_helper wiring. No actual profile/strength eligibility until all these checks pass; numeric gates unchanged.
