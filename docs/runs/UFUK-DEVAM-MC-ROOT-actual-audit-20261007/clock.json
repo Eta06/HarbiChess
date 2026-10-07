@@ -1,0 +1,7 @@
+{
+  "cpu_core": 2,
+  "deadline": 1791379780.4477415,
+  "first": 1791378880.4477415,
+  "protocol_sha256": "5c9f8ba2f101cfc7b9e63049b1aa22742e2126487bf4e180cc59b4c4158ca9bc",
+  "schema": "NNUE-strength-root-independent-audit-clock-v2"
+}
