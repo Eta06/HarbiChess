@@ -1,0 +1,9 @@
+{
+  "schema": "UFUK-DEVAM-technical-allocation-window-v1",
+  "first_epoch": 1791362516.685839,
+  "operator_end_epoch": 1791448916.685839,
+  "reason": "7 October user resume; bounded CPU allocation cap, not a new user hard deadline",
+  "historical_deadlines_unchanged": true,
+  "GPU_used": false,
+  "paid_compute": false
+}
