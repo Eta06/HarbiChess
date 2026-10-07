@@ -1,0 +1,10 @@
+test_full_history_keys_and_root_legality_budget_rejected (test_search.SearchTests.test_full_history_keys_and_root_legality_budget_rejected) ... ok
+test_full_width_matches_frozen_packet_and_every_fake_eval_alias (test_search.SearchTests.test_full_width_matches_frozen_packet_and_every_fake_eval_alias) ... ok
+test_generous_full_width_matches_independent_exhaustive_depth2 (test_search.SearchTests.test_generous_full_width_matches_independent_exhaustive_depth2) ... ok
+test_progressive_coverage_and_charged_budget_with_no_input_mutation (test_search.SearchTests.test_progressive_coverage_and_charged_budget_with_no_input_mutation) ... ok
+test_static_fallback_all_actions_and_incomplete_pass_disclosed (test_search.SearchTests.test_static_fallback_all_actions_and_incomplete_pass_disclosed) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 1.767s
+
+OK
