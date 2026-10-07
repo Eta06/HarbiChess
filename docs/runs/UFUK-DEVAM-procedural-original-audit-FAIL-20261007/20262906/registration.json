@@ -1,0 +1,29 @@
+{
+  "collection_receipt": {
+    "path": "/dev/shm/harbichess-human-randomstarts-ownq-v2/g-1/20262906/receipt.json",
+    "sha256": "5654857f3ca4b805de6957e2acc614dc006344f171d43802ddb106affa6229e9"
+  },
+  "collection_registration": {
+    "path": "/workspace/work/harbichess/continuation-20261007/human-random-collect-actual-20262906/collection-registration.json",
+    "sha256": "745ecdaf984755a57fba1ccd1c0a822455b19b17d79b011120fe2f49730c3454"
+  },
+  "commands": [],
+  "cpu_core": 3,
+  "deadline": 1791380037.9344573,
+  "first": 1791379437.9344573,
+  "helper": {
+    "path": "/workspace/work/harbichess/continuation-20261007/execute_procedural_own_learning.py",
+    "sha256": "3ea6a52380f0979bacf94b32ab76f5090adf61f104d257f3de147b837cce143c"
+  },
+  "operator_end_epoch": 1791448916.685839,
+  "phase": "audit",
+  "schema": "ROOT-procedural-own-learning-phase-v2",
+  "seed": 20262906,
+  "source_inventory": {
+    "path": "/workspace/work/harbichess/continuation-20261007/human-randomstarts-own-v2/source-inventory.json",
+    "sha256": "84e0d669dcdfebce018385984cb88e8aecca4eeafaa530b56b603be1ea660683"
+  },
+  "status": "running",
+  "teacher_labels_used": false,
+  "trained_teacher_weights_used": false
+}
