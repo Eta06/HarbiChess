@@ -1,0 +1,9 @@
+{
+  "directory": "/workspace/work/harbichess/continuation-20261007/procedural-proof-registration-adapter-v1",
+  "files": {
+    "adapter.py": "3ef93ebe4038ae1b891850e700747caaa0c9c6e1cb17531712f566fa0355e5a6",
+    "test_adapter.py": "47a4e15bbecc068dcafd9e956f6a911a80ffc3212c33d7fec8b603aee8486e75"
+  },
+  "schema": "procedural-proof-registration-adapter-source-inventory-v1",
+  "status": "source-only;8 metadata-corruption tests PASS, Ruff PASS; no model or SGD"
+}
