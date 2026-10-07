@@ -1,0 +1,52 @@
+{
+  "audit_set": {
+    "path": "/workspace/work/harbichess/continuation-20261007/procedural-forensic-v4-actual-audit-set.json",
+    "sha256": "4ba5a7a67fc5d793de31dbf3327b29f354ea20c7f20489e0e09409fb00983318"
+  },
+  "commands": [
+    [
+      "/workspace/HarbiChess/.venv/bin/python",
+      "/workspace/work/harbichess/continuation-20261007/human-randomstarts-own-v3-forensic-shadow/prepare_forensic_conversion_v3.py",
+      "--root",
+      "/workspace/work/harbichess/continuation-20261007",
+      "--seed",
+      "20262905",
+      "--audit-set",
+      "/workspace/work/harbichess/continuation-20261007/procedural-forensic-v4-actual-audit-set.json",
+      "--first",
+      "1791382282.4553242",
+      "--deadline",
+      "1791382882.4553242",
+      "--validator",
+      "/workspace/work/harbichess/continuation-20261007/human-randomstarts-own-v3-forensic-shadow/forensic_audit_set.py",
+      "--runtime",
+      "/workspace/work/harbichess/continuation-20261007/human-randomstarts-own-v3-forensic-shadow/audit_collection_six_v3.py",
+      "--output",
+      "/workspace/work/harbichess/continuation-20261007/procedural-forensic-v4-conversion-actual-20262905/conversion-seal.json"
+    ],
+    [
+      "/workspace/HarbiChess/.venv/bin/python",
+      "/workspace/work/harbichess/continuation-20261007/human-randomstarts-own-v3-forensic-shadow/convert_forensic_v3.py",
+      "--seal",
+      "/workspace/work/harbichess/continuation-20261007/procedural-forensic-v4-conversion-actual-20262905/conversion-seal.json",
+      "--output",
+      "/dev/shm/harbichess-human-randomstarts-forensic-data-v4/20262905"
+    ]
+  ],
+  "completed": [],
+  "cpu_core": 1,
+  "deadline": 1791382882.4553242,
+  "first": 1791382282.4553242,
+  "helper": {
+    "path": "/workspace/work/harbichess/continuation-20261007/execute_procedural_forensic_conversion_v4.py",
+    "sha256": "8ce7de43565cbd9e5cded8d47c00163ef4fbc7247fb9cb4d049909289a60fdb9"
+  },
+  "operator_end_epoch": 1791448916.685839,
+  "schema": "ROOT-procedural-forensic-v3-full-conversion-owner-v1",
+  "seed": 20262905,
+  "source_inventory": {
+    "path": "/workspace/work/harbichess/continuation-20261007/human-randomstarts-own-v3-forensic-shadow/forensic-v3-inventory.json",
+    "sha256": "5e8c4effdaff7fbdc243e34c02ac32763dfba54d10325098798e3b933acf29db"
+  },
+  "status": "running"
+}
