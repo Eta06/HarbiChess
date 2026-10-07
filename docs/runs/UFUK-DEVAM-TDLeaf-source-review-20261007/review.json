@@ -1,0 +1,47 @@
+{
+  "actual_SGD": 0,
+  "actual_model_reads": 0,
+  "actual_searches": 0,
+  "inventories": {
+    "tdleaf-human-prior-own-v2": {
+      "expected_inventory_matches": true,
+      "file_count": 18,
+      "inventory_sha256": "bd064c141c0191725877521674a29cea7c41d3696a2dfdf0d9fb3603f9f15047",
+      "mismatches": []
+    },
+    "tdleaf-search-equivalence-v1": {
+      "expected_inventory_matches": true,
+      "file_count": 6,
+      "inventory_sha256": "f8ec70a71df80f6f9e6d470dae9d120a6d5a4f24bbb724b63593f5e2a00e636c",
+      "mismatches": []
+    }
+  },
+  "limits": [
+    "Source review is not actual NN/search/native qualification.",
+    "neural_exposure_aliases is a conservative current-path exposure union, including nonqueried PV intermediate/played states; not exact model-call count.",
+    "Existing PV-path test exercises path membership; real end-to-end protected PV packet rejection still needs actual production qualifier/audit."
+  ],
+  "qualifier_v1_issues": [
+    "8MiBrawJSON stores triple fullhistory arrays per evaluation and checks cap only after24searches; requires new prospective compact/compressed trace representation.",
+    "PASS no_protected excludes only evaluated-input hits; ignores recorded protected_current_root_to_pv_path. New qualifier must include path and observer protection gates."
+  ],
+  "schema": "TDLeaf-v2-frozen-source-independent-final-review-v1",
+  "scope_checks": {
+    "current_START_rejected_past_START_context_allowed": true,
+    "current_root_only_selection": true,
+    "full_ancestral_context_diagnostics_recomputed": true,
+    "no_global_unseen_history_claim": true,
+    "original_CLASSIC4096_and_protected_array_unchanged": true,
+    "played_next_and_terminal_final_alias_checked": true,
+    "query_and_PV_intermediate_hits_exclude_whole_episode": true
+  },
+  "source_mutations": 0,
+  "status": "CORE-SCOPE-static-consistent;qualifier-v1-BLOCKED-before-actual",
+  "synthetic_size_estimate": {
+    "8MiB_packet_only_total_calls": 3472,
+    "actual_size_unknown": true,
+    "history_plies": 100,
+    "three_packets_bytes_per_call": 2416,
+    "worst24x8192_packet_only_bytes": 475004928
+  }
+}
