@@ -1,0 +1,11 @@
+{
+  "status": "PASS-phase-executed-not-strength",
+  "error": null,
+  "first_epoch": 1791376262.7057917,
+  "deadline_epoch": 1791381662.7057917,
+  "operator_end_epoch": 1791448916.685839,
+  "finished_epoch": 1791377870.8417575,
+  "registration_sha256": "0963e8577779cf197024eb985a0337c30af7face9b33912e17e60e500b577d14",
+  "controller_sha256": "5090ef465aafd81fd39a49dd86b205cfe7d2d97f73c357c83aa2822f321d464b",
+  "strength_success_claimed": false
+}
