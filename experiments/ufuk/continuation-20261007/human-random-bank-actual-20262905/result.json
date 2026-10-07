@@ -1,0 +1,81 @@
+{
+  "schema": "ROOT-teacher-free-procedural-phase-v2",
+  "status": "PASS-actual-rule-only-procedural-bank-not-strength",
+  "phase": "bank",
+  "seed": 20262905,
+  "cpu_core": 3,
+  "first": 1791374938.9847505,
+  "deadline": 1791375538.9847505,
+  "helper": {
+    "path": "/workspace/work/harbichess/continuation-20261007/execute_human_random_collection.py",
+    "sha256": "745353a8c7429a4c4d28dd6476e6c63ce2b4a8372aaab6a70a1a5954cf873f67"
+  },
+  "source_inventory": {
+    "path": "/workspace/work/harbichess/continuation-20261007/human-randomstarts-own-v2/source-inventory.json",
+    "sha256": "84e0d669dcdfebce018385984cb88e8aecca4eeafaa530b56b603be1ea660683"
+  },
+  "protected_aliases": {
+    "path": "/dev/shm/harbichess-continuation-20261007/metadata-20262906/protected-aliases.bin",
+    "sha256": "63865f92ebc82cae794c021d084ac7cd272449ea7a1c05a13be82d3753f0d4b5"
+  },
+  "commands": [
+    {
+      "name": "prepare-bank",
+      "command": [
+        "/workspace/HarbiChess/.venv/bin/python",
+        "/workspace/work/harbichess/continuation-20261007/human-randomstarts-own-v2/prepare_bank.py",
+        "--seed",
+        "20262905",
+        "--first",
+        "1791374938.9847505",
+        "--deadline",
+        "1791375538.9847505",
+        "--operator-end-epoch",
+        "1791448916.685839",
+        "--protected-aliases",
+        "/dev/shm/harbichess-continuation-20261007/metadata-20262906/protected-aliases.bin",
+        "--output",
+        "/workspace/work/harbichess/continuation-20261007/human-random-bank-actual-20262905/bank-registration.json"
+      ],
+      "returncode": 0,
+      "finished": 1791374939.1002698,
+      "stdout": {
+        "path": "/workspace/work/harbichess/continuation-20261007/human-random-bank-actual-20262905/prepare-bank.stdout.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/workspace/work/harbichess/continuation-20261007/human-random-bank-actual-20262905/prepare-bank.stderr.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "generate-bank",
+      "command": [
+        "/workspace/HarbiChess/.venv/bin/python",
+        "/workspace/work/harbichess/continuation-20261007/human-randomstarts-own-v2/root_bank.py",
+        "--registration",
+        "/workspace/work/harbichess/continuation-20261007/human-random-bank-actual-20262905/bank-registration.json",
+        "--output",
+        "/dev/shm/harbichess-human-randomstarts-bank-v2/20262905"
+      ],
+      "returncode": 0,
+      "finished": 1791374958.2433321,
+      "stdout": {
+        "path": "/workspace/work/harbichess/continuation-20261007/human-random-bank-actual-20262905/generate-bank.stdout.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/workspace/work/harbichess/continuation-20261007/human-random-bank-actual-20262905/generate-bank.stderr.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  ],
+  "teacher_labels_used": false,
+  "trained_teacher_weights_used": false,
+  "outcome_selection": false,
+  "receipt": {
+    "path": "/dev/shm/harbichess-human-randomstarts-bank-v2/20262905/receipt.json",
+    "sha256": "4b5fae8365caf2b59132cff92a4bb7d59fc451b756a472af0d70296f4c61b343"
+  },
+  "finished": 1791374958.2434995
+}
