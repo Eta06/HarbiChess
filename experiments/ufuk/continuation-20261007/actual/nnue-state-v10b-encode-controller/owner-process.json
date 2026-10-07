@@ -1,0 +1,8 @@
+{
+  "pid": 1054699,
+  "start_ticks": 33144678,
+  "registration": "/workspace/work/harbichess/continuation-20261007/nnue-state-v10b-encode-controller/controller-registration.json",
+  "first_epoch": 1791366907.4313974,
+  "deadline_epoch": 1791372307.4313974,
+  "operator_end_epoch": 1791448916.685839
+}
