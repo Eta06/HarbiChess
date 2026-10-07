@@ -1,0 +1,11 @@
+{
+  "schema": "ROOT-pre-SGD-corrective-source-final-ranking-v2",
+  "observed": 1791374732.0344632,
+  "old_train_sha256": "ee85ec7c5a158a7500e729ee79e90805cde889ff37d7725a0f647920eb673cec",
+  "new_train_sha256": "20babc41de239fefe72a037f110e2cf6b420d464eeed078ea89e44f27b8a8132",
+  "root_v3_sha256": "425a27cb5bd6232f88965f965a9255f31e6c076c1825078dbe02dc8a15412b14",
+  "old_failed_clocks_preserved": true,
+  "new_corrective_clock_not_historical_resume": true,
+  "targets_changed": false,
+  "thresholds_changed": false
+}
