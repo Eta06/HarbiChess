@@ -1,0 +1,36 @@
+{
+  "schema": "exact-rules-fastpath-synthetic-parity-v1",
+  "status": "PASS",
+  "tests": 3,
+  "boards": 49,
+  "benchmark_boards": 12,
+  "timings": {
+    "control1": {
+      "seconds": 0.5044870739220642,
+      "median": 0.04114909851341508,
+      "min": 0.03591253701597452,
+      "max": 0.0541217410354875
+    },
+    "candidate": {
+      "seconds": 0.8278935969574377,
+      "median": 0.0700341934862081,
+      "min": 0.05716598400613293,
+      "max": 0.07700068899430335
+    },
+    "control2": {
+      "seconds": 0.6043044148827903,
+      "median": 0.0467849594715517,
+      "min": 0.04197294102050364,
+      "max": 0.08316629100590944
+    }
+  },
+  "first_epoch": 1791364783.8019686,
+  "finished_epoch": 1791364792.1761937,
+  "source_sha256": {
+    "fastpath.py": "0649e4b79aa1b93422753cbdf0c7335582491acc480b72f27a3a6fc16fee5359",
+    "test_fastpath.py": "9d951b7b5bef0fa28e8c4dc338eba85a6bab86807fb5617d63cd9ea7d223ba40"
+  },
+  "original_source_sha256": "de53c14728a67b7772f18b396ac8ef5c35a144d4e4e616fec40099cd461a6670",
+  "models_or_training_data_used": false,
+  "strength_claim": false
+}
