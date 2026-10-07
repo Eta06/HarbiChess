@@ -1,0 +1,1 @@
+Unexecuted benchmark packet serialization assumption: dataclasses.asdict converts chess.Move to dict. First fake search completed, then AttributeError before timing result. Fixed using original result.move.uci(); no model/teacher/strength calls.
