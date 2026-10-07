@@ -1,0 +1,64 @@
+{
+  "actual_human_model_search_games": false,
+  "ancestor_sha256": "90c85ba8e3401cba57c82e6c2a34764d25aa999a03b244a4f2838124a8b46357",
+  "changed_method_AST": [
+    "__init__",
+    "_search_impl"
+  ],
+  "old_search_sha256": "de53c14728a67b7772f18b396ac8ef5c35a144d4e4e616fec40099cd461a6670",
+  "proof_receipts": {
+    "qualification/develop-help.log": "82626d4413f1b65bf41e76234cce1364b1f500bccb247fb59384c592344b84ed",
+    "qualification/register-help.log": "05ba03b7473285835b3348764cde15eab62346ba7dff4a1c3c17e2eb6501bde1",
+    "qualification/tests-metadata.log": "0b3a691b0349a36d2e7b0e3e6e323e186f2da8c0bf1fba9ce1aa190dd23bd80f",
+    "ruff-final.log": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+    "tests-final-2.log": "ffd03e8e4374517d5a09b37abea40ba0612c9a1321263bd556db9553f8c1ab79"
+  },
+  "runtime": {
+    "README.md": {
+      "bytes": 4962,
+      "sha256": "fde38161dfbddb607a2ff80f71799ea377d03470862183df7ff6ac8ec7d2590c"
+    },
+    "qualification/develop.py": {
+      "bytes": 21822,
+      "sha256": "a0cee1447580fd10606b8865431bd4d89f92245e5db9d9df78c4fe2b03128be6"
+    },
+    "qualification/register.py": {
+      "bytes": 2755,
+      "sha256": "63fe50533c6df0416a4051d9d51d407ad708630cd8292d21b26b998d41ee3811"
+    },
+    "qualification/test_metadata.py": {
+      "bytes": 1724,
+      "sha256": "6e36218bb95515235720023de2c4d8d1d7e1b25bdcf9f17eae375e20e2668496"
+    },
+    "search.py": {
+      "bytes": 15552,
+      "sha256": "cfea021c9fa226424774daa07ee7c066f61b198fad61e5d76068a6e4017ca5f9"
+    },
+    "test_search.py": {
+      "bytes": 6974,
+      "sha256": "ba22b51e96490d1d91bd320016b69afcbb5e581f794e100f4d4e07f60dafa38a"
+    }
+  },
+  "schema": "progressive-width-search-source-readiness-v1",
+  "status": "PASS-source-fixtures-only",
+  "tests": {
+    "metadata": 2,
+    "search": 6,
+    "skips": 0
+  },
+  "unchanged_ancestor_method_AST": [
+    "reset",
+    "consume",
+    "terminal",
+    "evaluate",
+    "key",
+    "_key",
+    "ordered",
+    "cutoff",
+    "probe",
+    "store",
+    "quiesce",
+    "negamax",
+    "search"
+  ]
+}
