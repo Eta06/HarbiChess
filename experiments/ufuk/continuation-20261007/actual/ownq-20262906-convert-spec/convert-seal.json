@@ -1,0 +1,55 @@
+{
+  "alias_chunks": {
+    "search-aliases-0000.bin": {
+      "path": "/dev/shm/harbichess-ownq-v2/20262906/search-aliases-0000.bin",
+      "sha256": "b50b06b29704d43302fc9b9c3c66ba95061aa4358349572bd6740f8958231301"
+    },
+    "search-aliases-0001.bin": {
+      "path": "/dev/shm/harbichess-ownq-v2/20262906/search-aliases-0001.bin",
+      "sha256": "199cf3252c251b86f20d0cf3d38506859e665f6b0d8840936a9f388d31fd18c6"
+    },
+    "search-aliases-0002.bin": {
+      "path": "/dev/shm/harbichess-ownq-v2/20262906/search-aliases-0002.bin",
+      "sha256": "db0fa2b87cf1e70bf8baaa0b6eb28618fa6e4410b1e637ae2ba6d19d2b467417"
+    },
+    "search-aliases-0003.bin": {
+      "path": "/dev/shm/harbichess-ownq-v2/20262906/search-aliases-0003.bin",
+      "sha256": "38caf5bfda10d9318df615b1410e397c982f447ef2a8936b65139d56a0f46430"
+    },
+    "search-aliases-0004.bin": {
+      "path": "/dev/shm/harbichess-ownq-v2/20262906/search-aliases-0004.bin",
+      "sha256": "50ae4d3a52c9451965da2421efc02376faf23f4686fac6bc1561eb40ff808308"
+    },
+    "search-aliases-0005.bin": {
+      "path": "/dev/shm/harbichess-ownq-v2/20262906/search-aliases-0005.bin",
+      "sha256": "61e952e1f00421015a568bb9756b310db9bdfcd8c83155ccf9c132b86cec775a"
+    }
+  },
+  "core_repo": "/workspace/work/harbichess/cpu-additive-source-6fcc8b4",
+  "deadline": 1791366630.0570214,
+  "events": {
+    "path": "/dev/shm/harbichess-ownq-v2/20262906/events.jsonl",
+    "sha256": "a62b381557f7620cd968e9883b45709079c0be9be778dbea8c42650ba8fd5178"
+  },
+  "features": {
+    "path": "/workspace/HarbiChess/experiments/ufuk/cpu-nnue16-v1/model.py",
+    "sha256": "c04914bc5a560ad51de81c6d0aaeb3fae4d04b45c07cd8e39bbd31f655d36565"
+  },
+  "first": 1791366030.0570214,
+  "operator_end_epoch": 1791448916.685839,
+  "prior": {
+    "path": "/workspace/HarbiChess/experiments/ufuk/cpu-classical-own-v1/value.py",
+    "sha256": "a99cddfc397bd9221b99a70691427fdd663488b033fb239d9f48240786b2f277"
+  },
+  "producer_directory": "/workspace/work/harbichess/continuation-20261007/nnue-own-producer-v2",
+  "receipt": {
+    "path": "/dev/shm/harbichess-ownq-v2/20262906/receipt.json",
+    "sha256": "39e56c4eb3446fad8e0404a8ddb71c3f46b94c23750464ff6bf31bf72757e057"
+  },
+  "registration": {
+    "path": "/workspace/work/harbichess/continuation-20261007/nnue-own-producer-v2/registrations/20262906.json",
+    "sha256": "cc912ba1502dd7ca48c69060cd6b4aadbec60dd292b1f45ba671f3d5da11014c"
+  },
+  "schema": "NNUE-own1024-dataset-conversion-seal-v2",
+  "status": "registered"
+}
