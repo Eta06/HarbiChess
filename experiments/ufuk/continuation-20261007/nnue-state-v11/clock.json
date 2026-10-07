@@ -1,0 +1,7 @@
+{
+  "schema": "NNUE-own-Oct7-release-clock-v11",
+  "status": "ROOT-approved-frozen-transport",
+  "started_epoch": 1791369783.3653486,
+  "deadline_epoch": 1791375183.3653486,
+  "operator_end_epoch": 1791448916.685839
+}
