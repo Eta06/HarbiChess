@@ -1,0 +1,17 @@
+{
+  "cpu_core": 4,
+  "files_sha256": {
+    "README.md": "d21376b5010703d69c1a04e3f42d1a602dfcaf3ae54204dfb073ec045926fdc6",
+    "search.py": "ae14d9b697f75bc9fa41bcd910ac89e33414fe9341d89936a7f59784806216b2",
+    "test_search.py": "ce13dd286db509e8e3b89357fdecc6bc662d9d6c95bc0afa16a3fe754695eba3",
+    "tests-final.log": "c99104d8a01d9da8085d5a0f80689e04d58950d160d989bca22eb31df49c7f21",
+    "tests.log": "8ad10ed96b5ce3e19c12dd7590c58f6a76a019904faa59b76eade40fa8fa6f4c"
+  },
+  "model_or_teacher_or_training_calls": 0,
+  "original_search_sha256": "de53c14728a67b7772f18b396ac8ef5c35a144d4e4e616fec40099cd461a6670",
+  "production_active": false,
+  "schema": "pv-history-search-v1-prototype-verification",
+  "skipped": 0,
+  "strength_claim": false,
+  "tests": 5
+}
