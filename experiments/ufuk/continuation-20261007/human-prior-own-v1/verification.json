@@ -1,0 +1,25 @@
+{
+  "CLI_import_help_count": 16,
+  "CLI_import_help_sha256": "f73e9dab2bee22c7e9705f0f283bb9e35e785d7e286544988356087d0696e582",
+  "actual_production_qualification": false,
+  "cold_synthetic_zero_native": "PASS",
+  "derivation_sha256": "c289aba59a19be4cdbb5c20b4828f0e24f38c56ad91ae62d973563c4436cdb7f",
+  "known_strength_or_selflearning_claim": false,
+  "model_sha256": "c04914bc5a560ad51de81c6d0aaeb3fae4d04b45c07cd8e39bbd31f655d36565",
+  "old_v3_source_inventory_unchanged": true,
+  "qualifier_sha256": "614365c1535e1847bf1510d7b1896c603ecaf27ec8cfa4102f5e6df4b2e56b22",
+  "real_initializer_or_collection_or_SGD_or_search_or_teacher_calls": 0,
+  "ruff": "PASS",
+  "ruff_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+  "runtime_bytes": 153964,
+  "runtime_files": 19,
+  "schema": "human-prior-own-v1-code-readiness",
+  "skipped": 0,
+  "source_inventory_sha256": "485d30553beeafd7bd0a168efed2ca3bc41baee4932bf73ccf5f4f4ef2a1bfcc",
+  "status": "READY-ROOT-actual-init-synthetic-and-production-proof-required",
+  "tests": 7,
+  "tests_log": {
+    "path": "/workspace/work/harbichess/continuation-20261007/human-prior-own-v1/tests-frozen-final.log",
+    "sha256": "819d3aae5be86472a52f7b14a69236217694539a550687f62bc74068a4d0b428"
+  }
+}
