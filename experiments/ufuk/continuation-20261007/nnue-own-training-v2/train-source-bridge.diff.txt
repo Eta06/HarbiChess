@@ -1,0 +1,22 @@
+--- frozen-v1/train.py
++++ own-execution-v2/train.py
+@@ -78,8 +78,18 @@
+         for path, expected in contract["inference_source_sha256"].items():
+             if sha(path) != expected:
+                 raise ValueError("inference source changed")
++    for path, expected in contract["execution_helpers_sha256"].items():
++        if sha(path) != expected:
++            raise ValueError("versioned execution helper source changed")
++    if not contract.get("synthetic_only"):
++        from convert import pins_tree
++
++        pins_tree(contract["raw_collection_inputs"])
+     first, end = contract["original_first_epoch"], contract["original_deadline_epoch"]
+-    if not first < end <= 1791273600:
++    if (contract.get("execution_scope_schema") != "NNUE-own-execution-contract-v2"
++            or contract.get("execution_mode") not in ["proof", "fresh-fit"]
++            or not first < end <= contract["operator_end_epoch"] <= 1791448916.685839
++            or end - first > (600 if contract["execution_mode"] == "proof" else 1800)):
+         raise ValueError("operator hard cap and separate prospective phase clock")
+     import shutil
+     import sys
