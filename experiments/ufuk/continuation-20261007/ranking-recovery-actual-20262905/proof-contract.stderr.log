@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "/workspace/work/harbichess/continuation-20261007/action-ranking-own-v2-source-binding/source/contract_builder.py", line 230, in <module>
+    main()
+  File "/workspace/work/harbichess/continuation-20261007/action-ranking-own-v2-source-binding/source/contract_builder.py", line 225, in main
+    with args.output.open("xb") as stream:
+         ^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/pathlib.py", line 1013, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileExistsError: [Errno 17] File exists: '/dev/shm/harbichess-NNUE-ranking-data-v1/20262905/proof-contract.json'
