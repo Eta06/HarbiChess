@@ -1,0 +1,30 @@
+usage: register.py [-h] --mode {profile,arena} --first FIRST --deadline
+                   DEADLINE --operator-end-epoch OPERATOR_END_EPOCH --cpu-core
+                   CPU_CORE --core-repo CORE_REPO --core-commit CORE_COMMIT
+                   --old-search OLD_SEARCH --advanced-search ADVANCED_SEARCH
+                   --prior-helper PRIOR_HELPER --output OUTPUT --registration
+                   REGISTRATION [--train-roots TRAIN_ROOTS] [--book BOOK]
+                   [--stockfish STOCKFISH] [--profile-result PROFILE_RESULT]
+                   [--incheck-extensions {0,1}]
+
+Metadata-only ROOT-stamped registration; never launches a child/search.
+
+options:
+  -h, --help            show this help message and exit
+  --mode {profile,arena}
+  --first FIRST
+  --deadline DEADLINE
+  --operator-end-epoch OPERATOR_END_EPOCH
+  --cpu-core CPU_CORE
+  --core-repo CORE_REPO
+  --core-commit CORE_COMMIT
+  --old-search OLD_SEARCH
+  --advanced-search ADVANCED_SEARCH
+  --prior-helper PRIOR_HELPER
+  --output OUTPUT
+  --registration REGISTRATION
+  --train-roots TRAIN_ROOTS
+  --book BOOK
+  --stockfish STOCKFISH
+  --profile-result PROFILE_RESULT
+  --incheck-extensions {0,1}
