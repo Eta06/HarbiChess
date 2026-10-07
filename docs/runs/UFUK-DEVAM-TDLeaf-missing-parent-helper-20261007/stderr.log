@@ -1,0 +1,16 @@
+Traceback (most recent call last):
+  File "/workspace/work/harbichess/continuation-20261007/tdleaf-search-equivalence-v3/qualify.py", line 728, in <module>
+    result = run(args.registration)
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/work/harbichess/continuation-20261007/tdleaf-search-equivalence-v3/qualify.py", line 424, in run
+    evaluator = parent_module.parent(reg)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/work/harbichess/continuation-20261007/tdleaf-human-prior-own-v2/run_collection.py", line 51, in parent
+    seal, admitted_contract = validate_admission_result(
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/work/harbichess/continuation-20261007/tdleaf-human-prior-own-v2/parent_bridge.py", line 234, in validate_admission_result
+    contract = validate_metadata(spec)
+               ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/work/harbichess/continuation-20261007/tdleaf-human-prior-own-v2/parent_bridge.py", line 101, in validate_metadata
+    from zero_parent import validate_zero_metadata
+ModuleNotFoundError: No module named 'zero_parent'
