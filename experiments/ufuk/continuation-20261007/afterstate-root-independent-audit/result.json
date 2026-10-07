@@ -1,0 +1,42 @@
+{
+  "status": "PASS-integrity-and-six-actual-not-strength",
+  "first": 1791374651.5666456,
+  "deadline": 1791375551.5666456,
+  "helper_sha256": "13dd1eb4a8b45bbc6ae276c40ec2375a358cc56e4267472073488123d3ae1ce8",
+  "pid": 1075019,
+  "commands": [
+    [
+      "/workspace/HarbiChess/.venv/bin/python",
+      "/workspace/work/harbichess/continuation-20261007/afterstate-known160-runtime/audit_known160_v2.py",
+      "--protocol",
+      "/workspace/work/harbichess/continuation-20261007/afterstate-known160-runtime/protocol.json",
+      "--arena",
+      "/dev/shm/harbichess-continuation-20261007/afterstate-known160-data/arena",
+      "--output",
+      "/workspace/work/harbichess/continuation-20261007/afterstate-root-independent-audit/fullhistory.json"
+    ],
+    [
+      "/workspace/HarbiChess/.venv/bin/python",
+      "/workspace/work/harbichess/continuation-20261007/afterstate-known160-runtime/replay_six.py",
+      "--protocol",
+      "/workspace/work/harbichess/continuation-20261007/afterstate-known160-runtime/protocol.json",
+      "--profile",
+      "/dev/shm/harbichess-continuation-20261007/afterstate-known160-data/profile.json",
+      "--arena",
+      "/dev/shm/harbichess-continuation-20261007/afterstate-known160-data/arena",
+      "--clock",
+      "/workspace/work/harbichess/continuation-20261007/afterstate-root-independent-audit/clock.json",
+      "--output",
+      "/workspace/work/harbichess/continuation-20261007/afterstate-root-independent-audit/six-actual-replays.json"
+    ]
+  ],
+  "completed": [
+    0,
+    1
+  ],
+  "outputs": {
+    "fullhistory.json": "ab04f7cc798f47f5cebc5af51dd2ec6150b0808fc124d96a43a6b6b619c69e73",
+    "six-actual-replays.json": "41d62b1c6a37342184f6a60f0fbb8bd029a1cb5fec931782af13a20dda91afb2"
+  },
+  "finished": 1791374705.7292674
+}
