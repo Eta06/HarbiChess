@@ -1,0 +1,21 @@
+{
+  "schema": "NNUE-own-strength-v2-preparation-verification",
+  "status": "READY-preparation-only-actual-inputs-and-root-execution-pending",
+  "pure_tests": 10,
+  "skipped_tests": 0,
+  "test_command": "/workspace/HarbiChess/.venv/bin/pytest -q /workspace/work/harbichess/continuation-20261007/nnue-strength-v2/test_controls.py /workspace/work/harbichess/continuation-20261007/nnue-strength-v2/test_collection_audit.py",
+  "ruff": "PASS canonical cwd /workspace/HarbiChess",
+  "actual_nn_inference_performed": false,
+  "actual_search_performed": false,
+  "actual_sgd_performed": false,
+  "pending": [
+    "both actual collection six-packet ROOT audits",
+    "exact-source converter all-row replay",
+    "own proof12 fresh native loads",
+    "own fixed64 fit4 fresh native loads",
+    "compiled trained parity48 and paired profile48",
+    "known160 fullhistory and six actual packet audit",
+    "eligible single candidate freeze before virgin books",
+    "formal960 typed executor/book seal still prospective"
+  ]
+}
