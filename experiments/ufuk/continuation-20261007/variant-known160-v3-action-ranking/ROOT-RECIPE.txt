@@ -1,0 +1,49 @@
+PREPARATION ONLY. Frozen original NNUE own-Q known160 and formal helpers unchanged.
+This NEW afterstate-capable package shares exact original search.py de53c147... and original tournament rules/nodes/q2/max8/400TOTAL/5arms/160/known8 gates. NO actual model/search/game/SGD/book operations performed by agent. MC collection/proof/fit qualification is still NOT actual evidence until ROOT runs it.
+
+Use ROOT-selected target_variant exactly one of own-q-v2, tdlambda-0.5-v1, closed-terminal-mc-v1, afterstate-search-q-v1. The known-development priority and ONE final confirmation allocation remain separately preregistered; this adapter does not authorize extra confirmation attempts.
+
+Typed draft inputs: start from corrected known160 recovery Q (including original_mixed_value AND E8_value_helper), preserving exact source/core/C binary/prior/teacher/known8 book/E8/SF refs. Replace ONLY registered target-variant child records and new helper SHA closure; no teacher parent/model swap. q.models[seed].learned == q.children[seed].candidate, q.models[seed].parent == q.teachers[seed].candidate. Actual new target variant is carried into scope/model kind/admission receipt. BOTHseeds20262905/06/fixed64.
+
+q.collection_audit_set={path,sha256}: ownQ/TD actual12 parent-search audit set is NNUE-own-collection-replay-audit-set-v2; MC requires NEW NNUE-own-closed-terminal-replay-audit-set-v1, audit result schema NNUE-own-closed-terminal-six-search-audit-v1/status PASS-six-actual-chronological-terminal-eligible-search-packets-and-complete-alias-traces. Each set has helper ref and audits[{seed,result,clock}], BOTHseeds. Exact source/events/registration/receipt/hash/old600 clocks bound; sampled IDs exact receipt.training_row_ids[0,204,409,614,819,1023]. No oldQ/TD audit substitution for new MC.
+
+Every children[seed] record standard SHA refs:
+ contract,proof_contract,dataset,target_provenance,candidate,initial,native,
+ proof_result,fit_result,proof_registration,fit_registration,
+ collection_receipt,collection_registration,events.
+Typed TD adds:
+ variant_helpers:{model,native,contract,tdlambda_targets,prepare,contract_builder}, each pinned original source .py ref (must appear in actual contract source/execution map);
+ contract_build_seals:{proof,fit} exact original ROOT seals;
+ source_converter:{path,sha256} actual ownQ-v2 converter;
+ td_conversion_inputs:{source_dataset,source_provenance,collection_receipt,events,conversion_result,build_seal}, each raw original pinned ref.
+Typed MC adds:
+ variant_helpers:{model,native,contract,convert,contract_builder}, exact original MC source refs;
+ contract_build_seals:{proof,fit};
+ raw source replay derives from target_provenance.inputs == contract.raw_collection_inputs, original convert.convert(inputs) byte equality.
+No nonexistent TD provenance.dataset_sha256 is required: actual native contract binds dataset/provenance hashes separately; native contract is fully rederived from original build seal. New TD helper source must be actual frozen source/contract path, not renamed copies of old runtime. Empty source closures fail.
+
+Admission repeats actual teacher256 strict/native/proof/fit check, ALL6proof +2fit native.load_native, checks full model/baseline/Adam/globalPython/Torch/privateSampler bit replay, actual SHA-sealed six+two subprocess log PASS/counter/command/contract/dataset inventory, original600/1800 clocks, fresh0 teacher MODEL weights only with emptyAdam, fixed64 actually changed model, finalcandidate==fullnative64. Python/Torch global RNG restored after readonly admission. No teacher-state optimizer bridge. Pure TD target replay runs at its original recorded conversion midpoint solely inside the replay function (historical target validation), never changes runtime owner deadline or original files. Raw ownQ feature/prior/fullhistory converter also replays exactly first.
+
+ROOT alone sample observed FIRST before seal, within current operator end1791448916.685839, enough for original7200+900. Copy draft into THIS new helper directory as protocol-DRAFT.json (or modify seal to bind a separate --study only via new prospective version; do not assume draft.parent differs). This current seal derives closure from draft.parent *.py. All metadata MUST be final and SHA-bound before actual call.
+venv/python H/seal.py --draft H/protocol-DRAFT.json --draft-sha256 EXACT --first OBSERVED_FIRST --operator-end END --output H/protocol.json
+# ROOT snapshots public registration/clock/closure FIRST before each launch.
+venv/python H/qualify_profile.py --protocol H/protocol.json --output NEW_RAM_PROFILE.json --first-epoch SAME_FIRST
+venv/python H/run.py --checkout CORE --study H --qualification NEW_RAM_PROFILE.json --output NEW_RAM_ARENA --first-epoch SAME_FIRST
+Profile remains actual48Torch/C parity+48role-rotated512 search calls; same<=1.10 ratio child/parent and child/E8. Original profile600 INCLUDED whole7200, no reset. ROOT own whole timer/descendants/resource guardian15GiB/floor256MiB; actual 160 must close.
+venv/python H/audit_known160_v2.py --help
+venv/python H/replay_six.py --help
+Use exact parser arguments printed by these helpers, under ONE ROOT-observed900 audit budget. No replay/arena retry beyond original phases. Known160 POINT screen only; independent formal960 separate campaign and bootstrap8+betting8 requirements unchanged.
+
+NEW optional formal runtime copy H/formal-runtime-alias-v2 contains typed admission/value and deterministic PREdraw conservative board-alias population rule. ROOT must pin this NEW helper inventory before any book draw/confirmation if used, not pretend hashes equal original preparation. q.target_variant required. Eligible PGN groups are formed first; each mirror-canonical piece-placement alias is owned by lexicographically first ECO; source games under other ECOs removed before all OS randomness. Multiple source games within the same owning stratum remain (uniform source draw); different drawn strata cannot share alias. Fixed selected strata then independently uniform source-game draw; no postdraw duplicate rejection/resampling. Fewer96 eligible strata=>INCOMPLETE, never adaptive refill. Shared START/global6/8/E8 pretraining/SF internals still explicitly unresolved. ECO itself is not proof of human-player independence.
+
+AFTERSTATE v2: use target_variant=afterstate-search-q-v1. Standard child refs as above; variant_helpers={model,native,contract,convert,contract_builder}; contract_build_seals={proof,fit}. No TD-only fields. Source is afterstate-own-v1/source; proof status PASS-afterstate-fixed-phase-and-fresh-native-loads-not-strength; registration NNUE-own-afterstate-training-orchestration-v1; native own-kingbucket-nnue16-afterstate-full-native-cpu-v1; proof key afterstate_proof_result. Require ACTUAL NEW six proof loads per seed plus two fresh64 fit loads per seed. All raw original ownQ events, source converter, original conversion result/seal and parent refs live inside provenance.inputs == contract.raw_collection_inputs and are independently rederived. Existing ownQ-v2 twelve-search audit set is reused only as factual original data provenance; no new afterstate native qualification is inferred from it. Actual afterstate proof/fit/latency/six arena searches remain PENDING.
+
+Copied protocol.json and protocol-DRAFT.json are PARENT EXAMPLES, not sealed afterstate registrations: historical helper maps/children/first clocks MUST NOT be executed. ROOT must create NEW draft with exact new child refs and actual new source inventory, placed beside this helper closure, then seal with observed first as above. No model/path renaming or reusing old native/optimizer proof.
+
+Independent diagnosis: root-Q distillation has no verified sign bug; negated selected-action backup has less effective future search than a newly searched child. See ../target-semantics-independent-review/review.json for actual TRAIN metadata-only contrasts and integrity/FAIL screens, not a formal result.
+
+ACTION-RANKING v3: target_variant=afterstate-action-ranking-v1; NEW exact source action-ranking-own-v1/source. variant_helpers={model,ranking,native,contract,convert,contract_builder}; contract_build_seals={proof,fit}; proof key action_ranking_proof_result. Candidate has NEW own-kingbucket-nnue16-action-ranking-model-v1 schema (teacher parent retains original own-kingbucket-nnue16-model-v1). Native own-kingbucket-nnue16-action-ranking-full-native-cpu-v1; phase own-afterstate-action-ranking-v1; actual proof/fit PASS-action-ranking-fixed-phase-and-fresh-native-loads-not-strength. No TD/MC/afterstate proof or candidate alias allowed.
+
+Fixed declared math MSE selected afterstate Q +.1 CE softmax(-all-legal-child-value/.25),16roots/batch,64 updates. ALL unselected legal children have feature/prior/fullhistory and original root-trace alias provenance, NOT fabricated ownQ or safe/WDL labels; terminal child WDL is exact child-mover constant. Typed contract.admit_contract and converter.convert rederive all1024 target/child histories and frozen afterstate→originalownQ source bytes. Original ownQ twelve actual searches establish old raw-data ancestry only, not new ranking native proof. Bothseed NEW real six proof loads +fresh64 two loads, actual model drift/fullAdam/global+samplerRNG equality and named teacher256 parent required before profile. Old copied protocols are PARENT EXAMPLES ONLY; create new ROOT draft with current exact refs/helper SHA and ONE observed clock.
+
+No actual conversion/native loads/model forwards/search/games/optimizer/book selection performed here. Native/contract source AST literals and fixed math checked, synthetic wire negative controls passed. Actual qualification is PENDING ROOT. Same old search/160/gates/native-parent attribution/one formal campaign remains unchanged.
