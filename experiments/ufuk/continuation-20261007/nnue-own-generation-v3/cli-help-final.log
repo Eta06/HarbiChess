@@ -1,0 +1,146 @@
+parent_seal.py SHA=92f50a46b5a5f9063379c1f3f8a67c51ceea645342d05619c5605d67114970c7 status=0
+usage: parent_seal.py [-h] --fit-result FIT_RESULT --fit-contract FIT_CONTRACT
+                      --proof-result PROOF_RESULT --proof-contract
+                      PROOF_CONTRACT --candidate CANDIDATE --dataset DATASET
+                      --output OUTPUT --generation GENERATION --seed SEED
+
+ROOT metadata-only own-final parent seal factory; no model load.
+
+options:
+  -h, --help            show this help message and exit
+  --fit-result FIT_RESULT
+  --fit-contract FIT_CONTRACT
+  --proof-result PROOF_RESULT
+  --proof-contract PROOF_CONTRACT
+  --candidate CANDIDATE
+  --dataset DATASET
+  --output OUTPUT
+  --generation GENERATION
+  --seed SEED
+admit_parent.py SHA=a7acdfd43805818dcfc0332f036f9a3fcb44528106a8b93948f892daf737f54f status=0
+usage: admit_parent.py [-h] --seal SEAL --output OUTPUT --clock CLOCK
+
+ROOT read-only admission in an isolated interpreter; no forward/search/SGD.
+
+options:
+  -h, --help       show this help message and exit
+  --seal SEAL
+  --output OUTPUT
+  --clock CLOCK
+metadata_factory.py SHA=d1662038de01d6a77ef48beefab229b0a5eda1852c86ca173b1fa7c1d509a097 status=0
+usage: metadata_factory.py [-h] --seal SEAL --output OUTPUT
+
+Pure versioned current-own-parent collection registration; no model calls.
+
+options:
+  -h, --help       show this help message and exit
+  --seal SEAL
+  --output OUTPUT
+run_collection.py SHA=5b65f513a10ad8fa8f0b4c41a0d200a5dd382dddad752123fecc7a4627aba3ce status=0
+usage: run_collection.py [-h] --registration REGISTRATION
+
+ROOT-registered producer only. This code does not train or call Stockfish.
+
+options:
+  -h, --help            show this help message and exit
+  --registration REGISTRATION
+audit_collection_six.py SHA=3f60f2fe3c62224e364d92365eaf191726bdc1e5585228e7e235ee46bcedd5e8 status=0
+usage: audit_collection_six.py [-h] --registration REGISTRATION --receipt
+                               RECEIPT --events EVENTS --clock CLOCK --output
+                               OUTPUT
+
+ROOT-only six chronological own-Q packets per seed; no new games or SGD.
+
+options:
+  -h, --help            show this help message and exit
+  --registration REGISTRATION
+  --receipt RECEIPT
+  --events EVENTS
+  --clock CLOCK
+  --output OUTPUT
+convert.py SHA=4ed1201e81f97b20a42078652ce6540f85bd6f26ac1d6912d36640e4b2367cea status=0
+usage: convert.py [-h] --seal SEAL --output OUTPUT
+
+Strict own-Q/fullhistory/terminal trace converter; no forward, engine, SGD or
+teacher.
+
+options:
+  -h, --help       show this help message and exit
+  --seal SEAL
+  --output OUTPUT
+contracts.py SHA=dc288b355952d0d0f980e8d822e96233ca9aa2de2d4694b77a80e17870b29a00 status=0
+usage: contracts.py [-h] --seal SEAL --output OUTPUT
+
+ROOT-clocked own64 contracts; cached original teacher admission, no optimizer
+step.
+
+options:
+  -h, --help       show this help message and exit
+  --seal SEAL
+  --output OUTPUT
+specs.py SHA=c0b1c2d77addb52dc00d45b6056470dd3d1d7c43b178c97b1fdfdc104f174c99 status=0
+usage: specs.py [-h] --phase {convert,proof,fit,registry} --output OUTPUT
+                [--plan PLAN] [--registration REGISTRATION]
+                [--registrations REGISTRATIONS] [--training TRAINING]
+                [--producer PRODUCER] [--audits AUDITS]
+                [--own-proof-result OWN_PROOF_RESULT]
+                [--own-proof-contract OWN_PROOF_CONTRACT] [--seed SEED]
+                [--cpu-core CPU_CORE] [--first FIRST] [--deadline DEADLINE]
+                [--operator-end OPERATOR_END]
+
+Metadata-only ROOT phase wiring; no imports of Torch, model, engine or
+trainer.
+
+options:
+  -h, --help            show this help message and exit
+  --phase {convert,proof,fit,registry}
+  --output OUTPUT
+  --plan PLAN
+  --registration REGISTRATION
+  --registrations REGISTRATIONS
+  --training TRAINING
+  --producer PRODUCER
+  --audits AUDITS
+  --own-proof-result OWN_PROOF_RESULT
+  --own-proof-contract OWN_PROOF_CONTRACT
+  --seed SEED
+  --cpu-core CPU_CORE
+  --first FIRST
+  --deadline DEADLINE
+  --operator-end OPERATOR_END
+prove.py SHA=9024f0d72b85b9d89c9feb0d643b2a1985cb125d61971a2299f823d9e79d4962 status=0
+usage: prove.py [-h] --registration REGISTRATION
+
+ROOT own-phase proof or fresh64; current own-parent WEIGHTS only, full state
+strict loads.
+
+options:
+  -h, --help            show this help message and exit
+  --registration REGISTRATION
+train.py SHA=1113c12f96fda6a8cd2623bdd40143cde9ac6ad368379876c54d88708c2bf3e6 status=0
+usage: train.py [-h] --contract CONTRACT --dataset DATASET --output OUTPUT
+                --stop STOP [--resume RESUME] [--resume-sha256 RESUME_SHA256]
+                [--bootstrap-candidate BOOTSTRAP_CANDIDATE] [--audit-only]
+
+Explicit synthetic/teacher/own phases, full CPU native and fixed source
+contracts.
+
+options:
+  -h, --help            show this help message and exit
+  --contract CONTRACT
+  --dataset DATASET
+  --output OUTPUT
+  --stop STOP
+  --resume RESUME
+  --resume-sha256 RESUME_SHA256
+  --bootstrap-candidate BOOTSTRAP_CANDIDATE
+  --audit-only
+ledger.py SHA=ffd35b758b77a183773bfb8565bea21d696c4d0ef619829246b5f6141352c7d9 status=0
+usage: ledger.py [-h] --seal SEAL --output OUTPUT
+
+Publish CLOSED generation ledger only; no model, phase launch or promotion.
+
+options:
+  -h, --help       show this help message and exit
+  --seal SEAL
+  --output OUTPUT
