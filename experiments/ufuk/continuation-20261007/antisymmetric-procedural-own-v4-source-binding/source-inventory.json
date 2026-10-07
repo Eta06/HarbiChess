@@ -1,0 +1,33 @@
+{
+  "actual_training_by_agent": false,
+  "files": {
+    "V4-ROOT-RECIPE.md": "f7d25e545521b87bd39e085eee0b3ec71e5631b9dc48a3c69c8c2ebeee2972bf",
+    "adapter.py": "71468b434553fc980b8f3ad001217fad613322123106fca225c411c861b6a582",
+    "admission.py": "0da4728da204bd54266ad864ce3873735cbbd4824857db93bd507f61334ccb6a",
+    "alias_pool.py": "74f3929f46c7a8ffeec3622c6f0b13d4cf0193d137f90632f050725d671fb7ec",
+    "audit_known160_v2.py": "bef1a8267f7425086e38905597b264a37c8ec7a5a87f192ff00cf0b510ac82df",
+    "compiled_evaluator.py": "4a6fd94659f9b02600e165af743146183aad14cee95e8ad15fda3b53a271230b",
+    "confirmation_stats.py": "aaf1fb4811a835bb725cfe1226c56e819eb12d6617dfe0d759dcf1d99278bbdd",
+    "contracts.py": "f93b4999c674ed7c3dab495408ed0430eb27cfde2a6ffa1987e17030d5c0b4ea",
+    "convert.py": "f396847ce749efbf303a77a46a90b5fd588225d353536934eca5fcbb9876d175",
+    "model.py": "407ae3b952bad383b84179a57333c5e6f2f5b9d7741a9bf1891de3c48d2352ac",
+    "native.py": "407700e502f7615d89b578acdf339de226e4a694cb55d94bff6d0fc077e814f9",
+    "parent_bridge.py": "ac47ceb8046eedfe409b105372d3a02a0baf27dec747204b90e51165d3678f18",
+    "prepare.py": "e0dc6aea598537b25ee5c667fef2e05600e5d45fbcdd8ab16fe45de248ea3c0a",
+    "prove.py": "7c31bf79f22b9a81af3af5f092df08b39207160b8544d537e718b0c73f6e5082",
+    "qualify_profile.py": "b3a0892f7ec46aa48be514d75924449e7668ec07358c6307b3ae5a98905676bb",
+    "replay_six.py": "48c3abe0c576b74d53227df2e306ca89b1e0651032de105738727cbfc9dab767",
+    "run_known160.py": "74517ca704bd33e46f00fee3b8bceab58ee27168423a998fe3969bab7d0f0639",
+    "search.py": "de53c14728a67b7772f18b396ac8ef5c35a144d4e4e616fec40099cd461a6670",
+    "support.py": "cc66ec4bfe1f268a207e5eae4b39309c1df4f0ad1df86c3063b818e4ca4b85e0",
+    "synthetic_cli.py": "d98ac6daeba35194e497d1bc7511839167f17014cb4f4f579009990c581dc137",
+    "test_pipeline.py": "766b168e71d2c8a89f4d347614419b397d4534fe32665333739beff10d6e275c",
+    "tournament.py": "7081128a96f575d01ebaf40f1c7de725274b4316ac3836802b539b3ce7395cb8",
+    "train.py": "961941a9d42fb62e89cecc708bd27632129103aecf26cfdfae7ebc8b1efb3ce2",
+    "value.py": "8f6f308e027c268828329b7727ee1370ee69c494435dc97629ead9e1d947bcc6",
+    "zero_parent.py": "dae2e6efb5e22f1b899194348c8aeea4837bde62fd927772ba7ab5c4a95c827b"
+  },
+  "original_zero_source_inventory": "dbf7e13d5b406ff30d8d4c13c6ea33d9ebfdaf6abc14d18d46a69f98d8a3f8a7",
+  "schema": "antisymmetric-byte-bound-training-source-v4",
+  "tests": "6 PASS27.60s inclactual sourcefixture whole/pause/freshresume/sixopens; final7 targetedPASS1.48s;8distinct"
+}
