@@ -1,0 +1,499 @@
+{
+  "E8_value_helper": {
+    "path": "/workspace/HarbiChess/experiments/ufuk/cpu-residual-value-v1/arena/value.py",
+    "sha256": "0e0d9092db254bd88e4a49875d63edc6b1b39770d0fc53f61e03629ccba02737"
+  },
+  "ROOToperator_end_epoch": 1791448916.685839,
+  "arena_helper_sha256": {
+    "admission.py": "fc052ba177918ef8b8dd856df29f872feb9a06d9d0876fc7dbc4d9e9f4b383e8",
+    "alias_pool.py": "74f3929f46c7a8ffeec3622c6f0b13d4cf0193d137f90632f050725d671fb7ec",
+    "audit_known160_v2.py": "d8ffdf03389e74f80e28d9cfd360f6e3807a56ea9d05a726ee0dfe40fc52159d",
+    "collection_admission.py": "eb488dc65e2943991979cc8f46aedb6358fba54cb05cea41d10875faab0b10e1",
+    "confirmation_stats.py": "aaf1fb4811a835bb725cfe1226c56e819eb12d6617dfe0d759dcf1d99278bbdd",
+    "original_ownq_admission.py": "2e4a4eef372b5f46f1151c6a6371646e3102bdf68059ed6c0e2a4179e65ab788",
+    "qualify_profile.py": "1106ffe7271757153077a5a3aebd9410dc2b12d7be26613fdca6a3031cc0ca81",
+    "replay_six.py": "2a3574fa0a297d20b46d96e6113e87fca65f50f96232cbefa661f9d9d2cf2ed6",
+    "run.py": "9c1823c0a10db786f299f6608251f59af125b56761ece8074844801e52ec3d30",
+    "seal.py": "f73b0d0ca7dcb4def0bf264bbb1301fef6b4fe273a0fe1fe59dcaa6317c8656c",
+    "search.py": "de53c14728a67b7772f18b396ac8ef5c35a144d4e4e616fec40099cd461a6670",
+    "teacher_admission.py": "94d80c5ab1f3ca9a2d5260d52bda5f7ab16ff236970a57a9a2c70e2351d92781",
+    "tournament.py": "7081128a96f575d01ebaf40f1c7de725274b4316ac3836802b539b3ce7395cb8",
+    "value.py": "ee0ac05bf73500c33f37036dcfdedfe1925564c133a2e62f49021b7a05dba167",
+    "wiring.py": "352669bbc06977255d12488bd1aff0d0abd1af3f6c3b630942dc4a2e251d1e42"
+  },
+  "audit_deadline_epoch": 1791378288.3141692,
+  "audit_max_seconds": 900,
+  "binary": {
+    "path": "/workspace/work/harbichess/cpu-kingbucket-nnue-proposal/_kingbucket16.cpython-312-x86_64-linux-gnu.so",
+    "sha256": "495505cdebd6dbc029ee314846dbac79d5cca6d445de26c804a43821808d644b"
+  },
+  "book_path": "/workspace/work/harbichess/cpu-own-replay-v1-actual/development/book.json",
+  "book_sha256": "9c36b5972c9676d19c358ca7e598b9f7f5d110b1947bed838cd660f644d845da",
+  "children": {
+    "20262905": {
+      "candidate": {
+        "path": "/dev/shm/harbichess-NNUE-tdlambda-fit-v1/20262905/whole/candidate.pt",
+        "sha256": "c116bbe33891f04beda9de7541d0e0276b359b41c3c0acbd862458e7909eb1e6"
+      },
+      "collection_receipt": {
+        "path": "/dev/shm/harbichess-ownq-v2/20262905/receipt.json",
+        "sha256": "320e526a12f331829a87c15af8ac6fab3687161bf5810cb729e626d0051b2982"
+      },
+      "collection_registration": {
+        "path": "/workspace/work/harbichess/continuation-20261007/nnue-own-producer-v2/registrations/20262905.json",
+        "sha256": "f9f36e02cdfbec9c13219af06a6ae75316c1f276394377ccf38862d78a4c142c"
+      },
+      "contract": {
+        "path": "/dev/shm/harbichess-NNUE-tdlambda-data-v1/20262905/fit-contract.json",
+        "sha256": "76ee25219e36520eb4274cea319f719a14aba83d7bd2088a9b2d6a4ddd9e82af"
+      },
+      "contract_build_seals": {
+        "fit": {
+          "path": "/workspace/work/harbichess/continuation-20261007/tdlambda-actual-20262905/fresh-fit-seal.json",
+          "sha256": "45d1524a47b31d2e8644986751004c9d30172680eeb7438f0a410b2ff20108bf"
+        },
+        "proof": {
+          "path": "/workspace/work/harbichess/continuation-20261007/tdlambda-actual-20262905/proof-seal.json",
+          "sha256": "671a337e5c3ca8eea827d866d6faa50e202a27076e0ff191940f96d1562b5eb7"
+        }
+      },
+      "converter": {
+        "path": "/workspace/work/harbichess/continuation-20261007/nnue-own-training-v2/convert.py",
+        "sha256": "bdfc780e544bac9f6ff3abe25b458babd1ee8b883434fb6aaf3e2085fe6e1edc"
+      },
+      "dataset": {
+        "path": "/dev/shm/harbichess-NNUE-tdlambda-data-v1/20262905/dataset.json",
+        "sha256": "15bc93969445dea6fa9dd1ef62cc62b3d5a399693af537ec2833ce7e2584500e"
+      },
+      "events": {
+        "path": "/dev/shm/harbichess-ownq-v2/20262905/events.jsonl",
+        "sha256": "cb82303fd42b10e911f6500a13182a188d5a2be59e5bff6466abff5a07def364"
+      },
+      "fit_registration": {
+        "path": "/workspace/work/harbichess/continuation-20261007/tdlambda-actual-20262905/fresh-fit-registration.json",
+        "sha256": "346271366d7fb7429b30d50eea1408fc3ce5d10e59fe25c0435d888ea30c63e0"
+      },
+      "fit_result": {
+        "path": "/dev/shm/harbichess-NNUE-tdlambda-fit-v1/20262905/result.json",
+        "sha256": "b2f312be415ddb744a0f5e823269fc0ad863bc89439fb562f718ba5168cbb60d"
+      },
+      "initial": {
+        "path": "/dev/shm/harbichess-NNUE-tdlambda-fit-v1/20262905/whole/initial.pt",
+        "sha256": "7902608a351e5cedf6f6e0615ebfebcb71c343b7f2df5eec2524702dfe788029"
+      },
+      "native": {
+        "path": "/dev/shm/harbichess-NNUE-tdlambda-fit-v1/20262905/whole/native.pt",
+        "sha256": "2785c9680d9ec0af4cf08d061dc08fceb0f70fc3b00554d2f7374d0f12f0cf58"
+      },
+      "proof_contract": {
+        "path": "/dev/shm/harbichess-NNUE-tdlambda-data-v1/20262905/proof-contract.json",
+        "sha256": "1f21bc86d2b9e0c864fe18c00c2c6564a6cc1b5bc8a0436a23584ecddfa27b33"
+      },
+      "proof_registration": {
+        "path": "/workspace/work/harbichess/continuation-20261007/tdlambda-actual-20262905/proof-registration.json",
+        "sha256": "675c452f8421ed6217d71516cf72996934634c3bafff584263be7cf12955d002"
+      },
+      "proof_result": {
+        "path": "/dev/shm/harbichess-NNUE-tdlambda-proof-v1/20262905/result.json",
+        "sha256": "6c377fe449d92e32631b691376b13f1282c92f32b41e5f44c13a2d6826f396b2"
+      },
+      "source_converter": {
+        "path": "/workspace/work/harbichess/continuation-20261007/nnue-own-training-v2/convert.py",
+        "sha256": "bdfc780e544bac9f6ff3abe25b458babd1ee8b883434fb6aaf3e2085fe6e1edc"
+      },
+      "target_provenance": {
+        "path": "/dev/shm/harbichess-NNUE-tdlambda-data-v1/20262905/provenance.json",
+        "sha256": "0fae7023c719df71282900274304b9b2ab8c54a74925756338da05971d79fe35"
+      },
+      "td_conversion_inputs": {
+        "build_seal": {
+          "path": "/workspace/work/harbichess/continuation-20261007/tdlambda-actual-20262905/conversion-seal.json",
+          "sha256": "97c7adeb2f54ef7e10318b511b73831138e82d34099f70be8de612cd2cdd1fb2"
+        },
+        "collection_receipt": {
+          "path": "/dev/shm/harbichess-ownq-v2/20262905/receipt.json",
+          "sha256": "320e526a12f331829a87c15af8ac6fab3687161bf5810cb729e626d0051b2982"
+        },
+        "conversion_result": {
+          "path": "/dev/shm/harbichess-NNUE-own-data-v2/20262905/result.json",
+          "sha256": "6d4581e80ee1026d8fa34912e3bb875269e8a42894c72045ca54b538c09300e6"
+        },
+        "events": {
+          "path": "/dev/shm/harbichess-ownq-v2/20262905/events.jsonl",
+          "sha256": "cb82303fd42b10e911f6500a13182a188d5a2be59e5bff6466abff5a07def364"
+        },
+        "source_dataset": {
+          "path": "/dev/shm/harbichess-NNUE-own-data-v2/20262905/dataset.json",
+          "sha256": "ce1bcef9d7d4a8ae67d3a0a6764ff0f6bcaef86679ae87a5070cf3be02419b1d"
+        },
+        "source_provenance": {
+          "path": "/dev/shm/harbichess-NNUE-own-data-v2/20262905/provenance.json",
+          "sha256": "ed6c745ebaf47433a9338b508290400880189691ebc1a0b9307fdba6ed52932a"
+        }
+      },
+      "variant_helpers": {
+        "contract": {
+          "path": "/workspace/work/harbichess/continuation-20261007/tdlambda-training-v1/source/contract.py",
+          "sha256": "b305255705d6df3da347d7323129a533e33afaf115272cf7bf3750e45aada88c"
+        },
+        "contract_builder": {
+          "path": "/workspace/work/harbichess/continuation-20261007/tdlambda-training-v1/source/contract_builder.py",
+          "sha256": "ec1b225d3576b878803362c1a61f48ebaf3da259ba5dd7a6d04792f42fdec51c"
+        },
+        "model": {
+          "path": "/workspace/work/harbichess/continuation-20261007/tdlambda-training-v1/source/model.py",
+          "sha256": "c04914bc5a560ad51de81c6d0aaeb3fae4d04b45c07cd8e39bbd31f655d36565"
+        },
+        "native": {
+          "path": "/workspace/work/harbichess/continuation-20261007/tdlambda-training-v1/source/native.py",
+          "sha256": "73351242b444522bd03b93a07839c5c19c896c897de0e3af4948568af61a2e3a"
+        },
+        "prepare": {
+          "path": "/workspace/work/harbichess/continuation-20261007/tdlambda-training-v1/source/prepare.py",
+          "sha256": "c35e3af467a652772444c376f30eed21aa5d0b3afa265d660f22d93f0326ae9a"
+        },
+        "tdlambda_targets": {
+          "path": "/workspace/work/harbichess/continuation-20261007/tdlambda-training-v1/source/tdlambda_targets.py",
+          "sha256": "c99a20bb4fbf69fa2b06fd16b46b23e697a87ce1ff7992b6c4c72c74c4fbb1e8"
+        }
+      }
+    },
+    "20262906": {
+      "candidate": {
+        "path": "/dev/shm/harbichess-NNUE-tdlambda-fit-v1/20262906/whole/candidate.pt",
+        "sha256": "fd3b233971becc466976c3a0300dde6cb5360ebbf9fe33ecac292c7b28163076"
+      },
+      "collection_receipt": {
+        "path": "/dev/shm/harbichess-ownq-v2/20262906/receipt.json",
+        "sha256": "39e56c4eb3446fad8e0404a8ddb71c3f46b94c23750464ff6bf31bf72757e057"
+      },
+      "collection_registration": {
+        "path": "/workspace/work/harbichess/continuation-20261007/nnue-own-producer-v2/registrations/20262906.json",
+        "sha256": "cc912ba1502dd7ca48c69060cd6b4aadbec60dd292b1f45ba671f3d5da11014c"
+      },
+      "contract": {
+        "path": "/dev/shm/harbichess-NNUE-tdlambda-data-v1/20262906/fit-contract.json",
+        "sha256": "e561a2dcff9683a8ef14e79ff5a95b871ab3004d319f74f90a6eeb241ea07c2b"
+      },
+      "contract_build_seals": {
+        "fit": {
+          "path": "/workspace/work/harbichess/continuation-20261007/tdlambda-actual-20262906/fresh-fit-seal.json",
+          "sha256": "3c88d874bb3d5f508919aee3f26e923ade3acbe7fa99b922d88d91a1f661f4e7"
+        },
+        "proof": {
+          "path": "/workspace/work/harbichess/continuation-20261007/tdlambda-actual-20262906/proof-seal.json",
+          "sha256": "2bee6b5e43b16a459dd4c3bb1d0e94a37925bdb76bfb787d1a85140845d2d468"
+        }
+      },
+      "converter": {
+        "path": "/workspace/work/harbichess/continuation-20261007/nnue-own-training-v2/convert.py",
+        "sha256": "bdfc780e544bac9f6ff3abe25b458babd1ee8b883434fb6aaf3e2085fe6e1edc"
+      },
+      "dataset": {
+        "path": "/dev/shm/harbichess-NNUE-tdlambda-data-v1/20262906/dataset.json",
+        "sha256": "b65dbeb453788f455e6845e14d6c94a38f1b3a98935f8e3c268037decbcd78a6"
+      },
+      "events": {
+        "path": "/dev/shm/harbichess-ownq-v2/20262906/events.jsonl",
+        "sha256": "a62b381557f7620cd968e9883b45709079c0be9be778dbea8c42650ba8fd5178"
+      },
+      "fit_registration": {
+        "path": "/workspace/work/harbichess/continuation-20261007/tdlambda-actual-20262906/fresh-fit-registration.json",
+        "sha256": "44c84b3b4ffe4945423e07835f7a1fd72f016af6c2f0955d97f308f5d45748ab"
+      },
+      "fit_result": {
+        "path": "/dev/shm/harbichess-NNUE-tdlambda-fit-v1/20262906/result.json",
+        "sha256": "fd6c85ff5f5500f5c1016c6a64209ed1a3c533130987eabab82b37af1f03e716"
+      },
+      "initial": {
+        "path": "/dev/shm/harbichess-NNUE-tdlambda-fit-v1/20262906/whole/initial.pt",
+        "sha256": "43f44a812456e82f0a8436877052f116827c151102001f1991cffcea38bd6307"
+      },
+      "native": {
+        "path": "/dev/shm/harbichess-NNUE-tdlambda-fit-v1/20262906/whole/native.pt",
+        "sha256": "f401cda061a25795e9e17e029177f1c0252c1205bffdc2fe552f155f9e5800a6"
+      },
+      "proof_contract": {
+        "path": "/dev/shm/harbichess-NNUE-tdlambda-data-v1/20262906/proof-contract.json",
+        "sha256": "ccde76c295c2fe1674dd169dbcdb37d3f7e6763b8b5da86b72afd1eeb2469a50"
+      },
+      "proof_registration": {
+        "path": "/workspace/work/harbichess/continuation-20261007/tdlambda-actual-20262906/proof-registration.json",
+        "sha256": "e5e05369eb853d4c0757460935a0bb10553fd0019687178cd21a479b7fb56c69"
+      },
+      "proof_result": {
+        "path": "/dev/shm/harbichess-NNUE-tdlambda-proof-v1/20262906/result.json",
+        "sha256": "2b8e47579252640de6138333ea4f3b6dd1cf74703b86e9cdd0ad8ab8f55c75ba"
+      },
+      "source_converter": {
+        "path": "/workspace/work/harbichess/continuation-20261007/nnue-own-training-v2/convert.py",
+        "sha256": "bdfc780e544bac9f6ff3abe25b458babd1ee8b883434fb6aaf3e2085fe6e1edc"
+      },
+      "target_provenance": {
+        "path": "/dev/shm/harbichess-NNUE-tdlambda-data-v1/20262906/provenance.json",
+        "sha256": "7923f53a144e900ea9f6a0f3dbca996cd75329804c90a657d6bc15a34e7cbce1"
+      },
+      "td_conversion_inputs": {
+        "build_seal": {
+          "path": "/workspace/work/harbichess/continuation-20261007/tdlambda-actual-20262906/conversion-seal.json",
+          "sha256": "4adc00f6821c2d1f40446b2291ea80ea44b558fb6aee7805476420fb1ccabf02"
+        },
+        "collection_receipt": {
+          "path": "/dev/shm/harbichess-ownq-v2/20262906/receipt.json",
+          "sha256": "39e56c4eb3446fad8e0404a8ddb71c3f46b94c23750464ff6bf31bf72757e057"
+        },
+        "conversion_result": {
+          "path": "/dev/shm/harbichess-NNUE-own-data-v2/20262906/result.json",
+          "sha256": "a7b42bb658b51f2a8425dadbc5d00a3f2734bc9bb222e3bb08cb8d362a1793e4"
+        },
+        "events": {
+          "path": "/dev/shm/harbichess-ownq-v2/20262906/events.jsonl",
+          "sha256": "a62b381557f7620cd968e9883b45709079c0be9be778dbea8c42650ba8fd5178"
+        },
+        "source_dataset": {
+          "path": "/dev/shm/harbichess-NNUE-own-data-v2/20262906/dataset.json",
+          "sha256": "4d96cdac6e6b1812c31b3a55b4c8ecb627ce8e086e531427721d1fff94988727"
+        },
+        "source_provenance": {
+          "path": "/dev/shm/harbichess-NNUE-own-data-v2/20262906/provenance.json",
+          "sha256": "e69cc5ef4ecb1eb7c2d8ff014dfcc47512a8419ee34e806cc437b477d7f15076"
+        }
+      },
+      "variant_helpers": {
+        "contract": {
+          "path": "/workspace/work/harbichess/continuation-20261007/tdlambda-training-v1/source/contract.py",
+          "sha256": "b305255705d6df3da347d7323129a533e33afaf115272cf7bf3750e45aada88c"
+        },
+        "contract_builder": {
+          "path": "/workspace/work/harbichess/continuation-20261007/tdlambda-training-v1/source/contract_builder.py",
+          "sha256": "ec1b225d3576b878803362c1a61f48ebaf3da259ba5dd7a6d04792f42fdec51c"
+        },
+        "model": {
+          "path": "/workspace/work/harbichess/continuation-20261007/tdlambda-training-v1/source/model.py",
+          "sha256": "c04914bc5a560ad51de81c6d0aaeb3fae4d04b45c07cd8e39bbd31f655d36565"
+        },
+        "native": {
+          "path": "/workspace/work/harbichess/continuation-20261007/tdlambda-training-v1/source/native.py",
+          "sha256": "73351242b444522bd03b93a07839c5c19c896c897de0e3af4948568af61a2e3a"
+        },
+        "prepare": {
+          "path": "/workspace/work/harbichess/continuation-20261007/tdlambda-training-v1/source/prepare.py",
+          "sha256": "c35e3af467a652772444c376f30eed21aa5d0b3afa265d660f22d93f0326ae9a"
+        },
+        "tdlambda_targets": {
+          "path": "/workspace/work/harbichess/continuation-20261007/tdlambda-training-v1/source/tdlambda_targets.py",
+          "sha256": "c99a20bb4fbf69fa2b06fd16b46b23e697a87ce1ff7992b6c4c72c74c4fbb1e8"
+        }
+      }
+    }
+  },
+  "classical_value_helper": {
+    "path": "/workspace/HarbiChess/experiments/ufuk/cpu-classical-own-v1/value.py",
+    "sha256": "a99cddfc397bd9221b99a70691427fdd663488b033fb239d9f48240786b2f277"
+  },
+  "clock_accounting": "ONE observed originalfirst; native admission+profile INCLUDED in whole7200",
+  "collection_audit_set": {
+    "path": "/workspace/work/harbichess/continuation-20261007/ownq-actual-audit-set.json",
+    "sha256": "0b9192ed491d558be7ec4cec042d52d42ee4c5b96a842bf9ab8b810c1bebc8cf"
+  },
+  "core_repo": "/workspace/work/harbichess/cpu-additive-source-6fcc8b4",
+  "cpu_core": 0,
+  "disk_min_free_bytes": 268435456,
+  "games_per_tournament": 16,
+  "match_seeds": [
+    20262905,
+    20262906
+  ],
+  "max_depth": 8,
+  "max_plies": 400,
+  "memory_max_bytes": 16106127360,
+  "models": {
+    "20262905": {
+      "e8": {
+        "path": "/workspace/work/harbichess/a100/restoration/local-rehearsal-content/harbichess-inputs/initial-e8.safetensors",
+        "sha256": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03"
+      },
+      "learned": {
+        "path": "/dev/shm/harbichess-NNUE-tdlambda-fit-v1/20262905/whole/candidate.pt",
+        "sha256": "c116bbe33891f04beda9de7541d0e0276b359b41c3c0acbd862458e7909eb1e6"
+      },
+      "parent": {
+        "path": "/dev/shm/harbichess-NNUE-teacher-fit-v1/20262905/whole/candidate.pt",
+        "sha256": "52e029bba0e895740f975109f4c52358c7a59fe22082cb1fb528821e3fa2b02d"
+      }
+    },
+    "20262906": {
+      "e8": {
+        "path": "/workspace/work/harbichess/a100/restoration/local-rehearsal-content/harbichess-inputs/initial-e8.safetensors",
+        "sha256": "e8fe6d4da5dd4726ff860ba760ff2830070b5e9008c123968fcee1b0f4c1af03"
+      },
+      "learned": {
+        "path": "/dev/shm/harbichess-NNUE-tdlambda-fit-v1/20262906/whole/candidate.pt",
+        "sha256": "fd3b233971becc466976c3a0300dde6cb5360ebbf9fe33ecac292c7b28163076"
+      },
+      "parent": {
+        "path": "/dev/shm/harbichess-NNUE-teacher-fit-v1/20262906/whole/candidate.pt",
+        "sha256": "4ff008426e2e8a09eeef5cc232195e015a1c6a498dd0ffb768e905e897eff4c8"
+      }
+    }
+  },
+  "nnue_directory": "/workspace/work/harbichess/cpu-kingbucket-nnue-proposal",
+  "nnue_helpers": {
+    "evaluator.py": {
+      "path": "/workspace/work/harbichess/cpu-kingbucket-nnue-proposal/evaluator.py",
+      "sha256": "5317e736f872a2e237e45942c8df9e797c5acee8f626bb12009464869fab8d95"
+    },
+    "model.py": {
+      "path": "/workspace/work/harbichess/cpu-kingbucket-nnue-proposal/model.py",
+      "sha256": "c04914bc5a560ad51de81c6d0aaeb3fae4d04b45c07cd8e39bbd31f655d36565"
+    },
+    "native.py": {
+      "path": "/workspace/work/harbichess/cpu-kingbucket-nnue-proposal/native.py",
+      "sha256": "f60a1f9814f48691af1e2d1f1db1b548cff3e7df0a7cae9718051de1865b8b69"
+    }
+  },
+  "opening_pairs": 8,
+  "operator_hard_deadline_epoch": null,
+  "original_deadline_epoch": 1791377388.3141692,
+  "original_first_epoch": 1791370188.3141692,
+  "original_mixed_value": {
+    "path": "/workspace/HarbiChess/experiments/ufuk/cpu-classical-own-v1/arena/value.py",
+    "sha256": "2abb3ac2812853c19abb001a0d38a9a1874115b8ab272cc9322bf7123f6cfd84"
+  },
+  "original_search": {
+    "path": "/workspace/HarbiChess/experiments/ufuk/cpu-classical-own-v1/arena/search.py",
+    "sha256": "de53c14728a67b7772f18b396ac8ef5c35a144d4e4e616fec40099cd461a6670"
+  },
+  "per_tournament_seconds": 2700,
+  "predecessor_protocol": {
+    "path": "/workspace/work/harbichess/continuation-20261007/nnue-strength-v2-e8-wiring-recovery/protocol.json",
+    "sha256": "22f87ce706483bcc1364a650a405b7edbf9b2fdccd380741a24a12fd2a29ddb2"
+  },
+  "prior_helper": {
+    "path": "/workspace/HarbiChess/experiments/ufuk/cpu-classical-own-v1/value.py",
+    "sha256": "a99cddfc397bd9221b99a70691427fdd663488b033fb239d9f48240786b2f277"
+  },
+  "profile_deadline_epoch": 1791370788.3141692,
+  "profile_first_epoch": 1791370188.3141692,
+  "quiescence_plies": 2,
+  "reserved_output_bytes": 100663296,
+  "schema": "NNUE-own64-parent-E8-strength-development-v2",
+  "scope": {
+    "GPU": false,
+    "development": "known8 paired160, not independent strength",
+    "target": "TDlambda0.5 same-own1024/exactteacher bootstrap weights; newAdam/RNG",
+    "teacher_labels_in_new_phase": false
+  },
+  "search_nodes": 512,
+  "source_commit": "6fcc8b476d25495d1c9c413e55b2c7ba4794013e",
+  "status": "ROOT-sealed-fixed64-awaiting-real48-parity48-profile-and160-games",
+  "stockfish_nodes": 512,
+  "stockfish_path": "/workspace/work/harbichess/stockfish/stockfish-linux-x86-64-universal",
+  "stockfish_sha256": "0f83d24cc46d2c66c60f16001af5444873bc112b7d028594513426894c12da19",
+  "target_variant": "tdlambda-0.5-v1",
+  "tasks": [
+    [
+      "learned",
+      "e8"
+    ],
+    [
+      "learned",
+      "parent"
+    ],
+    [
+      "learned",
+      "SF512"
+    ],
+    [
+      "parent",
+      "SF512"
+    ],
+    [
+      "e8",
+      "SF512"
+    ]
+  ],
+  "teachers": {
+    "20262905": {
+      "candidate": {
+        "path": "/dev/shm/harbichess-NNUE-teacher-fit-v1/20262905/whole/candidate.pt",
+        "sha256": "52e029bba0e895740f975109f4c52358c7a59fe22082cb1fb528821e3fa2b02d"
+      },
+      "contract": {
+        "path": "/workspace/work/harbichess/continuation-20261005/NNUE-teacher-fit-v1/20262905-contract.json",
+        "sha256": "6d25036db305a31259f5a90d6cf997bbefa315f77fe8c651502782858b0a8a46"
+      },
+      "dataset": {
+        "path": "/dev/shm/harbichess-NNUE-teacher-data-v1/20262905/dataset.json",
+        "sha256": "df36c1011f2d4044ecbd57ad9c1872da36a21f4f55a01366492449bed1389c7d"
+      },
+      "fit_result": {
+        "path": "/dev/shm/harbichess-NNUE-teacher-fit-v1/20262905/result.json",
+        "sha256": "c563e310042d2f25edab8208d7c423548d0312d64b589d511c891214eb87d28b"
+      },
+      "initial": {
+        "path": "/dev/shm/harbichess-NNUE-teacher-fit-v1/20262905/whole/initial.pt",
+        "sha256": "c54462de77192889b758d54616b728fa02ed6ec069c96da80f173e541a2b2c85"
+      },
+      "labels": {
+        "path": "/dev/shm/harbichess-NNUE-teacher8192-v1/20262905/labels-00004096.json.gz",
+        "sha256": "64104394a216fc5f679a885d7a95e7145540c50700a75db11c006e4b6156ef8a"
+      },
+      "native": {
+        "path": "/dev/shm/harbichess-NNUE-teacher-fit-v1/20262905/whole/native.pt",
+        "sha256": "a278669e6656f39e92b423b027aaa986531ee752900685c060d0336b226840a6"
+      },
+      "proof_contract": {
+        "path": "/workspace/work/harbichess/continuation-20261005/NNUE-teacher-proof-v1/20262905-contract.json",
+        "sha256": "f39dce438cddbb0fbab178e2f549940e6d3942857aa100a86834676a80447f3f"
+      },
+      "proof_result": {
+        "path": "/dev/shm/harbichess-NNUE-teacher-proof-v1/20262905/result.json",
+        "sha256": "44de33f19087e2b8e044a071b04ff0fa6ae06e3767d33d2d5864e124f473f643"
+      },
+      "seed": 20262905
+    },
+    "20262906": {
+      "candidate": {
+        "path": "/dev/shm/harbichess-NNUE-teacher-fit-v1/20262906/whole/candidate.pt",
+        "sha256": "4ff008426e2e8a09eeef5cc232195e015a1c6a498dd0ffb768e905e897eff4c8"
+      },
+      "contract": {
+        "path": "/workspace/work/harbichess/continuation-20261005/NNUE-teacher-fit-v1/20262906-contract.json",
+        "sha256": "926cb00aba5bd1b86bb2c008fd77e9930fca6cf52b3b20759a07dded149659d6"
+      },
+      "dataset": {
+        "path": "/dev/shm/harbichess-NNUE-teacher-data-v1/20262906/dataset.json",
+        "sha256": "85a960a0c78f53d6232a26b17a9e5956c555926e84874458944c4e897c3cbef6"
+      },
+      "fit_result": {
+        "path": "/dev/shm/harbichess-NNUE-teacher-fit-v1/20262906/result.json",
+        "sha256": "c75b10f73474b379032b3e29df1008552d337fbdab715e9545cdeeaf76ff77e6"
+      },
+      "initial": {
+        "path": "/dev/shm/harbichess-NNUE-teacher-fit-v1/20262906/whole/initial.pt",
+        "sha256": "5439e375a6ca325be843c57122f8be97ccf08bec93097d995f600f724085d8f7"
+      },
+      "labels": {
+        "path": "/dev/shm/harbichess-NNUE-teacher8192-v1/20262906/labels-00004096.json.gz",
+        "sha256": "43956d265b5363079682d5cd82dc6218667ed4253c3e01c0154ce1268acab10e"
+      },
+      "native": {
+        "path": "/dev/shm/harbichess-NNUE-teacher-fit-v1/20262906/whole/native.pt",
+        "sha256": "4abe755dfe5baae3b85d3686c55bdd6e013692a48f7aae72055602274efca612"
+      },
+      "proof_contract": {
+        "path": "/workspace/work/harbichess/continuation-20261005/NNUE-teacher-proof-v1/20262906-contract.json",
+        "sha256": "962d46d518a89aa5ea576976b455fa2c0bed67e5a19face6c32bbe791ba72321"
+      },
+      "proof_result": {
+        "path": "/dev/shm/harbichess-NNUE-teacher-proof-v1/20262906/result.json",
+        "sha256": "8d79048b3f2da708744ba8a013329cc778021c649974d91bbf09e3a717516cbd"
+      },
+      "seed": 20262906
+    }
+  },
+  "total_games": 160,
+  "variant_admission_schema": "NNUE-typed-own64-known160-admission-v1",
+  "whole_seconds": 7200
+}
