@@ -1,0 +1,31 @@
+{
+  "schema": "UFUK-DEVAM-bounded-cpu-phase-v1",
+  "phase": "V12A ONE ownedRelease workflow then ROOTanonymous35parts/768originalbytes, notstrength",
+  "output": "/dev/shm/harbichess-continuation-20261007/nnue-state-v12a-delivery-controller",
+  "first_epoch": 1791376262.7057917,
+  "deadline_epoch": 1791381662.7057917,
+  "operator_end_epoch": 1791448916.685839,
+  "cpu_core": 0,
+  "checkout": "/workspace/work/harbichess/cpu-additive-source-6fcc8b4",
+  "controller_sha256": "5090ef465aafd81fd39a49dd86b205cfe7d2d97f73c357c83aa2822f321d464b",
+  "memory_guard_path": "/workspace/work/harbichess/cpu-additive-source-6fcc8b4/src/harbichess/training/cgroup_budget.py",
+  "input_pins": {
+    "/workspace/work/harbichess/continuation-20261007/nnue-state-v12a/dispatch-registration.json": "ec21978532ca4a8a9c4b58a61a85e7bc3d3f6b8c47edf77ff59cbc1ea7650881",
+    "/workspace/work/harbichess/continuation-20261007/nnue-state-v12a/parts-control.json": "08eab4629fbc03ce569612f2453e74e9c57e56a1016454a57932ea350f592e02",
+    "/workspace/work/harbichess/continuation-20261007/nnue-state-v12a/manifest.json": "41aff121f17b151950932026b92cf86e3e4809903d63ed0b2e03feb266fe1029",
+    "/workspace/work/harbichess/continuation-20261007/nnue-state-v12a/raw_capsule_v12a.py": "4920e67410d51e11cb5e3806a418b8babb5984460d8a0d224aae4e0b6bb7f8f0",
+    "/workspace/work/harbichess/continuation-20261007/nnue-state-v12a/release_transport_v12a.py": "14c7e975f6318627baadea9e6764b9dbe9b19f75cba0a8b6a626bcfb65d05340",
+    "/workspace/work/harbichess/continuation-20261007/nnue-state-v12a/parts_receiver_v12a.py": "949d3a365c704b7812dc610065c661c9590c40c1fb58ff11d269c52736d8da04",
+    "/workspace/work/harbichess/continuation-20261007/nnue-state-v12a/dispatch_and_verify.py": "d47d2640b537ad898d876b90d46c18a404d7b6c980e3a62daad0106d7f37010a"
+  },
+  "command": [
+    "/workspace/HarbiChess/.venv/bin/python",
+    "/workspace/work/harbichess/continuation-20261007/nnue-state-v12a/dispatch_and_verify.py",
+    "--registration",
+    "/workspace/work/harbichess/continuation-20261007/nnue-state-v12a/dispatch-registration.json"
+  ],
+  "source_core_commit": "6fcc8b476d25495d1c9c413e55b2c7ba4794013e",
+  "historical_timer_reset": false,
+  "GPU_used": false,
+  "hash_guard_interval_seconds": 30
+}
