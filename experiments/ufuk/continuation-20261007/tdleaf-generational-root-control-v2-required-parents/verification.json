@@ -1,0 +1,14 @@
+{
+  "status": "PASS-source-only-15-synthetic-tests-and-real-zero-metadata-preflight",
+  "tests": 15,
+  "skips": 0,
+  "ruff": "PASS-repo-cwd",
+  "actual_model_search_bank_jobs": 0,
+  "unchanged_learning_files": [
+    "learn.py",
+    "train_entry.py",
+    "generation_entry.py",
+    "collect_entry.py",
+    "seal_plan.py"
+  ]
+}
