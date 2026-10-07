@@ -1,0 +1,69 @@
+{
+  "actual_book_draws": 0,
+  "actual_games": 0,
+  "actual_model_forwards": 0,
+  "actual_models_read": 0,
+  "actual_optimizer_updates": 0,
+  "actual_qualification": "PENDING-new-conversion/proof12/fit4/profile/six-arena-replays",
+  "actual_searches": 0,
+  "cli_help_pass": [
+    "seal.py",
+    "qualify_profile.py",
+    "run.py",
+    "audit_known160_v2.py",
+    "replay_six.py"
+  ],
+  "native_literals": {
+    "OWN_MODEL_SCHEMA": "own-kingbucket-nnue16-action-ranking-model-v1",
+    "PHASE": "own-afterstate-action-ranking-v1",
+    "SCHEMA": "own-kingbucket-nnue16-action-ranking-full-native-cpu-v1",
+    "SYNTHETIC_PHASE": "synthetic-action-ranking-test"
+  },
+  "observed_epoch": 1791373182.0884483,
+  "pure_tests_pass": 23,
+  "ranking_source_sha256": {
+    "arena_adapter.py": "23c4b26c21925959504969c15d77b9a15db17e1e4f101d70a1a319a00d8011ab",
+    "contract.py": "98bff62244220565de8bb34573c359d176f50d8a8ec0c6b03f904940f2e212ac",
+    "contract_builder.py": "679b888a81c2a1b9bc3e8ffa9aef50ef0a0f030b788873e82bfe3add8ba16f84",
+    "convert.py": "6c44a549605d8c446ab07fd775fb2b0ecfc0c4c20d7483fa7994561adf0d5c38",
+    "model.py": "c04914bc5a560ad51de81c6d0aaeb3fae4d04b45c07cd8e39bbd31f655d36565",
+    "native.py": "ebbf60b52d3585dc042ec1529ab0cdc2b819e1ddcf3a814f833ac51acd2a67c7",
+    "prove.py": "5d757dbea584681c5c2a62075a16831019f1d9841ee0dd2171c5be475acb304a",
+    "ranking.py": "0182042fd9e72cea70c245245cca8fe03411eb221c0530b048474b47b3bea435",
+    "train.py": "ee85ec7c5a158a7500e729ee79e90805cde889ff37d7725a0f647920eb673cec"
+  },
+  "ruff": "PASS-canonical-repo-cwd",
+  "schema": "typed-ranking-variant-known160-pure-verification-v3",
+  "skips": 0,
+  "source_literals": {
+    "CONTRACT_SCHEMA": "own-kingbucket-afterstate-action-ranking-contract-v1",
+    "DATA_SCHEMA": "own-kingbucket-afterstate-action-ranking-data-v1",
+    "NATIVE_SCHEMA": "own-kingbucket-nnue16-action-ranking-full-native-cpu-v1",
+    "PHASE": "own-afterstate-action-ranking-v1",
+    "PROVENANCE_SCHEMA": "NNUE-own1024-afterstate-action-ranking-provenance-v1",
+    "TARGET_METHOD": "own-selected-action-ranking-with-q-anchor-v1"
+  },
+  "source_math": {
+    "batch_roots": 16,
+    "beta1": 0.9,
+    "beta2": 0.999,
+    "clip_norm": 5,
+    "epsilon": 1e-08,
+    "lr": 0.001,
+    "objective": "selected-afterstate-Q-MSE+0.1-legal-child-softmax-CE;terminal-child-WDL-constant",
+    "selected_action_cross_entropy_weight": 0.1,
+    "selected_q_anchor_weight": 1.0,
+    "temperature": 0.25,
+    "weight_decay": 0
+  },
+  "status": "READY-prospective-not-actual-qualified",
+  "unchanged_helpers": {
+    "audit_known160_v2.py": "d8ffdf03389e74f80e28d9cfd360f6e3807a56ea9d05a726ee0dfe40fc52159d",
+    "confirmation_stats.py": "aaf1fb4811a835bb725cfe1226c56e819eb12d6617dfe0d759dcf1d99278bbdd",
+    "qualify_profile.py": "1106ffe7271757153077a5a3aebd9410dc2b12d7be26613fdca6a3031cc0ca81",
+    "replay_six.py": "2a3574fa0a297d20b46d96e6113e87fca65f50f96232cbefa661f9d9d2cf2ed6",
+    "run.py": "9c1823c0a10db786f299f6608251f59af125b56761ece8074844801e52ec3d30",
+    "search.py": "de53c14728a67b7772f18b396ac8ef5c35a144d4e4e616fec40099cd461a6670",
+    "tournament.py": "7081128a96f575d01ebaf40f1c7de725274b4316ac3836802b539b3ce7395cb8"
+  }
+}
