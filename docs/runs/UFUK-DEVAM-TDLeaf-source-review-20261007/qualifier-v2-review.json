@@ -1,0 +1,54 @@
+{
+  "SGD": 0,
+  "actual_searches": 0,
+  "corrected_checks": [
+    "Exact ordered FEN/fullmove-stack/HEX evaluator packet comparison",
+    "Observer/inputtrace consistency",
+    "Protectedcurrentroot-to-PVpath plus query/observer protection gates",
+    "Signedzero exact resultHEX",
+    "Bounded decompression and re-read published packetSHA"
+  ],
+  "expected_inventory_sha256": "20a5e4e0588de76dbee358e426b59c4ff4ee76a883e2937987858263c4837912",
+  "inventory_file_mismatches": [],
+  "inventory_sha256": "20a5e4e0588de76dbee358e426b59c4ff4ee76a883e2937987858263c4837912",
+  "model_reads": 0,
+  "prescribed24_metadata": {
+    "considered": 24,
+    "prefix_lengths": [
+      17,
+      51,
+      63,
+      22,
+      30,
+      25,
+      47,
+      34,
+      42,
+      54,
+      32,
+      5,
+      53,
+      7,
+      27,
+      23,
+      125,
+      34,
+      30,
+      79,
+      18,
+      68,
+      80,
+      7
+    ],
+    "scope": "Rule-only metadata; no engine/model/query or formalbook draw",
+    "source_pool_path": "/workspace/work/harbichess/continuation-20261007/nnue-own-producer-v2/input-pools/20262905.json",
+    "source_pool_sha256": "a8b43b377d5376a5f67f3a56edb893f949b54e92be9e7a60b1e6ff91bfdfaa6a"
+  },
+  "remaining_risks": [
+    "PV timing performs observe+call telemetry twice, baseline onlycall once. Addmatched baselineobserver operation beforeactualclock or separatelytimed uninstrumented repeats under SAME600.",
+    "RAW8MiBperroot enforced aftersearch mayexhaust; first24eligible CLASSIC05prefixlengthmax125 (range5..125 mean40.54) plussearchdepth gives>25MiB conservative8192call packetbound. Actualcalls unknown; prospectivelyfix streaming/rawcap beforeclock, noafterfailure cap adjustment."
+  ],
+  "schema": "TDLeaf-search-equivalence-v2-independent-source-review",
+  "source_edits": 0,
+  "status": "BLOCKED-asymmetric-wall-telemetry-and-raw-packet-cap-before-actual"
+}
