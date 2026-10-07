@@ -24,6 +24,8 @@ cgroup4 CPU, 16GiB RAM; phase guard15GiB, disk floor256MiB. Seed worker'ları CP
 
 ## Güç kapısı
 
+Known8 ekranı yalnız nokta tahminleri, cap ve hız ile aday elemesidir; küçük ve daha önce kullanılmış bu örneklemde inferential gate veya bağımsız başarı iddiası yapılmaz. Aşağıdaki lower-bound koşulları tek formal kampanyada uygulanır. Known8 nokta eşikleri formal eşiklerle aynı kalır; formal belirsizlik şartları kaldırılmaz.
+
 Önce açıkça geliştirme amaçlı known8 ekranı: beş kol ×16 renk/açılış eşli oyun ×iki seed =160 oyun. Kollar child–E8, child–parent, child–SF, parent–SF, E8–SF. Search512/q2/max8 bütün HarbiChess kollarında aynı; Stockfish19 nominal512 node, Threads1/Hash16/ClearHash, gerçek node overrun ayrıca raporlanır. Bu pozisyonlar geçmişte kullanıldı; bağımsız kanıt sayılmaz.
 
 Her seed ayrı geçmelidir: child–E8 score>0.60 ve lower confidence bound>0.50; child SF score≥0.25; E8'e göre paired SF score artışı>0.10 ve LCB>0; same-parent direct score>0.60 ve LCB>0.50; parent'a göre paired SF artışı>0 ve LCB>0. İki seed'in birleştirilmesi başarısız seed'i kurtaramaz. Cap oranı≤0.05, hız oranı≤1.10. Eksik maçlar tamamlanmış sonuç yerine kullanılamaz.
