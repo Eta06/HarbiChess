@@ -1,0 +1,259 @@
+{
+  "schema": "UFUK-cold-clean-cache-advisory-v1",
+  "epoch": 1791367833.2372425,
+  "cgroup_before": 14863331328,
+  "cgroup_after": 11923427328,
+  "entries": [
+    {
+      "path": "/workspace/work/harbichess/harbichess-replay-20261002.tar",
+      "bytes": 1713520640,
+      "operation": "read-only clean-page-cache advisory; file contents untouched"
+    },
+    {
+      "path": "/workspace/work/harbichess/harbichess-weights-20261002.tar.gz",
+      "bytes": 1393926493,
+      "operation": "read-only clean-page-cache advisory; file contents untouched"
+    },
+    {
+      "path": "/workspace/work/harbichess/ufuk-validation-panel.pt",
+      "bytes": 1000002713,
+      "operation": "read-only clean-page-cache advisory; file contents untouched"
+    },
+    {
+      "path": "/workspace/work/harbichess/ufuk-distill-panel.pt",
+      "bytes": 744195829,
+      "operation": "read-only clean-page-cache advisory; file contents untouched"
+    },
+    {
+      "path": "/workspace/work/harbichess/release/broad-data-supplement-20261004/HarbiChess-UFUK-broad-data-20261004.tar.gz",
+      "bytes": 452670525,
+      "operation": "read-only clean-page-cache advisory; file contents untouched"
+    },
+    {
+      "path": "/workspace/work/harbichess/recovery-evidence-unpublished-oversize-20261004.json",
+      "bytes": 303568277,
+      "operation": "read-only clean-page-cache advisory; file contents untouched"
+    },
+    {
+      "path": "/workspace/work/harbichess/release/completed-round-20261004/HarbiChess-PORT-AYNA-UFUK-20261003.tar.gz",
+      "bytes": 295312271,
+      "operation": "read-only clean-page-cache advisory; file contents untouched"
+    },
+    {
+      "path": "/workspace/work/harbichess/research-20261004/lichess-standard-2026-09-prefix-32MiB.pgn",
+      "bytes": 239599616,
+      "operation": "read-only clean-page-cache advisory; file contents untouched"
+    },
+    {
+      "path": "/workspace/work/harbichess/family6-strength-books/20261706/excluded-position-keys.json",
+      "bytes": 155852285,
+      "operation": "read-only clean-page-cache advisory; file contents untouched"
+    },
+    {
+      "path": "/workspace/work/harbichess/family6-strength-books/20261705/excluded-position-keys.json",
+      "bytes": 155781510,
+      "operation": "read-only clean-page-cache advisory; file contents untouched"
+    },
+    {
+      "path": "/workspace/work/harbichess/release/broad-training-supplement-20261004/HarbiChess-UFUK-broad-training-20261004.tar.gz",
+      "bytes": 147054070,
+      "operation": "read-only clean-page-cache advisory; file contents untouched"
+    },
+    {
+      "path": "/workspace/work/harbichess/family6-strength-books/main40-exclusions-v2/exclusions.json",
+      "bytes": 110897518,
+      "operation": "read-only clean-page-cache advisory; file contents untouched"
+    },
+    {
+      "path": "/workspace/work/harbichess/vectorized-encoder-stage/producer-4515-candidate/.git/objects/00/a35233aa5b9ee9fbfe2701f054514f259c6d52",
+      "bytes": 88585860,
+      "operation": "read-only clean-page-cache advisory; file contents untouched"
+    },
+    {
+      "path": "/workspace/work/harbichess/harbichess-evidence-20261002.tar.gz",
+      "bytes": 83339161,
+      "operation": "read-only clean-page-cache advisory; file contents untouched"
+    },
+    {
+      "path": "/workspace/work/harbichess/stockfish-linux-x86-64-universal.tar.gz",
+      "bytes": 81388977,
+      "operation": "read-only clean-page-cache advisory; file contents untouched"
+    },
+    {
+      "path": "/workspace/work/harbichess/release/supplement-20261004/HarbiChess-UFUK-supplement-20261004.tar.gz",
+      "bytes": 57536268,
+      "operation": "read-only clean-page-cache advisory; file contents untouched"
+    },
+    {
+      "path": "/workspace/work/harbichess/colab-cli/cache/archive-v0/Umo9UbNRsAIH_ogI/pyarrow/libarrow.so.2500",
+      "bytes": 55368864,
+      "operation": "read-only clean-page-cache advisory; file contents untouched"
+    },
+    {
+      "path": "/workspace/work/harbichess/colab-cli/tools/google-colab-cli/lib/python3.12/site-packages/pyarrow/libarrow.so.2500",
+      "bytes": 55368864,
+      "operation": "read-only clean-page-cache advisory; file contents untouched"
+    },
+    {
+      "path": "/workspace/work/harbichess/release/cpu-tiny-public-pack-actual/sha256-0809d667d126692b3de431aa7de3e8c6be2737212c862b93aa32b9b8e5876f1c.tar.gz",
+      "bytes": 49824432,
+      "operation": "read-only clean-page-cache advisory; file contents untouched"
+    },
+    {
+      "path": "/workspace/work/harbichess/a100-mc-confirmation3-books/20261206/excluded-position-keys.json",
+      "bytes": 46117568,
+      "operation": "read-only clean-page-cache advisory; file contents untouched"
+    },
+    {
+      "path": "/workspace/work/harbichess/a100-mc-confirmation3-books/20261205/excluded-position-keys.json",
+      "bytes": 46041476,
+      "operation": "read-only clean-page-cache advisory; file contents untouched"
+    },
+    {
+      "path": "/workspace/work/harbichess/a100-mc-strength-books/20261206/excluded-position-keys.json",
+      "bytes": 45965949,
+      "operation": "read-only clean-page-cache advisory; file contents untouched"
+    },
+    {
+      "path": "/workspace/work/harbichess/a100-mc-strength-books/20261205/excluded-position-keys.json",
+      "bytes": 45895864,
+      "operation": "read-only clean-page-cache advisory; file contents untouched"
+    },
+    {
+      "path": "/workspace/work/harbichess/search-acting-method5-books/20261606/excluded-position-keys.json",
+      "bytes": 45593376,
+      "operation": "read-only clean-page-cache advisory; file contents untouched"
+    },
+    {
+      "path": "/workspace/work/harbichess/search-acting-method5-books/20261605/excluded-position-keys.json",
+      "bytes": 45518971,
+      "operation": "read-only clean-page-cache advisory; file contents untouched"
+    },
+    {
+      "path": "/workspace/work/harbichess/cpu-fix-source-4cae085/experiments/ufuk/ownsearch-method4/books/20261506/excluded-position-keys.json",
+      "bytes": 45445980,
+      "operation": "read-only clean-page-cache advisory; file contents untouched"
+    },
+    {
+      "path": "/workspace/work/harbichess/own7-source-c022/experiments/ufuk/ownsearch-method4/books/20261506/excluded-position-keys.json",
+      "bytes": 45445980,
+      "operation": "read-only clean-page-cache advisory; file contents untouched"
+    },
+    {
+      "path": "/workspace/work/harbichess/own8-source-3be5/experiments/ufuk/ownsearch-method4/books/20261506/excluded-position-keys.json",
+      "bytes": 45445980,
+      "operation": "read-only clean-page-cache advisory; file contents untouched"
+    },
+    {
+      "path": "/workspace/work/harbichess/ownsearch-method4-books/20261506/excluded-position-keys.json",
+      "bytes": 45445980,
+      "operation": "read-only clean-page-cache advisory; file contents untouched"
+    },
+    {
+      "path": "/workspace/work/harbichess/source8-worktree/experiments/ufuk/ownsearch-method4/books/20261506/excluded-position-keys.json",
+      "bytes": 45445980,
+      "operation": "read-only clean-page-cache advisory; file contents untouched"
+    },
+    {
+      "path": "/workspace/work/harbichess/terminal-certificate-merged428-stage/experiments/ufuk/ownsearch-method4/books/20261506/excluded-position-keys.json",
+      "bytes": 45445980,
+      "operation": "read-only clean-page-cache advisory; file contents untouched"
+    },
+    {
+      "path": "/workspace/work/harbichess/cpu-fix-source-4cae085/experiments/ufuk/ownsearch-method4/books/20261505/excluded-position-keys.json",
+      "bytes": 45374528,
+      "operation": "read-only clean-page-cache advisory; file contents untouched"
+    },
+    {
+      "path": "/workspace/work/harbichess/own7-source-c022/experiments/ufuk/ownsearch-method4/books/20261505/excluded-position-keys.json",
+      "bytes": 45374528,
+      "operation": "read-only clean-page-cache advisory; file contents untouched"
+    },
+    {
+      "path": "/workspace/work/harbichess/own8-source-3be5/experiments/ufuk/ownsearch-method4/books/20261505/excluded-position-keys.json",
+      "bytes": 45374528,
+      "operation": "read-only clean-page-cache advisory; file contents untouched"
+    },
+    {
+      "path": "/workspace/work/harbichess/ownsearch-method4-books/20261505/excluded-position-keys.json",
+      "bytes": 45374528,
+      "operation": "read-only clean-page-cache advisory; file contents untouched"
+    },
+    {
+      "path": "/workspace/work/harbichess/source8-worktree/experiments/ufuk/ownsearch-method4/books/20261505/excluded-position-keys.json",
+      "bytes": 45374528,
+      "operation": "read-only clean-page-cache advisory; file contents untouched"
+    },
+    {
+      "path": "/workspace/work/harbichess/terminal-certificate-merged428-stage/experiments/ufuk/ownsearch-method4/books/20261505/excluded-position-keys.json",
+      "bytes": 45374528,
+      "operation": "read-only clean-page-cache advisory; file contents untouched"
+    },
+    {
+      "path": "/workspace/work/harbichess/a100-strength-second-book/excluded-position-keys.json",
+      "bytes": 37450806,
+      "operation": "read-only clean-page-cache advisory; file contents untouched"
+    },
+    {
+      "path": "/workspace/work/harbichess/release/harbichess-PORT-linux-20261002.tar.gz",
+      "bytes": 35020171,
+      "operation": "read-only clean-page-cache advisory; file contents untouched"
+    },
+    {
+      "path": "/workspace/work/harbichess/source8-actual-qualification/source.bundle",
+      "bytes": 34076740,
+      "operation": "read-only clean-page-cache advisory; file contents untouched"
+    },
+    {
+      "path": "/workspace/work/harbichess/curriculum-book-validation-profile/native-witness/book.json",
+      "bytes": 34025796,
+      "operation": "read-only clean-page-cache advisory; file contents untouched"
+    },
+    {
+      "path": "/workspace/work/harbichess/own-terminal-curriculum-stage/own-terminal-book-final.json",
+      "bytes": 34025796,
+      "operation": "read-only clean-page-cache advisory; file contents untouched"
+    },
+    {
+      "path": "/workspace/work/harbichess/own-terminal-curriculum-stage/own-terminal-book.json",
+      "bytes": 34025796,
+      "operation": "read-only clean-page-cache advisory; file contents untouched"
+    },
+    {
+      "path": "/workspace/work/harbichess/family6-strength-books/main40-exclusions/sha256-daaabb79b5f12c06fd1389851bfb438f11af2284734d25a4600c2cdf418168d3.tar.gz",
+      "bytes": 33992192,
+      "operation": "read-only clean-page-cache advisory; file contents untouched"
+    },
+    {
+      "path": "/workspace/work/harbichess/release/cpu-tiny-public-pack-actual/source.bundle",
+      "bytes": 33967930,
+      "operation": "read-only clean-page-cache advisory; file contents untouched"
+    },
+    {
+      "path": "/workspace/work/harbichess/family6-strength-books/main40-exclusions/sha256-169b4017c71ce08721cddf6a94711dae849115bf75546fb1aeabac0761160ec9.tar.gz",
+      "bytes": 33826848,
+      "operation": "read-only clean-page-cache advisory; file contents untouched"
+    },
+    {
+      "path": "/workspace/work/harbichess/family6-strength-books/main40-exclusions/sha256-867b209e4d0e3bf3b14f447459e86497149cbe922e2e8cca95d2fd5870c64422.tar.gz",
+      "bytes": 33645169,
+      "operation": "read-only clean-page-cache advisory; file contents untouched"
+    },
+    {
+      "path": "/workspace/work/harbichess/research-20261004/lichess-standard-2026-09-prefix-32MiB.pgn.zst",
+      "bytes": 33554432,
+      "operation": "read-only clean-page-cache advisory; file contents untouched"
+    },
+    {
+      "path": "/workspace/work/harbichess/family6-strength-books/main40-exclusions/sha256-2b2c676b1f787707cdfb55ba54e62837bde1f3b9d7a1b1968f4a2871832d91f2.tar.gz",
+      "bytes": 33464955,
+      "operation": "read-only clean-page-cache advisory; file contents untouched"
+    },
+    {
+      "path": "/workspace/work/harbichess/family6-strength-books/main40-exclusions/sha256-4c9cbfaa58a81a03fdeacfea8d74350e239cbf30627bda4803df82034206f223.tar.gz",
+      "bytes": 33405896,
+      "operation": "read-only clean-page-cache advisory; file contents untouched"
+    }
+  ],
+  "model_or_dataset_contents_changed": false
+}
