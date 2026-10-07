@@ -1,0 +1,49 @@
+{
+  "actual_book_draws": 0,
+  "actual_games": 0,
+  "actual_models_read": 0,
+  "actual_search_calls": 0,
+  "actual_training": 0,
+  "afterstate_actual_evidence": "PENDING-new-proof12/fresh64-fit4/profile48/six-arena-replays-no-reuse",
+  "afterstate_source_ast_literals_checked": {
+    "CONTRACT_SCHEMA": "own-kingbucket-afterstate-search-q-contract-v1",
+    "DATA_SCHEMA": "own-kingbucket-afterstate-search-q-data-v1",
+    "NATIVE_SCHEMA": "own-kingbucket-nnue16-afterstate-full-native-cpu-v1",
+    "PHASE": "own-afterstate-search-q-learning-v1",
+    "PROVENANCE_SCHEMA": "NNUE-own1024-afterstate-search-q-provenance-v1",
+    "TARGET_METHOD": "own-selected-action-afterstate-negated-search-q-v1"
+  },
+  "afterstate_source_sha256": {
+    "arena_adapter.py": "1dd51f2d30eb1614d39b3ab814e6819b414d78aec0eb0d238085866eeceeeee1",
+    "contract.py": "704e56896e350a71ae53b035b9da020e676a89685360248bdae6c014112d15f9",
+    "contract_builder.py": "25b868f75340895e7125df8a155d5143c5a76626d05db67f10e897330da8ed2a",
+    "convert.py": "feb2380975e4eb99346d39723fd3b5051a600de1681cac7ef1a1d5f4a281ef31",
+    "model.py": "c04914bc5a560ad51de81c6d0aaeb3fae4d04b45c07cd8e39bbd31f655d36565",
+    "native.py": "0f6d8c6daf8175057b4c449eb6df82b04a293235325c54fbbaaa539568a8630e",
+    "prove.py": "8ee0591189de4257cc56fb762d3f0b8b58d74238630a74d930d0cc4e7b12bca9",
+    "train.py": "3cd67cfa709a2545015ab328d8ea358560f27665e513cbf0edc1c4c7f3b1ef42"
+  },
+  "cli_help_pass": [
+    "seal.py",
+    "qualify_profile.py",
+    "run.py",
+    "audit_known160_v2.py",
+    "replay_six.py"
+  ],
+  "copied_protocols": "PARENT-EXAMPLES-ONLY-NOT-AFTERSTATE-REGISTRATIONS",
+  "observed_epoch": 1791371295.477936,
+  "ruff": "PASS-canonical-repo-cwd",
+  "schema": "typed-afterstate-variant-known160-pure-verification-v2",
+  "skips": 0,
+  "status": "READY-prospective-not-actual-qualified",
+  "tests_pass": 20,
+  "unchanged_vs_frozen_v1": {
+    "audit_known160_v2.py": "d8ffdf03389e74f80e28d9cfd360f6e3807a56ea9d05a726ee0dfe40fc52159d",
+    "confirmation_stats.py": "aaf1fb4811a835bb725cfe1226c56e819eb12d6617dfe0d759dcf1d99278bbdd",
+    "qualify_profile.py": "1106ffe7271757153077a5a3aebd9410dc2b12d7be26613fdca6a3031cc0ca81",
+    "replay_six.py": "2a3574fa0a297d20b46d96e6113e87fca65f50f96232cbefa661f9d9d2cf2ed6",
+    "run.py": "9c1823c0a10db786f299f6608251f59af125b56761ece8074844801e52ec3d30",
+    "search.py": "de53c14728a67b7772f18b396ac8ef5c35a144d4e4e616fec40099cd461a6670",
+    "tournament.py": "7081128a96f575d01ebaf40f1c7de725274b4316ac3836802b539b3ce7395cb8"
+  }
+}
