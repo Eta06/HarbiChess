@@ -1,5 +1,9 @@
 # HarbiChess codeword ve commit rehberi
 
+## UFUK-DEVAM (7 Ekim 2026)
+
+Kullanıcının yeniden devam talebiyle, korunmuş teacher-once NNUE başlangıcından CPU üzerinde kendi-search verisi, tam own-phase resume ve bağımsız güç doğrulaması. Önceki deadline ve başarısızlıklar korunur; yeni kayıtlı aşama saatleri teknik CPU tahsis bütçeleridir. Güç eşikleri ve onaylı v2 kapsamı değişmez. Protokol: `docs/runs/UFUK-DEVAM-NNUE-own-preregistration-20261007.md`.
+
 Snapshot: `3804f19`; 896 commit, 54 farklı prefix. Codeword bir geliştirme/deney aşamasının kısa adıdır, başarı rozeti veya takvim ayı değildir. DENGE ve KANIT gibi prefix'ler farklı deneylerde yeniden kullanılmıştır; kesin ayrım tarih, commit ve run kimliğiyle yapılır. ARSIV bu dökümden sonraki yedekleme ve dokümantasyon aşamasıdır.
 
 ## KIVILCIM
