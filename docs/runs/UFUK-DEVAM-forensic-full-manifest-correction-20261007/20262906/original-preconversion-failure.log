@@ -1,0 +1,9 @@
+Traceback (most recent call last):
+  File "/workspace/work/harbichess/continuation-20261007/human-randomstarts-own-v3-forensic-shadow/prepare_forensic_conversion_v3.py", line 81, in <module>
+    seal = build(
+           ^^^^^^
+  File "/workspace/work/harbichess/continuation-20261007/human-randomstarts-own-v3-forensic-shadow/prepare_forensic_conversion_v3.py", line 29, in build
+    validate(audit_set)
+  File "/workspace/work/harbichess/continuation-20261007/human-randomstarts-own-v3-forensic-shadow/forensic_audit_set.py", line 47, in validate
+    raise ValueError("forensic audit-set validator/helper pins")
+ValueError: forensic audit-set validator/helper pins
