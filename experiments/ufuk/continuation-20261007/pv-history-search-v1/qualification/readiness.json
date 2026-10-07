@@ -1,0 +1,36 @@
+{
+  "actual_cli_import_help": "PASS",
+  "actual_model_or_SF_or_training_calls": 0,
+  "actual_strength_games": 0,
+  "fake_timing": {
+    "calls": 27,
+    "median_v2_over_old": 1.1456073662979618,
+    "median_v2_over_v1": 0.8457298509991428,
+    "seconds": 2.3442912101745605
+  },
+  "frozen_advanced_v1_sha256": "ae14d9b697f75bc9fa41bcd910ac89e33414fe9341d89936a7f59784806216b2",
+  "latency_qualification": "NOT QUALIFIED; actual24 ROOT-profile median<=1.10 required before32 games",
+  "original_de53_sha256": "de53c14728a67b7772f18b396ac8ef5c35a144d4e4e616fec40099cd461a6670",
+  "pure_tests": 18,
+  "ruff": "PASS",
+  "schema": "pv-human-prior-search-v2-executor-readiness-v1",
+  "selflearning_claim": false,
+  "skipped": 0,
+  "source_sha256": {
+    "benchmark_fake_v2.py": "430a465a967c91ba0f83e954c5baa55115f9b351e34581b81eef1ab0ef934daa",
+    "fake-timing-v2.json": "b48f0747df9cae7c02361173efec6123fd864c5b8ee0337f4738d3e30986fded",
+    "qualification/README.md": "1e755f743b0c9c8434c5a8a3142e6eeea725709c648d81e6a64148034a14d827",
+    "qualification/develop-help.log": "82626d4413f1b65bf41e76234cce1364b1f500bccb247fb59384c592344b84ed",
+    "qualification/develop.py": "53d5a39bf52c862c390f6e41722c27bd8b551f5daa0e6d1eb5a603e9e87eec26",
+    "qualification/register-help.log": "f3aa3c97279aed799dba5aca1c7d6fce3c69cfcb20f3592452385794e8e39c53",
+    "qualification/register.py": "9e551d1ccd80398aff5d211ed3167fb10346fd48deda658dc53d97d69be8d075",
+    "qualification/ruff.log": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+    "qualification/test_develop.py": "8e8034a46974f7000bbc0914fc79de63e9daf16ad2d1efccb2e0c6d80e4e8b6c",
+    "qualification/tests-final.log": "b149dee5aa639e4a0e4755dadbfc2762ed4f16db3b93af00fc1707d50eff1d29",
+    "search_v2.py": "90c85ba8e3401cba57c82e6c2a34764d25aa999a03b244a4f2838124a8b46357",
+    "test_oracle_v2.py": "504c1a97bd0e15221bf585faba0f3f4737b5385ce251a78feae77a974cf9a6ef",
+    "test_search_v2.py": "029fa6cdee715ad897a91dcca0ea1652b53dce0607c3c64530d9200f21ac54ed",
+    "tests-v2-final.log": "dd9523e2e6686fb96391e4ff980d137acd5bb279c797e8153d5fcd85cef1d20c"
+  },
+  "status": "READY-ROOT-clock-and-actual-qualification-required"
+}
