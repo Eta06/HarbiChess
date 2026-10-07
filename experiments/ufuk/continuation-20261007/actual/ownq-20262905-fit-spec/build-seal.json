@@ -1,0 +1,104 @@
+{
+  "collection_replay_audit_set": {
+    "path": "/workspace/work/harbichess/continuation-20261007/ownq-actual-audit-set.json",
+    "sha256": "0b9192ed491d558be7ec4cec042d52d42ee4c5b96a842bf9ab8b810c1bebc8cf"
+  },
+  "collection_replay_results": [
+    {
+      "clock": {
+        "path": "/workspace/work/harbichess/continuation-20261007/ownq-20262905-six-audit/clock.json",
+        "sha256": "34fced44d6d83539f0e0dd0689b486f83b5d989421ebca4e7b60df9e8b614248"
+      },
+      "result": {
+        "path": "/workspace/work/harbichess/continuation-20261007/ownq-20262905-six-audit/result.json",
+        "sha256": "4b5c663c7d9474939c00ac2c25d13bdf247742112f615202da8ee2700b1ecb72"
+      },
+      "seed": 20262905
+    },
+    {
+      "clock": {
+        "path": "/workspace/work/harbichess/continuation-20261007/ownq-20262906-six-audit/clock.json",
+        "sha256": "0a7228548402cea086523a4d7b3d8766cdcebf85b36719f6ecfc0cab0c655168"
+      },
+      "result": {
+        "path": "/workspace/work/harbichess/continuation-20261007/ownq-20262906-six-audit/result.json",
+        "sha256": "6315111229e996bcfcd06ad6ab9fac5df16cf4ceece141c7a0ddd62a2ed9116b"
+      },
+      "seed": 20262906
+    }
+  ],
+  "dataset": {
+    "path": "/dev/shm/harbichess-NNUE-own-data-v2/20262905/dataset.json",
+    "sha256": "ce1bcef9d7d4a8ae67d3a0a6764ff0f6bcaef86679ae87a5070cf3be02419b1d"
+  },
+  "deadline": 1791367948.2950463,
+  "first": 1791366148.2950463,
+  "metadata_spec_helper": {
+    "path": "/workspace/work/harbichess/continuation-20261007/root-phase-specs/specs.py",
+    "sha256": "850e288c3e9bbd4cfbeea55bbb90ce6a42e574f951de86f3dda52cd9b78e9bd0"
+  },
+  "mode": "fresh-fit",
+  "operator_end_epoch": 1791448916.685839,
+  "own_proof_contract": {
+    "path": "/dev/shm/harbichess-NNUE-own-contracts-v2/20262905/proof.json",
+    "sha256": "e744b586d44818663aa9836b6a7f9bd2bf4d9885e72f84b31e17245eda06081e"
+  },
+  "own_proof_result": {
+    "path": "/dev/shm/harbichess-NNUE-own-proof-v2/20262905/result.json",
+    "sha256": "5938bec697c0e6b3840e4002650f346b394d69aec8c7ab092593e90fb6055c55"
+  },
+  "provenance": {
+    "path": "/dev/shm/harbichess-NNUE-own-data-v2/20262905/provenance.json",
+    "sha256": "ed6c745ebaf47433a9338b508290400880189691ebc1a0b9307fdba6ed52932a"
+  },
+  "schema": "NNUE-own-contract-build-seal-v2",
+  "seed": 20262905,
+  "status": "registered",
+  "teacher": {
+    "candidate": {
+      "path": "/dev/shm/harbichess-NNUE-teacher-fit-v1/20262905/whole/candidate.pt",
+      "sha256": "52e029bba0e895740f975109f4c52358c7a59fe22082cb1fb528821e3fa2b02d"
+    },
+    "contract": {
+      "path": "/workspace/work/harbichess/continuation-20261005/NNUE-teacher-fit-v1/20262905-contract.json",
+      "sha256": "6d25036db305a31259f5a90d6cf997bbefa315f77fe8c651502782858b0a8a46"
+    },
+    "dataset": {
+      "path": "/dev/shm/harbichess-NNUE-teacher-data-v1/20262905/dataset.json",
+      "sha256": "df36c1011f2d4044ecbd57ad9c1872da36a21f4f55a01366492449bed1389c7d"
+    },
+    "fit_result": {
+      "path": "/dev/shm/harbichess-NNUE-teacher-fit-v1/20262905/result.json",
+      "sha256": "c563e310042d2f25edab8208d7c423548d0312d64b589d511c891214eb87d28b"
+    },
+    "initial": {
+      "path": "/dev/shm/harbichess-NNUE-teacher-fit-v1/20262905/whole/initial.pt",
+      "sha256": "c54462de77192889b758d54616b728fa02ed6ec069c96da80f173e541a2b2c85"
+    },
+    "labels": {
+      "path": "/dev/shm/harbichess-NNUE-teacher8192-v1/20262905/labels-00004096.json.gz",
+      "sha256": "64104394a216fc5f679a885d7a95e7145540c50700a75db11c006e4b6156ef8a"
+    },
+    "native": {
+      "path": "/dev/shm/harbichess-NNUE-teacher-fit-v1/20262905/whole/native.pt",
+      "sha256": "a278669e6656f39e92b423b027aaa986531ee752900685c060d0336b226840a6"
+    },
+    "proof_contract": {
+      "path": "/workspace/work/harbichess/continuation-20261005/NNUE-teacher-proof-v1/20262905-contract.json",
+      "sha256": "f39dce438cddbb0fbab178e2f549940e6d3942857aa100a86834676a80447f3f"
+    },
+    "proof_result": {
+      "path": "/dev/shm/harbichess-NNUE-teacher-proof-v1/20262905/result.json",
+      "sha256": "44de33f19087e2b8e044a071b04ff0fa6ae06e3767d33d2d5864e124f473f643"
+    },
+    "seed": 20262905
+  },
+  "teacher_admission": {
+    "path": "/workspace/work/harbichess/cpu-nnue-trained-admission-proposal/admission.py",
+    "sha256": "94d80c5ab1f3ca9a2d5260d52bda5f7ab16ff236970a57a9a2c70e2351d92781"
+  },
+  "teacher_registry": {
+    "path": "/workspace/work/harbichess/continuation-20261005/NNUE-teacher-trained-profile-v2/registration.json",
+    "sha256": "af1b8eea45f6749a4b2c20d8e9093b8aad58d0d71bff64551eb5c2c93a20337b"
+  }
+}
