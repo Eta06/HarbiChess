@@ -1,0 +1,17 @@
+{
+  "actual_model_or_training_called": false,
+  "files_sha256": {
+    "README.md": "6589ae5b302289a6e46b18068c703063f9b179dca7b615c881b8ae01c2c43af8",
+    "parent_bridge.py": "3313c994e31d7399773d73bb1ae0b7ef1378777b568b52e9f4c0dc199fc95c4c",
+    "proposed-bootstrap.diff": "b5aafd528a462b4a0d241082f3825f81ed1539a6358c69cd06a1830745fcd472",
+    "test_parent_bridge.py": "4019c1738e9042e83c68e4dfc216bb81da5d1a853817067afc107251f8be67d0",
+    "tests-final-2.log": "e750891368b9172cb2ca10eb4af4ddba9546f52da4c3d9854204431f0b534bb8",
+    "tests-final.log": "6924ccdb32f76ae3bf8a9e20dba163c3005eb9ff7e3f909db4d5234d1ef88e44",
+    "tests.log": "40ab7908d91649115c2cda90913f32ca3dbf145bc7dd1f0a3c6dcdeb72a5a063"
+  },
+  "implemented_scope": "strict metadata/admission adapter only",
+  "production_loop_ready": false,
+  "schema": "NNUE-own-generation-v3-proposal-verification",
+  "skip": 0,
+  "tests": 6
+}
