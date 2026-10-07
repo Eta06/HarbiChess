@@ -1,0 +1,14 @@
+[
+  {
+    "seed": 20262905,
+    "parent_generation": 0,
+    "outgoing_generation": 1,
+    "status": "PASS-actual-metadata-original-parent-closure-no-inference"
+  },
+  {
+    "seed": 20262906,
+    "parent_generation": 0,
+    "outgoing_generation": 1,
+    "status": "PASS-actual-metadata-original-parent-closure-no-inference"
+  }
+]
