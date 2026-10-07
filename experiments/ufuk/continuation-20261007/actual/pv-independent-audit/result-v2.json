@@ -1,0 +1,352 @@
+{
+  "actual_stockfish_nodes": 669843,
+  "checked_played_plies": 2602,
+  "closed_games": 32,
+  "complete_ordered_trace_refs": [
+    {
+      "path": "/dev/shm/harbichess-pv-human-profile-v2/eval-trace-0000.bin",
+      "sha256": "72692fe0d9b2904a1abb6111aec7c0279df01e135e6b484ba7d9243ea0f57ecf"
+    },
+    {
+      "path": "/dev/shm/harbichess-pv-human-arena-v2/eval-trace-0000.bin",
+      "sha256": "f80a1f86dec7564f19f85f9804733bca4b43d922fefab2636629b302fa752821"
+    },
+    {
+      "path": "/dev/shm/harbichess-pv-human-arena-v2/eval-trace-0001.bin",
+      "sha256": "6cc1ce43d5a90be7ae1c34131c02e02d7695fcaa978e05cf4c0cafb942a4a704"
+    },
+    {
+      "path": "/dev/shm/harbichess-pv-human-arena-v2/eval-trace-0002.bin",
+      "sha256": "cdf0f2011c18fe142cfb9b5d4e8f1f24f3f413d3116c6856af6554b7cefcea19"
+    },
+    {
+      "path": "/dev/shm/harbichess-pv-human-arena-v2/eval-trace-0003.bin",
+      "sha256": "c97f394f15f0956aeb0adda686d08ceb76e58fb1615290c4776e28d86015a659"
+    }
+  ],
+  "deadline": 1791372544.260522,
+  "finished": 1791371724.7944574,
+  "first": 1791371644.260522,
+  "helper": {
+    "path": "/workspace/work/harbichess/continuation-20261007/audit_pv_actual_v2.py",
+    "sha256": "5ea35d3dcfeb3ebbd50cc897080c927a5b9ebf9ac75ac6f96a2a52b9586d204e"
+  },
+  "inputs": {
+    "arena_registration": {
+      "path": "/workspace/work/harbichess/continuation-20261007/pv-human-arena-v2/registration.json",
+      "sha256": "bbbe1152315e3dffbae554d01c802f574d79ea41d09c257cb364e14245406eeb"
+    },
+    "arena_result": {
+      "path": "/dev/shm/harbichess-pv-human-arena-v2/result.json",
+      "sha256": "5bd3d4583536f5d4e21a059f9863ab229a72cd1998154ee3965f46a56e651fa6"
+    },
+    "deadline": 1791372544.260522,
+    "derivative_reason": "JSON tuple/list canonicalization for logged principal_variation; first failed audit retained; same original clock and exact packet fields",
+    "develop": {
+      "path": "/workspace/work/harbichess/continuation-20261007/pv-history-search-v1/qualification/develop.py",
+      "sha256": "53d5a39bf52c862c390f6e41722c27bd8b551f5daa0e6d1eb5a603e9e87eec26"
+    },
+    "first": 1791371644.260522,
+    "helper_sha256": "5ea35d3dcfeb3ebbd50cc897080c927a5b9ebf9ac75ac6f96a2a52b9586d204e",
+    "output": "/dev/shm/harbichess-pv-independent-audit-v2",
+    "profile_registration": {
+      "path": "/workspace/work/harbichess/continuation-20261007/pv-human-profile-v2/registration.json",
+      "sha256": "a08a4ff8297f537e625b90c73e19d6c66f8d11a18547d050ae6e18aa3573c298"
+    },
+    "profile_result": {
+      "path": "/dev/shm/harbichess-pv-human-profile-v2/result.json",
+      "sha256": "549b135d3485f4f9ccea642a866019d2067d10135d760a6747d7f6f1d9b2ef5e"
+    },
+    "schema": "ROOT-pv-actual-audit-registration-v1"
+  },
+  "maximum_stockfish_node_overrun": 51,
+  "observed_search_score_gain": 0.0,
+  "registration": {
+    "path": "/workspace/work/harbichess/continuation-20261007/pv-independent-audit/registration-v2.json",
+    "sha256": "da5770f6719b7add1b5ac2c1459efeedf831cc758889f4b4520110b2f65ee51e"
+  },
+  "schema": "ROOT-pv-search-only-independent-actual-audit-v1",
+  "selflearning_success": false,
+  "six_actual_replays": [
+    {
+      "history": [
+        "e2e4",
+        "e7e5",
+        "b1c3",
+        "d8g5",
+        "c3d5",
+        "f8d6",
+        "d1f3",
+        "c7c6",
+        "d2d4",
+        "g5h4",
+        "d4e5",
+        "d6e5",
+        "g2g3",
+        "e5g3",
+        "h2g3",
+        "h4d8",
+        "f3c3"
+      ],
+      "match": true,
+      "mode": "profile",
+      "packet": {
+        "completed_depth": 2,
+        "evaluations": 481,
+        "move": "c6d5",
+        "nodes": 512,
+        "root_actions": 25,
+        "value_hex": "-0x1.02427eb040a7fp-1"
+      },
+      "role": "de53",
+      "trace_sha256": "d72b0b956a35a6402c7cd03c34673ed9114976150bf50b566f7740dbfc948eb7"
+    },
+    {
+      "history": [
+        "e2e4",
+        "e7e5",
+        "b1c3",
+        "d8g5",
+        "c3d5",
+        "f8d6",
+        "d1f3",
+        "c7c6",
+        "d2d4",
+        "g5h4",
+        "d4e5",
+        "d6e5",
+        "g2g3",
+        "e5g3",
+        "h2g3",
+        "h4d8",
+        "f3c3"
+      ],
+      "match": true,
+      "mode": "profile",
+      "packet": {
+        "budget_exhausted": true,
+        "completed_depth": 2,
+        "completed_root_passes": 2,
+        "evaluations": 439,
+        "incheck_horizon_returns": 1,
+        "move": "c6d5",
+        "nodes": 512,
+        "principal_variation": [
+          "c6d5"
+        ],
+        "pvs_researches": 4,
+        "q_check_extensions": 13,
+        "root_actions": 25,
+        "tt_hits": 14,
+        "value_hex": "-0x1.f63b4e98785c0p-2"
+      },
+      "role": "advanced",
+      "trace_sha256": "1410768bad3742cb3000ae7355f329163a5b095094c3bc6bfdcec72ed4e71208"
+    },
+    {
+      "history": [
+        "e2e4",
+        "e7e5",
+        "b1c3",
+        "d8g5",
+        "c3d5",
+        "f8d6",
+        "d1f3",
+        "g8f6",
+        "d5c7",
+        "d6c7",
+        "f1c4",
+        "d7d5",
+        "e4d5",
+        "c8f5",
+        "c4b5",
+        "e8d8",
+        "d5d6",
+        "c7d6",
+        "f3b7",
+        "f5e4",
+        "b7f7",
+        "g5g2",
+        "d2d3",
+        "d6b4",
+        "c2c3",
+        "g2h1",
+        "f7g7",
+        "b4c3",
+        "b2c3",
+        "f6e8",
+        "c1g5",
+        "e8f6",
+        "g5f6",
+        "d8c8",
+        "g7h8",
+        "c8b7",
+        "h8g7",
+        "b7b6",
+        "d3e4",
+        "h1e4",
+        "b5e2",
+        "b8c6",
+        "f6e5",
+        "c6e5",
+        "g7f6",
+        "e5c6",
+        "f2f4",
+        "a8d8",
+        "g1f3",
+        "h7h5",
+        "e1f2"
+      ],
+      "match": true,
+      "mode": "profile",
+      "packet": {
+        "completed_depth": 1,
+        "evaluations": 482,
+        "move": "d8g8",
+        "nodes": 512,
+        "root_actions": 40,
+        "value_hex": "-0x1.754434ddccdf2p-1"
+      },
+      "role": "de53",
+      "trace_sha256": "3eb1b90d0914c46821788fb6512a031836700374811e8c952995c2ed34ecf0d3"
+    },
+    {
+      "history": [
+        "e2e4",
+        "e7e5",
+        "b1c3",
+        "d8g5",
+        "c3d5",
+        "f8d6",
+        "d1f3",
+        "g8f6",
+        "d5c7",
+        "d6c7",
+        "f1c4",
+        "d7d5",
+        "e4d5",
+        "c8f5",
+        "c4b5",
+        "e8d8",
+        "d5d6",
+        "c7d6",
+        "f3b7",
+        "f5e4",
+        "b7f7",
+        "g5g2",
+        "d2d3",
+        "d6b4",
+        "c2c3",
+        "g2h1",
+        "f7g7",
+        "b4c3",
+        "b2c3",
+        "f6e8",
+        "c1g5",
+        "e8f6",
+        "g5f6",
+        "d8c8",
+        "g7h8",
+        "c8b7",
+        "h8g7",
+        "b7b6",
+        "d3e4",
+        "h1e4",
+        "b5e2",
+        "b8c6",
+        "f6e5",
+        "c6e5",
+        "g7f6",
+        "e5c6",
+        "f2f4",
+        "a8d8",
+        "g1f3",
+        "h7h5",
+        "e1f2"
+      ],
+      "match": true,
+      "mode": "profile",
+      "packet": {
+        "budget_exhausted": true,
+        "completed_depth": 1,
+        "completed_root_passes": 1,
+        "evaluations": 363,
+        "incheck_horizon_returns": 0,
+        "move": "d8g8",
+        "nodes": 512,
+        "principal_variation": [
+          "d8g8"
+        ],
+        "pvs_researches": 8,
+        "q_check_extensions": 11,
+        "root_actions": 40,
+        "tt_hits": 33,
+        "value_hex": "-0x1.754434ddccdf2p-1"
+      },
+      "role": "advanced",
+      "trace_sha256": "d41be56c106411ed97049d4b93105aa0b4ea804aaece82a05e8a4da604c2c5ba"
+    },
+    {
+      "history": [
+        "e2e4",
+        "e7e5",
+        "g1f3",
+        "b8c6"
+      ],
+      "match": true,
+      "mode": "arena",
+      "packet": {
+        "completed_depth": 2,
+        "evaluations": 461,
+        "move": "b1c3",
+        "nodes": 512,
+        "root_actions": 27,
+        "value_hex": "-0x1.7e46a73f3eca1p-7"
+      },
+      "role": "de53",
+      "trace_sha256": "fe48d668b900c5f356bd4eaeb04881686df4e59c9060eacd56c9f4aa1ec24e5d"
+    },
+    {
+      "history": [
+        "e2e4",
+        "e7e5",
+        "g1f3",
+        "b8c6"
+      ],
+      "match": true,
+      "mode": "arena",
+      "packet": {
+        "budget_exhausted": true,
+        "completed_depth": 2,
+        "completed_root_passes": 2,
+        "evaluations": 400,
+        "incheck_horizon_returns": 0,
+        "move": "b1c3",
+        "nodes": 512,
+        "principal_variation": [
+          "b1c3"
+        ],
+        "pvs_researches": 12,
+        "q_check_extensions": 0,
+        "root_actions": 27,
+        "tt_hits": 62,
+        "value_hex": "-0x1.7e46a73f3eca1p-7"
+      },
+      "role": "advanced",
+      "trace_sha256": "8dd3c73385da58355fbd2847155edaf575d430aeb0644c6704a9cadbb9338599"
+    }
+  ],
+  "status": "PASS-integrity-and-six-actual-not-strength",
+  "summary": {
+    "advanced": {
+      "games": 16,
+      "score_drawfilled": 0.125,
+      "unknown": 0
+    },
+    "de53": {
+      "games": 16,
+      "score_drawfilled": 0.125,
+      "unknown": 0
+    }
+  }
+}
