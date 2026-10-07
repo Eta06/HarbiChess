@@ -1,0 +1,91 @@
+{
+  "clock_sha256": "01e2e8f8b3a5739cba1ea5dc897328b3e06ebc3da3c927e5ed1c12a13d014799",
+  "deadline": 1791369830.4177356,
+  "finished": 1791368935.5906854,
+  "first": 1791368930.4177356,
+  "helper_sha256": "2a3574fa0a297d20b46d96e6113e87fca65f50f96232cbefa661f9d9d2cf2ed6",
+  "packets": [
+    {
+      "packet": {
+        "completed_depth": 2,
+        "evaluations": 449,
+        "move": "b1c3",
+        "nodes": 512,
+        "root_actions": 27,
+        "value_hex": "0x1.fa4a02fc76bb0p-3"
+      },
+      "profile_and_arena_matches": true,
+      "role": "learned",
+      "seed": 20262905
+    },
+    {
+      "packet": {
+        "completed_depth": 2,
+        "evaluations": 444,
+        "move": "h1g1",
+        "nodes": 512,
+        "root_actions": 27,
+        "value_hex": "0x1.1bee467be807ap-2"
+      },
+      "profile_and_arena_matches": true,
+      "role": "parent",
+      "seed": 20262905
+    },
+    {
+      "packet": {
+        "completed_depth": 2,
+        "evaluations": 472,
+        "move": "f1c4",
+        "nodes": 512,
+        "root_actions": 27,
+        "value_hex": "0x1.2a464f76cdc51p-3"
+      },
+      "profile_and_arena_matches": true,
+      "role": "e8",
+      "seed": 20262905
+    },
+    {
+      "packet": {
+        "completed_depth": 2,
+        "evaluations": 482,
+        "move": "d2d3",
+        "nodes": 512,
+        "root_actions": 27,
+        "value_hex": "-0x1.478c12afb2006p-6"
+      },
+      "profile_and_arena_matches": true,
+      "role": "learned",
+      "seed": 20262906
+    },
+    {
+      "packet": {
+        "completed_depth": 2,
+        "evaluations": 466,
+        "move": "h1g1",
+        "nodes": 512,
+        "root_actions": 27,
+        "value_hex": "0x1.95a9b565e407ep-3"
+      },
+      "profile_and_arena_matches": true,
+      "role": "parent",
+      "seed": 20262906
+    },
+    {
+      "packet": {
+        "completed_depth": 2,
+        "evaluations": 472,
+        "move": "f1c4",
+        "nodes": 512,
+        "root_actions": 27,
+        "value_hex": "0x1.2a464f76cdc51p-3"
+      },
+      "profile_and_arena_matches": true,
+      "role": "e8",
+      "seed": 20262906
+    }
+  ],
+  "profile_sha256": "22c316eb2eb9a0b611d649ca75cf06069730eff3a3442e39607488e01f210f38",
+  "protocol_sha256": "22f87ce706483bcc1364a650a405b7edbf9b2fdccd380741a24a12fd2a29ddb2",
+  "scope": "six exact packets, not all NN move research",
+  "status": "PASS-six-actual-fixed-chronological-search-packets"
+}
