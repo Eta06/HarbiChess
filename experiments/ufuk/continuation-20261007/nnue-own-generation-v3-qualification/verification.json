@@ -1,0 +1,19 @@
+{
+  "actual_model_search_SGD_executed": false,
+  "clock_supplied_only_by_ROOT": true,
+  "files_sha256": {
+    "README.md": "0f3bb88b17e910fe444d8403072e6f850eb46f834c3e50ed428ae374faee97c4",
+    "help.log": "e7dd66b7102dcc534076f813915e31a12bbebbfd351816981610d2dce56848f1",
+    "qualify.py": "7a798380b7432477c2edeee33a1d09a90c7427df200bf0f2f97722182283ebdd",
+    "test_qualify.py": "f57d32738f0c2642bdd9e482f964fc40d88bc48b850e16398bce4fe2727afb6c",
+    "tests-final.log": "8929a387753d438035b3b1658c92137b9ede74ab290a6e158468395a15fc86c2",
+    "tests.log": "8929a387753d438035b3b1658c92137b9ede74ab290a6e158468395a15fc86c2"
+  },
+  "frozen_runtime15_unchanged": true,
+  "metadata_tests": 4,
+  "required_actual_strict_loads_per_seed": 6,
+  "runtime_inventory_sha256": "0a55f63ec6901e954ad82612d87192fe6e204ec4b81f59cfa490182230a5ef87",
+  "schema": "NNUE-v3-synthetic-qualification-helper-verification",
+  "skip": 0,
+  "synthetic_optimizer_updates_per_seed": 16
+}
