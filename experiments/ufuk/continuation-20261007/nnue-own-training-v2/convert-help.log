@@ -1,0 +1,9 @@
+usage: convert.py [-h] --seal SEAL --output OUTPUT
+
+Strict own-Q/fullhistory/terminal trace converter; no forward, engine, SGD or
+teacher.
+
+options:
+  -h, --help       show this help message and exit
+  --seal SEAL
+  --output OUTPUT
