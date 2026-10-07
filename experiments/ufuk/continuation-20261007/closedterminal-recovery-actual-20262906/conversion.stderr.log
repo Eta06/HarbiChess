@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "/workspace/work/harbichess/continuation-20261007/closed-terminal-own-v2-reconciliation/source/convert.py", line 534, in <module>
+    main()
+  File "/workspace/work/harbichess/continuation-20261007/closed-terminal-own-v2-reconciliation/source/convert.py", line 507, in main
+    data, provenance = convert(spec, guard)
+                       ^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/work/harbichess/continuation-20261007/closed-terminal-own-v2-reconciliation/source/convert.py", line 150, in convert
+    pinned(dict(path=str(Path(spec["producer_directory"]) / name), sha256=digest))
+  File "/workspace/work/harbichess/continuation-20261007/closed-terminal-own-v2-reconciliation/source/convert.py", line 26, in pinned
+    raise ValueError("sealed input/source SHA")
+ValueError: sealed input/source SHA
