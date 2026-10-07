@@ -1,0 +1,146 @@
+parent_seal.py status=0
+usage: parent_seal.py [-h] --fit-result FIT_RESULT --fit-contract FIT_CONTRACT
+                      --proof-result PROOF_RESULT --proof-contract
+                      PROOF_CONTRACT --candidate CANDIDATE --dataset DATASET
+                      --output OUTPUT --generation GENERATION --seed SEED
+
+ROOT metadata-only own-final parent seal factory; no model load.
+
+options:
+  -h, --help            show this help message and exit
+  --fit-result FIT_RESULT
+  --fit-contract FIT_CONTRACT
+  --proof-result PROOF_RESULT
+  --proof-contract PROOF_CONTRACT
+  --candidate CANDIDATE
+  --dataset DATASET
+  --output OUTPUT
+  --generation GENERATION
+  --seed SEED
+admit_parent.py status=0
+usage: admit_parent.py [-h] --seal SEAL --output OUTPUT --clock CLOCK
+
+ROOT read-only admission in an isolated interpreter; no forward/search/SGD.
+
+options:
+  -h, --help       show this help message and exit
+  --seal SEAL
+  --output OUTPUT
+  --clock CLOCK
+metadata_factory.py status=0
+usage: metadata_factory.py [-h] --seal SEAL --output OUTPUT
+
+Pure versioned current-own-parent collection registration; no model calls.
+
+options:
+  -h, --help       show this help message and exit
+  --seal SEAL
+  --output OUTPUT
+run_collection.py status=0
+usage: run_collection.py [-h] --registration REGISTRATION
+
+ROOT-registered producer only. This code does not train or call Stockfish.
+
+options:
+  -h, --help            show this help message and exit
+  --registration REGISTRATION
+audit_collection_six.py status=0
+usage: audit_collection_six.py [-h] --registration REGISTRATION --receipt
+                               RECEIPT --events EVENTS --clock CLOCK --output
+                               OUTPUT
+
+ROOT-only six chronological own-Q packets per seed; no new games or SGD.
+
+options:
+  -h, --help            show this help message and exit
+  --registration REGISTRATION
+  --receipt RECEIPT
+  --events EVENTS
+  --clock CLOCK
+  --output OUTPUT
+convert.py status=0
+usage: convert.py [-h] --seal SEAL --output OUTPUT
+
+Strict own-Q/fullhistory/terminal trace converter; no forward, engine, SGD or
+teacher.
+
+options:
+  -h, --help       show this help message and exit
+  --seal SEAL
+  --output OUTPUT
+contracts.py status=0
+usage: contracts.py [-h] --seal SEAL --output OUTPUT
+
+ROOT-clocked own64 contracts; cached original teacher admission, no optimizer
+step.
+
+options:
+  -h, --help       show this help message and exit
+  --seal SEAL
+  --output OUTPUT
+specs.py status=0
+usage: specs.py [-h] --phase {convert,proof,fit,registry} --output OUTPUT
+                [--plan PLAN] [--registration REGISTRATION]
+                [--registrations REGISTRATIONS] [--training TRAINING]
+                [--producer PRODUCER] [--audits AUDITS]
+                [--own-proof-result OWN_PROOF_RESULT]
+                [--own-proof-contract OWN_PROOF_CONTRACT] [--seed SEED]
+                [--cpu-core CPU_CORE] [--first FIRST] [--deadline DEADLINE]
+                [--operator-end OPERATOR_END]
+
+Metadata-only ROOT phase wiring; no imports of Torch, model, engine or
+trainer.
+
+options:
+  -h, --help            show this help message and exit
+  --phase {convert,proof,fit,registry}
+  --output OUTPUT
+  --plan PLAN
+  --registration REGISTRATION
+  --registrations REGISTRATIONS
+  --training TRAINING
+  --producer PRODUCER
+  --audits AUDITS
+  --own-proof-result OWN_PROOF_RESULT
+  --own-proof-contract OWN_PROOF_CONTRACT
+  --seed SEED
+  --cpu-core CPU_CORE
+  --first FIRST
+  --deadline DEADLINE
+  --operator-end OPERATOR_END
+prove.py status=0
+usage: prove.py [-h] --registration REGISTRATION
+
+ROOT own-phase proof or fresh64; current own-parent WEIGHTS only, full state
+strict loads.
+
+options:
+  -h, --help            show this help message and exit
+  --registration REGISTRATION
+train.py status=0
+usage: train.py [-h] --contract CONTRACT --dataset DATASET --output OUTPUT
+                --stop STOP [--resume RESUME] [--resume-sha256 RESUME_SHA256]
+                [--bootstrap-candidate BOOTSTRAP_CANDIDATE] [--audit-only]
+
+Explicit synthetic/teacher/own phases, full CPU native and fixed source
+contracts.
+
+options:
+  -h, --help            show this help message and exit
+  --contract CONTRACT
+  --dataset DATASET
+  --output OUTPUT
+  --stop STOP
+  --resume RESUME
+  --resume-sha256 RESUME_SHA256
+  --bootstrap-candidate BOOTSTRAP_CANDIDATE
+  --audit-only
+ledger.py status=0
+usage: ledger.py [-h] --seal SEAL --output OUTPUT
+
+Publish CLOSED generation ledger only; no model, phase launch or promotion.
+
+options:
+  -h, --help       show this help message and exit
+  --seal SEAL
+  --output OUTPUT
