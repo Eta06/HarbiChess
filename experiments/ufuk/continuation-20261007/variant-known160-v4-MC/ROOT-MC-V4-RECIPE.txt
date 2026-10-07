@@ -1,0 +1,9 @@
+NEW source-only typed runtime copied from variant-known160-v3-action-ranking. No old runtime or MC learning source is edited. Changes admission.py ONLY plus new metadata tests; all search/value/profile/tournament/run/audit/replay/statistics/other phase checks remain byte identical.
+
+For ROOT MC known160 draft use target_variant closed-terminal-mc-v1. q.teachers[SEED].contract must be exact named teacher256 contract; candidate must be the identical bootstrap/currentparent endpoint. q.children variant_helpers stay EXISTING MC V3 source {model,native,contract,convert,contract_builder}; proof/fit/build/source/native refs actual unchanged.
+
+MC c.raw_collection_inputs consists EXACTLY provenance.inputs plus conversion_spec_file, conversion_result,parent_contract. No additional or missing keys allowed. Original spec ref is SHA-verified and parsed spec must equal all provenance.inputs. Result ref requires exact status, data/provenance SHA, recorded first/deadline/finished finite and matching original conversion600; actual dataset/provenance paths are result.json siblings. Extra parent ref equals q.teachers[seed].contract exactly, and contract is same-seed teacher-bootstrap256 with candidate path/SHA matching c.
+
+Converter is called with EXACT provenance.inputs (17 actual keys), NOT augmented raw_collection_inputs (20 actual keys). All original input bytes are replayed; native/proof/fit/source/terminal/protected/old phases retain strict checks. No arbitrary key dropping or output rewrite.
+
+ROOT must write a new protocol draft/registry bound to THIS runtime source inventory and actual completed proofs/fits; copied old protocol templates are only historical examples and MUST NOT execute unchanged. Source-only preparation is not native qualification, profile or strength success. Numeric gates/de53/search/games/clocks remain unchanged.
