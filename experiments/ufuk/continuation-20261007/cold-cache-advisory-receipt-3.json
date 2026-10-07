@@ -1,0 +1,13 @@
+{
+  "schema": "ROOT-readonly-inactive-disk-cache-advice-v3",
+  "observed": 1791376965.9808822,
+  "before": 15721435136,
+  "after": 10557235200,
+  "advised_regular_files": 1022,
+  "advised_bytes": 13793630090,
+  "scope_inventory_sha256": "0390665b1cf104f5dd0ae023e493cf0eddad4ccf262813a7ce6df4b2c0b05ed5",
+  "current_frozen_continuation_source_excluded": true,
+  "files_deleted": 0,
+  "file_contents_written": 0,
+  "all_size_mtime_inode_unchanged": true
+}
