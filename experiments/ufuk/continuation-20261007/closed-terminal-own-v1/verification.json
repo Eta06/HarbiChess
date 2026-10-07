@@ -1,0 +1,49 @@
+{
+  "actual_collection": false,
+  "actual_conversion": false,
+  "actual_fit": false,
+  "actual_strength_evaluation": false,
+  "cli_import_and_help": {
+    "files": [
+      "run_collection.py",
+      "convert.py",
+      "train.py",
+      "prove.py",
+      "contract_builder.py"
+    ],
+    "production_execution_ran": false,
+    "status": "PASS"
+  },
+  "converter_cli_synthetic_only": "PASS; wrote to /dev/shm and removed output",
+  "known_limitations": [
+    "No actual runtime qualification or data conversion has run.",
+    "The 1,024 terminal-row target may fail under the 4,096-row actor ceiling; insufficient-data failure is retained without budget extension.",
+    "Synthetic collector root-order helper in end-to-end fixture is injected; production collector selection and duplicate-history checks are tested separately."
+  ],
+  "ruff": "PASS",
+  "schema": "closed-terminal-own-scratch-verification-v1",
+  "source_and_test_sha256": {
+    "README.md": "058f166c1921f20487d7a146fc5f52ad1e38cfad39d276beca4731baea1e107c",
+    "source/arena_adapter.py": "bc976f5f0d26216cd0383c405e9e3f28f99162c672ae4b120daf7c1712a04098",
+    "source/collector.py": "99f2ea31ae1587c3d9c281f0d1838aa575ea9f603869dc662c1df98551055ba9",
+    "source/contract.py": "168116a2a245f47fdb3c2f367048361ef2f7e8b6fccaac918d4432f6538e4f19",
+    "source/contract_builder.py": "93b2f26de37631f35806fe8931d086cb93d7af906b88f50cc59e44fe3f496dff",
+    "source/convert.py": "f88f94f6d8a3b7fad0fc24b4f298e24a7676d84c3cf3bca692c88c46c870233a",
+    "source/model.py": "c04914bc5a560ad51de81c6d0aaeb3fae4d04b45c07cd8e39bbd31f655d36565",
+    "source/native.py": "cb37924f529b1647509a07eb99e79532f033b56abcf2e95adce5bb3031457949",
+    "source/prove.py": "a314abb5b8aa00501eceefe1bc1c2f37414f3fae0d500ef85016f8f5b80327fe",
+    "source/run_collection.py": "ec48d3277d969b11e2cae55a0151101d4fa3a270b08e6a1abe7ef3fa758a6ce5",
+    "source/train.py": "b441af70e2334c634a420275cf565db105395b0da9c9139c7ebe76bd69412a19",
+    "tests/test_collector.py": "98e7a46a1940627ed76fedc798b4cd6387162d758a6a642b0de8886ad3f5843f",
+    "tests/test_converter_end_to_end.py": "7e322b6a4ad0ae8945fe2a6d368f5e005932f493994a172e0577e7da56516d72",
+    "tests/test_native_contract.py": "ef83ca91711c3bf15611759882c071eeb2bc6c55fa3e9d20a15a46e9b96ea1cd"
+  },
+  "status": "SCRATCH-READY-FOR-ROOT-REVIEW-NOT-QUALIFIED",
+  "synthetic_tests": {
+    "failed": 0,
+    "includes_legal_event_sidecar_conversion": true,
+    "includes_resealed_semantic_mutations": 7,
+    "includes_terminal_and_capped_unknown_and_protected_episodes": true,
+    "passed": 15
+  }
+}
